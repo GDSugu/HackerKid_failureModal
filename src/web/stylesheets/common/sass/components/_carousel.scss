@@ -1,0 +1,11 @@
+@use '../themes/_default' as gt;
+@use '../base/_mixins' as gm;
+
+.carousel-indicators {
+  li {
+    @include gm.box(10px, 10px);
+    @include gm.border-radius(50%);
+
+    margin-left: 0.5rem;
+  }
+}

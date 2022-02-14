@@ -1,0 +1,153 @@
+@font-face {
+  font-family: 'LatoWebBlack';
+  src: url('../../fonts/Lato-Black.eot'); /* IE9 Compat Modes */
+  src:
+    url('../../fonts/Lato-Black.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../../fonts/Lato-Black.woff2') format('woff2'), /* Modern Browsers */
+    url('../../fonts/Lato-Black.woff') format('woff'), /* Modern Browsers */
+    url('../../fonts/Lato-Black.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'LatoWebBold';
+  src: url('../../fonts/Lato-Bold.eot'); /* IE9 Compat Modes */
+  src:
+    url('../../fonts/Lato-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../../fonts/Lato-Bold.woff2') format('woff2'), /* Modern Browsers */
+    url('../../fonts/Lato-Bold.woff') format('woff'), /* Modern Browsers */
+    url('../../fonts/Lato-Bold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'LatoWeb';
+  src: url('../../fonts/Lato-Regular.eot'); /* IE9 Compat Modes */
+  src:
+    url('../../fonts/Lato-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../../fonts/Lato-Regular.woff2') format('woff2'), /* Modern Browsers */
+    url('../../fonts/Lato-Regular.woff') format('woff'), /* Modern Browsers */
+    url('../../fonts/Lato-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'LatoWebHeavy';
+  src: url('../../fonts/Lato-Heavy.eot'); /* IE9 Compat Modes */
+  src:
+    url('../../fonts/Lato-Heavy.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../../fonts/Lato-Heavy.woff2') format('woff2'), /* Modern Browsers */
+    url('../../fonts/Lato-Heavy.woff') format('woff'), /* Modern Browsers */
+    url('../../fonts/Lato-Heavy.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'LatoWebSemibold';
+  src: url('../../fonts/Lato-Semibold.eot'); /* IE9 Compat Modes */
+  src:
+    url('../../fonts/Lato-Semibold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../../fonts/Lato-Semibold.woff2') format('woff2'), /* Modern Browsers */
+    url('../../fonts/Lato-Semibold.woff') format('woff'), /* Modern Browsers */
+    url('../../fonts/Lato-Semibold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'LatoWebMedium';
+  src: url('../../fonts/Lato-Medium.eot'); /* IE9 Compat Modes */
+  src:
+    url('../../fonts/Lato-Medium.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../../fonts/Lato-Medium.woff2') format('woff2'), /* Modern Browsers */
+    url('../../fonts/Lato-Medium.woff') format('woff'), /* Modern Browsers */
+    url('../../fonts/Lato-Medium.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'LatoWebLight';
+  src: url('../../fonts/Lato-Light.eot'); /* IE9 Compat Modes */
+  src:
+    url('../../fonts/Lato-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../../fonts/Lato-Light.woff2') format('woff2'), /* Modern Browsers */
+    url('../../fonts/Lato-Light.woff') format('woff'), /* Modern Browsers */
+    url('../../fonts/Lato-Light.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FredokaOne';
+  src: url('../../fonts/FredokaOne-Regular.ttf');
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HomeSchool';
+  src: url('../../fonts/HomeSchool400.otf');
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HomeSchool';
+  src: url('../../fonts/HomeSchool400.otf');
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Grace';
+  src: url('../../fonts/CoveredByYourGrace-Regular.ttf') format('truetype');
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DancingScriptBold';
+  src: url('../../fonts/DancingScript-Bold.ttf') format('truetype');
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Raleway';
+  src: url('../../fonts/Raleway-Medium.ttf') format('truetype');
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Raleway';
+  src: url('../../fonts/Raleway-Bold.ttf') format('truetype');
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}

@@ -1,0 +1,31 @@
+@use '../base/_mixins' as gm;
+@use '../themes/_default' as gt;
+
+.nav-tabs {
+  border-bottom: 1px solid gt.theme-var(gt.$bg-2);
+
+  .nav-link {
+    padding-left: 0;
+    padding-right: 0;
+    margin-right: 2rem;
+  }
+
+  .nav-item {
+    a {
+      color: gt.theme-var(gt.$text-color-4);
+      position: relative;
+
+      &.active {
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: gt.theme-var(gt.$text-color-5);
+          height: 3px;
+        }
+      }
+    }
+  }
+}

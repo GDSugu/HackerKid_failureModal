@@ -1,0 +1,21 @@
+.logo {
+  .dark & {
+    .with-out-logo {
+      background: url('../../../images/common/hackerkid.png');
+    }
+
+    .with-logo {
+      background: url('../../../images/common/hackerkid-with-logo.png');
+    }
+  }
+
+  .light & {
+    .with-out-logo {
+      background: url('../../../images/common/hackerkid-light.png');
+    }
+
+    .with-logo {
+      background: url('../../../images/common/hackerkid-with-logo-light.png');
+    }
+  }
+}

@@ -1,0 +1,10 @@
+#canvasLoader {
+  position: fixed;
+  top: 0;
+
+  & > div {
+    height: 0;
+    width: 0;
+    overflow: scroll;
+  }
+}

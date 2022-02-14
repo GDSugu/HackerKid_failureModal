@@ -1,0 +1,57 @@
+@import '../themes/_default.scss';
+@import '../base/_variables.scss';
+
+$theme-colors: (
+  "primary": $primary-color,
+  "success": $success-color,
+  "secondary": $secondary-color,
+);
+
+// stylelint-disable value-keyword-case
+$font-family-sans-serif: 'Lato', $fallback-fonts !default;
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base: $font-family-sans-serif !default;
+// stylelint-enable value-keyword-case
+
+// cards
+$card-border-width: 0 !default;
+$card-bg: theme-var($bg-2);
+
+// headings
+$headings-font-weight: 700 !default;
+
+// button
+$btn-border-radius: 50px !default;
+
+// inputs
+$input-color: theme-var($text-color-4);
+$input-bg: theme-var($bg-3);
+$input-group-addon-bg: theme-var($bg-3);
+
+// carousel
+$carousel-indicator-active-bg: theme-var($text-color-5);
+$carousel-caption-color: theme-var($text-color-4);
+
+// modal
+$modal-content-bg: theme-var($bg-2);
+
+// placeholder
+$input-placeholder-color: theme-var($text-color-9);
+
+//dropdowns
+$dropdown-bg: theme-var($bg-2);
+$dropdown-link-hover-bg: theme-var($bg-1);
+$dropdown-link-hover-color: theme-var($text-color-2);
+
+// nav
+// colors used directly since dark specific
+$navbar-dark-color: #e8e8e8;
+$navbar-dark-hover-color: #fff;
+
+// tabs
+$nav-tabs-link-active-color: theme-var($text-color-2);
+$nav-tabs-border-width: 0;
+
+// patch for bootstrap incompactability for css vars
+
+@import '~bootstrap/scss/bootstrap.scss';

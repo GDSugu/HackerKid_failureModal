@@ -1,0 +1,50 @@
+@use '../common/sass/base/_mixins' as gm;
+
+h1 {
+  @include gm.media-breakpoint-up(lg) {
+    font-size: 5rem;
+  }
+}
+
+h2 {
+  @include gm.media-breakpoint-up(lg) {
+    font-size: 2.5rem;
+  }
+}
+
+h3 {
+  @include gm.media-breakpoint-up(lg) {
+    font-size: 2.25rem;
+  }
+}
+
+h4 {
+  @include gm.media-breakpoint-up(lg) {
+    font-size: 2rem;
+  }
+}
+
+h5 {
+  @include gm.media-breakpoint-up(lg) {
+    font-size: 1.75rem;
+  }
+}
+
+h6 {
+  @include gm.media-breakpoint-up(lg) {
+    font-size: 1.5rem;
+  }
+}
+
+p {
+  @include gm.media-breakpoint-up(lg) {
+    font-size: 1.25rem;
+  }
+}
+
+button,
+.btn {
+  @include gm.media-breakpoint-up(lg) {
+    font-size: 1.125rem;
+  }
+}

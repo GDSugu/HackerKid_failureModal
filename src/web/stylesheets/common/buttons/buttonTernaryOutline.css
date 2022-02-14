@@ -1,0 +1,9 @@
+.btn-ternary-outline {
+  border: 1px solid var(--ternary-text-color);
+  background-color: var(--primary-bg-color);
+  color: var(--ternary-text-color);
+}
+
+.btn-ternary-outline:hover {
+  color: var(--primary-text-color);
+}

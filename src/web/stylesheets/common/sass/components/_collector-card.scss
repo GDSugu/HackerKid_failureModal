@@ -1,0 +1,286 @@
+@use '../base/_placeholders';
+@use '../themes/_default' as gt;
+@use '../base/_mixins' as gm;
+
+.bronze-color {
+  color: #ed9d5d;
+}
+
+.gold-color {
+  color: #fcbd28;
+}
+
+.platinum-color {
+  color: #7d8084;
+}
+
+.collector-card {
+  .card-body {
+    border-radius: 0.5rem;
+    height: 25rem;
+    width: 18rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    &.bronze {
+      background-image: url('../../images/merchandise/bronze.png');
+
+      &:before {
+        background-image: url('../../images/merchandise/bronze-medal.svg');
+      }
+    }
+
+    &.gold {
+      background-image: url('../../images/merchandise/gold.png');
+
+      &:before {
+        background-image: url('../../images/merchandise/gold-medal.svg');
+      }
+    }
+
+    &.platinum {
+      background-image: url('../../images/merchandise/platinum.png');
+
+      &:before {
+        background-image: url('../../images/merchandise/platinum-medal.svg');
+      }
+    }
+
+    &.with-badge {
+      &:before {
+        content: '';
+        left: -7px;
+        position: absolute;
+        top: -7px;
+        height: 40px;
+        width: 40px;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+
+  .avatar-container {
+    img {
+      object-fit: cover;
+      border-radius: 1rem;
+      width: 7rem;
+      height: 8rem;
+    }
+  }
+
+  .data-container {
+    font-size: 0.75rem;
+
+    p {
+      margin-bottom: 0.5rem;
+    }
+
+    .knownfor {
+      &:before {
+        background-image: url('../../images/merchandise/knownfor.png');
+      }
+    }
+
+    .networth {
+      &:before {
+        background-image: url('../../images/merchandise/networth.png');
+      }
+    }
+
+    .location {
+      &:before {
+        background-image: url('../../images/merchandise/location.png');
+      }
+    }
+
+    .location:before,
+    .networth:before,
+    .knownfor:before {
+      content: '';
+      background-size: contain;
+      background-repeat: no-repeat;
+      height: 10px;
+      width: 10px;
+      display: inline-block;
+      padding-right: 15px;
+    }
+  }
+
+  .points-container {
+    position: absolute;
+    right: -6px;
+    top: -10px;
+    z-index: 1;
+
+    .custom-points {
+      span {
+        top: -10px;
+        position: relative;
+        color: gt.theme-var(gt.$text-color-2);
+        width: 40px;
+      }
+
+      &:before {
+        content: '';
+        background: url("../../images/common/coin.svg");
+        height: 30px;
+        width: 30px;
+        background-size: contain;
+      }
+    }
+  }
+
+  &.with-badge:before,
+  &.with-point:after {
+    @extend %hexagon;
+    @extend %shadow;
+
+    content: '';
+    height: 3.5rem;
+    width: 3.5rem;
+    position: absolute;
+    background: gt.theme-var(gt.$bg-2);
+  }
+
+  &.with-badge:before {
+    left: -15px;
+    top: -15px;
+  }
+
+  &.with-point:after {
+    right: -15px;
+    top: -15px;
+  }
+}
+
+%collector-card-mini {
+  .points-container {
+    @include gm.media-breakpoint-down(md) {
+      right: -18px;
+    }
+
+    .custom-points {
+      &:before {
+        @include gm.media-breakpoint-down(md) {
+          @include gm.box(15px, 15px);
+        }
+      }
+    }
+
+    span {
+      @include gm.media-breakpoint-down(md) {
+        top: -5px;
+        font-size: 0.6rem;
+      }
+    }
+  }
+
+  &.with-badge {
+    &:before,
+    &:after {
+      @include gm.media-breakpoint-down(md) {
+        @include gm.box(2rem, 2rem);
+      }
+    }
+  }
+
+  .card-body {
+    padding: 1.5rem;
+
+    &:before {
+      @include gm.media-breakpoint-down(md) {
+        @include gm.box(15px, 15px);
+      }
+    }
+
+    @include gm.media-breakpoint-down(md) {
+      @include gm.box(9rem, 12.5rem);
+
+      padding: 0.5rem;
+    }
+
+    .avatar-container {
+      img {
+        @include gm.media-breakpoint-down(md) {
+          @include gm.box(3.5rem, 4rem);
+        }
+      }
+    }
+
+    .data-container {
+      p {
+        @include gm.media-breakpoint-down(md) {
+          display: none;
+        }
+      }
+
+      h5 {
+        @include gm.media-breakpoint-down(md) {
+          font-size: 0.7rem;
+          text-align: center;
+        }
+      }
+    }
+
+    .rank-container {
+      h5 {
+        @include gm.media-breakpoint-down(md) {
+          font-size: 0.7rem;
+        }
+      }
+    }
+  }
+}
+
+%card-container-actions {
+  position: relative;
+
+  .fa-square {
+    color: gt.theme-var(gt.$bg-2);
+  }
+
+  &:hover {
+    .collector-card {
+      opacity: 1;
+
+      @include gm.media-breakpoint-up(md) {
+        opacity: 0.3;
+      }
+    }
+
+    .download-container {
+      @include gm.media-breakpoint-up(md) {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        background-color: transparent;
+      }
+    }
+  }
+
+  .download-container {
+    font-size: 1.25rem;
+    display: flex;
+    position: relative;
+    top: -10px;
+    background-color: gt.theme-var(gt.$bg-2);
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    border-bottom-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    transform: initial;
+
+    @include gm.media-breakpoint-up(md) {
+      display: none;
+    }
+
+    a {
+      @include gm.media-breakpoint-down(md) {
+        font-size: 1rem;
+      }
+    }
+  }
+}

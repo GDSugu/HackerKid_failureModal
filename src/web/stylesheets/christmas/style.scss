@@ -1,0 +1,219 @@
+@use '../common/sass/base/_typography';
+@use '../common/sass/themes/_default' as gt;
+@use '../common/sass/base/_mixins' as gm;
+@use '../common/sass/base/_placeholders' as *;
+@use '../common/sass/components/_body';
+@use '../common/sass/components/_navbar';
+@use '../common/sass/components/_campaign-footer';
+@use '../common/sass/components/_loading';
+@use '../register/style.scss';
+@use '_font-size-override';
+// @use '_placeholders' as *;
+
+// default theme
+@include gt.populate-theme();
+
+// current page specific theme
+@include gt.populate-theme(gt.$santa-theme-map-light, gt.$santa-theme-map-dark);
+
+.top-container {
+  min-height: 25rem;
+
+  @include gm.media-breakpoint-down(md) {
+    min-height: 15rem;
+  }
+
+  h1 {
+    margin-top: 1.5rem;
+    position: relative;
+    color: gt.theme-var(gt.$santa-theme-color, null, gt.$santa-theme-map-light);
+    text-shadow: 4px 0 6px gt.theme-var(gt.$santa-shadow-color, null, gt.$santa-theme-map-light);
+
+    &:after {
+      content: '';
+      background-image: url('../../../images/christmas/santa.svg');
+      background-size: contain;
+      position: relative;
+      display: block;
+      background-repeat: no-repeat;
+      transform: scaleX(-1);
+      margin-left: auto;
+      top: -165px;
+      left: 30px;
+
+      @include gm.box(100px, 100px);
+
+      @include gm.media-breakpoint-up(md) {
+        display: none;
+      }
+    }
+  }
+}
+
+.image-container {
+  position: relative;
+  min-height: 20rem;
+
+  @include gm.media-breakpoint-down(md) {
+    overflow-x: hidden;
+  }
+
+  img {
+    width: 100%;
+    object-fit: contain;
+    position: relative;
+    top: -90px;
+
+    @include gm.media-breakpoint-down(md) {
+      object-fit: cover;
+      position: relative;
+      left: -100px;
+      top: 0;
+
+      @include gm.box(150%, 100%);
+    }
+  }
+}
+
+.form-container {
+  background-image: url('../../../images/christmas/santa-form-bg.svg');
+  background-size: cover;
+
+  .info-container {
+    position: relative;
+
+    h2 {
+      &:after {
+        content: '';
+        background-image: url('../../../images/christmas/santa-cap.svg');
+        background-size: contain;
+        position: relative;
+        display: block;
+        background-repeat: no-repeat;
+        top: -140px;
+        right: 45px;
+        margin-left: auto;
+
+        @include gm.box(75px, 75px);
+
+        @include gm.media-breakpoint-down(md) {
+          top: -105px;
+          right: 25px;
+        }
+      }
+
+      @include gm.media-breakpoint-down(md) {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .card {
+    @include gm.box-shadow-custom(0 0 0.5rem gt.theme-var(gt.$santa-shadow-color, null, gt.$santa-theme-map-light));
+  }
+
+  #userQuestion {
+    height: 7rem;
+  }
+}
+
+.winner-container {
+  & > div {
+    min-height: 10rem;
+  }
+
+  .info-image {
+    width: 100%;
+    top: -50px;
+
+    @include gm.media-breakpoint-up(md) {
+      position: relative;
+      z-index: -1;
+    }
+  }
+
+  h2 {
+    @include gm.media-breakpoint-down(md) {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+#registerModal {
+  .card {
+    @include gm.box-shadow-custom(0 0 0.5rem gt.theme-var(gt.$santa-shadow-color, null, gt.$santa-theme-map-light));
+  }
+
+  h2 {
+    @include gm.media-breakpoint-down(md) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .modal-body {
+    @include gm.media-breakpoint-up(md) {
+      &:before {
+        content: '';
+        background-image: url('../../../images/christmas/santa-holiday.svg');
+        background-size: contain;
+        position: absolute;
+        display: block;
+        background-repeat: no-repeat;
+        bottom: -70px;
+
+        @include gm.box(150px, 150px);
+      }
+    }
+  }
+}
+
+.card-container {
+  height: 100%;
+  min-height: 500px;
+
+  @include gm.media-breakpoint-down(md) {
+    height: auto;
+    min-height: 200px;
+  }
+}
+
+.message-container {
+  min-height: 15rem;
+
+  h6 {
+    &:after {
+      content: '';
+      background-image: url('../../../images/christmas/santa-fireworks.svg');
+      background-size: contain;
+      position: absolute;
+      display: block;
+      background-repeat: no-repeat;
+      top: 0;
+      left: 25%;
+
+      @include gm.box(150px, 150px);
+
+      @include gm.media-breakpoint-up(md) {
+        @include gm.box(50%, 100%);
+      }
+    }
+  }
+}
+
+.shade-container {
+  img {
+    position: relative;
+    bottom: -15px;
+    z-index: -1;
+
+    @include gm.media-breakpoint-up(md) {
+      bottom: -45px;
+    }
+  }
+}
+
+.result-container {
+  .text-highlight {
+    color: gt.theme-var(gt.$santa-theme-color, null, gt.$santa-theme-map-light);
+  }
+}

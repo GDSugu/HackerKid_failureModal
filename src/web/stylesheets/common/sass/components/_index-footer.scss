@@ -1,0 +1,47 @@
+@use '../themes/_default' as gt;
+@use '../base/_mixins' as gm;
+
+footer {
+  background: linear-gradient(90deg, gt.theme-var(gt.$index-footer-start, null, gt.$index-theme-map-light), gt.theme-var(gt.$index-footer-end, null, gt.$index-theme-map-light));
+
+  .social-container {
+    min-height: 10rem;
+  }
+
+  .contact-container {
+    min-height: 2rem;
+    color: gt.theme-var(gt.$index-footer-contact, null, gt.$index-theme-map-light);
+  }
+
+  .footer-logo {
+    padding: 2rem;
+
+    img {
+      height: 3rem;
+      object-fit: contain;
+
+      @include gm.media-breakpoint-down(md) {
+        width: 100%;
+      }
+    }
+  }
+
+  .social-links {
+    a {
+      padding: 0.5rem;
+
+      @include gm.media-breakpoint-up(md) {
+        padding: 1rem;
+      }
+
+      i {
+        font-size: 1.25rem;
+        color: gt.theme-var(gt.$index-footer-link, null, gt.$index-theme-map-light);
+
+        @include gm.media-breakpoint-up(md) {
+          font-size: 2.5rem;
+        }
+      }
+    }
+  }
+}

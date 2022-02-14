@@ -1,0 +1,84 @@
+@use '../base/_mixins' as gm;
+@use '../themes/_default' as gt;
+@use '_gradients';
+@use 'logo';
+
+.nav-logo {
+  @extend .logo;
+
+  & div {
+    @include gm.box(160px, 40px);
+
+    &.tiny {
+      @include gm.box(100px, 30px);
+    }
+
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+  }
+}
+
+.nav-bg {
+  background-color: gt.theme-var(gt.$bg-2);
+}
+
+.profile-wrap {
+  a {
+    color: gt.theme-var(gt.$text-color-4);
+    text-decoration: none;
+  }
+}
+
+.points-wrap:before {
+  @include gm.box(30px, 30px);
+
+  content: '';
+  background: url('../../../images/common/coin.svg');
+  background-size: contain;
+}
+
+.navbar-toggler {
+  border-radius: 0.25rem;
+}
+
+#navContent {
+  ul {
+    li {
+      &.active {
+        a {
+          font-weight: bold;
+          position: relative;
+
+          &:after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            right: 0;
+            background: gt.theme-var(gt.$text-color-2);
+            height: 4px;
+          }
+        }
+      }
+
+      &.nav-item {
+        padding-left: 1.5rem;
+      }
+    }
+  }
+
+  .dropdown-menu {
+    left: -25px;
+  }
+}
+
+.tag {
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-size: 0.7rem;
+  color: gt.theme-var(gt.$text-color-2);
+}
+
+.tag-danger {
+  background-color: #f32929;
+}

@@ -1,0 +1,41 @@
+%font-awesome {
+  font-family: "Font Awesome 5 Free", sans-serif;
+}
+
+%font-awesome-brand {
+  font-family: "Font Awesome 5 Brands", sans-serif;
+}
+
+%font-fas {
+  @extend %font-awesome;
+
+  font-weight: 900;
+}
+
+%font-far {
+  @extend %font-awesome;
+
+  font-weight: 400;
+}
+
+%font-fab {
+  @extend %font-awesome-brand;
+
+  font-weight: 400;
+}
+
+%font-weight-black {
+  font-weight: 900;
+}
+
+%w-75 {
+  width: 75%;
+}
+
+%hexagon {
+  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+}
+
+%shadow {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}

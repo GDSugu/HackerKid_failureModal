@@ -1,0 +1,13 @@
+.btn-primary-outline {
+  border: 1px solid var(--primary-bg-gradient-fallback-color);
+  background-color: var(--primary-bg-color);
+  color: var(--ternary-text-color);
+}
+
+.btn-primary-outline:hover {
+  color: var(--primary-text-color);
+}
+
+.btn-primary-outline:focus {
+  box-shadow: 0 0 0 0.2rem var(--color-1-alpha-25);
+}

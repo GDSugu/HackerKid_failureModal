@@ -1,0 +1,7 @@
+@use '../themes/_default' as gt;
+
+.btn[class*='btn-outline'] {
+  &:not(:hover) {
+    color: gt.theme-var(gt.$text-color-2);
+  }
+}

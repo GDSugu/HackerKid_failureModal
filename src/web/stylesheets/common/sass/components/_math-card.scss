@@ -1,0 +1,20 @@
+@use '../base/_mixins' as gm;
+@use '../themes/_default' as gt;
+
+.math-card {
+  @include gm.flex-center();
+
+  border-color: gt.theme-var(gt.$math-card-border, null, gt.$math-theme-map-light);
+  border-style: solid;
+  border-radius: 10px;
+  background-color: gt.theme-var(gt.$math-card-bg, null, gt.$math-theme-map-light);
+  box-shadow: 2px 4px gt.theme-var(gt.$math-card-shadow, null, gt.$math-theme-map-light);
+
+  .math-card-content {
+    @include gm.box(100%, 100%);
+    @include gm.flex-center();
+
+    border-radius: 10px;
+    margin: -3px;
+  }
+}

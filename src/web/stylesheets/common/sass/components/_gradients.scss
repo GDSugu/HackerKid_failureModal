@@ -1,0 +1,20 @@
+@use '../themes/_default' as gt;
+@use '../base/_mixins' as gm;
+
+.bg-primary-gradient {
+  background:
+    linear-gradient(
+      90deg,
+      gt.theme-var(gt.$button-gradient-1-start) 0%,
+      gt.theme-var(gt.$button-gradient-1-end) 100%
+    );
+}
+
+.bg-success-gradient {
+  background:
+    linear-gradient(
+      90deg,
+      gt.theme-var(gt.$button-gradient-2-start) 0%,
+      gt.theme-var(gt.$button-gradient-2-end) 100%
+    );
+}

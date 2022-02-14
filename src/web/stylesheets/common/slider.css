@@ -1,0 +1,49 @@
+.custom-range-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-range-wrap input {
+  opacity: 0;
+  z-index: 1;
+  width: 150px;
+}
+
+.custom-range-wrap .track {
+  width: 150px;
+  height: 0.25rem;
+  background: var(--ternary-text-color);
+  border-radius: 10px;
+  position: absolute;
+  bottom: 6px;
+}
+
+.custom-range-wrap .progress {
+  width: 75px;
+  height: 0.25rem;
+  background: var(--primary-bg-gradient-color);
+  border-radius: 10px;
+  position: absolute;
+  bottom: 6px;
+}
+
+.custom-range-wrap .thumb {
+  width: 75px;
+  height: 15px;
+  background: rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  position: absolute;
+  bottom: 6px;
+}
+
+.custom-range-wrap .thumb:after {
+  content: '';
+  width: 15px;
+  height: 15px;
+  background: var(--primary-bg-gradient-color);
+  border-radius: 10px;
+  position: absolute;
+  right: -7px;
+  top: 6px;
+}

@@ -1,0 +1,60 @@
+@use '../themes/_default' as gt;
+@use '../base/_mixins' as gm;
+@use '../base/_variables' as gv;
+@use '_font-dancing-bold';
+
+// turtle certificate component specific theme
+@include gt.populate-theme(gt.$tc-theme-map-light, gt.$tc-theme-map-dark);
+
+.imageTemplate {
+  height: 720px;
+  width: 1080px;
+}
+
+#certificateBlock {
+  height: 720px;
+  width: 1080px;
+  position: relative;
+}
+
+#certificateDOM {
+  position: fixed;
+  top: 0;
+
+  & > div {
+    height: 0;
+    width: 0;
+    overflow: scroll;
+  }
+}
+
+.userName {
+  position: absolute;
+  top: 330px;
+  font-size: 48px;
+  font-family: 'DancingScriptBold', sans-serif;
+  color: gt.theme-var(gt.$tc-font-color, null, gt.$tc-theme-map-light);
+}
+
+.certificateName {
+  position: absolute;
+  top: 470px;
+  font-size: 24px;
+  color: gt.theme-var(gt.$tc-font-color, null, gt.$tc-theme-map-light);
+  font-weight: bold;
+}
+
+.certificateId {
+  position: absolute;
+  top: 35px;
+  font-size: 18px;
+  left: 35px;
+  color: gt.theme-var(gt.$tc-font-color, null, gt.$tc-theme-map-light);
+}
+
+.certificateSign {
+  height: 80px;
+  width: 160px;
+  position: absolute;
+  top: 520px;
+}

@@ -1,0 +1,24 @@
+@use '../themes/_default' as gt;
+@use '../base/_mixins' as gm;
+
+footer {
+  min-height: 15rem;
+  background: linear-gradient(90deg, gt.theme-var(gt.$santa-footer-start, null, gt.$santa-theme-map-light), gt.theme-var(gt.$santa-footer-end, null, gt.$santa-theme-map-light));
+
+  .footer-logo {
+    padding: 2rem;
+
+    img {
+      height: 3rem;
+      object-fit: contain;
+
+      @include gm.media-breakpoint-down(md) {
+        width: 100%;
+      }
+    }
+  }
+
+  h2 {
+    color: gt.theme-var(gt.$santa-footer-text, null, gt.$santa-theme-map-light);
+  }
+}

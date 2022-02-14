@@ -1,0 +1,7 @@
+@use '../themes/_default' as gt;
+
+// default theme
+@include gt.populate-theme();
+
+// current page specific theme
+@include gt.populate-theme(gt.$index-theme-map-light, gt.$index-theme-map-dark);

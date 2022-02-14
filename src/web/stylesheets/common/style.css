@@ -1,0 +1,228 @@
+@import url('typography.css');
+
+:root {
+  --logo-primary-color: #fff;
+  --logo-secondary-color: #ffbe33;
+  --primary-bg-color: #121212;
+  --secondary-bg-color: #242424;
+  --ternary-bg-color: #1f1f1f;
+  --primary-text-color: #fff;
+  --secondary-text-color: #a0a0a0;
+  --ternary-text-color: #e8e8e8;
+  --color-1: #ffbe33;
+  --color-1-alpha-25: rgba(255, 190, 51, 0.25);
+  --danger-color: #f33;
+  --primary-bg-gradient-color:
+    linear-gradient(
+      90deg,
+      rgba(255, 93, 0, 1) 0%,
+      rgba(255, 140, 0, 1) 100%
+    );
+  --secondary-bg-gradient-color:
+    linear-gradient(
+      -90deg,
+      rgba(51, 158, 255, 1) 0%,
+      rgba(26, 113, 252, 1) 100%
+    );
+  --secondary-bg-gradient-color-90:
+    linear-gradient(
+      rgba(51, 158, 255, 1) 0%,
+      rgba(26, 113, 252, 1) 100%
+    );
+  --buttonoutlineblue: rgba(26, 113, 252, 1);
+  --shadow-color: rgba(0, 0, 0, 0.75);
+  --primary-bg-gradient-color-90:
+    linear-gradient(
+      rgba(255, 93, 0, 1) 0%,
+      rgba(255, 140, 0, 1) 100%
+    );
+  --nav-bg-color: #1f1f1f;
+  --nav-bg-hover-color: #000;
+  --nav-shadow-color: #000;
+  --primary-bg-gradient-fallback-color: #ff5d00;
+  --content-bg-color: #1d1d1d;
+  --content-light-bg-color: #2c2c2c;
+  --skulpt-bg-color: #fff;
+  --font-black: 'LatoWebBlack';
+  --font-bold: 'LatoWebBold';
+  --font-regular: 'LatoWeb';
+  --font-heavy: 'LatoWebHeavy';
+  --font-semibold: 'LatoWebSemibold';
+  --font-medium: 'LatoWebMedium';
+  --font-light: 'LatoWebLight';
+  --font-heavy: 'LatoWebHeavy';
+  --font-logo: 'FredokaOne';
+  --font-family-fontAwesome: 'FontAwesome';
+  --font-family-fontAwesome5: 'Font Awesome 5 Free';
+  --font-family-events: 'HomeSchool';
+  --font-family-grace: 'Grace';
+  --font-dancing-bold: 'DancingScriptBold';
+  --font-raleway: 'Raleway';
+  --text-light-small: rgba(252, 252, 252, 0.75);
+  --table-head-bg: #007bff;
+  --table-search-text: rgb(117, 117, 117);
+  --table-row-hover-bg: rgba(44, 44, 44, 1);
+  --table-cell-bg: rgba(31, 31, 31, 1);
+  --table-cell-border-color: rgba(112, 112, 112, 1);
+  --table-pagination-current-bg: rgba(255, 93, 0, 1);
+  --table-pagination-btn-border: rgba(255, 93, 0, 1);
+  --table-pagination-text-color: #fff;
+  --table-current-user: linear-gradient(to right, rgba(255, 140, 0, 1), rgba(255, 93, 0, 1));
+  --draft-search-bg: rgba(44, 44, 44, 1);
+  --draft-list-active-bg: #707070;
+  --modal-turtle-border-color: #0082ff;
+  --whatsapp-color: #25d366;
+  --facebook-color: #4267b2;
+  --twitter-color: #1da1f2;
+  --telegram-color: #08c;
+  --share-phone-border-color: #3d3d3d;
+  --card-bg: #2c2c2c;
+  --creative-level-completion: rgba(255, 190, 51, 1);
+  --competitiveness-level-completion: rgba(0, 130, 255, 1);
+  --team-player-level-completion: rgba(14, 173, 105, 1);
+  --enthusiastic-level-completion: rgba(255, 93, 0, 1);
+  --attendance-level-completion: rgba(255, 51, 51, 1);
+  --member-status-online: rgba(109, 255, 104, 1);
+  --landing-primary-blue: #4361ee;
+  --landing-kids-footer-gradient: linear-gradient(to bottom, #2c2c2c, #121212);
+  --landing-sticky-button: #fd721e;
+  --landing-parents-logo-color: #212529;
+  --landing-parents-text-color: #495057;
+  --landing-parent-alternate-bg: #fafafa;
+  --profile-image-bg: rgba(173, 181, 189, 1);
+  --upload-photo-btn: linear-gradient(to right, rgba(51, 158, 255, 1), rgba(26, 113, 252, 1));
+  --message-card-text-color: rgb(224, 224, 224, 1);
+  --empty-msg-color: rgb(187, 187, 187, 1);
+  --profile-line-color: rgba(255, 255, 255, 0.1);
+  --profile-card-color: #fff;
+  --form-border-color: #ced4da;
+  --event-footer-gradient: linear-gradient(to right, rgba(36, 36, 36, 1), rgba(18, 18, 18, 1));
+  --event-landing-header-box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.07);
+  --event-landing-content-border: #faece3;
+  --event-landing-content-card: rgba(255, 248, 243, 1);
+  --event-landing-alternate-bg: rgba(250, 250, 250, 1);
+  --event-landing-sign-up-path: #ffeee4;
+  --event-landing-free-practice-path: #fff6d4;
+  --event-landing-enroll-competition-path: #e7eeff;
+  --event-landing-competition-rounds-path: #fff6d4;
+  --event-landing-winner-path: #ffeee4;
+  --event-landing-road-path-color: rgb(241, 241, 241, 1);
+  --event-landing-card-box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.08);
+  --event-landing-testimonial-box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.1);
+  --zombieland-panel-title: rgba(160, 160, 160, 1);
+  --zombieland-completed-qns: rgba(74, 197, 89, 1);
+}
+
+/* utility classes */
+
+.font-semibold {
+  font-family: var(--font-semibold);
+}
+
+.font-heavy {
+  font-family: var(--font-heavy);
+}
+
+.font-large {
+  font-size: 1.5rem;
+}
+
+.font-black {
+  font-family: var(--font-black);
+}
+
+.primary-text {
+  color: var(--primary-text-color);
+}
+
+.secondary-text {
+  color: var(--secondary-text-color);
+}
+
+.ternary-text {
+  color: var(--ternary-text-color);
+}
+
+.bg-secondary-gradient {
+  background: var(--secondary-bg-gradient-color);
+}
+
+.bg-primary-gradient {
+  background: var(--primary-bg-gradient-color);
+}
+
+.border-radius-1 {
+  border-radius: 0.5rem;
+}
+
+.main-title {
+  color: var(--ternary-text-color);
+  font-family: var(--font-heavy);
+  font-weight: bold;
+  font-size: 1.875rem;
+}
+
+.bolder {
+  font-family: var(--font-bold) !important;
+  font-weight: 700;
+}
+
+.primary-bg {
+  background: var(--primary-bg-color);
+}
+
+.secondary-bg {
+  background: var(--secondary-bg-color);
+}
+
+.font-small {
+  font-size: 0.875rem;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.whatsapp-color {
+  color: var(--whatsapp-color);
+}
+
+.facebook-color {
+  color: var(--facebook-color);
+}
+
+.twitter-color {
+  color: var(--twitter-color);
+}
+
+.telegram-color {
+  color: var(--telegram-color);
+}
+
+.tag {
+  color: var(--primary-text-color);
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.tag-success {
+  background-color: #4361ee;
+}
+
+.tag-danger {
+  background-color: #f32929;
+}
+
+.font-smaller {
+  font-size: 0.7rem;
+}
+
+.secondary-border {
+  border: 2px solid var(--secondary-text-color);
+}
+
+.font-larger {
+  font-size: 2rem;
+}
+
+/* /utility classes */
