@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   getLocale,
   loadLocaleData,
@@ -8,6 +8,7 @@ const useRootPageState = () => {
   const [state, setState] = useState({
     currentLocaleMessages: false,
     currentLocale: false,
+    currentTheme: 'light',
   });
 
   const currentLocale = getLocale();
@@ -20,10 +21,11 @@ const useRootPageState = () => {
         currentLocale,
       }));
     });
-  });
+  }, []);
 
   return {
     state,
+    setState,
     static: {},
   };
 };

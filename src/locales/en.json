@@ -11,6 +11,10 @@
     "defaultMessage": "Go to Index",
     "description": "Link description"
   },
+  "T/a40M": {
+    "defaultMessage": "Toggle Theme",
+    "description": "Toggle theme Button description"
+  },
   "Yz1BIF": {
     "defaultMessage": "Go to About",
     "description": "Link description"

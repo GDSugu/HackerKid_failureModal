@@ -1,7 +1,13 @@
+import { getPlatform } from './utlis';
+
 const getLocale = () => {
-  const { language } = window.navigator.language;
-  if (language) {
-    return language.slice(0, 2);
+  // return 'fr';
+  const platform = getPlatform();
+  if (platform === 'web') {
+    const { language } = window.navigator;
+    if (language) {
+      return language.slice(0, 2);
+    }
   }
   return 'en';
 };

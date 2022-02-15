@@ -1,112 +1,51 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import 'intl';
+import '@formatjs/intl-getcanonicallocales/polyfill';
+import '@formatjs/intl-locale/polyfill';
+import '@formatjs/intl-pluralrules/polyfill';
+import '@formatjs/intl-pluralrules/locale-data/en';
+import '@formatjs/intl-numberformat/polyfill';
+import '@formatjs/intl-numberformat/locale-data/en';
+import '@formatjs/intl-datetimeformat/polyfill';
+import '@formatjs/intl-datetimeformat/locale-data/en';
+import '@formatjs/intl-datetimeformat/add-all-tz';
 
- import React from 'react';
- import type {Node} from 'react';
- import {
-   SafeAreaView,
-   ScrollView,
-   StatusBar,
-   StyleSheet,
-   Text,
-   useColorScheme,
-   View,
- } from 'react-native';
+import React, { useCallback } from 'react';
+import { View, Text } from 'react-native';
+import { IntlProvider } from 'react-intl';
+import App from './pages/App';
+import useRootPageState from '../hooks/pages/root';
+import ThemeContext from './components/theme';
+import { themes } from './components/config';
 
- import {
-   Colors,
-   DebugInstructions,
-   Header,
-   LearnMoreLinks,
-   ReloadInstructions,
- } from 'react-native/Libraries/NewAppScreen';
+const AppWrapper = () => {
+  const { state, setState } = useRootPageState();
 
- const Section = ({children, title}): Node => {
-   const isDarkMode = useColorScheme() === 'dark';
-   return (
-     <View style={styles.sectionContainer}>
-       <Text
-         style={[
-           styles.sectionTitle,
-           {
-             color: isDarkMode ? Colors.white : Colors.black,
-           },
-         ]}>
-         {title}
-       </Text>
-       <Text
-         style={[
-           styles.sectionDescription,
-           {
-             color: isDarkMode ? Colors.light : Colors.dark,
-           },
-         ]}>
-         {children}
-       </Text>
-     </View>
-   );
- };
+  const toggleTheme = useCallback(() => {
+    setState((prevState) => ({
+      ...prevState,
+      currentTheme: prevState.currentTheme === 'dark' ? 'light' : 'dark',
+    }));
+});
 
- const App: () => Node = () => {
-   const isDarkMode = useColorScheme() === 'dark';
 
-   const backgroundStyle = {
-     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-   };
+  return (
+    state.currentLocaleMessages
+      ? <ThemeContext.Provider
+          value = {{
+            currentTheme: state.currentTheme,
+            theme: themes[state.currentTheme],
+            toggleTheme,
+          }}>
+          <IntlProvider
+            locale = {state.currentLocale}
+            defaultLocale = 'en'
+            messages = {state.currentLocaleMessages}
+          >
+            <App/>
+          </IntlProvider>
+        </ThemeContext.Provider>
+      : <View><Text>Loading....</Text></View>
+  );
+};
 
-   return (
-     <SafeAreaView style={backgroundStyle}>
-       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-       <ScrollView
-         contentInsetAdjustmentBehavior="automatic"
-         style={backgroundStyle}>
-         <Header />
-         <View
-           style={{
-             backgroundColor: isDarkMode ? Colors.black : Colors.white,
-           }}>
-           <Section title="Step One">
-             Edit <Text style={styles.highlight}>App.js</Text> to change this
-             screen and then come back to see your edits.
-           </Section>
-           <Section title="See Your Changes">
-             <ReloadInstructions />
-           </Section>
-           <Section title="Debug">
-             <DebugInstructions />
-           </Section>
-           <Section title="Learn More">
-             Read the docs to discover what to do next:
-           </Section>
-           <LearnMoreLinks />
-         </View>
-       </ScrollView>
-     </SafeAreaView>
-   );
- };
-
- const styles = StyleSheet.create({
-   sectionContainer: {
-     marginTop: 32,
-     paddingHorizontal: 24,
-   },
-   sectionTitle: {
-     fontSize: 24,
-     fontWeight: '600',
-   },
-   sectionDescription: {
-     marginTop: 8,
-     fontSize: 18,
-     fontWeight: '400',
-   },
-   highlight: {
-     fontWeight: '700',
-   },
- });
-
- export default App;
+export default AppWrapper;
