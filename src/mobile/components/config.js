@@ -27,4 +27,4 @@ const themes = {
 export {
 	font,
 	themes,
-}
+};

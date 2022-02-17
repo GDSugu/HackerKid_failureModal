@@ -6,15 +6,21 @@
 @use '../common/sass/components/_navbar';
 @use '../common/sass/components/_campaign-footer';
 @use '../common/sass/components/_loading';
-@use '../register/style.scss';
 @use '_font-size-override';
 // @use '_placeholders' as *;
 
+@import './_default.js';
+
 // default theme
-@include gt.populate-theme();
+@include gt.populate-theme($themeMapLight, $themeMapDark);
 
 // current page specific theme
-@include gt.populate-theme(gt.$santa-theme-map-light, gt.$santa-theme-map-dark);
+// @include gt.populate-theme(gt.$santa-theme-map-light, gt.$santa-theme-map-dark);
+
+main {
+  background: gt.theme-var(body-bg-red, null, $themeMapDark);
+  // background: gt.map-deep-get($themeMapLight, 'nav-bg-blue');
+}
 
 .top-container {
   min-height: 25rem;
@@ -26,8 +32,8 @@
   h1 {
     margin-top: 1.5rem;
     position: relative;
-    color: gt.theme-var(gt.$santa-theme-color, null, gt.$santa-theme-map-light);
-    text-shadow: 4px 0 6px gt.theme-var(gt.$santa-shadow-color, null, gt.$santa-theme-map-light);
+    color: gt.theme-var(santa-theme-color, null, gt.$santa-theme-map-light);
+    text-shadow: 4px 0 6px gt.theme-var(santa-shadow-color, null, gt.$santa-theme-map-light);
 
     &:after {
       content: '';
@@ -109,7 +115,7 @@
   }
 
   .card {
-    @include gm.box-shadow-custom(0 0 0.5rem gt.theme-var(gt.$santa-shadow-color, null, gt.$santa-theme-map-light));
+    @include gm.box-shadow-custom(0 0 0.5rem gt.theme-var(santa-shadow-color, null, gt.$santa-theme-map-light));
   }
 
   #userQuestion {
@@ -141,7 +147,7 @@
 
 #registerModal {
   .card {
-    @include gm.box-shadow-custom(0 0 0.5rem gt.theme-var(gt.$santa-shadow-color, null, gt.$santa-theme-map-light));
+    @include gm.box-shadow-custom(0 0 0.5rem gt.theme-var(santa-shadow-color, null, gt.$santa-theme-map-light));
   }
 
   h2 {
@@ -214,6 +220,6 @@
 
 .result-container {
   .text-highlight {
-    color: gt.theme-var(gt.$santa-theme-color, null, gt.$santa-theme-map-light);
+    color: gt.theme-var(santa-theme-color, null, gt.$santa-theme-map-light);
   }
 }

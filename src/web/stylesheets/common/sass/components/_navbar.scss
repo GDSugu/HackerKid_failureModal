@@ -19,12 +19,12 @@
 }
 
 .nav-bg {
-  background-color: gt.theme-var(gt.$bg-2);
+  background-color: gt.theme-var(bg-2);
 }
 
 .profile-wrap {
   a {
-    color: gt.theme-var(gt.$text-color-4);
+    color: gt.theme-var(text-color-4);
     text-decoration: none;
   }
 }
@@ -55,7 +55,7 @@
             bottom: -0.5rem;
             left: 0;
             right: 0;
-            background: gt.theme-var(gt.$text-color-2);
+            background: gt.theme-var(text-color-2);
             height: 4px;
           }
         }
@@ -76,7 +76,7 @@
   border-top-left-radius: 10px;
   border-bottom-right-radius: 10px;
   font-size: 0.7rem;
-  color: gt.theme-var(gt.$text-color-2);
+  color: gt.theme-var(text-color-2);
 }
 
 .tag-danger {

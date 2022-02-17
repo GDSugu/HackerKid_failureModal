@@ -7,10 +7,10 @@
     content: '';
   }
 
-  color: gt.theme-var(gt.$text-color-2);
+  color: gt.theme-var(text-color-2);
   border-radius: 50px;
   padding: 1.5rem;
-  background-color: gt.theme-var(gt.$bg-2);
+  background-color: gt.theme-var(bg-2);
 
   @include gm.media-breakpoint-down(md) {
     display: none;

@@ -4,11 +4,11 @@
 .math-card {
   @include gm.flex-center();
 
-  border-color: gt.theme-var(gt.$math-card-border, null, gt.$math-theme-map-light);
+  border-color: gt.theme-var(math-card-border, null, gt.$math-theme-map-light);
   border-style: solid;
   border-radius: 10px;
-  background-color: gt.theme-var(gt.$math-card-bg, null, gt.$math-theme-map-light);
-  box-shadow: 2px 4px gt.theme-var(gt.$math-card-shadow, null, gt.$math-theme-map-light);
+  background-color: gt.theme-var(math-card-bg, null, gt.$math-theme-map-light);
+  box-shadow: 2px 4px gt.theme-var(math-card-shadow, null, gt.$math-theme-map-light);
 
   .math-card-content {
     @include gm.box(100%, 100%);

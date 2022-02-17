@@ -117,7 +117,7 @@
       span {
         top: -10px;
         position: relative;
-        color: gt.theme-var(gt.$text-color-2);
+        color: gt.theme-var(text-color-2);
         width: 40px;
       }
 
@@ -140,7 +140,7 @@
     height: 3.5rem;
     width: 3.5rem;
     position: absolute;
-    background: gt.theme-var(gt.$bg-2);
+    background: gt.theme-var(bg-2);
   }
 
   &.with-badge:before {
@@ -237,7 +237,7 @@
   position: relative;
 
   .fa-square {
-    color: gt.theme-var(gt.$bg-2);
+    color: gt.theme-var(bg-2);
   }
 
   &:hover {
@@ -266,7 +266,7 @@
     display: flex;
     position: relative;
     top: -10px;
-    background-color: gt.theme-var(gt.$bg-2);
+    background-color: gt.theme-var(bg-2);
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
     border-bottom-right-radius: 0.5rem;

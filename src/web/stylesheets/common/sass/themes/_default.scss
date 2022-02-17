@@ -1,86 +1,152 @@
-
 // main color system - start
-
-$text-color-1: --text-color-1;
-$text-color-2: --text-color-2;
-$text-color-3: --text-color-3;
-$text-color-4: --text-color-4;
-$text-color-5: --text-color-5;
-$text-color-6: --text-color-6;
-$text-color-7: --text-color-7;
-$text-color-8: --text-color-8;
-$text-color-9: --text-color-9;
-$button-gradient-1-start: --button-gradient-1-start;
-$button-gradient-1-end: --button-gradient-1-end;
-$button-solid: --button-solid;
-$button-gradient-2-start: --button-gradient-2-start;
-$button-gradient-2-end: --button-gradient-2-end;
-$bg-1: --bg-1;
-$bg-2: --bg-2;
-$bg-3: --bg-3;
-$bg-4: --bg-4;
+$main-color-system-cssVars: (
+  text-color-1: --text-color-1,
+  text-color-2: --text-color-2,
+  text-color-3: --text-color-3,
+  text-color-4: --text-color-4,
+  text-color-5: --text-color-5,
+  text-color-6: --text-color-6,
+  text-color-7: --text-color-7,
+  text-color-8: --text-color-8,
+  text-color-9: --text-color-9,
+  button-gradient-1-start: --button-gradient-1-start,
+  button-gradient-1-end: --button-gradient-1-end,
+  button-solid: --button-solid,
+  button-gradient-2-start: --button-gradient-2-start,
+  button-gradient-2-end: --button-gradient-2-end,
+  bg-1: --bg-1,
+  bg-2: --bg-2,
+  bg-3: --bg-3,
+  bg-4: --bg-4,
+);
 
 // Default theme
 $theme-map-light: (
-  $text-color-1: #e0e0e0,
-  $text-color-2: #000,
-  $text-color-3: #495057,
-  $text-color-4: #212529,
-  $text-color-5: #ff5d00,
-  $text-color-6: #5b5b5b,
-  $text-color-7: #ffbe33,
-  $text-color-8: #4361ee,
-  $text-color-9: #c1c1c1,
-  $button-gradient-1-start: #ff5d00,
-  $button-gradient-1-end: #ff8c00,
-  $button-solid: #ffbe33,
-  $button-gradient-2-start: #339eff,
-  $button-gradient-2-end: #1a71fc,
-  $bg-1: #fff,
-  $bg-2: #fff,
-  $bg-3: #fff,
-  $bg-4: #fff,
+  name: 'theme-map-light',
+  theme: (
+    text-color-1: #e0e0e0,
+    text-color-2: #000,
+    text-color-3: #495057,
+    text-color-4: #212529,
+    text-color-5: #ff5d00,
+    text-color-6: #5b5b5b,
+    text-color-7: #ffbe33,
+    text-color-8: #4361ee,
+    text-color-9: #c1c1c1,
+    button-gradient-1-start: #ff5d00,
+    button-gradient-1-end: #ff8c00,
+    button-solid: #ffbe33,
+    button-gradient-2-start: #339eff,
+    button-gradient-2-end: #1a71fc,
+    bg-1: #fff,
+    bg-2: #fff,
+    bg-3: #fff,
+    bg-4: #fff,
+  ),  
 );
 
 // Override the default light theme
 $theme-map-dark: (
-  $text-color-1: #e0e0e0,
-  $text-color-2: #fff,
-  $text-color-3: #a0a0a0,
-  $text-color-4: #e8e8e8,
-  $text-color-5: #ff5d00,
-  $text-color-6: #5b5b5b,
-  $text-color-7: #ffbe33,
-  $text-color-8: #4361ee,
-  $text-color-9: #696a6b,
-  $button-gradient-1-start: #ff5d00,
-  $button-gradient-1-end: #ff8c00,
-  $button-solid: #ffbe33,
-  $button-gradient-2-start: #339eff,
-  $button-gradient-2-end: #1a71fc,
-  $bg-1: #121212,
-  $bg-2: #1f1f1f,
-  $bg-3: #242424,
-  $bg-4: #2c2c2c,
+  name: 'theme-map-dark',
+  theme: (
+    text-color-1: #e0e0e0,
+    text-color-2: #fff,
+    text-color-3: #a0a0a0,
+    text-color-4: #e8e8e8,
+    text-color-5: #ff5d00,
+    text-color-6: #5b5b5b,
+    text-color-7: #ffbe33,
+    text-color-8: #4361ee,
+    text-color-9: #696a6b,
+    button-gradient-1-start: #ff5d00,
+    button-gradient-1-end: #ff8c00,
+    button-solid: #ffbe33,
+    button-gradient-2-start: #339eff,
+    button-gradient-2-end: #1a71fc,
+    bg-1: #121212,
+    bg-2: #1f1f1f,
+    bg-3: #242424,
+    bg-4: #2c2c2c,
+  ),
 );
 
+// js theme system
+$js-theme-system-cssVars: (
+  text-color-1: --text-color-1,
+  text-color-2: --text-color-2,
+  text-color-3: --text-color-3,
+  text-color-4: --text-color-4,
+  text-color-5: --text-color-5,
+  text-color-6: --text-color-6,
+  nav-bg-blue: --nav-bg-blue,
+  nav-bg-green: --nav-bg-green,
+  nav-bg-lightBlue: --nav-bg-lightblue,
+  nav-bg-red: --nav-bg-red,
+  nav-bg-yellow: --nav-bg-yellow,
+  body-bg-blue: --body-bg-blue,
+  body-bg-green: --body-bg-green,
+  body-bg-lightBlue: --body-bg-lightblue,
+  body-bg-red: --body-bg-red,
+  body-bg-yellow: --body-bg-yellow,
+);
+
+$reg-color-system-cssVars: (
+  reg-danger-color: --reg-danger-color,
+  reg-dim-color: --reg-dim-color,
+  reg-button-gradient-1: --reg-button-gradient-1,
+);
+
+$santa-color-system-cssVars: (
+  santa-theme-color: --santa-theme-color,
+  santa-shadow-color: --santa-shadow-color,
+  santa-footer-start: --santa-footer-start,
+  santa-footer-end: --santa-footer-end,
+  santa-footer-text: --santa-footer-text,
+);
+
+$cssVarMap: (
+  theme-map-light: $main-color-system-cssVars,
+  theme-map-dark: $main-color-system-cssVars,
+  reg-theme-map-light: $reg-color-system-cssVars,
+  reg-theme-map-dark: $reg-color-system-cssVars,
+  santa-theme-map-light: $santa-color-system-cssVars,
+  santa-theme-map-dark: $santa-color-system-cssVars,
+  themeMapLight: $js-theme-system-cssVars,
+  themeMapDark: $js-theme-system-cssVars,
+);
 /*
   include a map in a class
 */
-@mixin spread-map($map: ()) {
+@mixin spread-map($map: (), $cssMap: $main-color-system-cssVars) {
   @each $key,
     $value in $map {
+    $key: map-get($cssMap, $key);
     #{$key}: $value;
   }
 }
 
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+
+  @return $map;
+}
+
 @mixin populate-theme($light: $theme-map-light, $dark: $theme-map-dark) {
+  @debug $light;
   :root.light {
-    @include spread-map($light);
+    $theme: map-get($light, theme);
+    $name: map-get($light, name);
+    $cssMap: map-get($cssVarMap, $name);
+    @include spread-map($theme, $cssMap);
   }
 
   :root.dark {
-    @include spread-map($dark);
+    $theme: map-get($dark, theme);
+    $name: map-get($dark, name);
+    $cssMap: map-get($cssVarMap, $name);
+    @include spread-map($theme, $cssMap);
   }
 }
 
@@ -92,10 +158,14 @@ $theme-map-dark: (
   Throws error if the variable not part of the map
 */
 @function theme-var($key, $fallback: null, $map: $theme-map-light) {
+  $name: map-get($map, name);
+  $map: map-get($map, theme);
   @if not map-has-key($map, $key) {
     @error "key: #{$key}, is not a key in map: #{$map}";
   }
 
+  $cssMap: map-get($cssVarMap, $name); 
+  $key: map-get($cssMap, $key);
   @if ($fallback) {
     @return var($key, $fallback);
   }
@@ -106,199 +176,63 @@ $theme-map-dark: (
 }
 
 //body
-$body-bg: theme-var($bg-1);
-$body-color: theme-var($text-color-4);
+$body-bg: theme-var(bg-1);
+$body-color: theme-var(text-color-4);
 
 // bootstrap patch as css vars are not supported for some funcs like darken(), directly passed color codes
-$primary-color: map-get($theme-map-light, $text-color-5);
-$secondary-color: map-get($theme-map-light, $text-color-3);
-$success-color: map-get($theme-map-light, $text-color-8);
+$primary-color: map-get($theme-map-light, theme, text-color-5);
+$secondary-color: map-get($theme-map-light, theme, text-color-3);
+$success-color: map-get($theme-map-light, theme, text-color-8);
 
 // main color system - end
 
 // register color system - start -- prefix -- 'reg'
 
-$reg-danger-color: --reg-danger-color;
-$reg-dim-color: --reg-dim-color;
-$reg-button-gradient-1: --reg-button-gradient-1;
-
 // Default theme
 $reg-theme-map-light: (
-  $reg-danger-color: #f33,
-  $reg-dim-color: #707070,
-  $reg-button-gradient-1: linear-gradient(90deg, theme-var($button-gradient-1-start), theme-var($button-gradient-1-end)),
+  name: 'reg-theme-map-light',
+  theme: (
+    reg-danger-color: #f33,
+    reg-dim-color: #707070,
+    reg-button-gradient-1: linear-gradient(90deg, theme-var(button-gradient-1-start), theme-var(button-gradient-1-end)),
+  ),
 );
 
 // Override the default light theme
 $reg-theme-map-dark: (
-  $reg-danger-color: #f33,
-  $reg-dim-color: #707070,
-  $reg-button-gradient-1: linear-gradient(90deg, theme-var($button-gradient-1-start), theme-var($button-gradient-1-end)),
+  name: 'reg-theme-map-dark',
+  theme: (
+    reg-danger-color: #f33,
+    reg-dim-color: #707070,
+    reg-button-gradient-1: linear-gradient(90deg, theme-var(button-gradient-1-start), theme-var(button-gradient-1-end)),
+  ),
 );
 
 // register color system - end
 
-// index color system - start -- prefix -- 'index'
-
-$index-container-color: --index-container-color;
-$index-feature-container: --index-feature-container;
-$index-footer-start: --index-footer-start;
-$index-footer-end: --index-footer-end;
-$index-footer-link: --index-footer-link;
-$index-footer-contact: --index-footer-contact;
-
-// Default theme
-$index-theme-map-light: (
-  $index-container-color: #fff8f3,
-  $index-feature-container: #fafafa,
-  $index-footer-start: #242424,
-  $index-footer-end: #121212,
-  $index-footer-link: #fff,
-  $index-footer-contact: #e8e8e8,
-);
-
-// Override the default light theme
-$index-theme-map-dark: (
-  $index-container-color: #fff8f3,
-  $index-feature-container: #fafafa,
-  $index-footer-start: #242424,
-  $index-footer-end: #121212,
-  $index-footer-link: #fff,
-  $index-footer-contact: #e8e8e8,
-);
-
-// index color system - end
-
 // santa color system - start -- prefix -- 'santa'
-
-$santa-theme-color: --santa-theme-color;
-$santa-shadow-color: --santa-shadow-color;
-$santa-footer-start: --santa-footer-start;
-$santa-footer-end: --santa-footer-end;
-$santa-footer-text: --santa-footer-text;
-
 // Default theme
 $santa-theme-map-light: (
-  $santa-theme-color: #ff003c,
-  $santa-shadow-color: #e2e2e2,
-  $santa-footer-start: #242424,
-  $santa-footer-end: #121212,
-  $santa-footer-text: #fff,
+  name: 'santa-theme-map-light',
+  theme: (
+    santa-theme-color: #ff003c,
+    santa-shadow-color: #e2e2e2,
+    santa-footer-start: #242424,
+    santa-footer-end: #121212,
+    santa-footer-text: #fff,
+  ),
 );
 
 // Override the default light theme
 $santa-theme-map-dark: (
-  $santa-theme-color: #ff003c,
-  $santa-shadow-color: #e2e2e2,
-  $santa-footer-start: #242424,
-  $santa-footer-end: #121212,
-  $santa-footer-text: #fff,
+  name: 'santa-theme-map-dark',
+  theme: (
+    santa-theme-color: #ff003c,
+    santa-shadow-color: #e2e2e2,
+    santa-footer-start: #242424,
+    santa-footer-end: #121212,
+    santa-footer-text: #fff,
+  ),
 );
 
 // santa color system - end
-
-// mathgame color system - start -- prefix -- 'math'
-
-$math-theme-color: --math-theme-color;
-$math-card-border: --math-card-border;
-$math-card-color: --math-card-color;
-$math-btn-primary: --math-btn-primary;
-$math-btn-primary-disc: --math-btn-primary-disc;
-$math-card-bg: --math-card-bg;
-$math-content-color: --math-content-color;
-$math-card-shadow: --math-card-shadow;
-$math-btn-primary-shadow: --math-btn-primary-shadow;
-$game-showcase-bg: --game-showcase-bg;
-$game-showcase-shadow: --game-showcase-shadow;
-
-// Default theme
-$math-theme-map-light: (
-  $math-theme-color: #0444bf,
-  $math-card-border: #edf259,
-  $math-card-color: #a79674,
-  $math-btn-primary-shadow: #0991c8,
-  $math-btn-primary-disc: #2db8ef,
-  $math-btn-primary: #0aaff1,
-  $math-card-bg: #a79674,
-  $math-content-color: #fff,
-  $math-card-shadow: rgba(237, 242, 89, 0.7),
-  $game-showcase-bg: rgba(10, 175, 241, 1),
-  $game-showcase-shadow: #a79674,
-);
-
-// Override the default light theme
-$math-theme-map-dark: (
-  $math-theme-color: #0444bf,
-  $math-card-border: #edf259,
-  $math-card-color: #a79674,
-  $math-btn-primary-shadow: #0991c8,
-  $math-btn-primary-disc: #2db8ef,
-  $math-btn-primary: #0aaff1,
-  $math-card-bg: #a79674,
-  $math-content-color: #fff,
-  $math-card-shadow: rgba(237, 242, 89, 0.7),
-  $game-showcase-bg: rgba(10, 175, 241, 1),
-  $game-showcase-shadow: #a796749c,
-);
-
-// math color system - end
-
-// share color system - start -- prefix -- 'share'
-
-$share-whatsapp-color: --share-whatsapp-color;
-$share-facebook-color: --share-facebook-color;
-$share-twitter-color: --share-twitter-color;
-$share-telegram-color: --share-telegram-color;
-$share-linkedin-color: --share-linkedin-color;
-
-// Default theme
-$share-theme-map-light: (
-  $share-whatsapp-color: #25d366,
-  $share-facebook-color: #4267b2,
-  $share-twitter-color: #1da1f2,
-  $share-telegram-color: #08c,
-  $share-linkedin-color: #2867b2,
-);
-
-// Override the default light theme
-$share-theme-map-dark: (
-  $share-whatsapp-color: #25d366,
-  $share-facebook-color: #4267b2,
-  $share-twitter-color: #1da1f2,
-  $share-telegram-color: #08c,
-  $share-linkedin-color: #2867b2,
-);
-
-// share color system - end
-
-// profile color system - start -- prefix -- 'profile'
-
-$profile-card-bg: --profile-card-bg;
-
-// Default theme
-$profile-theme-map-light: (
-  $profile-card-bg: #fff,
-);
-
-// Override the default light theme
-$profile-theme-map-dark: (
-  $profile-card-bg: #fff,
-);
-
-// profile color system - end
-
-// turtle certificate color system - start -- prefix -- 'tc'
-
-$tc-font-color: --tc-font-color;
-
-// Default theme
-$tc-theme-map-light: (
-  $tc-font-color: #000,
-);
-
-// Override the default light theme
-$tc-theme-map-dark: (
-  $tc-font-color: #000,
-);
-
-// turtle certificate color system - end

@@ -8,7 +8,9 @@ const exitError = () => {
 const init = () => {
 	// default to prod
 	let envFile = '.env.production';
-	if (process.env.NODE_ENV === 'development') {
+	if (process.env.NODE_ENV === 'production' && process.env.VARIANT === 'dev-live') {
+		envFile = '.env.dev-live';
+	} else if (process.env.NODE_ENV === 'development') {
 		envFile = '.env.development';
 	}
 

@@ -33,14 +33,14 @@
   top: 330px;
   font-size: 48px;
   font-family: 'DancingScriptBold', sans-serif;
-  color: gt.theme-var(gt.$tc-font-color, null, gt.$tc-theme-map-light);
+  color: gt.theme-var(tc-font-color, null, gt.$tc-theme-map-light);
 }
 
 .certificateName {
   position: absolute;
   top: 470px;
   font-size: 24px;
-  color: gt.theme-var(gt.$tc-font-color, null, gt.$tc-theme-map-light);
+  color: gt.theme-var(tc-font-color, null, gt.$tc-theme-map-light);
   font-weight: bold;
 }
 
@@ -49,7 +49,7 @@
   top: 35px;
   font-size: 18px;
   left: 35px;
-  color: gt.theme-var(gt.$tc-font-color, null, gt.$tc-theme-map-light);
+  color: gt.theme-var(tc-font-color, null, gt.$tc-theme-map-light);
 }
 
 .certificateSign {

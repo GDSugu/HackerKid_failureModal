@@ -1,1 +1,1 @@
-export default {"ROOT":"","API_PATH":"","CODEPUSH_KEY":"","INTERNAL_VERSION":""};
+export default {"API":"http://api.codingpuppet.com/v1/","S3PREFIX":"dev"};

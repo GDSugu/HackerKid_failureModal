@@ -2,7 +2,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const config = require('./site.config');
 const path = require('path');
 const fs = require('fs');
-
+const jsonImporter = require('node-sass-json-importer');
 // Define common loader constants
 const sourceMap = config.env !== 'production';
 
@@ -84,6 +84,9 @@ const sass = {
       loader: 'sass-loader',
       options: {
         sourceMap,
+        sassOptions: {
+          importer: jsonImporter(),
+        },
       },
     },
   ],

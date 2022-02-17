@@ -16,7 +16,7 @@
 #loader-partial {
   position: static;
   display: block;
-  background-color: gt.theme-var(gt.$bg-1);
+  background-color: gt.theme-var(bg-1);
 }
 
 @keyframes spin {
@@ -39,7 +39,7 @@
   width: 40px;
   height: 40px;
   border-style: solid;
-  border-color: gt.theme-var(gt.$text-color-5);
+  border-color: gt.theme-var(text-color-5);
   border-top-color: transparent;
   border-width: 4px;
   border-radius: 50%;

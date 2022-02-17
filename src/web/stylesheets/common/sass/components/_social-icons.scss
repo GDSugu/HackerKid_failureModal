@@ -4,21 +4,21 @@
 @include gt.populate-theme(gt.$share-theme-map-light, gt.$share-theme-map-dark);
 
 .whatsapp-color {
-  color: gt.theme-var(gt.$share-whatsapp-color, null, gt.$share-theme-map-light);
+  color: gt.theme-var(share-whatsapp-color, null, gt.$share-theme-map-light);
 }
 
 .facebook-color {
-  color: gt.theme-var(gt.$share-facebook-color, null, gt.$share-theme-map-light);
+  color: gt.theme-var(share-facebook-color, null, gt.$share-theme-map-light);
 }
 
 .twitter-color {
-  color: gt.theme-var(gt.$share-twitter-color, null, gt.$share-theme-map-light);
+  color: gt.theme-var(share-twitter-color, null, gt.$share-theme-map-light);
 }
 
 .telegram-color {
-  color: gt.theme-var(gt.$share-telegram-color, null, gt.$share-theme-map-light);
+  color: gt.theme-var(share-telegram-color, null, gt.$share-theme-map-light);
 }
 
 .linkedin-color {
-  color: gt.theme-var(gt.$share-linkedin-color, null, gt.$share-theme-map-light);
+  color: gt.theme-var(share-linkedin-color, null, gt.$share-theme-map-light);
 }

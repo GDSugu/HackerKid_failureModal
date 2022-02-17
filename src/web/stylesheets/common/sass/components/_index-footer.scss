@@ -2,7 +2,7 @@
 @use '../base/_mixins' as gm;
 
 footer {
-  background: linear-gradient(90deg, gt.theme-var(gt.$index-footer-start, null, gt.$index-theme-map-light), gt.theme-var(gt.$index-footer-end, null, gt.$index-theme-map-light));
+  background: linear-gradient(90deg, gt.theme-var(index-footer-start, null, gt.$index-theme-map-light), gt.theme-var(index-footer-end, null, gt.$index-theme-map-light));
 
   .social-container {
     min-height: 10rem;
@@ -10,7 +10,7 @@ footer {
 
   .contact-container {
     min-height: 2rem;
-    color: gt.theme-var(gt.$index-footer-contact, null, gt.$index-theme-map-light);
+    color: gt.theme-var(index-footer-contact, null, gt.$index-theme-map-light);
   }
 
   .footer-logo {
@@ -36,7 +36,7 @@ footer {
 
       i {
         font-size: 1.25rem;
-        color: gt.theme-var(gt.$index-footer-link, null, gt.$index-theme-map-light);
+        color: gt.theme-var(index-footer-link, null, gt.$index-theme-map-light);
 
         @include gm.media-breakpoint-up(md) {
           font-size: 2.5rem;

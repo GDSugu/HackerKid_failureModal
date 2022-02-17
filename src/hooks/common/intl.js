@@ -1,7 +1,6 @@
-import { getPlatform } from './utlis';
+import getPlatform from './utlis';
 
 const getLocale = () => {
-  // return 'fr';
   const platform = getPlatform();
   if (platform === 'web') {
     const { language } = window.navigator;

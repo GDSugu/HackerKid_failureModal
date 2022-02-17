@@ -2,17 +2,17 @@
 @use '../themes/_default' as gt;
 
 .btn-math-primary {
-  background: radial-gradient(circle farthest-corner at 0 20%, gt.theme-var(gt.$math-btn-primary-disc, null, gt.$math-theme-map-light) 30%, gt.theme-var(gt.$math-btn-primary, null, gt.$math-theme-map-light) 0);
+  background: radial-gradient(circle farthest-corner at 0 20%, gt.theme-var(math-btn-primary-disc, null, gt.$math-theme-map-light) 30%, gt.theme-var(math-btn-primary, null, gt.$math-theme-map-light) 0);
   border-radius: 10px;
   min-width: 8rem;
 
   &,
   &:focus {
-    box-shadow: 0 6px gt.theme-var(gt.$math-btn-primary-shadow, null, gt.$math-theme-map-light);
+    box-shadow: 0 6px gt.theme-var(math-btn-primary-shadow, null, gt.$math-theme-map-light);
   }
 
   &:active {
-    box-shadow: 0 4px gt.theme-var(gt.$math-btn-primary-shadow, null, gt.$math-theme-map-light);
+    box-shadow: 0 4px gt.theme-var(math-btn-primary-shadow, null, gt.$math-theme-map-light);
     transform: translateY(2px);
   }
 }
@@ -29,7 +29,7 @@
   background-color: rgba(237, 242, 89, 1);
   color: rgba(4, 68, 191, 1);
 
-  @include gm.box-shadow-custom(2px 4px gt.theme-var(gt.$math-card-shadow, null, gt.$math-theme-map-light));
+  @include gm.box-shadow-custom(2px 4px gt.theme-var(math-card-shadow, null, gt.$math-theme-map-light));
 
   @include gm.media-breakpoint-up(md) {
     padding: 15px;

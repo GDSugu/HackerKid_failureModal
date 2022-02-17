@@ -3,7 +3,7 @@
 
 footer {
   min-height: 15rem;
-  background: linear-gradient(90deg, gt.theme-var(gt.$santa-footer-start, null, gt.$santa-theme-map-light), gt.theme-var(gt.$santa-footer-end, null, gt.$santa-theme-map-light));
+  background: linear-gradient(90deg, gt.theme-var(santa-footer-start, null, gt.$santa-theme-map-light), gt.theme-var(santa-footer-end, null, gt.$santa-theme-map-light));
 
   .footer-logo {
     padding: 2rem;
@@ -19,6 +19,6 @@ footer {
   }
 
   h2 {
-    color: gt.theme-var(gt.$santa-footer-text, null, gt.$santa-theme-map-light);
+    color: gt.theme-var(santa-footer-text, null, gt.$santa-theme-map-light);
   }
 }
