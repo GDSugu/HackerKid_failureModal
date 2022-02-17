@@ -4,42 +4,42 @@ const heading1 = {
   fontFamliy,
   fontStyle: 'normal',
   fontWeight: bold,
-  fontSize: '48px',
+  fontSize: 48,
 };
 
 const heading2 = {
   fontFamily,
   fontStyle: 'normal',
   fontWeight: 'bold',
-  fontSize: '40px',
+  fontSize: 40,
 }
 
 const heading3 = {
   fontFamily,
   fontStyle: 'normal',
   fontWeight: 'bold',
-  fontSize: '32px',
+  fontSize: 32,
 }
 
 const heading4 = {
   fontFamily,
   fontStyle: 'normal',
   fontWeight: 'bold',
-  fontSize: '28px',
+  fontSize: 28,
 }
 
 const heading5 = {
   fontFamily,
   fontStyle: 'normal',
   fontWeight: 'bold',
-  fontSize: '24px',
+  fontSize: 24,
 }
 
 const heading6 = {
   fontFamily,
   fontStyle: 'normal',
   fontWeight: 'bold',
-  fontSize: '20px',
+  fontSize: 20,
 }
 
 const mobileTypography = {
@@ -53,37 +53,37 @@ const mobileTypography = {
     fontFamily,
     fontStyle: 'normal',
     fontWeight: 'bold',
-    fontSize: '16px',
+    fontSize: 16,
   },
   subtitle2: {
     fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '16px',
+    fontSize: 16,
   },
   body: {
     fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '14px',
+    fontSize: 14,
   },
   bodyBold: {
     fontFamily,
     fontStyle: 'normal',
     fontWeight: 'bold',
-    fontSize: '14px',
+    fontSize: 14,
   },
   caption: {
     fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '12px',
+    fontSize: 12,
   },
   overline: {
     fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '10px',
+    fontSize: 10,
   }
 };
 
@@ -99,37 +99,37 @@ const webTypography = {
     fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '20px',
+    fontSize: 20,
   },
   bodyBold: {
     fontFamily,
     fontStyle: 'normal',
     fontWeight: 'bold',
-    fontSize: '18px',
+    fontSize: 18,
   },
   body: {
     fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '18px',
+    fontSize: 18,
   },
   captionBold: {
     fontFamily,
     fontStyle: 'normal',
     fontWeight: 'bold',
-    fontSize: '16px',
+    fontSize: 16,
   },
   caption: {
     fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '16px',
+    fontSize: 16,
   },
   overline: {
     fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '14px',
+    fontSize: 14,
   }
 }
 
