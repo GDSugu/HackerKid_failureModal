@@ -135,5 +135,5 @@ const webTypography = {
 
 
 module.exports = {
-  mobileTypography:JSON.stringify(mobileTypography), webTypography: JSON.stringify(webTypography)
+  mobileTypography, webTypography
 }
