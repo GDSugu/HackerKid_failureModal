@@ -22,72 +22,46 @@ $main-color-system-cssVars: (
 
 // Default theme
 $theme-map-light: (
-  name: 'theme-map-light',
-  theme: (
-    text-color-1: #e0e0e0,
-    text-color-2: #000,
-    text-color-3: #495057,
-    text-color-4: #212529,
-    text-color-5: #ff5d00,
-    text-color-6: #5b5b5b,
-    text-color-7: #ffbe33,
-    text-color-8: #4361ee,
-    text-color-9: #c1c1c1,
-    button-gradient-1-start: #ff5d00,
-    button-gradient-1-end: #ff8c00,
-    button-solid: #ffbe33,
-    button-gradient-2-start: #339eff,
-    button-gradient-2-end: #1a71fc,
-    bg-1: #fff,
-    bg-2: #fff,
-    bg-3: #fff,
-    bg-4: #fff,
-  ),  
+  text-color-1: #e0e0e0,
+  text-color-2: #000,
+  text-color-3: #495057,
+  text-color-4: #212529,
+  text-color-5: #ff5d00,
+  text-color-6: #5b5b5b,
+  text-color-7: #ffbe33,
+  text-color-8: #4361ee,
+  text-color-9: #c1c1c1,
+  button-gradient-1-start: #ff5d00,
+  button-gradient-1-end: #ff8c00,
+  button-solid: #ffbe33,
+  button-gradient-2-start: #339eff,
+  button-gradient-2-end: #1a71fc,
+  bg-1: #fff,
+  bg-2: #fff,
+  bg-3: #fff,
+  bg-4: #fff,
 );
 
 // Override the default light theme
 $theme-map-dark: (
-  name: 'theme-map-dark',
-  theme: (
-    text-color-1: #e0e0e0,
-    text-color-2: #fff,
-    text-color-3: #a0a0a0,
-    text-color-4: #e8e8e8,
-    text-color-5: #ff5d00,
-    text-color-6: #5b5b5b,
-    text-color-7: #ffbe33,
-    text-color-8: #4361ee,
-    text-color-9: #696a6b,
-    button-gradient-1-start: #ff5d00,
-    button-gradient-1-end: #ff8c00,
-    button-solid: #ffbe33,
-    button-gradient-2-start: #339eff,
-    button-gradient-2-end: #1a71fc,
-    bg-1: #121212,
-    bg-2: #1f1f1f,
-    bg-3: #242424,
-    bg-4: #2c2c2c,
-  ),
-);
-
-// js theme system
-$js-theme-system-cssVars: (
-  text-color-1: --text-color-1,
-  text-color-2: --text-color-2,
-  text-color-3: --text-color-3,
-  text-color-4: --text-color-4,
-  text-color-5: --text-color-5,
-  text-color-6: --text-color-6,
-  nav-bg-blue: --nav-bg-blue,
-  nav-bg-green: --nav-bg-green,
-  nav-bg-lightBlue: --nav-bg-lightblue,
-  nav-bg-red: --nav-bg-red,
-  nav-bg-yellow: --nav-bg-yellow,
-  body-bg-blue: --body-bg-blue,
-  body-bg-green: --body-bg-green,
-  body-bg-lightBlue: --body-bg-lightblue,
-  body-bg-red: --body-bg-red,
-  body-bg-yellow: --body-bg-yellow,
+  text-color-1: #e0e0e0,
+  text-color-2: #fff,
+  text-color-3: #a0a0a0,
+  text-color-4: #e8e8e8,
+  text-color-5: #ff5d00,
+  text-color-6: #5b5b5b,
+  text-color-7: #ffbe33,
+  text-color-8: #4361ee,
+  text-color-9: #696a6b,
+  button-gradient-1-start: #ff5d00,
+  button-gradient-1-end: #ff8c00,
+  button-solid: #ffbe33,
+  button-gradient-2-start: #339eff,
+  button-gradient-2-end: #1a71fc,
+  bg-1: #121212,
+  bg-2: #1f1f1f,
+  bg-3: #242424,
+  bg-4: #2c2c2c,
 );
 
 $reg-color-system-cssVars: (
@@ -104,23 +78,15 @@ $santa-color-system-cssVars: (
   santa-footer-text: --santa-footer-text,
 );
 
-$cssVarMap: (
-  theme-map-light: $main-color-system-cssVars,
-  theme-map-dark: $main-color-system-cssVars,
-  reg-theme-map-light: $reg-color-system-cssVars,
-  reg-theme-map-dark: $reg-color-system-cssVars,
-  santa-theme-map-light: $santa-color-system-cssVars,
-  santa-theme-map-dark: $santa-color-system-cssVars,
-  themeMapLight: $js-theme-system-cssVars,
-  themeMapDark: $js-theme-system-cssVars,
-);
 /*
   include a map in a class
 */
 @mixin spread-map($map: (), $cssMap: $main-color-system-cssVars) {
   @each $key,
     $value in $map {
+
     $key: map-get($cssMap, $key);
+
     #{$key}: $value;
   }
 }
@@ -133,20 +99,13 @@ $cssVarMap: (
   @return $map;
 }
 
-@mixin populate-theme($light: $theme-map-light, $dark: $theme-map-dark) {
-  @debug $light;
+@mixin populate-theme($light: $theme-map-light, $dark: $theme-map-dark, $cssVars: $main-color-system-cssVars) {
   :root.light {
-    $theme: map-get($light, theme);
-    $name: map-get($light, name);
-    $cssMap: map-get($cssVarMap, $name);
-    @include spread-map($theme, $cssMap);
+    @include spread-map($light, $cssVars);
   }
 
   :root.dark {
-    $theme: map-get($dark, theme);
-    $name: map-get($dark, name);
-    $cssMap: map-get($cssVarMap, $name);
-    @include spread-map($theme, $cssMap);
+    @include spread-map($dark, $cssVars);
   }
 }
 
@@ -157,15 +116,13 @@ $cssVarMap: (
   - CSS:  color: var(--theme-primary, blue)
   Throws error if the variable not part of the map
 */
-@function theme-var($key, $fallback: null, $map: $theme-map-light) {
-  $name: map-get($map, name);
-  $map: map-get($map, theme);
+@function theme-var($key, $fallback: null, $map: $theme-map-light, $cssVars: $main-color-system-cssVars) {
   @if not map-has-key($map, $key) {
     @error "key: #{$key}, is not a key in map: #{$map}";
   }
 
-  $cssMap: map-get($cssVarMap, $name); 
-  $key: map-get($cssMap, $key);
+  $key: map-get($cssVars, $key);
+
   @if ($fallback) {
     @return var($key, $fallback);
   }
@@ -180,9 +137,9 @@ $body-bg: theme-var(bg-1);
 $body-color: theme-var(text-color-4);
 
 // bootstrap patch as css vars are not supported for some funcs like darken(), directly passed color codes
-$primary-color: map-get($theme-map-light, theme, text-color-5);
-$secondary-color: map-get($theme-map-light, theme, text-color-3);
-$success-color: map-get($theme-map-light, theme, text-color-8);
+$primary-color: map-get($theme-map-light, text-color-5);
+$secondary-color: map-get($theme-map-light, text-color-3);
+$success-color: map-get($theme-map-light, text-color-8);
 
 // main color system - end
 
@@ -190,22 +147,16 @@ $success-color: map-get($theme-map-light, theme, text-color-8);
 
 // Default theme
 $reg-theme-map-light: (
-  name: 'reg-theme-map-light',
-  theme: (
-    reg-danger-color: #f33,
-    reg-dim-color: #707070,
-    reg-button-gradient-1: linear-gradient(90deg, theme-var(button-gradient-1-start), theme-var(button-gradient-1-end)),
-  ),
+  reg-danger-color: #f33,
+  reg-dim-color: #707070,
+  reg-button-gradient-1: linear-gradient(90deg, theme-var(button-gradient-1-start), theme-var(button-gradient-1-end)),
 );
 
 // Override the default light theme
 $reg-theme-map-dark: (
-  name: 'reg-theme-map-dark',
-  theme: (
-    reg-danger-color: #f33,
-    reg-dim-color: #707070,
-    reg-button-gradient-1: linear-gradient(90deg, theme-var(button-gradient-1-start), theme-var(button-gradient-1-end)),
-  ),
+  reg-danger-color: #f33,
+  reg-dim-color: #707070,
+  reg-button-gradient-1: linear-gradient(90deg, theme-var(button-gradient-1-start), theme-var(button-gradient-1-end)),
 );
 
 // register color system - end
@@ -213,26 +164,20 @@ $reg-theme-map-dark: (
 // santa color system - start -- prefix -- 'santa'
 // Default theme
 $santa-theme-map-light: (
-  name: 'santa-theme-map-light',
-  theme: (
-    santa-theme-color: #ff003c,
-    santa-shadow-color: #e2e2e2,
-    santa-footer-start: #242424,
-    santa-footer-end: #121212,
-    santa-footer-text: #fff,
-  ),
+  santa-theme-color: #ff003c,
+  santa-shadow-color: #e2e2e2,
+  santa-footer-start: #242424,
+  santa-footer-end: #121212,
+  santa-footer-text: #fff,
 );
 
 // Override the default light theme
 $santa-theme-map-dark: (
-  name: 'santa-theme-map-dark',
-  theme: (
-    santa-theme-color: #ff003c,
-    santa-shadow-color: #e2e2e2,
-    santa-footer-start: #242424,
-    santa-footer-end: #121212,
-    santa-footer-text: #fff,
-  ),
+  santa-theme-color: #ff003c,
+  santa-shadow-color: #e2e2e2,
+  santa-footer-start: #242424,
+  santa-footer-end: #121212,
+  santa-footer-text: #fff,
 );
 
 // santa color system - end

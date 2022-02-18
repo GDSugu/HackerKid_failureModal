@@ -18,9 +18,11 @@ const font = StyleSheet.create({
 const themes = {
 	dark: {
     primary: '#fff',
+    secondary: '#ccc',
   },
   light: {
     primary: '#000',
+    secondary: '#ccc',
   }
 };
 

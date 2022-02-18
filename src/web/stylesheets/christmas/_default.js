@@ -46,13 +46,27 @@ const themeMapDark = {
   'body-bg-yellow': Yellow.color50,
 };
 
+const cssVars = {
+  'text-color-1': '--text-color-1',
+  'text-color-2': '--text-color-2',
+  'text-color-3': '--text-color-3',
+  'text-color-4': '--text-color-4',
+  'text-color-5': '--text-color-5',
+  'text-color-6': '--text-color-6',
+  'nav-bg-blue': '--nav-bg-blue',
+  'nav-bg-green': '--nav-bg-green',
+  'nav-bg-lightBlue': '--nav-bg-lightblue',
+  'nav-bg-red': '--nav-bg-red',
+  'nav-bg-yellow': '--nav-bg-yellow',
+  'body-bg-blue': '--body-bg-blue',
+  'body-bg-green': '--body-bg-green',
+  'body-bg-lightBlue': '--body-bg-lightblue',
+  'body-bg-red': '--body-bg-red',
+  'body-bg-yellow': '--body-bg-yellow',
+};
+
 module.exports = {
-  themeMapLight: {
-    name: 'themeMapLight',
-    theme: JSON.parse(JSON.stringify(themeMapLight)),
-  },
-  themeMapDark: {
-    name: 'themeMapDark',
-    theme: JSON.parse(JSON.stringify(themeMapDark)),
-  },
+  themeMapLight,
+  themeMapDark,
+  cssVars,
 };
