@@ -2,22 +2,11 @@ import $ from 'jquery';
 import { useNavigate } from 'react-router-dom';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import analytics from '@react-native-firebase/analytics';
+import messaging from '@react-native-firebase/messaging';
+// import { AppEventsLogger } from 'react-native-fbsdk';
 import getPlatform from './utlis';
 import API from '../../../env';
-
-const authClearWeb = () => {
-  localStorage.clear();
-};
-
-const authClearMob = () => {
-  let result;
-  try {
-    result = AsyncStorage.clear();
-  } catch (err) {
-    console.error(err);
-  }
-  return result;
-};
 
 const debounce = (() => {
   if (getPlatform() === 'web') {
@@ -38,9 +27,40 @@ const getQueryString = (query) => {
   return false;
 };
 
-const getWebSession = (key) => localStorage.getItem(key);
+// Firebase Analytics Functions
+const MobAddAnalyticsEvent = (action, dataObject = {}) => analytics().logEvent(action, dataObject);
 
-const getMobSession = (key) => {
+// TODO: add pixel credentials in android and ios
+// const MobAddPixelEvent = (action, dataObject = {}) =>
+// AppEventsLogger.logEvent(action, dataObject);
+
+const MobTrackCurrentScreen = (screen) => analytics().logScreenView({
+  screen_name: screen,
+  screen_class: screen,
+});
+// Firebase Analytics Functions - end
+
+// Firebase Messaging Functions - start
+const MobCheckFCMPermission = () => messaging().hasPermission();
+
+const MobGetFCMPermission = () => messaging().registerDeviceForRemoteMessages();
+
+const MobGetFCMToken = () => messaging().getToken();
+
+const MobSubscribeToFCMTopic = (topic) => messaging().subscribeToTopic(topic);
+// Firebase Messaging Functions - end
+
+const MobauthClear = () => {
+  let result;
+  try {
+    result = AsyncStorage.clear();
+  } catch (err) {
+    console.error(err);
+  }
+  return result;
+};
+
+const MobgetSession = (key) => {
   let value = null;
   try {
     value = AsyncStorage.getItem(key);
@@ -50,13 +70,7 @@ const getMobSession = (key) => {
   return value;
 };
 
-const clearWebSession = (key) => {
-  if (key) {
-    localStorage.removeItem(key);
-  }
-};
-
-const clearMobSession = (key) => {
+const MobclearSession = (key) => {
   let result;
   if (key) {
     try {
@@ -68,12 +82,7 @@ const clearMobSession = (key) => {
   return result;
 };
 
-const navigateWeb = (path, replace) => {
-  const navigate = useNavigate();
-  navigate(path, { replace });
-};
-
-const navigateMob = (path, navigator) => {
+const Mobnavigate = (path, navigator) => {
   if (!navigator || !navigator.navigate) {
     throw new Error('Invalid navigator');
   } else {
@@ -81,12 +90,47 @@ const navigateMob = (path, navigator) => {
   }
 };
 
+const MobstoreSession = (key, value) => {
+  let result;
+  try {
+    if (value) {
+      result = AsyncStorage.setItem('key', JSON.stringify(value));
+    }
+  } catch (err) {
+    console.error(err);
+  }
+  return result;
+};
+
+const WebauthClear = () => {
+  localStorage.clear();
+};
+
+const WebgetSession = (key) => localStorage.getItem(key);
+
+const WebclearSession = (key) => {
+  if (key) {
+    localStorage.removeItem(key);
+  }
+};
+
+const Webnavigate = (path, replace) => {
+  const navigate = useNavigate();
+  navigate(path, { replace });
+};
+
+const WebstoreSession = (key, value) => {
+  if (value) {
+    localStorage.setItem(key, value);
+  }
+};
+
 const pathNavigator = ({ path, navigator, replace = false }) => {
   const platform = getPlatform();
   if (platform === 'web') {
-    navigateWeb(path, replace);
+    Webnavigate(path, replace);
   } else {
-    navigateMob(path, navigator);
+    Mobnavigate(path, navigator);
   }
 };
 
@@ -117,24 +161,6 @@ const showSnow = () => {
       })
       .catch(console.error);
   }
-};
-
-const storeWebSession = (key, value) => {
-  if (value) {
-    localStorage.setItem(key, value);
-  }
-};
-
-const storeMobSession = (key, value) => {
-  let result;
-  try {
-    if (value) {
-      result = AsyncStorage.setItem('key', JSON.stringify(value));
-    }
-  } catch (err) {
-    console.error(err);
-  }
-  return result;
 };
 
 const s3Upload = (blob, signedURL, contentType = 'image/png', processData = false) => axios({
@@ -222,33 +248,33 @@ const authorize = {};
 authorize.setSession = (key, value) => {
   const platform = getPlatform();
   if (platform === 'web') {
-    return storeWebSession(key, value);
+    return WebstoreSession(key, value);
   }
-  return storeMobSession(key, value);
+  return MobstoreSession(key, value);
 };
 
 authorize.getSession = (key) => {
   const platform = getPlatform();
   if (platform === 'web') {
-    return getWebSession(key);
+    return WebgetSession(key);
   }
-  return getMobSession(key);
+  return MobgetSession(key);
 };
 
 authorize.clearSession = (key) => {
   const platform = getPlatform();
   if (platform === 'web') {
-    return clearWebSession(key);
+    return WebclearSession(key);
   }
-  return clearMobSession(key);
+  return MobclearSession(key);
 };
 
 authorize.auth_clear = () => {
   const platform = getPlatform();
   if (platform === 'web') {
-    return authClearWeb();
+    return WebauthClear();
   }
-  return authClearMob();
+  return MobauthClear();
 };
 
 authorize.setUserSession = ({
@@ -287,7 +313,7 @@ authorize.setUserSession = ({
     .catch(console.error);
 };
 
-const post = (postData, apiPath, validateResponse = true, handleLoading = true) => {
+const post = (postData, apiPath, validateResponse = true) => {
   authorize.getSession('authtoken')
     .then((authToken) => {
       const jsonData = postData;
@@ -374,6 +400,13 @@ export {
   authorize,
   debounce,
   getQueryString,
+  MobAddAnalyticsEvent,
+  // MobAddPixelEvent,
+  MobCheckFCMPermission,
+  MobGetFCMPermission,
+  MobGetFCMToken,
+  MobSubscribeToFCMTopic,
+  MobTrackCurrentScreen,
   pathNavigator,
   popover,
   showSnow,

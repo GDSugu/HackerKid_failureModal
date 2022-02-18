@@ -7,18 +7,17 @@
 @use '../common/sass/components/_campaign-footer';
 @use '../common/sass/components/_loading';
 @use '_font-size-override';
-// @use '_placeholders' as *;
 
 @import './_default.js';
 
 // default theme
-@include gt.populate-theme($themeMapLight, $themeMapDark);
+@include gt.populate-theme($themeMapLight, $themeMapDark, $cssVars);
 
 // current page specific theme
 // @include gt.populate-theme(gt.$santa-theme-map-light, gt.$santa-theme-map-dark);
 
 main {
-  background: gt.theme-var(body-bg-red, null, $themeMapDark);
+  background: gt.theme-var(body-bg-red, null, $themeMapDark, $cssVars);
   // background: gt.map-deep-get($themeMapLight, 'nav-bg-blue');
 }
 
