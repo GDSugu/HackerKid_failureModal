@@ -85,7 +85,9 @@ const sass = {
       options: {
         sourceMap,
         sassOptions: {
-          importer: jsonImporter(),
+          importer: jsonImporter({
+            convertCase: true
+          }),
         },
       },
     },
