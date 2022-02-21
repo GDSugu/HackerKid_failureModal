@@ -25,8 +25,7 @@ const AppWrapper = () => {
       ...prevState,
       currentTheme: prevState.currentTheme === 'dark' ? 'light' : 'dark',
     }));
-});
-
+  });
 
   return (
     state.currentLocaleMessages
