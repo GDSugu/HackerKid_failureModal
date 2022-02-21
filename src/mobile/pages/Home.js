@@ -1,29 +1,46 @@
 import React, { useContext } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import {
+  Text,
+  Button,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
 import { FormattedMessage, useIntl } from 'react-intl';
 import ThemeContext from '../components/theme';
 
+const getStyles = (theme) => StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.bodyBg,
+  },
+});
+
 const Index = ({ navigation }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
-
-  const style = getStyles(theme);
+  const pageTheme = theme.screenHome;
+  const style = getStyles(pageTheme);
 
   const intl = useIntl();
 
   return (
-    <View style={style.container}>
-      <Text>
+    <ScrollView style={style.container}>
+      <Text style={{
+        fontSize: 100,
+        marginVertical: 200,
+        textAlign: 'center',
+      }}>
         <FormattedMessage
           description = "Page description"
-          defaultMessage = "This is index page"
+          defaultMessage = "This is Home page"
         />
       </Text>
       <Button
-        onPress={() => navigation.navigate('About')}
+        onPress={() => navigation.navigate('Games')}
         title={intl.formatMessage({
-          defaultMessage: 'Go to About',
+          defaultMessage: 'Go to Games',
           description: 'Link description',
         })}
+        color={pageTheme.btnBg}
       />
       <Button
         onPress={() => toggleTheme()}
@@ -31,18 +48,10 @@ const Index = ({ navigation }) => {
           defaultMessage: 'Toggle Theme',
           description: 'Toggle theme Button description',
         })}
+        color={pageTheme.btnBg}
       />
-    </View>
+    </ScrollView>
   );
 };
-
-const getStyles = (theme) => StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: theme.primary,
-  }
-});
 
 export default Index;
