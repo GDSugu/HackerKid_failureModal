@@ -2,7 +2,7 @@ const fontFamily = "'Averia Sans Libre'";
 
 const heading1 = {
   fontStyle: 'normal',
-  fontWeight: bold,
+  fontWeight: 'bold',
   fontSize: 48,
 };
 
@@ -10,31 +10,31 @@ const heading2 = {
   fontStyle: 'normal',
   fontWeight: 'bold',
   fontSize: 40,
-}
+};
 
 const heading3 = {
   fontStyle: 'normal',
   fontWeight: 'bold',
   fontSize: 32,
-}
+};
 
 const heading4 = {
   fontStyle: 'normal',
   fontWeight: 'bold',
   fontSize: 28,
-}
+};
 
 const heading5 = {
   fontStyle: 'normal',
   fontWeight: 'bold',
   fontSize: 24,
-}
+};
 
 const heading6 = {
   fontStyle: 'normal',
   fontWeight: 'bold',
   fontSize: 20,
-}
+};
 
 const mobileTypography = {
   heading1,
@@ -72,7 +72,7 @@ const mobileTypography = {
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: 10,
-  }
+  },
 };
 
 const webTypography = {
@@ -83,7 +83,7 @@ const webTypography = {
   heading5,
   heading6,
   subtitle1: heading6,
-  subtitle2:{
+  subtitle2: {
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: 20,
@@ -112,10 +112,11 @@ const webTypography = {
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: 14,
-  }
-}
-
+  },
+};
 
 module.exports = {
-  fontFamily,mobileTypography, webTypography
-}
+  fontFamily,
+  mobileTypography,
+  webTypography,
+};

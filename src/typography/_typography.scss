@@ -1,0 +1,46 @@
+@import './_typography.js';
+
+@font-face {
+  font-family: $font-family;
+  src: url('../../../fonts/AveriaSansLibre-Bold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 700;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $font-family;
+  src: url('../../../fonts/AveriaSansLibre-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $font-family;
+  src: url('../../../fonts/AveriaSansLibre-Light.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@mixin spread-typography-map($map) {
+  @each $key,$value in $map {
+    .#{$key} {
+      @each $property, $property-value in $value {
+        @if $property == font-size {
+          #{$property}: #{$property-value}px;
+        }
+
+        @else {
+          #{$property}: #{$property-value};
+        }
+      }
+    };
+  }
+}
+
+@include spread-typography-map($web-typography);
