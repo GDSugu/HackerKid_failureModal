@@ -79,3 +79,19 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin spread-typography-map($map) {
+  @each $key,$value in $map {
+    .#{$key} {
+      @each $property, $property-value in $value {
+        @if $property == font-size {
+          #{$property}: #{$property-value}px;
+        }
+
+        @else {
+          #{$property}: #{$property-value};
+        }
+      }
+    };
+  }
+}

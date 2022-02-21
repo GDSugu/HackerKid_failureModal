@@ -1,3 +1,5 @@
+@use '../web/stylesheets/common/sass/base/mixins' as gm;
+
 @import './_typography.js';
 
 @font-face {
@@ -42,23 +44,7 @@
   font-display: swap;
 }
 
-@mixin spread-typography-map($map) {
-  @each $key,$value in $map {
-    .#{$key} {
-      @each $property, $property-value in $value {
-        @if $property == font-size {
-          #{$property}: #{$property-value}px;
-        }
-
-        @else {
-          #{$property}: #{$property-value};
-        }
-      }
-    };
-  }
-}
-
-@include spread-typography-map($web-typography);
+@include gm.spread-typography-map($web-typography);
 
 body {
   font-family: $font-family;
