@@ -11,7 +11,7 @@ const betaOfferModal = () => {
                     <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-                  
+
                   <div class="col-md-9 mx-auto py-md-4 px-md-5 px-0">
                       <div class="crown-img">
                           <img src="images/beta-offer/crown.svg" alt="Crown">

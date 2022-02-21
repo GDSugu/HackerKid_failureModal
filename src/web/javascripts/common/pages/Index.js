@@ -7,7 +7,7 @@ const Index = () => (
     <h1>
       <FormattedMessage
         description = "Page description"
-        defaultMessage = "This is index page"
+        defaultMessage="This is index page"
       />
     </h1>
     <nav>
