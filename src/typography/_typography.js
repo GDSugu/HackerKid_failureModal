@@ -1,4 +1,4 @@
-const fontFamily = "'Averia Sans Libre'";
+const fontFamily = 'Averia Sans Libre';
 
 const heading1 = {
   fontStyle: 'normal',
