@@ -48,6 +48,12 @@
 		3A2593F69425471F8E810165 /* Raleway-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D36762DBBBC344AFB40E06E1 /* Raleway-Bold.ttf */; };
 		711481095D8E4E6EB297AF5B /* Raleway-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E68BC24FA144D01AE13B48C /* Raleway-Medium.ttf */; };
 		482C9FBFD6C845AA997422B6 /* Raleway-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01C0D4C1986F48529633752E /* Raleway-VariableFont_wght.ttf */; };
+		1BA2EFF37CB2423490A1BE49 /* AveriaSansLibre-Bold.woff in Resources */ = {isa = PBXBuildFile; fileRef = 5CB22C4B13224744B4BF2F03 /* AveriaSansLibre-Bold.woff */; };
+		6B66FF176B2F489F9E87CE2B /* AveriaSansLibre-Bold.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 954F595908CE4CCF9EBF0FF4 /* AveriaSansLibre-Bold.woff2 */; };
+		4268F6A57D4740868038744B /* AveriaSansLibre-Light.woff in Resources */ = {isa = PBXBuildFile; fileRef = C01C98B06F7F4FD0B345319D /* AveriaSansLibre-Light.woff */; };
+		2609FC0ED6A243FA8469176F /* AveriaSansLibre-Light.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 6A97134C162242A5929DA351 /* AveriaSansLibre-Light.woff2 */; };
+		DFC79D32D3074EBC843BE0C0 /* AveriaSansLibre-Regular.woff in Resources */ = {isa = PBXBuildFile; fileRef = 9EF1A1820E9A45D8974919FC /* AveriaSansLibre-Regular.woff */; };
+		2E815E7F42C545FA971EE962 /* AveriaSansLibre-Regular.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 0B64A400F5854D1D9657E3D8 /* AveriaSansLibre-Regular.woff2 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +118,12 @@
 		D36762DBBBC344AFB40E06E1 /* Raleway-Bold.ttf */ = {isa = PBXFileReference; name = "Raleway-Bold.ttf"; path = "../src/fonts/Raleway-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		6E68BC24FA144D01AE13B48C /* Raleway-Medium.ttf */ = {isa = PBXFileReference; name = "Raleway-Medium.ttf"; path = "../src/fonts/Raleway-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		01C0D4C1986F48529633752E /* Raleway-VariableFont_wght.ttf */ = {isa = PBXFileReference; name = "Raleway-VariableFont_wght.ttf"; path = "../src/fonts/Raleway-VariableFont_wght.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5CB22C4B13224744B4BF2F03 /* AveriaSansLibre-Bold.woff */ = {isa = PBXFileReference; name = "AveriaSansLibre-Bold.woff"; path = "../src/fonts/AveriaSansLibre-Bold.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		954F595908CE4CCF9EBF0FF4 /* AveriaSansLibre-Bold.woff2 */ = {isa = PBXFileReference; name = "AveriaSansLibre-Bold.woff2"; path = "../src/fonts/AveriaSansLibre-Bold.woff2"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C01C98B06F7F4FD0B345319D /* AveriaSansLibre-Light.woff */ = {isa = PBXFileReference; name = "AveriaSansLibre-Light.woff"; path = "../src/fonts/AveriaSansLibre-Light.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6A97134C162242A5929DA351 /* AveriaSansLibre-Light.woff2 */ = {isa = PBXFileReference; name = "AveriaSansLibre-Light.woff2"; path = "../src/fonts/AveriaSansLibre-Light.woff2"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9EF1A1820E9A45D8974919FC /* AveriaSansLibre-Regular.woff */ = {isa = PBXFileReference; name = "AveriaSansLibre-Regular.woff"; path = "../src/fonts/AveriaSansLibre-Regular.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0B64A400F5854D1D9657E3D8 /* AveriaSansLibre-Regular.woff2 */ = {isa = PBXFileReference; name = "AveriaSansLibre-Regular.woff2"; path = "../src/fonts/AveriaSansLibre-Regular.woff2"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +267,12 @@
 				D36762DBBBC344AFB40E06E1 /* Raleway-Bold.ttf */,
 				6E68BC24FA144D01AE13B48C /* Raleway-Medium.ttf */,
 				01C0D4C1986F48529633752E /* Raleway-VariableFont_wght.ttf */,
+				5CB22C4B13224744B4BF2F03 /* AveriaSansLibre-Bold.woff */,
+				954F595908CE4CCF9EBF0FF4 /* AveriaSansLibre-Bold.woff2 */,
+				C01C98B06F7F4FD0B345319D /* AveriaSansLibre-Light.woff */,
+				6A97134C162242A5929DA351 /* AveriaSansLibre-Light.woff2 */,
+				9EF1A1820E9A45D8974919FC /* AveriaSansLibre-Regular.woff */,
+				0B64A400F5854D1D9657E3D8 /* AveriaSansLibre-Regular.woff2 */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -390,6 +408,12 @@
 				3A2593F69425471F8E810165 /* Raleway-Bold.ttf in Resources */,
 				711481095D8E4E6EB297AF5B /* Raleway-Medium.ttf in Resources */,
 				482C9FBFD6C845AA997422B6 /* Raleway-VariableFont_wght.ttf in Resources */,
+				1BA2EFF37CB2423490A1BE49 /* AveriaSansLibre-Bold.woff in Resources */,
+				6B66FF176B2F489F9E87CE2B /* AveriaSansLibre-Bold.woff2 in Resources */,
+				4268F6A57D4740868038744B /* AveriaSansLibre-Light.woff in Resources */,
+				2609FC0ED6A243FA8469176F /* AveriaSansLibre-Light.woff2 in Resources */,
+				DFC79D32D3074EBC843BE0C0 /* AveriaSansLibre-Regular.woff in Resources */,
+				2E815E7F42C545FA971EE962 /* AveriaSansLibre-Regular.woff2 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

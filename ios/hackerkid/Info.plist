@@ -87,6 +87,12 @@
 		<string>Raleway-Bold.ttf</string>
 		<string>Raleway-Medium.ttf</string>
 		<string>Raleway-VariableFont_wght.ttf</string>
+		<string>AveriaSansLibre-Bold.woff</string>
+		<string>AveriaSansLibre-Bold.woff2</string>
+		<string>AveriaSansLibre-Light.woff</string>
+		<string>AveriaSansLibre-Light.woff2</string>
+		<string>AveriaSansLibre-Regular.woff</string>
+		<string>AveriaSansLibre-Regular.woff2</string>
 	</array>
 </dict>
 </plist>
