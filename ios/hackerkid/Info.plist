@@ -36,7 +36,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -51,5 +51,42 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>AveriaSansLibre-Bold.ttf</string>
+		<string>AveriaSansLibre-BoldItalic.ttf</string>
+		<string>AveriaSansLibre-Italic.ttf</string>
+		<string>AveriaSansLibre-Light.ttf</string>
+		<string>AveriaSansLibre-LightItalic.ttf</string>
+		<string>AveriaSansLibre-Regular.ttf</string>
+		<string>CoveredByYourGrace-Regular.ttf</string>
+		<string>DancingScript-Bold.ttf</string>
+		<string>FredokaOne-Regular.ttf</string>
+		<string>HomeSchool400.otf</string>
+		<string>Lato-Black.ttf</string>
+		<string>Lato-Black.woff</string>
+		<string>Lato-Black.woff2</string>
+		<string>Lato-Bold.ttf</string>
+		<string>Lato-Bold.woff</string>
+		<string>Lato-Bold.woff2</string>
+		<string>Lato-Heavy.ttf</string>
+		<string>Lato-Heavy.woff</string>
+		<string>Lato-Heavy.woff2</string>
+		<string>Lato-Light.ttf</string>
+		<string>Lato-Light.woff</string>
+		<string>Lato-Light.woff2</string>
+		<string>Lato-Medium.ttf</string>
+		<string>Lato-Medium.woff</string>
+		<string>Lato-Medium.woff2</string>
+		<string>Lato-Regular.ttf</string>
+		<string>Lato-Regular.woff</string>
+		<string>Lato-Regular.woff2</string>
+		<string>Lato-Semibold.ttf</string>
+		<string>Lato-Semibold.woff</string>
+		<string>Lato-Semibold.woff2</string>
+		<string>Raleway-Bold.ttf</string>
+		<string>Raleway-Medium.ttf</string>
+		<string>Raleway-VariableFont_wght.ttf</string>
+	</array>
 </dict>
 </plist>
