@@ -15,13 +15,13 @@ const mobAuthClear = () => {
 };
 
 const mobGetSession = (key) => {
-  let value = null;
+  let result = null;
   try {
-    value = AsyncStorage.getItem(key);
+    result = AsyncStorage.getItem(key);
   } catch (err) {
     console.error(err);
   }
-  return value;
+  return result;
 };
 
 const mobClearSession = (key) => {
