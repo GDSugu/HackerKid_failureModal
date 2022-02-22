@@ -8,7 +8,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-// import loadable from '@loadable/component';
+import * as Animatable from 'react-native-animatable';
 import Loader from '../components/Loader';
 import ThemeContext from '../components/theme';
 import Header from '../components/Header';
@@ -99,12 +99,6 @@ const TabBar = (props) => {
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const { Icon } = TabArray.filter((item) => item.name === route.name)[0];
-        // eslint-disable-next-line no-nested-ternary
-        const label = options.tabBarLabel !== undefined
-          ? options.tabBarLabel
-          : options.title !== undefined
-            ? options.title
-            : route.name;
 
         const isFocused = state.index === index;
 
@@ -117,8 +111,6 @@ const TabBar = (props) => {
 
           if (!isFocused && !event.defaultPrevented) {
             navigation.navigate({ name: route.name, merge: true });
-          } else {
-            console.log('focused', label);
           }
         };
 
@@ -149,12 +141,17 @@ const TabBar = (props) => {
               borderTopRightRadius: 12,
             }}
           >
-              <View style={{
-                height: 68,
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                width: '70%',
-              }}>
+              <Animatable.View
+                duration={500}
+                animation={isFocused ? 'bounceIn' : 'pulse'}
+                useNativeDriver={true}
+                style={{
+                  height: 68,
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  width: '70%',
+                }}
+              >
                 <View></View>
                 <Icon color={isFocused ? '#ffffff' : '#212527'}/>
                 <View style={{
@@ -163,7 +160,7 @@ const TabBar = (props) => {
                   backgroundColor: isFocused ? utilColors.white : 'transparent',
                   borderRadius: 10,
                 }}></View>
-              </View>
+              </Animatable.View>
           </TouchableOpacity>
         );
       })}
@@ -193,7 +190,7 @@ const TabNavigators = (prop) => {
       screenOptions={{
         lazy: true,
         lazyPlaceholder: () => <Loader route={routeName}/>,
-        swipeEnabled: routeName !== 'Home',
+        // swipeEnabled: routeName !== 'Home',
       }}
     >
       {TabArray.map((item, index) => (
@@ -223,12 +220,6 @@ const App = () => {
             onReady={() => { setRoutName(navigationRef.getCurrentRoute().name); }}
             onStateChange={() => { setRoutName(navigationRef.getCurrentRoute().name); }}
           >
-            {/* <TabNavigators
-              routeName={routeName}
-              screenTheme={screenTheme}
-              style={style}
-              theme={theme}
-            /> */}
             <Stack.Navigator
               initialRouteName='Start'
               screenOptions={{

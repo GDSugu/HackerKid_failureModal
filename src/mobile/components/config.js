@@ -1,20 +1,19 @@
 import { StyleSheet } from 'react-native';
 import { Theme } from '../common/_theme';
+import { mobileTypography } from '../../typography/_typography';
 
-const font = StyleSheet.create({
-  regular: {
-    fontFamily: 'Muli',
-    fontWeight: 'normal',
-  },
-  bold: {
-    fontFamily: 'Muli',
-    fontWeight: 'bold',
-  },
-  xbold: {
-    fontFamily: 'Muli',
-    fontWeight: 'bold',
-  },
-});
+// const font = StyleSheet.create({
+//   regular: {
+//     fontFamily: fontAveria.regular,
+//   },
+//   bold: {
+//     fontFamily: fontAveria.bold,
+//   },
+//   xbold: {
+//     fontFamily: fontAveria.bold,
+//   },
+// });
+const font = StyleSheet.create(mobileTypography);
 
 const fragmentBtnDisposal = {
   showHeader: true,

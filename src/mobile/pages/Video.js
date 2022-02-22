@@ -16,7 +16,7 @@ const getStyles = (theme) => StyleSheet.create({
 });
 
 const Video = ({ navigation }) => {
-  const { theme } = useContext(ThemeContext);
+  const { font, theme } = useContext(ThemeContext);
   const pageTheme = theme.screenVideo;
   const style = getStyles(pageTheme);
   const intl = useIntl();
@@ -24,9 +24,9 @@ const Video = ({ navigation }) => {
   return (
     <ScrollView style={style.container}>
       <Text style={{
-        fontSize: 100,
-        marginVertical: 200,
+        marginVertical: 250,
         textAlign: 'center',
+        ...font.heading1,
       }}>
         <FormattedMessage
           defaultMessage="This is Video page"

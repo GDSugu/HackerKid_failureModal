@@ -16,7 +16,7 @@ const getStyles = (theme) => StyleSheet.create({
 });
 
 const Index = ({ navigation }) => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { font, theme, toggleTheme } = useContext(ThemeContext);
   const pageTheme = theme.screenHome;
   const style = getStyles(pageTheme);
 
@@ -25,9 +25,9 @@ const Index = ({ navigation }) => {
   return (
     <ScrollView style={style.container}>
       <Text style={{
-        fontSize: 100,
-        marginVertical: 200,
+        marginVertical: 250,
         textAlign: 'center',
+        ...font.heading1,
       }}>
         <FormattedMessage
           description = "Page description"

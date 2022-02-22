@@ -90,6 +90,7 @@ const utilColors = {
   dimGrey: '#C4C4C4',
   lightGrey: '#A9ABAC',
   tertiary: '#E0E0E0',
+  disposableIconBg: '#FF5A79',
 };
 
 module.exports = {

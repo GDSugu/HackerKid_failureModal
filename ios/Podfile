@@ -13,6 +13,9 @@ target 'hackerkid' do
   )
 
 
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'hackerkidTests' do
     inherit! :complete
     # Pods for testing

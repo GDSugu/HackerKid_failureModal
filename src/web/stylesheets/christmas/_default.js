@@ -7,7 +7,7 @@ const {
   Red,
 } = require('../../../colors/_colors');
 
-const themeMapLight = {
+const thememaplight = {
   'text-color-1': utilColors.white,
   'text-color-2': utilColors.dark,
   'text-color-3': utilColors.grey,
@@ -27,7 +27,7 @@ const themeMapLight = {
 };
 // just copied the light theme colors to the dark for now
   // TODO: make this a real dark theme with appropriate colors
-const themeMapDark = {
+const thememapdark = {
   'text-color-1': utilColors.white,
   'text-color-2': utilColors.dark,
   'text-color-3': utilColors.grey,
@@ -46,7 +46,7 @@ const themeMapDark = {
   'body-bg-yellow': Yellow.color50,
 };
 
-const cssVars = {
+const cssvars = {
   'text-color-1': '--text-color-1',
   'text-color-2': '--text-color-2',
   'text-color-3': '--text-color-3',
@@ -66,7 +66,7 @@ const cssVars = {
 };
 
 module.exports = {
-  themeMapLight,
-  themeMapDark,
-  cssVars,
+  thememapdark,
+  thememaplight,
+  cssvars,
 };

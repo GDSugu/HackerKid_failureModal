@@ -16,7 +16,7 @@ const getStyles = (theme) => StyleSheet.create({
 });
 
 const Games = ({ navigation }) => {
-  const { theme } = useContext(ThemeContext);
+  const { theme, font } = useContext(ThemeContext);
   const pageTheme = theme.screenGames;
   const style = getStyles(pageTheme);
   const intl = useIntl();
@@ -24,9 +24,10 @@ const Games = ({ navigation }) => {
   return (
     <ScrollView style={style.container}>
       <Text style={{
-        fontSize: 100,
-        marginVertical: 200,
+        fontSize: 24,
+        marginVertical: 250,
         textAlign: 'center',
+        ...font.heading1,
       }}>
         <FormattedMessage
           defaultMessage="This is games page"

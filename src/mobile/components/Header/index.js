@@ -7,9 +7,10 @@ import {
   StyleSheet,
   // Image,
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import ThemeContext from '../theme';
 import IconHome from '../../../images/navbar/iconHome.svg';
-// import Icon from '../../common/Icons';
+import Icon from '../../common/Icons';
 
 const getStyles = (theme, utilColors) => StyleSheet.create({
   header: {
@@ -30,10 +31,14 @@ const getStyles = (theme, utilColors) => StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  disposableIconBtn: {
+    backgroundColor: utilColors.disposableIconBg,
+    color: utilColors.white,
+  },
 });
 
 const Header = ({ route, navigation }) => {
-  const { theme } = React.useContext(ThemeContext);
+  const { font, theme } = React.useContext(ThemeContext);
   const screenTheme = theme[`screen${route}`];
   const style = getStyles(screenTheme, theme.utilColors);
 
@@ -44,32 +49,69 @@ const Header = ({ route, navigation }) => {
         { (route !== 'Class') && <TouchableOpacity
             style={style.navigationBtn}
             onPress={() => {
-              navigation.current.navigate('Class');
+              navigation.navigate('Class');
             }}
           >
-          <Text>
+          <Text style={{
+            ...font.captionBold,
+            color: theme.utilColors.dark,
+          }}>
             <FormattedMessage
               defaultMessage='Go to Class'
               description='class navigation button'
             />
           </Text>
         </TouchableOpacity> }
-        { (route !== 'Home') && <TouchableOpacity
+        {<Animatable.View
+              animation={ route !== 'Home' ? 'fadeInRight' : 'fadeOutRight' }
+              duration={300}
+            >
+              { (route !== 'Home') && <TouchableOpacity
+                style={{ marginLeft: 10 }}
+                onPress={() => {
+                  navigation.navigate('Home');
+                }}
+              >
+                <IconHome />
+              </TouchableOpacity> }
+            </Animatable.View> }
+        { (screenTheme.viewType === 'fragment') && <Animatable.View
+            animation={ route !== 'Home' ? 'fadeInRight' : 'fadeOutRight' }
+            duration={300}
             style={{ marginLeft: 10 }}
-            onPress={() => {
-              navigation.navigate('Home');
-            }}
           >
-          {/* <Image
-            source={iconHome}
-          /> */}
-          <IconHome />
-          </TouchableOpacity> }
-        {/* { (screenTheme.viewType === 'fragment') && <TouchableOpacity>
-          <View>
-            <Icon name='user' type='FontAwesome' size={24} color={theme.utilColors.white} />
-          </View>
-          </TouchableOpacity>} */}
+           { screenTheme.disposal === 'btn' && <TouchableOpacity
+              style={style.navigationBtn}
+              onPress={() => {
+                navigation.current.goBack();
+              }}
+            >
+              <Text style={{
+                ...font.captionBold,
+                color: theme.utilColors.dark,
+              }}>
+                <FormattedMessage
+                  defaultMessage='close'
+                  description='close button'
+                />
+              </Text>
+            </TouchableOpacity> }
+           { screenTheme.disposal === 'icon' && <TouchableOpacity
+              style={style.disposableIconBtn}
+              onPress={() => {
+                navigation.current.goBack();
+              }}
+            >
+              <View>
+                <Icon
+                  name='history'
+                  type='FontAwesome'
+                  size={24}
+                  color={theme.utilColors.white}
+                />
+              </View>
+            </TouchableOpacity> }
+          </Animatable.View>}
       </View>
     </View>
   );

@@ -11,13 +11,13 @@
 @import './_default.js';
 
 // default theme
-@include gt.populate-theme($themeMapLight, $themeMapDark, $cssVars);
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 
 // current page specific theme
 // @include gt.populate-theme(gt.$santa-theme-map-light, gt.$santa-theme-map-dark);
 
 main {
-  background: gt.theme-var(body-bg-red, null, $themeMapDark, $cssVars);
+  background: gt.theme-var(body-bg-red, null, $thememapdark, $cssvars);
   // background: gt.map-deep-get($themeMapLight, 'nav-bg-blue');
 }
 
