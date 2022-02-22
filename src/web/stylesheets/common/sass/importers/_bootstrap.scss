@@ -1,5 +1,6 @@
 @import '../themes/_default.scss';
 @import '../base/_variables.scss';
+@import '../../../../../typography/_typography.js';
 
 $theme-colors: (
   "primary": $primary-color,
@@ -8,7 +9,7 @@ $theme-colors: (
 );
 
 // stylelint-disable value-keyword-case
-$font-family-sans-serif: 'Lato', $fallback-fonts !default;
+$font-family-sans-serif: $font-family, $fallback-fonts !default;
 $font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 $font-family-base: $font-family-sans-serif !default;
 // stylelint-enable value-keyword-case
