@@ -1,11 +1,13 @@
+@import '../../../../../typography/_typography.js';
+
 @font-face {
-  font-family: 'Lato';
-  src: url('../../../fonts/Lato-Bold.eot'); /* IE9 Compat Modes */
+  font-family: $font-family;
+  src: url('../../../fonts/AveriaSansLibre-Bold.eot'); /* IE9 Compat Modes */
   src:
-    url('../../../fonts/Lato-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('../../../fonts/Lato-Bold.woff2') format('woff2'), /* Modern Browsers */
-    url('../../../fonts/Lato-Bold.woff') format('woff'), /* Modern Browsers */
-    url('../../../fonts/Lato-Bold.ttf') format('truetype');
+    url('../../../fonts/AveriaSansLibre-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../../../fonts/AveriaSansLibre-Bold.woff2') format('woff2'), /* Modern Browsers */
+    url('../../../fonts/AveriaSansLibre-Bold.woff') format('woff'), /* Modern Browsers */
+    url('../../../fonts/AveriaSansLibre-Bold.ttf') format('truetype');
   font-style: normal;
   font-weight: 700;
   text-rendering: optimizeLegibility;
@@ -13,13 +15,13 @@
 }
 
 @font-face {
-  font-family: 'Lato';
-  src: url('../../../fonts/Lato-Regular.eot'); /* IE9 Compat Modes */
+  font-family: $font-family;
+  src: url('../../../fonts/AveriaSansLibre-Regular.eot'); /* IE9 Compat Modes */
   src:
-    url('../../../fonts/Lato-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('../../../fonts/Lato-Regular.woff2') format('woff2'), /* Modern Browsers */
-    url('../../../fonts/Lato-Regular.woff') format('woff'), /* Modern Browsers */
-    url('../../../fonts/Lato-Regular.ttf') format('truetype');
+    url('../../../fonts/AveriaSansLibre-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../../../fonts/AveriaSansLibre-Regular.woff2') format('woff2'), /* Modern Browsers */
+    url('../../../fonts/AveriaSansLibre-Regular.woff') format('woff'), /* Modern Browsers */
+    url('../../../fonts/AveriaSansLibre-Regular.ttf') format('truetype');
   font-style: normal;
   font-weight: 400;
   text-rendering: optimizeLegibility;
@@ -27,29 +29,33 @@
 }
 
 @font-face {
-  font-family: 'Lato';
-  src: url('../../../fonts/Lato-Light.eot'); /* IE9 Compat Modes */
+  font-family: $font-family;
+  src: url('../../../fonts/AveriaSansLibre-Light.eot'); /* IE9 Compat Modes */
   src:
-    url('../../../fonts/Lato-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('../../../fonts/Lato-Light.woff2') format('woff2'), /* Modern Browsers */
-    url('../../../fonts/Lato-Light.woff') format('woff'), /* Modern Browsers */
-    url('../../../fonts/Lato-Light.ttf') format('truetype');
+    url('../../../fonts/AveriaSansLibre-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../../../fonts/AveriaSansLibre-Light.woff2') format('woff2'), /* Modern Browsers */
+    url('../../../fonts/AveriaSansLibre-Light.woff') format('woff'), /* Modern Browsers */
+    url('../../../fonts/AveriaSansLibre-Light.ttf') format('truetype');
   font-style: normal;
   font-weight: 300;
   text-rendering: optimizeLegibility;
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Lato';
-  src: url('../../../fonts/Lato-Black.eot'); /* IE9 Compat Modes */
-  src:
-    url('../../../fonts/Lato-Black.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('../../../fonts/Lato-Black.woff2') format('woff2'), /* Modern Browsers */
-    url('../../../fonts/Lato-Black.woff') format('woff'), /* Modern Browsers */
-    url('../../../fonts/Lato-Black.ttf') format('truetype');
-  font-style: normal;
-  font-weight: 900;
-  text-rendering: optimizeLegibility;
-  font-display: swap;
+@mixin spread-typography-map($map) {
+  @each $key,$value in $map {
+    .#{$key} {
+      @each $property, $property-value in $value {
+        @if $property == font-size {
+          #{$property}: #{$property-value}px;
+        }
+
+        @else {
+          #{$property}: #{$property-value};
+        }
+      }
+    };
+  }
 }
+
+@include spread-typography-map($web-typography);
