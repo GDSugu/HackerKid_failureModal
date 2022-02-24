@@ -1,9 +1,10 @@
 import React from 'react';
-import { themes } from './config';
+import { themes, font } from './config';
 
 const ThemeContext = React.createContext({
   currentTheme: 'light',
   theme: themes.light,
+  font,
   toggleTheme: () => {},
 });
 

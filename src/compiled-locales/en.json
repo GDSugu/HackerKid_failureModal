@@ -1,8 +1,32 @@
 {
+  "/EsQT0": [
+    {
+      "type": 0,
+      "value": "This is games page"
+    }
+  ],
   "0JV99f": [
     {
       "type": 0,
       "value": "This is index page"
+    }
+  ],
+  "383EZ1": [
+    {
+      "type": 0,
+      "value": "This is more options page"
+    }
+  ],
+  "9ppS9d": [
+    {
+      "type": 0,
+      "value": "Go to Class"
+    }
+  ],
+  "C8CsWY": [
+    {
+      "type": 0,
+      "value": "This is Class page"
     }
   ],
   "D/2aSY": [
@@ -11,10 +35,22 @@
       "value": "This is about page"
     }
   ],
+  "EG430K": [
+    {
+      "type": 0,
+      "value": "Go to More"
+    }
+  ],
   "MS/biV": [
     {
       "type": 0,
       "value": "Go to Index"
+    }
+  ],
+  "MkkIOq": [
+    {
+      "type": 0,
+      "value": "This is challenges page"
     }
   ],
   "T/a40M": [
@@ -27,6 +63,42 @@
     {
       "type": 0,
       "value": "Go to About"
+    }
+  ],
+  "ZG77Sq": [
+    {
+      "type": 0,
+      "value": "close"
+    }
+  ],
+  "jxfpT4": [
+    {
+      "type": 0,
+      "value": "Go to Games"
+    }
+  ],
+  "of2vJ9": [
+    {
+      "type": 0,
+      "value": "This is Video page"
+    }
+  ],
+  "q86PwV": [
+    {
+      "type": 0,
+      "value": "Go to Home"
+    }
+  ],
+  "sM7xfR": [
+    {
+      "type": 0,
+      "value": "This is Home page"
+    }
+  ],
+  "swkU6w": [
+    {
+      "type": 0,
+      "value": "Go to Home"
     }
   ]
 }

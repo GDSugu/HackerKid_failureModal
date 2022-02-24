@@ -1,88 +1,101 @@
 const fontFamily = 'Averia Sans Libre';
-
-const heading1 = {
-  fontStyle: 'normal',
-  fontWeight: 'bold',
-  fontSize: 48,
-};
-
-const heading2 = {
-  fontStyle: 'normal',
-  fontWeight: 'bold',
-  fontSize: 40,
-};
-
-const heading3 = {
-  fontStyle: 'normal',
-  fontWeight: 'bold',
-  fontSize: 32,
-};
-
-const heading4 = {
-  fontStyle: 'normal',
-  fontWeight: 'bold',
-  fontSize: 28,
-};
-
-const heading5 = {
-  fontStyle: 'normal',
-  fontWeight: 'bold',
-  fontSize: 24,
-};
-
-const heading6 = {
-  fontStyle: 'normal',
-  fontWeight: 'bold',
-  fontSize: 20,
+const fontAveria = {
+  bold: 'AveriaSansLibre-Bold',
+  light: 'AveriaSansLibre-Light',
+  regular: 'AveriaSansLibre-Regular',
 };
 
 const mobileTypography = {
-  heading1,
-  heading2,
-  heading3,
-  heading4,
-  heading5,
-  heading6,
+  heading1: {
+    fontFamily: fontAveria.bold,
+    fontSize: 48,
+  },
+  heading2: {
+    fontFamily: fontAveria.bold,
+    fontSize: 40,
+  },
+  heading3: {
+    fontFamily: fontAveria.bold,
+    fontSize: 32,
+  },
+  heading4: {
+    fontFamily: fontAveria.bold,
+    fontSize: 28,
+  },
+  heading5: {
+    fontFamily: fontAveria.bold,
+    fontSize: 24,
+  },
+  heading6: {
+    fontFamily: fontAveria.bold,
+    fontSize: 20,
+  },
   subtitle1: {
-    fontStyle: 'normal',
-    fontWeight: 'bold',
+    fontFamily: fontAveria.bold,
     fontSize: 16,
   },
   subtitle2: {
-    fontStyle: 'normal',
-    fontWeight: 'normal',
+    fontFamily: fontAveria.regular,
     fontSize: 16,
   },
   body: {
-    fontStyle: 'normal',
-    fontWeight: 'normal',
+    fontFamily: fontAveria.regular,
     fontSize: 14,
   },
   bodyBold: {
-    fontStyle: 'normal',
-    fontWeight: 'bold',
+    fontFamily: fontAveria.bold,
     fontSize: 14,
   },
   caption: {
-    fontStyle: 'normal',
-    fontWeight: 'normal',
+    fontFamily: fontAveria.regular,
+    fontSize: 12,
+  },
+  captionBold: {
+    fontFamily: fontAveria.bold,
     fontSize: 12,
   },
   overline: {
-    fontStyle: 'normal',
-    fontWeight: 'normal',
+    fontFamily: fontAveria.regular,
     fontSize: 10,
   },
 };
 
 const webTypography = {
-  heading1,
-  heading2,
-  heading3,
-  heading4,
-  heading5,
-  heading6,
-  subtitle1: heading6,
+  heading1: {
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 48,
+  },
+  heading2: {
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 40,
+  },
+  heading3: {
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 32,
+  },
+  heading4: {
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 28,
+  },
+  heading5: {
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 24,
+  },
+  heading6: {
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  subtitle1: {
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
   subtitle2: {
     fontStyle: 'normal',
     fontWeight: 'normal',

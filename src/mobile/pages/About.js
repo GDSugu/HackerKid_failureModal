@@ -1,10 +1,24 @@
 import React, { useContext } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+} from 'react-native';
 import { FormattedMessage, useIntl } from 'react-intl';
 import ThemeContext from '../components/theme';
 
+const getStyles = (theme) => StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: theme.primary,
+  },
+});
+
 const About = ({ navigation }) => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   const style = getStyles(theme);
 
@@ -19,23 +33,14 @@ const About = ({ navigation }) => {
         />
       </Text>
       <Button
-        onPress = {() => navigation.navigate('Index')}
+        onPress = {() => navigation.navigate('Home')}
         title={intl.formatMessage({
-          defaultMessage: 'Go to Index',
+          defaultMessage: 'Go to Home',
           description: 'Link description',
         })}
       />
     </View>
   );
 };
-
-const getStyles = (theme) => StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: theme.primary,
-  }
-});
 
 export default About;

@@ -15,7 +15,7 @@ import { IntlProvider } from 'react-intl';
 import App from './pages/App';
 import useRootPageState from '../hooks/pages/root';
 import ThemeContext from './components/theme';
-import { themes } from './components/config';
+import { themes, font } from './components/config';
 
 const AppWrapper = () => {
   const { state, setState } = useRootPageState();
@@ -25,8 +25,7 @@ const AppWrapper = () => {
       ...prevState,
       currentTheme: prevState.currentTheme === 'dark' ? 'light' : 'dark',
     }));
-});
-
+  });
 
   return (
     state.currentLocaleMessages
@@ -34,6 +33,7 @@ const AppWrapper = () => {
           value = {{
             currentTheme: state.currentTheme,
             theme: themes[state.currentTheme],
+            font,
             toggleTheme,
           }}>
           <IntlProvider

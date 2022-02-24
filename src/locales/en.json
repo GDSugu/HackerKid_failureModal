@@ -1,15 +1,39 @@
 {
+  "/EsQT0": {
+    "defaultMessage": "This is games page",
+    "description": "Games Page"
+  },
   "0JV99f": {
     "defaultMessage": "This is index page",
     "description": "Page description"
+  },
+  "383EZ1": {
+    "defaultMessage": "This is more options page",
+    "description": "More options Page"
+  },
+  "9ppS9d": {
+    "defaultMessage": "Go to Class",
+    "description": "class navigation button"
+  },
+  "C8CsWY": {
+    "defaultMessage": "This is Class page",
+    "description": "Class Page"
   },
   "D/2aSY": {
     "defaultMessage": "This is about page",
     "description": "Page description"
   },
+  "EG430K": {
+    "defaultMessage": "Go to More",
+    "description": "Home Navigation Button"
+  },
   "MS/biV": {
     "defaultMessage": "Go to Index",
     "description": "Link description"
+  },
+  "MkkIOq": {
+    "defaultMessage": "This is challenges page",
+    "description": "Challenges Page"
   },
   "T/a40M": {
     "defaultMessage": "Toggle Theme",
@@ -17,6 +41,30 @@
   },
   "Yz1BIF": {
     "defaultMessage": "Go to About",
+    "description": "Link description"
+  },
+  "ZG77Sq": {
+    "defaultMessage": "close",
+    "description": "close button"
+  },
+  "jxfpT4": {
+    "defaultMessage": "Go to Games",
+    "description": "Link description"
+  },
+  "of2vJ9": {
+    "defaultMessage": "This is Video page",
+    "description": "Videos Page"
+  },
+  "q86PwV": {
+    "defaultMessage": "Go to Home",
+    "description": "Home Navigation Button"
+  },
+  "sM7xfR": {
+    "defaultMessage": "This is Home page",
+    "description": "Page description"
+  },
+  "swkU6w": {
+    "defaultMessage": "Go to Home",
     "description": "Link description"
   }
 }
