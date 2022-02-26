@@ -1,2 +1,8 @@
+@use '../common/sass/themes/_default' as gt;
 @use '../common/sass/base/_typography.scss';
 @use '../common/sass/importers/_bootstrap.scss';
+
+@import '../christmas/_default.js';
+
+// default theme
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
