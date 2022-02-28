@@ -1,87 +1,6 @@
-// main color system - start
-$main-color-system-cssVars: (
-  text-color-1: --text-color-1,
-  text-color-2: --text-color-2,
-  text-color-3: --text-color-3,
-  text-color-4: --text-color-4,
-  text-color-5: --text-color-5,
-  text-color-6: --text-color-6,
-  text-color-7: --text-color-7,
-  text-color-8: --text-color-8,
-  text-color-9: --text-color-9,
-  button-gradient-1-start: --button-gradient-1-start,
-  button-gradient-1-end: --button-gradient-1-end,
-  button-solid: --button-solid,
-  button-gradient-2-start: --button-gradient-2-start,
-  button-gradient-2-end: --button-gradient-2-end,
-  bg-1: --bg-1,
-  bg-2: --bg-2,
-  bg-3: --bg-3,
-  bg-4: --bg-4,
-);
+@import '../../../christmas/_default.js';
 
-// Default theme
-$theme-map-light: (
-  text-color-1: #e0e0e0,
-  text-color-2: #000,
-  text-color-3: #495057,
-  text-color-4: #212529,
-  text-color-5: #ff5d00,
-  text-color-6: #5b5b5b,
-  text-color-7: #ffbe33,
-  text-color-8: #4361ee,
-  text-color-9: #c1c1c1,
-  button-gradient-1-start: #ff5d00,
-  button-gradient-1-end: #ff8c00,
-  button-solid: #ffbe33,
-  button-gradient-2-start: #339eff,
-  button-gradient-2-end: #1a71fc,
-  bg-1: #fff,
-  bg-2: #fff,
-  bg-3: #fff,
-  bg-4: #fff,
-);
-
-// Override the default light theme
-$theme-map-dark: (
-  text-color-1: #e0e0e0,
-  text-color-2: #fff,
-  text-color-3: #a0a0a0,
-  text-color-4: #e8e8e8,
-  text-color-5: #ff5d00,
-  text-color-6: #5b5b5b,
-  text-color-7: #ffbe33,
-  text-color-8: #4361ee,
-  text-color-9: #696a6b,
-  button-gradient-1-start: #ff5d00,
-  button-gradient-1-end: #ff8c00,
-  button-solid: #ffbe33,
-  button-gradient-2-start: #339eff,
-  button-gradient-2-end: #1a71fc,
-  bg-1: #121212,
-  bg-2: #1f1f1f,
-  bg-3: #242424,
-  bg-4: #2c2c2c,
-);
-
-$reg-color-system-cssVars: (
-  reg-danger-color: --reg-danger-color,
-  reg-dim-color: --reg-dim-color,
-  reg-button-gradient-1: --reg-button-gradient-1,
-);
-
-$santa-color-system-cssVars: (
-  santa-theme-color: --santa-theme-color,
-  santa-shadow-color: --santa-shadow-color,
-  santa-footer-start: --santa-footer-start,
-  santa-footer-end: --santa-footer-end,
-  santa-footer-text: --santa-footer-text,
-);
-
-/*
-  include a map in a class
-*/
-@mixin spread-map($map: (), $cssMap: $main-color-system-cssVars) {
+@mixin spread-map($map: (), $cssMap: $cssvars) {
   @each $key,
     $value in $map {
 
@@ -99,7 +18,7 @@ $santa-color-system-cssVars: (
   @return $map;
 }
 
-@mixin populate-theme($light: $theme-map-light, $dark: $theme-map-dark, $cssVars: $main-color-system-cssVars) {
+@mixin populate-theme($light: $thememaplight, $dark: $thememapdark, $cssVars: $cssvars) {
   :root.light {
     @include spread-map($light, $cssVars);
   }
@@ -116,7 +35,7 @@ $santa-color-system-cssVars: (
   - CSS:  color: var(--theme-primary, blue)
   Throws error if the variable not part of the map
 */
-@function theme-var($key, $fallback: null, $map: $theme-map-light, $cssVars: $main-color-system-cssVars) {
+@function theme-var($key, $fallback: null, $map: $thememaplight, $cssVars: $cssvars) {
   @if not map-has-key($map, $key) {
     @error "key: #{$key}, is not a key in map: #{$map}";
   }
@@ -133,51 +52,4 @@ $santa-color-system-cssVars: (
 }
 
 //body
-$body-bg: theme-var(bg-1);
-$body-color: theme-var(text-color-4);
-
-// bootstrap patch as css vars are not supported for some funcs like darken(), directly passed color codes
-$primary-color: map-get($theme-map-light, text-color-5);
-$secondary-color: map-get($theme-map-light, text-color-3);
-$success-color: map-get($theme-map-light, text-color-8);
-
-// main color system - end
-
-// register color system - start -- prefix -- 'reg'
-
-// Default theme
-$reg-theme-map-light: (
-  reg-danger-color: #f33,
-  reg-dim-color: #707070,
-  reg-button-gradient-1: linear-gradient(90deg, theme-var(button-gradient-1-start), theme-var(button-gradient-1-end)),
-);
-
-// Override the default light theme
-$reg-theme-map-dark: (
-  reg-danger-color: #f33,
-  reg-dim-color: #707070,
-  reg-button-gradient-1: linear-gradient(90deg, theme-var(button-gradient-1-start), theme-var(button-gradient-1-end)),
-);
-
-// register color system - end
-
-// santa color system - start -- prefix -- 'santa'
-// Default theme
-$santa-theme-map-light: (
-  santa-theme-color: #ff003c,
-  santa-shadow-color: #e2e2e2,
-  santa-footer-start: #242424,
-  santa-footer-end: #121212,
-  santa-footer-text: #fff,
-);
-
-// Override the default light theme
-$santa-theme-map-dark: (
-  santa-theme-color: #ff003c,
-  santa-shadow-color: #e2e2e2,
-  santa-footer-start: #242424,
-  santa-footer-end: #121212,
-  santa-footer-text: #fff,
-);
-
-// santa color system - end
+$body-color: theme-var(text-color-2);

@@ -63,8 +63,14 @@
     "defaultMessage": "This is Home page",
     "description": "Page description"
   },
+  "sZIPDd": {
+    "defaultMessage": "Signin page"
+  },
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
+  },
+  "xxQxLE": {
+    "defaultMessage": "Email Address"
   }
 }
