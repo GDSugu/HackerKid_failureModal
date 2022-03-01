@@ -126,6 +126,11 @@ const webTypography = {
     fontWeight: 'normal',
     fontSize: 14,
   },
+  overlineBold: {
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
 };
 
 module.exports = {
