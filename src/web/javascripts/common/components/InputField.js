@@ -1,14 +1,8 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 
-const InputField = () => (
+const InputField = (props) => (
   <div className ="mb-3">
-    <label htmlFor="exampleFormControlInput1" className="form-label">
-    <FormattedMessage
-        defaultMessage = "Email Address"
-      />
-    </label>
-    <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+    <input type={props.type} className="form-control" id="exampleFormControlInput1" placeholder={props.placeHolder} />
   </div>
 );
 
