@@ -45,6 +45,7 @@ const Theme = {
       navBg: Yellow.color500,
       navActiveBg: Yellow.color600,
       btnBg: Yellow.color700,
+      inputBorderColor: Yellow.color700,
     },
     utilColors,
   },
