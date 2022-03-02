@@ -6,22 +6,6 @@
 $font-family-sans-serif: $font-family, $fallback-fonts !default;
 $font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 $font-family-base: $font-family-sans-serif !default;
-// stylelint-enable value-keyword-case
 
-// button
-$btn-border-radius: 50px !default;
-
-// inputs
-$input-color: theme-var(text-color-2);
-$input-padding-y: 0.8rem !default;
-$input-padding-x : 1rem !default;
-$input-border-color: theme-var(input-border-color);
-$input-border-width: 2px !default;
-$input-border-radius: 8px !default;
-$input-focus-border-color: theme-var(input-border-color);
-$input-focus-box-shadow: 0;
-
-
-// patch for bootstrap incompactability for css vars
 
 @import '~bootstrap/scss/bootstrap.scss';
