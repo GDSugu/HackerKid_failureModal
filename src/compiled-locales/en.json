@@ -17,10 +17,22 @@
       "value": "This is more options page"
     }
   ],
+  "5sg7KC": [
+    {
+      "type": 0,
+      "value": "Password"
+    }
+  ],
   "9ppS9d": [
     {
       "type": 0,
       "value": "Go to Class"
+    }
+  ],
+  "AyGauy": [
+    {
+      "type": 0,
+      "value": "Login"
     }
   ],
   "C8CsWY": [
@@ -53,6 +65,18 @@
       "value": "This is challenges page"
     }
   ],
+  "NU0Nha": [
+    {
+      "type": 0,
+      "value": "Forgot Password?"
+    }
+  ],
+  "Op5EHr": [
+    {
+      "type": 0,
+      "value": "Sign in with Google"
+    }
+  ],
   "T/a40M": [
     {
       "type": 0,
@@ -69,6 +93,12 @@
     {
       "type": 0,
       "value": "close"
+    }
+  ],
+  "flaX9K": [
+    {
+      "type": 0,
+      "value": "Create a New Account"
     }
   ],
   "jxfpT4": [
@@ -93,12 +123,6 @@
     {
       "type": 0,
       "value": "This is Home page"
-    }
-  ],
-  "sZIPDd": [
-    {
-      "type": 0,
-      "value": "Signin page"
     }
   ],
   "swkU6w": [
