@@ -4,7 +4,6 @@ import '../../../stylesheets/signin/style.scss';
 
 const Signin = () => (
   <>
-    <img className='background-vector' src='../../../../images/signin/background-vector.svg' />
     <nav className='d-flex justify-content-between align-items-center'>
       <img className='logo' src='../../../../images/signin/logo_H1.svg' />
       <p className='help caption-bold mb-0'>
