@@ -1,0 +1,85 @@
+@use '../common/sass/themes/_default' as gt;
+@use '../common/sass/base/_mixins' as gm;
+@use '../common/sass/base/_typography';
+@use '../common/sass/importers/_bootstrap';
+
+@import './_signinTheme.js';
+
+html,body,#root{
+  min-height: 100vh;
+}
+// default theme
+@include gt.populate-theme();
+// page specific theme
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+// body::before{
+//   content: '';
+//   display: block;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   bottom: 0;
+//   right: 0;
+//   background: url(../../../images/signin/background-vector.svg);
+//   background-repeat: no-repeat;
+//   z-index: -1;
+// }
+
+nav{
+  padding: 24px;
+  margin-bottom: 25px;
+
+  .help{
+    color: gt.theme-var(text-color-2, null, $thememaplight, $cssvars);
+  }
+}
+
+.form-control{
+  border: 2px solid gt.theme-var(input-border-color, null, $thememaplight, $cssvars);
+  padding: 14px 16px;
+  height: 48px;
+  border-radius: 8px;
+
+  &:focus{
+    border-color: gt.theme-var(input-border-color, null, $thememaplight, $cssvars);
+    box-shadow: 0 0 0 0.2rem rgb(255 155 3/ 25%);
+  }
+}
+
+.signin-form{
+  width: 36%;
+  min-width: 360px;
+  margin: auto;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+  background: white;
+
+  .signin-form-svg{
+    display: block;
+    margin: 4rem auto 2rem;
+  }
+  .create-account-btn{
+    background-color: gt.theme-var(faded-btn-bg, null, $thememaplight, $cssvars);
+    color: gt.theme-var(text-color-2, null, $thememaplight, $cssvars);
+    border-radius: 0 0 16px 16px;
+    margin-top: 5rem;
+
+    @include gm.media-breakpoint-up(md){
+      margin-top: 6rem;
+    }
+  }
+
+  .sign-in-with-google-btn{
+    border-radius: 12px;
+    height: 50px;
+  }
+
+  .login-btn{
+    border-radius: 12px;
+    height: 50px;
+
+    background-color: gt.theme-var(btn-bg, null, $thememaplight, $cssvars);
+    border-color: gt.theme-var(input-border-color, null, $thememaplight, $cssvars);
+  }
+}
