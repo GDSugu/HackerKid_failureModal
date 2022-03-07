@@ -33,6 +33,9 @@
     "defaultMessage": "Go to More",
     "description": "Home Navigation Button"
   },
+  "JCIgkj": {
+    "defaultMessage": "Username"
+  },
   "MS/biV": {
     "defaultMessage": "Go to Index",
     "description": "Link description"
@@ -46,6 +49,9 @@
   },
   "Op5EHr": {
     "defaultMessage": "Sign in with Google"
+  },
+  "SENRqu": {
+    "defaultMessage": "Help"
   },
   "T/a40M": {
     "defaultMessage": "Toggle Theme",
@@ -81,8 +87,5 @@
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
-  },
-  "xxQxLE": {
-    "defaultMessage": "Email Address"
   }
 }

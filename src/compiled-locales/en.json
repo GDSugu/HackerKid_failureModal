@@ -53,6 +53,12 @@
       "value": "Go to More"
     }
   ],
+  "JCIgkj": [
+    {
+      "type": 0,
+      "value": "Username"
+    }
+  ],
   "MS/biV": [
     {
       "type": 0,
@@ -75,6 +81,12 @@
     {
       "type": 0,
       "value": "Sign in with Google"
+    }
+  ],
+  "SENRqu": [
+    {
+      "type": 0,
+      "value": "Help"
     }
   ],
   "T/a40M": [
@@ -129,12 +141,6 @@
     {
       "type": 0,
       "value": "Go to Home"
-    }
-  ],
-  "xxQxLE": [
-    {
-      "type": 0,
-      "value": "Email Address"
     }
   ]
 }
