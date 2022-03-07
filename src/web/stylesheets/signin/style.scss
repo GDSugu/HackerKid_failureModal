@@ -5,10 +5,26 @@
 
 @import './_signinTheme.js';
 
+html,body,#root{
+  min-height: 100vh;
+}
 // default theme
 @include gt.populate-theme();
 // page specific theme
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+// body::before{
+//   content: '';
+//   display: block;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   bottom: 0;
+//   right: 0;
+//   background: url(../../../images/signin/background-vector.svg);
+//   background-repeat: no-repeat;
+//   z-index: -1;
+// }
 
 nav{
   padding: 24px;
@@ -37,6 +53,7 @@ nav{
   margin: auto;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
   border-radius: 16px;
+  background: white;
 
   .signin-form-svg{
     display: block;
@@ -46,13 +63,16 @@ nav{
     background-color: gt.theme-var(faded-btn-bg, null, $thememaplight, $cssvars);
     color: gt.theme-var(text-color-2, null, $thememaplight, $cssvars);
     border-radius: 0 0 16px 16px;
-    margin-top: 6.25rem;
+    margin-top: 5rem;
+
+    @include gm.media-breakpoint-up(md){
+      margin-top: 6rem;
+    }
   }
 
   .sign-in-with-google-btn{
     border-radius: 12px;
     height: 50px;
-    margin-bottom: 1rem;
   }
 
   .login-btn{
