@@ -7,12 +7,23 @@
 
 html,body,#root{
   min-height: 100vh;
+  position: relative;
 }
 // default theme
 @include gt.populate-theme();
 // page specific theme
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 
+.background-vector{
+  visibility: hidden;
+  @include gm.media-breakpoint-up(md){
+    visibility: visible;
+  }
+  position: absolute;
+  bottom: 0;
+  z-index: -1;
+  width: 100vw;
+}
 // body::before{
 //   content: '';
 //   display: block;
