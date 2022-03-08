@@ -19,6 +19,7 @@ import RouteHome from './Home';
 import RouteVideo from './Video';
 import RouteChallenges from './Challenges';
 import RouteMore from './More';
+import RouteSignin from './Signin';
 
 import IconGame from '../../images/navbar/iconGame.svg';
 import IconHome from '../../images/navbar/iconHome.svg';
@@ -221,7 +222,7 @@ const App = () => {
             onStateChange={() => { setRoutName(navigationRef.getCurrentRoute().name); }}
           >
             <Stack.Navigator
-              initialRouteName='Start'
+              initialRouteName='Signin'
               screenOptions={{
                 headerShown: false,
                 animation: 'slide_from_bottom',
@@ -235,7 +236,8 @@ const App = () => {
                   theme,
                 })}
               </Stack.Screen>
-              <Stack.Screen name='Class' component={RouteClass} />
+            <Stack.Screen name='Class' component={RouteClass} />
+            <Stack.Screen name='Signin' component={RouteSignin} />
             </Stack.Navigator>
           </NavigationContainer>
         </View>
