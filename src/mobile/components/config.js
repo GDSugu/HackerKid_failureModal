@@ -237,6 +237,9 @@ const themes = {
     },
     screenSignin: {
       ...Theme.light.screenYellow,
+      showHeader: false,
+      showNav: false,
+      viewType: 'screen',
     },
     utilColors: Theme.dark.utilColors,
   },
