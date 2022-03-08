@@ -42,16 +42,18 @@ const Header = ({ route, navigation }) => {
   const screenTheme = theme[`screen${route}`];
   const style = getStyles(screenTheme, theme.utilColors);
 
-  return screenTheme.showHeader && (
-    <View style={style.header}>
+  return <>
+    {
+      screenTheme.showHeader
+      && <View style={style.header}>
       <Text>hackekidLogo</Text>
       <View style={style.flexHorizontal}>
-        { (route !== 'Class') && <TouchableOpacity
-            style={style.navigationBtn}
-            onPress={() => {
-              navigation.navigate('Class');
-            }}
-          >
+        {(route !== 'Class') && <TouchableOpacity
+          style={style.navigationBtn}
+          onPress={() => {
+            navigation.navigate('Class');
+          }}
+        >
           <Text style={{
             ...font.captionBold,
             color: theme.utilColors.dark,
@@ -61,60 +63,61 @@ const Header = ({ route, navigation }) => {
               description='class navigation button'
             />
           </Text>
-        </TouchableOpacity> }
+        </TouchableOpacity>}
         {<Animatable.View
-              animation={ route !== 'Home' ? 'fadeInRight' : 'fadeOutRight' }
-              duration={300}
-            >
-              { (route !== 'Home') && <TouchableOpacity
-                style={{ marginLeft: 10 }}
-                onPress={() => {
-                  navigation.navigate('Home');
-                }}
-              >
-                <IconHome />
-              </TouchableOpacity> }
-            </Animatable.View> }
-        { (screenTheme.viewType === 'fragment') && <Animatable.View
-            animation={ route !== 'Home' ? 'fadeInRight' : 'fadeOutRight' }
-            duration={300}
+          animation={route !== 'Home' ? 'fadeInRight' : 'fadeOutRight'}
+          duration={300}
+        >
+          {(route !== 'Home') && <TouchableOpacity
             style={{ marginLeft: 10 }}
+            onPress={() => {
+              navigation.navigate('Home');
+            }}
           >
-           { screenTheme.disposal === 'btn' && <TouchableOpacity
-              style={style.navigationBtn}
-              onPress={() => {
-                navigation.current.goBack();
-              }}
-            >
-              <Text style={{
-                ...font.captionBold,
-                color: theme.utilColors.dark,
-              }}>
-                <FormattedMessage
-                  defaultMessage='close'
-                  description='close button'
-                />
-              </Text>
-            </TouchableOpacity> }
-           { screenTheme.disposal === 'icon' && <TouchableOpacity
-              style={style.disposableIconBtn}
-              onPress={() => {
-                navigation.current.goBack();
-              }}
-            >
-              <View>
-                <Icon
-                  name='history'
-                  type='FontAwesome'
-                  size={24}
-                  color={theme.utilColors.white}
-                />
-              </View>
-            </TouchableOpacity> }
-          </Animatable.View>}
+            <IconHome />
+          </TouchableOpacity>}
+        </Animatable.View>}
+        {(screenTheme.viewType === 'fragment') && <Animatable.View
+          animation={route !== 'Home' ? 'fadeInRight' : 'fadeOutRight'}
+          duration={300}
+          style={{ marginLeft: 10 }}
+        >
+          {screenTheme.disposal === 'btn' && <TouchableOpacity
+            style={style.navigationBtn}
+            onPress={() => {
+              navigation.current.goBack();
+            }}
+          >
+            <Text style={{
+              ...font.captionBold,
+              color: theme.utilColors.dark,
+            }}>
+              <FormattedMessage
+                defaultMessage='close'
+                description='close button'
+              />
+            </Text>
+          </TouchableOpacity>}
+          {screenTheme.disposal === 'icon' && <TouchableOpacity
+            style={style.disposableIconBtn}
+            onPress={() => {
+              navigation.current.goBack();
+            }}
+          >
+            <View>
+              <Icon
+                name='history'
+                type='FontAwesome'
+                size={24}
+                color={theme.utilColors.white}
+              />
+            </View>
+          </TouchableOpacity>}
+        </Animatable.View>}
       </View>
     </View>
-  );
+  }
+  </>;
 };
 
 export default Header;
