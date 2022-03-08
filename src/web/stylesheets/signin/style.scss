@@ -14,17 +14,6 @@ html,body,#root{
 // page specific theme
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 
-.background-vector{
-  visibility: hidden;
-  @include gm.media-breakpoint-up(md){
-    visibility: visible;
-  }
-  position: absolute;
-  bottom: 0;
-  z-index: -1;
-  width: 100vw;
-}
-
 body{
   background: url(../../../images/signin/background-vector.svg);
   background-repeat: no-repeat;
