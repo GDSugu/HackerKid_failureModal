@@ -6,7 +6,10 @@ import {
   TouchableOpacity,
   StyleSheet,
   TextInput,
+  ScrollView,
+  KeyboardAvoidingView,
 } from 'react-native';
+import { tree } from 'gulp';
 import ThemeContext from '../components/theme';
 import SigninFormSvg from '../../images/signin/signin-form-svg.svg';
 
@@ -22,7 +25,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     ...font.bodyBold,
   },
   inputField: {
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: theme.inputBorderColor,
     borderRadius: 8,
     padding: 14,
@@ -44,30 +47,42 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
 const Signin = ({ navigation }) => {
   const { font, theme } = React.useContext(ThemeContext);
   const screenTheme = theme.screenSignin;
-  const style = getStyles(screenTheme, theme.utilColors);
+  const style = getStyles(screenTheme, theme.utilColors, font);
 
   return (
-    <View style={{ flex: 1, justifyContent: 'space-between' }}>
+    <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between' }}>
       <View style={style.container}>
+        <KeyboardAvoidingView>
         <View style={{
           justifycontent: 'center', alignItems: 'center', marginBottom: 50, marginTop: 50,
         }}>
           <SigninFormSvg/>
         </View>
         <View style={{ marginBottom: 10 }}>
-          <Text style={style.label}>Username</Text>
+          <Text style={style.label}>
+            <FormattedMessage
+              defaultMessage='Username'
+            />
+          </Text>
           <TextInput
             style={style.inputField}
-            multiline={false}
+              multiline={false}
+              disableFullscreenUI = {false}
           />
         </View>
-        <View style={{ marginBottom: 10 }}>
-          <Text style={style.label}>Password</Text>
-          <TextInput
-            secureTextEntry={true}
-            style={style.inputField}
-            multiline={false} />
-        </View>
+          <View style={{ marginBottom: 10 }}>
+            <Text style={style.label}>
+              <FormattedMessage
+                defaultMessage='Password'
+              />
+            </Text>
+            <TextInput
+              disableFullscreenUI = {false}
+              secureTextEntry={true}
+              style={style.inputField}
+              multiline={false} />
+          </View>
+        </KeyboardAvoidingView>
         <TouchableOpacity>
           <Text style={[style.label, {
             marginBottom: 50, textAlign: 'center',
@@ -77,15 +92,19 @@ const Signin = ({ navigation }) => {
           <TouchableOpacity
               style={style.loginBtn}
               title="Login"
-            onPress={() => navigation.push('Start') }>
-            <Text style={{ ...font.bodyBold, color: 'white', textAlign: 'center' }}>Login</Text>
+            onPress={() => navigation.navigate('Start') }>
+            <Text style={{ ...font.bodyBold, color: 'white', textAlign: 'center' }}>
+              <FormattedMessage defaultMessage='Login' />
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
       <TouchableOpacity style={style.createAccountBtn} title='CreateAccountBtn'>
-        <Text style={{ ...font.bodyBold, color: style.createAccountBtn.color, textAlign: 'center' }}>Create a New Account</Text>
+        <Text style={{ ...font.bodyBold, color: style.createAccountBtn.color, textAlign: 'center' }}>
+          <FormattedMessage defaultMessage='Create a New Account' />
+        </Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 
