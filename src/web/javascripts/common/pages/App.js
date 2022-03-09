@@ -7,6 +7,7 @@ import {
 import Index from './Index';
 import About from './About';
 import Signin from './Signin';
+import Home from './Home';
 
 const App = () => (
   <BrowserRouter>
@@ -14,6 +15,7 @@ const App = () => (
       <Route index path='/' element={<Index/>}/>
       <Route path='about' element={<About />} />
       <Route path='/signin' element={<Signin />} />
+      <Route path='/home' element={<Home />} />
     </Routes>
   </BrowserRouter>
 );

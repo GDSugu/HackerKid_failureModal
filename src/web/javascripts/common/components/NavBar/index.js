@@ -1,0 +1,81 @@
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router-dom';
+
+const NavItem = (props) => {
+  const { icon, route, active } = props;
+  return <>
+    <div className="navigation-item">
+      <Link to={route} className={active ? 'active' : ''}>
+      { icon }
+      </Link>
+    </div>
+  </>;
+};
+
+const NavBar = () => {
+  const navItems = [
+    {
+      icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke='#212427' xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M9 22V12H15V22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>,
+      route: '/home',
+      active: true,
+    },
+    {
+      icon: <svg width="24" height="24" stroke="#212527" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 15L6.032 17.968C5.70167 18.2983 5.28084 18.5232 4.8227 18.6143C4.36457 18.7054 3.88971 18.6586 3.45815 18.4799C3.0266 18.3011 2.65773 17.9984 2.39819 17.6101C2.13864 17.2217 2.00007 16.7651 2 16.298V15L3.357 8.216C3.53824 7.30922 4.02806 6.49325 4.74312 5.90691C5.45817 5.32058 6.35429 5.0001 7.279 5H16.721C17.6457 5.0001 18.5418 5.32058 19.2569 5.90691C19.9719 6.49325 20.4618 7.30922 20.643 8.216L22 15V16.297C21.9999 16.7641 21.8614 17.2207 21.6018 17.6091C21.3423 17.9974 20.9734 18.3001 20.5418 18.4789C20.1103 18.6576 19.6354 18.7044 19.1773 18.6133C18.7192 18.5222 18.2983 18.2973 17.968 17.967L15 15H9Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M9 5L10 7H14L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>,
+      route: '/games',
+      active: false,
+    },
+    {
+      icon: <svg width="24" height="24" viewBox="24 24 24 24" fill="none" stroke="#212527" xmlns="http://www.w3.org/2000/svg">
+          <path d="M41 26L36 31L31 26M28 31H44C45.1046 31 46 31.8954 46 33V44C46 45.1046 45.1046 46 44 46H28C26.8954 46 26 45.1046 26 44V33C26 31.8954 26.8954 31 28 31Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>,
+      route: '/courses',
+      active: false,
+    },
+    {
+      icon: <svg width="24" height="24" viewBox="24 24 24 24" fill="none" stroke="#212527" xmlns="http://www.w3.org/2000/svg">
+          <path d="M36 26L39.09 32.26L46 33.27L41 38.14L42.18 45.02L36 41.77L29.82 45.02L31 38.14L26 33.27L32.91 32.26L36 26Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>,
+      route: '/challenges',
+      active: false,
+    },
+    {
+      icon: <svg width="24" height="24" viewBox="24 24 24 24" fill="none" stroke="#212527" xmlns="http://www.w3.org/2000/svg">
+          <path d="M27 36H45M27 30H45M27 42H45" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>,
+      route: '/more',
+      active: false,
+    },
+  ];
+
+  return <>
+    <div className='d-flex justify-content-between'>
+      <div className="logo">
+        <FormattedMessage
+          defaultMessage = 'hackerkid logo'
+          description={'logo'}
+          />
+      </div>
+      <div className='navigation-container d-flex align-items-center'>
+        {
+          navItems.map((item, index) => <NavItem {...item} key={index} />)
+        }
+
+      </div>
+      <div className="profileImg">
+        <FormattedMessage
+          defaultMessage = 'profile image'
+          description={'logo'}
+        />
+      </div>
+    </div>
+  </>;
+};
+
+export default NavBar;

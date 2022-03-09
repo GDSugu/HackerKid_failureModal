@@ -55,6 +55,7 @@
     "@react-navigation/material-top-tabs": "^6.1.1",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
+    "@svgr/webpack": "^5.5.0",
     "ace-builds": "^1.4.12",
     "animejs": "^3.2.1",
     "autocrop-worker": "^1.0.4",
