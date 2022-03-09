@@ -10,11 +10,16 @@ import {
 import ThemeContext from '../components/theme';
 import SigninFormSvg from '../../images/signin/signin-form-svg.svg';
 
-const getStyles = (theme, utilColors) => StyleSheet.create({
+const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
     flex: 1,
     paddingLeft: 18,
     paddingRight: 18,
+  },
+  label: {
+    color: 'black',
+    marginBottom: 5,
+    ...font.bodyBold,
   },
   inputField: {
     borderWidth: 2,
@@ -22,6 +27,7 @@ const getStyles = (theme, utilColors) => StyleSheet.create({
     borderRadius: 8,
     padding: 14,
     color: 'black',
+    ...font.bodyBold,
   },
   loginBtn: {
     borderRadius: 12,
@@ -49,23 +55,23 @@ const Signin = ({ navigation }) => {
           <SigninFormSvg/>
         </View>
         <View style={{ marginBottom: 10 }}>
-          <Text style={{ color: 'black', marginBottom: 5, ...font.bodyBold }}>Username</Text>
+          <Text style={style.label}>Username</Text>
           <TextInput
-            style={[style.inputField, font.bodyBold]}
+            style={style.inputField}
             multiline={false}
           />
         </View>
         <View style={{ marginBottom: 10 }}>
-          <Text style={{ color: 'black', marginBottom: 5, ...font.bodyBold }}>Password</Text>
+          <Text style={style.label}>Password</Text>
           <TextInput
             secureTextEntry={true}
-            style={[style.inputField, font.bodyBold]}
+            style={style.inputField}
             multiline={false} />
         </View>
         <TouchableOpacity>
-          <Text style={{
-            color: 'black', marginBottom: 50, ...font.bodyBold, textAlign: 'center',
-          }}>Forgot Password?</Text>
+          <Text style={[style.label, {
+            marginBottom: 50, textAlign: 'center',
+          }]}>Forgot Password?</Text>
         </TouchableOpacity>
         <View>
           <TouchableOpacity
