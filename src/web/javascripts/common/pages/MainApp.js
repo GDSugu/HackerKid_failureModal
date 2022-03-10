@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Navigate,
+  // Navigate,
   Routes,
   Route,
 } from 'react-router-dom';
@@ -15,18 +15,21 @@ const RouteCourses = loadable(() => import('./Courses'), { fallback: <Loading />
 const RouteChallenges = loadable(() => import('./Challenges'), { fallback: <Loading /> });
 const RouteMore = loadable(() => import('./More'), { fallback: <Loading /> });
 
-const MainApp = () => (
-  <>
-    <NavBar />
-    <Routes>
-      <Route exact path='/' element={<Navigate replace to='home' />} />
-      <Route path='home' element={<RouteHome />} />
-      <Route exact path='games' element={<RouteGames />} />
-      <Route exact path='courses' element={<RouteCourses />} />
-      <Route exact path='challenges' element={<RouteChallenges />} />
-      <Route exact path='more' element={<RouteMore />} />
-</Routes>
-  </>
-);
+const MainApp = (props) => {
+  console.log(props);
+
+  return (
+    <>
+      <NavBar />
+      <Routes>
+        <Route path='home' element={<RouteHome />} />
+        <Route path='games' element={<RouteGames />} />
+        <Route path='courses' element={<RouteCourses />} />
+        <Route path='challenges' element={<RouteChallenges />} />
+        <Route path='more' element={<RouteMore />} />
+      </Routes>
+    </>
+  );
+};
 
 export default MainApp;
