@@ -14,6 +14,10 @@
   "5sg7KC": {
     "defaultMessage": "Password"
   },
+  "6Cjk2D": {
+    "defaultMessage": "Login",
+    "description": "Login Button"
+  },
   "9ppS9d": {
     "defaultMessage": "Go to Class",
     "description": "class navigation button"
@@ -68,6 +72,10 @@
   "ZG77Sq": {
     "defaultMessage": "close",
     "description": "close button"
+  },
+  "a2ZCmv": {
+    "defaultMessage": "Create a New Account",
+    "description": "Create Account Button"
   },
   "flaX9K": {
     "defaultMessage": "Create a New Account"
