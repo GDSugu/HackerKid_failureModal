@@ -1,13 +1,15 @@
 import React from 'react';
-import NavBar from '../components/NavBar';
+import '../../../stylesheets/common/pages/home/style.scss';
+import { pageInit } from '../framework';
 
 const Home = () => {
-  console.log('home');
+  pageInit('home-container');
   return <>
-    <NavBar />
+  <div>
     <div>
       home
     </div>
+  </div>
   </>;
 };
 

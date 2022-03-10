@@ -4,18 +4,22 @@ import {
   Routes,
   Route,
 } from 'react-router-dom';
-import Index from './Index';
-import About from './About';
-import Signin from './Signin';
-import Home from './Home';
+import loadable from '@loadable/component';
+
+const Loading = () => <div>Loading...</div>;
+
+const RouteIndex = loadable(() => import('./Index'), { fallback: <Loading /> });
+const RouteAbout = loadable(() => import('./About'), { fallback: <Loading /> });
+const RouteSignin = loadable(() => import('./Signin'), { fallback: <Loading /> });
+const RouteMainApp = loadable(() => import('./MainApp'), { fallback: <Loading /> });
 
 const App = () => (
   <BrowserRouter>
     <Routes>
-      <Route index path='/' element={<Index/>}/>
-      <Route path='about' element={<About />} />
-      <Route path='/signin' element={<Signin />} />
-      <Route path='/home' element={<Home />} />
+      <Route index path='/' element={<RouteIndex/>}/>
+      <Route exact path='about' element={<RouteAbout />} />
+      <Route exact path='/signin' element={<RouteSignin />} />
+      <Route exact path='/app/*' element={<RouteMainApp />} />
     </Routes>
   </BrowserRouter>
 );

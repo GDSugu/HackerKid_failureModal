@@ -5,6 +5,12 @@ const { API } = process.env;
 
 const authorize = {};
 
+const pageInit = (className) => {
+  $('body')
+    .removeClass()
+    .addClass(className);
+};
+
 const pathNavigator = (path) => {
   const { origin } = window.location;
   window.location.href = `${origin}/${path}`;
@@ -360,6 +366,7 @@ ${withLink ? `
 export default post;
 
 export {
+  pageInit,
   pathNavigator,
   authorize,
   s3Upload,

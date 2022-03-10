@@ -1,0 +1,22 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+
+@import './_homeTheme.js';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+.home-container {
+  background-color: gt.theme-var(home-body-bg, null, $thememaplight, $cssvars);
+
+  nav {
+    background-color: gt.theme-var(home-nav-bg, null, $thememaplight, $cssvars);
+
+    .navigation-container {
+      .navigation-item {
+        &.active {
+          background-color: gt.theme-var(home-nav-active-bg, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+  }
+}

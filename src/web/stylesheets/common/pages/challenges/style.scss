@@ -1,0 +1,22 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+
+@import './_challengesTheme.js';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+.challenges-container {
+  background-color: gt.theme-var(challenges-body-bg, null, $thememaplight, $cssvars);
+
+  nav {
+    background-color: gt.theme-var(challenges-nav-bg, null, $thememaplight, $cssvars);
+
+    .navigation-container {
+      .navigation-item {
+        &.active {
+          background-color: gt.theme-var(challenges-nav-active-bg, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+  }
+}

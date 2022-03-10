@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import '../../../stylesheets/signin/style.scss';
+import '../../../stylesheets/common/pages/signin/style.scss';
 
 const Signin = () => (
   <div className='signin-form'>

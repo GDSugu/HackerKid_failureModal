@@ -1,23 +1,21 @@
-@use '../common/sass/themes/_default' as gt;
-@use '../common/sass/base/_mixins' as gm;
-@use '../common/sass/base/_typography';
-@use '../common/sass/importers/_bootstrap';
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
 
 @import './_signinTheme.js';
 
 // default theme
-@include gt.populate-theme();
+// @include gt.populate-theme();
 // page specific theme
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 
 .form-control{
-  border: 2px solid gt.theme-var(input-border-color, null, $thememaplight, $cssvars);
+  border: 2px solid gt.theme-var(signin-input-border-color, null, $thememaplight, $cssvars);
   padding: 14px 16px;
   height: 48px;
   border-radius: 8px;
 
   &:focus{
-    border-color: gt.theme-var(input-border-color, null, $thememaplight, $cssvars);
+    border-color: gt.theme-var(signin-input-border-color, null, $thememaplight, $cssvars);
     box-shadow: 0 0 0 0.2rem rgb(255 155 3/ 25%);
   }
 }
@@ -34,8 +32,8 @@
     margin: 4rem auto 2rem;
   }
   .create-account-btn{
-    background-color: gt.theme-var(faded-btn-bg, null, $thememaplight, $cssvars);
-    color: gt.theme-var(faded-btn-text-color, null, $thememaplight, $cssvars);
+    background-color: gt.theme-var(signin-faded-btn-bg, null, $thememaplight, $cssvars);
+    color: gt.theme-var(signin-faded-btn-text-color, null, $thememaplight, $cssvars);
     border-radius: 0 0 16px 16px;
     margin-top: 6.25rem;
   }
@@ -56,8 +54,8 @@
       width: 225px;
     }
 
-    background-color: gt.theme-var(btn-bg, null, $thememaplight, $cssvars);
-    border-color: gt.theme-var(input-border-color, null, $thememaplight, $cssvars);
+    background-color: gt.theme-var(signin-btn-bg, null, $thememaplight, $cssvars);
+    border-color: gt.theme-var(signin-input-border-color, null, $thememaplight, $cssvars);
   }
 
   .login-btn-and-google-btn{

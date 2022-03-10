@@ -1,0 +1,22 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+
+@import './_gameTheme.js';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+.games-container {
+  background-color: gt.theme-var(game-body-bg, null, $thememaplight, $cssvars);
+
+  nav {
+    background-color: gt.theme-var(game-nav-bg, null, $thememaplight, $cssvars);
+
+    .navigation-container {
+      .navigation-item {
+        &.active {
+          background-color: gt.theme-var(game-nav-active-bg, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+  }
+}
