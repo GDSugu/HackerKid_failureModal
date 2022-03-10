@@ -3,25 +3,36 @@ import {
   BrowserRouter,
   Routes,
   Route,
+  Navigate,
 } from 'react-router-dom';
 import loadable from '@loadable/component';
+import NavBar from '../components/NavBar';
 
 const Loading = () => <div>Loading...</div>;
-
-// const NotFound = () => <div>404 Not Found</div>;
 
 const RouteIndex = loadable(() => import('./Index'), { fallback: <Loading /> });
 const RouteAbout = loadable(() => import('./About'), { fallback: <Loading /> });
 const RouteSignin = loadable(() => import('./Signin'), { fallback: <Loading /> });
-const RouteMainApp = loadable(() => import('./MainApp'), { fallback: <Loading /> });
+const RouteDashboard = loadable(() => import('./Dashboard'), { fallback: <Loading /> });
+const RouteGames = loadable(() => import('./Games'), { fallback: <Loading /> });
+const RouteCourses = loadable(() => import('./Courses'), { fallback: <Loading /> });
+const RouteChallenges = loadable(() => import('./Challenges'), { fallback: <Loading /> });
+const RouteMore = loadable(() => import('./More'), { fallback: <Loading /> });
 
 const App = () => (
   <BrowserRouter>
     <Routes>
-      <Route index path='/' element={<RouteIndex />} />
-      <Route path='/*' element={<RouteMainApp />} />
-      <Route path='/about' element={<RouteAbout />} />
-      <Route path='/signin' element={<RouteSignin />} />
+      <Route index path='/' caseSensitive={true} element={<RouteIndex />} />
+      <Route path='/' caseSensitive={true} element={<NavBar />}>
+        <Route path='dashboard' caseSensitive={true} element={<RouteDashboard />} />
+        <Route path='games' caseSensitive={true} element={<RouteGames />} />
+        <Route path='courses' caseSensitive={true} element={<RouteCourses />} />
+        <Route path='challenges' caseSensitive={true} element={<RouteChallenges />} />
+        <Route path='more' caseSensitive={true} element={<RouteMore />} />
+      </Route>
+      <Route path='/about' caseSensitive={true} element={<RouteAbout />} />
+      <Route path='/signin' caseSensitive={true} element={<RouteSignin />} />
+      <Route path='*' element={ <Navigate to='/' />} />
     </Routes>
   </BrowserRouter>
 );

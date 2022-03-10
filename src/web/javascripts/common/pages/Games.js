@@ -3,7 +3,7 @@ import '../../../stylesheets/common/pages/games/style.scss';
 import { pageInit } from '../framework';
 
 const Games = () => {
-  pageInit('games-container');
+  pageInit('games-container', 'Games');
 
   return <>
   <div>

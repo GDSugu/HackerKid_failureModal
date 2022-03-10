@@ -3,7 +3,7 @@ import '../../../stylesheets/common/pages/more/style.scss';
 import { pageInit } from '../framework';
 
 const More = () => {
-  pageInit('more-container');
+  pageInit('more-container', 'More');
   return <>
   <div>
     <div>

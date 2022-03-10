@@ -3,7 +3,7 @@ import '../../../stylesheets/common/pages/challenges/style.scss';
 import { pageInit } from '../framework';
 
 const Challenges = () => {
-  pageInit('challenges-container');
+  pageInit('challenges-container', 'Challenges');
 
   return <>
   <div>

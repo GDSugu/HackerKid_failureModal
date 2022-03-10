@@ -5,10 +5,13 @@ const { API } = process.env;
 
 const authorize = {};
 
-const pageInit = (className) => {
-  $('body')
-    .removeClass()
-    .addClass(className);
+const pageInit = (className, title = null) => {
+  if (className) {
+    $('body')
+      .removeClass()
+      .addClass(className);
+  }
+  document.title = `HackerKID${title ? ` | ${title}` : ''}`;
 };
 
 const pathNavigator = (path) => {

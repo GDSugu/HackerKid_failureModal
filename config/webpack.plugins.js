@@ -307,7 +307,8 @@ class swInjectPlugin {
 const swInjector = new swInjectPlugin();
 
 const env = new Dotenv({
-  path: path.join(config.root, 'env', process.env.VARIANT, '.env'),
+  // path: path.join(config.root, 'env', process.env.VARIANT, '.env'),
+  path: path.join(config.root, `.env.${process.env.VARIANT}`),
 });
 
 const htaccess = `<FilesMatch "^\\.ht">
