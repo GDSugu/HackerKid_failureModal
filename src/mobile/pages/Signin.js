@@ -9,7 +9,6 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
-import { tree } from 'gulp';
 import ThemeContext from '../components/theme';
 import SigninFormSvg from '../../images/signin/signin-form-svg.svg';
 
