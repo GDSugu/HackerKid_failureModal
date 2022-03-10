@@ -9,7 +9,6 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
-import { tree } from 'gulp';
 import ThemeContext from '../components/theme';
 import SigninFormSvg from '../../images/signin/signin-form-svg.svg';
 
@@ -67,7 +66,7 @@ const Signin = ({ navigation }) => {
           <TextInput
             style={style.inputField}
               multiline={false}
-              disableFullscreenUI = {false}
+              disableFullscreenUI = {true}
           />
         </View>
           <View style={{ marginBottom: 10 }}>
@@ -77,7 +76,7 @@ const Signin = ({ navigation }) => {
               />
             </Text>
             <TextInput
-              disableFullscreenUI = {false}
+              disableFullscreenUI = {true}
               secureTextEntry={true}
               style={style.inputField}
               multiline={false} />
