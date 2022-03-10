@@ -36,10 +36,34 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     backgroundColor: theme.btnBg,
     padding: 14,
   },
+  loginBtnText: {
+    ...font.bodyBold,
+    color: 'white',
+    textAlign: 'center',
+  },
   createAccountBtn: {
     backgroundColor: theme.fadedBtnBg,
-    color: theme.fadedBtnTextColor,
     padding: 14,
+  },
+  createAccountBtnText: {
+    ...font.bodyBold,
+    textAlign: 'center',
+    color: theme.fadedBtnTextColor,
+  },
+  signInFormSvgContainer: {
+    justifycontent: 'center',
+    alignItems: 'center',
+    marginBottom: 50,
+    marginTop: 50,
+  },
+  labelAndInputContainer: {
+    marginBottom: 10,
+  },
+  forgotPassword: {
+    color: 'black',
+    ...font.bodyBold,
+    marginBottom: 50,
+    textAlign: 'center',
   },
 });
 
@@ -52,12 +76,10 @@ const Signin = ({ navigation }) => {
     <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between' }}>
       <View style={style.container}>
         <KeyboardAvoidingView>
-        <View style={{
-          justifycontent: 'center', alignItems: 'center', marginBottom: 50, marginTop: 50,
-        }}>
+        <View style={style.signInFormSvgContainer}>
           <SigninFormSvg/>
         </View>
-        <View style={{ marginBottom: 10 }}>
+        <View style={style.labelAndInputContainer}>
           <Text style={style.label}>
             <FormattedMessage
               defaultMessage='Username'
@@ -69,7 +91,7 @@ const Signin = ({ navigation }) => {
               disableFullscreenUI = {true}
           />
         </View>
-          <View style={{ marginBottom: 10 }}>
+          <View style={style.labelAndInputContainer}>
             <Text style={style.label}>
               <FormattedMessage
                 defaultMessage='Password'
@@ -83,24 +105,22 @@ const Signin = ({ navigation }) => {
           </View>
         </KeyboardAvoidingView>
         <TouchableOpacity>
-          <Text style={[style.label, {
-            marginBottom: 50, textAlign: 'center',
-          }]}>Forgot Password?</Text>
+          <Text style={style.forgotPassword}>Forgot Password?</Text>
         </TouchableOpacity>
         <View>
           <TouchableOpacity
               style={style.loginBtn}
               title="Login"
             onPress={() => navigation.navigate('Start') }>
-            <Text style={{ ...font.bodyBold, color: 'white', textAlign: 'center' }}>
-              <FormattedMessage defaultMessage='Login' />
+            <Text style={style.loginBtnText}>
+              <FormattedMessage defaultMessage='Login' description='Login Button'/>
             </Text>
           </TouchableOpacity>
         </View>
       </View>
       <TouchableOpacity style={style.createAccountBtn} title='CreateAccountBtn'>
-        <Text style={{ ...font.bodyBold, color: style.createAccountBtn.color, textAlign: 'center' }}>
-          <FormattedMessage defaultMessage='Create a New Account' />
+        <Text style={style.createAccountBtnText}>
+          <FormattedMessage defaultMessage='Create a New Account' description='Create Account Button' />
         </Text>
       </TouchableOpacity>
     </ScrollView>
