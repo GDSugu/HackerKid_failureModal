@@ -1,84 +1,76 @@
 @use '../base/_mixins' as gm;
 @use '../themes/_default' as gt;
-@use '_gradients';
+// @use '_gradients';
 @use 'logo';
 
-.nav-logo {
-  @extend .logo;
+nav {
+  .logo {
+    margin-left: 1rem;
 
-  & div {
-    @include gm.box(160px, 40px);
+    @include gm.media-breakpoint-down(md) {
+      order: 1;
+      margin-top: 1rem;
+    }
+  }
 
-    &.tiny {
-      @include gm.box(100px, 30px);
+  .navigation-container {
+    @include gm.media-breakpoint-down(md) {
+      order: 3;
+      width: 100%;
+      margin-top: 1rem;
     }
 
-    background-size: contain !important;
-    background-repeat: no-repeat !important;
-  }
-}
+    .navigation-item {
+      color: gt.theme-var(text-color-1);
+      padding: 1.5rem 2rem;
+      padding-bottom: 0.5rem;
+      text-align: center;
 
-.nav-bg {
-  background-color: gt.theme-var(bg-2);
-}
+      @include gm.media-breakpoint-down(md) {
+        padding: 1.5rem 0;
+        padding-bottom: 0;
+        flex: 1;
+      }
 
-.profile-wrap {
-  a {
-    color: gt.theme-var(text-color-4);
-    text-decoration: none;
-  }
-}
+      &:hover {
+        cursor: pointer;
+      }
 
-.points-wrap:before {
-  @include gm.box(30px, 30px);
-
-  content: '';
-  background: url('../../../images/common/coin.svg');
-  background-size: contain;
-}
-
-.navbar-toggler {
-  border-radius: 0.25rem;
-}
-
-#navContent {
-  ul {
-    li {
       &.active {
-        a {
-          font-weight: bold;
-          position: relative;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        color: gt.theme-var(text-color-2);
 
-          &:after {
-            content: '';
-            position: absolute;
-            bottom: -0.5rem;
-            left: 0;
-            right: 0;
-            background: gt.theme-var(text-color-2);
-            height: 4px;
-          }
+        .nav-bar {
+          border-color: gt.theme-var(text-color-2);
         }
       }
 
-      &.nav-item {
-        padding-left: 1.5rem;
+      .nav-bar {
+        border-width: 2px;
+        border-style: solid;
+        border-color: transparent;
+        width: 2.5rem;
+        border-radius: 2rem;
+        margin-top: 0.75rem;
+        margin-left: auto;
+        margin-right: auto;
       }
     }
   }
 
-  .dropdown-menu {
-    left: -25px;
+  .profileImg {
+    margin-right: 1rem;
+
+    @include gm.media-breakpoint-down(md) {
+      order: 2;
+      margin-top: 1rem;
+    }
+
+    img {
+      border-radius: 50%;
+      width: 2.75rem;
+      height: 2.75rem;
+    }
   }
-}
-
-.tag {
-  border-top-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  font-size: 0.7rem;
-  color: gt.theme-var(text-color-2);
-}
-
-.tag-danger {
-  background-color: #f32929;
 }

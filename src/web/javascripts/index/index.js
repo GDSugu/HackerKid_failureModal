@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { IntlProvider } from 'react-intl';
 import App from '../common/pages/App';
 import useRootPageState from '../../../hooks/pages/root';
+import '../../stylesheets/index/style.scss';
 
 const AppWrapper = () => {
   const { state } = useRootPageState();

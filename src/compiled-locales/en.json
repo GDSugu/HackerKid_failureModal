@@ -47,10 +47,22 @@
       "value": "This is about page"
     }
   ],
+  "DaO/pd": [
+    {
+      "type": 0,
+      "value": "hackerkid logo"
+    }
+  ],
   "EG430K": [
     {
       "type": 0,
       "value": "Go to More"
+    }
+  ],
+  "JCIgkj": [
+    {
+      "type": 0,
+      "value": "Username"
     }
   ],
   "MS/biV": [
@@ -129,12 +141,6 @@
     {
       "type": 0,
       "value": "Go to Home"
-    }
-  ],
-  "xxQxLE": [
-    {
-      "type": 0,
-      "value": "Email Address"
     }
   ]
 }

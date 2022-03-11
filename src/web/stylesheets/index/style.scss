@@ -1,1 +1,6 @@
+@use '../common/sass/base/_typography';
+@use '../common/sass/importers/_bootstrap';
+@use '../common/sass/themes/_default' as gt;
+@use '../common/sass/components/_navbar';
 
+@include gt.populate-theme();

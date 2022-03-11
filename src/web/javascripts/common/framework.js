@@ -5,6 +5,15 @@ const { API } = process.env;
 
 const authorize = {};
 
+const pageInit = (className, title = null) => {
+  if (className) {
+    $('body')
+      .removeClass()
+      .addClass(className);
+  }
+  document.title = `HackerKID${title ? ` | ${title}` : ''}`;
+};
+
 const pathNavigator = (path) => {
   const { origin } = window.location;
   window.location.href = `${origin}/${path}`;
@@ -360,6 +369,7 @@ ${withLink ? `
 export default post;
 
 export {
+  pageInit,
   pathNavigator,
   authorize,
   s3Upload,

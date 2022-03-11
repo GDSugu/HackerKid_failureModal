@@ -1,0 +1,22 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+
+@import './_moreTheme.js';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+.more-container {
+  background-color: gt.theme-var(more-body-bg, null, $thememaplight, $cssvars);
+
+  nav {
+    background-color: gt.theme-var(more-nav-bg, null, $thememaplight, $cssvars);
+
+    .navigation-container {
+      .navigation-item {
+        &.active {
+          background-color: gt.theme-var(more-nav-active-bg, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+  }
+}

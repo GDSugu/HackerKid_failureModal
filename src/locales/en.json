@@ -29,9 +29,16 @@
     "defaultMessage": "This is about page",
     "description": "Page description"
   },
+  "DaO/pd": {
+    "defaultMessage": "hackerkid logo",
+    "description": "logo"
+  },
   "EG430K": {
     "defaultMessage": "Go to More",
     "description": "Home Navigation Button"
+  },
+  "JCIgkj": {
+    "defaultMessage": "Username"
   },
   "MS/biV": {
     "defaultMessage": "Go to Index",
@@ -81,8 +88,5 @@
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
-  },
-  "xxQxLE": {
-    "defaultMessage": "Email Address"
   }
 }
