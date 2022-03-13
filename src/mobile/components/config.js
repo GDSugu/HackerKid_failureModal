@@ -133,6 +133,9 @@ const themes = {
       ...Theme.light.screenLightBlue,
       ...fragmentIconDisposal,
     },
+    screenSignin: {
+      ...Theme.light.screenYellow,
+    },
     utilColors: Theme.light.utilColors,
   },
   dark: {
@@ -231,6 +234,12 @@ const themes = {
     screenZombieLand: {
       ...Theme.light.screenLightBlue,
       ...fragmentIconDisposal,
+    },
+    screenSignin: {
+      ...Theme.light.screenYellow,
+      showHeader: false,
+      showNav: false,
+      viewType: 'screen',
     },
     utilColors: Theme.dark.utilColors,
   },
