@@ -55,6 +55,9 @@
   "NU0Nha": {
     "defaultMessage": "Forgot Password?"
   },
+  "PqOEWh": {
+    "defaultMessage": "Login with OTP"
+  },
   "SENRqu": {
     "defaultMessage": "Help"
   },
@@ -73,6 +76,12 @@
   "a2ZCmv": {
     "defaultMessage": "Create a New Account",
     "description": "Create Account Button"
+  },
+  "dswY2R": {
+    "defaultMessage": "Phone or Email"
+  },
+  "flaX9K": {
+    "defaultMessage": "Create a New Account"
   },
   "jxfpT4": {
     "defaultMessage": "Go to Games",
