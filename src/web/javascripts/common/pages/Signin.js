@@ -24,7 +24,7 @@ const Signin = () => {
                     defaultMessage = "Phone or Email"
                   />
               </label>
-              <span className='form-helper danger overline-bold'>
+              <span className='form-helper danger overline-bold d-none'>
                 <FormattedMessage
                   defaultMessage = "Enter a valid username"
                 />
@@ -39,7 +39,7 @@ const Signin = () => {
                     defaultMessage = "Password"
                 />
               </label>
-              <span className='form-helper danger overline-bold'>
+              <span className='form-helper danger overline-bold d-none'>
                 <FormattedMessage
                   defaultMessage = "Password or username does not match"
                 />
