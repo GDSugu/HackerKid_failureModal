@@ -125,6 +125,12 @@
       "value": "Forgot Password?"
     }
   ],
+  "PqOEWh": [
+    {
+      "type": 0,
+      "value": "Login with OTP"
+    }
+  ],
   "SENRqu": [
     {
       "type": 0,
@@ -150,6 +156,18 @@
     }
   ],
   "a2ZCmv": [
+    {
+      "type": 0,
+      "value": "Create a New Account"
+    }
+  ],
+  "dswY2R": [
+    {
+      "type": 0,
+      "value": "Phone or Email"
+    }
+  ],
+  "flaX9K": [
     {
       "type": 0,
       "value": "Create a New Account"
