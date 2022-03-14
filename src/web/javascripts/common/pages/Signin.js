@@ -23,7 +23,7 @@ const Signin = () => {
                   defaultMessage = "Phone or Email"
                 />
             </label>
-            <input className='form-control' type='text' name='username' id='username' placeholder='Username'/>
+            <input className='form-control' type='text' name='username' id='username' placeholder='Phone or Email'/>
           </div>
           <div className="mb-3">
             <label htmlFor="password" className="form-label overline-bold">
