@@ -18,25 +18,38 @@ const Signin = () => {
         <div className='p-3 w-100'>
           <img src='../../../../images/signin/signin-form-svg.svg' className='signin-form-svg'></img>
           <div className="mb-3">
-            <label htmlFor="username" className="form-label overline-bold">
-              <FormattedMessage
-                  defaultMessage = "Phone or Email"
+            <div className='d-flex justify-content-between'>
+              <label htmlFor="username" className="form-label overline-bold">
+                <FormattedMessage
+                    defaultMessage = "Phone or Email"
+                  />
+              </label>
+              <span className='form-helper danger overline-bold'>
+                <FormattedMessage
+                  defaultMessage = "Enter a valid username"
                 />
-            </label>
+              </span>
+            </div>
             <input className='form-control' type='text' name='username' id='username' placeholder='Phone or Email'/>
           </div>
           <div className="mb-3">
-            <label htmlFor="password" className="form-label overline-bold">
+            <div className='d-flex justify-content-between'>
+              <label htmlFor="password" className="form-label overline-bold">
+                <FormattedMessage
+                    defaultMessage = "Password"
+                />
+              </label>
+              <span className='form-helper danger overline-bold'>
+                <FormattedMessage
+                  defaultMessage = "Password or username does not match"
+                />
+              </span>
+            </div>
+            <input className='form-control' type='password' name='password' id='password' placeholder='Password'/>
+          </div>
+          <p className='overline-bold text-center forgot-password'>
             <FormattedMessage
-                defaultMessage = "Phone or Email"
-              />
-          </label>
-          <input className='form-control' type='text' name='username' id='username' placeholder='Username'/>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label overline-bold">
-          <FormattedMessage
-              defaultMessage = "Password"
+              defaultMessage = "Forgot Password?"
             />
           </label>
           <input className='form-control' type='password' name='password' id='password' placeholder='Password'/>
