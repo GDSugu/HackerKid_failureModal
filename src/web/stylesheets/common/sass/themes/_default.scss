@@ -1,10 +1,11 @@
 $thememaplight : (
   text-color-1: #212527,
   text-color-2: #fff,
-  text-color-3: #5b5b5b,
+  text-color-3: #ff9b03,
   text-color-4: #c4c4c4,
   text-color-5: #a9abac,
   text-color-6: #e0e0e0,
+  text-color-7: #4361ee,
   nav-bg-blue: #0051ff,
   nav-bg-green: #24aa70,
   nav-bg-lightblue: #00baff,
@@ -21,10 +22,11 @@ $thememaplight : (
 $thememapdark : (
   text-color-1: #212527,
   text-color-2: #fff,
-  text-color-3: #5b5b5b,
+  text-color-3: #ff9b03,
   text-color-4: #c4c4c4,
   text-color-5: #a9abac,
   text-color-6: #e0e0e0,
+  text-color-7: #4361ee,
   nav-bg-blue: #0051ff,
   nav-bg-green: #24aa70,
   nav-bg-lightblue: #00baff,
@@ -44,6 +46,7 @@ $cssvars : (
   text-color-4: --text-color-4,
   text-color-5: --text-color-5,
   text-color-6: --text-color-6,
+  text-color-7: --text-color-7,
   nav-bg-blue: --nav-bg-blue,
   nav-bg-green: --nav-bg-green,
   nav-bg-lightblue: --nav-bg-lightblue,
@@ -106,3 +109,6 @@ $cssvars : (
     @return var($key);
   }
 }
+
+// bootstrap patch as css vars are not supported for some funcs like darken(), directly passed color codes
+$primary-color: map-get($thememaplight, text-color-3);
