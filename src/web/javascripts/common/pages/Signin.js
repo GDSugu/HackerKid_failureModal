@@ -38,7 +38,7 @@ const Signin = () => {
           />
         </p>
         <div className='take-action-buttons'>
-          <button className='btn btn-primary login-btn btn-block'>
+          <button className='btn login-btn btn-block'>
             <span className='overline-bold'>
               <FormattedMessage
                 defaultMessage="Login"

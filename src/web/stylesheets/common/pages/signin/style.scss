@@ -7,7 +7,6 @@
 // @include gt.populate-theme();
 // page specific theme
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
-
 #root{
   height: 100vh;
 }
@@ -66,19 +65,24 @@
       margin: 4rem auto 2rem;
     }
 
-    .login-btn, .login-with-otp-btn, .create-new-account-btn{
+    .login-btn{
       border-radius: 12px;
       height: 50px;
+      color: white;
       background-color: gt.theme-var(signin-login-btn-bg, null, $thememaplight, $cssvars);
       border-color: gt.theme-var(signin-border-color, null, $thememaplight, $cssvars);
     }
 
     .login-with-otp-btn{
-      background-color: unset;
+      border-radius: 12px;
+      height: 50px;
+      border-color: gt.theme-var(signin-border-color, null, $thememaplight, $cssvars);
     }
 
     .create-new-account-btn{
-      background-color: unset;
+      border-radius: 12px;
+      height: 50px;
+      border-color: gt.theme-var(signin-border-color, null, $thememaplight, $cssvars);
     }
   }
 
