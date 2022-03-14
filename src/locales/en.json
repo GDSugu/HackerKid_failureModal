@@ -77,17 +77,6 @@
   "NU0Nha": {
     "defaultMessage": "Forgot Password?"
   },
-  "Op5EHr": {
-    "defaultMessage": "Sign in with Google"
-  },
-  "R5SEEt": {
-    "defaultMessage": "Close",
-    "description": "close button"
-  },
-  "RCQEmZ": {
-    "defaultMessage": "Grade",
-    "description": "Profile grade label"
-  },
   "SENRqu": {
     "defaultMessage": "Help"
   },
@@ -106,20 +95,6 @@
   "a2ZCmv": {
     "defaultMessage": "Create a New Account",
     "description": "Create Account Button"
-  },
-  "c9n6Sh": {
-    "defaultMessage": "School"
-  },
-  "flaX9K": {
-    "defaultMessage": "Create a New Account"
-  },
-  "h7B/gA": {
-    "defaultMessage": "store authtoken",
-    "description": "authtoken temp storage btn"
-  },
-  "ifGxkx": {
-    "defaultMessage": "Subscription",
-    "description": "Navigation link to subscription page"
   },
   "jxfpT4": {
     "defaultMessage": "Go to Games",
