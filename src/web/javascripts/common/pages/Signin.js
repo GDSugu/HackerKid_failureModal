@@ -28,7 +28,7 @@ const Signin = () => {
           <div className="mb-3">
             <label htmlFor="password" className="form-label overline-bold">
             <FormattedMessage
-                defaultMessage = "Password"
+                defaultMessage = "Phone or Email"
               />
             </label>
             <input className='form-control' type='password' name='password' id='password' placeholder='Password'/>
