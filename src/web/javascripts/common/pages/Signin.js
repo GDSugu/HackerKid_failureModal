@@ -14,10 +14,19 @@ const Signin = () => {
           <FormattedMessage defaultMessage="Help"/>
         </p>
       </nav>
-      <div className='signin-form p-3'>
-        <img src='../../../../images/signin/signin-form-svg.svg' className='signin-form-svg'></img>
-        <div className="mb-3">
-          <label htmlFor="username" className="form-label overline-bold">
+      <div className='signin-form'>
+        <div className='p-3 w-100'>
+          <img src='../../../../images/signin/signin-form-svg.svg' className='signin-form-svg'></img>
+          <div className="mb-3">
+            <label htmlFor="username" className="form-label overline-bold">
+              <FormattedMessage
+                  defaultMessage = "Phone or Email"
+                />
+            </label>
+            <input className='form-control' type='text' name='username' id='username' placeholder='Phone or Email'/>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label overline-bold">
             <FormattedMessage
                 defaultMessage = "Phone or Email"
               />
