@@ -149,13 +149,25 @@
       "value": "Something went wrong. Please try again"
     }
   ],
+  "ZzmCII": [
+    {
+      "type": 0,
+      "value": "Enter a valid username"
+    }
+  ],
   "a2ZCmv": [
     {
       "type": 0,
       "value": "Create a New Account"
     }
   ],
-  "jxfpT4": [
+  "d2TkEc": [
+    {
+      "type": 0,
+      "value": "Password or username does not match"
+    }
+  ],
+  "dswY2R": [
     {
       "type": 0,
       "value": "Go to Games"
