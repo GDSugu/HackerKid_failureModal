@@ -8,6 +8,7 @@
 // default theme
 // @include gt.populate-theme();
 // page specific theme
+@include gt.populate-theme(gt.$auth-thememaplight, gt.$auth-thememapdark, gt.$auth-cssvars);
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 #root{
   height: 100vh;
