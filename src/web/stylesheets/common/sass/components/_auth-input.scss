@@ -1,13 +1,7 @@
 @use '../themes/default' as gt;
 
 .form-control {
-  border: 1px solid gt.theme-var(auth-border-color, null, gt.$auth-thememaplight, gt.$auth-cssvars);
+  border: 1px solid gt.theme-var(text-color-3, null, gt.$thememaplight, gt.$cssvars);
   padding: 14px 16px;
-  height: 48px;
   border-radius: 8px;
-
-  &:focus {
-    border-color: gt.theme-var(auth-border-color, null, gt.$auth-thememaplight, gt.$auth-cssvars);
-    box-shadow: 0 0 0 0.2rem rgb(255 155 3/ 25%);
-  }
 }

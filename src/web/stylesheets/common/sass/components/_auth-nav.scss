@@ -6,7 +6,7 @@ nav {
 
   .help {
     cursor: pointer;
-    color: gt.theme-var(auth-text-color-2, null, gt.$auth-thememaplight, gt.$auth-cssvars);
+    color: gt.theme-var(text-color-9, null, gt.$thememaplight, gt.$cssvars);
     text-decoration: none;
   }
 }
