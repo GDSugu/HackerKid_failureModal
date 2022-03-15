@@ -1,7 +1,8 @@
 @use '../../sass/themes/_default' as gt;
 @use '../../sass/base/_mixins' as gm;
+@use '../../sass/components/login-header';
 
-@import './_signinTheme.js';
+@import './_loginTheme.js';
 
 // default theme
 // @include gt.populate-theme();
@@ -16,16 +17,6 @@
   background-repeat: no-repeat;
   background-size: contain;
   background-position: bottom;
-
-  nav {
-    padding: 24px;
-    margin-bottom: 25px;
-
-    .help {
-      color: gt.theme-var(signin-text-color-2, null, $thememaplight, $cssvars);
-      text-decoration: none;
-    }
-  }
 
   .form-control {
     border: 1px solid gt.theme-var(signin-border-color, null, $thememaplight, $cssvars);
