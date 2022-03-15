@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { pageInit } from '../framework';
-import '../../../stylesheets/common/pages/signin/style.scss';
+import '../../../stylesheets/common/pages/login/style.scss';
 
 const Signin = () => {
   pageInit('signin-container', 'Register');
