@@ -2,85 +2,78 @@
 @use '../../sass/base/_mixins' as gm;
 @use '../../sass/components/auth-nav';
 @use '../../sass/components/auth-input';
+@use '../../sass/components/auth-container';
 
 @import './_loginTheme.js';
 
 // default theme
 // @include gt.populate-theme();
 // page specific theme
-@include gt.populate-theme(gt.$auth-thememaplight, gt.$auth-thememapdark, gt.$auth-cssvars);
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 #root{
   height: 100vh;
 }
-.signin-container {
-  min-height: 100vh;
-  background: url(../../../../../images/signin/background-vector.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: bottom;
 
-  .signin-form {
-    width: 100%;
-    height: 100%;
-    margin: auto;
-    box-shadow: none;
-    border-radius: 16px;
-    background: gt.theme-var(bg-1);
+.signin-form-container {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  box-shadow: none;
+  border-radius: 16px;
+  background: gt.theme-var(bg-1);
 
-    @include gm.media-breakpoint-up(sm) {
-      width: 50%;
-      height: auto;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    }
-
-    @include gm.media-breakpoint-up(lg) {
-      width: 35%;
-    }
-
-    @include gm.media-breakpoint-up(xl) {
-      width: 27%;
-    }
-
-    @include gm.media-breakpoint-down(sm){
-      display: flex;
-      align-items: center;
-    }
-
-    .signin-form-svg {
-      display: block;
-      margin: 4rem auto 2rem;
-    }
-
-    .login-btn{
-      border-radius: 12px;
-      height: 50px;
-      color: white;
-      background-color: gt.theme-var(signin-login-btn-bg, null, $thememaplight, $cssvars);
-      border-color: gt.theme-var(signin-border-color, null, $thememaplight, $cssvars);
-    }
-
-    .login-with-otp-btn{
-      border-radius: 12px;
-      height: 50px;
-      border-color: gt.theme-var(signin-border-color, null, $thememaplight, $cssvars);
-    }
-
-    .create-new-account-btn{
-      border-radius: 12px;
-      height: 50px;
-      border-color: gt.theme-var(signin-border-color, null, $thememaplight, $cssvars);
-    }
-
-    .form-helper{
-      color: red;
-    }
+  @include gm.media-breakpoint-up(sm) {
+    width: 50%;
+    height: auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   }
 
-  .forgot-password{
+  @include gm.media-breakpoint-up(lg) {
+    width: 35%;
+  }
+
+  @include gm.media-breakpoint-up(xl) {
+    width: 27%;
+  }
+
+  @include gm.media-breakpoint-down(sm){
+    display: flex;
+    align-items: center;
+  }
+
+  .signin-form-svg {
     display: block;
-    color: gt.theme-var(signin-text-color-2, null, $thememaplight, $cssvars);
-    margin-bottom: 1rem;
-    text-decoration: none;
+    margin: 4rem auto 2rem;
   }
+
+  .login-btn{
+    border-radius: 12px;
+    height: 50px;
+    color: white;
+    background-color: gt.theme-var(signin-login-btn-bg, null, $thememaplight, $cssvars);
+    border-color: gt.theme-var(signin-border-color, null, $thememaplight, $cssvars);
+  }
+
+  .login-with-otp-btn{
+    border-radius: 12px;
+    height: 50px;
+    border-color: gt.theme-var(signin-border-color, null, $thememaplight, $cssvars);
+  }
+
+  .create-new-account-btn{
+    border-radius: 12px;
+    height: 50px;
+    border-color: gt.theme-var(signin-border-color, null, $thememaplight, $cssvars);
+  }
+
+  .form-helper{
+    color: red;
+  }
+}
+
+.forgot-password{
+  display: block;
+  color: gt.theme-var(signin-text-color-2, null, $thememaplight, $cssvars);
+  margin-bottom: 1rem;
+  text-decoration: none;
 }

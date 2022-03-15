@@ -5,7 +5,7 @@ import Header from '../components/loginHeader/Header';
 import '../../../stylesheets/common/pages/register/style.scss';
 
 const Register = () => {
-  pageInit('register-container', 'Register');
+  pageInit('auth-container', 'Register');
 
   return (
     <>
