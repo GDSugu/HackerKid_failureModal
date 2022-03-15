@@ -14,7 +14,7 @@
   height: 100vh;
 }
 
-.signin-form-container {
+.form-container {
   width: 100%;
   height: 100%;
   margin: auto;
@@ -46,24 +46,18 @@
     margin: 4rem auto 2rem;
   }
 
-  .login-btn{
+  .btn{
+    height: 48px;
     border-radius: 12px;
-    height: 50px;
-    color: white;
-    background-color: gt.theme-var(signin-login-btn-bg, null, $thememaplight, $cssvars);
-    border-color: gt.theme-var(signin-border-color, null, $thememaplight, $cssvars);
   }
 
-  .login-with-otp-btn{
-    border-radius: 12px;
-    height: 50px;
-    border-color: gt.theme-var(signin-border-color, null, $thememaplight, $cssvars);
+  .btn-primary{
+    color:gt.theme-var(bg-1);
   }
 
-  .create-new-account-btn{
+  .btn-outline-primary{
     border-radius: 12px;
-    height: 50px;
-    border-color: gt.theme-var(signin-border-color, null, $thememaplight, $cssvars);
+    color: gt.theme-var(text-color-1);
   }
 
   .form-helper{

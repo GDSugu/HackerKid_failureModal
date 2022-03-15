@@ -8,7 +8,7 @@ const Signin = () => {
 
   return (
     <>
-      <div className='signin-form-container'>
+      <div className='form-container'>
         <form className='p-3 w-100'>
           <img src='../../../../images/signin/signin-form-svg.svg' className='signin-form-svg'></img>
           <div className="mb-3 form-group">
@@ -47,21 +47,21 @@ const Signin = () => {
             />
           </a>
           <div className='take-action-buttons'>
-            <button className='btn login-btn btn-block'>
+            <button className='btn btn-primary login-btn btn-block'>
               <span className='overline-bold'>
                 <FormattedMessage
                   defaultMessage="Login"
                 />
               </span>
             </button>
-            <button className='btn btn-block login-with-otp-btn'>
+            <button className='btn btn-outline-primary btn-block login-with-otp-btn'>
               <span className='overline-bold'>
                 <FormattedMessage
                   defaultMessage="Login with OTP"
                 />
               </span>
             </button>
-            <button className='btn btn-block create-new-account-btn'>
+            <button className='btn btn-outline-primary btn-block create-new-account-btn'>
               <span className='overline-bold'>
                 <FormattedMessage
                   defaultMessage="Create a New Account"
