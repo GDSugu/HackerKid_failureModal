@@ -1,6 +1,7 @@
 @use '../../sass/themes/_default' as gt;
 @use '../../sass/base/_mixins' as gm;
-@use '../../sass/components/login-header';
+@use '../../sass/components/auth-nav';
+@use '../../sass/components/auth-input';
 
 @import './_loginTheme.js';
 
@@ -17,18 +18,6 @@
   background-repeat: no-repeat;
   background-size: contain;
   background-position: bottom;
-
-  .form-control {
-    border: 1px solid gt.theme-var(signin-border-color, null, $thememaplight, $cssvars);
-    padding: 14px 16px;
-    height: 48px;
-    border-radius: 8px;
-
-    &:focus {
-      border-color: gt.theme-var(signin-border-color, null, $thememaplight, $cssvars);
-      box-shadow: 0 0 0 0.2rem rgb(255 155 3/ 25%);
-    }
-  }
 
   .signin-form {
     width: 100%;
