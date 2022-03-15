@@ -1,0 +1,14 @@
+@use '../themes/default' as gt;
+
+@import '../../pages/login/_loginTheme.js';
+
+nav {
+  padding: 24px;
+  margin-bottom: 25px;
+
+  .help {
+    cursor: pointer;
+    color: gt.theme-var(signin-text-color-2, null, $thememaplight, $cssvars);
+    text-decoration: none;
+  }
+}

@@ -4,16 +4,10 @@ import { pageInit } from '../framework';
 import '../../../stylesheets/common/pages/login/style.scss';
 
 const Signin = () => {
-  pageInit('signin-container', 'Register');
+  pageInit('signin-container', 'Login');
 
   return (
     <>
-      <nav className='d-flex justify-content-between align-items-center'>
-        <img className='logo-img' src='../../../../images/signin/logo_H1.svg' />
-        <a href="#" className='help caption-bold mb-0'>
-          <FormattedMessage defaultMessage="Help"/>
-        </a>
-      </nav>
       <div className='signin-form'>
         <div className='p-3 w-100'>
           <img src='../../../../images/signin/signin-form-svg.svg' className='signin-form-svg'></img>
