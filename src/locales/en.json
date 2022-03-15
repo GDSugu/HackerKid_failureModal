@@ -73,9 +73,15 @@
     "defaultMessage": "close",
     "description": "close button"
   },
+  "ZzmCII": {
+    "defaultMessage": "Enter a valid username"
+  },
   "a2ZCmv": {
     "defaultMessage": "Create a New Account",
     "description": "Create Account Button"
+  },
+  "d2TkEc": {
+    "defaultMessage": "Password or username does not match"
   },
   "dswY2R": {
     "defaultMessage": "Phone or Email"
