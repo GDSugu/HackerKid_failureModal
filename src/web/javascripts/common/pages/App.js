@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import loadable from '@loadable/component';
 import NavBar from '../components/NavBar';
+import Header from '../components/loginHeader/Header';
 
 const Loading = () => <div>Loading...</div>;
 
@@ -30,8 +31,10 @@ const App = () => (
         <Route path='challenges' caseSensitive={true} element={<RouteChallenges />} />
         <Route path='more' caseSensitive={true} element={<RouteMore />} />
       </Route>
+      <Route path='/' caseSensitive={true} element={<Header/>}>
+        <Route path='login' caseSensitive={true} element={<RouteSignin />} />
+      </Route>
       <Route path='/about' caseSensitive={true} element={<RouteAbout />} />
-      <Route path='/login' caseSensitive={true} element={<RouteSignin />} />
       <Route path='*' element={ <Navigate to='/' />} />
     </Routes>
   </BrowserRouter>
