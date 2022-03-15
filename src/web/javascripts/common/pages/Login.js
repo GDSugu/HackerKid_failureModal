@@ -10,9 +10,9 @@ const Signin = () => {
     <>
       <nav className='d-none d-sm-flex justify-content-between align-items-center '>
         <img className='logo-img' src='../../../../images/signin/logo_H1.svg' />
-        <p className='help caption-bold mb-0'>
+        <a href="#" className='help caption-bold mb-0'>
           <FormattedMessage defaultMessage="Help"/>
-        </p>
+        </a>
       </nav>
       <div className='signin-form'>
         <div className='p-3 w-100'>
@@ -47,11 +47,11 @@ const Signin = () => {
             </div>
             <input className='form-control' type='password' name='password' id='password' placeholder='Password'/>
           </div>
-          <p className='overline-bold text-center forgot-password'>
+          <a href='#' className='overline-bold text-center forgot-password'>
             <FormattedMessage
               defaultMessage = "Forgot Password?"
             />
-          </p>
+          </a>
           <div className='take-action-buttons'>
             <button className='btn login-btn btn-block'>
               <span className='overline-bold'>
