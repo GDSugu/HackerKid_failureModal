@@ -23,6 +23,7 @@
 
     .help {
       color: gt.theme-var(signin-text-color-2, null, $thememaplight, $cssvars);
+      text-decoration: none;
     }
   }
 
@@ -91,7 +92,9 @@
   }
 
   .forgot-password{
-    cursor: pointer;
+    display: block;
     color: gt.theme-var(signin-text-color-2, null, $thememaplight, $cssvars);
+    margin-bottom: 1rem;
+    text-decoration: none;
   }
 }
