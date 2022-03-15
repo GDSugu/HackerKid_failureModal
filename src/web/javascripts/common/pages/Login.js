@@ -8,11 +8,11 @@ const Signin = () => {
 
   return (
     <>
-      <div className='signin-form'>
-        <div className='p-3 w-100'>
+      <div className='signin-form-container'>
+        <form className='p-3 w-100'>
           <img src='../../../../images/signin/signin-form-svg.svg' className='signin-form-svg'></img>
-          <div className="mb-3">
-            <div className='d-flex justify-content-between'>
+          <div className="mb-3 form-group">
+            <div className='d-flex justify-content-between label-with-helper'>
               <label htmlFor="username" className="form-label overline-bold">
                 <FormattedMessage
                     defaultMessage = "Phone or Email"
@@ -26,8 +26,8 @@ const Signin = () => {
             </div>
             <input className='form-control' type='text' name='username' id='username' placeholder='Phone or Email'/>
           </div>
-          <div className="mb-3">
-            <div className='d-flex justify-content-between'>
+          <div className="mb-3 form-group">
+            <div className='d-flex justify-content-between label-with-helper'>
               <label htmlFor="password" className="form-label overline-bold">
                 <FormattedMessage
                     defaultMessage = "Password"
@@ -69,7 +69,7 @@ const Signin = () => {
               </span>
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );
