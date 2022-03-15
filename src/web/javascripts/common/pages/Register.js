@@ -8,7 +8,6 @@ const Register = () => {
 
   return (
     <>
-      <Header />
     </>
   );
 };

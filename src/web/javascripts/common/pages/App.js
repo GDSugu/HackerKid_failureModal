@@ -13,7 +13,8 @@ const Loading = () => <div>Loading...</div>;
 
 const RouteIndex = loadable(() => import('./Index'), { fallback: <Loading /> });
 const RouteAbout = loadable(() => import('./About'), { fallback: <Loading /> });
-const RouteSignin = loadable(() => import('./Login'), { fallback: <Loading /> });
+const RouteLogin = loadable(() => import('./Login'), { fallback: <Loading /> });
+const RouteRegister = loadable(() => import('./Register'), { fallback: <Loading /> });
 const RouteDashboard = loadable(() => import('./Dashboard'), { fallback: <Loading /> });
 const RouteGames = loadable(() => import('./Games'), { fallback: <Loading /> });
 const RouteCourses = loadable(() => import('./Courses'), { fallback: <Loading /> });
@@ -32,7 +33,8 @@ const App = () => (
         <Route path='more' caseSensitive={true} element={<RouteMore />} />
       </Route>
       <Route path='/' caseSensitive={true} element={<Header/>}>
-        <Route path='login' caseSensitive={true} element={<RouteSignin />} />
+        <Route path='login' caseSensitive={true} element={<RouteLogin />} />
+        <Route path='register' caseSensitive={true} element={<RouteRegister />}/>
       </Route>
       <Route path='/about' caseSensitive={true} element={<RouteAbout />} />
       <Route path='*' element={ <Navigate to='/' />} />
