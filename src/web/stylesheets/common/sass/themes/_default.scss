@@ -65,6 +65,29 @@ $cssvars : (
   bg-2: --bg-2,
 );
 
+// auth theme
+$auth-thememaplight : (
+  auth-text-color-1: #212527,
+  auth-text-color-2: #FE6A07,
+  auth-border-color: #FF9B03,
+  auth-login-btn-bg: #FF9B03,
+);
+
+$auth-thememapdark : (
+  auth-text-color-1: #212527,
+  auth-text-color-2: #FE6A07,
+  auth-border-color: #FF9B03,
+  auth-login-btn-bg: #FF9B03,
+);
+
+$auth-cssvars:(
+  auth-text-color-1: --auth-text-color-1,
+  auth-text-color-2: --auth-text-color-2,
+  auth-border-color: --auth-border-color,
+  auth-login-btn-bg: --auth-login-btn-bg,
+);
+
+
 @mixin spread-map($map: (), $cssMap: $cssvars) {
   @each $key,
     $value in $map {
