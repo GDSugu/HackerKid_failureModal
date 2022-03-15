@@ -1,8 +1,9 @@
 @use '../../sass/themes/_default' as gt;
 @use '../../sass/base/_mixins' as gm;
 @use '../../sass/components/auth-nav';
+@use '../../sass/components/auth-input';
+@use '../../sass/components/auth-container';
 
 @import './_registerTheme.js';
 
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
-@include gt.populate-theme(gt.$auth-thememaplight, gt.$auth-thememapdark, gt.$auth-cssvars);

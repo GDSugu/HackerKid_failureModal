@@ -4,7 +4,7 @@ import { pageInit } from '../framework';
 import '../../../stylesheets/common/pages/login/style.scss';
 
 const Signin = () => {
-  pageInit('signin-container', 'Login');
+  pageInit('auth-container', 'Login');
 
   return (
     <>
