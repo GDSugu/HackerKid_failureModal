@@ -7,7 +7,9 @@
 @import './_registerTheme.js';
 
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
-
+#root{
+  height: 100vh;
+}
 .login-into-existing-account{
   display: block;
   color: gt.theme-var(text-color-7);
