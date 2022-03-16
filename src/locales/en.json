@@ -25,6 +25,9 @@
     "defaultMessage": "Login",
     "description": "Login Button"
   },
+  "9+Ddtu": {
+    "defaultMessage": "Next"
+  },
   "9ppS9d": {
     "defaultMessage": "Go to Class",
     "description": "class navigation button"
@@ -83,6 +86,9 @@
   "T/a40M": {
     "defaultMessage": "Toggle Theme",
     "description": "Toggle theme Button description"
+  },
+  "U6eTZW": {
+    "defaultMessage": "Parent's Name"
   },
   "Yz1BIF": {
     "defaultMessage": "Go to About",
