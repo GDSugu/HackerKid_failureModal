@@ -29,6 +29,12 @@
       "value": "Login"
     }
   ],
+  "9+Ddtu": [
+    {
+      "type": 0,
+      "value": "Next"
+    }
+  ],
   "9ppS9d": [
     {
       "type": 0,
@@ -65,6 +71,12 @@
       "value": "Go to More"
     }
   ],
+  "HAlOn1": [
+    {
+      "type": 0,
+      "value": "Name"
+    }
+  ],
   "JCIgkj": [
     {
       "type": 0,
@@ -89,6 +101,12 @@
       "value": "Forgot Password?"
     }
   ],
+  "O95R3Z": [
+    {
+      "type": 0,
+      "value": "Phone"
+    }
+  ],
   "PqOEWh": [
     {
       "type": 0,
@@ -105,6 +123,12 @@
     {
       "type": 0,
       "value": "Toggle Theme"
+    }
+  ],
+  "U6eTZW": [
+    {
+      "type": 0,
+      "value": "Parent's Name"
     }
   ],
   "Yz1BIF": [
@@ -177,6 +201,12 @@
     {
       "type": 0,
       "value": "Go to Home"
+    }
+  ],
+  "sy+pv5": [
+    {
+      "type": 0,
+      "value": "Email"
     }
   ]
 }
