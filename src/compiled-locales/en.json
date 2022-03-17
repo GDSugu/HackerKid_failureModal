@@ -29,6 +29,12 @@
       "value": "Login"
     }
   ],
+  "8lFjcp": [
+    {
+      "type": 0,
+      "value": "Login Into Existing Account"
+    }
+  ],
   "9+Ddtu": [
     {
       "type": 0,
@@ -191,6 +197,12 @@
       "value": "Go to Home"
     }
   ],
+  "sIIxF0": [
+    {
+      "type": 0,
+      "value": "Re-type password"
+    }
+  ],
   "sM7xfR": [
     {
       "type": 0,
@@ -207,6 +219,12 @@
     {
       "type": 0,
       "value": "Email"
+    }
+  ],
+  "yc/UOo": [
+    {
+      "type": 0,
+      "value": "Set a Password"
     }
   ]
 }

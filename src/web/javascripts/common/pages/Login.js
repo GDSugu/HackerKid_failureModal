@@ -42,7 +42,7 @@ const Signin = () => {
             </div>
             <input className='form-control' type='password' name='password' id='password' placeholder='Password'/>
           </div>
-          <Link to='#' className='overline-bold text-center forgot-password'>
+          <Link to='#' className='forgot-password overline-bold text-center mb-3'>
             <FormattedMessage
               defaultMessage = "Forgot Password?"
             />
@@ -55,14 +55,14 @@ const Signin = () => {
                 />
               </span>
             </button>
-            <button className='btn btn-outline-primary btn-block login-with-otp-btn'>
+            <button className='login-with-otp-btn btn btn-outline-primary btn-block mb-2'>
               <span className='overline-bold'>
                 <FormattedMessage
                   defaultMessage="Login with OTP"
                 />
               </span>
             </button>
-            <Link to='/register' className='d-block mt-2 text-decoration-none'>
+            <Link to='/register' className='d-block text-decoration-none'>
               <button className='btn btn-outline-primary btn-block create-new-account-btn'>
                   <span className='overline-bold'>
                     <FormattedMessage

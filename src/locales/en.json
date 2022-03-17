@@ -18,6 +18,9 @@
     "defaultMessage": "Login",
     "description": "Login Button"
   },
+  "8lFjcp": {
+    "defaultMessage": "Login Into Existing Account"
+  },
   "9+Ddtu": {
     "defaultMessage": "Next"
   },
@@ -113,6 +116,9 @@
     "defaultMessage": "Go to Home",
     "description": "Home Navigation Button"
   },
+  "sIIxF0": {
+    "defaultMessage": "Re-type password"
+  },
   "sM7xfR": {
     "defaultMessage": "This is Home page",
     "description": "Page description"
@@ -123,5 +129,8 @@
   },
   "sy+pv5": {
     "defaultMessage": "Email"
+  },
+  "yc/UOo": {
+    "defaultMessage": "Set a Password"
   }
 }
