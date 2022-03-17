@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import loadable from '@loadable/component';
 import NavBar from '../components/NavBar';
-import Header from '../components/loginHeader/Header';
+import AuthNav from '../components/AuthNav/AuthNav';
 
 const Loading = () => <div>Loading...</div>;
 
@@ -40,7 +40,7 @@ const App = () => (
           <Route path='subscription' caseSensitive={true} element={<RouteSubscription />} />
         </Route>
       </Route>
-      <Route path='/' caseSensitive={true} element={<Header/>}>
+      <Route path='/' caseSensitive={true} element={<AuthNav/>}>
         <Route path='login' caseSensitive={true} element={<RouteLogin />} />
         <Route path='register' caseSensitive={true} element={<RouteRegister />}/>
       </Route>
