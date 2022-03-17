@@ -25,6 +25,9 @@
     "defaultMessage": "Login",
     "description": "Login Button"
   },
+  "8lFjcp": {
+    "defaultMessage": "Login Into Existing Account"
+  },
   "9+Ddtu": {
     "defaultMessage": "Next"
   },
@@ -138,8 +141,8 @@
     "defaultMessage": "Go to Home",
     "description": "Home Navigation Button"
   },
-  "qXTiEd": {
-    "defaultMessage": "Grade"
+  "sIIxF0": {
+    "defaultMessage": "Re-type password"
   },
   "sM7xfR": {
     "defaultMessage": "This is Home page",
@@ -149,8 +152,10 @@
     "defaultMessage": "Go to Home",
     "description": "Link description"
   },
-  "z9lFwl": {
-    "defaultMessage": "Name",
-    "description": "Profile name label"
+  "sy+pv5": {
+    "defaultMessage": "Email"
+  },
+  "yc/UOo": {
+    "defaultMessage": "Set a Password"
   }
 }
