@@ -7,17 +7,31 @@
 @import './_registerTheme.js';
 
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
 #root{
-  height: 100vh;
+  min-height: 100vh;
 }
-.login-into-existing-account{
+
+.login-into-existing-account {
   display: block;
   color: gt.theme-var(text-color-7);
   margin-bottom: 1rem;
   text-decoration: none;
 
-  &:hover{
+  &:hover {
     text-decoration: none;
   }
 }
 
+.create-account-form {
+  .next-btn {
+    text-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .back-btn {
+    cursor: pointer;
+  }
+}
