@@ -29,6 +29,18 @@
       "value": "This is more options page"
     }
   ],
+  "3Wcqsy": [
+    {
+      "type": 0,
+      "value": "Next"
+    }
+  ],
+  "5L6FVQ": [
+    {
+      "type": 0,
+      "value": "Password"
+    }
+  ],
   "5sg7KC": [
     {
       "type": 0,
@@ -41,16 +53,28 @@
       "value": "Login"
     }
   ],
-  "8lFjcp": [
+  "6o79ty": [
     {
       "type": 0,
-      "value": "Login Into Existing Account"
+      "value": "Login with OTP"
     }
   ],
-  "9+Ddtu": [
+  "7IJhPE": [
     {
       "type": 0,
-      "value": "Next"
+      "value": "Enter a valid Phone or Email"
+    }
+  ],
+  "7xoBRq": [
+    {
+      "type": 0,
+      "value": "Phone or Email"
+    }
+  ],
+  "9gqH2W": [
+    {
+      "type": 0,
+      "value": "Login"
     }
   ],
   "9ppS9d": [
@@ -59,10 +83,10 @@
       "value": "Go to Class"
     }
   ],
-  "AyGauy": [
+  "B7znij": [
     {
       "type": 0,
-      "value": "Login"
+      "value": "Create a New Account"
     }
   ],
   "BB+f/k": [
@@ -95,16 +119,22 @@
       "value": "hackerkid logo"
     }
   ],
+  "DuPnGd": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
   "EG430K": [
     {
       "type": 0,
       "value": "Go to More"
     }
   ],
-  "HAlOn1": [
+  "G0CGdx": [
     {
       "type": 0,
-      "value": "Name"
+      "value": "Enter a valid Parent's name"
     }
   ],
   "HI8bPV": [
@@ -149,10 +179,16 @@
       "value": "Toggle Theme"
     }
   ],
-  "U6eTZW": [
+  "UmuBIc": [
     {
       "type": 0,
-      "value": "Parent's Name"
+      "value": "Enter a phone number"
+    }
+  ],
+  "VsWMVt": [
+    {
+      "type": 0,
+      "value": "Re-type password"
     }
   ],
   "Yz1BIF": [
@@ -167,25 +203,25 @@
       "value": "Something went wrong. Please try again"
     }
   ],
-  "ZzmCII": [
-    {
-      "type": 0,
-      "value": "Enter a valid username"
-    }
-  ],
   "a2ZCmv": [
     {
       "type": 0,
       "value": "Create a New Account"
     }
   ],
-  "d2TkEc": [
+  "bwmSIS": [
     {
       "type": 0,
-      "value": "Password or username does not match"
+      "value": "Enter a valid Name"
     }
   ],
-  "dswY2R": [
+  "fOZCSk": [
+    {
+      "type": 0,
+      "value": "Set a Password"
+    }
+  ],
+  "g2zl2J": [
     {
       "type": 0,
       "value": "Go to Games"
@@ -201,6 +237,12 @@
     {
       "type": 0,
       "value": "School"
+    }
+  ],
+  "mtXEZg": [
+    {
+      "type": 0,
+      "value": "Parent's Name"
     }
   ],
   "of2vJ9": [
@@ -221,10 +263,10 @@
       "value": "Go to Home"
     }
   ],
-  "sIIxF0": [
+  "quRCCv": [
     {
       "type": 0,
-      "value": "Re-type password"
+      "value": "Phone"
     }
   ],
   "sM7xfR": [
@@ -245,10 +287,22 @@
       "value": "Name"
     }
   ],
-  "yc/UOo": [
+  "uXQw5/": [
     {
       "type": 0,
-      "value": "Set a Password"
+      "value": "Password or username does not match"
+    }
+  ],
+  "ut7C3K": [
+    {
+      "type": 0,
+      "value": "Passwords do not match"
+    }
+  ],
+  "xOy0Vc": [
+    {
+      "type": 0,
+      "value": "Enter a valid Email address"
     }
   ]
 }
