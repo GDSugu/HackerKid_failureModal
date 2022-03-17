@@ -7,6 +7,13 @@
     "defaultMessage": "This is index page",
     "description": "Page description"
   },
+  "1RUvaS": {
+    "defaultMessage": "Profile Settings",
+    "description": "Navigation link to profile edit page"
+  },
+  "2W0f9h": {
+    "defaultMessage": "Bio"
+  },
   "383EZ1": {
     "defaultMessage": "This is more options page",
     "description": "More options Page"
@@ -33,6 +40,10 @@
     "defaultMessage": "This is about page",
     "description": "Page description"
   },
+  "DZ21OO": {
+    "defaultMessage": "Bio",
+    "description": "Profile bio label"
+  },
   "DaO/pd": {
     "defaultMessage": "hackerkid logo",
     "description": "logo"
@@ -40,6 +51,13 @@
   "EG430K": {
     "defaultMessage": "Go to More",
     "description": "Home Navigation Button"
+  },
+  "HAlOn1": {
+    "defaultMessage": "Name"
+  },
+  "HI8bPV": {
+    "defaultMessage": "Save",
+    "description": "Profile save button"
   },
   "JCIgkj": {
     "defaultMessage": "Username"
@@ -55,8 +73,19 @@
   "NU0Nha": {
     "defaultMessage": "Forgot Password?"
   },
+  "O95R3Z": {
+    "defaultMessage": "Phone"
+  },
   "Op5EHr": {
     "defaultMessage": "Sign in with Google"
+  },
+  "R5SEEt": {
+    "defaultMessage": "Close",
+    "description": "close button"
+  },
+  "RCQEmZ": {
+    "defaultMessage": "Grade",
+    "description": "Profile grade label"
   },
   "SENRqu": {
     "defaultMessage": "Help"
@@ -69,10 +98,6 @@
     "defaultMessage": "Go to About",
     "description": "Link description"
   },
-  "ZG77Sq": {
-    "defaultMessage": "close",
-    "description": "close button"
-  },
   "a2ZCmv": {
     "defaultMessage": "Create a New Account",
     "description": "Create Account Button"
@@ -80,17 +105,42 @@
   "flaX9K": {
     "defaultMessage": "Create a New Account"
   },
+  "h7B/gA": {
+    "defaultMessage": "store authtoken",
+    "description": "authtoken temp storage btn"
+  },
+  "iObM7I": {
+    "defaultMessage": "Parent Phone"
+  },
+  "ifGxkx": {
+    "defaultMessage": "Subscription",
+    "description": "Navigation link to subscription page"
+  },
   "jxfpT4": {
     "defaultMessage": "Go to Games",
     "description": "Link description"
+  },
+  "lKeCea": {
+    "defaultMessage": "Save & Exit",
+    "description": "Profile save button"
   },
   "of2vJ9": {
     "defaultMessage": "This is Video page",
     "description": "Videos Page"
   },
+  "ox9lTM": {
+    "defaultMessage": "Go to Profile",
+    "description": "Link description"
+  },
   "q86PwV": {
     "defaultMessage": "Go to Home",
     "description": "Home Navigation Button"
+  },
+  "qXTiEd": {
+    "defaultMessage": "Grade"
+  },
+  "qlFSwa": {
+    "defaultMessage": "Parent's Email"
   },
   "sM7xfR": {
     "defaultMessage": "This is Home page",
@@ -99,5 +149,12 @@
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
+  },
+  "sy+pv5": {
+    "defaultMessage": "Email"
+  },
+  "z9lFwl": {
+    "defaultMessage": "Name",
+    "description": "Profile name label"
   }
 }

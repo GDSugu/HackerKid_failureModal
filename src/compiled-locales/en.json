@@ -11,6 +11,18 @@
       "value": "This is index page"
     }
   ],
+  "1RUvaS": [
+    {
+      "type": 0,
+      "value": "Profile Settings"
+    }
+  ],
+  "2W0f9h": [
+    {
+      "type": 0,
+      "value": "Bio"
+    }
+  ],
   "383EZ1": [
     {
       "type": 0,
@@ -53,6 +65,12 @@
       "value": "This is about page"
     }
   ],
+  "DZ21OO": [
+    {
+      "type": 0,
+      "value": "Bio"
+    }
+  ],
   "DaO/pd": [
     {
       "type": 0,
@@ -63,6 +81,18 @@
     {
       "type": 0,
       "value": "Go to More"
+    }
+  ],
+  "HAlOn1": [
+    {
+      "type": 0,
+      "value": "Name"
+    }
+  ],
+  "HI8bPV": [
+    {
+      "type": 0,
+      "value": "Save"
     }
   ],
   "JCIgkj": [
@@ -89,10 +119,28 @@
       "value": "Forgot Password?"
     }
   ],
+  "O95R3Z": [
+    {
+      "type": 0,
+      "value": "Phone"
+    }
+  ],
   "Op5EHr": [
     {
       "type": 0,
       "value": "Sign in with Google"
+    }
+  ],
+  "R5SEEt": [
+    {
+      "type": 0,
+      "value": "Close"
+    }
+  ],
+  "RCQEmZ": [
+    {
+      "type": 0,
+      "value": "Grade"
     }
   ],
   "SENRqu": [
@@ -113,12 +161,6 @@
       "value": "Go to About"
     }
   ],
-  "ZG77Sq": [
-    {
-      "type": 0,
-      "value": "close"
-    }
-  ],
   "a2ZCmv": [
     {
       "type": 0,
@@ -131,10 +173,34 @@
       "value": "Create a New Account"
     }
   ],
+  "h7B/gA": [
+    {
+      "type": 0,
+      "value": "store authtoken"
+    }
+  ],
+  "iObM7I": [
+    {
+      "type": 0,
+      "value": "Parent Phone"
+    }
+  ],
+  "ifGxkx": [
+    {
+      "type": 0,
+      "value": "Subscription"
+    }
+  ],
   "jxfpT4": [
     {
       "type": 0,
       "value": "Go to Games"
+    }
+  ],
+  "lKeCea": [
+    {
+      "type": 0,
+      "value": "Save & Exit"
     }
   ],
   "of2vJ9": [
@@ -143,10 +209,28 @@
       "value": "This is Video page"
     }
   ],
+  "ox9lTM": [
+    {
+      "type": 0,
+      "value": "Go to Profile"
+    }
+  ],
   "q86PwV": [
     {
       "type": 0,
       "value": "Go to Home"
+    }
+  ],
+  "qXTiEd": [
+    {
+      "type": 0,
+      "value": "Grade"
+    }
+  ],
+  "qlFSwa": [
+    {
+      "type": 0,
+      "value": "Parent's Email"
     }
   ],
   "sM7xfR": [
@@ -159,6 +243,18 @@
     {
       "type": 0,
       "value": "Go to Home"
+    }
+  ],
+  "sy+pv5": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
+  "z9lFwl": [
+    {
+      "type": 0,
+      "value": "Name"
     }
   ]
 }

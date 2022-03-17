@@ -6,10 +6,15 @@ import {
   Navigate,
 } from 'react-router-dom';
 import loadable from '@loadable/component';
-import NavBar from '../components/NavBar';
+import 'bootstrap';
+import 'bootstrap/dist/js/bootstrap.min';
+import '../../../stylesheets/common/sass/importers/_bootstrap.scss';
+import '../../../stylesheets/common/sass/importers/_fontawesome.scss';
 
 const Loading = () => <div>Loading...</div>;
 
+const AccountNavBar = loadable(() => import('../components/AccountNavBar'), { fallback: <Loading /> });
+const NavBar = loadable(() => import('../components/NavBar'), { fallback: <Loading /> });
 const RouteIndex = loadable(() => import('./Index'), { fallback: <Loading /> });
 const RouteAbout = loadable(() => import('./About'), { fallback: <Loading /> });
 const RouteSignin = loadable(() => import('./Signin'), { fallback: <Loading /> });
@@ -18,6 +23,7 @@ const RouteGames = loadable(() => import('./Games'), { fallback: <Loading /> });
 const RouteCourses = loadable(() => import('./Courses'), { fallback: <Loading /> });
 const RouteChallenges = loadable(() => import('./Challenges'), { fallback: <Loading /> });
 const RouteMore = loadable(() => import('./More'), { fallback: <Loading /> });
+const RouteProfileEdit = loadable(() => import('./ProfileEdit'), { fallback: <Loading /> });
 
 const App = () => (
   <BrowserRouter>
@@ -29,6 +35,10 @@ const App = () => (
         <Route path='courses' caseSensitive={true} element={<RouteCourses />} />
         <Route path='challenges' caseSensitive={true} element={<RouteChallenges />} />
         <Route path='more' caseSensitive={true} element={<RouteMore />} />
+        <Route path='profile' caseSensitive={true} element={<AccountNavBar />}>
+          <Route path='edit' caseSensitive={true} element={<RouteProfileEdit />} />
+          {/* <Route path='subscription' caseSensitive={true} /> */}
+        </Route>
       </Route>
       <Route path='/about' caseSensitive={true} element={<RouteAbout />} />
       <Route path='/signin' caseSensitive={true} element={<RouteSignin />} />

@@ -1,0 +1,38 @@
+@use '../base/_mixins' as gm;
+@use '../themes/_default' as gt;
+
+.account-nav {
+  background-color: gt.theme-var(bg-1);
+
+  .account-nav-container {
+    display: flex;
+    align-items: center;
+
+    .navigation-icon {
+      flex: 1;
+    }
+
+    .account-nav-item-container {
+      display: flex;
+      align-items: center;
+      flex: 2;
+
+      .account-nav-item {
+        padding: 0.5rem 0.75rem;
+
+        a {
+          color: gt.theme-var(text-color-1);
+          text-decoration: none;
+        }
+
+        &.active {
+          border-bottom: 2px solid gt.theme-var(text-color-8);
+
+          a {
+            color: gt.theme-var(text-color-8);
+          }
+        }
+      }
+    }
+  }
+}

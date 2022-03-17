@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { Theme } from '../common/_theme';
 import { mobileTypography } from '../../typography/_typography';
+import { Yellow } from '../../colors/_colors';
 
 // const font = StyleSheet.create({
 //   regular: {
@@ -92,6 +93,7 @@ const themes = {
     screenEditProfile: {
       ...Theme.light.screenYellow,
       ...fragmentBtnDisposal,
+      inputBorderColor: Yellow.color300,
     },
     screenGames: {
       ...Theme.light.screenLightBlue,
