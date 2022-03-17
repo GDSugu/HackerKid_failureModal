@@ -8,6 +8,8 @@ import {
 import loadable from '@loadable/component';
 import NavBar from '../components/NavBar';
 import AuthNav from '../components/AuthNav/AuthNav';
+import '../../../stylesheets/common/sass/importers/_bootstrap.scss';
+import '../../../stylesheets/common/sass/importers/_fontawesome.scss';
 
 const Loading = () => <div>Loading...</div>;
 
