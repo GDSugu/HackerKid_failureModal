@@ -10,22 +10,22 @@
 // @include gt.populate-theme();
 // page specific theme
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
 #root{
-  height: 100vh;
+  min-height: 100vh;
 }
 
-.btn a{
+.btn a {
   color: inherit;
   text-decoration: none;
 }
 
-.forgot-password{
+.forgot-password {
   display: block;
   color: gt.theme-var(text-color-7);
   text-decoration: none;
 
-  &:hover{
+  &:hover {
     text-decoration: none;
   }
 }
-
