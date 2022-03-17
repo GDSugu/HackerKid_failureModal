@@ -2,6 +2,7 @@
 
 .form-control {
   border: 1px solid gt.theme-var(text-color-3, null, gt.$thememaplight, gt.$cssvars);
+  color: gt.theme-var(text-color-1);
   padding: 14px 16px;
   border-radius: 8px;
 }
