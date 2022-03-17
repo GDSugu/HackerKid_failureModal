@@ -2,7 +2,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 // import { AppEventsLogger } from 'react-native-fbsdk';
 import getPlatform from './utlis';
-import API from '../../../env';
+import ENV from '../../../env';
+
+let { API } = ENV;
+
+if (getPlatform() === 'web') {
+  API = process.env.API;
+}
 
 const mobAuthClear = () => {
   let result;
@@ -49,21 +55,30 @@ const mobStoreSession = (key, value) => {
 };
 
 const webAuthClear = () => {
-  localStorage.clear();
+  window.localStorage.clear();
 };
 
-const webGetSession = (key) => localStorage.getItem(key);
+const webGetSession = (key) => new Promise((resolve) => resolve(window.localStorage.getItem(key)));
 
 const webClearSession = (key) => {
   if (key) {
-    localStorage.removeItem(key);
+    window.localStorage.removeItem(key);
   }
 };
 
 const webStoreSession = (key, value) => {
+  let result;
   if (value) {
-    localStorage.setItem(key, value);
+    result = new Promise((resolve, reject) => {
+      try {
+        window.localStorage.setItem(key, value);
+        resolve(true);
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
+  return result;
 };
 
 const s3Upload = (blob, signedURL, contentType = 'image/png', processData = false) => axios({
@@ -141,21 +156,25 @@ const setUserSession = ({
 const post = (postData, apiPath, validateResponse = true) => getSession('authtoken')
   .then((authToken) => {
     const jsonData = postData;
-    jsonData.authToken = authToken;
+    jsonData.authtoken = authToken;
     const jsonString = JSON.stringify(jsonData);
+    const payload = new FormData();
+    payload.append('myData', jsonString);
     return axios({
-      method: 'post',
+      method: 'POST',
       url: `${API}${apiPath}`,
       timeout: 60000,
-      data: {
-        myData: jsonString,
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded',
       },
+      transformResponse: (response) => response,
+      data: payload,
     });
   })
   .then((response) => {
     if (validateResponse) {
       // check for access denied. for now returning response
-      if (response === 'access_denied') {
+      if (response.data === 'access_denied') {
         authClear();
       }
     }
