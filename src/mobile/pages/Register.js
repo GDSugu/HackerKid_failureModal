@@ -31,24 +31,28 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     color: 'black',
     ...font.bodyBold,
   },
-  loginBtn: {
+  btnPrimary: {
     borderRadius: 12,
+    marginBottom: 8,
     backgroundColor: theme.btnBg,
     padding: 14,
   },
-  loginBtnText: {
+  btnPrimaryText: {
     ...font.bodyBold,
     color: 'white',
     textAlign: 'center',
   },
-  createAccountBtn: {
-    backgroundColor: theme.fadedBtnBg,
+  btnOutlinePrimary: {
     padding: 14,
+    borderWidth: 1,
+    marginBottom: 8,
+    borderColor: theme.inputBorderColor,
+    borderRadius: 8,
   },
-  createAccountBtnText: {
+  btnOutlinePrimaryText: {
     ...font.bodyBold,
     textAlign: 'center',
-    color: theme.fadedBtnTextColor,
+    color: 'black',
   },
   signInFormSvgContainer: {
     justifycontent: 'center',
@@ -59,15 +63,16 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   labelAndInputContainer: {
     marginBottom: 10,
   },
-  forgotPassword: {
-    color: 'black',
+  loginIntoExistingAccount: {
+    color: theme.fadedBtnTextColor,
     ...font.bodyBold,
-    marginBottom: 50,
+    marginTop: 16,
+    marginBottom: 25,
     textAlign: 'center',
   },
 });
 
-const Signin = ({ navigation }) => {
+const Register = ({ navigation }) => {
   const { font, theme } = React.useContext(ThemeContext);
   const screenTheme = theme.screenSignin;
   const style = getStyles(screenTheme, theme.utilColors, font);
@@ -82,7 +87,8 @@ const Signin = ({ navigation }) => {
         <View style={style.labelAndInputContainer}>
           <Text style={style.label}>
             <FormattedMessage
-              defaultMessage='Username'
+                defaultMessage='Phone'
+                description='Phone label'
             />
           </Text>
           <TextInput
@@ -91,40 +97,59 @@ const Signin = ({ navigation }) => {
               disableFullscreenUI = {true}
           />
         </View>
-          <View style={style.labelAndInputContainer}>
-            <Text style={style.label}>
-              <FormattedMessage
-                defaultMessage='Password'
-              />
-            </Text>
-            <TextInput
-              disableFullscreenUI = {true}
-              secureTextEntry={true}
-              style={style.inputField}
-              multiline={false} />
-          </View>
+        <View style={style.labelAndInputContainer}>
+          <Text style={style.label}>
+            <FormattedMessage
+              defaultMessage='Email'
+              description='Email label'
+            />
+          </Text>
+          <TextInput
+            disableFullscreenUI = {true}
+            secureTextEntry={true}
+            style={style.inputField}
+            multiline={false} />
+        </View>
+        <View style={style.labelAndInputContainer}>
+          <Text style={style.label}>
+            <FormattedMessage
+              defaultMessage='Name'
+              description='Name label'
+            />
+          </Text>
+          <TextInput
+            disableFullscreenUI = {true}
+            style={style.inputField}
+            multiline={false} />
+        </View>
+        <View style={style.labelAndInputContainer}>
+        <Text style={style.label}>
+          <FormattedMessage
+            defaultMessage="Parent's Name"
+            description="Parent's Name label"
+          />
+        </Text>
+        <TextInput
+          disableFullscreenUI = {true}
+          style={style.inputField}
+          multiline={false} />
+      </View>
         </KeyboardAvoidingView>
-        <TouchableOpacity>
-          <Text style={style.forgotPassword}>Forgot Password?</Text>
-        </TouchableOpacity>
         <View>
           <TouchableOpacity
-              style={style.loginBtn}
-              title="Login"
-            onPress={() => navigation.navigate('Start') }>
-            <Text style={style.loginBtnText}>
-              <FormattedMessage defaultMessage='Login' description='Login Button'/>
+              style={style.btnPrimary}
+              title="Next">
+            <Text style={style.btnPrimaryText}>
+              <FormattedMessage defaultMessage='Next' description='Next Button'/>
             </Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={style.loginIntoExistingAccount}>Login into Existing Account</Text>
           </TouchableOpacity>
         </View>
       </View>
-      <TouchableOpacity style={style.createAccountBtn} title='CreateAccountBtn'>
-        <Text style={style.createAccountBtnText}>
-          <FormattedMessage defaultMessage='Create a New Account' description='Create Account Button' />
-        </Text>
-      </TouchableOpacity>
     </ScrollView>
   );
 };
 
-export default Signin;
+export default Register;

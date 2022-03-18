@@ -41,12 +41,6 @@
       "value": "Password"
     }
   ],
-  "5sg7KC": [
-    {
-      "type": 0,
-      "value": "Password"
-    }
-  ],
   "6Cjk2D": [
     {
       "type": 0,
@@ -125,12 +119,6 @@
       "value": "Enter a valid Parent's name"
     }
   ],
-  "JCIgkj": [
-    {
-      "type": 0,
-      "value": "Username"
-    }
-  ],
   "MS/biV": [
     {
       "type": 0,
@@ -153,6 +141,12 @@
     {
       "type": 0,
       "value": "Help"
+    }
+  ],
+  "SL6O2c": [
+    {
+      "type": 0,
+      "value": "Password"
     }
   ],
   "T/a40M": [
