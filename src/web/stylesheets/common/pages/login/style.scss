@@ -11,7 +11,7 @@
 // page specific theme
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 
-#root{
+#root {
   min-height: 100vh;
 }
 
