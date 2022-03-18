@@ -237,7 +237,7 @@ const themes = {
       ...Theme.light.screenLightBlue,
       ...fragmentIconDisposal,
     },
-    screenSignin: {
+    screenLogin: {
       ...Theme.light.screenYellow,
       showHeader: false,
       showNav: false,

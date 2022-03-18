@@ -27,9 +27,6 @@
     "defaultMessage": "Password",
     "description": "Password Field"
   },
-  "5sg7KC": {
-    "defaultMessage": "Password"
-  },
   "6Cjk2D": {
     "defaultMessage": "Login",
     "description": "Login Button"
@@ -90,13 +87,6 @@
     "defaultMessage": "Enter a valid Parent's name",
     "description": "Parent's name form helper"
   },
-  "HI8bPV": {
-    "defaultMessage": "Save",
-    "description": "Profile save button"
-  },
-  "JCIgkj": {
-    "defaultMessage": "Username"
-  },
   "MS/biV": {
     "defaultMessage": "Go to Index",
     "description": "Link description"
@@ -111,6 +101,10 @@
   },
   "SENRqu": {
     "defaultMessage": "Help"
+  },
+  "SL6O2c": {
+    "defaultMessage": "Password",
+    "description": "Password label"
   },
   "T/a40M": {
     "defaultMessage": "Toggle Theme",
