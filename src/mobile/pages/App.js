@@ -21,6 +21,7 @@ import RouteChallenges from './Challenges';
 import RouteMore from './More';
 import RouteProfile from './EditProfile';
 import RouteLogin from './Login';
+import RouteRegister from './Register';
 
 import IconGame from '../../images/navbar/iconGame.svg';
 import IconHome from '../../images/navbar/iconHome.svg';
@@ -223,7 +224,7 @@ const App = () => {
             onStateChange={() => { setRoutName(navigationRef.getCurrentRoute().name); }}
           >
             <Stack.Navigator
-              initialRouteName='Signin'
+              initialRouteName='Login'
               screenOptions={{
                 headerShown: false,
                 animation: 'slide_from_bottom',
@@ -238,8 +239,9 @@ const App = () => {
                 })}
               </Stack.Screen>
             <Stack.Screen name='Class' component={RouteClass} />
-            <Stack.Screen name='Signin' component={RouteLogin} />
             <Stack.Screen name='EditProfile' component={RouteProfile} />
+            <Stack.Screen name='Login' component={RouteLogin} />
+            <Stack.Screen name='Register' component={RouteRegister} />
             </Stack.Navigator>
           </NavigationContainer>
         </View>

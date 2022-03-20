@@ -47,6 +47,12 @@
       "value": "Login"
     }
   ],
+  "6V6DQY": [
+    {
+      "type": 0,
+      "value": "Next"
+    }
+  ],
   "6o79ty": [
     {
       "type": 0,
@@ -149,6 +155,12 @@
       "value": "Forgot Password?"
     }
   ],
+  "RHM1lo": [
+    {
+      "type": 0,
+      "value": "Re-type Password"
+    }
+  ],
   "SENRqu": [
     {
       "type": 0,
@@ -165,6 +177,12 @@
     {
       "type": 0,
       "value": "Toggle Theme"
+    }
+  ],
+  "TVjEEI": [
+    {
+      "type": 0,
+      "value": "Create Account"
     }
   ],
   "UmuBIc": [
@@ -221,7 +239,13 @@
       "value": "Save & Exit"
     }
   ],
-  "mm9QaY": [
+  "hxLhGK": [
+    {
+      "type": 0,
+      "value": "Set Password"
+    }
+  ],
+  "jxfpT4": [
     {
       "type": 0,
       "value": "School"
