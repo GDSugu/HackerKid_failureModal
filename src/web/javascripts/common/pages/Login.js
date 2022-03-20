@@ -27,7 +27,7 @@ const Signin = () => {
                 />
               </span>
             </div>
-            <input className='form-control' type='text' name='phone-or-email' id='phone-or-email' placeholder='Phone or Email'/>
+            <input required className='form-control' type='text' name='phone-or-email' id='phone-or-email' placeholder='Phone or Email'/>
           </div>
           <div className="mb-3 form-group">
             <div className='label-with-helper d-flex justify-content-between'>
@@ -44,7 +44,7 @@ const Signin = () => {
                 />
               </span>
             </div>
-            <input className='form-control' type='password' name='password' id='password' placeholder='Password'/>
+            <input required className='form-control' type='password' name='password' id='password' placeholder='Password'/>
           </div>
           <Link to='#' className='forgot-password overline-bold text-center mt-3 mb-4'>
             <FormattedMessage
@@ -53,7 +53,7 @@ const Signin = () => {
             />
           </Link>
           <div className='take-action-buttons'>
-            <button type='button' className='login-btn btn btn-primary btn-block'>
+            <button className='login-btn btn btn-primary btn-block'>
               <span className='overline-bold'>
                 <FormattedMessage
                   defaultMessage="Login"
