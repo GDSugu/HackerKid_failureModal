@@ -133,8 +133,17 @@ const themes = {
       ...Theme.light.screenLightBlue,
       ...fragmentIconDisposal,
     },
-    screenSignin: {
+    screenLogin: {
       ...Theme.light.screenYellow,
+      showHeader: false,
+      showNav: false,
+      viewType: 'screen',
+    },
+    screenRegister: {
+      ...Theme.light.screenYellow,
+      showHeader: false,
+      showNav: false,
+      viewType: 'screen',
     },
     utilColors: Theme.light.utilColors,
   },

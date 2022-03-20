@@ -31,6 +31,10 @@
     "defaultMessage": "Login",
     "description": "Login Button"
   },
+  "6V6DQY": {
+    "defaultMessage": "Next",
+    "description": "Next Button"
+  },
   "6o79ty": {
     "defaultMessage": "Login with OTP",
     "description": "Login with OTP button"
@@ -91,6 +95,10 @@
     "defaultMessage": "Create Account",
     "description": "Create Account button"
   },
+  "RHM1lo": {
+    "defaultMessage": "Re-type Password",
+    "description": "Re-type Password label"
+  },
   "SENRqu": {
     "defaultMessage": "Help"
   },
@@ -101,6 +109,10 @@
   "T/a40M": {
     "defaultMessage": "Toggle Theme",
     "description": "Toggle theme Button description"
+  },
+  "TVjEEI": {
+    "defaultMessage": "Create Account",
+    "description": "Create Account Button"
   },
   "UmuBIc": {
     "defaultMessage": "Enter a phone number",
@@ -137,6 +149,10 @@
   "gOkIvb": {
     "defaultMessage": "Name",
     "description": "Name label"
+  },
+  "hxLhGK": {
+    "defaultMessage": "Set Password",
+    "description": "Password Label"
   },
   "jxfpT4": {
     "defaultMessage": "Go to Games",
