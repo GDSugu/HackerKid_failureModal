@@ -10,7 +10,7 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import ThemeContext from '../components/theme';
-import SigninFormSvg from '../../images/signin/signin-form-svg.svg';
+import LoginFormSvg from '../../images/signin/signin-form-svg.svg';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
@@ -27,7 +27,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     borderWidth: 1,
     borderColor: theme.inputBorderColor,
     borderRadius: 8,
-    padding: 14,
+    padding: 8,
     color: 'black',
     ...font.bodyBold,
   },
@@ -54,7 +54,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     textAlign: 'center',
     color: 'black',
   },
-  signInFormSvgContainer: {
+  loginFormSvgContainer: {
     justifycontent: 'center',
     alignItems: 'center',
     marginBottom: 50,
@@ -74,15 +74,15 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
 
 const Login = ({ navigation }) => {
   const { font, theme } = React.useContext(ThemeContext);
-  const screenTheme = theme.screenSignin;
+  const screenTheme = theme.screenLogin;
   const style = getStyles(screenTheme, theme.utilColors, font);
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between' }}>
       <View style={style.container}>
         <KeyboardAvoidingView>
-        <View style={style.signInFormSvgContainer}>
-          <SigninFormSvg/>
+        <View style={style.loginFormSvgContainer}>
+          <LoginFormSvg/>
         </View>
         <View style={style.labelAndInputContainer}>
           <Text style={style.label}>
@@ -128,7 +128,10 @@ const Login = ({ navigation }) => {
               <FormattedMessage defaultMessage='Login with OTP' description='Login with OTP button' />
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={style.btnOutlinePrimary} title='CreateAccountBtn'>
+          <TouchableOpacity
+            style={style.btnOutlinePrimary}
+            title='CreateAccountBtn'
+            onPress={() => navigation.navigate('Register')}>
             <Text style={style.btnOutlinePrimaryText}>
               <FormattedMessage defaultMessage='Create a New Account' description='Create Account Button' />
             </Text>
