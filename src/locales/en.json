@@ -32,6 +32,10 @@
   "AyGauy": {
     "defaultMessage": "Login"
   },
+  "BB+f/k": {
+    "defaultMessage": "Try again",
+    "description": "try again btn"
+  },
   "C8CsWY": {
     "defaultMessage": "This is Class page",
     "description": "Class Page"
@@ -73,9 +77,6 @@
   "NU0Nha": {
     "defaultMessage": "Forgot Password?"
   },
-  "O95R3Z": {
-    "defaultMessage": "Phone"
-  },
   "Op5EHr": {
     "defaultMessage": "Sign in with Google"
   },
@@ -98,9 +99,16 @@
     "defaultMessage": "Go to About",
     "description": "Link description"
   },
+  "ZXYzUQ": {
+    "defaultMessage": "Something went wrong. Please try again",
+    "description": "error modal"
+  },
   "a2ZCmv": {
     "defaultMessage": "Create a New Account",
     "description": "Create Account Button"
+  },
+  "c9n6Sh": {
+    "defaultMessage": "School"
   },
   "flaX9K": {
     "defaultMessage": "Create a New Account"
@@ -108,9 +116,6 @@
   "h7B/gA": {
     "defaultMessage": "store authtoken",
     "description": "authtoken temp storage btn"
-  },
-  "iObM7I": {
-    "defaultMessage": "Parent Phone"
   },
   "ifGxkx": {
     "defaultMessage": "Subscription",
@@ -123,6 +128,10 @@
   "lKeCea": {
     "defaultMessage": "Save & Exit",
     "description": "Profile save button"
+  },
+  "mm9QaY": {
+    "defaultMessage": "School",
+    "description": "Profile school label"
   },
   "of2vJ9": {
     "defaultMessage": "This is Video page",
@@ -139,9 +148,6 @@
   "qXTiEd": {
     "defaultMessage": "Grade"
   },
-  "qlFSwa": {
-    "defaultMessage": "Parent's Email"
-  },
   "sM7xfR": {
     "defaultMessage": "This is Home page",
     "description": "Page description"
@@ -149,9 +155,6 @@
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
-  },
-  "sy+pv5": {
-    "defaultMessage": "Email"
   },
   "z9lFwl": {
     "defaultMessage": "Name",

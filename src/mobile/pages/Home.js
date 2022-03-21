@@ -32,6 +32,14 @@ const Index = ({ navigation }) => {
   AsyncStorage.getItem('authtoken')
     .then(setAuthToken);
 
+  const handleAuthTokenChange = (token) => {
+    AsyncStorage.setItem('authtoken', token)
+      .then(() => {
+        setAuthToken(token);
+      })
+      .catch(console.error);
+  };
+
   return (
     <ScrollView style={style.container}>
 
@@ -49,7 +57,7 @@ const Index = ({ navigation }) => {
           style={{ borderWidth: 2, marginBottom: 10, marginTop: 20 }}
           placeholder='authtoken'
           value={authtoken}
-          onChangeText={setAuthToken} />
+          onChangeText={(value) => handleAuthTokenChange(value)} />
         <Button
           title={intl.formatMessage({
             defaultMessage: 'store authtoken',

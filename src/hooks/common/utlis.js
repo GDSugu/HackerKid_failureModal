@@ -1,5 +1,5 @@
 const getPlatform = () => {
-  if (document) {
+  if (window.document) {
     return 'web';
   }
   return 'app';

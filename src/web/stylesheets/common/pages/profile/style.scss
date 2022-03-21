@@ -19,6 +19,8 @@
   }
 
   .profile-cntnr {
+    padding: 1.5rem 1rem;
+
     @include gm.media-breakpoint-down(sm) {
       background-color: gt.theme-var(profile-mob-body-bg, null, $thememaplight, $cssvars);
     }
@@ -27,7 +29,6 @@
       background-color: gt.theme-var(profile-card-bg, null, $thememaplight, $cssvars);
       border-radius: 0.75rem;
       margin: 1rem 0;
-      padding: 1.5rem 0;
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);
     }
 
@@ -36,49 +37,55 @@
 
       @include gm.media-breakpoint-up(md) {
         width: 60%;
-        min-width: 25rem;
+        min-width: 22.5rem;
         margin: auto;
       }
 
-      .profile-img-container {
-        position: relative;
-        width: 5rem;
-        height: 5rem;
-        margin: auto;
+      .profile-img-box {
+        .profile-img-container {
+          position: relative;
+          width: 5rem;
+          height: 5rem;
+          margin: auto;
 
-        @include gm.media-breakpoint-up(xxl) {
-          width: 6rem;
-          height: 6rem;
-        }
+          @include gm.media-breakpoint-up(xxl) {
+            width: 6rem;
+            height: 6rem;
+          }
 
-        .profile-img {
-          img {
-            border-radius: 50%;
-            width: 5rem;
-            height: 5rem;
+          .profile-img {
+            img {
+              border-radius: 50%;
+              width: 5rem;
+              height: 5rem;
 
-            @include gm.media-breakpoint-up(xxl) {
-              width: 6rem;
-              height: 6rem;
+              @include gm.media-breakpoint-up(xxl) {
+                width: 6rem;
+                height: 6rem;
+              }
+            }
+          }
+
+          .profile-edit-btn {
+            position: absolute;
+            right: 0;
+            transform: translateY(-75%);
+
+            label {
+              &:hover {
+                cursor: pointer;
+              }
+            }
+
+            #upload-btn {
+              width: 0;
+              height: 0;
             }
           }
         }
 
-        .profile-edit-btn {
-          position: absolute;
-          right: 0;
-          transform: translateY(-75%);
-
-          label {
-            &:hover {
-              cursor: pointer;
-            }
-          }
-
-          #upload-btn {
-            width: 0;
-            height: 0;
-          }
+        small {
+          text-align: center;
         }
       }
 

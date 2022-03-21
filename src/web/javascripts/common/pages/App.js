@@ -24,6 +24,7 @@ const RouteCourses = loadable(() => import('./Courses'), { fallback: <Loading />
 const RouteChallenges = loadable(() => import('./Challenges'), { fallback: <Loading /> });
 const RouteMore = loadable(() => import('./More'), { fallback: <Loading /> });
 const RouteProfileEdit = loadable(() => import('./ProfileEdit'), { fallback: <Loading /> });
+const RouteSubscription = loadable(() => import('./Subscription'), { fallback: <Loading /> });
 
 const App = () => (
   <BrowserRouter>
@@ -37,7 +38,7 @@ const App = () => (
         <Route path='more' caseSensitive={true} element={<RouteMore />} />
         <Route path='profile' caseSensitive={true} element={<AccountNavBar />}>
           <Route path='edit' caseSensitive={true} element={<RouteProfileEdit />} />
-          {/* <Route path='subscription' caseSensitive={true} /> */}
+          <Route path='subscription' caseSensitive={true} element={<RouteSubscription />} />
         </Route>
       </Route>
       <Route path='/about' caseSensitive={true} element={<RouteAbout />} />

@@ -53,6 +53,12 @@
       "value": "Login"
     }
   ],
+  "BB+f/k": [
+    {
+      "type": 0,
+      "value": "Try again"
+    }
+  ],
   "C8CsWY": [
     {
       "type": 0,
@@ -119,12 +125,6 @@
       "value": "Forgot Password?"
     }
   ],
-  "O95R3Z": [
-    {
-      "type": 0,
-      "value": "Phone"
-    }
-  ],
   "Op5EHr": [
     {
       "type": 0,
@@ -161,10 +161,22 @@
       "value": "Go to About"
     }
   ],
+  "ZXYzUQ": [
+    {
+      "type": 0,
+      "value": "Something went wrong. Please try again"
+    }
+  ],
   "a2ZCmv": [
     {
       "type": 0,
       "value": "Create a New Account"
+    }
+  ],
+  "c9n6Sh": [
+    {
+      "type": 0,
+      "value": "School"
     }
   ],
   "flaX9K": [
@@ -177,12 +189,6 @@
     {
       "type": 0,
       "value": "store authtoken"
-    }
-  ],
-  "iObM7I": [
-    {
-      "type": 0,
-      "value": "Parent Phone"
     }
   ],
   "ifGxkx": [
@@ -201,6 +207,12 @@
     {
       "type": 0,
       "value": "Save & Exit"
+    }
+  ],
+  "mm9QaY": [
+    {
+      "type": 0,
+      "value": "School"
     }
   ],
   "of2vJ9": [
@@ -227,12 +239,6 @@
       "value": "Grade"
     }
   ],
-  "qlFSwa": [
-    {
-      "type": 0,
-      "value": "Parent's Email"
-    }
-  ],
   "sM7xfR": [
     {
       "type": 0,
@@ -243,12 +249,6 @@
     {
       "type": 0,
       "value": "Go to Home"
-    }
-  ],
-  "sy+pv5": [
-    {
-      "type": 0,
-      "value": "Email"
     }
   ],
   "z9lFwl": [

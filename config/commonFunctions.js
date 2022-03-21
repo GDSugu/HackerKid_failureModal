@@ -1,6 +1,6 @@
 const glob = require('glob');
 const del = require('del');
-const axios = require('axios');
+// const axios = require('axios');
 const FormData = require('form-data');
 
 const list = (pathPattern, options) => {
@@ -21,7 +21,7 @@ const getDynamicLinks = () => {
   bodyFormData.append('myData', JSON.stringify({
     type: 'getSiteMap',
   }));
-  return axios.post('https://api.hackerkid.org/v1/seo/', bodyFormData, {
+  return fetch('https://api.hackerkid.org/v1/seo/', bodyFormData, {
     headers: bodyFormData.getHeaders(),
   }).then((response) => {
     return response.data;

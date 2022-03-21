@@ -23,9 +23,11 @@ const AccountNavBar = () => {
   return <>
     <div className='account-nav'>
       <div className="account-nav-container shadow-sm">
-        <div className="navigation-icon">
-          <i className="fa fa-arrow-left" aria-hidden="true"></i>
-        </div>
+          <div className="navigation-icon">
+            <Link to='/dashboard'>
+              <i className="fa fa-arrow-left" aria-hidden="true"></i>
+            </Link>
+          </div>
         <div className="account-nav-item-container">
           <div className={`account-nav-item ${screen === 'edit' ? 'active' : ''}`}>
             <Link to='edit'>
@@ -35,14 +37,14 @@ const AccountNavBar = () => {
               />
             </Link>
           </div>
-          <div className={`account-nav-item ${screen === 'subscription' ? 'active' : ''}`}>
+          {/* <div className={`account-nav-item ${screen === 'subscription' ? 'active' : ''}`}>
             <Link to='subscription'>
               <FormattedMessage
                 defaultMessage='Subscription'
                 description='Navigation link to subscription page'
               />
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

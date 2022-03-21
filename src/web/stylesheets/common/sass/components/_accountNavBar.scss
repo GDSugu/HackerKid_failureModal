@@ -10,6 +10,17 @@
 
     .navigation-icon {
       flex: 1;
+      margin-left: 1rem;
+
+      a {
+        color: gt.theme-var(text-color-1);
+
+        i {
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
     }
 
     .account-nav-item-container {
