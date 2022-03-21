@@ -1,11 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
+  Alert,
   Text,
   Button,
   StyleSheet,
   ScrollView,
+  TextInput,
+  ToastAndroid,
+  View,
 } from 'react-native';
 import { FormattedMessage, useIntl } from 'react-intl';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import ThemeContext from '../components/theme';
 
 const getStyles = (theme) => StyleSheet.create({
@@ -22,22 +27,68 @@ const Index = ({ navigation }) => {
 
   const intl = useIntl();
 
+  const [authtoken, setAuthToken] = useState(null);
+
+  AsyncStorage.getItem('authtoken')
+    .then(setAuthToken);
+
+  const handleAuthTokenChange = (token) => {
+    AsyncStorage.setItem('authtoken', token)
+      .then(() => {
+        setAuthToken(token);
+      })
+      .catch(console.error);
+  };
+
   return (
     <ScrollView style={style.container}>
-      <Text style={{
-        marginVertical: 250,
-        textAlign: 'center',
-        ...font.heading1,
-      }}>
-        <FormattedMessage
-          description = "Page description"
-          defaultMessage = "This is Home page"
+
+      <View style={{ marginVertical: 250 }}>
+        <Text style={{
+          textAlign: 'center',
+          ...font.heading1,
+        }}>
+          <FormattedMessage
+            description = "Page description"
+            defaultMessage = "This is Home page"
+          />
+        </Text>
+        <TextInput
+          style={{ borderWidth: 2, marginBottom: 10, marginTop: 20 }}
+          placeholder='authtoken'
+          value={authtoken}
+          onChangeText={(value) => handleAuthTokenChange(value)} />
+        <Button
+          title={intl.formatMessage({
+            defaultMessage: 'store authtoken',
+            description: 'authtoken temp storage btn',
+          })}
+          onPress={() => {
+            AsyncStorage.setItem('authtoken', authtoken)
+              .then((response) => {
+                ToastAndroid.show('authtoken set', ToastAndroid.SHORT);
+                console.log('response ', response);
+              })
+              .catch((error) => {
+                Alert.alert('Authtoken Error', error);
+              });
+          }}
+          color={pageTheme.btnBg}
         />
-      </Text>
+      </View>
+
       <Button
         onPress={() => navigation.navigate('Games')}
         title={intl.formatMessage({
           defaultMessage: 'Go to Games',
+          description: 'Link description',
+        })}
+        color={pageTheme.btnBg}
+      />
+      <Button
+        onPress={() => navigation.navigate('EditProfile')}
+        title={intl.formatMessage({
+          defaultMessage: 'Go to Profile',
           description: 'Link description',
         })}
         color={pageTheme.btnBg}

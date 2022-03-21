@@ -20,6 +20,7 @@ import RouteVideo from './Video';
 import RouteChallenges from './Challenges';
 import RouteMore from './More';
 import RouteSignin from './Signin';
+import RouteProfile from './EditProfile';
 
 import IconGame from '../../images/navbar/iconGame.svg';
 import IconHome from '../../images/navbar/iconHome.svg';
@@ -238,6 +239,7 @@ const App = () => {
               </Stack.Screen>
             <Stack.Screen name='Class' component={RouteClass} />
             <Stack.Screen name='Signin' component={RouteSignin} />
+            <Stack.Screen name='EditProfile' component={RouteProfile} />
             </Stack.Navigator>
           </NavigationContainer>
         </View>

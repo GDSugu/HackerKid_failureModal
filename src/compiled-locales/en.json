@@ -11,6 +11,18 @@
       "value": "This is index page"
     }
   ],
+  "1RUvaS": [
+    {
+      "type": 0,
+      "value": "Profile Settings"
+    }
+  ],
+  "2W0f9h": [
+    {
+      "type": 0,
+      "value": "Bio"
+    }
+  ],
   "383EZ1": [
     {
       "type": 0,
@@ -41,6 +53,12 @@
       "value": "Login"
     }
   ],
+  "BB+f/k": [
+    {
+      "type": 0,
+      "value": "Try again"
+    }
+  ],
   "C8CsWY": [
     {
       "type": 0,
@@ -53,6 +71,12 @@
       "value": "This is about page"
     }
   ],
+  "DZ21OO": [
+    {
+      "type": 0,
+      "value": "Bio"
+    }
+  ],
   "DaO/pd": [
     {
       "type": 0,
@@ -63,6 +87,18 @@
     {
       "type": 0,
       "value": "Go to More"
+    }
+  ],
+  "HAlOn1": [
+    {
+      "type": 0,
+      "value": "Name"
+    }
+  ],
+  "HI8bPV": [
+    {
+      "type": 0,
+      "value": "Save"
     }
   ],
   "JCIgkj": [
@@ -95,6 +131,18 @@
       "value": "Sign in with Google"
     }
   ],
+  "R5SEEt": [
+    {
+      "type": 0,
+      "value": "Close"
+    }
+  ],
+  "RCQEmZ": [
+    {
+      "type": 0,
+      "value": "Grade"
+    }
+  ],
   "SENRqu": [
     {
       "type": 0,
@@ -113,10 +161,10 @@
       "value": "Go to About"
     }
   ],
-  "ZG77Sq": [
+  "ZXYzUQ": [
     {
       "type": 0,
-      "value": "close"
+      "value": "Something went wrong. Please try again"
     }
   ],
   "a2ZCmv": [
@@ -125,10 +173,28 @@
       "value": "Create a New Account"
     }
   ],
+  "c9n6Sh": [
+    {
+      "type": 0,
+      "value": "School"
+    }
+  ],
   "flaX9K": [
     {
       "type": 0,
       "value": "Create a New Account"
+    }
+  ],
+  "h7B/gA": [
+    {
+      "type": 0,
+      "value": "store authtoken"
+    }
+  ],
+  "ifGxkx": [
+    {
+      "type": 0,
+      "value": "Subscription"
     }
   ],
   "jxfpT4": [
@@ -137,16 +203,40 @@
       "value": "Go to Games"
     }
   ],
+  "lKeCea": [
+    {
+      "type": 0,
+      "value": "Save & Exit"
+    }
+  ],
+  "mm9QaY": [
+    {
+      "type": 0,
+      "value": "School"
+    }
+  ],
   "of2vJ9": [
     {
       "type": 0,
       "value": "This is Video page"
     }
   ],
+  "ox9lTM": [
+    {
+      "type": 0,
+      "value": "Go to Profile"
+    }
+  ],
   "q86PwV": [
     {
       "type": 0,
       "value": "Go to Home"
+    }
+  ],
+  "qXTiEd": [
+    {
+      "type": 0,
+      "value": "Grade"
     }
   ],
   "sM7xfR": [
@@ -159,6 +249,12 @@
     {
       "type": 0,
       "value": "Go to Home"
+    }
+  ],
+  "z9lFwl": [
+    {
+      "type": 0,
+      "value": "Name"
     }
   ]
 }

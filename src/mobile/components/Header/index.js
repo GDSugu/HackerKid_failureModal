@@ -42,13 +42,16 @@ const Header = ({ route, navigation }) => {
   const screenTheme = theme[`screen${route}`];
   const style = getStyles(screenTheme, theme.utilColors);
 
+  const classNavRoutes = ['Home', 'Games', 'Video', 'Challenges', 'More'];
+  const homeNavRoutes = ['Class', 'Games', 'Video', 'Challenges', 'More'];
+
   return <>
     {
       screenTheme.showHeader
       && <View style={style.header}>
       <Text>hackekidLogo</Text>
       <View style={style.flexHorizontal}>
-        {(route !== 'Class') && <TouchableOpacity
+        {(classNavRoutes.includes(route)) && <TouchableOpacity
           style={style.navigationBtn}
           onPress={() => {
             navigation.navigate('Class');
@@ -65,7 +68,7 @@ const Header = ({ route, navigation }) => {
           </Text>
         </TouchableOpacity>}
         {<Animatable.View
-          animation={route !== 'Home' ? 'fadeInRight' : 'fadeOutRight'}
+          animation={homeNavRoutes.includes(route) ? 'fadeInRight' : 'fadeOutRight'}
           duration={300}
         >
           {(route !== 'Home') && <TouchableOpacity
@@ -93,7 +96,7 @@ const Header = ({ route, navigation }) => {
               color: theme.utilColors.dark,
             }}>
               <FormattedMessage
-                defaultMessage='close'
+                defaultMessage='Close'
                 description='close button'
               />
             </Text>

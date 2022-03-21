@@ -77,7 +77,9 @@ const NavBar = () => {
 
         </div>
         <div className="profileImg">
-          <img src={`${imgPath}/common/profile.png`} alt="Hackerkid User"/>
+          <Link to='/profile'>
+            <img src={`${imgPath}/common/profile.png`} alt="Hackerkid User"/>
+          </Link>
         </div>
       </div>
     </nav>

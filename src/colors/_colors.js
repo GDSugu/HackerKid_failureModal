@@ -91,6 +91,9 @@ const utilColors = {
   lightGrey: '#A9ABAC',
   tertiary: '#E0E0E0',
   disposableIconBg: '#FF5A79',
+  bg2: '#FAFAFA',
+  bg3: '#F5F5F5',
+  danger: Red.color700,
 };
 
 module.exports = {

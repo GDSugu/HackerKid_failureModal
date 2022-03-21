@@ -239,6 +239,21 @@ const getQueryString = (query) => {
   return search.get(query);
 };
 
+const popover = (selector, options, showIn = 0, hideIn = 2000) => {
+  try {
+    setTimeout(() => {
+      $(selector).popover(options);
+      $(selector).popover('show');
+      setTimeout(() => {
+        $(selector).popover('hide');
+        $(selector).popover('dispose'); // support for dynamic content
+      }, hideIn);
+    }, showIn);
+  } catch (error) {
+    // console.log(error);
+  }
+};
+
 const showSnow = () => {
   try {
     import('magic-snowflakes').then((response) => {
@@ -249,21 +264,6 @@ const showSnow = () => {
     });
   } catch (error) {
     console.log(error);
-  }
-};
-
-const popover = (selector, options, showIn = 0, hideIn = 2000) => {
-  try {
-    setTimeout(() => {
-      selector.popover(options);
-      selector.popover('show');
-      setTimeout(() => {
-        selector.popover('hide');
-        selector.popover('dispose'); // support for dynamic content
-      }, hideIn);
-    }, showIn);
-  } catch (error) {
-    // console.log(error);
   }
 };
 
@@ -376,6 +376,7 @@ export {
   addEvent,
   validate,
   getQueryString,
+  $,
   showSnow,
   popover,
   getShareFooter,

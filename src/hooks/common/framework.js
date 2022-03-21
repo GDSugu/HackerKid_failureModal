@@ -1,6 +1,4 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
-// import { AppEventsLogger } from 'react-native-fbsdk';
 import getPlatform from './utlis';
 import ENV from '../../../env';
 
@@ -81,11 +79,10 @@ const webStoreSession = (key, value) => {
   return result;
 };
 
-const s3Upload = (blob, signedURL, contentType = 'image/png', processData = false) => axios({
-  url: signedURL,
-  data: blob,
+const s3Upload = (blob, signedURL, contentType = 'image/png', processData = false) => fetch(signedURL, {
+  body: blob,
   contentType,
-  type: 'PUT',
+  method: 'PUT',
   processData,
 });
 
@@ -160,22 +157,22 @@ const post = (postData, apiPath, validateResponse = true) => getSession('authtok
     const jsonString = JSON.stringify(jsonData);
     const payload = new FormData();
     payload.append('myData', jsonString);
-    return axios({
-      method: 'POST',
-      url: `${API}${apiPath}`,
-      timeout: 60000,
-      headers: {
-        'content-type': 'application/x-www-form-urlencoded',
-      },
-      transformResponse: (response) => response,
-      data: payload,
+    const url = `${API}${apiPath}`;
+    const headers = {};
+    if (getPlatform() === 'app') {
+      headers['Content-Type'] = 'multipart/form-data';
+    }
+    return fetch(url, {
+      method: 'post',
+      headers,
+      body: payload,
     });
   })
-  .then((response) => {
+  .then((resp) => resp.text())
+  .then(async (response) => {
     if (validateResponse) {
-      // check for access denied. for now returning response
-      if (response.data === 'access_denied') {
-        authClear();
+      if (response === 'access_denied') {
+        await authClear();
       }
     }
     return response;
