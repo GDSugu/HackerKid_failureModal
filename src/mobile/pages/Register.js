@@ -9,10 +9,9 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import ThemeContext from '../components/theme';
 import RegisterFormSvg from '../../images/register/register-form-svg.svg';
+import useRegisterFormStep from '../../hooks/pages/register/index';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
@@ -81,13 +80,32 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   nextBtnText: {
     textAlign: 'left',
   },
+  labelAndOtpFields: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  otpLabel: {
+    alignSelf: 'baseline',
+  },
+  otpFields: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flexGrow: 1,
+    marginBottom: 30,
+  },
+  otpField: {
+    borderRadius: 0,
+    borderTopWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderBottomWidth: 2,
+    marginRight: 10,
+  },
 });
 
-const Tab = createMaterialTopTabNavigator();
-
-const RegisterFormStepOne = ({ style }) => (
-  <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
-      <View style={style.container}>
+const RegisterFormStepOne = ({ style, currentStep, setCurrentStep }) => (
+    <View style={style.container}>
       <KeyboardAvoidingView>
       <View style={style.labelAndInputContainer}>
         <Text style={style.label}>
@@ -143,7 +161,8 @@ const RegisterFormStepOne = ({ style }) => (
       <View>
         <TouchableOpacity
             style={style.btnPrimary}
-            title="Next">
+            title="Next"
+            onPress={() => setCurrentStep(currentStep + 1) }>
           <Text style={[style.btnPrimaryText, style.nextBtnText]}>
             <FormattedMessage defaultMessage='Next' description='Next Button'/>
           </Text>
@@ -152,11 +171,54 @@ const RegisterFormStepOne = ({ style }) => (
           <Text style={style.loginIntoExistingAccount}>Login into Existing Account</Text>
         </TouchableOpacity>
       </View>
-    </View>
-  </ScrollView>
+  </View>
 );
 
-const RegisterFormStepTwo = ({ style }) => (
+const RegisterFormStepTwo = ({ style, currentStep, setCurrentStep }) => (
+  <View style={ style.container }>
+    <KeyboardAvoidingView >
+      <View style={style.labelAndOtpFields}>
+        <Text style={[style.label, style.otpLabel]}>
+          <FormattedMessage
+              defaultMessage='OTP'
+              description='OTP label'
+          />
+        </Text>
+        <View style={ style.otpFields }>
+          <TextInput style={ [style.inputField, style.otpField] }/>
+          <TextInput style={ [style.inputField, style.otpField] }/>
+          <TextInput style={ [style.inputField, style.otpField] }/>
+          <TextInput style={ [style.inputField, style.otpField] }/>
+          <TextInput style={ [style.inputField, style.otpField] }/>
+          <TextInput style={ [style.inputField, style.otpField] }/>
+        </View>
+        <TouchableOpacity style={{ marginBottom: 20 }}>
+          <Text style={style.loginIntoExistingAccount}>NOT 9845213459?</Text>
+        </TouchableOpacity>
+      </View>
+      <View>
+        <TouchableOpacity
+            style={style.btnPrimary}
+           title="Verify OTP and proceed"
+            onPress={() => setCurrentStep(currentStep + 1)}>
+          <Text style={style.btnPrimaryText}>
+            <FormattedMessage defaultMessage='Verify OTP and proceed' description='Verify OTP and proceed Button'/>
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+            style={style.btnOutlinePrimary}
+          title="Login into existing account"
+        >
+          <Text style={style.btnOutlinePrimaryText}>
+            <FormattedMessage defaultMessage='Login into existing account' description='Login into existing account button'/>
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </KeyboardAvoidingView>
+  </View>
+);
+
+const RegisterFormStepThree = ({ style }) => (
     <View style={style.container}>
     <KeyboardAvoidingView>
     <View style={style.labelAndInputContainer}>
@@ -200,21 +262,35 @@ const RegisterFormStepTwo = ({ style }) => (
 );
 
 const Register = ({ navigation }) => {
+  const [currentStep, setCurrentStep] = useRegisterFormStep(1);
   const { font, theme } = React.useContext(ThemeContext);
   const screenTheme = theme.screenLogin;
   const style = getStyles(screenTheme, theme.utilColors, font);
 
   return (
-    <NavigationContainer independent={true}>
-      <Text style={style.createAccountHeading}>Create a New Account</Text>
-      <View style={style.registerFormSvgContainer}>
-        <RegisterFormSvg/>
+      <ScrollView style={{ flex: 1 }}>
+        <Text style={style.createAccountHeading}>Create a New Account</Text>
+        <View style={style.registerFormSvgContainer}>
+          <RegisterFormSvg/>
       </View>
-      <Tab.Navigator>
-        <Tab.Screen options={{ tabBarStyle: { display: 'none' }, swipeEnabled: false }} name="RegisterFormStepOne" component={() => <RegisterFormStepOne style={ style }/>} />
-        <Tab.Screen options={{ tabBarStyle: { display: 'none' }, swipeEnabled: false }} name="RegisterFormStepTwo" component={() => <RegisterFormStepTwo style={ style }/>} />
-      </Tab.Navigator>
-    </NavigationContainer>
+      {
+        ((currentStep === 1)
+          && <RegisterFormStepOne
+            style={style}
+            currentStep={currentStep}
+            setCurrentStep={setCurrentStep} />)
+        || ((currentStep === 2)
+          && <RegisterFormStepTwo
+            style={style}
+            currentStep={currentStep}
+            setCurrentStep={setCurrentStep} />)
+        || ((currentStep === 3)
+          && <RegisterFormStepThree
+              style={style}
+              currentStep={currentStep}
+              setCurrentStep={setCurrentStep} />)
+      }
+      </ScrollView>
   );
 };
 
