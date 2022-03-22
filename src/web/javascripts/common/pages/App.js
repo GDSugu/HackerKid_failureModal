@@ -6,7 +6,8 @@ import {
   Navigate,
 } from 'react-router-dom';
 import loadable from '@loadable/component';
-import NavBar from '../components/NavBar';
+import 'bootstrap';
+import 'bootstrap/dist/js/bootstrap.min';
 import AuthNav from '../components/AuthNav/AuthNav';
 import '../../../stylesheets/common/sass/importers/_bootstrap.scss';
 import '../../../stylesheets/common/sass/importers/_fontawesome.scss';
