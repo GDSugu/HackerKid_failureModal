@@ -4,20 +4,9 @@ import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { pageInit } from '../framework';
 import '../../../stylesheets/common/pages/register/style.scss';
+import useRegisterFormStep from '../../../../hooks/pages/register';
 
-const nextBtnClickHandler = () => {
-  $('.step-1-fields').hide();
-  $('.step-2-fields').addClass('d-block');
-  $('.back-btn').addClass('d-block');
-};
-
-const backBtnClickHandler = () => {
-  $('.step-1-fields').show();
-  $('.step-2-fields').removeClass('d-block');
-  $('.back-btn').removeClass('d-block');
-};
-
-const RegisterFormStepOne = () => (
+const RegisterFormStepOne = ({ currentStep, setCurrentStep }) => (
   <div className='step-1-fields'>
   <div className="form-group mb-3">
     <div className='label-with-helper d-flex justify-content-between'>
@@ -88,7 +77,7 @@ const RegisterFormStepOne = () => (
     <input className='form-control' type='text' name='parent-name' id='parent-name' placeholder="Parent's Name"/>
   </div>
   <div className='take-action-buttons mt-4'>
-    <button type="button" className='next-btn btn btn-primary btn-block mb-3' onClick={nextBtnClickHandler}>
+    <button type="button" className='next-btn btn btn-primary btn-block mb-3' onClick={() => setCurrentStep(currentStep + 1)}>
       <span className='overline-bold'>
         <FormattedMessage
           defaultMessage="Next"
@@ -97,7 +86,7 @@ const RegisterFormStepOne = () => (
       </span>
       <i className="fa fa-angle-right"></i>
     </button>
-    <Link to='/login' className='overline-bold text-center login-into-existing-account mb-3'>
+    <Link to='/login' className='login-into-existing-account overline-bold text-center mb-3'>
       <FormattedMessage
         defaultMessage="Login Into Existing Account"
         description="Login Into existing account button"
@@ -108,53 +97,53 @@ const RegisterFormStepOne = () => (
 );
 
 const RegisterFormStepThree = () => (
-  <div className='step-3-fields d-none'>
-            <div className="form-group mb-3">
-                <div className='label-with-helper d-flex justify-content-between'>
-                  <label htmlFor="password" className="form-label overline-bold">
-                    <FormattedMessage
-                    defaultMessage="Set a Password"
-                    description="Set password label"
-                      />
-                  </label>
-                  <span className='form-helper text-danger overline-bold d-none'>
-                    <FormattedMessage
-                    defaultMessage="Enter a valid password"
-                    description="Set password form helper"
-                    />
-                  </span>
-                </div>
-                <input className='form-control' type='password' name='password' id='password' placeholder='Password' />
-            </div>
-            <div className="form-group mb-3">
-                <div className='d-flex justify-content-between label-with-helper'>
-                  <label htmlFor="retyped-password" className="form-label overline-bold">
-                    <FormattedMessage
-                    defaultMessage="Re-type password"
-                    description="Re-type password label"
-                      />
-                  </label>
-                  <span className='form-helper text-danger overline-bold d-none'>
-                    <FormattedMessage
-                    defaultMessage="Passwords do not match"
-                    description="Re-type password form helper"
-                    />
-                  </span>
-                </div>
-                <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' />
-            </div>
-            <div className='take-action-buttons'>
-              <button type="button" className='create-account-btn btn btn-primary btn-block'>
-                <FormattedMessage
-                  defaultMessage="Create Account"
-                  description="Create Account button"/>
-              </button>
-            </div>
-          </div>
+  <div className='step-3-fields'>
+    <div className="form-group mb-3">
+        <div className='label-with-helper d-flex justify-content-between'>
+          <label htmlFor="password" className="form-label overline-bold">
+            <FormattedMessage
+            defaultMessage="Set a Password"
+            description="Set password label"
+              />
+          </label>
+          <span className='form-helper text-danger overline-bold d-none'>
+            <FormattedMessage
+            defaultMessage="Enter a valid password"
+            description="Set password form helper"
+            />
+          </span>
+        </div>
+        <input className='form-control' type='password' name='password' id='password' placeholder='Password' />
+    </div>
+    <div className="form-group mb-3">
+        <div className='label-with-helper d-flex justify-content-between'>
+          <label htmlFor="retyped-password" className="form-label overline-bold">
+            <FormattedMessage
+            defaultMessage="Re-type password"
+            description="Re-type password label"
+              />
+          </label>
+          <span className='form-helper text-danger overline-bold d-none'>
+            <FormattedMessage
+            defaultMessage="Passwords do not match"
+            description="Re-type password form helper"
+            />
+          </span>
+        </div>
+        <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' />
+    </div>
+    <div className='take-action-buttons'>
+      <button type="button" className='create-account-btn btn btn-primary btn-block'>
+        <FormattedMessage
+          defaultMessage="Create Account"
+          description="Create Account button"/>
+      </button>
+    </div>
+  </div>
 );
 
-const RegisterFormStepTwo = () => (
-  <div className='step-2-fields d-none'>
+const RegisterFormStepTwo = ({ currentStep, setCurrentStep }) => (
+  <div className='step-2-fields'>
     <div className='label-and-otp-fields mb-5'>
       <label>
         <FormattedMessage defaultMessage='OTP' description='OTP Label' />
@@ -175,7 +164,9 @@ const RegisterFormStepTwo = () => (
     </Link>
     </div>
     <div className='take-action-buttons'>
-      <button type='button' className='verify-otp-btn btn btn-primary btn-block mb-2'>
+      <button type='button'
+        className='verify-otp-btn btn btn-primary btn-block mb-2'
+        onClick={() => setCurrentStep(currentStep + 1)}>
         <FormattedMessage
           defaultMessage="Verify OTP and proceed"
           description="verify otp button"/>
@@ -196,12 +187,18 @@ const RegisterFormStepTwo = () => (
 const Register = () => {
   pageInit('auth-container', 'Register');
 
+  const [currentStep, setCurrentStep] = useRegisterFormStep(1);
+
+  const backBtnDisplay = currentStep > 1 ? 'd-block' : 'd-none';
+
   return (
     <>
       <div className='form-container'>
         <form className='create-account-form p-3 w-100'>
           <header className='d-flex'>
-            <i className='back-btn fa fa-arrow-left d-none' onClick={backBtnClickHandler}></i>
+            <i
+              className={`back-btn fa fa-arrow-left ${backBtnDisplay}`}
+              onClick={() => setCurrentStep(currentStep - 1)}></i>
             <h5 className='subtitle1 text-center flex-grow-1'>
               <FormattedMessage
                 defaultMessage="Create a New Account"
@@ -209,9 +206,14 @@ const Register = () => {
             </h5>
           </header>
           <img src='../../../../images/register/register-form-svg.svg' className='form-svg' />
-          <RegisterFormStepOne />
-          <RegisterFormStepTwo />
-          <RegisterFormStepThree />
+          {
+            ((currentStep === 1)
+            && <RegisterFormStepOne currentStep={currentStep} setCurrentStep={setCurrentStep} />)
+            || ((currentStep === 2)
+            && <RegisterFormStepTwo currentStep={currentStep} setCurrentStep={setCurrentStep} />)
+            || ((currentStep === 3)
+            && <RegisterFormStepThree currentStep={currentStep} setCurrentStep={setCurrentStep} />)
+          }
         </form>
       </div>
     </>
