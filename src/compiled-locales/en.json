@@ -17,22 +17,10 @@
       "value": "Forgot Password?"
     }
   ],
-  "1RUvaS": [
-    {
-      "type": 0,
-      "value": "Profile Settings"
-    }
-  ],
   "1x4WPP": [
     {
       "type": 0,
       "value": "Create a New Account"
-    }
-  ],
-  "2W0f9h": [
-    {
-      "type": 0,
-      "value": "Bio"
     }
   ],
   "383EZ1": [
@@ -45,12 +33,6 @@
     {
       "type": 0,
       "value": "Next"
-    }
-  ],
-  "4Ve1r3": [
-    {
-      "type": 0,
-      "value": "Ok"
     }
   ],
   "5L6FVQ": [
@@ -107,12 +89,6 @@
       "value": "Create a New Account"
     }
   ],
-  "BB+f/k": [
-    {
-      "type": 0,
-      "value": "Try again"
-    }
-  ],
   "C8CsWY": [
     {
       "type": 0,
@@ -155,24 +131,6 @@
       "value": "Enter a valid Parent's name"
     }
   ],
-  "GQwBTI": [
-    {
-      "type": 0,
-      "value": "Verify OTP and proceed"
-    }
-  ],
-  "HAlOn1": [
-    {
-      "type": 0,
-      "value": "Name"
-    }
-  ],
-  "HI8bPV": [
-    {
-      "type": 0,
-      "value": "Save"
-    }
-  ],
   "MS/biV": [
     {
       "type": 0,
@@ -189,18 +147,6 @@
     {
       "type": 0,
       "value": "Create Account"
-    }
-  ],
-  "R5SEEt": [
-    {
-      "type": 0,
-      "value": "Close"
-    }
-  ],
-  "RCQEmZ": [
-    {
-      "type": 0,
-      "value": "Grade"
     }
   ],
   "RHM1lo": [
@@ -245,12 +191,6 @@
       "value": "Re-type password"
     }
   ],
-  "X1rCRf": [
-    {
-      "type": 0,
-      "value": "Login into existing account"
-    }
-  ],
   "Yz1BIF": [
     {
       "type": 0,
@@ -275,18 +215,6 @@
       "value": "Enter a valid Name"
     }
   ],
-  "c9n6Sh": [
-    {
-      "type": 0,
-      "value": "School"
-    }
-  ],
-  "e5Eaen": [
-    {
-      "type": 0,
-      "value": "Profile updated successfully"
-    }
-  ],
   "fOZCSk": [
     {
       "type": 0,
@@ -305,12 +233,6 @@
       "value": "Name"
     }
   ],
-  "h7B/gA": [
-    {
-      "type": 0,
-      "value": "store authtoken"
-    }
-  ],
   "hxLhGK": [
     {
       "type": 0,
@@ -323,34 +245,10 @@
       "value": "Go to Games"
     }
   ],
-  "lKeCea": [
-    {
-      "type": 0,
-      "value": "Save & Exit"
-    }
-  ],
-  "mDpOZM": [
-    {
-      "type": 0,
-      "value": "OTP"
-    }
-  ],
-  "mm9QaY": [
-    {
-      "type": 0,
-      "value": "School"
-    }
-  ],
   "mtXEZg": [
     {
       "type": 0,
       "value": "Parent's Name"
-    }
-  ],
-  "no2x/M": [
-    {
-      "type": 0,
-      "value": "Not 9876543210?"
     }
   ],
   "of2vJ9": [
@@ -369,12 +267,6 @@
     {
       "type": 0,
       "value": "Go to Home"
-    }
-  ],
-  "qXTiEd": [
-    {
-      "type": 0,
-      "value": "Grade"
     }
   ],
   "quRCCv": [
@@ -417,12 +309,6 @@
     {
       "type": 0,
       "value": "Enter a valid Email address"
-    }
-  ],
-  "z9lFwl": [
-    {
-      "type": 0,
-      "value": "Name"
     }
   ]
 }

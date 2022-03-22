@@ -11,16 +11,9 @@
     "defaultMessage": "Forgot Password?",
     "description": "forgot password link"
   },
-  "1RUvaS": {
-    "defaultMessage": "Profile Settings",
-    "description": "Navigation link to profile edit page"
-  },
   "1x4WPP": {
     "defaultMessage": "Create a New Account",
     "description": "Create a New Account heading"
-  },
-  "2W0f9h": {
-    "defaultMessage": "Bio"
   },
   "383EZ1": {
     "defaultMessage": "This is more options page",
@@ -29,10 +22,6 @@
   "3Wcqsy": {
     "defaultMessage": "Next",
     "description": "Next button"
-  },
-  "4Ve1r3": {
-    "defaultMessage": "Ok",
-    "description": "confirm btn"
   },
   "5L6FVQ": {
     "defaultMessage": "Password",
@@ -70,10 +59,6 @@
     "defaultMessage": "Create a New Account",
     "description": "Create a New Account button"
   },
-  "BB+f/k": {
-    "defaultMessage": "Try again",
-    "description": "try again btn"
-  },
   "C8CsWY": {
     "defaultMessage": "This is Class page",
     "description": "Class Page"
@@ -102,17 +87,6 @@
     "defaultMessage": "Enter a valid Parent's name",
     "description": "Parent's name form helper"
   },
-  "GQwBTI": {
-    "defaultMessage": "Verify OTP and proceed",
-    "description": "verify otp button"
-  },
-  "HAlOn1": {
-    "defaultMessage": "Name"
-  },
-  "HI8bPV": {
-    "defaultMessage": "Save",
-    "description": "Profile save button"
-  },
   "MS/biV": {
     "defaultMessage": "Go to Index",
     "description": "Link description"
@@ -124,14 +98,6 @@
   "OdODwS": {
     "defaultMessage": "Create Account",
     "description": "Create Account button"
-  },
-  "R5SEEt": {
-    "defaultMessage": "Close",
-    "description": "close button"
-  },
-  "RCQEmZ": {
-    "defaultMessage": "Grade",
-    "description": "Profile grade label"
   },
   "RHM1lo": {
     "defaultMessage": "Re-type Password",
@@ -160,10 +126,6 @@
     "defaultMessage": "Re-type password",
     "description": "Re-type password label"
   },
-  "X1rCRf": {
-    "defaultMessage": "Login into existing account",
-    "description": "login into existing account button"
-  },
   "Yz1BIF": {
     "defaultMessage": "Go to About",
     "description": "Link description"
@@ -180,13 +142,6 @@
     "defaultMessage": "Enter a valid Name",
     "description": "Name form helper"
   },
-  "c9n6Sh": {
-    "defaultMessage": "School"
-  },
-  "e5Eaen": {
-    "defaultMessage": "Profile updated successfully",
-    "description": "success modal"
-  },
   "fOZCSk": {
     "defaultMessage": "Set a Password",
     "description": "Set password label"
@@ -199,10 +154,6 @@
     "defaultMessage": "Name",
     "description": "Name label"
   },
-  "h7B/gA": {
-    "defaultMessage": "store authtoken",
-    "description": "authtoken temp storage btn"
-  },
   "hxLhGK": {
     "defaultMessage": "Set Password",
     "description": "Password Label"
@@ -211,25 +162,9 @@
     "defaultMessage": "Go to Games",
     "description": "Link description"
   },
-  "lKeCea": {
-    "defaultMessage": "Save & Exit",
-    "description": "Profile save button"
-  },
-  "mDpOZM": {
-    "defaultMessage": "OTP",
-    "description": "OTP Label"
-  },
-  "mm9QaY": {
-    "defaultMessage": "School",
-    "description": "Profile school label"
-  },
   "mtXEZg": {
     "defaultMessage": "Parent's Name",
     "description": "Parent's Name label"
-  },
-  "no2x/M": {
-    "defaultMessage": "Not 9876543210?",
-    "description": "not button"
   },
   "of2vJ9": {
     "defaultMessage": "This is Video page",
@@ -242,9 +177,6 @@
   "q86PwV": {
     "defaultMessage": "Go to Home",
     "description": "Home Navigation Button"
-  },
-  "qXTiEd": {
-    "defaultMessage": "Grade"
   },
   "quRCCv": {
     "defaultMessage": "Phone",
@@ -273,9 +205,5 @@
   "xOy0Vc": {
     "defaultMessage": "Enter a valid Email address",
     "description": "Email form helper"
-  },
-  "z9lFwl": {
-    "defaultMessage": "Name",
-    "description": "Profile name label"
   }
 }
