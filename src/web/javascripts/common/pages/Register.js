@@ -107,7 +107,7 @@ const RegisterFormStepOne = () => (
 </div>
 );
 
-const RegisterFormStepTwo = () => (
+const RegisterFormStepThree = () => (
   <div className='step-3-fields d-none'>
             <div className="form-group mb-3">
                 <div className='label-with-helper d-flex justify-content-between'>
@@ -153,7 +153,7 @@ const RegisterFormStepTwo = () => (
           </div>
 );
 
-const RegisterFormStepThree = () => (
+const RegisterFormStepTwo = () => (
   <div className='step-2-fields d-none'>
     <div className='label-and-otp-fields mb-5'>
       <label>
