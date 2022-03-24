@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
   View,
@@ -12,12 +12,14 @@ import {
 import ThemeContext from '../components/theme';
 import RegisterFormSvg from '../../images/register/register-form-svg.svg';
 import useRegisterFormStep from '../../hooks/pages/register/index';
+import Icon from '../common/Icons';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
     flex: 1,
     paddingLeft: 18,
     paddingRight: 18,
+    justifyContent: 'center',
   },
   label: {
     color: 'black',
@@ -29,6 +31,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     marginVertical: 10,
     ...font.heading6,
     textAlign: 'center',
+    flexGrow: 1,
   },
   inputField: {
     borderWidth: 1,
@@ -77,6 +80,11 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     marginBottom: 25,
     textAlign: 'center',
   },
+  nextBtn: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   nextBtnText: {
     textAlign: 'left',
   },
@@ -102,9 +110,25 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     borderBottomWidth: 2,
     marginRight: 10,
   },
+  hide: {
+    display: 'none',
+  },
+  show: {
+    display: 'flex',
+  },
+  formHeadingAndBackBtn: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    flex: 1,
+    paddingHorizontal: 18,
+  },
 });
 
-const RegisterFormStepOne = ({ style, currentStep, setCurrentStep }) => (
+const RegisterFormStepOne = ({
+  style, currentStep, setCurrentStep, theme, font,
+}) => (
     <View style={style.container}>
       <KeyboardAvoidingView>
       <View style={style.labelAndInputContainer}>
@@ -160,12 +184,18 @@ const RegisterFormStepOne = ({ style, currentStep, setCurrentStep }) => (
       </KeyboardAvoidingView>
       <View>
         <TouchableOpacity
-            style={style.btnPrimary}
+            style={[style.btnPrimary, style.nextBtn]}
             title="Next"
             onPress={() => setCurrentStep(currentStep + 1) }>
           <Text style={[style.btnPrimaryText, style.nextBtnText]}>
-            <FormattedMessage defaultMessage='Next' description='Next Button'/>
-          </Text>
+            <FormattedMessage defaultMessage='Next' description='Next Button' />
+        </Text>
+        <Icon
+                name='chevron-right'
+                type='FontAwesome'
+                size={font.bodyBold.fontSize}
+                color={theme.utilColors.white}
+            />
         </TouchableOpacity>
         <TouchableOpacity>
           <Text style={style.loginIntoExistingAccount}>Login into Existing Account</Text>
@@ -174,7 +204,9 @@ const RegisterFormStepOne = ({ style, currentStep, setCurrentStep }) => (
   </View>
 );
 
-const RegisterFormStepTwo = ({ style, currentStep, setCurrentStep }) => (
+const RegisterFormStepTwo = ({
+  style, currentStep, setCurrentStep,
+}) => (
   <View style={ style.container }>
     <KeyboardAvoidingView >
       <View style={style.labelAndOtpFields}>
@@ -267,26 +299,51 @@ const Register = ({ navigation }) => {
   const screenTheme = theme.screenLogin;
   const style = getStyles(screenTheme, theme.utilColors, font);
 
+  const backBtnStyle = currentStep > 1 ? style.show : style.hide;
+
+  // useEffect(() => {
+  //   const backAction = () => {
+  //     if (currentStep > 1) {
+  //       setCurrentStep(currentStep - 1);
+  //     }
+  //   };
+
+  //   const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+  //   return () => backHandler.remove();
+  // }, []);
+
   return (
-      <ScrollView style={{ flex: 1 }}>
-        <Text style={style.createAccountHeading}>Create a New Account</Text>
+    <ScrollView style={{ flex: 1 }}>
+      <View style={style.formHeadingAndBackBtn}>
+        <TouchableOpacity style={ backBtnStyle } onPress={() => setCurrentStep(currentStep - 1)}>
+          <Icon name={'arrow-left'} type='FontAwesome' size={font.heading6.fontSize} color={ theme.utilColors.dark }/>
+        </TouchableOpacity>
+        <Text style={style.createAccountHeading}>
+          <FormattedMessage defaultMessage={'Create a New Account'} description='Create Account Heading'/>
+        </Text>
+        </View>
         <View style={style.registerFormSvgContainer}>
           <RegisterFormSvg/>
-      </View>
+        </View>
       {
         ((currentStep === 1)
           && <RegisterFormStepOne
             style={style}
+          theme={theme}
+          font={font}
             currentStep={currentStep}
             setCurrentStep={setCurrentStep} />)
         || ((currentStep === 2)
           && <RegisterFormStepTwo
-            style={style}
+          style={style}
+          theme={ theme }
             currentStep={currentStep}
             setCurrentStep={setCurrentStep} />)
         || ((currentStep === 3)
           && <RegisterFormStepThree
               style={style}
+              theme={ theme }
               currentStep={currentStep}
               setCurrentStep={setCurrentStep} />)
       }
