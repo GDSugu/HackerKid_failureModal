@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 import { pageInit } from '../framework';
 import '../../../stylesheets/common/pages/login/style.scss';
 
-const Signin = () => {
+const Login = () => {
   pageInit('auth-container', 'Login');
 
   return (
     <>
       <div className='form-container'>
         <form className='login-form p-3 w-100'>
-          <img src='../../../../images/signin/signin-form-svg.svg' className='form-svg' alt='form-svg'/>
+          <img src='../../../../images/login/login-form-svg.svg' className='form-svg' alt='form-svg'/>
           <div className="mb-3 form-group">
             <div className='label-with-helper d-flex justify-content-between'>
               <label htmlFor="phone-or-email" className="form-label overline-bold">
@@ -86,4 +86,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default Login;
