@@ -10,6 +10,19 @@ import { useRegisterFormStep, useRegisterFormSavedFields } from '../../../../hoo
 
 const manager = {};
 
+const removeValidationIndicatiors = (e) => {
+  const currentTarget = $(e.target);
+
+  if (currentTarget.hasClass('is-invalid')) {
+    currentTarget.removeClass('is-invalid');
+    const formHelper = $(`#${currentTarget.attr('id')}-form-helper`);
+
+    if (formHelper.css('display') === 'block') {
+      formHelper.hide();
+    }
+  }
+};
+
 const stepOneRequest = (phoneNumber, countryCode) => {
   const postData = {
     type: 'send-otp',
@@ -84,13 +97,11 @@ const RegisterFormStepOne = ({
       utilsScript: intlTelInput.utilsScript,
     });
   }, []);
-  const nextBtnClickHandler = () => {
+  const nextBtnClickHandler = (e) => {
     const phoneFieldValue = validate('#phone', 'mobile', 1, '#phone-form-helper', 'Enter a valid phone number');
     const emailFieldValue = validate('#email', 'email', 1, '#email-form-helper', 'Enter a valid E-mail address');
     const nameFieldValue = validate('#name', 'name', 1, '#name-form-helper', 'Enter a valid name');
     const parentNameFieldValue = validate('#parent-name', 'name', 1, '#parent-name-form-helper', "Enter a valid Parent's Name");
-
-    console.log(phoneFieldValue, emailFieldValue, nameFieldValue, parentNameFieldValue);
 
     if (phoneFieldValue
       && emailFieldValue
@@ -99,18 +110,21 @@ const RegisterFormStepOne = ({
       let countryCode = manager.telInput.getSelectedCountryData();
       countryCode = `+${countryCode.dialCode}`;
 
-      setSavedValuesObj(getValuesObj('.create-account-form .step-1-fields input'));
-      // setCurrentStep(currentStep + 1);
+      const enteredValues = getValuesObj('.create-account-form .step-1-fields input');
+      enteredValues.countryCode = countryCode;
+
+      setSavedValuesObj(enteredValues);
 
       stepOneRequest(phoneFieldValue, countryCode).then((data) => {
         if (data.status === 'success') {
           setCurrentStep(currentStep + 1);
         } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
           $('#phone').addClass('is-invalid').removeClass('is-valid');
-          $('#step-error').text('Account already exists!, try logging in').removeClass('invisible');
+          $('#current-step-error').text('Account already exists!, try logging in').removeClass('d-none');
         }
       });
     }
+    $(e.target).parents('form').attr('was-validated', true);
   };
 
   return (
@@ -126,7 +140,7 @@ const RegisterFormStepOne = ({
           <span className='form-helper text-danger overline-bold' id='phone-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='tel' name='phone' id='phone' placeholder='Phone' defaultValue={savedValuesObj.phone} required={ true }/>
+        <input className='form-control' type='tel' name='phone' id='phone' placeholder='Phone' defaultValue={savedValuesObj.phone} required={true} onChange={removeValidationIndicatiors}/>
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -139,7 +153,7 @@ const RegisterFormStepOne = ({
           <span className='form-helper text-danger overline-bold' id='email-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='email' name='email' id='email' placeholder='Email' defaultValue={savedValuesObj.email} required={ true }/>
+        <input className='form-control' type='email' name='email' id='email' placeholder='Email' defaultValue={savedValuesObj.email} required={ true } onChange={removeValidationIndicatiors}/>
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -152,7 +166,7 @@ const RegisterFormStepOne = ({
           <span className='form-helper text-danger overline-bold' id='name-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='text' name='name' id='name' placeholder='Name' defaultValue={savedValuesObj.name} required={ true }/>
+        <input className='form-control' type='text' name='name' id='name' placeholder='Name' defaultValue={savedValuesObj.name} required={ true } onChange={removeValidationIndicatiors}/>
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -165,8 +179,9 @@ const RegisterFormStepOne = ({
           <span className='form-helper text-danger overline-bold' id='parent-name-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='text' name='parent-name' id='parent-name' placeholder="Parent's Name" defaultValue={savedValuesObj['parent-name']} required={ true }/>
+        <input className='form-control' type='text' name='parent-name' id='parent-name' placeholder="Parent's Name" defaultValue={savedValuesObj['parent-name']} required={ true } onChange={removeValidationIndicatiors}/>
       </div>
+      <p className='current-step-error text-danger overline-bold text-center d-none' id='current-step-error'></p>
       <div className='take-action-buttons mt-4'>
         <button type="button" className='next-btn btn btn-primary btn-block mb-3' onClick={nextBtnClickHandler}>
           <span className='overline-bold'>
@@ -188,7 +203,7 @@ const RegisterFormStepOne = ({
   );
 };
 
-const RegisterFormStepTwo = ({ phoneNumber, currentStep, setCurrentStep }) => {
+const RegisterFormStepTwo = ({ savedValuesObj, currentStep, setCurrentStep }) => {
   const inputOnChangeHandler = (e) => {
     const { target } = e;
     const currentValue = target.value;
@@ -237,10 +252,9 @@ const RegisterFormStepTwo = ({ phoneNumber, currentStep, setCurrentStep }) => {
     const validatedOtp = validateOtp(enteredOtp, '[0-9]{4,4}$', 4);
 
     if (validatedOtp) {
-      let countryCode = manager.telInput.getSelectedCountryData();
-      countryCode = `+${countryCode.dialCode}`;
-
-      stepTwoRequest(phoneNumber, countryCode, validatedOtp).then((data) => {
+      stepTwoRequest(savedValuesObj.phone,
+        savedValuesObj.countryCode,
+        validatedOtp).then((data) => {
         if (data.status === 'success') {
           setCurrentStep(currentStep + 1);
         } else if (data.status === 'error' && data.message === 'OTP_EXPIRED') {
@@ -266,12 +280,13 @@ const RegisterFormStepTwo = ({ phoneNumber, currentStep, setCurrentStep }) => {
             defaultMessage='Not {phone}'
             description="not button"
             values={{
-              phone: phoneNumber,
+              phone: savedValuesObj.phone,
             }}
           />
         </Link>
       </div>
-      <div className='take-action-buttons'>
+      <p className='current-step-error text-danger overline-bold text-center d-none' id='step-error'></p>
+      <div className='take-action-buttons mt-4'>
         <button type='button'
           className='verify-otp-btn btn btn-primary btn-block mb-2'
           onClick={verifyBtnClickHandler}>
@@ -296,31 +311,28 @@ const RegisterFormStepTwo = ({ phoneNumber, currentStep, setCurrentStep }) => {
 
 const RegisterFormStepThree = ({ savedValuesObj }) => {
   const createAccountBtnClickHandler = () => {
-    // let countryCode = manager.telInput.getSelectedCountryData();
-    // countryCode = `+${countryCode.dialCode}`;
-
     const enteredPassword = validate('#password', 'password', 1, '#password-form-helper', 'Enter a valid password');
     const retypedPassword = validate('#retyped-password', 'password', 1, '#retyped-password-form-helper', 'Enter a valid password');
-
     if ((enteredPassword && retypedPassword)) {
+      $('#step-error').addClass('invisible');
       if (enteredPassword !== retypedPassword) {
         $('#password').addClass('is-invalid').removeClass('is-valid');
         $('#password-form-helper').html('Passwords do not match');
 
         $('#retyped-password').addClass('is-invalid').removeClass('is-valid');
       }
-      // stepThreeRequest(savedValuesObj.phone,
-      //   countryCode,
-      //   savedValuesObj.name,
-      //   savedValuesObj.email,
-      //   enteredPassword).then((data) => {
-      //   if (data.status === 'success' && data.message === 'REGISTERED') {
-      //     const sessionDetails = data.session;
-      //     authorize.setUserSession(sessionDetails);
-      //   }
-      // });
-    } else {
-      $('#password-form-helper').text('Enter a valid password');
+      stepThreeRequest(savedValuesObj.phone,
+        savedValuesObj.countryCode,
+        savedValuesObj.name,
+        savedValuesObj.email,
+        enteredPassword).then((data) => {
+        if (data.status === 'success' && data.message === 'REGISTERED') {
+          const sessionDetails = data.session;
+          authorize.setUserSession(sessionDetails);
+        }
+      });
+    } else if (!enteredPassword && !retypedPassword) {
+      $('#step-error').text('Passwords length must be atleast 4, consisting of letters and numbers').removeClass('invisible');
     }
   };
   return (
@@ -348,7 +360,7 @@ const RegisterFormStepThree = ({ savedValuesObj }) => {
           <span className='form-helper text-danger overline-bold' id='retyped-password-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' />
+        <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' typeName='Re-type Password' />
     </div>
     <div className='take-action-buttons'>
       <button type="button" className='create-account-btn btn btn-primary btn-block' onClick={createAccountBtnClickHandler}>
@@ -402,7 +414,6 @@ const Register = () => {
             </h5>
           </header>
           <img src='../../../../images/register/register-form-svg.svg' className='form-svg' />
-          {/* <RegisterFormStepThree currentStep={currentStep} setCurrentStep={setCurrentStep} /> */}
           {
             ((currentStep === 1)
               && <RegisterFormStepOne
@@ -413,13 +424,15 @@ const Register = () => {
               getValuesObj={ getValuesObj } />)
             || ((currentStep === 2)
               && <RegisterFormStepTwo
-                phoneNumber={savedValuesObj.phone}
+                savedValuesObj={savedValuesObj}
                 currentStep={currentStep}
                 setCurrentStep={setCurrentStep} />)
             || ((currentStep === 3)
-            && <RegisterFormStepThree currentStep={currentStep} setCurrentStep={setCurrentStep} />)
+              && <RegisterFormStepThree
+                savedValuesObj={savedValuesObj}
+                currentStep={currentStep}
+                setCurrentStep={setCurrentStep} />)
           }
-          <p className='step-error text-danger overline-bold invisible text-center' id='step-error'></p>
         </form>
 
       </div>

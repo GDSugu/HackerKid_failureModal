@@ -12,6 +12,10 @@
   min-height: 100vh;
 }
 
+.form-helper{
+  display:none;
+};
+
 .login-into-existing-account, .not-given-number {
   display: block;
   color: gt.theme-var(text-color-8);
