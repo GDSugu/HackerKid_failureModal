@@ -9,7 +9,7 @@ import post, {
 } from '../framework';
 import '../../../stylesheets/common/pages/register/style.scss';
 import { useRegisterFormStep, useRegisterFormSavedFields, useIsOtpTimerRunning } from '../../../../hooks/pages/register';
-import { togglePasswordVisibility, inputChangeAfterValidationHandler } from '../commonLoginRegisterFunctions';
+import { togglePasswordVisibility, inputChangeAfterValidationHandler, closeFormError } from '../commonLoginRegisterFunctions';
 
 const manager = {};
 
@@ -306,19 +306,19 @@ const RegisterFormStepTwo = ({ savedValuesObj, currentStep, setCurrentStep }) =>
         <div className='otp-fields mb-5'>
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
             inputOnChangeHandler(e);
-            inputChangeAfterValidationHandler(e);
+            closeFormError(e.target);
           }} data-close-form-error-type='OTP_EXPIRED'/>
           <input type='text' className='form-control' maxLength={1} onChange={ (e) => {
             inputOnChangeHandler(e);
-            inputChangeAfterValidationHandler(e);
+            closeFormError(e.target);
           } } data-close-form-error-type='OTP_EXPIRED'/>
           <input type='text' className='form-control' maxLength={1} onChange={ (e) => {
             inputOnChangeHandler(e);
-            inputChangeAfterValidationHandler(e);
+            closeFormError(e.target);
           } } data-close-form-error-type='OTP_EXPIRED'/>
           <input type='text' className='form-control' maxLength={1} onChange={ (e) => {
             inputOnChangeHandler(e);
-            inputChangeAfterValidationHandler(e);
+            closeFormError(e.target);
           } } data-close-form-error-type='OTP_EXPIRED'/>
         </div>
         <Link to='#' className='not-given-number overline-bold text-center' onClick={() => setCurrentStep(1)}>
