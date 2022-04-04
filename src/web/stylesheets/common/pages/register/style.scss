@@ -12,11 +12,13 @@
   min-height: 100vh;
 }
 
-.form-helper,#current-step-error{
-  display:none;
-};
+.form-helper,
+#form-error {
+  display: none;
+}
 
-.login-into-existing-account, .not-given-number{
+.login-into-existing-account,
+.not-given-number {
   display: block;
   color: gt.theme-var(text-color-8);
   margin-bottom: 1rem;
@@ -40,23 +42,24 @@
   }
 }
 
-.label-and-otp-fields{
+.label-and-otp-fields {
   width: 90%;
   margin: auto;
 
-  @include gm.media-breakpoint-up(sm){
+  @include gm.media-breakpoint-up(sm) {
     width: 70%;
   }
 }
 
-.otp-fields{
+.otp-fields {
   display: flex;
   justify-content: space-between;
 
-  input:not(:last-child){
-    margin-right: .6rem;
+  input:not(:last-child) {
+    margin-right: 0.6rem;
   }
-  input{
+
+  input {
     padding: initial;
     border-left: none;
     border-right: none;
@@ -65,10 +68,9 @@
     border-radius: initial;
     border-bottom-width: 2px !important;
     text-align: center;
-    border-bottom-width: 1px;
   }
 
-  input:focus{
+  input:focus {
     box-shadow: none;
     outline: none;
   }
@@ -78,14 +80,36 @@
   width: 100%;
 }
 
-.otp-timer{
+.otp-timer {
   display: none;
   color: gt.theme-var(text-color-5);
 }
 
-.resend-otp{
+.resend-otp {
   display: none;
   color: gt.theme-var(text-color-8);
   text-decoration: none;
   cursor: pointer;
+}
+
+.passwordfield-with-toggle-icon {
+  position: relative;
+
+  .password-toggle-icon-container {
+    position: absolute;
+    right: 10px;
+    top: 0.4rem;
+    font-size: 1rem;
+    color: gt.theme-var(text-color-5);
+    z-index: 3;
+
+    i {
+      cursor: pointer;
+    }
+  }
+}
+
+input[type="password"].is-invalid,
+input[type="text"]#password.is-invalid {
+  background-image: unset;
 }
