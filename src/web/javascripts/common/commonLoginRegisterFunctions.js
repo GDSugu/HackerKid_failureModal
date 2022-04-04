@@ -27,8 +27,10 @@ const closeFormError = (callingToCloseTarget) => {
 
 const inputChangeAfterValidationHandler = (e) => {
   const { target } = e;
-  removeInvalidBorderAndHelper(target);
-  closeFormError(target);
+  if ($(target).hasClass('invalid')) {
+    removeInvalidBorderAndHelper(target);
+    closeFormError(target);
+  }
 };
 
 const togglePasswordVisibility = (e) => {
@@ -46,9 +48,17 @@ const togglePasswordVisibility = (e) => {
   }
 };
 
+const setFormErrorField = (value, attrObj) => {
+  Object.keys(attrObj).forEach((attrName) => {
+    $('#form-error').attr(attrName, attrObj[attrName]);
+  });
+  $('#form-error').val(value).show();
+};
+
 export {
   removeInvalidBorderAndHelper,
   togglePasswordVisibility,
   closeFormError,
   inputChangeAfterValidationHandler,
+  setFormErrorField,
 };
