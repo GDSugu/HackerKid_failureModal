@@ -27,7 +27,7 @@ const closeFormError = (callingToCloseTarget) => {
 
 const inputChangeAfterValidationHandler = (e) => {
   const { target } = e;
-  if ($(target).hasClass('invalid')) {
+  if ($(target).hasClass('is-invalid')) {
     removeInvalidBorderAndHelper(target);
     closeFormError(target);
   }
