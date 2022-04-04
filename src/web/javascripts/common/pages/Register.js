@@ -1,30 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import $ from 'jquery';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/css/intlTelInput.css';
-import post, { pageInit, validate, authorize } from '../framework';
+import post, {
+  pageInit, validate, authorize,
+} from '../framework';
 import '../../../stylesheets/common/pages/register/style.scss';
 import { useRegisterFormStep, useRegisterFormSavedFields, useIsOtpTimerRunning } from '../../../../hooks/pages/register';
+import { togglePasswordVisibility, inputChangeAfterValidationHandler } from '../commonLoginRegisterFunctions';
 
 const manager = {};
-
-const removeValidationIndicatiors = (e) => {
-  const currentTarget = $(e.target);
-  const currentStepError = $('#current-step-error');
-
-  if (currentTarget.hasClass('is-invalid')) {
-    currentTarget.removeClass('is-invalid');
-    const formHelper = $(`#${currentTarget.attr('id')}-form-helper`);
-    if (formHelper.css('display') === 'block') {
-      formHelper.hide();
-    }
-  }
-  if (currentStepError.css('display') === 'block' && currentTarget.data('close-current-step-error') === true) {
-    currentStepError.hide();
-  }
-};
 
 const stepOneRequest = (phoneNumber, countryCode) => {
   const postData = {
@@ -123,7 +110,7 @@ const RegisterFormStepOne = ({
           setCurrentStep(currentStep + 1);
         } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
           $('#phone').addClass('is-invalid').removeClass('is-valid');
-          $('#current-step-error').text('Account already exists!, try logging in').show();
+          $('#form-error').text('Account already exists!, try logging in').attr('data-error-type', data.message).show();
         }
       });
     }
@@ -143,7 +130,7 @@ const RegisterFormStepOne = ({
           <span className='form-helper text-danger overline-bold' id='phone-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='tel' name='phone' id='phone' placeholder='Phone' defaultValue={savedValuesObj.phone} required={true} onChange={removeValidationIndicatiors} data-close-current-step-error={true}/>
+        <input className='form-control' type='tel' name='phone' id='phone' placeholder='Phone' defaultValue={savedValuesObj.phone} required={true} onChange={inputChangeAfterValidationHandler} data-close-form-error-type='ACCOUNT_EXIST' />
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -156,7 +143,7 @@ const RegisterFormStepOne = ({
           <span className='form-helper text-danger overline-bold' id='email-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='email' name='email' id='email' placeholder='Email' defaultValue={savedValuesObj.email} required={ true } onChange={removeValidationIndicatiors}/>
+        <input className='form-control' type='email' name='email' id='email' placeholder='Email' defaultValue={savedValuesObj.email} required={ true } onChange={inputChangeAfterValidationHandler}/>
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -169,7 +156,7 @@ const RegisterFormStepOne = ({
           <span className='form-helper text-danger overline-bold' id='name-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='text' name='name' id='name' placeholder='Name' defaultValue={savedValuesObj.name} required={ true } onChange={removeValidationIndicatiors}/>
+        <input className='form-control' type='text' name='name' id='name' placeholder='Name' defaultValue={savedValuesObj.name} required={ true } onChange={inputChangeAfterValidationHandler}/>
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -182,9 +169,9 @@ const RegisterFormStepOne = ({
           <span className='form-helper text-danger overline-bold' id='parent-name-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='text' name='parent-name' id='parent-name' placeholder="Parent's Name" defaultValue={savedValuesObj['parent-name']} required={ true } onChange={removeValidationIndicatiors} data-typename="Parent's Name" />
+        <input className='form-control' type='text' name='parent-name' id='parent-name' placeholder="Parent's Name" defaultValue={savedValuesObj['parent-name']} required={ true } onChange={inputChangeAfterValidationHandler} data-typename="Parent's Name" />
       </div>
-      <p className='current-step-error text-danger overline-bold text-center' id='current-step-error'></p>
+      <p className='form-error text-danger overline-bold text-center' id='form-error'></p>
       <div className='take-action-buttons mt-4'>
         <button type="button" className='next-btn btn btn-primary btn-block mb-3' onClick={nextBtnClickHandler}>
           <span className='overline-bold'>
@@ -299,7 +286,7 @@ const RegisterFormStepTwo = ({ savedValuesObj, currentStep, setCurrentStep }) =>
         if (data.status === 'success') {
           setCurrentStep(currentStep + 1);
         } else if (data.status === 'error' && data.message === 'OTP_EXPIRED') {
-          $('#current-step-error').html('Enter a valid OTP').show();
+          $('#form-error').html('Enter a valid OTP').attr('data-error-type', data.message).show();
         }
       });
     }
@@ -318,22 +305,21 @@ const RegisterFormStepTwo = ({ savedValuesObj, currentStep, setCurrentStep }) =>
         </div>
         <div className='otp-fields mb-5'>
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
-            console.log(e.target);
             inputOnChangeHandler(e);
-            removeValidationIndicatiors(e);
-          }} data-close-current-step-error={ true }/>
+            inputChangeAfterValidationHandler(e);
+          }} data-close-form-error-type='OTP_EXPIRED'/>
           <input type='text' className='form-control' maxLength={1} onChange={ (e) => {
             inputOnChangeHandler(e);
-            removeValidationIndicatiors(e);
-          } } data-close-current-step-error={ true }/>
+            inputChangeAfterValidationHandler(e);
+          } } data-close-form-error-type='OTP_EXPIRED'/>
           <input type='text' className='form-control' maxLength={1} onChange={ (e) => {
             inputOnChangeHandler(e);
-            removeValidationIndicatiors(e);
-          } } data-close-current-step-error={ true }/>
+            inputChangeAfterValidationHandler(e);
+          } } data-close-form-error-type='OTP_EXPIRED'/>
           <input type='text' className='form-control' maxLength={1} onChange={ (e) => {
             inputOnChangeHandler(e);
-            removeValidationIndicatiors(e);
-          } } data-close-current-step-error={ true }/>
+            inputChangeAfterValidationHandler(e);
+          } } data-close-form-error-type='OTP_EXPIRED'/>
         </div>
         <Link to='#' className='not-given-number overline-bold text-center' onClick={() => setCurrentStep(1)}>
           <FormattedMessage
@@ -345,7 +331,7 @@ const RegisterFormStepTwo = ({ savedValuesObj, currentStep, setCurrentStep }) =>
           />
         </Link>
       </div>
-      <p className='current-step-error text-danger overline-bold text-center' id='current-step-error'></p>
+      <p className='form-error text-danger overline-bold text-center' id='form-error'></p>
       <div className='take-action-buttons mt-4'>
         <button type='button'
           className='verify-otp-btn btn btn-primary btn-block mb-2'
@@ -391,7 +377,7 @@ const RegisterFormStepThree = ({ savedValuesObj }) => {
         }
       });
     } else if (!enteredPassword && !retypedPassword) {
-      $('#current-step-error').text('Passwords length must be atleast 4, consisting of letters and numbers').show();
+      $('#form-error').text('Passwords length must be atleast 4, consisting of letters and numbers').attr('data-error-type', 'PASSWORDS_DONT_MATCH').show();
     }
   };
   return (
@@ -406,7 +392,12 @@ const RegisterFormStepThree = ({ savedValuesObj }) => {
           </label>
           <span className='form-helper text-danger overline-bold' id='password-form-helper'></span>
         </div>
-        <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={removeValidationIndicatiors} data-close-current-step-error={ true }/>
+        <div className='passwordfield-with-toggle-icon'>
+          <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={inputChangeAfterValidationHandler} data-close-form-error-type='PASSWORDS_DONT_MATCH' />
+          <span className="password-toggle-icon-container">
+            <i className="fa fa-fw fa-eye toggle-password" toggle="#password" onClick={togglePasswordVisibility}></i>
+          </span>
+        </div>
     </div>
     <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -419,9 +410,14 @@ const RegisterFormStepThree = ({ savedValuesObj }) => {
           <span className='form-helper text-danger overline-bold' id='retyped-password-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' typename='Re-type Password' onChange={removeValidationIndicatiors} data-close-current-step-error={ true }/>
+        <div className='passwordfield-with-toggle-icon'>
+          <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' typename='Re-type Password' onChange={inputChangeAfterValidationHandler} data-close-form-error-type='PASSWORDS_DONT_MATCH'/>
+          <span className="password-toggle-icon-container">
+            <i className="fa fa-fw fa-eye toggle-password" toggle="#password" onClick={togglePasswordVisibility}></i>
+          </span>
+        </div>
       </div>
-      <p className='current-step-error text-danger overline-bold text-center' id='current-step-error'></p>
+      <p className='form-error text-danger overline-bold text-center' id='form-error'></p>
       <div className='take-action-buttons mt-4'>
         <button type="button" className='create-account-btn btn btn-primary btn-block' onClick={createAccountBtnClickHandler}>
           <FormattedMessage
@@ -474,11 +470,7 @@ const Register = () => {
             </h5>
           </header>
           <img src='../../../../images/register/register-form-svg.svg' className='form-svg' />
-          <RegisterFormStepThree
-                savedValuesObj={savedValuesObj}
-                currentStep={currentStep}
-                setCurrentStep={setCurrentStep} />
-          {/* {
+          {
             ((currentStep === 1)
               && <RegisterFormStepOne
               savedValuesObj={savedValuesObj}
@@ -496,7 +488,7 @@ const Register = () => {
                 savedValuesObj={savedValuesObj}
                 currentStep={currentStep}
                 setCurrentStep={setCurrentStep} />)
-          } */}
+          }
         </form>
 
       </div>
