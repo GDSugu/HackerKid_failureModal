@@ -28,11 +28,14 @@ const Login = () => {
 
   const { loginMethod, setLoginMethod, loginWithPhone } = useLoginMethod();
 
-  const loginMethodTabClickHandler = (e) => {
-    setLoginMethod('loginWithPhone');
+  const loginMethodTabClickHandler = (e, loginMethodToSet) => {
+    setLoginMethod(loginMethodToSet);
+
+    const inputFields = $('form input');
 
     closeFormError(e.target);
-    $('.is-invalid').each(function () {
+
+    inputFields.each(function () {
       $(this).val('');
       $(this).removeClass('is-invalid');
     });
@@ -91,13 +94,13 @@ const Login = () => {
             <li className="nav-item overline-bold" role="presentation">
               <a className="nav-link active" id="login-with-phone-tab"
                 data-toggle="pill" href="#login-with-phone"
-                role="tab" onClick={loginMethodTabClickHandler}
+                role="tab" onClick={(e) => loginMethodTabClickHandler(e, 'loginWithPhone')}
                 data-close-form-error-type='EMAIL_LOGIN_RESTRICTED'>Login with Phone</a>
             </li>
             <li className="nav-item overline-bold" role="presentation">
               <a className="nav-link" id="login-with-email-tab"
                 data-toggle="pill" href="#login-with-email"
-                role="tab" onClick={loginMethodTabClickHandler}
+                role="tab" onClick={(e) => loginMethodTabClickHandler(e, 'loginWithEmail')}
                 data-close-form-error-type='NOT_REGISTERED,INCORRECT'>Login with Email</a>
             </li>
           </ul>
