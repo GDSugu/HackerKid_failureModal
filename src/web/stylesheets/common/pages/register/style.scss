@@ -12,11 +12,11 @@
   min-height: 100vh;
 }
 
-.form-helper{
+.form-helper,#current-step-error{
   display:none;
 };
 
-.login-into-existing-account, .not-given-number {
+.login-into-existing-account, .not-given-number{
   display: block;
   color: gt.theme-var(text-color-8);
   margin-bottom: 1rem;
@@ -76,4 +76,16 @@
 
 .iti--separate-dial-code {
   width: 100%;
+}
+
+.otp-timer{
+  display: none;
+  color: gt.theme-var(text-color-5);
+}
+
+.resend-otp{
+  display: none;
+  color: gt.theme-var(text-color-8);
+  text-decoration: none;
+  cursor: pointer;
 }

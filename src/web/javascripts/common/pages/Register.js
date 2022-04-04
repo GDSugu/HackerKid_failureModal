@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import $ from 'jquery';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
@@ -6,20 +6,23 @@ import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/css/intlTelInput.css';
 import post, { pageInit, validate, authorize } from '../framework';
 import '../../../stylesheets/common/pages/register/style.scss';
-import { useRegisterFormStep, useRegisterFormSavedFields } from '../../../../hooks/pages/register';
+import { useRegisterFormStep, useRegisterFormSavedFields, useIsOtpTimerRunning } from '../../../../hooks/pages/register';
 
 const manager = {};
 
 const removeValidationIndicatiors = (e) => {
   const currentTarget = $(e.target);
+  const currentStepError = $('#current-step-error');
 
   if (currentTarget.hasClass('is-invalid')) {
     currentTarget.removeClass('is-invalid');
     const formHelper = $(`#${currentTarget.attr('id')}-form-helper`);
-
     if (formHelper.css('display') === 'block') {
       formHelper.hide();
     }
+  }
+  if (currentStepError.css('display') === 'block' && currentTarget.data('close-current-step-error') === true) {
+    currentStepError.hide();
   }
 };
 
@@ -120,7 +123,7 @@ const RegisterFormStepOne = ({
           setCurrentStep(currentStep + 1);
         } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
           $('#phone').addClass('is-invalid').removeClass('is-valid');
-          $('#current-step-error').text('Account already exists!, try logging in').removeClass('d-none');
+          $('#current-step-error').text('Account already exists!, try logging in').show();
         }
       });
     }
@@ -140,7 +143,7 @@ const RegisterFormStepOne = ({
           <span className='form-helper text-danger overline-bold' id='phone-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='tel' name='phone' id='phone' placeholder='Phone' defaultValue={savedValuesObj.phone} required={true} onChange={removeValidationIndicatiors}/>
+        <input className='form-control' type='tel' name='phone' id='phone' placeholder='Phone' defaultValue={savedValuesObj.phone} required={true} onChange={removeValidationIndicatiors} data-close-current-step-error={true}/>
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -179,9 +182,9 @@ const RegisterFormStepOne = ({
           <span className='form-helper text-danger overline-bold' id='parent-name-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='text' name='parent-name' id='parent-name' placeholder="Parent's Name" defaultValue={savedValuesObj['parent-name']} required={ true } onChange={removeValidationIndicatiors}/>
+        <input className='form-control' type='text' name='parent-name' id='parent-name' placeholder="Parent's Name" defaultValue={savedValuesObj['parent-name']} required={ true } onChange={removeValidationIndicatiors} data-typename="Parent's Name" />
       </div>
-      <p className='current-step-error text-danger overline-bold text-center d-none' id='current-step-error'></p>
+      <p className='current-step-error text-danger overline-bold text-center' id='current-step-error'></p>
       <div className='take-action-buttons mt-4'>
         <button type="button" className='next-btn btn btn-primary btn-block mb-3' onClick={nextBtnClickHandler}>
           <span className='overline-bold'>
@@ -204,6 +207,42 @@ const RegisterFormStepOne = ({
 };
 
 const RegisterFormStepTwo = ({ savedValuesObj, currentStep, setCurrentStep }) => {
+  const [isOtpTimerRunning, setIsOtpTimerRunning] = useIsOtpTimerRunning(false);
+
+  const startOtpTimer = () => {
+    const otpTimerDOM = $('.otp-timer');
+    const resendOtp = $('.resend-otp');
+    let seconds = 30;
+    let secondsText = '00 : 30';
+    otpTimerDOM.text(secondsText);
+    otpTimerDOM.show();
+    setIsOtpTimerRunning(true);
+    const timer = setInterval(() => {
+      seconds -= 1;
+      secondsText = `00 : ${(seconds > 9) ? seconds : (`0${seconds.toString()}`)}`;
+      otpTimerDOM.text(secondsText);
+      if (seconds <= 0) {
+        otpTimerDOM.hide();
+        resendOtp.show();
+        setIsOtpTimerRunning(false);
+        clearInterval(timer);
+      }
+    }, 1000);
+  };
+
+  const resendOtpClickHandler = () => {
+    $('.resend-otp').hide();
+    if (isOtpTimerRunning === false) {
+      stepOneRequest(savedValuesObj.phone, savedValuesObj.countryCode).then((data) => {
+        if (data.status === 'success') {
+          startOtpTimer();
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
+  };
+
   const inputOnChangeHandler = (e) => {
     const { target } = e;
     const currentValue = target.value;
@@ -248,8 +287,10 @@ const RegisterFormStepTwo = ({ savedValuesObj, currentStep, setCurrentStep }) =>
 
   const verifyBtnClickHandler = () => {
     const enteredOtp = gatherDigitsFromOtpFields();
+    console.log(enteredOtp);
 
     const validatedOtp = validateOtp(enteredOtp, '[0-9]{4,4}$', 4);
+    console.log(validatedOtp);
 
     if (validatedOtp) {
       stepTwoRequest(savedValuesObj.phone,
@@ -258,22 +299,41 @@ const RegisterFormStepTwo = ({ savedValuesObj, currentStep, setCurrentStep }) =>
         if (data.status === 'success') {
           setCurrentStep(currentStep + 1);
         } else if (data.status === 'error' && data.message === 'OTP_EXPIRED') {
-          $('#otp-form-helper').html('Enter a valid OTP');
+          $('#current-step-error').html('Enter a valid OTP').show();
         }
       });
     }
   };
+
+  useEffect(() => startOtpTimer(), []);
   return (
     <div className='step-2-fields'>
       <div className='label-and-otp-fields mb-5'>
-        <label>
-          <FormattedMessage defaultMessage='OTP' description='OTP Label' />
-        </label>
+        <div className='label-with-otp-timer d-flex justify-content-between'>
+          <label>
+            <FormattedMessage defaultMessage='OTP' description='OTP Label' />
+          </label>
+          <span className='otp-timer overline-bold'></span>
+          <span className='resend-otp overline-bold' onClick={resendOtpClickHandler}>Resend</span>
+        </div>
         <div className='otp-fields mb-5'>
-          <input type='text' className='form-control' maxLength={1} onChange={ inputOnChangeHandler }/>
-          <input type='text' className='form-control' maxLength={1} onChange={ inputOnChangeHandler }/>
-          <input type='text' className='form-control' maxLength={1} onChange={ inputOnChangeHandler }/>
-          <input type='text' className='form-control' maxLength={1} onChange={ inputOnChangeHandler }/>
+          <input type='text' className='form-control' maxLength={1} onChange={(e) => {
+            console.log(e.target);
+            inputOnChangeHandler(e);
+            removeValidationIndicatiors(e);
+          }} data-close-current-step-error={ true }/>
+          <input type='text' className='form-control' maxLength={1} onChange={ (e) => {
+            inputOnChangeHandler(e);
+            removeValidationIndicatiors(e);
+          } } data-close-current-step-error={ true }/>
+          <input type='text' className='form-control' maxLength={1} onChange={ (e) => {
+            inputOnChangeHandler(e);
+            removeValidationIndicatiors(e);
+          } } data-close-current-step-error={ true }/>
+          <input type='text' className='form-control' maxLength={1} onChange={ (e) => {
+            inputOnChangeHandler(e);
+            removeValidationIndicatiors(e);
+          } } data-close-current-step-error={ true }/>
         </div>
         <Link to='#' className='not-given-number overline-bold text-center' onClick={() => setCurrentStep(1)}>
           <FormattedMessage
@@ -285,7 +345,7 @@ const RegisterFormStepTwo = ({ savedValuesObj, currentStep, setCurrentStep }) =>
           />
         </Link>
       </div>
-      <p className='current-step-error text-danger overline-bold text-center d-none' id='step-error'></p>
+      <p className='current-step-error text-danger overline-bold text-center' id='current-step-error'></p>
       <div className='take-action-buttons mt-4'>
         <button type='button'
           className='verify-otp-btn btn btn-primary btn-block mb-2'
@@ -314,10 +374,9 @@ const RegisterFormStepThree = ({ savedValuesObj }) => {
     const enteredPassword = validate('#password', 'password', 1, '#password-form-helper', 'Enter a valid password');
     const retypedPassword = validate('#retyped-password', 'password', 1, '#retyped-password-form-helper', 'Enter a valid password');
     if ((enteredPassword && retypedPassword)) {
-      $('#step-error').addClass('invisible');
       if (enteredPassword !== retypedPassword) {
         $('#password').addClass('is-invalid').removeClass('is-valid');
-        $('#password-form-helper').html('Passwords do not match');
+        $('#password-form-helper').html('Passwords do not match').show();
 
         $('#retyped-password').addClass('is-invalid').removeClass('is-valid');
       }
@@ -332,7 +391,7 @@ const RegisterFormStepThree = ({ savedValuesObj }) => {
         }
       });
     } else if (!enteredPassword && !retypedPassword) {
-      $('#step-error').text('Passwords length must be atleast 4, consisting of letters and numbers').removeClass('invisible');
+      $('#current-step-error').text('Passwords length must be atleast 4, consisting of letters and numbers').show();
     }
   };
   return (
@@ -347,7 +406,7 @@ const RegisterFormStepThree = ({ savedValuesObj }) => {
           </label>
           <span className='form-helper text-danger overline-bold' id='password-form-helper'></span>
         </div>
-        <input className='form-control' type='password' name='password' id='password' placeholder='Password' />
+        <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={removeValidationIndicatiors} data-close-current-step-error={ true }/>
     </div>
     <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -360,15 +419,16 @@ const RegisterFormStepThree = ({ savedValuesObj }) => {
           <span className='form-helper text-danger overline-bold' id='retyped-password-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' typeName='Re-type Password' />
-    </div>
-    <div className='take-action-buttons'>
-      <button type="button" className='create-account-btn btn btn-primary btn-block' onClick={createAccountBtnClickHandler}>
-        <FormattedMessage
-          defaultMessage="Create Account"
-          description="Create Account button"/>
-      </button>
-    </div>
+        <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' typename='Re-type Password' onChange={removeValidationIndicatiors} data-close-current-step-error={ true }/>
+      </div>
+      <p className='current-step-error text-danger overline-bold text-center' id='current-step-error'></p>
+      <div className='take-action-buttons mt-4'>
+        <button type="button" className='create-account-btn btn btn-primary btn-block' onClick={createAccountBtnClickHandler}>
+          <FormattedMessage
+            defaultMessage="Create Account"
+            description="Create Account button"/>
+        </button>
+      </div>
   </div>
   );
 };
@@ -414,7 +474,11 @@ const Register = () => {
             </h5>
           </header>
           <img src='../../../../images/register/register-form-svg.svg' className='form-svg' />
-          {
+          <RegisterFormStepThree
+                savedValuesObj={savedValuesObj}
+                currentStep={currentStep}
+                setCurrentStep={setCurrentStep} />
+          {/* {
             ((currentStep === 1)
               && <RegisterFormStepOne
               savedValuesObj={savedValuesObj}
@@ -432,7 +496,7 @@ const Register = () => {
                 savedValuesObj={savedValuesObj}
                 currentStep={currentStep}
                 setCurrentStep={setCurrentStep} />)
-          }
+          } */}
         </form>
 
       </div>
