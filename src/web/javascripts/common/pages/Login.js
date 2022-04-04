@@ -148,7 +148,7 @@ const Login = () => {
               </span>
             </div>
             <div className='passwordfield-with-toggle-icon'>
-              <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={inputChangeAfterValidationHandler} data-close-form-error={true }/>
+              <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={inputChangeAfterValidationHandler} data-close-form-error-type='INCORRECT'/>
               <span className="password-toggle-icon-container">
                 <i className="fa fa-fw fa-eye toggle-password" toggle="#password" onClick={togglePasswordVisibility}></i>
               </span>
