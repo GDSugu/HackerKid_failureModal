@@ -114,7 +114,7 @@ const Login = () => {
                   <span className='form-helper text-danger overline-bold' id='phone-form-helper'>
                   </span>
                 </div>
-                <input className='form-control' type='text' name='phone' id='phone' placeholder='Phone' onChange={inputChangeAfterValidationHandler} data-close-form-error={true }/>
+                <input className='form-control' type='text' name='phone' id='phone' placeholder='Phone' onChange={inputChangeAfterValidationHandler} data-close-form-error-type='INCORRECT,NOT_REGISTERED'/>
               </div>
             </div>
             <div className="tab-pane fade" id="login-with-email" role="tabpanel">
@@ -129,7 +129,7 @@ const Login = () => {
                   <span className='form-helper text-danger overline-bold' id='email-form-helper'>
                   </span>
                 </div>
-                <input className='form-control' type='email' name='email' id='email' placeholder='Email' onChange={inputChangeAfterValidationHandler} data-close-form-error={true }/>
+                <input className='form-control' type='email' name='email' id='email' placeholder='Email' onChange={inputChangeAfterValidationHandler} data-close-form-error-type='INCORRECT'/>
               </div>
             </div>
           </div>
