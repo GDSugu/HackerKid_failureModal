@@ -199,11 +199,14 @@ const RegisterFormStepTwo = ({ savedValuesObj, currentStep, setCurrentStep }) =>
   const startOtpTimer = () => {
     const otpTimerDOM = $('.otp-timer');
     const resendOtp = $('.resend-otp');
+
     let seconds = 30;
     let secondsText = '00 : 30';
+
     otpTimerDOM.text(secondsText);
     otpTimerDOM.show();
     setIsOtpTimerRunning(true);
+
     const timer = setInterval(() => {
       seconds -= 1;
       secondsText = `00 : ${(seconds > 9) ? seconds : (`0${seconds.toString()}`)}`;
@@ -274,10 +277,7 @@ const RegisterFormStepTwo = ({ savedValuesObj, currentStep, setCurrentStep }) =>
 
   const verifyBtnClickHandler = () => {
     const enteredOtp = gatherDigitsFromOtpFields();
-    console.log(enteredOtp);
-
     const validatedOtp = validateOtp(enteredOtp, '[0-9]{4,4}$', 4);
-    console.log(validatedOtp);
 
     if (validatedOtp) {
       stepTwoRequest(savedValuesObj.phone,
@@ -413,7 +413,7 @@ const RegisterFormStepThree = ({ savedValuesObj }) => {
         <div className='passwordfield-with-toggle-icon'>
           <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' typename='Re-type Password' onChange={inputChangeAfterValidationHandler} data-close-form-error-type='PASSWORDS_DONT_MATCH'/>
           <span className="password-toggle-icon-container">
-            <i className="fa fa-fw fa-eye toggle-password" toggle="#password" onClick={togglePasswordVisibility}></i>
+            <i className="fa fa-fw fa-eye toggle-password" toggle="#retyped-password" onClick={togglePasswordVisibility}></i>
           </span>
         </div>
       </div>
