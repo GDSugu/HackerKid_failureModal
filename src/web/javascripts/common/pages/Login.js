@@ -3,25 +3,15 @@ import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import intlTelInput from 'intl-tel-input';
 import $ from 'jquery';
-import { inputChangeAfterValidationHandler, togglePasswordVisibility } from '../commonLoginRegisterFunctions';
+import { closeFormError, inputChangeAfterValidationHandler, togglePasswordVisibility } from '../commonLoginRegisterFunctions';
 import 'intl-tel-input/build/css/intlTelInput.css';
-import post, {
+import {
   pageInit, validate, authorize,
 } from '../framework';
 import '../../../stylesheets/common/pages/login/style.scss';
+import { useLoginMethod } from '../../../../hooks/pages/login';
 
 const manager = {};
-
-const getDevice = () => {
-  const ua = navigator.userAgent;
-  if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
-    return 'tablet';
-  }
-  if (/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
-    return 'mobile';
-  }
-  return 'web';
-};
 
 const Login = () => {
   pageInit('auth-container', 'Login');
@@ -36,49 +26,62 @@ const Login = () => {
     });
   }, []);
 
-  const loginWithPhone = (phone, password, email = false, useEmail = false) => {
-    const device = getDevice();
-    let countryCode = manager.telInput.getSelectedCountryData();
-    countryCode = `+${countryCode.dialCode}`;
-    // const neoeyed = getneoEyed(phone);
-    post({
-      type: 'usercheckPhone',
-      phone,
-      password,
-      device,
-      countryCode,
-      email,
-      useEmail,
-    }, 'login/')
-      .then((response) => {
+  const { loginMethod, setLoginMethod, loginWithPhone } = useLoginMethod();
+
+  const loginMethodTabClickHandler = (e) => {
+    setLoginMethod('loginWithPhone');
+
+    closeFormError(e.target);
+    $('.is-invalid').each(function () {
+      $(this).val('');
+      $(this).removeClass('is-invalid');
+    });
+  };
+
+  const loginBtnClickHandler = () => {
+    let primaryLoginField;
+
+    if (loginMethod === 'loginWithPhone') {
+      primaryLoginField = validate('#phone', 'mobile', 1, '#phone-form-helper', 'Enter a valid phone number');
+    } else {
+      primaryLoginField = validate('#email', 'email', 1, '#email-form-helper', 'Enter a E-mail Address');
+    }
+    const password = validate('#password', 'password', 1, '#password-form-helper', null, true);
+
+    if (primaryLoginField && password) {
+      let countryCode = manager.telInput.getSelectedCountryData();
+      countryCode = `+${countryCode.dialCode}`;
+
+      const phoneNumber = (loginMethod === 'loginWithPhone') ? primaryLoginField : '';
+      const email = (loginMethod !== 'loginWithPhone') ? primaryLoginField : false;
+
+      loginWithPhone(phoneNumber, countryCode, password, email).then((response) => {
         const data = JSON.parse(response);
 
         if (data.status === 'success') {
           authorize.setUserSession(data);
         } else if (data.status === 'not-exists') {
-          $('#form-error').html('You are not registered user, <a href="register.html">Register Now</a>').show();
+          $('#form-error').html('You are not registered user, <a href="/register">Register Now</a>').attr('data-error-type', 'NOT_REGISTERED').show();
           $('#phone').addClass('is-invalid').removeClass('is-valid');
           $('#password').removeClass('is-invalid');
         } else if (data.status === 'not-valid') {
-          $('#form-error').text('Incorrect Phone Number or Password').show();
-          $('#phone').addClass('is-invalid').removeClass('is-valid');
+          $('#form-error').text(`Incorrect ${email ? 'Email address' : 'Phone Number'} or Password`).attr('data-error-type', 'INCORRECT').show();
+          $(`${email ? '#email' : '#phone'}`).addClass('is-invalid').removeClass('is-valid');
           $('#password').addClass('is-invalid').removeClass('is-valid');
+        } else if (data.status === 'error' && data.message === 'EMAIL_LOGIN_RESTRICTED') {
+          $('#form-error').text('You are not allowed to login using email. Try mobile login.').attr('data-error-type', data.message).show();
+        } else if (data.status === 'error') {
+          // setErrorField('Server Error 500');
+          console.log(data.message);
         }
       })
-      .catch((error) => {
-        const errData = JSON.parse(error);
-        console.log(errData);
-      });
-  };
-
-  const loginBtnClickHandler = () => {
-    const validatedPhone = validate('#phone', 'mobile', 1, '#phone-form-helper', 'Enter a valid phone number');
-    const password = validate('#password', 'password', 1, '#password-form-helper', null, true);
-
-    if (validatedPhone && password) {
-      loginWithPhone(validatedPhone, password);
+        .catch((error) => {
+          const errData = JSON.parse(error);
+          console.log(errData);
+        });
     }
   };
+
   return (
     <>
       <div className='form-container'>
@@ -86,10 +89,16 @@ const Login = () => {
           <img src='../../../../images/login/login-form-svg.svg' className='form-svg' alt='form-svg' />
           <ul className="login-method-tabs nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
             <li className="nav-item overline-bold" role="presentation">
-              <a className="nav-link active" id="login-with-phone-tab" data-toggle="pill" href="#login-with-phone" role="tab">Login with Phone</a>
+              <a className="nav-link active" id="login-with-phone-tab"
+                data-toggle="pill" href="#login-with-phone"
+                role="tab" onClick={loginMethodTabClickHandler}
+                data-close-form-error-type='EMAIL_LOGIN_RESTRICTED'>Login with Phone</a>
             </li>
             <li className="nav-item overline-bold" role="presentation">
-            <a className="nav-link" id="login-with-email-tab" data-toggle="pill" href="#login-with-email" role="tab">Login with Email</a>
+              <a className="nav-link" id="login-with-email-tab"
+                data-toggle="pill" href="#login-with-email"
+                role="tab" onClick={loginMethodTabClickHandler}
+                data-close-form-error-type='NOT_REGISTERED,INCORRECT'>Login with Email</a>
             </li>
           </ul>
           <div className="tab-content" id="pills-tabContent">
@@ -105,7 +114,7 @@ const Login = () => {
                   <span className='form-helper text-danger overline-bold' id='phone-form-helper'>
                   </span>
                 </div>
-                <input className='form-control' type='text' name='phone' id='phone' placeholder='Phone' onChange={removeValidationIndicatiors} data-close-form-error={true }/>
+                <input className='form-control' type='text' name='phone' id='phone' placeholder='Phone' onChange={inputChangeAfterValidationHandler} data-close-form-error={true }/>
               </div>
             </div>
             <div className="tab-pane fade" id="login-with-email" role="tabpanel">
@@ -120,7 +129,7 @@ const Login = () => {
                   <span className='form-helper text-danger overline-bold' id='email-form-helper'>
                   </span>
                 </div>
-                <input className='form-control' type='email' name='email' id='email' placeholder='Email' onChange={removeValidationIndicatiors} data-close-form-error={true }/>
+                <input className='form-control' type='email' name='email' id='email' placeholder='Email' onChange={inputChangeAfterValidationHandler} data-close-form-error={true }/>
               </div>
             </div>
           </div>
@@ -136,7 +145,7 @@ const Login = () => {
               </span>
             </div>
             <div className='passwordfield-with-toggle-icon'>
-              <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={removeValidationIndicatiors} data-close-form-error={true }/>
+              <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={inputChangeAfterValidationHandler} data-close-form-error={true }/>
               <span className="password-toggle-icon-container">
                 <i className="fa fa-fw fa-eye toggle-password" toggle="#password" onClick={togglePasswordVisibility}></i>
               </span>
