@@ -12,17 +12,12 @@ const removeInvalidBorderAndHelper = (target) => {
 
 const closeFormError = (callingToCloseTarget) => {
   const formError = $('#form-error');
-  const type = formError.data('error-type');
-  const errorTypeString = $(callingToCloseTarget).data('close-form-error-type');
+  const errorTypeString = $(callingToCloseTarget).attr('data-close-form-error-type');
 
   if (errorTypeString) {
     const errorTypeArr = errorTypeString.split(',');
 
-    errorTypeArr.forEach((errorType) => {
-      errorType.trim();
-    });
-
-    if (errorTypeArr.includes(type)
+    if (errorTypeArr.includes(formError.attr('data-error-type'))
       && formError.css('display') === 'block') {
       formError.hide();
     }

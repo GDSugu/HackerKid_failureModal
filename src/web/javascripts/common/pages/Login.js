@@ -11,7 +11,7 @@ import {
   pageInit, validate, authorize,
 } from '../framework';
 import '../../../stylesheets/common/pages/login/style.scss';
-import { useLoginMethod } from '../../../../hooks/pages/login';
+import useLoginMethod from '../../../../hooks/pages/login';
 
 const manager = {};
 
@@ -62,6 +62,7 @@ const Login = () => {
 
       loginWithPhone(phoneNumber, countryCode, password, email).then((response) => {
         const data = JSON.parse(response);
+        console.log(data);
 
         if (data.status === 'success') {
           authorize.setUserSession(data);
