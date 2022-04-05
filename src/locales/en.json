@@ -3,9 +3,17 @@
     "defaultMessage": "This is games page",
     "description": "Games Page"
   },
+  "/ndV7b": {
+    "defaultMessage": "Coins Earned:",
+    "description": "coins earned"
+  },
   "0JV99f": {
     "defaultMessage": "This is index page",
     "description": "Page description"
+  },
+  "0Sgdtj": {
+    "defaultMessage": "Game Progress",
+    "description": "game progress heading"
   },
   "1RUvaS": {
     "defaultMessage": "Profile Settings",
@@ -14,16 +22,36 @@
   "2W0f9h": {
     "defaultMessage": "Bio"
   },
+  "2ua1yZ": {
+    "defaultMessage": "rank",
+    "description": "rank"
+  },
   "383EZ1": {
     "defaultMessage": "This is more options page",
     "description": "More options Page"
   },
+  "4Ve1r3": {
+    "defaultMessage": "Ok",
+    "description": "confirm btn"
+  },
   "5sg7KC": {
     "defaultMessage": "Password"
+  },
+  "6+MZGf": {
+    "defaultMessage": "Challenges",
+    "description": "challenges heading"
   },
   "6Cjk2D": {
     "defaultMessage": "Login",
     "description": "Login Button"
+  },
+  "6NWftj": {
+    "defaultMessage": "Challenges",
+    "description": "Challenges card heading"
+  },
+  "9gqH2W": {
+    "defaultMessage": "Login",
+    "description": "Login button"
   },
   "9ppS9d": {
     "defaultMessage": "Go to Class",
@@ -36,13 +64,25 @@
     "defaultMessage": "Try again",
     "description": "try again btn"
   },
+  "BIWKGG": {
+    "defaultMessage": "Time Spent:",
+    "description": "time spent heading text"
+  },
   "C8CsWY": {
     "defaultMessage": "This is Class page",
     "description": "Class Page"
   },
+  "CcB4fo": {
+    "defaultMessage": "Coins Earned:",
+    "description": "Coins Earned"
+  },
   "D/2aSY": {
     "defaultMessage": "This is about page",
     "description": "Page description"
+  },
+  "DBTgpi": {
+    "defaultMessage": "completed",
+    "description": "completed"
   },
   "DZ21OO": {
     "defaultMessage": "Bio",
@@ -56,6 +96,10 @@
     "defaultMessage": "Go to More",
     "description": "Home Navigation Button"
   },
+  "FIcBXp": {
+    "defaultMessage": "Home",
+    "description": "home heading"
+  },
   "HAlOn1": {
     "defaultMessage": "Name"
   },
@@ -63,8 +107,16 @@
     "defaultMessage": "Save",
     "description": "Profile save button"
   },
+  "HbJPsh": {
+    "defaultMessage": "All Challenges",
+    "description": "all challenges"
+  },
   "JCIgkj": {
     "defaultMessage": "Username"
+  },
+  "MB8h2I": {
+    "defaultMessage": "Leaderboard Ranking",
+    "description": "Leaderboard card heading text"
   },
   "MS/biV": {
     "defaultMessage": "Go to Index",
@@ -80,6 +132,18 @@
   "Op5EHr": {
     "defaultMessage": "Sign in with Google"
   },
+  "OvWf0W": {
+    "defaultMessage": "Class",
+    "description": "class nav text"
+  },
+  "PSx95N": {
+    "defaultMessage": "Home",
+    "description": "Home card heading"
+  },
+  "Qvy78L": {
+    "defaultMessage": "Profile",
+    "description": "profile heading"
+  },
   "R5SEEt": {
     "defaultMessage": "Close",
     "description": "close button"
@@ -91,9 +155,25 @@
   "SENRqu": {
     "defaultMessage": "Help"
   },
-  "T/a40M": {
-    "defaultMessage": "Toggle Theme",
-    "description": "Toggle theme Button description"
+  "TmcPug": {
+    "defaultMessage": "Edit Profile",
+    "description": "edit profile"
+  },
+  "UUCx/J": {
+    "defaultMessage": "Edit",
+    "description": "edit profile"
+  },
+  "Y+dh5z": {
+    "defaultMessage": "Edit Profile",
+    "description": "Home card menu"
+  },
+  "YImSKa": {
+    "defaultMessage": "You are not authorized to access this page.",
+    "description": "Not authorized message"
+  },
+  "YxMMzC": {
+    "defaultMessage": "All Games",
+    "description": "Game Progress card menu"
   },
   "Yz1BIF": {
     "defaultMessage": "Go to About",
@@ -107,31 +187,59 @@
     "defaultMessage": "Create a New Account",
     "description": "Create Account Button"
   },
+  "bK9TWX": {
+    "defaultMessage": "Leaderboard Rank",
+    "description": "leaderboard rank heading"
+  },
   "c9n6Sh": {
     "defaultMessage": "School"
   },
+  "d1eDsY": {
+    "defaultMessage": "Loading...",
+    "description": "Loading..."
+  },
+  "e5Eaen": {
+    "defaultMessage": "Profile updated successfully",
+    "description": "success modal"
+  },
+  "f1vl6A": {
+    "defaultMessage": "Show Leaderboard",
+    "description": "show leaderboard"
+  },
   "flaX9K": {
     "defaultMessage": "Create a New Account"
+  },
+  "g0zp7w": {
+    "defaultMessage": "Continue Playing",
+    "description": "Game Progress card primary button"
   },
   "h7B/gA": {
     "defaultMessage": "store authtoken",
     "description": "authtoken temp storage btn"
   },
-  "ifGxkx": {
-    "defaultMessage": "Subscription",
-    "description": "Navigation link to subscription page"
-  },
-  "jxfpT4": {
-    "defaultMessage": "Go to Games",
-    "description": "Link description"
-  },
   "lKeCea": {
     "defaultMessage": "Save & Exit",
     "description": "Profile save button"
   },
+  "mEFtca": {
+    "defaultMessage": "Continue Challenge",
+    "description": "Game Progress card primary button"
+  },
   "mm9QaY": {
     "defaultMessage": "School",
     "description": "Profile school label"
+  },
+  "n45USK": {
+    "defaultMessage": "rank",
+    "description": "sheet card subtitle"
+  },
+  "nlYt8p": {
+    "defaultMessage": "View more",
+    "description": "View More Bottomsheet Btn"
+  },
+  "oJe49d": {
+    "defaultMessage": "All Challenges",
+    "description": "Challenges card menu"
   },
   "of2vJ9": {
     "defaultMessage": "This is Video page",
@@ -141,6 +249,10 @@
     "defaultMessage": "Go to Profile",
     "description": "Link description"
   },
+  "pwy4hs": {
+    "defaultMessage": "Game Progress",
+    "description": "Game Progress card heading"
+  },
   "q86PwV": {
     "defaultMessage": "Go to Home",
     "description": "Home Navigation Button"
@@ -148,13 +260,29 @@
   "qXTiEd": {
     "defaultMessage": "Grade"
   },
-  "sM7xfR": {
-    "defaultMessage": "This is Home page",
-    "description": "Page description"
+  "rECW1h": {
+    "defaultMessage": "completed",
+    "description": "Game Progress card caption"
   },
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
+  },
+  "tsF0aG": {
+    "defaultMessage": "Continue Playing",
+    "description": "continue playing"
+  },
+  "vChW6P": {
+    "defaultMessage": "Show Leaderboard",
+    "description": "Leaderboard show button"
+  },
+  "xT1NKB": {
+    "defaultMessage": "Games",
+    "description": "games nav text"
+  },
+  "xW6DFp": {
+    "defaultMessage": "Videos",
+    "description": "videos nav text"
   },
   "z9lFwl": {
     "defaultMessage": "Name",

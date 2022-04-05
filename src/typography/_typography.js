@@ -30,6 +30,14 @@ const mobileTypography = {
     fontFamily: fontAveria.bold,
     fontSize: 20,
   },
+  subtitle: {
+    fontFamily: fontAveria.regular,
+    fontSize: 18,
+  },
+  subtitleBold: {
+    fontFamily: fontAveria.bold,
+    fontSize: 18,
+  },
   subtitle1: {
     fontFamily: fontAveria.bold,
     fontSize: 16,
