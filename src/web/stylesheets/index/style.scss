@@ -4,3 +4,7 @@
 @use '../common/sass/components/_navbar';
 
 @include gt.populate-theme();
+
+body {
+  min-width: 20rem;
+}

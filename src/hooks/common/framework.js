@@ -290,8 +290,10 @@ export default post;
 
 export {
   clearSession,
+  getSession,
   loginCheck,
   logout,
+  setSession,
   setUserSession,
   s3Upload,
   updatePoints,

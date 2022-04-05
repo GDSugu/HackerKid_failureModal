@@ -5,22 +5,10 @@
       "value": "This is games page"
     }
   ],
-  "/dnxym": [
+  "/ndV7b": [
     {
       "type": 0,
-      "value": "Create a New Account"
-    }
-  ],
-  "/itreP": [
-    {
-      "type": 1,
-      "value": "label"
-    }
-  ],
-  "/x0h9E": [
-    {
-      "type": 0,
-      "value": "Login with Phone"
+      "value": "Coins Earned:"
     }
   ],
   "0JV99f": [
@@ -29,10 +17,10 @@
       "value": "This is index page"
     }
   ],
-  "1FjMUC": [
+  "0Sgdtj": [
     {
       "type": 0,
-      "value": "Forgot Password?"
+      "value": "Game Progress"
     }
   ],
   "1RUvaS": [
@@ -53,16 +41,10 @@
       "value": "Bio"
     }
   ],
-  "2bMdhC": [
+  "2ua1yZ": [
     {
       "type": 0,
-      "value": "Create a New Account"
-    }
-  ],
-  "2yf2WH": [
-    {
-      "type": 0,
-      "value": "Login with Phone"
+      "value": "rank"
     }
   ],
   "383EZ1": [
@@ -71,22 +53,22 @@
       "value": "This is more options page"
     }
   ],
-  "3Wcqsy": [
-    {
-      "type": 0,
-      "value": "Next"
-    }
-  ],
   "4Ve1r3": [
     {
       "type": 0,
       "value": "Ok"
     }
   ],
-  "5L6FVQ": [
+  "5sg7KC": [
     {
       "type": 0,
       "value": "Password"
+    }
+  ],
+  "6+MZGf": [
+    {
+      "type": 0,
+      "value": "Challenges"
     }
   ],
   "6Cjk2D": [
@@ -95,34 +77,10 @@
       "value": "Login"
     }
   ],
-  "6FPmdk": [
+  "6NWftj": [
     {
       "type": 0,
-      "value": "Filter"
-    }
-  ],
-  "6V6DQY": [
-    {
-      "type": 0,
-      "value": "Next"
-    }
-  ],
-  "74UjvK": [
-    {
-      "type": 0,
-      "value": "Login to existing Account"
-    }
-  ],
-  "7L3+7M": [
-    {
-      "type": 0,
-      "value": "Login into existing account"
-    }
-  ],
-  "9YoD+Y": [
-    {
-      "type": 0,
-      "value": "New Password"
+      "value": "Challenges"
     }
   ],
   "9gqH2W": [
@@ -173,16 +131,34 @@
       "value": "Try again"
     }
   ],
+  "BIWKGG": [
+    {
+      "type": 0,
+      "value": "Time Spent:"
+    }
+  ],
   "C8CsWY": [
     {
       "type": 0,
       "value": "This is Class page"
     }
   ],
+  "CcB4fo": [
+    {
+      "type": 0,
+      "value": "Coins Earned:"
+    }
+  ],
   "D/2aSY": [
     {
       "type": 0,
       "value": "This is about page"
+    }
+  ],
+  "DBTgpi": [
+    {
+      "type": 0,
+      "value": "completed"
     }
   ],
   "DZ21OO": [
@@ -209,54 +185,10 @@
       "value": "Go to More"
     }
   ],
-  "EhuHU0": [
-    {
-      "type": 1,
-      "value": "errorMessage"
-    }
-  ],
-  "F/vOH1": [
+  "FIcBXp": [
     {
       "type": 0,
-      "value": "Forgot Password"
-    }
-  ],
-  "FhTUgw": [
-    {
-      "type": 0,
-      "value": "Not "
-    },
-    {
-      "type": 1,
-      "value": "phone"
-    },
-    {
-      "type": 0,
-      "value": " ?"
-    }
-  ],
-  "G0AqB8": [
-    {
-      "type": 0,
-      "value": "Login into Existing Account"
-    }
-  ],
-  "GQwBTI": [
-    {
-      "type": 0,
-      "value": "Verify OTP and proceed"
-    }
-  ],
-  "Gon8SN": [
-    {
-      "type": 0,
-      "value": "Login with Email"
-    }
-  ],
-  "H2rvzb": [
-    {
-      "type": 0,
-      "value": "Password changed successfully"
+      "value": "Home"
     }
   ],
   "HAlOn1": [
@@ -271,16 +203,22 @@
       "value": "Save"
     }
   ],
-  "In3suu": [
+  "HbJPsh": [
     {
-      "type": 1,
-      "value": "errorMessage"
+      "type": 0,
+      "value": "All Challenges"
     }
   ],
-  "JnwRMJ": [
+  "JCIgkj": [
     {
       "type": 0,
       "value": "OTP"
+    }
+  ],
+  "MB8h2I": [
+    {
+      "type": 0,
+      "value": "Leaderboard Ranking"
     }
   ],
   "MS/biV": [
@@ -313,6 +251,24 @@
       "value": "Create Account"
     }
   ],
+  "OvWf0W": [
+    {
+      "type": 0,
+      "value": "Class"
+    }
+  ],
+  "PSx95N": [
+    {
+      "type": 0,
+      "value": "Home"
+    }
+  ],
+  "Qvy78L": [
+    {
+      "type": 0,
+      "value": "Profile"
+    }
+  ],
   "R5SEEt": [
     {
       "type": 0,
@@ -343,10 +299,34 @@
       "value": "errorMessage"
     }
   ],
-  "T/a40M": [
+  "TmcPug": [
     {
       "type": 0,
-      "value": "Toggle Theme"
+      "value": "Edit Profile"
+    }
+  ],
+  "UUCx/J": [
+    {
+      "type": 0,
+      "value": "Edit"
+    }
+  ],
+  "Y+dh5z": [
+    {
+      "type": 0,
+      "value": "Edit Profile"
+    }
+  ],
+  "YImSKa": [
+    {
+      "type": 0,
+      "value": "You are not authorized to access this page."
+    }
+  ],
+  "YxMMzC": [
+    {
+      "type": 0,
+      "value": "All Games"
     }
   ],
   "TS73XZ": [
@@ -409,10 +389,22 @@
       "value": "Create a New Account"
     }
   ],
+  "bK9TWX": [
+    {
+      "type": 0,
+      "value": "Leaderboard Rank"
+    }
+  ],
   "c9n6Sh": [
     {
       "type": 0,
       "value": "School"
+    }
+  ],
+  "d1eDsY": [
+    {
+      "type": 0,
+      "value": "Loading..."
     }
   ],
   "e5Eaen": [
@@ -421,28 +413,22 @@
       "value": "Profile updated successfully"
     }
   ],
-  "fOZCSk": [
+  "f1vl6A": [
     {
       "type": 0,
-      "value": "Set a Password"
+      "value": "Show Leaderboard"
     }
   ],
-  "g2zl2J": [
+  "flaX9K": [
     {
       "type": 0,
-      "value": "Login Into Existing Account"
+      "value": "Create a New Account"
     }
   ],
-  "gHMD5/": [
-    {
-      "type": 1,
-      "value": "modalTitle"
-    }
-  ],
-  "gOkIvb": [
+  "g0zp7w": [
     {
       "type": 0,
-      "value": "Name"
+      "value": "Continue Playing"
     }
   ],
   "h7B/gA": [
@@ -451,52 +437,16 @@
       "value": "store authtoken"
     }
   ],
-  "hJpqIn": [
-    {
-      "type": 0,
-      "value": "Send OTP"
-    }
-  ],
-  "hphOHh": [
-    {
-      "type": 0,
-      "value": "Help"
-    }
-  ],
-  "hxLhGK": [
-    {
-      "type": 0,
-      "value": "Set Password"
-    }
-  ],
-  "jZhy7I": [
-    {
-      "type": 0,
-      "value": "Forgot Password"
-    }
-  ],
-  "jxfpT4": [
-    {
-      "type": 0,
-      "value": "Go to Games"
-    }
-  ],
   "lKeCea": [
     {
       "type": 0,
       "value": "Save & Exit"
     }
   ],
-  "lynO1X": [
+  "mEFtca": [
     {
       "type": 0,
-      "value": "Change Password"
-    }
-  ],
-  "mDpOZM": [
-    {
-      "type": 0,
-      "value": "OTP"
+      "value": "Continue Challenge"
     }
   ],
   "mm9QaY": [
@@ -505,16 +455,22 @@
       "value": "School"
     }
   ],
-  "mtXEZg": [
+  "n45USK": [
     {
       "type": 0,
-      "value": "Parent's Name"
+      "value": "rank"
     }
   ],
-  "nT6Ql7": [
+  "nlYt8p": [
     {
-      "type": 1,
-      "value": "text"
+      "type": 0,
+      "value": "View more"
+    }
+  ],
+  "oJe49d": [
+    {
+      "type": 0,
+      "value": "All Challenges"
     }
   ],
   "of2vJ9": [
@@ -529,6 +485,12 @@
       "value": "Go to Profile"
     }
   ],
+  "pwy4hs": [
+    {
+      "type": 0,
+      "value": "Game Progress"
+    }
+  ],
   "q86PwV": [
     {
       "type": 0,
@@ -541,16 +503,10 @@
       "value": "Grade"
     }
   ],
-  "quRCCv": [
+  "rECW1h": [
     {
       "type": 0,
-      "value": "Phone"
-    }
-  ],
-  "sM7xfR": [
-    {
-      "type": 0,
-      "value": "This is Home page"
+      "value": "completed"
     }
   ],
   "swkU6w": [
@@ -559,16 +515,28 @@
       "value": "Go to Home"
     }
   ],
-  "uhayi4": [
-    {
-      "type": 1,
-      "value": "errorMessage"
-    }
-  ],
-  "x8lXTv": [
+  "tsF0aG": [
     {
       "type": 0,
-      "value": "Resend"
+      "value": "Continue Playing"
+    }
+  ],
+  "vChW6P": [
+    {
+      "type": 0,
+      "value": "Show Leaderboard"
+    }
+  ],
+  "xT1NKB": [
+    {
+      "type": 0,
+      "value": "Games"
+    }
+  ],
+  "xW6DFp": [
+    {
+      "type": 0,
+      "value": "Videos"
     }
   ],
   "z9lFwl": [

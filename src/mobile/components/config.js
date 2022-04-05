@@ -36,6 +36,12 @@ const screenWithHeader = {
   viewType: 'screen',
 };
 
+const ScreenSheet = {
+  showHeader: false,
+  showNav: false,
+  viewType: 'screen',
+};
+
 const themes = {
   light: {
     screenAchievements: {
@@ -153,7 +159,11 @@ const themes = {
       showNav: false,
       viewType: 'screen',
     },
+    screenBottomSheet: {
+      ...ScreenSheet,
+    },
     utilColors: Theme.light.utilColors,
+    gradients: Theme.light.gradients,
   },
   dark: {
     screenAchievements: {
@@ -258,7 +268,11 @@ const themes = {
       showNav: false,
       viewType: 'screen',
     },
+    screenBottomSheet: {
+      ...ScreenSheet,
+    },
     utilColors: Theme.dark.utilColors,
+    gradients: Theme.dark.gradients,
   },
 };
 

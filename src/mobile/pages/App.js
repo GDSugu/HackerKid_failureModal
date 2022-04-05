@@ -24,6 +24,8 @@ import RouteLogin from './Login';
 import RouteRegister from './Register';
 import RouteForgotPassword from './ForgotPassword';
 
+import BottomSheet from '../components/BottomSheet';
+
 import IconGame from '../../images/navbar/iconGame.svg';
 import IconHome from '../../images/navbar/iconHome.svg';
 import IconMore from '../../images/navbar/iconMore.svg';
@@ -195,6 +197,7 @@ const TabNavigators = (prop) => {
         lazy: true,
         lazyPlaceholder: () => <Loader route={routeName}/>,
         // swipeEnabled: routeName !== 'Home',
+        swipeEnabled: false,
       }}
     >
       {TabArray.map((item, index) => (
@@ -229,19 +232,24 @@ const App = () => {
                 headerShown: false,
                 animation: 'slide_from_bottom',
               }} initialRouteName={'Login'}>
-              <Stack.Screen name='Start'>
-                {() => TabNavigators({
-                  routeName,
-                  screenTheme,
-                  style,
-                  theme,
-                })}
-              </Stack.Screen>
-            <Stack.Screen name='Class' component={RouteClass} />
-            <Stack.Screen name='EditProfile' component={RouteProfile} />
-            <Stack.Screen name='Login' component={RouteLogin} />
-            <Stack.Screen name='Register' component={RouteRegister} />
-            <Stack.Screen name='ForgotPassword' component={RouteForgotPassword} />
+              <Stack.Group>
+                <Stack.Screen name='Start'>
+                  {() => TabNavigators({
+                    routeName,
+                    screenTheme,
+                    style,
+                    theme,
+                  })}
+                </Stack.Screen>
+                <Stack.Screen name='Class' component={RouteClass} />
+                <Stack.Screen name='EditProfile' component={RouteProfile} />
+                <Stack.Screen name='Login' component={RouteLogin} />
+              <Stack.Screen name='Register' component={RouteRegister} />
+              <Stack.Screen name='ForgotPassword' component={RouteForgotPassword} />
+              </Stack.Group>
+              <Stack.Group screenOptions={{ presentation: 'modal' }}>
+                <Stack.Screen name='BottomSheet' component={BottomSheet} />
+              </Stack.Group>
             </Stack.Navigator>
           </NavigationContainer>
         </View>
