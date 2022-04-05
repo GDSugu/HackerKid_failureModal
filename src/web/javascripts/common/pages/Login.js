@@ -3,7 +3,9 @@ import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import intlTelInput from 'intl-tel-input';
 import $ from 'jquery';
-import { closeFormError, inputChangeAfterValidationHandler, togglePasswordVisibility } from '../commonLoginRegisterFunctions';
+import {
+  closeFormError, inputChangeAfterValidationHandler, setFormErrorField, togglePasswordVisibility,
+} from '../commonLoginRegisterFunctions';
 import 'intl-tel-input/build/css/intlTelInput.css';
 import {
   pageInit, validate, authorize,
@@ -64,18 +66,17 @@ const Login = () => {
         if (data.status === 'success') {
           authorize.setUserSession(data);
         } else if (data.status === 'not-exists') {
-          $('#form-error').html('You are not registered user, <a href="/register">Register Now</a>').attr('data-error-type', 'NOT_REGISTERED').show();
+          setFormErrorField('You are not registered user', { 'data-error-type': 'NOT_REGISTERED' });
           $('#phone').addClass('is-invalid').removeClass('is-valid');
           $('#password').removeClass('is-invalid');
         } else if (data.status === 'not-valid') {
-          $('#form-error').text(`Incorrect ${email ? 'Email address' : 'Phone Number'} or Password`).attr('data-error-type', 'INCORRECT').show();
+          setFormErrorField(`Incorrect ${email ? 'Email address' : 'Phone Number'} or Password`, { 'data-error-type': 'INCORRECT' });
           $(`${email ? '#email' : '#phone'}`).addClass('is-invalid').removeClass('is-valid');
           $('#password').addClass('is-invalid').removeClass('is-valid');
         } else if (data.status === 'error' && data.message === 'EMAIL_LOGIN_RESTRICTED') {
-          $('#form-error').text('You are not allowed to login using email. Try mobile login.').attr('data-error-type', data.message).show();
+          setFormErrorField('You are not allowed to login using email. Try mobile login.', { 'data-error-type': data.message });
         } else if (data.status === 'error') {
-          // setErrorField('Server Error 500');
-          console.log(data.message);
+          setFormErrorField('Server Error');
         }
       })
         .catch((error) => {
@@ -87,7 +88,7 @@ const Login = () => {
 
   return (
     <>
-      <div className='form-container'>
+      <div className='form-container login-form-container'>
         <form className='login-form p-3 w-100'>
           <img src='../../../../images/login/login-form-svg.svg' className='form-svg' alt='form-svg' />
           <ul className="login-method-tabs nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
@@ -154,7 +155,7 @@ const Login = () => {
               </span>
             </div>
           </div>
-          <Link to='#' className='forgot-password overline-bold text-center mt-3 mb-4'>
+          <Link to='#' className='forgot-password overline-bold text-center my-3'>
             <FormattedMessage
               defaultMessage="Forgot Password?"
               description="forgot password link"

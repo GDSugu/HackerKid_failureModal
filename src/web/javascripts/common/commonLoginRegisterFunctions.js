@@ -18,6 +18,10 @@ const closeFormError = (callingToCloseTarget) => {
   if (errorTypeString) {
     const errorTypeArr = errorTypeString.split(',');
 
+    errorTypeArr.forEach((errorType) => {
+      errorType.trim();
+    });
+
     if (errorTypeArr.includes(type)
       && formError.css('display') === 'block') {
       formError.hide();
@@ -48,11 +52,12 @@ const togglePasswordVisibility = (e) => {
   }
 };
 
-const setFormErrorField = (value, attrObj) => {
+const setFormErrorField = (value, attrObj = {}) => {
   Object.keys(attrObj).forEach((attrName) => {
     $('#form-error').attr(attrName, attrObj[attrName]);
   });
-  $('#form-error').val(value).show();
+
+  $('#form-error').text(value).show();
 };
 
 export {
