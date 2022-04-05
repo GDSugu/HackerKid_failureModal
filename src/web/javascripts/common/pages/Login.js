@@ -62,7 +62,6 @@ const Login = () => {
 
       loginWithPhone(phoneNumber, countryCode, password, email).then((response) => {
         const data = JSON.parse(response);
-        console.log(data);
 
         if (data.status === 'success') {
           authorize.setUserSession(data);
