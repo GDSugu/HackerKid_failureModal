@@ -110,6 +110,7 @@
 }
 
 input[type="password"].is-invalid,
-input[type="text"]#password.is-invalid {
+input[type="text"]#password.is-invalid,
+input[type="text"]#retyped-password.is-invalid {
   background-image: unset;
 }

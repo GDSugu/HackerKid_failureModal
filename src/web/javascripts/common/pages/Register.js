@@ -342,6 +342,7 @@ const RegisterFormStepThree = ({ stepThreeRequest, savedValuesObj }) => {
       $('#form-error').text('Passwords length must be atleast 4, consisting of letters and numbers').attr('data-error-type', 'INVALID_PASSWORD').show();
     }
   };
+
   return (
   <div className='step-3-fields'>
     <div className="form-group mb-3">
