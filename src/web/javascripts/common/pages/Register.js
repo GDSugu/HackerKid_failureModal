@@ -4,79 +4,19 @@ import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/css/intlTelInput.css';
-import post, {
+import {
   pageInit, validate, authorize,
 } from '../framework';
 import '../../../stylesheets/common/pages/register/style.scss';
-import { useRegisterFormStep, useRegisterFormSavedFields, useIsOtpTimerRunning } from '../../../../hooks/pages/register';
+import {
+  useRegisterFormStep, useRegisterFormSavedFields, useOtpTimerId, useRegisterFormRequests,
+} from '../../../../hooks/pages/register';
 import { togglePasswordVisibility, inputChangeAfterValidationHandler, closeFormError } from '../commonLoginRegisterFunctions';
 
 const manager = {};
 
-const stepOneRequest = (phoneNumber, countryCode) => {
-  const postData = {
-    type: 'send-otp',
-    phone: phoneNumber,
-    countryCode,
-  };
-
-  return new Promise((resolve, reject) => {
-    post(postData, 'register/').then((response) => {
-      const data = JSON.parse(response);
-      resolve(data);
-    }).catch((error) => {
-      const errData = JSON.parse(error);
-      reject(errData);
-      console.log(errData);
-    });
-  });
-};
-
-const stepTwoRequest = (phoneNumber, countryCode, enteredOtp) => {
-  const postData = {
-    type: 'verify-otp',
-    phone: phoneNumber,
-    countryCode,
-    otp: enteredOtp,
-  };
-
-  return new Promise((resolve, reject) => {
-    post(postData, 'register/').then((response) => {
-      const data = JSON.parse(response);
-      resolve(data);
-    }).catch((error) => {
-      const errData = JSON.parse(error);
-      reject(errData);
-      console.log(errData);
-    });
-  });
-};
-
-const stepThreeRequest = (phoneNumber, countryCode, fullName, mailAddress, password) => {
-  const postData = {
-    type: 'register',
-    phone: phoneNumber,
-    countryCode,
-    name: fullName,
-    mail: mailAddress,
-    password,
-    url: window.location.href,
-  };
-
-  return new Promise((resolve, reject) => {
-    post(postData, 'register/').then((response) => {
-      const data = JSON.parse(response);
-      resolve(data);
-    }).catch((error) => {
-      const errData = JSON.parse(error);
-      reject(errData);
-      console.log(errData);
-    });
-  });
-};
-
 const RegisterFormStepOne = ({
-  savedValuesObj, setSavedValuesObj, currentStep, setCurrentStep, getValuesObj,
+  stepOneRequest, savedValuesObj, setSavedValuesObj, currentStep, setCurrentStep, getValuesObj,
 }) => {
   useEffect(() => {
     const flaginput = document.querySelector('#phone');
@@ -105,16 +45,19 @@ const RegisterFormStepOne = ({
 
       setSavedValuesObj(enteredValues);
 
-      stepOneRequest(phoneFieldValue, countryCode).then((data) => {
+      stepOneRequest(phoneFieldValue, countryCode).then((response) => {
+        const data = JSON.parse(response);
         if (data.status === 'success') {
           setCurrentStep(currentStep + 1);
         } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
           $('#phone').addClass('is-invalid').removeClass('is-valid');
           $('#form-error').text('Account already exists!, try logging in').attr('data-error-type', data.message).show();
         }
+      }).catch((err) => {
+        const errData = JSON.parse(err);
+        console.log(errData);
       });
     }
-    $(e.target).parents('form').attr('was-validated', true);
   };
 
   return (
@@ -193,8 +136,10 @@ const RegisterFormStepOne = ({
   );
 };
 
-const RegisterFormStepTwo = ({ savedValuesObj, currentStep, setCurrentStep }) => {
-  const [isOtpTimerRunning, setIsOtpTimerRunning] = useIsOtpTimerRunning(false);
+const RegisterFormStepTwo = ({
+  stepOneRequest, stepTwoRequest, savedValuesObj, currentStep, setCurrentStep,
+}) => {
+  const [otpTimerId, setOtpTimerId] = useOtpTimerId(null);
 
   const startOtpTimer = () => {
     const otpTimerDOM = $('.otp-timer');
@@ -205,7 +150,6 @@ const RegisterFormStepTwo = ({ savedValuesObj, currentStep, setCurrentStep }) =>
 
     otpTimerDOM.text(secondsText);
     otpTimerDOM.show();
-    setIsOtpTimerRunning(true);
 
     const timer = setInterval(() => {
       seconds -= 1;
@@ -214,15 +158,16 @@ const RegisterFormStepTwo = ({ savedValuesObj, currentStep, setCurrentStep }) =>
       if (seconds <= 0) {
         otpTimerDOM.hide();
         resendOtp.show();
-        setIsOtpTimerRunning(false);
+        setOtpTimerId(null);
         clearInterval(timer);
       }
     }, 1000);
+    setOtpTimerId(timer);
   };
 
   const resendOtpClickHandler = () => {
     $('.resend-otp').hide();
-    if (isOtpTimerRunning === false) {
+    if (otpTimerId === null) {
       stepOneRequest(savedValuesObj.phone, savedValuesObj.countryCode).then((data) => {
         if (data.status === 'success') {
           startOtpTimer();
@@ -282,17 +227,29 @@ const RegisterFormStepTwo = ({ savedValuesObj, currentStep, setCurrentStep }) =>
     if (validatedOtp) {
       stepTwoRequest(savedValuesObj.phone,
         savedValuesObj.countryCode,
-        validatedOtp).then((data) => {
+        validatedOtp).then((response) => {
+        const data = JSON.parse(response);
+
         if (data.status === 'success') {
           setCurrentStep(currentStep + 1);
         } else if (data.status === 'error' && data.message === 'OTP_EXPIRED') {
           $('#form-error').html('Enter a valid OTP').attr('data-error-type', data.message).show();
         }
+      }).catch((err) => {
+        const errData = JSON.parse(err);
+        console.log(errData);
       });
     }
   };
 
-  useEffect(() => startOtpTimer(), []);
+  useEffect(() => {
+    startOtpTimer();
+
+    return () => {
+      clearInterval(otpTimerId);
+    };
+  }, []);
+
   return (
     <div className='step-2-fields'>
       <div className='label-and-otp-fields mb-5'>
@@ -355,29 +312,34 @@ const RegisterFormStepTwo = ({ savedValuesObj, currentStep, setCurrentStep }) =>
   );
 };
 
-const RegisterFormStepThree = ({ savedValuesObj }) => {
+const RegisterFormStepThree = ({ stepThreeRequest, savedValuesObj }) => {
   const createAccountBtnClickHandler = () => {
     const enteredPassword = validate('#password', 'password', 1, '#password-form-helper', 'Enter a valid password');
     const retypedPassword = validate('#retyped-password', 'password', 1, '#retyped-password-form-helper', 'Enter a valid password');
     if ((enteredPassword && retypedPassword)) {
-      if (enteredPassword !== retypedPassword) {
+      if (enteredPassword === retypedPassword) {
+        stepThreeRequest(savedValuesObj.phone,
+          savedValuesObj.countryCode,
+          savedValuesObj.name,
+          savedValuesObj.email,
+          enteredPassword).then((response) => {
+          const data = JSON.parse(response);
+
+          if (data.status === 'success' && data.message === 'REGISTERED') {
+            const sessionDetails = data.session;
+            authorize.setUserSession(sessionDetails);
+          }
+        }).catch((error) => {
+          const errData = JSON.parse(error);
+          console.log(errData);
+        });
+      } else {
         $('#password').addClass('is-invalid').removeClass('is-valid');
         $('#password-form-helper').html('Passwords do not match').show();
-
         $('#retyped-password').addClass('is-invalid').removeClass('is-valid');
       }
-      stepThreeRequest(savedValuesObj.phone,
-        savedValuesObj.countryCode,
-        savedValuesObj.name,
-        savedValuesObj.email,
-        enteredPassword).then((data) => {
-        if (data.status === 'success' && data.message === 'REGISTERED') {
-          const sessionDetails = data.session;
-          authorize.setUserSession(sessionDetails);
-        }
-      });
     } else if (!enteredPassword && !retypedPassword) {
-      $('#form-error').text('Passwords length must be atleast 4, consisting of letters and numbers').attr('data-error-type', 'PASSWORDS_DONT_MATCH').show();
+      $('#form-error').text('Passwords length must be atleast 4, consisting of letters and numbers').attr('data-error-type', 'INVALID_PASSWORD').show();
     }
   };
   return (
@@ -393,7 +355,7 @@ const RegisterFormStepThree = ({ savedValuesObj }) => {
           <span className='form-helper text-danger overline-bold' id='password-form-helper'></span>
         </div>
         <div className='passwordfield-with-toggle-icon'>
-          <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={inputChangeAfterValidationHandler} data-close-form-error-type='PASSWORDS_DONT_MATCH' />
+          <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={inputChangeAfterValidationHandler} data-close-form-error-type='INVALID_PASSWORD' />
           <span className="password-toggle-icon-container">
             <i className="fa fa-fw fa-eye toggle-password" toggle="#password" onClick={togglePasswordVisibility}></i>
           </span>
@@ -411,7 +373,7 @@ const RegisterFormStepThree = ({ savedValuesObj }) => {
           </span>
         </div>
         <div className='passwordfield-with-toggle-icon'>
-          <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' typename='Re-type Password' onChange={inputChangeAfterValidationHandler} data-close-form-error-type='PASSWORDS_DONT_MATCH'/>
+          <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' typename='Re-type Password' onChange={inputChangeAfterValidationHandler} data-close-form-error-type='INVALID_PASSWORD'/>
           <span className="password-toggle-icon-container">
             <i className="fa fa-fw fa-eye toggle-password" toggle="#retyped-password" onClick={togglePasswordVisibility}></i>
           </span>
@@ -442,8 +404,8 @@ const Register = () => {
     return valuesObj;
   };
   const [savedValuesObj, setSavedValuesObj] = useRegisterFormSavedFields(() => getValuesObj('.create-account-form .step-1-fields input'));
-
   const [currentStep, setCurrentStep] = useRegisterFormStep(1);
+  const { stepOneRequest, stepTwoRequest, stepThreeRequest } = useRegisterFormRequests();
 
   const backBtnClickHandler = () => {
     if (currentStep === 3) {
@@ -473,6 +435,7 @@ const Register = () => {
           {
             ((currentStep === 1)
               && <RegisterFormStepOne
+              stepOneRequest={ stepOneRequest}
               savedValuesObj={savedValuesObj}
               setSavedValuesObj={setSavedValuesObj}
               currentStep={currentStep}
@@ -480,11 +443,14 @@ const Register = () => {
               getValuesObj={ getValuesObj } />)
             || ((currentStep === 2)
               && <RegisterFormStepTwo
+                stepOneRequest={stepOneRequest}
+                stepTwoRequest={ stepTwoRequest}
                 savedValuesObj={savedValuesObj}
                 currentStep={currentStep}
                 setCurrentStep={setCurrentStep} />)
             || ((currentStep === 3)
               && <RegisterFormStepThree
+                stepThreeRequest={ stepThreeRequest}
                 savedValuesObj={savedValuesObj}
                 currentStep={currentStep}
                 setCurrentStep={setCurrentStep} />)
