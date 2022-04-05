@@ -28,12 +28,7 @@ const useLoginMethod = () => {
       countryCode,
       email,
       useEmail,
-    }, 'login/')
-      .then((response) => response)
-      .catch((error) => {
-        const errData = JSON.parse(error);
-        console.log(errData);
-      });
+    }, 'login/');
 
     return result;
   };
@@ -45,6 +40,4 @@ const useLoginMethod = () => {
   };
 };
 
-export {
-  useLoginMethod,
-};
+export default useLoginMethod;
