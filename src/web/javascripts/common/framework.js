@@ -48,7 +48,7 @@ authorize.setUserSession = (user) => {
   if (user.profileLink) {
     authorize.setSession('profileLink', user.profileLink);
   }
-  pathNavigator('dashboard.html');
+  pathNavigator('dashboard');
 };
 
 const post = (postData, apiPath, validateResponse = true, handleLoading = true) => {
