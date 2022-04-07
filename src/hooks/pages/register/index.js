@@ -1,52 +1,58 @@
 import { useState } from 'react';
 import post from '../../../web/javascripts/common/framework';
 
-const useRegisterFormStep = (initialStep) => useState(initialStep);
-const useRegisterFormSavedFields = (fn) => useState(fn);
-const useOtpTimerId = (initialValue) => useState(initialValue);
-const useRegisterFormRequests = () => {
-  const stepOneRequest = (phoneNumber, countryCode) => {
-    const postData = {
-      type: 'send-otp',
-      phone: phoneNumber,
-      countryCode,
-    };
+const useRegister = () => {
+  const [stateObj, setStateObj] = useState({
+    registerFormStep: 1,
+    otpTimerId: null,
+    registerFormFieldValues: {
+      phoneNumber: '',
+      email: '',
+      fullName: '',
+      parentName: '',
+    },
+  });
 
-    return post(postData, 'register/');
-  };
+  const registerFormRequests = {
+    stepOneRequest: (phoneNumber, countryCode) => {
+      const postData = {
+        type: 'send-otp',
+        phone: phoneNumber,
+        countryCode,
+      };
 
-  const stepTwoRequest = (phoneNumber, countryCode, enteredOtp) => {
-    const postData = {
-      type: 'verify-otp',
-      phone: phoneNumber,
-      countryCode,
-      otp: enteredOtp,
-    };
+      return post(postData, 'register/');
+    },
+    stepTwoRequest: (phoneNumber, countryCode, enteredOtp) => {
+      const postData = {
+        type: 'verify-otp',
+        phone: phoneNumber,
+        countryCode,
+        otp: enteredOtp,
+      };
 
-    return post(postData, 'register/');
-  };
+      return post(postData, 'register/');
+    },
+    stepThreeRequest: (phoneNumber, countryCode, fullName, mailAddress, password) => {
+      const postData = {
+        type: 'register',
+        phone: phoneNumber,
+        countryCode,
+        name: fullName,
+        mail: mailAddress,
+        password,
+        url: window.location.href,
+      };
 
-  const stepThreeRequest = (phoneNumber, countryCode, fullName, mailAddress, password) => {
-    const postData = {
-      type: 'register',
-      phone: phoneNumber,
-      countryCode,
-      name: fullName,
-      mail: mailAddress,
-      password,
-      url: window.location.href,
-    };
-
-    return post(postData, 'register/');
+      return post(postData, 'register/');
+    },
   };
 
   return {
-    stepOneRequest,
-    stepTwoRequest,
-    stepThreeRequest,
+    stateObj,
+    setStateObj,
+    registerFormRequests,
   };
 };
 
-export {
-  useRegisterFormStep, useRegisterFormSavedFields, useOtpTimerId, useRegisterFormRequests,
-};
+export default useRegister;

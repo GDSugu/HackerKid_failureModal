@@ -8,15 +8,13 @@ import {
   pageInit, validate, authorize,
 } from '../framework';
 import '../../../stylesheets/common/pages/register/style.scss';
-import {
-  useRegisterFormStep, useRegisterFormSavedFields, useOtpTimerId, useRegisterFormRequests,
-} from '../../../../hooks/pages/register';
+import useRegister from '../../../../hooks/pages/register';
 import { togglePasswordVisibility, inputChangeAfterValidationHandler, closeFormError } from '../commonLoginRegisterFunctions';
 
 const manager = {};
 
 const RegisterFormStepOne = ({
-  stepOneRequest, savedValuesObj, setSavedValuesObj, currentStep, setCurrentStep, getValuesObj,
+  stepOneRequest, stateObj, setStateObj,
 }) => {
   useEffect(() => {
     const flaginput = document.querySelector('#phone');
@@ -27,7 +25,8 @@ const RegisterFormStepOne = ({
       utilsScript: intlTelInput.utilsScript,
     });
   }, []);
-  const nextBtnClickHandler = (e) => {
+
+  const nextBtnClickHandler = () => {
     const phoneFieldValue = validate('#phone', 'mobile', 1, '#phone-form-helper', 'Enter a valid phone number');
     const emailFieldValue = validate('#email', 'email', 1, '#email-form-helper', 'Enter a valid E-mail address');
     const nameFieldValue = validate('#name', 'name', 1, '#name-form-helper', 'Enter a valid name');
@@ -40,15 +39,26 @@ const RegisterFormStepOne = ({
       let countryCode = manager.telInput.getSelectedCountryData();
       countryCode = `+${countryCode.dialCode}`;
 
-      const enteredValues = getValuesObj('.create-account-form .step-1-fields input');
-      enteredValues.countryCode = countryCode;
+      const registerFormFieldValues = {
+        phoneNumber: phoneFieldValue,
+        email: emailFieldValue,
+        fullName: nameFieldValue,
+        parentName: parentNameFieldValue,
+        countryCode,
+      };
 
-      setSavedValuesObj(enteredValues);
+      setStateObj((prevObj) => ({
+        ...prevObj,
+        registerFormFieldValues,
+      }));
 
       stepOneRequest(phoneFieldValue, countryCode).then((response) => {
         const data = JSON.parse(response);
         if (data.status === 'success') {
-          setCurrentStep(currentStep + 1);
+          setStateObj((prevObj) => ({
+            ...prevObj,
+            registerFormStep: prevObj.registerFormStep + 1,
+          }));
         } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
           $('#phone').addClass('is-invalid').removeClass('is-valid');
           $('#form-error').text('Account already exists!, try logging in').attr('data-error-type', data.message).show();
@@ -73,7 +83,7 @@ const RegisterFormStepOne = ({
           <span className='form-helper text-danger overline-bold' id='phone-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='tel' name='phone' id='phone' placeholder='Phone' defaultValue={savedValuesObj.phone} required={true} onChange={inputChangeAfterValidationHandler} data-close-form-error-type='ACCOUNT_EXIST' />
+        <input className='form-control' type='tel' name='phone' id='phone' placeholder='Phone' defaultValue={stateObj.registerFormFieldValues.phoneNumber} required={true} onChange={inputChangeAfterValidationHandler} data-close-form-error-type='ACCOUNT_EXIST' />
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -86,7 +96,7 @@ const RegisterFormStepOne = ({
           <span className='form-helper text-danger overline-bold' id='email-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='email' name='email' id='email' placeholder='Email' defaultValue={savedValuesObj.email} required={ true } onChange={inputChangeAfterValidationHandler}/>
+        <input className='form-control' type='email' name='email' id='email' placeholder='Email' defaultValue={stateObj.registerFormFieldValues.email} required={ true } onChange={inputChangeAfterValidationHandler}/>
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -99,7 +109,7 @@ const RegisterFormStepOne = ({
           <span className='form-helper text-danger overline-bold' id='name-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='text' name='name' id='name' placeholder='Name' defaultValue={savedValuesObj.name} required={ true } onChange={inputChangeAfterValidationHandler}/>
+        <input className='form-control' type='text' name='name' id='name' placeholder='Name' defaultValue={stateObj.registerFormFieldValues.fullName} required={ true } onChange={inputChangeAfterValidationHandler}/>
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -112,7 +122,7 @@ const RegisterFormStepOne = ({
           <span className='form-helper text-danger overline-bold' id='parent-name-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='text' name='parent-name' id='parent-name' placeholder="Parent's Name" defaultValue={savedValuesObj['parent-name']} required={ true } onChange={inputChangeAfterValidationHandler} data-typename="Parent's Name" />
+        <input className='form-control' type='text' name='parent-name' id='parent-name' placeholder="Parent's Name" defaultValue={stateObj.registerFormFieldValues.parentName} required={ true } onChange={inputChangeAfterValidationHandler} data-typename="Parent's Name" />
       </div>
       <p className='form-error text-danger overline-bold text-center' id='form-error'></p>
       <div className='take-action-buttons mt-4'>
@@ -137,10 +147,8 @@ const RegisterFormStepOne = ({
 };
 
 const RegisterFormStepTwo = ({
-  stepOneRequest, stepTwoRequest, savedValuesObj, currentStep, setCurrentStep,
+  stepOneRequest, stepTwoRequest, stateObj, setStateObj,
 }) => {
-  const [otpTimerId, setOtpTimerId] = useOtpTimerId(null);
-
   const startOtpTimer = () => {
     const otpTimerDOM = $('.otp-timer');
     const resendOtp = $('.resend-otp');
@@ -155,20 +163,30 @@ const RegisterFormStepTwo = ({
       seconds -= 1;
       secondsText = `00 : ${(seconds > 9) ? seconds : (`0${seconds.toString()}`)}`;
       otpTimerDOM.text(secondsText);
+
+      console.log(seconds);
       if (seconds <= 0) {
         otpTimerDOM.hide();
         resendOtp.show();
-        setOtpTimerId(null);
+        setStateObj((prevObj) => ({
+          ...prevObj,
+          otpTimerId: null,
+        }));
         clearInterval(timer);
       }
     }, 1000);
-    setOtpTimerId(timer);
+    setStateObj((prevObj) => ({
+      ...prevObj,
+      otpTimerId: timer,
+    }));
   };
 
   const resendOtpClickHandler = () => {
     $('.resend-otp').hide();
-    if (otpTimerId === null) {
-      stepOneRequest(savedValuesObj.phone, savedValuesObj.countryCode).then((data) => {
+    if (stateObj.otpTimerId === null) {
+      stepOneRequest(stateObj.registerFormFieldValues.phoneNumber,
+        stateObj.registerFormFieldValues.countryCode).then((response) => {
+        const data = JSON.parse(response);
         if (data.status === 'success') {
           startOtpTimer();
         }
@@ -225,13 +243,16 @@ const RegisterFormStepTwo = ({
     const validatedOtp = validateOtp(enteredOtp, '[0-9]{4,4}$', 4);
 
     if (validatedOtp) {
-      stepTwoRequest(savedValuesObj.phone,
-        savedValuesObj.countryCode,
+      stepTwoRequest(stateObj.registerFormFieldValues.phoneNumber,
+        stateObj.registerFormFieldValues.countryCode,
         validatedOtp).then((response) => {
         const data = JSON.parse(response);
 
         if (data.status === 'success') {
-          setCurrentStep(currentStep + 1);
+          setStateObj((prevObj) => ({
+            ...prevObj,
+            registerFormStep: prevObj.registerFormStep + 1,
+          }));
         } else if (data.status === 'error' && data.message === 'OTP_EXPIRED') {
           $('#form-error').html('Enter a valid OTP').attr('data-error-type', data.message).show();
         }
@@ -246,7 +267,7 @@ const RegisterFormStepTwo = ({
     startOtpTimer();
 
     return () => {
-      clearInterval(otpTimerId);
+      clearInterval(stateObj.otpTimerId);
     };
   }, []);
 
@@ -278,12 +299,15 @@ const RegisterFormStepTwo = ({
             closeFormError(e.target);
           } } data-close-form-error-type='OTP_EXPIRED'/>
         </div>
-        <Link to='#' className='not-given-number overline-bold text-center' onClick={() => setCurrentStep(1)}>
+        <Link to='#' className='not-given-number overline-bold text-center' onClick={() => setStateObj((prevObj) => ({
+          ...prevObj,
+          registerFormStep: 1,
+        }))}>
           <FormattedMessage
             defaultMessage='Not {phone}'
             description="not button"
             values={{
-              phone: savedValuesObj.phone,
+              phone: stateObj.registerFormFieldValues.phoneNumber,
             }}
           />
         </Link>
@@ -312,16 +336,16 @@ const RegisterFormStepTwo = ({
   );
 };
 
-const RegisterFormStepThree = ({ stepThreeRequest, savedValuesObj }) => {
+const RegisterFormStepThree = ({ stateObj, stepThreeRequest }) => {
   const createAccountBtnClickHandler = () => {
     const enteredPassword = validate('#password', 'password', 1, '#password-form-helper', 'Enter a valid password');
     const retypedPassword = validate('#retyped-password', 'password', 1, '#retyped-password-form-helper', 'Enter a valid password');
     if ((enteredPassword && retypedPassword)) {
       if (enteredPassword === retypedPassword) {
-        stepThreeRequest(savedValuesObj.phone,
-          savedValuesObj.countryCode,
-          savedValuesObj.name,
-          savedValuesObj.email,
+        stepThreeRequest(stateObj.registerFormFieldValues.phoneNumber,
+          stateObj.registerFormFieldValues.countryCode,
+          stateObj.registerFormFieldValues.fullName,
+          stateObj.registerFormFieldValues.email,
           enteredPassword).then((response) => {
           const data = JSON.parse(response);
 
@@ -395,28 +419,23 @@ const RegisterFormStepThree = ({ stepThreeRequest, savedValuesObj }) => {
 const Register = () => {
   pageInit('auth-container', 'Register');
 
-  const getValuesObj = (selector) => {
-    const valuesObj = {};
-
-    $(selector).each(function () {
-      valuesObj[$(this).attr('name')] = $(this).val();
-    });
-
-    return valuesObj;
-  };
-  const [savedValuesObj, setSavedValuesObj] = useRegisterFormSavedFields(() => getValuesObj('.create-account-form .step-1-fields input'));
-  const [currentStep, setCurrentStep] = useRegisterFormStep(1);
-  const { stepOneRequest, stepTwoRequest, stepThreeRequest } = useRegisterFormRequests();
+  const { stateObj, setStateObj, registerFormRequests } = useRegister();
 
   const backBtnClickHandler = () => {
-    if (currentStep === 3) {
-      setCurrentStep(1);
+    if (stateObj.registerFormStep === 3) {
+      setStateObj((prevState) => ({
+        ...prevState,
+        registerFormStep: 1,
+      }));
     } else {
-      setCurrentStep(currentStep - 1);
+      setStateObj((prevState) => ({
+        ...prevState,
+        registerFormStep: prevState.registerFormStep - 1,
+      }));
     }
   };
 
-  const backBtnDisplay = currentStep > 1 ? 'd-block' : 'd-none';
+  const backBtnDisplay = stateObj.registerFormStep > 1 ? 'd-block' : 'd-none';
 
   return (
     <>
@@ -434,27 +453,25 @@ const Register = () => {
           </header>
           <img src='../../../../images/register/register-form-svg.svg' className='form-svg' />
           {
-            ((currentStep === 1)
+            ((stateObj.registerFormStep === 1)
               && <RegisterFormStepOne
-              stepOneRequest={ stepOneRequest}
-              savedValuesObj={savedValuesObj}
-              setSavedValuesObj={setSavedValuesObj}
-              currentStep={currentStep}
-              setCurrentStep={setCurrentStep}
-              getValuesObj={ getValuesObj } />)
-            || ((currentStep === 2)
+              stateObj={stateObj}
+              setStateObj={setStateObj}
+              stepOneRequest = {registerFormRequests.stepOneRequest}
+            />)
+            || ((stateObj.registerFormStep === 2)
               && <RegisterFormStepTwo
-                stepOneRequest={stepOneRequest}
-                stepTwoRequest={ stepTwoRequest}
-                savedValuesObj={savedValuesObj}
-                currentStep={currentStep}
-                setCurrentStep={setCurrentStep} />)
-            || ((currentStep === 3)
+              stateObj={stateObj}
+              setStateObj={setStateObj}
+              stepOneRequest={registerFormRequests.stepOneRequest}
+              stepTwoRequest={registerFormRequests.stepTwoRequest}
+               />)
+            || ((stateObj.registerFormStep === 3)
               && <RegisterFormStepThree
-                stepThreeRequest={ stepThreeRequest}
-                savedValuesObj={savedValuesObj}
-                currentStep={currentStep}
-                setCurrentStep={setCurrentStep} />)
+              stateObj={stateObj}
+              setStateObj={setStateObj}
+              stepThreeRequest = {registerFormRequests.stepThreeRequest}
+               />)
           }
         </form>
 
