@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import navbar from './navbar';
+// import navbar from './navbar';
 
 const { API } = process.env;
 
@@ -86,7 +86,7 @@ const post = (postData, apiPath, validateResponse = true, handleLoading = true) 
 authorize.loginCheck = () => new Promise((resolve, reject) => {
   const authToken = authorize.getSession('authtoken');
   if (authToken === '' || authToken === null) {
-    navbar.addSignInButton();
+    // navbar.addSignInButton();
     resolve(false);
   } else {
     post({ type: 'checkSession' }, 'login/', true, false).then((response) => {
@@ -94,7 +94,7 @@ authorize.loginCheck = () => new Promise((resolve, reject) => {
         resolve(false);
       } else {
         $('.username').text(authorize.getSession('name'));
-        navbar.addDropdown();
+        // navbar.addDropdown();
         resolve(true);
       }
     }).catch((error) => {
@@ -103,14 +103,14 @@ authorize.loginCheck = () => new Promise((resolve, reject) => {
   }
 });
 
-const addSignInButton = () => {
-  $('.nav-trail').html('<div><a href="/login.html" class="btn btn-primary">Sign in</a></div>');
-};
+// const addSignInButton = () => {
+//   $('.nav-trail').html('<div><a href="/login.html" class="btn btn-primary">Sign in</a></div>');
+// };
 
 const loginCheck = () => new Promise((resolve, reject) => {
   const authToken = authorize.getSession('authtoken');
   if (authToken === '' || authToken === null) {
-    addSignInButton();
+    // addSignInButton();
     resolve(false);
   } else {
     post({ type: 'checkSession' }, 'login/', true, false).then((response) => {
@@ -118,7 +118,7 @@ const loginCheck = () => new Promise((resolve, reject) => {
         resolve(false);
       } else {
         $('.username').text(authorize.getSession('name'));
-        navbar.addDropdown();
+        // navbar.addDropdown();
         resolve(true);
       }
     }).catch((error) => {

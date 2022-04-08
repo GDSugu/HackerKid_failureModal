@@ -24,7 +24,6 @@ const SUPPORTED_ORIENTATIONS = [
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: '#00000050',
   },
   mask: {
     flex: 1,
@@ -59,6 +58,8 @@ class BottomSheet extends Component {
       modalVisible: false,
       modalShown: false,
       pan: new Animated.ValueXY(),
+      modalBg: '#00000000',
+      overlayHeight: 0,
     };
 
     this.createPanResponder(props);
@@ -72,12 +73,16 @@ class BottomSheet extends Component {
     if (visible) {
       this.setState({ modalVisible: visible });
       if (typeof onOpen === 'function') onOpen(props);
+      this.setState({ overlayHeight: SCREEN_HEIGHT });
+      this.setState({ modalBg: '#00000050' });
     } else {
+      this.setState({ modalBg: '#00000000' });
       pan.setValue({ x: 0, y: 0 });
       this.setState({
         modalVisible: visible,
         modalShown: false,
       });
+      this.setState({ overlayHeight: 0 });
 
       if (typeof onClose === 'function') onClose(props);
     }
@@ -127,42 +132,50 @@ class BottomSheet extends Component {
     };
 
     return (
-      <Modal
-        transparent
-        animationType={animationType}
-        visible={modalVisible}
-        supportedOrientations={SUPPORTED_ORIENTATIONS}
-        onRequestClose={() => {
-          if (closeOnPressBack) this.setModalVisible(false);
+      <View
+        style={{
+          ...StyleSheet.absoluteFill,
+          backgroundColor: this.state.modalBg,
+          height: this.state.overlayHeight,
         }}
-        onShow={() => this.setState({ modalShown: true })}
       >
-        <KeyboardAvoidingView
-          enabled={keyboardAvoidingViewEnabled}
-          behavior="padding"
-          style={[styles.wrapper, customStyles.wrapper]}
+        <Modal
+          transparent
+          animationType={animationType}
+          visible={modalVisible}
+          supportedOrientations={SUPPORTED_ORIENTATIONS}
+          onRequestClose={() => {
+            if (closeOnPressBack) this.setModalVisible(false);
+          }}
+          onShow={() => { this.setState({ modalShown: true }); } }
         >
-          <TouchableOpacity
-            style={styles.mask}
-            activeOpacity={1}
-            onPress={() => (closeOnPressMask ? this.close() : null)}
-          />
-            <Animated.View
-              {...(contentPanEnabled && this.panResponder.panHandlers)}
-              style={[panStyle, styles.container, customStyles.container]}
-            >
+          <KeyboardAvoidingView
+            enabled={keyboardAvoidingViewEnabled}
+            behavior="padding"
+            style={[styles.wrapper, customStyles.wrapper]}
+          >
+            <TouchableOpacity
+              style={styles.mask}
+              activeOpacity={1}
+              onPress={() => (closeOnPressMask ? this.close() : null)}
+            />
               <Animated.View
-                {...(!contentPanEnabled && this.panResponder.panHandlers)}
-                style={styles.draggableContainer}
+                {...(contentPanEnabled && this.panResponder.panHandlers)}
+                style={[panStyle, styles.container, customStyles.container]}
               >
-                <Animated.View style={[styles.draggableIcon, customStyles.draggableIcon]} />
+                <Animated.View
+                  {...(!contentPanEnabled && this.panResponder.panHandlers)}
+                  style={styles.draggableContainer}
+                >
+                  <Animated.View style={[styles.draggableIcon, customStyles.draggableIcon]} />
+                </Animated.View>
+                  <View>
+                    {children}
+                  </View>
               </Animated.View>
-                <View>
-                  {children}
-                </View>
-            </Animated.View>
-        </KeyboardAvoidingView>
-      </Modal>
+          </KeyboardAvoidingView>
+        </Modal>
+      </View>
     );
   }
 }

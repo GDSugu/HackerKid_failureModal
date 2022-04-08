@@ -27,11 +27,9 @@ const attachSubmitListener = () => {
         parentLink: userMedia,
         url: window.location.href,
       };
-      console.log(request);
       if (userName && userSchool) {
         $('#loader').show();
-        post(request, 'campaign/', true, false).then((response) => {
-          console.log(response);
+        post(request, 'campaign/', true, false).then(() => {
         }).then(() => {
           if (userName
             && userSchool

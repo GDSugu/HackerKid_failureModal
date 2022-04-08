@@ -5,7 +5,6 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  // Image,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import ThemeContext from '../theme';

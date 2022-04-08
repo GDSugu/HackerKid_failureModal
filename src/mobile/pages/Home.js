@@ -13,10 +13,9 @@ import {
   TouchableOpacity,
   ImageBackground,
   FlatList,
-  Modal,
-  Dimensions,
 } from 'react-native';
 import { FormattedMessage } from 'react-intl';
+import { Skeleton } from '@rneui/base';
 import { useDashboard } from '../../hooks/pages/dashboard';
 import { useLeaderBoard } from '../../hooks/pages/leaderboard';
 import { useGetChallenges } from '../../hooks/pages/challenges';
@@ -26,186 +25,33 @@ import Icon from '../common/Icons';
 import dashboardHero from '../../images/dashboard/dashboard-hero-bg-mobile.png';
 import defaultUser from '../../images/profile/default_user.png';
 import hkcoin from '../../images/common/hkcoin.png';
-import xpPoints from '../../images/common/xp.png';
-import timeSpent from '../../images/common/eva_clock-fill.png';
+// import xpPoints from '../../images/common/xp.png';
+// import timeSpent from '../../images/common/eva_clock-fill.png';
 import turtle from '../../images/dashboard/dashboard-turtle.png';
 import zombieLand from '../../images/dashboard/dashboard-zombieLand.png';
 import marioLand from '../../images/dashboard/dashboard-marioLand.png';
-import achievementImage from '../../images/dashboard/dashboard-achievements.png';
+// import achievementImage from '../../images/dashboard/dashboard-achievements.png';
 import CircleGradientProgressBar from '../components/CircleGradientProgressBar';
+import AuthErrorModal from '../components/Modals/AuthErrorModal';
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
-
-const challengesData = {
-  status: 'success',
-  trendingChallenges: [
-    {
-      challengeName: 'gfhjkl',
-      creatorName: 'John Prem Kumar S',
-      challengeId: 1,
-      updatedAt: 1609876288,
-      isCreator: false,
-      actionUrl: '/turtle/challenges/1/gfhjkl',
-      imgPath: 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/turtle/challenges/dev/1.png',
-      pointsAvailable: 10,
-    },
-    {
-      challengeName: 'fghjkl;',
-      creatorName: 'John Prem Kumar S',
-      challengeId: 3,
-      updatedAt: 1610781239,
-      isCreator: false,
-      actionUrl: '/turtle/challenges/3/fghjkl',
-      imgPath: 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/turtle/challenges/dev/3.png',
-      pointsAvailable: 4,
-    },
-    {
-      challengeName: 'testing validation',
-      creatorName: 'John Prem Kumar S',
-      challengeId: 22,
-      updatedAt: 1612109149,
-      isCreator: false,
-      actionUrl: '/turtle/challenges/22/testing-validation',
-      imgPath: 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/turtle/challenges/dev/22.png',
-      pointsAvailable: 20,
-    },
-    {
-      challengeName: 'hello world',
-      creatorName: 'Joe',
-      challengeId: 18,
-      updatedAt: 1601277598,
-      isCreator: false,
-      actionUrl: '/turtle/challenges/18/hello-world',
-      imgPath: 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/turtle/challenges/dev/18.png',
-      pointsAvailable: 34,
-    },
-    {
-      challengeName: 'test',
-      creatorName: 'mohamed',
-      challengeId: 17,
-      updatedAt: 1601242659,
-      isCreator: false,
-      actionUrl: '/turtle/challenges/17/test',
-      imgPath: 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/turtle/challenges/dev/17.png',
-      pointsAvailable: 28,
-    },
-    {
-      challengeName: 'Write CSK KU WHISTLE PODU',
-      creatorName: 'Immanuel',
-      challengeId: 15,
-      updatedAt: 1601233396,
-      isCreator: false,
-      actionUrl: '/turtle/challenges/15/write-csk-ku-whistle-podu',
-      imgPath: 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/turtle/challenges/dev/15.png',
-      pointsAvailable: 16,
-    },
-    {
-      challengeName: 'Circle Mirage',
-      creatorName: 'John Prem Kumar S',
-      challengeId: 14,
-      updatedAt: 1601232126,
-      isCreator: false,
-      actionUrl: '/turtle/challenges/14/circle-mirage',
-      imgPath: 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/turtle/challenges/dev/14.png',
-      pointsAvailable: 12,
-    },
-    {
-      challengeName: 'ghjklhkjl',
-      creatorName: 'Immanuel',
-      challengeId: 9,
-      updatedAt: 1601227394,
-      isCreator: false,
-      actionUrl: '/turtle/challenges/9/ghjklhkjl',
-      imgPath: 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/turtle/challenges/dev/9.png',
-      pointsAvailable: 24,
-    },
-    {
-      challengeName: 'dvfeedwqs',
-      creatorName: 'Immanuel',
-      challengeId: 7,
-      updatedAt: 1601207060,
-      isCreator: false,
-      actionUrl: '/turtle/challenges/7/dvfeedwqs',
-      imgPath: 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/turtle/challenges/dev/7.png',
-      pointsAvailable: 10,
-    },
-    {
-      challengeName: 'gfhjkl',
-      creatorName: 'John Prem Kumar S',
-      challengeId: 5,
-      updatedAt: 1601049495,
-      isCreator: false,
-      actionUrl: '/turtle/challenges/5/gfhjkl',
-      imgPath: 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/turtle/challenges/dev/5.png',
-      pointsAvailable: 6,
-    },
-    {
-      challengeName: 'ok goku',
-      creatorName: 'John Prem Kumar S',
-      challengeId: 2,
-      updatedAt: 1612108499,
-      isCreator: false,
-      actionUrl: '/turtle/challenges/2/ok-goku',
-      imgPath: 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/turtle/challenges/dev/2.png',
-      pointsAvailable: 6,
-    },
-    {
-      challengeName: 'Vara Vara',
-      creatorName: 'John Prem Kumar S',
-      challengeId: 47,
-      updatedAt: 1612108196,
-      isCreator: false,
-      actionUrl: '/turtle/challenges/47/vara-vara',
-      imgPath: 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/turtle/challenges/dev/47.png',
-      pointsAvailable: 8,
-    },
-  ],
-  paginationInfo: {
-    perPageCount: 12,
-    currentPage: 1,
-    overAllChallengesCount: '21',
-  },
-};
 
 const getStyles = (theme, utilColors, gradients, font, additionalThemes) => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.bodyBg,
   },
+  skeletonCard: {
+    width: '95%',
+    borderRadius: 10,
+    alignSelf: 'center',
+    marginTop: 16,
+  },
   marginRight24: {
     marginRight: 24,
   },
   marginBottm32: {
     marginBottom: 32,
-  },
-  errorComponent: {
-    backgroundColor: '#00000050',
-    flex: 1,
-    justifyContent: 'center',
-  },
-  errorCard: {
-    backgroundColor: 'white',
-    borderRadius: 16,
-    alignItems: 'center',
-    paddingVertical: 24,
-    paddingHorizontal: 16,
-    margin: Dimensions.get('window').width * 0.05,
-  },
-  errorCardPrimaryBtn: {
-    backgroundColor: theme.btnBg,
-    marginTop: 16,
-    width: '100%',
-    padding: 12,
-    borderRadius: 16,
-    alignItems: 'center',
-  },
-  errorCardPrimaryBtnText: {
-    color: utilColors.white,
-    ...font.subtitle1,
-  },
-  errorCardMessageText: {
-    ...font.heading6,
-    textAlign: 'center',
   },
   bodyCard: {
     margin: 16,
@@ -539,51 +385,8 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => Styl
 });
 
 const DashboardBlock = ({
-  avatar, bottomSheetRef, dashboardState, navigation, style,
-}) => {
-  let gameProgress = 0;
-  let totalGames = 0;
-  let totalPointsEarned = 0;
-  const gameProgressValue = new Animated.Value(0);
-  const gameDataTextRef = useRef();
-
-  const {
-    dashBoardData,
-    userData: dashboardUserData,
-  } = dashboardState;
-
-  if (dashBoardData) {
-    Object.keys(dashBoardData).forEach((key) => {
-      totalGames += dashBoardData[key].overAllQuestionCount;
-      gameProgress += dashBoardData[key].validSubmissionCount;
-      totalPointsEarned += dashBoardData[key].totalPointsEarned;
-    });
-
-    Animated.timing(gameProgressValue, {
-      toValue: gameProgress,
-      duration: 1000,
-      delay: 1000,
-      useNativeDriver: true,
-    }).start();
-
-    gameProgressValue.addListener(({ value }) => {
-      // const percentage = (value / totalGames) * 100;
-
-      // if (gameprogressCircleRef?.current) {
-      //   gameprogressCircleRef.current.setNativeProps({
-      //     strokeDasharray: [((value / totalGames) * 251.2), 251.2],
-      //   });
-      // }
-
-      if (gameDataTextRef?.current) {
-        gameDataTextRef.current.setNativeProps({
-          text: `${Math.round(value)}`.toString(),
-        });
-      }
-    });
-  }
-
-  return <>
+  avatar, bottomSheetRef, dashboardUserData, gameData, style,
+}) => <>
     <View style={style.bodyCard}>
       <View style={style.heroCard}>
           <View style={style.heroCardContent}>
@@ -606,7 +409,10 @@ const DashboardBlock = ({
               <View style={style.heroBlockDataContainer}>
                 <View style={[style.bodyCardContentTitle, style.heroCardDataBlock]}>
                   <Image source={hkcoin} style={style.heroCardDataIcon} />
-                  <Text style={style.heroCardText}>{totalPointsEarned} coins</Text>
+                  <Text
+                    style={style.heroCardText}>
+                      {gameData ? gameData.totalPointsEarned : 0} coins
+                  </Text>
                 </View>
                 {/* <View style={[style.bodyCardContentTitle, style.heroCardDataBlock]}>
                   <Image source={xpPoints} style={style.heroCardDataIcon} />
@@ -628,6 +434,11 @@ const DashboardBlock = ({
           </View>
       </View>
     </View>
+  </>;
+
+const HomeBlock = ({
+  avatar, dashboardUserData, navigation, style,
+}) => <>
     <View style={style.bodyCard}>
       <View style={style.bodyCardHeading}>
         <Text style={style.bodyCardHeadingText}>
@@ -655,14 +466,52 @@ const DashboardBlock = ({
               uri: dashboardUserData.profileImage,
             } : avatar }
           />
-          <Text style={style.bodyCardContentTitleText}>{dashboardUserData.name || 'Student Name'}</Text>
+          {
+            dashboardUserData
+            && <Text style={style.bodyCardContentTitleText}>{dashboardUserData.name}</Text>
+          }
+          {
+            !dashboardUserData
+            && <Skeleton width='50%' height={20} style={{ borderRadius: 4, marginLeft: 8 }} />
+          }
         </View>
         <View style={style.bodyCardContentContainer}>
-          <Text style={style.bodyCardContentText}>{dashboardUserData.about || 'Student\'s Bio'}</Text>
+          {
+            dashboardUserData
+            && <Text style={style.bodyCardContentText}>{dashboardUserData.about}</Text>
+          }
+          {
+            !dashboardUserData
+            && <Skeleton width='50%' height={16} style={{ borderRadius: 4 }} />
+          }
         </View>
       </View>
     </View>
-    <View style={[style.bodyCard, style.gameCard]}>
+  </>;
+
+const GameBlock = ({ style, navigation, gameData }) => {
+  const gameProgressValue = new Animated.Value(0);
+  const gameDataTextRef = useRef();
+
+  if (gameData) {
+    Animated.timing(gameProgressValue, {
+      toValue: gameData.gameProgress,
+      duration: 1000,
+      delay: 1000,
+      useNativeDriver: true,
+    }).start();
+
+    gameProgressValue.addListener(({ value }) => {
+      if (gameDataTextRef?.current) {
+        gameDataTextRef.current.setNativeProps({
+          text: `${Math.round(value)}`.toString(),
+        });
+      }
+    });
+  }
+
+  return <>
+     <View style={[style.bodyCard, style.gameCard]}>
       <View style={style.bodyCardHeading}>
         <Text style={style.bodyCardHeadingText}>
           <FormattedMessage
@@ -684,49 +533,11 @@ const DashboardBlock = ({
       <View style={style.bodyCardContent}>
         <View style={[style.bodyCardContentTitle, style.gameCardProgressContainer]}>
           <View style={style.gameCardProgressBlock}>
-            {/* <View style={style.gameCardSvgContainer}>
-              <Svg xmlns="http://www.w3.org/2000/svg" id="yourScoreAnimated" width='175%' height='175%' viewBox="0 0 100 100">
-                <Defs>
-                  <LinearGradient id="gradient">
-                    <Stop offset="10%" stopColor={style.svgGradient.color[0]} />
-                    <Stop offset="90%" stopColor={style.svgGradient.color[1]} />
-                  </LinearGradient>
-                </Defs>
-                <AnimatedPath
-                  ref={gameprogressCircleRef}
-                  id="yourScoreProgress"
-                  strokeLinecap="round"
-                  strokeWidth="6"
-                  strokeDasharray={'0, 251.2'}
-                  strokeDashoffset={2}
-                  stroke={'url(#gradient)'}
-                  className="progress-bar"
-                  d="M50 10 a 40 40 0 0 1 0 80 a 40 40 0 0 1 0 -80" />
-              </Svg>
-              <View style={style.gameCardSvgTextContainer}>
-                <View style={style.bodyCardContentTitle}>
-                  <AnimatedTextInput
-                    ref={gameDataTextRef}
-                    underlineColorAndroid='transparent'
-                    style={style.gameCardText}
-                    value={'0'}
-                    editable={false}
-                  />
-                  <Text style={style.gameCardTextLight}>/{totalGames || 0 }</Text>
-                </View>
-                <Text style={style.gameCardSvgCaption}>
-                  <FormattedMessage
-                    defaultMessage="completed"
-                    description="Game Progress card caption"
-                  />
-                </Text>
-              </View>
-            </View> */}
             <CircleGradientProgressBar
               gradientColors={[[style.svgGradient.color[0], '10%'], [style.svgGradient.color[1], '90%']]}
-              progressValue={gameProgress}
-              totalValue={totalGames}
-              startAnim={Boolean(dashBoardData)}
+              progressValue={ gameData ? gameData.gameProgress : 0}
+              totalValue={ gameData ? gameData.totalGames : 100}
+              startAnim={Boolean(gameData)}
                >
               <View style={style.bodyCardContentTitle}>
                 <AnimatedTextInput
@@ -736,7 +547,7 @@ const DashboardBlock = ({
                   value={'0'}
                   editable={false}
                 />
-                <Text style={style.gameCardTextLight}>/{totalGames || 0 }</Text>
+                <Text style={style.gameCardTextLight}>/{gameData ? gameData.totalGames : '--' }</Text>
               </View>
               <Text style={style.gameCardSvgCaption}>
                 <FormattedMessage
@@ -759,7 +570,7 @@ const DashboardBlock = ({
                     description='Coins Earned'
                   />
                 </Text>
-                <Text style={style.gameCardText}>{totalPointsEarned}</Text>
+                <Text style={style.gameCardText}>{gameData ? gameData.totalPointsEarned : '--' }</Text>
               </View>
             </View>
             {/* <View style={[style.bodyCardContentTitle, style.gameCardContent]}>
@@ -859,21 +670,36 @@ const ChallengeBlock = ({ challengeData, navigation, style }) => {
         </TouchableOpacity>
       </View>
       <View>
-        <FlatList
-          data={challengeData}
-          renderItem={challengeCardItem}
-          keyExtractor={(item, index) => index.toString()}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          fadingEdgeLength={50}
-          initialNumToRender={3}
-          snapToInterval={200}
-          decelerationRate={0.001}
-          snapToAlignment={'start'}
-          contentInset={{ left: 20 }}
-          automaticallyAdjustContentInsets={false}
-          style={style.challengeCardList}
-        />
+        {
+          challengeData && <>
+            <FlatList
+              data={challengeData}
+              renderItem={challengeCardItem}
+              keyExtractor={(item, index) => index.toString()}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              fadingEdgeLength={50}
+              initialNumToRender={3}
+              snapToInterval={200}
+              decelerationRate={0.001}
+              snapToAlignment={'start'}
+              contentInset={{ left: 20 }}
+              automaticallyAdjustContentInsets={false}
+              style={style.challengeCardList}
+            />
+          </>
+        }
+        {
+          !challengeData && <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            { [1, 2, 3, 4].map((item) => (
+              <View style={[style.challengeCardItem, { width: 200 }]} key={item}>
+                <Skeleton width='100%' height={100} style={{ borderRadius: 10, margin: 4 }} />
+                <Skeleton width='25%' height={24} style={{ borderRadius: 10, margin: 4 }} />
+                <Skeleton width='75%' height={16} style={{ borderRadius: 8, margin: 4 }} />
+              </View>
+            )) }
+          </ScrollView>
+        }
       </View>
       <View style={style.bodyCard}>
         <TouchableOpacity
@@ -987,7 +813,9 @@ const ChallengeBlock = ({ challengeData, navigation, style }) => {
 //   </View>
 // </>;
 
-const LeaderBoardCard = ({ navigation, style }) => <>
+const LeaderBoardCard = ({
+  leaderboardData, leaderBoardUserData, navigation, style,
+}) => <>
   <View style={[style.sheetCard]}>
     <View style={style.sheetCardHeading}>
       <Text style={[style.sheetCardHeadingText, style.sheetLeaderboardHeadingText]}>
@@ -997,28 +825,47 @@ const LeaderBoardCard = ({ navigation, style }) => <>
         />
       </Text>
     </View>
-    <View style={style.sheetCardHeroContent}>
-      <Text style={[style.sheetCardTextColor, style.sheetCardHeroTitle]}>#{24}</Text>
-      <Text style={style.sheetCardBodyText}>
-        <FormattedMessage
-          defaultMessage='rank'
-          description='sheet card subtitle'
-        />
-      </Text>
-    </View>
+    {
+      leaderBoardUserData && <>
+      <View style={style.sheetCardHeroContent}>
+        <Text
+          style={[style.sheetCardTextColor, style.sheetCardHeroTitle]}
+          >#{leaderBoardUserData.rank}</Text>
+        <Text style={style.sheetCardBodyText}>
+          <FormattedMessage
+            defaultMessage='rank'
+            description='sheet card subtitle'
+          />
+        </Text>
+      </View>
+    </>
+    }
+    { !leaderBoardUserData && <>
+        <Skeleton width='20%' height={48} style={{ borderRadius: 8, alignSelf: 'center', marginVertical: 8 }} />
+      </> }
     <View style={style.sheetCardBodyContent}>
-      { [1, 2, 3].map((item, index) => (
+      { leaderboardData
+      && leaderboardData.slice(0, 3).map((item, index) => (
         <View style={style.sheetCardBodyRow} key={index}>
           <View style={style.sheetCardBodyRow1}>
             <Text
               style={[
                 style.sheetCardBodyText, style.sheetCardRowIndex,
               ]}
-            >#{item}</Text>
-            <Text style={style.sheetCardBodyText}>{'StudentName1'}</Text>
+            >#{item.rank}</Text>
+            <Text style={style.sheetCardBodyText}>{item.name}</Text>
           </View>
-          <Text style={style.sheetCardBodyText}>{12345}</Text>
+          <Text style={style.sheetCardBodyText}>{item.points}</Text>
         </View>)) }
+        {
+          !leaderboardData
+          && [1, 2, 3].map((item, index) => (
+            <View key={index} style={style.sheetCardBodyRow}>
+              <Skeleton width='50%' height={24} style={{ borderRadius: 8 }} />
+              <Skeleton width='15%' height={24} style={{ borderRadius: 8 }} />
+            </View>
+          ))
+        }
     </View>
     <TouchableOpacity
       onPress={() => navigation.navigate('Leaderboard')}
@@ -1034,38 +881,32 @@ const LeaderBoardCard = ({ navigation, style }) => <>
   </View>
 </>;
 
-// const compareProps = (
-//   prevProps,
-//   nextProps,
-// ) => JSON.stringify(prevProps) === JSON.stringify(nextProps);
-
 const compareProps = (prev, next) => {
   let isEqual = true;
   Object.keys(prev).forEach((key) => {
-    if (prev[key] === 'avatar') {
-      isEqual = true;
-    }
-    if (prev[key] !== next[key]) {
-      isEqual = false;
+    if (key === 'avatar' || key === 'navigation' || key === 'style') {
+      isEqual = isEqual && true;
     } else if (typeof prev[key] === 'function') {
       // use memoized function for passing as props
-      isEqual = true;
+      isEqual = isEqual && true;
     } else if (key.toLowerCase().includes('ref')) {
       isEqual = true;
     } else {
-      isEqual = JSON.stringify(prev[key]) === JSON.stringify(next[key]);
+      isEqual = isEqual && JSON.stringify(prev[key]) === JSON.stringify(next[key]);
     }
   });
   return isEqual;
 };
 
 const DashboardComponent = memo(DashboardBlock, compareProps);
+const HomeComponent = memo(HomeBlock, compareProps);
+const GameComponent = memo(GameBlock, compareProps);
 const ChallengeComponent = memo(ChallengeBlock, compareProps);
 const LeaderBoardComponent = memo(LeaderBoardCard, compareProps);
 // const ClubComponent = memo(ClubCard, compareProps);
 // const AchievementComponent = memo(AchievementCard, compareProps);
 
-const Index = ({ navigation }) => {
+const Index = ({ route, navigation }) => {
   const { font, theme } = useContext(ThemeContext);
   const pageTheme = theme.screenHome;
   const style = getStyles(pageTheme, theme.utilColors, theme.gradients, font, theme);
@@ -1076,10 +917,13 @@ const Index = ({ navigation }) => {
 
   const {
     status: dashboarStatus,
+    userData: dashboardUserData,
+    gameData,
   } = dashboardState;
 
   const {
     leaderboardData,
+    userData: leaderBoardUserData,
     status: leaderboardStatus,
   } = leaderBoardState;
 
@@ -1089,8 +933,6 @@ const Index = ({ navigation }) => {
   } = getChallengesState;
 
   const bottomSheetRef = useRef();
-
-  console.log('-------------------------------------------------------------------------------------------');
 
   const bottomSheetStyles = {
     draggableIcon: {
@@ -1103,56 +945,34 @@ const Index = ({ navigation }) => {
   };
 
   if ([dashboarStatus, leaderboardStatus, challengesStatus].includes('access_denied')) {
-    return <>
-      <Modal transparent animationType='slide' >
-        <View style={style.errorComponent}>
-          <View style={style.errorCard}>
-            <Text style={style.errorCardMessageText}>
-              <FormattedMessage
-                defaultMessage='You are not authorized to access this page.'
-                description='Not authorized message'
-              />
-            </Text>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('More')} // change to Signup after signup integrated
-              style={style.errorCardPrimaryBtn}
-            >
-              <Text style={style.errorCardPrimaryBtnText}>
-                <FormattedMessage
-                  defaultMessage='Login'
-                  description='Login button'
-                />
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
-    </>;
+    return <AuthErrorModal navigation={navigation} route={route} />;
   }
 
   return (
     <>
       <ScrollView style={style.container}>
         <View style={style.container}>
-
-           {/* DashboardComponent */}
-           {
-            dashboardState.dashBoardData
-            && <DashboardComponent
-              avatar={defaultUser}
-              bottomSheetRef={bottomSheetRef}
-              dashboardState={dashboardState}
-              style={style}
-              navigation={navigation} />
-           }
-           {/* ChallengeComponent */}
-           {
-             challengesData
-             && <ChallengeComponent
-              challengeData={trendingChallenges}
-              navigation={navigation}
-              style={style} />
-           }
+          <DashboardComponent
+            avatar={defaultUser}
+            bottomSheetRef={bottomSheetRef}
+            dashboardUserData={dashboardUserData}
+            gameData={gameData}
+            style={style}
+            navigation={navigation} />
+          <HomeComponent
+            avatar={defaultUser}
+            dashboardUserData={dashboardUserData}
+            navigation={navigation}
+            style={style} />
+          <GameComponent
+            gameData={gameData}
+            navigation={navigation}
+            style={style}
+          />
+          <ChallengeComponent
+            challengeData={trendingChallenges}
+            navigation={navigation}
+            style={style} />
         </View>
       </ScrollView>
       <BottomSheet
@@ -1167,7 +987,11 @@ const Index = ({ navigation }) => {
           {/* <ClubComponent navigation={navigation} style={style} /> */}
           {
             leaderboardData
-            && <LeaderBoardComponent navigation={navigation} style={style} />
+            && <LeaderBoardComponent
+            leaderboardData={leaderboardData}
+            leaderBoardUserData={leaderBoardUserData}
+            navigation={navigation}
+            style={style} />
           }
         </ScrollView>
       </BottomSheet>
