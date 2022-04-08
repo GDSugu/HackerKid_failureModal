@@ -91,6 +91,11 @@
               font-size: 1.125rem;
               margin-left: 0.5rem;
             }
+
+            img {
+              width: 2rem;
+              height: 2rem;
+            }
           }
         }
       }
@@ -177,6 +182,11 @@
               margin-left: 1rem;
               font-size: 0.875rem;
               font-weight: bold;
+            }
+
+            img {
+              width: 2rem;
+              height: 2rem;
             }
           }
 
@@ -305,19 +315,19 @@
                   margin-right: 0.75rem;
 
                   img {
-                    width: 100%;
-                    height: 100%;
+                    width: 2.75rem;
+                    height: 2.75rem;
                   }
                 }
 
                 .progress-sub-header {
-                  font-size: 0.75rem;
+                  font-size: 1rem;
                   color: gt.theme-var(dashboard-text-color-4, null, $thememaplight, $cssvars);
                   margin-bottom: 0;
                 }
 
                 .progress-data {
-                  font-size: 0.875rem;
+                  font-size: 1.25rem;
                   margin-bottom: 0;
                 }
               }
@@ -599,5 +609,91 @@
       margin: 0.5rem 0;
       width: 100%;
     }
+  }
+
+  .skeleton {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.75rem;
+    overflow: hidden;
+
+    .sideboard-content-title {
+      height: 3rem;
+      width: 15%;
+      border-radius: 0.75rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .sideboard-content-data {
+      .sideboard-row {
+        margin: 0.75rem;
+
+        .sideboard-names {
+          height: 2rem;
+          width: 100%;
+          border-radius: 0.5rem;
+        }
+      }
+    }
+
+    .skeleton-body {
+      width: 100%;
+      height: 100%;
+      min-height: 10rem;
+    }
+
+    .skeleton-challenge-container {
+      width: 100%;
+      padding: 1.5rem 0;
+      overflow-x: auto;
+
+      .skeleton-challenge-card {
+        min-width: 20rem;
+        min-height: 12.5rem;
+        border-radius: 0.75rem;
+        margin: 0 1rem 0 0;
+
+        @include gm.media-breakpoint-down(md) {
+          min-width: 15rem;
+          min-height: 8.25rem;
+          border-radius: 0.5rem;
+        }
+      }
+    }
+
+    .skeleton-body,
+    .sideboard-content-title,
+    .sideboard-names,
+    .sideboard-rank,
+    .skeleton-challenge-card {
+      animation: refresh 2.5s ease-out infinite;
+      background-image: linear-gradient(90deg, gt.theme-var(text-color-6), gt.theme-var(bg-3) 30px, gt.theme-var(skeleton-bg) 60px);
+      background-size: 200%;
+    }
+  }
+
+  @keyframes refresh {
+    0% {
+      background-position: -100%;
+    }
+
+    100% {
+      background-position: 100%;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: gt.theme-var(skeleton-bg);
+    border-radius: 0.5rem;
   }
 }

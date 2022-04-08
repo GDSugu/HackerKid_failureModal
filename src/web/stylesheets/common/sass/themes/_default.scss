@@ -22,6 +22,8 @@ $thememaplight : (
   body-bg-yellow: #fff7e1,
   bg-1: #fff,
   bg-2: #212527,
+  bg-3: #ededed,
+  skeleton-bg: #13224125,
 );
 // just copied the light theme colors to the dark for now
 // TODO: make this a real dark theme with appropriate colors
@@ -49,6 +51,8 @@ $thememapdark : (
   body-bg-yellow: #fff7e1,
   bg-1: #212527,
   bg-2: #fff,
+  bg-3: #ededed,
+  skeleton-bg: #13224125,
 );
 
 $cssvars : (
@@ -75,6 +79,8 @@ $cssvars : (
   body-bg-yellow: --body-bg-yellow,
   bg-1: --bg-1,
   bg-2: --bg-2,
+  bg-3: --bg-3,
+  skeleton-bg: --skeleton-bg,
 );
 
 @mixin spread-map($map: (), $cssMap: $cssvars) {

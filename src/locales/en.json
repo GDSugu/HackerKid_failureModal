@@ -85,10 +85,6 @@
     "defaultMessage": "Try again",
     "description": "try again btn"
   },
-  "BIWKGG": {
-    "defaultMessage": "Time Spent:",
-    "description": "time spent heading text"
-  },
   "C8CsWY": {
     "defaultMessage": "This is Class page",
     "description": "Class Page"
@@ -261,10 +257,6 @@
   },
   "c9n6Sh": {
     "defaultMessage": "School"
-  },
-  "d1eDsY": {
-    "defaultMessage": "Loading...",
-    "description": "Loading..."
   },
   "e5Eaen": {
     "defaultMessage": "Profile updated successfully",

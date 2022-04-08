@@ -64,9 +64,8 @@ const More = ({ navigation }) => {
           })}
           onPress={() => {
             AsyncStorage.setItem('authtoken', authtoken)
-              .then((response) => {
+              .then(() => {
                 ToastAndroid.show('authtoken set', ToastAndroid.SHORT);
-                console.log('response ', response);
               })
               .catch((error) => {
                 Alert.alert('Authtoken Error', error);
