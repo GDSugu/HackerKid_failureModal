@@ -8,15 +8,19 @@ import {
   TextInput,
   ScrollView,
   KeyboardAvoidingView,
+  Alert,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import ThemeContext from '../components/theme';
-import LoginFormSvg from '../../images/signin/signin-form-svg.svg';
+import LoginFormSvg from '../../images/login/login-form-svg.svg';
+import useLoginMethod from '../../hooks/pages/login';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
     flex: 1,
     paddingLeft: 18,
     paddingRight: 18,
+    justifyContent: 'center',
   },
   label: {
     color: 'black',
@@ -70,33 +74,130 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     marginBottom: 25,
     textAlign: 'center',
   },
+  loginMethodTabsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 30,
+  },
+  loginMethodTab: {
+    padding: 14,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomWidth: 2,
+    borderColor: theme.loginTabInactiveBorder,
+  },
+  loginMethodTabActive: {
+    borderColor: theme.fadedBtnTextColor,
+  },
+  loginMethodTabText: {
+    color: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+    ...font.bodyBold,
+  },
+  loginMethodTabTextActive: {
+    color: theme.fadedBtnTextColor,
+  },
 });
 
 const Login = ({ navigation }) => {
   const { font, theme } = React.useContext(ThemeContext);
+  const { state, setState, loginWithPhone } = useLoginMethod();
   const screenTheme = theme.screenLogin;
   const style = getStyles(screenTheme, theme.utilColors, font);
 
+  const loginWithPhoneTabStyle = [style.loginMethodTab];
+  const loginWithPhoneTextStyle = [style.loginMethodTabText];
+
+  if (state.loginMethod === 'loginWithPhone') {
+    loginWithPhoneTabStyle.push(style.loginMethodTabActive);
+    loginWithPhoneTextStyle.push(style.loginMethodTabTextActive);
+  }
+
+  const loginWithEmailTabStyle = [style.loginMethodTab];
+  const loginWithEmailTextStyle = [style.loginMethodTabText];
+
+  if (state.loginMethod === 'loginWithEmail') {
+    loginWithEmailTabStyle.push(style.loginMethodTabActive);
+    loginWithEmailTextStyle.push(style.loginMethodTabTextActive);
+  }
+
+  const handleStateChange = (key, value) => {
+    setState((prevState) => ({
+      ...prevState,
+      [key]: value,
+    }));
+  };
+
+  const loginBtnClickHandler = () => {
+    console.log(state);
+    loginWithPhone(state.phoneNumber, '+91', state.password).then((response) => {
+      const data = JSON.parse(response);
+      console.log(data);
+      if (data.status === 'success') {
+        navigation.navigate('EditProfile');
+        AsyncStorage.setItem('authtoken', data.auth)
+          .then((storageResponse) => {
+            console.log('response ', storageResponse);
+          })
+          .catch((error) => {
+            Alert.alert('Authtoken Error', error);
+          });
+      }
+    });
+  };
+
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between' }}>
+    <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
       <View style={style.container}>
         <KeyboardAvoidingView>
         <View style={style.loginFormSvgContainer}>
           <LoginFormSvg/>
         </View>
-        <View style={style.labelAndInputContainer}>
-          <Text style={style.label}>
-            <FormattedMessage
-                defaultMessage='Phone or Email'
-                description='Phone or Email label'
+          <View style={ style.loginMethodTabsContainer}>
+            <TouchableOpacity style={loginWithPhoneTabStyle} onPress={() => setState((prevState) => ({ ...prevState, loginMethod: 'loginWithPhone' }))}>
+              <Text style={loginWithPhoneTextStyle}>
+                Login with Phone
+              </Text>
+            </TouchableOpacity>
+          <TouchableOpacity style={loginWithEmailTabStyle} onPress={() => setState((prevState) => ({ ...prevState, loginMethod: 'loginWithEmail' }))}>
+            <Text style={loginWithEmailTextStyle}>
+              Login with Email
+            </Text>
+          </TouchableOpacity>
+          </View>
+          {
+            (state.loginMethod === 'loginWithPhone')
+              ? <View style={style.labelAndInputContainer}>
+                <Text style={style.label}>
+              <FormattedMessage
+                  defaultMessage='Phone'
+                  description='Phone label'
+              />
+            </Text>
+            <TextInput
+                style={style.inputField}
+                 multiline={false}
+                  disableFullscreenUI={true}
+                  onChangeText={(value) => { handleStateChange('phoneNumber', value); }}
             />
-          </Text>
-          <TextInput
-            style={style.inputField}
-              multiline={false}
-              disableFullscreenUI = {true}
-          />
-        </View>
+              </View>
+              : <View style={style.labelAndInputContainer}>
+              <Text style={style.label}>
+                <FormattedMessage
+                    defaultMessage='Email'
+                    description='Email label'
+                />
+              </Text>
+              <TextInput
+                style={style.inputField}
+                  multiline={false}
+                  disableFullscreenUI={true}
+                  onChangeText={(value) => { handleStateChange('email', value); }}
+              />
+            </View>
+        }
           <View style={style.labelAndInputContainer}>
             <Text style={style.label}>
               <FormattedMessage
@@ -105,10 +206,11 @@ const Login = ({ navigation }) => {
               />
             </Text>
             <TextInput
-              disableFullscreenUI = {true}
+              disableFullscreenUI={true}
               secureTextEntry={true}
               style={style.inputField}
-              multiline={false} />
+              multiline={false}
+              onChangeText={(value) => { handleStateChange('password', value); }} />
           </View>
         </KeyboardAvoidingView>
         <TouchableOpacity>
@@ -118,7 +220,7 @@ const Login = ({ navigation }) => {
           <TouchableOpacity
               style={style.btnPrimary}
               title="Login"
-            onPress={() => navigation.navigate('Start') }>
+            onPress={loginBtnClickHandler}>
             <Text style={style.btnPrimaryText}>
               <FormattedMessage defaultMessage='Login' description='Login Button'/>
             </Text>

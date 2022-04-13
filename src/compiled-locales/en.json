@@ -47,6 +47,16 @@
       "value": "Next"
     }
   ],
+  "3i4N8J": [
+    {
+      "type": 0,
+      "value": "Not "
+    },
+    {
+      "type": 1,
+      "value": "phone"
+    }
+  ],
   "4Ve1r3": [
     {
       "type": 0,
@@ -77,16 +87,10 @@
       "value": "Login with OTP"
     }
   ],
-  "7IJhPE": [
+  "7L3+7M": [
     {
       "type": 0,
-      "value": "Enter a valid Phone or Email"
-    }
-  ],
-  "7xoBRq": [
-    {
-      "type": 0,
-      "value": "Phone or Email"
+      "value": "Login into existing account"
     }
   ],
   "9gqH2W": [
@@ -99,6 +103,12 @@
     {
       "type": 0,
       "value": "Go to Class"
+    }
+  ],
+  "Aevhvw": [
+    {
+      "type": 0,
+      "value": "Verify OTP and proceed"
     }
   ],
   "B7znij": [
@@ -149,12 +159,6 @@
       "value": "Go to More"
     }
   ],
-  "G0CGdx": [
-    {
-      "type": 0,
-      "value": "Enter a valid Parent's name"
-    }
-  ],
   "GQwBTI": [
     {
       "type": 0,
@@ -171,6 +175,12 @@
     {
       "type": 0,
       "value": "Save"
+    }
+  ],
+  "JnwRMJ": [
+    {
+      "type": 0,
+      "value": "OTP"
     }
   ],
   "MS/biV": [
@@ -233,16 +243,16 @@
       "value": "Create Account"
     }
   ],
-  "UmuBIc": [
-    {
-      "type": 0,
-      "value": "Enter a phone number"
-    }
-  ],
   "VsWMVt": [
     {
       "type": 0,
       "value": "Re-type password"
+    }
+  ],
+  "VthZQE": [
+    {
+      "type": 0,
+      "value": "Create a New Account"
     }
   ],
   "X1rCRf": [
@@ -267,12 +277,6 @@
     {
       "type": 0,
       "value": "Create a New Account"
-    }
-  ],
-  "bwmSIS": [
-    {
-      "type": 0,
-      "value": "Enter a valid Name"
     }
   ],
   "c9n6Sh": [
@@ -347,12 +351,6 @@
       "value": "Parent's Name"
     }
   ],
-  "no2x/M": [
-    {
-      "type": 0,
-      "value": "Not 9876543210?"
-    }
-  ],
   "of2vJ9": [
     {
       "type": 0,
@@ -393,30 +391,6 @@
     {
       "type": 0,
       "value": "Go to Home"
-    }
-  ],
-  "uNKBuG": [
-    {
-      "type": 0,
-      "value": "Enter a valid password"
-    }
-  ],
-  "uXQw5/": [
-    {
-      "type": 0,
-      "value": "Password or username does not match"
-    }
-  ],
-  "ut7C3K": [
-    {
-      "type": 0,
-      "value": "Passwords do not match"
-    }
-  ],
-  "xOy0Vc": [
-    {
-      "type": 0,
-      "value": "Enter a valid Email address"
     }
   ],
   "z9lFwl": [

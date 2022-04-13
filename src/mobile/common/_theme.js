@@ -48,6 +48,7 @@ const Theme = {
       inputBorderColor: Yellow.color700,
       fadedBtnBg: Yellow.color50,
       fadedBtnTextColor: Yellow.color900,
+      loginTabInactiveBorder: Yellow.color100,
     },
     utilColors,
   },

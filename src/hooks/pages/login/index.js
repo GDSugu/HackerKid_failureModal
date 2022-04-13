@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import post from '../../../web/javascripts/common/framework';
+import post from '../../common/framework';
 
 const getDevice = () => {
   const ua = navigator.userAgent;
@@ -13,10 +13,15 @@ const getDevice = () => {
 };
 
 const useLoginMethod = () => {
-  const [loginMethod, setLoginMethod] = useState('loginWithPhone');
+  const [state, setState] = useState({
+    loginMethod: 'loginWithPhone',
+    phoneNumber: '',
+    email: '',
+    password: '',
+  });
 
   const loginWithPhone = (phone, countryCode, password, email = false) => {
-    const useEmail = loginMethod !== 'loginWithPhone';
+    const useEmail = state.loginMethod !== 'loginWithPhone';
 
     const device = getDevice();
     // const neoeyed = getneoEyed(phone);
@@ -34,8 +39,8 @@ const useLoginMethod = () => {
   };
 
   return {
-    loginMethod,
-    setLoginMethod,
+    state,
+    setState,
     loginWithPhone,
   };
 };

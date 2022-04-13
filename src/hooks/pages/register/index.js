@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import post from '../../../web/javascripts/common/framework';
+import post from '../../common/framework';
 
 const useRegister = () => {
   const [stateObj, setStateObj] = useState({

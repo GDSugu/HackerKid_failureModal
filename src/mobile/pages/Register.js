@@ -293,25 +293,13 @@ const RegisterFormStepThree = ({ style }) => (
   </View>
 );
 
-const Register = ({ navigation }) => {
+const Register = () => {
   const [currentStep, setCurrentStep] = useRegisterFormStep(1);
   const { font, theme } = React.useContext(ThemeContext);
   const screenTheme = theme.screenLogin;
   const style = getStyles(screenTheme, theme.utilColors, font);
 
   const backBtnStyle = currentStep > 1 ? style.show : style.hide;
-
-  // useEffect(() => {
-  //   const backAction = () => {
-  //     if (currentStep > 1) {
-  //       setCurrentStep(currentStep - 1);
-  //     }
-  //   };
-
-  //   const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
-
-  //   return () => backHandler.remove();
-  // }, []);
 
   return (
     <ScrollView style={{ flex: 1 }}>

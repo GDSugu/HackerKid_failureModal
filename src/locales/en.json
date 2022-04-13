@@ -30,6 +30,10 @@
     "defaultMessage": "Next",
     "description": "Next button"
   },
+  "3i4N8J": {
+    "defaultMessage": "Not {phone}",
+    "description": "not button"
+  },
   "4Ve1r3": {
     "defaultMessage": "Ok",
     "description": "confirm btn"
@@ -50,13 +54,9 @@
     "defaultMessage": "Login with OTP",
     "description": "Login with OTP button"
   },
-  "7IJhPE": {
-    "defaultMessage": "Enter a valid Phone or Email",
-    "description": "Phone or Email form helper"
-  },
-  "7xoBRq": {
-    "defaultMessage": "Phone or Email",
-    "description": "Phone or Email label"
+  "7L3+7M": {
+    "defaultMessage": "Login into existing account",
+    "description": "Login into existing account button"
   },
   "9gqH2W": {
     "defaultMessage": "Login",
@@ -65,6 +65,10 @@
   "9ppS9d": {
     "defaultMessage": "Go to Class",
     "description": "class navigation button"
+  },
+  "Aevhvw": {
+    "defaultMessage": "Verify OTP and proceed",
+    "description": "Verify OTP and proceed Button"
   },
   "B7znij": {
     "defaultMessage": "Create a New Account",
@@ -98,10 +102,6 @@
     "defaultMessage": "Go to More",
     "description": "Home Navigation Button"
   },
-  "G0CGdx": {
-    "defaultMessage": "Enter a valid Parent's name",
-    "description": "Parent's name form helper"
-  },
   "GQwBTI": {
     "defaultMessage": "Verify OTP and proceed",
     "description": "verify otp button"
@@ -112,6 +112,10 @@
   "HI8bPV": {
     "defaultMessage": "Save",
     "description": "Profile save button"
+  },
+  "JnwRMJ": {
+    "defaultMessage": "OTP",
+    "description": "OTP label"
   },
   "MS/biV": {
     "defaultMessage": "Go to Index",
@@ -152,13 +156,13 @@
     "defaultMessage": "Create Account",
     "description": "Create Account Button"
   },
-  "UmuBIc": {
-    "defaultMessage": "Enter a phone number",
-    "description": "Phone label form helper"
-  },
   "VsWMVt": {
     "defaultMessage": "Re-type password",
     "description": "Re-type password label"
+  },
+  "VthZQE": {
+    "defaultMessage": "Create a New Account",
+    "description": "Create Account Heading"
   },
   "X1rCRf": {
     "defaultMessage": "Login into existing account",
@@ -175,10 +179,6 @@
   "a2ZCmv": {
     "defaultMessage": "Create a New Account",
     "description": "Create Account Button"
-  },
-  "bwmSIS": {
-    "defaultMessage": "Enter a valid Name",
-    "description": "Name form helper"
   },
   "c9n6Sh": {
     "defaultMessage": "School"
@@ -227,10 +227,6 @@
     "defaultMessage": "Parent's Name",
     "description": "Parent's Name label"
   },
-  "no2x/M": {
-    "defaultMessage": "Not 9876543210?",
-    "description": "not button"
-  },
   "of2vJ9": {
     "defaultMessage": "This is Video page",
     "description": "Videos Page"
@@ -257,22 +253,6 @@
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
-  },
-  "uNKBuG": {
-    "defaultMessage": "Enter a valid password",
-    "description": "Set password form helper"
-  },
-  "uXQw5/": {
-    "defaultMessage": "Password or username does not match",
-    "description": "Password form helper"
-  },
-  "ut7C3K": {
-    "defaultMessage": "Passwords do not match",
-    "description": "Re-type password form helper"
-  },
-  "xOy0Vc": {
-    "defaultMessage": "Enter a valid Email address",
-    "description": "Email form helper"
   },
   "z9lFwl": {
     "defaultMessage": "Name",
