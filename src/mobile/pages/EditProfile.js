@@ -270,7 +270,7 @@ const EditProfile = ({ navigation }) => {
         uri: profileImage,
       });
     }
-  }, Object.keys(state).filter((key) => key !== 'profileImage' && key !== 'profileImageName'));
+  }, Object.keys(state).filter((key) => key !== 'profileImage' && key !== 'profileImageName' && key !== 'response'));
 
   return <>
     <View style={style.container}>

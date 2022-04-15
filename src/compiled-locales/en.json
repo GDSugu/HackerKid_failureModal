@@ -5,10 +5,22 @@
       "value": "This is games page"
     }
   ],
+  "/ndV7b": [
+    {
+      "type": 0,
+      "value": "Coins Earned:"
+    }
+  ],
   "0JV99f": [
     {
       "type": 0,
       "value": "This is index page"
+    }
+  ],
+  "0Sgdtj": [
+    {
+      "type": 0,
+      "value": "Game Progress"
     }
   ],
   "1RUvaS": [
@@ -23,10 +35,22 @@
       "value": "Bio"
     }
   ],
+  "2ua1yZ": [
+    {
+      "type": 0,
+      "value": "rank"
+    }
+  ],
   "383EZ1": [
     {
       "type": 0,
       "value": "This is more options page"
+    }
+  ],
+  "4Ve1r3": [
+    {
+      "type": 0,
+      "value": "Ok"
     }
   ],
   "5sg7KC": [
@@ -35,7 +59,25 @@
       "value": "Password"
     }
   ],
+  "6+MZGf": [
+    {
+      "type": 0,
+      "value": "Challenges"
+    }
+  ],
   "6Cjk2D": [
+    {
+      "type": 0,
+      "value": "Login"
+    }
+  ],
+  "6NWftj": [
+    {
+      "type": 0,
+      "value": "Challenges"
+    }
+  ],
+  "9gqH2W": [
     {
       "type": 0,
       "value": "Login"
@@ -65,10 +107,22 @@
       "value": "This is Class page"
     }
   ],
+  "CcB4fo": [
+    {
+      "type": 0,
+      "value": "Coins Earned:"
+    }
+  ],
   "D/2aSY": [
     {
       "type": 0,
       "value": "This is about page"
+    }
+  ],
+  "DBTgpi": [
+    {
+      "type": 0,
+      "value": "completed"
     }
   ],
   "DZ21OO": [
@@ -89,6 +143,12 @@
       "value": "Go to More"
     }
   ],
+  "FIcBXp": [
+    {
+      "type": 0,
+      "value": "Home"
+    }
+  ],
   "HAlOn1": [
     {
       "type": 0,
@@ -101,10 +161,22 @@
       "value": "Save"
     }
   ],
+  "HbJPsh": [
+    {
+      "type": 0,
+      "value": "All Challenges"
+    }
+  ],
   "JCIgkj": [
     {
       "type": 0,
       "value": "Username"
+    }
+  ],
+  "MB8h2I": [
+    {
+      "type": 0,
+      "value": "Leaderboard Ranking"
     }
   ],
   "MS/biV": [
@@ -131,6 +203,24 @@
       "value": "Sign in with Google"
     }
   ],
+  "OvWf0W": [
+    {
+      "type": 0,
+      "value": "Class"
+    }
+  ],
+  "PSx95N": [
+    {
+      "type": 0,
+      "value": "Home"
+    }
+  ],
+  "Qvy78L": [
+    {
+      "type": 0,
+      "value": "Profile"
+    }
+  ],
   "R5SEEt": [
     {
       "type": 0,
@@ -149,10 +239,34 @@
       "value": "Help"
     }
   ],
-  "T/a40M": [
+  "TmcPug": [
     {
       "type": 0,
-      "value": "Toggle Theme"
+      "value": "Edit Profile"
+    }
+  ],
+  "UUCx/J": [
+    {
+      "type": 0,
+      "value": "Edit"
+    }
+  ],
+  "Y+dh5z": [
+    {
+      "type": 0,
+      "value": "Edit Profile"
+    }
+  ],
+  "YImSKa": [
+    {
+      "type": 0,
+      "value": "You are not authorized to access this page."
+    }
+  ],
+  "YxMMzC": [
+    {
+      "type": 0,
+      "value": "All Games"
     }
   ],
   "Yz1BIF": [
@@ -173,10 +287,28 @@
       "value": "Create a New Account"
     }
   ],
+  "bK9TWX": [
+    {
+      "type": 0,
+      "value": "Leaderboard Rank"
+    }
+  ],
   "c9n6Sh": [
     {
       "type": 0,
       "value": "School"
+    }
+  ],
+  "e5Eaen": [
+    {
+      "type": 0,
+      "value": "Profile updated successfully"
+    }
+  ],
+  "f1vl6A": [
+    {
+      "type": 0,
+      "value": "Show Leaderboard"
     }
   ],
   "flaX9K": [
@@ -185,22 +317,16 @@
       "value": "Create a New Account"
     }
   ],
+  "g0zp7w": [
+    {
+      "type": 0,
+      "value": "Continue Playing"
+    }
+  ],
   "h7B/gA": [
     {
       "type": 0,
       "value": "store authtoken"
-    }
-  ],
-  "ifGxkx": [
-    {
-      "type": 0,
-      "value": "Subscription"
-    }
-  ],
-  "jxfpT4": [
-    {
-      "type": 0,
-      "value": "Go to Games"
     }
   ],
   "lKeCea": [
@@ -209,10 +335,34 @@
       "value": "Save & Exit"
     }
   ],
+  "mEFtca": [
+    {
+      "type": 0,
+      "value": "Continue Challenge"
+    }
+  ],
   "mm9QaY": [
     {
       "type": 0,
       "value": "School"
+    }
+  ],
+  "n45USK": [
+    {
+      "type": 0,
+      "value": "rank"
+    }
+  ],
+  "nlYt8p": [
+    {
+      "type": 0,
+      "value": "View more"
+    }
+  ],
+  "oJe49d": [
+    {
+      "type": 0,
+      "value": "All Challenges"
     }
   ],
   "of2vJ9": [
@@ -227,6 +377,12 @@
       "value": "Go to Profile"
     }
   ],
+  "pwy4hs": [
+    {
+      "type": 0,
+      "value": "Game Progress"
+    }
+  ],
   "q86PwV": [
     {
       "type": 0,
@@ -239,16 +395,40 @@
       "value": "Grade"
     }
   ],
-  "sM7xfR": [
+  "rECW1h": [
     {
       "type": 0,
-      "value": "This is Home page"
+      "value": "completed"
     }
   ],
   "swkU6w": [
     {
       "type": 0,
       "value": "Go to Home"
+    }
+  ],
+  "tsF0aG": [
+    {
+      "type": 0,
+      "value": "Continue Playing"
+    }
+  ],
+  "vChW6P": [
+    {
+      "type": 0,
+      "value": "Show Leaderboard"
+    }
+  ],
+  "xT1NKB": [
+    {
+      "type": 0,
+      "value": "Games"
+    }
+  ],
+  "xW6DFp": [
+    {
+      "type": 0,
+      "value": "Videos"
     }
   ],
   "z9lFwl": [

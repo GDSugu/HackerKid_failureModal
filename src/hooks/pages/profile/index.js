@@ -95,8 +95,9 @@ const useProfileInfo = (action = 'getBasicInfo') => {
         }, 'profile/')
           .then((response) => {
             if (response === 'access_denied') {
-              setProfileInfo(() => ({
-                status: 'error',
+              setProfileInfo((prevState) => ({
+                status: 'access_denied',
+                ...prevState,
                 response,
               }));
             } else {

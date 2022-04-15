@@ -22,6 +22,8 @@ import RouteMore from './More';
 import RouteSignin from './Signin';
 import RouteProfile from './EditProfile';
 
+import BottomSheet from '../components/BottomSheet';
+
 import IconGame from '../../images/navbar/iconGame.svg';
 import IconHome from '../../images/navbar/iconHome.svg';
 import IconMore from '../../images/navbar/iconMore.svg';
@@ -193,6 +195,7 @@ const TabNavigators = (prop) => {
         lazy: true,
         lazyPlaceholder: () => <Loader route={routeName}/>,
         // swipeEnabled: routeName !== 'Home',
+        swipeEnabled: false,
       }}
     >
       {TabArray.map((item, index) => (
@@ -229,17 +232,22 @@ const App = () => {
                 animation: 'slide_from_bottom',
               }}
             >
-              <Stack.Screen name='Start'>
-                {() => TabNavigators({
-                  routeName,
-                  screenTheme,
-                  style,
-                  theme,
-                })}
-              </Stack.Screen>
-            <Stack.Screen name='Class' component={RouteClass} />
-            <Stack.Screen name='Signin' component={RouteSignin} />
-            <Stack.Screen name='EditProfile' component={RouteProfile} />
+              <Stack.Group>
+                <Stack.Screen name='Start'>
+                  {() => TabNavigators({
+                    routeName,
+                    screenTheme,
+                    style,
+                    theme,
+                  })}
+                </Stack.Screen>
+                <Stack.Screen name='Class' component={RouteClass} />
+                <Stack.Screen name='Signin' component={RouteSignin} />
+                <Stack.Screen name='EditProfile' component={RouteProfile} />
+              </Stack.Group>
+              <Stack.Group screenOptions={{ presentation: 'modal' }}>
+                <Stack.Screen name='BottomSheet' component={BottomSheet} />
+              </Stack.Group>
             </Stack.Navigator>
           </NavigationContainer>
         </View>

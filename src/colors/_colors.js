@@ -94,6 +94,7 @@ const utilColors = {
   bg2: '#FAFAFA',
   bg3: '#F5F5F5',
   danger: Red.color700,
+  shadowColor1: '#F9A826',
 };
 
 module.exports = {
