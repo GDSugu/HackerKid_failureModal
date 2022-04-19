@@ -13,7 +13,7 @@ const getDevice = () => {
 };
 
 const useLoginMethod = () => {
-  const [state, setState] = useState({
+  const [stateObj, setState] = useState({
     loginMethod: 'loginWithPhone',
     phoneNumber: '',
     email: '',
@@ -21,7 +21,7 @@ const useLoginMethod = () => {
   });
 
   const loginWithPhone = (phone, countryCode, password, email = false) => {
-    const useEmail = state.loginMethod !== 'loginWithPhone';
+    const useEmail = stateObj.loginMethod !== 'loginWithPhone';
 
     const device = getDevice();
     // const neoeyed = getneoEyed(phone);
@@ -39,7 +39,7 @@ const useLoginMethod = () => {
   };
 
   return {
-    state,
+    stateObj,
     setState,
     loginWithPhone,
   };

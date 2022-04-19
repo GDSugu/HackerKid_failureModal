@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import $, { event } from 'jquery';
+import $ from 'jquery';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import intlTelInput from 'intl-tel-input';
@@ -54,7 +54,7 @@ const RegisterFormStepOne = ({
       let countryCode = manager.telInput.getSelectedCountryData();
       countryCode = `+${countryCode.dialCode}`;
 
-      stepOneRequest(stateObj.phoneNumber, countryCode).then((response) => {
+      stepOneRequest(countryCode).then((response) => {
         const data = JSON.parse(response);
         if (data.status === 'success') {
           setStateObj((prevObj) => ({
@@ -196,8 +196,7 @@ const RegisterFormStepTwo = ({
   const resendOtpClickHandler = () => {
     $('.resend-otp').hide();
     if (stateObj.otpTimerId === null) {
-      stepOneRequest(stateObj.phoneNumber,
-        stateObj.countryCode).then((response) => {
+      stepOneRequest().then((response) => {
         const data = JSON.parse(response);
         if (data.status === 'success') {
           startOtpTimer();
@@ -262,15 +261,13 @@ const RegisterFormStepTwo = ({
     return false;
   };
 
-  const verifyBtnClickHandler = () => {
+  const verifyBtnClickHandler = (e) => {
+    e.preventDefault();
     const enteredOtp = gatherDigitsFromOtpFields();
     const validatedOtp = validateOtp(enteredOtp, '[0-9]{4,4}$', 4);
-    console.log(validatedOtp);
 
     if (validatedOtp) {
-      stepTwoRequest(stateObj.phoneNumber,
-        stateObj.countryCode,
-        validatedOtp).then((response) => {
+      stepTwoRequest(validatedOtp).then((response) => {
         const data = JSON.parse(response);
 
         if (data.status === 'success') {
@@ -285,6 +282,8 @@ const RegisterFormStepTwo = ({
         const errData = JSON.parse(err);
         console.log(errData);
       });
+    } else if (enteredOtp === '') {
+      setFormErrorField('Enter a OTP to proceed', { 'data-error-type': 'OTP_EXPIRED' });
     } else {
       setFormErrorField('Enter a OTP which contains only digits', { 'data-error-type': 'OTP_EXPIRED' });
     }
@@ -337,7 +336,7 @@ const RegisterFormStepTwo = ({
       </div>
       <p className='form-error text-danger overline-bold text-center' id='form-error'></p>
       <div className='take-action-buttons mt-4'>
-        <button type='button'
+        <button type='submit'
           className='verify-otp-btn btn btn-primary btn-block mb-2'
           onClick={verifyBtnClickHandler}>
           <FormattedMessage
@@ -359,8 +358,9 @@ const RegisterFormStepTwo = ({
   );
 };
 
-const RegisterFormStepThree = ({ stateObj, stepThreeRequest }) => {
-  const createAccountBtnClickHandler = () => {
+const RegisterFormStepThree = ({ stepThreeRequest }) => {
+  const createAccountBtnClickHandler = (e) => {
+    e.preventDefault();
     const inputFields = $('input');
     const resultArr = [];
 
@@ -380,11 +380,7 @@ const RegisterFormStepThree = ({ stateObj, stepThreeRequest }) => {
 
     if ((enteredPassword && retypedPassword)) {
       if (enteredPassword === retypedPassword) {
-        stepThreeRequest(stateObj.registerFormFieldValues.phoneNumber,
-          stateObj.registerFormFieldValues.countryCode,
-          stateObj.registerFormFieldValues.fullName,
-          stateObj.registerFormFieldValues.email,
-          enteredPassword).then((response) => {
+        stepThreeRequest(enteredPassword).then((response) => {
           const data = JSON.parse(response);
 
           if (data.status === 'success' && data.message === 'REGISTERED') {
@@ -418,7 +414,7 @@ const RegisterFormStepThree = ({ stateObj, stepThreeRequest }) => {
           <span className='form-helper text-danger overline-bold' id='password-form-helper'></span>
         </div>
         <div className='passwordfield-with-toggle-icon'>
-          <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={inputOnChangeHandler} data-close-form-error-type='INVALID_PASSWORD' />
+          <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={inputOnChangeHandler} data-close-form-error-type='INVALID_PASSWORD' required={ true} data-typename='Password'/>
           <span className="password-toggle-icon-container">
             <i className="fa fa-fw fa-eye toggle-password" toggle="#password" onClick={togglePasswordVisibility}></i>
           </span>
@@ -436,7 +432,7 @@ const RegisterFormStepThree = ({ stateObj, stepThreeRequest }) => {
           </span>
         </div>
         <div className='passwordfield-with-toggle-icon'>
-          <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' typename='Re-type Password' onChange={inputOnChangeHandler} data-close-form-error-type='INVALID_PASSWORD'/>
+          <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' typename='Re-type Password' onChange={inputOnChangeHandler} data-close-form-error-type='INVALID_PASSWORD' required={ true} data-typename='Re-type Password'/>
           <span className="password-toggle-icon-container">
             <i className="fa fa-fw fa-eye toggle-password" toggle="#retyped-password" onClick={togglePasswordVisibility}></i>
           </span>
@@ -444,7 +440,7 @@ const RegisterFormStepThree = ({ stateObj, stepThreeRequest }) => {
       </div>
       <p className='form-error text-danger overline-bold text-center' id='form-error'></p>
       <div className='take-action-buttons mt-4'>
-        <button type="button" className='create-account-btn btn btn-primary btn-block' onClick={createAccountBtnClickHandler}>
+        <button type="submit" className='create-account-btn btn btn-primary btn-block' onClick={createAccountBtnClickHandler}>
           <FormattedMessage
             defaultMessage="Create Account"
             description="Create Account button"/>

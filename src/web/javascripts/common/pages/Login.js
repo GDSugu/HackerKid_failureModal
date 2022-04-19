@@ -8,10 +8,11 @@ import {
 } from '../commonLoginRegisterFunctions';
 import 'intl-tel-input/build/css/intlTelInput.css';
 import {
-  pageInit, authorize, validate,
+  pageInit, validate, pathNavigator,
 } from '../framework';
 import '../../../stylesheets/common/pages/login/style.scss';
 import useLoginMethod from '../../../../hooks/pages/login';
+import { setUserSession } from '../../../../hooks/common/framework';
 
 const manager = {};
 
@@ -28,7 +29,7 @@ const Login = () => {
     });
   }, []);
 
-  const { state, setState, loginWithPhone } = useLoginMethod();
+  const { stateObj, setState, loginWithPhone } = useLoginMethod();
 
   const loginMethodTabClickHandler = (e, loginMethodToSet) => {
     setState((prevObj) => ({ ...prevObj, loginMethod: loginMethodToSet }));
@@ -40,13 +41,16 @@ const Login = () => {
     inputFields.each(function () {
       $(this).val('');
       $(this).removeClass('is-invalid');
+      const formHelperIdSelector = `#${$(this).attr('id')}-form-helper`;
+
+      $(formHelperIdSelector).html('').hide();
     });
   };
 
   const loginBtnClickHandler = () => {
     let primaryLoginField;
 
-    if (state.loginMethod === 'loginWithPhone') {
+    if (stateObj.loginMethod === 'loginWithPhone') {
       primaryLoginField = validate('#phone', 'tel', 1, '#phone-form-helper', 'Enter a valid phone number');
     } else {
       primaryLoginField = validate('#email', 'email', 1, '#email-form-helper', 'Enter a E-mail Address');
@@ -57,14 +61,15 @@ const Login = () => {
       let countryCode = manager.telInput.getSelectedCountryData();
       countryCode = `+${countryCode.dialCode}`;
 
-      const phoneNumber = (state.loginMethod === 'loginWithPhone') ? primaryLoginField : '';
-      const email = (state.loginMethod !== 'loginWithPhone') ? primaryLoginField : false;
+      const phoneNumber = (stateObj.loginMethod === 'loginWithPhone') ? primaryLoginField : '';
+      const email = (stateObj.loginMethod !== 'loginWithPhone') ? primaryLoginField : false;
 
       loginWithPhone(phoneNumber, countryCode, password, email).then((response) => {
         const data = JSON.parse(response);
 
         if (data.status === 'success') {
-          authorize.setUserSession(data);
+          setUserSession(data);
+          pathNavigator('dashboard');
         } else if (data.status === 'not-exists') {
           setFormErrorField('You are not registered user', { 'data-error-type': 'NOT_REGISTERED' });
           $('#phone').addClass('is-invalid').removeClass('is-valid');
