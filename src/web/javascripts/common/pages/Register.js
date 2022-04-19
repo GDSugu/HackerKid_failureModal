@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/css/intlTelInput.css';
 import {
-  pageInit, validate,
+  pageInit, pathNavigator, validate,
 } from '../framework';
 import '../../../stylesheets/common/pages/register/style.scss';
 import useRegister from '../../../../hooks/pages/register';
 import {
   togglePasswordVisibility, inputOnChangeHandler, closeFormError, setFormErrorField,
 } from '../commonLoginRegisterFunctions';
-import { setUserSession } from '../../../../hooks/common/framework';
+import { loginCheck, setUserSession } from '../../../../hooks/common/framework';
 
 const manager = {};
 
@@ -473,6 +473,17 @@ const Register = () => {
   };
 
   const backBtnDisplay = stateObj.registerFormStep > 1 ? 'd-block' : 'd-none';
+
+  useEffect(() => {
+    loginCheck().then((response) => {
+      const data = JSON.parse(response);
+      if (data.status === 'success') {
+        pathNavigator('dashboard');
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
+  }, []);
 
   return (
     <>

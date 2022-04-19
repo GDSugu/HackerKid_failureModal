@@ -178,19 +178,21 @@ const post = (postData, apiPath, validateResponse = true) => getSession('authtok
     return response;
   });
 
-const loginCheck = () => (resolve) => getSession('authtoken')
-  .then((authToken) => {
-    if (authToken === null || authToken === undefined || authToken === '') {
-      resolve(false);
-    }
-    return post({ type: 'checkSession' }, 'login/', true, false);
-  })
-  .then((response) => {
-    if (response === 'access_denied') {
-      resolve(false);
-    }
-    return response;
-  });
+const loginCheck = () => new Promise((resolve) => {
+  getSession('authtoken')
+    .then((authToken) => {
+      if (authToken === null || authToken === undefined || authToken === '') {
+        resolve(false);
+      }
+      return post({ type: 'checkSession' }, 'login/', true, false);
+    })
+    .then((response) => {
+      if (response === 'access_denied') {
+        resolve(false);
+      }
+      resolve(response);
+    });
+});
 
 const logout = () => post({ type: 'logout' }, 'login/')
   .then((response) => {

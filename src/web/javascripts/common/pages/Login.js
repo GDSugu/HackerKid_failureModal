@@ -12,7 +12,7 @@ import {
 } from '../framework';
 import '../../../stylesheets/common/pages/login/style.scss';
 import useLoginMethod from '../../../../hooks/pages/login';
-import { setUserSession } from '../../../../hooks/common/framework';
+import { setUserSession, loginCheck } from '../../../../hooks/common/framework';
 
 const manager = {};
 
@@ -26,6 +26,16 @@ const Login = () => {
       initialCountry: 'in',
       separateDialCode: true,
       utilsScript: intlTelInput.utilsScript,
+    });
+
+    loginCheck().then((response) => {
+      const data = JSON.parse(response);
+
+      if (data.status === 'success') {
+        pathNavigator('dashboard');
+      }
+    }).catch((err) => {
+      console.log('err', err);
     });
   }, []);
 
