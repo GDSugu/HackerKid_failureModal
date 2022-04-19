@@ -163,8 +163,6 @@ const RegisterFormStepOne = ({
 const RegisterFormStepTwo = ({
   stepOneRequest, stepTwoRequest, stateObj, setStateObj,
 }) => {
-  let numberOfTimeBackspacePressed;
-
   const startOtpTimer = () => {
     const otpTimerDOM = $('.otp-timer');
     const resendOtp = $('.resend-otp');
@@ -211,19 +209,8 @@ const RegisterFormStepTwo = ({
   };
 
   const keyUpHandler = (e) => {
-    const { target, key } = e;
+    const { target } = e;
 
-    if ((key === 'Backspace' || key === 'Delete')) {
-      const prevOtpField = $(target).prev();
-      numberOfTimeBackspacePressed += 1;
-
-      if ((prevOtpField.length && numberOfTimeBackspacePressed > 1)) {
-        $(target).trigger('blur');
-        prevOtpField.trigger('focus');
-      }
-
-      return;
-    }
     if (String.fromCharCode(e.keyCode).match(/\w|\d/g)) {
       const isInputFilled = target.value.length === 1;
 
@@ -246,6 +233,17 @@ const RegisterFormStepTwo = ({
     const { key, target } = e;
     if (key === 'Tab' && target.value.length === 0) {
       e.preventDefault();
+    }
+
+    if ((key === 'Backspace') && target.value.length === 0) {
+      e.preventDefault();
+      const prevOtpField = $(target).prev();
+      numberOfTimeBackspacePressed += 1;
+
+      if (prevOtpField.length) {
+        $(target).trigger('blur');
+        prevOtpField.trigger('focus');
+      }
     }
   };
 
@@ -497,7 +495,13 @@ const Register = () => {
             </h5>
           </header>
           <img src='../../../../images/register/register-form-svg.svg' className='form-svg' />
-          {
+          <RegisterFormStepTwo
+              stateObj={stateObj}
+              setStateObj={setStateObj}
+              stepOneRequest={registerFormRequests.stepOneRequest}
+              stepTwoRequest={registerFormRequests.stepTwoRequest}
+               />
+          {/* {
             ((stateObj.registerFormStep === 1)
               && <RegisterFormStepOne
               stateObj={stateObj}
@@ -517,7 +521,7 @@ const Register = () => {
               setStateObj={setStateObj}
               stepThreeRequest = {registerFormRequests.stepThreeRequest}
                />)
-          }
+          } */}
         </form>
 
       </div>
