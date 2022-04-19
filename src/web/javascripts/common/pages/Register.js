@@ -490,13 +490,7 @@ const Register = () => {
             </h5>
           </header>
           <img src='../../../../images/register/register-form-svg.svg' className='form-svg' />
-          <RegisterFormStepTwo
-              stateObj={stateObj}
-              setStateObj={setStateObj}
-              stepOneRequest={registerFormRequests.stepOneRequest}
-              stepTwoRequest={registerFormRequests.stepTwoRequest}
-               />
-          {/* {
+          {
             ((stateObj.registerFormStep === 1)
               && <RegisterFormStepOne
               stateObj={stateObj}
@@ -516,7 +510,7 @@ const Register = () => {
               setStateObj={setStateObj}
               stepThreeRequest = {registerFormRequests.stepThreeRequest}
                />)
-          } */}
+          }
         </form>
 
       </div>
