@@ -1,14 +1,5 @@
 import $ from 'jquery';
-
-const removeInvalidBorderAndHelper = (target) => {
-  if ($(target).hasClass('is-invalid')) {
-    $(target).removeClass('is-invalid');
-    const formHelper = $(`#${$(target).attr('id')}-form-helper`);
-    if (formHelper.css('display') === 'block') {
-      formHelper.hide();
-    }
-  }
-};
+import { validate } from './framework';
 
 const closeFormError = (callingToCloseTarget) => {
   const formError = $('#form-error');
@@ -24,12 +15,17 @@ const closeFormError = (callingToCloseTarget) => {
   }
 };
 
-const inputChangeAfterValidationHandler = (e) => {
+const inputOnChangeHandler = (e) => {
   const { target } = e;
-  if ($(target).hasClass('is-invalid')) {
-    removeInvalidBorderAndHelper(target);
-    closeFormError(target);
-  }
+
+  const idSelector = `#${$(target).attr('id')}`;
+  const type = $(target).attr('type');
+  const formHelperIdSelector = `${idSelector}-form-helper`;
+  const required = ($(target).attr('required') ? 1 : 0);
+  const skipValueCheck = $(target).attr('data-skip-value-check');
+
+  validate(idSelector, type, required, formHelperIdSelector, null, skipValueCheck);
+  closeFormError(target);
 };
 
 const togglePasswordVisibility = (e) => {
@@ -56,9 +52,8 @@ const setFormErrorField = (value, attrObj = {}) => {
 };
 
 export {
-  removeInvalidBorderAndHelper,
   togglePasswordVisibility,
   closeFormError,
-  inputChangeAfterValidationHandler,
+  inputOnChangeHandler,
   setFormErrorField,
 };

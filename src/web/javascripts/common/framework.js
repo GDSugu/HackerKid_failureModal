@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { validateField } from '../../../hooks/common/framework';
 import navbar from './navbar';
 
 const { API } = process.env;
@@ -176,51 +177,21 @@ const validate = (id, type, required = 1, warnId = false, warnMsg = false,
     data = data.toLowerCase();
   }
 
-  const regPattern = {
-    email: /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i,
-    name: /^[a-zA-Z ]*$/,
-    // regex for passwords containing letters(upperCase or lowerCase)
-    // with digits OR special characters(excluding regex special characters like ^&* ()),
-    // given the password minimum length of 4
-    password: /^(?=[^a-zA-Z\n]*[a-zA-Z])(?=[^\d\n!@#$]*[\d!@#$])[\w!@#$]{4,}$/,
-    mobile: /[0-9 -()+]{8}$/,
-    url: /^[A-Z0-9._%+-]*$/,
-    rollnum: /([\w\d]{3,})/,
-    college_name: /\w/,
-    company_name: /\w/,
-    school_name: /\w/,
-    question: /\w/,
-    select: /\w/,
-    file: /\w/,
-  };
-  const typeName = {
-    email: 'E-mail',
-    name: 'Name',
-    password: 'Password',
-    mobile: 'Mobile No.',
-    url: 'Link',
-    rollnum: 'Roll Number / Register Number',
-    college_name: 'College Name',
-    company_name: 'Company Name',
-    school_name: 'School Name',
-    question: 'Question',
-    select: 'This field',
-    file: 'This field',
-  };
+  if (data === '' && !required) return true;
 
-  if (!required && !data) {
-    return true;
-  } // if field is not required and data is not given
+  const validationResponse = validateField(type, data, inputField.attr('data-typename'), null, skipValueCheck);
 
-  if (data === '') {
-    const currentTypeName = $(id).data('typename') ? $(id).data('typename') : typeName[type];
+  if (data === '' && required) {
+    const currentTypeName = inputField.attr('data-typename') ? inputField.attr('data-typename') : inputField.attr('name');
     inputField.addClass('is-invalid');
     inputField.attr('placeholder', `${currentTypeName} is required`);
     return false;
-  } if (!skipValueCheck && !regPattern[type].test(data)) {
+  } if (!skipValueCheck && !validationResponse.status) {
     inputField.addClass('is-invalid');
     if (warnId && warnMsg) {
       $(warnId).html(warnMsg).show();
+    } else if (warnId && !warnMsg) {
+      $(warnId).html(validationResponse.message).show();
     }
     return false;
   }

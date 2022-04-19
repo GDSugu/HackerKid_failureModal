@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import intlTelInput from 'intl-tel-input';
 import $ from 'jquery';
 import {
-  closeFormError, inputChangeAfterValidationHandler, setFormErrorField, togglePasswordVisibility,
+  closeFormError, inputOnChangeHandler, setFormErrorField, togglePasswordVisibility,
 } from '../commonLoginRegisterFunctions';
 import 'intl-tel-input/build/css/intlTelInput.css';
 import {
-  pageInit, validate, authorize,
+  pageInit, authorize, validate,
 } from '../framework';
 import '../../../stylesheets/common/pages/login/style.scss';
 import useLoginMethod from '../../../../hooks/pages/login';
@@ -28,10 +28,10 @@ const Login = () => {
     });
   }, []);
 
-  const { loginMethod, setLoginMethod, loginWithPhone } = useLoginMethod();
+  const { state, setState, loginWithPhone } = useLoginMethod();
 
   const loginMethodTabClickHandler = (e, loginMethodToSet) => {
-    setLoginMethod(loginMethodToSet);
+    setState((prevObj) => ({ ...prevObj, loginMethod: loginMethodToSet }));
 
     const inputFields = $('form input');
 
@@ -46,8 +46,8 @@ const Login = () => {
   const loginBtnClickHandler = () => {
     let primaryLoginField;
 
-    if (loginMethod === 'loginWithPhone') {
-      primaryLoginField = validate('#phone', 'mobile', 1, '#phone-form-helper', 'Enter a valid phone number');
+    if (state.loginMethod === 'loginWithPhone') {
+      primaryLoginField = validate('#phone', 'tel', 1, '#phone-form-helper', 'Enter a valid phone number');
     } else {
       primaryLoginField = validate('#email', 'email', 1, '#email-form-helper', 'Enter a E-mail Address');
     }
@@ -57,8 +57,8 @@ const Login = () => {
       let countryCode = manager.telInput.getSelectedCountryData();
       countryCode = `+${countryCode.dialCode}`;
 
-      const phoneNumber = (loginMethod === 'loginWithPhone') ? primaryLoginField : '';
-      const email = (loginMethod !== 'loginWithPhone') ? primaryLoginField : false;
+      const phoneNumber = (state.loginMethod === 'loginWithPhone') ? primaryLoginField : '';
+      const email = (state.loginMethod !== 'loginWithPhone') ? primaryLoginField : false;
 
       loginWithPhone(phoneNumber, countryCode, password, email).then((response) => {
         const data = JSON.parse(response);
@@ -118,7 +118,7 @@ const Login = () => {
                   <span className='form-helper text-danger overline-bold' id='phone-form-helper'>
                   </span>
                 </div>
-                <input className='form-control' type='text' name='phone' id='phone' placeholder='Phone' onChange={inputChangeAfterValidationHandler} data-close-form-error-type='INCORRECT,NOT_REGISTERED'/>
+                <input className='form-control' type='tel' name='phone' id='phone' placeholder='Phone' onChange={inputOnChangeHandler} data-close-form-error-type='INCORRECT,NOT_REGISTERED' data-typename='Phone Number' required={ true}/>
               </div>
             </div>
             <div className="tab-pane fade" id="login-with-email" role="tabpanel">
@@ -133,7 +133,7 @@ const Login = () => {
                   <span className='form-helper text-danger overline-bold' id='email-form-helper'>
                   </span>
                 </div>
-                <input className='form-control' type='email' name='email' id='email' placeholder='Email' onChange={inputChangeAfterValidationHandler} data-close-form-error-type='INCORRECT'/>
+                <input className='form-control' type='email' name='email' id='email' placeholder='Email' onChange={inputOnChangeHandler} data-close-form-error-type='INCORRECT' data-typename='Email Address' required={ true}/>
               </div>
             </div>
           </div>
@@ -145,11 +145,11 @@ const Login = () => {
                   description="Password Field"
                 />
               </label>
-              <span className='form-helper text-danger overline-bold' id='#password-form-helper'>
+              <span className='form-helper text-danger overline-bold' id='password-form-helper'>
               </span>
             </div>
             <div className='passwordfield-with-toggle-icon'>
-              <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={inputChangeAfterValidationHandler} data-close-form-error-type='INCORRECT'/>
+              <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={inputOnChangeHandler} data-close-form-error-type='INCORRECT' data-typename='Password' data-skip-value-check={true} required={ true}/>
               <span className="password-toggle-icon-container">
                 <i className="fa fa-fw fa-eye toggle-password" toggle="#password" onClick={togglePasswordVisibility}></i>
               </span>

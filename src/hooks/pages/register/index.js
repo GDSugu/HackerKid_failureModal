@@ -5,12 +5,10 @@ const useRegister = () => {
   const [stateObj, setStateObj] = useState({
     registerFormStep: 1,
     otpTimerId: null,
-    registerFormFieldValues: {
-      phoneNumber: '',
-      email: '',
-      fullName: '',
-      parentName: '',
-    },
+    phoneNumber: '',
+    email: '',
+    fullName: '',
+    parentName: '',
   });
 
   const registerFormRequests = {

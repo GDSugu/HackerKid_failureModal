@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
-import $ from 'jquery';
+import $, { event } from 'jquery';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/css/intlTelInput.css';
 import {
-  pageInit, validate, authorize,
+  pageInit, authorize, validate,
 } from '../framework';
 import '../../../stylesheets/common/pages/register/style.scss';
 import useRegister from '../../../../hooks/pages/register';
-import { togglePasswordVisibility, inputChangeAfterValidationHandler, closeFormError } from '../commonLoginRegisterFunctions';
+import {
+  togglePasswordVisibility, inputOnChangeHandler, closeFormError, setFormErrorField,
+} from '../commonLoginRegisterFunctions';
 
 const manager = {};
 
@@ -26,37 +28,38 @@ const RegisterFormStepOne = ({
     });
   }, []);
 
-  const nextBtnClickHandler = () => {
-    const phoneFieldValue = validate('#phone', 'mobile', 1, '#phone-form-helper', 'Enter a valid phone number');
-    const emailFieldValue = validate('#email', 'email', 1, '#email-form-helper', 'Enter a valid E-mail address');
-    const nameFieldValue = validate('#name', 'name', 1, '#name-form-helper', 'Enter a valid name');
-    const parentNameFieldValue = validate('#parent-name', 'name', 1, '#parent-name-form-helper', "Enter a valid Parent's Name");
+  const nextBtnClickHandler = (e) => {
+    e.preventDefault();
 
-    if (phoneFieldValue
-      && emailFieldValue
-      && nameFieldValue
-      && parentNameFieldValue) {
+    const inputFields = $('input');
+    const resultArr = [];
+
+    inputFields.each(function () {
+      const idSelector = `#${$(this).attr('id')}`;
+      const type = $(this).attr('type');
+      const formHelperIdSelector = `${idSelector}-form-helper`;
+      const required = ($(this).attr('required') ? 1 : 0);
+      const skipValueCheck = $(this).attr('data-skip-value-check');
+
+      const result = validate(idSelector, type, required,
+        formHelperIdSelector, null, skipValueCheck);
+
+      resultArr.push(result);
+    });
+
+    if (resultArr.every((result) => {
+      if (result) return true;
+      return false;
+    })) {
       let countryCode = manager.telInput.getSelectedCountryData();
       countryCode = `+${countryCode.dialCode}`;
 
-      const registerFormFieldValues = {
-        phoneNumber: phoneFieldValue,
-        email: emailFieldValue,
-        fullName: nameFieldValue,
-        parentName: parentNameFieldValue,
-        countryCode,
-      };
-
-      setStateObj((prevObj) => ({
-        ...prevObj,
-        registerFormFieldValues,
-      }));
-
-      stepOneRequest(phoneFieldValue, countryCode).then((response) => {
+      stepOneRequest(stateObj.phoneNumber, countryCode).then((response) => {
         const data = JSON.parse(response);
         if (data.status === 'success') {
           setStateObj((prevObj) => ({
             ...prevObj,
+            countryCode,
             registerFormStep: prevObj.registerFormStep + 1,
           }));
         } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
@@ -68,6 +71,17 @@ const RegisterFormStepOne = ({
         console.log(errData);
       });
     }
+  };
+
+  const handleStateChange = (key, value, e) => {
+    setStateObj((prevObj) => (
+      {
+        ...prevObj,
+        [key]: value,
+      }
+    ));
+
+    inputOnChangeHandler(e);
   };
 
   return (
@@ -83,7 +97,7 @@ const RegisterFormStepOne = ({
           <span className='form-helper text-danger overline-bold' id='phone-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='tel' name='phone' id='phone' placeholder='Phone' defaultValue={stateObj.registerFormFieldValues.phoneNumber} required={true} onChange={inputChangeAfterValidationHandler} data-close-form-error-type='ACCOUNT_EXIST' />
+        <input className='form-control' type='tel' name='phone' id='phone' placeholder='Phone' defaultValue={stateObj.phoneNumber} required={true} onChange={(e) => handleStateChange('phoneNumber', e.target.value, e)} data-close-form-error-type='ACCOUNT_EXIST' data-typename='Phone Number'/>
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -96,7 +110,7 @@ const RegisterFormStepOne = ({
           <span className='form-helper text-danger overline-bold' id='email-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='email' name='email' id='email' placeholder='Email' defaultValue={stateObj.registerFormFieldValues.email} required={ true } onChange={inputChangeAfterValidationHandler}/>
+        <input className='form-control' type='email' name='email' id='email' placeholder='Email' defaultValue={stateObj.email} required={ true } onChange={(e) => handleStateChange('email', e.target.value, e)} data-typename='Email Address'/>
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -109,7 +123,7 @@ const RegisterFormStepOne = ({
           <span className='form-helper text-danger overline-bold' id='name-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='text' name='name' id='name' placeholder='Name' defaultValue={stateObj.registerFormFieldValues.fullName} required={ true } onChange={inputChangeAfterValidationHandler}/>
+        <input className='form-control' type='name' name='name' id='name' placeholder='Name' defaultValue={stateObj.fullName} required={ true } onChange={(e) => handleStateChange('fullName', e.target.value, e)} data-typename='Full Name'/>
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -122,11 +136,11 @@ const RegisterFormStepOne = ({
           <span className='form-helper text-danger overline-bold' id='parent-name-form-helper'>
           </span>
         </div>
-        <input className='form-control' type='text' name='parent-name' id='parent-name' placeholder="Parent's Name" defaultValue={stateObj.registerFormFieldValues.parentName} required={ true } onChange={inputChangeAfterValidationHandler} data-typename="Parent's Name" />
+        <input className='form-control' type='name' name='parent-name' id='parent-name' placeholder="Parent's Name" defaultValue={stateObj.parentName} required={ true } onChange={(e) => handleStateChange('parentName', e.target.value, e)} data-typename="Parent's Name" />
       </div>
       <p className='form-error text-danger overline-bold text-center' id='form-error'></p>
       <div className='take-action-buttons mt-4'>
-        <button type="button" className='next-btn btn btn-primary btn-block mb-3' onClick={nextBtnClickHandler}>
+        <button type="submit" className='next-btn btn btn-primary btn-block mb-3' onClick={nextBtnClickHandler}>
           <span className='overline-bold'>
             <FormattedMessage
               defaultMessage="Next"
@@ -149,6 +163,8 @@ const RegisterFormStepOne = ({
 const RegisterFormStepTwo = ({
   stepOneRequest, stepTwoRequest, stateObj, setStateObj,
 }) => {
+  let numberOfTimeBackspacePressed;
+
   const startOtpTimer = () => {
     const otpTimerDOM = $('.otp-timer');
     const resendOtp = $('.resend-otp');
@@ -163,8 +179,6 @@ const RegisterFormStepTwo = ({
       seconds -= 1;
       secondsText = `00 : ${(seconds > 9) ? seconds : (`0${seconds.toString()}`)}`;
       otpTimerDOM.text(secondsText);
-
-      console.log(seconds);
       if (seconds <= 0) {
         otpTimerDOM.hide();
         resendOtp.show();
@@ -184,8 +198,8 @@ const RegisterFormStepTwo = ({
   const resendOtpClickHandler = () => {
     $('.resend-otp').hide();
     if (stateObj.otpTimerId === null) {
-      stepOneRequest(stateObj.registerFormFieldValues.phoneNumber,
-        stateObj.registerFormFieldValues.countryCode).then((response) => {
+      stepOneRequest(stateObj.phoneNumber,
+        stateObj.countryCode).then((response) => {
         const data = JSON.parse(response);
         if (data.status === 'success') {
           startOtpTimer();
@@ -196,25 +210,42 @@ const RegisterFormStepTwo = ({
     }
   };
 
-  const inputOnChangeHandler = (e) => {
-    const { target } = e;
-    const currentValue = target.value;
-    const inputFieldFilled = currentValue.length === 1;
+  const keyUpHandler = (e) => {
+    const { target, key } = e;
 
-    if (inputFieldFilled) {
-      const nextSibling = $(target).next();
+    if ((key === 'Backspace' || key === 'Delete')) {
+      const prevOtpField = $(target).prev();
+      numberOfTimeBackspacePressed += 1;
 
-      if (nextSibling.length) {
+      if ((prevOtpField.length && numberOfTimeBackspacePressed > 1)) {
         $(target).trigger('blur');
-        nextSibling.trigger('focus');
+        prevOtpField.trigger('focus');
       }
-    } else if (!inputFieldFilled) {
-      const previousSibling = $(target).prev();
 
-      if (previousSibling.length > 0) {
-        $(target).trigger('blur');
-        previousSibling.trigger('focus');
+      return;
+    }
+    if (String.fromCharCode(e.keyCode).match(/\w|\d/g)) {
+      const isInputFilled = target.value.length === 1;
+
+      if (isInputFilled) {
+        const nextOtpField = $(target).next();
+
+        if (nextOtpField.length) {
+          $(target).trigger('blur');
+          nextOtpField.trigger('focus');
+        }
       }
+    }
+  };
+
+  const onFocusHandler = () => {
+    numberOfTimeBackspacePressed = 0;
+  };
+
+  const onKeyDownHandler = (e) => {
+    const { key, target } = e;
+    if (key === 'Tab' && target.value.length === 0) {
+      e.preventDefault();
     }
   };
 
@@ -241,10 +272,11 @@ const RegisterFormStepTwo = ({
   const verifyBtnClickHandler = () => {
     const enteredOtp = gatherDigitsFromOtpFields();
     const validatedOtp = validateOtp(enteredOtp, '[0-9]{4,4}$', 4);
+    console.log(validatedOtp);
 
     if (validatedOtp) {
-      stepTwoRequest(stateObj.registerFormFieldValues.phoneNumber,
-        stateObj.registerFormFieldValues.countryCode,
+      stepTwoRequest(stateObj.phoneNumber,
+        stateObj.countryCode,
         validatedOtp).then((response) => {
         const data = JSON.parse(response);
 
@@ -260,6 +292,8 @@ const RegisterFormStepTwo = ({
         const errData = JSON.parse(err);
         console.log(errData);
       });
+    } else {
+      setFormErrorField('Enter a OTP which contains only digits', { 'data-error-type': 'OTP_EXPIRED' });
     }
   };
 
@@ -283,21 +317,17 @@ const RegisterFormStepTwo = ({
         </div>
         <div className='otp-fields mb-5'>
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
-            inputOnChangeHandler(e);
             closeFormError(e.target);
-          }} data-close-form-error-type='OTP_EXPIRED'/>
-          <input type='text' className='form-control' maxLength={1} onChange={ (e) => {
-            inputOnChangeHandler(e);
+          }} data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} onFocus={onFocusHandler} onKeyDown={onKeyDownHandler }/>
+          <input type='text' className='form-control' maxLength={1} onChange={(e) => {
             closeFormError(e.target);
-          } } data-close-form-error-type='OTP_EXPIRED'/>
-          <input type='text' className='form-control' maxLength={1} onChange={ (e) => {
-            inputOnChangeHandler(e);
+          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} onFocus={ onFocusHandler} onKeyDown={onKeyDownHandler }/>
+          <input type='text' className='form-control' maxLength={1} onChange={(e) => {
             closeFormError(e.target);
-          } } data-close-form-error-type='OTP_EXPIRED'/>
-          <input type='text' className='form-control' maxLength={1} onChange={ (e) => {
-            inputOnChangeHandler(e);
+          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} onFocus={ onFocusHandler} onKeyDown={onKeyDownHandler }/>
+          <input type='text' className='form-control' maxLength={1} onChange={(e) => {
             closeFormError(e.target);
-          } } data-close-form-error-type='OTP_EXPIRED'/>
+          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} onFocus={ onFocusHandler} onKeyDown={onKeyDownHandler }/>
         </div>
         <Link to='#' className='not-given-number overline-bold text-center' onClick={() => setStateObj((prevObj) => ({
           ...prevObj,
@@ -307,7 +337,7 @@ const RegisterFormStepTwo = ({
             defaultMessage='Not {phone}'
             description="not button"
             values={{
-              phone: stateObj.registerFormFieldValues.phoneNumber,
+              phone: stateObj.phoneNumber,
             }}
           />
         </Link>
@@ -338,8 +368,23 @@ const RegisterFormStepTwo = ({
 
 const RegisterFormStepThree = ({ stateObj, stepThreeRequest }) => {
   const createAccountBtnClickHandler = () => {
-    const enteredPassword = validate('#password', 'password', 1, '#password-form-helper', 'Enter a valid password');
-    const retypedPassword = validate('#retyped-password', 'password', 1, '#retyped-password-form-helper', 'Enter a valid password');
+    const inputFields = $('input');
+    const resultArr = [];
+
+    inputFields.each(function () {
+      const idSelector = `#${$(this).attr('id')}`;
+      const type = $(this).attr('type');
+      const formHelperIdSelector = `${idSelector}-form-helper`;
+      const required = ($(this).attr('required') ? 1 : 0);
+      const skipValueCheck = $(this).attr('data-skip-value-check');
+
+      const result = validate(idSelector, type, required,
+        formHelperIdSelector, null, skipValueCheck);
+
+      resultArr.push(result);
+    });
+    const [enteredPassword, retypedPassword] = resultArr;
+
     if ((enteredPassword && retypedPassword)) {
       if (enteredPassword === retypedPassword) {
         stepThreeRequest(stateObj.registerFormFieldValues.phoneNumber,
@@ -363,7 +408,7 @@ const RegisterFormStepThree = ({ stateObj, stepThreeRequest }) => {
         $('#retyped-password').addClass('is-invalid').removeClass('is-valid');
       }
     } else if (!enteredPassword && !retypedPassword) {
-      $('#form-error').text('Passwords length must be atleast 4, consisting of letters and numbers').attr('data-error-type', 'INVALID_PASSWORD').show();
+      setFormErrorField('Passwords length must be atleast 4, consisting of letters and numbers', { 'data-error-type': 'INVALID_PASSWORD' });
     }
   };
 
@@ -380,7 +425,7 @@ const RegisterFormStepThree = ({ stateObj, stepThreeRequest }) => {
           <span className='form-helper text-danger overline-bold' id='password-form-helper'></span>
         </div>
         <div className='passwordfield-with-toggle-icon'>
-          <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={inputChangeAfterValidationHandler} data-close-form-error-type='INVALID_PASSWORD' />
+          <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={inputOnChangeHandler} data-close-form-error-type='INVALID_PASSWORD' />
           <span className="password-toggle-icon-container">
             <i className="fa fa-fw fa-eye toggle-password" toggle="#password" onClick={togglePasswordVisibility}></i>
           </span>
@@ -398,7 +443,7 @@ const RegisterFormStepThree = ({ stateObj, stepThreeRequest }) => {
           </span>
         </div>
         <div className='passwordfield-with-toggle-icon'>
-          <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' typename='Re-type Password' onChange={inputChangeAfterValidationHandler} data-close-form-error-type='INVALID_PASSWORD'/>
+          <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' typename='Re-type Password' onChange={inputOnChangeHandler} data-close-form-error-type='INVALID_PASSWORD'/>
           <span className="password-toggle-icon-container">
             <i className="fa fa-fw fa-eye toggle-password" toggle="#retyped-password" onClick={togglePasswordVisibility}></i>
           </span>
