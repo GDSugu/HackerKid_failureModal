@@ -225,10 +225,6 @@ const RegisterFormStepTwo = ({
     }
   };
 
-  const onFocusHandler = () => {
-    numberOfTimeBackspacePressed = 0;
-  };
-
   const onKeyDownHandler = (e) => {
     const { key, target } = e;
     if (key === 'Tab' && target.value.length === 0) {
