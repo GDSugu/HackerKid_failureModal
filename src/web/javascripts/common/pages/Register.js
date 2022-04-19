@@ -5,13 +5,14 @@ import { Link } from 'react-router-dom';
 import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/css/intlTelInput.css';
 import {
-  pageInit, authorize, validate,
+  pageInit, validate,
 } from '../framework';
 import '../../../stylesheets/common/pages/register/style.scss';
 import useRegister from '../../../../hooks/pages/register';
 import {
   togglePasswordVisibility, inputOnChangeHandler, closeFormError, setFormErrorField,
 } from '../commonLoginRegisterFunctions';
+import { setUserSession } from '../../../../hooks/common/framework';
 
 const manager = {};
 
@@ -305,7 +306,9 @@ const RegisterFormStepTwo = ({
             <FormattedMessage defaultMessage='OTP' description='OTP Label' />
           </label>
           <span className='otp-timer overline-bold'></span>
-          <span className='resend-otp overline-bold' onClick={resendOtpClickHandler}>Resend</span>
+          <button className='resend-otp btn-as-interactive-link overline-bold' onClick={resendOtpClickHandler}>
+            <FormattedMessage defaultMessage='Resend' description='resend otp button' />
+          </button>
         </div>
         <div className='otp-fields mb-5'>
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
@@ -385,7 +388,7 @@ const RegisterFormStepThree = ({ stepThreeRequest }) => {
 
           if (data.status === 'success' && data.message === 'REGISTERED') {
             const sessionDetails = data.session;
-            authorize.setUserSession(sessionDetails);
+            setUserSession(sessionDetails);
           }
         }).catch((error) => {
           const errData = JSON.parse(error);
