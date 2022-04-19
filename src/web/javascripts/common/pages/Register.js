@@ -234,7 +234,6 @@ const RegisterFormStepTwo = ({
     if ((key === 'Backspace') && target.value.length === 0) {
       e.preventDefault();
       const prevOtpField = $(target).prev();
-      numberOfTimeBackspacePressed += 1;
 
       if (prevOtpField.length) {
         $(target).trigger('blur');
@@ -312,16 +311,16 @@ const RegisterFormStepTwo = ({
         <div className='otp-fields mb-5'>
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
             closeFormError(e.target);
-          }} data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} onFocus={onFocusHandler} onKeyDown={onKeyDownHandler }/>
+          }} data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} onKeyDown={onKeyDownHandler }/>
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
             closeFormError(e.target);
-          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} onFocus={ onFocusHandler} onKeyDown={onKeyDownHandler }/>
+          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} onKeyDown={onKeyDownHandler }/>
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
             closeFormError(e.target);
-          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} onFocus={ onFocusHandler} onKeyDown={onKeyDownHandler }/>
+          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} onKeyDown={onKeyDownHandler }/>
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
             closeFormError(e.target);
-          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} onFocus={ onFocusHandler} onKeyDown={onKeyDownHandler }/>
+          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} onKeyDown={onKeyDownHandler }/>
         </div>
         <Link to='#' className='not-given-number overline-bold text-center' onClick={() => setStateObj((prevObj) => ({
           ...prevObj,
