@@ -164,6 +164,10 @@
     "defaultMessage": "Create a New Account",
     "description": "Create Account Heading"
   },
+  "W5zEev": {
+    "defaultMessage": "Resend",
+    "description": "resend otp button"
+  },
   "X1rCRf": {
     "defaultMessage": "Login into existing account",
     "description": "login into existing account button"

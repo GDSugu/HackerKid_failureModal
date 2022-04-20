@@ -11,19 +11,20 @@
 #root {
   min-height: 100vh;
 }
-a:focus-visible, .btn-as-interactive-link:focus-visible{
+a:focus-visible,
+.btn-as-interactive-link:focus-visible {
   color: gt.theme-var(text-color-10);
   outline: none;
-};
+}
 
-.btn-as-interactive-link{
+.btn-as-interactive-link {
   border: none;
   outline: none;
   background: none;
 
-  &:hover{
+  &:hover {
     color: gt.theme-var(text-color-10);
-  };
+  }
 }
 
 .form-helper,
