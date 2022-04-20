@@ -97,6 +97,7 @@ const utilColors = {
   danger: Red.color700,
   shadowColor1: '#F9A826',
   shadowColor2: '#FFE8B6',
+  black: '#000000',
 };
 
 module.exports = {

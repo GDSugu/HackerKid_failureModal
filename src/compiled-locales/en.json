@@ -1,14 +1,8 @@
 {
-  "+AycvP": [
+  "+019EW": [
     {
       "type": 0,
-      "value": "Email"
-    }
-  ],
-  "+g4yFF": [
-    {
-      "type": 0,
-      "value": "Logout"
+      "value": "PLAY"
     }
   ],
   "/EsQT0": [
@@ -433,7 +427,13 @@
       "value": "Forgot Password?"
     }
   ],
-  "NeSPuI": [
+  "O6Zqgz": [
+    {
+      "type": 0,
+      "value": "Go to Turtle Home"
+    }
+  ],
+  "Op5EHr": [
     {
       "type": 0,
       "value": "Try the new in-built IDE"
@@ -527,6 +527,12 @@
     {
       "type": 1,
       "value": "studentName"
+    }
+  ],
+  "TKud4q": [
+    {
+      "type": 0,
+      "value": "Problem Statement"
     }
   ],
   "TmcPug": [

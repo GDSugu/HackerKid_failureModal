@@ -345,6 +345,10 @@
     "defaultMessage": "{studentName}",
     "description": "student name"
   },
+  "TKud4q": {
+    "defaultMessage": "Problem Statement",
+    "description": "Problem Statement"
+  },
   "TmcPug": {
     "defaultMessage": "Edit Profile",
     "description": "edit profile"

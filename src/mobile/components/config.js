@@ -133,7 +133,27 @@ const themes = {
       ...Theme.light.screenYellow,
       fragmentIconDisposal,
     },
-    screenTurtle: {
+    screenTurtleHome: {
+      ...Theme.light.screenLightBlue,
+      ...fragmentIconDisposal,
+    },
+    screenTurtleMain: {
+      ...Theme.light.screenLightBlue,
+      ...fragmentIconDisposal,
+    },
+    screenTurtleQuestion: {
+      ...Theme.light.screenLightBlue,
+      ...fragmentIconDisposal,
+    },
+    screenTurtleEditor: {
+      ...Theme.light.screenLightBlue,
+      ...fragmentIconDisposal,
+    },
+    screenTurtleOutput: {
+      ...Theme.light.screenLightBlue,
+      ...fragmentIconDisposal,
+    },
+    screenTurtleLeaderBoard: {
       ...Theme.light.screenLightBlue,
       ...fragmentIconDisposal,
     },
@@ -261,7 +281,27 @@ const themes = {
       ...Theme.light.screenYellow,
       fragmentIconDisposal,
     },
-    screenTurtle: {
+    screenTurtleHome: {
+      ...Theme.light.screenLightBlue,
+      ...fragmentIconDisposal,
+    },
+    screenTurtleMain: {
+      ...Theme.light.screenLightBlue,
+      ...fragmentIconDisposal,
+    },
+    screenTurtleQuestion: {
+      ...Theme.light.screenLightBlue,
+      ...fragmentIconDisposal,
+    },
+    screenTurtleEditor: {
+      ...Theme.light.screenLightBlue,
+      ...fragmentIconDisposal,
+    },
+    screenTurtleOutput: {
+      ...Theme.light.screenLightBlue,
+      ...fragmentIconDisposal,
+    },
+    screenTurtleLeaderBoard: {
       ...Theme.light.screenLightBlue,
       ...fragmentIconDisposal,
     },
