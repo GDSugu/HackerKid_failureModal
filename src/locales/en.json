@@ -1,4 +1,8 @@
 {
+  "+019EW": {
+    "defaultMessage": "PLAY",
+    "description": "Play Button"
+  },
   "/EsQT0": {
     "defaultMessage": "This is games page",
     "description": "Games Page"
@@ -125,6 +129,10 @@
   "NU0Nha": {
     "defaultMessage": "Forgot Password?"
   },
+  "O6Zqgz": {
+    "defaultMessage": "Go to Turtle Home",
+    "description": "Link description"
+  },
   "Op5EHr": {
     "defaultMessage": "Sign in with Google"
   },
@@ -150,6 +158,10 @@
   },
   "SENRqu": {
     "defaultMessage": "Help"
+  },
+  "TKud4q": {
+    "defaultMessage": "Problem Statement",
+    "description": "Problem Statement"
   },
   "TmcPug": {
     "defaultMessage": "Edit Profile",
@@ -267,6 +279,10 @@
   "vChW6P": {
     "defaultMessage": "Show Leaderboard",
     "description": "Leaderboard show button"
+  },
+  "viQX0N": {
+    "defaultMessage": "Turtle",
+    "description": "Game Title"
   },
   "xT1NKB": {
     "defaultMessage": "Games",

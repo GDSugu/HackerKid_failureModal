@@ -83,6 +83,14 @@ const More = ({ navigation }) => {
         color={pageTheme.btnBg}
       />
       <Button
+        onPress={() => navigation.navigate('TurtleHome')}
+        title={intl.formatMessage({
+          defaultMessage: 'Go to Turtle Home',
+          description: 'Link description',
+        })}
+        color={pageTheme.btnBg}
+      />
+      <Button
         onPress={() => navigation.navigate('Home')}
         title={intl.formatMessage({
           defaultMessage: 'Go to Home',

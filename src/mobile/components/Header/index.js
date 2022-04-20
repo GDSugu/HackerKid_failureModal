@@ -5,11 +5,13 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
+  Image,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import ThemeContext from '../theme';
 import IconHome from '../../../images/navbar/iconHome.svg';
 import Icon from '../../common/Icons';
+import favicon from '../../../images/common/favicon.png';
 
 const getStyles = (theme, utilColors) => StyleSheet.create({
   header: {
@@ -30,9 +32,16 @@ const getStyles = (theme, utilColors) => StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  headerLogo: {
+    width: 36,
+    height: 36,
+  },
   disposableIconBtn: {
     backgroundColor: utilColors.disposableIconBg,
     color: utilColors.white,
+    borderRadius: 8,
+    paddingHorizontal: 6,
+    paddingVertical: 4,
   },
 });
 
@@ -48,7 +57,11 @@ const Header = ({ route, navigation }) => {
     {
       screenTheme.showHeader
       && <View style={style.header}>
-      <Text>hackekidLogo</Text>
+      {/* <Text>hackekidLogo</Text> */}
+      <Image
+        source={favicon}
+        style={style.headerLogo}
+      />
       <View style={style.flexHorizontal}>
         {(classNavRoutes.includes(route)) && <TouchableOpacity
           style={style.navigationBtn}
@@ -108,7 +121,7 @@ const Header = ({ route, navigation }) => {
           >
             <View>
               <Icon
-                name='history'
+                name='close'
                 type='FontAwesome'
                 size={24}
                 color={theme.utilColors.white}

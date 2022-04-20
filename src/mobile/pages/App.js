@@ -3,6 +3,7 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
+  StatusBar,
 } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
@@ -21,8 +22,9 @@ import RouteChallenges from './Challenges';
 import RouteMore from './More';
 import RouteSignin from './Signin';
 import RouteProfile from './EditProfile';
-
-import BottomSheet from '../components/BottomSheet';
+import RouteTurtleHome from './TurtleHome';
+import RouteTurtleMain from './TurtleMain';
+import RouteTurtleLeaderBoard from './TurtleLeaderBoard';
 
 import IconGame from '../../images/navbar/iconGame.svg';
 import IconHome from '../../images/navbar/iconHome.svg';
@@ -218,6 +220,9 @@ const App = () => {
 
   return (
     <SafeAreaProvider>
+        <StatusBar
+          backgroundColor={screenTheme.navBg}
+        />
         <View style={style.container}>
           <Header route={routeName} navigation={navigationRef}/>
           <NavigationContainer
@@ -244,9 +249,17 @@ const App = () => {
                 <Stack.Screen name='Class' component={RouteClass} />
                 <Stack.Screen name='Signin' component={RouteSignin} />
                 <Stack.Screen name='EditProfile' component={RouteProfile} />
-              </Stack.Group>
-              <Stack.Group screenOptions={{ presentation: 'modal' }}>
-                <Stack.Screen name='BottomSheet' component={BottomSheet} />
+                <Stack.Screen name='TurtleHome'>
+                  {(props) => <RouteTurtleHome {...props} routeName={routeName} /> }
+                </Stack.Screen>
+                <Stack.Group
+                  screenOptions={{
+                    animation: 'slide_from_right',
+                  }}
+                >
+                  <Stack.Screen name='TurtleMain' component={RouteTurtleMain} />
+                </Stack.Group>
+                <Stack.Screen name='TurtleLeaderBoard' component={RouteTurtleLeaderBoard} options={{ presentation: 'transparentModal' }} />
               </Stack.Group>
             </Stack.Navigator>
           </NavigationContainer>
