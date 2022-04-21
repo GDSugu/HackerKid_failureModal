@@ -10,7 +10,7 @@ import {
 import '../../../stylesheets/common/pages/register/style.scss';
 import useRegister from '../../../../hooks/pages/register';
 import {
-  togglePasswordVisibility, inputOnChangeHandler, closeFormError, setFormErrorField,
+  togglePasswordVisibility, validateInputOnChange, closeFormError, setFormErrorField,
 } from '../commonLoginRegisterFunctions';
 import { loginCheck, setUserSession } from '../../../../hooks/common/framework';
 
@@ -52,15 +52,11 @@ const RegisterFormStepOne = ({
       if (result) return true;
       return false;
     })) {
-      let countryCode = manager.telInput.getSelectedCountryData();
-      countryCode = `+${countryCode.dialCode}`;
-
-      stepOneRequest(countryCode).then((response) => {
+      stepOneRequest().then((response) => {
         const data = JSON.parse(response);
         if (data.status === 'success') {
           setStateObj((prevObj) => ({
             ...prevObj,
-            countryCode,
             registerFormStep: prevObj.registerFormStep + 1,
           }));
         } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
@@ -75,14 +71,25 @@ const RegisterFormStepOne = ({
   };
 
   const handleStateChange = (key, value, e) => {
-    setStateObj((prevObj) => (
-      {
-        ...prevObj,
-        [key]: value,
-      }
-    ));
+    const result = validateInputOnChange(e);
 
-    inputOnChangeHandler(e);
+    if (result) {
+      setStateObj((prevObj) => {
+        const newObj = {
+          ...prevObj,
+          [key]: value,
+        };
+
+        if (key === 'phoneNumber') {
+          let countryCode = manager.telInput.getSelectedCountryData();
+          countryCode = `+${countryCode.dialCode}`;
+          newObj.countryCode = countryCode;
+        }
+        return newObj;
+      });
+    }
+
+    closeFormError(e.target);
   };
 
   return (
@@ -209,7 +216,7 @@ const RegisterFormStepTwo = ({
   };
 
   const keyUpHandler = (e) => {
-    const { target } = e;
+    const { key, target } = e;
 
     if (String.fromCharCode(e.keyCode).match(/\w|\d/g)) {
       const isInputFilled = target.value.length === 1;
@@ -222,72 +229,86 @@ const RegisterFormStepTwo = ({
           nextOtpField.trigger('focus');
         }
       }
-    }
-  };
-
-  const onKeyDownHandler = (e) => {
-    const { key, target } = e;
-    if (key === 'Tab' && target.value.length === 0) {
-      e.preventDefault();
-    }
-
-    if ((key === 'Backspace') && target.value.length === 0) {
-      e.preventDefault();
+    } else if (key === 'Backspace' || key === 'Delete') {
       const prevOtpField = $(target).prev();
+      const currentEnteredOtp = stateObj.enteredOtp;
 
+      if (currentEnteredOtp) {
+        setStateObj((prevObj) => ({
+          ...prevObj,
+          enteredOtp: prevObj.enteredOtp.substring(0, currentEnteredOtp.length),
+        }));
+      }
       if (prevOtpField.length) {
         $(target).trigger('blur');
         prevOtpField.trigger('focus');
+        const htmlElement = prevOtpField[0];
+        htmlElement.select();
       }
     }
   };
 
-  const gatherDigitsFromOtpFields = () => {
-    const otpFields = $('.otp-fields input');
-    const digits = [];
+  const onChangeHandler = (e, otpIndex) => {
+    const { target } = e;
+    const { value } = target;
+    const regex = /\D/g;
 
-    otpFields.each(function () {
-      digits.push($(this).val());
-    });
-
-    return digits.join('');
-  };
-
-  const validateOtp = (enteredOtp, regex, length) => {
-    const regexObj = new RegExp(regex);
-    const value = enteredOtp;
-    if (value.length === length && regexObj.test(value)) {
-      return value;
+    if (regex.test(value)) {
+      e.target.value = value.replace(regex, '');
+      return;
     }
-    return false;
+
+    // if digit is entered in the field
+    if (value.length) {
+      setStateObj((prevObj) => {
+        const prevEnteredOtpArr = prevObj.enteredOtpArr;
+
+        prevEnteredOtpArr.splice(otpIndex, 0, value);
+
+        return {
+          ...prevObj,
+          enteredOtpArr: [...prevEnteredOtpArr],
+        };
+      });
+    } else {
+      // else if its being removed from the field
+      setStateObj((prevObj) => {
+        const prevEnteredOtpArr = prevObj.enteredOtpArr;
+
+        prevEnteredOtpArr.splice(otpIndex, 1);
+
+        return {
+          ...prevObj,
+          enteredOtpArr: [...prevEnteredOtpArr],
+        };
+      });
+    }
   };
 
   const verifyBtnClickHandler = (e) => {
     e.preventDefault();
-    const enteredOtp = gatherDigitsFromOtpFields();
-    const validatedOtp = validateOtp(enteredOtp, '[0-9]{4,4}$', 4);
+    const { enteredOtp } = stateObj;
 
-    if (validatedOtp) {
-      stepTwoRequest(validatedOtp).then((response) => {
-        const data = JSON.parse(response);
-
-        if (data.status === 'success') {
-          setStateObj((prevObj) => ({
-            ...prevObj,
-            registerFormStep: prevObj.registerFormStep + 1,
-          }));
-        } else if (data.status === 'error' && data.message === 'OTP_EXPIRED') {
-          $('#form-error').html('Enter a valid OTP').attr('data-error-type', data.message).show();
-        }
-      }).catch((err) => {
-        const errData = JSON.parse(err);
-        console.log(errData);
-      });
-    } else if (enteredOtp === '') {
+    if (enteredOtp === '') {
       setFormErrorField('Enter a OTP to proceed', { 'data-error-type': 'OTP_EXPIRED' });
-    } else {
-      setFormErrorField('Enter a OTP which contains only digits', { 'data-error-type': 'OTP_EXPIRED' });
+      return;
     }
+
+    stepTwoRequest().then((response) => {
+      const data = JSON.parse(response);
+
+      if (data.status === 'success') {
+        setStateObj((prevObj) => ({
+          ...prevObj,
+          registerFormStep: prevObj.registerFormStep + 1,
+        }));
+      } else if (data.status === 'error' && data.message === 'OTP_EXPIRED') {
+        $('#form-error').html('Enter a valid OTP').attr('data-error-type', data.message).show();
+      }
+    }).catch((err) => {
+      const errData = JSON.parse(err);
+      console.log(errData);
+    });
   };
 
   useEffect(() => {
@@ -306,30 +327,34 @@ const RegisterFormStepTwo = ({
             <FormattedMessage defaultMessage='OTP' description='OTP Label' />
           </label>
           <span className='otp-timer overline-bold'></span>
-          <button className='resend-otp btn-as-interactive-link overline-bold' onClick={resendOtpClickHandler}>
+          <button type='button' className='resend-otp btn-as-interactive-link overline-bold' onClick={resendOtpClickHandler}>
             <FormattedMessage defaultMessage='Resend' description='resend otp button' />
           </button>
         </div>
         <div className='otp-fields mb-5'>
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
+            onChangeHandler(e, 0);
             closeFormError(e.target);
-          }} data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} onKeyDown={onKeyDownHandler }/>
+          }} data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler}/>
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
+            onChangeHandler(e, 1);
             closeFormError(e.target);
-          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} onKeyDown={onKeyDownHandler }/>
+          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} />
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
+            onChangeHandler(e, 2);
             closeFormError(e.target);
-          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} onKeyDown={onKeyDownHandler }/>
+          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} />
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
+            onChangeHandler(e, 3);
             closeFormError(e.target);
-          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} onKeyDown={onKeyDownHandler }/>
+          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler}/>
         </div>
         <Link to='#' className='not-given-number overline-bold text-center' onClick={() => setStateObj((prevObj) => ({
           ...prevObj,
           registerFormStep: 1,
         }))}>
           <FormattedMessage
-            defaultMessage='Not {phone}'
+            defaultMessage='Not {phone} ?'
             description="not button"
             values={{
               phone: stateObj.phoneNumber,
@@ -339,7 +364,7 @@ const RegisterFormStepTwo = ({
       </div>
       <p className='form-error text-danger overline-bold text-center' id='form-error'></p>
       <div className='take-action-buttons mt-4'>
-        <button type='submit'
+        <button type={'submit'}
           className='verify-otp-btn btn btn-primary btn-block mb-2'
           onClick={verifyBtnClickHandler}>
           <FormattedMessage
@@ -417,7 +442,7 @@ const RegisterFormStepThree = ({ stepThreeRequest }) => {
           <span className='form-helper text-danger overline-bold' id='password-form-helper'></span>
         </div>
         <div className='passwordfield-with-toggle-icon'>
-          <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={inputOnChangeHandler} data-close-form-error-type='INVALID_PASSWORD' required={ true} data-typename='Password'/>
+          <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={validateInputOnChange} data-close-form-error-type='INVALID_PASSWORD' required={ true} data-typename='Password'/>
           <span className="password-toggle-icon-container">
             <i className="fa fa-fw fa-eye toggle-password" toggle="#password" onClick={togglePasswordVisibility}></i>
           </span>
@@ -435,7 +460,7 @@ const RegisterFormStepThree = ({ stepThreeRequest }) => {
           </span>
         </div>
         <div className='passwordfield-with-toggle-icon'>
-          <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' typename='Re-type Password' onChange={inputOnChangeHandler} data-close-form-error-type='INVALID_PASSWORD' required={ true} data-typename='Re-type Password'/>
+          <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' typename='Re-type Password' onChange={validateInputOnChange} data-close-form-error-type='INVALID_PASSWORD' required={ true} data-typename='Re-type Password'/>
           <span className="password-toggle-icon-container">
             <i className="fa fa-fw fa-eye toggle-password" toggle="#retyped-password" onClick={togglePasswordVisibility}></i>
           </span>

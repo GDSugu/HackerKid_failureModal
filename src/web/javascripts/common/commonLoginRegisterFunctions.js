@@ -15,7 +15,7 @@ const closeFormError = (callingToCloseTarget) => {
   }
 };
 
-const inputOnChangeHandler = (e) => {
+const validateInputOnChange = (e) => {
   const { target } = e;
 
   const idSelector = `#${$(target).attr('id')}`;
@@ -24,8 +24,7 @@ const inputOnChangeHandler = (e) => {
   const required = ($(target).attr('required') ? 1 : 0);
   const skipValueCheck = $(target).attr('data-skip-value-check');
 
-  validate(idSelector, type, required, formHelperIdSelector, null, skipValueCheck);
-  closeFormError(target);
+  return validate(idSelector, type, required, formHelperIdSelector, null, skipValueCheck);
 };
 
 const togglePasswordVisibility = (e) => {
@@ -54,6 +53,6 @@ const setFormErrorField = (value, attrObj = {}) => {
 export {
   togglePasswordVisibility,
   closeFormError,
-  inputOnChangeHandler,
+  validateInputOnChange,
   setFormErrorField,
 };

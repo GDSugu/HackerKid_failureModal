@@ -9,36 +9,38 @@ const useRegister = () => {
     email: '',
     fullName: '',
     parentName: '',
+    enteredOtpArr: [],
+    password: '',
   });
 
   const registerFormRequests = {
-    stepOneRequest: (countryCode) => {
+    stepOneRequest: () => {
       const postData = {
         type: 'send-otp',
         phone: stateObj.phoneNumber,
-        countryCode,
+        countryCode: stateObj.countryCode,
       };
 
       return post(postData, 'register/');
     },
-    stepTwoRequest: (enteredOtp) => {
+    stepTwoRequest: () => {
       const postData = {
         type: 'verify-otp',
         phone: stateObj.phoneNumber,
         countryCode: stateObj.countryCode,
-        otp: enteredOtp,
+        otp: stateObj.enteredOtpArr.join(''),
       };
 
       return post(postData, 'register/');
     },
-    stepThreeRequest: (password) => {
+    stepThreeRequest: () => {
       const postData = {
         type: 'register',
         phone: stateObj.phoneNumber,
         countryCode: stateObj.countryCode,
         name: stateObj.fullName,
         mail: stateObj.email,
-        password,
+        password: stateObj.password,
         url: window.location.href,
       };
 
