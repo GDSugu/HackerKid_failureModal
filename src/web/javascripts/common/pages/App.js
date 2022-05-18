@@ -20,6 +20,7 @@ const RouteIndex = loadable(() => import('./Index'), { fallback: <Loading /> });
 const RouteAbout = loadable(() => import('./About'), { fallback: <Loading /> });
 const RouteLogin = loadable(() => import('./Login'), { fallback: <Loading /> });
 const RouteRegister = loadable(() => import('./Register'), { fallback: <Loading /> });
+const RouteForgotPassword = loadable(() => import('./ForgotPassword'), { fallback: <Loading /> });
 const RouteDashboard = loadable(() => import('./Dashboard'), { fallback: <Loading /> });
 const RouteGames = loadable(() => import('./Games'), { fallback: <Loading /> });
 const RouteCourses = loadable(() => import('./Courses'), { fallback: <Loading /> });
@@ -45,7 +46,8 @@ const App = () => (
       </Route>
       <Route path='/' caseSensitive={true} element={<AuthNav/>}>
         <Route path='login' caseSensitive={true} element={<RouteLogin />} />
-        <Route path='register' caseSensitive={true} element={<RouteRegister />}/>
+        <Route path='register' caseSensitive={true} element={<RouteRegister />} />
+        <Route path='forgot-password' caseSensitive={true} element={<RouteForgotPassword />} />
       </Route>
       <Route path='/about' caseSensitive={true} element={<RouteAbout />} />
       <Route path='*' element={ <Navigate to='/' />} />

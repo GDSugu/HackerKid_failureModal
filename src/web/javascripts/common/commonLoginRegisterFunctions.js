@@ -5,6 +5,8 @@ const closeFormError = (callingToCloseTarget) => {
   const formError = $('#form-error');
   const errorTypeString = $(callingToCloseTarget).attr('data-close-form-error-type');
 
+  console.log(errorTypeString);
+
   if (errorTypeString) {
     const errorTypeArr = errorTypeString.split(',');
 
@@ -15,16 +17,16 @@ const closeFormError = (callingToCloseTarget) => {
   }
 };
 
-const validateInputOnChange = (e) => {
+const validateInputOnChange = (e, providedType = '', customMessage = '') => {
   const { target } = e;
 
   const idSelector = `#${$(target).attr('id')}`;
-  const type = $(target).attr('type');
+  const type = (providedType) || $(target).attr('type');
   const formHelperIdSelector = `${idSelector}-form-helper`;
   const required = ($(target).attr('required') ? 1 : 0);
   const skipValueCheck = $(target).attr('data-skip-value-check');
 
-  return validate(idSelector, type, required, formHelperIdSelector, null, skipValueCheck);
+  return validate(idSelector, type, required, formHelperIdSelector, customMessage, skipValueCheck);
 };
 
 const togglePasswordVisibility = (e) => {

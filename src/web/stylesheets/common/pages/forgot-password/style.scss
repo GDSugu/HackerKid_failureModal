@@ -1,0 +1,137 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+@use '../../sass/components/auth-nav';
+@use '../../sass/components/auth-input';
+@use '../../sass/components/auth-containers';
+
+@import './_forgotPasswordTheme.js';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+#root {
+  min-height: 100vh;
+}
+
+a:focus-visible,
+.btn-as-interactive-link:focus-visible {
+  color: gt.theme-var(text-color-10);
+  outline: none;
+}
+
+.btn-as-interactive-link {
+  border: none;
+  outline: none;
+  background: none;
+
+  &:hover {
+    color: gt.theme-var(text-color-10);
+  }
+}
+
+.form-helper,
+#form-error {
+  display: none;
+}
+
+.iti--separate-dial-code {
+  width: 100%;
+}
+
+.login-to-existing-account-btn,
+.create-new-account-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondary-take-action-buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  @include gm.media-breakpoint-up(md) {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+}
+
+.otp-fields {
+  display: flex;
+  justify-content: space-between;
+
+  input:not(:last-child) {
+    margin-right: 0.6rem;
+  }
+
+  input {
+    padding: initial;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    outline: none;
+    border-radius: initial;
+    border-bottom-width: 2px !important;
+    text-align: center;
+  }
+
+  input:focus {
+    box-shadow: none;
+    outline: none;
+  }
+}
+
+.otp-timer {
+  display: none;
+  color: gt.theme-var(text-color-5);
+}
+
+.resend-otp {
+  display: none;
+  color: gt.theme-var(text-color-8);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.not-given-number {
+  display: block;
+  color: gt.theme-var(text-color-8);
+  margin-bottom: 1rem;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.label-and-otp-fields {
+  width: 90%;
+  margin: auto;
+
+  @include gm.media-breakpoint-up(sm) {
+    width: 70%;
+  }
+}
+
+.passwordfield-with-toggle-icon {
+  position: relative;
+
+  .password-toggle-icon-container {
+    position: absolute;
+    right: 10px;
+    top: 0.4rem;
+    font-size: 1rem;
+    color: gt.theme-var(text-color-5);
+    z-index: 3;
+
+    i {
+      cursor: pointer;
+    }
+  }
+}
+
+input[type="password"].is-invalid,
+input[type="text"]#password.is-invalid,
+input[type="text"]#retyped-password.is-invalid {
+  background-image: unset;
+}

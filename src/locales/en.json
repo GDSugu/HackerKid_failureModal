@@ -3,6 +3,10 @@
     "defaultMessage": "This is games page",
     "description": "Games Page"
   },
+  "/dnxym": {
+    "defaultMessage": "Create a New Account",
+    "description": "create new account button"
+  },
   "0JV99f": {
     "defaultMessage": "This is index page",
     "description": "Page description"
@@ -30,10 +34,6 @@
     "defaultMessage": "Next",
     "description": "Next button"
   },
-  "3i4N8J": {
-    "defaultMessage": "Not {phone}",
-    "description": "not button"
-  },
   "4Ve1r3": {
     "defaultMessage": "Ok",
     "description": "confirm btn"
@@ -54,6 +54,10 @@
     "defaultMessage": "Login with OTP",
     "description": "Login with OTP button"
   },
+  "74UjvK": {
+    "defaultMessage": "Login to existing Account",
+    "description": "Login to existing account button"
+  },
   "7L3+7M": {
     "defaultMessage": "Login into existing account",
     "description": "Login into existing account button"
@@ -65,6 +69,10 @@
   "9ppS9d": {
     "defaultMessage": "Go to Class",
     "description": "class navigation button"
+  },
+  "A5u1Oz": {
+    "defaultMessage": "New Password",
+    "description": "New Password label"
   },
   "Aevhvw": {
     "defaultMessage": "Verify OTP and proceed",
@@ -101,6 +109,14 @@
   "EG430K": {
     "defaultMessage": "Go to More",
     "description": "Home Navigation Button"
+  },
+  "F/vOH1": {
+    "defaultMessage": "Forgot Password",
+    "description": "Forgot Password heading"
+  },
+  "FhTUgw": {
+    "defaultMessage": "Not {phone} ?",
+    "description": "not button"
   },
   "GQwBTI": {
     "defaultMessage": "Verify OTP and proceed",
@@ -151,6 +167,10 @@
   "T/a40M": {
     "defaultMessage": "Toggle Theme",
     "description": "Toggle theme Button description"
+  },
+  "TS73XZ": {
+    "defaultMessage": "Change password",
+    "description": "Change password Button"
   },
   "TVjEEI": {
     "defaultMessage": "Create Account",
@@ -206,6 +226,10 @@
   "h7B/gA": {
     "defaultMessage": "store authtoken",
     "description": "authtoken temp storage btn"
+  },
+  "hJpqIn": {
+    "defaultMessage": "Send OTP",
+    "description": "send otp button"
   },
   "hxLhGK": {
     "defaultMessage": "Set Password",

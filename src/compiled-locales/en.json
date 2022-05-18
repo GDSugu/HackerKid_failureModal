@@ -5,6 +5,12 @@
       "value": "This is games page"
     }
   ],
+  "/dnxym": [
+    {
+      "type": 0,
+      "value": "Create a New Account"
+    }
+  ],
   "0JV99f": [
     {
       "type": 0,
@@ -47,16 +53,6 @@
       "value": "Next"
     }
   ],
-  "3i4N8J": [
-    {
-      "type": 0,
-      "value": "Not "
-    },
-    {
-      "type": 1,
-      "value": "phone"
-    }
-  ],
   "4Ve1r3": [
     {
       "type": 0,
@@ -87,6 +83,12 @@
       "value": "Login with OTP"
     }
   ],
+  "74UjvK": [
+    {
+      "type": 0,
+      "value": "Login to existing Account"
+    }
+  ],
   "7L3+7M": [
     {
       "type": 0,
@@ -103,6 +105,12 @@
     {
       "type": 0,
       "value": "Go to Class"
+    }
+  ],
+  "A5u1Oz": [
+    {
+      "type": 0,
+      "value": "New Password"
     }
   ],
   "Aevhvw": [
@@ -157,6 +165,26 @@
     {
       "type": 0,
       "value": "Go to More"
+    }
+  ],
+  "F/vOH1": [
+    {
+      "type": 0,
+      "value": "Forgot Password"
+    }
+  ],
+  "FhTUgw": [
+    {
+      "type": 0,
+      "value": "Not "
+    },
+    {
+      "type": 1,
+      "value": "phone"
+    },
+    {
+      "type": 0,
+      "value": " ?"
     }
   ],
   "GQwBTI": [
@@ -235,6 +263,12 @@
     {
       "type": 0,
       "value": "Toggle Theme"
+    }
+  ],
+  "TS73XZ": [
+    {
+      "type": 0,
+      "value": "Change password"
     }
   ],
   "TVjEEI": [
@@ -319,6 +353,12 @@
     {
       "type": 0,
       "value": "store authtoken"
+    }
+  ],
+  "hJpqIn": [
+    {
+      "type": 0,
+      "value": "Send OTP"
     }
   ],
   "hxLhGK": [

@@ -185,6 +185,7 @@ const validate = (id, type, required = 1, warnId = false, warnMsg = false,
     const currentTypeName = inputField.attr('data-typename') ? inputField.attr('data-typename') : inputField.attr('name');
     inputField.addClass('is-invalid');
     inputField.attr('placeholder', `${currentTypeName} is required`);
+    $(warnId).hide();
     return false;
   } if (!skipValueCheck && !validationResponse.status) {
     inputField.addClass('is-invalid');

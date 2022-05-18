@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import intlTelInput from 'intl-tel-input';
 import $ from 'jquery';
 import {
-  closeFormError, inputOnChangeHandler, setFormErrorField, togglePasswordVisibility,
+  closeFormError, setFormErrorField, togglePasswordVisibility, validateInputOnChange,
 } from '../commonLoginRegisterFunctions';
 import 'intl-tel-input/build/css/intlTelInput.css';
 import {
@@ -39,10 +39,26 @@ const Login = () => {
     });
   }, []);
 
-  const { stateObj, setState, loginWithPhone } = useLoginMethod();
+  const { stateObj, setState: setStateObj, loginWithPhone } = useLoginMethod();
+
+  const handleStateChange = (key, value) => {
+    setStateObj((prevObj) => {
+      const newObj = {
+        ...prevObj,
+        [key]: value,
+      };
+
+      if (key === 'phoneNumber') {
+        let countryCode = manager.telInput.getSelectedCountryData();
+        countryCode = `+${countryCode.dialCode}`;
+        newObj.countryCode = countryCode;
+      }
+      return newObj;
+    });
+  };
 
   const loginMethodTabClickHandler = (e, loginMethodToSet) => {
-    setState((prevObj) => ({ ...prevObj, loginMethod: loginMethodToSet }));
+    setStateObj((prevObj) => ({ ...prevObj, loginMethod: loginMethodToSet }));
 
     const inputFields = $('form input');
 
@@ -58,23 +74,20 @@ const Login = () => {
   };
 
   const loginBtnClickHandler = () => {
-    let primaryLoginField;
+    let primaryLoginFieldValue;
 
     if (stateObj.loginMethod === 'loginWithPhone') {
-      primaryLoginField = validate('#phone', 'tel', 1, '#phone-form-helper', 'Enter a valid phone number');
+      primaryLoginFieldValue = validate('#phone', 'tel', 1, '#phone-form-helper', 'Enter a valid phone number');
     } else {
-      primaryLoginField = validate('#email', 'email', 1, '#email-form-helper', 'Enter a E-mail Address');
+      primaryLoginFieldValue = validate('#email', 'email', 1, '#email-form-helper', 'Enter a E-mail Address');
     }
     const password = validate('#password', 'password', 1, '#password-form-helper', null, true);
 
-    if (primaryLoginField && password) {
-      let countryCode = manager.telInput.getSelectedCountryData();
-      countryCode = `+${countryCode.dialCode}`;
-
-      const phoneNumber = (stateObj.loginMethod === 'loginWithPhone') ? primaryLoginField : '';
-      const email = (stateObj.loginMethod !== 'loginWithPhone') ? primaryLoginField : false;
-
-      loginWithPhone(phoneNumber, countryCode, password, email).then((response) => {
+    if (primaryLoginFieldValue && password) {
+      loginWithPhone(stateObj.phoneNumber,
+        stateObj.countryCode,
+        stateObj.password,
+        stateObj.email).then((response) => {
         const data = JSON.parse(response);
 
         if (data.status === 'success') {
@@ -85,8 +98,8 @@ const Login = () => {
           $('#phone').addClass('is-invalid').removeClass('is-valid');
           $('#password').removeClass('is-invalid');
         } else if (data.status === 'not-valid') {
-          setFormErrorField(`Incorrect ${email ? 'Email address' : 'Phone Number'} or Password`, { 'data-error-type': 'INCORRECT' });
-          $(`${email ? '#email' : '#phone'}`).addClass('is-invalid').removeClass('is-valid');
+          setFormErrorField(`Incorrect ${stateObj.loginMethod === 'loginWithEmail' ? 'Email address' : 'Phone Number'} or Password`, { 'data-error-type': 'INCORRECT' });
+          $(`${stateObj.loginMethod === 'loginWithEmail' ? '#email' : '#phone'}`).addClass('is-invalid').removeClass('is-valid');
           $('#password').addClass('is-invalid').removeClass('is-valid');
         } else if (data.status === 'error' && data.message === 'EMAIL_LOGIN_RESTRICTED') {
           setFormErrorField('You are not allowed to login using email. Try mobile login.', { 'data-error-type': data.message });
@@ -133,7 +146,11 @@ const Login = () => {
                   <span className='form-helper text-danger overline-bold' id='phone-form-helper'>
                   </span>
                 </div>
-                <input className='form-control' type='tel' name='phone' id='phone' placeholder='Phone' onChange={inputOnChangeHandler} data-close-form-error-type='INCORRECT,NOT_REGISTERED' data-typename='Phone Number' required={ true}/>
+                <input className='form-control' type='tel' name='phone' id='phone' placeholder='Phone' onChange={(e) => {
+                  handleStateChange('phoneNumber', e.target.value);
+                  validateInputOnChange(e);
+                  closeFormError(e.target);
+                }} data-close-form-error-type='INCORRECT,NOT_REGISTERED' data-typename='Phone Number' required={ true}/>
               </div>
             </div>
             <div className="tab-pane fade" id="login-with-email" role="tabpanel">
@@ -148,7 +165,11 @@ const Login = () => {
                   <span className='form-helper text-danger overline-bold' id='email-form-helper'>
                   </span>
                 </div>
-                <input className='form-control' type='email' name='email' id='email' placeholder='Email' onChange={inputOnChangeHandler} data-close-form-error-type='INCORRECT' data-typename='Email Address' required={ true}/>
+                <input className='form-control' type='email' name='email' id='email' placeholder='Email' onChange={(e) => {
+                  handleStateChange('email', e.target.value);
+                  validateInputOnChange(e);
+                  closeFormError(e.target);
+                }} data-close-form-error-type='INCORRECT' data-typename='Email Address' required={ true}/>
               </div>
             </div>
           </div>
@@ -164,7 +185,11 @@ const Login = () => {
               </span>
             </div>
             <div className='passwordfield-with-toggle-icon'>
-              <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={inputOnChangeHandler} data-close-form-error-type='INCORRECT' data-typename='Password' data-skip-value-check={true} required={ true}/>
+              <input className='form-control' type='password' name='password' id='password' placeholder='Password' onChange={(e) => {
+                handleStateChange('password', e.target.value);
+                validateInputOnChange(e);
+                closeFormError(e.target);
+              }} data-close-form-error-type='INCORRECT' data-typename='Password' data-skip-value-check={true} required={ true}/>
               <span className="password-toggle-icon-container">
                 <i className="fa fa-fw fa-eye toggle-password" toggle="#password" onClick={togglePasswordVisibility}></i>
               </span>

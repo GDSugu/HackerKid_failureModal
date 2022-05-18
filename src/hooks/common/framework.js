@@ -242,7 +242,7 @@ const validateField = (type, value, typename, lengthRangeObj = false, skipValueC
       email: /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i,
       name: /^[a-zA-Z ]*$/,
       // regex for passwords containing letters(upperCase or lowerCase)
-      // with digits OR special characters(excluding regex special characters like ^&* ()),
+      // with digits OR special characters(excluding regex special characters like ^&* ()`),
       // given the password minimum length of 4
       password: /^(?=[^a-zA-Z\n]*[a-zA-Z])(?=[^\d\n!@#$]*[\d!@#$])[\w!@#$]{4,}$/,
       tel: /[0-9 -()+]{8}$/,
