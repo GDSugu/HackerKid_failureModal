@@ -179,6 +179,12 @@
       "value": "Username"
     }
   ],
+  "JNotzf": [
+    {
+      "type": 0,
+      "value": "Expected Output"
+    }
+  ],
   "MB8h2I": [
     {
       "type": 0,
@@ -269,6 +275,12 @@
       "value": "Edit"
     }
   ],
+  "UrVWqS": [
+    {
+      "type": 1,
+      "value": "step"
+    }
+  ],
   "Y+dh5z": [
     {
       "type": 0,
@@ -351,6 +363,12 @@
     {
       "type": 0,
       "value": "Save & Exit"
+    }
+  ],
+  "lPt9wn": [
+    {
+      "type": 1,
+      "value": "question"
     }
   ],
   "mEFtca": [
@@ -453,6 +471,12 @@
     {
       "type": 0,
       "value": "Videos"
+    }
+  ],
+  "z9//BN": [
+    {
+      "type": 0,
+      "value": "Instructions"
     }
   ],
   "z9lFwl": [

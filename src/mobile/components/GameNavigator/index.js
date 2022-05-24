@@ -58,6 +58,7 @@ const getStyle = (font, utilColors = {}) => StyleSheet.create({
   tabHeaderLevelText: {
     ...font.heading6R,
     color: utilColors.white,
+    marginLeft: 8,
   },
 });
 
@@ -149,7 +150,7 @@ const GameHeader = ({ currentScreen, font, utilColors }) => {
           source={levelIcon}
           style={style.tabHeaderIcon}
         />
-        <Text style={[style.tabHeaderLevelText, style.tabHeaderLevelText]}>{'Level 2'}</Text>
+        <Text style={[style.tabHeaderLevelText]}>{'Level 2'}</Text>
       </View>
       <View style={style.row}>
         <TouchableOpacity

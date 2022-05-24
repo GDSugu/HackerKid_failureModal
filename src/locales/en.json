@@ -114,6 +114,10 @@
   "JCIgkj": {
     "defaultMessage": "Username"
   },
+  "JNotzf": {
+    "defaultMessage": "Expected Output",
+    "description": "Collapse Title - Expected Output"
+  },
   "MB8h2I": {
     "defaultMessage": "Leaderboard Ranking",
     "description": "Leaderboard card heading text"
@@ -171,6 +175,10 @@
     "defaultMessage": "Edit",
     "description": "edit profile"
   },
+  "UrVWqS": {
+    "defaultMessage": "{step}",
+    "description": "Steps"
+  },
   "Y+dh5z": {
     "defaultMessage": "Edit Profile",
     "description": "Home card menu"
@@ -224,6 +232,10 @@
   "lKeCea": {
     "defaultMessage": "Save & Exit",
     "description": "Profile save button"
+  },
+  "lPt9wn": {
+    "defaultMessage": "{question}",
+    "description": "Question"
   },
   "mEFtca": {
     "defaultMessage": "Continue Challenge",
@@ -291,6 +303,10 @@
   "xW6DFp": {
     "defaultMessage": "Videos",
     "description": "videos nav text"
+  },
+  "z9//BN": {
+    "defaultMessage": "Instructions",
+    "description": "Instructions"
   },
   "z9lFwl": {
     "defaultMessage": "Name",
