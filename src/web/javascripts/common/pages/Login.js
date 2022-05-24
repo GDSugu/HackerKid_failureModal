@@ -195,7 +195,7 @@ const Login = () => {
               </span>
             </div>
           </div>
-          <Link to='#' className='forgot-password overline-bold text-center my-3'>
+          <Link to='/forgot-password' className='forgot-password overline-bold text-center my-3'>
             <FormattedMessage
               defaultMessage="Forgot Password?"
               description="forgot password link"
