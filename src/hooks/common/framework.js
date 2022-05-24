@@ -153,7 +153,7 @@ const setUserSession = ({
 const post = (postData, apiPath, validateResponse = true) => getSession('authtoken')
   .then((authToken) => {
     const jsonData = postData;
-    jsonData.authtoken = authToken;
+    jsonData.authtoken = authToken || null;
     const jsonString = JSON.stringify(jsonData);
     const payload = new FormData();
     payload.append('myData', jsonString);

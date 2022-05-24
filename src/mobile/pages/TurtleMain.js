@@ -9,6 +9,7 @@ import TurtleQuestion from './TurtleQuestion';
 import TurtleEditor from './TurtleEditor';
 import TurtleOutput from './TurtleOutput';
 import GameNavigator from '../components/GameNavigator';
+import { useTurtleFetchQuestion, TurtleContext } from '../../hooks/pages/turtle';
 
 const getStyles = () => StyleSheet.create({
   container: {
@@ -22,6 +23,11 @@ const TurtleMain = () => {
   const style = getStyles(pageTheme, font, theme.utilColors);
 
   const [currentGameScreen, setCurrentGameScreen] = React.useState('TurtleQuestion');
+
+  const { state: turtleQuestionState } = useTurtleFetchQuestion({
+    type: 'initialQuestion',
+    virtualId: 3,
+  });
 
   const TurtleScreenArray = [
     {
@@ -51,9 +57,11 @@ const TurtleMain = () => {
         style={style.container}
       >
         <View style={[style.container, { backgroundColor: currentGameScreen === 'TurtleQuestion' ? 'transparent' : theme.utilColors.dark }]}>
-          <GameNavigator
-            ScreenArray={TurtleScreenArray}
-            currentScreen={{ currentGameScreen, setCurrentGameScreen }} />
+          <TurtleContext.Provider value={turtleQuestionState}>
+            <GameNavigator
+              ScreenArray={TurtleScreenArray}
+              currentScreen={{ currentGameScreen, setCurrentGameScreen }} />
+          </TurtleContext.Provider>
         </View>
       </ImageBackground>
     </View>
