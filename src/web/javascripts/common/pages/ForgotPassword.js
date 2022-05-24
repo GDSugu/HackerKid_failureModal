@@ -19,22 +19,24 @@ const manager = {};
 const TakeActionButtons = ({ children }) => (
   <div className='take-action-buttons mt-4'>
     {children}
-    <Link to='/login' className='login-to-existing-account-btn btn btn-outline-primary btn-block mb-2'>
-      <span className='overline-bold'>
-        <FormattedMessage
-          defaultMessage="Login to existing Account"
-          description="Login to existing account button"
-        />
-      </span>
-      </Link>
-      <Link to='/register' className='create-new-account-btn btn btn-outline-primary btn-block mt-0 mb-2'>
+    <div className='secondary-take-action-buttons'>
+      <Link to='/login' className='login-to-existing-account-btn btn btn-outline-primary btn-block mb-2'>
         <span className='overline-bold'>
           <FormattedMessage
-            defaultMessage="Create a New Account"
-            description="create new account button"
+            defaultMessage="Login to existing Account"
+            description="Login to existing account button"
           />
         </span>
-    </Link>
+        </Link>
+        <Link to='/register' className='create-new-account-btn btn btn-outline-primary btn-block mt-0 mb-2'>
+          <span className='overline-bold'>
+            <FormattedMessage
+              defaultMessage="Create a New Account"
+              description="create new account button"
+            />
+          </span>
+      </Link>
+    </div>
 </div>
 );
 const ForgotPasswordStepOne = ({
@@ -62,7 +64,7 @@ const ForgotPasswordStepOne = ({
           setStateObj((prevObj) => (
             {
               ...prevObj,
-              forgotPasswordFormStep: prevObj.forgotPasswordFormStep + 1,
+              formStep: prevObj.formStep + 1,
             }
           ));
         } else if (data.status === 'error' && data.message === 'ACCOUNT_NOT_EXIST') {
@@ -262,16 +264,15 @@ const ForgotPassword = () => {
       </header>
         <img src='../../../../images/forgot-password/forgot-password-form-svg.svg' className='form-svg' />
         {
-          ((stateObj.forgotPasswordFormStep === 1
+          ((stateObj.formStep === 1
             && <ForgotPasswordStepOne stateObj={stateObj}
               setStateObj={setStateObj} stepOneRequest={stepOneRequest}
               handleStateChange={handleStateChange} />)
-            || (stateObj.forgotPasswordFormStep === 2
-            && <VerifyOtpFormStep stateObj={stateObj}
-              setStateObj={setStateObj} sendOtpRequest={stepOneRequest}
-              verifyOtpRequest={stepTwoRequest} handleStateChange={handleStateChange}
-              secondaryActionButtons={[]} />)
-            || (stateObj.forgotPasswordFormStep === 3
+            || (stateObj.formStep === 2
+            && <VerifyOtpFormStep parentStateObj={stateObj}
+              setParentStateObj={setStateObj} sendOtpRequest={stepOneRequest}
+              verifyOtpRequest={stepTwoRequest} secondaryActionButtons={[]} />)
+            || (stateObj.formStep === 3
               && <ForgotPasswordStepThree stateObj={stateObj}
               setStateObj={setStateObj} stepThreeRequest={stepThreeRequest}
               handleStateChange={handleStateChange}/>)
