@@ -3,7 +3,7 @@ import post from '../../common/framework';
 
 const useRegister = () => {
   const [stateObj, setStateObj] = useState({
-    registerFormStep: 1,
+    formStep: 1,
     otpTimerId: null,
     phoneNumber: '',
     email: '',
@@ -13,45 +13,24 @@ const useRegister = () => {
     password: '',
   });
 
-  const registerFormRequests = {
-    stepOneRequest: () => {
-      const postData = {
-        type: 'send-otp',
-        phone: stateObj.phoneNumber,
-        countryCode: stateObj.countryCode,
-      };
+  const createAccountRequest = () => {
+    const postData = {
+      type: 'register',
+      phone: stateObj.phoneNumber,
+      countryCode: stateObj.countryCode,
+      name: stateObj.fullName,
+      mail: stateObj.email,
+      password: stateObj.password,
+      url: window.location.href,
+    };
 
-      return post(postData, 'register/');
-    },
-    stepTwoRequest: () => {
-      const postData = {
-        type: 'verify-otp',
-        phone: stateObj.phoneNumber,
-        countryCode: stateObj.countryCode,
-        otp: stateObj.enteredOtpArr.join(''),
-      };
-
-      return post(postData, 'register/');
-    },
-    stepThreeRequest: () => {
-      const postData = {
-        type: 'register',
-        phone: stateObj.phoneNumber,
-        countryCode: stateObj.countryCode,
-        name: stateObj.fullName,
-        mail: stateObj.email,
-        password: stateObj.password,
-        url: window.location.href,
-      };
-
-      return post(postData, 'register/');
-    },
+    return post(postData, 'register/');
   };
 
   return {
     stateObj,
     setStateObj,
-    registerFormRequests,
+    createAccountRequest,
   };
 };
 

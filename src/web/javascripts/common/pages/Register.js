@@ -13,12 +13,24 @@ import {
   togglePasswordVisibility, validateInputOnChange, closeFormError, setFormErrorField,
 } from '../commonLoginRegisterFunctions';
 import { loginCheck, setUserSession } from '../../../../hooks/common/framework';
+import VerifyOtpFormStep from '../components/VerifyOtpFormStep/VeriyOtpFormStep';
+import useOtp from '../../../../hooks/pages/otp';
 
 const manager = {};
 
+const TakeActionButtons = ({ buttonsArr }) => (
+    <div className='take-action-buttons mt-4'>
+    {
+      buttonsArr.map((button) => button)
+    }
+  </div>
+);
+
 const RegisterFormStepOne = ({
-  stepOneRequest, stateObj, setStateObj, handleStateChange,
+  stateObj, setStateObj, handleStateChange,
 }) => {
+  const { sendOtpRequest } = useOtp(stateObj.phoneNumber, stateObj.countryCode);
+
   useEffect(() => {
     const flaginput = document.querySelector('#phone');
     manager.telInput = intlTelInput(flaginput, {
@@ -52,12 +64,12 @@ const RegisterFormStepOne = ({
       if (result) return true;
       return false;
     })) {
-      stepOneRequest().then((response) => {
+      sendOtpRequest().then((response) => {
         const data = JSON.parse(response);
         if (data.status === 'success') {
           setStateObj((prevObj) => ({
             ...prevObj,
-            registerFormStep: prevObj.registerFormStep + 1,
+            formStep: prevObj.formStep + 1,
           }));
         } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
           $('#phone').addClass('is-invalid').removeClass('is-valid');
@@ -84,8 +96,9 @@ const RegisterFormStepOne = ({
           </span>
         </div>
         <input className='form-control' type='tel' name='phone' id='phone' placeholder='Phone' defaultValue={stateObj.phoneNumber} required={true} onChange={(e) => {
-          handleStateChange('phoneNumber', e.target.value, e);
+          handleStateChange('phoneNumber', e.target.value);
           validateInputOnChange(e);
+          closeFormError(e.target);
         }} data-close-form-error-type='ACCOUNT_EXIST' data-typename='Phone Number'/>
       </div>
       <div className="form-group mb-3">
@@ -100,8 +113,9 @@ const RegisterFormStepOne = ({
           </span>
         </div>
         <input className='form-control' type='email' name='email' id='email' placeholder='Email' defaultValue={stateObj.email} required={true} onChange={(e) => {
-          handleStateChange('email', e.target.value, e);
+          handleStateChange('email', e.target.value);
           validateInputOnChange(e);
+          closeFormError(e.target);
         }} data-typename='Email Address'/>
       </div>
       <div className="form-group mb-3">
@@ -118,6 +132,7 @@ const RegisterFormStepOne = ({
         <input className='form-control' type='name' name='name' id='name' placeholder='Name' defaultValue={stateObj.fullName} required={true} onChange={(e) => {
           handleStateChange('fullName', e.target.value, e);
           validateInputOnChange(e);
+          closeFormError(e.target);
         }} data-typename='Full Name'/>
       </div>
       <div className="form-group mb-3">
@@ -134,9 +149,11 @@ const RegisterFormStepOne = ({
         <input className='form-control' type='name' name='parent-name' id='parent-name' placeholder="Parent's Name" defaultValue={stateObj.parentName} required={ true } onChange={(e) => {
           handleStateChange('parentName', e.target.value, e);
           validateInputOnChange(e);
+          closeFormError(e.target);
         }} data-typename="Parent's Name" />
       </div>
       <p className='form-error text-danger overline-bold text-center' id='form-error'></p>
+      <TakeActionButtons buttonsArr ={[]} />
       <div className='take-action-buttons mt-4'>
         <button type="submit" className='next-btn btn btn-primary btn-block mb-3' onClick={nextBtnClickHandler}>
           <span className='overline-bold'>
@@ -158,225 +175,7 @@ const RegisterFormStepOne = ({
   );
 };
 
-const RegisterFormStepTwo = ({
-  stepOneRequest, stepTwoRequest, stateObj, setStateObj,
-}) => {
-  const startOtpTimer = () => {
-    const otpTimerDOM = $('.otp-timer');
-    const resendOtp = $('.resend-otp');
-
-    let seconds = 30;
-    let secondsText = '00 : 30';
-
-    otpTimerDOM.text(secondsText);
-    otpTimerDOM.show();
-
-    const timer = setInterval(() => {
-      seconds -= 1;
-      secondsText = `00 : ${(seconds > 9) ? seconds : (`0${seconds.toString()}`)}`;
-      otpTimerDOM.text(secondsText);
-      if (seconds <= 0) {
-        otpTimerDOM.hide();
-        resendOtp.show();
-        setStateObj((prevObj) => ({
-          ...prevObj,
-          otpTimerId: null,
-        }));
-        clearInterval(timer);
-      }
-    }, 1000);
-    setStateObj((prevObj) => ({
-      ...prevObj,
-      otpTimerId: timer,
-    }));
-  };
-
-  const resendOtpClickHandler = () => {
-    $('.resend-otp').hide();
-    if (stateObj.otpTimerId === null) {
-      stepOneRequest().then((response) => {
-        const data = JSON.parse(response);
-        if (data.status === 'success') {
-          startOtpTimer();
-        }
-      }).catch((err) => {
-        console.log(err);
-      });
-    }
-  };
-
-  const keyUpHandler = (e) => {
-    const { key, target } = e;
-
-    if (String.fromCharCode(e.keyCode).match(/\w|\d/g)) {
-      const isInputFilled = target.value.length === 1;
-
-      if (isInputFilled) {
-        const nextOtpField = $(target).next();
-
-        if (nextOtpField.length) {
-          $(target).trigger('blur');
-          nextOtpField.trigger('focus');
-        }
-      }
-    } else if (key === 'Backspace' || key === 'Delete') {
-      const prevOtpField = $(target).prev();
-      const currentEnteredOtp = stateObj.enteredOtp;
-
-      if (currentEnteredOtp) {
-        setStateObj((prevObj) => ({
-          ...prevObj,
-          enteredOtp: prevObj.enteredOtp.substring(0, currentEnteredOtp.length),
-        }));
-      }
-      if (prevOtpField.length) {
-        $(target).trigger('blur');
-        prevOtpField.trigger('focus');
-        const htmlElement = prevOtpField[0];
-        htmlElement.select();
-      }
-    }
-  };
-
-  const onChangeHandler = (e, otpIndex) => {
-    const { target } = e;
-    const { value } = target;
-    const regex = /\D/g;
-
-    if (regex.test(value)) {
-      e.target.value = value.replace(regex, '');
-      return;
-    }
-
-    // if digit is entered in the field
-    if (value.length) {
-      setStateObj((prevObj) => {
-        const prevEnteredOtpArr = prevObj.enteredOtpArr;
-
-        prevEnteredOtpArr.splice(otpIndex, 0, value);
-
-        return {
-          ...prevObj,
-          enteredOtpArr: [...prevEnteredOtpArr],
-        };
-      });
-    } else {
-      // else if its being removed from the field
-      setStateObj((prevObj) => {
-        const prevEnteredOtpArr = prevObj.enteredOtpArr;
-
-        prevEnteredOtpArr.splice(otpIndex, 1);
-
-        return {
-          ...prevObj,
-          enteredOtpArr: [...prevEnteredOtpArr],
-        };
-      });
-    }
-  };
-
-  const verifyBtnClickHandler = (e) => {
-    e.preventDefault();
-    const { enteredOtpArr } = stateObj;
-
-    if (enteredOtpArr.legnth === 0) {
-      setFormErrorField('Enter a OTP to proceed', { 'data-error-type': 'OTP_EXPIRED' });
-      return;
-    }
-
-    stepTwoRequest().then((response) => {
-      const data = JSON.parse(response);
-
-      if (data.status === 'success') {
-        setStateObj((prevObj) => ({
-          ...prevObj,
-          registerFormStep: prevObj.registerFormStep + 1,
-        }));
-      } else if (data.status === 'error' && data.message === 'OTP_EXPIRED') {
-        setFormErrorField('Enter a valid OTP', { 'data-error-type': data.message });
-      }
-    }).catch((err) => {
-      const errData = JSON.parse(err);
-      console.log(errData);
-    });
-  };
-
-  useEffect(() => {
-    startOtpTimer();
-
-    return () => {
-      clearInterval(stateObj.otpTimerId);
-    };
-  }, []);
-
-  return (
-    <div className='step-2-fields'>
-      <div className='label-and-otp-fields mb-5'>
-        <div className='label-with-otp-timer d-flex justify-content-between'>
-          <label>
-            <FormattedMessage defaultMessage='OTP' description='OTP Label' />
-          </label>
-          <span className='otp-timer overline-bold'></span>
-          <button type='button' className='resend-otp btn-as-interactive-link overline-bold' onClick={resendOtpClickHandler}>
-            <FormattedMessage defaultMessage='Resend' description='resend otp button' />
-          </button>
-        </div>
-        <div className='otp-fields mb-5'>
-          <input type='text' className='form-control' maxLength={1} onChange={(e) => {
-            onChangeHandler(e, 0);
-            closeFormError(e.target);
-          }} data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler}/>
-          <input type='text' className='form-control' maxLength={1} onChange={(e) => {
-            onChangeHandler(e, 1);
-            closeFormError(e.target);
-          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} />
-          <input type='text' className='form-control' maxLength={1} onChange={(e) => {
-            onChangeHandler(e, 2);
-            closeFormError(e.target);
-          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} />
-          <input type='text' className='form-control' maxLength={1} onChange={(e) => {
-            onChangeHandler(e, 3);
-            closeFormError(e.target);
-          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler}/>
-        </div>
-        <Link to='#' className='not-given-number overline-bold text-center' onClick={() => setStateObj((prevObj) => ({
-          ...prevObj,
-          registerFormStep: 1,
-        }))}>
-          <FormattedMessage
-            defaultMessage='Not {phone} ?'
-            description="not button"
-            values={{
-              phone: stateObj.phoneNumber,
-            }}
-          />
-        </Link>
-      </div>
-      <p className='form-error text-danger overline-bold text-center' id='form-error'></p>
-      <div className='take-action-buttons mt-4'>
-        <button type={'submit'}
-          className='verify-otp-btn btn btn-primary btn-block mb-2'
-          onClick={verifyBtnClickHandler}>
-          <FormattedMessage
-            defaultMessage="Verify OTP and proceed"
-            description="verify otp button" />
-        </button>
-        <Link to='/login' className='d-block text-decoration-none'>
-          <button type='button' className='login-into-existing-account-btn btn btn-outline-primary btn-block'>
-            <span className='overline-bold'>
-              <FormattedMessage
-                defaultMessage="Login into existing account"
-                description="login into existing account button"
-              />
-            </span>
-          </button>
-        </Link>
-      </div>
-    </div>
-  );
-};
-
-const RegisterFormStepThree = ({ stepThreeRequest, handleStateChange }) => {
+const RegisterFormStepThree = ({ createAccountRequest, handleStateChange }) => {
   const matchValueTo = (e, matchTo) => {
     const { target } = e;
     const { value } = target;
@@ -416,7 +215,7 @@ const RegisterFormStepThree = ({ stepThreeRequest, handleStateChange }) => {
 
     if ((enteredPassword && retypedPassword)) {
       if (enteredPassword === retypedPassword) {
-        stepThreeRequest().then((response) => {
+        createAccountRequest().then((response) => {
           const data = JSON.parse(response);
 
           if (data.status === 'success' && data.message === 'REGISTERED') {
@@ -499,7 +298,7 @@ const RegisterFormStepThree = ({ stepThreeRequest, handleStateChange }) => {
 const Register = () => {
   pageInit('auth-container', 'Register');
 
-  const { stateObj, setStateObj, registerFormRequests } = useRegister();
+  const { stateObj, setStateObj, createAccountRequest } = useRegister();
 
   const handleStateChange = (key, value) => {
     setStateObj((prevObj) => {
@@ -518,20 +317,20 @@ const Register = () => {
   };
 
   const backBtnClickHandler = () => {
-    if (stateObj.registerFormStep === 3) {
+    if (stateObj.formStep === 3) {
       setStateObj((prevState) => ({
         ...prevState,
-        registerFormStep: 1,
+        formStep: 1,
       }));
     } else {
       setStateObj((prevState) => ({
         ...prevState,
-        registerFormStep: prevState.registerFormStep - 1,
+        formStep: prevState.formStep - 1,
       }));
     }
   };
 
-  const backBtnDisplay = stateObj.registerFormStep > 1 ? 'd-block' : 'd-none';
+  const backBtnDisplay = stateObj.formStep > 1 ? 'd-block' : 'd-none';
 
   useEffect(() => {
     loginCheck().then((response) => {
@@ -560,31 +359,36 @@ const Register = () => {
           </header>
           <img src='../../../../images/register/register-form-svg.svg' className='form-svg' />
           {
-            ((stateObj.registerFormStep === 1)
+            ((stateObj.formStep === 1)
               && <RegisterFormStepOne
               stateObj={stateObj}
               setStateObj={setStateObj}
-              stepOneRequest={registerFormRequests.stepOneRequest}
               handleStateChange={ handleStateChange}
             />)
-            || ((stateObj.registerFormStep === 2)
-              && <RegisterFormStepTwo
-              stateObj={stateObj}
-              setStateObj={setStateObj}
-              stepOneRequest={registerFormRequests.stepOneRequest}
-              stepTwoRequest={registerFormRequests.stepTwoRequest}
-              handleStateChange={ handleStateChange}
+            || ((stateObj.formStep === 2)
+              && <VerifyOtpFormStep
+              parentStateObj={stateObj}
+              setParentStateObj={setStateObj}
+              secondaryActionButtons={[<Link key={ 0} to='/login' className='d-block text-decoration-none'>
+              <button type='button' className='login-into-existing-account-btn btn btn-outline-primary btn-block'>
+                <span className='overline-bold'>
+                  <FormattedMessage
+                    defaultMessage="Login into existing account"
+                    description="login into existing account button"
+                  />
+                </span>
+              </button>
+            </Link>]}
                />)
-            || ((stateObj.registerFormStep === 3)
+            || ((stateObj.formStep === 3)
               && <RegisterFormStepThree
               stateObj={stateObj}
               setStateObj={setStateObj}
-              stepThreeRequest={registerFormRequests.stepThreeRequest}
+              createAccountRequest={createAccountRequest}
               handleStateChange={ handleStateChange}
                />)
           }
         </form>
-
       </div>
     </>
   );
