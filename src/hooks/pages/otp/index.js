@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import post from '../../common/framework';
 
-const useOtp = (phoneNumber, countryCode) => {
+const useOtp = () => {
   const [stateObj, setStateObj] = useState({
     otpTimerId: null,
     enteredOtpArr: [],
   });
 
-  const sendOtpRequest = () => {
+  const sendOtpRequest = (phoneNumber, countryCode) => {
     const postData = {
       type: 'send-otp',
       phone: phoneNumber,
@@ -17,7 +17,7 @@ const useOtp = (phoneNumber, countryCode) => {
     return post(postData, 'register/');
   };
 
-  const verifyOtpRequest = () => {
+  const verifyOtpRequest = (phoneNumber, countryCode) => {
     const postData = {
       type: 'verify-otp',
       phone: phoneNumber,

@@ -10,7 +10,7 @@ const VerifyOtpFormStep = ({
 }) => {
   const {
     sendOtpRequest, verifyOtpRequest, stateObj, setStateObj,
-  } = useOtp(parentStateObj.phoneNumber, parentStateObj.countryCode);
+  } = useOtp();
 
   const startOtpTimer = () => {
     const otpTimerDOM = $('.otp-timer');
@@ -45,7 +45,7 @@ const VerifyOtpFormStep = ({
   const resendOtpClickHandler = () => {
     $('.resend-otp').hide();
     if (stateObj.otpTimerId === null) {
-      sendOtpRequest().then((response) => {
+      sendOtpRequest(parentStateObj.phoneNumber, parentStateObj.countryCode).then((response) => {
         const data = JSON.parse(response);
         if (data.status === 'success') {
           startOtpTimer();
@@ -128,7 +128,7 @@ const VerifyOtpFormStep = ({
       return;
     }
 
-    verifyOtpRequest().then((response) => {
+    verifyOtpRequest(parentStateObj.phoneNumber, parentStateObj.countryCode).then((response) => {
       const data = JSON.parse(response);
 
       if (data.status === 'success') {
@@ -183,7 +183,7 @@ const VerifyOtpFormStep = ({
             closeFormError(e.target);
           } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler}/>
         </div>
-        <Link to='#' className='not-given-number overline-bold text-center' onClick={() => setParentStateObj((prevObj) => ({
+        <Link to='#' className='not-given-number overline-bold text-link' onClick={() => setParentStateObj((prevObj) => ({
           ...prevObj,
           formStep: 1,
         }))}>
