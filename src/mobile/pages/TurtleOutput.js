@@ -6,6 +6,7 @@ import { useSharedTurtleWebView } from '../../shared/turtle';
 import ThemeContext from '../components/theme';
 import webViewElement from '../components/WebView';
 import outputJS from '../components/WebView/output';
+import turtleOutputJS from '../components/WebView/turtleOutput';
 
 const getStyles = () => StyleSheet.create({
   container: {
@@ -38,18 +39,24 @@ const TurtleOutput = () => {
         const initBlockly = `
         try {
           window.ReactNativeWebView.postMessage('turtle output');
-          // window.ReactNativeWebView.postMessage(Object.keys(Sk).toString());
-          // window.ReactNativeWebView.postMessage(Object.keys(managerObj).toString());
-          window.Turtle.runCode('${JSON.stringify(turtleContext.questionObject.snippet)}', 'answerCanvas', true, 3, 0)
-            .then(() => {
-              window.ReactNativeWebView.postMessage('turtle output success');
-              const currentSelector = $('#answerCanvas')[0];
-              if (currentSelector && currentSelector.turtleInstance) {
-                currentSelector.turtleInstance.update();
-              }
+            // window.ReactNativeWebView.postMessage(Object.keys(Sk).toString());
+            // window.ReactNativeWebView.postMessage(Object.keys(managerObj).toString());
+            window.execute({
+              action: 'runCode',
+              data: {
+                snippet: '${JSON.stringify(turtleContext.questionObject.snippet)}',
+              },
             });
+          /* window.Turtle.runCode('${JSON.stringify(turtleContext.questionObject.snippet)}', 'answerCanvas', true, 3, 0)
+             .then(() => {
+               window.ReactNativeWebView.postMessage('turtle output success');
+               const currentSelector = $('#answerCanvas')[0];
+               if (currentSelector && currentSelector.turtleInstance) {
+                 currentSelector.turtleInstance.update();
+               }
+             }); */
         } catch (err) {
-          window.ReactNativeWebView.postMessage('Error: ');
+          window.ReactNativeWebView.postMessage('Script Error: ');
           window.ReactNativeWebView.postMessage(err.message);
         }
           `;
@@ -66,6 +73,20 @@ const TurtleOutput = () => {
         //     `;
         webViewRef.current.injectJavaScript(initBlockly);
       }
+
+      // const str = `
+      // try {
+      //   // window.ReactNativeWebView.postMessage(Object.keys(window).toString());
+      //   window.execute({
+      //     action: "runCode",
+      //     data: "hello world"
+      //   });
+      // } catch (err) {
+      //   window.ReactNativeWebView.postMessage('Error: ');
+      //   window.ReactNativeWebView.postMessage(err.message);
+      // }`;
+
+      // webViewRef.current.injectJavaScript(str);
     }, 3000);
     // setTimeout(() => {
     //   const initBlockly = `
@@ -98,6 +119,8 @@ const TurtleOutput = () => {
       });
   `;
 
+  // console.log(turtleOutputJS);
+
   return <>
     <View style={style.container}>
       <WebView
@@ -105,7 +128,9 @@ const TurtleOutput = () => {
         ref={webViewRef}
         source={{ html: webViewString }}
         // source={{ html: outputJS }}
+        // source={{ html: turtleOutputJS }}
         originWhitelist={['*']}
+        // injectedJavaScript={'window.execute({action: "runCode", data: "hello world"})'}
         injectedJavaScript={scriptToInject}
         // injectedJavaScript={jsScript}
         onMessage={console.log}
