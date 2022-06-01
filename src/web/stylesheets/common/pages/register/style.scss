@@ -12,6 +12,7 @@
 #root {
   min-height: 100vh;
 }
+
 a:focus-visible,
 .btn-as-interactive-link:focus-visible {
   color: gt.theme-var(text-color-10);
@@ -33,7 +34,7 @@ a:focus-visible,
   display: none;
 }
 
-.text-link{
+.text-link {
   display: block;
   color: gt.theme-var(text-color-8);
   margin-bottom: 1rem;

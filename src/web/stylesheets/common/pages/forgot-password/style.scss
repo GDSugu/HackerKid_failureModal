@@ -13,12 +13,12 @@
   min-height: 100vh;
 }
 
-a:focus-visible{
+a:focus-visible {
   color: gt.theme-var(text-color-10);
   outline: none;
 }
 
-.text-link{
+.text-link {
   display: block;
   color: gt.theme-var(text-color-8);
   margin-bottom: 1rem;
@@ -46,7 +46,7 @@ a:focus-visible{
   justify-content: center;
 }
 
-.secondary-take-action-buttons{
+.secondary-take-action-buttons {
   display: flex;
   justify-content: center;
   align-items: center;
