@@ -1,5 +1,6 @@
 import React from 'react';
 import { getBlockly, getTurtleOutput } from './turtleBlocks';
+import { getTurtleOutput as getTurtleOutput1 } from './turtleBlocks1';
 
 const useSharedTurtleWebView = () => {
   const TurtleBodyContent = () => <>
@@ -109,25 +110,62 @@ const useSharedTurtleWebView = () => {
     {/* <script src='https://unpkg.com/crypto-js@4.0.0' type='text/javascript' ></script> */}
   </>;
 
+  // const turtleOutputScriptToInject = `
+  //   try {
+  //     const pool = workerpool.pool();
+  //     // window.ReactNativeWebView.postMessage('script inject sk');
+  //     // window.ReactNativeWebView.postMessage(Object.keys(window.Sk).toString());
+  //     ${getTurtleOutput.toString()}
+  //     const {
+  //       managerObj, poolObj,
+  //     } = getTurtleOutput({
+  //       blocklyObj: window.Blockly,
+  //       poolObj: pool,
+  //     });
+
+  //     // Sk = SkObj;
+  //     // window.SkObj = SkObj;
+  //     window.Turtle = managerObj;
+  //     window.SkObj = Sk;
+  //     // window.ReactNativeWebView.postMessage('script inject sk');
+  //     // window.ReactNativeWebView.postMessage(Object.keys(window.Sk).toString());
+  //   } catch (err) {
+  //     window.ReactNativeWebView.postMessage('turtleoutput error: ' + err);
+  //   }
+  // `;
+
   const turtleOutputScriptToInject = `
     try {
-      const pool = workerpool.pool();
-      // window.ReactNativeWebView.postMessage('script inject sk');
-      // window.ReactNativeWebView.postMessage(Object.keys(window.Sk).toString());
-      ${getTurtleOutput.toString()}
-      const {
-        managerObj, poolObj,
-      } = getTurtleOutput({
-        blocklyObj: window.Blockly,
-        poolObj: pool,
-      });
+      window.ReactNativeWebView.postMessage('script inject sk execution');
 
-      // Sk = SkObj;
-      // window.SkObj = SkObj;
-      window.Turtle = managerObj;
-      window.SkObj = Sk;
-      // window.ReactNativeWebView.postMessage('script inject sk');
-      // window.ReactNativeWebView.postMessage(Object.keys(window.Sk).toString());
+      ${getTurtleOutput1.toString()}
+
+      function executeRunCode (data) {
+        try {
+          window.ReactNativeWebView.postMessage(Object.entries(data).toString());
+          runCode(data.snippet, 'answerCanvas', true, 3, 0)
+            .then(() => {
+              const currentSelector = $('#answerCanvas')[0];
+              if (currentSelector && currentSelector.turtleInstance) {
+                currentSelector.turtleInstance.update();
+              }
+            });
+        } catch (err) {
+          window.ReactNativeWebView.postMessage('turtleoutput error: ' + err);
+        }
+      }
+
+      window.execute = (payload) => {
+        window.ReactNativeWebView.postMessage('execute payload: ');
+        window.ReactNativeWebView.postMessage(Object.entries(payload).toString());
+        switch (payload.action) {
+          case 'runCode':
+            window.ReactNativeWebView.postMessage('execute runcode: '); 
+            executeRunCode(payload.data);
+            break;
+          default: break;
+        }
+      };
     } catch (err) {
       window.ReactNativeWebView.postMessage('turtleoutput error: ' + err);
     }

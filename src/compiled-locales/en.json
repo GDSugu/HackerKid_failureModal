@@ -59,6 +59,12 @@
       "value": "Ok"
     }
   ],
+  "4Yb5Wa": [
+    {
+      "type": 0,
+      "value": "Please connect to the internet."
+    }
+  ],
   "5sg7KC": [
     {
       "type": 0,
@@ -359,6 +365,12 @@
       "value": "store authtoken"
     }
   ],
+  "k6tlKQ": [
+    {
+      "type": 0,
+      "value": "Ok"
+    }
+  ],
   "lKeCea": [
     {
       "type": 0,
@@ -471,6 +483,12 @@
     {
       "type": 0,
       "value": "Videos"
+    }
+  ],
+  "xlvJ5U": [
+    {
+      "type": 0,
+      "value": "You are offline."
     }
   ],
   "z9//BN": [

@@ -31,6 +31,7 @@ import IconHome from '../../images/navbar/iconHome.svg';
 import IconMore from '../../images/navbar/iconMore.svg';
 import IconStar from '../../images/navbar/iconStar.svg';
 import IconVideo from '../../images/navbar/iconVideo.svg';
+import CheckNetwork from '../components/CheckNetwork';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -225,6 +226,7 @@ const App = () => {
         />
         <View style={style.container}>
           <Header route={routeName} navigation={navigationRef}/>
+          <CheckNetwork route={routeName} />
           <NavigationContainer
             ref={navigationRef}
             onReady={() => { setRoutName(navigationRef.getCurrentRoute().name); }}

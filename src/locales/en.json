@@ -38,6 +38,10 @@
     "defaultMessage": "Ok",
     "description": "confirm btn"
   },
+  "4Yb5Wa": {
+    "defaultMessage": "Please connect to the internet.",
+    "description": "offline message"
+  },
   "5sg7KC": {
     "defaultMessage": "Password"
   },
@@ -229,6 +233,10 @@
     "defaultMessage": "store authtoken",
     "description": "authtoken temp storage btn"
   },
+  "k6tlKQ": {
+    "defaultMessage": "Ok",
+    "description": "closing modal button"
+  },
   "lKeCea": {
     "defaultMessage": "Save & Exit",
     "description": "Profile save button"
@@ -303,6 +311,10 @@
   "xW6DFp": {
     "defaultMessage": "Videos",
     "description": "videos nav text"
+  },
+  "xlvJ5U": {
+    "defaultMessage": "You are offline.",
+    "description": "offline message"
   },
   "z9//BN": {
     "defaultMessage": "Instructions",
