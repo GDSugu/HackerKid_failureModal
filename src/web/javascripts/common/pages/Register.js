@@ -164,7 +164,7 @@ const RegisterFormStepOne = ({
           </span>
           <i className="fa fa-angle-right"></i>
         </button>
-        <Link to='/login' className='login-into-existing-account overline-bold text-center mb-3'>
+        <Link to='/login' className='login-into-existing-account text-link overline-bold text-center mb-3'>
           <FormattedMessage
             defaultMessage="Login Into Existing Account"
             description="Login Into existing account button"
@@ -346,7 +346,7 @@ const Register = () => {
   return (
     <>
       <div className='form-container'>
-        <form className='create-account-form p-3 w-100'>
+        <form className='register-account-form py-5 py-sm-3 px-3 w-100'>
           <header className='d-flex'>
             <i
               className={`back-btn fa fa-arrow-left ${backBtnDisplay}`}
@@ -369,15 +369,13 @@ const Register = () => {
               && <VerifyOtpFormStep
               parentStateObj={stateObj}
               setParentStateObj={setStateObj}
-              secondaryActionButtons={[<Link key={ 0} to='/login' className='d-block text-decoration-none'>
-              <button type='button' className='login-into-existing-account-btn btn btn-outline-primary btn-block'>
-                <span className='overline-bold'>
-                  <FormattedMessage
-                    defaultMessage="Login into existing account"
-                    description="login into existing account button"
-                  />
-                </span>
-              </button>
+              secondaryActionButtons={[<Link key={ 0} to='/login' className='login-into-existing-account-btn text-link mt-3'>
+              <span className='overline-bold'>
+                <FormattedMessage
+                  defaultMessage="Login into existing account"
+                  description="login into existing account button"
+                />
+              </span>
             </Link>]}
                />)
             || ((stateObj.formStep === 3)

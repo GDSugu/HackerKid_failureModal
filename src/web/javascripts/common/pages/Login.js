@@ -117,7 +117,7 @@ const Login = () => {
   return (
     <>
       <div className='form-container login-form-container'>
-        <form className='login-form p-3 w-100'>
+        <form className='login-form py-5 py-sm-3 px-3 w-100'>
           <img src='../../../../images/login/login-form-svg.svg' className='form-svg' alt='form-svg' />
           <ul className="login-method-tabs nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
             <li className="nav-item overline-bold" role="presentation">

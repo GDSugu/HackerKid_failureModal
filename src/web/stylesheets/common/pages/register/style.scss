@@ -33,12 +33,12 @@ a:focus-visible,
   display: none;
 }
 
-.login-into-existing-account,
-.not-given-number {
+.text-link{
   display: block;
   color: gt.theme-var(text-color-8);
   margin-bottom: 1rem;
   text-decoration: none;
+  text-align: center;
 
   &:hover {
     text-decoration: none;

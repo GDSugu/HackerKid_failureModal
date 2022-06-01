@@ -20,17 +20,6 @@ const useForgotPassword = () => {
     return post(postData, 'register/');
   };
 
-  const stepTwoRequest = () => {
-    const postData = {
-      type: 'verify-otp',
-      phone: stateObj.phoneNumber,
-      countryCode: stateObj.countryCode,
-      otp: stateObj.enteredOtpArr.join(''),
-    };
-
-    return post(postData, 'register/');
-  };
-
   const stepThreeRequest = () => {
     const postData = {
       type: 'changePassword',
@@ -46,7 +35,6 @@ const useForgotPassword = () => {
     stateObj,
     setStateObj,
     stepOneRequest,
-    stepTwoRequest,
     stepThreeRequest,
   };
 };

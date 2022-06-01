@@ -3,6 +3,7 @@
 @use '../../sass/components/auth-nav';
 @use '../../sass/components/auth-input';
 @use '../../sass/components/auth-containers';
+@use '../../sass/components/otp';
 
 @import './_forgotPasswordTheme.js';
 
@@ -12,19 +13,20 @@
   min-height: 100vh;
 }
 
-a:focus-visible,
-.btn-as-interactive-link:focus-visible {
+a:focus-visible{
   color: gt.theme-var(text-color-10);
   outline: none;
 }
 
-.btn-as-interactive-link {
-  border: none;
-  outline: none;
-  background: none;
+.text-link{
+  display: block;
+  color: gt.theme-var(text-color-8);
+  margin-bottom: 1rem;
+  text-decoration: none;
+  text-align: center;
 
   &:hover {
-    color: gt.theme-var(text-color-10);
+    text-decoration: none;
   }
 }
 
@@ -53,63 +55,6 @@ a:focus-visible,
   @include gm.media-breakpoint-up(md) {
     flex-direction: row;
     gap: 0.5rem;
-  }
-}
-
-.otp-fields {
-  display: flex;
-  justify-content: space-between;
-
-  input:not(:last-child) {
-    margin-right: 0.6rem;
-  }
-
-  input {
-    padding: initial;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    outline: none;
-    border-radius: initial;
-    border-bottom-width: 2px !important;
-    text-align: center;
-  }
-
-  input:focus {
-    box-shadow: none;
-    outline: none;
-  }
-}
-
-.otp-timer {
-  display: none;
-  color: gt.theme-var(text-color-5);
-}
-
-.resend-otp {
-  display: none;
-  color: gt.theme-var(text-color-8);
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.not-given-number {
-  display: block;
-  color: gt.theme-var(text-color-8);
-  margin-bottom: 1rem;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: none;
-  }
-}
-
-.label-and-otp-fields {
-  width: 90%;
-  margin: auto;
-
-  @include gm.media-breakpoint-up(sm) {
-    width: 70%;
   }
 }
 

@@ -214,7 +214,7 @@ const ForgotPassword = () => {
   pageInit('auth-container', 'Forgot-Password');
 
   const {
-    stateObj, setStateObj, stepOneRequest, stepTwoRequest, stepThreeRequest,
+    stateObj, setStateObj, stepOneRequest, stepThreeRequest,
   } = useForgotPassword();
 
   const handleStateChange = (key, value) => {
@@ -251,7 +251,7 @@ const ForgotPassword = () => {
 
   return (
     <div className='form-container'>
-    <form className='forgot-password-form p-3 w-100'>
+    <form className='forgot-password-form py-5 px-3 py-sm-3 w-100'>
     <header className='d-flex'>
         <i
           className={`back-btn fa fa-arrow-left ${backBtnDisplay}`}
@@ -270,8 +270,21 @@ const ForgotPassword = () => {
               handleStateChange={handleStateChange} />)
             || (stateObj.formStep === 2
             && <VerifyOtpFormStep parentStateObj={stateObj}
-              setParentStateObj={setStateObj} sendOtpRequest={stepOneRequest}
-              verifyOtpRequest={stepTwoRequest} secondaryActionButtons={[]} />)
+              setParentStateObj={setStateObj} secondaryActionButtons={[<Link key={ 0} to='/login' className='login-to-existing-account-btn btn btn-outline-primary btn-block mb-2'>
+              <span className='overline-bold'>
+                <FormattedMessage
+                  defaultMessage="Login to existing Account"
+                  description="Login to existing account button"
+                />
+              </span>
+            </Link>, <Link key={ 1} to='/register' className='create-new-account-btn btn btn-outline-primary btn-block mt-0 mb-2'>
+          <span className='overline-bold'>
+            <FormattedMessage
+              defaultMessage="Create a New Account"
+              description="create new account button"
+            />
+          </span>
+      </Link>]} />)
             || (stateObj.formStep === 3
               && <ForgotPasswordStepThree stateObj={stateObj}
               setStateObj={setStateObj} stepThreeRequest={stepThreeRequest}

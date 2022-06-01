@@ -5,8 +5,6 @@ const closeFormError = (callingToCloseTarget) => {
   const formError = $('#form-error');
   const errorTypeString = $(callingToCloseTarget).attr('data-close-form-error-type');
 
-  console.log(errorTypeString);
-
   if (errorTypeString) {
     const errorTypeArr = errorTypeString.split(',');
 
