@@ -21,6 +21,11 @@ const manager = {
   try {
     const container = $('.outputContainer');
     const content = $('#answerCanvas');
+    window.ReactNativeWebView.postMessage(window.outerWidth.toString());
+    window.ReactNativeWebView.postMessage(window.outerHeight.toString());
+    window.ReactNativeWebView.postMessage(content[0].scrollWidth.toString());
+    window.ReactNativeWebView.postMessage(content[0].scrollHeight.toString());
+
     container.scrollLeft(
       (
         (content[0].scrollWidth * manager.canvasScale)
@@ -41,8 +46,9 @@ const manager = {
 const runCode = (code, target, animate = true, frames = 1, delay = 0, respectDebugger = false) => {
   let attachDebugger = false;
   window.ReactNativeWebView.postMessage('execution started: runCode');
-  window.ReactNativeWebView.postMessage(Object.keys(Sk).toString());
+  // window.ReactNativeWebView.postMessage(Object.keys(Sk).toString());
   try {
+    code = code.replace(/^"|"$/g, '');
     Sk.configure({
       read: (x) => {
         if (Sk.builtinFiles === undefined || Sk.builtinFiles.files[x] === undefined) {
@@ -56,10 +62,10 @@ const runCode = (code, target, animate = true, frames = 1, delay = 0, respectDeb
     });
     (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = target;
     Sk.TurtleGraphics.bufferSize = 1000;
-    const width = 1500;
-    Sk.TurtleGraphics.width = width;
-    Sk.TurtleGraphics.height = width;
+    Sk.TurtleGraphics.width = window.outerWidth;
+    Sk.TurtleGraphics.height = window.outerHeight;
     Sk.TurtleGraphics.animate = animate;
+    $('#answerCanvas, #userCanvas').css('transform', 'scale('+ manager.canvasScale +')');
     setTimeout(() => {
       repositionTurtle();
     }, 500);
