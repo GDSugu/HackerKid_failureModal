@@ -110,6 +110,24 @@ const useSharedTurtleWebView = () => {
     {/* <script src='https://unpkg.com/crypto-js@4.0.0' type='text/javascript' ></script> */}
   </>;
 
+  const turtleOutputStyle = `
+    <style>
+      #userCanvas {
+        background-color: green;
+      }
+
+      #answerCanvas {
+        background-color: red;
+        width: 100%;
+        height: 100%;
+      }
+
+      body {
+        background-color: blue;
+      }
+    </style>
+  `;
+
   // const turtleOutputScriptToInject = `
   //   try {
   //     const pool = workerpool.pool();
@@ -188,6 +206,7 @@ const useSharedTurtleWebView = () => {
       BodyContent: TurtleOutputBodyContent,
       ScriptContent: TurtleOutputScriptContent,
       scriptToInject: turtleOutputScriptToInject,
+      styleString: turtleOutputStyle,
     },
   };
 };

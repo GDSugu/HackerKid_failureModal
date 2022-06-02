@@ -22,7 +22,7 @@ const TurtleOutput = () => {
   let webViewString = '';
 
   const {
-    BodyContent, ScriptContent, scriptToInject,
+    BodyContent, ScriptContent, scriptToInject, styleString,
   } = turtleOutput;
 
   const turtleContext = React.useContext(TurtleContext);
@@ -30,6 +30,7 @@ const TurtleOutput = () => {
   webViewString = webViewElement({
     BodyComponent: BodyContent,
     ScriptComponent: ScriptContent,
+    styleString,
   });
 
   React.useEffect(() => {

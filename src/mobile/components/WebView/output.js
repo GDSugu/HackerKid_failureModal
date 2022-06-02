@@ -39,7 +39,7 @@ function outf(text) {
 function builtinRead(x) {
     if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
             throw "File not found: '" + x + "'";
-    return Sk.builtinFiles["files"][x];
+    return Sk.builtinFiles.files[x];
 }
 
 // Here's everything you need to run a python program in skulpt
@@ -50,8 +50,11 @@ function builtinRead(x) {
 
 function repositionTurtle() {
     try {
+      window.ReactNativeWebView.postMessage('repositionTurtle: start');
+      window.ReactNativeWebView.postMessage(window.innerWidth.toString);
       const container = $('.outputContainer');
       const content = $('#answerCanvas');
+      $('#answerCanvas, #userCanvas').css('transform', 'scale(3)');
       container.scrollLeft(
         (
           (content[0].scrollWidth * 1.0)
@@ -77,8 +80,8 @@ function runit() {
     Sk.pre = "output";
     Sk.configure({output:outf, read:builtinRead}); 
     (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'answerCanvas';
-    Sk.TurtleGraphics.width = 1500;
-    Sk.TurtleGraphics.height = 1500;
+    Sk.TurtleGraphics.width = window.innerWidth;
+    Sk.TurtleGraphics.height = window.innerHeight;
     Sk.TurtleGraphics.animate = true;
     setTimeout(() => {
       repositionTurtle();
@@ -92,7 +95,10 @@ function runit() {
         }, function(err) {
             console.log(err.toString());
         });
-} 
+}
+  
+
+
 </script> 
 
 <h3>Try This</h3> 
@@ -130,16 +136,18 @@ print "Hello World"
       const content = $('#answerCanvas');
       container.scrollLeft(
         (
-          (content[0].scrollWidth * 1.0)
+          (content[0].scrollWidth * 4.0)
           - container.width()
         ) * 0.50,
       );
       container.scrollTop(
         (
-          (content[0].scrollHeight * 1.0)
+          (content[0].scrollHeight * 4.0)
           - container.height()
         ) * 0.50,
       );
+
+      $('#answerCanvas, #userCanvas').css('transform', 'scale(1.6)');
     } catch (error) {
       console.log(error);
     }
