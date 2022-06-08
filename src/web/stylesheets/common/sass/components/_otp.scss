@@ -1,6 +1,21 @@
 @use '../themes/default' as gt;
 @use '../base/mixins' as gm;
 
+.btn-as-interactive-link {
+  border: none;
+  outline: none;
+  background: none;
+
+  &:hover {
+    color: gt.theme-var(text-color-10);
+  }
+}
+
+.btn-as-interactive-link:focus-visible{
+  color: gt.theme-var(text-color-10);
+  outline: none;
+}
+
 .label-and-otp-fields {
   width: 90%;
   margin: auto;

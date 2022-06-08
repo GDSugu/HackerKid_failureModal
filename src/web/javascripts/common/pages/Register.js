@@ -15,6 +15,7 @@ import {
 import { loginCheck, setUserSession } from '../../../../hooks/common/framework';
 import VerifyOtpFormStep from '../components/VerifyOtpFormStep/VeriyOtpFormStep';
 import useOtp from '../../../../hooks/pages/otp';
+import useBackBtn from '../../../../hooks/pages/back-btn';
 
 const manager = {};
 
@@ -27,9 +28,9 @@ const TakeActionButtons = ({ buttonsArr }) => (
 );
 
 const RegisterFormStepOne = ({
-  stateObj, setStateObj, handleStateChange,
+  stateObj, setStateObj, handleStateChange, setBackBtnStateObj,
 }) => {
-  const { sendOtpRequest } = useOtp(stateObj.phoneNumber, stateObj.countryCode);
+  const { sendOtpRequest } = useOtp();
 
   useEffect(() => {
     const flaginput = document.querySelector('#phone');
@@ -39,6 +40,11 @@ const RegisterFormStepOne = ({
       separateDialCode: true,
       utilsScript: intlTelInput.utilsScript,
     });
+
+    setBackBtnStateObj((prevBackObj) => ({
+      ...prevBackObj,
+      showBackBtn: false,
+    }));
   }, []);
 
   const nextBtnClickHandler = (e) => {
@@ -175,7 +181,9 @@ const RegisterFormStepOne = ({
   );
 };
 
-const RegisterFormStepThree = ({ createAccountRequest, handleStateChange }) => {
+const RegisterFormStepThree = ({
+  createAccountRequest, handleStateChange, setStateObj, setBackBtnStateObj,
+}) => {
   const matchValueTo = (e, matchTo) => {
     const { target } = e;
     const { value } = target;
@@ -236,6 +244,19 @@ const RegisterFormStepThree = ({ createAccountRequest, handleStateChange }) => {
       setFormErrorField('Passwords length must be atleast 4, consisting of letters and numbers', { 'data-error-type': 'INVALID_PASSWORD' });
     }
   };
+
+  useEffect(() => {
+    setBackBtnStateObj((prevBackObj) => ({
+      ...prevBackObj,
+      showBackBtn: true,
+      backFn: () => {
+        setStateObj((prevObj) => ({
+          ...prevObj,
+          formStep: 1,
+        }));
+      },
+    }));
+  }, []);
 
   return (
   <div className='step-3-fields'>
@@ -299,6 +320,7 @@ const Register = () => {
   pageInit('auth-container', 'Register');
 
   const { stateObj, setStateObj, createAccountRequest } = useRegister();
+  const { stateObj: backBtnStateObj, setStateObj: setBackBtnStateObj } = useBackBtn();
 
   const handleStateChange = (key, value) => {
     setStateObj((prevObj) => {
@@ -317,20 +339,10 @@ const Register = () => {
   };
 
   const backBtnClickHandler = () => {
-    if (stateObj.formStep === 3) {
-      setStateObj((prevState) => ({
-        ...prevState,
-        formStep: 1,
-      }));
-    } else {
-      setStateObj((prevState) => ({
-        ...prevState,
-        formStep: prevState.formStep - 1,
-      }));
-    }
+    backBtnStateObj.backFn();
   };
 
-  const backBtnDisplay = stateObj.formStep > 1 ? 'd-block' : 'd-none';
+  const backBtnDisplay = backBtnStateObj.showBackBtn ? 'd-block' : 'd-none';
 
   useEffect(() => {
     loginCheck().then((response) => {
@@ -363,12 +375,14 @@ const Register = () => {
               && <RegisterFormStepOne
               stateObj={stateObj}
               setStateObj={setStateObj}
-              handleStateChange={ handleStateChange}
+              handleStateChange={handleStateChange}
+              setBackBtnStateObj={setBackBtnStateObj}
             />)
             || ((stateObj.formStep === 2)
               && <VerifyOtpFormStep
               parentStateObj={stateObj}
               setParentStateObj={setStateObj}
+              setBackBtnStateObj={setBackBtnStateObj}
               secondaryActionButtons={[<Link key={ 0} to='/login' className='login-into-existing-account-btn text-link mt-3'>
               <span className='overline-bold'>
                 <FormattedMessage
@@ -383,7 +397,8 @@ const Register = () => {
               stateObj={stateObj}
               setStateObj={setStateObj}
               createAccountRequest={createAccountRequest}
-              handleStateChange={ handleStateChange}
+              handleStateChange={handleStateChange}
+              setBackBtnStateObj={setBackBtnStateObj}
                />)
           }
         </form>

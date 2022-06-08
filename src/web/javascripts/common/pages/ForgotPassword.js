@@ -13,6 +13,7 @@ import {
   validateInputOnChange, closeFormError, setFormErrorField, togglePasswordVisibility,
 } from '../commonLoginRegisterFunctions';
 import VerifyOtpFormStep from '../components/VerifyOtpFormStep/VeriyOtpFormStep';
+import useBackBtn from '../../../../hooks/pages/back-btn';
 
 const manager = {};
 
@@ -40,7 +41,7 @@ const TakeActionButtons = ({ children }) => (
 </div>
 );
 const ForgotPasswordStepOne = ({
-  stateObj, setStateObj, stepOneRequest, handleStateChange,
+  stateObj, setStateObj, stepOneRequest, handleStateChange, setBackBtnStateObj,
 }) => {
   useEffect(() => {
     const flaginput = document.querySelector('#phone');
@@ -50,6 +51,11 @@ const ForgotPasswordStepOne = ({
       separateDialCode: true,
       utilsScript: intlTelInput.utilsScript,
     });
+
+    setBackBtnStateObj((prevObj) => ({
+      ...prevObj,
+      showBackBtn: false,
+    }));
   }, []);
 
   const sendOtpClickHandler = (e) => {
@@ -115,7 +121,9 @@ const ForgotPasswordStepOne = ({
   );
 };
 
-const ForgotPasswordStepThree = ({ stepThreeRequest, setStateObj, handleStateChange }) => {
+const ForgotPasswordStepThree = ({
+  stepThreeRequest, setStateObj, handleStateChange, setBackBtnStateObj,
+}) => {
   const matchValueTo = (e, matchTo) => {
     const { target } = e;
     const { value } = target;
@@ -152,6 +160,18 @@ const ForgotPasswordStepThree = ({ stepThreeRequest, setStateObj, handleStateCha
       console.log(errData);
     });
   };
+
+  useEffect(() => {
+    setBackBtnStateObj((prevBackObj) => ({
+      ...prevBackObj,
+      backFn: () => {
+        setStateObj((prevObj) => ({
+          ...prevObj,
+          formStep: 1,
+        }));
+      },
+    }));
+  }, []);
 
   return (
   <div className='step-3-fields'>
@@ -210,12 +230,18 @@ const ForgotPasswordStepThree = ({ stepThreeRequest, setStateObj, handleStateCha
   );
 };
 
+const ForgotPasswordStepFour = () => (
+    <h1>step4</h1>
+);
+
 const ForgotPassword = () => {
   pageInit('auth-container', 'Forgot-Password');
 
   const {
     stateObj, setStateObj, stepOneRequest, stepThreeRequest,
   } = useForgotPassword();
+
+  const { stateObj: backBtnStateObj, setStateObj: setBackBtnStateObj } = useBackBtn();
 
   const handleStateChange = (key, value) => {
     setStateObj((prevObj) => {
@@ -234,20 +260,10 @@ const ForgotPassword = () => {
   };
 
   const backBtnClickHandler = () => {
-    if (stateObj.forgotPasswordFormStep === 3) {
-      setStateObj((prevState) => ({
-        ...prevState,
-        forgotPasswordFormStep: 1,
-      }));
-    } else {
-      setStateObj((prevState) => ({
-        ...prevState,
-        forgotPasswordFormStep: prevState.forgotPasswordFormStep - 1,
-      }));
-    }
+    backBtnStateObj.backFn();
   };
 
-  const backBtnDisplay = stateObj.forgotPasswordFormStep > 1 ? 'd-block' : 'd-none';
+  const backBtnDisplay = backBtnStateObj.showBackBtn ? 'd-block' : 'd-none';
 
   return (
     <div className='form-container'>
@@ -267,10 +283,10 @@ const ForgotPassword = () => {
           ((stateObj.formStep === 1
             && <ForgotPasswordStepOne stateObj={stateObj}
               setStateObj={setStateObj} stepOneRequest={stepOneRequest}
-              handleStateChange={handleStateChange} />)
+              handleStateChange={handleStateChange} setBackBtnStateObj={ setBackBtnStateObj} />)
             || (stateObj.formStep === 2
             && <VerifyOtpFormStep parentStateObj={stateObj}
-              setParentStateObj={setStateObj} secondaryActionButtons={[<Link key={ 0} to='/login' className='login-to-existing-account-btn btn btn-outline-primary btn-block mb-2'>
+              setParentStateObj={setStateObj} setBackBtnStateObj={setBackBtnStateObj} secondaryActionButtons={[<Link key={ 0} to='/login' className='login-to-existing-account-btn btn btn-outline-primary btn-block mb-2'>
               <span className='overline-bold'>
                 <FormattedMessage
                   defaultMessage="Login to existing Account"
@@ -284,11 +300,11 @@ const ForgotPassword = () => {
               description="create new account button"
             />
           </span>
-      </Link>]} />)
+          </Link>]} />)
             || (stateObj.formStep === 3
               && <ForgotPasswordStepThree stateObj={stateObj}
               setStateObj={setStateObj} stepThreeRequest={stepThreeRequest}
-              handleStateChange={handleStateChange}/>)
+              handleStateChange={handleStateChange} setBackBtnStateObj={ setBackBtnStateObj}/>)
             )
         }
     </form>

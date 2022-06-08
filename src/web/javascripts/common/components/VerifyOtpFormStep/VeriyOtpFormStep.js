@@ -6,7 +6,7 @@ import { closeFormError, setFormErrorField } from '../../commonLoginRegisterFunc
 import useOtp from '../../../../../hooks/pages/otp';
 
 const VerifyOtpFormStep = ({
-  parentStateObj, setParentStateObj, secondaryActionButtons,
+  parentStateObj, setParentStateObj, secondaryActionButtons, setBackBtnStateObj,
 }) => {
   const {
     sendOtpRequest, verifyOtpRequest, stateObj, setStateObj,
@@ -45,7 +45,7 @@ const VerifyOtpFormStep = ({
   const resendOtpClickHandler = () => {
     $('.resend-otp').hide();
     if (stateObj.otpTimerId === null) {
-      sendOtpRequest(parentStateObj.phoneNumber, parentStateObj.countryCode).then((response) => {
+      sendOtpRequest(parentStateObj.phoneNumber, parentStateObj.countryCode, 'send-otp-for-pwd-change').then((response) => {
         const data = JSON.parse(response);
         if (data.status === 'success') {
           startOtpTimer();
@@ -147,6 +147,17 @@ const VerifyOtpFormStep = ({
 
   useEffect(() => {
     startOtpTimer();
+
+    setBackBtnStateObj((prevObj) => ({
+      ...prevObj,
+      showBackBtn: true,
+      backFn: () => {
+        setParentStateObj((prevParentObj) => ({
+          ...prevParentObj,
+          formStep: prevParentObj.formStep - 1,
+        }));
+      },
+    }));
 
     return () => {
       clearInterval(stateObj.otpTimerId);
