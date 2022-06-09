@@ -13,8 +13,7 @@
   min-height: 100vh;
 }
 
-a:focus-visible,
-.btn-as-interactive-link:focus-visible {
+a:focus-visible {
   color: gt.theme-var(text-color-10);
   outline: none;
 }

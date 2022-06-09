@@ -152,7 +152,7 @@ const ForgotPasswordStepThree = ({
       if (data.status === 'success' && data.message === 'CHANGED') {
         setStateObj((prevObj) => ({
           ...prevObj,
-          session: data.session,
+          formStep: 4,
         }));
       }
     }).catch((error) => {
@@ -230,9 +230,36 @@ const ForgotPasswordStepThree = ({
   );
 };
 
-const ForgotPasswordStepFour = () => (
-    <h1>step4</h1>
-);
+const ForgotPasswordStepFour = ({ setBackBtnStateObj }) => {
+  useEffect(() => {
+    setBackBtnStateObj((prevBackObj) => ({
+      ...prevBackObj,
+      showBackBtn: false,
+    }));
+  }, []);
+
+  return (
+    <div>
+      <h5 className='text-center'>
+        <FormattedMessage
+          defaultMessage={'Password changed successfully'}
+          description="Password changed text" />
+      </h5>
+      <div className='take-action-buttons mt-5'>
+        <Link to='/login' className='d-block text-decoration-none'>
+          <button type='button' className='go-to-login-btn btn btn-primary btn-block'>
+            <span className='overline-bold'>
+              <FormattedMessage
+                defaultMessage="Go to login"
+                description="Go to login button"
+              />
+            </span>
+          </button>
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 const ForgotPassword = () => {
   pageInit('auth-container', 'Forgot-Password');
@@ -264,6 +291,13 @@ const ForgotPassword = () => {
   };
 
   const backBtnDisplay = backBtnStateObj.showBackBtn ? 'd-block' : 'd-none';
+  let formSvgPath = '../../../../images/forgot-password/forgot-password-form-svg.svg';
+
+  if (stateObj.formStep === 3) {
+    formSvgPath = '../../../../images/forgot-password/forgot-password-step-3-svg.svg';
+  } else if (stateObj.formStep === 4) {
+    formSvgPath = '../../../../images/forgot-password/forgot-password-step-4-svg.svg';
+  }
 
   return (
     <div className='form-container'>
@@ -278,7 +312,7 @@ const ForgotPassword = () => {
             description="Forgot Password heading"/>
         </h5>
       </header>
-        <img src='../../../../images/forgot-password/forgot-password-form-svg.svg' className='form-svg' />
+        <img src={ formSvgPath} className='form-svg' />
         {
           ((stateObj.formStep === 1
             && <ForgotPasswordStepOne stateObj={stateObj}
@@ -304,8 +338,10 @@ const ForgotPassword = () => {
             || (stateObj.formStep === 3
               && <ForgotPasswordStepThree stateObj={stateObj}
               setStateObj={setStateObj} stepThreeRequest={stepThreeRequest}
-              handleStateChange={handleStateChange} setBackBtnStateObj={ setBackBtnStateObj}/>)
-            )
+              handleStateChange={handleStateChange} setBackBtnStateObj={setBackBtnStateObj} />)
+            || (stateObj.formStep === 4
+              && <ForgotPasswordStepFour setBackBtnStateObj={setBackBtnStateObj} />)
+          )
         }
     </form>
   </div>
