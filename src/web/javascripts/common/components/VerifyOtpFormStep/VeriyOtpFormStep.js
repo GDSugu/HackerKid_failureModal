@@ -97,7 +97,7 @@ const VerifyOtpFormStep = ({
       setStateObj((prevObj) => {
         const prevEnteredOtpArr = prevObj.enteredOtpArr;
 
-        prevEnteredOtpArr.splice(otpIndex, 0, value);
+        prevEnteredOtpArr.splice(otpIndex, 1, value);
 
         return {
           ...prevObj,
@@ -109,7 +109,7 @@ const VerifyOtpFormStep = ({
       setStateObj((prevObj) => {
         const prevEnteredOtpArr = prevObj.enteredOtpArr;
 
-        prevEnteredOtpArr.splice(otpIndex, 1);
+        prevEnteredOtpArr.splice(otpIndex, 1, '');
 
         return {
           ...prevObj,
@@ -123,7 +123,7 @@ const VerifyOtpFormStep = ({
     e.preventDefault();
     const { enteredOtpArr } = stateObj;
 
-    if (enteredOtpArr.legnth === 0) {
+    if (enteredOtpArr.length !== 4) {
       setFormErrorField('Enter a OTP to proceed', { 'data-error-type': 'OTP_EXPIRED' });
       return;
     }
