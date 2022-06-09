@@ -203,7 +203,7 @@ const Login = () => {
           </Link>
           <p className='form-error text-danger overline-bold text-center' id='form-error'></p>
           <div className='take-action-buttons mt-4'>
-            <button type='button' className='login-btn btn btn-primary btn-block' onClick={loginBtnClickHandler}>
+            <button type='button' className='login-btn btn btn-primary btn-block mb-2' onClick={loginBtnClickHandler}>
               <span className='overline-bold'>
                 <FormattedMessage
                   defaultMessage="Login"
@@ -211,14 +211,14 @@ const Login = () => {
                 />
               </span>
             </button>
-            <button type='button' className='login-with-otp-btn btn btn-outline-primary btn-block mb-2'>
+            {/* <button type='button' className='login-with-otp-btn btn btn-outline-primary btn-block mb-2'>
               <span className='overline-bold'>
                 <FormattedMessage
                   defaultMessage="Login with OTP"
                   description="Login with OTP button"
                 />
               </span>
-            </button>
+            </button> */}
             <Link to='/register' className='d-block text-decoration-none'>
               <button type='button' className='create-new-account-btn btn btn-outline-primary btn-block'>
                   <span className='overline-bold'>
