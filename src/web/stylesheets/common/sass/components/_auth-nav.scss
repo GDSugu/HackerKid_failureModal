@@ -1,10 +1,21 @@
 @use '../themes/default' as gt;
 
+.btn-as-interactive-link {
+  border: none;
+  outline: none;
+  background: none;
+
+  &:hover {
+    color: gt.theme-var(text-color-10);
+  }
+}
+
 nav {
   padding: 24px;
   margin-bottom: 25px;
 
   .help {
+    color: gt.theme-var(text-color-8);
     text-decoration: none;
   }
 }
