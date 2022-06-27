@@ -1,6 +1,5 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Link } from 'react-router-dom';
 import Modal from '../Modal';
 import '../../../../stylesheets/common/sass/components/_help-modal.scss';
 
@@ -28,7 +27,7 @@ const HelpModal = () => (
     <a href='mailto:help@hackerkid.org'>
       <HelpType label='Email' text='help@hackerkid.org' iconPath='../../../../../images/help-modal/email-icon.svg' />
     </a>
-      <HelpType text='Open chat now' iconPath='../../../../../images/help-modal/chat-icon.svg' />
+{/* <HelpType text='Open chat now' iconPath='../../../../../images/help-modal/chat-icon.svg' /> */}
       <HelpType text='FAQ' iconPath='../../../../../images/help-modal/faq-icon.svg' />
     </Modal>
 );
