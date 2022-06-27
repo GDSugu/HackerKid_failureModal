@@ -113,17 +113,17 @@ const useSharedTurtleWebView = () => {
   const turtleOutputStyle = `
     <style>
       #userCanvas {
-        background-color: green;
+        // background-color: green;
       }
 
       #answerCanvas {
-        background-color: red;
+        // background-color: red;
         width: 100%;
         height: 100%;
       }
 
       body {
-        background-color: blue;
+        // background-color: blue;
       }
     </style>
   `;
