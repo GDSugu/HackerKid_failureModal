@@ -70,7 +70,7 @@ const ForgotPasswordStepOne = ({
           setStateObj((prevObj) => (
             {
               ...prevObj,
-              formStep: prevObj.formStep + 1,
+              formStep: 2,
             }
           ));
         } else if (data.status === 'error' && data.message === 'ACCOUNT_NOT_EXIST') {
@@ -146,19 +146,27 @@ const ForgotPasswordStepThree = ({
   const changePasswordBtnClickHandler = (e) => {
     e.preventDefault();
 
-    stepThreeRequest().then((response) => {
-      const data = JSON.parse(response);
+    const password = validate('#password', 'password', 1);
+    const retypePassword = validate('#retyped-password', 'password', 1);
 
-      if (data.status === 'success' && data.message === 'CHANGED') {
-        setStateObj((prevObj) => ({
-          ...prevObj,
-          formStep: 4,
-        }));
-      }
-    }).catch((error) => {
-      const errData = JSON.parse(error);
-      console.log(errData);
-    });
+    if ((password && retypePassword) && (password !== retypePassword)) {
+      $('#retyped-password').addClass('is-invalid');
+    }
+    if ((password && retypePassword) && (password === retypePassword)) {
+      stepThreeRequest().then((response) => {
+        const data = JSON.parse(response);
+
+        if (data.status === 'success' && data.message === 'CHANGED') {
+          setStateObj((prevObj) => ({
+            ...prevObj,
+            formStep: 4,
+          }));
+        }
+      }).catch((error) => {
+        const errData = JSON.parse(error);
+        console.log(errData);
+      });
+    }
   };
 
   useEffect(() => {
