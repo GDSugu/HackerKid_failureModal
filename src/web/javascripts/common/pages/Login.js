@@ -211,7 +211,8 @@ const Login = () => {
                 />
               </span>
             </button>
-            {/* <button type='button' className='login-with-otp-btn btn btn-outline-primary btn-block mb-2'>
+            {/* <button
+            type='button' className='login-with-otp-btn btn btn-outline-primary btn-block mb-2'>
               <span className='overline-bold'>
                 <FormattedMessage
                   defaultMessage="Login with OTP"

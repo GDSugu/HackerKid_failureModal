@@ -70,7 +70,7 @@ const RegisterFormStepOne = ({
       if (result) return true;
       return false;
     })) {
-      sendOtpRequest().then((response) => {
+      sendOtpRequest(stateObj.phoneNumber, stateObj.countryCode).then((response) => {
         const data = JSON.parse(response);
         if (data.status === 'success') {
           setStateObj((prevObj) => ({
