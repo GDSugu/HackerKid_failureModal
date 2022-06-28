@@ -5,6 +5,7 @@
 @use '../../sass/components/auth-containers';
 
 @import './_loginTheme.js';
+@import '../../loading.css';
 
 // default theme
 // @include gt.populate-theme();
@@ -13,6 +14,11 @@
 
 #root {
   min-height: 100vh;
+}
+
+#loader-partial::after{
+  width: 20px;
+  height: 20px;
 }
 
 .form-helper,

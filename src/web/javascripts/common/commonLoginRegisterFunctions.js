@@ -50,9 +50,28 @@ const setFormErrorField = (value, attrObj = {}) => {
   $('#form-error').text(value).show();
 };
 
+const showLoadingSpinner = (selector) => {
+  const loadingSpinner = document.createElement('div');
+  $(loadingSpinner).attr('id', 'loader-partial');
+
+  const htmlBeforeLoading = $(selector).html();
+
+  const hideLoadingSpinner = () => {
+    $(selector).empty();
+    $(selector).removeAttr('disabled');
+    $(selector).html(htmlBeforeLoading);
+  };
+  $(selector).attr('disabled', true);
+  $(selector).empty();
+  $(selector).append(loadingSpinner);
+
+  return hideLoadingSpinner;
+};
+
 export {
   togglePasswordVisibility,
   closeFormError,
   validateInputOnChange,
   setFormErrorField,
+  showLoadingSpinner,
 };

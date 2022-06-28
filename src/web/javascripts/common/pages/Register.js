@@ -10,7 +10,7 @@ import {
 import '../../../stylesheets/common/pages/register/style.scss';
 import useRegister from '../../../../hooks/pages/register';
 import {
-  togglePasswordVisibility, validateInputOnChange, closeFormError, setFormErrorField,
+  togglePasswordVisibility, validateInputOnChange, closeFormError, showLoadingSpinner,
 } from '../commonLoginRegisterFunctions';
 import { loginCheck, setUserSession } from '../../../../hooks/common/framework';
 import VerifyOtpFormStep from '../components/VerifyOtpFormStep/VeriyOtpFormStep';
@@ -18,14 +18,6 @@ import useOtp from '../../../../hooks/pages/otp';
 import useBackBtn from '../../../../hooks/pages/back-btn';
 
 const manager = {};
-
-const TakeActionButtons = ({ buttonsArr }) => (
-    <div className='take-action-buttons mt-4'>
-    {
-      buttonsArr.map((button) => button)
-    }
-  </div>
-);
 
 const RegisterFormStepOne = ({
   stateObj, setStateObj, handleStateChange, setBackBtnStateObj,
@@ -70,6 +62,8 @@ const RegisterFormStepOne = ({
       if (result) return true;
       return false;
     })) {
+      const hideLoadingSpinner = showLoadingSpinner('.next-btn');
+
       sendOtpRequest(stateObj.phoneNumber, stateObj.countryCode).then((response) => {
         const data = JSON.parse(response);
         if (data.status === 'success') {
@@ -78,10 +72,12 @@ const RegisterFormStepOne = ({
             formStep: prevObj.formStep + 1,
           }));
         } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
+          hideLoadingSpinner();
           $('#phone').addClass('is-invalid').removeClass('is-valid');
           $('#form-error').text('Account already exists!, try logging in').attr('data-error-type', data.message).show();
         }
       }).catch((err) => {
+        hideLoadingSpinner();
         const errData = JSON.parse(err);
         console.log(errData);
       });
@@ -159,7 +155,6 @@ const RegisterFormStepOne = ({
         }} data-typename="Parent's Name" />
       </div>
       <p className='form-error text-danger overline-bold text-center' id='form-error'></p>
-      <TakeActionButtons buttonsArr ={[]} />
       <div className='take-action-buttons mt-4'>
         <button type="submit" className='next-btn btn btn-primary btn-block mb-3' onClick={nextBtnClickHandler}>
           <span className='overline-bold'>
@@ -202,6 +197,7 @@ const RegisterFormStepThree = ({
       $(formHelperId).hide();
     }
   };
+
   const createAccountBtnClickHandler = (e) => {
     e.preventDefault();
     const inputFields = $('input');
@@ -223,6 +219,8 @@ const RegisterFormStepThree = ({
 
     if ((enteredPassword && retypedPassword)) {
       if (enteredPassword === retypedPassword) {
+        const hideLoadingSpinner = showLoadingSpinner('.create-account-btn');
+
         createAccountRequest().then((response) => {
           const data = JSON.parse(response);
 
@@ -230,19 +228,22 @@ const RegisterFormStepThree = ({
             const sessionDetails = data.session;
             setUserSession(sessionDetails);
             pathNavigator('dashboard');
+          } else if (data.status === 'error') {
+            hideLoadingSpinner();
           }
         }).catch((error) => {
+          hideLoadingSpinner();
           const errData = JSON.parse(error);
           console.log(errData);
         });
       } else {
-        $('#password').addClass('is-invalid').removeClass('is-valid');
-        $('#password-form-helper').html('Passwords do not match').show();
         $('#retyped-password').addClass('is-invalid').removeClass('is-valid');
       }
-    } else if (!enteredPassword && !retypedPassword) {
-      setFormErrorField('Passwords length must be atleast 4, consisting of letters and numbers', { 'data-error-type': 'INVALID_PASSWORD' });
     }
+    // else if (!enteredPassword && !retypedPassword) {
+    //   setFormErrorField('Passwords length must be atleast 4,
+    // consisting of letters and numbers', { 'data - error - type': 'INVALID_PASSWORD' });
+    // }
   };
 
   useEffect(() => {

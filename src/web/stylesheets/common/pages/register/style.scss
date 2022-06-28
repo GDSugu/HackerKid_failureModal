@@ -6,11 +6,17 @@
 @use '../../sass/components/otp';
 
 @import './_registerTheme.js';
+@import '../../loading.css';
 
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 
 #root {
   min-height: 100vh;
+}
+
+#loader-partial::after{
+  width: 20px;
+  height: 20px;
 }
 
 a:focus-visible {

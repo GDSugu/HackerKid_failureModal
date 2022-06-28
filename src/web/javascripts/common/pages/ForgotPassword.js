@@ -10,7 +10,8 @@ import {
 import '../../../stylesheets/common/pages/forgot-password/style.scss';
 import useForgotPassword from '../../../../hooks/pages/forgot-password';
 import {
-  validateInputOnChange, closeFormError, setFormErrorField, togglePasswordVisibility,
+  validateInputOnChange, closeFormError, setFormErrorField,
+  togglePasswordVisibility, showLoadingSpinner,
 } from '../commonLoginRegisterFunctions';
 import VerifyOtpFormStep from '../components/VerifyOtpFormStep/VeriyOtpFormStep';
 import useBackBtn from '../../../../hooks/pages/back-btn';
@@ -40,6 +41,7 @@ const TakeActionButtons = ({ children }) => (
     </div>
 </div>
 );
+
 const ForgotPasswordStepOne = ({
   stateObj, setStateObj, stepOneRequest, handleStateChange, setBackBtnStateObj,
 }) => {
@@ -63,6 +65,7 @@ const ForgotPasswordStepOne = ({
     const result = validate('#phone', 'tel', 1, '#phone-form-helper', 'Enter a valida Phone Number');
 
     if (result) {
+      const hideLoadingSpinner = showLoadingSpinner('.send-otp-btn');
       stepOneRequest().then((response) => {
         const data = JSON.parse(response);
 
@@ -74,12 +77,15 @@ const ForgotPasswordStepOne = ({
             }
           ));
         } else if (data.status === 'error' && data.message === 'ACCOUNT_NOT_EXIST') {
+          hideLoadingSpinner();
           $('#phone').addClass('is-invalid');
           setFormErrorField("Account doesn't exists!, try signing up", { 'data-error-type': 'ACCOUNT_NOT_EXIST' });
         } else if (data.status === 'error') {
+          hideLoadingSpinner();
           setFormErrorField('Something went wrong', { 'data-close-form-error': 'ACCOUNT_NOT_EXIST' });
         }
       }).catch((err) => {
+        hideLoadingSpinner();
         const errData = JSON.parse(err);
 
         console.error(errData);
@@ -153,6 +159,7 @@ const ForgotPasswordStepThree = ({
       $('#retyped-password').addClass('is-invalid');
     }
     if ((password && retypePassword) && (password === retypePassword)) {
+      const hideLoadingSpinner = showLoadingSpinner('.change-password-btn');
       stepThreeRequest().then((response) => {
         const data = JSON.parse(response);
 
@@ -161,8 +168,11 @@ const ForgotPasswordStepThree = ({
             ...prevObj,
             formStep: 4,
           }));
+        } else if (data.status === 'error') {
+          hideLoadingSpinner();
         }
       }).catch((error) => {
+        hideLoadingSpinner();
         const errData = JSON.parse(error);
         console.log(errData);
       });

@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import intlTelInput from 'intl-tel-input';
 import $ from 'jquery';
 import {
-  closeFormError, setFormErrorField, togglePasswordVisibility, validateInputOnChange,
+  closeFormError, setFormErrorField, showLoadingSpinner, togglePasswordVisibility,
+  validateInputOnChange,
 } from '../commonLoginRegisterFunctions';
 import 'intl-tel-input/build/css/intlTelInput.css';
 import {
@@ -84,6 +85,7 @@ const Login = () => {
     const password = validate('#password', 'password', 1, '#password-form-helper', null, true);
 
     if (primaryLoginFieldValue && password) {
+      const hideLoadingSpinner = showLoadingSpinner('.login-btn');
       loginWithPhone(stateObj.phoneNumber,
         stateObj.countryCode,
         stateObj.password,
@@ -94,20 +96,25 @@ const Login = () => {
           setUserSession(data);
           pathNavigator('dashboard');
         } else if (data.status === 'not-exists') {
+          hideLoadingSpinner();
           setFormErrorField('You are not registered user', { 'data-error-type': 'NOT_REGISTERED' });
           $('#phone').addClass('is-invalid').removeClass('is-valid');
           $('#password').removeClass('is-invalid');
         } else if (data.status === 'not-valid') {
+          hideLoadingSpinner();
           setFormErrorField(`Incorrect ${stateObj.loginMethod === 'loginWithEmail' ? 'Email address' : 'Phone Number'} or Password`, { 'data-error-type': 'INCORRECT' });
           $(`${stateObj.loginMethod === 'loginWithEmail' ? '#email' : '#phone'}`).addClass('is-invalid').removeClass('is-valid');
           $('#password').addClass('is-invalid').removeClass('is-valid');
         } else if (data.status === 'error' && data.message === 'EMAIL_LOGIN_RESTRICTED') {
+          hideLoadingSpinner();
           setFormErrorField('You are not allowed to login using email. Try mobile login.', { 'data-error-type': data.message });
         } else if (data.status === 'error') {
+          hideLoadingSpinner();
           setFormErrorField('Server Error');
         }
       })
         .catch((error) => {
+          hideLoadingSpinner();
           const errData = JSON.parse(error);
           console.log(errData);
         });

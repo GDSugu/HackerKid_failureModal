@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import $ from 'jquery';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
-import { closeFormError, setFormErrorField } from '../../commonLoginRegisterFunctions';
+import { closeFormError, setFormErrorField, showLoadingSpinner } from '../../commonLoginRegisterFunctions';
 import useOtp from '../../../../../hooks/pages/otp';
 
 const VerifyOtpFormStep = ({
@@ -128,18 +128,20 @@ const VerifyOtpFormStep = ({
       return;
     }
 
+    const hideLoadingSpinner = showLoadingSpinner('.verify-otp-btn');
     verifyOtpRequest(parentStateObj.phoneNumber, parentStateObj.countryCode).then((response) => {
       const data = JSON.parse(response);
-
       if (data.status === 'success') {
         setParentStateObj((prevObj) => ({
           ...prevObj,
           formStep: prevObj.formStep + 1,
         }));
       } else if (data.status === 'error' && data.message === 'OTP_EXPIRED') {
+        hideLoadingSpinner();
         setFormErrorField('Enter a valid OTP', { 'data-error-type': data.message });
       }
     }).catch((err) => {
+      hideLoadingSpinner();
       const errData = JSON.parse(err);
       console.log(errData);
     });
