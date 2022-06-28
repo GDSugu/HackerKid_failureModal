@@ -21,14 +21,17 @@ const HelpType = ({ text, iconPath, label = '' }) => (
 
 const HelpModal = () => (
     <Modal customClass='help-modal' modalTitle='Help' options='hide'>
-    <a href='tel:+919876543221'>
+    <a href='tel:+919876543221' className='help-type-link'>
       <HelpType label='Call' text='9876543221' iconPath='../../../../../images/help-modal/call-icon.svg' />
     </a>
-    <a href='mailto:help@hackerkid.org'>
+    <a href='mailto:help@hackerkid.org' className='help-type-link'>
       <HelpType label='Email' text='help@hackerkid.org' iconPath='../../../../../images/help-modal/email-icon.svg' />
     </a>
-{/* <HelpType text='Open chat now' iconPath='../../../../../images/help-modal/chat-icon.svg' /> */}
+    {/* <HelpType text='Open chat now'
+    iconPath='../../../../../images/help-modal/chat-icon.svg' /> */}
+    {/* <a href='#' className='help-type-link'>
       <HelpType text='FAQ' iconPath='../../../../../images/help-modal/faq-icon.svg' />
+    </a> */}
     </Modal>
 );
 

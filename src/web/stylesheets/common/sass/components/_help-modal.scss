@@ -4,15 +4,22 @@
 .modal.help-modal {
   padding: 0;
 
+  .modal-dialog{
+    max-width: 950px;
+  }
+
   .modal-header {
     border: none;
-    margin-bottom: 2rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    margin-bottom: 0.8rem;
     background-color: gt.theme-var(text-color-11);
     align-items: center;
 
     .close {
       border-radius: 0.3rem;
       padding: 0.3rem 0.8rem;
+      padding-bottom: 0.6rem;
       margin-right: 0.2rem;
       display: inline-block;
       background-color: red;
@@ -25,6 +32,10 @@
     }
   }
 
+  .modal-content{
+    border-radius: 1rem;
+  }
+
   a {
     color: gt.theme-var(text-color-1);
   }
@@ -35,9 +46,13 @@
   }
 }
 
-.help-type-container {
-  width: 100%;
+.help-type-link {
+  display: block;
+  min-width: 75%;
   margin: auto;
+}
+
+.help-type-container {
   border-radius: 0.8rem;
   border: 2px solid gt.theme-var(text-color-11);
   padding: 1.5rem 1.25rem;
@@ -46,16 +61,12 @@
   justify-content: space-between;
   align-items: center;
 
-  @include gm.media-breakpoint-up(sm) {
-    width: 90%;
-  }
-
   label {
     color: gt.theme-var(text-color-5);
   }
 
   .icon {
-    width: 40px;
-    height: 46px;
+    width: 30px;
+    height: 36px;
   }
 }
