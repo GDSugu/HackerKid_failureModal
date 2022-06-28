@@ -61,13 +61,15 @@ const Login = () => {
   const loginMethodTabClickHandler = (e, loginMethodToSet) => {
     setStateObj((prevObj) => ({ ...prevObj, loginMethod: loginMethodToSet }));
 
-    const inputFields = $('form input');
-
     closeFormError(e.target);
+
+    // reset the input fields to original form
+    const inputFields = $('form input');
 
     inputFields.each(function () {
       $(this).val('');
       $(this).removeClass('is-invalid');
+      $(this).attr('placeholder', $(this).attr('data-original-placeholder'));
       const formHelperIdSelector = `#${$(this).attr('id')}-form-helper`;
 
       $(formHelperIdSelector).html('').hide();
