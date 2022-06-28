@@ -1243,15 +1243,16 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {} })
         horizontalLayout: (window.innerWidth < 641 && !xmlBlock.includes('category')) || true,
         maxBlocks,
       });
-      TurtleObj.workspace = workspace;
       const xmlDom = BlocklyObj.Xml.textToDom(
         'submissionDetails' in response
         && response.submissionDetails.xmlWorkSpace
         && response.submissionDetails.xmlWorkSpace !== ''
-          ? response.submissionDetails.xmlWorkSpace
-          : '<xml><block type="turtle_import"></block></xml>',
-      );
+        ? response.submissionDetails.xmlWorkSpace
+        : '<xml><block type="turtle_import"></block></xml>',
+        );
       BlocklyObj.Xml.domToWorkspace(xmlDom, workspace);
+      workspace.addChangeListener();
+      TurtleObj.workspace = workspace;
       // const msg = {
       //   type: 'turtle_import',
       //   caller: 'initializeBlockly',
@@ -1262,6 +1263,41 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {} })
       // window.sendMessage(msg);
     } catch (error) {
       window.ReactNativeWebView.postMessage(`BlocklyObj error:  ${error}`);
+    }
+  };
+
+  TurtleObj.initializeEditor = () => {
+    try {
+      if (!TurtleObj.editor) {
+        const editor = ace.edit('codeBlock');
+        editor.setOptions({
+          fontSize: 16,
+          wrap: true,
+          showGutter: true,
+          showLineNumbers: true,
+          showPrintMargin: false,
+          scrollPastEnd: true,
+        });
+        editor.setTheme('ace/theme/monokai');
+        editor.session.setMode('ace/mode/python');
+        editor.setReadOnly(true);
+        TurtleObj.editor = editor;
+      } else {
+        TurtleObj.editor.setValue('');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  TurtleObj.handleBlocksChange = () => {
+    try {
+      if (TurtleObj.workspace && TurtleObj.editor) {
+        const code = BlocklyObj.Python.workspaceToCode(TurtleObj.workspace);
+        TurtleObj.editor.setValue(code, 1); // 1 moves cursor to the end of the code
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

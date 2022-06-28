@@ -67,19 +67,19 @@ const TurtleQuestion = () => {
                 defaultMessage='{question}'
                 description='Question'
                 values={{
-                  question: turtleContext.questionObject.Question,
+                  question: turtleContext.tqState.questionObject.Question,
                 }}
               />
             </Text>
-            { turtleContext.questionObject.steps
+            { turtleContext.tqState.questionObject.steps
             && <Text style={style.cardContent}>
                 <FormattedMessage
                   defaultMessage='Instructions'
                   description='Instructions'
                 />
               </Text> }
-            { turtleContext.questionObject.steps
-                && turtleContext.questionObject.steps.map(
+            { turtleContext.tqState.questionObject.steps
+                && turtleContext.tqState.questionObject.steps.map(
                   (step, index) => <Text key={index} style={style.problemStatement}>
                     <FormattedMessage
                       defaultMessage={'{step}'}
