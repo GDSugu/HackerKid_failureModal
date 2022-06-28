@@ -35,17 +35,21 @@ const TurtleEditor = () => {
     styleString,
   });
 
+  const handleMessage = (msg) => {
+    console.log(msg);
+  };
+
   React.useEffect(() => {
     setTimeout(() => {
-      if (webViewRef.current && turtleContext.status === 'success') {
-        const initBlockly = `Turtle.initializeBlockly(${JSON.stringify(turtleContext)});`;
+      if (webViewRef.current && turtleContext.tqState.status === 'success') {
+        const initBlockly = `Turtle.initializeBlockly(${JSON.stringify(turtleContext.tqState)});`;
         webViewRef.current.injectJavaScript(initBlockly);
       }
     }, 500);
   }, []);
 
-  // if (turtleContext.status === 'success') {
-  //   const initBlockly = `Turtle.initializeBlockly(${JSON.stringify(turtleContext)});`;
+  // if (turtleContext.tqState.status === 'success') {
+  //   const initBlockly = `Turtle.initializeBlockly(${JSON.stringify(turtleContext.tqState)});`;
   //   webViewRef.current.injectJavaScript(initBlockly);
   // }
 
@@ -57,7 +61,7 @@ const TurtleEditor = () => {
         source={{ html: webViewString }}
         originWhitelist={['*']}
         injectedJavaScript={scriptToInject}
-        onMessage={console.log}
+        onMessage={handleMessage}
         />
     </View>
   </>;

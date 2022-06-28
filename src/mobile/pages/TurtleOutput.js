@@ -35,8 +35,8 @@ const TurtleOutput = () => {
 
   React.useEffect(() => {
     setTimeout(() => {
-      // console.log('turtleContext: ', turtleContext.questionObject.snippet);
-      if (webViewRef.current && turtleContext.status === 'success') {
+      // console.log('turtleContext.tqState: ', turtleContext.tqState.questionObject.snippet);
+      if (webViewRef.current && turtleContext.tqState.status === 'success') {
         const initBlockly = `
         try {
           window.ReactNativeWebView.postMessage('turtle output');
@@ -45,10 +45,10 @@ const TurtleOutput = () => {
             window.execute({
               action: 'runCode',
               data: {
-                snippet: '${JSON.stringify(turtleContext.questionObject.snippet)}',
+                snippet: '${JSON.stringify(turtleContext.tqState.questionObject.snippet)}',
               },
             });
-          /* window.Turtle.runCode('${JSON.stringify(turtleContext.questionObject.snippet)}', 'answerCanvas', true, 3, 0)
+          /* window.Turtle.runCode('${JSON.stringify(turtleContext.tqState.questionObject.snippet)}', 'answerCanvas', true, 3, 0)
              .then(() => {
                window.ReactNativeWebView.postMessage('turtle output success');
                const currentSelector = $('#answerCanvas')[0];

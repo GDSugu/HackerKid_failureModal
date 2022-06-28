@@ -24,7 +24,7 @@ const TurtleMain = () => {
 
   const [currentGameScreen, setCurrentGameScreen] = React.useState('TurtleQuestion');
 
-  const { state: turtleQuestionState } = useTurtleFetchQuestion({
+  const { state: turtleQuestionState, setState: setTurtleQuestionState } = useTurtleFetchQuestion({
     type: 'initialQuestion',
     virtualId: 3,
   });
@@ -57,7 +57,10 @@ const TurtleMain = () => {
         style={style.container}
       >
         <View style={[style.container, { backgroundColor: currentGameScreen === 'TurtleQuestion' ? 'transparent' : theme.utilColors.dark }]}>
-          <TurtleContext.Provider value={turtleQuestionState}>
+          <TurtleContext.Provider value={{
+            tqState: turtleQuestionState,
+            tqSetState: setTurtleQuestionState,
+          }}>
             <GameNavigator
               ScreenArray={TurtleScreenArray}
               currentScreen={{ currentGameScreen, setCurrentGameScreen }} />
