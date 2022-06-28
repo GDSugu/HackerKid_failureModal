@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { closeFormError, setFormErrorField, showLoadingSpinner } from '../../commonLoginRegisterFunctions';
 import useOtp from '../../../../../hooks/pages/otp';
+import '../../../../stylesheets/common/sass/components/_otp.scss';
 
 const VerifyOtpFormStep = ({
   parentStateObj, setParentStateObj, secondaryActionButtons, setBackBtnStateObj,
