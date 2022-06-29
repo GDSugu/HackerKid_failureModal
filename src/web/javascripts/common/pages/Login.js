@@ -94,24 +94,24 @@ const Login = () => {
         stateObj.email).then((response) => {
         const data = JSON.parse(response);
 
+        if (data.status !== 'success') {
+          hideLoadingSpinner();
+        }
+
         if (data.status === 'success') {
           setUserSession(data);
           pathNavigator('dashboard');
         } else if (data.status === 'not-exists') {
-          hideLoadingSpinner();
           setFormErrorField('You are not registered user', { 'data-error-type': 'NOT_REGISTERED' });
           $('#phone').addClass('is-invalid').removeClass('is-valid');
           $('#password').removeClass('is-invalid');
         } else if (data.status === 'not-valid') {
-          hideLoadingSpinner();
           setFormErrorField(`Incorrect ${stateObj.loginMethod === 'loginWithEmail' ? 'Email address' : 'Phone Number'} or Password`, { 'data-error-type': 'INCORRECT' });
           $(`${stateObj.loginMethod === 'loginWithEmail' ? '#email' : '#phone'}`).addClass('is-invalid').removeClass('is-valid');
           $('#password').addClass('is-invalid').removeClass('is-valid');
         } else if (data.status === 'error' && data.message === 'EMAIL_LOGIN_RESTRICTED') {
-          hideLoadingSpinner();
           setFormErrorField('You are not allowed to login using email. Try mobile login.', { 'data-error-type': data.message });
         } else if (data.status === 'error') {
-          hideLoadingSpinner();
           setFormErrorField('Server Error');
         }
       })
