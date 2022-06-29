@@ -11,6 +11,12 @@
       "value": "Create a New Account"
     }
   ],
+  "/itreP": [
+    {
+      "type": 1,
+      "value": "label"
+    }
+  ],
   "0JV99f": [
     {
       "type": 0,
@@ -193,6 +199,12 @@
       "value": "Verify OTP and proceed"
     }
   ],
+  "H2rvzb": [
+    {
+      "type": 0,
+      "value": "Password changed successfully"
+    }
+  ],
   "HAlOn1": [
     {
       "type": 0,
@@ -223,6 +235,12 @@
       "value": "This is challenges page"
     }
   ],
+  "Nn5oAD": [
+    {
+      "type": 0,
+      "value": "Go to login"
+    }
+  ],
   "OdODwS": [
     {
       "type": 0,
@@ -245,12 +263,6 @@
     {
       "type": 0,
       "value": "Re-type Password"
-    }
-  ],
-  "SENRqu": [
-    {
-      "type": 0,
-      "value": "Help"
     }
   ],
   "SL6O2c": [
@@ -343,6 +355,12 @@
       "value": "Login Into Existing Account"
     }
   ],
+  "gHMD5/": [
+    {
+      "type": 1,
+      "value": "modalTitle"
+    }
+  ],
   "gOkIvb": [
     {
       "type": 0,
@@ -359,6 +377,12 @@
     {
       "type": 0,
       "value": "Send OTP"
+    }
+  ],
+  "hphOHh": [
+    {
+      "type": 0,
+      "value": "Help"
     }
   ],
   "hxLhGK": [
@@ -395,6 +419,12 @@
     {
       "type": 0,
       "value": "Parent's Name"
+    }
+  ],
+  "nT6Ql7": [
+    {
+      "type": 1,
+      "value": "text"
     }
   ],
   "of2vJ9": [

@@ -7,6 +7,10 @@
     "defaultMessage": "Create a New Account",
     "description": "create new account button"
   },
+  "/itreP": {
+    "defaultMessage": "{label}",
+    "description": "help type label"
+  },
   "0JV99f": {
     "defaultMessage": "This is index page",
     "description": "Page description"
@@ -122,6 +126,10 @@
     "defaultMessage": "Verify OTP and proceed",
     "description": "verify otp button"
   },
+  "H2rvzb": {
+    "defaultMessage": "Password changed successfully",
+    "description": "Password changed text"
+  },
   "HAlOn1": {
     "defaultMessage": "Name"
   },
@@ -141,6 +149,10 @@
     "defaultMessage": "This is challenges page",
     "description": "Challenges Page"
   },
+  "Nn5oAD": {
+    "defaultMessage": "Go to login",
+    "description": "Go to login button"
+  },
   "OdODwS": {
     "defaultMessage": "Create Account",
     "description": "Create Account button"
@@ -156,9 +168,6 @@
   "RHM1lo": {
     "defaultMessage": "Re-type Password",
     "description": "Re-type Password label"
-  },
-  "SENRqu": {
-    "defaultMessage": "Help"
   },
   "SL6O2c": {
     "defaultMessage": "Password",
@@ -219,6 +228,10 @@
     "defaultMessage": "Login Into Existing Account",
     "description": "Login Into existing account button"
   },
+  "gHMD5/": {
+    "defaultMessage": "{modalTitle}",
+    "description": "modal title"
+  },
   "gOkIvb": {
     "defaultMessage": "Name",
     "description": "Name label"
@@ -230,6 +243,10 @@
   "hJpqIn": {
     "defaultMessage": "Send OTP",
     "description": "send otp button"
+  },
+  "hphOHh": {
+    "defaultMessage": "Help",
+    "description": "help button"
   },
   "hxLhGK": {
     "defaultMessage": "Set Password",
@@ -254,6 +271,10 @@
   "mtXEZg": {
     "defaultMessage": "Parent's Name",
     "description": "Parent's Name label"
+  },
+  "nT6Ql7": {
+    "defaultMessage": "{text}",
+    "description": "help type text"
   },
   "of2vJ9": {
     "defaultMessage": "This is Video page",
