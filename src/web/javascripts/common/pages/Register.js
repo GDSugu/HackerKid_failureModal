@@ -10,12 +10,13 @@ import {
 import '../../../stylesheets/common/pages/register/style.scss';
 import useRegister from '../../../../hooks/pages/register';
 import {
-  togglePasswordVisibility, validateInputOnChange, closeFormError, showLoadingSpinner,
+  togglePasswordVisibility, validateInputOnChange, closeFormError,
 } from '../commonLoginRegisterFunctions';
 import { loginCheck, setUserSession } from '../../../../hooks/common/framework';
 import VerifyOtpFormStep from '../components/VerifyOtpFormStep/VeriyOtpFormStep';
 import useOtp from '../../../../hooks/pages/otp';
 import useBackBtn from '../../../../hooks/pages/back-btn';
+import showInlineLoadingSpinner from '../loader';
 
 const manager = {};
 
@@ -62,7 +63,7 @@ const RegisterFormStepOne = ({
       if (result) return true;
       return false;
     })) {
-      const hideLoadingSpinner = showLoadingSpinner('.next-btn');
+      const hideInlineLoadingSpinner = showInlineLoadingSpinner('.next-btn');
 
       sendOtpRequest(stateObj.phoneNumber, stateObj.countryCode).then((response) => {
         const data = JSON.parse(response);
@@ -72,12 +73,12 @@ const RegisterFormStepOne = ({
             formStep: prevObj.formStep + 1,
           }));
         } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
-          hideLoadingSpinner();
+          hideInlineLoadingSpinner();
           $('#phone').addClass('is-invalid').removeClass('is-valid');
           $('#form-error').text('Account already exists!, try logging in').attr('data-error-type', data.message).show();
         }
       }).catch((err) => {
-        hideLoadingSpinner();
+        hideInlineLoadingSpinner();
         const errData = JSON.parse(err);
         console.log(errData);
       });
@@ -219,7 +220,7 @@ const RegisterFormStepThree = ({
 
     if ((enteredPassword && retypedPassword)) {
       if (enteredPassword === retypedPassword) {
-        const hideLoadingSpinner = showLoadingSpinner('.create-account-btn');
+        const hideInlineLoadingSpinner = showInlineLoadingSpinner('.create-account-btn');
 
         createAccountRequest().then((response) => {
           const data = JSON.parse(response);
@@ -229,10 +230,10 @@ const RegisterFormStepThree = ({
             setUserSession(sessionDetails);
             pathNavigator('dashboard');
           } else if (data.status === 'error') {
-            hideLoadingSpinner();
+            hideInlineLoadingSpinner();
           }
         }).catch((error) => {
-          hideLoadingSpinner();
+          hideInlineLoadingSpinner();
           const errData = JSON.parse(error);
           console.log(errData);
         });

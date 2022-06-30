@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import intlTelInput from 'intl-tel-input';
 import $ from 'jquery';
 import {
-  closeFormError, setFormErrorField, showLoadingSpinner, togglePasswordVisibility,
+  closeFormError, setFormErrorField, togglePasswordVisibility,
   validateInputOnChange,
 } from '../commonLoginRegisterFunctions';
 import 'intl-tel-input/build/css/intlTelInput.css';
@@ -14,6 +14,7 @@ import {
 import '../../../stylesheets/common/pages/login/style.scss';
 import useLoginMethod from '../../../../hooks/pages/login';
 import { setUserSession, loginCheck } from '../../../../hooks/common/framework';
+import showInlineLoadingSpinner from '../loader';
 
 const manager = {};
 
@@ -87,7 +88,7 @@ const Login = () => {
     const password = validate('#password', 'password', 1, '#password-form-helper', null, true);
 
     if (primaryLoginFieldValue && password) {
-      const hideLoadingSpinner = showLoadingSpinner('.login-btn');
+      const hideInlineLoadingSpinner = showInlineLoadingSpinner('.login-btn');
       loginWithPhone(stateObj.phoneNumber,
         stateObj.countryCode,
         stateObj.password,
@@ -95,7 +96,7 @@ const Login = () => {
         const data = JSON.parse(response);
 
         if (data.status !== 'success') {
-          hideLoadingSpinner();
+          hideInlineLoadingSpinner();
         }
 
         if (data.status === 'success') {
@@ -116,7 +117,7 @@ const Login = () => {
         }
       })
         .catch((error) => {
-          hideLoadingSpinner();
+          hideInlineLoadingSpinner();
           const errData = JSON.parse(error);
           console.log(errData);
         });

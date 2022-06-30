@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import $ from 'jquery';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
-import { closeFormError, setFormErrorField, showLoadingSpinner } from '../../commonLoginRegisterFunctions';
+import { closeFormError, setFormErrorField } from '../../commonLoginRegisterFunctions';
 import useOtp from '../../../../../hooks/pages/otp';
 import '../../../../stylesheets/common/sass/components/_otp.scss';
+import showInlineLoadingSpinner from '../../loader';
 
 const VerifyOtpFormStep = ({
   parentStateObj, setParentStateObj, secondaryActionButtons, setBackBtnStateObj,
@@ -129,7 +130,7 @@ const VerifyOtpFormStep = ({
       return;
     }
 
-    const hideLoadingSpinner = showLoadingSpinner('.verify-otp-btn');
+    const hideInlineLoadingSpinner = showInlineLoadingSpinner('.verify-otp-btn');
     verifyOtpRequest(parentStateObj.phoneNumber, parentStateObj.countryCode).then((response) => {
       const data = JSON.parse(response);
       if (data.status === 'success') {
@@ -138,11 +139,11 @@ const VerifyOtpFormStep = ({
           formStep: prevObj.formStep + 1,
         }));
       } else if (data.status === 'error' && data.message === 'OTP_EXPIRED') {
-        hideLoadingSpinner();
+        hideInlineLoadingSpinner();
         setFormErrorField('Enter a valid OTP', { 'data-error-type': data.message });
       }
     }).catch((err) => {
-      hideLoadingSpinner();
+      hideInlineLoadingSpinner();
       const errData = JSON.parse(err);
       console.log(errData);
     });

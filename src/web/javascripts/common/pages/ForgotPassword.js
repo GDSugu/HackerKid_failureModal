@@ -10,11 +10,11 @@ import {
 import '../../../stylesheets/common/pages/forgot-password/style.scss';
 import useForgotPassword from '../../../../hooks/pages/forgot-password';
 import {
-  validateInputOnChange, closeFormError, setFormErrorField,
-  togglePasswordVisibility, showLoadingSpinner,
+  validateInputOnChange, closeFormError, setFormErrorField, togglePasswordVisibility,
 } from '../commonLoginRegisterFunctions';
 import VerifyOtpFormStep from '../components/VerifyOtpFormStep/VeriyOtpFormStep';
 import useBackBtn from '../../../../hooks/pages/back-btn';
+import showInlineLoadingSpinner from '../loader';
 
 const manager = {};
 
@@ -65,7 +65,7 @@ const ForgotPasswordStepOne = ({
     const result = validate('#phone', 'tel', 1, '#phone-form-helper', 'Enter a valida Phone Number');
 
     if (result) {
-      const hideLoadingSpinner = showLoadingSpinner('.send-otp-btn');
+      const hideLoadingSpinner = showInlineLoadingSpinner('.send-otp-btn');
       stepOneRequest().then((response) => {
         const data = JSON.parse(response);
 
@@ -159,7 +159,7 @@ const ForgotPasswordStepThree = ({
       $('#retyped-password').addClass('is-invalid');
     }
     if ((password && retypePassword) && (password === retypePassword)) {
-      const hideLoadingSpinner = showLoadingSpinner('.change-password-btn');
+      const hideInlineLoadingSpinner = showInlineLoadingSpinner('.change-password-btn');
       stepThreeRequest().then((response) => {
         const data = JSON.parse(response);
 
@@ -169,10 +169,10 @@ const ForgotPasswordStepThree = ({
             formStep: 4,
           }));
         } else if (data.status === 'error') {
-          hideLoadingSpinner();
+          hideInlineLoadingSpinner();
         }
       }).catch((error) => {
-        hideLoadingSpinner();
+        hideInlineLoadingSpinner();
         const errData = JSON.parse(error);
         console.log(errData);
       });
