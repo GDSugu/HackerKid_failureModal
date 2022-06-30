@@ -51,6 +51,8 @@ const TurtleQuestion = () => {
   const intl = useIntl();
   const turtleContext = React.useContext(TurtleContext);
 
+  console.log('turtlequestion before jsx');
+
   return <>
     {/* <TurtleContext.Consumer>
       { (value) => <> */}

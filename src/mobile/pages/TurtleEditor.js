@@ -35,14 +35,31 @@ const TurtleEditor = () => {
     styleString,
   });
 
+  console.log('turtleeditor before jsx');
+
   const handleMessage = (msg) => {
-    console.log(msg);
+    const message = JSON.parse(msg.nativeEvent.data);
+    const { action, data } = message;
+
+    switch (action) {
+      case 'code_changed':
+        turtleContext.tqSetState((prevState) => ({
+          ...prevState,
+          snippet: data.snippet,
+        }));
+        console.log(turtleContext.tqState.snippet);
+        break;
+      default: break;
+    }
   };
 
   React.useEffect(() => {
+    console.log('turtle editor useeffect hook');
     setTimeout(() => {
       if (webViewRef.current && turtleContext.tqState.status === 'success') {
-        const initBlockly = `Turtle.initializeBlockly(${JSON.stringify(turtleContext.tqState)});`;
+        const initBlockly = `
+          Turtle.initializeBlockly(${JSON.stringify(turtleContext.tqState)});
+        `;
         webViewRef.current.injectJavaScript(initBlockly);
       }
     }, 500);
