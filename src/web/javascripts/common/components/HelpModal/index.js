@@ -7,11 +7,11 @@ const HelpType = ({ text, iconPath, label = '' }) => (
     <div className='help-type-container'>
     <div className='text'>
       {
-        label && <label className='body-bold'>
+        label && <label className='caption-bold'>
         <FormattedMessage defaultMessage='{label}' description='help type label' values={{ label }}/>
       </label>
       }
-        <p className='subtitle1 m-0'>
+        <p className='caption-bold m-0'>
         <FormattedMessage defaultMessage='{text}' description='help type text' values={{ text }}/>
         </p>
       </div>
