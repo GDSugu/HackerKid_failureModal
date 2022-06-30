@@ -231,7 +231,7 @@ const App = () => {
   return (
     <SafeAreaProvider>
         <StatusBar
-          backgroundColor={screenTheme.navBg}
+          backgroundColor={screenTheme.notificationBg}
         />
         <View style={style.container}>
           <Header route={routeName} navigation={navigationRef}/>

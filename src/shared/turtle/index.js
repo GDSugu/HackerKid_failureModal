@@ -112,14 +112,23 @@ const useSharedTurtleWebView = () => {
 
   const turtleOutputStyle = `
     <style>
+      .outputContainer {
+        overflow: auto;
+        height: 1500px;
+      }
+
       #userCanvas {
-        // background-color: green;
+        width: 100%;
+        transform: scale(7);
+        // background-color: red;
       }
 
       #answerCanvas {
-        // background-color: red;
+        // margin-right: -100%;
         width: 100%;
-        height: 100%;
+        opacity: 0.5;
+        transform: scale(7) translate(-25%, 0);
+        // background-color: lightblue;
       }
 
       body {
@@ -154,14 +163,29 @@ const useSharedTurtleWebView = () => {
 
   const turtleOutputScriptToInject = `
     try {
+      const manager = {
+        windowType: 'desktop',
+        canvasScale: 1.0,
+        drawingVisible: true,
+        debuggingEnabled: false,
+        inDebugging: false,
+        suspension: false,
+      };
+
+      window.ReactNativeWebView.postMessage('poolobj initiating');
+      const pool = workerpool.pool();
+      window.ReactNativeWebView.postMessage('poolobj initiated');
+  
       window.ReactNativeWebView.postMessage('script inject sk execution');
 
-      ${getTurtleOutput1.toString()}
+      ${getTurtleOutput.toString()}
+
+      const { managerObj, poolObj } = getTurtleOutput({ blocklyObj: Blockly, turtleOutputObj: manager, workerPoolObj: pool });
 
       function executeRunCode (data) {
         try {
           window.ReactNativeWebView.postMessage(Object.entries(data).toString());
-          runCode(data.snippet, 'answerCanvas', true, 3, 0)
+          managerObj.runCode(data.snippet, 'answerCanvas', true, 3, 0)
             .then(() => {
               const currentSelector = $('#answerCanvas')[0];
               if (currentSelector && currentSelector.turtleInstance) {
@@ -169,13 +193,14 @@ const useSharedTurtleWebView = () => {
               }
             });
         } catch (err) {
-          window.ReactNativeWebView.postMessage('turtleoutput error: ' + err);
+          window.ReactNativeWebView.postMessage('turtleoutput execute error: ');
+          window.ReactNativeWebView.postMessage(err.message);
         }
       }
 
       window.execute = (payload) => {
-        window.ReactNativeWebView.postMessage('execute payload: ');
-        window.ReactNativeWebView.postMessage(Object.entries(payload).toString());
+        // window.ReactNativeWebView.postMessage('execute payload: ');
+        // window.ReactNativeWebView.postMessage(Object.entries(payload).toString());
         switch (payload.action) {
           case 'runCode':
             window.ReactNativeWebView.postMessage('execute runcode: '); 
@@ -185,7 +210,8 @@ const useSharedTurtleWebView = () => {
         }
       };
     } catch (err) {
-      window.ReactNativeWebView.postMessage('turtleoutput error: ' + err);
+      window.ReactNativeWebView.postMessage('turtleoutput error: ');
+      window.ReactNativeWebView.postMessage(err.message);
     }
   `;
 

@@ -33,6 +33,8 @@ const TurtleOutput = () => {
     styleString,
   });
 
+  console.log('turtleoutput before jsx');
+
   React.useEffect(() => {
     setTimeout(() => {
       // console.log('turtleContext.tqState: ', turtleContext.tqState.questionObject.snippet);
@@ -41,7 +43,7 @@ const TurtleOutput = () => {
         try {
           window.ReactNativeWebView.postMessage('turtle output');
             // window.ReactNativeWebView.postMessage(Object.keys(Sk).toString());
-            // window.ReactNativeWebView.postMessage(Object.keys(managerObj).toString());
+            // window.ReactNativeWebView.postMessage(Object.keys(window).toString());
             window.execute({
               action: 'runCode',
               data: {
@@ -88,7 +90,7 @@ const TurtleOutput = () => {
       // }`;
 
       // webViewRef.current.injectJavaScript(str);
-    }, 3000);
+    }, 0);
     // setTimeout(() => {
     //   const initBlockly = `
     //         window.ReactNativeWebView.postMessage(Object.keys(window).toString());
@@ -121,6 +123,8 @@ const TurtleOutput = () => {
   `;
 
   // console.log(turtleOutputJS);
+  // console.log(webViewString);
+  // console.log(scriptToInject);
 
   return <>
     <View style={style.container}>
@@ -134,7 +138,7 @@ const TurtleOutput = () => {
         // injectedJavaScript={'window.execute({action: "runCode", data: "hello world"})'}
         injectedJavaScript={scriptToInject}
         // injectedJavaScript={jsScript}
-        onMessage={console.log}
+        onMessage={(e) => console.log(e)}
       />
     </View>
   </>;
