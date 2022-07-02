@@ -157,6 +157,7 @@ const ForgotPasswordStepThree = ({
 
     if ((password && retypePassword) && (password !== retypePassword)) {
       $('#retyped-password').addClass('is-invalid');
+      $('#retyped-password-form-helper').text('Password do not match').show();
     }
     if ((password && retypePassword) && (password === retypePassword)) {
       const hideInlineLoadingSpinner = showInlineLoadingSpinner('.change-password-btn');
