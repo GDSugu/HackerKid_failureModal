@@ -61,7 +61,7 @@ const VerifyOtpFormStep = ({
   const keyUpHandler = (e) => {
     const { key, target } = e;
 
-    if (String.fromCharCode(e.keyCode).match(/\w|\d/g)) {
+    if (e.key.match(/\d/g)) {
       const isInputFilled = target.value.length === 1;
 
       if (isInputFilled) {
