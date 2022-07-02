@@ -14,7 +14,7 @@ const getStyles = () => StyleSheet.create({
   },
 });
 
-const TurtleOutput = () => {
+const TurtleOutput = ({ navigation }) => {
   const { theme: { utilColors } } = React.useContext(ThemeContext);
   const style = getStyles(utilColors);
   const { turtleOutput } = useSharedTurtleWebView();
@@ -33,31 +33,40 @@ const TurtleOutput = () => {
     styleString,
   });
 
-  console.log('turtleoutput before jsx');
+  if (navigation.getState().index === 2) {
+    if (webViewRef.current && turtleContext.tqState.status === 'success') {
+      const runTurtle = `
+      try {
+        window.execute({
+          action: 'runCode',
+          data: {
+            snippet: '${JSON.stringify(turtleContext.tqState.snippet)}',
+            canvas: 'userCanvas',
+          },
+        });
+      } catch (err) {
+        window.ReactNativeWebView.postMessage('Script Error on run: ');
+        window.ReactNativeWebView.postMessage(err.message);
+      }`;
+      webViewRef.current.injectJavaScript(runTurtle);
+    }
+  }
 
   React.useEffect(() => {
     setTimeout(() => {
-      // console.log('turtleContext.tqState: ', turtleContext.tqState.questionObject.snippet);
       if (webViewRef.current && turtleContext.tqState.status === 'success') {
         const initBlockly = `
         try {
-          window.ReactNativeWebView.postMessage('turtle output');
+          // window.ReactNativeWebView.postMessage('turtle output');
             // window.ReactNativeWebView.postMessage(Object.keys(Sk).toString());
             // window.ReactNativeWebView.postMessage(Object.keys(window).toString());
             window.execute({
               action: 'runCode',
               data: {
                 snippet: '${JSON.stringify(turtleContext.tqState.questionObject.snippet)}',
+                canvas: 'answerCanvas',
               },
             });
-          /* window.Turtle.runCode('${JSON.stringify(turtleContext.tqState.questionObject.snippet)}', 'answerCanvas', true, 3, 0)
-             .then(() => {
-               window.ReactNativeWebView.postMessage('turtle output success');
-               const currentSelector = $('#answerCanvas')[0];
-               if (currentSelector && currentSelector.turtleInstance) {
-                 currentSelector.turtleInstance.update();
-               }
-             }); */
         } catch (err) {
           window.ReactNativeWebView.postMessage('Script Error: ');
           window.ReactNativeWebView.postMessage(err.message);
@@ -121,10 +130,6 @@ const TurtleOutput = () => {
           });
       });
   `;
-
-  // console.log(turtleOutputJS);
-  // console.log(webViewString);
-  // console.log(scriptToInject);
 
   return <>
     <View style={style.container}>

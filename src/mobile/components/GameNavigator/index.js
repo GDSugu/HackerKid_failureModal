@@ -187,6 +187,7 @@ const GameNavigator = ({ currentScreen, ScreenArray }) => {
         />
         <BottomTab.Navigator
       initialRouteName='TurtleQuestion'
+      detachInactiveScreens={false}
       tabBar={
         (props) => <GameBottomTabBar
           {...props}
