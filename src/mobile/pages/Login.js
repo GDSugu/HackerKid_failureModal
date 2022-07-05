@@ -103,14 +103,14 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
 
 const Login = ({ navigation }) => {
   const { font, theme } = React.useContext(ThemeContext);
-  const { state, setState, loginWithPhone } = useLoginMethod();
+  const { stateObj, setState, loginWithPhone } = useLoginMethod();
   const screenTheme = theme.screenLogin;
   const style = getStyles(screenTheme, theme.utilColors, font);
 
   const loginWithPhoneTabStyle = [style.loginMethodTab];
   const loginWithPhoneTextStyle = [style.loginMethodTabText];
 
-  if (state.loginMethod === 'loginWithPhone') {
+  if (stateObj.loginMethod === 'loginWithPhone') {
     loginWithPhoneTabStyle.push(style.loginMethodTabActive);
     loginWithPhoneTextStyle.push(style.loginMethodTabTextActive);
   }
@@ -118,7 +118,7 @@ const Login = ({ navigation }) => {
   const loginWithEmailTabStyle = [style.loginMethodTab];
   const loginWithEmailTextStyle = [style.loginMethodTabText];
 
-  if (state.loginMethod === 'loginWithEmail') {
+  if (stateObj.loginMethod === 'loginWithEmail') {
     loginWithEmailTabStyle.push(style.loginMethodTabActive);
     loginWithEmailTextStyle.push(style.loginMethodTabTextActive);
   }
@@ -131,8 +131,7 @@ const Login = ({ navigation }) => {
   };
 
   const loginBtnClickHandler = () => {
-    console.log(state);
-    loginWithPhone(state.phoneNumber, '+91', state.password).then((response) => {
+    loginWithPhone(stateObj.phoneNumber, '+91', stateObj.password).then((response) => {
       const data = JSON.parse(response);
       console.log(data);
       if (data.status === 'success') {
@@ -168,7 +167,7 @@ const Login = ({ navigation }) => {
           </TouchableOpacity>
           </View>
           {
-            (state.loginMethod === 'loginWithPhone')
+            (stateObj.loginMethod === 'loginWithPhone')
               ? <View style={style.labelAndInputContainer}>
                 <Text style={style.label}>
               <FormattedMessage

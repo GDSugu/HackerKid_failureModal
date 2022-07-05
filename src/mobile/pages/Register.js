@@ -11,7 +11,8 @@ import {
 } from 'react-native';
 import ThemeContext from '../components/theme';
 import RegisterFormSvg from '../../images/register/register-form-svg.svg';
-import useRegisterFormStep from '../../hooks/pages/register/index';
+import useRegister from '../../hooks/pages/register/index';
+import useBackBtn from '../../hooks/pages/back-btn';
 import Icon from '../common/Icons';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
@@ -127,128 +128,176 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
 });
 
 const RegisterFormStepOne = ({
-  style, currentStep, setCurrentStep, theme, font,
-}) => (
+  style, theme, font, stateObj, setStateObj, setBackBtnStateObj, handleStateChange,
+}) => {
+  useEffect(() => {
+    setBackBtnStateObj((prevObj) => ({
+      ...prevObj,
+      showBackBtn: false,
+    }));
+  }, []);
+
+  return (
     <View style={style.container}>
-      <KeyboardAvoidingView>
-      <View style={style.labelAndInputContainer}>
-        <Text style={style.label}>
-          <FormattedMessage
-              defaultMessage='Phone'
-              description='Phone label'
-          />
-        </Text>
-        <TextInput
-          style={style.inputField}
-            multiline={false}
-            disableFullscreenUI = {true}
-        />
-      </View>
-      <View style={style.labelAndInputContainer}>
-        <Text style={style.label}>
-          <FormattedMessage
-            defaultMessage='Email'
-            description='Email label'
-          />
-        </Text>
-        <TextInput
-          disableFullscreenUI = {true}
-          secureTextEntry={true}
-          style={style.inputField}
-          multiline={false} />
-      </View>
-      <View style={style.labelAndInputContainer}>
-        <Text style={style.label}>
-          <FormattedMessage
-            defaultMessage='Name'
-            description='Name label'
-          />
-        </Text>
-        <TextInput
-          disableFullscreenUI = {true}
-          style={style.inputField}
-          multiline={false} />
-      </View>
-      <View style={style.labelAndInputContainer}>
+    <KeyboardAvoidingView>
+    <View style={style.labelAndInputContainer}>
       <Text style={style.label}>
         <FormattedMessage
-          defaultMessage="Parent's Name"
-          description="Parent's Name label"
+            defaultMessage='Phone'
+            description='Phone label'
+        />
+      </Text>
+      <TextInput
+            style={style.inputField}
+            multiline={false}
+            disableFullscreenUI={true}
+            value={stateObj.phoneNumber}
+            keyboardType={'number-pad'}
+            onChangeText={ (value) => handleStateChange('phoneNumber', value)}
+      />
+    </View>
+    <View style={style.labelAndInputContainer}>
+      <Text style={style.label}>
+        <FormattedMessage
+          defaultMessage='Email'
+          description='Email label'
         />
       </Text>
       <TextInput
         disableFullscreenUI = {true}
         style={style.inputField}
-        multiline={false} />
+        multiline={false}
+        value={stateObj.email}
+        onChangeText={ (value) => handleStateChange('email', value)}
+      />
     </View>
-      </KeyboardAvoidingView>
-      <View>
-        <TouchableOpacity
-            style={[style.btnPrimary, style.nextBtn]}
-            title="Next"
-            onPress={() => setCurrentStep(currentStep + 1) }>
-          <Text style={[style.btnPrimaryText, style.nextBtnText]}>
-            <FormattedMessage defaultMessage='Next' description='Next Button' />
-        </Text>
-        <Icon
-                name='chevron-right'
-                type='FontAwesome'
-                size={font.bodyBold.fontSize}
-                color={theme.utilColors.white}
-            />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={style.loginIntoExistingAccount}>Login into Existing Account</Text>
-        </TouchableOpacity>
-      </View>
+    <View style={style.labelAndInputContainer}>
+      <Text style={style.label}>
+        <FormattedMessage
+          defaultMessage='Name'
+          description='Name label'
+        />
+      </Text>
+      <TextInput
+            disableFullscreenUI={true}
+            style={style.inputField}
+            multiline={false}
+            value={stateObj.fullName}
+            onChangeText={(value) => handleStateChange('fullName', value)}
+      />
+    </View>
+    <View style={style.labelAndInputContainer}>
+    <Text style={style.label}>
+      <FormattedMessage
+        defaultMessage="Parent's Name"
+        description="Parent's Name label"
+      />
+    </Text>
+    <TextInput
+        disableFullscreenUI={true}
+        style={style.inputField}
+        multiline={false}
+        value={stateObj.parentName}
+        onChangeText={(value) => handleStateChange('parentName', value)}
+      />
   </View>
-);
+    </KeyboardAvoidingView>
+    <View>
+      <TouchableOpacity
+          style={[style.btnPrimary, style.nextBtn]}
+          title="Next"
+          onPress={() => {
+            setStateObj((prevObj) => ({
+              ...prevObj,
+              formStep: prevObj.formStep + 1,
+            }));
+          }}>
+        <Text style={[style.btnPrimaryText, style.nextBtnText]}>
+          <FormattedMessage defaultMessage='Next' description='Next Button' />
+      </Text>
+      <Icon
+              name='chevron-right'
+              type='FontAwesome'
+              size={font.bodyBold.fontSize}
+              color={theme.utilColors.white}
+          />
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Text style={style.loginIntoExistingAccount}>Login into Existing Account</Text>
+      </TouchableOpacity>
+    </View>
+</View>
+  );
+};
 
 const RegisterFormStepTwo = ({
-  style, currentStep, setCurrentStep,
-}) => (
-  <View style={ style.container }>
+  style, theme, font, stateObj, setStateObj, setBackBtnStateObj, handleStateChange,
+}) => {
+  useEffect(() => {
+    setBackBtnStateObj((prevBackObj) => ({
+      ...prevBackObj,
+      showBackBtn: true,
+      backFn: () => {
+        setStateObj((prevObj) => ({
+          ...prevObj,
+          formStep: prevObj.formStep - 1,
+        }));
+      },
+    }));
+  }, []);
+
+  return (
+  <View style={style.container}>
     <KeyboardAvoidingView >
       <View style={style.labelAndOtpFields}>
         <Text style={[style.label, style.otpLabel]}>
           <FormattedMessage
-              defaultMessage='OTP'
-              description='OTP label'
+            defaultMessage='OTP'
+            description='OTP label'
           />
         </Text>
-        <View style={ style.otpFields }>
-          <TextInput style={ [style.inputField, style.otpField] }/>
-          <TextInput style={ [style.inputField, style.otpField] }/>
-          <TextInput style={ [style.inputField, style.otpField] }/>
-          <TextInput style={ [style.inputField, style.otpField] }/>
-          <TextInput style={ [style.inputField, style.otpField] }/>
-          <TextInput style={ [style.inputField, style.otpField] }/>
+        <View style={style.otpFields}>
+          <TextInput style={[style.inputField, style.otpField]} />
+          <TextInput style={[style.inputField, style.otpField]} />
+          <TextInput style={[style.inputField, style.otpField]} />
+          <TextInput style={[style.inputField, style.otpField]} />
         </View>
         <TouchableOpacity style={{ marginBottom: 20 }}>
-          <Text style={style.loginIntoExistingAccount}>NOT 9845213459?</Text>
+            <Text style={style.loginIntoExistingAccount}>
+              <FormattedMessage
+                defaultMessage='Not {phone} ?'
+                description="not button"
+                values={{
+                  phone: stateObj.phoneNumber,
+                }}
+              />
+            </Text>
         </TouchableOpacity>
       </View>
       <View>
         <TouchableOpacity
-            style={style.btnPrimary}
-           title="Verify OTP and proceed"
-            onPress={() => setCurrentStep(currentStep + 1)}>
+          style={style.btnPrimary}
+          title="Verify OTP and proceed"
+            onPress={
+              () => setStateObj((prevObj) => ({ ...prevObj, formStep: prevObj.formStep + 1 }))
+            }>
           <Text style={style.btnPrimaryText}>
-            <FormattedMessage defaultMessage='Verify OTP and proceed' description='Verify OTP and proceed Button'/>
+            <FormattedMessage defaultMessage='Verify OTP and proceed' description='Verify OTP and proceed Button' />
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-            style={style.btnOutlinePrimary}
+          style={style.btnOutlinePrimary}
           title="Login into existing account"
         >
           <Text style={style.btnOutlinePrimaryText}>
-            <FormattedMessage defaultMessage='Login into existing account' description='Login into existing account button'/>
+            <FormattedMessage defaultMessage='Login into existing account' description='Login into existing account button' />
           </Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   </View>
-);
+  );
+};
 
 const RegisterFormStepThree = ({ style }) => (
     <View style={style.container}>
@@ -294,46 +343,72 @@ const RegisterFormStepThree = ({ style }) => (
 );
 
 const Register = () => {
-  const [currentStep, setCurrentStep] = useRegisterFormStep(1);
+  const { stateObj, setStateObj, createAccountRequest } = useRegister();
+  const { stateObj: backBtnStateObj, setStateObj: setBackBtnStateObj } = useBackBtn();
+
   const { font, theme } = React.useContext(ThemeContext);
   const screenTheme = theme.screenLogin;
   const style = getStyles(screenTheme, theme.utilColors, font);
 
-  const backBtnStyle = currentStep > 1 ? style.show : style.hide;
+  const backBtnStyle = backBtnStateObj.showBackBtn ? style.show : style.hide;
+
+  const handleStateChange = (key, value) => {
+    setStateObj((prevObj) => {
+      const newObj = {
+        ...prevObj,
+        [key]: value,
+      };
+
+      return newObj;
+    });
+  };
 
   return (
     <ScrollView style={{ flex: 1 }}>
       <View style={style.formHeadingAndBackBtn}>
-        <TouchableOpacity style={ backBtnStyle } onPress={() => setCurrentStep(currentStep - 1)}>
-          <Icon name={'arrow-left'} type='FontAwesome' size={font.heading6.fontSize} color={ theme.utilColors.dark }/>
-        </TouchableOpacity>
-        <Text style={style.createAccountHeading}>
-          <FormattedMessage defaultMessage={'Create a New Account'} description='Create Account Heading'/>
-        </Text>
+        <View style={{ flex: 0.1 } }>
+          <TouchableOpacity style={backBtnStyle} onPress={backBtnStateObj.backFn}>
+            <Icon name={'arrow-left'} type='FontAwesome' size={font.heading6.fontSize} color={ theme.utilColors.dark }/>
+          </TouchableOpacity>
+        </View>
+        <View style={{ flex: 0.9 }}>
+          <Text style={style.createAccountHeading}>
+            <FormattedMessage defaultMessage={'Create a New Account'} description='Create Account Heading'/>
+          </Text>
+        </View>
         </View>
         <View style={style.registerFormSvgContainer}>
           <RegisterFormSvg/>
         </View>
       {
-        ((currentStep === 1)
+        ((stateObj.formStep === 1)
           && <RegisterFormStepOne
-            style={style}
+          style={style}
           theme={theme}
           font={font}
-            currentStep={currentStep}
-            setCurrentStep={setCurrentStep} />)
-        || ((currentStep === 2)
+          stateObj={stateObj}
+          setStateObj={setStateObj}
+          setBackBtnStateObj={setBackBtnStateObj}
+          handleStateChange = {handleStateChange}
+          />)
+        || ((stateObj.formStep === 2)
           && <RegisterFormStepTwo
-          style={style}
-          theme={ theme }
-            currentStep={currentStep}
-            setCurrentStep={setCurrentStep} />)
-        || ((currentStep === 3)
+          s style={style}
+          theme={theme}
+          font={font}
+          stateObj={stateObj}
+          setStateObj={setStateObj}
+          setBackBtnStateObj={ setBackBtnStateObj } />)
+        || ((stateObj.formStep === 3)
           && <RegisterFormStepThree
-              style={style}
-              theme={ theme }
-              currentStep={currentStep}
-              setCurrentStep={setCurrentStep} />)
+          style={style}
+          theme={theme}
+          font={font}
+          stateObj={stateObj}
+          setStateObj={setStateObj}
+          setBackBtnStateObj={setBackBtnStateObj}
+          createAccountRequest={ createAccountRequest }
+          />)
       }
       </ScrollView>
   );
