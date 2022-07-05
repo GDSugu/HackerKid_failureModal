@@ -16,7 +16,7 @@ const getStyles = () => StyleSheet.create({
 
 const TurtleOutput = ({ navigation }) => {
   const { theme: { utilColors } } = React.useContext(ThemeContext);
-  const style = getStyles(utilColors);
+  const style = getStyles(utilColors);S
   const { turtleOutput } = useSharedTurtleWebView();
   const webViewRef = React.useRef(null);
   let webViewString = '';
@@ -41,7 +41,6 @@ const TurtleOutput = ({ navigation }) => {
           action: 'runCode',
           data: {
             snippet: '${JSON.stringify(turtleContext.tqState.snippet)}',
-            canvas: 'userCanvas',
           },
         });
       } catch (err) {
@@ -57,14 +56,10 @@ const TurtleOutput = ({ navigation }) => {
       if (webViewRef.current && turtleContext.tqState.status === 'success') {
         const initBlockly = `
         try {
-          // window.ReactNativeWebView.postMessage('turtle output');
-            // window.ReactNativeWebView.postMessage(Object.keys(Sk).toString());
-            // window.ReactNativeWebView.postMessage(Object.keys(window).toString());
             window.execute({
-              action: 'runCode',
+              action: 'renderTurtle',
               data: {
                 snippet: '${JSON.stringify(turtleContext.tqState.questionObject.snippet)}',
-                canvas: 'answerCanvas',
               },
             });
         } catch (err) {
@@ -99,7 +94,7 @@ const TurtleOutput = ({ navigation }) => {
       // }`;
 
       // webViewRef.current.injectJavaScript(str);
-    }, 0);
+    }, 1000);
     // setTimeout(() => {
     //   const initBlockly = `
     //         window.ReactNativeWebView.postMessage(Object.keys(window).toString());

@@ -33,11 +33,8 @@ const useSharedTurtleWebView = () => {
           window.ReactNativeWebView.postMessage('blockinit msg send: ' + err);
         }
       };
-      // window.ReactNativeWebView.postMessage('blockinit msg send: start');
       ${getBlockly.toString()}
-      // window.ReactNativeWebView.postMessage('blockinit msg send: imported');
       const { BlocklyObj, TurtleObj } = getBlockly({ blocklyObj: Blockly });
-      // window.ReactNativeWebView.postMessage('blockinit msg send: success');
       Blockly = BlocklyObj;
       window.Turtle = TurtleObj;
       window.sendMessage({ type: 'blockinit', status: 'success' });
@@ -114,21 +111,22 @@ const useSharedTurtleWebView = () => {
     <style>
       .outputContainer {
         overflow: auto;
-        height: 1500px;
+        height: 420px;
+        background-color: #fff;
+        display: flex;
       }
 
       #userCanvas {
         width: 100%;
-        transform: scale(7);
-        // background-color: red;
+        transform: scale(7) translate(-25%, 0);
+        background-color: transparent;
       }
 
       #answerCanvas {
-        // margin-right: -100%;
         width: 100%;
         opacity: 0.5;
+        background-image: radial-gradient(red, green, blue);
         transform: scale(7) translate(-25%, 0);
-        // background-color: lightblue;
       }
 
       body {
@@ -172,9 +170,7 @@ const useSharedTurtleWebView = () => {
         suspension: false,
       };
 
-      window.ReactNativeWebView.postMessage('poolobj initiating');
       const pool = workerpool.pool();
-      window.ReactNativeWebView.postMessage('poolobj initiated');
   
       window.ReactNativeWebView.postMessage('script inject sk execution');
 
@@ -182,12 +178,12 @@ const useSharedTurtleWebView = () => {
 
       const { managerObj, poolObj } = getTurtleOutput({ blocklyObj: Blockly, turtleOutputObj: manager, workerPoolObj: pool });
 
-      function executeRunCode (data) {
+      function executeRunCode(data) {
         try {
           window.ReactNativeWebView.postMessage(Object.entries(data).toString());
-          managerObj.runCode(data.snippet, 'answerCanvas', true, 3, 0)
+          managerObj.runCode(data.snippet, data.canvas, true, 3, 0)
             .then(() => {
-              const currentSelector = $('#answerCanvas')[0];
+              const currentSelector = $('#' + data.canvas)[0];
               if (currentSelector && currentSelector.turtleInstance) {
                 currentSelector.turtleInstance.update();
               }
@@ -198,12 +194,18 @@ const useSharedTurtleWebView = () => {
         }
       }
 
-      window.execute = (payload) => {
-        // window.ReactNativeWebView.postMessage('execute payload: ');
-        // window.ReactNativeWebView.postMessage(Object.entries(payload).toString());
+      window.execute = function (payload) {
+        window.ReactNativeWebView.postMessage('execute payload: ');
+        window.ReactNativeWebView.postMessage(Object.entries(payload).toString());
         switch (payload.action) {
+          case 'renderTurtle':
+            window.ReactNativeWebView.postMessage('execute renderTurtle: '); 
+            payload.data.canvas = 'answerCanvas';
+            executeRunCode(payload.data);
+            break;
           case 'runCode':
             window.ReactNativeWebView.postMessage('execute runcode: '); 
+            payload.data.canvas = 'userCanvas';
             executeRunCode(payload.data);
             break;
           default: break;
