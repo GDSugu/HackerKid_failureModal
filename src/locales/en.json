@@ -425,6 +425,10 @@
     "defaultMessage": "Leaderboard Rank",
     "description": "leaderboard rank heading"
   },
+  "c8cENG": {
+    "defaultMessage": "Share",
+    "description": "Turtle Output Share Button"
+  },
   "c9n6Sh": {
     "defaultMessage": "School"
   },

@@ -98,6 +98,7 @@ const utilColors = {
   shadowColor1: '#F9A826',
   shadowColor2: '#FFE8B6',
   black: '#000000',
+  transparent: 'transparent',
 };
 
 module.exports = {

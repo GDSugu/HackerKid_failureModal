@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import WebView from 'react-native-webview';
 import ThemeContext from '../components/theme';
 import webViewElement from '../components/WebView';
-import { TurtleContext } from '../../hooks/pages/turtle';
+import { TurtleContext, useTurtleValidation } from '../../hooks/pages/turtle';
 import { useSharedTurtleWebView } from '../../shared/turtle';
 
 const getStyles = (utils) => StyleSheet.create({
@@ -20,6 +20,7 @@ const TurtleEditor = () => {
   const { theme: { utilColors } } = React.useContext(ThemeContext);
   const style = getStyles(utilColors);
   const { blocklyWorkspace } = useSharedTurtleWebView();
+  const { setState } = useTurtleValidation();
   const webViewRef = React.useRef(null);
   let webViewString = '';
 
@@ -35,26 +36,30 @@ const TurtleEditor = () => {
     styleString,
   });
 
-  console.log('turtleeditor before jsx');
-
   const handleMessage = (msg) => {
-    const message = JSON.parse(msg.nativeEvent.data);
-    const { action, data } = message;
+    try {
+      const message = JSON.parse(msg.nativeEvent.data);
+      console.log(message);
+      const { action, data } = message;
 
-    switch (action) {
-      case 'code_changed':
-        turtleContext.tqSetState((prevState) => ({
-          ...prevState,
-          snippet: data.snippet,
-        }));
-        console.log(turtleContext.tqState.snippet);
-        break;
-      default: break;
+      switch (action) {
+        case 'code_changed':
+          console.log(data);
+          turtleContext.tqSetState((prevState) => ({
+            ...prevState,
+            snippet: data.snippet,
+            xmlWorkSpace: data.workspace,
+          }));
+          // console.log(turtleContext.tqState.snippet);
+          break;
+        default: break;
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
   React.useEffect(() => {
-    console.log('turtle editor useeffect hook');
     setTimeout(() => {
       if (webViewRef.current && turtleContext.tqState.status === 'success') {
         const initBlockly = `
@@ -62,7 +67,7 @@ const TurtleEditor = () => {
         `;
         webViewRef.current.injectJavaScript(initBlockly);
       }
-    }, 500);
+    }, 1000);
   }, []);
 
   // if (turtleContext.tqState.status === 'success') {

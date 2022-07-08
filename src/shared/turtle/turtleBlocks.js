@@ -1239,7 +1239,7 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {}, a
           snap: true,
         },
         zoom: {
-          startScale: 3.0,
+          startScale: 3,
         },
         horizontalLayout: (window.innerWidth < 641 && !xmlBlock.includes('category')) || true,
         maxBlocks,
@@ -1300,6 +1300,8 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {}, a
           action: 'code_changed',
           data: {
             snippet: code,
+            workspace: BlocklyObj.Xml.domToText(BlocklyObj.Xml.workspaceToDom(TurtleObj.workspace)),
+            // qId: TurtleObj.initialResponse.questionObject.question_id,
           },
         };
         window.ReactNativeWebView.postMessage(JSON.stringify(outputMsg));
@@ -1488,8 +1490,6 @@ const getTurtleOutput = (
   managerObj.runCode = (
     code, target, animate = true, frames = 1, delay = 0, respectDebugger = false,
   ) => {
-    // window.ReactNativeWebView.postMessage(`script runcode sk, ${code}`);
-    // window.ReactNativeWebView.postMessage(Object.keys(Sk).toString());
     let attachDebugger = false;
     try {
       code = code.replace(/^"|"$/g, '');
@@ -1504,7 +1504,6 @@ const getTurtleOutput = (
         killableWhile: true,
         killableFor: true,
       });
-      window.ReactNativeWebView.postMessage('skulpt configured');
       (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = target;
       Sk.TurtleGraphics.bufferSize = 1000;
       const width = 1500;
@@ -1544,10 +1543,9 @@ const getTurtleOutput = (
           return false;
         },
       };
-      window.ReactNativeWebView.postMessage('skulpt imported');
     } catch (error) {
       window.ReactNativeWebView.postMessage('script runcode error');
-      // window.ReactNativeWebView.postMessage(error);
+      window.ReactNativeWebView.postMessage(error.message);
     }
     return Sk.misceval.asyncToPromise(() => Sk.importMainWithBody('<stdin>', false, code, true), attachDebugger);
   };
