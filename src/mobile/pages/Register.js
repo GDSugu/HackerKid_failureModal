@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
   View,
@@ -14,6 +14,7 @@ import RegisterFormSvg from '../../images/register/register-form-svg.svg';
 import useRegister from '../../hooks/pages/register/index';
 import useBackBtn from '../../hooks/pages/back-btn';
 import Icon from '../common/Icons';
+import { validate } from '../common/framework';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
@@ -40,6 +41,13 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     borderRadius: 8,
     padding: 8,
     color: 'black',
+    ...font.bodyBold,
+  },
+  errorField: {
+    borderColor: 'red',
+  },
+  errorLabel: {
+    color: 'red',
     ...font.bodyBold,
   },
   btnPrimary: {
@@ -125,10 +133,17 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     flex: 1,
     paddingHorizontal: 18,
   },
+  labelAndFormHelperContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'space-between',
+  },
 });
 
 const RegisterFormStepOne = ({
   style, theme, font, stateObj, setStateObj, setBackBtnStateObj, handleStateChange,
+  errorStateObj, setError,
 }) => {
   useEffect(() => {
     setBackBtnStateObj((prevObj) => ({
@@ -137,68 +152,142 @@ const RegisterFormStepOne = ({
     }));
   }, []);
 
+  const nextBtnPressHandler = () => {
+    const obj = {
+      phoneNumber: {
+        type: 'tel',
+        typeName: 'Phone Number',
+      },
+      email: {
+        type: 'email',
+        typeName: 'Email',
+      },
+      fullName: {
+        type: 'name',
+        typeName: 'Name',
+      },
+      parentName: {
+        type: 'name',
+        typeName: "Parent's Name",
+      },
+    };
+
+    const resultArr = [];
+    Object.keys(obj).forEach((key) => {
+      const result = validate(obj[key].type, stateObj[key], obj[key].typeName, setError, key);
+
+      resultArr.push(result);
+    });
+
+    if (resultArr.every((result) => {
+      if (result) return true;
+      return false;
+    })) {
+      setStateObj((prevObj) => ({
+        ...prevObj,
+        formStep: prevObj.formStep + 1,
+      }));
+    }
+  };
+
   return (
     <View style={style.container}>
     <KeyboardAvoidingView>
     <View style={style.labelAndInputContainer}>
-      <Text style={style.label}>
-        <FormattedMessage
-            defaultMessage='Phone'
-            description='Phone label'
-        />
-      </Text>
+      <View style={style.labelAndFormHelperContainer}>
+        <Text style={style.label}>
+          <FormattedMessage
+              defaultMessage='Phone'
+              description='Phone label'
+          />
+        </Text>
+        <Text style={style.errorLabel}>
+          {errorStateObj.phoneNumber}
+        </Text>
+      </View>
       <TextInput
-            style={style.inputField}
+            style={(!errorStateObj.phoneNumber)
+              ? style.inputField : { ...style.inputField, ...style.errorField }}
             multiline={false}
             disableFullscreenUI={true}
             value={stateObj.phoneNumber}
             keyboardType={'number-pad'}
-            onChangeText={ (value) => handleStateChange('phoneNumber', value)}
+            onChangeText={(value) => {
+              handleStateChange('phoneNumber', value);
+              validate('tel', value, 'Phone Number', setError, 'phoneNumber');
+            }}
       />
     </View>
     <View style={style.labelAndInputContainer}>
-      <Text style={style.label}>
-        <FormattedMessage
-          defaultMessage='Email'
-          description='Email label'
-        />
-      </Text>
+      <View style={style.labelAndFormHelperContainer}>
+        <Text style={style.label}>
+          <FormattedMessage
+            defaultMessage='Email'
+            description='Email label'
+          />
+        </Text>
+        <Text style={style.errorLabel}>
+          {errorStateObj.email}
+        </Text>
+      </View>
       <TextInput
         disableFullscreenUI = {true}
-        style={style.inputField}
+        style={(!errorStateObj.email)
+          ? style.inputField : { ...style.inputField, ...style.errorField }}
         multiline={false}
         value={stateObj.email}
-        onChangeText={ (value) => handleStateChange('email', value)}
+        onChangeText={(value) => {
+          handleStateChange('email', value);
+          validate('email', value, 'Email', setError, 'email', 'Enter a valid Email address');
+        }}
       />
     </View>
     <View style={style.labelAndInputContainer}>
-      <Text style={style.label}>
-        <FormattedMessage
-          defaultMessage='Name'
-          description='Name label'
-        />
-      </Text>
+      <View style={style.labelAndFormHelperContainer}>
+        <Text style={style.label}>
+          <FormattedMessage
+            defaultMessage='Name'
+            description='Name label'
+          />
+        </Text>
+        <Text style={style.errorLabel}>
+          {errorStateObj.fullName}
+        </Text>
+      </View>
       <TextInput
             disableFullscreenUI={true}
-            style={style.inputField}
+            style={!(errorStateObj.fullName)
+              ? style.inputField : { ...style.inputField, ...style.errorField }}
             multiline={false}
             value={stateObj.fullName}
-            onChangeText={(value) => handleStateChange('fullName', value)}
+            onChangeText={(value) => {
+              handleStateChange('fullName', value);
+              validate('name', value, 'Name', setError, 'fullName');
+            }}
       />
     </View>
     <View style={style.labelAndInputContainer}>
-    <Text style={style.label}>
-      <FormattedMessage
-        defaultMessage="Parent's Name"
-        description="Parent's Name label"
-      />
-    </Text>
+      <View style={style.labelAndFormHelperContainer}>
+        <Text style={style.label}>
+          <FormattedMessage
+            defaultMessage="Parent's Name"
+            description="Parent's Name label"
+          />
+        </Text>
+        <Text style={style.errorLabel}>
+          {errorStateObj.parentName}
+        </Text>
+      </View>
     <TextInput
         disableFullscreenUI={true}
-        style={style.inputField}
+        style={!(errorStateObj.parentName)
+          ? style.inputField : { ...style.inputField, ...style.errorField }}
         multiline={false}
         value={stateObj.parentName}
-        onChangeText={(value) => handleStateChange('parentName', value)}
+            onChangeText={(value) => {
+              handleStateChange('parentName', value);
+              validate('name', value, "Parent's Name", setError, 'parentName');
+            }}
       />
   </View>
     </KeyboardAvoidingView>
@@ -206,12 +295,7 @@ const RegisterFormStepOne = ({
       <TouchableOpacity
           style={[style.btnPrimary, style.nextBtn]}
           title="Next"
-          onPress={() => {
-            setStateObj((prevObj) => ({
-              ...prevObj,
-              formStep: prevObj.formStep + 1,
-            }));
-          }}>
+          onPress={nextBtnPressHandler}>
         <Text style={[style.btnPrimaryText, style.nextBtnText]}>
           <FormattedMessage defaultMessage='Next' description='Next Button' />
       </Text>
@@ -231,7 +315,7 @@ const RegisterFormStepOne = ({
 };
 
 const RegisterFormStepTwo = ({
-  style, theme, font, stateObj, setStateObj, setBackBtnStateObj, handleStateChange,
+  style, stateObj, setStateObj, setBackBtnStateObj, navigation,
 }) => {
   useEffect(() => {
     setBackBtnStateObj((prevBackObj) => ({
@@ -244,6 +328,14 @@ const RegisterFormStepTwo = ({
         }));
       },
     }));
+
+    navigation.addListener('beforeRemove', (e) => {
+      e.preventDefault();
+      setStateObj((prevObj) => ({
+        ...prevObj,
+        formStep: prevObj.formStep - 1,
+      }));
+    });
   }, []);
 
   return (
@@ -342,9 +434,15 @@ const RegisterFormStepThree = ({ style }) => (
   </View>
 );
 
-const Register = () => {
+const Register = ({ navigation }) => {
   const { stateObj, setStateObj, createAccountRequest } = useRegister();
   const { stateObj: backBtnStateObj, setStateObj: setBackBtnStateObj } = useBackBtn();
+  const [errorStateObj, setError] = useState({
+    phoneNumber: '',
+    email: '',
+    fullName: '',
+    parentName: '',
+  });
 
   const { font, theme } = React.useContext(ThemeContext);
   const screenTheme = theme.screenLogin;
@@ -389,7 +487,9 @@ const Register = () => {
           stateObj={stateObj}
           setStateObj={setStateObj}
           setBackBtnStateObj={setBackBtnStateObj}
-          handleStateChange = {handleStateChange}
+          handleStateChange={handleStateChange}
+          errorStateObj={errorStateObj}
+          setError = {setError}
           />)
         || ((stateObj.formStep === 2)
           && <RegisterFormStepTwo
@@ -398,7 +498,8 @@ const Register = () => {
           font={font}
           stateObj={stateObj}
           setStateObj={setStateObj}
-          setBackBtnStateObj={ setBackBtnStateObj } />)
+          setBackBtnStateObj={setBackBtnStateObj}
+          navigation={ navigation } />)
         || ((stateObj.formStep === 3)
           && <RegisterFormStepThree
           style={style}

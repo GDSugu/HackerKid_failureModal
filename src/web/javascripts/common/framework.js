@@ -179,10 +179,10 @@ const validate = (id, type, required = 1, warnId = false, warnMsg = false,
 
   if (data === '' && !required) return true;
 
-  const validationResponse = validateField(type, data, inputField.attr('data-typename'), null, skipValueCheck);
+  const validationResponse = validateField(type, data, null, skipValueCheck);
 
+  const currentTypeName = inputField.attr('data-typename') ? inputField.attr('data-typename') : inputField.attr('name');
   if (data === '' && required) {
-    const currentTypeName = inputField.attr('data-typename') ? inputField.attr('data-typename') : inputField.attr('name');
     inputField.addClass('is-invalid');
     inputField.attr('data-original-placeholder', inputField.attr('placeholder'));
     inputField.attr('placeholder', `${currentTypeName} is required`);
@@ -193,7 +193,8 @@ const validate = (id, type, required = 1, warnId = false, warnMsg = false,
     if (warnId && warnMsg) {
       $(warnId).html(warnMsg).show();
     } else if (warnId && !warnMsg) {
-      $(warnId).html(validationResponse.message).show();
+      const errorMessageToShow = (validationResponse.message) ? validationResponse.message : `Enter a valid ${currentTypeName}`;
+      $(warnId).html(errorMessageToShow).show();
     }
     return false;
   }

@@ -211,7 +211,7 @@ const updatePoints = (addedPoints) => {
   // nav update
 };
 
-const validateField = (type, value, typename, lengthRangeObj = false, skipValueCheck = false) => {
+const validateField = (type, value, lengthRangeObj = false, skipValueCheck = false) => {
   try {
     if (lengthRangeObj) {
       const { min, max } = lengthRangeObj;
@@ -264,7 +264,7 @@ const validateField = (type, value, typename, lengthRangeObj = false, skipValueC
       const passed = regPattern[type].test(value);
 
       if (!passed) {
-        throw new Error(`Enter a valid ${typename}`);
+        throw new Error();
       }
       status = regPattern[type].test(value);
     }
@@ -274,11 +274,15 @@ const validateField = (type, value, typename, lengthRangeObj = false, skipValueC
       value,
     };
   } catch (e) {
-    return {
+    const errorObj = {
       status: false,
-      message: e.message,
       value,
     };
+
+    if (e.message) {
+      errorObj.message = e.message;
+    }
+    return errorObj;
   }
 };
 
