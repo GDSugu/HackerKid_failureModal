@@ -1,4 +1,5 @@
 import React from 'react';
+import md5 from 'crypto-js/md5';
 import post from '../../common/framework';
 
 const useTurtleFetchQuestion = ({ type = 'initialQuestion' || 'getQuestionById', virtualId = false, questionId = false }) => {
@@ -67,9 +68,42 @@ const useTurtleFetchQuestion = ({ type = 'initialQuestion' || 'getQuestionById',
 
 const TurtleContext = React.createContext();
 
+const useTurtleValidation = () => {
+  const submitTurtle = () => {
+    console.log();
+    // if (TurtleContext.current)
+    // let requestString = TurtleContext;
+    // Object.keys(turtleValidationState).forEach((key) => {
+    //   if (key !== 'status') {
+    //     requestString += turtleValidationState[key];
+    //   }
+    // });
+
+    // const requestHash = md5(requestString + md5(requestString).toString()).toString();
+    // const payload = {
+    //   type: 'validateQuestion',
+    //   // questionId: turtleValidationState.questionId,
+    //   // sourceCode: turtleValidationState.sourceCode,
+    //   // xmlWorkSpace: turtleValidationState.xmlWorkSpace,
+    //   // validated: turtleValidationState.validated,
+
+    //   requestHash,
+    // };
+
+    // return post(payload, 'turtle/', false);
+  };
+
+  return {
+    // state: turtleValidationState,
+    // setState: setTurtleValidationState,
+    submitTurtle,
+  };
+};
+
 export default null;
 
 export {
   useTurtleFetchQuestion,
+  useTurtleValidation,
   TurtleContext,
 };

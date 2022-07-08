@@ -51,9 +51,12 @@ const getStyle = (font, utilColors = {}) => StyleSheet.create({
   mh4: {
     marginHorizontal: 4,
   },
+  mr12: {
+    marginRight: 12,
+  },
   tabHeaderIcon: {
-    width: 32,
-    height: 32,
+    width: 28,
+    height: 28,
   },
   tabHeaderLevelText: {
     ...font.heading6R,
@@ -153,15 +156,22 @@ const GameHeader = ({ currentScreen, font, utilColors }) => {
         <Text style={[style.tabHeaderLevelText]}>{'Level 2'}</Text>
       </View>
       <View style={style.row}>
-        <TouchableOpacity
-          style={style.mh4}
-          >
-          <Image
-            source={hintIcon}
-            resizeMode='contain'
-            style={style.tabHeaderIcon}
-          />
-        </TouchableOpacity>
+        {/* { currentScreen !== 'TurtleOutput' */}
+          <Animatable.View
+              animation={currentScreen !== 'TurtleOutput' ? 'fadeInUp' : 'fadeOutDown'}
+              duration={currentScreen !== 'TurtleOutput' ? 500 : 1250}
+            >
+              <TouchableOpacity
+                style={style.mr12}
+              >
+                <Image
+                  source={hintIcon}
+                  resizeMode='contain'
+                  style={style.tabHeaderIcon}
+                />
+              </TouchableOpacity>
+            </Animatable.View>
+          {/* : <></> */}
         <TouchableOpacity style={style.mh4}>
           <Image
             source={gameMenuIcon}

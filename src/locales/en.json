@@ -57,6 +57,10 @@
     "defaultMessage": "Challenges",
     "description": "Challenges card heading"
   },
+  "7PlDmO": {
+    "defaultMessage": "Play",
+    "description": "Turtle Play Button"
+  },
   "9gqH2W": {
     "defaultMessage": "Login",
     "description": "Login button"
@@ -210,6 +214,10 @@
   "bK9TWX": {
     "defaultMessage": "Leaderboard Rank",
     "description": "leaderboard rank heading"
+  },
+  "c8cENG": {
+    "defaultMessage": "Share",
+    "description": "Turtle Output Share Button"
   },
   "c9n6Sh": {
     "defaultMessage": "School"

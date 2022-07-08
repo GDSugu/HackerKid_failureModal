@@ -1,6 +1,5 @@
 import React from 'react';
 import { getBlockly, getTurtleOutput } from './turtleBlocks';
-import { getTurtleOutput as getTurtleOutput1 } from './turtleBlocks1';
 
 const useSharedTurtleWebView = () => {
   const TurtleBodyContent = () => <>
@@ -8,6 +7,8 @@ const useSharedTurtleWebView = () => {
   </>;
 
   const TurtleScriptContent = () => <>
+    {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossOrigin="anonymous"></link> */}
+    {/* <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossOrigin="anonymous"></script> */}
     <script src="https://unpkg.com/blockly@3.20200625.2/blockly.min.js"></script>
     <script src="https://unpkg.com/blockly@3.20200625.2/python_compressed.js"></script>
     <script src="https://unpkg.com/blockly@3.20200625.2/msg/en"></script>
@@ -90,13 +91,30 @@ const useSharedTurtleWebView = () => {
     });`;
 
   const TurtleOutputBodyContent = () => <>
+  <div id="outputSection">
+    <div className="flex-column drawing-controls align-items-end mr-3">
+      <button className="btn btn-light mt-1 zoom-control zoomIn font-weight-bold" data-zoomaction="in" title="Zoom In" disabled>+</button>
+      <button className="btn btn-light mt-1 zoom-control zoomOut font-weight-bold" data-zoomaction="out" title="Zoom Out" disabled>-</button>
+      <button className="btn btn-light mt-1 repositionDrawing" title="Center">
+        <i className="fa fa-crosshairs"></i>
+      </button>
+      <button className="btn btn-light mt-1 drawingToggle" title="Hide output">
+        <i className="fas fa-eye"></i>
+      </button>
+      <button className="btn btn-light mt-1 debugToggle" title="Enable debugger">
+        <i className="fas fa-pause-circle"></i>
+      </button>
+    </div>
     <div className="sectionContent outputContainer mx-2">
       <div id="userCanvas"></div>
       <div id="answerCanvas"></div>
     </div>
+  </div>
   </>;
 
   const TurtleOutputScriptContent = () => <>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css" integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossOrigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossOrigin="anonymous"/>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossOrigin="anonymous"></script>
     <script src="https://unpkg.com/blockly@3.20200625.2/blockly.min.js"></script>
     <script src="https://unpkg.com/blockly@3.20200625.2/python_compressed.js"></script>
@@ -111,26 +129,90 @@ const useSharedTurtleWebView = () => {
     <style>
       .outputContainer {
         overflow: auto;
-        height: 420px;
-        background-color: #fff;
+        background-color: transparent;
         display: flex;
       }
 
       #userCanvas {
         width: 100%;
-        transform: scale(7) translate(-25%, 0);
+        // transform: scale(4) translate(-25%, 0);
         background-color: transparent;
+        position: absolute;
       }
 
       #answerCanvas {
+        position: absolute;
         width: 100%;
         opacity: 0.5;
-        background-image: radial-gradient(red, green, blue);
-        transform: scale(7) translate(-25%, 0);
+        // transform: scale(4) translate(-25%, 0);
+      }
+
+      .drawing-controls {
+        display: flex;
+        position: absolute;
+        left: 100%;
+        z-index: 100;
+      }
+
+      #outputSection {
+        position: relative;
+      }
+
+      #outputSection {
+        background-color: green;
+      }
+
+      .drawing-controls button {
+        width: 40px;
+      }
+
+      .btn {
+        display: inline-block;
+        font-weight: 400;
+        color: #212529;
+        text-align: center;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-color: transparent;
+        border: 1px solid transparent;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: 0.25rem;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+      }
+
+      .btn-light {
+        color: #212529;
+        background-color: #f8f9fa;
+        border-color: #f8f9fa;
+      }
+
+      .mt-1, .my-1 {
+        margin-top: 0.25rem!important;
+      }
+
+      .mr-1, .mx-1 {
+        margin-right: 0.25rem!important;
+      }
+
+      .btn-light.disabled, .btn-light:disabled {
+        color: #212529;
+        background-color: #f8f9fa;
+        border-color: #f8f9fa;
+      }
+      .btn.disabled, .btn:disabled {
+          opacity: .65;
+      }
+      .font-weight-bold {
+          font-weight: 700!important;
       }
 
       body {
-        // background-color: blue;
+        transform: scale(7) translate(-25%, 0);
       }
     </style>
   `;
@@ -172,22 +254,61 @@ const useSharedTurtleWebView = () => {
 
       const pool = workerpool.pool();
   
-      window.ReactNativeWebView.postMessage('script inject sk execution');
-
       ${getTurtleOutput.toString()}
 
       const { managerObj, poolObj } = getTurtleOutput({ blocklyObj: Blockly, turtleOutputObj: manager, workerPoolObj: pool });
 
-      function executeRunCode(data) {
+      function executeRunCode(payload) {
         try {
-          window.ReactNativeWebView.postMessage(Object.entries(data).toString());
-          managerObj.runCode(data.snippet, data.canvas, true, 3, 0)
+          const { action, data } = payload;
+          if (action === 'renderTurtle') {
+            managerObj.runCode(data.snippet, data.canvas, true, 3, 0)
             .then(() => {
               const currentSelector = $('#' + data.canvas)[0];
               if (currentSelector && currentSelector.turtleInstance) {
                 currentSelector.turtleInstance.update();
               }
             });
+          } else if (action === 'runCode') {
+            managerObj.runCode(data.snippet, data.canvas, true, 3, 0)
+            .then(() => {
+              const currentSelector = $('#' + data.canvas)[0];
+              if (!currentSelector || !currentSelector.turtleInstance) {
+                return false;
+              }
+              return currentSelector.turtleInstance.update();
+            })
+            .then(() => {
+              const answerImages = managerObj.getPixelData('#answerCanvas canvas');
+              const userImages = managerObj.getPixelData('#userCanvas canvas');
+              return pool.exec(managerObj.validateCode, [answerImages, userImages]);
+            })
+            .then((valid) => {
+              validated = valid;
+              const request = {
+                action: 'validated',
+                // questionId: Number(managerObj.initialResponse.questionObject.question_id),
+                // sourceCode: data.snippet,
+                // xmlWorkSpace: data.workspace,
+                data: {
+                  validated,
+                },
+              };
+              // let requestString = '';
+              // Object.keys(request).forEach((index) => {
+              //   requestString += request[index];
+              // });
+              // const requestHash = md5(requestString + md5(requestString).toString()).toString();
+              // request.requestHash = requestString;
+              // return post(request, 'turtle/', false);
+              window.ReactNativeWebView.postMessage(JSON.stringify(request));
+            })
+            .catch((err) => {
+              window.ReactNativeWebView.postMessage('turtlevalidation error: ');
+              window.ReactNativeWebView.postMessage(err.message);
+              throw err;
+            })
+          }
         } catch (err) {
           window.ReactNativeWebView.postMessage('turtleoutput execute error: ');
           window.ReactNativeWebView.postMessage(err.message);
@@ -195,18 +316,14 @@ const useSharedTurtleWebView = () => {
       }
 
       window.execute = function (payload) {
-        window.ReactNativeWebView.postMessage('execute payload: ');
-        window.ReactNativeWebView.postMessage(Object.entries(payload).toString());
         switch (payload.action) {
           case 'renderTurtle':
-            window.ReactNativeWebView.postMessage('execute renderTurtle: '); 
             payload.data.canvas = 'answerCanvas';
-            executeRunCode(payload.data);
+            executeRunCode(payload);
             break;
           case 'runCode':
-            window.ReactNativeWebView.postMessage('execute runcode: '); 
             payload.data.canvas = 'userCanvas';
-            executeRunCode(payload.data);
+            executeRunCode(payload);
             break;
           default: break;
         }
