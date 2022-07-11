@@ -164,6 +164,10 @@ const RegisterFormStepOne = ({
 
   const nextBtnPressHandler = () => {
     const obj = {
+      phoneNumber: {
+        type: 'tel',
+        typeName: 'Phone Number',
+      },
       email: {
         type: 'email',
         typeName: 'Email',
