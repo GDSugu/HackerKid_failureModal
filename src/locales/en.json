@@ -137,6 +137,10 @@
     "defaultMessage": "Save",
     "description": "Profile save button"
   },
+  "In3suu": {
+    "defaultMessage": "{errorMessage}",
+    "description": "error text"
+  },
   "JnwRMJ": {
     "defaultMessage": "OTP",
     "description": "OTP label"

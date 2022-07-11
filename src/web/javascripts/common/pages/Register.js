@@ -59,18 +59,30 @@ const RegisterFormStepOne = ({
       resultArr.push(result);
     });
 
-    if (resultArr.every((result) => {
+    const checkAllValidations = () => resultArr.every((result) => {
       if (result) return true;
       return false;
-    })) {
-      const hideInlineLoadingSpinner = showInlineLoadingSpinner('.next-btn');
+    });
 
-      sendOtpRequest(stateObj.phoneNumber, stateObj.countryCode).then((response) => {
+    const getCurrentCountryCode = () => {
+      let countryCode = manager.telInput.getSelectedCountryData();
+      countryCode = `+${countryCode.dialCode}`;
+
+      return countryCode;
+    };
+
+    const allValidationsPassed = checkAllValidations();
+    if (allValidationsPassed) {
+      const hideInlineLoadingSpinner = showInlineLoadingSpinner('.next-btn');
+      const countryCode = getCurrentCountryCode();
+
+      sendOtpRequest(stateObj.phoneNumber, countryCode).then((response) => {
         const data = JSON.parse(response);
         if (data.status === 'success') {
           setStateObj((prevObj) => ({
             ...prevObj,
             formStep: prevObj.formStep + 1,
+            countryCode,
           }));
         } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
           hideInlineLoadingSpinner();
@@ -201,50 +213,33 @@ const RegisterFormStepThree = ({
 
   const createAccountBtnClickHandler = (e) => {
     e.preventDefault();
-    const inputFields = $('input');
-    const resultArr = [];
 
-    inputFields.each(function () {
-      const idSelector = `#${$(this).attr('id')}`;
-      const type = $(this).attr('type');
-      const formHelperIdSelector = `${idSelector}-form-helper`;
-      const required = ($(this).attr('required') ? 1 : 0);
-      const skipValueCheck = $(this).attr('data-skip-value-check');
+    const enteredPassword = validate('#password', 'password', 1);
+    const retypedPassword = validate('#retyped-password', 'password', 1);
 
-      const result = validate(idSelector, type, required,
-        formHelperIdSelector, null, skipValueCheck);
-
-      resultArr.push(result);
-    });
-    const [enteredPassword, retypedPassword] = resultArr;
-
-    if ((enteredPassword && retypedPassword)) {
-      if (enteredPassword === retypedPassword) {
-        const hideInlineLoadingSpinner = showInlineLoadingSpinner('.create-account-btn');
-
-        createAccountRequest().then((response) => {
-          const data = JSON.parse(response);
-
-          if (data.status === 'success' && data.message === 'REGISTERED') {
-            const sessionDetails = data.session;
-            setUserSession(sessionDetails);
-            pathNavigator('dashboard');
-          } else if (data.status === 'error') {
-            hideInlineLoadingSpinner();
-          }
-        }).catch((error) => {
-          hideInlineLoadingSpinner();
-          const errData = JSON.parse(error);
-          console.log(errData);
-        });
-      } else {
-        $('#retyped-password').addClass('is-invalid').removeClass('is-valid');
-      }
+    if ((enteredPassword && retypedPassword) && (enteredPassword !== retypedPassword)) {
+      $('#retyped-password').addClass('is-invalid');
+      $('#retyped-password-form-helper').text('Password do not match').show();
     }
-    // else if (!enteredPassword && !retypedPassword) {
-    //   setFormErrorField('Passwords length must be atleast 4,
-    // consisting of letters and numbers', { 'data - error - type': 'INVALID_PASSWORD' });
-    // }
+    if ((enteredPassword && retypedPassword) && (enteredPassword === retypedPassword)) {
+      const hideInlineLoadingSpinner = showInlineLoadingSpinner('.create-account-btn');
+
+      createAccountRequest().then((response) => {
+        const data = JSON.parse(response);
+
+        if (data.status === 'success' && data.message === 'REGISTERED') {
+          const sessionDetails = data.session;
+          setUserSession(sessionDetails);
+          pathNavigator('dashboard');
+        } else if (data.status === 'error') {
+          hideInlineLoadingSpinner();
+        }
+      }).catch((error) => {
+        hideInlineLoadingSpinner();
+        const errData = JSON.parse(error);
+        console.log(errData);
+      });
+    }
   };
 
   useEffect(() => {
@@ -331,11 +326,6 @@ const Register = () => {
         [key]: value,
       };
 
-      if (key === 'phoneNumber') {
-        let countryCode = manager.telInput.getSelectedCountryData();
-        countryCode = `+${countryCode.dialCode}`;
-        newObj.countryCode = countryCode;
-      }
       return newObj;
     });
   };

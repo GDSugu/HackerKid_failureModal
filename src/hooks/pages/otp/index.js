@@ -14,7 +14,7 @@ const useOtp = () => {
       countryCode,
     };
 
-    return post(postData, 'register/');
+    return post(postData, 'register/', false, false);
   };
 
   const verifyOtpRequest = (phoneNumber, countryCode) => {

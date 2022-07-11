@@ -152,15 +152,16 @@ const ForgotPasswordStepThree = ({
   const changePasswordBtnClickHandler = (e) => {
     e.preventDefault();
 
-    const password = validate('#password', 'password', 1);
-    const retypePassword = validate('#retyped-password', 'password', 1);
+    const enteredPassword = validate('#password', 'password', 1);
+    const retypedPassword = validate('#retyped-password', 'password', 1);
 
-    if ((password && retypePassword) && (password !== retypePassword)) {
+    if ((enteredPassword && retypedPassword) && (enteredPassword !== retypedPassword)) {
       $('#retyped-password').addClass('is-invalid');
       $('#retyped-password-form-helper').text('Password do not match').show();
     }
-    if ((password && retypePassword) && (password === retypePassword)) {
+    if ((enteredPassword && retypedPassword) && (enteredPassword === retypedPassword)) {
       const hideInlineLoadingSpinner = showInlineLoadingSpinner('.change-password-btn');
+
       stepThreeRequest().then((response) => {
         const data = JSON.parse(response);
 

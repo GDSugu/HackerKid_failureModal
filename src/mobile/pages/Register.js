@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
   View,
@@ -9,12 +9,14 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
+import PhoneInput from 'react-native-phone-number-input';
 import ThemeContext from '../components/theme';
 import RegisterFormSvg from '../../images/register/register-form-svg.svg';
 import useRegister from '../../hooks/pages/register/index';
 import useBackBtn from '../../hooks/pages/back-btn';
 import Icon from '../common/Icons';
 import { validate } from '../common/framework';
+import useOtp from '../../hooks/pages/otp';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
@@ -46,7 +48,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   errorField: {
     borderColor: 'red',
   },
-  errorLabel: {
+  errorText: {
     color: 'red',
     ...font.bodyBold,
   },
@@ -139,12 +141,20 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
   },
+  formError: {
+    textAlign: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+  },
 });
 
 const RegisterFormStepOne = ({
   style, theme, font, stateObj, setStateObj, setBackBtnStateObj, handleStateChange,
-  errorStateObj, setError,
+  errorStateObj, setError, formErrorStateObj, setFormErrorObj,
 }) => {
+  const { sendOtpRequest } = useOtp();
+  const phoneInput = useRef(null);
+
   useEffect(() => {
     setBackBtnStateObj((prevObj) => ({
       ...prevObj,
@@ -154,10 +164,6 @@ const RegisterFormStepOne = ({
 
   const nextBtnPressHandler = () => {
     const obj = {
-      phoneNumber: {
-        type: 'tel',
-        typeName: 'Phone Number',
-      },
       email: {
         type: 'email',
         typeName: 'Email',
@@ -179,15 +185,48 @@ const RegisterFormStepOne = ({
       resultArr.push(result);
     });
 
-    if (resultArr.every((result) => {
+    const checkAllValidations = () => resultArr.every((result) => {
       if (result) return true;
       return false;
-    })) {
-      setStateObj((prevObj) => ({
-        ...prevObj,
-        formStep: prevObj.formStep + 1,
-      }));
+    });
+
+    const allValidationsPassed = checkAllValidations();
+    if (allValidationsPassed) {
+      // const countryCode = `+${phoneInput.current.getCallingCode()}`;
+
+      sendOtpRequest('8951426234', '+91').then((response) => {
+        const data = JSON.parse(response);
+
+        if (data.status === 'error') {
+          setFormErrorObj({ formError: 'Something went wrong, Try again!', formErrorType: 'ERROR' });
+        }
+
+        if (data.status === 'success') {
+          setStateObj((prevObj) => ({
+            ...prevObj,
+            formStep: prevObj.formStep + 1,
+            // countryCode,
+          }));
+        } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
+          setError((prevObj) => ({ ...prevObj, phoneNumber: true }));
+          setFormErrorObj((prevObj) => ({ ...prevObj, formError: 'Account already exists!, try logging in', formErrorType: 'ACCOUNT_EXIST' }));
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
     }
+  };
+
+  const getStyleArr = (key, additionalStyles = false) => {
+    const styleArr = [style.inputField];
+
+    if (errorStateObj[key]) {
+      styleArr.push(style.errorField);
+    }
+    if (additionalStyles) {
+      styleArr.push(additionalStyles);
+    }
+    return styleArr;
   };
 
   return (
@@ -201,21 +240,34 @@ const RegisterFormStepOne = ({
               description='Phone label'
           />
         </Text>
-        <Text style={style.errorLabel}>
-          {errorStateObj.phoneNumber}
+          <Text style={style.errorText}>
+              <FormattedMessage
+                defaultMessage='{errorMessage}'
+                description='error text'
+                values={{ errorMessage: errorStateObj.phoneNumber }}
+              />
         </Text>
       </View>
-      <TextInput
-            style={(!errorStateObj.phoneNumber)
-              ? style.inputField : { ...style.inputField, ...style.errorField }}
-            multiline={false}
-            disableFullscreenUI={true}
-            value={stateObj.phoneNumber}
-            keyboardType={'number-pad'}
-            onChangeText={(value) => {
-              handleStateChange('phoneNumber', value);
-              validate('tel', value, 'Phone Number', setError, 'phoneNumber');
-            }}
+      <PhoneInput
+        ref={phoneInput}
+        defaultCode='IN'
+        containerStyle={getStyleArr('phoneNumber', { padding: 1.8, backgroundColor: 'transparent', width: '100%' })}
+        textContainerStyle={{ height: 41, backgroundColor: 'transparent' }}
+        placeholder=" "
+        textInputStyle={[font.bodyBold, { height: 41 }]}
+        layout='second' codeTextStyle={{ ...font.bodyBold }}
+        flagButtonStyle={{ width: 60 }}
+        textInputProps={{
+          multiline: false, disableFullscreenUI: true, keyboardType: 'number-pad', value: stateObj.phoneNumber,
+        }}
+        onChangeText={(value) => {
+          handleStateChange('phoneNumber', value);
+          validate('tel', value, 'Phone Number', setError, 'phoneNumber');
+          if (formErrorStateObj.formError && (formErrorStateObj.formErrorType === 'ACCOUNT_EXIST' || formErrorStateObj.formErrorType === 'ERROR')) {
+            setFormErrorObj({ formError: false, formErrorType: false });
+            setError((prevObj) => ({ ...prevObj, phoneNumber: false }));
+          }
+        }}
       />
     </View>
     <View style={style.labelAndInputContainer}>
@@ -226,19 +278,21 @@ const RegisterFormStepOne = ({
             description='Email label'
           />
         </Text>
-        <Text style={style.errorLabel}>
+        <Text style={style.errorText}>
           {errorStateObj.email}
         </Text>
       </View>
       <TextInput
         disableFullscreenUI = {true}
-        style={(!errorStateObj.email)
-          ? style.inputField : { ...style.inputField, ...style.errorField }}
+        style={getStyleArr('email')}
         multiline={false}
         value={stateObj.email}
         onChangeText={(value) => {
           handleStateChange('email', value);
           validate('email', value, 'Email', setError, 'email', 'Enter a valid Email address');
+          if (formErrorStateObj.formErrorType === 'ERROR') {
+            setFormErrorObj({ formError: false, formErrorType: false });
+          }
         }}
       />
     </View>
@@ -250,19 +304,21 @@ const RegisterFormStepOne = ({
             description='Name label'
           />
         </Text>
-        <Text style={style.errorLabel}>
+        <Text style={style.errorText}>
           {errorStateObj.fullName}
         </Text>
       </View>
       <TextInput
             disableFullscreenUI={true}
-            style={!(errorStateObj.fullName)
-              ? style.inputField : { ...style.inputField, ...style.errorField }}
+            style={getStyleArr('fullName')}
             multiline={false}
             value={stateObj.fullName}
             onChangeText={(value) => {
               handleStateChange('fullName', value);
               validate('name', value, 'Name', setError, 'fullName');
+              if (formErrorStateObj.formErrorType === 'ERROR') {
+                setFormErrorObj({ formError: false, formErrorType: false });
+              }
             }}
       />
     </View>
@@ -274,24 +330,30 @@ const RegisterFormStepOne = ({
             description="Parent's Name label"
           />
         </Text>
-        <Text style={style.errorLabel}>
+        <Text style={style.errorText}>
           {errorStateObj.parentName}
         </Text>
       </View>
     <TextInput
         disableFullscreenUI={true}
-        style={!(errorStateObj.parentName)
-          ? style.inputField : { ...style.inputField, ...style.errorField }}
+        style={getStyleArr('parentName')}
         multiline={false}
         value={stateObj.parentName}
             onChangeText={(value) => {
               handleStateChange('parentName', value);
               validate('name', value, "Parent's Name", setError, 'parentName');
+              if (formErrorStateObj.formErrorType === 'ERROR') {
+                setFormErrorObj({ formError: false, formErrorType: false });
+              }
             }}
       />
   </View>
     </KeyboardAvoidingView>
     <View>
+        {formErrorStateObj.formError
+        && <Text style={[style.errorText, style.formError]}>
+        {formErrorStateObj.formError}
+      </Text>}
       <TouchableOpacity
           style={[style.btnPrimary, style.nextBtn]}
           title="Next"
@@ -438,10 +500,15 @@ const Register = ({ navigation }) => {
   const { stateObj, setStateObj, createAccountRequest } = useRegister();
   const { stateObj: backBtnStateObj, setStateObj: setBackBtnStateObj } = useBackBtn();
   const [errorStateObj, setError] = useState({
-    phoneNumber: '',
-    email: '',
-    fullName: '',
-    parentName: '',
+    phoneNumber: false,
+    email: false,
+    fullName: false,
+    parentName: false,
+  });
+
+  const [formErrorStateObj, setFormErrorObj] = useState({
+    formError: false,
+    formErrorType: false,
   });
 
   const { font, theme } = React.useContext(ThemeContext);
@@ -489,7 +556,9 @@ const Register = ({ navigation }) => {
           setBackBtnStateObj={setBackBtnStateObj}
           handleStateChange={handleStateChange}
           errorStateObj={errorStateObj}
-          setError = {setError}
+          setError={setError}
+          formErrorStateObj={formErrorStateObj}
+          setFormErrorObj={ setFormErrorObj }
           />)
         || ((stateObj.formStep === 2)
           && <RegisterFormStepTwo
