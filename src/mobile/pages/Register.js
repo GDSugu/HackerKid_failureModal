@@ -192,9 +192,9 @@ const RegisterFormStepOne = ({
 
     const allValidationsPassed = checkAllValidations();
     if (allValidationsPassed) {
-      // const countryCode = `+${phoneInput.current.getCallingCode()}`;
+      const countryCode = `+${phoneInput.current.getCallingCode()}`;
 
-      sendOtpRequest('8951426234', '+91').then((response) => {
+      sendOtpRequest(stateObj.phoneNumber, countryCode).then((response) => {
         const data = JSON.parse(response);
 
         if (data.status === 'error') {
@@ -205,7 +205,7 @@ const RegisterFormStepOne = ({
           setStateObj((prevObj) => ({
             ...prevObj,
             formStep: prevObj.formStep + 1,
-            // countryCode,
+            countryCode,
           }));
         } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
           setError((prevObj) => ({ ...prevObj, phoneNumber: true }));
