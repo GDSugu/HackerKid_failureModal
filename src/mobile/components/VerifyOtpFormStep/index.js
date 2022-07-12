@@ -308,7 +308,10 @@ const VerifyOtpFormStep = ({
       }));
     });
 
-    return removeListener;
+    return () => {
+      removeListener();
+      clearInterval(stateObj.otpTimerId);
+    };
   }, []);
 
   const otpTimerSyles = [style.otpTimer];
@@ -380,7 +383,10 @@ const VerifyOtpFormStep = ({
               onChange={(e) => onChangeHandler(e, 3)} onKeyPress={(e) => keyPressHandler(e, 3)} />
         </View>
       </View>
-        <TouchableOpacity style={{ marginBottom: 20 }}>
+        <TouchableOpacity style={{ marginBottom: 20 }}
+          onPress={
+            () => setParentStateObj((prevObj) => ({ ...prevObj, formStep: prevObj.formStep - 1 }))
+          }>
             <Text style={style.notNumber}>
               <FormattedMessage
                 defaultMessage='Not {phone} ?'

@@ -330,7 +330,6 @@ const RegisterFormStepOne = ({
             }}
       />
   </View>
-    </KeyboardAvoidingView>
     <View>
         {formErrorStateObj.formError
         && <Text style={[style.errorText, style.formError]}>
@@ -354,6 +353,7 @@ const RegisterFormStepOne = ({
         <Text style={style.loginIntoExistingAccount}>Login into Existing Account</Text>
       </TouchableOpacity>
     </View>
+    </KeyboardAvoidingView>
 </View>
   );
 };
@@ -450,14 +450,7 @@ const Register = ({ navigation }) => {
         <View style={style.registerFormSvgContainer}>
           <RegisterFormSvg/>
       </View>
-      <VerifyOtpFormStep
-        parentStateObj={stateObj}
-        setParentStateObj={setStateObj}
-        setBackBtnStateObj={setBackBtnStateObj}
-        formErrorStateObj={formErrorStateObj}
-        setFormErrorObj={setFormErrorObj}
-        navigation={navigation} />
-      {/* {
+      {
         ((stateObj.formStep === 1)
           && <RegisterFormStepOne
           style={style}
@@ -473,14 +466,13 @@ const Register = ({ navigation }) => {
           setFormErrorObj={ setFormErrorObj }
           />)
         || ((stateObj.formStep === 2)
-          && <RegisterFormStepTwo
-          s style={style}
-          theme={theme}
-          font={font}
-          stateObj={stateObj}
-          setStateObj={setStateObj}
-          setBackBtnStateObj={setBackBtnStateObj}
-          navigation={ navigation } />)
+          && <VerifyOtpFormStep
+        parentStateObj={stateObj}
+        setParentStateObj={setStateObj}
+        setBackBtnStateObj={setBackBtnStateObj}
+        formErrorStateObj={formErrorStateObj}
+        setFormErrorObj={setFormErrorObj}
+        navigation={navigation} />)
         || ((stateObj.formStep === 3)
           && <RegisterFormStepThree
           style={style}
@@ -491,7 +483,7 @@ const Register = ({ navigation }) => {
           setBackBtnStateObj={setBackBtnStateObj}
           createAccountRequest={ createAccountRequest }
           />)
-      } */}
+      }
       </ScrollView>
   );
 };
