@@ -17,6 +17,7 @@ import useBackBtn from '../../hooks/pages/back-btn';
 import Icon from '../common/Icons';
 import { validate } from '../common/framework';
 import useOtp from '../../hooks/pages/otp';
+import VerifyOtpFormStep from '../components/VerifyOtpFormStep';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
@@ -99,28 +100,6 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   nextBtnText: {
     textAlign: 'left',
   },
-  labelAndOtpFields: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  otpLabel: {
-    alignSelf: 'baseline',
-  },
-  otpFields: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    flexGrow: 1,
-    marginBottom: 30,
-  },
-  otpField: {
-    borderRadius: 0,
-    borderTopWidth: 0,
-    borderLeftWidth: 0,
-    borderRightWidth: 0,
-    borderBottomWidth: 2,
-    marginRight: 10,
-  },
   hide: {
     display: 'none',
   },
@@ -143,8 +122,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   },
   formError: {
     textAlign: 'center',
-    marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 20,
   },
 });
 
@@ -380,83 +358,6 @@ const RegisterFormStepOne = ({
   );
 };
 
-const RegisterFormStepTwo = ({
-  style, stateObj, setStateObj, setBackBtnStateObj, navigation,
-}) => {
-  useEffect(() => {
-    setBackBtnStateObj((prevBackObj) => ({
-      ...prevBackObj,
-      showBackBtn: true,
-      backFn: () => {
-        setStateObj((prevObj) => ({
-          ...prevObj,
-          formStep: prevObj.formStep - 1,
-        }));
-      },
-    }));
-
-    navigation.addListener('beforeRemove', (e) => {
-      e.preventDefault();
-      setStateObj((prevObj) => ({
-        ...prevObj,
-        formStep: prevObj.formStep - 1,
-      }));
-    });
-  }, []);
-
-  return (
-  <View style={style.container}>
-    <KeyboardAvoidingView >
-      <View style={style.labelAndOtpFields}>
-        <Text style={[style.label, style.otpLabel]}>
-          <FormattedMessage
-            defaultMessage='OTP'
-            description='OTP label'
-          />
-        </Text>
-        <View style={style.otpFields}>
-          <TextInput style={[style.inputField, style.otpField]} />
-          <TextInput style={[style.inputField, style.otpField]} />
-          <TextInput style={[style.inputField, style.otpField]} />
-          <TextInput style={[style.inputField, style.otpField]} />
-        </View>
-        <TouchableOpacity style={{ marginBottom: 20 }}>
-            <Text style={style.loginIntoExistingAccount}>
-              <FormattedMessage
-                defaultMessage='Not {phone} ?'
-                description="not button"
-                values={{
-                  phone: stateObj.phoneNumber,
-                }}
-              />
-            </Text>
-        </TouchableOpacity>
-      </View>
-      <View>
-        <TouchableOpacity
-          style={style.btnPrimary}
-          title="Verify OTP and proceed"
-            onPress={
-              () => setStateObj((prevObj) => ({ ...prevObj, formStep: prevObj.formStep + 1 }))
-            }>
-          <Text style={style.btnPrimaryText}>
-            <FormattedMessage defaultMessage='Verify OTP and proceed' description='Verify OTP and proceed Button' />
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={style.btnOutlinePrimary}
-          title="Login into existing account"
-        >
-          <Text style={style.btnOutlinePrimaryText}>
-            <FormattedMessage defaultMessage='Login into existing account' description='Login into existing account button' />
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </KeyboardAvoidingView>
-  </View>
-  );
-};
-
 const RegisterFormStepThree = ({ style }) => (
     <View style={style.container}>
     <KeyboardAvoidingView>
@@ -516,7 +417,7 @@ const Register = ({ navigation }) => {
   });
 
   const { font, theme } = React.useContext(ThemeContext);
-  const screenTheme = theme.screenLogin;
+  const screenTheme = theme.screenRegister;
   const style = getStyles(screenTheme, theme.utilColors, font);
 
   const backBtnStyle = backBtnStateObj.showBackBtn ? style.show : style.hide;
@@ -548,8 +449,15 @@ const Register = ({ navigation }) => {
         </View>
         <View style={style.registerFormSvgContainer}>
           <RegisterFormSvg/>
-        </View>
-      {
+      </View>
+      <VerifyOtpFormStep
+        parentStateObj={stateObj}
+        setParentStateObj={setStateObj}
+        setBackBtnStateObj={setBackBtnStateObj}
+        formErrorStateObj={formErrorStateObj}
+        setFormErrorObj={setFormErrorObj}
+        navigation={navigation} />
+      {/* {
         ((stateObj.formStep === 1)
           && <RegisterFormStepOne
           style={style}
@@ -583,7 +491,7 @@ const Register = ({ navigation }) => {
           setBackBtnStateObj={setBackBtnStateObj}
           createAccountRequest={ createAccountRequest }
           />)
-      }
+      } */}
       </ScrollView>
   );
 };

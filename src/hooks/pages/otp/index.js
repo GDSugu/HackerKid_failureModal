@@ -4,7 +4,7 @@ import post from '../../common/framework';
 const useOtp = () => {
   const [stateObj, setStateObj] = useState({
     otpTimerId: null,
-    enteredOtpArr: [],
+    enteredOtpArr: ['', '', '', ''],
   });
 
   const sendOtpRequest = (phoneNumber, countryCode, type = 'send-otp') => {

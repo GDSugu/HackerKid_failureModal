@@ -125,7 +125,7 @@ const VerifyOtpFormStep = ({
     e.preventDefault();
     const { enteredOtpArr } = stateObj;
 
-    if (enteredOtpArr.length !== 4) {
+    if (enteredOtpArr.join('').length !== 4) {
       setFormErrorField('Enter a OTP to proceed', { 'data-error-type': 'OTP_EXPIRED' });
       return;
     }
