@@ -15,7 +15,7 @@ import RegisterFormSvg from '../../images/register/register-form-svg.svg';
 import useRegister from '../../hooks/pages/register/index';
 import useBackBtn from '../../hooks/pages/back-btn';
 import Icon from '../common/Icons';
-import { validate } from '../common/framework';
+import { closeFormError, validate } from '../common/framework';
 import useOtp from '../../hooks/pages/otp';
 import VerifyOtpFormStep from '../components/VerifyOtpFormStep';
 
@@ -108,9 +108,9 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   },
   formHeadingAndBackBtn: {
     display: 'flex',
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row',
     flex: 1,
     paddingHorizontal: 18,
   },
@@ -124,11 +124,58 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     textAlign: 'center',
     marginBottom: 20,
   },
+  labelAndOtpFields: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  labelWithOtpTimer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '80%',
+  },
+  otpLabel: {
+    marginBottom: 0,
+  },
+  otpTimer: {
+    color: utilColors.lightGrey,
+    ...font.bodyBold,
+  },
+  resendOtpBtnText: {
+    ...font.bodyBold,
+    color: theme.fadedBtnTextColor,
+  },
+  otpFields: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    margin: 'auto',
+    width: '80%',
+    marginVertical: 30,
+  },
+  otpField: {
+    borderRadius: 0,
+    borderTopWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderBottomWidth: 2,
+    width: '20%',
+    padding: 0,
+    textAlign: 'center',
+  },
+  notNumber: {
+    color: theme.fadedBtnTextColor,
+    ...font.bodyBold,
+    marginTop: 16,
+    marginBottom: 25,
+    textAlign: 'center',
+  },
 });
 
 const RegisterFormStepOne = ({
   style, theme, font, stateObj, setStateObj, setBackBtnStateObj, handleStateChange,
-  errorStateObj, setError, formErrorStateObj, setFormErrorObj,
+  errorStateObj, setError, formErrorStateObj, setFormErrorObj, navigation,
 }) => {
   const { sendOtpRequest } = useOtp();
   const phoneInput = useRef(null);
@@ -245,10 +292,7 @@ const RegisterFormStepOne = ({
         onChangeText={(value) => {
           handleStateChange('phoneNumber', value);
           validate('tel', value, 'Phone Number', setError, 'phoneNumber');
-          if (formErrorStateObj.formError && (formErrorStateObj.formErrorType === 'ACCOUNT_EXIST' || formErrorStateObj.formErrorType === 'ERROR')) {
-            setFormErrorObj({ formError: false, formErrorType: false });
-            setError((prevObj) => ({ ...prevObj, phoneNumber: false }));
-          }
+          closeFormError(formErrorStateObj, 'ACCOUNT_EXIST,ERROR', setFormErrorObj);
         }}
       />
     </View>
@@ -272,9 +316,7 @@ const RegisterFormStepOne = ({
         onChangeText={(value) => {
           handleStateChange('email', value);
           validate('email', value, 'Email', setError, 'email', 'Enter a valid Email address');
-          if (formErrorStateObj.formErrorType === 'ERROR') {
-            setFormErrorObj({ formError: false, formErrorType: false });
-          }
+          closeFormError(formErrorStateObj, 'ERROR', setFormErrorObj);
         }}
       />
     </View>
@@ -298,9 +340,7 @@ const RegisterFormStepOne = ({
             onChangeText={(value) => {
               handleStateChange('fullName', value);
               validate('name', value, 'Name', setError, 'fullName');
-              if (formErrorStateObj.formErrorType === 'ERROR') {
-                setFormErrorObj({ formError: false, formErrorType: false });
-              }
+              closeFormError(formErrorStateObj, 'ERROR', setFormErrorObj);
             }}
       />
     </View>
@@ -324,9 +364,7 @@ const RegisterFormStepOne = ({
             onChangeText={(value) => {
               handleStateChange('parentName', value);
               validate('name', value, "Parent's Name", setError, 'parentName');
-              if (formErrorStateObj.formErrorType === 'ERROR') {
-                setFormErrorObj({ formError: false, formErrorType: false });
-              }
+              closeFormError(formErrorStateObj, 'ERROR', setFormErrorObj);
             }}
       />
   </View>
@@ -349,7 +387,7 @@ const RegisterFormStepOne = ({
               color={theme.utilColors.white}
           />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
         <Text style={style.loginIntoExistingAccount}>Login into Existing Account</Text>
       </TouchableOpacity>
     </View>
@@ -436,12 +474,12 @@ const Register = ({ navigation }) => {
   return (
     <ScrollView style={{ flex: 1 }}>
       <View style={style.formHeadingAndBackBtn}>
-        <View style={{ flex: 0.1 } }>
+        <View style={{ flexBasis: '5%' }}>
           <TouchableOpacity style={backBtnStyle} onPress={backBtnStateObj.backFn}>
             <Icon name={'arrow-left'} type='FontAwesome' size={font.heading6.fontSize} color={ theme.utilColors.dark }/>
           </TouchableOpacity>
         </View>
-        <View style={{ flex: 0.9 }}>
+        <View style={{ flexBasis: '100%' }}>
           <Text style={style.createAccountHeading}>
             <FormattedMessage defaultMessage={'Create a New Account'} description='Create Account Heading'/>
           </Text>
@@ -463,16 +501,27 @@ const Register = ({ navigation }) => {
           errorStateObj={errorStateObj}
           setError={setError}
           formErrorStateObj={formErrorStateObj}
-          setFormErrorObj={ setFormErrorObj }
+          setFormErrorObj={setFormErrorObj}
+          navigation={navigation}
           />)
         || ((stateObj.formStep === 2)
           && <VerifyOtpFormStep
-        parentStateObj={stateObj}
-        setParentStateObj={setStateObj}
-        setBackBtnStateObj={setBackBtnStateObj}
-        formErrorStateObj={formErrorStateObj}
-        setFormErrorObj={setFormErrorObj}
-        navigation={navigation} />)
+          style={style}
+          parentStateObj={stateObj}
+          setParentStateObj={setStateObj}
+          setBackBtnStateObj={setBackBtnStateObj}
+          formErrorStateObj={formErrorStateObj}
+          setFormErrorObj={setFormErrorObj}
+          navigation={navigation}
+          secondaryActionButtons={[<TouchableOpacity
+            key={ 0 }
+            style={style.btnOutlinePrimary}
+            title="Login into existing account"
+            onPress={() => navigation.navigate('Login')}>
+            <Text style={style.btnOutlinePrimaryText}>
+              <FormattedMessage defaultMessage='Login into existing account' description='Login into existing account button' />
+            </Text>
+          </TouchableOpacity>] } />)
         || ((stateObj.formStep === 3)
           && <RegisterFormStepThree
           style={style}

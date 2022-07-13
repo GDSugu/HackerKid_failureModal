@@ -46,9 +46,20 @@ const validate = (type, value, typename, setError, errorKey,
   }
   setError((prevObj) => ({
     ...prevObj,
-    [errorKey]: '',
+    [errorKey]: false,
   }));
   return validationResponse.value;
+};
+
+const closeFormError = (formErrorStateObj, callingToCloseErrorType, setFormError) => {
+  const currentFormErrorType = formErrorStateObj.formErrorType;
+
+  if (!formErrorStateObj.formError) return;
+
+  const errorTypesArr = callingToCloseErrorType.split(',');
+  if (errorTypesArr.includes(currentFormErrorType)) {
+    setFormError({ formError: false, formErrorType: false });
+  }
 };
 
 export {
@@ -59,4 +70,5 @@ export {
   mobSubscribeToFCMTopic,
   mobTrackCurrentScreen,
   validate,
+  closeFormError,
 };
