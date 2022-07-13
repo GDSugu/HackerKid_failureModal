@@ -8,7 +8,7 @@ import '../../../../stylesheets/common/sass/components/_otp.scss';
 import showInlineLoadingSpinner from '../../loader';
 
 const VerifyOtpFormStep = ({
-  parentStateObj, setParentStateObj, secondaryActionButtons, setBackBtnStateObj,
+  parentStateObj, setParentStateObj, setBackBtnStateObj, secondaryActionButtons = false,
 }) => {
   const {
     sendOtpRequest, verifyOtpRequest, stateObj, setStateObj,
@@ -222,7 +222,8 @@ const VerifyOtpFormStep = ({
         </button>
         <div className='secondary-take-action-buttons'>
           {
-            secondaryActionButtons.map((secondaryActionButton) => secondaryActionButton)
+            secondaryActionButtons
+            && secondaryActionButtons.map((secondaryActionButton) => secondaryActionButton)
           }
         </div>
       </div>
