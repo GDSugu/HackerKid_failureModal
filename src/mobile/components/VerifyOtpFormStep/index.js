@@ -6,8 +6,10 @@ import {
   TouchableOpacity,
   TextInput,
   KeyboardAvoidingView,
+  Keyboard,
 } from 'react-native';
 import useOtp from '../../../hooks/pages/otp';
+import { closeFormError } from '../../common/framework';
 
 const VerifyOtpFormStep = ({
   style, parentStateObj, setParentStateObj, setBackBtnStateObj, formErrorStateObj,
@@ -50,7 +52,7 @@ const VerifyOtpFormStep = ({
 
   const resendOtpPressHandler = () => {
     if (stateObj.otpTimerId === null) {
-      sendOtpRequest(parentStateObj.phoneNumber, parentStateObj.countryCode, 'send-otp-for-pwd-change').then((response) => {
+      sendOtpRequest(parentStateObj.phoneNumber, parentStateObj.countryCode).then((response) => {
         const data = JSON.parse(response);
 
         if (data.status === 'error') {
@@ -68,21 +70,18 @@ const VerifyOtpFormStep = ({
   const keyPressHandler = (e, otpIndex) => {
     const { nativeEvent } = e;
     const { key } = nativeEvent;
-    const currentOtpField = otpFieldsArr[otpIndex].current;
 
     if (key.match(/\d/g)) {
       const nextOtpField = otpFieldsArr[otpIndex + 1]
         ? otpFieldsArr[otpIndex + 1].current : false;
 
       if (nextOtpField) {
-        currentOtpField.blur();
         nextOtpField.focus();
       }
-    } else if (key === 'Backspace' || key === 'Delete') {
+    } else if (key === 'Backspace') {
       const prevOtpField = otpFieldsArr[otpIndex - 1] ? otpFieldsArr[otpIndex - 1].current : false;
 
       if (prevOtpField) {
-        currentOtpField.blur();
         prevOtpField.focus();
       }
     }
@@ -93,6 +92,7 @@ const VerifyOtpFormStep = ({
     const { text: value } = nativeEvent;
     const regex = /\D/g;
 
+    // replace the value if not a digit
     if (regex.test(value)) {
       const replacedValue = value.replace(regex, '');
 
@@ -184,8 +184,8 @@ const VerifyOtpFormStep = ({
     }));
 
     const removeListener = navigation.addListener('beforeRemove', (e) => {
-      e.preventDefault();
       if (e.data.action.type === 'GO_BACK') {
+        e.preventDefault();
         setParentStateObj((prevObj) => ({
           ...prevObj,
           formStep: prevObj.formStep - 1,
@@ -198,6 +198,13 @@ const VerifyOtpFormStep = ({
       clearInterval(stateObj.otpTimerId);
     };
   }, []);
+
+  useEffect(() => {
+    if (stateObj.enteredOtpArr.join('').length === 4) {
+      verifyBtnPressHandler();
+      Keyboard.dismiss();
+    }
+  }, [stateObj]);
 
   const otpTimerSyles = [style.otpTimer];
   const resendOtpBtnStyles = [style.resendOtpBtn];
@@ -241,7 +248,11 @@ const VerifyOtpFormStep = ({
               multiline={false}
               maxLength={1}
               ref={firstOtpField}
-              onChange={(e) => onChangeHandler(e, 0)} onKeyPress={(e) => keyPressHandler(e, 0)} />
+              onChange={(e) => {
+                onChangeHandler(e, 0);
+                closeFormError(formErrorStateObj, 'OTP_EXPIRED,ERROR', setFormErrorObj);
+              }}
+              onKeyPress={(e) => keyPressHandler(e, 0)} />
             <TextInput style={[style.inputField, style.otpField]}
               value={stateObj.enteredOtpArr[1]}
               keyboardType='number-pad'
@@ -249,7 +260,11 @@ const VerifyOtpFormStep = ({
               multiline={false}
               maxLength={1}
               ref={secondOtpField}
-              onChange={(e) => onChangeHandler(e, 1)} onKeyPress={(e) => keyPressHandler(e, 1)} />
+              onChange={(e) => {
+                onChangeHandler(e, 1);
+                closeFormError(formErrorStateObj, 'OTP_EXPIRED,ERROR', setFormErrorObj);
+              } }
+              onKeyPress={(e) => keyPressHandler(e, 1)} />
             <TextInput
               style={[style.inputField, style.otpField]}
               value={stateObj.enteredOtpArr[2]}
@@ -258,21 +273,29 @@ const VerifyOtpFormStep = ({
               multiline={false}
               maxLength={1}
               ref={thirdOtpField}
-              onChange={(e) => onChangeHandler(e, 2)} onKeyPress={(e) => keyPressHandler(e, 2)} />
+              onChange={(e) => {
+                onChangeHandler(e, 2);
+                closeFormError(formErrorStateObj, 'OTP_EXPIRED,ERROR', setFormErrorObj);
+              } }
+              onKeyPress={(e) => keyPressHandler(e, 2)} />
             <TextInput style={[style.inputField, style.otpField]}
               value={stateObj.enteredOtpArr[3]}
               keyboardType='number-pad'
               disableFullscreenUI={true}
               multiline={false}
               maxLength={1} ref={fourthOtpField}
-              onChange={(e) => onChangeHandler(e, 3)} onKeyPress={(e) => keyPressHandler(e, 3)} />
+              onChange={(e) => {
+                onChangeHandler(e, 3);
+                closeFormError(formErrorStateObj, 'OTP_EXPIRED,ERROR', setFormErrorObj);
+              } }
+              onKeyPress={(e) => keyPressHandler(e, 3)} />
         </View>
       </View>
         <TouchableOpacity style={{ marginBottom: 20 }}
           onPress={
             () => setParentStateObj((prevObj) => ({ ...prevObj, formStep: prevObj.formStep - 1 }))
           }>
-            <Text style={style.notNumber}>
+            <Text style={style.btnAsInteractiveText}>
               <FormattedMessage
                 defaultMessage='Not {phone} ?'
                 description="not button"
