@@ -3,10 +3,14 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import {
   ScrollView, StyleSheet, Text, View,
 } from 'react-native';
+import WebView from 'react-native-webview';
 import * as Animatable from 'react-native-animatable';
 import ThemeContext from '../components/theme';
 import { TurtleContext } from '../../hooks/pages/turtle';
 import Collapse from '../components/Collapse';
+import { useSharedTurtleWebView } from '../../shared/turtle';
+import webViewElement from '../components/WebView';
+import Collapsible from 'react-native-collapsible';
 
 const getStyles = (font, utilColors) => StyleSheet.create({
   container: {
@@ -50,8 +54,37 @@ const TurtleQuestion = () => {
   const style = getStyles(font, utilColors);
   const intl = useIntl();
   const turtleContext = React.useContext(TurtleContext);
+  const webViewRef = React.useRef(null);
+
+  const { turtleOutput: { BodyContent, ScriptContent, scriptToInject } } = useSharedTurtleWebView();
+
+  const webViewString = webViewElement({
+    BodyComponent: BodyContent,
+    ScriptComponent: ScriptContent,
+  });
 
   console.log('turtlequestion before jsx');
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      if (webViewRef.current && turtleContext.tqState.status === 'success') {
+        const initBlockly = `
+        try {
+            window.execute({
+              action: 'renderTurtle',
+              data: {
+                snippet: '${JSON.stringify(turtleContext.tqState.questionObject.snippet)}',
+              },
+            });
+        } catch (err) {
+          window.ReactNativeWebView.postMessage('Question Script Error: ');
+          window.ReactNativeWebView.postMessage(err.message);
+        }
+          `;
+        webViewRef.current.injectJavaScript(initBlockly);
+      }
+    }, 1000);
+  }, []);
 
   return <>
     {/* <TurtleContext.Consumer>
@@ -94,9 +127,11 @@ const TurtleQuestion = () => {
                 ) }
           </View>
         {/* <View style={style.card}></View> */}
-          <Animatable.View style={style.card}>
+          {/* <Animatable.View style={style.card}>
             <Collapse
-              style={style.card}
+              style={{
+                ...style.card,
+              }}
               title={intl.formatMessage({
                 defaultMessage: 'Expected Output',
                 description: 'Collapse Title - Expected Output',
@@ -104,12 +139,34 @@ const TurtleQuestion = () => {
               // CustomHeader={() => <Text style={style.cardContent} >Expected Output</Text>}
             >
               <View>
-              { new Array(5)
-                .fill(0, 0, 10)
-                .map((elem, ind) => <Text key={ind} >hello</Text>)}
+                <WebView
+                  ref={webViewRef}
+                  source={{ html: webViewString }}
+                  originWhitelist={['*']}
+                  startInLoadingState={true}
+                  injectedJavaScript={scriptToInject}
+                  onMessage={(event) => {
+                    console.log('turtlequestion onMessage');
+                    console.log(event.nativeEvent.data);
+                  }}
+                />
               </View>
             </Collapse>
-          </Animatable.View>
+          </Animatable.View> */}
+          <Collapsible collapsed={false}>
+            <Text>hello collapse</Text>
+            <WebView
+              ref={webViewRef}
+              source={{ html: webViewString }}
+              originWhitelist={['*']}
+              startInLoadingState={true}
+              injectedJavaScript={scriptToInject}
+              onMessage={(event) => {
+                console.log('turtlequestion onMessage');
+                console.log(event.nativeEvent.data);
+              }}
+            />
+          </Collapsible>
         </ScrollView>
       {/* </> }
     </TurtleContext.Consumer> */}

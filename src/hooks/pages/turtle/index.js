@@ -69,8 +69,15 @@ const useTurtleFetchQuestion = ({ type = 'initialQuestion' || 'getQuestionById',
 const TurtleContext = React.createContext();
 
 const useTurtleValidation = () => {
-  const submitTurtle = () => {
-    console.log();
+  const submitTurtle = (request) => {
+    console.log('submitTurtle');
+    let requestString = '';
+    Object.keys(request).forEach((index) => {
+      requestString += request[index];
+    });
+    const requestHash = md5(requestString + md5(requestString).toString()).toString();
+    request.requestHash = requestHash;
+    console.log(request);
     // if (TurtleContext.current)
     // let requestString = TurtleContext;
     // Object.keys(turtleValidationState).forEach((key) => {

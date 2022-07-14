@@ -58,14 +58,14 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
 const TurtleOutput = ({ navigation }) => {
   const { theme: { utilColors, screenTurtleOutput }, font } = React.useContext(ThemeContext);
   const style = getStyles(screenTurtleOutput, utilColors, font);
-  const { turtleOutput } = useSharedTurtleWebView();
+  const {
+    turtleOutput: {
+      BodyContent, ScriptContent, scriptToInject, styleString
+    },
+  } = useSharedTurtleWebView();
   const { submitTurtle } = useTurtleValidation();
   const webViewRef = React.useRef(null);
   let webViewString = '';
-
-  const {
-    BodyContent, ScriptContent, scriptToInject, styleString,
-  } = turtleOutput;
 
   const turtleContext = React.useContext(TurtleContext);
 
@@ -100,9 +100,17 @@ const TurtleOutput = ({ navigation }) => {
       const { action, data } = message;
 
       switch (action) {
-        case 'validated':
+        case 'validated': {
           console.log(data);
           console.log(Object.keys(turtleContext.tqState));
+          const obj = {
+            questionId: Number(turtleContext.tqState.questionObject.question_id),
+            sourceCode: turtleContext.tqState.snippet,
+            xmlWorkSpace: turtleContext.tqState.xmlWorkSpace,
+            validated: data.validated,
+          };
+          submitTurtle(obj);
+        }
           break;
         default: break;
       }
@@ -234,7 +242,6 @@ const TurtleOutput = ({ navigation }) => {
           }}
           onPress={() => {
             console.log('Play btn');
-            submitTurtle();
           }}
         >
           <Text
