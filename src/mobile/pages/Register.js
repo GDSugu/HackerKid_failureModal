@@ -8,8 +8,11 @@ import {
   TextInput,
   ScrollView,
   KeyboardAvoidingView,
+  Alert,
 } from 'react-native';
 import PhoneInput from 'react-native-phone-number-input';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CommonActions } from '@react-navigation/native';
 import ThemeContext from '../components/theme';
 import RegisterFormSvg from '../../images/register/register-form-svg.svg';
 import useRegister from '../../hooks/pages/register/index';
@@ -18,80 +21,10 @@ import Icon from '../common/Icons';
 import { closeFormError, validate } from '../common/framework';
 import useOtp from '../../hooks/pages/otp';
 import VerifyOtpFormStep from '../components/VerifyOtpFormStep';
+import getCommonStyles from '../components/commonStyles';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingLeft: 18,
-    paddingRight: 18,
-    justifyContent: 'center',
-  },
-  label: {
-    color: 'black',
-    marginBottom: 5,
-    ...font.bodyBold,
-  },
-  createAccountHeading: {
-    color: 'black',
-    marginVertical: 10,
-    ...font.heading6,
-    textAlign: 'center',
-    flexGrow: 1,
-  },
-  inputField: {
-    borderWidth: 1,
-    borderColor: theme.inputBorderColor,
-    borderRadius: 8,
-    padding: 8,
-    color: 'black',
-    ...font.bodyBold,
-  },
-  errorField: {
-    borderColor: 'red',
-  },
-  errorText: {
-    color: 'red',
-    ...font.bodyBold,
-  },
-  btnPrimary: {
-    borderRadius: 12,
-    marginBottom: 8,
-    backgroundColor: theme.btnBg,
-    padding: 14,
-  },
-  btnPrimaryText: {
-    ...font.bodyBold,
-    color: 'white',
-    textAlign: 'center',
-  },
-  btnOutlinePrimary: {
-    padding: 14,
-    borderWidth: 1,
-    marginBottom: 8,
-    borderColor: theme.inputBorderColor,
-    borderRadius: 8,
-  },
-  btnOutlinePrimaryText: {
-    ...font.bodyBold,
-    textAlign: 'center',
-    color: 'black',
-  },
-  registerFormSvgContainer: {
-    justifycontent: 'center',
-    alignItems: 'center',
-    marginBottom: 50,
-    marginTop: 50,
-  },
-  labelAndInputContainer: {
-    marginBottom: 10,
-  },
-  loginIntoExistingAccount: {
-    color: theme.fadedBtnTextColor,
-    ...font.bodyBold,
-    marginTop: 16,
-    marginBottom: 25,
-    textAlign: 'center',
-  },
+  ...getCommonStyles(theme, utilColors, font),
   nextBtn: {
     display: 'flex',
     flexDirection: 'row',
@@ -99,30 +32,6 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   },
   nextBtnText: {
     textAlign: 'left',
-  },
-  hide: {
-    display: 'none',
-  },
-  show: {
-    display: 'flex',
-  },
-  formHeadingAndBackBtn: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-    paddingHorizontal: 18,
-  },
-  labelAndFormHelperContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    flex: 1,
-    justifyContent: 'space-between',
-  },
-  formError: {
-    textAlign: 'center',
-    marginBottom: 20,
   },
   labelAndOtpFields: {
     justifyContent: 'center',
@@ -162,13 +71,6 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     borderBottomWidth: 2,
     width: '20%',
     padding: 0,
-    textAlign: 'center',
-  },
-  notNumber: {
-    color: theme.fadedBtnTextColor,
-    ...font.bodyBold,
-    marginTop: 16,
-    marginBottom: 25,
     textAlign: 'center',
   },
 });
@@ -222,6 +124,7 @@ const RegisterFormStepOne = ({
     const allValidationsPassed = checkAllValidations();
     if (allValidationsPassed) {
       const countryCode = `+${phoneInput.current.getCallingCode()}`;
+      const countryAbbrevation = phoneInput.current.getCountryCode();
 
       sendOtpRequest(stateObj.phoneNumber, countryCode).then((response) => {
         const data = JSON.parse(response);
@@ -235,6 +138,7 @@ const RegisterFormStepOne = ({
             ...prevObj,
             formStep: prevObj.formStep + 1,
             countryCode,
+            countryAbbrevation,
           }));
         } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
           setError((prevObj) => ({ ...prevObj, phoneNumber: true }));
@@ -279,7 +183,7 @@ const RegisterFormStepOne = ({
       </View>
       <PhoneInput
         ref={phoneInput}
-        defaultCode='IN'
+        defaultCode={(stateObj.countryAbbrevation) || 'IN'}
         containerStyle={getStyleArr('phoneNumber', { padding: 1.8, backgroundColor: 'transparent', width: '100%' })}
         textContainerStyle={{ height: 41, backgroundColor: 'transparent' }}
         placeholder=" "
@@ -388,7 +292,9 @@ const RegisterFormStepOne = ({
           />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-        <Text style={style.loginIntoExistingAccount}>Login into Existing Account</Text>
+        <Text style={style.btnAsInteractiveText}>
+          <FormattedMessage description='Login into Exisiting Account button' defaultMessage='Login into Existing Account'/>
+        </Text>
       </TouchableOpacity>
     </View>
     </KeyboardAvoidingView>
@@ -396,48 +302,194 @@ const RegisterFormStepOne = ({
   );
 };
 
-const RegisterFormStepThree = ({ style }) => (
+const RegisterFormStepThree = ({
+  style, font, theme, stateObj, setStateObj,
+  handleStateChange, formErrorStateObj, setFormErrorObj, errorStateObj,
+  setError, setBackBtnStateObj, createAccountRequest, navigation,
+}) => {
+  const [hidePasswordObj, setHidePasswordObj] = useState({
+    password: true,
+    retypedPassword: true,
+  });
+
+  useEffect(() => {
+    setBackBtnStateObj((prevBackObj) => ({
+      ...prevBackObj,
+      showBackBtn: true,
+      backFn: () => {
+        setStateObj((prevObj) => ({
+          ...prevObj,
+          formStep: 1,
+        }));
+      },
+    }));
+
+    const removeListener = navigation.addListener('beforeRemove', (e) => {
+      if (e.data.action.type === 'GO_BACK') {
+        e.preventDefault();
+        setStateObj((prevObj) => ({
+          ...prevObj,
+          formStep: 1,
+        }));
+      }
+    });
+
+    return removeListener;
+  }, []);
+
+  const matchValueTo = (value, matchToValue, errorKey, setErrorObj) => {
+    if (value === '') return;
+
+    if (value !== matchToValue) {
+      setErrorObj((prevObj) => ({ ...prevObj, [errorKey]: 'Passwords do not match' }));
+    }
+  };
+
+  const createAccountBtnPressHandler = (e) => {
+    e.preventDefault();
+
+    const enteredPassword = validate('password', stateObj.password, 'Password', setError, 'password');
+    const retypedPassword = validate('password', stateObj.retypedPassword, 'Retype Password', setError, 'retypedPassword');
+
+    if ((enteredPassword && retypedPassword) && (enteredPassword !== retypedPassword)) {
+      setError((prevObj) => ({ ...prevObj, retypedPassword: 'Passwords do not match' }));
+    }
+
+    if ((enteredPassword && retypedPassword) && (enteredPassword === retypedPassword)) {
+      createAccountRequest().then((response) => {
+        const data = JSON.parse(response);
+
+        if (data.status === 'success' && data.message === 'REGISTERED') {
+          AsyncStorage.setItem('authtoken', data.session.auth)
+            .then(() => {
+              navigation.dispatch(
+                CommonActions.reset({
+                  index: 1,
+                  routes: [
+                    { name: 'Start' },
+                  ],
+                }),
+              );
+            })
+            .catch((error) => {
+              Alert.alert('Authtoken Error', error);
+            });
+        } else if (data.status === 'error') {
+          setFormErrorObj({ formError: 'Something went wrong!Try again later', formErrorType: 'ERROR' });
+        }
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
+  };
+
+  const getStyleArr = (key, additionalStyles = false) => {
+    const styleArr = [style.inputField];
+
+    if (errorStateObj[key]) {
+      styleArr.push(style.errorField);
+    }
+    if (additionalStyles) {
+      styleArr.push(additionalStyles);
+    }
+    return styleArr;
+  };
+
+  return (
     <View style={style.container}>
     <KeyboardAvoidingView>
-    <View style={style.labelAndInputContainer}>
-      <Text style={style.label}>
-        <FormattedMessage
-            defaultMessage='Set Password'
-            description='Password Label'
-        />
-      </Text>
-      <TextInput
-        style={style.inputField}
-          multiline={false}
-          disableFullscreenUI={true}
-          secureTextEntry={true}
-      />
-    </View>
-    <View style={style.labelAndInputContainer}>
-      <Text style={style.label}>
-        <FormattedMessage
-          defaultMessage='Re-type Password'
-          description='Re-type Password label'
-        />
-      </Text>
-      <TextInput
-        disableFullscreenUI = {true}
-        secureTextEntry={true}
-        style={style.inputField}
-        multiline={false} />
-    </View>
-    </KeyboardAvoidingView>
-    <View>
-      <TouchableOpacity
-          style={style.btnPrimary}
+      <View style={style.labelAndInputContainer}>
+        <View style={style.labelAndFormHelperContainer}>
+          <Text style={style.label}>
+            <FormattedMessage
+              defaultMessage='Set Password'
+              description='Password Label'
+            />
+          </Text>
+          <Text style={style.errorText}>
+            {errorStateObj.password}
+          </Text>
+        </View>
+        <View>
+          <TextInput
+              style={getStyleArr('password')}
+              multiline={false}
+              disableFullscreenUI={true}
+              secureTextEntry={hidePasswordObj.password}
+              onChangeText={(value) => {
+                handleStateChange('password', value);
+                validate('password', value, 'Password', setError, 'password', 'Use a stronger password');
+                closeFormError(formErrorStateObj, 'ERROR');
+              }}
+            />
+          <TouchableOpacity
+            style={{
+              position: 'absolute', right: 0, top: 10, marginRight: 10,
+            }}
+              onPress={() => setHidePasswordObj((prevObj) => (
+                { ...prevObj, password: !prevObj.password }
+              ))}>
+              <Icon
+                  name={(hidePasswordObj.password) ? 'eye' : 'eye-slash'}
+                  type='FontAwesome'
+                  size={font.heading5.fontSize}
+                  color={theme.utilColors.lightGrey}
+              />
+            </TouchableOpacity>
+        </View>
+      </View>
+      <View style={style.labelAndInputContainer}>
+        <View style={style.labelAndFormHelperContainer}>
+          <Text style={style.label}>
+            <FormattedMessage
+              defaultMessage='Re-type Password'
+              description='Re-type Password label'
+            />
+          </Text>
+          <Text style={style.errorText}>
+            {errorStateObj.retypedPassword}
+          </Text>
+        </View>
+        <View>
+          <TextInput
+            disableFullscreenUI={true}
+            secureTextEntry={hidePasswordObj.retypedPassword}
+            style={getStyleArr('retypedPassword')}
+            multiline={false}
+            onChangeText={(value) => {
+              handleStateChange('retypedPassword', value);
+              validate('password', value, 'Retype Password', setError, 'retypedPassword', 'Use a stronger password');
+              closeFormError(formErrorStateObj, 'ERROR');
+              matchValueTo(value, stateObj.password, 'retypedPassword', setError);
+            }}
+            />
+          <TouchableOpacity style={{
+            position: 'absolute', right: 0, top: 10, marginRight: 10,
+          }} onPress={() => setHidePasswordObj((prevObj) => (
+            { ...prevObj, retypedPassword: !prevObj.retypedPassword }
+          ))}>
+            <Icon
+                name={(hidePasswordObj.retypedPassword) ? 'eye' : 'eye-slash'}
+                type='FontAwesome'
+                size={font.heading5.fontSize}
+                color={theme.utilColors.lightGrey}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View>
+        <TouchableOpacity
+          style={[style.btnPrimary, { marginVertical: 10 }]}
+          onPress={createAccountBtnPressHandler}
           title="Create Account">
-        <Text style={style.btnPrimaryText}>
-          <FormattedMessage defaultMessage='Create Account' description='Create Account Button'/>
-        </Text>
-      </TouchableOpacity>
-    </View>
-  </View>
-);
+          <Text style={style.btnPrimaryText}>
+            <FormattedMessage defaultMessage='Create Account' description='Create Account Button' />
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </KeyboardAvoidingView>
+  </View>);
+};
 
 const Register = ({ navigation }) => {
   const { stateObj, setStateObj, createAccountRequest } = useRegister();
@@ -447,6 +499,8 @@ const Register = ({ navigation }) => {
     email: false,
     fullName: false,
     parentName: false,
+    password: false,
+    retypedPassword: false,
   });
 
   const [formErrorStateObj, setFormErrorObj] = useState({
@@ -471,6 +525,12 @@ const Register = ({ navigation }) => {
     });
   };
 
+  useEffect(() => {
+    if (formErrorStateObj.formError) {
+      setFormErrorObj({ formError: false, formErrorType: false });
+    }
+  }, [stateObj.formStep]);
+
   return (
     <ScrollView style={{ flex: 1 }}>
       <View style={style.formHeadingAndBackBtn}>
@@ -479,13 +539,13 @@ const Register = ({ navigation }) => {
             <Icon name={'arrow-left'} type='FontAwesome' size={font.heading6.fontSize} color={ theme.utilColors.dark }/>
           </TouchableOpacity>
         </View>
-        <View style={{ flexBasis: '100%' }}>
-          <Text style={style.createAccountHeading}>
+        <View style={{ flex: 1 }}>
+          <Text style={style.formHeading}>
             <FormattedMessage defaultMessage={'Create a New Account'} description='Create Account Heading'/>
           </Text>
         </View>
         </View>
-        <View style={style.registerFormSvgContainer}>
+        <View style={style.formSvgContainer}>
           <RegisterFormSvg/>
       </View>
       {
@@ -517,20 +577,28 @@ const Register = ({ navigation }) => {
             key={ 0 }
             style={style.btnOutlinePrimary}
             title="Login into existing account"
-            onPress={() => navigation.navigate('Login')}>
+            onPress={() => {
+              navigation.navigate('Login');
+            }}>
             <Text style={style.btnOutlinePrimaryText}>
               <FormattedMessage defaultMessage='Login into existing account' description='Login into existing account button' />
             </Text>
           </TouchableOpacity>] } />)
         || ((stateObj.formStep === 3)
           && <RegisterFormStepThree
-          style={style}
-          theme={theme}
-          font={font}
-          stateObj={stateObj}
-          setStateObj={setStateObj}
-          setBackBtnStateObj={setBackBtnStateObj}
-          createAccountRequest={ createAccountRequest }
+        style={style}
+        theme={theme}
+        font={font}
+        stateObj={stateObj}
+        setStateObj={setStateObj}
+        handleStateChange = {handleStateChange}
+        formErrorStateObj={formErrorStateObj}
+        setFormErrorObj={setFormErrorObj}
+        errorStateObj={errorStateObj}
+        setError={setError}
+        setBackBtnStateObj={setBackBtnStateObj}
+        createAccountRequest={createAccountRequest}
+        navigation={ navigation}
           />)
       }
       </ScrollView>

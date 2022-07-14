@@ -11,6 +11,7 @@ const useRegister = () => {
     parentName: '',
     enteredOtpArr: [],
     password: '',
+    retypedPassword: '',
   });
 
   const createAccountRequest = () => {
@@ -21,7 +22,6 @@ const useRegister = () => {
       name: stateObj.fullName,
       mail: stateObj.email,
       password: stateObj.password,
-      url: window.location.href,
     };
 
     return post(postData, 'register/');
