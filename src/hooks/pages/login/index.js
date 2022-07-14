@@ -20,15 +20,16 @@ const useLoginMethod = () => {
     password: '',
   });
 
-  const loginWithPhone = (phone, countryCode, password, email = false) => {
-    const useEmail = stateObj.loginMethod !== 'loginWithPhone';
+  const loginWithPhone = (countryCode) => {
+    const useEmail = stateObj.loginMethod === 'loginWithEmail';
+    const email = (stateObj.loginMethod === 'loginWithEmail') ? stateObj.email : false;
 
     const device = getDevice();
     // const neoeyed = getneoEyed(phone);
     const result = post({
       type: 'usercheckPhone',
-      phone,
-      password,
+      phone: stateObj.phoneNumber,
+      password: stateObj.password,
       device,
       countryCode,
       email,

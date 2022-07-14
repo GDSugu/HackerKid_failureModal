@@ -44,19 +44,11 @@ const Login = () => {
   const { stateObj, setState: setStateObj, loginWithPhone } = useLoginMethod();
 
   const handleStateChange = (key, value) => {
-    setStateObj((prevObj) => {
-      const newObj = {
-        ...prevObj,
-        [key]: value,
-      };
-
-      if (key === 'phoneNumber') {
-        let countryCode = manager.telInput.getSelectedCountryData();
-        countryCode = `+${countryCode.dialCode}`;
-        newObj.countryCode = countryCode;
-      }
-      return newObj;
-    });
+    setStateObj((prevObj) => ({
+      ...prevObj,
+      [key]: value,
+    }
+    ));
   };
 
   const loginMethodTabClickHandler = (e, loginMethodToSet) => {
@@ -77,22 +69,23 @@ const Login = () => {
     });
   };
 
-  const loginBtnClickHandler = () => {
+  const loginBtnClickHandler = (e) => {
+    e.preventDefault();
     let primaryLoginFieldValue;
 
     if (stateObj.loginMethod === 'loginWithPhone') {
-      primaryLoginFieldValue = validate('#phone', 'tel', 1, '#phone-form-helper', 'Enter a valid phone number');
+      primaryLoginFieldValue = validate('#phone', 'tel', 1, '#phone-form-helper');
     } else {
-      primaryLoginFieldValue = validate('#email', 'email', 1, '#email-form-helper', 'Enter a E-mail Address');
+      primaryLoginFieldValue = validate('#email', 'email', 1, '#email-form-helper');
     }
     const password = validate('#password', 'password', 1, '#password-form-helper', null, true);
 
     if (primaryLoginFieldValue && password) {
       const hideInlineLoadingSpinner = showInlineLoadingSpinner('.login-btn');
-      loginWithPhone(stateObj.phoneNumber,
-        stateObj.countryCode,
-        stateObj.password,
-        stateObj.email).then((response) => {
+      let countryCode = manager.telInput.getSelectedCountryData();
+      countryCode = stateObj.loginMethod === 'loginWithPhone' ? `+${countryCode.dialCode}` : '';
+
+      loginWithPhone(countryCode).then((response) => {
         const data = JSON.parse(response);
 
         if (data.status !== 'success') {
@@ -134,13 +127,17 @@ const Login = () => {
               <a className="nav-link active" id="login-with-phone-tab"
                 data-toggle="pill" href="#login-with-phone"
                 role="tab" onClick={(e) => loginMethodTabClickHandler(e, 'loginWithPhone')}
-                data-close-form-error-type='EMAIL_LOGIN_RESTRICTED'>Login with Phone</a>
+                data-close-form-error-type='EMAIL_LOGIN_RESTRICTED'>
+                <FormattedMessage defaultMessage='Login with Phone' description='login with phone tab'/>
+              </a>
             </li>
             <li className="nav-item overline-bold" role="presentation">
               <a className="nav-link" id="login-with-email-tab"
                 data-toggle="pill" href="#login-with-email"
                 role="tab" onClick={(e) => loginMethodTabClickHandler(e, 'loginWithEmail')}
-                data-close-form-error-type='NOT_REGISTERED,INCORRECT'>Login with Email</a>
+                data-close-form-error-type='NOT_REGISTERED,INCORRECT'>
+                <FormattedMessage defaultMessage='Login with Email' description='Login with email tab' />
+              </a>
             </li>
           </ul>
           <div className="tab-content" id="pills-tabContent">
@@ -213,7 +210,7 @@ const Login = () => {
           </Link>
           <p className='form-error text-danger overline-bold text-center' id='form-error'></p>
           <div className='take-action-buttons mt-4'>
-            <button type='button' className='login-btn btn btn-primary btn-block mb-2' onClick={loginBtnClickHandler}>
+            <button type='submit' className='login-btn btn btn-primary btn-block mb-2' onClick={loginBtnClickHandler}>
               <span className='overline-bold'>
                 <FormattedMessage
                   defaultMessage="Login"
