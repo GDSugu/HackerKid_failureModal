@@ -5,6 +5,7 @@ const useForgotPassword = () => {
   const [stateObj, setStateObj] = useState({
     phoneNumber: '',
     password: '',
+    retypedPassword: '',
     formStep: 1,
   });
 
