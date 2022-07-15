@@ -6,21 +6,9 @@ const useForgotPassword = () => {
     phoneNumber: '',
     password: '',
     formStep: 1,
-    otpTimerId: null,
-    enteredOtpArr: [],
   });
 
-  const stepOneRequest = () => {
-    const postData = {
-      type: 'send-otp-for-pwd-change',
-      phone: stateObj.phoneNumber,
-      countryCode: stateObj.countryCode,
-    };
-
-    return post(postData, 'register/');
-  };
-
-  const stepThreeRequest = () => {
+  const changePasswordRequest = () => {
     const postData = {
       type: 'changePassword',
       phone: stateObj.phoneNumber,
@@ -34,8 +22,7 @@ const useForgotPassword = () => {
   return {
     stateObj,
     setStateObj,
-    stepOneRequest,
-    stepThreeRequest,
+    changePasswordRequest,
   };
 };
 

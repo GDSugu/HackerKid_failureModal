@@ -15,6 +15,7 @@ import {
 import VerifyOtpFormStep from '../components/VerifyOtpFormStep/VeriyOtpFormStep';
 import useBackBtn from '../../../../hooks/pages/back-btn';
 import showInlineLoadingSpinner from '../loader';
+import useOtp from '../../../../hooks/pages/otp';
 
 const manager = {};
 
@@ -43,8 +44,10 @@ const TakeActionButtons = ({ children }) => (
 );
 
 const ForgotPasswordStepOne = ({
-  stateObj, setStateObj, stepOneRequest, handleStateChange, setBackBtnStateObj,
+  stateObj, setStateObj, handleStateChange, setBackBtnStateObj,
 }) => {
+  const { sendOtpRequest } = useOtp();
+
   useEffect(() => {
     const flaginput = document.querySelector('#phone');
     manager.telInput = intlTelInput(flaginput, {
@@ -62,11 +65,14 @@ const ForgotPasswordStepOne = ({
 
   const sendOtpClickHandler = (e) => {
     e.preventDefault();
-    const result = validate('#phone', 'tel', 1, '#phone-form-helper', 'Enter a valida Phone Number');
+    const result = validate('#phone', 'tel', 1, '#phone-form-helper');
+
+    let countryCode = manager.telInput.getSelectedCountryData();
+    countryCode = `+${countryCode.dialCode}`;
 
     if (result) {
       const hideLoadingSpinner = showInlineLoadingSpinner('.send-otp-btn');
-      stepOneRequest().then((response) => {
+      sendOtpRequest(stateObj.phoneNumber, countryCode, 'send-otp-for-pwd-change').then((response) => {
         const data = JSON.parse(response);
 
         if (data.status === 'success') {
@@ -74,6 +80,7 @@ const ForgotPasswordStepOne = ({
             {
               ...prevObj,
               formStep: 2,
+              countryCode,
             }
           ));
         } else if (data.status === 'error' && data.message === 'ACCOUNT_NOT_EXIST') {
@@ -128,7 +135,7 @@ const ForgotPasswordStepOne = ({
 };
 
 const ForgotPasswordStepThree = ({
-  stepThreeRequest, setStateObj, handleStateChange, setBackBtnStateObj,
+  changePasswordRequest, setStateObj, handleStateChange, setBackBtnStateObj,
 }) => {
   const matchValueTo = (e, matchTo) => {
     const { target } = e;
@@ -162,7 +169,7 @@ const ForgotPasswordStepThree = ({
     if ((enteredPassword && retypedPassword) && (enteredPassword === retypedPassword)) {
       const hideInlineLoadingSpinner = showInlineLoadingSpinner('.change-password-btn');
 
-      stepThreeRequest().then((response) => {
+      changePasswordRequest().then((response) => {
         const data = JSON.parse(response);
 
         if (data.status === 'success' && data.message === 'CHANGED') {
@@ -285,25 +292,16 @@ const ForgotPassword = () => {
   pageInit('auth-container', 'Forgot-Password');
 
   const {
-    stateObj, setStateObj, stepOneRequest, stepThreeRequest,
+    stateObj, setStateObj, changePasswordRequest,
   } = useForgotPassword();
 
   const { stateObj: backBtnStateObj, setStateObj: setBackBtnStateObj } = useBackBtn();
 
   const handleStateChange = (key, value) => {
-    setStateObj((prevObj) => {
-      const newObj = {
-        ...prevObj,
-        [key]: value,
-      };
-
-      if (key === 'phoneNumber') {
-        let countryCode = manager.telInput.getSelectedCountryData();
-        countryCode = `+${countryCode.dialCode}`;
-        newObj.countryCode = countryCode;
-      }
-      return newObj;
-    });
+    setStateObj((prevObj) => ({
+      ...prevObj,
+      [key]: value,
+    }));
   };
 
   const backBtnClickHandler = () => {
@@ -336,7 +334,7 @@ const ForgotPassword = () => {
         {
           ((stateObj.formStep === 1
             && <ForgotPasswordStepOne stateObj={stateObj}
-              setStateObj={setStateObj} stepOneRequest={stepOneRequest}
+              setStateObj={setStateObj}
               handleStateChange={handleStateChange} setBackBtnStateObj={ setBackBtnStateObj} />)
             || (stateObj.formStep === 2
             && <VerifyOtpFormStep parentStateObj={stateObj}
@@ -357,7 +355,7 @@ const ForgotPassword = () => {
           </Link>]} />)
             || (stateObj.formStep === 3
               && <ForgotPasswordStepThree stateObj={stateObj}
-              setStateObj={setStateObj} stepThreeRequest={stepThreeRequest}
+              setStateObj={setStateObj} changePasswordRequest={changePasswordRequest}
               handleStateChange={handleStateChange} setBackBtnStateObj={setBackBtnStateObj} />)
             || (stateObj.formStep === 4
               && <ForgotPasswordStepFour setBackBtnStateObj={setBackBtnStateObj} />)
