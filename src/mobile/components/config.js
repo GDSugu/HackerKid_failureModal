@@ -147,6 +147,12 @@ const themes = {
       showNav: false,
       viewType: 'screen',
     },
+    screenForgotPassword: {
+      ...Theme.light.screenYellow,
+      showHeader: false,
+      showNav: false,
+      viewType: 'screen',
+    },
     utilColors: Theme.light.utilColors,
   },
   dark: {

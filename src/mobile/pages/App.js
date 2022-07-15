@@ -22,6 +22,7 @@ import RouteMore from './More';
 import RouteProfile from './EditProfile';
 import RouteLogin from './Login';
 import RouteRegister from './Register';
+import RouteForgotPassword from './ForgotPassword';
 
 import IconGame from '../../images/navbar/iconGame.svg';
 import IconHome from '../../images/navbar/iconHome.svg';
@@ -242,6 +243,7 @@ const App = () => {
             <Stack.Screen name='EditProfile' component={RouteProfile} />
             <Stack.Screen name='Login' component={RouteLogin} />
             <Stack.Screen name='Register' component={RouteRegister} />
+            <Stack.Screen name='ForgotPassword' component={RouteForgotPassword} />
             </Stack.Navigator>
           </NavigationContainer>
         </View>
