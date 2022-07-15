@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import PhoneInput from 'react-native-phone-number-input';
+import { CommonActions } from '@react-navigation/native';
 import ThemeContext from '../components/theme';
 import Icon from '../common/Icons';
 import ForgotPasswordFirstSvg from '../../images/forgot-password/forgot-password-form-svg.svg';
@@ -39,7 +40,15 @@ const TakeActionButtons = ({ children, style, navigation }) => (
         style={style.btnOutlinePrimary}
         title="Login into existing account"
         onPress={() => {
-          navigation.navigate('Login');
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 1,
+              routes: [
+                { name: 'ForgotPassword' },
+                { name: 'Login' },
+              ],
+            }),
+          );
         }}>
           <Text style={style.btnOutlinePrimaryText}>
             <FormattedMessage defaultMessage='Login into existing account' description='Login into existing account button' />
@@ -49,7 +58,15 @@ const TakeActionButtons = ({ children, style, navigation }) => (
         style={style.btnOutlinePrimary}
         title="Create a New Account"
         onPress={() => {
-          navigation.navigate('Register');
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 1,
+              routes: [
+                { name: 'ForgotPassword' },
+                { name: 'Register' },
+              ],
+            }),
+          );
         }}>
           <Text style={style.btnOutlinePrimaryText}>
             <FormattedMessage defaultMessage='Create a New Account' description='create a new account button' />

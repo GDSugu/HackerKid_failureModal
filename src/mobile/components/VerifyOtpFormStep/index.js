@@ -246,6 +246,7 @@ const VerifyOtpFormStep = ({
     }));
 
     const removeListener = navigation.addListener('beforeRemove', (e) => {
+      clearInterval(stateObj.otpTimerId);
       if (e.data.action.type === 'GO_BACK') {
         e.preventDefault();
         setParentStateObj((prevObj) => ({
