@@ -21,7 +21,7 @@ const manager = {};
 
 const TakeActionButtons = ({ children }) => (
   <div className='take-action-buttons mt-4'>
-    {children}
+    {(children) || false}
     <div className='secondary-take-action-buttons'>
       <Link to='/login' className='login-to-existing-account-btn btn btn-outline-primary btn-block mb-2'>
         <span className='overline-bold'>
@@ -337,8 +337,12 @@ const ForgotPassword = () => {
               setStateObj={setStateObj}
               handleStateChange={handleStateChange} setBackBtnStateObj={ setBackBtnStateObj} />)
             || (stateObj.formStep === 2
-            && <VerifyOtpFormStep parentStateObj={stateObj}
-              setParentStateObj={setStateObj} setBackBtnStateObj={setBackBtnStateObj} secondaryActionButtons={[<Link key={ 0} to='/login' className='login-to-existing-account-btn btn btn-outline-primary btn-block mb-2'>
+            && <VerifyOtpFormStep
+              parentStateObj={stateObj}
+            setParentStateObj={setStateObj}
+            setBackBtnStateObj={setBackBtnStateObj}
+            otpRequestType = {'send-otp-for-pwd-change'}
+            secondaryActionButtons={[<Link key={0} to='/login' className='login-to-existing-account-btn btn btn-outline-primary btn-block mb-2'>
               <span className='overline-bold'>
                 <FormattedMessage
                   defaultMessage="Login to existing Account"

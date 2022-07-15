@@ -8,7 +8,8 @@ import '../../../../stylesheets/common/sass/components/_otp.scss';
 import showInlineLoadingSpinner from '../../loader';
 
 const VerifyOtpFormStep = ({
-  parentStateObj, setParentStateObj, setBackBtnStateObj, secondaryActionButtons = false,
+  parentStateObj, setParentStateObj, setBackBtnStateObj, otpRequestType,
+  secondaryActionButtons = false,
 }) => {
   const {
     sendOtpRequest, verifyOtpRequest, stateObj, setStateObj,
@@ -47,7 +48,9 @@ const VerifyOtpFormStep = ({
   const resendOtpClickHandler = () => {
     $('.resend-otp').hide();
     if (stateObj.otpTimerId === null) {
-      sendOtpRequest(parentStateObj.phoneNumber, parentStateObj.countryCode, 'send-otp-for-pwd-change').then((response) => {
+      sendOtpRequest(parentStateObj.phoneNumber,
+        parentStateObj.countryCode,
+        otpRequestType).then((response) => {
         const data = JSON.parse(response);
         if (data.status === 'success') {
           startOtpTimer();
@@ -131,7 +134,8 @@ const VerifyOtpFormStep = ({
     }
 
     const hideInlineLoadingSpinner = showInlineLoadingSpinner('.verify-otp-btn');
-    verifyOtpRequest(parentStateObj.phoneNumber, parentStateObj.countryCode).then((response) => {
+    verifyOtpRequest(parentStateObj.phoneNumber,
+      parentStateObj.countryCode).then((response) => {
       const data = JSON.parse(response);
       if (data.status === 'success') {
         setParentStateObj((prevObj) => ({
@@ -221,10 +225,11 @@ const VerifyOtpFormStep = ({
             description="verify otp button" />
         </button>
         <div className='secondary-take-action-buttons'>
-          {
-            secondaryActionButtons
-            && secondaryActionButtons.map((secondaryActionButton) => secondaryActionButton)
-          }
+        {
+              (Array.isArray(secondaryActionButtons))
+                ? secondaryActionButtons.map((secondaryActionBtn) => secondaryActionBtn)
+                : secondaryActionButtons
+            }
         </div>
       </div>
     </div>

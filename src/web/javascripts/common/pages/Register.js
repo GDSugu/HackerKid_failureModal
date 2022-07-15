@@ -76,7 +76,7 @@ const RegisterFormStepOne = ({
       const hideInlineLoadingSpinner = showInlineLoadingSpinner('.next-btn');
       const countryCode = getCurrentCountryCode();
 
-      sendOtpRequest(stateObj.phoneNumber, countryCode).then((response) => {
+      sendOtpRequest(stateObj.phoneNumber, countryCode, 'send-otp').then((response) => {
         const data = JSON.parse(response);
         if (data.status === 'success') {
           setStateObj((prevObj) => ({
@@ -375,14 +375,15 @@ const Register = () => {
               parentStateObj={stateObj}
               setParentStateObj={setStateObj}
               setBackBtnStateObj={setBackBtnStateObj}
-              secondaryActionButtons={[<Link key={ 0} to='/login' className='login-into-existing-account-btn text-link mt-3'>
+              otpRequestType={'send-otp'}
+              secondaryActionButtons={[<Link key={0} to='/login' className='login-into-existing-account-btn text-link mt-3'>
               <span className='overline-bold'>
                 <FormattedMessage
                   defaultMessage="Login into existing account"
                   description="login into existing account button"
                 />
               </span>
-            </Link>]}
+              </Link>]}
                />)
             || ((stateObj.formStep === 3)
               && <RegisterFormStepThree

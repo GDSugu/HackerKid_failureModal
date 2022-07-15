@@ -7,7 +7,7 @@ const useOtp = () => {
     enteredOtpArr: ['', '', '', ''],
   });
 
-  const sendOtpRequest = (phoneNumber, countryCode, type = 'send-otp') => {
+  const sendOtpRequest = (phoneNumber, countryCode, type) => {
     const postData = {
       type,
       phone: phoneNumber,

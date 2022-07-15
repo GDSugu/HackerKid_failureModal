@@ -8,10 +8,8 @@ import {
   TextInput,
   ScrollView,
   KeyboardAvoidingView,
-  Alert,
 } from 'react-native';
 import PhoneInput from 'react-native-phone-number-input';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CommonActions } from '@react-navigation/native';
 import ThemeContext from '../components/theme';
 import RegisterFormSvg from '../../images/register/register-form-svg.svg';
@@ -22,6 +20,7 @@ import { closeFormError, validate } from '../common/framework';
 import useOtp from '../../hooks/pages/otp';
 import VerifyOtpFormStep from '../components/VerifyOtpFormStep';
 import getCommonStyles from '../components/commonStyles';
+import { setUserSession } from '../../hooks/common/framework';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   ...getCommonStyles(theme, utilColors, font),
@@ -86,7 +85,7 @@ const RegisterFormStepOne = ({
       const countryCode = `+${phoneInput.current.getCallingCode()}`;
       const countryAbbrevation = phoneInput.current.getCountryCode();
 
-      sendOtpRequest(stateObj.phoneNumber, countryCode).then((response) => {
+      sendOtpRequest(stateObj.phoneNumber, countryCode, 'send-otp').then((response) => {
         const data = JSON.parse(response);
 
         if (data.status === 'error') {
@@ -320,20 +319,16 @@ const RegisterFormStepThree = ({
         const data = JSON.parse(response);
 
         if (data.status === 'success' && data.message === 'REGISTERED') {
-          AsyncStorage.setItem('authtoken', data.session.auth)
-            .then(() => {
-              navigation.dispatch(
-                CommonActions.reset({
-                  index: 1,
-                  routes: [
-                    { name: 'Start' },
-                  ],
-                }),
-              );
-            })
-            .catch((error) => {
-              Alert.alert('Authtoken Error', error);
-            });
+          setUserSession(data.session).then(() => {
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 1,
+                routes: [
+                  { name: 'Start' },
+                ],
+              }),
+            );
+          }).catch((err) => console.log(err));
         } else if (data.status === 'error') {
           setFormErrorObj({ formError: 'Something went wrong!Try again later', formErrorType: 'ERROR' });
         }
@@ -475,14 +470,10 @@ const Register = ({ navigation }) => {
   const backBtnStyle = backBtnStateObj.showBackBtn ? style.show : style.hide;
 
   const handleStateChange = (key, value) => {
-    setStateObj((prevObj) => {
-      const newObj = {
-        ...prevObj,
-        [key]: value,
-      };
-
-      return newObj;
-    });
+    setStateObj((prevObj) => ({
+      ...prevObj,
+      [key]: value,
+    }));
   };
 
   useEffect(() => {
@@ -533,6 +524,7 @@ const Register = ({ navigation }) => {
           formErrorStateObj={formErrorStateObj}
           setFormErrorObj={setFormErrorObj}
           navigation={navigation}
+          otpRequestType={'send-otp'}
           secondaryActionButtons={[<TouchableOpacity
             key={ 0 }
             style={style.btnOutlinePrimary}
@@ -543,7 +535,7 @@ const Register = ({ navigation }) => {
             <Text style={style.btnOutlinePrimaryText}>
               <FormattedMessage defaultMessage='Login into existing account' description='Login into existing account button' />
             </Text>
-          </TouchableOpacity>] } />)
+          </TouchableOpacity>]} />)
         || ((stateObj.formStep === 3)
           && <RegisterFormStepThree
         style={style}

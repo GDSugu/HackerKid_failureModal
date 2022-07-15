@@ -16,7 +16,8 @@ import getCommonStyles from '../commonStyles';
 
 const VerifyOtpFormStep = ({
   parentStateObj, setParentStateObj, setBackBtnStateObj, formErrorStateObj,
-  setFormErrorObj, navigation, secondaryActionButtons = false, additionalStyles = false,
+  setFormErrorObj, navigation, otpRequestType,
+  secondaryActionButtons = false, additionalStyles = false,
 }) => {
   let additionalStylesObj = {};
 
@@ -114,7 +115,9 @@ const VerifyOtpFormStep = ({
 
   const resendOtpPressHandler = () => {
     if (stateObj.otpTimerId === null) {
-      sendOtpRequest(parentStateObj.phoneNumber, parentStateObj.countryCode).then((response) => {
+      sendOtpRequest(parentStateObj.phoneNumber,
+        parentStateObj.countryCode,
+        otpRequestType).then((response) => {
         const data = JSON.parse(response);
 
         if (data.status === 'error') {

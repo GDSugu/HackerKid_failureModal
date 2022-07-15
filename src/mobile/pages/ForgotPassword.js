@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ScrollView,
   KeyboardAvoidingView,
+  TextInput,
 } from 'react-native';
 import PhoneInput from 'react-native-phone-number-input';
 import { CommonActions } from '@react-navigation/native';
@@ -192,6 +193,185 @@ const ForgotPasswordStepOne = ({
   );
 };
 
+const ForgotPasswordStepThree = ({
+  style, font, theme, stateObj, setStateObj,
+  handleStateChange, formErrorStateObj, setFormErrorObj, errorStateObj,
+  setError, setBackBtnStateObj, changePasswordRequest, navigation,
+}) => {
+  const [hidePasswordObj, setHidePasswordObj] = useState({
+    password: true,
+    retypedPassword: true,
+  });
+
+  useEffect(() => {
+    setBackBtnStateObj((prevBackObj) => ({
+      ...prevBackObj,
+      showBackBtn: true,
+      backFn: () => {
+        setStateObj((prevObj) => ({
+          ...prevObj,
+          formStep: 1,
+        }));
+      },
+    }));
+
+    const removeListener = navigation.addListener('beforeRemove', (e) => {
+      if (e.data.action.type === 'GO_BACK') {
+        e.preventDefault();
+        setStateObj((prevObj) => ({
+          ...prevObj,
+          formStep: 1,
+        }));
+      }
+    });
+
+    return removeListener;
+  }, []);
+
+  const matchValueTo = (value, matchToValue, errorKey, setErrorObj) => {
+    if (value === '') return;
+
+    if (value !== matchToValue) {
+      setErrorObj((prevObj) => ({ ...prevObj, [errorKey]: 'Passwords do not match' }));
+    }
+  };
+
+  const changePasswordBtnPressHandler = (e) => {
+    e.preventDefault();
+
+    const enteredPassword = validate('password', stateObj.password, 'Password', setError, 'password');
+    const retypedPassword = validate('password', stateObj.retypedPassword, 'Retype Password', setError, 'retypedPassword');
+
+    if ((enteredPassword && retypedPassword) && (enteredPassword !== retypedPassword)) {
+      setError((prevObj) => ({ ...prevObj, retypedPassword: 'Passwords do not match' }));
+    }
+
+    if ((enteredPassword && retypedPassword) && (enteredPassword === retypedPassword)) {
+      console.log('here');
+      changePasswordRequest().then((response) => {
+        const data = JSON.parse(response);
+        console.log(data);
+
+        if (data.status === 'success' && data.message === 'REGISTERED') {
+          setStateObj((prevObj) => ({ ...prevObj, formStep: prevObj.formStep + 1 }));
+        } else if (data.status === 'error') {
+          setFormErrorObj({ formError: 'Something went wrong!Try again later', formErrorType: 'ERROR' });
+        }
+      }).catch((error) => {
+        setFormErrorObj({ formError: 'Something went wrong!Try again later', formErrorType: 'ERROR' });
+        console.log(error);
+      });
+    }
+  };
+
+  const getStyleArr = (key, additionalStyles = false) => {
+    const styleArr = [style.inputField];
+
+    if (errorStateObj[key]) {
+      styleArr.push(style.errorField);
+    }
+    if (additionalStyles) {
+      styleArr.push(additionalStyles);
+    }
+    return styleArr;
+  };
+
+  return (
+    <View style={style.container}>
+    <KeyboardAvoidingView>
+      <View style={style.labelAndInputContainer}>
+        <View style={style.labelAndFormHelperContainer}>
+          <Text style={style.label}>
+            <FormattedMessage
+              defaultMessage='New Password'
+              description='New Password Label'
+            />
+          </Text>
+          <Text style={style.errorText}>
+            {errorStateObj.password}
+          </Text>
+        </View>
+        <View>
+          <TextInput
+              style={getStyleArr('password')}
+              multiline={false}
+              disableFullscreenUI={true}
+              secureTextEntry={hidePasswordObj.password}
+              onChangeText={(value) => {
+                handleStateChange('password', value);
+                validate('password', value, 'Password', setError, 'password', 'Use a stronger password');
+                closeFormError(formErrorStateObj, 'ERROR');
+              }}
+            />
+          <TouchableOpacity
+            style={{
+              position: 'absolute', right: 0, top: 10, marginRight: 10,
+            }}
+              onPress={() => setHidePasswordObj((prevObj) => (
+                { ...prevObj, password: !prevObj.password }
+              ))}>
+              <Icon
+                  name={(hidePasswordObj.password) ? 'eye' : 'eye-slash'}
+                  type='FontAwesome'
+                  size={font.heading5.fontSize}
+                  color={theme.utilColors.lightGrey}
+              />
+            </TouchableOpacity>
+        </View>
+      </View>
+      <View style={style.labelAndInputContainer}>
+        <View style={style.labelAndFormHelperContainer}>
+          <Text style={style.label}>
+            <FormattedMessage
+              defaultMessage='Re-type Password'
+              description='Re-type Password label'
+            />
+          </Text>
+          <Text style={style.errorText}>
+            {errorStateObj.retypedPassword}
+          </Text>
+        </View>
+        <View>
+          <TextInput
+            disableFullscreenUI={true}
+            secureTextEntry={hidePasswordObj.retypedPassword}
+            style={getStyleArr('retypedPassword')}
+            multiline={false}
+            onChangeText={(value) => {
+              handleStateChange('retypedPassword', value);
+              validate('password', value, 'Retype Password', setError, 'retypedPassword', 'Use a stronger password');
+              closeFormError(formErrorStateObj, 'ERROR');
+              matchValueTo(value, stateObj.password, 'retypedPassword', setError);
+            }}
+            />
+          <TouchableOpacity style={{
+            position: 'absolute', right: 0, top: 10, marginRight: 10,
+          }} onPress={() => setHidePasswordObj((prevObj) => (
+            { ...prevObj, retypedPassword: !prevObj.retypedPassword }
+          ))}>
+            <Icon
+                name={(hidePasswordObj.retypedPassword) ? 'eye' : 'eye-slash'}
+                type='FontAwesome'
+                size={font.heading5.fontSize}
+                color={theme.utilColors.lightGrey}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View>
+        <TouchableOpacity
+          style={[style.btnPrimary, { marginVertical: 10 }]}
+          onPress={changePasswordBtnPressHandler}
+          title="Change Password">
+          <Text style={style.btnPrimaryText}>
+            <FormattedMessage defaultMessage='Change Password' description='Change password button text' />
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </KeyboardAvoidingView>
+  </View>);
+};
+
 const ForgotPassword = ({ navigation }) => {
   const { stateObj, setStateObj, changePasswordRequest } = useForgotPassword();
 
@@ -264,24 +444,25 @@ const ForgotPassword = ({ navigation }) => {
           setBackBtnStateObj={setBackBtnStateObj}
           formErrorStateObj={formErrorStateObj}
           setFormErrorObj={setFormErrorObj}
+          otpRequesType ={'send-otp-for-pwd-change'}
           navigation={navigation}
           secondaryActionButtons={<TakeActionButtons style={style} navigation={navigation} />} />)
-        // || ((stateObj.formStep === 3)
-        //   && <RegisterFormStepThree
-        // style={style}
-        // theme={theme}
-        // font={font}
-        // stateObj={stateObj}
-        // setStateObj={setStateObj}
-        // handleStateChange = {handleStateChange}
-        // formErrorStateObj={formErrorStateObj}
-        // setFormErrorObj={setFormErrorObj}
-        // errorStateObj={errorStateObj}
-        // setError={setError}
-        // setBackBtnStateObj={setBackBtnStateObj}
-        // createAccountRequest={createAccountRequest}
-        // navigation={ navigation}
-        //   />)
+        || ((stateObj.formStep === 3)
+          && <ForgotPasswordStepThree
+        style={style}
+        theme={theme}
+        font={font}
+        stateObj={stateObj}
+        setStateObj={setStateObj}
+        handleStateChange = {handleStateChange}
+        formErrorStateObj={formErrorStateObj}
+        setFormErrorObj={setFormErrorObj}
+        errorStateObj={errorStateObj}
+        setError={setError}
+        setBackBtnStateObj={setBackBtnStateObj}
+        changePasswordRequest={changePasswordRequest}
+        navigation={ navigation}
+          />)
       }
       </ScrollView>
   );
