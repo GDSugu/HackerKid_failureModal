@@ -7,15 +7,73 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Keyboard,
+  StyleSheet,
 } from 'react-native';
+import ThemeContext from '../theme';
 import useOtp from '../../../hooks/pages/otp';
 import { closeFormError } from '../../common/framework';
+import getCommonStyles from '../commonStyles';
 
 const VerifyOtpFormStep = ({
-  style, parentStateObj, setParentStateObj, setBackBtnStateObj, formErrorStateObj,
-  setFormErrorObj, navigation, secondaryActionButtons = false,
+  parentStateObj, setParentStateObj, setBackBtnStateObj, formErrorStateObj,
+  setFormErrorObj, navigation, secondaryActionButtons = false, additionalStyles = false,
 }) => {
+  let additionalStylesObj = {};
+
+  if (additionalStyles) {
+    additionalStylesObj = additionalStyles;
+  }
+
+  const getStyles = (theme, utilColors, font) => StyleSheet.create({
+    ...getCommonStyles(theme, utilColors, font),
+    labelAndOtpFields: {
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    labelWithOtpTimer: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width: '80%',
+    },
+    otpLabel: {
+      marginBottom: 0,
+    },
+    otpTimer: {
+      color: utilColors.lightGrey,
+      ...font.bodyBold,
+    },
+    resendOtpBtnText: {
+      ...font.bodyBold,
+      color: theme.fadedBtnTextColor,
+    },
+    otpFields: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      margin: 'auto',
+      width: '80%',
+      marginVertical: 30,
+    },
+    otpField: {
+      borderRadius: 0,
+      borderTopWidth: 0,
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
+      borderBottomWidth: 2,
+      width: '20%',
+      padding: 0,
+      textAlign: 'center',
+    },
+    ...additionalStylesObj,
+  });
+
   const [otpSeconds, setOtpSeconds] = useState(0);
+
+  const { font, theme } = React.useContext(ThemeContext);
+  const screenTheme = theme.screenRegister;
+  const style = getStyles(screenTheme, theme.utilColors, font);
 
   const firstOtpField = useRef(null);
   const secondOtpField = useRef(null);
@@ -28,10 +86,14 @@ const VerifyOtpFormStep = ({
     sendOtpRequest, verifyOtpRequest, stateObj, setStateObj,
   } = useOtp();
 
+  let componentStillMounted = true;
+
   const startOtpTimer = () => {
     setOtpSeconds(30);
     const timer = setInterval(() => {
-      setOtpSeconds((second) => second - 1);
+      if (componentStillMounted) {
+        setOtpSeconds((second) => second - 1);
+      }
     }, 1000);
     setStateObj((prevObj) => ({
       ...prevObj,
@@ -196,6 +258,7 @@ const VerifyOtpFormStep = ({
     return () => {
       removeListener();
       clearInterval(stateObj.otpTimerId);
+      componentStillMounted = false;
     };
   }, []);
 
@@ -319,10 +382,11 @@ const VerifyOtpFormStep = ({
           </Text>
         </TouchableOpacity>
         <View>
-          {
-              secondaryActionButtons
-              && secondaryActionButtons.map((secondaryActionBtn) => secondaryActionBtn)
-          }
+            {
+              (Array.isArray(secondaryActionButtons))
+                ? secondaryActionButtons.map((secondaryActionBtn) => secondaryActionBtn)
+                : secondaryActionButtons
+            }
         </View>
       </View>
     </KeyboardAvoidingView>

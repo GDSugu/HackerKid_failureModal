@@ -33,46 +33,6 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   nextBtnText: {
     textAlign: 'left',
   },
-  labelAndOtpFields: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  labelWithOtpTimer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '80%',
-  },
-  otpLabel: {
-    marginBottom: 0,
-  },
-  otpTimer: {
-    color: utilColors.lightGrey,
-    ...font.bodyBold,
-  },
-  resendOtpBtnText: {
-    ...font.bodyBold,
-    color: theme.fadedBtnTextColor,
-  },
-  otpFields: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    margin: 'auto',
-    width: '80%',
-    marginVertical: 30,
-  },
-  otpField: {
-    borderRadius: 0,
-    borderTopWidth: 0,
-    borderLeftWidth: 0,
-    borderRightWidth: 0,
-    borderBottomWidth: 2,
-    width: '20%',
-    padding: 0,
-    textAlign: 'center',
-  },
 });
 
 const RegisterFormStepOne = ({
