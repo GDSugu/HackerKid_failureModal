@@ -1,16 +1,18 @@
 import React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import {
+  Dimensions,
+  Pressable,
   ScrollView, StyleSheet, Text, View,
 } from 'react-native';
 import WebView from 'react-native-webview';
-import * as Animatable from 'react-native-animatable';
+import Collapsible from 'react-native-collapsible';
 import ThemeContext from '../components/theme';
 import { TurtleContext } from '../../hooks/pages/turtle';
 import Collapse from '../components/Collapse';
 import { useSharedTurtleWebView } from '../../shared/turtle';
 import webViewElement from '../components/WebView';
-import Collapsible from 'react-native-collapsible';
+import Icon from '../common/Icons';
 
 const getStyles = (font, utilColors) => StyleSheet.create({
   container: {
@@ -18,15 +20,31 @@ const getStyles = (font, utilColors) => StyleSheet.create({
     padding: 16,
   },
   titleText: {
-    ...font.subtitle1,
+    ...font.subtitleBold,
     color: utilColors.white,
   },
   card: {
     borderRadius: 12,
     paddingVertical: 16,
-    marginVertical: 4,
-    // backgroundColor: utilColors.white,
-    backgroundColor: 'white',
+    marginVertical: 8,
+    backgroundColor: utilColors.white,
+    // backgroundColor: 'white',
+  },
+  collapseCard: {
+    flex: 1,
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 32,
+    backgroundColor: utilColors.white,
+  },
+  collapseCardHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  collapseCardHeaderContent: {
+    ...font.subtitleBold,
+    color: utilColors.black,
   },
   cardProblemBg: {
     backgroundColor: '#ffffffee',
@@ -45,23 +63,36 @@ const getStyles = (font, utilColors) => StyleSheet.create({
     ...font.subtitle2,
     color: utilColors.dark,
     lineHeight: 24,
-    marginLeft: 16,
+    // marginLeft: 16,
   },
 });
 
 const TurtleQuestion = () => {
   const { font, theme: { utilColors } } = React.useContext(ThemeContext);
-  const style = getStyles(font, utilColors);
-  const intl = useIntl();
   const turtleContext = React.useContext(TurtleContext);
   const webViewRef = React.useRef(null);
+  const [isCollapsed, setIsCollapsed] = React.useState(false);
+  const memoizedCollapseValue = React.useMemo(() => isCollapsed, [isCollapsed]);
+  const style = getStyles(font, utilColors);
 
-  const { turtleOutput: { BodyContent, ScriptContent, scriptToInject } } = useSharedTurtleWebView();
+  const {
+    turtleQuestion: {
+      BodyContent, ScriptContent, scriptToInject, styleString,
+    },
+  } = useSharedTurtleWebView();
 
   const webViewString = webViewElement({
     BodyComponent: BodyContent,
     ScriptComponent: ScriptContent,
+    // styleString: `<style>
+    //   body {
+    //     border-radius: 12px;
+    //   }
+    // </style>`,
+    styleString,
   });
+
+  const toggleCollapse = () => setIsCollapsed(!isCollapsed);
 
   console.log('turtlequestion before jsx');
 
@@ -92,12 +123,15 @@ const TurtleQuestion = () => {
         <ScrollView style={style.container}>
           <Text style={style.titleText}>
             <FormattedMessage
-              defaultMessage='Problem Statement'
-              description='Problem Statement'
+              defaultMessage='{question}'
+              description='Question'
+              values={{
+                question: turtleContext.tqState.questionObject.Question,
+              }}
             />
           </Text>
           <View style={[style.card, style.cardProblemBg]}>
-            <Text style={[style.cardContent, style.mb1]}>
+            {/* <Text style={[style.cardContent, style.mb1]}>
               <FormattedMessage
                 defaultMessage='{question}'
                 description='Question'
@@ -105,14 +139,14 @@ const TurtleQuestion = () => {
                   question: turtleContext.tqState.questionObject.Question,
                 }}
               />
-            </Text>
-            { turtleContext.tqState.questionObject.steps
+            </Text> */}
+            {/* { turtleContext.tqState.questionObject.steps
             && <Text style={style.cardContent}>
                 <FormattedMessage
                   defaultMessage='Instructions'
                   description='Instructions'
                 />
-              </Text> }
+              </Text> } */}
             { turtleContext.tqState.questionObject.steps
                 && turtleContext.tqState.questionObject.steps.map(
                   (step, index) => <Text key={index} style={style.problemStatement}>
@@ -153,10 +187,30 @@ const TurtleQuestion = () => {
               </View>
             </Collapse>
           </Animatable.View> */}
-          <Collapsible collapsed={false}>
-            <Text>hello collapse</Text>
+          <View style={style.collapseCard}>
+            <Pressable
+              onPress={toggleCollapse}
+            >
+              <View style={style.collapseCardHeader}>
+                <Text style={style.collapseCardHeaderContent}>
+                  <FormattedMessage
+                    defaultMessage='Expected Output'
+                    description='Collapse Title - Expected Output'
+                  />
+                </Text>
+                <Icon type='FontAwesome5' name={ memoizedCollapseValue ? 'angle-down' : 'angle-up'} color={utilColors.black} size={24} />
+              </View>
+            </Pressable>
+            <Collapsible
+              collapsed={memoizedCollapseValue}
+            >
             <WebView
               ref={webViewRef}
+              style={{
+                height: Dimensions.get('window').height * 0.3,
+                width: '100%',
+                borderRadius: 12,
+              }}
               source={{ html: webViewString }}
               originWhitelist={['*']}
               startInLoadingState={true}
@@ -167,6 +221,7 @@ const TurtleQuestion = () => {
               }}
             />
           </Collapsible>
+          </View>
         </ScrollView>
       {/* </> }
     </TurtleContext.Consumer> */}

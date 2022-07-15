@@ -1244,6 +1244,28 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {}, a
         horizontalLayout: (window.innerWidth < 641 && !xmlBlock.includes('category')) || true,
         maxBlocks,
       });
+      const blocklyArea = document.querySelector('#turtleBlock');
+      const blocklyDiv = document.querySelector('body');
+      const onresize = () => {
+        // Compute the absolute coordinates and dimensions of blocklyArea.
+        let element = blocklyArea;
+        let x = 0;
+        let y = 0;
+        do {
+          x += element.offsetLeft;
+          y += element.offsetTop;
+          element = element.offsetParent;
+        } while (element);
+        // Position blocklyDiv over blocklyArea.
+        blocklyDiv.style.left = `${x}px`;
+        blocklyDiv.style.top = `${y}px`;
+        blocklyDiv.style.width = `${blocklyArea.offsetWidth}px`;
+        blocklyDiv.style.height = `${blocklyArea.offsetHeight}px`;
+        BlocklyObj.svgResize(workspace);
+      };
+      window.addEventListener('resize', onresize, false);
+      onresize();
+      BlocklyObj.svgResize(workspace);
       const xmlDom = BlocklyObj.Xml.textToDom(
         'submissionDetails' in response
         && response.submissionDetails.xmlWorkSpace
