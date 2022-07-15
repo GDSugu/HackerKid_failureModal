@@ -8,10 +8,8 @@ import {
   TextInput,
   ScrollView,
   KeyboardAvoidingView,
-  Alert,
 } from 'react-native';
 import PhoneInput from 'react-native-phone-number-input';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CommonActions } from '@react-navigation/native';
 import Icon from '../common/Icons';
 import { closeFormError, validate } from '../common/framework';
@@ -19,7 +17,7 @@ import ThemeContext from '../components/theme';
 import LoginFormSvg from '../../images/login/login-form-svg.svg';
 import useLoginMethod from '../../hooks/pages/login';
 import getCommonStyles from '../components/commonStyles';
-import { loginCheck } from '../../hooks/common/framework';
+import { loginCheck, setUserSession } from '../../hooks/common/framework';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   ...getCommonStyles(theme, utilColors, font),
@@ -105,20 +103,16 @@ const Login = ({ navigation }) => {
       loginWithPhone(countryCode).then((response) => {
         const data = JSON.parse(response);
         if (data.status === 'success') {
-          AsyncStorage.setItem('authtoken', data.auth)
-            .then(() => {
-              navigation.dispatch(
-                CommonActions.reset({
-                  index: 1,
-                  routes: [
-                    { name: 'Start' },
-                  ],
-                }),
-              );
-            })
-            .catch((error) => {
-              Alert.alert('Authtoken Error', error);
-            });
+          setUserSession(data).then(() => {
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 1,
+                routes: [
+                  { name: 'Start' },
+                ],
+              }),
+            );
+          }).catch((err) => console.log(err));
         } else if (data.status === 'not-exists') {
           setFormErrorObj({ formError: 'You are not registered user', formErrorType: 'NOT_REGISTERED' });
           setError((prevObj) => ({ ...prevObj, phoneNumber: true }));

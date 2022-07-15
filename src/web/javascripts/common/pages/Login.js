@@ -101,8 +101,6 @@ const Login = () => {
           $('#password').removeClass('is-invalid');
         } else if (data.status === 'not-valid') {
           setFormErrorField(`Incorrect ${stateObj.loginMethod === 'loginWithEmail' ? 'Email address' : 'Phone Number'} or Password`, { 'data-error-type': 'INCORRECT' });
-          $(`${stateObj.loginMethod === 'loginWithEmail' ? '#email' : '#phone'}`).addClass('is-invalid').removeClass('is-valid');
-          $('#password').addClass('is-invalid').removeClass('is-valid');
         } else if (data.status === 'error' && data.message === 'EMAIL_LOGIN_RESTRICTED') {
           setFormErrorField('You are not allowed to login using email. Try mobile login.', { 'data-error-type': data.message });
         } else if (data.status === 'error') {
