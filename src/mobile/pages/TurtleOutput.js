@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
+  Dimensions,
   StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
 import WebView from 'react-native-webview';
@@ -18,6 +19,7 @@ import Icon from '../common/Icons';
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
     flex: 1,
+    width: Dimensions.get('window').width,
   },
   btnContainer: {
     flexDirection: 'row',

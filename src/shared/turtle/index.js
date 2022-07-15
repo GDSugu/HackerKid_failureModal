@@ -2,9 +2,38 @@ import React from 'react';
 import { getBlockly, getTurtleOutput } from './turtleBlocks';
 
 const useSharedTurtleWebView = () => {
+  const TurtleQuestionBodyContent = () => <>
+    <div className="sectionContent outputContainer mx-2">
+      <div id="answerCanvas"></div>
+    </div>
+  </>;
+
   const TurtleBodyContent = () => <>
     <div id='turtleBlock'></div>
   </>;
+
+  const turtleQuestionStyle = `
+    <style>
+      .outputContainer {
+        overflow: auto;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+      }
+
+      #answerCanvas {
+        position: absolute;
+        width: 100%;
+        // opacity: 0.5;
+        transform: scale(6) translate(-25%, 0);
+      }
+
+      body {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  `;
 
   const TurtleScriptContent = () => <>
     {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossOrigin="anonymous"></link> */}
@@ -72,6 +101,11 @@ const useSharedTurtleWebView = () => {
       padding: 0;
       margin: 0;
     }
+
+    g.blocklyTrash {
+      // position: relative;
+      // transform: scale(2.5) translate(100%, 100%);
+    }
   `;
 
   const EditorBodyContent = () => <>
@@ -92,7 +126,7 @@ const useSharedTurtleWebView = () => {
 
   const TurtleOutputBodyContent = () => <>
   <div id="outputSection">
-    <div className="flex-column drawing-controls align-items-end mr-3">
+    <div className="flex-column drawing-controls align-items-end">
       <button className="btn btn-light mt-1 zoom-control zoomIn font-weight-bold" data-zoomaction="in" title="Zoom In" disabled>+</button>
       <button className="btn btn-light mt-1 zoom-control zoomOut font-weight-bold" data-zoomaction="out" title="Zoom Out" disabled>-</button>
       <button className="btn btn-light mt-1 repositionDrawing" title="Center">
@@ -127,15 +161,29 @@ const useSharedTurtleWebView = () => {
 
   const turtleOutputStyle = `
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        border: none;
+        box-sizing: border-box;
+      }
+
+      body {
+        // background-color: red;
+      }
+
       .outputContainer {
+        width: 100%;
+        height: 100%;
         overflow: auto;
-        background-color: transparent;
+        // background-color: green;
         display: flex;
       }
 
       #userCanvas {
         width: 100%;
-        // transform: scale(4) translate(-25%, 0);
+        // height: 100%;
+        transform: scale(7) translate(-25%, 0);
         background-color: transparent;
         position: absolute;
       }
@@ -143,27 +191,36 @@ const useSharedTurtleWebView = () => {
       #answerCanvas {
         position: absolute;
         width: 100%;
+        // height: 100%;
         opacity: 0.5;
-        // transform: scale(4) translate(-25%, 0);
+        // background-color: pink;
+        transform: scale(7) translate(-25%, 0);
       }
 
       .drawing-controls {
         display: flex;
-        position: absolute;
-        left: 100%;
+        position: fixed;
         z-index: 100;
+        // left: 100%;
+        right: 10%;
+        box-sizing: border-box;
+        transform: scale(4) translateX(-25%);
+        padding-top: 1.5rem;
       }
 
       #outputSection {
-        position: relative;
+        width: 100vw;
+        height: 100vh;
       }
 
       #outputSection {
-        background-color: green;
+        width: 100vw;
       }
 
       .drawing-controls button {
         width: 40px;
+        margin: 0 4px;
+        position: relative;
       }
 
       .btn {
@@ -205,14 +262,10 @@ const useSharedTurtleWebView = () => {
         border-color: #f8f9fa;
       }
       .btn.disabled, .btn:disabled {
-          opacity: .65;
+        opacity: .65;
       }
       .font-weight-bold {
-          font-weight: 700!important;
-      }
-
-      body {
-        transform: scale(7) translate(-25%, 0);
+        font-weight: 700!important;
       }
     </style>
   `;
@@ -335,6 +388,13 @@ const useSharedTurtleWebView = () => {
   `;
 
   return {
+    turtleQuestion: {
+      BodyContent: TurtleQuestionBodyContent,
+      ScriptContent: TurtleOutputScriptContent,
+      scriptToInject: turtleOutputScriptToInject,
+      styleString: turtleQuestionStyle,
+    },
+
     blocklyWorkspace: {
       BodyContent: TurtleBodyContent,
       ScriptContent: TurtleScriptContent,
