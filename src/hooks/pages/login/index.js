@@ -1,16 +1,6 @@
 import { useState } from 'react';
 import post from '../../common/framework';
-
-const getDevice = () => {
-  const ua = navigator.userAgent;
-  if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
-    return 'tablet';
-  }
-  if (/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
-    return 'mobile';
-  }
-  return 'web';
-};
+import getPlatform from '../../common/utlis';
 
 const useLoginMethod = () => {
   const [stateObj, setState] = useState({
@@ -24,7 +14,7 @@ const useLoginMethod = () => {
     const useEmail = stateObj.loginMethod === 'loginWithEmail';
     const email = (stateObj.loginMethod === 'loginWithEmail') ? stateObj.email : false;
 
-    const device = getDevice();
+    const device = getPlatform();
     // const neoeyed = getneoEyed(phone);
     const result = post({
       type: 'usercheckPhone',

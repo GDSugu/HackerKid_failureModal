@@ -241,7 +241,7 @@ const Login = ({ navigation }) => {
                   onChangeText={(value) => {
                     handleStateChange('email', value);
                     validate('email', value, 'Email', setError, 'email');
-                    closeFormError(formErrorStateObj, 'INCORRECT,ERROR', setFormErrorObj);
+                    closeFormError(formErrorStateObj, 'INCORRECT,EMAIL_LOGIN_RESTRICTED,ERROR', setFormErrorObj);
                   }}
               />
             </View>
