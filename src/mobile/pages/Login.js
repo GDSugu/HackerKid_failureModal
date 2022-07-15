@@ -19,6 +19,7 @@ import ThemeContext from '../components/theme';
 import LoginFormSvg from '../../images/login/login-form-svg.svg';
 import useLoginMethod from '../../hooks/pages/login';
 import getCommonStyles from '../components/commonStyles';
+import { loginCheck } from '../../hooks/common/framework';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   ...getCommonStyles(theme, utilColors, font),
@@ -48,6 +49,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     color: theme.fadedBtnTextColor,
   },
 });
+
 const Login = ({ navigation }) => {
   const { font, theme } = React.useContext(ThemeContext);
   const { stateObj, setState, loginWithPhone } = useLoginMethod();
@@ -94,7 +96,6 @@ const Login = ({ navigation }) => {
     const primaryFieldTypeName = stateObj.loginMethod === 'loginWithPhone' ? 'Phone Number' : 'Email';
     const primaryFieldType = stateObj.loginMethod === 'loginWithPhone' ? 'tel' : 'email';
 
-    console.log(primaryFieldKey, primaryFieldTypeName, primaryFieldType);
     const primaryField = validate(primaryFieldType, stateObj[primaryFieldKey],
       primaryFieldTypeName, setError, primaryFieldKey);
     const password = validate('password', stateObj.password, 'Password', setError, 'password', null, 1, true);
@@ -152,6 +153,25 @@ const Login = ({ navigation }) => {
     }
     return styleArr;
   };
+
+  useEffect(() => {
+    loginCheck().then((response) => {
+      const data = JSON.parse(response);
+
+      if (data.status === 'success') {
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 1,
+            routes: [
+              { name: 'Start' },
+            ],
+          }),
+        );
+      }
+    }).catch((err) => {
+      console.log('err', err);
+    });
+  }, []);
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
