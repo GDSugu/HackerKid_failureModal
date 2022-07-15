@@ -1,6 +1,5 @@
 const getCommonStyles = (theme, utilColors, font) => ({
   container: {
-    flex: 1,
     paddingLeft: 18,
     paddingRight: 18,
     justifyContent: 'center',
@@ -22,7 +21,6 @@ const getCommonStyles = (theme, utilColors, font) => ({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
     paddingHorizontal: 18,
     marginVertical: 8,
   },
