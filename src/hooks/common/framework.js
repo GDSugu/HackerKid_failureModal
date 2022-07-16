@@ -44,7 +44,7 @@ const mobStoreSession = (key, value) => {
   let result;
   try {
     if (value) {
-      result = AsyncStorage.setItem(key, JSON.stringify(value));
+      result = AsyncStorage.setItem(key, (typeof value !== 'string') ? JSON.stringify(value) : value);
     }
   } catch (err) {
     console.error(err);

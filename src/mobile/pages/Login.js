@@ -17,7 +17,7 @@ import ThemeContext from '../components/theme';
 import LoginFormSvg from '../../images/login/login-form-svg.svg';
 import useLoginMethod from '../../hooks/pages/login';
 import getCommonStyles from '../components/commonStyles';
-import { loginCheck, setUserSession } from '../../hooks/common/framework';
+import { setUserSession } from '../../hooks/common/framework';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   ...getCommonStyles(theme, utilColors, font),
@@ -147,25 +147,6 @@ const Login = ({ navigation }) => {
     }
     return styleArr;
   };
-
-  useEffect(() => {
-    loginCheck().then((response) => {
-      const data = JSON.parse(response);
-
-      if (data.status === 'success') {
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 1,
-            routes: [
-              { name: 'Start' },
-            ],
-          }),
-        );
-      }
-    }).catch((err) => {
-      console.log('err', err);
-    });
-  }, []);
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
