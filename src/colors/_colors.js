@@ -87,6 +87,7 @@ const utilColors = {
   white: '#FFFFFF',
   dark: '#212527',
   red: '#F7393D',
+  darkTransparent50: '#21252750',
   grey: '#5B5B5B',
   dimGrey: '#C4C4C4',
   lightGrey: '#A9ABAC',

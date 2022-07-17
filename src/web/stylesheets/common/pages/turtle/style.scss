@@ -1,0 +1,73 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+
+@import '_turtleTheme.js';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+.turtle-container {
+  // background-color: gt.theme-var(game-body-bg, null, $thememaplight, $cssvars);
+  background: url(../../../../../images/turtle/turtleBgWeb.svg) no-repeat 0 / cover;
+  height: 100vh;
+  width: 100vw;
+
+  @include gm.media-breakpoint-down(xl) {
+    background-size: contain;
+  }
+
+  nav {
+    background-color: gt.theme-var(game-nav-bg, null, $thememaplight, $cssvars);
+
+    .navigation-container {
+      .navigation-item {
+        &.active {
+          background-color: gt.theme-var(game-nav-active-bg, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+  }
+
+  .turtle-card {
+    position: relative;
+    left: 45%;
+    width: 50%;
+    display: inline-block;
+    background-color: gt.theme-var(game-dark-transparent, null, $thememaplight, $cssvars);
+    border-radius: 12px;
+    // backdrop-filter: blur(24px) saturate(200%);
+    // -webkit-backdrop-filter: blur(24px) saturate(200%);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 4rem;
+    margin-top: 4rem;
+    color: gt.theme-var(text-color-2);
+
+    .card-container {
+      text-align: center;
+
+      .gameTitle {
+        font-size: 4rem;
+        margin: 0;
+      }
+
+      .gameDesc {
+        font-size: 1.25rem;
+        line-height: 1.5;
+        margin: 1rem 0 2rem 0;
+      }
+
+      .gameBtn {
+        border-radius: 1rem;
+        background-color: gt.theme-var(text-color-2);
+
+        .gameBtnDesc {
+          font-weight: bold;
+          color: gt.theme-var(game-btn-text-color, null, $thememaplight, $cssvars);
+          margin-bottom: 0;
+          margin-left: 0.5rem;
+        }
+      }
+    }
+  }
+}
