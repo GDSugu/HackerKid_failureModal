@@ -122,6 +122,10 @@
   "JCIgkj": {
     "defaultMessage": "Username"
   },
+  "JNotzf": {
+    "defaultMessage": "Expected Output",
+    "description": "Collapse Title - Expected Output"
+  },
   "MB8h2I": {
     "defaultMessage": "Leaderboard Ranking",
     "description": "Leaderboard card heading text"
@@ -166,10 +170,6 @@
   },
   "SENRqu": {
     "defaultMessage": "Help"
-  },
-  "TKud4q": {
-    "defaultMessage": "Problem Statement",
-    "description": "Problem Statement"
   },
   "TmcPug": {
     "defaultMessage": "Edit Profile",
@@ -319,10 +319,6 @@
   "xlvJ5U": {
     "defaultMessage": "You are offline.",
     "description": "offline message"
-  },
-  "z9//BN": {
-    "defaultMessage": "Instructions",
-    "description": "Instructions"
   },
   "z9lFwl": {
     "defaultMessage": "Name",

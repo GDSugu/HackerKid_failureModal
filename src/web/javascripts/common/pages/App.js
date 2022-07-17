@@ -24,6 +24,7 @@ const RouteCourses = loadable(() => import('./Courses'), { fallback: <Loading />
 const RouteChallenges = loadable(() => import('./Challenges'), { fallback: <Loading /> });
 const RouteMore = loadable(() => import('./More'), { fallback: <Loading /> });
 const RouteProfileEdit = loadable(() => import('./ProfileEdit'), { fallback: <Loading /> });
+const RouteTurtle = loadable(() => import('./Turtle'), { fallback: <Loading /> });
 const RouteSubscription = loadable(() => import('./Subscription'), { fallback: <Loading /> });
 
 const App = () => (
@@ -39,6 +40,8 @@ const App = () => (
         <Route path='profile' caseSensitive={true} element={<AccountNavBar />}>
           <Route path='edit' caseSensitive={true} element={<RouteProfileEdit />} />
           <Route path='subscription' caseSensitive={true} element={<RouteSubscription />} />
+        </Route>
+        <Route path='turtle' caseSensitive={true} element={<RouteTurtle />} >
         </Route>
       </Route>
       <Route path='/about' caseSensitive={true} element={<RouteAbout />} />
