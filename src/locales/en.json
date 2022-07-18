@@ -190,25 +190,9 @@
     "defaultMessage": "Home",
     "description": "home heading"
   },
-  "FhTUgw": {
-    "defaultMessage": "Not {phone} ?",
-    "description": "not button"
-  },
-  "G0AqB8": {
-    "defaultMessage": "Login into Existing Account",
-    "description": "Login into Exisiting Account button"
-  },
-  "GQwBTI": {
-    "defaultMessage": "Verify OTP and proceed",
-    "description": "verify otp button"
-  },
-  "Gon8SN": {
-    "defaultMessage": "Login with Email",
-    "description": "Login with email tab"
-  },
-  "H2rvzb": {
-    "defaultMessage": "Password changed successfully",
-    "description": "Password changed text"
+  "FYwxn7": {
+    "defaultMessage": "This is Video page",
+    "description": "More options Page"
   },
   "HAlOn1": {
     "defaultMessage": "Name"
@@ -486,10 +470,6 @@
   "oJe49d": {
     "defaultMessage": "All Challenges",
     "description": "Challenges card menu"
-  },
-  "of2vJ9": {
-    "defaultMessage": "This is Video page",
-    "description": "Videos Page"
   },
   "ox9lTM": {
     "defaultMessage": "Go to Profile",

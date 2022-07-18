@@ -109,17 +109,17 @@
           justify-content: space-between;
           align-items: center;
           background-color: gt.theme-var(bg-1);
-          box-shadow: 0px 4px 4px gt.theme-var(more-card-box-shadow-color, null, $thememaplight, $cssvars);;
+          box-shadow: 0 4px 4px gt.theme-var(more-card-box-shadow-color, null, $thememaplight, $cssvars);
           border: 1px solid gt.theme-var(more-btn-bg, null, $thememaplight, $cssvars);
           border-radius: 12px;
           padding: 1rem;
           margin-bottom: 0.5rem;
-    
+
           &:last-child {
             margin-bottom: 0;
           }
-    
-          p{
+
+          p {
             margin: 0;
             font-weight: bold;
             color: gt.theme-var(more-btn-text-color, null, $thememaplight, $cssvars);
@@ -150,29 +150,29 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-  
+
         .more-card-title {
           margin-bottom: 0;
           line-height: 1.5;
         }
-  
+
         .more-card-subtitle {
           margin-top: 0;
           color: gt.theme-var(text-color-5);
           font-size: 0.875rem;
         }
-  
+
         .more-card-btn-container {
           display: flex;
           justify-content: flex-end;
           padding-top: 3rem;
-  
+
           .more-card-btn {
             border-radius: 0.75rem;
             padding: 0.75rem 2rem;
             background-color: gt.theme-var(more-btn-bg, null, $thememaplight, $cssvars);
-            box-shadow: 0px 4px 4px gt.theme-var(more-card-box-shadow-color, null, $thememaplight, $cssvars);;
-    
+            box-shadow: 0 4px 4px gt.theme-var(more-card-box-shadow-color, null, $thememaplight, $cssvars);
+
             p {
               margin: 0;
               color: gt.theme-var(text-color-2);
@@ -197,7 +197,7 @@
       justify-content: space-between;
       align-items: center;
       background-color: gt.theme-var(bg-1);
-      box-shadow: 0px 4px 4px gt.theme-var(more-card-box-shadow-color, null, $thememaplight, $cssvars);;
+      box-shadow: 0 4px 4px gt.theme-var(more-card-box-shadow-color, null, $thememaplight, $cssvars);
       border-radius: 12px;
       padding: 1rem;
       margin-bottom: 0.5rem;

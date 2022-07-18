@@ -55,7 +55,7 @@ const AuthErrorModal = ({ route, navigation }) => {
           </Text>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('More');
+              navigation.navigate('Video');
               setModalVisibility(false);
             }} // change to Signup after signup integrated
             style={style.errorCardPrimaryBtn}

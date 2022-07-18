@@ -1,95 +1,122 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import {
-  Alert,
-  Button,
   Text,
   StyleSheet,
   ScrollView,
-  TextInput,
-  ToastAndroid,
   View,
+  TouchableOpacity,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import ThemeContext from '../components/theme';
+import Icon from '../common/Icons';
 
-const getStyles = (theme) => StyleSheet.create({
+const getStyles = (theme, font, utils) => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.bodyBg,
+    padding: 12,
+  },
+  moreMenuBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 12,
+    shadowColor: `${utils.shadowColor2}`,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowRadius: 16,
+    shadowOpacity: 0,
+    marginVertical: 4,
+  },
+  collectionBtn: {
+    borderWidth: 2,
+    borderRadius: 12,
+    borderColor: theme.inputBorderColor,
+  },
+  moreMenuBtnText: {
+    ...font.subtitle1,
+    color: utils.dark,
+  },
+  collectionBtnText: {
+    color: theme.textBold,
   },
 });
 
-const More = ({ navigation }) => {
+const More = () => {
   const { font, theme } = useContext(ThemeContext);
   const pageTheme = theme.screenMore;
-  const style = getStyles(pageTheme);
-  const intl = useIntl();
-
-  const [authtoken, setAuthToken] = useState(null);
-
-  AsyncStorage.getItem('authtoken')
-    .then(setAuthToken);
-
-  const handleAuthTokenChange = (token) => {
-    AsyncStorage.setItem('authtoken', token)
-      .then(() => {
-        setAuthToken(token);
-      })
-      .catch(console.error);
-  };
+  const style = getStyles(pageTheme, font, theme.utilColors);
 
   return (
     <ScrollView style={style.container}>
-      <View style={{ marginVertical: 250 }}>
-        <Text style={{
-          textAlign: 'center',
-          ...font.heading1,
-        }}>
-          <FormattedMessage
-            defaultMessage="This is more options page"
-            description="More options Page"
-          />
-        </Text>
-        <TextInput
-          style={{ borderWidth: 2, marginBottom: 10, marginTop: 20 }}
-          placeholder='authtoken'
-          value={authtoken}
-          onChangeText={(value) => handleAuthTokenChange(value)}
-        />
-        <Button
-          title={intl.formatMessage({
-            defaultMessage: 'store authtoken',
-            description: 'authtoken temp storage btn',
-          })}
-          onPress={() => {
-            AsyncStorage.setItem('authtoken', authtoken)
-              .then(() => {
-                ToastAndroid.show('authtoken set', ToastAndroid.SHORT);
-              })
-              .catch((error) => {
-                Alert.alert('Authtoken Error', error);
-              });
-          }}
-          color={pageTheme.btnBg}
-        />
-      </View>
-      <Button
-        onPress={() => navigation.navigate('EditProfile')}
-        title={intl.formatMessage({
-          defaultMessage: 'Go to Profile',
-          description: 'Link description',
-        })}
-        color={pageTheme.btnBg}
-      />
-      <Button
-        onPress={() => navigation.navigate('Home')}
-        title={intl.formatMessage({
-          defaultMessage: 'Go to Home',
-          description: 'Home Navigation Button',
-        })}
-        color={pageTheme.btnBg}
-      />
+      <TouchableOpacity onPress={() => {}}>
+        <View style={{
+          ...style.moreMenuBtn,
+          ...style.collectionBtn,
+        }}
+          >
+          <Text style={{
+            ...style.moreMenuBtnText,
+            ...style.collectionBtnText,
+          }}>
+            <FormattedMessage
+              defaultMessage="Your Collections and Perks"
+              description="Collections and Perks CTA"
+            />
+          </Text>
+          <Icon type='FontAwesome5' name={'angle-right'} size={32} color={pageTheme.textBold} />
+        </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => {}}>
+        <View style={style.moreMenuBtn}>
+          <Text style={style.moreMenuBtnText}>
+            <FormattedMessage
+              defaultMessage="Doubts"
+              description="Doubts CTA"
+            />
+          </Text>
+          <Icon type='FontAwesome5' name={'angle-right'} size={32} color={theme.utilColors.dark} />
+        </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => {}}>
+        <View style={style.moreMenuBtn}>
+          <Text style={style.moreMenuBtnText}>
+            <FormattedMessage
+              defaultMessage="Logout"
+              description="Logout Button"
+            />
+          </Text>
+          <Icon type='FontAwesome5' name={'angle-right'} size={32} color={theme.utilColors.dark} />
+        </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => {}}>
+        <View style={style.moreMenuBtn}>
+          <Text style={style.moreMenuBtnText}>
+            <FormattedMessage
+              defaultMessage="Account Settings"
+              description="account settings CTA"
+            />
+          </Text>
+          <Icon type='FontAwesome5' name={'angle-right'} size={32} color={theme.utilColors.dark} />
+        </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => {}}>
+        <View style={style.moreMenuBtn}>
+          <Text style={style.moreMenuBtnText}>
+            <FormattedMessage
+              defaultMessage="Help"
+              description="Help CTA"
+            />
+          </Text>
+          <Icon type='FontAwesome5' name={'angle-right'} size={32} color={theme.utilColors.dark} />
+        </View>
+      </TouchableOpacity>
     </ScrollView>
   );
 };

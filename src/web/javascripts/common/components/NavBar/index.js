@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link, useLocation, Outlet } from 'react-router-dom';
-import { useAuthSession, useGetSession } from '../../../../../hooks/pages/root';
+import { useGetSession } from '../../../../../hooks/pages/root';
 
 const NavItem = (props) => {
   const { icon, route, active } = props;
@@ -20,8 +20,6 @@ const NavBar = () => {
   const routes = pathname.split('/');
   const screen = routes[routes.length - 1];
   const { session: { profileLink } } = useGetSession(['profileLink']);
-
-  useAuthSession();
 
   const navItems = [
     {

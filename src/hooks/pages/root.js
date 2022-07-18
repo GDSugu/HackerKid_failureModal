@@ -15,13 +15,14 @@ const useRootPageState = () => {
   const currentLocale = getLocale();
 
   useEffect(() => {
-    loadLocaleData(currentLocale).then((currentLocaleMessages) => {
-      setState((prevState) => ({
-        ...prevState,
-        currentLocaleMessages,
-        currentLocale,
-      }));
-    });
+    loadLocaleData(currentLocale)
+      .then((currentLocaleMessages) => {
+        setState((prevState) => ({
+          ...prevState,
+          currentLocaleMessages,
+          currentLocale,
+        }));
+      });
   }, []);
 
   return {
