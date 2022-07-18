@@ -225,7 +225,7 @@ const App = () => {
     } catch (err) {
       console.error(err);
     }
-    return 'Start';
+    return 'Login';
   };
 
   return (
@@ -238,7 +238,7 @@ const App = () => {
             onStateChange={() => { setRoutName(navigationRef.getCurrentRoute().name); }}
           >
             <Stack.Navigator
-              initialRouteName={() => getInitialRoute()}
+              initialRouteName={getInitialRoute()}
               screenOptions={{
                 headerShown: false,
                 animation: 'slide_from_bottom',
