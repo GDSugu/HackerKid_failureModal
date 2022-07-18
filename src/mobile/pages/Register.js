@@ -35,11 +35,12 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
 });
 
 const RegisterFormStepOne = ({
-  style, theme, font, stateObj, setStateObj, setBackBtnStateObj, handleStateChange,
+  style, getStyleArr, theme, font, stateObj, setStateObj, setBackBtnStateObj, handleStateChange,
   errorStateObj, setError, formErrorStateObj, setFormErrorObj, navigation,
 }) => {
-  const { sendOtpRequest } = useOtp();
+  // hooks
   const phoneInput = useRef(null);
+  const { sendOtpRequest } = useOtp();
 
   useEffect(() => {
     setBackBtnStateObj((prevObj) => ({
@@ -48,6 +49,7 @@ const RegisterFormStepOne = ({
     }));
   }, []);
 
+  // handlers
   const nextBtnPressHandler = () => {
     const obj = {
       phoneNumber: {
@@ -107,18 +109,6 @@ const RegisterFormStepOne = ({
         console.log(err);
       });
     }
-  };
-
-  const getStyleArr = (key, additionalStyles = false) => {
-    const styleArr = [style.inputField];
-
-    if (errorStateObj[key]) {
-      styleArr.push(style.errorField);
-    }
-    if (additionalStyles) {
-      styleArr.push(additionalStyles);
-    }
-    return styleArr;
   };
 
   return (
@@ -262,10 +252,11 @@ const RegisterFormStepOne = ({
 };
 
 const RegisterFormStepThree = ({
-  style, font, theme, stateObj, setStateObj,
+  style, getStyleArr, font, theme, stateObj, setStateObj,
   handleStateChange, formErrorStateObj, setFormErrorObj, errorStateObj,
   setError, setBackBtnStateObj, createAccountRequest, navigation,
 }) => {
+  // hooks
   const [hidePasswordObj, setHidePasswordObj] = useState({
     password: true,
     retypedPassword: true,
@@ -296,6 +287,7 @@ const RegisterFormStepThree = ({
     return removeListener;
   }, []);
 
+  // handlers
   const matchValueTo = (value, matchToValue, errorKey, setErrorObj) => {
     if (value === '') return;
 
@@ -336,18 +328,6 @@ const RegisterFormStepThree = ({
         console.log(error);
       });
     }
-  };
-
-  const getStyleArr = (key, additionalStyles = false) => {
-    const styleArr = [style.inputField];
-
-    if (errorStateObj[key]) {
-      styleArr.push(style.errorField);
-    }
-    if (additionalStyles) {
-      styleArr.push(additionalStyles);
-    }
-    return styleArr;
   };
 
   return (
@@ -447,6 +427,7 @@ const RegisterFormStepThree = ({
 };
 
 const Register = ({ navigation }) => {
+  // hooks
   const { stateObj, setStateObj, createAccountRequest } = useRegister();
   const { stateObj: backBtnStateObj, setStateObj: setBackBtnStateObj } = useBackBtn();
   const [errorStateObj, setError] = useState({
@@ -457,30 +438,45 @@ const Register = ({ navigation }) => {
     password: false,
     retypedPassword: false,
   });
-
   const [formErrorStateObj, setFormErrorObj] = useState({
     formError: false,
     formErrorType: false,
   });
-
-  const { font, theme } = React.useContext(ThemeContext);
-  const screenTheme = theme.screenRegister;
-  const style = getStyles(screenTheme, theme.utilColors, font);
-
-  const backBtnStyle = backBtnStateObj.showBackBtn ? style.show : style.hide;
-
-  const handleStateChange = (key, value) => {
-    setStateObj((prevObj) => ({
-      ...prevObj,
-      [key]: value,
-    }));
-  };
 
   useEffect(() => {
     if (formErrorStateObj.formError) {
       setFormErrorObj({ formError: false, formErrorType: false });
     }
   }, [stateObj.formStep]);
+
+  // styles
+  const { font, theme } = React.useContext(ThemeContext);
+  const screenTheme = theme.screenRegister;
+  const style = getStyles(screenTheme, theme.utilColors, font);
+  const backBtnStyle = backBtnStateObj.showBackBtn ? style.show : style.hide;
+  const getStyleArr = (key, additionalStyles = false) => {
+    const styleArr = [style.inputField];
+
+    if (errorStateObj[key]) {
+      styleArr.push(style.errorField);
+    }
+    if (additionalStyles) {
+      styleArr.push(additionalStyles);
+    }
+    return styleArr;
+  };
+
+  // handleStateChange
+  const handleStateChange = (key, value) => {
+    try {
+      setStateObj((prevState) => ({
+        ...prevState,
+        [key]: value,
+      }));
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <ScrollView style={{ flex: 1 }}>
@@ -503,6 +499,7 @@ const Register = ({ navigation }) => {
         ((stateObj.formStep === 1)
           && <RegisterFormStepOne
           style={style}
+          getStyleArr = {getStyleArr}
           theme={theme}
           font={font}
           stateObj={stateObj}
@@ -530,15 +527,23 @@ const Register = ({ navigation }) => {
             style={style.btnOutlinePrimary}
             title="Login into existing account"
             onPress={() => {
-              navigation.navigate('Login');
+              navigation.dispatch(
+                CommonActions.reset({
+                  index: 1,
+                  routes: [
+                    { name: 'Login' },
+                  ],
+                }),
+              );
             }}>
             <Text style={style.btnOutlinePrimaryText}>
               <FormattedMessage defaultMessage='Login into existing account' description='Login into existing account button' />
             </Text>
           </TouchableOpacity>]} />)
         || ((stateObj.formStep === 3)
-          && <RegisterFormStepThree
+        && <RegisterFormStepThree
         style={style}
+        getStyleArr={getStyleArr}
         theme={theme}
         font={font}
         stateObj={stateObj}

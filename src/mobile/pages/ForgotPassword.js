@@ -51,7 +51,6 @@ const TakeActionButtons = ({ children, style, navigation }) => (
             CommonActions.reset({
               index: 1,
               routes: [
-                { name: 'ForgotPassword' },
                 { name: 'Login' },
               ],
             }),
@@ -69,7 +68,6 @@ const TakeActionButtons = ({ children, style, navigation }) => (
             CommonActions.reset({
               index: 1,
               routes: [
-                { name: 'ForgotPassword' },
                 { name: 'Register' },
               ],
             }),
@@ -84,11 +82,12 @@ const TakeActionButtons = ({ children, style, navigation }) => (
 );
 
 const ForgotPasswordStepOne = ({
-  style, font, stateObj, setStateObj, setBackBtnStateObj, handleStateChange,
+  style, getStyleArr, font, stateObj, setStateObj, setBackBtnStateObj, handleStateChange,
   errorStateObj, setError, formErrorStateObj, setFormErrorObj, navigation,
 }) => {
-  const { sendOtpRequest } = useOtp();
+  // hooks
   const phoneInput = useRef(null);
+  const { sendOtpRequest } = useOtp();
 
   useEffect(() => {
     setBackBtnStateObj((prevObj) => ({
@@ -96,7 +95,7 @@ const ForgotPasswordStepOne = ({
       showBackBtn: false,
     }));
   }, []);
-
+  // handlers
   const sendOtpClickHandler = () => {
     const phoneNumber = validate('tel', stateObj.phoneNumber, 'Phone Number', setError, 'phoneNumber');
 
@@ -126,18 +125,6 @@ const ForgotPasswordStepOne = ({
         console.log(err);
       });
     }
-  };
-
-  const getStyleArr = (key, additionalStyles = false) => {
-    const styleArr = [style.inputField];
-
-    if (errorStateObj[key]) {
-      styleArr.push(style.errorField);
-    }
-    if (additionalStyles) {
-      styleArr.push(additionalStyles);
-    }
-    return styleArr;
   };
 
   return (
@@ -200,10 +187,11 @@ const ForgotPasswordStepOne = ({
 };
 
 const ForgotPasswordStepThree = ({
-  style, font, theme, stateObj, setStateObj,
+  style, getStyleArr, font, theme, stateObj, setStateObj,
   handleStateChange, formErrorStateObj, setFormErrorObj, errorStateObj,
   setError, setBackBtnStateObj, changePasswordRequest, navigation,
 }) => {
+  // hooks
   const [hidePasswordObj, setHidePasswordObj] = useState({
     password: true,
     retypedPassword: true,
@@ -234,6 +222,7 @@ const ForgotPasswordStepThree = ({
     return removeListener;
   }, []);
 
+  // handlers
   const matchValueTo = (value, matchToValue, errorKey, setErrorObj) => {
     if (value === '') return;
 
@@ -267,18 +256,6 @@ const ForgotPasswordStepThree = ({
         console.log(error);
       });
     }
-  };
-
-  const getStyleArr = (key, additionalStyles = false) => {
-    const styleArr = [style.inputField];
-
-    if (errorStateObj[key]) {
-      styleArr.push(style.errorField);
-    }
-    if (additionalStyles) {
-      styleArr.push(additionalStyles);
-    }
-    return styleArr;
   };
 
   return (
@@ -378,6 +355,7 @@ const ForgotPasswordStepThree = ({
 };
 
 const ForgotPasswordStepFour = ({ navigation, style, setBackBtnStateObj }) => {
+  // hooks
   useEffect(() => {
     setBackBtnStateObj((prevObj) => ({
       ...prevObj,
@@ -407,7 +385,9 @@ const ForgotPasswordStepFour = ({ navigation, style, setBackBtnStateObj }) => {
     </View>
   );
 };
+
 const ForgotPassword = ({ navigation }) => {
+  // hooks
   const { stateObj, setStateObj, changePasswordRequest } = useForgotPassword();
 
   const { stateObj: backBtnStateObj, setStateObj: setBackBtnStateObj } = useBackBtn();
@@ -422,17 +402,33 @@ const ForgotPassword = ({ navigation }) => {
     formErrorType: false,
   });
 
+  // styles
   const { font, theme } = React.useContext(ThemeContext);
   const screenTheme = theme.screenForgotPassword;
   const style = getStyles(screenTheme, theme.utilColors, font);
-
   const backBtnStyle = backBtnStateObj.showBackBtn ? style.show : style.hide;
+  const getStyleArr = (key, additionalStyles = false) => {
+    const styleArr = [style.inputField];
 
+    if (errorStateObj[key]) {
+      styleArr.push(style.errorField);
+    }
+    if (additionalStyles) {
+      styleArr.push(additionalStyles);
+    }
+    return styleArr;
+  };
+
+  // handleState change
   const handleStateChange = (key, value) => {
-    setStateObj((prevObj) => ({
-      ...prevObj,
-      [key]: value,
-    }));
+    try {
+      setStateObj((prevObj) => ({
+        ...prevObj,
+        [key]: value,
+      }));
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -460,6 +456,7 @@ const ForgotPassword = ({ navigation }) => {
         ((stateObj.formStep === 1)
           && <ForgotPasswordStepOne
           style={style}
+          getStyleArr={getStyleArr}
           font={font}
           stateObj={stateObj}
           setStateObj={setStateObj}
@@ -485,6 +482,7 @@ const ForgotPassword = ({ navigation }) => {
         || ((stateObj.formStep === 3)
           && <ForgotPasswordStepThree
         style={style}
+        getStyleArr={getStyleArr}
         theme={theme}
         font={font}
         stateObj={stateObj}
@@ -499,8 +497,10 @@ const ForgotPassword = ({ navigation }) => {
         navigation={ navigation}
           />)
         || ((stateObj.formStep === 4)
-          && <ForgotPasswordStepFour style={style} navigation={navigation}
-            setBackBtnStateObj={setBackBtnStateObj} />)
+          && <ForgotPasswordStepFour
+          style={style}
+          navigation={navigation}
+          setBackBtnStateObj={setBackBtnStateObj} />)
       }
       </ScrollView>
   );

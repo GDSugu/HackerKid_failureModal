@@ -11,6 +11,10 @@
     "defaultMessage": "{label}",
     "description": "help type label"
   },
+  "/x0h9E": {
+    "defaultMessage": "Login with Phone",
+    "description": "login with phone tab"
+  },
   "0JV99f": {
     "defaultMessage": "This is index page",
     "description": "Page description"
@@ -29,6 +33,14 @@
   },
   "2W0f9h": {
     "defaultMessage": "Bio"
+  },
+  "2bMdhC": {
+    "defaultMessage": "Create a New Account",
+    "description": "create a new account button"
+  },
+  "2yf2WH": {
+    "defaultMessage": "Login with Phone",
+    "description": "Login with Phone tab"
   },
   "383EZ1": {
     "defaultMessage": "This is more options page",
@@ -54,10 +66,6 @@
     "defaultMessage": "Next",
     "description": "Next Button"
   },
-  "6o79ty": {
-    "defaultMessage": "Login with OTP",
-    "description": "Login with OTP button"
-  },
   "74UjvK": {
     "defaultMessage": "Login to existing Account",
     "description": "Login to existing account button"
@@ -65,6 +73,10 @@
   "7L3+7M": {
     "defaultMessage": "Login into existing account",
     "description": "Login into existing account button"
+  },
+  "9YoD+Y": {
+    "defaultMessage": "New Password",
+    "description": "New Password Label"
   },
   "9gqH2W": {
     "defaultMessage": "Login",
@@ -74,6 +86,10 @@
     "defaultMessage": "Go to Class",
     "description": "class navigation button"
   },
+  "A5tWte": {
+    "defaultMessage": "{formError}",
+    "description": "form error"
+  },
   "A5u1Oz": {
     "defaultMessage": "New Password",
     "description": "New Password label"
@@ -81,6 +97,10 @@
   "Aevhvw": {
     "defaultMessage": "Verify OTP and proceed",
     "description": "Verify OTP and proceed Button"
+  },
+  "AhFvSt": {
+    "defaultMessage": "Login with Email",
+    "description": "Login with Email tab"
   },
   "B7znij": {
     "defaultMessage": "Create a New Account",
@@ -114,6 +134,10 @@
     "defaultMessage": "Go to More",
     "description": "Home Navigation Button"
   },
+  "EhuHU0": {
+    "defaultMessage": "{errorMessage}",
+    "description": "password form helper"
+  },
   "F/vOH1": {
     "defaultMessage": "Forgot Password",
     "description": "Forgot Password heading"
@@ -122,9 +146,17 @@
     "defaultMessage": "Not {phone} ?",
     "description": "not button"
   },
+  "G0AqB8": {
+    "defaultMessage": "Login into Existing Account",
+    "description": "Login into Exisiting Account button"
+  },
   "GQwBTI": {
     "defaultMessage": "Verify OTP and proceed",
     "description": "verify otp button"
+  },
+  "Gon8SN": {
+    "defaultMessage": "Login with Email",
+    "description": "Login with email tab"
   },
   "H2rvzb": {
     "defaultMessage": "Password changed successfully",
@@ -153,6 +185,10 @@
     "defaultMessage": "This is challenges page",
     "description": "Challenges Page"
   },
+  "NZqKYF": {
+    "defaultMessage": "Forgot Password?",
+    "description": "Forgot password link"
+  },
   "Nn5oAD": {
     "defaultMessage": "Go to login",
     "description": "Go to login button"
@@ -176,6 +212,10 @@
   "SL6O2c": {
     "defaultMessage": "Password",
     "description": "Password label"
+  },
+  "SpftNg": {
+    "defaultMessage": "{errorMessage}",
+    "description": "phoneNumber form helper"
   },
   "T/a40M": {
     "defaultMessage": "Toggle Theme",
@@ -212,6 +252,10 @@
   "ZXYzUQ": {
     "defaultMessage": "Something went wrong. Please try again",
     "description": "error modal"
+  },
+  "ZvfR3g": {
+    "defaultMessage": "Send OTP",
+    "description": "Send OTP button"
   },
   "a2ZCmv": {
     "defaultMessage": "Create a New Account",
@@ -256,6 +300,10 @@
     "defaultMessage": "Set Password",
     "description": "Password Label"
   },
+  "jZhy7I": {
+    "defaultMessage": "Forgot Password",
+    "description": "Forgot Password Heading"
+  },
   "jxfpT4": {
     "defaultMessage": "Go to Games",
     "description": "Link description"
@@ -263,6 +311,10 @@
   "lKeCea": {
     "defaultMessage": "Save & Exit",
     "description": "Profile save button"
+  },
+  "lynO1X": {
+    "defaultMessage": "Change Password",
+    "description": "Change password button text"
   },
   "mDpOZM": {
     "defaultMessage": "OTP",
@@ -306,6 +358,14 @@
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
+  },
+  "uhayi4": {
+    "defaultMessage": "{errorMessage}",
+    "description": "email form helper"
+  },
+  "x8lXTv": {
+    "defaultMessage": "Resend",
+    "description": "Resend otp button text"
   },
   "z9lFwl": {
     "defaultMessage": "Name",

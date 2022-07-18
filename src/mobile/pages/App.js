@@ -29,7 +29,6 @@ import IconHome from '../../images/navbar/iconHome.svg';
 import IconMore from '../../images/navbar/iconMore.svg';
 import IconStar from '../../images/navbar/iconStar.svg';
 import IconVideo from '../../images/navbar/iconVideo.svg';
-import { loginCheck } from '../../hooks/common/framework';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -216,18 +215,6 @@ const App = () => {
   const screenTheme = theme[`screen${routeName}`];
   const style = getStyles(screenTheme, theme.utilColors);
 
-  const getInitialRoute = async () => {
-    try {
-      const response = await loginCheck();
-      const data = JSON.parse(response);
-
-      if (data.status !== 'success') return 'Login';
-    } catch (err) {
-      console.error(err);
-    }
-    return 'Login';
-  };
-
   return (
     <SafeAreaProvider>
         <View style={style.container}>
@@ -238,12 +225,10 @@ const App = () => {
             onStateChange={() => { setRoutName(navigationRef.getCurrentRoute().name); }}
           >
             <Stack.Navigator
-              initialRouteName={getInitialRoute()}
               screenOptions={{
                 headerShown: false,
                 animation: 'slide_from_bottom',
-              }}
-            >
+              }} initialRouteName={'Login'}>
               <Stack.Screen name='Start'>
                 {() => TabNavigators({
                   routeName,

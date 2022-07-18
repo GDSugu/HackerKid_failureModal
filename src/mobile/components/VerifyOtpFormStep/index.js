@@ -19,12 +19,36 @@ const VerifyOtpFormStep = ({
   setFormErrorObj, navigation, otpRequestType,
   secondaryActionButtons = false, additionalStyles = false,
 }) => {
+  // hooks
+  const {
+    sendOtpRequest, verifyOtpRequest, stateObj, setStateObj,
+  } = useOtp();
+  const [otpSeconds, setOtpSeconds] = useState(0);
+
+  const firstOtpField = useRef(null);
+  const secondOtpField = useRef(null);
+  const thirdOtpField = useRef(null);
+  const fourthOtpField = useRef(null);
+  const otpFieldsArr = [firstOtpField, secondOtpField, thirdOtpField, fourthOtpField];
+
   let additionalStylesObj = {};
 
   if (additionalStyles) {
     additionalStylesObj = additionalStyles;
   }
 
+  // side effect for decrease in otp timer seconds
+  useEffect(() => {
+    if (otpSeconds <= 0) {
+      setStateObj((prevObj) => ({
+        ...prevObj,
+        otpTimerId: null,
+      }));
+      clearInterval(stateObj.otpTimerId);
+    }
+  }, [otpSeconds]);
+
+  // styles
   const getStyles = (theme, utilColors, font) => StyleSheet.create({
     ...getCommonStyles(theme, utilColors, font),
     labelAndOtpFields: {
@@ -70,25 +94,24 @@ const VerifyOtpFormStep = ({
     ...additionalStylesObj,
   });
 
-  const [otpSeconds, setOtpSeconds] = useState(0);
-
   const { font, theme } = React.useContext(ThemeContext);
   const screenTheme = theme.screenRegister;
   const style = getStyles(screenTheme, theme.utilColors, font);
+  const otpTimerSyles = [style.otpTimer];
+  const resendOtpBtnStyles = [style.resendOtpBtn];
 
-  const firstOtpField = useRef(null);
-  const secondOtpField = useRef(null);
-  const thirdOtpField = useRef(null);
-  const fourthOtpField = useRef(null);
+  // if timer already active hide resend btn
+  if (stateObj.otpTimerId !== null) {
+    resendOtpBtnStyles.push(style.hide);
+  }
 
-  const otpFieldsArr = [firstOtpField, secondOtpField, thirdOtpField, fourthOtpField];
-
-  const {
-    sendOtpRequest, verifyOtpRequest, stateObj, setStateObj,
-  } = useOtp();
+  if (stateObj.otpTimerId === null) {
+    otpTimerSyles.push(style.hide);
+  }
 
   let componentStillMounted = true;
 
+  // methods
   const startOtpTimer = () => {
     setOtpSeconds(30);
     const timer = setInterval(() => {
@@ -101,17 +124,6 @@ const VerifyOtpFormStep = ({
       otpTimerId: timer,
     }));
   };
-
-  // side effect for decrease in otp timer seconds
-  useEffect(() => {
-    if (otpSeconds <= 0) {
-      setStateObj((prevObj) => ({
-        ...prevObj,
-        otpTimerId: null,
-      }));
-      clearInterval(stateObj.otpTimerId);
-    }
-  }, [otpSeconds]);
 
   const resendOtpPressHandler = () => {
     if (stateObj.otpTimerId === null) {
@@ -272,18 +284,6 @@ const VerifyOtpFormStep = ({
       Keyboard.dismiss();
     }
   }, [stateObj]);
-
-  const otpTimerSyles = [style.otpTimer];
-  const resendOtpBtnStyles = [style.resendOtpBtn];
-
-  // if timer already active hide resend btn
-  if (stateObj.otpTimerId !== null) {
-    resendOtpBtnStyles.push(style.hide);
-  }
-
-  if (stateObj.otpTimerId === null) {
-    otpTimerSyles.push(style.hide);
-  }
 
   return (
   <View style={style.container}>

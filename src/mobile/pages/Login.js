@@ -49,7 +49,8 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
 });
 
 const Login = ({ navigation }) => {
-  const { font, theme } = React.useContext(ThemeContext);
+  // hooks
+  const phoneInput = useRef(null);
   const { stateObj, setState, loginWithPhone } = useLoginMethod();
   const [errorStateObj, setError] = useState({
     phoneNumber: false,
@@ -61,11 +62,18 @@ const Login = ({ navigation }) => {
   });
   const [hidePassword, setHidePassword] = useState(true);
 
-  const phoneInput = useRef(null);
+  useEffect(() => {
+    setError({ phoneNumber: false, email: false, password: false });
+    setFormErrorObj({ formError: false, formErrorType: false });
+    setState((prevObj) => ({
+      ...prevObj, phoneNumber: '', password: '', email: '',
+    }));
+  }, [stateObj.loginMethod]);
 
+  // styles
+  const { font, theme } = React.useContext(ThemeContext);
   const screenTheme = theme.screenLogin;
   const style = getStyles(screenTheme, theme.utilColors, font);
-
   const loginWithPhoneTabStyle = [style.loginMethodTab];
   const loginWithPhoneTextStyle = [style.loginMethodTabText];
 
@@ -82,14 +90,20 @@ const Login = ({ navigation }) => {
     loginWithEmailTextStyle.push(style.loginMethodTabTextActive);
   }
 
-  const handleStateChange = (key, value) => {
-    setState((prevState) => ({
-      ...prevState,
-      [key]: value,
-    }));
+  const getStyleArr = (key, additionalStyles = false) => {
+    const styleArr = [style.inputField];
+
+    if (errorStateObj[key]) {
+      styleArr.push(style.errorField);
+    }
+    if (additionalStyles) {
+      styleArr.push(additionalStyles);
+    }
+    return styleArr;
   };
 
-  const loginBtnClickHandler = () => {
+  // handlers
+  const loginBtnPressHandler = () => {
     const primaryFieldKey = stateObj.loginMethod === 'loginWithPhone' ? 'phoneNumber' : 'email';
     const primaryFieldTypeName = stateObj.loginMethod === 'loginWithPhone' ? 'Phone Number' : 'Email';
     const primaryFieldType = stateObj.loginMethod === 'loginWithPhone' ? 'tel' : 'email';
@@ -128,24 +142,16 @@ const Login = ({ navigation }) => {
     }
   };
 
-  useEffect(() => {
-    setError({ phoneNumber: false, email: false, password: false });
-    setFormErrorObj({ formError: false, formErrorType: false });
-    setState((prevObj) => ({
-      ...prevObj, phoneNumber: '', password: '', email: '',
-    }));
-  }, [stateObj.loginMethod]);
-
-  const getStyleArr = (key, additionalStyles = false) => {
-    const styleArr = [style.inputField];
-
-    if (errorStateObj[key]) {
-      styleArr.push(style.errorField);
+  // handleStateChange
+  const handleStateChange = (key, value) => {
+    try {
+      setState((prevState) => ({
+        ...prevState,
+        [key]: value,
+      }));
+    } catch (e) {
+      console.error(e);
     }
-    if (additionalStyles) {
-      styleArr.push(additionalStyles);
-    }
-    return styleArr;
   };
 
   return (
@@ -284,7 +290,7 @@ const Login = ({ navigation }) => {
           <TouchableOpacity
               style={style.btnPrimary}
               title="Login"
-            onPress={loginBtnClickHandler}>
+            onPress={loginBtnPressHandler}>
             <Text style={style.btnPrimaryText}>
               <FormattedMessage defaultMessage='Login' description='Login Button'/>
             </Text>

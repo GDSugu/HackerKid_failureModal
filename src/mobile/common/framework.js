@@ -26,39 +26,47 @@ const mobSubscribeToFCMTopic = (topic) => messaging().subscribeToTopic(topic);
 // Firebase Messaging Functions - end
 const validate = (type, value, typename, setError, errorKey,
   errorMessage = '', required = 1, skipValueCheck = false) => {
-  if (value === '' && !required) return true;
+  try {
+    if (value === '' && !required) return true;
 
-  const validationResponse = validateField(type, value, typename, null, skipValueCheck);
+    const validationResponse = validateField(type, value, typename, null, skipValueCheck);
 
-  if (value === '' && required) {
+    if (value === '' && required) {
+      setError((prevObj) => ({
+        ...prevObj,
+        [errorKey]: `${typename} is required`,
+      }));
+      return false;
+    } if (!skipValueCheck && !validationResponse.status) {
+      const currentErrorMessage = (errorMessage) || `Enter a valid ${typename}`;
+      setError((prevObj) => ({
+        ...prevObj,
+        [errorKey]: currentErrorMessage,
+      }));
+      return false;
+    }
     setError((prevObj) => ({
       ...prevObj,
-      [errorKey]: `${typename} is required`,
+      [errorKey]: false,
     }));
-    return false;
-  } if (!skipValueCheck && !validationResponse.status) {
-    const currentErrorMessage = (errorMessage) || `Enter a valid ${typename}`;
-    setError((prevObj) => ({
-      ...prevObj,
-      [errorKey]: currentErrorMessage,
-    }));
-    return false;
+  } catch (e) {
+    console.error(e);
   }
-  setError((prevObj) => ({
-    ...prevObj,
-    [errorKey]: false,
-  }));
-  return validationResponse.value;
+  return value;
 };
 
 const closeFormError = (formErrorStateObj, callingToCloseErrorType, setFormError) => {
-  const currentFormErrorType = formErrorStateObj.formErrorType;
+  try {
+    const currentFormErrorType = formErrorStateObj.formErrorType;
 
-  if (!formErrorStateObj.formError) return;
+    if (!formErrorStateObj.formError) return;
 
-  const errorTypesArr = callingToCloseErrorType.split(',');
-  if (errorTypesArr.includes(currentFormErrorType)) {
-    setFormError({ formError: false, formErrorType: false });
+    const errorTypesArr = callingToCloseErrorType.split(',');
+    if (errorTypesArr.includes(currentFormErrorType)) {
+      setFormError({ formError: false, formErrorType: false });
+    }
+  } catch (e) {
+    console.error(e);
   }
 };
 

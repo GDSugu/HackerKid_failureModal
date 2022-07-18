@@ -17,6 +17,12 @@
       "value": "label"
     }
   ],
+  "/x0h9E": [
+    {
+      "type": 0,
+      "value": "Login with Phone"
+    }
+  ],
   "0JV99f": [
     {
       "type": 0,
@@ -45,6 +51,18 @@
     {
       "type": 0,
       "value": "Bio"
+    }
+  ],
+  "2bMdhC": [
+    {
+      "type": 0,
+      "value": "Create a New Account"
+    }
+  ],
+  "2yf2WH": [
+    {
+      "type": 0,
+      "value": "Login with Phone"
     }
   ],
   "383EZ1": [
@@ -83,12 +101,6 @@
       "value": "Next"
     }
   ],
-  "6o79ty": [
-    {
-      "type": 0,
-      "value": "Login with OTP"
-    }
-  ],
   "74UjvK": [
     {
       "type": 0,
@@ -99,6 +111,12 @@
     {
       "type": 0,
       "value": "Login into existing account"
+    }
+  ],
+  "9YoD+Y": [
+    {
+      "type": 0,
+      "value": "New Password"
     }
   ],
   "9gqH2W": [
@@ -113,6 +131,12 @@
       "value": "Go to Class"
     }
   ],
+  "A5tWte": [
+    {
+      "type": 1,
+      "value": "formError"
+    }
+  ],
   "A5u1Oz": [
     {
       "type": 0,
@@ -123,6 +147,12 @@
     {
       "type": 0,
       "value": "Verify OTP and proceed"
+    }
+  ],
+  "AhFvSt": [
+    {
+      "type": 0,
+      "value": "Login with Email"
     }
   ],
   "B7znij": [
@@ -173,6 +203,12 @@
       "value": "Go to More"
     }
   ],
+  "EhuHU0": [
+    {
+      "type": 1,
+      "value": "errorMessage"
+    }
+  ],
   "F/vOH1": [
     {
       "type": 0,
@@ -193,10 +229,22 @@
       "value": " ?"
     }
   ],
+  "G0AqB8": [
+    {
+      "type": 0,
+      "value": "Login into Existing Account"
+    }
+  ],
   "GQwBTI": [
     {
       "type": 0,
       "value": "Verify OTP and proceed"
+    }
+  ],
+  "Gon8SN": [
+    {
+      "type": 0,
+      "value": "Login with Email"
     }
   ],
   "H2rvzb": [
@@ -241,6 +289,12 @@
       "value": "This is challenges page"
     }
   ],
+  "NZqKYF": [
+    {
+      "type": 0,
+      "value": "Forgot Password?"
+    }
+  ],
   "Nn5oAD": [
     {
       "type": 0,
@@ -275,6 +329,12 @@
     {
       "type": 0,
       "value": "Password"
+    }
+  ],
+  "SpftNg": [
+    {
+      "type": 1,
+      "value": "errorMessage"
     }
   ],
   "T/a40M": [
@@ -329,6 +389,12 @@
     {
       "type": 0,
       "value": "Something went wrong. Please try again"
+    }
+  ],
+  "ZvfR3g": [
+    {
+      "type": 0,
+      "value": "Send OTP"
     }
   ],
   "a2ZCmv": [
@@ -397,6 +463,12 @@
       "value": "Set Password"
     }
   ],
+  "jZhy7I": [
+    {
+      "type": 0,
+      "value": "Forgot Password"
+    }
+  ],
   "jxfpT4": [
     {
       "type": 0,
@@ -407,6 +479,12 @@
     {
       "type": 0,
       "value": "Save & Exit"
+    }
+  ],
+  "lynO1X": [
+    {
+      "type": 0,
+      "value": "Change Password"
     }
   ],
   "mDpOZM": [
@@ -473,6 +551,18 @@
     {
       "type": 0,
       "value": "Go to Home"
+    }
+  ],
+  "uhayi4": [
+    {
+      "type": 1,
+      "value": "errorMessage"
+    }
+  ],
+  "x8lXTv": [
+    {
+      "type": 0,
+      "value": "Resend"
     }
   ],
   "z9lFwl": [
