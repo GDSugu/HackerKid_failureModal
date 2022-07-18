@@ -1,4 +1,10 @@
 {
+  "+g4yFF": [
+    {
+      "type": 0,
+      "value": "Logout"
+    }
+  ],
   "/EsQT0": [
     {
       "type": 0,
@@ -41,10 +47,10 @@
       "value": "Game Progress"
     }
   ],
-  "1FjMUC": [
+  "13ETG6": [
     {
       "type": 0,
-      "value": "Forgot Password?"
+      "value": "Help"
     }
   ],
   "1RUvaS": [
@@ -251,10 +257,10 @@
       "value": "hackerkid logo"
     }
   ],
-  "DuPnGd": [
+  "E+cQHz": [
     {
       "type": 0,
-      "value": "Email"
+      "value": "Unlock Now"
     }
   ],
   "EG430K": [
@@ -359,6 +365,12 @@
     {
       "type": 0,
       "value": "Leaderboard Ranking"
+    }
+  ],
+  "LkuPrA": [
+    {
+      "type": 0,
+      "value": "Join your friends in the club"
     }
   ],
   "MB8h2I": [
@@ -613,7 +625,13 @@
       "value": "Show Leaderboard"
     }
   ],
-  "fOZCSk": [
+  "feq+Va": [
+    {
+      "type": 0,
+      "value": "More friends = More fun"
+    }
+  ],
+  "flaX9K": [
     {
       "type": 0,
       "value": "Set a Password"
@@ -649,28 +667,10 @@
       "value": "store authtoken"
     }
   ],
-  "hJpqIn": [
+  "iS2zLU": [
     {
       "type": 0,
-      "value": "Send OTP"
-    }
-  ],
-  "hphOHh": [
-    {
-      "type": 0,
-      "value": "Help"
-    }
-  ],
-  "hxLhGK": [
-    {
-      "type": 0,
-      "value": "Set Password"
-    }
-  ],
-  "jZhy7I": [
-    {
-      "type": 0,
-      "value": "Forgot Password"
+      "value": "Visit Club"
     }
   ],
   "lKeCea": [
@@ -721,16 +721,28 @@
       "value": "rank"
     }
   ],
-  "nT6Ql7": [
+  "n6bCYe": [
     {
-      "type": 1,
-      "value": "text"
+      "type": 0,
+      "value": "Get the rare collectibles with your coins now"
+    }
+  ],
+  "nTxUJZ": [
+    {
+      "type": 0,
+      "value": "Try IDE Now"
     }
   ],
   "nlYt8p": [
     {
       "type": 0,
       "value": "View more"
+    }
+  ],
+  "o2jxWd": [
+    {
+      "type": 0,
+      "value": "Account Settings"
     }
   ],
   "oJe49d": [
@@ -805,10 +817,10 @@
       "value": "Show Leaderboard"
     }
   ],
-  "x8lXTv": [
+  "vY562d": [
     {
       "type": 0,
-      "value": "Resend"
+      "value": "Try the new in-built IDE"
     }
   ],
   "xT1NKB": [
@@ -823,10 +835,22 @@
       "value": "Videos"
     }
   ],
+  "yujxGL": [
+    {
+      "type": 0,
+      "value": "Your Collections and Perks"
+    }
+  ],
   "z9lFwl": [
     {
       "type": 0,
       "value": "Name"
+    }
+  ],
+  "zMmp/q": [
+    {
+      "type": 0,
+      "value": "Practise... or play with the new code editor"
     }
   ]
 }

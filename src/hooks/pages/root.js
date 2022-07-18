@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getSession } from '../common/framework';
 import {
   getLocale,
   loadLocaleData,
@@ -30,4 +31,46 @@ const useRootPageState = () => {
   };
 };
 
+const useGetSession = (sessionAttr = []) => {
+  const [session, setSession] = useState({});
+
+  useEffect(() => {
+    if (sessionAttr.length) {
+      const sesn = {};
+      sessionAttr.forEach((attr) => {
+        sesn[attr] = localStorage.getItem(attr);
+      });
+      setSession(sesn);
+    } else {
+      const namePr = getSession('name');
+      const rankPr = getSession('rank');
+      const pointsEarnedPr = getSession('pointsEarned');
+      const profileImagePr = getSession('profileLink');
+      Promise.all([
+        namePr,
+        rankPr,
+        pointsEarnedPr,
+        profileImagePr,
+      ])
+        .then(([name, rank, pointsEarned, profileImage]) => {
+          setSession({
+            name,
+            rank,
+            pointsEarned,
+            profileImage,
+          });
+        })
+        .catch(console.error);
+    }
+  }, []);
+
+  return {
+    session,
+    setSession,
+  };
+};
+
+const AuthContext = React.createContext({});
+
 export default useRootPageState;
+export { AuthContext, useGetSession };

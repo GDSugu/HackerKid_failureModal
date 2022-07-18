@@ -1,4 +1,8 @@
 {
+  "+g4yFF": {
+    "defaultMessage": "Logout",
+    "description": "more menu button"
+  },
   "/EsQT0": {
     "defaultMessage": "This is games page",
     "description": "Games Page"
@@ -27,9 +31,9 @@
     "defaultMessage": "Game Progress",
     "description": "game progress heading"
   },
-  "1FjMUC": {
-    "defaultMessage": "Forgot Password?",
-    "description": "forgot password link"
+  "13ETG6": {
+    "defaultMessage": "Help",
+    "description": "more menu button"
   },
   "1RUvaS": {
     "defaultMessage": "Profile Settings",
@@ -166,9 +170,9 @@
     "defaultMessage": "hackerkid logo",
     "description": "logo"
   },
-  "DuPnGd": {
-    "defaultMessage": "Email",
-    "description": "Email label"
+  "E+cQHz": {
+    "defaultMessage": "Unlock Now",
+    "description": "more card button"
   },
   "EG430K": {
     "defaultMessage": "Go to More",
@@ -228,6 +232,10 @@
   "JnwRMJ": {
     "defaultMessage": "OTP",
     "description": "OTP label"
+  },
+  "LkuPrA": {
+    "defaultMessage": "Join your friends in the club",
+    "description": "more card subtitle"
   },
   "MB8h2I": {
     "defaultMessage": "Leaderboard Ranking",
@@ -396,9 +404,12 @@
     "defaultMessage": "Show Leaderboard",
     "description": "show leaderboard"
   },
-  "fOZCSk": {
-    "defaultMessage": "Set a Password",
-    "description": "Set password label"
+  "feq+Va": {
+    "defaultMessage": "More friends = More fun",
+    "description": "more card title"
+  },
+  "flaX9K": {
+    "defaultMessage": "Create a New Account"
   },
   "g0zp7w": {
     "defaultMessage": "Continue Playing",
@@ -420,21 +431,9 @@
     "defaultMessage": "store authtoken",
     "description": "authtoken temp storage btn"
   },
-  "hJpqIn": {
-    "defaultMessage": "Send OTP",
-    "description": "send otp button"
-  },
-  "hphOHh": {
-    "defaultMessage": "Help",
-    "description": "help button"
-  },
-  "hxLhGK": {
-    "defaultMessage": "Set Password",
-    "description": "Password Label"
-  },
-  "jZhy7I": {
-    "defaultMessage": "Forgot Password",
-    "description": "Forgot Password Heading"
+  "iS2zLU": {
+    "defaultMessage": "Visit Club",
+    "description": "more card button"
   },
   "lKeCea": {
     "defaultMessage": "Save & Exit",
@@ -468,13 +467,21 @@
     "defaultMessage": "rank",
     "description": "sheet card subtitle"
   },
-  "nT6Ql7": {
-    "defaultMessage": "{text}",
-    "description": "help type text"
+  "n6bCYe": {
+    "defaultMessage": "Get the rare collectibles with your coins now",
+    "description": "more card title"
+  },
+  "nTxUJZ": {
+    "defaultMessage": "Try IDE Now",
+    "description": "more card button"
   },
   "nlYt8p": {
     "defaultMessage": "View more",
     "description": "View More Bottomsheet Btn"
+  },
+  "o2jxWd": {
+    "defaultMessage": "Account Settings",
+    "description": "more menu button"
   },
   "oJe49d": {
     "defaultMessage": "All Challenges",
@@ -523,9 +530,9 @@
     "defaultMessage": "Show Leaderboard",
     "description": "Leaderboard show button"
   },
-  "x8lXTv": {
-    "defaultMessage": "Resend",
-    "description": "Resend otp button text"
+  "vY562d": {
+    "defaultMessage": "Try the new in-built IDE",
+    "description": "more card title"
   },
   "xT1NKB": {
     "defaultMessage": "Games",
@@ -535,8 +542,16 @@
     "defaultMessage": "Videos",
     "description": "videos nav text"
   },
+  "yujxGL": {
+    "defaultMessage": "Your Collections and Perks",
+    "description": "more menu button"
+  },
   "z9lFwl": {
     "defaultMessage": "Name",
     "description": "Profile name label"
+  },
+  "zMmp/q": {
+    "defaultMessage": "Practise... or play with the new code editor",
+    "description": "more card subtitle"
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link, useLocation, Outlet } from 'react-router-dom';
+import { useAuthSession, useGetSession } from '../../../../../hooks/pages/root';
 
 const NavItem = (props) => {
   const { icon, route, active } = props;
@@ -18,6 +19,9 @@ const NavBar = () => {
   const { pathname } = useLocation();
   const routes = pathname.split('/');
   const screen = routes[routes.length - 1];
+  const { session: { profileLink } } = useGetSession(['profileLink']);
+
+  useAuthSession();
 
   const navItems = [
     {
@@ -59,7 +63,7 @@ const NavBar = () => {
     },
   ];
 
-  const imgPath = '../../../../../images';
+  const profileImg = profileLink || '../../../../../images/common/profile.png';
 
   return <>
     <nav>
@@ -78,7 +82,7 @@ const NavBar = () => {
         </div>
         <div className="profileImg">
           <Link to='/profile'>
-            <img src={`${imgPath}/common/profile.png`} alt="Hackerkid User"/>
+            <img src={profileImg} alt="Hackerkid User"/>
           </Link>
         </div>
       </div>
