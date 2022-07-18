@@ -29,6 +29,12 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
   },
+  passwordChangedText: {
+    ...font.heading6,
+    textAlign: 'center',
+    marginVertical: 30,
+    color: utilColors.dark,
+  },
 });
 
 const TakeActionButtons = ({ children, style, navigation }) => (
@@ -250,9 +256,8 @@ const ForgotPasswordStepThree = ({
       console.log('here');
       changePasswordRequest().then((response) => {
         const data = JSON.parse(response);
-        console.log(data);
 
-        if (data.status === 'success' && data.message === 'REGISTERED') {
+        if (data.status === 'success' && data.message === 'CHANGED') {
           setStateObj((prevObj) => ({ ...prevObj, formStep: prevObj.formStep + 1 }));
         } else if (data.status === 'error') {
           setFormErrorObj({ formError: 'Something went wrong!Try again later', formErrorType: 'ERROR' });
@@ -372,6 +377,36 @@ const ForgotPasswordStepThree = ({
   </View>);
 };
 
+const ForgotPasswordStepFour = ({ navigation, style, setBackBtnStateObj }) => {
+  useEffect(() => {
+    setBackBtnStateObj((prevObj) => ({
+      ...prevObj,
+      showBackBtn: false,
+    }));
+  }, []);
+
+  return (
+  <View style={style.container}>
+    <Text style={style.passwordChangedText}>
+      Password changed successfully
+    </Text>
+    <TouchableOpacity style={style.btnPrimary} onPress={() => {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [
+            { name: 'Login' },
+          ],
+        }),
+      );
+    }}>
+      <Text style={style.btnPrimaryText}>
+        Go to Login
+      </Text>
+    </TouchableOpacity>
+    </View>
+  );
+};
 const ForgotPassword = ({ navigation }) => {
   const { stateObj, setStateObj, changePasswordRequest } = useForgotPassword();
 
@@ -463,6 +498,9 @@ const ForgotPassword = ({ navigation }) => {
         changePasswordRequest={changePasswordRequest}
         navigation={ navigation}
           />)
+        || ((stateObj.formStep === 4)
+          && <ForgotPasswordStepFour style={style} navigation={navigation}
+            setBackBtnStateObj={setBackBtnStateObj} />)
       }
       </ScrollView>
   );
