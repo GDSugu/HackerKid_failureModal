@@ -11,10 +11,12 @@ const VerifyOtpFormStep = ({
   parentStateObj, setParentStateObj, setBackBtnStateObj, otpRequestType,
   secondaryActionButtons = false,
 }) => {
+  // hooks
   const {
     sendOtpRequest, verifyOtpRequest, stateObj, setStateObj,
   } = useOtp();
 
+  // methods
   const startOtpTimer = () => {
     const otpTimerDOM = $('.otp-timer');
     const resendOtp = $('.resend-otp');

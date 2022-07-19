@@ -46,6 +46,7 @@ const TakeActionButtons = ({ children }) => (
 const ForgotPasswordStepOne = ({
   stateObj, setStateObj, handleStateChange, setBackBtnStateObj,
 }) => {
+  // hooks
   const { sendOtpRequest } = useOtp();
 
   useEffect(() => {
@@ -63,6 +64,7 @@ const ForgotPasswordStepOne = ({
     }));
   }, []);
 
+  // methods
   const sendOtpClickHandler = (e) => {
     e.preventDefault();
     const result = validate('#phone', 'tel', 1, '#phone-form-helper');
@@ -89,7 +91,7 @@ const ForgotPasswordStepOne = ({
           setFormErrorField("Account doesn't exists!, try signing up", { 'data-error-type': 'ACCOUNT_NOT_EXIST' });
         } else if (data.status === 'error') {
           hideLoadingSpinner();
-          setFormErrorField('Something went wrong', { 'data-close-form-error': 'ACCOUNT_NOT_EXIST' });
+          setFormErrorField('Something went wrong! Try again', { 'data-close-form-error': 'ERROR' });
         }
       }).catch((err) => {
         hideLoadingSpinner();
@@ -117,7 +119,7 @@ const ForgotPasswordStepOne = ({
           handleStateChange('phoneNumber', e.target.value);
           validateInputOnChange(e);
           closeFormError(e.target);
-        }} data-close-form-error-type='ACCOUNT_NOT_EXIST' data-typename='Phone Number'/>
+        }} data-close-form-error-type='ERROR,ACCOUNT_NOT_EXIST' data-typename='Phone Number'/>
     </div>
       <p className='form-error text-danger overline-bold text-center' id='form-error'></p>
       <TakeActionButtons>
@@ -137,6 +139,20 @@ const ForgotPasswordStepOne = ({
 const ForgotPasswordStepThree = ({
   changePasswordRequest, setStateObj, handleStateChange, setBackBtnStateObj,
 }) => {
+  // hooks
+  useEffect(() => {
+    setBackBtnStateObj((prevBackObj) => ({
+      ...prevBackObj,
+      backFn: () => {
+        setStateObj((prevObj) => ({
+          ...prevObj,
+          formStep: 1,
+        }));
+      },
+    }));
+  }, []);
+
+  // methods
   const matchValueTo = (e, matchTo) => {
     const { target } = e;
     const { value } = target;
@@ -188,18 +204,6 @@ const ForgotPasswordStepThree = ({
     }
   };
 
-  useEffect(() => {
-    setBackBtnStateObj((prevBackObj) => ({
-      ...prevBackObj,
-      backFn: () => {
-        setStateObj((prevObj) => ({
-          ...prevObj,
-          formStep: 1,
-        }));
-      },
-    }));
-  }, []);
-
   return (
   <div className='step-3-fields'>
     <div className="form-group mb-3">
@@ -217,7 +221,7 @@ const ForgotPasswordStepThree = ({
             handleStateChange('password', e.target.value);
             validateInputOnChange(e, 'password', 'Use a stronger password');
             closeFormError(e.target);
-          } } data-close-form-error-type='INVALID_PASSWORD' required={ true} data-typename='Password'/>
+          } } data-close-form-error-type='ERROR,INVALID_PASSWORD' required={ true} data-typename='Password'/>
           <span className="password-toggle-icon-container">
             <i className="fa fa-fw fa-eye toggle-password" toggle="#password" onClick={togglePasswordVisibility}></i>
           </span>
@@ -239,7 +243,7 @@ const ForgotPasswordStepThree = ({
             handleStateChange('password', e.target.value);
             validateInputOnChange(e, 'password', 'Use a stronger Password');
             matchValueTo(e, '#password');
-          }} data-close-form-error-type='INVALID_PASSWORD' required={ true} data-typename='Re-type Password'/>
+          }} data-close-form-error-type='ERROR,INVALID_PASSWORD' required={ true} data-typename='Re-type Password'/>
           <span className="password-toggle-icon-container">
             <i className="fa fa-fw fa-eye toggle-password" toggle="#retyped-password" onClick={togglePasswordVisibility}></i>
           </span>
@@ -258,6 +262,7 @@ const ForgotPasswordStepThree = ({
 };
 
 const ForgotPasswordStepFour = ({ setBackBtnStateObj }) => {
+  // hooks
   useEffect(() => {
     setBackBtnStateObj((prevBackObj) => ({
       ...prevBackObj,
@@ -290,24 +295,14 @@ const ForgotPasswordStepFour = ({ setBackBtnStateObj }) => {
 
 const ForgotPassword = () => {
   pageInit('auth-container', 'Forgot-Password');
-
+  // hooks
   const {
     stateObj, setStateObj, changePasswordRequest,
   } = useForgotPassword();
 
   const { stateObj: backBtnStateObj, setStateObj: setBackBtnStateObj } = useBackBtn();
 
-  const handleStateChange = (key, value) => {
-    setStateObj((prevObj) => ({
-      ...prevObj,
-      [key]: value,
-    }));
-  };
-
-  const backBtnClickHandler = () => {
-    backBtnStateObj.backFn();
-  };
-
+  // styles
   const backBtnDisplay = backBtnStateObj.showBackBtn ? 'd-block' : 'd-none';
   let formSvgPath = '../../../../images/forgot-password/forgot-password-form-svg.svg';
 
@@ -317,13 +312,20 @@ const ForgotPassword = () => {
     formSvgPath = '../../../../images/forgot-password/forgot-password-step-4-svg.svg';
   }
 
+  const handleStateChange = (key, value) => {
+    setStateObj((prevObj) => ({
+      ...prevObj,
+      [key]: value,
+    }));
+  };
+
   return (
     <div className='form-container'>
     <form className='forgot-password-form py-5 px-3 py-sm-3 w-100'>
     <header className='d-flex'>
         <i
           className={`back-btn fa fa-arrow-left ${backBtnDisplay}`}
-          onClick={backBtnClickHandler}></i>
+          onClick={backBtnStateObj.backFn}></i>
         <h5 className='subtitle1 text-center flex-grow-1'>
           <FormattedMessage
             defaultMessage="Forgot Password"

@@ -21,6 +21,7 @@ const manager = {};
 const Login = () => {
   pageInit('auth-container', 'Login');
 
+  // hooks
   useEffect(() => {
     const flaginput = document.querySelector('#phone');
     manager.telInput = intlTelInput(flaginput, {
@@ -43,14 +44,7 @@ const Login = () => {
 
   const { stateObj, setState: setStateObj, loginWithPhone } = useLoginMethod();
 
-  const handleStateChange = (key, value) => {
-    setStateObj((prevObj) => ({
-      ...prevObj,
-      [key]: value,
-    }
-    ));
-  };
-
+  // methods
   const loginMethodTabClickHandler = (e, loginMethodToSet) => {
     setStateObj((prevObj) => ({ ...prevObj, loginMethod: loginMethodToSet }));
 
@@ -104,7 +98,7 @@ const Login = () => {
         } else if (data.status === 'error' && data.message === 'EMAIL_LOGIN_RESTRICTED') {
           setFormErrorField('You are not allowed to login using email. Try mobile login.', { 'data-error-type': data.message });
         } else if (data.status === 'error') {
-          setFormErrorField('Server Error');
+          setFormErrorField('Something went wrong ! Try again', { 'data-error-type': 'ERROR' });
         }
       })
         .catch((error) => {
@@ -115,6 +109,14 @@ const Login = () => {
     }
   };
 
+  // handle state change
+  const handleStateChange = (key, value) => {
+    setStateObj((prevObj) => ({
+      ...prevObj,
+      [key]: value,
+    }
+    ));
+  };
   return (
     <>
       <div className='form-container login-form-container'>
@@ -155,7 +157,7 @@ const Login = () => {
                   handleStateChange('phoneNumber', e.target.value);
                   validateInputOnChange(e);
                   closeFormError(e.target);
-                }} data-close-form-error-type='INCORRECT,NOT_REGISTERED' data-typename='Phone Number' required={ true}/>
+                }} data-close-form-error-type='ERROR,INCORRECT,NOT_REGISTERED' data-typename='Phone Number' required={ true}/>
               </div>
             </div>
             <div className="tab-pane fade" id="login-with-email" role="tabpanel">
@@ -174,7 +176,7 @@ const Login = () => {
                   handleStateChange('email', e.target.value);
                   validateInputOnChange(e);
                   closeFormError(e.target);
-                }} data-close-form-error-type='INCORRECT' data-typename='Email Address' required={ true}/>
+                }} data-close-form-error-type='ERROR,INCORRECT,EMAIL_LOGIN_RESTRICTED' data-typename='Email Address' required={ true}/>
               </div>
             </div>
           </div>
@@ -194,7 +196,7 @@ const Login = () => {
                 handleStateChange('password', e.target.value);
                 validateInputOnChange(e);
                 closeFormError(e.target);
-              }} data-close-form-error-type='INCORRECT' data-typename='Password' data-skip-value-check={true} required={ true}/>
+              }} data-close-form-error-type='ERROR,INCORRECT' data-typename='Password' data-skip-value-check={true} required={ true}/>
               <span className="password-toggle-icon-container">
                 <i className="fa fa-fw fa-eye toggle-password" toggle="#password" onClick={togglePasswordVisibility}></i>
               </span>

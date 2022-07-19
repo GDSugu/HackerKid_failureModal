@@ -23,6 +23,7 @@ const manager = {};
 const RegisterFormStepOne = ({
   stateObj, setStateObj, handleStateChange, setBackBtnStateObj,
 }) => {
+  // hooks
   const { sendOtpRequest } = useOtp();
 
   useEffect(() => {
@@ -40,6 +41,7 @@ const RegisterFormStepOne = ({
     }));
   }, []);
 
+  // methods
   const nextBtnClickHandler = (e) => {
     e.preventDefault();
 
@@ -192,6 +194,21 @@ const RegisterFormStepOne = ({
 const RegisterFormStepThree = ({
   createAccountRequest, handleStateChange, setStateObj, setBackBtnStateObj,
 }) => {
+  // hooks
+  useEffect(() => {
+    setBackBtnStateObj((prevBackObj) => ({
+      ...prevBackObj,
+      showBackBtn: true,
+      backFn: () => {
+        setStateObj((prevObj) => ({
+          ...prevObj,
+          formStep: 1,
+        }));
+      },
+    }));
+  }, []);
+
+  // methods
   const matchValueTo = (e, matchTo) => {
     const { target } = e;
     const { value } = target;
@@ -241,19 +258,6 @@ const RegisterFormStepThree = ({
       });
     }
   };
-
-  useEffect(() => {
-    setBackBtnStateObj((prevBackObj) => ({
-      ...prevBackObj,
-      showBackBtn: true,
-      backFn: () => {
-        setStateObj((prevObj) => ({
-          ...prevObj,
-          formStep: 1,
-        }));
-      },
-    }));
-  }, []);
 
   return (
   <div className='step-3-fields'>
@@ -316,25 +320,9 @@ const RegisterFormStepThree = ({
 const Register = () => {
   pageInit('auth-container', 'Register');
 
+  // hooks
   const { stateObj, setStateObj, createAccountRequest } = useRegister();
   const { stateObj: backBtnStateObj, setStateObj: setBackBtnStateObj } = useBackBtn();
-
-  const handleStateChange = (key, value) => {
-    setStateObj((prevObj) => {
-      const newObj = {
-        ...prevObj,
-        [key]: value,
-      };
-
-      return newObj;
-    });
-  };
-
-  const backBtnClickHandler = () => {
-    backBtnStateObj.backFn();
-  };
-
-  const backBtnDisplay = backBtnStateObj.showBackBtn ? 'd-block' : 'd-none';
 
   useEffect(() => {
     loginCheck().then((response) => {
@@ -347,6 +335,17 @@ const Register = () => {
     });
   }, []);
 
+  // styles
+  const backBtnDisplay = backBtnStateObj.showBackBtn ? 'd-block' : 'd-none';
+
+  // methods
+  const handleStateChange = (key, value) => {
+    setStateObj((prevObj) => ({
+      ...prevObj,
+      [key]: value,
+    }));
+  };
+
   return (
     <>
       <div className='form-container'>
@@ -354,7 +353,7 @@ const Register = () => {
           <header className='d-flex'>
             <i
               className={`back-btn fa fa-arrow-left ${backBtnDisplay}`}
-              onClick={backBtnClickHandler}></i>
+              onClick={backBtnStateObj.backFn}></i>
             <h5 className='subtitle1 text-center flex-grow-1'>
               <FormattedMessage
                 defaultMessage="Create a New Account"
