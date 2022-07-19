@@ -1,4 +1,7 @@
 const getCommonStyles = (theme, utilColors, font) => ({
+  stepContainer: {
+    flexBasis: '95%',
+  },
   container: {
     paddingLeft: 18,
     paddingRight: 18,
@@ -11,18 +14,22 @@ const getCommonStyles = (theme, utilColors, font) => ({
   },
   formHeading: {
     color: utilColors.dark,
-    marginVertical: 10,
-    ...font.heading6,
     textAlign: 'center',
-    flexGrow: 1,
+    ...font.heading6,
+  },
+  backBtn: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
   },
   formHeadingAndBackBtn: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 18,
-    marginVertical: 8,
+    marginVertical: 20,
+    flexBasis: '5%',
+    width: '100%',
   },
   inputField: {
     borderWidth: 1,

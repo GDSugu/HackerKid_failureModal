@@ -112,7 +112,7 @@ const RegisterFormStepOne = ({
   };
 
   return (
-    <View style={style.container}>
+    <View style={style.styleContainer}>
     <KeyboardAvoidingView>
     <View style={style.labelAndInputContainer}>
       <View style={style.labelAndFormHelperContainer}>
@@ -331,7 +331,7 @@ const RegisterFormStepThree = ({
   };
 
   return (
-    <View style={style.container}>
+    <View style={style.styleContainer}>
     <KeyboardAvoidingView>
       <View style={style.labelAndInputContainer}>
         <View style={style.labelAndFormHelperContainer}>
@@ -480,84 +480,86 @@ const Register = ({ navigation }) => {
 
   return (
     <ScrollView style={{ flex: 1 }}>
-      <View style={style.formHeadingAndBackBtn}>
-        <View style={{ flexBasis: '5%' }}>
-          <TouchableOpacity style={backBtnStyle} onPress={backBtnStateObj.backFn}>
-            <Icon name={'arrow-left'} type='FontAwesome' size={font.heading6.fontSize} color={ theme.utilColors.dark }/>
-          </TouchableOpacity>
+      <View style={style.container}>
+        <View style={style.formHeadingAndBackBtn}>
+          <View style={style.backBtn}>
+            <TouchableOpacity style={backBtnStyle} onPress={backBtnStateObj.backFn}>
+              <Icon name={'arrow-left'} type='FontAwesome' size={font.heading6.fontSize} color={ theme.utilColors.dark }/>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <Text style={style.formHeading}>
+              <FormattedMessage defaultMessage={'Create a New Account'} description='Create Account Heading'/>
+            </Text>
+          </View>
+          </View>
+          <View style={style.formSvgContainer}>
+            <RegisterFormSvg/>
         </View>
-        <View style={{ flex: 1 }}>
-          <Text style={style.formHeading}>
-            <FormattedMessage defaultMessage={'Create a New Account'} description='Create Account Heading'/>
-          </Text>
-        </View>
-        </View>
-        <View style={style.formSvgContainer}>
-          <RegisterFormSvg/>
-      </View>
-      {
-        ((stateObj.formStep === 1)
-          && <RegisterFormStepOne
+        {
+          ((stateObj.formStep === 1)
+            && <RegisterFormStepOne
+            style={style}
+            getStyleArr = {getStyleArr}
+            theme={theme}
+            font={font}
+            stateObj={stateObj}
+            setStateObj={setStateObj}
+            setBackBtnStateObj={setBackBtnStateObj}
+            handleStateChange={handleStateChange}
+            errorStateObj={errorStateObj}
+            setError={setError}
+            formErrorStateObj={formErrorStateObj}
+            setFormErrorObj={setFormErrorObj}
+            navigation={navigation}
+            />)
+          || ((stateObj.formStep === 2)
+            && <VerifyOtpFormStep
+            style={style}
+            parentStateObj={stateObj}
+            setParentStateObj={setStateObj}
+            setBackBtnStateObj={setBackBtnStateObj}
+            formErrorStateObj={formErrorStateObj}
+            setFormErrorObj={setFormErrorObj}
+            navigation={navigation}
+            otpRequestType={'send-otp'}
+            secondaryActionButtons={[<TouchableOpacity
+              key={ 0 }
+              style={style.btnOutlinePrimary}
+              title="Login into existing account"
+              onPress={() => {
+                navigation.dispatch(
+                  CommonActions.reset({
+                    index: 1,
+                    routes: [
+                      { name: 'Login' },
+                    ],
+                  }),
+                );
+              }}>
+              <Text style={style.btnOutlinePrimaryText}>
+                <FormattedMessage defaultMessage='Login into existing account' description='Login into existing account button' />
+              </Text>
+            </TouchableOpacity>]} />)
+          || ((stateObj.formStep === 3)
+          && <RegisterFormStepThree
           style={style}
-          getStyleArr = {getStyleArr}
+          getStyleArr={getStyleArr}
           theme={theme}
           font={font}
           stateObj={stateObj}
           setStateObj={setStateObj}
-          setBackBtnStateObj={setBackBtnStateObj}
-          handleStateChange={handleStateChange}
+          handleStateChange = {handleStateChange}
+          formErrorStateObj={formErrorStateObj}
+          setFormErrorObj={setFormErrorObj}
           errorStateObj={errorStateObj}
           setError={setError}
-          formErrorStateObj={formErrorStateObj}
-          setFormErrorObj={setFormErrorObj}
-          navigation={navigation}
-          />)
-        || ((stateObj.formStep === 2)
-          && <VerifyOtpFormStep
-          style={style}
-          parentStateObj={stateObj}
-          setParentStateObj={setStateObj}
           setBackBtnStateObj={setBackBtnStateObj}
-          formErrorStateObj={formErrorStateObj}
-          setFormErrorObj={setFormErrorObj}
-          navigation={navigation}
-          otpRequestType={'send-otp'}
-          secondaryActionButtons={[<TouchableOpacity
-            key={ 0 }
-            style={style.btnOutlinePrimary}
-            title="Login into existing account"
-            onPress={() => {
-              navigation.dispatch(
-                CommonActions.reset({
-                  index: 1,
-                  routes: [
-                    { name: 'Login' },
-                  ],
-                }),
-              );
-            }}>
-            <Text style={style.btnOutlinePrimaryText}>
-              <FormattedMessage defaultMessage='Login into existing account' description='Login into existing account button' />
-            </Text>
-          </TouchableOpacity>]} />)
-        || ((stateObj.formStep === 3)
-        && <RegisterFormStepThree
-        style={style}
-        getStyleArr={getStyleArr}
-        theme={theme}
-        font={font}
-        stateObj={stateObj}
-        setStateObj={setStateObj}
-        handleStateChange = {handleStateChange}
-        formErrorStateObj={formErrorStateObj}
-        setFormErrorObj={setFormErrorObj}
-        errorStateObj={errorStateObj}
-        setError={setError}
-        setBackBtnStateObj={setBackBtnStateObj}
-        createAccountRequest={createAccountRequest}
-        navigation={ navigation}
-          />)
-      }
+          createAccountRequest={createAccountRequest}
+          navigation={ navigation}
+            />)
+        }
+        </View>
       </ScrollView>
   );
 };

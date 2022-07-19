@@ -173,6 +173,7 @@ const Login = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
           </View>
+          <View style={style.stepContainer}>
           {
             (stateObj.loginMethod === 'loginWithPhone')
               ? <View style={style.labelAndInputContainer}>
@@ -274,7 +275,6 @@ const Login = ({ navigation }) => {
             </TouchableOpacity>
             </View>
           </View>
-        </KeyboardAvoidingView>
         <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
           <Text style={style.btnAsInteractiveText}>
             <FormattedMessage defaultMessage='Forgot Password?' description='Forgot password link' />
@@ -310,7 +310,9 @@ const Login = ({ navigation }) => {
               <FormattedMessage defaultMessage='Create a New Account' description='Create Account Button' />
             </Text>
           </TouchableOpacity>
-        </View>
+          </View>
+          </View>
+        </KeyboardAvoidingView>
       </View>
     </ScrollView>
   );

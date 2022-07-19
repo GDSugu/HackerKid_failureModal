@@ -286,7 +286,7 @@ const VerifyOtpFormStep = ({
   }, [stateObj]);
 
   return (
-  <View style={style.container}>
+  <View style={style.stepContainer}>
     <KeyboardAvoidingView >
       <View style={style.labelAndOtpFields}>
         <View style={style.labelWithOtpTimer}>

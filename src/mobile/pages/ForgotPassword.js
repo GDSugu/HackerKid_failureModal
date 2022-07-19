@@ -128,7 +128,7 @@ const ForgotPasswordStepOne = ({
   };
 
   return (
-    <View style={style.container}>
+    <View style={style.stepContainer}>
     <KeyboardAvoidingView>
     <View style={style.labelAndInputContainer}>
       <View style={style.labelAndFormHelperContainer}>
@@ -259,7 +259,7 @@ const ForgotPasswordStepThree = ({
   };
 
   return (
-    <View style={style.container}>
+    <View style={style.stepContainer}>
     <KeyboardAvoidingView>
       <View style={style.labelAndInputContainer}>
         <View style={style.labelAndFormHelperContainer}>
@@ -364,7 +364,7 @@ const ForgotPasswordStepFour = ({ navigation, style, setBackBtnStateObj }) => {
   }, []);
 
   return (
-  <View style={style.container}>
+  <View style={style.stepContainer}>
     <Text style={style.passwordChangedText}>
       Password changed successfully
     </Text>
@@ -432,76 +432,79 @@ const ForgotPassword = ({ navigation }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
-      <View style={style.formHeadingAndBackBtn}>
-        <View style={{ flexBasis: '5%' }}>
-          <TouchableOpacity style={backBtnStyle} onPress={backBtnStateObj.backFn}>
-            <Icon name={'arrow-left'} type='FontAwesome' size={font.heading6.fontSize} color={ theme.utilColors.dark }/>
-          </TouchableOpacity>
-        </View>
-        <View style={{ flex: 1 }}>
-          <Text style={style.formHeading}>
-            <FormattedMessage defaultMessage={'Forgot Password'} description='Forgot Password Heading'/>
-          </Text>
-        </View>
-        </View>
-        <View style={style.formSvgContainer}>
-          {
-          (stateObj.formStep === 3 && <ForgotPasswordThirdSvg />)
-          || (stateObj.formStep === 4 && <ForgotPasswordFourthSvg />)
-          || <ForgotPasswordFirstSvg/>
-          }
-        </View>
-      {
-        ((stateObj.formStep === 1)
-          && <ForgotPasswordStepOne
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <View style={style.container}>
+        <View style={style.formHeadingAndBackBtn}>
+          <View style={style.backBtn}>
+            <TouchableOpacity
+              style={backBtnStyle} onPress={backBtnStateObj.backFn}>
+              <Icon name={'arrow-left'} type='FontAwesome' size={font.heading6.fontSize} color={ theme.utilColors.dark }/>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <Text style={style.formHeading}>
+              <FormattedMessage defaultMessage={'Forgot Password'} description='Forgot Password Heading'/>
+            </Text>
+          </View>
+          </View>
+          <View style={style.formSvgContainer}>
+            {
+            (stateObj.formStep === 3 && <ForgotPasswordThirdSvg />)
+            || (stateObj.formStep === 4 && <ForgotPasswordFourthSvg />)
+            || <ForgotPasswordFirstSvg/>
+            }
+          </View>
+        {
+          ((stateObj.formStep === 1)
+            && <ForgotPasswordStepOne
+            style={style}
+            getStyleArr={getStyleArr}
+            font={font}
+            stateObj={stateObj}
+            setStateObj={setStateObj}
+            setBackBtnStateObj={setBackBtnStateObj}
+            handleStateChange={handleStateChange}
+            errorStateObj={errorStateObj}
+            setError={setError}
+            formErrorStateObj={formErrorStateObj}
+            setFormErrorObj={setFormErrorObj}
+            navigation={navigation}
+            />)
+          || ((stateObj.formStep === 2)
+            && <VerifyOtpFormStep
+            style={style}
+            parentStateObj={stateObj}
+            setParentStateObj={setStateObj}
+            setBackBtnStateObj={setBackBtnStateObj}
+            formErrorStateObj={formErrorStateObj}
+            setFormErrorObj={setFormErrorObj}
+            otpRequesType ={'send-otp-for-pwd-change'}
+            navigation={navigation}
+            secondaryActionButtons={<TakeActionButtons style={style} navigation={navigation} />} />)
+          || ((stateObj.formStep === 3)
+            && <ForgotPasswordStepThree
           style={style}
           getStyleArr={getStyleArr}
+          theme={theme}
           font={font}
           stateObj={stateObj}
           setStateObj={setStateObj}
-          setBackBtnStateObj={setBackBtnStateObj}
-          handleStateChange={handleStateChange}
+          handleStateChange = {handleStateChange}
+          formErrorStateObj={formErrorStateObj}
+          setFormErrorObj={setFormErrorObj}
           errorStateObj={errorStateObj}
           setError={setError}
-          formErrorStateObj={formErrorStateObj}
-          setFormErrorObj={setFormErrorObj}
-          navigation={navigation}
-          />)
-        || ((stateObj.formStep === 2)
-          && <VerifyOtpFormStep
-          style={style}
-          parentStateObj={stateObj}
-          setParentStateObj={setStateObj}
           setBackBtnStateObj={setBackBtnStateObj}
-          formErrorStateObj={formErrorStateObj}
-          setFormErrorObj={setFormErrorObj}
-          otpRequesType ={'send-otp-for-pwd-change'}
-          navigation={navigation}
-          secondaryActionButtons={<TakeActionButtons style={style} navigation={navigation} />} />)
-        || ((stateObj.formStep === 3)
-          && <ForgotPasswordStepThree
-        style={style}
-        getStyleArr={getStyleArr}
-        theme={theme}
-        font={font}
-        stateObj={stateObj}
-        setStateObj={setStateObj}
-        handleStateChange = {handleStateChange}
-        formErrorStateObj={formErrorStateObj}
-        setFormErrorObj={setFormErrorObj}
-        errorStateObj={errorStateObj}
-        setError={setError}
-        setBackBtnStateObj={setBackBtnStateObj}
-        changePasswordRequest={changePasswordRequest}
-        navigation={ navigation}
-          />)
-        || ((stateObj.formStep === 4)
-          && <ForgotPasswordStepFour
-          style={style}
-          navigation={navigation}
-          setBackBtnStateObj={setBackBtnStateObj} />)
-      }
+          changePasswordRequest={changePasswordRequest}
+          navigation={ navigation}
+            />)
+          || ((stateObj.formStep === 4)
+            && <ForgotPasswordStepFour
+            style={style}
+            navigation={navigation}
+            setBackBtnStateObj={setBackBtnStateObj} />)
+        }
+      </View>
       </ScrollView>
   );
 };
