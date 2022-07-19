@@ -1,4 +1,10 @@
 {
+  "+AycvP": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
   "+g4yFF": [
     {
       "type": 0,
@@ -29,10 +35,16 @@
       "value": "Coins Earned:"
     }
   ],
-  "/x0h9E": [
+  "/r/CdV": [
     {
       "type": 0,
-      "value": "Login with Phone"
+      "value": "help@hackerkid.org"
+    }
+  ],
+  "/vp2XZ": [
+    {
+      "type": 0,
+      "value": "FAQ"
     }
   ],
   "0JV99f": [
@@ -77,10 +89,10 @@
       "value": "Bio"
     }
   ],
-  "2bMdhC": [
+  "2qExk8": [
     {
       "type": 0,
-      "value": "Create a New Account"
+      "value": "Get the rare collectibles with your coins now"
     }
   ],
   "2ua1yZ": [
@@ -311,19 +323,19 @@
       "value": "All Challenges"
     }
   ],
-  "IgwSoy": [
+  "ILnphX": [
     {
       "type": 0,
-      "value": "Previous"
+      "value": "Call"
     }
   ],
-  "In3suu": [
+  "Ib1cTy": [
     {
-      "type": 1,
-      "value": "errorMessage"
+      "type": 0,
+      "value": "9876543221"
     }
   ],
-  "JnwRMJ": [
+  "JCIgkj": [
     {
       "type": 0,
       "value": "OTP"
@@ -725,6 +737,12 @@
       "value": "Go to Profile"
     }
   ],
+  "pEiO08": [
+    {
+      "type": 0,
+      "value": "Account Settings"
+    }
+  ],
   "pwy4hs": [
     {
       "type": 0,
@@ -755,10 +773,22 @@
       "value": "completed"
     }
   ],
+  "sNqwYF": [
+    {
+      "type": 0,
+      "value": "Logout"
+    }
+  ],
   "swkU6w": [
     {
       "type": 0,
       "value": "Go to Home"
+    }
+  ],
+  "t7ObEx": [
+    {
+      "type": 0,
+      "value": "Unlock Now"
     }
   ],
   "tsF0aG": [
@@ -785,6 +815,12 @@
       "value": "Try the new in-built IDE"
     }
   ],
+  "wrdAU0": [
+    {
+      "type": 0,
+      "value": "Help"
+    }
+  ],
   "xT1NKB": [
     {
       "type": 0,
@@ -795,6 +831,12 @@
     {
       "type": 0,
       "value": "Videos"
+    }
+  ],
+  "yeNTz5": [
+    {
+      "type": 0,
+      "value": "Your Collections and Perks"
     }
   ],
   "yujxGL": [

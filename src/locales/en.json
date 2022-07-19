@@ -1,4 +1,8 @@
 {
+  "+AycvP": {
+    "defaultMessage": "Email",
+    "description": "Email Button Title"
+  },
   "+g4yFF": {
     "defaultMessage": "Logout",
     "description": "more menu button"
@@ -19,9 +23,13 @@
     "defaultMessage": "Coins Earned:",
     "description": "coins earned"
   },
-  "/x0h9E": {
-    "defaultMessage": "Login with Phone",
-    "description": "login with phone tab"
+  "/r/CdV": {
+    "defaultMessage": "help@hackerkid.org",
+    "description": "Email Button Text"
+  },
+  "/vp2XZ": {
+    "defaultMessage": "FAQ",
+    "description": "FAQ Button Text"
   },
   "0JV99f": {
     "defaultMessage": "This is index page",
@@ -50,25 +58,13 @@
   "2W0f9h": {
     "defaultMessage": "Bio"
   },
-  "2bMdhC": {
-    "defaultMessage": "Create a New Account",
-    "description": "create a new account button"
+  "2qExk8": {
+    "defaultMessage": "Get the rare collectibles with your coins now",
+    "description": "More card Title"
   },
   "2ua1yZ": {
     "defaultMessage": "rank",
     "description": "rank"
-  },
-  "2yf2WH": {
-    "defaultMessage": "Login with Phone",
-    "description": "Login with Phone tab"
-  },
-  "383EZ1": {
-    "defaultMessage": "This is more options page",
-    "description": "More options Page"
-  },
-  "3Wcqsy": {
-    "defaultMessage": "Next",
-    "description": "Next button"
   },
   "4Ve1r3": {
     "defaultMessage": "Ok",
@@ -205,17 +201,16 @@
     "defaultMessage": "All Challenges",
     "description": "all challenges"
   },
-  "IgwSoy": {
-    "defaultMessage": "Previous",
-    "description": "previous page button"
+  "ILnphX": {
+    "defaultMessage": "Call",
+    "description": "Call Button Title"
   },
-  "In3suu": {
-    "defaultMessage": "{errorMessage}",
-    "description": "error text"
+  "Ib1cTy": {
+    "defaultMessage": "9876543221",
+    "description": "Call Button Text"
   },
-  "JnwRMJ": {
-    "defaultMessage": "OTP",
-    "description": "OTP label"
+  "JCIgkj": {
+    "defaultMessage": "Username"
   },
   "LkuPrA": {
     "defaultMessage": "Join your friends in the club",
@@ -313,25 +308,9 @@
     "defaultMessage": "Edit",
     "description": "edit profile"
   },
-  "VsWMVt": {
-    "defaultMessage": "Re-type password",
-    "description": "Re-type password label"
-  },
-  "VthZQE": {
-    "defaultMessage": "Create a New Account",
-    "description": "Create Account Heading"
-  },
-  "VyTY/V": {
-    "defaultMessage": "{coins}",
-    "description": "Coins"
-  },
-  "W5zEev": {
-    "defaultMessage": "Resend",
-    "description": "resend otp button"
-  },
-  "X1rCRf": {
-    "defaultMessage": "Login into existing account",
-    "description": "login into existing account button"
+  "VsYaEG": {
+    "defaultMessage": "Open chat now",
+    "description": "Chat Button Text"
   },
   "Y+dh5z": {
     "defaultMessage": "Edit Profile",
@@ -475,6 +454,10 @@
     "defaultMessage": "Go to Profile",
     "description": "Link description"
   },
+  "pEiO08": {
+    "defaultMessage": "Account Settings",
+    "description": "account settings CTA"
+  },
   "pwy4hs": {
     "defaultMessage": "Game Progress",
     "description": "Game Progress card heading"
@@ -494,9 +477,17 @@
     "defaultMessage": "completed",
     "description": "Game Progress card caption"
   },
+  "sNqwYF": {
+    "defaultMessage": "Logout",
+    "description": "Logout Button"
+  },
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
+  },
+  "t7ObEx": {
+    "defaultMessage": "Unlock Now",
+    "description": "More card button text"
   },
   "tsF0aG": {
     "defaultMessage": "Continue Playing",
@@ -514,6 +505,10 @@
     "defaultMessage": "Try the new in-built IDE",
     "description": "more card title"
   },
+  "wrdAU0": {
+    "defaultMessage": "Help",
+    "description": "Help CTA"
+  },
   "xT1NKB": {
     "defaultMessage": "Games",
     "description": "games nav text"
@@ -521,6 +516,10 @@
   "xW6DFp": {
     "defaultMessage": "Videos",
     "description": "videos nav text"
+  },
+  "yeNTz5": {
+    "defaultMessage": "Your Collections and Perks",
+    "description": "Collections and Perks CTA"
   },
   "yujxGL": {
     "defaultMessage": "Your Collections and Perks",

@@ -1,3 +1,4 @@
+import { Linking, Platform } from 'react-native';
 import analytics from '@react-native-firebase/analytics';
 import messaging from '@react-native-firebase/messaging';
 import { validateField } from '../../hooks/common/framework';
@@ -70,7 +71,40 @@ const closeFormError = (formErrorStateObj, callingToCloseErrorType, setFormError
   }
 };
 
-export {
+const openDialer = (phoneNumber) => {
+  let url = '';
+  if (Platform.OS === 'android') {
+    url = `tel:${phoneNumber}`;
+  } else if (Platform.OS === 'ios') {
+    url = `telprompt:${phoneNumber}`;
+  }
+  Linking.canOpenURL(url)
+    .then((supported) => {
+      if (supported) {
+        Linking.openURL(url);
+      } else {
+        console.log(`Can't handle url: ${url}`);
+      }
+    })
+    .catch((err) => console.error('An error occurred', err));
+};
+
+const openMail = (email) => {
+  const url = `mailto:${email}`;
+  Linking.canOpenURL(url)
+    .then((supported) => {
+      if (supported) {
+        Linking.openURL(url);
+      } else {
+        console.log(`Can't handle url: ${url}`);
+      }
+    })
+    .catch((err) => console.error('An error occurred', err));
+};
+
+module.exports = {
+  openDialer,
+  openMail,
   mobAddAnalyticsEvent,
   mobCheckFCMPermission,
   mobGetFCMPermission,
