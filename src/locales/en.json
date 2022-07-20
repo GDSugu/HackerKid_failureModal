@@ -62,6 +62,10 @@
     "defaultMessage": "Login",
     "description": "Login Button"
   },
+  "6FPmdk": {
+    "defaultMessage": "Filter",
+    "description": "Filter button"
+  },
   "6V6DQY": {
     "defaultMessage": "Next",
     "description": "Next Button"

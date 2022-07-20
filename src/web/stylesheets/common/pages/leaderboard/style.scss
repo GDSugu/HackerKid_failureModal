@@ -1,0 +1,99 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+
+@import './_leaderboardTheme.js';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+#root {
+  min-height: 100vh;
+}
+
+.leaderboard-container {
+  background-color: gt.theme-var(leaderboard-body-bg, null, $thememaplight, $cssvars);
+
+  nav {
+    background-color: gt.theme-var(leaderboard-nav-bg, null, $thememaplight, $cssvars);
+
+    .navigation-container {
+      .navigation-item {
+        &.active {
+          background-color: gt.theme-var(leaderboard-nav-active-bg, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+  }
+}
+
+.wrapper{
+  width: 80%;
+  margin: auto;
+  margin-top: 1rem;
+
+  @include gm.media-breakpoint-up(sm) {
+    width: 60%;
+  }
+
+  @include gm.media-breakpoint-up(md) {
+    width: 40%;
+  }
+}
+
+.controls-container{
+  display: flex;
+  gap:1rem;
+  margin-bottom: 3rem;
+}
+
+.control{
+  outline: none;
+  border: 1px solid gt.theme-var(leaderboard-control-border-color, null, $thememaplight, $cssvars);
+  border-radius: 12px;
+  background:white;
+  padding: 11px;
+  padding-left: 35px;
+}
+
+.search-box-container{
+  flex-grow: 20;
+  color: gt.theme-var(text-color-1);
+
+  .search-box{
+    @include gm.box(100%, 100%);
+    padding-left: 40px;
+  }
+}
+
+.search-box::placeholder{
+  color: gt.theme-var(text-color-1);
+}
+
+.filter-btn-container{
+  flex-grow: 1;
+
+  .filter-btn{
+    width: 100%;
+  }
+}
+
+.control-with-icon{
+  position: relative;
+
+  .icon{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 1rem;
+  }
+}
+
+.leaderboard-table{
+  width: 100%;
+
+  th{
+    color:gt.theme-var(text-color-5);
+  }
+  th:last-child{
+    text-align: end;
+  }
+}
