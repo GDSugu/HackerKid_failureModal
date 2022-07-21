@@ -398,7 +398,7 @@ const DashboardBlock = ({
                 resizeMethod='scale'
               >
                 <Image
-                  source={dashboardUserData ? {
+                  source={dashboardUserData && dashboardUserData.profileImage ? {
                     uri: dashboardUserData.profileImage,
                   } : avatar }
                   style={style.heroCardImage}
