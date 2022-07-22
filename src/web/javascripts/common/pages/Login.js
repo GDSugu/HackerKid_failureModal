@@ -87,10 +87,11 @@ const Login = () => {
         }
 
         if (data.status === 'success') {
-          setUserSession(data);
-          pathNavigator('dashboard');
+          setUserSession(data).then(() => {
+            pathNavigator('dashboard');
+          });
         } else if (data.status === 'not-exists') {
-          setFormErrorField('You are not registered user', { 'data-error-type': 'NOT_REGISTERED' });
+          setFormErrorField('You are not a registered user', { 'data-error-type': 'NOT_REGISTERED' });
           $('#phone').addClass('is-invalid').removeClass('is-valid');
           $('#password').removeClass('is-invalid');
         } else if (data.status === 'not-valid') {
