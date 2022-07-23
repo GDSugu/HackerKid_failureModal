@@ -38,9 +38,10 @@
       }
 
       @include gm.media-breakpoint-down(sm) {
-        background: url('../../../../../images/dashboard/dashboard-hero-bg-mobile.png') no-repeat center left / contain, gt.theme-var(bg-1);
-        min-height: unset;
-        padding: 1rem;
+        // background: url('../../../../../images/dashboard/dashboard-hero-bg-mobile.png') no-repeat center left / contain, gt.theme-var(bg-1);
+        // min-height: unset;
+        // padding: 1rem;
+        display: none;
       }
 
       .hero-card-data {
@@ -132,6 +133,38 @@
         }
       }
     }
+
+    .hero-card-mob {
+      margin-top: 1rem;
+      display: none;
+
+      @include gm.media-breakpoint-down(sm) {
+        display: block;
+      }
+
+      .more-menu-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: gt.theme-var(bg-1);
+        box-shadow: 0 4px 4px gt.theme-var(more-card-box-shadow-color, null, $thememaplight, $cssvars);
+        border: 1px solid gt.theme-var(more-btn-bg, null, $thememaplight, $cssvars);
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 0.5rem;
+
+        p {
+          margin: 0;
+          font-weight: bold;
+          color: gt.theme-var(more-btn-text-color, null, $thememaplight, $cssvars);
+        }
+
+        i {
+          font-size: 1.5rem;
+          color: gt.theme-var(more-btn-text-color, null, $thememaplight, $cssvars);
+        }
+      }
+    }
   }
 
   .more-card-container {
@@ -142,42 +175,81 @@
         padding: 0.25rem;
       }
 
-      .more-card {
-        border-radius: 12px;
-        background-color: gt.theme-var(bg-1);
-        padding: 1.5rem;
+      .more-card-block-cntnr {
         height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        background-color: gt.theme-var(bg-1);
+        border-radius: 0.875rem;
 
-        .more-card-title {
-          margin-bottom: 0;
-          line-height: 1.5;
+        &.collectible-card {
+          background: url('../../../../../images/more/collectibles.svg') no-repeat bottom left / 30%, gt.theme-var(bg-1);
+
+          @include gm.media-breakpoint-down(md) {
+            background: url('../../../../../images/more/collectibles.svg') no-repeat bottom left / 45%, gt.theme-var(bg-1);
+          }
         }
 
-        .more-card-subtitle {
-          margin-top: 0;
-          color: gt.theme-var(text-color-5);
-          font-size: 0.875rem;
+        &.club-card {
+          background: url('../../../../../images/more/moreFriends.svg') no-repeat bottom left / 30%, gt.theme-var(bg-1);
+
+          @include gm.media-breakpoint-down(md) {
+            background: url('../../../../../images/more/moreFriends.svg') no-repeat bottom left / 45%, gt.theme-var(bg-1);
+          }
         }
 
-        .more-card-btn-container {
-          display: flex;
-          justify-content: flex-end;
-          padding-top: 3rem;
+        &.ide-card {
+          background: url('../../../../../images/more/ide.svg') no-repeat bottom left / 30%, gt.theme-var(bg-1);
+
+          @include gm.media-breakpoint-down(md) {
+            background: url('../../../../../images/more/ide.svg') no-repeat bottom left / 45%, gt.theme-var(bg-1);
+          }
 
           .more-card-btn {
-            border-radius: 0.75rem;
-            padding: 0.75rem 2rem;
-            background-color: gt.theme-var(more-btn-bg, null, $thememaplight, $cssvars);
-            box-shadow: 0 4px 4px gt.theme-var(more-card-box-shadow-color, null, $thememaplight, $cssvars);
+            background-color: gt.theme-var(more-ide-btn-bg, null, $thememaplight, $cssvars) !important;
+          }
+        }
 
-            p {
-              margin: 0;
-              color: gt.theme-var(text-color-2);
-              font-weight: bold;
-              // font-size: 0.75rem;
+        .more-card {
+          border-radius: 12px;
+          padding: 1rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100%;
+  
+          .more-card-title {
+            margin-bottom: 0;
+            line-height: 1.5;
+          }
+  
+          .more-card-subtitle {
+            margin-top: 0;
+            color: gt.theme-var(text-color-5);
+            font-size: 0.875rem;
+          }
+  
+          .more-card-btn-container {
+            display: flex;
+            justify-content: flex-end;
+            padding-top: 3rem;
+  
+            .more-card-btn {
+              border-radius: 0.75rem;
+              padding: 0.75rem 2rem;
+              background-color: gt.theme-var(more-btn-bg, null, $thememaplight, $cssvars);
+              box-shadow: 0 4px 4px gt.theme-var(more-card-box-shadow-color, null, $thememaplight, $cssvars);
+              max-width: 10rem;
+              min-width: 9rem;
+
+              @include gm.media-breakpoint-down(md) {
+                padding: 0.75rem 1.75rem;
+              }
+  
+              p {
+                margin: 0;
+                color: gt.theme-var(text-color-2);
+                font-weight: bold;
+                // font-size: 0.75rem;
+              }
             }
           }
         }

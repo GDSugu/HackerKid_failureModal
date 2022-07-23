@@ -1,4 +1,4 @@
-const { Yellow } = require('../../../../../colors/_colors');
+const { Yellow, LightBlue } = require('../../../../../colors/_colors');
 const {
   Theme,
 } = require('../../../../javascripts/common/_theme');
@@ -13,6 +13,7 @@ const thememaplight = {
   'more-body-bg': lightTheme.screenYellow.bodyBg,
   'more-nav-bg': lightTheme.screenYellow.navBg,
   'more-nav-active-bg': lightTheme.screenYellow.navActiveBg,
+  'more-ide-btn-bg': LightBlue.color700,
   'more-card-box-shadow-color': '#FFE8B6',
   'more-hero-card-box-shadow-color': '#F9A82625',
 };
@@ -25,6 +26,7 @@ const thememapdark = {
   'more-body-bg': darkTheme.screenYellow.bodyBg,
   'more-nav-bg': darkTheme.screenYellow.navBg,
   'more-nav-active-bg': darkTheme.screenYellow.navActiveBg,
+  'more-ide-btn-bg': LightBlue.color700,
   'more-card-box-shadow-color': '#FFE8B6',
   'more-hero-card-box-shadow-color': '#F9A82625',
 };
@@ -36,6 +38,7 @@ const cssvars = {
   'more-body-bg': '--more-body-bg',
   'more-nav-bg': '--more-nav-bg',
   'more-nav-active-bg': '--more-nav-active-bg',
+  'more-ide-btn-bg': '--more-ide-btn-bg',
   'more-card-box-shadow-color': '--more-card-box-shadow-color',
   'more-hero-card-box-shadow-color': '--more-hero-card-box-shadow-color',
 };

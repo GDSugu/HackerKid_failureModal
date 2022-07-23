@@ -1,9 +1,9 @@
 import React from 'react';
-import '../../../stylesheets/common/pages/games/style.scss';
+import '../../../stylesheets/common/pages/profile/style.scss';
 import { pageInit } from '../framework';
 
 const Subscription = () => {
-  pageInit('subscription-container', 'Profile - Subscription');
+  pageInit('profile-container', 'Profile - Subscription');
 
   return <>
   <div>

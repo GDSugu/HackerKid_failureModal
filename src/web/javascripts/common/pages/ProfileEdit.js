@@ -69,7 +69,8 @@ const validateField = (key, target) => {
 const Profile = () => {
   pageInit('profile-container', 'Profile - Settings');
 
-  const { state, setState, saveProfile } = useProfileInfo();
+  const isPageMounted = React.useRef(true);
+  const { state, setState, saveProfile } = useProfileInfo({ isPageMounted });
   const [showUpdatedModal, setShowUpdatedModal] = useState(false);
 
   const {
@@ -130,6 +131,9 @@ const Profile = () => {
     if (uniqueUrl) {
       window.history.replaceState({}, '', `/profile/edit/${uniqueUrl}`);
     }
+    return () => {
+      isPageMounted.current = false;
+    };
   }, [uniqueUrl]);
 
   return <>

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import post, { s3Upload } from '../../common/framework';
 import API from '../../../../env';
 
-const useProfileInfo = (action = 'getBasicInfo') => {
+const useProfileInfo = ({ action = 'getBasicInfo', isPageMounted }) => {
   const [profileInfo, setProfileInfo] = useState({
     status: true,
     name: false,
@@ -94,26 +94,28 @@ const useProfileInfo = (action = 'getBasicInfo') => {
           s3Prefix: API.S3PREFIX,
         }, 'profile/')
           .then((response) => {
-            if (response === 'access_denied') {
-              setProfileInfo((prevState) => ({
-                status: 'access_denied',
-                ...prevState,
-                response,
-              }));
-            } else {
-              const parsedResponse = JSON.parse(response);
-              if (parsedResponse.status === 'success') {
-                const { userInfo } = parsedResponse;
-                setProfileInfo(() => ({
-                  ...userInfo,
-                  status: 'success',
+            if (isPageMounted.current) {
+              if (response === 'access_denied') {
+                setProfileInfo((prevState) => ({
+                  status: 'access_denied',
+                  ...prevState,
+                  response,
                 }));
               } else {
-                setProfileInfo((prevState) => ({
-                  ...prevState,
-                  status: 'error',
-                  response: parsedResponse,
-                }));
+                const parsedResponse = JSON.parse(response);
+                if (parsedResponse.status === 'success') {
+                  const { userInfo } = parsedResponse;
+                  setProfileInfo(() => ({
+                    ...userInfo,
+                    status: 'success',
+                  }));
+                } else {
+                  setProfileInfo((prevState) => ({
+                    ...prevState,
+                    status: 'error',
+                    response: parsedResponse,
+                  }));
+                }
               }
             }
           });
