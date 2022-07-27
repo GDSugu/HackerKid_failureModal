@@ -20,7 +20,11 @@ const showBottomSheet = () => {
 const HeroContainer = ({ dashboardUserData, isDesktop, session }) => <>
   <div className="hero-card">
     <div className="hero-card-data col-6 col-sm-4">
-      <div className="hero-card-img" style={ (session.profileLink || dashboardUserData.profileImage) && { backgroundImage: `url(${session.profileLink ? session.profileLink : dashboardUserData.profileImage})` }}></div>
+      <div className="hero-card-img"
+        style={(session.profileLink || dashboardUserData.profileImage)
+          ? { backgroundImage: `url(${session.profileLink ? session.profileLink : dashboardUserData.profileImage})` }
+          : {}
+      }></div>
       { isDesktop
         && <>
             <div className="hero-card-data-content">

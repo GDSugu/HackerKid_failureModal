@@ -19,8 +19,12 @@ import RouteHome from './Home';
 import RouteVideo from './Video';
 import RouteChallenges from './Challenges';
 import RouteMore from './More';
-import RouteSignin from './Signin';
 import RouteProfile from './EditProfile';
+import RouteLogin from './Login';
+import RouteRegister from './Register';
+import RouteForgotPassword from './ForgotPassword';
+
+import BottomSheet from '../components/BottomSheet';
 
 import BottomSheet from '../components/BottomSheet';
 
@@ -226,12 +230,15 @@ const App = () => {
             onStateChange={() => { setRoutName(navigationRef.getCurrentRoute().name); }}
           >
             <Stack.Navigator
-              initialRouteName='Signin'
               screenOptions={{
                 headerShown: false,
                 animation: 'slide_from_bottom',
+<<<<<<< HEAD
               }}
             >
+=======
+              }} initialRouteName={'Login'}>
+>>>>>>> CU-22j045v_Login-and-signup-page_Sai-Darshan
               <Stack.Group>
                 <Stack.Screen name='Start'>
                   {() => TabNavigators({
@@ -242,8 +249,15 @@ const App = () => {
                   })}
                 </Stack.Screen>
                 <Stack.Screen name='Class' component={RouteClass} />
+<<<<<<< HEAD
                 <Stack.Screen name='Signin' component={RouteSignin} />
                 <Stack.Screen name='EditProfile' component={RouteProfile} />
+=======
+                <Stack.Screen name='EditProfile' component={RouteProfile} />
+                <Stack.Screen name='Login' component={RouteLogin} />
+              <Stack.Screen name='Register' component={RouteRegister} />
+              <Stack.Screen name='ForgotPassword' component={RouteForgotPassword} />
+>>>>>>> CU-22j045v_Login-and-signup-page_Sai-Darshan
               </Stack.Group>
               <Stack.Group screenOptions={{ presentation: 'modal' }}>
                 <Stack.Screen name='BottomSheet' component={BottomSheet} />

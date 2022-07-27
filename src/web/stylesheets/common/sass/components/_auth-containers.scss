@@ -1,0 +1,60 @@
+@use '../themes/default' as gt;
+@use '../base/mixins' as gm;
+
+.auth-container {
+  background: url(../../../../../images/login/background-vector.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom;
+}
+
+.form-container {
+  width: 100%;
+  margin: auto;
+  box-shadow: none;
+  border-radius: 16px;
+  background: gt.theme-var(bg-1);
+
+  @include gm.media-breakpoint-down(ss) {
+    min-height: 100vh;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  @include gm.media-breakpoint-up(sm) {
+    width: 50%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  @include gm.media-breakpoint-up(lg) {
+    width: 35%;
+  }
+
+  @include gm.media-breakpoint-up(xl) {
+    width: 27%;
+  }
+
+  @include gm.media-breakpoint-down(sm) {
+    display: flex;
+    align-items: center;
+  }
+
+  .form-svg {
+    display: block;
+    margin: 4rem auto 2rem;
+  }
+
+  .btn {
+    height: 48px;
+    border-radius: 12px;
+  }
+
+  .btn-primary {
+    color: gt.theme-var(bg-1);
+  }
+
+  .btn-outline-primary {
+    border-radius: 12px;
+    color: gt.theme-var(text-color-1);
+  }
+}

@@ -44,7 +44,7 @@ const mobStoreSession = (key, value) => {
   let result;
   try {
     if (value) {
-      result = AsyncStorage.setItem('key', JSON.stringify(value));
+      result = AsyncStorage.setItem(key, (typeof value !== 'string') ? JSON.stringify(value) : value);
     }
   } catch (err) {
     console.error(err);
@@ -178,19 +178,21 @@ const post = (postData, apiPath, validateResponse = true) => getSession('authtok
     return response;
   });
 
-const loginCheck = () => (resolve) => getSession('authtoken')
-  .then((authToken) => {
-    if (authToken === null || authToken === undefined || authToken === '') {
-      resolve(false);
-    }
-    return post({ type: 'checkSession' }, 'login/', true, false);
-  })
-  .then((response) => {
-    if (response === 'access_denied') {
-      resolve(false);
-    }
-    return response;
-  });
+const loginCheck = () => new Promise((resolve) => {
+  getSession('authtoken')
+    .then((authToken) => {
+      if (authToken === null || authToken === undefined || authToken === '') {
+        resolve(false);
+      }
+      return post({ type: 'checkSession' }, 'login/', true, false);
+    })
+    .then((response) => {
+      if (response === 'access_denied') {
+        resolve(false);
+      }
+      resolve(response);
+    });
+});
 
 const logout = () => post({ type: 'logout' }, 'login/')
   .then((response) => {
@@ -209,6 +211,81 @@ const updatePoints = (addedPoints) => {
   // nav update
 };
 
+const validateField = (type, value, lengthRangeObj = false, skipValueCheck = false) => {
+  try {
+    if (lengthRangeObj) {
+      const { min, max } = lengthRangeObj;
+
+      let minLengthSatisfied;
+      let maxLengthSatisfied;
+
+      if (min) {
+        minLengthSatisfied = value.length >= min;
+
+        if (!minLengthSatisfied) {
+          throw new Error(`Enter a value that must be a minimum length of ${min}`);
+        }
+      }
+
+      if (max) {
+        maxLengthSatisfied = value.length <= max;
+
+        if (!maxLengthSatisfied) {
+          throw new Error(`Enter a value that must be a maximum length of ${max}`);
+        }
+      }
+    }
+
+    const regPattern = {
+      word: /\w/,
+      digit: /\d/,
+      email: /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i,
+      name: /^[a-zA-Z ]*$/,
+      // regex for passwords containing letters(upperCase or lowerCase)
+      // with digits OR special characters(excluding regex special characters like ^&* ()`),
+      // given the password minimum length of 4
+      password: /^(?=[^a-zA-Z\n]*[a-zA-Z])(?=[^\d\n!@#$]*[\d!@#$])[\w!@#$]{4,}$/,
+      tel: /[0-9 -()+]{8}$/,
+      url: /^[A-Z0-9._%+-]*$/,
+      rollnum: /([\w\d]{3,})/,
+      college_name: /\w/,
+      company_name: /\w/,
+      school_name: /\w/,
+      question: /\w/,
+      select: /\w/,
+      file: /\w/,
+    };
+
+    let status;
+
+    if (skipValueCheck) {
+      status = true;
+    } else {
+      const passed = regPattern[type].test(value);
+
+      if (!passed) {
+        throw new Error();
+      }
+      status = regPattern[type].test(value);
+    }
+
+    return {
+      status,
+      value,
+    };
+  } catch (e) {
+    const errorObj = {
+      status: false,
+      value,
+    };
+
+    if (e.message) {
+      errorObj.message = e.message;
+    }
+    return errorObj;
+  }
+};
+
 export default post;
 
 export {
@@ -220,4 +297,5 @@ export {
   setUserSession,
   s3Upload,
   updatePoints,
+  validateField,
 };

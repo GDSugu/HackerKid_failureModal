@@ -141,8 +141,26 @@ const themes = {
       ...Theme.light.screenLightBlue,
       ...fragmentIconDisposal,
     },
-    screenSignin: {
+    screenLogin: {
       ...Theme.light.screenYellow,
+      showHeader: false,
+      showNav: false,
+      viewType: 'screen',
+    },
+    screenRegister: {
+      ...Theme.light.screenYellow,
+      showHeader: false,
+      showNav: false,
+      viewType: 'screen',
+    },
+    screenForgotPassword: {
+      ...Theme.light.screenYellow,
+      showHeader: false,
+      showNav: false,
+      viewType: 'screen',
+    },
+    screenBottomSheet: {
+      ...ScreenSheet,
     },
     screenBottomSheet: {
       ...ScreenSheet,
@@ -247,7 +265,7 @@ const themes = {
       ...Theme.light.screenLightBlue,
       ...fragmentIconDisposal,
     },
-    screenSignin: {
+    screenLogin: {
       ...Theme.light.screenYellow,
       showHeader: false,
       showNav: false,

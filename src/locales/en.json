@@ -19,6 +19,10 @@
     "defaultMessage": "Profile Settings",
     "description": "Navigation link to profile edit page"
   },
+  "1x4WPP": {
+    "defaultMessage": "Create a New Account",
+    "description": "Create a New Account heading"
+  },
   "2W0f9h": {
     "defaultMessage": "Bio"
   },
@@ -57,8 +61,25 @@
     "defaultMessage": "Go to Class",
     "description": "class navigation button"
   },
-  "AyGauy": {
-    "defaultMessage": "Login"
+  "A5tWte": {
+    "defaultMessage": "{formError}",
+    "description": "form error"
+  },
+  "A5u1Oz": {
+    "defaultMessage": "New Password",
+    "description": "New Password label"
+  },
+  "Aevhvw": {
+    "defaultMessage": "Verify OTP and proceed",
+    "description": "Verify OTP and proceed Button"
+  },
+  "AhFvSt": {
+    "defaultMessage": "Login with Email",
+    "description": "Login with Email tab"
+  },
+  "B7znij": {
+    "defaultMessage": "Create a New Account",
+    "description": "Create a New Account button"
   },
   "BB+f/k": {
     "defaultMessage": "Try again",
@@ -87,6 +108,10 @@
   "DaO/pd": {
     "defaultMessage": "hackerkid logo",
     "description": "logo"
+  },
+  "DuPnGd": {
+    "defaultMessage": "Email",
+    "description": "Email label"
   },
   "EG430K": {
     "defaultMessage": "Go to More",
@@ -122,11 +147,29 @@
     "defaultMessage": "This is challenges page",
     "description": "Challenges Page"
   },
-  "NU0Nha": {
-    "defaultMessage": "Forgot Password?"
+  "NZqKYF": {
+    "defaultMessage": "Forgot Password?",
+    "description": "Forgot password link"
   },
-  "Op5EHr": {
-    "defaultMessage": "Sign in with Google"
+  "Nn5oAD": {
+    "defaultMessage": "Go to login",
+    "description": "Go to login button"
+  },
+  "OdODwS": {
+    "defaultMessage": "Create Account",
+    "description": "Create Account button"
+  },
+  "OvWf0W": {
+    "defaultMessage": "Class",
+    "description": "class nav text"
+  },
+  "PSx95N": {
+    "defaultMessage": "Home",
+    "description": "Home card heading"
+  },
+  "Qvy78L": {
+    "defaultMessage": "Profile",
+    "description": "profile heading"
   },
   "OvWf0W": {
     "defaultMessage": "Class",
@@ -148,8 +191,17 @@
     "defaultMessage": "Grade",
     "description": "Profile grade label"
   },
-  "SENRqu": {
-    "defaultMessage": "Help"
+  "RHM1lo": {
+    "defaultMessage": "Re-type Password",
+    "description": "Re-type Password label"
+  },
+  "SL6O2c": {
+    "defaultMessage": "Password",
+    "description": "Password label"
+  },
+  "SpftNg": {
+    "defaultMessage": "{errorMessage}",
+    "description": "phoneNumber form helper"
   },
   "TmcPug": {
     "defaultMessage": "Edit Profile",
@@ -178,6 +230,10 @@
   "ZXYzUQ": {
     "defaultMessage": "Something went wrong. Please try again",
     "description": "error modal"
+  },
+  "ZvfR3g": {
+    "defaultMessage": "Send OTP",
+    "description": "Send OTP button"
   },
   "a2ZCmv": {
     "defaultMessage": "Create a New Account",

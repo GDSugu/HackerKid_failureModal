@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import 'bootstrap';
-import '../../stylesheets/common/sass/importers/_bootstrap.scss';
-import '../../stylesheets/common/sass/importers/_fontawesome.scss';
+
 import {
   authorize,
   pathNavigator,

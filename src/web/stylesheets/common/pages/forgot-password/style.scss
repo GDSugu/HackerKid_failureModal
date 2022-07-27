@@ -1,0 +1,91 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+@use '../../sass/components/auth-nav';
+@use '../../sass/components/auth-input';
+@use '../../sass/components/auth-containers';
+
+@import './_forgotPasswordTheme.js';
+@import '../../loading.css';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+#root {
+  min-height: 100vh;
+}
+
+#loader-partial:after {
+  width: 20px;
+  height: 20px;
+}
+
+a:focus-visible {
+  color: gt.theme-var(text-color-10);
+  outline: none;
+}
+
+.back-btn {
+  cursor: pointer;
+}
+
+.text-link {
+  display: block;
+  color: gt.theme-var(text-color-8);
+  margin-bottom: 1rem;
+  text-decoration: none;
+  text-align: center;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.form-helper,
+#form-error {
+  display: none;
+}
+
+.iti--separate-dial-code {
+  width: 100%;
+}
+
+.login-to-existing-account-btn,
+.create-new-account-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondary-take-action-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  @include gm.media-breakpoint-up(md) {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+}
+
+.passwordfield-with-toggle-icon {
+  position: relative;
+
+  .password-toggle-icon-container {
+    position: absolute;
+    right: 10px;
+    top: 0.4rem;
+    font-size: 1rem;
+    color: gt.theme-var(text-color-5);
+    z-index: 3;
+
+    i {
+      cursor: pointer;
+    }
+  }
+}
+
+input[type="password"].is-invalid,
+input[type="text"]#password.is-invalid,
+input[type="text"]#retyped-password.is-invalid {
+  background-image: unset;
+}

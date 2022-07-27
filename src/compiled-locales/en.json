@@ -29,6 +29,12 @@
       "value": "Profile Settings"
     }
   ],
+  "1x4WPP": [
+    {
+      "type": 0,
+      "value": "Create a New Account"
+    }
+  ],
   "2W0f9h": [
     {
       "type": 0,
@@ -89,10 +95,34 @@
       "value": "Go to Class"
     }
   ],
-  "AyGauy": [
+  "A5tWte": [
+    {
+      "type": 1,
+      "value": "formError"
+    }
+  ],
+  "A5u1Oz": [
     {
       "type": 0,
-      "value": "Login"
+      "value": "New Password"
+    }
+  ],
+  "Aevhvw": [
+    {
+      "type": 0,
+      "value": "Verify OTP and proceed"
+    }
+  ],
+  "AhFvSt": [
+    {
+      "type": 0,
+      "value": "Login with Email"
+    }
+  ],
+  "B7znij": [
+    {
+      "type": 0,
+      "value": "Create a New Account"
     }
   ],
   "BB+f/k": [
@@ -137,6 +167,12 @@
       "value": "hackerkid logo"
     }
   ],
+  "DuPnGd": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
   "EG430K": [
     {
       "type": 0,
@@ -170,7 +206,13 @@
   "JCIgkj": [
     {
       "type": 0,
-      "value": "Username"
+      "value": "OTP"
+    }
+  ],
+  "MB8h2I": [
+    {
+      "type": 0,
+      "value": "Leaderboard Ranking"
     }
   ],
   "MB8h2I": [
@@ -191,16 +233,40 @@
       "value": "This is challenges page"
     }
   ],
-  "NU0Nha": [
+  "NZqKYF": [
     {
       "type": 0,
       "value": "Forgot Password?"
     }
   ],
-  "Op5EHr": [
+  "Nn5oAD": [
     {
       "type": 0,
-      "value": "Sign in with Google"
+      "value": "Go to login"
+    }
+  ],
+  "OdODwS": [
+    {
+      "type": 0,
+      "value": "Create Account"
+    }
+  ],
+  "OvWf0W": [
+    {
+      "type": 0,
+      "value": "Class"
+    }
+  ],
+  "PSx95N": [
+    {
+      "type": 0,
+      "value": "Home"
+    }
+  ],
+  "Qvy78L": [
+    {
+      "type": 0,
+      "value": "Profile"
     }
   ],
   "OvWf0W": [
@@ -233,10 +299,22 @@
       "value": "Grade"
     }
   ],
-  "SENRqu": [
+  "RHM1lo": [
     {
       "type": 0,
-      "value": "Help"
+      "value": "Re-type Password"
+    }
+  ],
+  "SL6O2c": [
+    {
+      "type": 0,
+      "value": "Password"
+    }
+  ],
+  "SpftNg": [
+    {
+      "type": 1,
+      "value": "errorMessage"
     }
   ],
   "TmcPug": [
@@ -269,6 +347,42 @@
       "value": "All Games"
     }
   ],
+  "TS73XZ": [
+    {
+      "type": 0,
+      "value": "Change password"
+    }
+  ],
+  "TVjEEI": [
+    {
+      "type": 0,
+      "value": "Create Account"
+    }
+  ],
+  "VsWMVt": [
+    {
+      "type": 0,
+      "value": "Re-type password"
+    }
+  ],
+  "VthZQE": [
+    {
+      "type": 0,
+      "value": "Create a New Account"
+    }
+  ],
+  "W5zEev": [
+    {
+      "type": 0,
+      "value": "Resend"
+    }
+  ],
+  "X1rCRf": [
+    {
+      "type": 0,
+      "value": "Login into existing account"
+    }
+  ],
   "Yz1BIF": [
     {
       "type": 0,
@@ -279,6 +393,12 @@
     {
       "type": 0,
       "value": "Something went wrong. Please try again"
+    }
+  ],
+  "ZvfR3g": [
+    {
+      "type": 0,
+      "value": "Send OTP"
     }
   ],
   "a2ZCmv": [
