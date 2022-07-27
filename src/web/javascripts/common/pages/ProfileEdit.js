@@ -73,6 +73,10 @@ const Profile = () => {
   const { state, setState, saveProfile } = useProfileInfo({ isPageMounted });
   const [showUpdatedModal, setShowUpdatedModal] = useState(false);
 
+  const modalVisible = state.status === 'error' || state.status === 'access_denied' || state.response === 'access_denied';
+
+  console.log(modalVisible);
+
   const {
     about,
     grade,
@@ -261,9 +265,10 @@ const Profile = () => {
         </div>
       </div>
     </div>
-    { (state.status === 'error' || state.status === 'access_denied')
-      && <Modal
+    { modalVisible
+     && <Modal
       customClass={'curved'}
+      modalVisible={modalVisible}
       options={{
         keyboard: false,
         backdrop: 'static',
@@ -286,7 +291,7 @@ const Profile = () => {
       </button>
     </Modal>
     }
-    { showUpdatedModal && <Modal customClass={'curved'} >
+    { showUpdatedModal && <Modal customClass={'curved'} modalVisible={showUpdatedModal} onHidden={() => setShowUpdatedModal(false)}>
       <div className="container">
         <p className='text-center my-5'>
           <FormattedMessage

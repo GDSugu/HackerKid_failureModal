@@ -70,7 +70,7 @@
     "envfile": "^6.17.0",
     "file-saver": "^2.0.2",
     "font-awesome": "^4.7.0",
-    "html2canvas": "^1.0.0-rc.7",
+    "html2canvas": "^1.4.1",
     "intl": "^1.2.5",
     "intl-tel-input": "^17.0.3",
     "jquery": "^3.5.1",

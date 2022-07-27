@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import post, { s3Upload } from '../../common/framework';
 import API from '../../../../env';
 
-const useProfileInfo = ({ action = 'getBasicInfo', isPageMounted }) => {
+const useProfileInfo = ({ action = 'getBasicInfo', isPageMounted, uniqueurl }) => {
   const [profileInfo, setProfileInfo] = useState({
     status: true,
     name: false,
@@ -119,6 +119,38 @@ const useProfileInfo = ({ action = 'getBasicInfo', isPageMounted }) => {
               }
             }
           });
+        break;
+      }
+      case 'getProfileData': {
+        if (uniqueurl) {
+          post({
+            type: 'getProfileData',
+            s3Prefix: API.S3PREFIX,
+            uniqueUrl: uniqueurl,
+          }, 'profile/')
+            .then((response) => {
+              if (isPageMounted.current) {
+                if (response === 'access_denied') {
+                  setProfileInfo((prevState) => ({
+                    status: 'access_denied',
+                    ...prevState,
+                    response,
+                  }));
+                } else {
+                  const parsedResponse = JSON.parse(response);
+                  if (parsedResponse.status === 'success') {
+                    setProfileInfo(parsedResponse);
+                  } else {
+                    setProfileInfo((prevState) => ({
+                      ...prevState,
+                      status: 'error',
+                      response: parsedResponse,
+                    }));
+                  }
+                }
+              }
+            });
+        }
         break;
       }
       default: break;

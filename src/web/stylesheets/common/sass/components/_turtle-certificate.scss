@@ -1,10 +1,11 @@
 @use '../themes/_default' as gt;
 @use '../base/_mixins' as gm;
 @use '../base/_variables' as gv;
-@use '_font-dancing-bold';
+// @use '_font-dancing-bold';
 
 // turtle certificate component specific theme
-@include gt.populate-theme(gt.$tc-theme-map-light, gt.$tc-theme-map-dark);
+
+@include gt.populate-theme(gt.$thememaplight, gt.$thememapdark, gt.$cssvars);
 
 .imageTemplate {
   height: 720px;
@@ -33,14 +34,14 @@
   top: 330px;
   font-size: 48px;
   font-family: 'DancingScriptBold', sans-serif;
-  color: gt.theme-var(tc-font-color, null, gt.$tc-theme-map-light);
+  color: gt.theme-var(tc-font-color, null, gt.$thememaplight, gt.$cssvars);
 }
 
 .certificateName {
   position: absolute;
   top: 470px;
   font-size: 24px;
-  color: gt.theme-var(tc-font-color, null, gt.$tc-theme-map-light);
+  color: gt.theme-var(tc-font-color, null, gt.$thememaplight, gt.$cssvars);
   font-weight: bold;
 }
 
@@ -49,7 +50,7 @@
   top: 35px;
   font-size: 18px;
   left: 35px;
-  color: gt.theme-var(tc-font-color, null, gt.$tc-theme-map-light);
+  color: gt.theme-var(tc-font-color, null, gt.$thememaplight, gt.$cssvars);
 }
 
 .certificateSign {

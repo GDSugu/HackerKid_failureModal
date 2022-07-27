@@ -502,6 +502,8 @@ const Dashboard = () => {
     trendingChallenges,
   } = getChallengesState;
 
+  const modalVisible = [dashboarStatus, leaderboardStatus, challengesStatus].includes('access_denied');
+
   const populateScore = (selectorPrefix, score, percentage) => {
     if (score) {
       $({ Counter: 0, percent: 0 }).animate({
@@ -580,9 +582,11 @@ const Dashboard = () => {
       </>
     }
     {
-      [dashboarStatus, leaderboardStatus, challengesStatus].includes('access_denied')
+      // [dashboarStatus, leaderboardStatus, challengesStatus].includes('access_denied')
+      modalVisible
       && <Modal
         customClass={'curved'}
+        modalVisible={modalVisible}
         options={{
           keyboard: false,
           backdrop: 'static',

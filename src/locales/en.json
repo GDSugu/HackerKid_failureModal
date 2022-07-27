@@ -66,6 +66,10 @@
     "defaultMessage": "rank",
     "description": "rank"
   },
+  "3lLFC/": {
+    "defaultMessage": "{label}",
+    "description": "{description}"
+  },
   "4Ve1r3": {
     "defaultMessage": "Ok",
     "description": "confirm btn"
@@ -212,6 +216,10 @@
   "JCIgkj": {
     "defaultMessage": "Username"
   },
+  "K+0Pvy": {
+    "defaultMessage": "Certificates",
+    "description": "collection header"
+  },
   "LkuPrA": {
     "defaultMessage": "Join your friends in the club",
     "description": "more card subtitle"
@@ -232,9 +240,9 @@
     "defaultMessage": "Forgot Password?",
     "description": "Forgot password link"
   },
-  "Nn5oAD": {
-    "defaultMessage": "Go to login",
-    "description": "Go to login button"
+  "O1sXEv": {
+    "defaultMessage": "Collections",
+    "description": "collectibles modal title"
   },
   "OdODwS": {
     "defaultMessage": "Create Account",
@@ -397,6 +405,10 @@
   "iS2zLU": {
     "defaultMessage": "Visit Club",
     "description": "more card button"
+  },
+  "km5SOz": {
+    "defaultMessage": "View all collections",
+    "description": "modal collection button"
   },
   "lKeCea": {
     "defaultMessage": "Save & Exit",

@@ -57,7 +57,7 @@ const NavBar = () => {
           <path d="M27 36H45M27 30H45M27 42H45" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>,
       route: '/more',
-      active: ['more', 'certificates'].includes(screen),
+      active: ['more', 'certificates', 'awards', 'collectibles'].includes(screen),
     },
   ];
 

@@ -215,23 +215,23 @@
           flex-direction: column;
           justify-content: space-between;
           height: 100%;
-  
+
           .more-card-title {
             margin-bottom: 0;
             line-height: 1.5;
           }
-  
+
           .more-card-subtitle {
             margin-top: 0;
             color: gt.theme-var(text-color-5);
             font-size: 0.875rem;
           }
-  
+
           .more-card-btn-container {
             display: flex;
             justify-content: flex-end;
             padding-top: 3rem;
-  
+
             .more-card-btn {
               border-radius: 0.75rem;
               padding: 0.75rem 2rem;
@@ -243,7 +243,7 @@
               @include gm.media-breakpoint-down(md) {
                 padding: 0.75rem 1.75rem;
               }
-  
+
               p {
                 margin: 0;
                 color: gt.theme-var(text-color-2);
@@ -285,6 +285,75 @@
 
       i {
         font-size: 1.5rem;
+      }
+    }
+  }
+
+  .collectibles-modal {
+    .modal-dialog {
+      @include gm.media-breakpoint-up(md) {
+        max-width: 50%;
+      }
+    }
+
+    .modal-body {
+      padding: 0;
+    }
+
+    .modal-custom-header {
+      background-color: gt.theme-var(more-modal-header-bg, null, $thememaplight, $cssvars);
+      padding: 0.75rem;
+
+      .modal-title {
+        font-weight: bold;
+      }
+
+      button.close {
+        color: gt.theme-var(text-color-2);
+        font-size: 2.5rem;
+        background: gt.theme-var(more-modal-close-btn-bg, null, $thememaplight, $cssvars);
+        padding: 0.125rem 0.6rem 0.45rem;
+        line-height: 0.75;
+        opacity: 1;
+      }
+    }
+
+    .collection-block {
+      margin: 2rem 0;
+
+      .collection-header {
+        h5 {
+          font-weight: bold;
+          font-size: 1.125rem;
+        }
+      }
+
+      .collection-content {
+        text-align: center;
+
+        p {
+          margin: 0;
+          font-size: 0.875rem;
+          color: gt.theme-var(text-color-5);
+        }
+      }
+    }
+
+    .footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: gt.theme-var(more-btn-bg, null, $thememaplight, $cssvars);
+      padding: 0.75rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      .footer-btn {
+        background-color: transparent;
+        border: none;
+        color: gt.theme-var(text-color-2);
       }
     }
   }
