@@ -49,18 +49,21 @@ const Leaderboard = () => {
 
   return (
   <div className='wrapper col-12 col-md-10 col-lg-9 col-xl-5 mx-auto'>
-    <div className='controls-container d-flex'>
+    {/* <div className='controls-container d-flex'>
       <div className='filter-btn-container control-with-icon'>
-        <img className='icon' src='../../../../images/leaderboard/filter-icon-svg.svg' alt='filter-icon'/>
+        <img className='icon'
+        src='../../../../images/leaderboard/filter-icon-svg.svg' alt='filter-icon'/>
         <button className='btn filter-btn control caption-bold'>
           <FormattedMessage defaultMessage='Filter' description='Filter button'/>
         </button>
       </div>
       <div className='search-box-container control-with-icon'>
-        <img className='icon' src='../../../../images/leaderboard/search-icon-svg.svg' alt='filter-icon'/>
-        <input className='search-box form-control control caption-bold' name='search' type={'search'} placeholder='Search' />
+        <img className='icon'
+        src='../../../../images/leaderboard/search-icon-svg.svg' alt='filter-icon'/>
+        <input className='search-box form-control control caption-bold'
+        name='search' type={'search'} placeholder='Search' />
       </div>
-    </div>
+    </div> */}
     <table className='skeleton leaderboard-table'>
       <thead>
         <tr>
