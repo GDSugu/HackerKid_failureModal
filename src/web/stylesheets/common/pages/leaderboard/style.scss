@@ -25,33 +25,26 @@
   }
 }
 
-.wrapper{
-
+.wrapper {
   margin: auto;
   margin-top: 1rem;
-}
-
-.controls-container {
-  display: flex;
-  gap:1rem;
 }
 
 .control {
   outline: none;
   border: 1px solid gt.theme-var(leaderboard-control-border-color, null, $thememaplight, $cssvars);
-  border-radius: 12px;
-  background:white;
-  padding: 11px;
-  padding-left: 35px;
+  border-radius: 0.75rem;
+  background: gt.theme-var(bg-1);
+  padding: 0.68rem;
+  padding-left: 2.6rem;
 }
 
 .search-box-container {
-  flex-grow: 20;
+  width: 100%;
   color: gt.theme-var(text-color-1);
 
-  .search-box{
+  .search-box {
     @include gm.box(100%, 100%);
-    padding-left: 42px;
   }
 }
 
@@ -59,8 +52,12 @@
   color: gt.theme-var(text-color-1);
 }
 
-.filter-btn-container{
-  flex-grow: 1;
+.filter-btn-container {
+  margin-right: 0.5rem;
+
+  @include gm.media-breakpoint-up(md) {
+    margin-right: 1rem;
+  }
 
   .filter-btn {
     width: 100%;
@@ -81,10 +78,34 @@
 .leaderboard-table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 1rem 2rem;
+  border-spacing: 0 1rem;
+
+  tr {
+    position: relative;
+  }
+
+  tr.loggedin-user-highlight {
+    td:first-child {
+      border-top-left-radius: 16px;
+      border-bottom-left-radius: 16px;
+    }
+
+    td:last-child {
+      border-top-right-radius: 16px;
+      border-bottom-right-radius: 16px;
+    }
+
+    td {
+      background-color: gt.theme-var(leaderboard-user-highlight-color, null, $thememaplight, $cssvars);
+    }
+  }
+
+  td {
+    padding: 0.5rem;
+  }
 
   th {
-    color:gt.theme-var(text-color-5);
+    color: gt.theme-var(text-color-5);
   }
 
   .name-with-profile-picture {
@@ -92,7 +113,7 @@
     align-items: center;
 
     .profile-picture img,
-    img.profile-picture{
+    img.profile-picture {
       width: 36px;
       height: 36px;
 
@@ -100,8 +121,9 @@
         width: 56px;
         height: 56px;
       }
+
       border-radius: 50%;
-      margin-right: .5rem;
+      margin-right: 0.5rem;
     }
   }
 
@@ -127,13 +149,13 @@
     min-height: 10rem;
   }
 
-  .rank-cell div{
+  .rank-cell div {
     width: 55%;
     height: 2rem;
     border-radius: 0.5rem;
   }
 
-  .name-with-profile-picture div.profile-picture{
+  .name-with-profile-picture div.profile-picture {
     width: 36px;
     height: 36px;
     border-radius: 50%;
@@ -144,14 +166,14 @@
     }
   }
 
-  .name-with-profile-picture div.name{
+  .name-with-profile-picture div.name {
     width: 190px;
     height: 2rem;
-    margin-left: .5rem;
+    margin-left: 0.5rem;
     border-radius: 0.5rem;
   }
 
-  .coins-cell div{
+  .coins-cell div {
     height: 2rem;
     border-radius: 0.5rem;
   }

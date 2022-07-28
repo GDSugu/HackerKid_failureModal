@@ -5,10 +5,28 @@
       "value": "This is games page"
     }
   ],
+  "/dnxym": [
+    {
+      "type": 0,
+      "value": "Create a New Account"
+    }
+  ],
+  "/itreP": [
+    {
+      "type": 1,
+      "value": "label"
+    }
+  ],
   "/ndV7b": [
     {
       "type": 0,
       "value": "Coins Earned:"
+    }
+  ],
+  "/x0h9E": [
+    {
+      "type": 0,
+      "value": "Login with Phone"
     }
   ],
   "0JV99f": [
@@ -23,6 +41,12 @@
       "value": "Game Progress"
     }
   ],
+  "1FjMUC": [
+    {
+      "type": 0,
+      "value": "Forgot Password?"
+    }
+  ],
   "1RUvaS": [
     {
       "type": 0,
@@ -35,10 +59,22 @@
       "value": "Create a New Account"
     }
   ],
+  "2Tu0HO": [
+    {
+      "type": 0,
+      "value": "Next"
+    }
+  ],
   "2W0f9h": [
     {
       "type": 0,
       "value": "Bio"
+    }
+  ],
+  "2bMdhC": [
+    {
+      "type": 0,
+      "value": "Create a New Account"
     }
   ],
   "2ua1yZ": [
@@ -47,10 +83,22 @@
       "value": "rank"
     }
   ],
+  "2yf2WH": [
+    {
+      "type": 0,
+      "value": "Login with Phone"
+    }
+  ],
   "383EZ1": [
     {
       "type": 0,
       "value": "This is more options page"
+    }
+  ],
+  "3Wcqsy": [
+    {
+      "type": 0,
+      "value": "Next"
     }
   ],
   "4Ve1r3": [
@@ -59,7 +107,13 @@
       "value": "Ok"
     }
   ],
-  "5sg7KC": [
+  "53f59E": [
+    {
+      "type": 0,
+      "value": "Rank"
+    }
+  ],
+  "5L6FVQ": [
     {
       "type": 0,
       "value": "Password"
@@ -77,10 +131,40 @@
       "value": "Login"
     }
   ],
+  "6FPmdk": [
+    {
+      "type": 0,
+      "value": "Filter"
+    }
+  ],
   "6NWftj": [
     {
       "type": 0,
       "value": "Challenges"
+    }
+  ],
+  "6V6DQY": [
+    {
+      "type": 0,
+      "value": "Next"
+    }
+  ],
+  "74UjvK": [
+    {
+      "type": 0,
+      "value": "Login to existing Account"
+    }
+  ],
+  "7L3+7M": [
+    {
+      "type": 0,
+      "value": "Login into existing account"
+    }
+  ],
+  "9YoD+Y": [
+    {
+      "type": 0,
+      "value": "New Password"
     }
   ],
   "9gqH2W": [
@@ -93,6 +177,12 @@
     {
       "type": 0,
       "value": "Go to Class"
+    }
+  ],
+  "A/XB4F": [
+    {
+      "type": 0,
+      "value": "Student's Name"
     }
   ],
   "A5tWte": [
@@ -179,10 +269,60 @@
       "value": "Go to More"
     }
   ],
+  "EhuHU0": [
+    {
+      "type": 1,
+      "value": "errorMessage"
+    }
+  ],
+  "F/vOH1": [
+    {
+      "type": 0,
+      "value": "Forgot Password"
+    }
+  ],
   "FIcBXp": [
     {
       "type": 0,
       "value": "Home"
+    }
+  ],
+  "FhTUgw": [
+    {
+      "type": 0,
+      "value": "Not "
+    },
+    {
+      "type": 1,
+      "value": "phone"
+    },
+    {
+      "type": 0,
+      "value": " ?"
+    }
+  ],
+  "G0AqB8": [
+    {
+      "type": 0,
+      "value": "Login into Existing Account"
+    }
+  ],
+  "GQwBTI": [
+    {
+      "type": 0,
+      "value": "Verify OTP and proceed"
+    }
+  ],
+  "Gon8SN": [
+    {
+      "type": 0,
+      "value": "Login with Email"
+    }
+  ],
+  "H2rvzb": [
+    {
+      "type": 0,
+      "value": "Password changed successfully"
     }
   ],
   "HAlOn1": [
@@ -203,7 +343,19 @@
       "value": "All Challenges"
     }
   ],
-  "JCIgkj": [
+  "IgwSoy": [
+    {
+      "type": 0,
+      "value": "Previous"
+    }
+  ],
+  "In3suu": [
+    {
+      "type": 1,
+      "value": "errorMessage"
+    }
+  ],
+  "JnwRMJ": [
     {
       "type": 0,
       "value": "OTP"
@@ -251,6 +403,12 @@
       "value": "Class"
     }
   ],
+  "PMX+8G": [
+    {
+      "type": 1,
+      "value": "coins"
+    }
+  ],
   "PSx95N": [
     {
       "type": 0,
@@ -293,6 +451,24 @@
       "value": "errorMessage"
     }
   ],
+  "TS73XZ": [
+    {
+      "type": 0,
+      "value": "Change password"
+    }
+  ],
+  "TVjEEI": [
+    {
+      "type": 0,
+      "value": "Create Account"
+    }
+  ],
+  "TbteVJ": [
+    {
+      "type": 1,
+      "value": "studentName"
+    }
+  ],
   "TmcPug": [
     {
       "type": 0,
@@ -303,6 +479,36 @@
     {
       "type": 0,
       "value": "Edit"
+    }
+  ],
+  "VsWMVt": [
+    {
+      "type": 0,
+      "value": "Re-type password"
+    }
+  ],
+  "VthZQE": [
+    {
+      "type": 0,
+      "value": "Create a New Account"
+    }
+  ],
+  "VyTY/V": [
+    {
+      "type": 1,
+      "value": "coins"
+    }
+  ],
+  "W5zEev": [
+    {
+      "type": 0,
+      "value": "Resend"
+    }
+  ],
+  "X1rCRf": [
+    {
+      "type": 0,
+      "value": "Login into existing account"
     }
   ],
   "Y+dh5z": [
@@ -323,42 +529,6 @@
       "value": "All Games"
     }
   ],
-  "TS73XZ": [
-    {
-      "type": 0,
-      "value": "Change password"
-    }
-  ],
-  "TVjEEI": [
-    {
-      "type": 0,
-      "value": "Create Account"
-    }
-  ],
-  "VsWMVt": [
-    {
-      "type": 0,
-      "value": "Re-type password"
-    }
-  ],
-  "VthZQE": [
-    {
-      "type": 0,
-      "value": "Create a New Account"
-    }
-  ],
-  "W5zEev": [
-    {
-      "type": 0,
-      "value": "Resend"
-    }
-  ],
-  "X1rCRf": [
-    {
-      "type": 0,
-      "value": "Login into existing account"
-    }
-  ],
   "Yz1BIF": [
     {
       "type": 0,
@@ -375,6 +545,12 @@
     {
       "type": 0,
       "value": "Send OTP"
+    }
+  ],
+  "ZzPt+i": [
+    {
+      "type": 0,
+      "value": "Leaderboard"
     }
   ],
   "a2ZCmv": [
@@ -395,6 +571,18 @@
       "value": "School"
     }
   ],
+  "cZDBd3": [
+    {
+      "type": 0,
+      "value": "Coins"
+    }
+  ],
+  "croLiZ": [
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
   "e5Eaen": [
     {
       "type": 0,
@@ -407,10 +595,10 @@
       "value": "Show Leaderboard"
     }
   ],
-  "flaX9K": [
+  "fOZCSk": [
     {
       "type": 0,
-      "value": "Create a New Account"
+      "value": "Set a Password"
     }
   ],
   "g0zp7w": [
@@ -419,16 +607,76 @@
       "value": "Continue Playing"
     }
   ],
+  "g2zl2J": [
+    {
+      "type": 0,
+      "value": "Login Into Existing Account"
+    }
+  ],
+  "gHMD5/": [
+    {
+      "type": 1,
+      "value": "modalTitle"
+    }
+  ],
+  "gOkIvb": [
+    {
+      "type": 0,
+      "value": "Name"
+    }
+  ],
   "h7B/gA": [
     {
       "type": 0,
       "value": "store authtoken"
     }
   ],
+  "hJpqIn": [
+    {
+      "type": 0,
+      "value": "Send OTP"
+    }
+  ],
+  "hphOHh": [
+    {
+      "type": 0,
+      "value": "Help"
+    }
+  ],
+  "hxLhGK": [
+    {
+      "type": 0,
+      "value": "Set Password"
+    }
+  ],
+  "jZhy7I": [
+    {
+      "type": 0,
+      "value": "Forgot Password"
+    }
+  ],
   "lKeCea": [
     {
       "type": 0,
       "value": "Save & Exit"
+    }
+  ],
+  "lynO1X": [
+    {
+      "type": 0,
+      "value": "Change Password"
+    }
+  ],
+  "m19v5I": [
+    {
+      "type": 1,
+      "value": "rank"
+    }
+  ],
+  "mDpOZM": [
+    {
+      "type": 0,
+      "value": "OTP"
     }
   ],
   "mEFtca": [
@@ -443,10 +691,22 @@
       "value": "School"
     }
   ],
+  "mtXEZg": [
+    {
+      "type": 0,
+      "value": "Parent's Name"
+    }
+  ],
   "n45USK": [
     {
       "type": 0,
       "value": "rank"
+    }
+  ],
+  "nT6Ql7": [
+    {
+      "type": 1,
+      "value": "text"
     }
   ],
   "nlYt8p": [
@@ -491,6 +751,12 @@
       "value": "Grade"
     }
   ],
+  "quRCCv": [
+    {
+      "type": 0,
+      "value": "Phone"
+    }
+  ],
   "rECW1h": [
     {
       "type": 0,
@@ -509,10 +775,22 @@
       "value": "Continue Playing"
     }
   ],
+  "uhayi4": [
+    {
+      "type": 1,
+      "value": "errorMessage"
+    }
+  ],
   "vChW6P": [
     {
       "type": 0,
       "value": "Show Leaderboard"
+    }
+  ],
+  "x8lXTv": [
+    {
+      "type": 0,
+      "value": "Resend"
     }
   ],
   "xT1NKB": [

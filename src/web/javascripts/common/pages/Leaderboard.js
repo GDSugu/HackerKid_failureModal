@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { pageInit } from '../framework';
 import '../../../stylesheets/common/pages/leaderboard/style.scss';
@@ -9,22 +9,58 @@ import Modal from '../components/Modal';
 const Leaderboard = () => {
   pageInit('leaderboard-container', 'Leaderboard');
 
-  const { state, getLeaderBoardData } = useLeaderBoard(true);
+  const { state, setLeaderBoardData, getLeaderBoardData } = useLeaderBoard(true);
+  const { leaderboardData, userData, paginationDetails } = state;
+
+  const disablePrevBtn = paginationDetails.page <= 1;
+  const disableNextBtn = Math.ceil(paginationDetails.overallCount
+    / paginationDetails.countPerPage) === paginationDetails.page;
+
+  // methods
+  const previousBtnClickHandler = () => {
+    getLeaderBoardData(paginationDetails.page - 1).then(() => window.scrollTo({ top: 0 }));
+  };
+
+  const nextBtnClickHandler = () => {
+    getLeaderBoardData(paginationDetails.page + 1).then(() => window.scrollTo({ top: 0 }));
+  };
+
+  const loggedInUserInCurrentPage = (currentPage, userUniqueUrl) => {
+    const loggedInUserFound = currentPage.find((obj) => obj.uniqueUrl === userUniqueUrl);
+
+    return !!loggedInUserFound;
+  };
+
+  // side effect
+  useEffect(() => {
+    // if no userData OR user doesnt have points or rank, do nothing!
+    if (!userData || (userData.points === 0 && userData.rank === '--')) return;
+
+    const loggedInUserFound = loggedInUserInCurrentPage(leaderboardData, userData.uniqueUrl);
+
+    if (!loggedInUserFound) {
+      leaderboardData.push(userData);
+      setLeaderBoardData((prev) => ({
+        ...prev,
+        leaderboardData: [...leaderboardData],
+      }));
+    }
+  }, [state]);
 
   return (
   <div className='wrapper col-12 col-md-10 col-lg-9 col-xl-5 mx-auto'>
-    <div className='controls-container'>
-      <div className='control-with-icon filter-btn-container'>
+    <div className='controls-container d-flex'>
+      <div className='filter-btn-container control-with-icon'>
         <img className='icon' src='../../../../images/leaderboard/filter-icon-svg.svg' alt='filter-icon'/>
         <button className='btn filter-btn control caption-bold'>
           <FormattedMessage defaultMessage='Filter' description='Filter button'/>
         </button>
       </div>
-      <div className='control-with-icon search-box-container'>
+      <div className='search-box-container control-with-icon'>
         <img className='icon' src='../../../../images/leaderboard/search-icon-svg.svg' alt='filter-icon'/>
         <input className='search-box form-control control caption-bold' name='search' type={'search'} placeholder='Search' />
       </div>
-      </div>
+    </div>
     <table className='skeleton leaderboard-table'>
       <thead>
         <tr>
@@ -38,7 +74,7 @@ const Leaderboard = () => {
               defaultMessage={"Student's Name"}
               description='Student Name cell header' />
             </th>
-          <th className='coins-header-cell'>
+          <th className='coins-header-cell text-center'>
             <FormattedMessage
               defaultMessage={'Coins'}
               description='Coins cell header' />
@@ -47,8 +83,7 @@ const Leaderboard = () => {
       </thead>
       <tbody>
       {
-        (!state.leaderboardData) && new Array(10).fill().map((obj, index) => (
-          <tr key={index}>
+        (!leaderboardData) && new Array(10).fill().map((val, index) => <tr key={index}>
             <td className='rank-cell'>
               <div></div>
             </td>
@@ -61,35 +96,35 @@ const Leaderboard = () => {
             <td className='coins-cell'>
               <div></div>
             </td>
-          </tr>
-        ))
+          </tr>)
       }
       {
-        (state.leaderboardData) && state.leaderboardData.map((obj, index) => <tr key={index}>
+        (leaderboardData) && leaderboardData.map((profileObj, index) => <tr key={index}
+        tabIndex={0} className={profileObj.uniqueUrl === userData.uniqueUrl && 'loggedin-user-highlight'}>
         <td>
           <FormattedMessage
           defaultMessage='{rank}'
           description='rank'
-          values = {{ rank: obj.rank ? `#${obj.rank}` : '--' }}/>
+          values = {{ rank: !Number.isNaN(Number(profileObj.rank)) ? `#${profileObj.rank}` : '--' }}/>
         </td>
         <td>
           <div className='name-with-profile-picture'>
             <Img className='profile-picture'
-              alt={obj.name}
-              src={(obj.profileImage) || 'common/profile/default_user.png'}
-              local={!(obj.profileImage)}
+              alt={profileObj.name}
+              src={(profileObj.profileImage) || 'common/profile/default_user.png'}
+              local={!(profileObj.profileImage)}
             />
             <FormattedMessage
               defaultMessage='{name}'
               description='name'
-              values = {{ name: obj.name }}/>
+              values = {{ name: profileObj.name }}/>
           </div>
         </td>
         <td>
           <FormattedMessage
           defaultMessage='{coins}'
           description='Coins'
-          values = {{ coins: obj.points || '--' }}/>
+          values = {{ coins: profileObj.points || '--' }}/>
         </td>
       </tr>)
       }
@@ -97,23 +132,16 @@ const Leaderboard = () => {
     </table>
     <footer>
       <div className='paginator d-flex justify-content-between mb-5'>
-        <button className='previous-page-btn btn btn-primary'
-          disabled={state.paginationDetails.page <= 1}
-          onClick={() => {
-            getLeaderBoardData(state.paginationDetails.page - 1)
-              .then(() => window.scrollTo({ top: 0 }));
-          }}>
-          Previous
+          <button className='previous-page-btn btn btn-primary'
+            disabled={disablePrevBtn}
+            onClick={previousBtnClickHandler}>
+          <FormattedMessage defaultMessage={'Previous'} description='previous page button'/>
         </button>
         <button
           className='next-page-btn btn btn-primary'
-          disabled={state.paginationDetails.overallCount / state.paginationDetails.countPerPage
-          === state.paginationDetails.page}
-          onClick={() => {
-            getLeaderBoardData(state.paginationDetails.page + 1)
-              .then(() => window.scrollTo({ top: 0 }));
-          }}>
-          Next
+            disabled={disableNextBtn}
+          onClick={nextBtnClickHandler}>
+          <FormattedMessage defaultMessage={'Next'} description='next page button'/>
         </button>
       </div>
     </footer>
