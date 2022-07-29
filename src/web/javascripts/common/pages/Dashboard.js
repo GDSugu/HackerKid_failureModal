@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { $, pageInit } from '../framework';
+import { $, loginCheck, pageInit } from '../framework';
 import Img from '../components/Img';
 import SwiperComponent from '../components/SwiperComponent';
 import { useDashboard } from '../../../../hooks/pages/dashboard';
@@ -479,10 +479,11 @@ const Dashboard = () => {
   pageInit('dashboard-container', 'Dashboard');
 
   const [isDesktop, setIsDesktop] = useState(window.matchMedia('(min-width: 576px)').matches);
+  const isPageMounted = React.useRef(true);
 
-  const { state: dashboardState } = useDashboard();
-  const { state: leaderBoardState } = useLeaderBoard();
-  const { state: getChallengesState } = useGetChallenges();
+  const { state: dashboardState } = useDashboard({ isPageMounted });
+  const { state: leaderBoardState } = useLeaderBoard({ isPageMounted });
+  const { state: getChallengesState } = useGetChallenges({ isPageMounted });
 
   const {
     status: dashboarStatus,
@@ -532,10 +533,15 @@ const Dashboard = () => {
   populateScore('#yourScore', gameData.gameProgress, parseInt((gameData.gameProgress / gameData.totalGames) * 100, 10));
 
   useEffect(() => {
+    loginCheck();
     window.addEventListener('resize', () => {
       setIsDesktop(window.matchMedia('(min-width: 576px)').matches);
     });
     populateScore('#yourScore', gameData.gameProgress, parseInt((gameData.gameProgress / gameData.totalGames) * 100, 10));
+
+    return () => {
+      isPageMounted.current = false;
+    };
   }, []);
 
   return <>

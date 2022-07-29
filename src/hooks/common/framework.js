@@ -194,10 +194,13 @@ const loginCheck = () => new Promise((resolve) => getSession('authtoken')
 
 const logout = () => post({ type: 'logout' }, 'login/')
   .then((response) => {
+    let result = false;
     const data = JSON.parse(response);
     if (data.status === 'success') {
       authClear();
+      result = true;
     }
+    return result;
   });
 
 const updatePoints = (addedPoints) => {

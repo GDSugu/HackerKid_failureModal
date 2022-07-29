@@ -10,7 +10,10 @@ const Certificates = () => {
   pageInit('certificates-container', 'Certificates');
 
   const isPageMounted = React.useRef(true);
-  // const { session: { uniqueUrl } } = useGetSession(['uniqueUrl']);
+  // const { session: { uniqueUrl } } = useGetSession({
+  //   sessionAttr: ['uniqueUrl'],
+  //   isPageMounted
+  // });
   // const uniqueUrlRef = React.useRef(uniqueUrl);
   const uniqueUrl = localStorage.getItem('uniqueUrl');
 
@@ -21,6 +24,10 @@ const Certificates = () => {
   if (status === 'success') {
     console.log(gameDetails[0].certificateData);
   }
+
+  React.useEffect(() => () => {
+    isPageMounted.current = false;
+  }, []);
 
   return <>
    <MoreAccountNavBar />

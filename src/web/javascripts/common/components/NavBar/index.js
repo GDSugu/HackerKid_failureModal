@@ -19,7 +19,8 @@ const NavBar = () => {
   const { pathname } = useLocation();
   const routes = pathname.split('/');
   const screen = routes[routes.length - 1];
-  const { session: { profileLink } } = useGetSession(['profileLink']);
+  const isPageMounted = React.useRef(true);
+  const { session: { profileLink } } = useGetSession({ sessionAttr: ['profileLink'], isPageMounted });
 
   const navItems = [
     {
@@ -62,6 +63,10 @@ const NavBar = () => {
   ];
 
   const profileImg = profileLink || '../../../../../images/common/profile.png';
+
+  React.useEffect(() => () => {
+    isPageMounted.current = false;
+  }, []);
 
   return <>
     <nav>

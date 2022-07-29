@@ -1,11 +1,13 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { logout } from '../../../../hooks/common/framework';
 import { useGetSession } from '../../../../hooks/pages/root';
 import '../../../stylesheets/common/pages/more/style.scss';
-import { pageInit } from '../framework';
+import {
+  $, loginCheck, pageInit, authorize,
+} from '../framework';
 import Img from '../components/Img';
 import Modal from '../components/Modal';
+import HelpModal from '../components/HelpModal';
 
 const MoreHero = ({ isDesktop, session, toggleModal }) => <>
   <div className="more-hero-container">
@@ -83,10 +85,10 @@ const MoreCards = () => <>
               </h5>
             </div>
             <div className="more-card-btn-container">
-              <button className="more-card-btn btn">
+              <button className="more-card-btn btn" disabled>
                 <p>
                   <FormattedMessage
-                    defaultMessage={'Unlock Now'}
+                    defaultMessage={'Coming Soon...'}
                     description={'more card button'}
                   />
                 </p>
@@ -95,7 +97,7 @@ const MoreCards = () => <>
           </div>
         </div>
       </div>
-      <div className='more-card-block col-12 col-md-6'>
+      {/* <div className='more-card-block col-12 col-md-6'>
         <div className="more-card-block-cntnr club-card">
           <div className="more-card">
             <div className="more-card-contnr">
@@ -113,10 +115,10 @@ const MoreCards = () => <>
               </p>
             </div>
             <div className="more-card-btn-container">
-              <button className="more-card-btn btn">
+              <button className="more-card-btn btn" disabled>
                 <p>
                   <FormattedMessage
-                    defaultMessage={'Visit Club'}
+                    defaultMessage={'Coming Soon...'}
                     description={'more card button'}
                   />
                 </p>
@@ -124,7 +126,7 @@ const MoreCards = () => <>
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className='more-card-block col-12 col-md-6'>
         <div className="more-card-block-cntnr ide-card">
           <div className="more-card">
@@ -143,10 +145,14 @@ const MoreCards = () => <>
               </p>
             </div>
             <div className="more-card-btn-container">
-              <button className="more-card-btn btn">
+              <button className="more-card-btn btn" disabled>
                 <p>
-                  <FormattedMessage
+                  {/* <FormattedMessage
                     defaultMessage={'Try IDE Now'}
+                    description={'more card button'}
+                  /> */}
+                  <FormattedMessage
+                    defaultMessage={'Coming Soon...'}
                     description={'more card button'}
                   />
                 </p>
@@ -159,9 +165,9 @@ const MoreCards = () => <>
   </div>
 </>;
 
-const MoreMenu = () => <>
+const MoreMenu = ({ logoutHandler = () => {} }) => <>
   <div className="more-menu-container">
-    <a href='#' className="more-menu-card btn btn-block" onClick={logout}>
+    <a href='#' className="more-menu-card btn btn-block" onClick={logoutHandler}>
       <p>
         <FormattedMessage
           defaultMessage={'Logout'}
@@ -179,7 +185,7 @@ const MoreMenu = () => <>
       </p>
       <i className="fas fa-angle-right"></i>
     </a>
-    <a href='#' className="more-menu-card btn btn-block">
+    <button className="more-menu-card btn btn-block" onClick={() => $('.help-modal').modal('show')}>
       <p>
         <FormattedMessage
           defaultMessage={'Help'}
@@ -187,20 +193,26 @@ const MoreMenu = () => <>
         />
       </p>
       <i className="fas fa-angle-right"></i>
-    </a>
+    </button>
   </div>
 </>;
 
 const More = () => {
   pageInit('more-container', 'More');
 
+  const isPageMounted = React.useRef(true);
   const [isDesktop, setIsDesktop] = React.useState(window.matchMedia('(min-width: 576px)').matches);
   const [collectionModalVisibile, setCollectionModalVisibile] = React.useState(false);
-  const { session } = useGetSession(['name', 'pointsEarned', 'profileLink']);
+  const { session } = useGetSession({ sessionAttr: ['name', 'pointsEarned', 'profileLink'], isPageMounted });
 
   const toggleModal = () => setCollectionModalVisibile(!collectionModalVisibile);
 
+  const logoutHandler = () => {
+    authorize.logout();
+  };
+
   React.useEffect(() => {
+    loginCheck();
     window.addEventListener('resize', () => {
       setIsDesktop(window.matchMedia('(min-width: 576px)').matches);
     });
@@ -208,6 +220,7 @@ const More = () => {
     return () => {
       console.log('more unmounted');
       setCollectionModalVisibile(false);
+      isPageMounted.current = false;
     };
   }, []);
 
@@ -219,7 +232,7 @@ const More = () => {
         <MoreCards />
       </div>
       <div className="col-12 col-md-4">
-        <MoreMenu />
+        <MoreMenu logoutHandler={logoutHandler} />
       </div>
     </div>
   </div>
@@ -243,7 +256,7 @@ const More = () => {
     }
   >
     <div className='col-12 col-md-10 mx-auto'>
-      <div className="certificates-block collection-block">
+      {/* <div className="certificates-block collection-block">
         <div className="collection-header">
           <h5>
             <FormattedMessage
@@ -260,6 +273,14 @@ const More = () => {
             />
           </p>
         </div>
+      </div> */}
+      <div className='collection-content'>
+        <h3 className='text-center'>
+          <FormattedMessage
+            defaultMessage={'Coming Soon'}
+            description={'collectibles header'}
+          />
+        </h3>
       </div>
       {/* <div className="awards-block collection-block">
         <div className="collection-header">
@@ -298,7 +319,7 @@ const More = () => {
         </div>
       </div> */}
     </div>
-    <div className='footer'
+    {/* <div className='footer'
       onClick={() => {
         toggleModal();
         window.location.pathname = '/certificates';
@@ -309,8 +330,9 @@ const More = () => {
           description={'modal collection button'}
         />
       </button>
-    </div>
+    </div> */}
   </Modal>
+  <HelpModal />
   </>;
 };
 

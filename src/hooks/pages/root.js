@@ -32,16 +32,24 @@ const useRootPageState = () => {
   };
 };
 
-const useGetSession = (sessionAttr = []) => {
+const useGetSession = ({ sessionAttr = [], isPageMounted }) => {
   const [session, setSession] = useState({});
 
   useEffect(() => {
     if (sessionAttr.length) {
       const sesn = {};
       sessionAttr.forEach((attr) => {
-        sesn[attr] = localStorage.getItem(attr);
+        sesn[attr] = getSession(attr);
       });
-      setSession(sesn);
+      Promise.all(Object.values(sesn))
+        .then((res) => {
+          if (isPageMounted.current) {
+            Object.entries(sesn).forEach(([key], idx) => {
+              sesn[key] = res[idx];
+            });
+            setSession(sesn);
+          }
+        });
     } else {
       const namePr = getSession('name');
       const rankPr = getSession('rank');
@@ -54,12 +62,14 @@ const useGetSession = (sessionAttr = []) => {
         profileImagePr,
       ])
         .then(([name, rank, pointsEarned, profileImage]) => {
-          setSession({
-            name,
-            rank,
-            pointsEarned,
-            profileImage,
-          });
+          if (isPageMounted.current) {
+            setSession({
+              name,
+              rank,
+              pointsEarned,
+              profileImage,
+            });
+          }
         })
         .catch(console.error);
     }

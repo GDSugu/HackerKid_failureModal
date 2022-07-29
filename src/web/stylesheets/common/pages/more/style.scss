@@ -240,6 +240,10 @@
               max-width: 10rem;
               min-width: 9rem;
 
+              &:disabled:hover {
+                cursor: not-allowed;
+              }
+
               @include gm.media-breakpoint-down(md) {
                 padding: 0.75rem 1.75rem;
               }
@@ -336,6 +340,13 @@
           font-size: 0.875rem;
           color: gt.theme-var(text-color-5);
         }
+      }
+    }
+
+    .collection-content {
+      h3 {
+        color: gt.theme-var(text-color-5);
+        margin: 3rem 0;
       }
     }
 

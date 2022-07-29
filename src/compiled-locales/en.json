@@ -47,6 +47,12 @@
       "value": "FAQ"
     }
   ],
+  "/x0h9E": [
+    {
+      "type": 0,
+      "value": "Login with Phone"
+    }
+  ],
   "0JV99f": [
     {
       "type": 0,
@@ -63,6 +69,12 @@
     {
       "type": 0,
       "value": "Help"
+    }
+  ],
+  "1FjMUC": [
+    {
+      "type": 0,
+      "value": "Forgot Password?"
     }
   ],
   "1RUvaS": [
@@ -87,6 +99,12 @@
     {
       "type": 0,
       "value": "Bio"
+    }
+  ],
+  "2bMdhC": [
+    {
+      "type": 0,
+      "value": "Create a New Account"
     }
   ],
   "2qExk8": [
@@ -147,6 +165,12 @@
     {
       "type": 0,
       "value": "Login"
+    }
+  ],
+  "6FPmdk": [
+    {
+      "type": 0,
+      "value": "Filter"
     }
   ],
   "6NWftj": [
@@ -269,10 +293,10 @@
       "value": "hackerkid logo"
     }
   ],
-  "E+cQHz": [
+  "DuPnGd": [
     {
       "type": 0,
-      "value": "Unlock Now"
+      "value": "Email"
     }
   ],
   "EG430K": [
@@ -305,6 +329,44 @@
       "value": "This is Video page"
     }
   ],
+  "FhTUgw": [
+    {
+      "type": 0,
+      "value": "Not "
+    },
+    {
+      "type": 1,
+      "value": "phone"
+    },
+    {
+      "type": 0,
+      "value": " ?"
+    }
+  ],
+  "G0AqB8": [
+    {
+      "type": 0,
+      "value": "Login into Existing Account"
+    }
+  ],
+  "GQwBTI": [
+    {
+      "type": 0,
+      "value": "Verify OTP and proceed"
+    }
+  ],
+  "Gon8SN": [
+    {
+      "type": 0,
+      "value": "Login with Email"
+    }
+  ],
+  "H2rvzb": [
+    {
+      "type": 0,
+      "value": "Password changed successfully"
+    }
+  ],
   "HAlOn1": [
     {
       "type": 0,
@@ -329,34 +391,28 @@
       "value": "Call"
     }
   ],
+  "IV0q/o": [
+    {
+      "type": 0,
+      "value": "Help"
+    }
+  ],
   "Ib1cTy": [
     {
       "type": 0,
       "value": "9876543221"
     }
   ],
-  "JCIgkj": [
+  "In3suu": [
+    {
+      "type": 1,
+      "value": "errorMessage"
+    }
+  ],
+  "JnwRMJ": [
     {
       "type": 0,
       "value": "OTP"
-    }
-  ],
-  "MB8h2I": [
-    {
-      "type": 0,
-      "value": "Leaderboard Ranking"
-    }
-  ],
-  "K+0Pvy": [
-    {
-      "type": 0,
-      "value": "Certificates"
-    }
-  ],
-  "LkuPrA": [
-    {
-      "type": 0,
-      "value": "Join your friends in the club"
     }
   ],
   "MB8h2I": [
@@ -383,16 +439,16 @@
       "value": "Forgot Password?"
     }
   ],
+  "Nn5oAD": [
+    {
+      "type": 0,
+      "value": "Go to login"
+    }
+  ],
   "O1sXEv": [
     {
       "type": 0,
       "value": "Collections"
-    }
-  ],
-  "Op5EHr": [
-    {
-      "type": 0,
-      "value": "Go to login"
     }
   ],
   "OdODwS": [
@@ -411,24 +467,6 @@
     {
       "type": 1,
       "value": "coins"
-    }
-  ],
-  "PSx95N": [
-    {
-      "type": 0,
-      "value": "Home"
-    }
-  ],
-  "Qvy78L": [
-    {
-      "type": 0,
-      "value": "Profile"
-    }
-  ],
-  "OvWf0W": [
-    {
-      "type": 0,
-      "value": "Class"
     }
   ],
   "PSx95N": [
@@ -507,6 +545,12 @@
     {
       "type": 0,
       "value": "Re-type password"
+    }
+  ],
+  "VsYaEG": [
+    {
+      "type": 0,
+      "value": "Open chat now"
     }
   ],
   "VthZQE": [
@@ -617,7 +661,7 @@
       "value": "Show Leaderboard"
     }
   ],
-  "feq+Va": [
+  "fOZCSk": [
     {
       "type": 0,
       "value": "More friends = More fun"
@@ -659,16 +703,34 @@
       "value": "store authtoken"
     }
   ],
-  "iS2zLU": [
+  "hEqp4d": [
     {
       "type": 0,
-      "value": "Visit Club"
+      "value": "Coming Soon..."
     }
   ],
-  "km5SOz": [
+  "hJpqIn": [
     {
       "type": 0,
-      "value": "View all collections"
+      "value": "Send OTP"
+    }
+  ],
+  "hphOHh": [
+    {
+      "type": 0,
+      "value": "Help"
+    }
+  ],
+  "hxLhGK": [
+    {
+      "type": 0,
+      "value": "Set Password"
+    }
+  ],
+  "jZhy7I": [
+    {
+      "type": 0,
+      "value": "Forgot Password"
     }
   ],
   "lKeCea": [
@@ -725,10 +787,10 @@
       "value": "Get the rare collectibles with your coins now"
     }
   ],
-  "nTxUJZ": [
+  "nT6Ql7": [
     {
-      "type": 0,
-      "value": "Try IDE Now"
+      "type": 1,
+      "value": "text"
     }
   ],
   "nlYt8p": [
@@ -837,6 +899,12 @@
     {
       "type": 0,
       "value": "Help"
+    }
+  ],
+  "x8lXTv": [
+    {
+      "type": 0,
+      "value": "Resend"
     }
   ],
   "xT1NKB": [
