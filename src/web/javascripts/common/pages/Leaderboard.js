@@ -49,6 +49,9 @@ const Leaderboard = () => {
 
   return (
   <div className='wrapper col-12 col-md-10 col-lg-9 col-xl-5 mx-auto'>
+    <h5 className="subtitle1 my-4">
+      <FormattedMessage defaultMessage={'Leaderboard'} description='Leaderboard page title'/>
+    </h5>
     {/* <div className='controls-container d-flex'>
       <div className='filter-btn-container control-with-icon'>
         <img className='icon'
