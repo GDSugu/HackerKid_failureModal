@@ -103,7 +103,8 @@ const Leaderboard = () => {
       }
       {
         (leaderboardData) && leaderboardData.map((profileObj, index) => <tr key={index}
-        tabIndex={0} className={profileObj.uniqueUrl === userData.uniqueUrl && 'loggedin-user-highlight'}>
+          tabIndex={0}
+          className={profileObj.uniqueUrl === userData.uniqueUrl ? 'loggedin-user-highlight' : ''}>
         <td>
           <FormattedMessage
           defaultMessage='{rank}'
