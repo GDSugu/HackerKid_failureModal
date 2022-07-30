@@ -5,7 +5,6 @@ import post, {
   authorize,
 } from '../common/framework';
 
-console.log(intlTelInput);
 const actionsOrder = ['send-otp', 'verify-otp', 'register'];
 const otpTimerDOM = $('#otptimer');
 const flaginput = document.querySelector('#phone');
@@ -40,7 +39,6 @@ function validateField(selector, type, length = 0) {
     phone: '^\\d+$',
     name: '^[a-zA-Z. ]+$',
   };
-  console.log('here');
   const regex = (defaultRegex[type] !== undefined) ? defaultRegex[type] : type;
   const regexObj = new RegExp(regex);
   const value = $(selector).val();

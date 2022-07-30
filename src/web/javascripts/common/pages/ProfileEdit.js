@@ -75,8 +75,6 @@ const Profile = () => {
 
   const modalVisible = state.status === 'error' || state.status === 'access_denied' || state.response === 'access_denied';
 
-  console.log(modalVisible);
-
   const {
     about,
     grade,

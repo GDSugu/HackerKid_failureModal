@@ -51,19 +51,22 @@ const useGetSession = ({ sessionAttr = [], isPageMounted }) => {
           }
         });
     } else {
+      const authPr = getSession('authtoken');
       const namePr = getSession('name');
       const rankPr = getSession('rank');
       const pointsEarnedPr = getSession('pointsEarned');
       const profileImagePr = getSession('profileLink');
       Promise.all([
+        authPr,
         namePr,
         rankPr,
         pointsEarnedPr,
         profileImagePr,
       ])
-        .then(([name, rank, pointsEarned, profileImage]) => {
+        .then(([authtoken, name, rank, pointsEarned, profileImage]) => {
           if (isPageMounted.current) {
             setSession({
+              authtoken,
               name,
               rank,
               pointsEarned,
@@ -81,7 +84,7 @@ const useGetSession = ({ sessionAttr = [], isPageMounted }) => {
   };
 };
 
-const AuthContext = React.createContext({});
+const AuthContext = React.createContext();
 
 export default useRootPageState;
 export { AuthContext, useGetSession };

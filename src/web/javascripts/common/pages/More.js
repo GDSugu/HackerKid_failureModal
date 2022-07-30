@@ -218,7 +218,6 @@ const More = () => {
     });
 
     return () => {
-      console.log('more unmounted');
       setCollectionModalVisibile(false);
       isPageMounted.current = false;
     };

@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import post from '../../common/framework';
 import API from '../../../../env';
+import { AuthContext } from '../root';
 
 const useGetChallenges = ({ initializeData = true, isPageMounted }) => {
   const [challenges, setChallenges] = useState({
@@ -8,6 +9,8 @@ const useGetChallenges = ({ initializeData = true, isPageMounted }) => {
     trendingChallenges: false,
     paginationInfo: false,
   });
+
+  const authContext = useContext(AuthContext);
 
   const getChallenges = (filterObj = {}) => {
     const { page = 1, sort = 'popularity', search = '' } = filterObj;
@@ -20,29 +23,50 @@ const useGetChallenges = ({ initializeData = true, isPageMounted }) => {
 
     if (search && search !== '') payload.search = search;
 
-    return post(payload, 'challenge/')
-      .then((res) => {
-        if (isPageMounted.current) {
-          if (res === 'access_denied') {
-            setChallenges((prevState) => ({
-              ...prevState,
-              status: 'access_denied',
-            }));
-          } else {
-            const parsedResponse = JSON.parse(res);
-            if (parsedResponse.status === 'success') {
-              setChallenges(() => ({
-                ...parsedResponse,
+    let result;
+
+    if (authContext.appData.getChallengesHook) {
+      result = new Promise((resolve) => {
+        const { getChallengesHook } = authContext.appData;
+        setChallenges(() => ({
+          ...getChallengesHook,
+        }));
+        resolve(true);
+      });
+    } else {
+      result = post(payload, 'challenge/')
+        .then((res) => {
+          if (isPageMounted.current) {
+            if (res === 'access_denied') {
+              setChallenges((prevState) => ({
+                ...prevState,
+                status: 'access_denied',
               }));
             } else {
-              setChallenges(() => ({
-                ...parsedResponse,
-                status: false,
-              }));
+              const parsedResponse = JSON.parse(res);
+              if (parsedResponse.status === 'success') {
+                setChallenges(() => ({
+                  ...parsedResponse,
+                }));
+                authContext.setAuthState({
+                  appData: {
+                    getChallengesHook: {
+                      ...parsedResponse,
+                    },
+                  },
+                });
+              } else {
+                setChallenges(() => ({
+                  ...parsedResponse,
+                  status: false,
+                }));
+              }
             }
           }
-        }
-      });
+        });
+    }
+
+    return result;
   };
 
   useEffect(() => {
@@ -63,6 +87,8 @@ const useTakeChallenge = ({ isPageMounted }) => {
     submissionDetails: false,
   });
 
+  const authContext = useContext(AuthContext);
+
   const fetchChallenge = (challengeId) => {
     const payload = {
       type: 'takeChallenge',
@@ -70,29 +96,50 @@ const useTakeChallenge = ({ isPageMounted }) => {
       challengeId,
     };
 
-    return post(payload, 'challenges/')
-      .then((res) => {
-        if (isPageMounted.current) {
-          if (res === 'access_denied') {
-            setTakeChallenge((prevState) => ({
-              ...prevState,
-              status: 'access_denied',
-            }));
-          } else {
-            const parsedResponse = JSON.parse(res);
-            if (parsedResponse.status === 'success') {
-              setTakeChallenge(() => ({
-                ...parsedResponse,
+    let result;
+
+    if (authContext.appData.takeChallengeHook) {
+      result = new Promise((resolve) => {
+        const { takeChallengeHook } = authContext.appData;
+        setTakeChallenge(() => ({
+          ...takeChallengeHook,
+        }));
+        resolve(true);
+      });
+    } else {
+      result = post(payload, 'challenges/')
+        .then((res) => {
+          if (isPageMounted.current) {
+            if (res === 'access_denied') {
+              setTakeChallenge((prevState) => ({
+                ...prevState,
+                status: 'access_denied',
               }));
             } else {
-              setTakeChallenge(() => ({
-                ...parsedResponse,
-                status: false,
-              }));
+              const parsedResponse = JSON.parse(res);
+              if (parsedResponse.status === 'success') {
+                setTakeChallenge(() => ({
+                  ...parsedResponse,
+                }));
+                authContext.setAuthState({
+                  appData: {
+                    takeChallengeHook: {
+                      ...parsedResponse,
+                    },
+                  },
+                });
+              } else {
+                setTakeChallenge(() => ({
+                  ...parsedResponse,
+                  status: false,
+                }));
+              }
             }
           }
-        }
-      });
+        });
+    }
+
+    return result;
   };
 
   return {

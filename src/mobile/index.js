@@ -16,6 +16,7 @@ import App from './pages/App';
 import useRootPageState from '../hooks/pages/root';
 import ThemeContext from './components/theme';
 import { themes, font } from './components/config';
+import AuthProvider from '../hooks/common/AuthProvider';
 
 const AppWrapper = () => {
   const { state, setState } = useRootPageState();
@@ -28,23 +29,25 @@ const AppWrapper = () => {
   });
 
   return (
-    state.currentLocaleMessages
-      ? <ThemeContext.Provider
-          value = {{
-            currentTheme: state.currentTheme,
-            theme: themes[state.currentTheme],
-            font,
-            toggleTheme,
-          }}>
-          <IntlProvider
-            locale = {state.currentLocale}
-            defaultLocale = 'en'
-            messages = {state.currentLocaleMessages}
-          >
-            <App/>
-          </IntlProvider>
-        </ThemeContext.Provider>
-      : <View><Text>Loading....</Text></View>
+    <AuthProvider>
+      {state.currentLocaleMessages
+        ? <ThemeContext.Provider
+            value = {{
+              currentTheme: state.currentTheme,
+              theme: themes[state.currentTheme],
+              font,
+              toggleTheme,
+            }}>
+            <IntlProvider
+              locale = {state.currentLocale}
+              defaultLocale = 'en'
+              messages = {state.currentLocaleMessages}
+            >
+              <App/>
+            </IntlProvider>
+          </ThemeContext.Provider>
+        : <View><Text>Loading....</Text></View>}
+    </AuthProvider>
   );
 };
 

@@ -242,7 +242,6 @@ const ForgotPasswordStepThree = ({
     }
 
     if ((enteredPassword && retypedPassword) && (enteredPassword === retypedPassword)) {
-      console.log('here');
       changePasswordRequest().then((response) => {
         const data = JSON.parse(response);
 

@@ -8,8 +8,8 @@ import ThemeContext from '../components/theme';
 import { openDialer, openMail } from '../common/framework';
 import CallIcon from '../../images/help-modal/call-icon.svg';
 import EmailIcon from '../../images/help-modal/email-icon.svg';
-import ChatIcon from '../../images/help-modal/chat-icon.svg';
-import FAQIcon from '../../images/help-modal/faq-icon.svg';
+// import ChatIcon from '../../images/help-modal/chat-icon.svg';
+// import FAQIcon from '../../images/help-modal/faq-icon.svg';
 
 const getStyles = (theme, font, utils) => StyleSheet.create({
   container: {
@@ -96,7 +96,7 @@ const Help = () => {
           <Icon type='SVGFile' name={EmailIcon} size={32} color={theme.utilColors.dark} />
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => {}}>
+      {/* <TouchableOpacity onPress={() => {}}>
         <View style={style.helpMenuBtn}>
           <View>
             <Text style={{
@@ -111,8 +111,8 @@ const Help = () => {
           </View>
           <Icon type='SVGFile' name={ChatIcon} size={32} color={theme.utilColors.dark} />
         </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => {}}>
+      </TouchableOpacity> */}
+      {/* <TouchableOpacity onPress={() => {}}>
         <View style={style.helpMenuBtn}>
           <View>
             <Text style={{
@@ -127,7 +127,7 @@ const Help = () => {
           </View>
           <Icon type='SVGFile' name={FAQIcon} size={32} color={theme.utilColors.dark} />
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </ScrollView>
 </>;
 };

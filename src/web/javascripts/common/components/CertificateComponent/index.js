@@ -2,9 +2,7 @@ import html2canvas from 'html2canvas';
 import React, { useEffect } from 'react';
 import { $ } from '../../framework';
 
-const CertificateComonent = ({ gameDetails, profileDetails, overallDetails }) => {
-  console.log(gameDetails, profileDetails, overallDetails);
-
+const CertificateComonent = ({ gameDetails, profileDetails }) => {
   const { certificateData } = gameDetails;
 
   useEffect(() => {

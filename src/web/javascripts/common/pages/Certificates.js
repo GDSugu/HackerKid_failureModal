@@ -19,11 +19,9 @@ const Certificates = () => {
 
   const { state: { status, gameDetails, profileDetails } } = useProfileInfo({ action: 'getProfileData', uniqueurl: uniqueUrl, isPageMounted });
 
-  console.log(status, gameDetails);
-
-  if (status === 'success') {
-    console.log(gameDetails[0].certificateData);
-  }
+  // if (status === 'success') {
+  //   console.log(gameDetails[0].certificateData);
+  // }
 
   React.useEffect(() => () => {
     isPageMounted.current = false;

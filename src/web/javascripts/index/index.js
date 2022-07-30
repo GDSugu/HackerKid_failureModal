@@ -4,12 +4,14 @@ import { IntlProvider } from 'react-intl';
 import App from '../common/pages/App';
 import useRootPageState from '../../../hooks/pages/root';
 import '../../stylesheets/index/style.scss';
+import AuthProvider from '../../../hooks/common/AuthProvider';
 
 const AppWrapper = () => {
   const { state } = useRootPageState();
 
   return (
-    state.currentLocaleMessages
+    <AuthProvider>
+    {state.currentLocaleMessages
       ? <IntlProvider
           locale = {state.currentLocale}
           defaultLocale = 'en'
@@ -17,7 +19,8 @@ const AppWrapper = () => {
       >
         <App/>
       </IntlProvider>
-      : <div>Loading....</div>
+      : <div>Loading....</div>}
+    </AuthProvider>
   );
 };
 

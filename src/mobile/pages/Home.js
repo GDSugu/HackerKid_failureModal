@@ -914,9 +914,11 @@ const Index = ({ route, navigation }) => {
   const pageTheme = theme.screenHome;
   const style = getStyles(pageTheme, theme.utilColors, theme.gradients, font, theme);
 
-  const { state: dashboardState } = useDashboard();
-  const { state: leaderBoardState } = useLeaderBoard();
-  const { state: getChallengesState } = useGetChallenges();
+  const isPageMounted = React.useRef(true);
+
+  const { state: dashboardState } = useDashboard({ isPageMounted });
+  const { state: leaderBoardState } = useLeaderBoard({ isPageMounted });
+  const { state: getChallengesState } = useGetChallenges({ isPageMounted });
 
   const {
     status: dashboarStatus,
@@ -950,6 +952,10 @@ const Index = ({ route, navigation }) => {
   if ([dashboarStatus, leaderboardStatus, challengesStatus].includes('access_denied')) {
     return <AuthErrorModal navigation={navigation} route={route} />;
   }
+
+  React.useEffect(() => () => {
+    isPageMounted.current = false;
+  }, []);
 
   return (
     <>

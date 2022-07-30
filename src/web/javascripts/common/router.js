@@ -38,8 +38,7 @@ const router = (routes) => {
   };
 
   const listener = () => {
-    window.addEventListener('popstate', (event) => {
-      console.log(event);
+    window.addEventListener('popstate', () => {
       handleRoute(routes);
     });
   };

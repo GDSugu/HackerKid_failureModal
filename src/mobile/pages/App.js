@@ -33,6 +33,7 @@ import IconHome from '../../images/navbar/iconHome.svg';
 import IconMore from '../../images/navbar/iconMore.svg';
 import IconStar from '../../images/navbar/iconStar.svg';
 import IconVideo from '../../images/navbar/iconVideo.svg';
+import { AuthContext } from '../../hooks/pages/root';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -220,6 +221,8 @@ const App = () => {
   const screenTheme = theme[`screen${routeName}`];
   const style = getStyles(screenTheme, theme.utilColors);
 
+  const authContext = useContext(AuthContext);
+
   return (
     <SafeAreaProvider>
         <View style={style.container}>
@@ -235,20 +238,27 @@ const App = () => {
                 animation: 'slide_from_bottom',
               }} initialRouteName={'Login'}>
               <Stack.Group>
-                <Stack.Screen name='Start'>
-                  {() => TabNavigators({
-                    routeName,
-                    screenTheme,
-                    style,
-                    theme,
-                  })}
-                </Stack.Screen>
-                <Stack.Screen name='Class' component={RouteClass} />
-                <Stack.Screen name='EditProfile' component={RouteProfile} />
-                <Stack.Screen name='Login' component={RouteLogin} />
-                <Stack.Screen name='Register' component={RouteRegister} />
-                <Stack.Screen name='ForgotPassword' component={RouteForgotPassword} />
-                <Stack.Screen name='Leaderboard' component={RouteLeaderboard} />
+                {
+                  authContext.isLoggedIn
+                    ? <>
+                      <Stack.Screen name='Start'>
+                      {() => TabNavigators({
+                        routeName,
+                        screenTheme,
+                        style,
+                        theme,
+                      })}
+                    </Stack.Screen>
+                    <Stack.Screen name='Class' component={RouteClass} />
+                    <Stack.Screen name='EditProfile' component={RouteProfile} />
+                    <Stack.Screen name='Leaderboard' component={RouteLeaderboard} />
+                    </>
+                    : <>
+                      <Stack.Screen name='Login' component={RouteLogin} />
+                      <Stack.Screen name='Register' component={RouteRegister} />
+                      <Stack.Screen name='ForgotPassword' component={RouteForgotPassword} />
+                    </>
+                }
               </Stack.Group>
               <Stack.Screen name='Help' component={RouteHelp} />
               <Stack.Group screenOptions={{ presentation: 'modal' }}>

@@ -27,10 +27,6 @@
     "defaultMessage": "help@hackerkid.org",
     "description": "Email Button Text"
   },
-  "/vp2XZ": {
-    "defaultMessage": "FAQ",
-    "description": "FAQ Button Text"
-  },
   "/x0h9E": {
     "defaultMessage": "Login with Phone",
     "description": "login with phone tab"
@@ -285,6 +281,10 @@
     "defaultMessage": "Forgot Password?",
     "description": "Forgot password link"
   },
+  "NeSPuI": {
+    "defaultMessage": "Try the new in-built IDE",
+    "description": "More card Title"
+  },
   "Nn5oAD": {
     "defaultMessage": "Go to login",
     "description": "Go to login button"
@@ -369,13 +369,13 @@
     "defaultMessage": "Coming Soon",
     "description": "collectibles header"
   },
+  "VoYGmQ": {
+    "defaultMessage": "Practise... or play with the new code editor",
+    "description": "More card Subtitle"
+  },
   "VsWMVt": {
     "defaultMessage": "Re-type password",
     "description": "Re-type password label"
-  },
-  "VsYaEG": {
-    "defaultMessage": "Open chat now",
-    "description": "Chat Button Text"
   },
   "VthZQE": {
     "defaultMessage": "Create a New Account",
@@ -575,10 +575,6 @@
     "defaultMessage": "Go to Home",
     "description": "Link description"
   },
-  "t7ObEx": {
-    "defaultMessage": "Unlock Now",
-    "description": "More card button text"
-  },
   "tsF0aG": {
     "defaultMessage": "Continue Playing",
     "description": "continue playing"
@@ -611,10 +607,6 @@
     "defaultMessage": "Videos",
     "description": "videos nav text"
   },
-  "yeNTz5": {
-    "defaultMessage": "Your Collections and Perks",
-    "description": "Collections and Perks CTA"
-  },
   "yujxGL": {
     "defaultMessage": "Your Collections and Perks",
     "description": "more menu button"
@@ -626,5 +618,9 @@
   "zMmp/q": {
     "defaultMessage": "Practise... or play with the new code editor",
     "description": "more card subtitle"
+  },
+  "zROcjU": {
+    "defaultMessage": "Coming soon",
+    "description": "More card button text"
   }
 }

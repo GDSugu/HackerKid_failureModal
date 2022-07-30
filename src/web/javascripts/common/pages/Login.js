@@ -12,7 +12,7 @@ import {
   pageInit, validate, pathNavigator,
 } from '../framework';
 import '../../../stylesheets/common/pages/login/style.scss';
-import useLoginMethod from '../../../../hooks/pages/login';
+import useLoginMethod from '../../../../hooks/pages/auth';
 import { setUserSession, loginCheck } from '../../../../hooks/common/framework';
 import showInlineLoadingSpinner from '../loader';
 
@@ -20,7 +20,6 @@ const manager = {};
 
 const Login = () => {
   pageInit('auth-container', 'Login');
-
   // hooks
   useEffect(() => {
     const flaginput = document.querySelector('#phone');
@@ -33,7 +32,6 @@ const Login = () => {
 
     loginCheck().then((response) => {
       const data = JSON.parse(response);
-
       if (data.status === 'success') {
         pathNavigator('dashboard');
       }

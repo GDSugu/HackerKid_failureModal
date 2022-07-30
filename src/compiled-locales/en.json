@@ -41,12 +41,6 @@
       "value": "help@hackerkid.org"
     }
   ],
-  "/vp2XZ": [
-    {
-      "type": 0,
-      "value": "FAQ"
-    }
-  ],
   "/x0h9E": [
     {
       "type": 0,
@@ -439,6 +433,12 @@
       "value": "Forgot Password?"
     }
   ],
+  "NeSPuI": [
+    {
+      "type": 0,
+      "value": "Try the new in-built IDE"
+    }
+  ],
   "Nn5oAD": [
     {
       "type": 0,
@@ -541,16 +541,22 @@
       "value": "Edit"
     }
   ],
+  "VdAhqD": [
+    {
+      "type": 0,
+      "value": "Coming Soon"
+    }
+  ],
+  "VoYGmQ": [
+    {
+      "type": 0,
+      "value": "Practise... or play with the new code editor"
+    }
+  ],
   "VsWMVt": [
     {
       "type": 0,
       "value": "Re-type password"
-    }
-  ],
-  "VsYaEG": [
-    {
-      "type": 0,
-      "value": "Open chat now"
     }
   ],
   "VthZQE": [
@@ -865,12 +871,6 @@
       "value": "Go to Home"
     }
   ],
-  "t7ObEx": [
-    {
-      "type": 0,
-      "value": "Unlock Now"
-    }
-  ],
   "tsF0aG": [
     {
       "type": 0,
@@ -919,12 +919,6 @@
       "value": "Videos"
     }
   ],
-  "yeNTz5": [
-    {
-      "type": 0,
-      "value": "Your Collections and Perks"
-    }
-  ],
   "yujxGL": [
     {
       "type": 0,
@@ -941,6 +935,12 @@
     {
       "type": 0,
       "value": "Practise... or play with the new code editor"
+    }
+  ],
+  "zROcjU": [
+    {
+      "type": 0,
+      "value": "Coming soon"
     }
   ]
 }

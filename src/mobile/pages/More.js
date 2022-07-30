@@ -11,9 +11,10 @@ import { FormattedMessage } from 'react-intl';
 import ThemeContext from '../components/theme';
 import Icon from '../common/Icons';
 import collectionIllustration from '../../images/more/collectibles.png';
-// import ideIllustration from '../../images/more/ide.png';
+import ideIllustration from '../../images/more/ide.png';
 // import moreFriendsIllustration from '../../images/more/moreFriends.png';
 import { LightBlue } from '../../colors/_colors';
+import { useLogout } from '../../hooks/pages/auth';
 
 const getStyles = (theme, font, utils) => StyleSheet.create({
   container: {
@@ -129,10 +130,12 @@ const More = ({ navigation }) => {
   const pageTheme = theme.screenMore;
   const style = getStyles(pageTheme, font, theme.utilColors);
 
+  const { logout } = useLogout();
+
   return (
     <View style={style.container}>
       <ScrollView style={style.scrollContainer}>
-        <TouchableOpacity onPress={() => {}}>
+        {/* <TouchableOpacity onPress={() => {}}>
           <View style={{
             ...style.moreMenuBtn,
             ...style.collectionBtn,
@@ -149,7 +152,7 @@ const More = ({ navigation }) => {
             </Text>
             <Icon type='FontAwesome5' name={'angle-right'} size={32} color={pageTheme.textBold} />
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <View style={style.moreCard}>
           <ImageBackground
@@ -169,11 +172,15 @@ const More = ({ navigation }) => {
               <View style={style.moreBtnContainer}>
                 <TouchableOpacity
                   onPress={() => {}}
-                  style={style.moreCardButton}
+                  style={{
+                    ...style.moreCardButton,
+                    opacity: 0.5,
+                  }}
+                  disabled={true}
                   >
                   <Text style={style.moreCardButtonText}>
                     <FormattedMessage
-                      defaultMessage="Unlock Now"
+                      defaultMessage="Coming soon"
                       description="More card button text"
                     />
                   </Text>
@@ -221,7 +228,7 @@ const More = ({ navigation }) => {
               </View>
             </View>
           </ImageBackground>
-        </View>
+        </View> */}
 
         <View style={style.moreCard}>
           <ImageBackground
@@ -252,11 +259,13 @@ const More = ({ navigation }) => {
                   style={{
                     ...style.moreCardButton,
                     ...style.moreCardIdeBtn,
+                    opacity: 0.5,
                   }}
+                  disabled={true}
                   >
                   <Text style={style.moreCardButtonText}>
                     <FormattedMessage
-                      defaultMessage="Try IDE Now"
+                      defaultMessage="Coming soon"
                       description="More card button text"
                     />
                   </Text>
@@ -264,7 +273,7 @@ const More = ({ navigation }) => {
               </View>
             </View>
           </ImageBackground>
-        </View> */}
+        </View>
 
         {/* <TouchableOpacity onPress={() => {}}>
           <View style={style.moreMenuBtn}>
@@ -279,7 +288,7 @@ const More = ({ navigation }) => {
           </View>
         </TouchableOpacity> */}
 
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={logout}>
           <View style={style.moreMenuBtn}>
             <Text style={style.moreMenuBtnText}>
               <FormattedMessage
