@@ -23,6 +23,7 @@ import RouteProfile from './EditProfile';
 import RouteLogin from './Login';
 import RouteRegister from './Register';
 import RouteForgotPassword from './ForgotPassword';
+import RouteLeaderboard from './Leaderboard';
 
 import BottomSheet from '../components/BottomSheet';
 
@@ -244,8 +245,9 @@ const App = () => {
                 <Stack.Screen name='Class' component={RouteClass} />
                 <Stack.Screen name='EditProfile' component={RouteProfile} />
                 <Stack.Screen name='Login' component={RouteLogin} />
-              <Stack.Screen name='Register' component={RouteRegister} />
-              <Stack.Screen name='ForgotPassword' component={RouteForgotPassword} />
+                <Stack.Screen name='Register' component={RouteRegister} />
+                <Stack.Screen name='ForgotPassword' component={RouteForgotPassword} />
+                <Stack.Screen name='Leaderboard' component={RouteLeaderboard} />
               </Stack.Group>
               <Stack.Group screenOptions={{ presentation: 'modal' }}>
                 <Stack.Screen name='BottomSheet' component={BottomSheet} />

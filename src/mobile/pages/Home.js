@@ -814,7 +814,7 @@ const ChallengeBlock = ({ challengeData, navigation, style }) => {
 // </>;
 
 const LeaderBoardCard = ({
-  leaderboardData, leaderBoardUserData, navigation, style,
+  leaderboardData, leaderBoardUserData, navigation, style, bottomSheetRef,
 }) => <>
   <View style={[style.sheetCard]}>
     <View style={style.sheetCardHeading}>
@@ -868,7 +868,10 @@ const LeaderBoardCard = ({
         }
     </View>
     <TouchableOpacity
-      onPress={() => navigation.navigate('Leaderboard')}
+        onPress={() => {
+          bottomSheetRef.current.close();
+          navigation.navigate('Leaderboard');
+        }}
       style={[style.sheetCardButton, style.sheetLeaderboardBtn]}
     >
       <Text style={style.sheetCardButtonText}>
@@ -990,6 +993,7 @@ const Index = ({ route, navigation }) => {
             && <LeaderBoardComponent
             leaderboardData={leaderboardData}
             leaderBoardUserData={leaderBoardUserData}
+            bottomSheetRef={bottomSheetRef}
             navigation={navigation}
             style={style} />
           }

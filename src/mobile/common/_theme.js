@@ -56,6 +56,8 @@ const Theme = {
       fadedBtnTextColor: Yellow.color900,
       loginTabInactiveBorder: Yellow.color100,
       textBold: Yellow.color900,
+      disabledBtnColor: `${Yellow.color700}99`,
+      leaderBoardHighlightEntryColor: Yellow.color100,
     },
     utilColors,
     gradients,

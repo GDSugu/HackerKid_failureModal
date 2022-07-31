@@ -22,15 +22,15 @@
   }
 
   @include gm.media-breakpoint-up(sm) {
-    width: 50%;
+    width: 60%;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   }
 
   @include gm.media-breakpoint-up(lg) {
-    width: 35%;
+    width: 40%;
   }
 
-  @include gm.media-breakpoint-up(xl) {
+  @include gm.media-breakpoint-up(xxl) {
     width: 27%;
   }
 

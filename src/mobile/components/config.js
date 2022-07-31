@@ -113,9 +113,9 @@ const themes = {
       ...Theme.light.screenYellow,
       ...fragmentIconDisposal,
     },
-    screenLeaderBoard: {
+    screenLeaderboard: {
       ...Theme.light.screenYellow,
-      ...fragmentIconDisposal,
+      ...screenWithHeader,
     },
     screenMore: {
       ...Theme.light.screenYellow,
@@ -237,9 +237,9 @@ const themes = {
       ...Theme.light.screenYellow,
       ...fragmentIconDisposal,
     },
-    screenLeaderBoard: {
+    screenLeaderboard: {
       ...Theme.light.screenYellow,
-      ...fragmentIconDisposal,
+      ...screenWithHeader,
     },
     screenMore: {
       ...Theme.light.screenYellow,

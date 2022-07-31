@@ -3,9 +3,21 @@
     "defaultMessage": "This is games page",
     "description": "Games Page"
   },
+  "/dnxym": {
+    "defaultMessage": "Create a New Account",
+    "description": "create new account button"
+  },
+  "/itreP": {
+    "defaultMessage": "{label}",
+    "description": "help type label"
+  },
   "/ndV7b": {
     "defaultMessage": "Coins Earned:",
     "description": "coins earned"
+  },
+  "/x0h9E": {
+    "defaultMessage": "Login with Phone",
+    "description": "login with phone tab"
   },
   "0JV99f": {
     "defaultMessage": "This is index page",
@@ -15,6 +27,10 @@
     "defaultMessage": "Game Progress",
     "description": "game progress heading"
   },
+  "1FjMUC": {
+    "defaultMessage": "Forgot Password?",
+    "description": "forgot password link"
+  },
   "1RUvaS": {
     "defaultMessage": "Profile Settings",
     "description": "Navigation link to profile edit page"
@@ -23,23 +39,44 @@
     "defaultMessage": "Create a New Account",
     "description": "Create a New Account heading"
   },
+  "2Tu0HO": {
+    "defaultMessage": "Next",
+    "description": "next page button"
+  },
   "2W0f9h": {
     "defaultMessage": "Bio"
+  },
+  "2bMdhC": {
+    "defaultMessage": "Create a New Account",
+    "description": "create a new account button"
   },
   "2ua1yZ": {
     "defaultMessage": "rank",
     "description": "rank"
   },
+  "2yf2WH": {
+    "defaultMessage": "Login with Phone",
+    "description": "Login with Phone tab"
+  },
   "383EZ1": {
     "defaultMessage": "This is more options page",
     "description": "More options Page"
+  },
+  "3Wcqsy": {
+    "defaultMessage": "Next",
+    "description": "Next button"
   },
   "4Ve1r3": {
     "defaultMessage": "Ok",
     "description": "confirm btn"
   },
-  "5sg7KC": {
-    "defaultMessage": "Password"
+  "53f59E": {
+    "defaultMessage": "Rank",
+    "description": "Rank table cell header"
+  },
+  "5L6FVQ": {
+    "defaultMessage": "Password",
+    "description": "Password Field"
   },
   "6+MZGf": {
     "defaultMessage": "Challenges",
@@ -53,6 +90,22 @@
     "defaultMessage": "Challenges",
     "description": "Challenges card heading"
   },
+  "6V6DQY": {
+    "defaultMessage": "Next",
+    "description": "Next Button"
+  },
+  "74UjvK": {
+    "defaultMessage": "Login to existing Account",
+    "description": "Login to existing account button"
+  },
+  "7L3+7M": {
+    "defaultMessage": "Login into existing account",
+    "description": "Login into existing account button"
+  },
+  "9YoD+Y": {
+    "defaultMessage": "New Password",
+    "description": "New Password Label"
+  },
   "9gqH2W": {
     "defaultMessage": "Login",
     "description": "Login button"
@@ -60,6 +113,10 @@
   "9ppS9d": {
     "defaultMessage": "Go to Class",
     "description": "class navigation button"
+  },
+  "A/XB4F": {
+    "defaultMessage": "Student's Name",
+    "description": "Student Name cell header"
   },
   "A5tWte": {
     "defaultMessage": "{formError}",
@@ -117,9 +174,37 @@
     "defaultMessage": "Go to More",
     "description": "Home Navigation Button"
   },
+  "EhuHU0": {
+    "defaultMessage": "{errorMessage}",
+    "description": "password form helper"
+  },
+  "F/vOH1": {
+    "defaultMessage": "Forgot Password",
+    "description": "Forgot Password heading"
+  },
   "FIcBXp": {
     "defaultMessage": "Home",
     "description": "home heading"
+  },
+  "FhTUgw": {
+    "defaultMessage": "Not {phone} ?",
+    "description": "not button"
+  },
+  "G0AqB8": {
+    "defaultMessage": "Login into Existing Account",
+    "description": "Login into Exisiting Account button"
+  },
+  "GQwBTI": {
+    "defaultMessage": "Verify OTP and proceed",
+    "description": "verify otp button"
+  },
+  "Gon8SN": {
+    "defaultMessage": "Login with Email",
+    "description": "Login with email tab"
+  },
+  "H2rvzb": {
+    "defaultMessage": "Password changed successfully",
+    "description": "Password changed text"
   },
   "HAlOn1": {
     "defaultMessage": "Name"
@@ -132,8 +217,17 @@
     "defaultMessage": "All Challenges",
     "description": "all challenges"
   },
-  "JCIgkj": {
-    "defaultMessage": "Username"
+  "IgwSoy": {
+    "defaultMessage": "Previous",
+    "description": "previous page button"
+  },
+  "In3suu": {
+    "defaultMessage": "{errorMessage}",
+    "description": "error text"
+  },
+  "JnwRMJ": {
+    "defaultMessage": "OTP",
+    "description": "OTP label"
   },
   "MB8h2I": {
     "defaultMessage": "Leaderboard Ranking",
@@ -162,6 +256,10 @@
   "OvWf0W": {
     "defaultMessage": "Class",
     "description": "class nav text"
+  },
+  "PMX+8G": {
+    "defaultMessage": "{coins}",
+    "description": "coins"
   },
   "PSx95N": {
     "defaultMessage": "Home",
@@ -203,6 +301,18 @@
     "defaultMessage": "{errorMessage}",
     "description": "phoneNumber form helper"
   },
+  "TS73XZ": {
+    "defaultMessage": "Change password",
+    "description": "Change password Button"
+  },
+  "TVjEEI": {
+    "defaultMessage": "Create Account",
+    "description": "Create Account Button"
+  },
+  "TbteVJ": {
+    "defaultMessage": "{studentName}",
+    "description": "student name"
+  },
   "TmcPug": {
     "defaultMessage": "Edit Profile",
     "description": "edit profile"
@@ -210,6 +320,26 @@
   "UUCx/J": {
     "defaultMessage": "Edit",
     "description": "edit profile"
+  },
+  "VsWMVt": {
+    "defaultMessage": "Re-type password",
+    "description": "Re-type password label"
+  },
+  "VthZQE": {
+    "defaultMessage": "Create a New Account",
+    "description": "Create Account Heading"
+  },
+  "VyTY/V": {
+    "defaultMessage": "{coins}",
+    "description": "Coins"
+  },
+  "W5zEev": {
+    "defaultMessage": "Resend",
+    "description": "resend otp button"
+  },
+  "X1rCRf": {
+    "defaultMessage": "Login into existing account",
+    "description": "login into existing account button"
   },
   "Y+dh5z": {
     "defaultMessage": "Edit Profile",
@@ -235,6 +365,10 @@
     "defaultMessage": "Send OTP",
     "description": "Send OTP button"
   },
+  "ZzPt+i": {
+    "defaultMessage": "Leaderboard",
+    "description": "Leaderboard page heading"
+  },
   "a2ZCmv": {
     "defaultMessage": "Create a New Account",
     "description": "Create Account Button"
@@ -246,6 +380,14 @@
   "c9n6Sh": {
     "defaultMessage": "School"
   },
+  "cZDBd3": {
+    "defaultMessage": "Coins",
+    "description": "Coins cell header"
+  },
+  "croLiZ": {
+    "defaultMessage": "{name}",
+    "description": "name"
+  },
   "e5Eaen": {
     "defaultMessage": "Profile updated successfully",
     "description": "success modal"
@@ -254,20 +396,61 @@
     "defaultMessage": "Show Leaderboard",
     "description": "show leaderboard"
   },
-  "flaX9K": {
-    "defaultMessage": "Create a New Account"
+  "fOZCSk": {
+    "defaultMessage": "Set a Password",
+    "description": "Set password label"
   },
   "g0zp7w": {
     "defaultMessage": "Continue Playing",
     "description": "Game Progress card primary button"
   },
+  "g2zl2J": {
+    "defaultMessage": "Login Into Existing Account",
+    "description": "Login Into existing account button"
+  },
+  "gHMD5/": {
+    "defaultMessage": "{modalTitle}",
+    "description": "modal title"
+  },
+  "gOkIvb": {
+    "defaultMessage": "Name",
+    "description": "Name label"
+  },
   "h7B/gA": {
     "defaultMessage": "store authtoken",
     "description": "authtoken temp storage btn"
   },
+  "hJpqIn": {
+    "defaultMessage": "Send OTP",
+    "description": "send otp button"
+  },
+  "hphOHh": {
+    "defaultMessage": "Help",
+    "description": "help button"
+  },
+  "hxLhGK": {
+    "defaultMessage": "Set Password",
+    "description": "Password Label"
+  },
+  "jZhy7I": {
+    "defaultMessage": "Forgot Password",
+    "description": "Forgot Password Heading"
+  },
   "lKeCea": {
     "defaultMessage": "Save & Exit",
     "description": "Profile save button"
+  },
+  "lynO1X": {
+    "defaultMessage": "Change Password",
+    "description": "Change password button text"
+  },
+  "m19v5I": {
+    "defaultMessage": "{rank}",
+    "description": "rank"
+  },
+  "mDpOZM": {
+    "defaultMessage": "OTP",
+    "description": "OTP Label"
   },
   "mEFtca": {
     "defaultMessage": "Continue Challenge",
@@ -277,9 +460,17 @@
     "defaultMessage": "School",
     "description": "Profile school label"
   },
+  "mtXEZg": {
+    "defaultMessage": "Parent's Name",
+    "description": "Parent's Name label"
+  },
   "n45USK": {
     "defaultMessage": "rank",
     "description": "sheet card subtitle"
+  },
+  "nT6Ql7": {
+    "defaultMessage": "{text}",
+    "description": "help type text"
   },
   "nlYt8p": {
     "defaultMessage": "View more",
@@ -308,6 +499,10 @@
   "qXTiEd": {
     "defaultMessage": "Grade"
   },
+  "quRCCv": {
+    "defaultMessage": "Phone",
+    "description": "Phone label"
+  },
   "rECW1h": {
     "defaultMessage": "completed",
     "description": "Game Progress card caption"
@@ -320,9 +515,17 @@
     "defaultMessage": "Continue Playing",
     "description": "continue playing"
   },
+  "uhayi4": {
+    "defaultMessage": "{errorMessage}",
+    "description": "email form helper"
+  },
   "vChW6P": {
     "defaultMessage": "Show Leaderboard",
     "description": "Leaderboard show button"
+  },
+  "x8lXTv": {
+    "defaultMessage": "Resend",
+    "description": "Resend otp button text"
   },
   "xT1NKB": {
     "defaultMessage": "Games",

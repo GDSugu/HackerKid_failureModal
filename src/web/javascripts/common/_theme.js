@@ -49,6 +49,7 @@ const Theme = {
       fadedBtnBg: Yellow.color50,
       fadedBtnTextColor: Yellow.color900,
       leaderBoardControlsBorderColor: Yellow.color400,
+      leaderBoardHighlightEntryColor: Yellow.color100,
     },
     utilColors,
   },

@@ -21,7 +21,7 @@ const Img = ({
     <source srcSet={`${imgPath}/webps/${fileName}.webp`} type="image/webp"></source>
     <img srcSet={`${imgPath}/resized/${fileName}-1000w.${fileExtension} 1000w`} src={`${imgPath + src}`} alt={alt} />
   </picture>}
-  {!local && <img src={src} />}
+    {!local && <img src={src} style={style} className={className} alt={alt } />}
   </>;
 };
 

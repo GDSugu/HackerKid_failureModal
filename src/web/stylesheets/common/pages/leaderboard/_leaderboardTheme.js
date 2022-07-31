@@ -12,6 +12,7 @@ const thememaplight = {
   'leaderboard-nav-bg': lightTheme.screenYellow.navBg,
   'leaderboard-nav-active-bg': lightTheme.screenYellow.navActiveBg,
   'leaderboard-control-border-color': lightTheme.screenYellow.leaderBoardControlsBorderColor,
+  'leaderboard-user-highlight-color': lightTheme.screenYellow.leaderBoardHighlightEntryColor,
 };
 // just copied the light theme colors to the dark for now
   // TODO: make this a real dark theme with appropriate colors
@@ -30,6 +31,7 @@ const cssvars = {
   'leaderboard-nav-bg': '--leaderboard-nav-bg',
   'leaderboard-nav-active-bg': '--leaderboard-nav-active-bg',
   'leaderboard-control-border-color': '--leaderboard-control-border-color',
+  'leaderboard-user-highlight-color': '--leaderboard-user-highlight-color',
 };
 
 module.exports = {
