@@ -10,12 +10,11 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import PhoneInput from 'react-native-phone-number-input';
-import { CommonActions } from '@react-navigation/native';
 import Icon from '../common/Icons';
 import { closeFormError, validate } from '../common/framework';
 import ThemeContext from '../components/theme';
 import LoginFormSvg from '../../images/login/login-form-svg.svg';
-import useLoginMethod from '../../hooks/pages/login';
+import useLoginMethod from '../../hooks/pages/auth';
 import getCommonStyles from '../components/commonStyles';
 import { setUserSession } from '../../hooks/common/framework';
 
@@ -117,16 +116,11 @@ const Login = ({ navigation }) => {
       loginWithPhone(countryCode).then((response) => {
         const data = JSON.parse(response);
         if (data.status === 'success') {
-          setUserSession(data).then(() => {
-            navigation.dispatch(
-              CommonActions.reset({
-                index: 1,
-                routes: [
-                  { name: 'Start' },
-                ],
-              }),
-            );
-          }).catch((err) => console.log(err));
+          // authContext.setAuthState({
+          //   isLoggedIn: true,
+          //   sessionData: data,
+          // });
+          setUserSession(data);
         } else if (data.status === 'not-exists') {
           setFormErrorObj({ formError: 'You are not registered user', formErrorType: 'NOT_REGISTERED' });
           setError((prevObj) => ({ ...prevObj, phoneNumber: true }));

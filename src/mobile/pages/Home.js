@@ -13,6 +13,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   FlatList,
+  RefreshControl,
 } from 'react-native';
 import { FormattedMessage } from 'react-intl';
 import { Skeleton } from '@rneui/base';
@@ -33,6 +34,7 @@ import marioLand from '../../images/dashboard/dashboard-marioLand.png';
 // import achievementImage from '../../images/dashboard/dashboard-achievements.png';
 import CircleGradientProgressBar from '../components/CircleGradientProgressBar';
 import AuthErrorModal from '../components/Modals/AuthErrorModal';
+import { AuthContext } from '../../hooks/pages/root';
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
@@ -385,9 +387,9 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => Styl
 });
 
 const DashboardBlock = ({
-  avatar, bottomSheetRef, dashboardUserData, gameData, style,
+  avatar, bottomSheetRef, dashboardUserData, gameData, style, reloadComponent,
 }) => <>
-    <View style={style.bodyCard}>
+    <View style={style.bodyCard} key={reloadComponent}>
       <View style={style.heroCard}>
           <View style={style.heroCardContent}>
             <View style={style.heroCardBlock1}>
@@ -399,9 +401,10 @@ const DashboardBlock = ({
               >
                 <Image
                   source={dashboardUserData && dashboardUserData.profileImage ? {
-                    uri: dashboardUserData.profileImage,
+                    uri: dashboardUserData.profileImage.toString().replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`),
                   } : avatar }
                   style={style.heroCardImage}
+                  defaultSource={avatar}
                 />
               </ImageBackground>
             </View>
@@ -437,9 +440,9 @@ const DashboardBlock = ({
   </>;
 
 const HomeBlock = ({
-  avatar, dashboardUserData, navigation, style,
+  avatar, dashboardUserData, navigation, style, reloadComponent,
 }) => <>
-    <View style={style.bodyCard}>
+    <View style={style.bodyCard} key={reloadComponent}>
       <View style={style.bodyCardHeading}>
         <Text style={style.bodyCardHeadingText}>
           <FormattedMessage
@@ -463,7 +466,7 @@ const HomeBlock = ({
           <Image
             style={style.bodyCardContentTitleImage}
             source={dashboardUserData ? {
-              uri: dashboardUserData.profileImage,
+              uri: dashboardUserData.profileImage.toString().replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`),
             } : avatar }
           />
           {
@@ -914,9 +917,37 @@ const Index = ({ route, navigation }) => {
   const pageTheme = theme.screenHome;
   const style = getStyles(pageTheme, theme.utilColors, theme.gradients, font, theme);
 
-  const { state: dashboardState } = useDashboard();
-  const { state: leaderBoardState } = useLeaderBoard();
-  const { state: getChallengesState } = useGetChallenges();
+  const isPageMounted = React.useRef(true);
+  const [reloadComponent, setReloadComponent] = React.useState(0);
+
+  const {
+    state: dashboardState,
+    static: { getSessionData, getDashboardData },
+  } = useDashboard({ isPageMounted });
+  const { state: leaderBoardState } = useLeaderBoard({ isPageMounted });
+  const {
+    state: getChallengesState,
+    static: { getChallenges },
+  } = useGetChallenges({ isPageMounted });
+
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    Promise.all([
+      getSessionData({ cached: false }),
+      getDashboardData({ cached: false }),
+      getChallenges({ cached: false }),
+    ])
+      .then(() => {
+        setReloadComponent(reloadComponent + 1);
+        setRefreshing(false);
+      })
+      .catch(() => {
+        // show snackbar of error
+        setRefreshing(false);
+      });
+  };
 
   const {
     status: dashboarStatus,
@@ -951,9 +982,31 @@ const Index = ({ route, navigation }) => {
     return <AuthErrorModal navigation={navigation} route={route} />;
   }
 
+  const authContext = React.useContext(AuthContext);
+
+  if (authContext.appData.isReferesh) {
+    onRefresh();
+    authContext.setAuthState({ isReferesh: false });
+  }
+
+  React.useEffect(() => {
+    onRefresh();
+
+    return () => {
+      isPageMounted.current = false;
+    };
+  }, []);
+
   return (
     <>
-      <ScrollView style={style.container}>
+      <ScrollView
+        style={style.container}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }>
         <View style={style.container}>
           <DashboardComponent
             avatar={defaultUser}
@@ -961,16 +1014,21 @@ const Index = ({ route, navigation }) => {
             dashboardUserData={dashboardUserData}
             gameData={gameData}
             style={style}
-            navigation={navigation} />
+            navigation={navigation}
+            reloadComponent={reloadComponent}
+          />
           <HomeComponent
             avatar={defaultUser}
             dashboardUserData={dashboardUserData}
             navigation={navigation}
-            style={style} />
+            style={style}
+            reloadComponent={reloadComponent}
+          />
           <GameComponent
             gameData={gameData}
             navigation={navigation}
             style={style}
+            reloadComponent={reloadComponent}
           />
           <ChallengeComponent
             challengeData={trendingChallenges}

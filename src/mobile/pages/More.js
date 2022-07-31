@@ -1,96 +1,330 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import {
-  Alert,
-  Button,
   Text,
   StyleSheet,
   ScrollView,
-  TextInput,
-  ToastAndroid,
   View,
+  TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import ThemeContext from '../components/theme';
+import Icon from '../common/Icons';
+import collectionIllustration from '../../images/more/collectibles.png';
+import ideIllustration from '../../images/more/ide.png';
+// import moreFriendsIllustration from '../../images/more/moreFriends.png';
+import { LightBlue } from '../../colors/_colors';
+import { useLogout } from '../../hooks/pages/auth';
 
-const getStyles = (theme) => StyleSheet.create({
+const getStyles = (theme, font, utils) => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.bodyBg,
+    // paddingBottom: 12,
+  },
+  scrollContainer: {
+    padding: 12,
+  },
+  moreMenuBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: utils.white,
+    borderRadius: 12,
+    padding: 12,
+    shadowColor: `${utils.shadowColor2}`,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowRadius: 16,
+    shadowOpacity: 0,
+    marginVertical: 4,
+  },
+  lastBtn: {
+    marginBottom: 25,
+  },
+  collectionBtn: {
+    borderWidth: 2,
+    borderColor: theme.inputBorderColor,
+  },
+  moreMenuBtnText: {
+    ...font.subtitle1,
+    color: utils.dark,
+  },
+  collectionBtnText: {
+    color: theme.textBold,
+  },
+  moreCard: {
+    borderRadius: 12,
+    backgroundColor: utils.white,
+    marginVertical: 4,
+    height: 200,
+  },
+  moreCardTitle: {
+    ...font.heading5,
+    color: utils.dark,
+    lineHeight: 38,
+  },
+  moreCardSubtitleText: {
+    ...font.subtitle1,
+    color: utils.lightGrey,
+  },
+  moreBtnContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  moreCardButton: {
+    borderRadius: 12,
+    backgroundColor: theme.btnBg,
+    padding: 16,
+    width: 130,
+    shadowColor: `${utils.shadowColor2}`,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowRadius: 4,
+    shadowOpacity: 0,
+  },
+  moreCardIdeBtn: {
+    backgroundColor: LightBlue.color700,
+    shadowColor: LightBlue.color100,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowRadius: 4,
+    shadowOpacity: 0,
+  },
+  moreCardButtonText: {
+    ...font.subtitle1,
+    color: utils.white,
+    textAlign: 'center',
+    alignItems: 'flex-end',
+  },
+  moreCardBg: {
+    justifyContent: 'space-between',
+    padding: 16,
+  },
+  moreCardContainer: {
+    justifyContent: 'space-between',
+    height: '100%',
+  },
+  collectibleImgBg: {
+    width: 150,
+    height: 290,
+  },
+  ideImgBg: {
+    width: 150,
+    height: 310,
+  },
+  moreFriendsImgBg: {
+    width: 150,
+    height: 280,
   },
 });
 
 const More = ({ navigation }) => {
   const { font, theme } = useContext(ThemeContext);
   const pageTheme = theme.screenMore;
-  const style = getStyles(pageTheme);
-  const intl = useIntl();
+  const style = getStyles(pageTheme, font, theme.utilColors);
 
-  const [authtoken, setAuthToken] = useState(null);
-
-  AsyncStorage.getItem('authtoken')
-    .then(setAuthToken);
-
-  const handleAuthTokenChange = (token) => {
-    AsyncStorage.setItem('authtoken', token)
-      .then(() => {
-        setAuthToken(token);
-      })
-      .catch(console.error);
-  };
+  const { logout } = useLogout();
 
   return (
-    <ScrollView style={style.container}>
-      <View style={{ marginVertical: 250 }}>
-        <Text style={{
-          textAlign: 'center',
-          ...font.heading1,
-        }}>
-          <FormattedMessage
-            defaultMessage="This is more options page"
-            description="More options Page"
-          />
-        </Text>
-        <TextInput
-          style={{ borderWidth: 2, marginBottom: 10, marginTop: 20 }}
-          placeholder='authtoken'
-          value={authtoken}
-          onChangeText={(value) => handleAuthTokenChange(value)}
-        />
-        <Button
-          title={intl.formatMessage({
-            defaultMessage: 'store authtoken',
-            description: 'authtoken temp storage btn',
-          })}
-          onPress={() => {
-            AsyncStorage.setItem('authtoken', authtoken)
-              .then(() => {
-                ToastAndroid.show('authtoken set', ToastAndroid.SHORT);
-              })
-              .catch((error) => {
-                Alert.alert('Authtoken Error', error);
-              });
+    <View style={style.container}>
+      <ScrollView style={style.scrollContainer}>
+        {/* <TouchableOpacity onPress={() => {}}>
+          <View style={{
+            ...style.moreMenuBtn,
+            ...style.collectionBtn,
           }}
-          color={pageTheme.btnBg}
-        />
-      </View>
-      <Button
-        onPress={() => navigation.navigate('EditProfile')}
-        title={intl.formatMessage({
-          defaultMessage: 'Go to Profile',
-          description: 'Link description',
-        })}
-        color={pageTheme.btnBg}
-      />
-      <Button
-        onPress={() => navigation.navigate('Home')}
-        title={intl.formatMessage({
-          defaultMessage: 'Go to Home',
-          description: 'Home Navigation Button',
-        })}
-        color={pageTheme.btnBg}
-      />
-    </ScrollView>
+            >
+            <Text style={{
+              ...style.moreMenuBtnText,
+              ...style.collectionBtnText,
+            }}>
+              <FormattedMessage
+                defaultMessage="Your Collections and Perks"
+                description="Collections and Perks CTA"
+              />
+            </Text>
+            <Icon type='FontAwesome5' name={'angle-right'} size={32} color={pageTheme.textBold} />
+          </View>
+        </TouchableOpacity> */}
+
+        <View style={style.moreCard}>
+          <ImageBackground
+            source={collectionIllustration}
+            resizeMethod={'scale'}
+            resizeMode={'contain'}
+            style={style.moreCardBg}
+            imageStyle={style.collectibleImgBg}
+            >
+            <View style={style.moreCardContainer}>
+              <Text style={style.moreCardTitle}>
+                <FormattedMessage
+                  defaultMessage="Get the rare collectibles with your coins now"
+                  description="More card Title"
+                />
+              </Text>
+              <View style={style.moreBtnContainer}>
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    ...style.moreCardButton,
+                    opacity: 0.5,
+                  }}
+                  disabled={true}
+                  >
+                  <Text style={style.moreCardButtonText}>
+                    <FormattedMessage
+                      defaultMessage="Coming soon"
+                      description="More card button text"
+                    />
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </ImageBackground>
+        </View>
+
+        {/* <View style={style.moreCard}>
+          <ImageBackground
+            source={moreFriendsIllustration}
+            resizeMethod={'scale'}
+            resizeMode={'contain'}
+            style={style.moreCardBg}
+            imageStyle={style.moreFriendsImgBg}
+          >
+            <View style={style.moreCardContainer}>
+              <View>
+                <Text style={style.moreCardTitle}>
+                  <FormattedMessage
+                    defaultMessage="More friends = More fun"
+                    description="More card Title"
+                  />
+                </Text>
+                <Text style={style.moreCardSubtitleText}>
+                  <FormattedMessage
+                    defaultMessage="Join your friends in the club"
+                    description="More card Subtitle"
+                  />
+                </Text>
+              </View>
+              <View style={style.moreBtnContainer}>
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={style.moreCardButton}
+                  >
+                  <Text style={style.moreCardButtonText}>
+                    <FormattedMessage
+                      defaultMessage="Visit Club"
+                      description="More card button text"
+                    />
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </ImageBackground>
+        </View> */}
+
+        <View style={style.moreCard}>
+          <ImageBackground
+            source={ideIllustration}
+            resizeMethod={'scale'}
+            resizeMode={'contain'}
+            style={style.moreCardBg}
+            imageStyle={style.ideImgBg}
+          >
+            <View style={style.moreCardContainer}>
+              <View>
+                <Text style={style.moreCardTitle}>
+                  <FormattedMessage
+                    defaultMessage="Try the new in-built IDE"
+                    description="More card Title"
+                  />
+                </Text>
+                <Text style={style.moreCardSubtitleText}>
+                  <FormattedMessage
+                    defaultMessage="Practise... or play with the new code editor"
+                    description="More card Subtitle"
+                  />
+                </Text>
+              </View>
+              <View style={style.moreBtnContainer}>
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    ...style.moreCardButton,
+                    ...style.moreCardIdeBtn,
+                    opacity: 0.5,
+                  }}
+                  disabled={true}
+                  >
+                  <Text style={style.moreCardButtonText}>
+                    <FormattedMessage
+                      defaultMessage="Coming soon"
+                      description="More card button text"
+                    />
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </ImageBackground>
+        </View>
+
+        {/* <TouchableOpacity onPress={() => {}}>
+          <View style={style.moreMenuBtn}>
+            <Text style={style.moreMenuBtnText}>
+              <FormattedMessage
+                defaultMessage="Doubts"
+                description="Doubts CTA"
+              />
+            </Text>
+            <Icon
+              type='FontAwesome5' name={'angle-right'} size={32} color={theme.utilColors.dark} />
+          </View>
+        </TouchableOpacity> */}
+
+        <TouchableOpacity onPress={logout}>
+          <View style={style.moreMenuBtn}>
+            <Text style={style.moreMenuBtnText}>
+              <FormattedMessage
+                defaultMessage="Logout"
+                description="Logout Button"
+              />
+            </Text>
+            <Icon type='FontAwesome5' name={'angle-right'} size={32} color={theme.utilColors.dark} />
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate('EditProfile') }>
+          <View style={style.moreMenuBtn}>
+            <Text style={style.moreMenuBtnText}>
+              <FormattedMessage
+                defaultMessage="Account Settings"
+                description="account settings CTA"
+              />
+            </Text>
+            <Icon type='FontAwesome5' name={'angle-right'} size={32} color={theme.utilColors.dark} />
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate('Help')} style={style.lastBtn}>
+          <View style={style.moreMenuBtn}>
+            <Text style={style.moreMenuBtnText}>
+              <FormattedMessage
+                defaultMessage="Help"
+                description="Help CTA"
+              />
+            </Text>
+            <Icon type='FontAwesome5' name={'angle-right'} size={32} color={theme.utilColors.dark} />
+          </View>
+        </TouchableOpacity>
+      </ScrollView>
+    </View>
   );
 };
 

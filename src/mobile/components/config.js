@@ -121,6 +121,10 @@ const themes = {
       ...Theme.light.screenYellow,
       ...screenWithHeader,
     },
+    screenHelp: {
+      ...Theme.light.screenYellow,
+      ...fragmentIconDisposal,
+    },
     screenStudentProfile: {
       ...Theme.light.screenYellow,
       ...fragmentIconDisposal,
@@ -244,6 +248,10 @@ const themes = {
     screenMore: {
       ...Theme.light.screenYellow,
       ...screenWithHeader,
+    },
+    screenHelp: {
+      ...Theme.light.screenYellow,
+      ...fragmentIconDisposal,
     },
     screenStudentProfile: {
       ...Theme.light.screenYellow,

@@ -23,7 +23,9 @@ $thememaplight : (
   bg-1: #fff,
   bg-2: #212527,
   bg-3: #ededed,
+  modal-close-btn-bg: #ff5a79,
   skeleton-bg: #13224125,
+  tc-font-color: #000,
 );
 // just copied the light theme colors to the dark for now
 // TODO: make this a real dark theme with appropriate colors
@@ -52,7 +54,9 @@ $thememapdark : (
   bg-1: #212527,
   bg-2: #fff,
   bg-3: #ededed,
+  modal-close-btn-bg: #ff5a79,
   skeleton-bg: #13224125,
+  tc-font-color: #000,
 );
 
 $cssvars : (
@@ -80,7 +84,9 @@ $cssvars : (
   bg-1: --bg-1,
   bg-2: --bg-2,
   bg-3: --bg-3,
+  modal-close-btn-bg: --modal-close-btn-bg,
   skeleton-bg: --skeleton-bg,
+  tc-font-color: --tc-font-color,
 );
 
 @mixin spread-map($map: (), $cssMap: $cssvars) {

@@ -113,9 +113,11 @@ const loginCheck = () => new Promise((resolve, reject) => {
   if (authToken === '' || authToken === null) {
     // addSignInButton();
     resolve(false);
+    pathNavigator('login');
   } else {
     post({ type: 'checkSession' }, 'login/', true, false).then((response) => {
-      if (response === 'access_denied') {
+      if (!response || response === 'access_denied') {
+        pathNavigator('login');
         resolve(false);
       } else {
         $('.username').text(authorize.getSession('name'));

@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import {
-  View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, KeyboardAvoidingView, Image,
+  View, Text, StyleSheet, TouchableOpacity,
+  // TextInput,
+  ScrollView,
+  // KeyboardAvoidingView,
+  Image,
 } from 'react-native';
 import { FormattedMessage } from 'react-intl';
 import { Skeleton } from '@rneui/base';
@@ -112,8 +116,9 @@ const Row = ({ style, children }) => (
 );
 
 const Leaderboard = () => {
+  const isPageMounted = useRef(true);
   // hooks
-  const { state, setLeaderBoardData, getLeaderBoardData } = useLeaderBoard();
+  const { state, setLeaderBoardData, getLeaderBoardData } = useLeaderBoard({ isPageMounted });
   const { leaderboardData, userData, paginationDetails } = state;
   // styles
   const { font, theme } = React.useContext(ThemeContext);
@@ -127,13 +132,13 @@ const Leaderboard = () => {
 
   // methods
   const nextBtnPressHandler = () => {
-    getLeaderBoardData(paginationDetails.page + 1).then(() => {
+    getLeaderBoardData({ pageNumber: paginationDetails.page + 1 }).then(() => {
       scrollViewRef.current.scrollTo({ y: 0, animated: true });
     });
   };
 
   const previousBtnPressHandler = () => {
-    getLeaderBoardData(paginationDetails.page - 1).then(() => {
+    getLeaderBoardData({ pageNumber: paginationDetails.page - 1 }).then(() => {
       scrollViewRef.current.scrollTo({ y: 0, animated: true });
     });
   };

@@ -9,7 +9,9 @@ import Modal from '../components/Modal';
 const Leaderboard = () => {
   pageInit('leaderboard-container', 'Leaderboard');
 
-  const { state, setLeaderBoardData, getLeaderBoardData } = useLeaderBoard(true);
+  const isPageMounted = React.useRef(true);
+
+  const { state, setLeaderBoardData, getLeaderBoardData } = useLeaderBoard({ isPageMounted });
   const { leaderboardData, userData, paginationDetails } = state;
 
   const disablePrevBtn = paginationDetails.page <= 1;
@@ -18,11 +20,13 @@ const Leaderboard = () => {
 
   // methods
   const previousBtnClickHandler = () => {
-    getLeaderBoardData(paginationDetails.page - 1).then(() => window.scrollTo({ top: 0 }));
+    getLeaderBoardData({ pageNumber: paginationDetails.page - 1 })
+      .then(() => window.scrollTo({ top: 0 }));
   };
 
   const nextBtnClickHandler = () => {
-    getLeaderBoardData(paginationDetails.page + 1).then(() => window.scrollTo({ top: 0 }));
+    getLeaderBoardData({ pageNumber: paginationDetails.page + 1 })
+      .then(() => window.scrollTo({ top: 0 }));
   };
 
   const loggedInUserInCurrentPage = (currentPage, userUniqueUrl) => {

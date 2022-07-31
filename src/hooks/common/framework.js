@@ -178,28 +178,34 @@ const post = (postData, apiPath, validateResponse = true) => getSession('authtok
     return response;
   });
 
-const loginCheck = () => new Promise((resolve) => {
-  getSession('authtoken')
-    .then((authToken) => {
-      if (authToken === null || authToken === undefined || authToken === '') {
-        resolve(false);
-      }
-      return post({ type: 'checkSession' }, 'login/', true, false);
-    })
-    .then((response) => {
-      if (response === 'access_denied') {
-        resolve(false);
-      }
-      resolve(response);
-    });
-});
+const loginCheck = () => new Promise((resolve) => getSession('authtoken')
+  .then((authToken) => {
+    if (authToken === null || authToken === undefined || authToken === '') {
+      resolve(false);
+    }
+    resolve(post({ type: 'checkSession' }, 'login/', true, false));
+  })
+  .then((response) => {
+    if (response === 'access_denied') {
+      resolve(false);
+    }
+    return response;
+  }));
 
 const logout = () => post({ type: 'logout' }, 'login/')
   .then((response) => {
-    const data = JSON.parse(response);
-    if (data.status === 'success') {
+    let result = false;
+    if (response === 'access_denied') {
       authClear();
+      result = true;
+    } else {
+      const data = JSON.parse(response);
+      if (data.status === 'success') {
+        authClear();
+        result = true;
+      }
     }
+    return result;
   });
 
 const updatePoints = (addedPoints) => {
@@ -286,6 +292,26 @@ const validateField = (type, value, lengthRangeObj = false, skipValueCheck = fal
   }
 };
 
+const mergeRecursive = (obj1, obj2) => {
+  const source1 = JSON.parse(JSON.stringify(obj1));
+  const source2 = JSON.parse(JSON.stringify(obj2));
+  // eslint-disable-next-line guard-for-in, no-restricted-syntax
+  for (const key in source2) {
+    try {
+      // Property in destination object set; update its value.
+      if (source2[key].constructor === Object) {
+        source1[key] = mergeRecursive(source1[key], source2[key]);
+      } else {
+        source1[key] = source2[key];
+      }
+    } catch (e) {
+      // Property in destination object not set; create it and set its value.
+      source1[key] = source2[key];
+    }
+  }
+  return source1;
+};
+
 export default post;
 
 export {
@@ -298,4 +324,5 @@ export {
   s3Upload,
   updatePoints,
   validateField,
+  mergeRecursive,
 };

@@ -1,6 +1,8 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link, useLocation, Outlet } from 'react-router-dom';
+import { useGetSession } from '../../../../../hooks/pages/root';
+import Img from '../Img';
 
 const NavItem = (props) => {
   const { icon, route, active } = props;
@@ -18,6 +20,8 @@ const NavBar = () => {
   const { pathname } = useLocation();
   const routes = pathname.split('/');
   const screen = routes[routes.length - 1];
+  const isPageMounted = React.useRef(true);
+  const { session: { profileLink } } = useGetSession({ sessionAttr: ['profileLink'], isPageMounted });
 
   const navItems = [
     {
@@ -55,11 +59,15 @@ const NavBar = () => {
           <path d="M27 36H45M27 30H45M27 42H45" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>,
       route: '/more',
-      active: screen === 'more',
+      active: ['more', 'certificates', 'awards', 'collectibles'].includes(screen),
     },
   ];
 
-  const imgPath = '../../../../../images';
+  const profileImg = profileLink || '../../../../../images/common/profile.png';
+
+  React.useEffect(() => () => {
+    isPageMounted.current = false;
+  }, []);
 
   return <>
     <nav>
@@ -78,7 +86,7 @@ const NavBar = () => {
         </div>
         <div className="profileImg">
           <Link to='/profile'>
-            <img src={`${imgPath}/common/profile.png`} alt="Hackerkid User"/>
+            <Img src={profileImg} alt="Hackerkid User"/>
           </Link>
         </div>
       </div>

@@ -1,4 +1,16 @@
 {
+  "+AycvP": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
+  "+g4yFF": [
+    {
+      "type": 0,
+      "value": "Logout"
+    }
+  ],
   "/EsQT0": [
     {
       "type": 0,
@@ -23,6 +35,12 @@
       "value": "Coins Earned:"
     }
   ],
+  "/r/CdV": [
+    {
+      "type": 0,
+      "value": "help@hackerkid.org"
+    }
+  ],
   "/x0h9E": [
     {
       "type": 0,
@@ -39,6 +57,12 @@
     {
       "type": 0,
       "value": "Game Progress"
+    }
+  ],
+  "13ETG6": [
+    {
+      "type": 0,
+      "value": "Help"
     }
   ],
   "1FjMUC": [
@@ -77,6 +101,12 @@
       "value": "Create a New Account"
     }
   ],
+  "2qExk8": [
+    {
+      "type": 0,
+      "value": "Get the rare collectibles with your coins now"
+    }
+  ],
   "2ua1yZ": [
     {
       "type": 0,
@@ -89,16 +119,16 @@
       "value": "Login with Phone"
     }
   ],
-  "383EZ1": [
-    {
-      "type": 0,
-      "value": "This is more options page"
-    }
-  ],
   "3Wcqsy": [
     {
       "type": 0,
       "value": "Next"
+    }
+  ],
+  "3lLFC/": [
+    {
+      "type": 1,
+      "value": "label"
     }
   ],
   "4Ve1r3": [
@@ -281,6 +311,12 @@
       "value": "Home"
     }
   ],
+  "FYwxn7": [
+    {
+      "type": 0,
+      "value": "This is Video page"
+    }
+  ],
   "FhTUgw": [
     {
       "type": 0,
@@ -337,6 +373,24 @@
       "value": "All Challenges"
     }
   ],
+  "ILnphX": [
+    {
+      "type": 0,
+      "value": "Call"
+    }
+  ],
+  "IV0q/o": [
+    {
+      "type": 0,
+      "value": "Help"
+    }
+  ],
+  "Ib1cTy": [
+    {
+      "type": 0,
+      "value": "9876543221"
+    }
+  ],
   "IgwSoy": [
     {
       "type": 0,
@@ -353,12 +407,6 @@
     {
       "type": 0,
       "value": "OTP"
-    }
-  ],
-  "MB8h2I": [
-    {
-      "type": 0,
-      "value": "Leaderboard Ranking"
     }
   ],
   "MB8h2I": [
@@ -385,10 +433,22 @@
       "value": "Forgot Password?"
     }
   ],
+  "NeSPuI": [
+    {
+      "type": 0,
+      "value": "Try the new in-built IDE"
+    }
+  ],
   "Nn5oAD": [
     {
       "type": 0,
       "value": "Go to login"
+    }
+  ],
+  "O1sXEv": [
+    {
+      "type": 0,
+      "value": "Collections"
     }
   ],
   "OdODwS": [
@@ -407,24 +467,6 @@
     {
       "type": 1,
       "value": "coins"
-    }
-  ],
-  "PSx95N": [
-    {
-      "type": 0,
-      "value": "Home"
-    }
-  ],
-  "Qvy78L": [
-    {
-      "type": 0,
-      "value": "Profile"
-    }
-  ],
-  "OvWf0W": [
-    {
-      "type": 0,
-      "value": "Class"
     }
   ],
   "PSx95N": [
@@ -497,6 +539,18 @@
     {
       "type": 0,
       "value": "Edit"
+    }
+  ],
+  "VdAhqD": [
+    {
+      "type": 0,
+      "value": "Coming Soon"
+    }
+  ],
+  "VoYGmQ": [
+    {
+      "type": 0,
+      "value": "Practise... or play with the new code editor"
     }
   ],
   "VsWMVt": [
@@ -631,12 +685,6 @@
       "value": "Login Into Existing Account"
     }
   ],
-  "gHMD5/": [
-    {
-      "type": 1,
-      "value": "modalTitle"
-    }
-  ],
   "gOkIvb": [
     {
       "type": 0,
@@ -647,6 +695,12 @@
     {
       "type": 0,
       "value": "store authtoken"
+    }
+  ],
+  "hEqp4d": [
+    {
+      "type": 0,
+      "value": "Coming Soon..."
     }
   ],
   "hJpqIn": [
@@ -665,6 +719,12 @@
     {
       "type": 0,
       "value": "Set Password"
+    }
+  ],
+  "jDzDCp": [
+    {
+      "type": 0,
+      "value": "Leaderboard"
     }
   ],
   "jZhy7I": [
@@ -721,6 +781,12 @@
       "value": "rank"
     }
   ],
+  "n6bCYe": [
+    {
+      "type": 0,
+      "value": "Get the rare collectibles with your coins now"
+    }
+  ],
   "nT6Ql7": [
     {
       "type": 1,
@@ -733,22 +799,28 @@
       "value": "View more"
     }
   ],
+  "o2jxWd": [
+    {
+      "type": 0,
+      "value": "Account Settings"
+    }
+  ],
   "oJe49d": [
     {
       "type": 0,
       "value": "All Challenges"
     }
   ],
-  "of2vJ9": [
-    {
-      "type": 0,
-      "value": "This is Video page"
-    }
-  ],
   "ox9lTM": [
     {
       "type": 0,
       "value": "Go to Profile"
+    }
+  ],
+  "pEiO08": [
+    {
+      "type": 0,
+      "value": "Account Settings"
     }
   ],
   "pwy4hs": [
@@ -781,6 +853,12 @@
       "value": "completed"
     }
   ],
+  "sNqwYF": [
+    {
+      "type": 0,
+      "value": "Logout"
+    }
+  ],
   "swkU6w": [
     {
       "type": 0,
@@ -805,6 +883,18 @@
       "value": "Show Leaderboard"
     }
   ],
+  "vY562d": [
+    {
+      "type": 0,
+      "value": "Try the new in-built IDE"
+    }
+  ],
+  "wrdAU0": [
+    {
+      "type": 0,
+      "value": "Help"
+    }
+  ],
   "x8lXTv": [
     {
       "type": 0,
@@ -823,10 +913,28 @@
       "value": "Videos"
     }
   ],
+  "yujxGL": [
+    {
+      "type": 0,
+      "value": "Your Collections and Perks"
+    }
+  ],
   "z9lFwl": [
     {
       "type": 0,
       "value": "Name"
+    }
+  ],
+  "zMmp/q": [
+    {
+      "type": 0,
+      "value": "Practise... or play with the new code editor"
+    }
+  ],
+  "zROcjU": [
+    {
+      "type": 0,
+      "value": "Coming soon"
     }
   ]
 }

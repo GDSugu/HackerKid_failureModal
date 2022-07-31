@@ -1,0 +1,32 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+
+@import './_collectibleTheme.js';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+.collectibles-container {
+  background-color: gt.theme-var(collectibles-body-bg, null, $thememaplight, $cssvars);
+
+  nav {
+    background-color: gt.theme-var(collectibles-nav-bg, null, $thememaplight, $cssvars);
+
+    .navigation-container {
+      .navigation-item {
+        &.active {
+          background-color: gt.theme-var(collectibles-nav-active-bg, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+  }
+
+  .account-nav {
+    .account-nav-container {
+      .account-nav-item-container {
+        .account-nav-item {
+          padding: 0.75rem;
+        }
+      }
+    }
+  }
+}

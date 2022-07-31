@@ -1,4 +1,12 @@
 {
+  "+AycvP": {
+    "defaultMessage": "Email",
+    "description": "Email Button Title"
+  },
+  "+g4yFF": {
+    "defaultMessage": "Logout",
+    "description": "more menu button"
+  },
   "/EsQT0": {
     "defaultMessage": "This is games page",
     "description": "Games Page"
@@ -15,6 +23,10 @@
     "defaultMessage": "Coins Earned:",
     "description": "coins earned"
   },
+  "/r/CdV": {
+    "defaultMessage": "help@hackerkid.org",
+    "description": "Email Button Text"
+  },
   "/x0h9E": {
     "defaultMessage": "Login with Phone",
     "description": "login with phone tab"
@@ -26,6 +38,10 @@
   "0Sgdtj": {
     "defaultMessage": "Game Progress",
     "description": "game progress heading"
+  },
+  "13ETG6": {
+    "defaultMessage": "Help",
+    "description": "more menu button"
   },
   "1FjMUC": {
     "defaultMessage": "Forgot Password?",
@@ -50,6 +66,10 @@
     "defaultMessage": "Create a New Account",
     "description": "create a new account button"
   },
+  "2qExk8": {
+    "defaultMessage": "Get the rare collectibles with your coins now",
+    "description": "More card Title"
+  },
   "2ua1yZ": {
     "defaultMessage": "rank",
     "description": "rank"
@@ -58,13 +78,13 @@
     "defaultMessage": "Login with Phone",
     "description": "Login with Phone tab"
   },
-  "383EZ1": {
-    "defaultMessage": "This is more options page",
-    "description": "More options Page"
-  },
   "3Wcqsy": {
     "defaultMessage": "Next",
     "description": "Next button"
+  },
+  "3lLFC/": {
+    "defaultMessage": "{label}",
+    "description": "{description}"
   },
   "4Ve1r3": {
     "defaultMessage": "Ok",
@@ -186,6 +206,10 @@
     "defaultMessage": "Home",
     "description": "home heading"
   },
+  "FYwxn7": {
+    "defaultMessage": "This is Video page",
+    "description": "More options Page"
+  },
   "FhTUgw": {
     "defaultMessage": "Not {phone} ?",
     "description": "not button"
@@ -217,6 +241,18 @@
     "defaultMessage": "All Challenges",
     "description": "all challenges"
   },
+  "ILnphX": {
+    "defaultMessage": "Call",
+    "description": "Call Button Title"
+  },
+  "IV0q/o": {
+    "defaultMessage": "Help",
+    "description": "Help modal title"
+  },
+  "Ib1cTy": {
+    "defaultMessage": "9876543221",
+    "description": "Call Button Text"
+  },
   "IgwSoy": {
     "defaultMessage": "Previous",
     "description": "previous page button"
@@ -245,9 +281,17 @@
     "defaultMessage": "Forgot Password?",
     "description": "Forgot password link"
   },
+  "NeSPuI": {
+    "defaultMessage": "Try the new in-built IDE",
+    "description": "More card Title"
+  },
   "Nn5oAD": {
     "defaultMessage": "Go to login",
     "description": "Go to login button"
+  },
+  "O1sXEv": {
+    "defaultMessage": "Collections",
+    "description": "collectibles modal title"
   },
   "OdODwS": {
     "defaultMessage": "Create Account",
@@ -260,18 +304,6 @@
   "PMX+8G": {
     "defaultMessage": "{coins}",
     "description": "coins"
-  },
-  "PSx95N": {
-    "defaultMessage": "Home",
-    "description": "Home card heading"
-  },
-  "Qvy78L": {
-    "defaultMessage": "Profile",
-    "description": "profile heading"
-  },
-  "OvWf0W": {
-    "defaultMessage": "Class",
-    "description": "class nav text"
   },
   "PSx95N": {
     "defaultMessage": "Home",
@@ -320,6 +352,14 @@
   "UUCx/J": {
     "defaultMessage": "Edit",
     "description": "edit profile"
+  },
+  "VdAhqD": {
+    "defaultMessage": "Coming Soon",
+    "description": "collectibles header"
+  },
+  "VoYGmQ": {
+    "defaultMessage": "Practise... or play with the new code editor",
+    "description": "More card Subtitle"
   },
   "VsWMVt": {
     "defaultMessage": "Re-type password",
@@ -408,10 +448,6 @@
     "defaultMessage": "Login Into Existing Account",
     "description": "Login Into existing account button"
   },
-  "gHMD5/": {
-    "defaultMessage": "{modalTitle}",
-    "description": "modal title"
-  },
   "gOkIvb": {
     "defaultMessage": "Name",
     "description": "Name label"
@@ -419,6 +455,10 @@
   "h7B/gA": {
     "defaultMessage": "store authtoken",
     "description": "authtoken temp storage btn"
+  },
+  "hEqp4d": {
+    "defaultMessage": "Coming Soon...",
+    "description": "more card button"
   },
   "hJpqIn": {
     "defaultMessage": "Send OTP",
@@ -431,6 +471,10 @@
   "hxLhGK": {
     "defaultMessage": "Set Password",
     "description": "Password Label"
+  },
+  "jDzDCp": {
+    "defaultMessage": "Leaderboard",
+    "description": "Leaderboard page title"
   },
   "jZhy7I": {
     "defaultMessage": "Forgot Password",
@@ -468,6 +512,10 @@
     "defaultMessage": "rank",
     "description": "sheet card subtitle"
   },
+  "n6bCYe": {
+    "defaultMessage": "Get the rare collectibles with your coins now",
+    "description": "more card title"
+  },
   "nT6Ql7": {
     "defaultMessage": "{text}",
     "description": "help type text"
@@ -476,17 +524,21 @@
     "defaultMessage": "View more",
     "description": "View More Bottomsheet Btn"
   },
+  "o2jxWd": {
+    "defaultMessage": "Account Settings",
+    "description": "more menu button"
+  },
   "oJe49d": {
     "defaultMessage": "All Challenges",
     "description": "Challenges card menu"
   },
-  "of2vJ9": {
-    "defaultMessage": "This is Video page",
-    "description": "Videos Page"
-  },
   "ox9lTM": {
     "defaultMessage": "Go to Profile",
     "description": "Link description"
+  },
+  "pEiO08": {
+    "defaultMessage": "Account Settings",
+    "description": "account settings CTA"
   },
   "pwy4hs": {
     "defaultMessage": "Game Progress",
@@ -507,6 +559,10 @@
     "defaultMessage": "completed",
     "description": "Game Progress card caption"
   },
+  "sNqwYF": {
+    "defaultMessage": "Logout",
+    "description": "Logout Button"
+  },
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
@@ -523,6 +579,14 @@
     "defaultMessage": "Show Leaderboard",
     "description": "Leaderboard show button"
   },
+  "vY562d": {
+    "defaultMessage": "Try the new in-built IDE",
+    "description": "more card title"
+  },
+  "wrdAU0": {
+    "defaultMessage": "Help",
+    "description": "Help CTA"
+  },
   "x8lXTv": {
     "defaultMessage": "Resend",
     "description": "Resend otp button text"
@@ -535,8 +599,20 @@
     "defaultMessage": "Videos",
     "description": "videos nav text"
   },
+  "yujxGL": {
+    "defaultMessage": "Your Collections and Perks",
+    "description": "more menu button"
+  },
   "z9lFwl": {
     "defaultMessage": "Name",
     "description": "Profile name label"
+  },
+  "zMmp/q": {
+    "defaultMessage": "Practise... or play with the new code editor",
+    "description": "more card subtitle"
+  },
+  "zROcjU": {
+    "defaultMessage": "Coming soon",
+    "description": "More card button text"
   }
 }

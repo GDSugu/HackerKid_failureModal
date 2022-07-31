@@ -33,6 +33,9 @@ const getStyles = (theme, utilColors) => StyleSheet.create({
   disposableIconBtn: {
     backgroundColor: utilColors.disposableIconBg,
     color: utilColors.white,
+    borderRadius: 8,
+    padding: 4,
+    paddingHorizontal: 6,
   },
 });
 
@@ -108,7 +111,7 @@ const Header = ({ route, navigation }) => {
           >
             <View>
               <Icon
-                name='history'
+                name='close'
                 type='FontAwesome'
                 size={24}
                 color={theme.utilColors.white}

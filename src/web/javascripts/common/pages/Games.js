@@ -1,9 +1,13 @@
 import React from 'react';
 import '../../../stylesheets/common/pages/games/style.scss';
-import { pageInit } from '../framework';
+import { loginCheck, pageInit } from '../framework';
 
 const Games = () => {
   pageInit('games-container', 'Games');
+
+  React.useEffect(() => {
+    loginCheck();
+  }, []);
 
   return <>
   <div>

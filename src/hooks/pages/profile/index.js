@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import post, { s3Upload } from '../../common/framework';
 import API from '../../../../env';
+import { AuthContext } from '../root';
 
-const useProfileInfo = (action = 'getBasicInfo') => {
+const useProfileInfo = ({
+  action = 'getBasicInfo', isPageMounted, uniqueurl,
+}) => {
   const [profileInfo, setProfileInfo] = useState({
     status: true,
     name: false,
@@ -13,6 +16,118 @@ const useProfileInfo = (action = 'getBasicInfo') => {
     grade: false,
     school: false,
   });
+
+  const authContext = useContext(AuthContext);
+
+  const setState = (args) => {
+    setProfileInfo((prevState) => ({
+      ...prevState,
+      ...args,
+    }));
+    authContext.setAuthState({
+      appData: {
+        profileInfoHook: {
+          ...profileInfo,
+          ...args,
+        },
+      },
+    });
+  };
+
+  const getProfileInfo = ({ cached = true }) => {
+    if (cached && authContext.appData.profileInfoHook) {
+      const { profileInfoHook } = authContext.appData;
+      setProfileInfo({
+        ...profileInfoHook,
+        status: 'success',
+      });
+    } else {
+      post({
+        type: 'getBasicInfo',
+        s3Prefix: API.S3PREFIX,
+      }, 'profile/')
+        .then((response) => {
+          if (isPageMounted.current) {
+            if (response === 'access_denied') {
+              setProfileInfo((prevState) => ({
+                status: 'access_denied',
+                ...prevState,
+                response,
+              }));
+            } else {
+              const parsedResponse = JSON.parse(response);
+              if (parsedResponse.status === 'success') {
+                const { userInfo } = parsedResponse;
+                setProfileInfo(() => ({
+                  ...userInfo,
+                  status: 'success',
+                }));
+                authContext.setAuthState({
+                  appData: {
+                    profileInfoHook: {
+                      ...userInfo,
+                      status: 'success',
+                    },
+                  },
+                });
+              } else {
+                setProfileInfo((prevState) => ({
+                  ...prevState,
+                  status: 'error',
+                  response: parsedResponse,
+                }));
+              }
+            }
+          }
+        });
+    }
+  };
+
+  const getProfileData = ({ cached = true }) => {
+    if (uniqueurl) {
+      if (cached && authContext.appData.profileDataHook) {
+        const { profileDataHook } = authContext.appData;
+        setProfileInfo({
+          ...profileDataHook,
+        });
+      } else {
+        post({
+          type: 'getProfileData',
+          s3Prefix: API.S3PREFIX,
+          uniqueUrl: uniqueurl,
+        }, 'profile/')
+          .then((response) => {
+            if (isPageMounted.current) {
+              if (response === 'access_denied') {
+                setProfileInfo((prevState) => ({
+                  status: 'access_denied',
+                  ...prevState,
+                  response,
+                }));
+              } else {
+                const parsedResponse = JSON.parse(response);
+                if (parsedResponse.status === 'success') {
+                  setProfileInfo(parsedResponse);
+                  authContext.setAuthState({
+                    appData: {
+                      profileDataHook: {
+                        parsedResponse,
+                      },
+                    },
+                  });
+                } else {
+                  setProfileInfo((prevState) => ({
+                    ...prevState,
+                    status: 'error',
+                    response: parsedResponse,
+                  }));
+                }
+              }
+            }
+          });
+      }
+    }
+  };
 
   const saveProfile = () => {
     let result = false;
@@ -35,40 +150,47 @@ const useProfileInfo = (action = 'getBasicInfo') => {
       };
       result = post(payload, 'profile/', false, false)
         .then((res) => {
-          if (res === 'access_denied') {
-            setProfileInfo((prevState) => ({
-              ...prevState,
-              status: 'access_denied',
-            }));
-          } else if (profileImage && typeof profileImage !== 'object') {
-            setProfileInfo((prevState) => ({
-              ...prevState,
-              status: 'success',
-            }));
+          if (isPageMounted.current) {
+            if (res === 'access_denied') {
+              setProfileInfo((prevState) => ({
+                ...prevState,
+                status: 'access_denied',
+              }));
+            } else if (profileImage && typeof profileImage !== 'object') {
+              setProfileInfo((prevState) => ({
+                ...prevState,
+                status: 'success',
+              }));
+            }
           }
         })
         .then(() => {
           let signedReq = false;
-          if (profileImage && typeof profileImage === 'object') {
-            const signedRequestPayload = {
-              type: 'profileSignedURL',
-              fileName: profileImageName || `${uniqueUrl}_profile.png`,
-              s3Prefix: API.S3PREFIX,
-            };
-            signedReq = post(signedRequestPayload, 'profile/', false, false);
+          if (isPageMounted.current) {
+            if (profileImage && typeof profileImage === 'object') {
+              const signedRequestPayload = {
+                type: 'profileSignedURL',
+                fileName: profileImageName || `${uniqueUrl}_profile.png`,
+                s3Prefix: API.S3PREFIX,
+              };
+              signedReq = post(signedRequestPayload, 'profile/', false, false);
+            }
           }
           return signedReq;
         })
         .then((signedResponse) => {
-          const parsedResponse = JSON.parse(signedResponse);
           let uploadReq = false;
-          if (parsedResponse.status === 'success') {
-            uploadReq = s3Upload(profileImage, parsedResponse.signedURL, profileImage.type);
-            setProfileInfo((prevState) => ({
-              ...prevState,
-              status: 'success',
-            }));
+          if (isPageMounted.current) {
+            const parsedResponse = JSON.parse(signedResponse);
+            if (parsedResponse.status === 'success') {
+              uploadReq = s3Upload(profileImage, parsedResponse.signedURL, profileImage.type);
+              setProfileInfo((prevState) => ({
+                ...prevState,
+                status: 'success',
+              }));
+            }
           }
+          getProfileInfo({ cached: false });
           return uploadReq;
         })
         .catch((err) => {
@@ -82,41 +204,18 @@ const useProfileInfo = (action = 'getBasicInfo') => {
 
   const result = {
     state: profileInfo,
-    setState: setProfileInfo,
+    setState,
     saveProfile,
   };
 
   useEffect(() => {
     switch (action) {
       case 'getBasicInfo': {
-        post({
-          type: 'getBasicInfo',
-          s3Prefix: API.S3PREFIX,
-        }, 'profile/')
-          .then((response) => {
-            if (response === 'access_denied') {
-              setProfileInfo((prevState) => ({
-                status: 'access_denied',
-                ...prevState,
-                response,
-              }));
-            } else {
-              const parsedResponse = JSON.parse(response);
-              if (parsedResponse.status === 'success') {
-                const { userInfo } = parsedResponse;
-                setProfileInfo(() => ({
-                  ...userInfo,
-                  status: 'success',
-                }));
-              } else {
-                setProfileInfo((prevState) => ({
-                  ...prevState,
-                  status: 'error',
-                  response: parsedResponse,
-                }));
-              }
-            }
-          });
+        getProfileInfo({});
+        break;
+      }
+      case 'getProfileData': {
+        getProfileData({});
         break;
       }
       default: break;

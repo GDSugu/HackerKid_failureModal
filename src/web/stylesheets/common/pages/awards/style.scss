@@ -1,0 +1,32 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+
+@import './_awardsTheme.js';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+.awards-container {
+  background-color: gt.theme-var(awards-body-bg, null, $thememaplight, $cssvars);
+
+  nav {
+    background-color: gt.theme-var(awards-nav-bg, null, $thememaplight, $cssvars);
+
+    .navigation-container {
+      .navigation-item {
+        &.active {
+          background-color: gt.theme-var(awards-nav-active-bg, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+  }
+
+  .account-nav {
+    .account-nav-container {
+      .account-nav-item-container {
+        .account-nav-item {
+          padding: 0.75rem;
+        }
+      }
+    }
+  }
+}

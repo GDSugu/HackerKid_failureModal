@@ -69,8 +69,11 @@ const validateField = (key, target) => {
 const Profile = () => {
   pageInit('profile-container', 'Profile - Settings');
 
-  const { state, setState, saveProfile } = useProfileInfo();
+  const isPageMounted = React.useRef(true);
+  const { state, setState, saveProfile } = useProfileInfo({ isPageMounted });
   const [showUpdatedModal, setShowUpdatedModal] = useState(false);
+
+  const modalVisible = state.status === 'error' || state.status === 'access_denied' || state.response === 'access_denied';
 
   const {
     about,
@@ -87,7 +90,7 @@ const Profile = () => {
       $(`#${key}~small`).html('');
       $(`#${key}`).removeClass('is-invalid');
     }
-    setState((prevState) => ({ ...prevState, [key]: value }));
+    setState({ [key]: value });
   };
 
   const handleSubmission = () => {
@@ -116,11 +119,10 @@ const Profile = () => {
         $('.profile-img-box small').html('Image format should be one of JPG or PNG with size less than 2MB');
         throw new Error('FIELDS_CHECK_FAILED');
       }
-      setState((prevState) => ({
-        ...prevState,
+      setState({
         profileImage: profileImg,
         profileImageName: profileImg.name,
-      }));
+      });
     } catch (error) {
       console.error(error);
     }
@@ -131,6 +133,10 @@ const Profile = () => {
       window.history.replaceState({}, '', `/profile/edit/${uniqueUrl}`);
     }
   }, [uniqueUrl]);
+
+  useEffect(() => () => {
+    isPageMounted.current = false;
+  }, []);
 
   return <>
     <div className="profile-cntnr col-md-6 col-lg-5 col-xxl-4 mx-auto">
@@ -257,9 +263,10 @@ const Profile = () => {
         </div>
       </div>
     </div>
-    { (state.status === 'error' || state.status === 'access_denied')
-      && <Modal
+    { modalVisible
+     && <Modal
       customClass={'curved'}
+      modalVisible={modalVisible}
       options={{
         keyboard: false,
         backdrop: 'static',
@@ -282,7 +289,7 @@ const Profile = () => {
       </button>
     </Modal>
     }
-    { showUpdatedModal && <Modal customClass={'curved'} >
+    { showUpdatedModal && <Modal customClass={'curved profileSuccessModal'} modalVisible={showUpdatedModal} onHidden={() => setShowUpdatedModal(false)}>
       <div className="container">
         <p className='text-center my-5'>
           <FormattedMessage
@@ -292,7 +299,9 @@ const Profile = () => {
         </p>
       </div>
       <button
-        className='btn btn-block btn-primary'>
+        className='btn btn-block btn-primary'
+        onClick={() => $('.profileSuccessModal').modal('hide')}
+        >
         <FormattedMessage
           defaultMessage='Ok'
           description='confirm btn'

@@ -16,6 +16,7 @@ import ThemeContext from '../components/theme';
 import { useProfileInfo } from '../../hooks/pages/profile';
 import defaultUser from '../../images/profile/default_user.png';
 import profileEdit from '../../images/profile/profile-edit.png';
+import { AuthContext } from '../../hooks/pages/root';
 
 const getStyles = (theme, utils, font) => StyleSheet.create({
   container: {
@@ -148,9 +149,12 @@ const EditProfile = ({ navigation }) => {
     parentEmail: false,
     parentPhone: false,
   });
-  const [hasEdited, setHasEdited] = useState(false);
+  const hasEdited = React.useRef(false);
+  const isPageMounted = React.useRef(true);
 
-  const { saveProfile, state, setState } = useProfileInfo();
+  const authContext = React.useContext(AuthContext);
+
+  const { saveProfile, state, setState } = useProfileInfo({ isPageMounted });
 
   if (!state.status) {
     Alert.alert('Error', 'Profile not found', [{ text: 'Go to Home', onPress: () => navigation.navigate('Home') }]);
@@ -194,11 +198,10 @@ const EditProfile = ({ navigation }) => {
             }
             const resp = await fetch(uriPath);
             const blob = await resp.blob();
-            setState((prevState) => ({
-              ...prevState,
+            setState({
               profileImage: blob,
-            }));
-            setHasEdited(true);
+            });
+            hasEdited.current = true;
           }
         }
       });
@@ -231,23 +234,27 @@ const EditProfile = ({ navigation }) => {
         [key]: validatedResponse.error,
       }));
     }
-    setState((prevState) => ({
-      ...prevState,
+    setState({
       [key]: value,
-    }));
-    setHasEdited(true);
+    });
+    hasEdited.current = true;
   };
 
   const handleSubmission = () => {
     const validated = Object.entries(errorMessage).filter(([key, value]) => key !== 'profileImg' && value !== false).length;
     if (!validated) {
-      setHasEdited(false);
+      hasEdited.current = false;
       saveProfile()
         .then(() => {
           if (status === 'access_denied') {
             Alert.alert('Error', 'Access denied. Please try again', [{ text: 'Go Back', onPress: () => navigation.goBack() }]);
           } else {
             Alert.alert('Success', 'Profile updated successfully', [{ text: 'OK', onPress: () => {} }]);
+            authContext.setAuthState({
+              appData: {
+                isRefresh: true,
+              },
+            });
           }
         });
     }
@@ -255,13 +262,18 @@ const EditProfile = ({ navigation }) => {
 
   useEffect(() => {
     navigation.addListener('beforeRemove', (e) => {
-      if (!hasEdited) return;
-      e.preventDefault();
-      Alert.alert('Warning', 'You have unsaved changes. Are you sure you want to leave?', [
-        { text: 'Cancel', style: 'cancel', onPress: () => {} },
-        { text: 'Leave', style: 'destructive', onPress: () => navigation.dispatch(e.data.action) },
-      ]);
+      if (hasEdited.current) {
+        e.preventDefault();
+        Alert.alert('Warning', 'You have unsaved changes. Are you sure you want to leave?', [
+          { text: 'Cancel', style: 'cancel', onPress: () => {} },
+          { text: 'Leave', style: 'destructive', onPress: () => navigation.dispatch(e.data.action) },
+        ]);
+      }
     });
+
+    return () => {
+      isPageMounted.current = false;
+    };
   }, [navigation, hasEdited]);
 
   useEffect(() => {
@@ -270,6 +282,10 @@ const EditProfile = ({ navigation }) => {
         uri: profileImage,
       });
     }
+
+    // return () => {
+    //   isPageMounted.current = false;
+    // };
   }, Object.keys(state).filter((key) => key !== 'profileImage' && key !== 'profileImageName' && key !== 'response'));
 
   return <>

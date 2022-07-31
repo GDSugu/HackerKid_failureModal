@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { FormattedMessage } from 'react-intl';
 import {
   Link,
   useLocation,
@@ -8,7 +7,7 @@ import {
 } from 'react-router-dom';
 import '../../../../stylesheets/common/sass/components/_accountNavBar.scss';
 
-const AccountNavBar = () => {
+const AccountNavBar = ({ backNavigationUrl = '/dashboard', NavItems = () => <></> }) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   let routes = pathname.split('/').filter((a) => a !== '');
@@ -23,28 +22,13 @@ const AccountNavBar = () => {
   return <>
     <div className='account-nav'>
       <div className="account-nav-container shadow-sm">
-          <div className="navigation-icon">
-            <Link to='/dashboard'>
-              <i className="fa fa-arrow-left" aria-hidden="true"></i>
-            </Link>
-          </div>
+        <div className="navigation-icon">
+          <Link to={backNavigationUrl}>
+            <i className="fa fa-arrow-left" aria-hidden="true"></i>
+          </Link>
+        </div>
         <div className="account-nav-item-container">
-          <div className={`account-nav-item ${screen === 'edit' ? 'active' : ''}`}>
-            <Link to='edit'>
-              <FormattedMessage
-                defaultMessage='Profile Settings'
-                description='Navigation link to profile edit page'
-              />
-            </Link>
-          </div>
-          {/* <div className={`account-nav-item ${screen === 'subscription' ? 'active' : ''}`}>
-            <Link to='subscription'>
-              <FormattedMessage
-                defaultMessage='Subscription'
-                description='Navigation link to subscription page'
-              />
-            </Link>
-          </div> */}
+          {NavItems(screen)}
         </div>
       </div>
     </div>

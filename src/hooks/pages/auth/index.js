@@ -1,0 +1,86 @@
+import React, { useState } from 'react';
+import post, { logout } from '../../common/framework';
+import getPlatform from '../../common/utlis';
+import { AuthContext } from '../root';
+
+const useLoginMethod = () => {
+  const [stateObj, setState] = useState({
+    loginMethod: 'loginWithPhone',
+    phoneNumber: '',
+    email: '',
+    password: '',
+  });
+
+  const authContext = React.useContext(AuthContext);
+
+  const loginWithPhone = (countryCode) => {
+    const useEmail = stateObj.loginMethod === 'loginWithEmail';
+    const email = (stateObj.loginMethod === 'loginWithEmail') ? stateObj.email : false;
+
+    const device = getPlatform();
+    // const neoeyed = getneoEyed(phone);
+
+    // const result = post({
+    //   type: 'usercheckPhone',
+    //   phone: stateObj.phoneNumber,
+    //   password: stateObj.password,
+    //   device,
+    //   countryCode,
+    //   email,
+    //   useEmail,
+    // }, 'login/');
+
+    // return result;
+    return post({
+      type: 'usercheckPhone',
+      phone: stateObj.phoneNumber,
+      password: stateObj.password,
+      device,
+      countryCode,
+      email,
+      useEmail,
+    }, 'login/')
+      .then((response) => {
+        const data = JSON.parse(response);
+        if (data.status === 'success') {
+          authContext.setAuthState({
+            isLoggedIn: true,
+            sessionData: data,
+          });
+        }
+        return response;
+      });
+  };
+
+  return {
+    stateObj,
+    setState,
+    loginWithPhone,
+  };
+};
+
+const useLogout = () => {
+  const authContext = React.useContext(AuthContext);
+
+  const logoutHandler = () => {
+    logout()
+      .then((res) => {
+        if (res) {
+          const device = getPlatform();
+          if (device === 'app') {
+            authContext.clearAuthState();
+          }
+        }
+      });
+  };
+
+  return {
+    logout: logoutHandler,
+  };
+};
+
+export default useLoginMethod;
+
+export {
+  useLogout,
+};
