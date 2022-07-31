@@ -4,7 +4,7 @@ import API from '../../../../env';
 import { AuthContext } from '../root';
 
 const useProfileInfo = ({
-  action = 'getBasicInfo', isPageMounted, uniqueurl, cached = true,
+  action = 'getBasicInfo', isPageMounted, uniqueurl,
 }) => {
   const [profileInfo, setProfileInfo] = useState({
     status: true,
@@ -19,11 +19,26 @@ const useProfileInfo = ({
 
   const authContext = useContext(AuthContext);
 
-  const getProfileInfo = (cache = cached) => {
-    if (cache && authContext.appData.profileInfoHook) {
+  const setState = (args) => {
+    setProfileInfo((prevState) => ({
+      ...prevState,
+      ...args,
+    }));
+    authContext.setAuthState({
+      appData: {
+        profileInfoHook: {
+          ...profileInfo,
+          ...args,
+        },
+      },
+    });
+  };
+
+  const getProfileInfo = ({ cached = true }) => {
+    if (cached && authContext.appData.profileInfoHook) {
       const { profileInfoHook } = authContext.appData;
       setProfileInfo({
-        ...profileInfoHook.userInfo,
+        ...profileInfoHook,
         status: 'success',
       });
     } else {
@@ -50,7 +65,8 @@ const useProfileInfo = ({
                 authContext.setAuthState({
                   appData: {
                     profileInfoHook: {
-                      ...parsedResponse,
+                      ...userInfo,
+                      status: 'success',
                     },
                   },
                 });
@@ -67,9 +83,9 @@ const useProfileInfo = ({
     }
   };
 
-  const getProfileData = (cache = cached) => {
+  const getProfileData = ({ cached = true }) => {
     if (uniqueurl) {
-      if (cache && authContext.appData.profileDataHook) {
+      if (cached && authContext.appData.profileDataHook) {
         const { profileDataHook } = authContext.appData;
         setProfileInfo({
           ...profileDataHook,
@@ -174,12 +190,12 @@ const useProfileInfo = ({
               }));
             }
           }
+          getProfileInfo({ cached: false });
           return uploadReq;
         })
         .catch((err) => {
           console.log(err);
         });
-      getProfileInfo(false);
     } catch (error) {
       console.error(error);
     }
@@ -188,18 +204,18 @@ const useProfileInfo = ({
 
   const result = {
     state: profileInfo,
-    setState: setProfileInfo,
+    setState,
     saveProfile,
   };
 
   useEffect(() => {
     switch (action) {
       case 'getBasicInfo': {
-        getProfileInfo();
+        getProfileInfo({});
         break;
       }
       case 'getProfileData': {
-        getProfileData();
+        getProfileData({});
         break;
       }
       default: break;

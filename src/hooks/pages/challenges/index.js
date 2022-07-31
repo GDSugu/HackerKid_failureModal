@@ -12,7 +12,22 @@ const useGetChallenges = ({ initializeData = true, isPageMounted }) => {
 
   const authContext = useContext(AuthContext);
 
-  const getChallenges = (filterObj = {}) => {
+  const setState = (args) => {
+    setChallenges((prevState) => ({
+      ...prevState,
+      ...args,
+    }));
+    authContext.setAuthState({
+      appData: {
+        getChallengesHook: {
+          ...challenges,
+          ...args,
+        },
+      },
+    });
+  };
+
+  const getChallenges = ({ filterObj = {}, cached = true }) => {
     const { page = 1, sort = 'popularity', search = '' } = filterObj;
     const payload = {
       type: 'getChallenges',
@@ -25,7 +40,7 @@ const useGetChallenges = ({ initializeData = true, isPageMounted }) => {
 
     let result;
 
-    if (authContext.appData.getChallengesHook) {
+    if (cached && authContext.appData.getChallengesHook) {
       result = new Promise((resolve) => {
         const { getChallengesHook } = authContext.appData;
         setChallenges(() => ({
@@ -70,13 +85,15 @@ const useGetChallenges = ({ initializeData = true, isPageMounted }) => {
   };
 
   useEffect(() => {
-    if (initializeData) getChallenges();
+    if (initializeData) getChallenges({});
   }, []);
 
   return {
     state: challenges,
-    setState: setChallenges,
-    getChallenges,
+    setState,
+    static: {
+      getChallenges,
+    },
   };
 };
 
@@ -89,7 +106,22 @@ const useTakeChallenge = ({ isPageMounted }) => {
 
   const authContext = useContext(AuthContext);
 
-  const fetchChallenge = (challengeId) => {
+  const setState = (args) => {
+    setTakeChallenge((prevState) => ({
+      ...prevState,
+      ...args,
+    }));
+    authContext.setAuthState({
+      appData: {
+        takeChallengeHook: {
+          ...takeChallenge,
+          ...args,
+        },
+      },
+    });
+  };
+
+  const fetchChallenge = ({ challengeId, cached = true }) => {
     const payload = {
       type: 'takeChallenge',
       s3Prefix: API.S3PREFIX,
@@ -98,7 +130,7 @@ const useTakeChallenge = ({ isPageMounted }) => {
 
     let result;
 
-    if (authContext.appData.takeChallengeHook) {
+    if (cached && authContext.appData.takeChallengeHook) {
       result = new Promise((resolve) => {
         const { takeChallengeHook } = authContext.appData;
         setTakeChallenge(() => ({
@@ -144,8 +176,10 @@ const useTakeChallenge = ({ isPageMounted }) => {
 
   return {
     state: takeChallenge,
-    setState: setTakeChallenge,
-    fetchChallenge,
+    setState,
+    static: {
+      fetchChallenge,
+    },
   };
 };
 

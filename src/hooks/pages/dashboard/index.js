@@ -14,15 +14,9 @@ const useDashboard = ({ dateString = new Date().toISOString(), isPageMounted }) 
 
   const authContext = useContext(AuthContext);
 
-  const result = {
-    state: dashboardData,
-    setState: setDashboardData,
-  };
-
-  useEffect(() => {
-    const queryDate = new Date(Date.parse(dateString));
-    const isoDate = queryDate.toISOString().substring(0, 10);
-    if (authContext.sessionData.authtoken) {
+  const getSessionData = ({ cached = true }) => {
+    let result;
+    if (cached && authContext.sessionData.authtoken) {
       const { sessionData } = authContext;
       setDashboardData((prevState) => ({
         ...prevState,
@@ -33,6 +27,9 @@ const useDashboard = ({ dateString = new Date().toISOString(), isPageMounted }) 
           rank: sessionData.rank,
         },
       }));
+      result = new Promise((resolve) => {
+        resolve(true);
+      });
     } else {
       const sessionPromises = [getSession('name'), getSession('pointsEarned'), getSession('profileLink'), getSession('rank')];
       Promise.all(sessionPromises).then((res) => {
@@ -47,16 +44,29 @@ const useDashboard = ({ dateString = new Date().toISOString(), isPageMounted }) 
             },
           }));
         }
+        result = new Promise((resolve) => {
+          resolve(true);
+        });
       });
     }
-    if (authContext.appData.dashBoardHook) {
+    return result;
+  };
+
+  const getDashboardData = ({ cached = true }) => {
+    const queryDate = new Date(Date.parse(dateString));
+    const isoDate = queryDate.toISOString().substring(0, 10);
+    let result;
+    if (cached && authContext.appData.dashBoardHook) {
       const { dashBoardHook } = authContext.appData;
       setDashboardData((prevState) => ({
         ...prevState,
         ...dashBoardHook,
       }));
+      result = new Promise((resolve) => {
+        resolve(true);
+      });
     } else {
-      post({ type: 'dashBoardData', date: isoDate, s3Prefix: API.S3PREFIX }, 'dashboard/')
+      result = post({ type: 'dashBoardData', date: isoDate, s3Prefix: API.S3PREFIX }, 'dashboard/')
         .then((res) => {
           if (isPageMounted.current) {
             if (res === 'access_denied') {
@@ -108,7 +118,22 @@ const useDashboard = ({ dateString = new Date().toISOString(), isPageMounted }) 
           }
         });
     }
+    return result;
+  };
+
+  useEffect(() => {
+    getSessionData({});
+    getDashboardData({});
   }, []);
+
+  const result = {
+    state: dashboardData,
+    setState: setDashboardData,
+    static: {
+      getSessionData,
+      getDashboardData,
+    },
+  };
 
   return result;
 };

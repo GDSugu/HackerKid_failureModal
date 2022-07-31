@@ -10,17 +10,19 @@ const AppWrapper = () => {
   const { state } = useRootPageState();
 
   return (
-    <AuthProvider>
-    {state.currentLocaleMessages
-      ? <IntlProvider
-          locale = {state.currentLocale}
-          defaultLocale = 'en'
-          messages = {state.currentLocaleMessages}
-      >
-        <App/>
-      </IntlProvider>
-      : <div>Loading....</div>}
-    </AuthProvider>
+    <React.StrictMode>
+      <AuthProvider>
+      {state.currentLocaleMessages
+        ? <IntlProvider
+            locale = {state.currentLocale}
+            defaultLocale = 'en'
+            messages = {state.currentLocaleMessages}
+        >
+          <App/>
+        </IntlProvider>
+        : <div>Loading....</div>}
+      </AuthProvider>
+    </React.StrictMode>
   );
 };
 

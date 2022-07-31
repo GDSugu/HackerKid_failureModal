@@ -17,7 +17,6 @@ import LoginFormSvg from '../../images/login/login-form-svg.svg';
 import useLoginMethod from '../../hooks/pages/auth';
 import getCommonStyles from '../components/commonStyles';
 import { setUserSession } from '../../hooks/common/framework';
-import { AuthContext } from '../../hooks/pages/root';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   ...getCommonStyles(theme, utilColors, font),
@@ -61,8 +60,6 @@ const Login = ({ navigation }) => {
     formErrorType: false,
   });
   const [hidePassword, setHidePassword] = useState(true);
-
-  const authContext = React.useContext(AuthContext);
 
   useEffect(() => {
     setError({ phoneNumber: false, email: false, password: false });

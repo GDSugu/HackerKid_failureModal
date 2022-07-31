@@ -119,16 +119,16 @@
       "value": "Login with Phone"
     }
   ],
-  "383EZ1": [
-    {
-      "type": 0,
-      "value": "This is more options page"
-    }
-  ],
   "3Wcqsy": [
     {
       "type": 0,
       "value": "Next"
+    }
+  ],
+  "3lLFC/": [
+    {
+      "type": 1,
+      "value": "label"
     }
   ],
   "4Ve1r3": [
@@ -159,12 +159,6 @@
     {
       "type": 0,
       "value": "Login"
-    }
-  ],
-  "6FPmdk": [
-    {
-      "type": 0,
-      "value": "Filter"
     }
   ],
   "6NWftj": [
@@ -395,6 +389,12 @@
     {
       "type": 0,
       "value": "9876543221"
+    }
+  ],
+  "IgwSoy": [
+    {
+      "type": 0,
+      "value": "Previous"
     }
   ],
   "In3suu": [
@@ -670,12 +670,6 @@
   "fOZCSk": [
     {
       "type": 0,
-      "value": "More friends = More fun"
-    }
-  ],
-  "flaX9K": [
-    {
-      "type": 0,
       "value": "Set a Password"
     }
   ],
@@ -689,12 +683,6 @@
     {
       "type": 0,
       "value": "Login Into Existing Account"
-    }
-  ],
-  "gHMD5/": [
-    {
-      "type": 1,
-      "value": "modalTitle"
     }
   ],
   "gOkIvb": [
@@ -731,6 +719,12 @@
     {
       "type": 0,
       "value": "Set Password"
+    }
+  ],
+  "jDzDCp": [
+    {
+      "type": 0,
+      "value": "Leaderboard"
     }
   ],
   "jZhy7I": [

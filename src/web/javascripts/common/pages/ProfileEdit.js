@@ -90,7 +90,7 @@ const Profile = () => {
       $(`#${key}~small`).html('');
       $(`#${key}`).removeClass('is-invalid');
     }
-    setState((prevState) => ({ ...prevState, [key]: value }));
+    setState({ [key]: value });
   };
 
   const handleSubmission = () => {
@@ -119,11 +119,10 @@ const Profile = () => {
         $('.profile-img-box small').html('Image format should be one of JPG or PNG with size less than 2MB');
         throw new Error('FIELDS_CHECK_FAILED');
       }
-      setState((prevState) => ({
-        ...prevState,
+      setState({
         profileImage: profileImg,
         profileImageName: profileImg.name,
-      }));
+      });
     } catch (error) {
       console.error(error);
     }
@@ -133,10 +132,11 @@ const Profile = () => {
     if (uniqueUrl) {
       window.history.replaceState({}, '', `/profile/edit/${uniqueUrl}`);
     }
-    return () => {
-      isPageMounted.current = false;
-    };
   }, [uniqueUrl]);
+
+  useEffect(() => () => {
+    isPageMounted.current = false;
+  }, []);
 
   return <>
     <div className="profile-cntnr col-md-6 col-lg-5 col-xxl-4 mx-auto">
@@ -289,7 +289,7 @@ const Profile = () => {
       </button>
     </Modal>
     }
-    { showUpdatedModal && <Modal customClass={'curved'} modalVisible={showUpdatedModal} onHidden={() => setShowUpdatedModal(false)}>
+    { showUpdatedModal && <Modal customClass={'curved profileSuccessModal'} modalVisible={showUpdatedModal} onHidden={() => setShowUpdatedModal(false)}>
       <div className="container">
         <p className='text-center my-5'>
           <FormattedMessage
@@ -299,7 +299,9 @@ const Profile = () => {
         </p>
       </div>
       <button
-        className='btn btn-block btn-primary'>
+        className='btn btn-block btn-primary'
+        onClick={() => $('.profileSuccessModal').modal('hide')}
+        >
         <FormattedMessage
           defaultMessage='Ok'
           description='confirm btn'

@@ -106,10 +106,6 @@
     "defaultMessage": "Login",
     "description": "Login Button"
   },
-  "6FPmdk": {
-    "defaultMessage": "Filter",
-    "description": "Filter button"
-  },
   "6NWftj": {
     "defaultMessage": "Challenges",
     "description": "Challenges card heading"
@@ -257,6 +253,10 @@
     "defaultMessage": "9876543221",
     "description": "Call Button Text"
   },
+  "IgwSoy": {
+    "defaultMessage": "Previous",
+    "description": "previous page button"
+  },
   "In3suu": {
     "defaultMessage": "{errorMessage}",
     "description": "error text"
@@ -304,18 +304,6 @@
   "PMX+8G": {
     "defaultMessage": "{coins}",
     "description": "coins"
-  },
-  "PSx95N": {
-    "defaultMessage": "Home",
-    "description": "Home card heading"
-  },
-  "Qvy78L": {
-    "defaultMessage": "Profile",
-    "description": "profile heading"
-  },
-  "OvWf0W": {
-    "defaultMessage": "Class",
-    "description": "class nav text"
   },
   "PSx95N": {
     "defaultMessage": "Home",
@@ -380,6 +368,10 @@
   "VthZQE": {
     "defaultMessage": "Create a New Account",
     "description": "Create Account Heading"
+  },
+  "VyTY/V": {
+    "defaultMessage": "{coins}",
+    "description": "Coins"
   },
   "W5zEev": {
     "defaultMessage": "Resend",
@@ -456,10 +448,6 @@
     "defaultMessage": "Login Into Existing Account",
     "description": "Login Into existing account button"
   },
-  "gHMD5/": {
-    "defaultMessage": "{modalTitle}",
-    "description": "modal title"
-  },
   "gOkIvb": {
     "defaultMessage": "Name",
     "description": "Name label"
@@ -483,6 +471,10 @@
   "hxLhGK": {
     "defaultMessage": "Set Password",
     "description": "Password Label"
+  },
+  "jDzDCp": {
+    "defaultMessage": "Leaderboard",
+    "description": "Leaderboard page title"
   },
   "jZhy7I": {
     "defaultMessage": "Forgot Password",

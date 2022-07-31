@@ -31,9 +31,11 @@ const Login = () => {
     });
 
     loginCheck().then((response) => {
-      const data = JSON.parse(response);
-      if (data.status === 'success') {
-        pathNavigator('dashboard');
+      if (response !== 'access_denied') {
+        const data = JSON.parse(response);
+        if (data.status === 'success') {
+          pathNavigator('dashboard');
+        }
       }
     }).catch((err) => {
       console.log('err', err);

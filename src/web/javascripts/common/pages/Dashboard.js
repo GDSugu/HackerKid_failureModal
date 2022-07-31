@@ -17,121 +17,130 @@ const showBottomSheet = () => {
   });
 };
 
-const HeroContainer = ({ dashboardUserData, isDesktop, session }) => <>
-  <div className="hero-card">
-    <div className="hero-card-data col-6 col-sm-4">
-      <div className="hero-card-img"
-        style={(session.profileLink || dashboardUserData.profileImage)
-          ? { backgroundImage: `url(${session.profileLink ? session.profileLink : dashboardUserData.profileImage})` }
-          : {}
-      }></div>
-      { isDesktop
-        && <>
-            <div className="hero-card-data-content">
-              <div className="hero-data">
-                <Img src='common/hkcoin.png' />
-                <p className='mb-0'>{`${session.pointsEarned || '--'} coins`}</p>
+const HeroContainer = ({ dashboardUserData, isDesktop, session }) => {
+  let profileImg = '../../../../images/profile/default_user.png';
+  if (session && dashboardUserData) {
+    profileImg = (session.profileLink ? session.profileLink : dashboardUserData.profileImage)
+      .toString()
+      .replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`);
+  }
+
+  return <>
+    <div className="hero-card">
+      <div className="hero-card-data col-6 col-sm-4">
+        <div className="hero-card-img"
+          style={(session.profileLink || dashboardUserData.profileImage)
+            ? { backgroundImage: `url(${profileImg})` }
+            : {}
+        }></div>
+        { isDesktop
+          && <>
+              <div className="hero-card-data-content">
+                <div className="hero-data">
+                  <Img src='common/hkcoin.png' />
+                  <p className='mb-0'>{`${session.pointsEarned || '--'} coins`}</p>
+                </div>
+                {/* <div className="hero-data">
+                  <Img src='common/xp.png' />
+                  <p className='mb-0'>
+                    <FormattedMessage
+                      defaultMessage={`${12345 || '--'} XP`}
+                      description={'hk XP'}
+                    />
+                  </p>
+                </div> */}
               </div>
-              {/* <div className="hero-data">
-                <Img src='common/xp.png' />
-                <p className='mb-0'>
-                  <FormattedMessage
-                    defaultMessage={`${12345 || '--'} XP`}
-                    description={'hk XP'}
-                  />
-                </p>
-              </div> */}
-            </div>
-          </> }
-    </div>
-    <div className="hero-card-nav col-6 col-sm-8">
-      { isDesktop
-      && <>
-      <div className="hero-nav-container">
-        <Link to='/games' className='hero-nav-link nav-game-card col' >
-          <div className="hero-nav-card">
-            <div className="hero-nav-card-content">
-              <div className="hero-nav-icon">
-                <svg width="24" height="24" stroke="white" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9 15L6.032 17.968C5.70167 18.2983 5.28084 18.5232 4.8227 18.6143C4.36457 18.7054 3.88971 18.6586 3.45815 18.4799C3.0266 18.3011 2.65773 17.9984 2.39819 17.6101C2.13864 17.2217 2.00007 16.7651 2 16.298V15L3.357 8.216C3.53824 7.30922 4.02806 6.49325 4.74312 5.90691C5.45817 5.32058 6.35429 5.0001 7.279 5H16.721C17.6457 5.0001 18.5418 5.32058 19.2569 5.90691C19.9719 6.49325 20.4618 7.30922 20.643 8.216L22 15V16.297C21.9999 16.7641 21.8614 17.2207 21.6018 17.6091C21.3423 17.9974 20.9734 18.3001 20.5418 18.4789C20.1103 18.6576 19.6354 18.7044 19.1773 18.6133C18.7192 18.5222 18.2983 18.2973 17.968 17.967L15 15H9Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M9 5L10 7H14L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <div className="hero-nav-title">
-                <h3 className='mb-0'>
-                  <FormattedMessage
-                    defaultMessage={'Games'}
-                    description={'games nav text'}
-                  />
-                </h3>
-              </div>
-            </div>
-          </div>
-        </Link>
-        <Link to='/courses' className='hero-nav-link nav-course-card col' >
-          <div className="hero-nav-card">
-            <div className="hero-nav-card-content">
-              <div className="hero-nav-icon">
-                <svg width="24" height="24" viewBox="24 24 24 24" fill="none" stroke="white" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M41 26L36 31L31 26M28 31H44C45.1046 31 46 31.8954 46 33V44C46 45.1046 45.1046 46 44 46H28C26.8954 46 26 45.1046 26 44V33C26 31.8954 26.8954 31 28 31Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <div className="hero-nav-title">
-                <h3 className='mb-0'>
-                  <FormattedMessage
-                    defaultMessage={'Videos'}
-                    description={'videos nav text'}
-                  />
-                </h3>
-              </div>
-            </div>
-          </div>
-        </Link>
-        <Link to='/class' className='hero-nav-link nav-class-card col' >
-          <div className="hero-nav-card">
-            <div className="hero-nav-card-content">
-              <div className="hero-nav-icon">
-                <svg width="32" height="40" viewBox="0 0 32 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M26.5 0C27.2223 0 27.9375 0.142262 28.6048 0.418663C29.2721 0.695063 29.8784 1.10019 30.3891 1.61091C30.8998 2.12163 31.3049 2.72795 31.5813 3.39524C31.8577 4.06253 32 4.77773 32 5.5V34.5C32 35.2223 31.8577 35.9375 31.5813 36.6048C31.3049 37.272 30.8998 37.8784 30.3891 38.3891C29.8784 38.8998 29.2721 39.3049 28.6048 39.5813C27.9375 39.8577 27.2223 40 26.5 40H5.5C4.77756 40 4.0622 39.8577 3.39478 39.5811C2.72736 39.3046 2.12095 38.8993 1.61021 38.3884C1.09946 37.8774 0.694372 37.2709 0.418088 36.6034C0.141805 35.9359 -0.000262341 35.2204 3.63671e-07 34.498V5.5C3.63671e-07 2.98 1.692 0.86 4 0.206V3.5C3.392 3.956 3 4.68 3 5.5V34.496C3 35.876 4.12 36.996 5.5 36.996H26.5C27.88 36.996 29 35.876 29 34.496V5.5C29 4.12 27.88 3 26.5 3H22V0H26.5ZM20 0V16.278C20 17.772 18.4 18.332 17.42 17.806L17.256 17.702L13.004 15.132L8.848 17.634C7.848 18.354 6.188 17.914 6.014 16.518L6 16.28V0H20ZM17 3H9V14.046L12.146 12.148C12.3966 12.0148 12.6746 11.9411 12.9584 11.9328C13.2421 11.9245 13.524 11.9817 13.782 12.1L17.002 14.048V3H17Z" fill="white" />
-                </svg>
-              </div>
-              <div className="hero-nav-title">
-                <h3 className='mb-0'>
-                  <FormattedMessage
-                    defaultMessage={'Class'}
-                    description={'class nav text'}
-                  />
-                </h3>
-              </div>
-            </div>
-          </div>
-        </Link>
+            </> }
       </div>
-      </> }
-      { !isDesktop
-      && <>
-        <div className="hero-data-content">
-          <div className="hero-data">
-            <Img src='common/hkcoin.png' />
-            <p className='mb-0'>{`${session.pointsEarned || '--'} coins`}</p>
-          </div>
-          {/* <div className="hero-data">
-            <Img src='common/xp.png' />
-            <p className='mb-0'>
-              <FormattedMessage
-                defaultMessage={`${12345 || '--'} XP`}
-                description={'hk xp'}
-              />
-            </p>
-          </div> */}
-          <div className="dashboard-hero-sheet-btn">
-            <button className='btn btn-block sheet-btn disabled' onClick={showBottomSheet}>Loading...</button>
-          </div>
+      <div className="hero-card-nav col-6 col-sm-8">
+        { isDesktop
+        && <>
+        <div className="hero-nav-container">
+          <Link to='/games' className='hero-nav-link nav-game-card col' >
+            <div className="hero-nav-card">
+              <div className="hero-nav-card-content">
+                <div className="hero-nav-icon">
+                  <svg width="24" height="24" stroke="white" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 15L6.032 17.968C5.70167 18.2983 5.28084 18.5232 4.8227 18.6143C4.36457 18.7054 3.88971 18.6586 3.45815 18.4799C3.0266 18.3011 2.65773 17.9984 2.39819 17.6101C2.13864 17.2217 2.00007 16.7651 2 16.298V15L3.357 8.216C3.53824 7.30922 4.02806 6.49325 4.74312 5.90691C5.45817 5.32058 6.35429 5.0001 7.279 5H16.721C17.6457 5.0001 18.5418 5.32058 19.2569 5.90691C19.9719 6.49325 20.4618 7.30922 20.643 8.216L22 15V16.297C21.9999 16.7641 21.8614 17.2207 21.6018 17.6091C21.3423 17.9974 20.9734 18.3001 20.5418 18.4789C20.1103 18.6576 19.6354 18.7044 19.1773 18.6133C18.7192 18.5222 18.2983 18.2973 17.968 17.967L15 15H9Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M9 5L10 7H14L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <div className="hero-nav-title">
+                  <h3 className='mb-0'>
+                    <FormattedMessage
+                      defaultMessage={'Games'}
+                      description={'games nav text'}
+                    />
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </Link>
+          <Link to='/courses' className='hero-nav-link nav-course-card col' >
+            <div className="hero-nav-card">
+              <div className="hero-nav-card-content">
+                <div className="hero-nav-icon">
+                  <svg width="24" height="24" viewBox="24 24 24 24" fill="none" stroke="white" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M41 26L36 31L31 26M28 31H44C45.1046 31 46 31.8954 46 33V44C46 45.1046 45.1046 46 44 46H28C26.8954 46 26 45.1046 26 44V33C26 31.8954 26.8954 31 28 31Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <div className="hero-nav-title">
+                  <h3 className='mb-0'>
+                    <FormattedMessage
+                      defaultMessage={'Videos'}
+                      description={'videos nav text'}
+                    />
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </Link>
+          <Link to='/class' className='hero-nav-link nav-class-card col' >
+            <div className="hero-nav-card">
+              <div className="hero-nav-card-content">
+                <div className="hero-nav-icon">
+                  <svg width="32" height="40" viewBox="0 0 32 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M26.5 0C27.2223 0 27.9375 0.142262 28.6048 0.418663C29.2721 0.695063 29.8784 1.10019 30.3891 1.61091C30.8998 2.12163 31.3049 2.72795 31.5813 3.39524C31.8577 4.06253 32 4.77773 32 5.5V34.5C32 35.2223 31.8577 35.9375 31.5813 36.6048C31.3049 37.272 30.8998 37.8784 30.3891 38.3891C29.8784 38.8998 29.2721 39.3049 28.6048 39.5813C27.9375 39.8577 27.2223 40 26.5 40H5.5C4.77756 40 4.0622 39.8577 3.39478 39.5811C2.72736 39.3046 2.12095 38.8993 1.61021 38.3884C1.09946 37.8774 0.694372 37.2709 0.418088 36.6034C0.141805 35.9359 -0.000262341 35.2204 3.63671e-07 34.498V5.5C3.63671e-07 2.98 1.692 0.86 4 0.206V3.5C3.392 3.956 3 4.68 3 5.5V34.496C3 35.876 4.12 36.996 5.5 36.996H26.5C27.88 36.996 29 35.876 29 34.496V5.5C29 4.12 27.88 3 26.5 3H22V0H26.5ZM20 0V16.278C20 17.772 18.4 18.332 17.42 17.806L17.256 17.702L13.004 15.132L8.848 17.634C7.848 18.354 6.188 17.914 6.014 16.518L6 16.28V0H20ZM17 3H9V14.046L12.146 12.148C12.3966 12.0148 12.6746 11.9411 12.9584 11.9328C13.2421 11.9245 13.524 11.9817 13.782 12.1L17.002 14.048V3H17Z" fill="white" />
+                  </svg>
+                </div>
+                <div className="hero-nav-title">
+                  <h3 className='mb-0'>
+                    <FormattedMessage
+                      defaultMessage={'Class'}
+                      description={'class nav text'}
+                    />
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </Link>
         </div>
-      </> }
+        </> }
+        { !isDesktop
+        && <>
+          <div className="hero-data-content">
+            <div className="hero-data">
+              <Img src='common/hkcoin.png' />
+              <p className='mb-0'>{`${session.pointsEarned || '--'} coins`}</p>
+            </div>
+            {/* <div className="hero-data">
+              <Img src='common/xp.png' />
+              <p className='mb-0'>
+                <FormattedMessage
+                  defaultMessage={`${12345 || '--'} XP`}
+                  description={'hk xp'}
+                />
+              </p>
+            </div> */}
+            <div className="dashboard-hero-sheet-btn">
+              <button className='btn btn-block sheet-btn disabled' onClick={showBottomSheet}>Loading...</button>
+            </div>
+          </div>
+        </> }
+      </div>
     </div>
-  </div>
-</>;
+  </>;
+};
 
 const ProfileContainer = ({ dashboardUserData, isDesktop, session }) => <>
   <div className="dashboard-profile-container dashboard-body-block">

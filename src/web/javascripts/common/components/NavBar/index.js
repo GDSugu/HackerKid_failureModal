@@ -2,6 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link, useLocation, Outlet } from 'react-router-dom';
 import { useGetSession } from '../../../../../hooks/pages/root';
+import Img from '../Img';
 
 const NavItem = (props) => {
   const { icon, route, active } = props;
@@ -85,7 +86,7 @@ const NavBar = () => {
         </div>
         <div className="profileImg">
           <Link to='/profile'>
-            <img src={profileImg} alt="Hackerkid User"/>
+            <Img src={profileImg} alt="Hackerkid User"/>
           </Link>
         </div>
       </div>

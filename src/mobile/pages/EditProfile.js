@@ -16,6 +16,7 @@ import ThemeContext from '../components/theme';
 import { useProfileInfo } from '../../hooks/pages/profile';
 import defaultUser from '../../images/profile/default_user.png';
 import profileEdit from '../../images/profile/profile-edit.png';
+import { AuthContext } from '../../hooks/pages/root';
 
 const getStyles = (theme, utils, font) => StyleSheet.create({
   container: {
@@ -151,6 +152,8 @@ const EditProfile = ({ navigation }) => {
   const hasEdited = React.useRef(false);
   const isPageMounted = React.useRef(true);
 
+  const authContext = React.useContext(AuthContext);
+
   const { saveProfile, state, setState } = useProfileInfo({ isPageMounted });
 
   if (!state.status) {
@@ -195,10 +198,9 @@ const EditProfile = ({ navigation }) => {
             }
             const resp = await fetch(uriPath);
             const blob = await resp.blob();
-            setState((prevState) => ({
-              ...prevState,
+            setState({
               profileImage: blob,
-            }));
+            });
             hasEdited.current = true;
           }
         }
@@ -232,10 +234,9 @@ const EditProfile = ({ navigation }) => {
         [key]: validatedResponse.error,
       }));
     }
-    setState((prevState) => ({
-      ...prevState,
+    setState({
       [key]: value,
-    }));
+    });
     hasEdited.current = true;
   };
 
@@ -249,6 +250,11 @@ const EditProfile = ({ navigation }) => {
             Alert.alert('Error', 'Access denied. Please try again', [{ text: 'Go Back', onPress: () => navigation.goBack() }]);
           } else {
             Alert.alert('Success', 'Profile updated successfully', [{ text: 'OK', onPress: () => {} }]);
+            authContext.setAuthState({
+              appData: {
+                isRefresh: true,
+              },
+            });
           }
         });
     }
@@ -277,9 +283,9 @@ const EditProfile = ({ navigation }) => {
       });
     }
 
-    return () => {
-      isPageMounted.current = false;
-    };
+    // return () => {
+    //   isPageMounted.current = false;
+    // };
   }, Object.keys(state).filter((key) => key !== 'profileImage' && key !== 'profileImageName' && key !== 'response'));
 
   return <>

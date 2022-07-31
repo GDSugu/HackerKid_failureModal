@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import post from '../../common/framework';
 import API from '../../../../env';
+import { AuthContext } from '../root';
 
 const useLeaderBoard = ({ initializeData = true, isPageMounted }) => {
   const [leaderBoardData, setLeaderBoardData] = useState({
@@ -10,7 +11,9 @@ const useLeaderBoard = ({ initializeData = true, isPageMounted }) => {
     paginationDetails: false,
   });
 
-  const getLeaderBoardData = (pageNumber = 1) => post({ type: 'getLeaderBoard', page: pageNumber, s3Prefix: API.S3PREFIX }, 'turtle/')
+  const authContext = useContext(AuthContext);
+
+  const getLeaderBoardData = ({ pageNumber = 1 }) => post({ type: 'getLeaderBoard', page: pageNumber, s3Prefix: API.S3PREFIX }, 'turtle/')
     .then((res) => {
       if (isPageMounted.current) {
         if (res === 'access_denied') {
@@ -24,6 +27,15 @@ const useLeaderBoard = ({ initializeData = true, isPageMounted }) => {
             setLeaderBoardData(() => ({
               ...parsedResponse,
             }));
+            authContext.setAuthState({
+              appData: {
+                getLeaderBoardHook: {
+                  [pageNumber]: {
+                    ...parsedResponse,
+                  },
+                },
+              },
+            });
           } else {
             setLeaderBoardData(() => ({
               ...parsedResponse,
@@ -35,7 +47,7 @@ const useLeaderBoard = ({ initializeData = true, isPageMounted }) => {
     });
 
   useEffect(() => {
-    if (initializeData) getLeaderBoardData();
+    if (initializeData) getLeaderBoardData({});
   }, []);
 
   return {

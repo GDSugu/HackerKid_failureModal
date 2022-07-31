@@ -30,7 +30,7 @@ const RouteChallenges = loadable(() => import('./Challenges'), { fallback: <Load
 const RouteMore = loadable(() => import('./More'), { fallback: <Loading /> });
 const RouteProfileEdit = loadable(() => import('./ProfileEdit'), { fallback: <Loading /> });
 // const RouteSubscription = loadable(() => import('./Subscription'), { fallback: <Loading /> });
-// const RouteLeaderBoard = loadable(() => import('./Leaderboard'), { fallback: <Loading /> });
+const RouteLeaderBoard = loadable(() => import('./Leaderboard'), { fallback: <Loading /> });
 const RouteCertificates = loadable(() => import('./Certificates'), { fallback: <Loading /> });
 // const RouteAwards = loadable(() => import('./Awards'), { fallback: <Loading /> });
 // const RouteCollectibles = loadable(() => import('./Collectibles'), { fallback: <Loading /> });
@@ -46,6 +46,7 @@ const App = () => (
         <Route path='challenges' caseSensitive={true} element={<RouteChallenges />} />
         {/* <Route path='more' caseSensitive={true} element={<RouteMore />} /> */}
         <Route path='more' caseSensitive={true} element={<RouteMore />} />
+        <Route path='leaderboard' caseSensitive={true} element={<RouteLeaderBoard />} />
         {/* <Route path='/more/' caseSensitive={true} element={ <AccountNavBar />} /> */}
         <Route path='certificates' caseSensitive={true} element={<RouteCertificates />} />
         {/* <Route path='awards' caseSensitive={true} element={<RouteAwards />} />
