@@ -26,8 +26,6 @@ import RouteForgotPassword from './ForgotPassword';
 
 import BottomSheet from '../components/BottomSheet';
 
-import BottomSheet from '../components/BottomSheet';
-
 import IconGame from '../../images/navbar/iconGame.svg';
 import IconHome from '../../images/navbar/iconHome.svg';
 import IconMore from '../../images/navbar/iconMore.svg';
@@ -233,12 +231,7 @@ const App = () => {
               screenOptions={{
                 headerShown: false,
                 animation: 'slide_from_bottom',
-<<<<<<< HEAD
-              }}
-            >
-=======
               }} initialRouteName={'Login'}>
->>>>>>> CU-22j045v_Login-and-signup-page_Sai-Darshan
               <Stack.Group>
                 <Stack.Screen name='Start'>
                   {() => TabNavigators({
@@ -249,15 +242,10 @@ const App = () => {
                   })}
                 </Stack.Screen>
                 <Stack.Screen name='Class' component={RouteClass} />
-<<<<<<< HEAD
-                <Stack.Screen name='Signin' component={RouteSignin} />
-                <Stack.Screen name='EditProfile' component={RouteProfile} />
-=======
                 <Stack.Screen name='EditProfile' component={RouteProfile} />
                 <Stack.Screen name='Login' component={RouteLogin} />
               <Stack.Screen name='Register' component={RouteRegister} />
               <Stack.Screen name='ForgotPassword' component={RouteForgotPassword} />
->>>>>>> CU-22j045v_Login-and-signup-page_Sai-Darshan
               </Stack.Group>
               <Stack.Group screenOptions={{ presentation: 'modal' }}>
                 <Stack.Screen name='BottomSheet' component={BottomSheet} />
