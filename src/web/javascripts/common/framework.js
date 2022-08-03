@@ -210,6 +210,18 @@ const validate = (id, type, required = 1, warnId = false, warnMsg = false,
   return data;
 };
 
+const getRecapchaToken = (executeOptions) => {
+  if (!executeOptions) throw new Error('Execute Options required');
+  if (Array.isArray(executeOptions) || typeof executeOptions !== 'object') throw new Error('Object Expected');
+
+  return new Promise((resolve, reject) => {
+    window.grecaptcha.ready(() => {
+      window.grecaptcha.execute('6LdlNzkhAAAAACHROyP4u5UKmMbmKewfuNlFQwOX', executeOptions).then((token) => resolve(token))
+        .catch((err) => reject(err));
+    });
+  });
+};
+
 const getQueryString = (query) => {
   const search = new URLSearchParams(document.location.search.substring(1));
   return search.get(query);
@@ -362,4 +374,5 @@ export {
   updatePoints,
   debounce,
   getShareMarkup,
+  getRecapchaToken,
 };

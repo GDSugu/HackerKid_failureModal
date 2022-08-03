@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/css/intlTelInput.css';
 import {
-  pageInit, pathNavigator, validate,
+  getRecapchaToken, pageInit, pathNavigator, validate,
 } from '../framework';
 import '../../../stylesheets/common/pages/register/style.scss';
 import useRegister from '../../../../hooks/pages/register';
 import {
-  togglePasswordVisibility, validateInputOnChange, closeFormError,
+  togglePasswordVisibility, validateInputOnChange, closeFormError, setFormErrorField,
 } from '../commonLoginRegisterFunctions';
 import { loginCheck, setUserSession } from '../../../../hooks/common/framework';
 import VerifyOtpFormStep from '../components/VerifyOtpFormStep/VeriyOtpFormStep';
@@ -78,27 +78,30 @@ const RegisterFormStepOne = ({
       const hideInlineLoadingSpinner = showInlineLoadingSpinner('.next-btn');
       const countryCode = getCurrentCountryCode();
 
-      sendOtpRequest(stateObj.phoneNumber, countryCode, 'send-otp').then((response) => {
-        const data = JSON.parse(response);
-        if (data.status === 'success') {
-          setStateObj((prevObj) => ({
-            ...prevObj,
-            formStep: prevObj.formStep + 1,
-            countryCode,
-          }));
-        } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
+      getRecapchaToken({ action: 'register' }).then((token) => {
+        sendOtpRequest(stateObj.phoneNumber, countryCode, 'send-otp', token).then((response) => {
+          const data = JSON.parse(response);
+          if (data.status === 'success') {
+            setStateObj((prevObj) => ({
+              ...prevObj,
+              formStep: prevObj.formStep + 1,
+              countryCode,
+            }));
+          } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
+            hideInlineLoadingSpinner();
+            $('#phone').addClass('is-invalid').removeClass('is-valid');
+            setFormErrorField('Account already exists!, try logging in', { 'data-error-type': data.message });
+          } else if (data.status === 'error') {
+            hideInlineLoadingSpinner();
+            setFormErrorField('Something went wrong! Try again', { 'data-error-type': 'ERROR' });
+          }
+        }).catch((err) => {
           hideInlineLoadingSpinner();
-          $('#phone').addClass('is-invalid').removeClass('is-valid');
-          $('#form-error').text('Account already exists!, try logging in').attr('data-error-type', data.message).show();
-        } else if (data.status === 'error') {
-          hideInlineLoadingSpinner();
-          $('#form-error').text('Something went wrong! Try again').attr('data-error-type', 'ERROR').show();
-        }
-      }).catch((err) => {
-        hideInlineLoadingSpinner();
-        const errData = JSON.parse(err);
-        console.log(errData);
-      });
+          const errData = JSON.parse(err);
+          console.log(errData);
+        });
+      })
+        .catch((err) => console.error(err));
     }
   };
 
@@ -247,22 +250,24 @@ const RegisterFormStepThree = ({
     if ((enteredPassword && retypedPassword) && (enteredPassword === retypedPassword)) {
       const hideInlineLoadingSpinner = showInlineLoadingSpinner('.create-account-btn');
 
-      createAccountRequest().then((response) => {
-        const data = JSON.parse(response);
+      getRecapchaToken({ action: 'register' }).then((token) => {
+        createAccountRequest(token).then((response) => {
+          const data = JSON.parse(response);
 
-        if (data.status === 'success' && data.message === 'REGISTERED') {
-          const sessionDetails = data.session;
-          setUserSession(sessionDetails);
-          pathNavigator('dashboard');
-        } else if (data.status === 'error') {
+          if (data.status === 'success' && data.message === 'REGISTERED') {
+            const sessionDetails = data.session;
+            setUserSession(sessionDetails);
+            pathNavigator('dashboard');
+          } else if (data.status === 'error') {
+            hideInlineLoadingSpinner();
+            setFormErrorField('Something went wrong! Try again', { 'data-error-type': 'ERROR' });
+          }
+        }).catch((error) => {
           hideInlineLoadingSpinner();
-          $('#form-error').text('Something went wrong! Try again').attr('data-error-type', 'ERROR').show();
-        }
-      }).catch((error) => {
-        hideInlineLoadingSpinner();
-        const errData = JSON.parse(error);
-        console.log(errData);
-      });
+          const errData = JSON.parse(error);
+          console.log(errData);
+        });
+      }).catch((err) => console.error(err));
     }
   };
 
@@ -340,6 +345,29 @@ const Register = () => {
     }).catch((err) => {
       console.log(err);
     });
+
+    const loadScriptByURL = (id, url, onload = false) => {
+      const isScriptExist = document.getElementById(id);
+
+      if (!isScriptExist) {
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = url;
+        script.id = id;
+        script.onload = () => {
+          if (onload) onload();
+        };
+        document.body.appendChild(script);
+      }
+
+      if (isScriptExist && onload) onload();
+    };
+
+    loadScriptByURL('recaptcha-key', 'https://www.google.com/recaptcha/api.js?render=6LdlNzkhAAAAACHROyP4u5UKmMbmKewfuNlFQwOX');
+
+    return () => {
+      $('recaptcha-key').remove();
+    };
   }, []);
 
   // styles
@@ -351,6 +379,13 @@ const Register = () => {
       ...prevObj,
       [key]: value,
     }));
+  };
+
+  const commonProps = {
+    stateObj,
+    setStateObj,
+    handleStateChange,
+    setBackBtnStateObj,
   };
 
   return (
@@ -370,18 +405,14 @@ const Register = () => {
           <img src='../../../../images/register/register-form-svg.svg' className='form-svg' />
           {
             ((stateObj.formStep === 1)
-              && <RegisterFormStepOne
-              stateObj={stateObj}
-              setStateObj={setStateObj}
-              handleStateChange={handleStateChange}
-              setBackBtnStateObj={setBackBtnStateObj}
-            />)
+              && <RegisterFormStepOne {...commonProps} />)
             || ((stateObj.formStep === 2)
               && <VerifyOtpFormStep
               parentStateObj={stateObj}
               setParentStateObj={setStateObj}
               setBackBtnStateObj={setBackBtnStateObj}
               otpRequestType={'send-otp'}
+              recapchaExecuteOptions = {{ action: 'register' }}
               secondaryActionButtons={[<Link key={0} to='/login' className='login-into-existing-account-btn text-link mt-3'>
               <span className='overline-bold'>
                 <FormattedMessage
@@ -393,11 +424,8 @@ const Register = () => {
                />)
             || ((stateObj.formStep === 3)
               && <RegisterFormStepThree
-              stateObj={stateObj}
-              setStateObj={setStateObj}
+              {...commonProps}
               createAccountRequest={createAccountRequest}
-              handleStateChange={handleStateChange}
-              setBackBtnStateObj={setBackBtnStateObj}
                />)
           }
         </form>

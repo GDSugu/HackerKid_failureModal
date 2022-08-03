@@ -6,9 +6,10 @@ import { closeFormError, setFormErrorField } from '../../commonLoginRegisterFunc
 import useOtp from '../../../../../hooks/pages/otp';
 import '../../../../stylesheets/common/sass/components/_otp.scss';
 import showInlineLoadingSpinner from '../../loader';
+import { getRecapchaToken } from '../../framework';
 
 const VerifyOtpFormStep = ({
-  parentStateObj, setParentStateObj, setBackBtnStateObj, otpRequestType,
+  parentStateObj, setParentStateObj, setBackBtnStateObj, otpRequestType, recapchaExecuteOptions,
   secondaryActionButtons = false,
 }) => {
   // hooks
@@ -50,16 +51,18 @@ const VerifyOtpFormStep = ({
   const resendOtpClickHandler = () => {
     $('.resend-otp').hide();
     if (stateObj.otpTimerId === null) {
-      sendOtpRequest(parentStateObj.phoneNumber,
-        parentStateObj.countryCode,
-        otpRequestType).then((response) => {
-        const data = JSON.parse(response);
-        if (data.status === 'success') {
-          startOtpTimer();
-        }
-      }).catch((err) => {
-        console.log(err);
-      });
+      getRecapchaToken(recapchaExecuteOptions).then((token) => {
+        sendOtpRequest(parentStateObj.phoneNumber,
+          parentStateObj.countryCode,
+          otpRequestType, token).then((response) => {
+          const data = JSON.parse(response);
+          if (data.status === 'success') {
+            startOtpTimer();
+          }
+        }).catch((err) => {
+          console.log(err);
+        });
+      }).catch((err) => console.error(err));
     }
   };
 
@@ -136,26 +139,29 @@ const VerifyOtpFormStep = ({
     }
 
     const hideInlineLoadingSpinner = showInlineLoadingSpinner('.verify-otp-btn');
-    verifyOtpRequest(parentStateObj.phoneNumber,
-      parentStateObj.countryCode).then((response) => {
-      const data = JSON.parse(response);
-      if (data.status === 'success') {
-        setParentStateObj((prevObj) => ({
-          ...prevObj,
-          formStep: prevObj.formStep + 1,
-        }));
-      } else if (data.status === 'error' && data.message === 'OTP_EXPIRED') {
+
+    getRecapchaToken(recapchaExecuteOptions).then((token) => {
+      verifyOtpRequest(parentStateObj.phoneNumber,
+        parentStateObj.countryCode, token).then((response) => {
+        const data = JSON.parse(response);
+        if (data.status === 'success') {
+          setParentStateObj((prevObj) => ({
+            ...prevObj,
+            formStep: prevObj.formStep + 1,
+          }));
+        } else if (data.status === 'error' && data.message === 'OTP_EXPIRED') {
+          hideInlineLoadingSpinner();
+          setFormErrorField('Enter a valid OTP', { 'data-error-type': data.message });
+        } else if (data.status === 'error') {
+          hideInlineLoadingSpinner();
+          setFormErrorField('Something went wrong! Try again', { 'data-error-type': 'ERROR' });
+        }
+      }).catch((err) => {
         hideInlineLoadingSpinner();
-        setFormErrorField('Enter a valid OTP', { 'data-error-type': data.message });
-      } else if (data.status === 'error') {
-        hideInlineLoadingSpinner();
-        setFormErrorField('Something went wrong! Try again', { 'data-error-type': 'ERROR' });
-      }
-    }).catch((err) => {
-      hideInlineLoadingSpinner();
-      const errData = JSON.parse(err);
-      console.log(errData);
-    });
+        const errData = JSON.parse(err);
+        console.log(errData);
+      });
+    }).catch((err) => console.error(err));
   };
 
   useEffect(() => {

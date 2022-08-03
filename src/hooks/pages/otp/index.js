@@ -7,22 +7,24 @@ const useOtp = () => {
     enteredOtpArr: ['', '', '', ''],
   });
 
-  const sendOtpRequest = (phoneNumber, countryCode, type) => {
+  const sendOtpRequest = (phoneNumber, countryCode, type, token) => {
     const postData = {
       type,
       phone: phoneNumber,
       countryCode,
+      token,
     };
 
     return post(postData, 'register/', false, false);
   };
 
-  const verifyOtpRequest = (phoneNumber, countryCode) => {
+  const verifyOtpRequest = (phoneNumber, countryCode, token) => {
     const postData = {
       type: 'verify-otp',
       phone: phoneNumber,
       countryCode,
       otp: stateObj.enteredOtpArr.join(''),
+      token,
     };
 
     return post(postData, 'register/');

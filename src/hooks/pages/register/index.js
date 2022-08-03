@@ -14,7 +14,7 @@ const useRegister = () => {
     retypedPassword: '',
   });
 
-  const createAccountRequest = () => {
+  const createAccountRequest = (token) => {
     const postData = {
       type: 'register',
       phone: stateObj.phoneNumber,
@@ -22,6 +22,7 @@ const useRegister = () => {
       name: stateObj.fullName,
       mail: stateObj.email,
       password: stateObj.password,
+      token,
     };
 
     return post(postData, 'register/');
