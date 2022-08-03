@@ -12,7 +12,18 @@ const Modal = ({
   onHidden = () => {},
   onShown = () => {},
   modalVisible,
-}) => {
+}, ref) => {
+  const modalRef = React.useRef(null);
+
+  React.useImperativeHandle(ref, () => ({
+    show: () => {
+      $('#modal').modal('show');
+    },
+    hide: () => {
+      $('#modal').modal('hide');
+    },
+  }));
+
   useEffect(() => {
     if (modalVisible) {
       $('#modal').modal(options || 'show');
@@ -42,7 +53,7 @@ const Modal = ({
   }
 
   return <>
-    <div className={`modal fade ${customClass}`} id="modal" tabIndex="-1" role="dialog" aria-labelledby="errorModal" aria-hidden="true">
+    <div ref={modalRef} className={`modal fade ${customClass}`} id="modal" tabIndex="-1" role="dialog" aria-labelledby="errorModal" aria-hidden="true">
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
           {/* <div className='modal-header'>
@@ -73,4 +84,4 @@ const Modal = ({
   </>;
 };
 
-export default Modal;
+export default React.forwardRef(Modal);

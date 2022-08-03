@@ -86,6 +86,10 @@
     "defaultMessage": "{label}",
     "description": "{description}"
   },
+  "4Op8zY": {
+    "defaultMessage": "Problem Statement",
+    "description": "Problem statement title"
+  },
   "4Ve1r3": {
     "defaultMessage": "Ok",
     "description": "confirm btn"
@@ -101,6 +105,10 @@
   "6+MZGf": {
     "defaultMessage": "Challenges",
     "description": "challenges heading"
+  },
+  "634LIC": {
+    "defaultMessage": "PLAY",
+    "description": "Play button"
   },
   "6Cjk2D": {
     "defaultMessage": "Login",
@@ -165,6 +173,10 @@
   "C8CsWY": {
     "defaultMessage": "This is Class page",
     "description": "Class Page"
+  },
+  "CabaPs": {
+    "defaultMessage": "Level {level}",
+    "description": "Level 1 navigation link"
   },
   "CcB4fo": {
     "defaultMessage": "Coins Earned:",
@@ -349,6 +361,10 @@
     "defaultMessage": "{studentName}",
     "description": "student name"
   },
+  "SjoZlV": {
+    "defaultMessage": "Play Now",
+    "description": "Play button"
+  },
   "TmcPug": {
     "defaultMessage": "Edit Profile",
     "description": "edit profile"
@@ -416,6 +432,10 @@
   "a2ZCmv": {
     "defaultMessage": "Create a New Account",
     "description": "Create Account Button"
+  },
+  "b2J6mh": {
+    "defaultMessage": "Home",
+    "description": "Home navigation link"
   },
   "bK9TWX": {
     "defaultMessage": "Leaderboard Rank",
@@ -487,6 +507,10 @@
   "jZhy7I": {
     "defaultMessage": "Forgot Password",
     "description": "Forgot Password Heading"
+  },
+  "ksYOCd": {
+    "defaultMessage": "Leaderboard",
+    "description": "Leaderboard button"
   },
   "lKeCea": {
     "defaultMessage": "Save & Exit",
@@ -574,6 +598,10 @@
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
+  },
+  "tbPLF3": {
+    "defaultMessage": "{step}",
+    "description": "turtle instruction"
   },
   "tsF0aG": {
     "defaultMessage": "Continue Playing",

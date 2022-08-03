@@ -2,29 +2,28 @@ import React from 'react';
 import md5 from 'crypto-js/md5';
 import post from '../../common/framework';
 
-const useTurtleFetchQuestion = ({ type = 'initialQuestion' || 'getQuestionById', virtualId = false, questionId = false }) => {
+const useTurtleFetchQuestion = ({
+  isPageMounted,
+}) => {
   const [turtleQuestionInfo, setTurtleQuestionInfo] = React.useState({
     status: true,
     questionList: false,
     questionObject: false,
+    validated: false,
     submissionDetails: false,
   });
 
-  const result = {
-    state: turtleQuestionInfo,
-    setState: setTurtleQuestionInfo,
-  };
+  const fetchTurtleQuestion = ({ type = 'initialQuestion' || 'getQuestionById', virtualId = false, questionId = false }) => {
+    let payload = false;
+    let qnResult;
 
-  let payload = false;
-
-  React.useEffect(() => {
     switch (type) {
       case 'initialQuestion':
+        payload = {
+          type: 'initialQuestion',
+        };
         if (virtualId) {
-          payload = {
-            type: 'initialQuestion',
-            virtualId,
-          };
+          payload.virtualId = virtualId;
         }
         break;
       case 'getQuestionById':
@@ -39,31 +38,60 @@ const useTurtleFetchQuestion = ({ type = 'initialQuestion' || 'getQuestionById',
     }
 
     if (payload) {
-      post(payload, 'turtle/')
+      qnResult = post(payload, 'turtle/')
         .then((response) => {
-          if (response === 'access_denied') {
-            setTurtleQuestionInfo((prevState) => ({
-              status: 'access_denied',
-              ...prevState,
-              response,
-            }));
-          } else {
-            const parsedResponse = JSON.parse(response);
-            if (parsedResponse.status === 'success') {
-              setTurtleQuestionInfo(parsedResponse);
-            } else {
+          if (isPageMounted.current) {
+            if (response === 'access_denied') {
               setTurtleQuestionInfo((prevState) => ({
+                status: 'access_denied',
                 ...prevState,
-                status: 'error',
-                response: parsedResponse,
+                response,
               }));
+            } else {
+              const parsedResponse = JSON.parse(response);
+              if (parsedResponse.status === 'success') {
+                setTurtleQuestionInfo({
+                  ...parsedResponse,
+                  validated: false,
+                });
+              } else {
+                setTurtleQuestionInfo((prevState) => ({
+                  ...prevState,
+                  status: 'error',
+                  response: parsedResponse,
+                }));
+              }
             }
           }
         });
     }
+    return qnResult;
+  };
+
+  const submitTurtle = (request) => post(request, 'turtle/', false);
+  // {
+  // console.log('submitTurtle');
+  // let requestString = '';
+  // Object.keys(request).forEach((index) => {
+  //   requestString += request[index];
+  // });
+  // const requestHash = md5(requestString + md5(requestString).toString()).toString();
+  // request.requestHash = requestHash;
+  // console.log(request);
+  // };
+
+  React.useEffect(() => {
+    fetchTurtleQuestion({});
   }, []);
 
-  return result;
+  return {
+    state: turtleQuestionInfo,
+    setState: setTurtleQuestionInfo,
+    static: {
+      fetchTurtleQuestion,
+      submitTurtle,
+    },
+  };
 };
 
 const TurtleContext = React.createContext();

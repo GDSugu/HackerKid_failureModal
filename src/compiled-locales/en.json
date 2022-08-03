@@ -125,6 +125,12 @@
       "value": "label"
     }
   ],
+  "4Op8zY": [
+    {
+      "type": 0,
+      "value": "Problem Statement"
+    }
+  ],
   "4Ve1r3": [
     {
       "type": 0,
@@ -147,6 +153,12 @@
     {
       "type": 0,
       "value": "Challenges"
+    }
+  ],
+  "634LIC": [
+    {
+      "type": 0,
+      "value": "PLAY"
     }
   ],
   "6Cjk2D": [
@@ -243,6 +255,16 @@
     {
       "type": 0,
       "value": "This is Class page"
+    }
+  ],
+  "CabaPs": [
+    {
+      "type": 0,
+      "value": "Level "
+    },
+    {
+      "type": 1,
+      "value": "level"
     }
   ],
   "CcB4fo": [
@@ -535,6 +557,12 @@
       "value": "studentName"
     }
   ],
+  "SjoZlV": [
+    {
+      "type": 0,
+      "value": "Play Now"
+    }
+  ],
   "TmcPug": [
     {
       "type": 0,
@@ -635,6 +663,12 @@
     {
       "type": 0,
       "value": "Create a New Account"
+    }
+  ],
+  "b2J6mh": [
+    {
+      "type": 0,
+      "value": "Home"
     }
   ],
   "bK9TWX": [
@@ -743,6 +777,12 @@
     {
       "type": 0,
       "value": "Forgot Password"
+    }
+  ],
+  "ksYOCd": [
+    {
+      "type": 0,
+      "value": "Leaderboard"
     }
   ],
   "lKeCea": [
@@ -875,6 +915,12 @@
     {
       "type": 0,
       "value": "Go to Home"
+    }
+  ],
+  "tbPLF3": [
+    {
+      "type": 1,
+      "value": "step"
     }
   ],
   "tsF0aG": [
