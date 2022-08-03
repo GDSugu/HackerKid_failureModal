@@ -1,19 +1,16 @@
 @use '../../sass/themes/_default' as gt;
 @use '../../sass/base/_mixins' as gm;
+@use '../../sass/components/gameNavBar';
 
 @import '_turtleTheme.js';
 
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 
-.turtle-container {
+.turtle-home-container,
+.turtle-main-container {
   // background-color: gt.theme-var(game-body-bg, null, $thememaplight, $cssvars);
-  background: url(../../../../../images/turtle/turtleBgWeb.svg) no-repeat 0 / cover;
   height: 100vh;
   width: 100vw;
-
-  @include gm.media-breakpoint-down(xl) {
-    background-size: contain;
-  }
 
   nav {
     background-color: gt.theme-var(game-nav-bg, null, $thememaplight, $cssvars);
@@ -25,49 +22,414 @@
         }
       }
     }
+
+    &.turtle-navbar {
+      // background: url(../../../../../images/games/navbg.png) no-repeat 100% / cover;
+      background-color: transparent;
+
+      // .dashboard-nav-link {
+      //   a {
+      //     color: gt.theme-var(text-color-2);
+
+      //     &:hover {
+      //       text-decoration: none;
+      //     }
+      //   }
+      // }
+
+      // .level-btn {
+      //   img {
+      //     width: 2rem;
+      //   }
+
+      //   p {
+      //     color: gt.theme-var(text-color-2);
+      //   }
+      // }
+
+      .leaderboard-btn {
+        background-color: gt.theme-var(game-leaderboard-btn-bg, null, $thememaplight, $cssvars);
+      }
+
+      // .profileImg {
+      //   margin: 0;
+      // }
+    }
   }
 
-  .turtle-card {
-    position: relative;
-    left: 45%;
-    width: 50%;
-    display: inline-block;
-    background-color: gt.theme-var(game-dark-transparent, null, $thememaplight, $cssvars);
-    border-radius: 12px;
-    // backdrop-filter: blur(24px) saturate(200%);
-    // -webkit-backdrop-filter: blur(24px) saturate(200%);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 4rem;
-    margin-top: 4rem;
-    color: gt.theme-var(text-color-2);
+  .turtle-frame {
+    // background: url(../../../../../images/turtle/turtleBgWeb.svg) no-repeat 100% / cover;
 
-    .card-container {
-      text-align: center;
+    .turtle-card {
+      position: relative;
+      left: 45%;
+      width: 50%;
+      display: inline-block;
+      border-radius: 12px;
+      background-color: gt.theme-var(game-dark-transparent, null, $thememaplight, $cssvars);
+      // backdrop-filter: blur(24px) saturate(200%);
+      // -webkit-backdrop-filter: blur(24px) saturate(200%);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 4rem;
+      margin-top: 4rem;
+      color: gt.theme-var(text-color-2);
 
-      .gameTitle {
-        font-size: 4rem;
-        margin: 0;
+      @include gm.media-breakpoint-down(md) {
+        display: none;
       }
 
-      .gameDesc {
-        font-size: 1.25rem;
-        line-height: 1.5;
-        margin: 1rem 0 2rem 0;
+      .card-container {
+        text-align: center;
+
+        .gameTitle {
+          font-size: 4rem;
+          margin: 0;
+        }
+
+        .gameDesc {
+          font-size: 1.25rem;
+          line-height: 1.5;
+          margin: 1rem 0 2rem 0;
+        }
+
+        .gameBtn {
+          border-radius: 1rem;
+          background-color: gt.theme-var(text-color-2);
+
+          .gameBtnDesc {
+            font-weight: bold;
+            color: gt.theme-var(game-btn-text-color, null, $thememaplight, $cssvars);
+            margin-bottom: 0;
+            margin-left: 0.5rem;
+          }
+        }
+      }
+    }
+
+    .turtle-mob-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+
+      @include gm.media-breakpoint-up(md) {
+        display: none;
       }
 
-      .gameBtn {
-        border-radius: 1rem;
-        background-color: gt.theme-var(text-color-2);
+      .turtle-title,
+      .turtle-actions {
+        display: grid;
+        place-content: center;
+      }
 
-        .gameBtnDesc {
-          font-weight: bold;
-          color: gt.theme-var(game-btn-text-color, null, $thememaplight, $cssvars);
+      .turtle-title {
+        flex: 4;
+
+        .gameTitle {
+          color: gt.theme-var(text-color-2);
           margin-bottom: 0;
-          margin-left: 0.5rem;
+        }
+      }
+
+      .turtle-actions {
+        flex: 1;
+
+        img {
+          width: 2.5rem;
+          // height: 2.5rem;
+        }
+
+        .turtle-play-btn {
+          .play-btn-container {
+            background-color: gt.theme-var(bg-1);
+            border-radius: 50%;
+            box-shadow: gt.theme-var(game-btn-shadow, null, $thememaplight, $cssvars);
+            padding: 1rem 1.25rem;
+
+            p {
+              color: gt.theme-var(game-btn-text-color, null, $thememaplight, $cssvars);
+              margin-bottom: 0;
+              margin-top: 0.125rem;
+              font-size: 0.85rem;
+              letter-spacing: 2.25px;
+            }
+          }
         }
       }
     }
   }
+
+  .turtle-game-container {
+    display: flex;
+    align-items: stretch;
+    height: 100%;
+    padding: 1rem 0 1rem 0;
+    // background: url(../../../../../images/turtle/turtleBgWeb.svg) no-repeat 100% / cover;
+
+    .game-container-block {
+      .turtle-editor-container {
+        #tabsContent {
+          #turtleOutput {
+            #outputSection {
+              position: relative;
+              background-color: gt.theme-var(bg-1);
+              height: 100%;
+
+              .drawing-controls {
+                // display: flex;
+                // justify-content: flex-end;
+                // align-items: flex-end;
+                margin-right: 0.25rem;
+                margin-top: 0.25rem;
+                display: flex;
+                position: absolute;
+                right: 0;
+                z-index: 100;
+
+                @include gm.media-breakpoint-down(md) {
+                  flex-direction: column;
+                }
+
+                button {
+                  margin: 0.25rem;
+                  width: 2.5rem;
+                }
+              }
+
+              .sectionContent {
+                height: 100%;
+                overflow: auto;
+                position: relative;
+
+                #userCanvas {
+                  position: absolute;
+                  width: 100%;
+                }
+                
+                #answerCanvas {
+                  position: absolute;
+                  width: 100%;
+                  opacity: 0.5;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .turtle-question-container,
+    .turtle-block-container,
+    .turtle-editor-container {
+      height: 100%;
+      border-radius: 0.75rem;
+      overflow: hidden;
+
+      #tabsContent {
+        height: calc(100% - 49px);
+
+        .tab-pane {
+          height: 100%;
+        }
+      }
+    }
+
+    .turtle-question-container {
+      display: flex;
+      flex-direction: column;
+
+      .turtle-question-block,
+      .turtle-exoup-block {
+        flex-basis: 0;
+        flex-grow: 1;
+        height: 50%;
+        background-color: gt.theme-var(game-transparent-bg, null, $thememaplight, $cssvars);
+      }
+
+      .turtle-title-block {
+        background-color: gt.theme-var(game-question-title-bg, null, $thememaplight, $cssvars);
+        padding: 0.75rem;
+
+        .turtle-question-title {
+          color: gt.theme-var(text-color-1);
+          font-weight: bold;
+          font-size: 1.125rem;
+          margin-bottom: 0;
+        }
+      }
+
+      .turtle-question-content {
+        height: calc(100% - 51px);
+        overflow-y: auto;
+        padding: 0.5rem;
+
+        .turtle-question {
+          font-weight: bold;
+        }
+
+        .turtle-question-instructions {
+          .turtle-question-instructions-title {
+            font-weight: bold;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    .turtle-block-container {
+      // background-color: gt.theme-var(game-dark-transparent, null, $thememaplight, $cssvars);
+      background-color: gt.theme-var(bg-2);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+
+      .turtle-blockly-container {
+        background-color: gt.theme-var(bg-4);
+        padding: 0.75rem;
+
+        .turtle-blockly-title {
+          color: gt.theme-var(text-color-2);
+          font-weight: bold;
+          font-size: 1.125rem;
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .turtle-editor-container {
+      background-color: gt.theme-var(bg-2);
+
+      .turtle-editor-title {
+        background-color: gt.theme-var(bg-4);
+        padding-top: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+
+        .nav-tabs {
+          .nav-item {
+            .nav-link {
+              color: gt.theme-var(text-color-9);
+              background: transparent;
+
+              &.active {
+                color: gt.theme-var(text-color-2);
+                background-color: transparent;
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                border-bottom-width: 2px;
+              }
+
+              &:hover {
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                border-bottom-width: 2px;
+                border-color: gt.theme-var(text-color-2);
+              }
+            }
+          }
+        }
+
+        .runBtn {
+          color: gt.theme-var(text-color-2);
+
+          &:focus {
+            box-shadow: none;
+          }
+        }
+      }
+    }
+
+    .turtle-skeleton-body {
+      height: 100%;
+      animation: refresh 2.5s ease-out infinite;
+      background-image: linear-gradient(90deg, gt.theme-var(text-color-5), gt.theme-var(bg-2) 50%, gt.theme-var(skeleton-bg) 50%);
+      background-size: 200%;
+    }
+
+  }
+  .successModal {
+    .success-modal-content {
+      .recognition-content,
+      .share-content {
+        display: grid;
+        place-items: center;
+
+        h5,
+        p {
+          text-align: center;
+        }
+        
+        button {
+          margin: 0 0.25rem;
+          border-width: 2px;
+          border-radius: 0.75rem;
+          font-weight: bold;
+        }
+      }
+
+      .recognition-content {
+        h5 {
+          margin: 1rem 0;
+        }
+
+        p {
+          margin: 1rem 0;
+          line-height: 1.5;
+        }
+
+        i {
+          margin-left: 1.5rem;
+          font-size: 1.25rem;
+        }
+
+        button {
+          &.btn-primary {
+            color: gt.theme-var(text-color-2);
+          }
+        }
+
+        input {
+          border: 1px solid gt.theme-var(game-input-border-color, null, $thememaplight, $cssvars);
+        }
+      }
+
+      .share-content {
+        .btn-container {
+          margin: 2rem 0;
+        }
+      }
+    }
+  }
+
+  @keyframes refresh {
+    0% {
+      background-position: -100%;
+    }
+
+    100% {
+      background-position: 100%;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: gt.theme-var(skeleton-bg);
+    border-radius: 1rem;
+  }
+}
+
+.turtle-home-container {
+  background: url(../../../../../images/turtle/turtleBgWeb.svg) no-repeat 100% / cover;
+}
+
+.turtle-main-container {
+  background: url(../../../../../images/turtle/turtleMainBgWeb.svg) no-repeat 100% / cover;
+  max-width: 100vw;
+  width: unset;
 }

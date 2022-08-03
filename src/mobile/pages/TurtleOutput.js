@@ -180,7 +180,7 @@ const TurtleOutput = ({ navigation }) => {
           managerObj, poolObj,
         } = getTurtleOutput({
           blocklyObj: window.Blockly,
-          poolObj: pool,
+          workerPoolObj: pool,
         });
       
         window.Turtle = managerObj;

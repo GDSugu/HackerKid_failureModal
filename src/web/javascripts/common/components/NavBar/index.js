@@ -59,7 +59,7 @@ const NavBar = () => {
     },
   ];
 
-  const imgPath = '../../../../../images';
+  const defaultUser = '../../../../../images/common/profile.png';
 
   return <>
     <nav>
@@ -78,7 +78,7 @@ const NavBar = () => {
         </div>
         <div className="profileImg">
           <Link to='/profile'>
-            <img src={`${imgPath}/common/profile.png`} alt="Hackerkid User"/>
+            <img src={defaultUser} alt="Hackerkid User"/>
           </Link>
         </div>
       </div>

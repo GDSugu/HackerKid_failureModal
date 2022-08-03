@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // // import * as Blockly from 'blockly/core';
 // import 'blockly/blocks';
 // import 'blockly/python';
@@ -1285,7 +1286,11 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {}, a
       // };
       // window.sendMessage(msg);
     } catch (error) {
-      window.ReactNativeWebView.postMessage(`BlocklyObj error:  ${error}`);
+      if (window.ReactNativeWebView) {
+        window.ReactNativeWebView.postMessage(`BlocklyObj error:  ${error}`);
+      } else {
+        console.error(`BlocklyObj error:  ${error}`);
+      }
     }
   };
 
@@ -1309,7 +1314,11 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {}, a
         TurtleObj.editor.setValue('');
       }
     } catch (error) {
-      window.ReactNativeWebView.postMessage(`initializeeditor error:  ${error}`);
+      if (window.ReactNativeWebView) {
+        window.ReactNativeWebView.postMessage(`initializeeditor error:  ${error}`);
+      } else {
+        console.error(`initializeeditor error:  ${error}`);
+      }
     }
   };
 
@@ -1326,7 +1335,11 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {}, a
             // qId: TurtleObj.initialResponse.questionObject.question_id,
           },
         };
-        window.ReactNativeWebView.postMessage(JSON.stringify(outputMsg));
+        if (window.ReactNativeWebView) {
+          window.ReactNativeWebView.postMessage(JSON.stringify(outputMsg));
+        } else {
+          console.log(JSON.stringify(outputMsg));
+        }
       }
     } catch (error) {
       console.log(error);
@@ -1384,18 +1397,18 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {}, a
 //   };
 // };
 
-const getTurtleOutput = (
+const getTurtleOutput = ({
   blocklyObj = {}, turtleOutputObj = {}, /* skulptObj = {}, */ workerPoolObj = {},
-) => {
+}) => {
   const BlocklyObj = blocklyObj;
   const managerObj = turtleOutputObj;
   // const Sk = skulptObj;
   const poolObj = workerPoolObj;
 
-  managerObj.repositionTurtle = () => {
+  managerObj.repositionTurtle = (selector = '#answerCanvas', containerSelector = '.outputContainer') => {
     try {
-      const container = $('.outputContainer');
-      const content = $('#answerCanvas');
+      const container = $(containerSelector);
+      const content = $(selector);
       container.scrollLeft(
         (
           (content[0].scrollWidth * managerObj.canvasScale)
@@ -1510,7 +1523,7 @@ const getTurtleOutput = (
   };
 
   managerObj.runCode = (
-    code, target, animate = true, frames = 1, delay = 0, respectDebugger = false,
+    code, target, animate = true, frames = 1, delay = 0, respectDebugger = false, parentSelector = '.outputContainer',
   ) => {
     let attachDebugger = false;
     try {
@@ -1533,7 +1546,7 @@ const getTurtleOutput = (
       Sk.TurtleGraphics.height = width;
       Sk.TurtleGraphics.animate = animate;
       setTimeout(() => {
-        managerObj.repositionTurtle();
+        managerObj.repositionTurtle(`#${target}`, parentSelector);
       }, 500);
       // eslint-disable-next-line new-cap
       Sk.builtins.highlightBlock = new Sk.builtin.func((id) => {
@@ -1566,8 +1579,12 @@ const getTurtleOutput = (
         },
       };
     } catch (error) {
-      window.ReactNativeWebView.postMessage('script runcode error');
-      window.ReactNativeWebView.postMessage(error.message);
+      if (window.ReactNativeWebView) {
+        window.ReactNativeWebView.postMessage('script runcode error');
+        window.ReactNativeWebView.postMessage(error.message);
+      } else {
+        console.log(`script runcode error: ${error.message}`);
+      }
     }
     return Sk.misceval.asyncToPromise(() => Sk.importMainWithBody('<stdin>', false, code, true), attachDebugger);
   };

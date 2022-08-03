@@ -7,6 +7,7 @@ $thememaplight : (
   text-color-6: #e0e0e0,
   text-color-7: #4361ee,
   text-color-8: #fe6a07,
+  text-color-9: #505659,
   nav-bg-blue: #0051ff,
   nav-bg-green: #24aa70,
   nav-bg-lightblue: #00baff,
@@ -20,6 +21,7 @@ $thememaplight : (
   bg-1: #fff,
   bg-2: #212527,
   bg-3: #ededed,
+  bg-4: #000,
   skeleton-bg: #13224125,
 );
 // just copied the light theme colors to the dark for now
@@ -33,6 +35,7 @@ $thememapdark : (
   text-color-6: #e0e0e0,
   text-color-7: #4361ee,
   text-color-8: #fe6a07,
+  text-color-9: #505659,
   nav-bg-blue: #0051ff,
   nav-bg-green: #24aa70,
   nav-bg-lightblue: #00baff,
@@ -46,6 +49,7 @@ $thememapdark : (
   bg-1: #212527,
   bg-2: #fff,
   bg-3: #ededed,
+  bg-4: #000,
   skeleton-bg: #13224125,
 );
 
@@ -58,6 +62,7 @@ $cssvars : (
   text-color-6: --text-color-6,
   text-color-7: --text-color-7,
   text-color-8: --text-color-8,
+  text-color-9: --text-color-9,
   nav-bg-blue: --nav-bg-blue,
   nav-bg-green: --nav-bg-green,
   nav-bg-lightblue: --nav-bg-lightblue,
@@ -71,6 +76,7 @@ $cssvars : (
   bg-1: --bg-1,
   bg-2: --bg-2,
   bg-3: --bg-3,
+  bg-4: --bg-4,
   skeleton-bg: --skeleton-bg,
 );
 

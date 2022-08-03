@@ -34,6 +34,10 @@
     "defaultMessage": "This is more options page",
     "description": "More options Page"
   },
+  "4Op8zY": {
+    "defaultMessage": "Problem Statement",
+    "description": "Problem statement title"
+  },
   "4Ve1r3": {
     "defaultMessage": "Ok",
     "description": "confirm btn"
@@ -42,12 +46,20 @@
     "defaultMessage": "Please connect to the internet.",
     "description": "offline message"
   },
+  "5E2ZL9": {
+    "defaultMessage": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ullam deleniti nobis deserunt, eveniet, architecto incidunt sunt maiores itaque culpa voluptate molestiae pariatur voluptatem laudantium nostrum maxime obcaecati asperiores minima.",
+    "description": "Turtle description"
+  },
   "5sg7KC": {
     "defaultMessage": "Password"
   },
   "6+MZGf": {
     "defaultMessage": "Challenges",
     "description": "challenges heading"
+  },
+  "634LIC": {
+    "defaultMessage": "PLAY",
+    "description": "Play button"
   },
   "6Cjk2D": {
     "defaultMessage": "Login",
@@ -69,6 +81,10 @@
     "defaultMessage": "Go to Class",
     "description": "class navigation button"
   },
+  "AVSoe3": {
+    "defaultMessage": "Expected output",
+    "description": "Expected output title"
+  },
   "AyGauy": {
     "defaultMessage": "Login"
   },
@@ -79,6 +95,10 @@
   "C8CsWY": {
     "defaultMessage": "This is Class page",
     "description": "Class Page"
+  },
+  "CabaPs": {
+    "defaultMessage": "Level {level}",
+    "description": "Level 1 navigation link"
   },
   "CcB4fo": {
     "defaultMessage": "Coins Earned:",
@@ -171,6 +191,10 @@
   "SENRqu": {
     "defaultMessage": "Help"
   },
+  "SjoZlV": {
+    "defaultMessage": "Play Now",
+    "description": "Play button"
+  },
   "TmcPug": {
     "defaultMessage": "Edit Profile",
     "description": "edit profile"
@@ -207,6 +231,10 @@
     "defaultMessage": "Create a New Account",
     "description": "Create Account Button"
   },
+  "b2J6mh": {
+    "defaultMessage": "Home",
+    "description": "Home navigation link"
+  },
   "bK9TWX": {
     "defaultMessage": "Leaderboard Rank",
     "description": "leaderboard rank heading"
@@ -237,9 +265,17 @@
     "defaultMessage": "store authtoken",
     "description": "authtoken temp storage btn"
   },
+  "hWyGja": {
+    "defaultMessage": "Instructions",
+    "description": "Instructions title"
+  },
   "k6tlKQ": {
     "defaultMessage": "Ok",
     "description": "closing modal button"
+  },
+  "ksYOCd": {
+    "defaultMessage": "Leaderboard",
+    "description": "Leaderboard button"
   },
   "lKeCea": {
     "defaultMessage": "Save & Exit",
@@ -277,6 +313,10 @@
     "defaultMessage": "Go to Profile",
     "description": "Link description"
   },
+  "pVIk7O": {
+    "defaultMessage": "Turtle",
+    "description": "Turtle title"
+  },
   "pwy4hs": {
     "defaultMessage": "Game Progress",
     "description": "Game Progress card heading"
@@ -295,6 +335,10 @@
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
+  },
+  "tbPLF3": {
+    "defaultMessage": "{step}",
+    "description": "turtle instruction"
   },
   "tsF0aG": {
     "defaultMessage": "Continue Playing",
