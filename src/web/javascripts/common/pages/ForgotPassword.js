@@ -195,6 +195,7 @@ const ForgotPasswordStepThree = ({
           }));
         } else if (data.status === 'error') {
           hideInlineLoadingSpinner();
+          setFormErrorField('Something went wrong ! Try again', { 'data-error-type': 'ERROR' });
         }
       }).catch((error) => {
         hideInlineLoadingSpinner();

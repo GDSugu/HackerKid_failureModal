@@ -90,6 +90,9 @@ const RegisterFormStepOne = ({
           hideInlineLoadingSpinner();
           $('#phone').addClass('is-invalid').removeClass('is-valid');
           $('#form-error').text('Account already exists!, try logging in').attr('data-error-type', data.message).show();
+        } else if (data.status === 'error') {
+          hideInlineLoadingSpinner();
+          $('#form-error').text('Something went wrong! Try again').attr('data-error-type', 'ERROR').show();
         }
       }).catch((err) => {
         hideInlineLoadingSpinner();
@@ -116,7 +119,7 @@ const RegisterFormStepOne = ({
           handleStateChange('phoneNumber', e.target.value);
           validateInputOnChange(e);
           closeFormError(e.target);
-        }} data-close-form-error-type='ACCOUNT_EXIST' data-typename='Phone Number'/>
+        }} data-close-form-error-type='ACCOUNT_EXIST,ERROR' data-typename='Phone Number'/>
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -133,7 +136,8 @@ const RegisterFormStepOne = ({
           handleStateChange('email', e.target.value);
           validateInputOnChange(e);
           closeFormError(e.target);
-        }} data-typename='Email Address'/>
+        }} data-typename='Email Address'
+        data-close-form-error-type='ERROR'/>
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -150,7 +154,8 @@ const RegisterFormStepOne = ({
           handleStateChange('fullName', e.target.value, e);
           validateInputOnChange(e);
           closeFormError(e.target);
-        }} data-typename='Full Name'/>
+        }} data-typename='Full Name'
+        data-close-form-error-type='ERROR'/>
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -167,7 +172,8 @@ const RegisterFormStepOne = ({
           handleStateChange('parentName', e.target.value, e);
           validateInputOnChange(e);
           closeFormError(e.target);
-        }} data-typename="Parent's Name" />
+        }} data-typename="Parent's Name"
+        data-close-form-error-type='ERROR'/>
       </div>
       <p className='form-error text-danger overline-bold text-center' id='form-error'></p>
       <div className='take-action-buttons mt-4'>
@@ -250,6 +256,7 @@ const RegisterFormStepThree = ({
           pathNavigator('dashboard');
         } else if (data.status === 'error') {
           hideInlineLoadingSpinner();
+          $('#form-error').text('Something went wrong! Try again').attr('data-error-type', 'ERROR').show();
         }
       }).catch((error) => {
         hideInlineLoadingSpinner();
@@ -276,7 +283,7 @@ const RegisterFormStepThree = ({
             handleStateChange('password', e.target.value);
             validateInputOnChange(e, 'password', 'Use a stronger password');
             closeFormError(e.target);
-          }} data-close-form-error-type='INVALID_PASSWORD' required={ true} data-typename='Password' />
+          }} data-close-form-error-type='ERROR,INVALID_PASSWORD' required={ true} data-typename='Password' />
           <span className="password-toggle-icon-container">
             <i className="fa fa-fw fa-eye toggle-password" toggle="#password" onClick={togglePasswordVisibility}></i>
           </span>
@@ -299,7 +306,7 @@ const RegisterFormStepThree = ({
             validateInputOnChange(e, 'password', 'Use a stronger password');
             closeFormError(e.target);
             matchValueTo(e, '#password');
-          }} data-close-form-error-type='INVALID_PASSWORD' required={ true} data-typename='Re-type Password'/>
+          }} data-close-form-error-type='ERROR,INVALID_PASSWORD' required={true} data-typename='Re-type Password'/>
           <span className="password-toggle-icon-container">
             <i className="fa fa-fw fa-eye toggle-password" toggle="#retyped-password" onClick={togglePasswordVisibility}></i>
           </span>

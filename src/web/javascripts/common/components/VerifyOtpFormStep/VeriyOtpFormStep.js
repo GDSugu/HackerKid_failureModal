@@ -147,6 +147,9 @@ const VerifyOtpFormStep = ({
       } else if (data.status === 'error' && data.message === 'OTP_EXPIRED') {
         hideInlineLoadingSpinner();
         setFormErrorField('Enter a valid OTP', { 'data-error-type': data.message });
+      } else if (data.status === 'error') {
+        hideInlineLoadingSpinner();
+        setFormErrorField('Something went wrong! Try again', { 'data-error-type': 'ERROR' });
       }
     }).catch((err) => {
       hideInlineLoadingSpinner();
@@ -190,19 +193,19 @@ const VerifyOtpFormStep = ({
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
             onChangeHandler(e, 0);
             closeFormError(e.target);
-          }} data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler}/>
+          }} data-close-form-error-type='ERROR,OTP_EXPIRED' onKeyUp={keyUpHandler}/>
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
             onChangeHandler(e, 1);
             closeFormError(e.target);
-          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} />
+          } } data-close-form-error-type='ERROR,OTP_EXPIRED' onKeyUp={keyUpHandler} />
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
             onChangeHandler(e, 2);
             closeFormError(e.target);
-          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} />
+          } } data-close-form-error-type='ERROR,OTP_EXPIRED' onKeyUp={keyUpHandler} />
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
             onChangeHandler(e, 3);
             closeFormError(e.target);
-          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler}/>
+          } } data-close-form-error-type='ERROR,OTP_EXPIRED' onKeyUp={keyUpHandler}/>
         </div>
         <Link to='#' className='not-given-number overline-bold text-link' onClick={() => setParentStateObj((prevObj) => ({
           ...prevObj,
