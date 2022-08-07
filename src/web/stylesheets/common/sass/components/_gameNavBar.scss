@@ -4,6 +4,10 @@
 .game-navbar {
   background: url(../../../../../images/games/navbg.png) no-repeat 100% / cover;
 
+  @include gm.media-breakpoint-down(md) {
+    background: unset;
+  }
+
   .flex-start {
     display: flex;
     align-items: center;
@@ -35,12 +39,22 @@
   .level-btn {
     margin-top: 1rem;
 
+    @include gm.media-breakpoint-down(md) {
+      margin-top: 0;
+    }
+
     img {
       width: 2rem;
     }
 
     p {
       color: gt.theme-var(text-color-2);
+    }
+  }
+
+  .moreIcon {
+    img {
+      width: 2rem;
     }
   }
 

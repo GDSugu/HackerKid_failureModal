@@ -5,6 +5,18 @@
       "value": "PLAY"
     }
   ],
+  "+AycvP": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
+  "+g4yFF": [
+    {
+      "type": 0,
+      "value": "Logout"
+    }
+  ],
   "/EsQT0": [
     {
       "type": 0,
@@ -63,6 +75,12 @@
     {
       "type": 0,
       "value": "Forgot Password?"
+    }
+  ],
+  "1G3215": [
+    {
+      "type": 0,
+      "value": "Share"
     }
   ],
   "1RUvaS": [
@@ -137,10 +155,22 @@
       "value": "Ok"
     }
   ],
+  "4Yb5Wa": [
+    {
+      "type": 0,
+      "value": "Please connect to the internet."
+    }
+  ],
   "53f59E": [
     {
       "type": 0,
       "value": "Rank"
+    }
+  ],
+  "5E2ZL9": [
+    {
+      "type": 0,
+      "value": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ullam deleniti nobis deserunt, eveniet, architecto incidunt sunt maiores itaque culpa voluptate molestiae pariatur voluptatem laudantium nostrum maxime obcaecati asperiores minima."
     }
   ],
   "5L6FVQ": [
@@ -179,6 +209,12 @@
       "value": "Next"
     }
   ],
+  "6oGVMu": [
+    {
+      "type": 0,
+      "value": "Awesome!"
+    }
+  ],
   "74UjvK": [
     {
       "type": 0,
@@ -189,6 +225,12 @@
     {
       "type": 0,
       "value": "Login into existing account"
+    }
+  ],
+  "7PlDmO": [
+    {
+      "type": 0,
+      "value": "Play"
     }
   ],
   "9YoD+Y": [
@@ -225,6 +267,12 @@
     {
       "type": 0,
       "value": "New Password"
+    }
+  ],
+  "AVSoe3": [
+    {
+      "type": 0,
+      "value": "Expected output"
     }
   ],
   "Aevhvw": [
@@ -419,16 +467,16 @@
       "value": "errorMessage"
     }
   ],
-  "JnwRMJ": [
-    {
-      "type": 0,
-      "value": "OTP"
-    }
-  ],
   "JNotzf": [
     {
       "type": 0,
       "value": "Expected Output"
+    }
+  ],
+  "JnwRMJ": [
+    {
+      "type": 0,
+      "value": "OTP"
     }
   ],
   "MB8h2I": [
@@ -455,13 +503,7 @@
       "value": "Forgot Password?"
     }
   ],
-  "O6Zqgz": [
-    {
-      "type": 0,
-      "value": "Go to Turtle Home"
-    }
-  ],
-  "Op5EHr": [
+  "NeSPuI": [
     {
       "type": 0,
       "value": "Try the new in-built IDE"
@@ -533,6 +575,12 @@
       "value": "Password"
     }
   ],
+  "SjoZlV": [
+    {
+      "type": 0,
+      "value": "Play Now"
+    }
+  ],
   "SpftNg": [
     {
       "type": 1,
@@ -557,22 +605,34 @@
       "value": "studentName"
     }
   ],
-  "SjoZlV": [
-    {
-      "type": 0,
-      "value": "Play Now"
-    }
-  ],
   "TmcPug": [
     {
       "type": 0,
       "value": "Edit Profile"
     }
   ],
+  "U3AyDz": [
+    {
+      "type": 0,
+      "value": "Register to save your progess and compete with others"
+    }
+  ],
   "UUCx/J": [
     {
       "type": 0,
       "value": "Edit"
+    }
+  ],
+  "UkT6PM": [
+    {
+      "type": 0,
+      "value": "You have completed this level !"
+    }
+  ],
+  "UrVWqS": [
+    {
+      "type": 1,
+      "value": "step"
     }
   ],
   "VdAhqD": [
@@ -689,6 +749,12 @@
       "value": "School"
     }
   ],
+  "cI34g1": [
+    {
+      "type": 0,
+      "value": "Play next"
+    }
+  ],
   "cZDBd3": [
     {
       "type": 0,
@@ -755,6 +821,12 @@
       "value": "Send OTP"
     }
   ],
+  "hWyGja": [
+    {
+      "type": 0,
+      "value": "Instructions"
+    }
+  ],
   "hphOHh": [
     {
       "type": 0,
@@ -779,6 +851,12 @@
       "value": "Forgot Password"
     }
   ],
+  "k6tlKQ": [
+    {
+      "type": 0,
+      "value": "Ok"
+    }
+  ],
   "ksYOCd": [
     {
       "type": 0,
@@ -789,6 +867,12 @@
     {
       "type": 0,
       "value": "Save & Exit"
+    }
+  ],
+  "lPt9wn": [
+    {
+      "type": 1,
+      "value": "question"
     }
   ],
   "lynO1X": [
@@ -875,6 +959,12 @@
       "value": "Account Settings"
     }
   ],
+  "pVIk7O": [
+    {
+      "type": 0,
+      "value": "Turtle"
+    }
+  ],
   "pwy4hs": [
     {
       "type": 0,
@@ -905,6 +995,12 @@
       "value": "completed"
     }
   ],
+  "rZKLPy": [
+    {
+      "type": 0,
+      "value": "Copy Link"
+    }
+  ],
   "sNqwYF": [
     {
       "type": 0,
@@ -929,6 +1025,12 @@
       "value": "Continue Playing"
     }
   ],
+  "uGb/uS": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
   "uhayi4": [
     {
       "type": 1,
@@ -947,10 +1049,22 @@
       "value": "Try the new in-built IDE"
     }
   ],
+  "viQX0N": [
+    {
+      "type": 0,
+      "value": "Turtle"
+    }
+  ],
   "wrdAU0": [
     {
       "type": 0,
       "value": "Help"
+    }
+  ],
+  "x1EHNZ": [
+    {
+      "type": 0,
+      "value": "Share"
     }
   ],
   "x8lXTv": [
@@ -969,6 +1083,18 @@
     {
       "type": 0,
       "value": "Videos"
+    }
+  ],
+  "xlvJ5U": [
+    {
+      "type": 0,
+      "value": "You are offline."
+    }
+  ],
+  "xs8DW+": [
+    {
+      "type": 0,
+      "value": "Register for free"
     }
   ],
   "yujxGL": [

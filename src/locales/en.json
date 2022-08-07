@@ -1,4 +1,8 @@
 {
+  "+019EW": {
+    "defaultMessage": "PLAY",
+    "description": "Play Button"
+  },
   "+AycvP": {
     "defaultMessage": "Email",
     "description": "Email Button Title"
@@ -47,6 +51,10 @@
     "defaultMessage": "Forgot Password?",
     "description": "forgot password link"
   },
+  "1G3215": {
+    "defaultMessage": "Share",
+    "description": "Share button"
+  },
   "1RUvaS": {
     "defaultMessage": "Profile Settings",
     "description": "Navigation link to profile edit page"
@@ -94,9 +102,17 @@
     "defaultMessage": "Ok",
     "description": "confirm btn"
   },
+  "4Yb5Wa": {
+    "defaultMessage": "Please connect to the internet.",
+    "description": "offline message"
+  },
   "53f59E": {
     "defaultMessage": "Rank",
     "description": "Rank table cell header"
+  },
+  "5E2ZL9": {
+    "defaultMessage": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ullam deleniti nobis deserunt, eveniet, architecto incidunt sunt maiores itaque culpa voluptate molestiae pariatur voluptatem laudantium nostrum maxime obcaecati asperiores minima.",
+    "description": "Turtle description"
   },
   "5L6FVQ": {
     "defaultMessage": "Password",
@@ -122,6 +138,10 @@
     "defaultMessage": "Next",
     "description": "Next Button"
   },
+  "6oGVMu": {
+    "defaultMessage": "Awesome!",
+    "description": "Success message"
+  },
   "74UjvK": {
     "defaultMessage": "Login to existing Account",
     "description": "Login to existing account button"
@@ -129,6 +149,10 @@
   "7L3+7M": {
     "defaultMessage": "Login into existing account",
     "description": "Login into existing account button"
+  },
+  "7PlDmO": {
+    "defaultMessage": "Play",
+    "description": "Turtle Play Button"
   },
   "9YoD+Y": {
     "defaultMessage": "New Password",
@@ -153,6 +177,10 @@
   "A5u1Oz": {
     "defaultMessage": "New Password",
     "description": "New Password label"
+  },
+  "AVSoe3": {
+    "defaultMessage": "Expected output",
+    "description": "Expected output title"
   },
   "Aevhvw": {
     "defaultMessage": "Verify OTP and proceed",
@@ -273,13 +301,13 @@
     "defaultMessage": "{errorMessage}",
     "description": "error text"
   },
-  "JnwRMJ": {
-    "defaultMessage": "OTP",
-    "description": "OTP label"
-  },
   "JNotzf": {
     "defaultMessage": "Expected Output",
     "description": "Collapse Title - Expected Output"
+  },
+  "JnwRMJ": {
+    "defaultMessage": "OTP",
+    "description": "OTP label"
   },
   "MB8h2I": {
     "defaultMessage": "Leaderboard Ranking",
@@ -345,6 +373,10 @@
     "defaultMessage": "Password",
     "description": "Password label"
   },
+  "SjoZlV": {
+    "defaultMessage": "Play Now",
+    "description": "Play button"
+  },
   "SpftNg": {
     "defaultMessage": "{errorMessage}",
     "description": "phoneNumber form helper"
@@ -361,17 +393,25 @@
     "defaultMessage": "{studentName}",
     "description": "student name"
   },
-  "SjoZlV": {
-    "defaultMessage": "Play Now",
-    "description": "Play button"
-  },
   "TmcPug": {
     "defaultMessage": "Edit Profile",
     "description": "edit profile"
   },
+  "U3AyDz": {
+    "defaultMessage": "Register to save your progess and compete with others",
+    "description": "Success message"
+  },
   "UUCx/J": {
     "defaultMessage": "Edit",
     "description": "edit profile"
+  },
+  "UkT6PM": {
+    "defaultMessage": "You have completed this level !",
+    "description": "Success message"
+  },
+  "UrVWqS": {
+    "defaultMessage": "{step}",
+    "description": "Steps"
   },
   "VdAhqD": {
     "defaultMessage": "Coming Soon",
@@ -448,6 +488,10 @@
   "c9n6Sh": {
     "defaultMessage": "School"
   },
+  "cI34g1": {
+    "defaultMessage": "Play next",
+    "description": "Play next button"
+  },
   "cZDBd3": {
     "defaultMessage": "Coins",
     "description": "Coins cell header"
@@ -492,6 +536,10 @@
     "defaultMessage": "Send OTP",
     "description": "send otp button"
   },
+  "hWyGja": {
+    "defaultMessage": "Instructions",
+    "description": "Instructions title"
+  },
   "hphOHh": {
     "defaultMessage": "Help",
     "description": "help button"
@@ -508,6 +556,10 @@
     "defaultMessage": "Forgot Password",
     "description": "Forgot Password Heading"
   },
+  "k6tlKQ": {
+    "defaultMessage": "Ok",
+    "description": "closing modal button"
+  },
   "ksYOCd": {
     "defaultMessage": "Leaderboard",
     "description": "Leaderboard button"
@@ -515,6 +567,10 @@
   "lKeCea": {
     "defaultMessage": "Save & Exit",
     "description": "Profile save button"
+  },
+  "lPt9wn": {
+    "defaultMessage": "{question}",
+    "description": "Question"
   },
   "lynO1X": {
     "defaultMessage": "Change Password",
@@ -572,6 +628,10 @@
     "defaultMessage": "Account Settings",
     "description": "account settings CTA"
   },
+  "pVIk7O": {
+    "defaultMessage": "Turtle",
+    "description": "Turtle title"
+  },
   "pwy4hs": {
     "defaultMessage": "Game Progress",
     "description": "Game Progress card heading"
@@ -591,6 +651,10 @@
     "defaultMessage": "completed",
     "description": "Game Progress card caption"
   },
+  "rZKLPy": {
+    "defaultMessage": "Copy Link",
+    "description": "Copy Link button"
+  },
   "sNqwYF": {
     "defaultMessage": "Logout",
     "description": "Logout Button"
@@ -607,6 +671,10 @@
     "defaultMessage": "Continue Playing",
     "description": "continue playing"
   },
+  "uGb/uS": {
+    "defaultMessage": "{message}",
+    "description": "Success message"
+  },
   "uhayi4": {
     "defaultMessage": "{errorMessage}",
     "description": "email form helper"
@@ -619,9 +687,17 @@
     "defaultMessage": "Try the new in-built IDE",
     "description": "more card title"
   },
+  "viQX0N": {
+    "defaultMessage": "Turtle",
+    "description": "Game Title"
+  },
   "wrdAU0": {
     "defaultMessage": "Help",
     "description": "Help CTA"
+  },
+  "x1EHNZ": {
+    "defaultMessage": "Share",
+    "description": "Share message"
   },
   "x8lXTv": {
     "defaultMessage": "Resend",
@@ -634,6 +710,14 @@
   "xW6DFp": {
     "defaultMessage": "Videos",
     "description": "videos nav text"
+  },
+  "xlvJ5U": {
+    "defaultMessage": "You are offline.",
+    "description": "offline message"
+  },
+  "xs8DW+": {
+    "defaultMessage": "Register for free",
+    "description": "register button"
   },
   "yujxGL": {
     "defaultMessage": "Your Collections and Perks",

@@ -1,19 +1,23 @@
 import React from 'react';
 import md5 from 'crypto-js/md5';
-import post from '../../common/framework';
+import post, { getSession, setSession } from '../../common/framework';
 
 const useTurtleFetchQuestion = ({
   isPageMounted,
+  virtualid = false,
 }) => {
   const [turtleQuestionInfo, setTurtleQuestionInfo] = React.useState({
     status: true,
     questionList: false,
     questionObject: false,
-    validated: false,
+    successObject: false,
     submissionDetails: false,
+    validated: false,
+    validationDetails: false,
+    hintDetails: false,
   });
 
-  const fetchTurtleQuestion = ({ type = 'initialQuestion' || 'getQuestionById', virtualId = false, questionId = false }) => {
+  const fetchTurtleQuestion = ({ type = 'initialQuestion' || 'getQuestionById', virtualId = virtualid, questionId = false }) => {
     let payload = false;
     let qnResult;
 
@@ -68,7 +72,36 @@ const useTurtleFetchQuestion = ({
     return qnResult;
   };
 
-  const submitTurtle = (request) => post(request, 'turtle/', false);
+  const getNextQuestion = () => {
+    let result = new Promise((resolve) => resolve(false));
+    if (turtleQuestionInfo && turtleQuestionInfo.questionList) {
+      const nextQuestionidx = turtleQuestionInfo
+        .questionList
+        .findIndex((el) => el.question_id === turtleQuestionInfo.questionObject.question_id) + 1;
+      const nextQnId = turtleQuestionInfo.questionList[nextQuestionidx].question_id;
+      result = fetchTurtleQuestion({ type: 'getQuestionById', questionId: nextQnId });
+    }
+    return result;
+  };
+
+  const submitTurtle = (request) => post(request, 'turtle/', false)
+    .then((response) => {
+      if (response !== 'access_denied') {
+        const parsedResponse = JSON.parse(response);
+        if (parsedResponse.status === 'success' && parsedResponse.parse) {
+          if (parsedResponse.pointsDetails.addedPoints) {
+            getSession('pointsEarned')
+              .then((pointsEarned) => {
+                const availablePoints = pointsEarned ? Number(pointsEarned) : 0;
+                const newPoints = availablePoints
+                  + Number(parsedResponse.pointsDetails.addedPoints);
+                setSession('pointsEarned', newPoints);
+              });
+          }
+        }
+      }
+      return response;
+    });
   // {
   // console.log('submitTurtle');
   // let requestString = '';
@@ -80,8 +113,47 @@ const useTurtleFetchQuestion = ({
   // console.log(request);
   // };
 
+  const loadHints = ({ blockTypes, action = false }) => {
+    let request = {};
+    let result = new Promise((resolve) => resolve(false));
+    if (blockTypes) {
+      request = {
+        type: 'getHint',
+        questionId: turtleQuestionInfo.questionObject.question_id,
+        blockTypes,
+      };
+      const requiredHint = turtleQuestionInfo?.hintDetails?.currentHint;
+      if (requiredHint) {
+        if ((action === 'prev') && (requiredHint !== 1)) {
+          request.currentHint = requiredHint - 1;
+        } else if (action === 'next') {
+          request.currentHint = requiredHint + 1;
+        }
+      }
+      result = post(request, 'turtle/', false)
+        .then((response) => {
+          if (response === 'access_denied') {
+            setTurtleQuestionInfo((prevState) => ({
+              ...prevState,
+              hintDetails: 'access_denied',
+            }));
+          } else {
+            const parsedResponse = JSON.parse(response);
+            setTurtleQuestionInfo((prevState) => ({
+              ...prevState,
+              hintDetails: parsedResponse,
+            }));
+          }
+        });
+    }
+    return result;
+  };
+
   React.useEffect(() => {
-    fetchTurtleQuestion({});
+    fetchTurtleQuestion({
+      type: 'initialQuestion',
+      virtualId: virtualid,
+    });
   }, []);
 
   return {
@@ -89,6 +161,8 @@ const useTurtleFetchQuestion = ({
     setState: setTurtleQuestionInfo,
     static: {
       fetchTurtleQuestion,
+      loadHints,
+      getNextQuestion,
       submitTurtle,
     },
   };

@@ -64,6 +64,7 @@ const NavBar = () => {
   ];
 
   const profileImg = profileLink || '../../../../../images/common/profile.png';
+  const local = typeof profileLink === 'string' && profileLink.length > 0;
 
   React.useEffect(() => () => {
     isPageMounted.current = false;
@@ -86,7 +87,7 @@ const NavBar = () => {
         </div>
         <div className="profileImg">
           <Link to='/profile'>
-            <Img src={profileImg} alt="Hackerkid User"/>
+            <Img src={profileImg} local={!local} alt="Hackerkid User"/>
           </Link>
         </div>
       </div>

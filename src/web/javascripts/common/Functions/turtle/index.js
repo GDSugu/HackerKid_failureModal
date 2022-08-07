@@ -8,6 +8,9 @@ import 'blockly/python';
 import Blockly from './turtleBlocks';
 import Sk from '../../../vendors/skulpt/skulpt.min';
 import '../../../vendors/skulpt/skulpt-stdlib';
+import {
+  upsertDescription, upsertFBMeta, upsertTitle, upsertTwitterMeta,
+} from '../../seo';
 
 const manager = {
   windowType: 'desktop',
@@ -130,10 +133,12 @@ const repositionTurtle = (targetSelector = '#answerCanvas', parentSelector = '.o
   }
 };
 
+window.repositionTurtle = repositionTurtle;
+
 const updateDebugState = () => {
   try {
-    const debugButton = $('#continueDebugger');
-    const runButton = $('#runCode');
+    const debugButton = $('#continueDebugger, .continueDebugger');
+    const runButton = $('#runCode, .runCode');
     if (manager.inDebugging) {
       debugButton.show();
       runButton.hide();
@@ -146,8 +151,24 @@ const updateDebugState = () => {
   }
 };
 
+const updateSeoTags = (parsedResponse) => {
+  try {
+    const title = `${parsedResponse.questionObject.Question} - Turtle Level - Hackerkid`;
+    const description = `Follow the instructions: ${parsedResponse.questionObject.steps.join(', ')}`;
+    const url = `${window.location.origin}/turtle/${parsedResponse.questionObject.virtualId}/${parsedResponse.questionObject.uniqueString}`;
+    const image = parsedResponse.questionObject.img_link;
+    upsertTitle(title);
+    upsertDescription(description);
+    upsertFBMeta(title, description, url, image);
+    upsertTwitterMeta(title, description, url, image);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const toggleDebugState = () => {
   try {
+    console.log('debuggler state');
     const buttonEl = $('.debugToggle');
     const iconEl = $('.debugToggle i');
     if (!manager.debuggingEnabled) {
@@ -190,7 +211,7 @@ const runNextStep = (data, resolve, reject) => {
   try {
     // disable continue debugging
     const stepData = data;
-    $('#continueDebugger').attr('disabled', true);
+    $('#continueDebugger, .continueDebugger').attr('disabled', true);
     if (!manager.drawingVisible) {
       toggleDrawingState();
     }
@@ -211,22 +232,26 @@ const runNextStep = (data, resolve, reject) => {
   }
 };
 
+const runDebugger = () => {
+  if (manager.suspension
+    && 'resolve' in manager.suspension
+    && 'reject' in manager.suspension
+    && 'stepData' in manager.suspension) {
+    runNextStep(
+      manager.suspension.stepData,
+      manager.suspension.resolve,
+      manager.suspension.reject,
+    );
+  }
+};
+
 const attachDebugStepper = () => {
-  $(document).on('click', '#continueDebugger', () => {
-    if (manager.suspension
-      && 'resolve' in manager.suspension
-      && 'reject' in manager.suspension
-      && 'stepData' in manager.suspension) {
-      runNextStep(
-        manager.suspension.stepData,
-        manager.suspension.resolve,
-        manager.suspension.reject,
-      );
-    }
+  $(document).on('click', '#continueDebugger, .continueDebugger', () => {
+    runDebugger();
   });
 };
 
-const runCode = (code, target, animate = true, frames = 1, delay = 0, respectDebugger = false, parentSelector = '.outputContainer') => {
+const runCode = (code, target = '#answerCanvas', animate = true, frames = 1, delay = 0, respectDebugger = false, parentSelector = '.outputContainer') => {
   Sk.configure({
     read: (x) => {
       if (Sk.builtinFiles === undefined || Sk.builtinFiles.files[x] === undefined) {
@@ -263,7 +288,7 @@ const runCode = (code, target, animate = true, frames = 1, delay = 0, respectDeb
         updateDebugState();
 
         // allow continue debugging
-        $('#continueDebugger').attr('disabled', false);
+        $('#continueDebugger, .continueDebugger').attr('disabled', false);
         return new Promise((resolve, reject) => {
           manager.suspension = {
             stepData,
@@ -336,6 +361,46 @@ const resetDebugger = () => {
   updateDebugState();
 };
 
+const postNavigationHandle = () => {
+  // resetting canvas
+  $('#userCanvas, #answerCanvas #expOutCanvas').html('');
+
+  // clearing previously loaded hints
+  manager.hintResponse = false;
+
+  // hide hint container if already open
+  $('.hintContainer').animate({
+    transform: 200,
+  }, {
+    duration: 300,
+    step: (now) => {
+      $('.hintContainer').css('transform', `translate(-50%, ${now}%)`);
+    },
+    complete: () => {
+      $('.hintContainer').removeClass('shown');
+    },
+  });
+
+  // hide tour if alreadyopen
+  if (manager.tour) {
+    manager.tour.hide();
+  }
+
+  // resetting tour data
+  manager.tour = false;
+
+  resetDebugger();
+};
+
+const updateHistory = (response) => {
+  try {
+    const { uniqueString, virtualId } = response.questionObject;
+    window.history.replaceState({}, '', `/turtle/${virtualId}/${uniqueString}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const initiateRunCode = () => {
   // highlight current running block
   Blockly.Python.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
@@ -351,9 +416,7 @@ const initiateRunCode = () => {
     delay = 0;
   }
   let validated = false;
-  console.log('initiateRunCode', code);
   return runCode(code, 'userCanvas', true, frames, delay, true).then(() => {
-    console.log('runCode resolved');
     manager.workspace.highlightBlock(null);
     const selector = $('#userCanvas')[0];
     if (!selector || !selector.turtleInstance) {
@@ -429,6 +492,20 @@ const runSkulpt = () => {
 //     runSkulpt();
 //   });
 // };
+
+const copyHandler = (e) => {
+  const copyField = $('#shareLink');
+  const copyButton = $(e.target);
+  copyField.select();
+  document.execCommand('copy');
+  copyButton.popover({
+    content: 'Copied!',
+  });
+  copyButton.popover('show');
+  setTimeout(() => {
+    copyButton.popover('hide');
+  }, 1000);
+};
 
 const attachSpeedHandler = () => {
   try {
@@ -515,9 +592,11 @@ const attachZoomControls = () => {
 // };
 
 const attachDebugToggler = () => {
-  $(document).on('click', '.debugToggle', () => {
-    toggleDebugState();
-  });
+  // $(document).on('click', '.debugToggle', (e) => {
+  //   e.stopPropagation();
+  //   console.log('debug toggle');
+  //   toggleDebugState();
+  // });
   // initial state
   updateDebugState();
 };
@@ -540,8 +619,24 @@ const attachResizeHandler = () => {
   });
 };
 
+const selectDomView = () => {
+  try {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      manager.windowType = 'mobile';
+    } else {
+      manager.windowType = 'desktop';
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const startTurtle = ({ response }) => {
   manager.initialResponse = response;
+  selectDomView();
+  updateSeoTags(response);
+  updateHistory(response);
+  postNavigationHandle();
   initializeTurtle(response.questionObject);
   initializeEditor();
   initializeBlockly(response);
@@ -557,8 +652,12 @@ const startTurtle = ({ response }) => {
 export default null;
 
 export {
+  copyHandler,
   toggleDrawingState,
-  startTurtle,
   repositionTurtle,
+  runDebugger,
   runSkulpt,
+  startTurtle,
+  toggleDebugState,
+  updateHistory,
 };

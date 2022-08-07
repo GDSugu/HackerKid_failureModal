@@ -27,13 +27,12 @@ const Modal = ({
   useEffect(() => {
     if (modalVisible) {
       $('#modal').modal(options || 'show');
-      $('#modal').on('hidden.bs.modal', onHidden);
-      $('#modal').on('shown.bs.modal', onShown);
     } else {
       $('#modal').modal('hide');
-      $('#modal').off('hidden.bs.modal');
-      $('#modal').off('shown.bs.modal');
     }
+
+    $('#modal').on('hidden.bs.modal', onHidden);
+    $('#modal').on('shown.bs.modal', onShown);
 
     return () => {
       $('#modal').off('hidden.bs.modal');
@@ -44,12 +43,8 @@ const Modal = ({
 
   if (modalVisible) {
     $('#modal').modal(options || 'show');
-    $('#modal').on('hidden.bs.modal', onHidden);
-    $('#modal').on('shown.bs.modal', onShown);
   } else {
     $('#modal').modal('hide');
-    $('#modal').off('hidden.bs.modal');
-    $('#modal').off('shown.bs.modal');
   }
 
   return <>
@@ -75,7 +70,9 @@ const Modal = ({
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              { children }
+              <div className='modal-container'>
+                { children }
+              </div>
             </div>
           </div>
         </div>

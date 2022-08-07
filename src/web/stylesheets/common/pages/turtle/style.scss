@@ -165,9 +165,12 @@
     align-items: stretch;
     height: 100%;
     padding: 1rem 0 1rem 0;
+    overflow: hidden;
     // background: url(../../../../../images/turtle/turtleBgWeb.svg) no-repeat 100% / cover;
 
     .game-container-block {
+      position: relative;
+
       .turtle-editor-container {
         #tabsContent {
           #turtleOutput {
@@ -206,7 +209,7 @@
                   position: absolute;
                   width: 100%;
                 }
-                
+
                 #answerCanvas {
                   position: absolute;
                   width: 100%;
@@ -228,6 +231,29 @@
 
       #tabsContent {
         height: calc(100% - 49px);
+
+        .hintBtnContainer {
+          position: absolute;
+          right: 0;
+          transform: translateX(-25%);
+          z-index: 100;
+
+          .hintBtn {
+            &:focus {
+              box-shadow: none;
+            }
+
+            &.hintBtn-dark {
+              transform: translateY(48px);
+
+              svg {
+                path {
+                  fill: gt.theme-var(text-color-1);
+                }
+              }
+            }
+          }
+        }
 
         .tab-pane {
           height: 100%;
@@ -309,24 +335,20 @@
         .nav-tabs {
           .nav-item {
             .nav-link {
-              color: gt.theme-var(text-color-9);
-              background: transparent;
+              color: gt.theme-var(text-color-2);
+              border: none;
+              font-weight: bold;
 
               &.active {
                 color: gt.theme-var(text-color-2);
-                background-color: transparent;
-                border-top: none;
-                border-left: none;
-                border-right: none;
-                border-bottom-width: 2px;
+                background: gt.theme-var(game-white-gradient-bg, null, $thememaplight, $cssvars);
+                background-size: 100% 0.25rem;
+                background-position: bottom 0 left 0, bottom 0.25rem left 0;
+                background-repeat: no-repeat;
               }
 
               &:hover {
-                border-top: none;
-                border-left: none;
-                border-right: none;
-                border-bottom-width: 2px;
-                border-color: gt.theme-var(text-color-2);
+                border: none;
               }
             }
           }
@@ -348,9 +370,282 @@
       background-image: linear-gradient(90deg, gt.theme-var(text-color-5), gt.theme-var(bg-2) 50%, gt.theme-var(skeleton-bg) 50%);
       background-size: 200%;
     }
-
   }
+
+  .game-mob-container {
+    position: relative;
+    height: calc(100vh - 62px);
+    overflow: hidden;
+
+    .turtle-mob-game-container {
+      display: flex;
+      flex-direction: column;
+
+      #tabsContent {
+        flex: 1;
+
+        .tab-pane {
+          height: calc(100vh - 62px - 81px);
+
+          &#questionBlock {
+            .turtle-mob-question-container {
+              padding: 0 1rem;
+              height: 100%;
+              display: grid;
+              grid-template-rows: 50% 50%;
+
+              .turtle-mob-question-block {
+                height: 95%;
+                overflow: hidden;
+                margin-bottom: 1rem;
+
+                .turtle-question-header,
+                .turtle-question-title,
+                .turtle-question-instructions-title {
+                  font-weight: bold;
+                }
+
+                .turtle-question-header {
+                  color: gt.theme-var(text-color-2);
+                }
+
+                .turtle-question-card {
+                  background-color: gt.theme-var(game-transparent-bg, null, $thememaplight, $cssvars);
+                  border-radius: 0.75rem;
+                  padding: 1rem;
+                  color: gt.theme-var(text-color-1);
+                  height: calc(100% - 40px);
+                  overflow: auto;
+                }
+              }
+
+              .turtle-mob-output-block {
+                background-color: transparent;
+                // border: 1px solid gt.theme-var(game-btn-bg, null, $thememaplight, $cssvars);
+                border-radius: 0.75rem;
+                max-height: 100%;
+                flex-grow: 1;
+                flex-basis: 0;
+                overflow: hidden;
+
+                button {
+                  background-color: gt.theme-var(bg-1);
+                  border: unset;
+                  border-radius: 0.75rem;
+                  width: 100%;
+                  padding: 1rem;
+                  transition: all 0.3s ease-in-out;
+
+                  &[aria-expanded=true] {
+                    border-radius: unset;
+
+                    i {
+                      &:before {
+                        content: '\f106';
+                      }
+                    }
+                  }
+
+                  p,
+                  i {
+                    color: gt.theme-var(text-color-1);
+                    font-weight: bold;
+                  }
+
+                  i {
+                    font-size: 1.75rem;
+                  }
+                }
+
+                #expOupCollapse {
+                  height: calc(100% - 62px);
+                  background-color: gt.theme-var(bg-1);
+                  transition: all 0.1s ease-in-out;
+
+                  .turtle-qnout-container {
+                    height: 100%;
+                    overflow: auto;
+                    position: relative;
+
+                    #expOutCanvas {
+                      position: absolute;
+                      height: 100%;
+                      width: 100%;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          // &#turtleBlock {
+          //   .blocklyScrollbarVertical {
+          //     left: 2%;
+
+          //     .blocklyScrollbarHandle {
+          //       width: 0.5rem;
+          //     }
+          //   }
+
+          //   .blocklyScrollbarHorizontal {
+          //     top: 2%;
+
+          //     .blocklyScrollbarHandle {
+          //       height: 0.5rem;
+          //     }
+          //   }
+          // }
+
+          &#turtleOutput {
+            background: gt.theme-var(bg-1);
+
+            #outputSection {
+              height: 100%;
+
+              .drawing-controls {
+                margin-right: 0.25rem;
+                margin-top: 0.25rem;
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                right: 0;
+                z-index: 100;
+
+                button {
+                  margin: 0.25rem;
+                  width: 2.5rem;
+                }
+              }
+
+              .outputContainer {
+                height: 100%;
+                position: relative;
+                overflow: auto;
+
+                #answerCanvas,
+                #userCanvas {
+                  width: 100%;
+                  height: 100%;
+                  position: absolute;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .nav-tabs {
+        background-color: gt.theme-var(game-dark-transparent, null, $thememaplight, $cssvars);
+        backdrop-filter: blur(4px);
+
+        .nav-item {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+
+          .nav-link {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            &.active {
+              background: unset;
+              border: unset;
+
+              svg,
+              p {
+                color: gt.theme-var(game-nav-active-color, null, $thememaplight, $cssvars);
+              }
+            }
+
+            p {
+              color: gt.theme-var(text-color-2);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .hintContainer {
+    // display: none;
+    position: absolute;
+    background-color: gt.theme-var(bg-1);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    width: 50%;
+    z-index: 100;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translate(-50%, 100%);
+
+    @include gm.media-breakpoint-down(md) {
+      width: 90%;
+      transform: translate(-50%, 150%);
+    }
+
+    button {
+      border-radius: 0.75rem;
+      border: 2px solid gt.theme-var(game-hint-btn-bg, null, $thememaplight, $cssvars);
+      background-color: transparent;
+
+      &:hover {
+        background-color: gt.theme-var(game-hint-btn-bg, null, $thememaplight, $cssvars);
+        color: gt.theme-var(text-color-2);
+      }
+
+      &.close {
+        color: gt.theme-var(nav-bg-red);
+        line-height: 0.5;
+        font-size: 2.5rem;
+        border: none;
+
+        &:hover {
+          background-color: unset;
+        }
+      }
+
+      &.registerBtn {
+        background-color: gt.theme-var(game-hint-btn-bg, null, $thememaplight, $cssvars);
+        color: gt.theme-var(text-color-2);
+      }
+
+      &.navigateHint {
+        border-radius: 50%;
+        border: 2px solid gt.theme-var(game-hint-btn-bg, null, $thememaplight, $cssvars);
+        color: gt.theme-var(game-hint-btn-bg, null, $thememaplight, $cssvars);
+        font-size: 1rem;
+        line-height: 0.5;
+
+        &:hover {
+          background-color: gt.theme-var(game-hint-btn-bg, null, $thememaplight, $cssvars);
+          color: gt.theme-var(text-color-2);
+        }
+
+        & > * {
+          pointer-events: none;
+        }
+      }
+    }
+
+    #currentHint {
+      width: 90%;
+    }
+  }
+
   .successModal {
+    .modal-custom-header {
+      button.close {
+        color: gt.theme-var(text-color-2);
+        font-size: 2rem;
+        background: gt.theme-var(game-modal-close-btn-bg, null, $thememaplight, $cssvars);
+        padding: 0.125rem 0.6rem 0.45rem;
+        line-height: 0.75;
+        opacity: 1;
+      }
+    }
+
     .success-modal-content {
       .recognition-content,
       .share-content {
@@ -361,12 +656,18 @@
         p {
           text-align: center;
         }
-        
+
         button {
           margin: 0 0.25rem;
           border-width: 2px;
           border-radius: 0.75rem;
           font-weight: bold;
+
+          &.btn-outline-primary {
+            &:hover {
+              color: gt.theme-var(text-color-2);
+            }
+          }
         }
       }
 
@@ -385,6 +686,10 @@
           font-size: 1.25rem;
         }
 
+        img {
+          width: 12rem;
+        }
+
         button {
           &.btn-primary {
             color: gt.theme-var(text-color-2);
@@ -398,7 +703,22 @@
 
       .share-content {
         .btn-container {
-          margin: 2rem 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 2rem auto;
+          padding: 0;
+
+          .form-group {
+            margin: 0;
+            padding: 0;
+
+            input {
+              border-radius: 0.5rem;
+              border: 1px solid gt.theme-var(game-input-border-color, null, $thememaplight, $cssvars);
+              background-color: gt.theme-var(bg-1);
+            }
+          }
         }
       }
     }
@@ -415,21 +735,33 @@
   }
 
   ::-webkit-scrollbar {
-    width: 0.5rem;
+    @include gm.media-breakpoint-up(md) {
+      width: 0.5rem;
+    }
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: gt.theme-var(skeleton-bg);
-    border-radius: 1rem;
+    @include gm.media-breakpoint-up(md) {
+      background-color: gt.theme-var(skeleton-bg);
+      border-radius: 1rem;
+    }
   }
 }
 
 .turtle-home-container {
   background: url(../../../../../images/turtle/turtleBgWeb.svg) no-repeat 100% / cover;
+
+  @include gm.media-breakpoint-down(md) {
+    background-image: url(../../../../../images/turtle/turtleBg.png);
+  }
 }
 
 .turtle-main-container {
   background: url(../../../../../images/turtle/turtleMainBgWeb.svg) no-repeat 100% / cover;
   max-width: 100vw;
   width: unset;
+
+  @include gm.media-breakpoint-down(md) {
+    background-image: url(../../../../../images/turtle/turtleMainBg.png);
+  }
 }
