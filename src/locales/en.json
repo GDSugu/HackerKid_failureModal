@@ -98,6 +98,10 @@
     "defaultMessage": "Problem Statement",
     "description": "Problem statement title"
   },
+  "4Op8zY": {
+    "defaultMessage": "Problem Statement",
+    "description": "Problem statement title"
+  },
   "4Ve1r3": {
     "defaultMessage": "Ok",
     "description": "confirm btn"
@@ -309,6 +313,10 @@
     "defaultMessage": "OTP",
     "description": "OTP label"
   },
+  "JNotzf": {
+    "defaultMessage": "Expected Output",
+    "description": "Collapse Title - Expected Output"
+  },
   "MB8h2I": {
     "defaultMessage": "Leaderboard Ranking",
     "description": "Leaderboard card heading text"
@@ -392,6 +400,10 @@
   "TbteVJ": {
     "defaultMessage": "{studentName}",
     "description": "student name"
+  },
+  "SjoZlV": {
+    "defaultMessage": "Play Now",
+    "description": "Play button"
   },
   "TmcPug": {
     "defaultMessage": "Edit Profile",

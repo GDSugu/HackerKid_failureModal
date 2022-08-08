@@ -261,22 +261,22 @@ const App = () => {
                     <Stack.Screen name='Class' component={RouteClass} />
                     <Stack.Screen name='EditProfile' component={RouteProfile} />
                     <Stack.Screen name='Leaderboard' component={RouteLeaderboard} />
+                    <Stack.Screen name='TurtleHome'>
+                      {(props) => <RouteTurtleHome {...props} routeName={routeName} /> }
+                    </Stack.Screen>
+                    <Stack.Group
+                      screenOptions={{
+                        animation: 'slide_from_right',
+                      }}
+                    >
+                      <Stack.Screen name='TurtleMain' component={RouteTurtleMain} />
+                    </Stack.Group>
+                    <Stack.Screen name='TurtleLeaderBoard' component={RouteTurtleLeaderBoard} options={{ presentation: 'transparentModal' }} />
                     </>
                     : <>
                       <Stack.Screen name='Login' component={RouteLogin} />
                       <Stack.Screen name='Register' component={RouteRegister} />
                       <Stack.Screen name='ForgotPassword' component={RouteForgotPassword} />
-                      <Stack.Screen name='TurtleHome'>
-                        {(props) => <RouteTurtleHome {...props} routeName={routeName} /> }
-                      </Stack.Screen>
-                      <Stack.Group
-                        screenOptions={{
-                          animation: 'slide_from_right',
-                        }}
-                      >
-                        <Stack.Screen name='TurtleMain' component={RouteTurtleMain} />
-                      </Stack.Group>
-                      <Stack.Screen name='TurtleLeaderBoard' component={RouteTurtleLeaderBoard} options={{ presentation: 'transparentModal' }} />
                     </>
                 }
               </Stack.Group>
