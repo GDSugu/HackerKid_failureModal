@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/css/intlTelInput.css';
 import {
-  getRecapchaToken, pageInit, pathNavigator, validate,
+  pageInit, pathNavigator, validate,
 } from '../framework';
 import '../../../stylesheets/common/pages/register/style.scss';
 import useRegister from '../../../../hooks/pages/register';
@@ -13,15 +13,16 @@ import {
   togglePasswordVisibility, validateInputOnChange, closeFormError, setFormErrorField,
 } from '../commonLoginRegisterFunctions';
 import { loginCheck, setUserSession } from '../../../../hooks/common/framework';
-import VerifyOtpFormStep from '../components/VerifyOtpFormStep/VeriyOtpFormStep';
+import VerifyOtpFormStep from '../components/VerifyOtpFormStep';
 import useOtp from '../../../../hooks/pages/otp';
 import useBackBtn from '../../../../hooks/pages/back-btn';
 import showInlineLoadingSpinner from '../loader';
+import useRecapchav3 from '../../../../hooks/pages/recapchav3';
 
 const manager = {};
 
 const RegisterFormStepOne = ({
-  stateObj, setStateObj, handleStateChange, setBackBtnStateObj,
+  stateObj, setStateObj, handleStateChange, setBackBtnStateObj, getRecapchaToken,
 }) => {
   // hooks
   const { sendOtpRequest } = useOtp();
@@ -30,7 +31,7 @@ const RegisterFormStepOne = ({
     const flaginput = document.querySelector('#phone');
     manager.telInput = intlTelInput(flaginput, {
       allowDropdown: true,
-      initialCountry: 'in',
+      initialCountry: stateObj.countryAbbrevation || 'in',
       separateDialCode: true,
       utilsScript: intlTelInput.utilsScript,
     });
@@ -39,7 +40,7 @@ const RegisterFormStepOne = ({
       ...prevBackObj,
       showBackBtn: false,
     }));
-  }, []);
+  }, [stateObj.formStep]);
 
   // methods
   const nextBtnClickHandler = (e) => {
@@ -66,42 +67,70 @@ const RegisterFormStepOne = ({
       return false;
     });
 
-    const getCurrentCountryCode = () => {
-      let countryCode = manager.telInput.getSelectedCountryData();
-      countryCode = `+${countryCode.dialCode}`;
+    const getCurrentCountryData = () => {
+      const countryData = manager.telInput.getSelectedCountryData();
 
-      return countryCode;
+      return {
+        countryCode: `+${countryData.dialCode}`,
+        countryAbbrevation: countryData.iso2,
+      };
     };
 
     const allValidationsPassed = checkAllValidations();
     if (allValidationsPassed) {
       const hideInlineLoadingSpinner = showInlineLoadingSpinner('.next-btn');
-      const countryCode = getCurrentCountryCode();
+      const { countryCode, countryAbbrevation } = getCurrentCountryData();
 
-      getRecapchaToken({ action: 'register' }).then((token) => {
-        sendOtpRequest(stateObj.phoneNumber, countryCode, 'send-otp', token).then((response) => {
-          const data = JSON.parse(response);
-          if (data.status === 'success') {
-            setStateObj((prevObj) => ({
-              ...prevObj,
-              formStep: prevObj.formStep + 1,
-              countryCode,
-            }));
-          } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
-            hideInlineLoadingSpinner();
-            $('#phone').addClass('is-invalid').removeClass('is-valid');
-            setFormErrorField('Account already exists!, try logging in', { 'data-error-type': data.message });
-          } else if (data.status === 'error') {
-            hideInlineLoadingSpinner();
-            setFormErrorField('Something went wrong! Try again', { 'data-error-type': 'ERROR' });
+      getRecapchaToken({ action: 'register' }).then((token) => sendOtpRequest(stateObj.phoneNumber, countryCode, 'send-otp', token).then((response) => {
+        const data = JSON.parse(response);
+        const { status, message } = data;
+
+        if (status === 'success') {
+          setStateObj((prevObj) => ({
+            ...prevObj,
+            formStep: prevObj.formStep + 1,
+            countryCode,
+            countryAbbrevation,
+          }));
+        } else if (status === 'error') {
+          const errorCause = 'postData';
+
+          switch (message) {
+            case 'ACCOUNT_EXIST': {
+              $('#phone').addClass('is-invalid').removeClass('is-valid');
+              const err = new Error('Account already exists!, try logging in');
+              err.errorTypeObject = { 'data-error-type': 'ACCOUNT_EXIST' };
+              err.cause = errorCause;
+
+              throw err;
+            }
+            case 'UNAUTHORIZED_ACCESS': {
+              const err = new Error('Unauthorized access, reload and try again!');
+              err.errorTypeObject = { 'data-error-type': 'ERROR' };
+              err.cause = errorCause;
+
+              throw err;
+            }
+            default: {
+              const err = new Error('Something went wrong!Try again');
+              err.errorTypeObject = { 'data-error-type': 'ERROR' };
+              err.cause = errorCause;
+
+              throw err;
+            }
           }
-        }).catch((err) => {
-          hideInlineLoadingSpinner();
+        }
+      })).catch((err) => {
+        hideInlineLoadingSpinner();
+        if (err.cause === 'postData') {
+          setFormErrorField(err.message, err.errorTypeObject);
+        } else {
+          setFormErrorField('Something went wrong! Try again', { 'data-error-type': 'ERROR' });
+
           const errData = JSON.parse(err);
-          console.log(errData);
-        });
-      })
-        .catch((err) => console.error(err));
+          console.error(errData);
+        }
+      });
     }
   };
 
@@ -201,7 +230,7 @@ const RegisterFormStepOne = ({
 };
 
 const RegisterFormStepThree = ({
-  createAccountRequest, handleStateChange, setStateObj, setBackBtnStateObj,
+  createAccountRequest, handleStateChange, setStateObj, setBackBtnStateObj, getRecapchaToken,
 }) => {
   // hooks
   useEffect(() => {
@@ -250,24 +279,43 @@ const RegisterFormStepThree = ({
     if ((enteredPassword && retypedPassword) && (enteredPassword === retypedPassword)) {
       const hideInlineLoadingSpinner = showInlineLoadingSpinner('.create-account-btn');
 
-      getRecapchaToken({ action: 'register' }).then((token) => {
-        createAccountRequest(token).then((response) => {
-          const data = JSON.parse(response);
+      getRecapchaToken({ action: 'register' }).then((token) => createAccountRequest(token).then((response) => {
+        const data = JSON.parse(response);
+        const { status, message } = data;
 
-          if (data.status === 'success' && data.message === 'REGISTERED') {
-            const sessionDetails = data.session;
-            setUserSession(sessionDetails);
-            pathNavigator('dashboard');
-          } else if (data.status === 'error') {
-            hideInlineLoadingSpinner();
-            setFormErrorField('Something went wrong! Try again', { 'data-error-type': 'ERROR' });
+        if (status === 'success') {
+          const sessionDetails = data.session;
+          setUserSession(sessionDetails).then(() => pathNavigator('dashboard'));
+        } else if (status === 'error') {
+          const errorCause = 'postData';
+          switch (message) {
+            case 'UNAUTHORIZED_ACCESS': {
+              const err = new Error('Unauthorized access, reload and try again!');
+              err.errorTypeObject = { 'data-error-type': 'ERROR' };
+              err.cause = errorCause;
+
+              throw err;
+            }
+            default: {
+              const err = new Error('Something went wrong! Try again', errorCause);
+              err.errorTypeObject = { 'data-error-type': 'ERROR' };
+              err.cause = errorCause;
+
+              throw err;
+            }
           }
-        }).catch((error) => {
-          hideInlineLoadingSpinner();
-          const errData = JSON.parse(error);
-          console.log(errData);
-        });
-      }).catch((err) => console.error(err));
+        }
+      })).catch((err) => {
+        hideInlineLoadingSpinner();
+
+        if (err.cause === 'postData') {
+          setFormErrorField(err.message, err.errorTypeObject);
+        } else {
+          setFormErrorField('Something went wrong! Try again');
+
+          console.error(err);
+        }
+      });
     }
   };
 
@@ -335,6 +383,7 @@ const Register = () => {
   // hooks
   const { stateObj, setStateObj, createAccountRequest } = useRegister();
   const { stateObj: backBtnStateObj, setStateObj: setBackBtnStateObj } = useBackBtn();
+  const getRecapchaToken = useRecapchav3();
 
   useEffect(() => {
     loginCheck().then((response) => {
@@ -345,29 +394,6 @@ const Register = () => {
     }).catch((err) => {
       console.log(err);
     });
-
-    const loadScriptByURL = (id, url, onload = false) => {
-      const isScriptExist = document.getElementById(id);
-
-      if (!isScriptExist) {
-        const script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = url;
-        script.id = id;
-        script.onload = () => {
-          if (onload) onload();
-        };
-        document.body.appendChild(script);
-      }
-
-      if (isScriptExist && onload) onload();
-    };
-
-    loadScriptByURL('recaptcha-key', 'https://www.google.com/recaptcha/api.js?render=6LdlNzkhAAAAACHROyP4u5UKmMbmKewfuNlFQwOX');
-
-    return () => {
-      $('recaptcha-key').remove();
-    };
   }, []);
 
   // styles
@@ -386,6 +412,7 @@ const Register = () => {
     setStateObj,
     handleStateChange,
     setBackBtnStateObj,
+    getRecapchaToken,
   };
 
   return (
@@ -412,6 +439,7 @@ const Register = () => {
               setParentStateObj={setStateObj}
               setBackBtnStateObj={setBackBtnStateObj}
               otpRequestType={'send-otp'}
+              getRecapchaToken = {getRecapchaToken}
               recapchaExecuteOptions = {{ action: 'register' }}
               secondaryActionButtons={[<Link key={0} to='/login' className='login-into-existing-account-btn text-link mt-3'>
               <span className='overline-bold'>

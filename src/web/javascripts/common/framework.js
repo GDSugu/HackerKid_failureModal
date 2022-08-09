@@ -210,16 +210,23 @@ const validate = (id, type, required = 1, warnId = false, warnMsg = false,
   return data;
 };
 
-const getRecapchaToken = (executeOptions) => {
-  if (!executeOptions) throw new Error('Execute Options required');
-  if (Array.isArray(executeOptions) || typeof executeOptions !== 'object') throw new Error('Object Expected');
+const loadScriptByURL = (id, url, async = false, defer = false, onload = false) => {
+  const isScriptExist = document.getElementById(id);
 
-  return new Promise((resolve, reject) => {
-    window.grecaptcha.ready(() => {
-      window.grecaptcha.execute('6LdlNzkhAAAAACHROyP4u5UKmMbmKewfuNlFQwOX', executeOptions).then((token) => resolve(token))
-        .catch((err) => reject(err));
-    });
-  });
+  if (!isScriptExist) {
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = url;
+    script.id = id;
+    script.async = async;
+    script.defer = defer;
+    script.onload = () => {
+      if (onload) onload();
+    };
+    document.body.appendChild(script);
+  }
+
+  if (isScriptExist && onload) onload();
 };
 
 const getQueryString = (query) => {
@@ -374,5 +381,5 @@ export {
   updatePoints,
   debounce,
   getShareMarkup,
-  getRecapchaToken,
+  loadScriptByURL,
 };

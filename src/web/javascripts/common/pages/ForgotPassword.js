@@ -12,39 +12,44 @@ import useForgotPassword from '../../../../hooks/pages/forgot-password';
 import {
   validateInputOnChange, closeFormError, setFormErrorField, togglePasswordVisibility,
 } from '../commonLoginRegisterFunctions';
-import VerifyOtpFormStep from '../components/VerifyOtpFormStep/VeriyOtpFormStep';
+import VerifyOtpFormStep from '../components/VerifyOtpFormStep';
 import useBackBtn from '../../../../hooks/pages/back-btn';
 import showInlineLoadingSpinner from '../loader';
 import useOtp from '../../../../hooks/pages/otp';
+import useRecapchav3 from '../../../../hooks/pages/recapchav3';
 
 const manager = {};
+
+const LoginIntoExistingAccountBtn = () => <Link to='/login' className='login-to-existing-account-btn btn btn-outline-primary btn-block mb-2'>
+  <span className='overline-bold'>
+    <FormattedMessage
+      defaultMessage="Login to existing Account"
+      description="Login to existing account button"
+    />
+  </span>
+  </Link>;
+
+const CreateAccountBtn = () => <Link to='/register' className='create-new-account-btn btn btn-outline-primary btn-block mt-0 mb-2'>
+    <span className='overline-bold'>
+      <FormattedMessage
+        defaultMessage="Create a New Account"
+        description="create new account button"
+      />
+    </span>
+</Link>;
 
 const TakeActionButtons = ({ children }) => (
   <div className='take-action-buttons mt-4'>
     {(children) || false}
     <div className='secondary-take-action-buttons'>
-      <Link to='/login' className='login-to-existing-account-btn btn btn-outline-primary btn-block mb-2'>
-        <span className='overline-bold'>
-          <FormattedMessage
-            defaultMessage="Login to existing Account"
-            description="Login to existing account button"
-          />
-        </span>
-        </Link>
-        <Link to='/register' className='create-new-account-btn btn btn-outline-primary btn-block mt-0 mb-2'>
-          <span className='overline-bold'>
-            <FormattedMessage
-              defaultMessage="Create a New Account"
-              description="create new account button"
-            />
-          </span>
-      </Link>
+      <LoginIntoExistingAccountBtn/>
+      <CreateAccountBtn />
     </div>
 </div>
 );
 
 const ForgotPasswordStepOne = ({
-  stateObj, setStateObj, handleStateChange, setBackBtnStateObj,
+  stateObj, setStateObj, handleStateChange, setBackBtnStateObj, getRecapchaToken,
 }) => {
   // hooks
   const { sendOtpRequest } = useOtp();
@@ -73,32 +78,59 @@ const ForgotPasswordStepOne = ({
     countryCode = `+${countryCode.dialCode}`;
 
     if (result) {
-      const hideLoadingSpinner = showInlineLoadingSpinner('.send-otp-btn');
-      sendOtpRequest(stateObj.phoneNumber, countryCode, 'send-otp-for-pwd-change').then((response) => {
-        const data = JSON.parse(response);
+      const hideInLineLoadingSpinner = showInlineLoadingSpinner('.send-otp-btn');
+      getRecapchaToken({ action: 'forgotPassword' })
+        .then((token) => sendOtpRequest(stateObj.phoneNumber, countryCode, 'send-otp-for-pwd-change', token)
+          .then((response) => {
+            const data = JSON.parse(response);
+            const { status, message } = data;
 
-        if (data.status === 'success') {
-          setStateObj((prevObj) => (
-            {
-              ...prevObj,
-              formStep: 2,
-              countryCode,
+            if (status === 'success') {
+              setStateObj((prevObj) => (
+                {
+                  ...prevObj,
+                  formStep: 2,
+                  countryCode,
+                }
+              ));
+            } else if (data.status === 'error') {
+              const errorCause = 'postData';
+              switch (message) {
+                case 'ACCOUNT_NOT_EXIST': {
+                  $('#phone').addClass('is-invalid');
+
+                  const err = new Error("Account doesn't exists!, try signing up");
+                  err.errorTypeObject = { 'data-error-type': 'ACCOUNT_NOT_EXIST' };
+                  err.cause = errorCause;
+
+                  throw err;
+                }
+                case 'UNAUTHORIZED_ACCESS': {
+                  const err = new Error('Unauthorized access, reload and try again!');
+                  err.errorTypeObject = { 'data-error-type': 'ERROR' };
+                  err.cause = errorCause;
+
+                  throw err;
+                }
+                default: {
+                  const err = new Error('Something went wrong! Try again');
+                  err.errorTypeObject = { 'data-error-type': 'ERROR' };
+                  err.cause = errorCause;
+
+                  throw err;
+                }
+              }
             }
-          ));
-        } else if (data.status === 'error' && data.message === 'ACCOUNT_NOT_EXIST') {
-          hideLoadingSpinner();
-          $('#phone').addClass('is-invalid');
-          setFormErrorField("Account doesn't exists!, try signing up", { 'data-error-type': 'ACCOUNT_NOT_EXIST' });
-        } else if (data.status === 'error') {
-          hideLoadingSpinner();
-          setFormErrorField('Something went wrong! Try again', { 'data-close-form-error': 'ERROR' });
-        }
-      }).catch((err) => {
-        hideLoadingSpinner();
-        const errData = JSON.parse(err);
+          })).catch((err) => {
+          hideInLineLoadingSpinner();
 
-        console.error(errData);
-      });
+          if (err.cause === 'postData') {
+            setFormErrorField(err.message, err.errorTypeObject);
+          } else {
+            setFormErrorField('Something went wrong! Try again', { 'data-error-type': 'ERROR' });
+            console.error(err);
+          }
+        });
     }
   };
 
@@ -137,7 +169,7 @@ const ForgotPasswordStepOne = ({
 };
 
 const ForgotPasswordStepThree = ({
-  changePasswordRequest, setStateObj, handleStateChange, setBackBtnStateObj,
+  changePasswordRequest, setStateObj, handleStateChange, setBackBtnStateObj, getRecapchaToken,
 }) => {
   // hooks
   useEffect(() => {
@@ -182,25 +214,48 @@ const ForgotPasswordStepThree = ({
       $('#retyped-password').addClass('is-invalid');
       $('#retyped-password-form-helper').text('Password do not match').show();
     }
+
     if ((enteredPassword && retypedPassword) && (enteredPassword === retypedPassword)) {
       const hideInlineLoadingSpinner = showInlineLoadingSpinner('.change-password-btn');
 
-      changePasswordRequest().then((response) => {
+      getRecapchaToken({ action: 'forgotPassword' }).then((token) => changePasswordRequest(token).then((response) => {
         const data = JSON.parse(response);
+        const { status, message } = data;
 
-        if (data.status === 'success' && data.message === 'CHANGED') {
+        if (status === 'success') {
           setStateObj((prevObj) => ({
             ...prevObj,
             formStep: 4,
           }));
-        } else if (data.status === 'error') {
-          hideInlineLoadingSpinner();
-          setFormErrorField('Something went wrong ! Try again', { 'data-error-type': 'ERROR' });
+        } else if (status === 'error') {
+          const errorCause = 'postData';
+          const errorTypeObject = { 'data-error-type': 'ERROR' };
+          switch (message) {
+            case 'UNAUTHORIZED_ACCESS': {
+              const err = new Error('Unauthorized access, reload and try again!');
+              err.errorTypeObject = errorTypeObject;
+              err.cause = errorCause;
+
+              throw err;
+            }
+            default: {
+              const err = new Error('Something went wrong! Try again');
+              err.errorTypeObject = errorTypeObject;
+              err.cause = errorCause;
+
+              throw err;
+            }
+          }
         }
-      }).catch((error) => {
+      })).catch((err) => {
         hideInlineLoadingSpinner();
-        const errData = JSON.parse(error);
-        console.log(errData);
+
+        if (err.cause === 'postData') {
+          setFormErrorField(err.message, err.errorTypeObject);
+        } else {
+          setFormErrorField('Something went wrong! Try again');
+          console.error(err);
+        }
       });
     }
   };
@@ -302,6 +357,7 @@ const ForgotPassword = () => {
   } = useForgotPassword();
 
   const { stateObj: backBtnStateObj, setStateObj: setBackBtnStateObj } = useBackBtn();
+  const getRecapchaToken = useRecapchav3();
 
   // styles
   const backBtnDisplay = backBtnStateObj.showBackBtn ? 'd-block' : 'd-none';
@@ -320,6 +376,15 @@ const ForgotPassword = () => {
     }));
   };
 
+  // common props
+  const commonProps = {
+    getRecapchaToken,
+    stateObj,
+    setStateObj,
+    handleStateChange,
+    setBackBtnStateObj,
+  };
+
   return (
     <div className='form-container'>
     <form className='forgot-password-form py-5 px-3 py-sm-3 w-100'>
@@ -336,34 +401,22 @@ const ForgotPassword = () => {
         <img src={ formSvgPath} className='form-svg' />
         {
           ((stateObj.formStep === 1
-            && <ForgotPasswordStepOne stateObj={stateObj}
-              setStateObj={setStateObj}
-              handleStateChange={handleStateChange} setBackBtnStateObj={ setBackBtnStateObj} />)
+            && <ForgotPasswordStepOne {...commonProps} />)
             || (stateObj.formStep === 2
             && <VerifyOtpFormStep
-              parentStateObj={stateObj}
+            parentStateObj={stateObj}
             setParentStateObj={setStateObj}
             setBackBtnStateObj={setBackBtnStateObj}
-            otpRequestType = {'send-otp-for-pwd-change'}
-            secondaryActionButtons={[<Link key={0} to='/login' className='login-to-existing-account-btn btn btn-outline-primary btn-block mb-2'>
-              <span className='overline-bold'>
-                <FormattedMessage
-                  defaultMessage="Login to existing Account"
-                  description="Login to existing account button"
-                />
-              </span>
-            </Link>, <Link key={ 1} to='/register' className='create-new-account-btn btn btn-outline-primary btn-block mt-0 mb-2'>
-          <span className='overline-bold'>
-            <FormattedMessage
-              defaultMessage="Create a New Account"
-              description="create new account button"
-            />
-          </span>
-          </Link>]} />)
+            otpRequestType={'send-otp-for-pwd-change'}
+            recapchaExecuteOptions={{ action: 'forgotPassword' }}
+            getRecapchaToken={getRecapchaToken}
+            secondaryActionButtons={[<LoginIntoExistingAccountBtn key={0} />,
+              <CreateAccountBtn key={1} />]} />)
             || (stateObj.formStep === 3
-              && <ForgotPasswordStepThree stateObj={stateObj}
-              setStateObj={setStateObj} changePasswordRequest={changePasswordRequest}
-              handleStateChange={handleStateChange} setBackBtnStateObj={setBackBtnStateObj} />)
+            && <ForgotPasswordStepThree
+                {...commonProps}
+               changePasswordRequest={changePasswordRequest}
+               />)
             || (stateObj.formStep === 4
               && <ForgotPasswordStepFour setBackBtnStateObj={setBackBtnStateObj} />)
           )
