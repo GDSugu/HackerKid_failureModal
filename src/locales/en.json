@@ -122,6 +122,10 @@
     "defaultMessage": "Login into existing account",
     "description": "Login into existing account button"
   },
+  "9BVOVU": {
+    "defaultMessage": "Please verify to continue",
+    "description": "Recaptcha Modal heading"
+  },
   "9YoD+Y": {
     "defaultMessage": "New Password",
     "description": "New Password Label"

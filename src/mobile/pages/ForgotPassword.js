@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import PhoneInput from 'react-native-phone-number-input';
 import { CommonActions } from '@react-navigation/native';
+import API from '../../../env';
 import ThemeContext from '../components/theme';
 import Icon from '../common/Icons';
 import ForgotPasswordFirstSvg from '../../images/forgot-password/forgot-password-form-svg.svg';
@@ -22,6 +23,8 @@ import { closeFormError, validate } from '../common/framework';
 import getCommonStyles from '../components/commonStyles';
 import useForgotPassword from '../../hooks/pages/forgot-password';
 import useBackBtn from '../../hooks/pages/back-btn';
+import Recaptchav2Modal from '../components/Recaptchav2Modal';
+import Recaptchav3 from '../components/Recaptchav3';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   ...getCommonStyles(theme, utilColors, font),
@@ -84,6 +87,7 @@ const TakeActionButtons = ({ children, style, navigation }) => (
 const ForgotPasswordStepOne = ({
   style, getStyleArr, font, stateObj, setStateObj, setBackBtnStateObj, handleStateChange,
   errorStateObj, setError, formErrorStateObj, setFormErrorObj, navigation,
+  recaptchav2Ref, recaptchav3Ref,
 }) => {
   // hooks
   const phoneInput = useRef(null);
@@ -95,35 +99,76 @@ const ForgotPasswordStepOne = ({
       showBackBtn: false,
     }));
   }, []);
+
   // handlers
+  const sendOtpRequestWithToken = (token, recaptchaVersion) => {
+    const countryCode = `+${phoneInput.current.getCallingCode()}`;
+    const countryAbbrevation = phoneInput.current.getCountryCode();
+
+    sendOtpRequest(stateObj.phoneNumber, countryCode, 'send-otp-for-pwd-change',
+      token, recaptchaVersion).then((response) => {
+      const data = JSON.parse(response);
+      const { status, message } = data;
+
+      if (status === 'success') {
+        setStateObj((prevObj) => ({
+          ...prevObj,
+          formStep: prevObj.formStep + 1,
+          countryCode,
+          countryAbbrevation,
+        }));
+      } else if (status === 'error' && message === 'ACCOUNT_NOT_EXIST') {
+        switch (message) {
+          case 'ACCOUNT_NOT_EXIST': {
+            const err = new Error("Account doesn't exists!, try signing up");
+            err.errorType = message;
+            err.cause = 'postData';
+            err.errorFieldHighlightKey = 'phoneNumber';
+
+            throw err;
+          }
+          case 'UNAUTHORIZED_ACCESS': {
+            recaptchav2Ref.current.showModal();
+            recaptchav2Ref.current.setOnTokenFn(() => sendOtpRequestWithToken);
+
+            break;
+          }
+          default: {
+            const err = new Error('Something went wrong! Try again');
+            err.errorType = 'ERROR';
+            err.cause = 'postData';
+
+            throw err;
+          }
+        }
+      }
+    }).catch((err) => {
+      if (err.cause === 'postData') {
+        if (err.errorFieldHighlightKey) {
+          setError((prevObj) => ({ ...prevObj, [err.errorFieldHighlightKey]: true }));
+        }
+        setFormErrorObj((prevObj) => ({
+          ...prevObj,
+          formError: err.message,
+          formErrorType: err.errorType,
+        }));
+      } else {
+        console.error(err);
+        setFormErrorObj((prevObj) => ({
+          ...prevObj,
+          formError: 'Something went wrong! Try again',
+          formErrorType: 'ERROR',
+        }));
+      }
+    });
+  };
+
   const sendOtpClickHandler = () => {
     const phoneNumber = validate('tel', stateObj.phoneNumber, 'Phone Number', setError, 'phoneNumber');
 
     if (phoneNumber) {
-      const countryCode = `+${phoneInput.current.getCallingCode()}`;
-      const countryAbbrevation = phoneInput.current.getCountryCode();
-
-      sendOtpRequest(stateObj.phoneNumber, countryCode, 'send-otp-for-pwd-change').then((response) => {
-        const data = JSON.parse(response);
-
-        if (data.status === 'error') {
-          setFormErrorObj({ formError: 'Something went wrong, Try again!', formErrorType: 'ERROR' });
-        }
-
-        if (data.status === 'success') {
-          setStateObj((prevObj) => ({
-            ...prevObj,
-            formStep: prevObj.formStep + 1,
-            countryCode,
-            countryAbbrevation,
-          }));
-        } else if (data.status === 'error' && data.message === 'ACCOUNT_NOT_EXIST') {
-          setError((prevObj) => ({ ...prevObj, phoneNumber: true }));
-          setFormErrorObj((prevObj) => ({ ...prevObj, formError: "Account doesn't exists!, try signing up", formErrorType: 'ACCOUNT_NOT_EXIST' }));
-        }
-      }).catch((err) => {
-        console.log(err);
-      });
+      recaptchav3Ref.current.generateNewToken();
+      recaptchav3Ref.current.setOnTokenFn(() => sendOtpRequestWithToken);
     }
   };
 
@@ -430,6 +475,28 @@ const ForgotPassword = ({ navigation }) => {
     }
   };
 
+  const recaptchav2Ref = useRef(null);
+  const recaptchav3Ref = useRef(null);
+
+  // common props
+  const commonProps = {
+    theme,
+    style,
+    getStyleArr,
+    font,
+    stateObj,
+    setStateObj,
+    setBackBtnStateObj,
+    handleStateChange,
+    errorStateObj,
+    setError,
+    formErrorStateObj,
+    setFormErrorObj,
+    navigation,
+    recaptchav2Ref,
+    recaptchav3Ref,
+  };
+
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={style.container}>
@@ -452,50 +519,23 @@ const ForgotPassword = ({ navigation }) => {
             || (stateObj.formStep === 4 && <ForgotPasswordFourthSvg />)
             || <ForgotPasswordFirstSvg/>
             }
-          </View>
+        </View>
+        <Recaptchav2Modal ref={recaptchav2Ref} siteKey={API.RECAPCHAV2SITEKEY} domainURL='https://localhost/'/>
+        <Recaptchav3 ref={recaptchav3Ref} siteKey={API.RECAPCHAV3SITEKEY} domainURL='https://localhost/'/>
         {
           ((stateObj.formStep === 1)
-            && <ForgotPasswordStepOne
-            style={style}
-            getStyleArr={getStyleArr}
-            font={font}
-            stateObj={stateObj}
-            setStateObj={setStateObj}
-            setBackBtnStateObj={setBackBtnStateObj}
-            handleStateChange={handleStateChange}
-            errorStateObj={errorStateObj}
-            setError={setError}
-            formErrorStateObj={formErrorStateObj}
-            setFormErrorObj={setFormErrorObj}
-            navigation={navigation}
-            />)
+            && <ForgotPasswordStepOne {...commonProps} />)
           || ((stateObj.formStep === 2)
             && <VerifyOtpFormStep
-            style={style}
+            {...commonProps}
             parentStateObj={stateObj}
             setParentStateObj={setStateObj}
-            setBackBtnStateObj={setBackBtnStateObj}
-            formErrorStateObj={formErrorStateObj}
-            setFormErrorObj={setFormErrorObj}
-            otpRequesType ={'send-otp-for-pwd-change'}
-            navigation={navigation}
+            otpRequestType ={'send-otp-for-pwd-change'}
             secondaryActionButtons={<TakeActionButtons style={style} navigation={navigation} />} />)
           || ((stateObj.formStep === 3)
             && <ForgotPasswordStepThree
-          style={style}
-          getStyleArr={getStyleArr}
-          theme={theme}
-          font={font}
-          stateObj={stateObj}
-          setStateObj={setStateObj}
-          handleStateChange = {handleStateChange}
-          formErrorStateObj={formErrorStateObj}
-          setFormErrorObj={setFormErrorObj}
-          errorStateObj={errorStateObj}
-          setError={setError}
-          setBackBtnStateObj={setBackBtnStateObj}
+            {...commonProps}
           changePasswordRequest={changePasswordRequest}
-          navigation={ navigation}
             />)
           || ((stateObj.formStep === 4)
             && <ForgotPasswordStepFour
