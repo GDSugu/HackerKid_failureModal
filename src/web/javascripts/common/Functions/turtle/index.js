@@ -563,21 +563,47 @@ const updateZoomState = (disableZoomIn, disableZoomOut) => {
 
 const attachZoomControls = () => {
   try {
-    const maxScale = 1.0;
+    const maxScale = 1.3;
     const minScale = 0.2;
     const scaleStep = 0.1;
-    $(document).on('click', '.zoom-control', (event) => {
-      const target = $(event.currentTarget);
-      const action = target.data('zoomaction');
-      if (action === 'in' && manager.canvasScale < maxScale) {
-        manager.canvasScale = Number((manager.canvasScale + scaleStep).toFixed(1));
-      } else if (action === 'out' && manager.canvasScale > minScale) {
-        manager.canvasScale = Number((manager.canvasScale - scaleStep).toFixed(1));
+
+    const zoomCanvas = (e) => {
+      const delta = e.originalEvent.deltaY;
+      if (delta > 0) {
+        if (manager.canvasScale > minScale) {
+          manager.canvasScale = Number((manager.canvasScale - scaleStep).toFixed(1));
+        }
+      } else if (delta <= 0) {
+        if (manager.canvasScale < maxScale) {
+          manager.canvasScale = Number((manager.canvasScale + scaleStep).toFixed(1));
+        }
       }
+    };
+
+    $('.outputContainer').on('wheel', (e) => {
+      e.preventDefault();
+      zoomCanvas(e);
       $('#answerCanvas, #userCanvas').css('transform', `scale(${manager.canvasScale})`);
-      updateZoomState(manager.canvasScale === maxScale, manager.canvasScale === minScale);
-      repositionTurtle();
     });
+
+    $('.turtle-qnout-container').on('wheel', (e) => {
+      e.preventDefault();
+      zoomCanvas(e);
+      $('#expOutCanvas').css('transform', `scale(${manager.canvasScale})`);
+    });
+
+    // $(document).on('click', '.zoom-control', (event) => {
+    //   const target = $(event.currentTarget);
+    //   const action = target.data('zoomaction');
+    //   if (action === 'in' && manager.canvasScale < maxScale) {
+    //     manager.canvasScale = Number((manager.canvasScale + scaleStep).toFixed(1));
+    //   } else if (action === 'out' && manager.canvasScale > minScale) {
+    //     manager.canvasScale = Number((manager.canvasScale - scaleStep).toFixed(1));
+    //   }
+    //   $('#answerCanvas, #userCanvas').css('transform', `scale(${manager.canvasScale})`);
+    //   updateZoomState(manager.canvasScale === maxScale, manager.canvasScale === minScale);
+    //   repositionTurtle();
+    // });
     // initialState
     updateZoomState(manager.canvasScale === maxScale, manager.canvasScale === minScale);
   } catch (error) {
@@ -599,6 +625,43 @@ const attachDebugToggler = () => {
   // });
   // initial state
   updateDebugState();
+};
+
+const attachDragHandler = (selector) => {
+  const slider = $(selector)[0];
+  let mouseDown = false;
+  let startX;
+  let startY;
+  let scrollLeft;
+  let scrollTop;
+
+  const startDragging = function (e) {
+    mouseDown = true;
+    startX = e.pageX - slider.offsetLeft;
+    startY = e.pageY - slider.offsetTop;
+    scrollLeft = slider.scrollLeft;
+    scrollTop = slider.scrollTop;
+  };
+
+  const stopDragging = function () {
+    mouseDown = false;
+  };
+
+  slider.addEventListener('mousemove', (e) => {
+    e.preventDefault();
+    if (!mouseDown) { return; }
+    const x = e.pageX - slider.offsetLeft;
+    const y = e.pageY - slider.offsetTop;
+    const scroll = x - startX;
+    const scrollv = y - startY;
+    slider.scrollLeft = scrollLeft - scroll;
+    slider.scrollTop = scrollTop - scrollv;
+  });
+
+  // Add the event listeners
+  slider.addEventListener('mousedown', startDragging, false);
+  slider.addEventListener('mouseup', stopDragging, false);
+  slider.addEventListener('mouseleave', stopDragging, false);
 };
 
 const attachResizeHandler = () => {
@@ -641,6 +704,8 @@ const startTurtle = ({ response }) => {
   initializeEditor();
   initializeBlockly(response);
   attachSpeedHandler();
+  attachDragHandler('.outputContainer');
+  attachDragHandler('.turtle-qnout-container');
   attachResizeHandler();
   attachZoomControls();
   // attachDrawingToggler();

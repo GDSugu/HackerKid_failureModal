@@ -25,7 +25,7 @@ const useSharedTurtleWebView = () => {
         position: absolute;
         width: 100%;
         // opacity: 0.5;
-        transform: scale(6) translate(-25%, 0);
+        // transform: scale(6) translate(-25%, 0);
       }
 
       body {
@@ -149,7 +149,7 @@ const useSharedTurtleWebView = () => {
   const TurtleOutputScriptContent = () => <>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css" integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossOrigin="anonymous"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossOrigin="anonymous"/>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossOrigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://unpkg.com/blockly@3.20200625.2/blockly.min.js"></script>
     <script src="https://unpkg.com/blockly@3.20200625.2/python_compressed.js"></script>
     <script src="https://unpkg.com/blockly@3.20200625.2/msg/en"></script>
@@ -161,51 +161,19 @@ const useSharedTurtleWebView = () => {
 
   const turtleOutputStyle = `
     <style>
-      * {
+      // * {
+      //   margin: 0;
+      //   padding: 0;
+      //   border: none;
+      //   box-sizing: border-box;
+      // }
+
+      body {
         margin: 0;
         padding: 0;
         border: none;
-        box-sizing: border-box;
-      }
-
-      body {
-        // background-color: red;
-      }
-
-      .outputContainer {
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        // background-color: green;
-        display: flex;
-      }
-
-      #userCanvas {
-        width: 100%;
-        // height: 100%;
-        transform: scale(7) translate(-25%, 0);
-        background-color: transparent;
-        position: absolute;
-      }
-
-      #answerCanvas {
-        position: absolute;
-        width: 100%;
-        // height: 100%;
-        opacity: 0.5;
-        // background-color: pink;
-        transform: scale(7) translate(-25%, 0);
-      }
-
-      .drawing-controls {
-        display: flex;
-        position: fixed;
-        z-index: 100;
-        // left: 100%;
-        right: 10%;
-        box-sizing: border-box;
-        transform: scale(4) translateX(-25%);
-        padding-top: 1.5rem;
+        width: 100vw;
+        height: 100vh;
       }
 
       #outputSection {
@@ -213,13 +181,38 @@ const useSharedTurtleWebView = () => {
         height: 100vh;
       }
 
-      #outputSection {
+      .outputContainer {
         width: 100vw;
+        height: 100vh;
+        overflow: auto;
+        position: relative;
+      }
+
+      #userCanvas,
+      #answerCanvas {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      #answerCanvas {
+        opacity: 0.5;
+      }
+
+      .drawing-controls {
+        display: flex;
+        position: absolute;
+        flex-direction: column;
+        z-index: 100;
+        // left: 100%;
+        right: 0.5rem;
+        // padding-top: 1.5rem;
       }
 
       .drawing-controls button {
         width: 40px;
-        margin: 0 4px;
+        height: 40px;
+        margin: 4px 0;
         position: relative;
       }
 
@@ -266,6 +259,10 @@ const useSharedTurtleWebView = () => {
       }
       .font-weight-bold {
         font-weight: 700!important;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: #212529;
       }
     </style>
   `;
@@ -323,7 +320,7 @@ const useSharedTurtleWebView = () => {
               }
             });
           } else if (action === 'runCode') {
-            managerObj.runCode(data.snippet, data.canvas, true, 3, 0)
+            managerObj.runCode(data.snippet, data.canvas, true, 3, 0, true)
             .then(() => {
               const currentSelector = $('#' + data.canvas)[0];
               if (!currentSelector || !currentSelector.turtleInstance) {
@@ -357,8 +354,14 @@ const useSharedTurtleWebView = () => {
               window.ReactNativeWebView.postMessage(JSON.stringify(request));
             })
             .catch((err) => {
-              window.ReactNativeWebView.postMessage('turtlevalidation error: ');
-              window.ReactNativeWebView.postMessage(err.message);
+              const errmsg = {
+                action: 'error',
+                data: {
+                  cause: 'executeRunCode Chain',
+                  error: err.message,
+                },
+              };
+              window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
               throw err;
             })
           }
@@ -371,12 +374,23 @@ const useSharedTurtleWebView = () => {
       window.execute = function (payload) {
         switch (payload.action) {
           case 'renderTurtle':
+            managerObj.resetDebugger
             payload.data.canvas = 'answerCanvas';
             executeRunCode(payload);
+            setTimeout(() => {
+              managerObj.attachListeners();
+              managerObj.updateDebugState();
+            }, 1000);
             break;
           case 'runCode':
             payload.data.canvas = 'userCanvas';
             executeRunCode(payload);
+            break;
+          case 'repositionTurtle':
+            managerObj.repositionTurtle();
+            break;
+          case 'runDebugger':
+            managerObj.runDebugger();
             break;
           default: break;
         }

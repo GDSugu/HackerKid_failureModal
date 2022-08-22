@@ -21,14 +21,13 @@ const TurtleEditor = () => {
   const style = getStyles(utilColors);
   const { blocklyWorkspace } = useSharedTurtleWebView();
   const { setState } = useTurtleValidation();
+  const turtleContext = React.useContext(TurtleContext);
   const webViewRef = React.useRef(null);
   let webViewString = '';
 
   const {
     BodyContent, ScriptContent, styleString, scriptToInject,
   } = blocklyWorkspace;
-
-  const turtleContext = React.useContext(TurtleContext);
 
   webViewString = webViewElement({
     BodyComponent: BodyContent,
@@ -39,18 +38,21 @@ const TurtleEditor = () => {
   const handleMessage = (msg) => {
     try {
       const message = JSON.parse(msg.nativeEvent.data);
-      console.log(message);
       const { action, data } = message;
 
       switch (action) {
         case 'code_changed':
-          console.log(data);
           turtleContext.tqSetState((prevState) => ({
             ...prevState,
             snippet: data.snippet,
             xmlWorkSpace: data.workspace,
+            blockTypes: data.blockTypes,
           }));
-          // console.log(turtleContext.tqState.snippet);
+          console.log(turtleContext.tqState.snippet);
+          break;
+        case 'workspace_initialized':
+          console.log('workspace_initialized');
+          console.log(message);
           break;
         default: break;
       }
@@ -68,7 +70,11 @@ const TurtleEditor = () => {
         webViewRef.current.injectJavaScript(initBlockly);
       }
     }, 1000);
-  }, []);
+    turtleContext.tqSetState((prevState) => ({
+      ...prevState,
+      xmlWorkSpace: turtleContext.tqState,
+    }));
+  }, [turtleContext.tqState.questionObject]);
 
   // if (turtleContext.tqState.status === 'success') {
   //   const initBlockly = `Turtle.initializeBlockly(${JSON.stringify(turtleContext.tqState)});`;

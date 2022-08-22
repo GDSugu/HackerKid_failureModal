@@ -919,6 +919,9 @@ const Index = ({ route, navigation }) => {
 
   const isPageMounted = React.useRef(true);
   const [reloadComponent, setReloadComponent] = React.useState(0);
+  const [refreshing, setRefreshing] = React.useState(false);
+  const authContext = React.useContext(AuthContext);
+  const bottomSheetRef = useRef();
 
   const {
     state: dashboardState,
@@ -929,8 +932,6 @@ const Index = ({ route, navigation }) => {
     state: getChallengesState,
     static: { getChallenges },
   } = useGetChallenges({ isPageMounted });
-
-  const [refreshing, setRefreshing] = React.useState(false);
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -966,8 +967,6 @@ const Index = ({ route, navigation }) => {
     trendingChallenges,
   } = getChallengesState;
 
-  const bottomSheetRef = useRef();
-
   const bottomSheetStyles = {
     draggableIcon: {
       backgroundColor: theme.utilColors.white,
@@ -982,11 +981,12 @@ const Index = ({ route, navigation }) => {
     return <AuthErrorModal navigation={navigation} route={route} />;
   }
 
-  const authContext = React.useContext(AuthContext);
-
   if (authContext.appData.isReferesh) {
     onRefresh();
-    authContext.setAuthState({ isReferesh: false });
+    authContext.setAuthState((prevState) => ({
+      ...prevState,
+      isReferesh: false,
+    }));
   }
 
   React.useEffect(() => {
@@ -1008,32 +1008,47 @@ const Index = ({ route, navigation }) => {
           />
         }>
         <View style={style.container}>
-          <DashboardComponent
-            avatar={defaultUser}
-            bottomSheetRef={bottomSheetRef}
-            dashboardUserData={dashboardUserData}
-            gameData={gameData}
-            style={style}
-            navigation={navigation}
-            reloadComponent={reloadComponent}
-          />
-          <HomeComponent
-            avatar={defaultUser}
-            dashboardUserData={dashboardUserData}
-            navigation={navigation}
-            style={style}
-            reloadComponent={reloadComponent}
-          />
-          <GameComponent
-            gameData={gameData}
-            navigation={navigation}
-            style={style}
-            reloadComponent={reloadComponent}
-          />
-          <ChallengeComponent
-            challengeData={trendingChallenges}
-            navigation={navigation}
-            style={style} />
+          {
+            dashboardUserData
+              && <>
+                <DashboardComponent
+                avatar={defaultUser}
+                bottomSheetRef={bottomSheetRef}
+                dashboardUserData={dashboardUserData}
+                gameData={gameData}
+                style={style}
+                navigation={navigation}
+                reloadComponent={reloadComponent}
+              />
+              <HomeComponent
+                avatar={defaultUser}
+                dashboardUserData={dashboardUserData}
+                navigation={navigation}
+                style={style}
+                reloadComponent={reloadComponent}
+              />
+            </>
+          }
+          {
+            gameData
+            && <>
+            <GameComponent
+              gameData={gameData}
+              navigation={navigation}
+              style={style}
+              reloadComponent={reloadComponent}
+            />
+            </>
+          }
+          {
+            trendingChallenges
+            && <>
+              <ChallengeComponent
+                challengeData={trendingChallenges}
+                navigation={navigation}
+                style={style} />
+            </>
+          }
         </View>
       </ScrollView>
       <BottomSheet

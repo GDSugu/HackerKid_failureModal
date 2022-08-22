@@ -9,6 +9,7 @@ import ThemeContext from '../theme';
 import levelIcon from '../../../images/games/levelStar.png';
 import hintIcon from '../../../images/games/hint.png';
 import gameMenuIcon from '../../../images/games/gameMenu.png';
+import { TurtleContext } from '../../../hooks/pages/turtle';
 
 const getStyle = (font, utilColors = {}) => StyleSheet.create({
   tabBar: {
@@ -95,7 +96,10 @@ const GameBottomTabBar = (props) => {
 
           if (!isFocused && !event.defaultPrevented) {
             navigation.navigate({ name: route.name, merge: true });
-            setCurrentScreen(route.name);
+            setCurrentScreen((prevState) => ({
+              ...prevState,
+              currentGameScreen: route.name,
+            }));
           }
         };
 
@@ -145,6 +149,7 @@ const GameBottomTabBar = (props) => {
 
 const GameHeader = ({ currentScreen, font, utilColors }) => {
   const style = getStyle(font, utilColors);
+  const turtleContext = useContext(TurtleContext);
 
   return <>
     <View style={[style.tabHeader, { backgroundColor: currentScreen === 'TurtleQuestion' ? 'transparent' : utilColors.dark }]}>
@@ -163,6 +168,7 @@ const GameHeader = ({ currentScreen, font, utilColors }) => {
             >
               <TouchableOpacity
                 style={style.mr12}
+                onPress={() => { turtleContext.handleHintVisibility(true); }}
               >
                 <Image
                   source={hintIcon}
@@ -208,8 +214,9 @@ const GameNavigator = ({ currentScreen, ScreenArray }) => {
       }
       screenOptions={{
         animationEnabled: true,
-        swipeEnabled: true,
+        swipeEnabled: false,
         headerShown: false,
+        // lazy: false,
         // header: (props) => <GameHeader
         //   {...props}
         //   currentScreen={currentScreen.currentGameScreen}

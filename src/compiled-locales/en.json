@@ -59,10 +59,22 @@
       "value": "This is index page"
     }
   ],
+  "0K7noF": [
+    {
+      "type": 0,
+      "value": "Code"
+    }
+  ],
   "0Sgdtj": [
     {
       "type": 0,
       "value": "Game Progress"
+    }
+  ],
+  "0mcQbk": [
+    {
+      "type": 1,
+      "value": "message"
     }
   ],
   "13ETG6": [
@@ -93,6 +105,12 @@
     {
       "type": 0,
       "value": "Create a New Account"
+    }
+  ],
+  "2RBdEr": [
+    {
+      "type": 0,
+      "value": "Continue"
     }
   ],
   "2Tu0HO": [
@@ -141,12 +159,6 @@
     {
       "type": 1,
       "value": "label"
-    }
-  ],
-  "4Op8zY": [
-    {
-      "type": 0,
-      "value": "Problem Statement"
     }
   ],
   "4Op8zY": [
@@ -237,6 +249,12 @@
     {
       "type": 0,
       "value": "Play"
+    }
+  ],
+  "9NID4X": [
+    {
+      "type": 0,
+      "value": "OK"
     }
   ],
   "9YoD+Y": [
@@ -369,6 +387,12 @@
       "value": "errorMessage"
     }
   ],
+  "EqEa5m": [
+    {
+      "type": 0,
+      "value": "Later"
+    }
+  ],
   "F/vOH1": [
     {
       "type": 0,
@@ -399,6 +423,16 @@
     {
       "type": 0,
       "value": " ?"
+    }
+  ],
+  "Fl1ECE": [
+    {
+      "type": 0,
+      "value": "Level "
+    },
+    {
+      "type": 1,
+      "value": "level"
     }
   ],
   "G0AqB8": [
@@ -443,6 +477,12 @@
       "value": "All Challenges"
     }
   ],
+  "Hjj2+R": [
+    {
+      "type": 0,
+      "value": "Register to Get help from Turtle"
+    }
+  ],
   "ILnphX": [
     {
       "type": 0,
@@ -485,10 +525,10 @@
       "value": "OTP"
     }
   ],
-  "JNotzf": [
+  "LCt8qV": [
     {
       "type": 0,
-      "value": "Expected Output"
+      "value": "Share"
     }
   ],
   "MB8h2I": [
@@ -503,10 +543,22 @@
       "value": "Go to Index"
     }
   ],
+  "MfoF60": [
+    {
+      "type": 1,
+      "value": "hint"
+    }
+  ],
   "MkkIOq": [
     {
       "type": 0,
       "value": "This is challenges page"
+    }
+  ],
+  "NXV57/": [
+    {
+      "type": 0,
+      "value": "Share"
     }
   ],
   "NZqKYF": [
@@ -533,6 +585,12 @@
       "value": "Collections"
     }
   ],
+  "OWSL0r": [
+    {
+      "type": 0,
+      "value": "Register"
+    }
+  ],
   "OdODwS": [
     {
       "type": 0,
@@ -545,6 +603,12 @@
       "value": "Class"
     }
   ],
+  "PKwyq8": [
+    {
+      "type": 0,
+      "value": "Move any blocks to get hints"
+    }
+  ],
   "PMX+8G": [
     {
       "type": 1,
@@ -555,6 +619,12 @@
     {
       "type": 0,
       "value": "Home"
+    }
+  ],
+  "PcqGYQ": [
+    {
+      "type": 0,
+      "value": "Playground"
     }
   ],
   "Qvy78L": [
@@ -579,6 +649,12 @@
     {
       "type": 0,
       "value": "Re-type Password"
+    }
+  ],
+  "Rf84nl": [
+    {
+      "type": 0,
+      "value": "ok"
     }
   ],
   "SL6O2c": [
@@ -617,12 +693,6 @@
       "value": "studentName"
     }
   ],
-  "SjoZlV": [
-    {
-      "type": 0,
-      "value": "Play Now"
-    }
-  ],
   "TmcPug": [
     {
       "type": 0,
@@ -633,6 +703,12 @@
     {
       "type": 0,
       "value": "Register to save your progess and compete with others"
+    }
+  ],
+  "UFvWGM": [
+    {
+      "type": 0,
+      "value": "Play Next"
     }
   ],
   "UUCx/J": [
@@ -651,6 +727,24 @@
     {
       "type": 1,
       "value": "step"
+    }
+  ],
+  "V365ug": [
+    {
+      "type": 0,
+      "value": "Output"
+    }
+  ],
+  "V624J+": [
+    {
+      "type": 0,
+      "value": "Copy Link"
+    }
+  ],
+  "V7hpAI": [
+    {
+      "type": 0,
+      "value": "Question"
     }
   ],
   "VdAhqD": [
@@ -687,6 +781,12 @@
     {
       "type": 0,
       "value": "Resend"
+    }
+  ],
+  "WIy+CB": [
+    {
+      "type": 0,
+      "value": "Awesome!"
     }
   ],
   "X1rCRf": [
@@ -743,6 +843,12 @@
       "value": "Create a New Account"
     }
   ],
+  "aWjMjy": [
+    {
+      "type": 0,
+      "value": "Register"
+    }
+  ],
   "b2J6mh": [
     {
       "type": 0,
@@ -753,6 +859,12 @@
     {
       "type": 0,
       "value": "Leaderboard Rank"
+    }
+  ],
+  "byK6c0": [
+    {
+      "type": 0,
+      "value": "Later"
     }
   ],
   "c8cENG": [
@@ -845,6 +957,12 @@
       "value": "Instructions"
     }
   ],
+  "hjOcJT": [
+    {
+      "type": 0,
+      "value": "Go to Turtle"
+    }
+  ],
   "hphOHh": [
     {
       "type": 0,
@@ -875,12 +993,6 @@
       "value": "Ok"
     }
   ],
-  "ksYOCd": [
-    {
-      "type": 0,
-      "value": "Leaderboard"
-    }
-  ],
   "lKeCea": [
     {
       "type": 0,
@@ -903,6 +1015,12 @@
     {
       "type": 1,
       "value": "rank"
+    }
+  ],
+  "mD5V7u": [
+    {
+      "type": 1,
+      "value": "hintMessage"
     }
   ],
   "mDpOZM": [
@@ -939,6 +1057,12 @@
     {
       "type": 0,
       "value": "Get the rare collectibles with your coins now"
+    }
+  ],
+  "nGT7h4": [
+    {
+      "type": 0,
+      "value": "Scoreboard"
     }
   ],
   "nT6Ql7": [
@@ -1113,6 +1237,12 @@
     {
       "type": 0,
       "value": "Register for free"
+    }
+  ],
+  "yCTEJz": [
+    {
+      "type": 1,
+      "value": "hintMessage"
     }
   ],
   "yujxGL": [

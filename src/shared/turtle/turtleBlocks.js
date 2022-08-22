@@ -1239,9 +1239,6 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {}, a
           colour: 'rgba(255, 255, 255, 0.1)',
           snap: true,
         },
-        zoom: {
-          startScale: 3,
-        },
         horizontalLayout: (window.innerWidth < 641 && !xmlBlock.includes('category')) || true,
         maxBlocks,
       });
@@ -1278,7 +1275,7 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {}, a
       workspace.addChangeListener(TurtleObj.handleBlocksChange);
       TurtleObj.workspace = workspace;
       // const msg = {
-      //   type: 'turtle_import',
+      //   action: 'turtle_import',
       //   caller: 'initializeBlockly',
       //   payload: {
       //     status: 'success',
@@ -1286,10 +1283,18 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {}, a
       // };
       // window.sendMessage(msg);
     } catch (error) {
+      const errmsg = {
+        action: 'error',
+        caller: 'initializeBlockly',
+        payload: {
+          status: 'error',
+          message: error.message,
+        },
+      };
       if (window.ReactNativeWebView) {
-        window.ReactNativeWebView.postMessage(`BlocklyObj error:  ${error}`);
+        window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
       } else {
-        console.error(`BlocklyObj error:  ${error}`);
+        console.error(errmsg);
       }
     }
   };
@@ -1314,10 +1319,18 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {}, a
         TurtleObj.editor.setValue('');
       }
     } catch (error) {
+      const errmsg = {
+        action: 'error',
+        caller: 'initializeEditor',
+        payload: {
+          status: 'error',
+          message: error.message,
+        },
+      };
       if (window.ReactNativeWebView) {
-        window.ReactNativeWebView.postMessage(`initializeeditor error:  ${error}`);
+        window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
       } else {
-        console.error(`initializeeditor error:  ${error}`);
+        console.error(JSON.stringify(errmsg));
       }
     }
   };
@@ -1326,12 +1339,15 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {}, a
     try {
       if (TurtleObj.workspace) {
         const code = BlocklyObj.Python.workspaceToCode(TurtleObj.workspace);
+        const blocks = TurtleObj.workspace.getAllBlocks();
+        const blockTypes = blocks.map((block) => block.type);
         // TurtleObj.editor.setValue(code, 1); // 1 moves cursor to the end of the code
         const outputMsg = {
           action: 'code_changed',
           data: {
             snippet: code,
             workspace: BlocklyObj.Xml.domToText(BlocklyObj.Xml.workspaceToDom(TurtleObj.workspace)),
+            blockTypes,
             // qId: TurtleObj.initialResponse.questionObject.question_id,
           },
         };
@@ -1407,36 +1423,63 @@ const getTurtleOutput = ({
 
   managerObj.repositionTurtle = (selector = '#answerCanvas', containerSelector = '.outputContainer') => {
     try {
-      const container = $(containerSelector);
-      const content = $(selector);
-      container.scrollLeft(
+      const container = document.querySelector(containerSelector);
+      const content = document.querySelector(selector);
+      container.scroll(
         (
-          (content[0].scrollWidth * managerObj.canvasScale)
-          - container.width()
+          (content.scrollWidth * managerObj.canvasScale)
+          - container.offsetWidth
+        ) * 0.50,
+        (
+          (content.scrollHeight * managerObj.canvasScale)
+          - container.offsetHeight
         ) * 0.50,
       );
-      container.scrollTop(
-        (
-          (content[0].scrollHeight * managerObj.canvasScale)
-          - container.height()
-        ) * 0.50,
-      );
+      // container.scrollTop(
+      //   (
+      //     (content[0].scrollHeight * managerObj.canvasScale)
+      //     - container.height()
+      //   ) * 0.50,
+      // );
     } catch (error) {
-      console.log(error);
+      const errmsg = {
+        action: 'error',
+        caller: 'repositionTurtle',
+        payload: {
+          status: 'error',
+          message: error.message,
+        },
+      };
+      window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
+      console.log(errmsg);
     }
   };
 
   managerObj.updateDebugState = () => {
     try {
-      const debugButton = $('#continueDebugger');
-      const runButton = $('#runCode');
+      // const debugButton = document.querySelector('#continueDebugger');
+      // const runButton = document.querySelector('#runCode');
+      const outputMsg = {
+        action: 'debug_state_changed',
+      };
       if (managerObj.inDebugging) {
-        debugButton.show();
-        runButton.hide();
+        // runButton.hide();
+        // debugButton.show();
+        // runButton.style.display = 'none';
+        // debugButton.style.display = 'block';
+        outputMsg.data = {
+          inDebugging: true,
+        };
       } else {
-        debugButton.hide();
-        runButton.show();
+        // debugButton.hide();
+        // runButton.show();
+        // debugButton.style.display = 'none';
+        // runButton.style.display = 'block';
+        outputMsg.data = {
+          inDebugging: false,
+        };
       }
+      window.ReactNativeWebView.postMessage(JSON.stringify(outputMsg));
     } catch (error) {
       console.log(error);
     }
@@ -1444,16 +1487,22 @@ const getTurtleOutput = ({
 
   managerObj.toggleDebugState = () => {
     try {
-      const buttonEl = $('.debugToggle');
-      const iconEl = $('.debugToggle i');
+      const buttonEl = document.querySelector('.debugToggle');
+      const iconEl = document.querySelector('.debugToggle i');
       if (!managerObj.debuggingEnabled) {
-        iconEl.removeClass('fa-pause-circle').addClass('fa-play-circle');
+        // iconEl.removeClass('fa-pause-circle').addClass('fa-play-circle');
+        iconEl.classList.remove('fa-pause-circle');
+        iconEl.classList.add('fa-play-circle');
         managerObj.debuggingEnabled = true;
-        buttonEl.attr('title', 'Disable debugger');
+        // buttonEl.attr('title', 'Disable debugger');
+        buttonEl.title = 'Disable debugger';
       } else {
-        iconEl.removeClass('fa-play-circle').addClass('fa-pause-circle');
+        // iconEl.removeClass('fa-play-circle').addClass('fa-pause-circle');
+        iconEl.classList.remove('fa-play-circle');
+        iconEl.classList.add('fa-pause-circle');
         managerObj.debuggingEnabled = false;
-        buttonEl.attr('title', 'Enable debugger');
+        // buttonEl.attr('title', 'Enable debugger');
+        buttonEl.title = 'Enable debugger';
       }
       managerObj.updateDebugState();
     } catch (error) {
@@ -1463,19 +1512,27 @@ const getTurtleOutput = ({
 
   managerObj.toggleDrawingState = () => {
     try {
-      const buttonEl = $('.drawingToggle');
-      const eyeEl = $('.drawingToggle i');
-      const answerCanvasEl = $('#userCanvas');
+      const buttonEl = document.querySelector('.drawingToggle');
+      const eyeEl = document.querySelector('.drawingToggle i');
+      const answerCanvasEl = document.querySelector('#userCanvas');
       if (managerObj.drawingVisible) {
-        answerCanvasEl.css('opacity', 0);
-        eyeEl.removeClass('fa-eye').addClass('fa-eye-slash');
+        // answerCanvasEl.css('opacity', 0);
+        answerCanvasEl.style.opacity = 0;
+        // eyeEl.removeClass('fa-eye').addClass('fa-eye-slash');
+        eyeEl.classList.remove('fa-eye');
+        eyeEl.classList.add('fa-eye-slash');
         managerObj.drawingVisible = false;
-        buttonEl.attr('title', 'Show output');
+        // buttonEl.attr('title', 'Show output');
+        buttonEl.title = 'Show output';
       } else {
-        answerCanvasEl.css('opacity', 1);
-        eyeEl.removeClass('fa-eye-slash').addClass('fa-eye');
+        // answerCanvasEl.css('opacity', 1);
+        answerCanvasEl.style.opacity = 1;
+        // eyeEl.removeClass('fa-eye-slash').addClass('fa-eye');
+        eyeEl.classList.remove('fa-eye-slash');
+        eyeEl.classList.add('fa-eye');
         managerObj.drawingVisible = true;
-        buttonEl.attr('title', 'Hide output');
+        // buttonEl.attr('title', 'Hide output');
+        buttonEl.title = 'Hide output';
       }
     } catch (error) {
       console.log(error);
@@ -1486,13 +1543,15 @@ const getTurtleOutput = ({
     try {
       // disable continue debugging
       const stepData = data;
-      $('#continueDebugger').attr('disabled', true);
+      // $('#continueDebugger').attr('disabled', true);
+      // const continueDebugger = document.querySelector('#continueDebugger');
+      // continueDebugger.disabled = true;
       if (!managerObj.drawingVisible) {
         managerObj.toggleDrawingState();
       }
-      if (managerObj.windowType === 'mobile' && !$('#outputTab').hasClass('active')) {
-        $('#outputTab').tab('show');
-      }
+      // if (managerObj.windowType === 'mobile' && !$('#outputTab').hasClass('active')) {
+      //   $('#outputTab').tab('show');
+      // }
       stepData.data.promise.then((x) => {
         stepData.data.result = x;
         resolve(stepData.resume());
@@ -1508,22 +1567,75 @@ const getTurtleOutput = ({
   };
 
   managerObj.attachDebugStepper = () => {
-    $(document).on('click', '#continueDebugger', () => {
-      if (managerObj.suspension
-        && 'resolve' in managerObj.suspension
-        && 'reject' in managerObj.suspension
-        && 'stepData' in managerObj.suspension) {
-        managerObj.runNextStep(
-          managerObj.suspension.stepData,
-          managerObj.suspension.resolve,
-          managerObj.suspension.reject,
-        );
-      }
-    });
+    // document.querySelector('#continueDebugger').addEventListener('click', () => {
+    if (managerObj.suspension
+      && 'resolve' in managerObj.suspension
+      && 'reject' in managerObj.suspension
+      && 'stepData' in managerObj.suspension) {
+      managerObj.runNextStep(
+        managerObj.suspension.stepData,
+        managerObj.suspension.resolve,
+        managerObj.suspension.reject,
+      );
+    }
+    // });
+  };
+
+  managerObj.updateZoomState = (disableZoomIn, disableZoomOut) => {
+    try {
+      const zoomInEl = document.querySelector('.zoomIn');
+      const zoomOutEl = document.querySelector('.zoomOut');
+      // zoomInEl.attr('disabled', disableZoomIn);
+      // zoomOutEl.attr('disabled', disableZoomOut);
+      zoomInEl.disabled = disableZoomIn;
+      zoomOutEl.disabled = disableZoomOut;
+    } catch (error) {
+      const errmsg = {
+        action: 'error',
+        caller: 'updateZoomState',
+        payload: {
+          status: 'error',
+          message: error.message,
+        },
+      };
+      window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
+      console.log(errmsg);
+    }
+  };
+
+  managerObj.attachZoomControls = () => {
+    try {
+      const maxScale = 1.0;
+      const minScale = 0.2;
+      const scaleStep = 0.1;
+      document.querySelectorAll('.zoom-control').forEach((el) => {
+        el.addEventListener('click', (event) => {
+          const { target } = event;
+          const action = target.getAttribute('data-zoomaction');
+          if (action === 'in' && managerObj.canvasScale < maxScale) {
+            managerObj.canvasScale = Number((managerObj.canvasScale + scaleStep).toFixed(1));
+          } else if (action === 'out' && managerObj.canvasScale > minScale) {
+            managerObj.canvasScale = Number((managerObj.canvasScale - scaleStep).toFixed(1));
+          }
+          document.querySelector('#userCanvas').style.transform = `scale(${managerObj.canvasScale})`;
+          document.querySelector('#answerCanvas').style.transform = `scale(${managerObj.canvasScale})`;
+          managerObj
+            .updateZoomState(managerObj.canvasScale === maxScale,
+              managerObj.canvasScale === minScale);
+          managerObj.repositionTurtle();
+        });
+      });
+
+      managerObj
+        .updateZoomState(managerObj.canvasScale === maxScale, managerObj.canvasScale === minScale);
+
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   managerObj.runCode = (
-    code, target, animate = true, frames = 1, delay = 0, respectDebugger = false, parentSelector = '.outputContainer',
+    code, target = 'answerCanvas', animate = true, frames = 1, delay = 0, respectDebugger = false, parentSelector = '.outputContainer',
   ) => {
     let attachDebugger = false;
     try {
@@ -1541,9 +1653,10 @@ const getTurtleOutput = ({
       });
       (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = target;
       Sk.TurtleGraphics.bufferSize = 1000;
-      const width = 1500;
-      Sk.TurtleGraphics.width = width;
-      Sk.TurtleGraphics.height = width;
+      // const width = window.innerWidth;
+      // const height = window.innerHeight;
+      Sk.TurtleGraphics.width = 1500;
+      Sk.TurtleGraphics.height = 1500;
       Sk.TurtleGraphics.animate = animate;
       setTimeout(() => {
         managerObj.repositionTurtle(`#${target}`, parentSelector);
@@ -1564,7 +1677,9 @@ const getTurtleOutput = ({
             managerObj.updateDebugState();
 
             // allow continue debugging
-            $('#continueDebugger').attr('disabled', false);
+            // $('#continueDebugger').attr('disabled', false);
+            // const continueDebugger = document.querySelector('#continueDebugger');
+            // continueDebugger.disabled = false;
             return new Promise((resolve, reject) => {
               managerObj.suspension = {
                 stepData,
@@ -1579,11 +1694,18 @@ const getTurtleOutput = ({
         },
       };
     } catch (error) {
+      const errmsg = {
+        action: 'error',
+        caller: 'runCode',
+        payload: {
+          status: 'error',
+          message: error.message,
+        },
+      };
       if (window.ReactNativeWebView) {
-        window.ReactNativeWebView.postMessage('script runcode error');
-        window.ReactNativeWebView.postMessage(error.message);
+        window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
       } else {
-        console.log(`script runcode error: ${error.message}`);
+        console.log(errmsg);
       }
     }
     return Sk.misceval.asyncToPromise(() => Sk.importMainWithBody('<stdin>', false, code, true), attachDebugger);
@@ -1631,7 +1753,7 @@ const getTurtleOutput = ({
       }
     } catch (error) {
       const msg = {
-        type: 'error',
+        action: 'error',
         caller: 'validateCode -> initiateRunCode',
         payload: {
           error,
@@ -1640,6 +1762,19 @@ const getTurtleOutput = ({
       window.sendMessage(msg);
     }
     return true;
+  };
+
+  managerObj.runDebugger = () => {
+    if (managerObj.suspension
+      && 'resolve' in managerObj.suspension
+      && 'reject' in managerObj.suspension
+      && 'stepData' in managerObj.suspension) {
+      managerObj.runNextStep(
+        managerObj.suspension.stepData,
+        managerObj.suspension.resolve,
+        managerObj.suspension.reject,
+      );
+    }
   };
 
   managerObj.resetDebugger = () => {
@@ -1667,7 +1802,7 @@ const getTurtleOutput = ({
     let validated = false;
     managerObj.runCode(code, 'userCanvas', true, frames, delay, true).then(() => {
       managerObj.workspace.highlightBlock(null);
-      const selector = $('#userCanvas')[0];
+      const selector = document.querySelector('#userCanvas');
       if (!selector || !selector.turtleInstance) {
         // lets say like no promise in that case but we need to save code -- JPK
         return false;
@@ -1684,14 +1819,14 @@ const getTurtleOutput = ({
     }).then((valid) => {
       validated = valid;
       const request = {
-        type: 'validateQuestion',
+        action: 'validateQuestion',
         questionId: Number(managerObj.initialResponse.questionObject.question_id),
         sourceCode: managerObj.editor.getValue(),
         xmlWorkSpace: BlocklyObj.Xml.domToText(BlocklyObj.Xml.workspaceToDom(managerObj.workspace)),
         validated,
       };
       const msg = {
-        type: 'validateQuestion',
+        action: 'validateQuestion',
         caller: 'initiateRunCode -> runCode',
         payload: {
           request,
@@ -1703,7 +1838,7 @@ const getTurtleOutput = ({
         // reset debugger in case of error
         managerObj.resetDebugger();
         const msg = {
-          type: 'error',
+          action: 'error',
           caller: 'initiateRunCode -> runCode',
           payload: {
             error,
@@ -1711,6 +1846,59 @@ const getTurtleOutput = ({
         };
         window.sendMessage(msg);
       });
+  };
+
+  managerObj.attachListeners = () => {
+    try {
+      // $(document).on('click', '.repositionDrawing', () => {
+      //   managerObj.repositionTurtle();
+      // });attachLis
+      document.querySelector('.repositionDrawing').addEventListener('click', () => {
+        managerObj.repositionTurtle();
+      });
+
+      // document.querySelector('#continueDebugger').addEventListener('click', () => {
+      //   managerObj.runDebugger();
+      // });
+
+      // document.querySelector('.continueDebugger').addEventListener('click', () => {
+      //   managerObj.runDebugger();
+      // });
+
+      document.querySelector('.drawingToggle').addEventListener('click', () => {
+        managerObj.toggleDrawingState();
+      });
+
+      document.querySelector('.debugToggle').addEventListener('click', () => {
+        managerObj.toggleDebugState();
+      });
+
+      // $($(document).on('click', '.repositionDrawing', () => {
+      //   //   managerObj.repositionTurtle();
+      //   // });document).on('click', '.debugToggle', (e) => {
+      //   e.stopPropagation();
+      //   managerObj.toggleDebugState();
+      // });
+
+      // $(document).on('click', '#continueDebugger, .continueDebugger', () => {
+      //   managerObj.runDebugger();
+      // });
+
+      // $(document).on('click', '.drawingToggle', () => {
+      //   managerObj.toggleDrawingState();
+      // });
+
+      managerObj.attachZoomControls();
+    } catch (error) {
+      const msg = {
+        action: 'error',
+        caller: 'attachListeners',
+        payload: {
+          error,
+        },
+      };
+      window.ReactNativeWebView.postMessage(JSON.stringify(msg));
+    }
   };
 
   return {

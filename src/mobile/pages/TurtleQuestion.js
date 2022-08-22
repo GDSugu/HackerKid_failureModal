@@ -74,6 +74,7 @@ const TurtleQuestion = () => {
   const [isCollapsed, setIsCollapsed] = React.useState(false);
   const memoizedCollapseValue = React.useMemo(() => isCollapsed, [isCollapsed]);
   const style = getStyles(font, utilColors);
+  const toggleCollapse = () => setIsCollapsed(!isCollapsed);
 
   const {
     turtleQuestion: {
@@ -84,15 +85,8 @@ const TurtleQuestion = () => {
   const webViewString = webViewElement({
     BodyComponent: BodyContent,
     ScriptComponent: ScriptContent,
-    // styleString: `<style>
-    //   body {
-    //     border-radius: 12px;
-    //   }
-    // </style>`,
     styleString,
   });
-
-  const toggleCollapse = () => setIsCollapsed(!isCollapsed);
 
   console.log('turtlequestion before jsx');
 

@@ -1,6 +1,7 @@
 @use '../../sass/themes/_default' as gt;
 @use '../../sass/base/_mixins' as gm;
 @use '../../sass/components/gameNavBar';
+@use '../../sass/components/loading';
 
 @import '_turtleTheme.js';
 
@@ -354,11 +355,15 @@
           }
         }
 
-        .runBtn {
-          color: gt.theme-var(text-color-2);
+        .runBtnContainer {
+          position: relative;
 
-          &:focus {
-            box-shadow: none;
+          .runBtn {
+            color: gt.theme-var(text-color-2);
+
+            &:focus {
+              box-shadow: none;
+            }
           }
         }
       }
@@ -374,7 +379,7 @@
 
   .game-mob-container {
     position: relative;
-    height: calc(100vh - 62px);
+    height: calc(100vh - 62px - 76px);
     overflow: hidden;
 
     .turtle-mob-game-container {
@@ -385,7 +390,7 @@
         flex: 1;
 
         .tab-pane {
-          height: calc(100vh - 62px - 81px);
+          height: calc(100vh - 62px - 76px - 81px);
 
           &#questionBlock {
             .turtle-mob-question-container {
@@ -543,7 +548,8 @@
           display: flex;
           justify-content: center;
 
-          .nav-link {
+          .nav-link,
+          .nav-link-container {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -557,6 +563,10 @@
               p {
                 color: gt.theme-var(game-nav-active-color, null, $thememaplight, $cssvars);
               }
+            }
+
+            .continueDebugger {
+              display: none;
             }
 
             p {
@@ -736,13 +746,15 @@
 
   ::-webkit-scrollbar {
     @include gm.media-breakpoint-up(md) {
-      width: 0.5rem;
+      width: 0.25rem;
+      height: 0.25rem;
     }
   }
 
   ::-webkit-scrollbar-thumb {
+    background-color: gt.theme-var(skeleton-bg);
+
     @include gm.media-breakpoint-up(md) {
-      background-color: gt.theme-var(skeleton-bg);
       border-radius: 1rem;
     }
   }

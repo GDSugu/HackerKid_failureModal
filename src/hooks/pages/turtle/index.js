@@ -88,15 +88,41 @@ const useTurtleFetchQuestion = ({
     .then((response) => {
       if (response !== 'access_denied') {
         const parsedResponse = JSON.parse(response);
-        if (parsedResponse.status === 'success' && parsedResponse.parse) {
+        if (parsedResponse.status === 'success' && parsedResponse.passed) {
           if (parsedResponse.pointsDetails.addedPoints) {
             getSession('pointsEarned')
               .then((pointsEarned) => {
                 const availablePoints = pointsEarned ? Number(pointsEarned) : 0;
                 const newPoints = availablePoints
-                  + Number(parsedResponse.pointsDetails.addedPoints);
+                + Number(parsedResponse.pointsDetails.addedPoints);
                 setSession('pointsEarned', newPoints);
               });
+          }
+          const shareLink = `https://www.hackerkid.org/turtle/submissions/${parsedResponse.profileDetails.uniqueUrl}/${turtleQuestionInfo.questionObject.question_id}/${turtleQuestionInfo.questionObject.uniqueString}`;
+          if (!turtleQuestionInfo.username) {
+            getSession('name')
+              .then((username) => {
+                setTurtleQuestionInfo((prevState) => ({
+                  ...prevState,
+                  responseObject: {
+                    ...parsedResponse,
+                    successMessage: parsedResponse.pointsDetails.submissionStatus.replace('{{name}}', username),
+                    shareLink,
+                  },
+                  validated: parsedResponse.passed,
+                  username,
+                }));
+              });
+          } else {
+            setTurtleQuestionInfo((prevState) => ({
+              ...prevState,
+              responseObject: {
+                ...parsedResponse,
+                successMessage: parsedResponse.pointsDetails.submissionStatus.replace('{{name}}', turtleQuestionInfo.username),
+                shareLink,
+              },
+              validated: parsedResponse.passed,
+            }));
           }
         }
       }

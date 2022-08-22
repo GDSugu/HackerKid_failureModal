@@ -1,25 +1,23 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
-  Dimensions,
   StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
 import WebView from 'react-native-webview';
 import {
   Svg, Path,
 } from 'react-native-svg';
-import { TurtleContext, useTurtleValidation } from '../../hooks/pages/turtle';
+import md5 from 'crypto-js/md5';
+import { TurtleContext } from '../../hooks/pages/turtle';
 import { useSharedTurtleWebView } from '../../shared/turtle';
 import ThemeContext from '../components/theme';
 import webViewElement from '../components/WebView';
-import outputJS from '../components/WebView/output';
-import turtleOutputJS from '../components/WebView/turtleOutput';
 import Icon from '../common/Icons';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
     flex: 1,
-    width: Dimensions.get('window').width,
+    // width: Dimensions.get('window').width,
   },
   btnContainer: {
     flexDirection: 'row',
@@ -60,16 +58,14 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
 const TurtleOutput = ({ navigation }) => {
   const { theme: { utilColors, screenTurtleOutput }, font } = React.useContext(ThemeContext);
   const style = getStyles(screenTurtleOutput, utilColors, font);
+  const webViewRef = React.useRef(null);
+  const turtleContext = React.useContext(TurtleContext);
   const {
     turtleOutput: {
-      BodyContent, ScriptContent, scriptToInject, styleString
+      BodyContent, ScriptContent, scriptToInject, styleString,
     },
   } = useSharedTurtleWebView();
-  const { submitTurtle } = useTurtleValidation();
-  const webViewRef = React.useRef(null);
   let webViewString = '';
-
-  const turtleContext = React.useContext(TurtleContext);
 
   webViewString = webViewElement({
     BodyComponent: BodyContent,
@@ -77,22 +73,72 @@ const TurtleOutput = ({ navigation }) => {
     styleString,
   });
 
-  if (navigation.getState().index === 2) {
+  const handlePlayBtn = () => {
     if (webViewRef.current && turtleContext.tqState.status === 'success') {
+      const obj = {
+        action: 'runCode',
+        data: {
+          snippet: turtleContext.tqState.snippet,
+          canvas: 'answerCanvas',
+        },
+      };
       const runTurtle = `
       try {
-        window.execute({
-          action: 'runCode',
-          data: {
-            snippet: '${JSON.stringify(turtleContext.tqState.snippet)}',
-          },
-        });
+        // window.execute({
+        //   action: 'runCode',
+        //   data: {
+        //     snippet: '${JSON.stringify(turtleContext.tqState.snippet)}',
+        //   },
+        // });
+        window.execute(${JSON.stringify(obj)});
       } catch (err) {
         window.ReactNativeWebView.postMessage('Script Error on run: ');
         window.ReactNativeWebView.postMessage(err.message);
       }`;
       webViewRef.current.injectJavaScript(runTurtle);
     }
+  };
+
+  const handleDebugger = () => {
+    if (webViewRef.current && turtleContext.tqState.status === 'success') {
+      const obj = {
+        action: 'runDebugger',
+      };
+      const runTurtle = `
+        try {
+          window.execute(${JSON.stringify(obj)});
+        } catch (err) {
+          const errmsg = {
+            action: 'error',
+            data: err.message,
+          };
+          window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
+        }`;
+      webViewRef.current.injectJavaScript(runTurtle);
+    }
+  };
+
+  if (navigation.getState().index === 2) {
+    if (webViewRef.current && turtleContext.tqState.status === 'success') {
+      const obj = {
+        action: 'repositionTurtle',
+      };
+      const runTurtle = `
+      try {
+        window.execute(${JSON.stringify(obj)});
+      } catch (err) {
+        const errmsg = {
+          action: 'error',
+          data: err.message,
+          caller: 'repositionTurtle from turtle output screen',
+        };
+        window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
+      }`;
+      setTimeout(() => {
+        webViewRef.current.injectJavaScript(runTurtle);
+      }, 300);
+    }
+    // setTimeout(handlePlayBtn, 300);
   }
 
   const handleMessage = (msg) => {
@@ -100,20 +146,30 @@ const TurtleOutput = ({ navigation }) => {
       console.log(msg.nativeEvent.data);
       const message = JSON.parse(msg.nativeEvent.data);
       const { action, data } = message;
-
       switch (action) {
         case 'validated': {
-          console.log(data);
-          console.log(Object.keys(turtleContext.tqState));
-          const obj = {
+          // console.log(data);
+          // console.log(Object.keys(turtleContext.tqState));
+          const request = {
+            type: 'validateQuestion',
             questionId: Number(turtleContext.tqState.questionObject.question_id),
             sourceCode: turtleContext.tqState.snippet,
             xmlWorkSpace: turtleContext.tqState.xmlWorkSpace,
             validated: data.validated,
           };
-          submitTurtle(obj);
-        }
+          let requestString = '';
+          Object.keys(request).forEach((index) => {
+            requestString += request[index];
+          });
+          const requestHash = md5(requestString + md5(requestString).toString()).toString();
+          request.requestHash = requestHash;
+          turtleContext.submitTurtle(request);
           break;
+        }
+        case 'debug_state_changed': {
+          console.log(data.inDebugging);
+          break;
+        }
         default: break;
       }
     } catch (error) {
@@ -122,79 +178,32 @@ const TurtleOutput = ({ navigation }) => {
   };
 
   React.useEffect(() => {
+    setTimeout(handlePlayBtn, 300);
+  }, [turtleContext.tqState.snippet]);
+
+  React.useEffect(() => {
     setTimeout(() => {
+      console.log('webview ref: ', turtleContext.tqState.questionObject.snippet);
       if (webViewRef.current && turtleContext.tqState.status === 'success') {
-        const initBlockly = `
-        try {
-            window.execute({
-              action: 'renderTurtle',
-              data: {
-                snippet: '${JSON.stringify(turtleContext.tqState.questionObject.snippet)}',
-              },
-            });
-        } catch (err) {
-          window.ReactNativeWebView.postMessage('Script Error: ');
-          window.ReactNativeWebView.postMessage(err.message);
-        }
-          `;
-        // const initBlockly = `
-        // const a = {
-        //   name: 'hello',
-        // };
-        //   window.ReactNativeWebView.postMessage(Object.keys(Sk).toString());
-        // // try {
-        // // } catch (e) {
-        //   // window.ReactNativeWebView.postMessage(JSON.stringify(e));
-        //   // window.ReactNativeWebView.postMessage(e.toString());
-        // // }
-        //     `;
-        webViewRef.current.injectJavaScript(initBlockly);
+        const obj = {
+          action: 'renderTurtle',
+          data: {
+            snippet: turtleContext.tqState.questionObject.snippet,
+          },
+        };
+
+        const init = `
+          try {
+            window.execute(${JSON.stringify(obj)});
+          } catch (err) {
+            window.ReactNativeWebView.postMessage('Script Error: ');
+            window.ReactNativeWebView.postMessage(err.message);
+          }
+        `;
+        webViewRef.current.injectJavaScript(init);
       }
-
-      // const str = `
-      // try {
-      //   // window.ReactNativeWebView.postMessage(Object.keys(window).toString());
-      //   window.execute({
-      //     action: "runCode",
-      //     data: "hello world"
-      //   });
-      // } catch (err) {
-      //   window.ReactNativeWebView.postMessage('Error: ');
-      //   window.ReactNativeWebView.postMessage(err.message);
-      // }`;
-
-      // webViewRef.current.injectJavaScript(str);
     }, 1000);
-    // setTimeout(() => {
-    //   const initBlockly = `
-    //         window.ReactNativeWebView.postMessage(Object.keys(window).toString());
-    //         `;
-    //   webViewRef.current.injectJavaScript(initBlockly);
-    // }, 500);
-  }, []);
-
-  const jsScript = `
-      $(() => {
-        const pool = workerpool.pool();
-        const {
-          managerObj, poolObj,
-        } = getTurtleOutput({
-          blocklyObj: window.Blockly,
-          workerPoolObj: pool,
-        });
-      
-        window.Turtle = managerObj;
-        window.SkObj = Sk;
-        const abc = 'from turtle import *\nsetundobuffer(1000)\nforward(25)\nright(90)\nforward(25)\nleft(90)\nforward(25)';
-        window.Turtle.runCode(abc, 'answerCanvas', true, 3, 0)
-          .then(() => {
-            const currentSelector = $('#answerCanvas')[0];
-            if (currentSelector && currentSelector.turtleInstance) {
-              currentSelector.turtleInstance.update();
-            }
-          });
-      });
-  `;
+  }, [turtleContext.tqState.questionObject]);
 
   return <>
     <View style={style.container}>
@@ -202,15 +211,13 @@ const TurtleOutput = ({ navigation }) => {
         style={style.container}
         ref={webViewRef}
         source={{ html: webViewString }}
-        // source={{ html: outputJS }}
-        // source={{ html: turtleOutputJS }}
         originWhitelist={['*']}
-        // injectedJavaScript={'window.execute({action: "runCode", data: "hello world"})'}
         injectedJavaScript={scriptToInject}
-        // scalesPageToFit={false}
+        scrollEnabled={true}
+        scalesPageToFit={false}
         startInLoadingState={true}
-        // injectedJavaScript={jsScript}
         onMessage={handleMessage}
+        overScrollMode='never'
       />
       <View style={style.btnContainer}>
         <TouchableOpacity
@@ -218,7 +225,7 @@ const TurtleOutput = ({ navigation }) => {
             ...style.outputBtn,
             ...style.shareBtn,
           }}
-          onPress={() => console.log('share btn')}
+          onPress={handleDebugger}
         >
           <Text
             style={{
@@ -242,9 +249,7 @@ const TurtleOutput = ({ navigation }) => {
             ...style.outputBtn,
             ...style.playBtn,
           }}
-          onPress={() => {
-            console.log('Play btn');
-          }}
+          onPress={handlePlayBtn}
         >
           <Text
             style={{

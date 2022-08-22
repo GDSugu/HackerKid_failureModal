@@ -22,16 +22,37 @@ const resizeHandler = (nav = 'nav', selector) => {
   }
 };
 
+const hideDefaultNavBar = (device, turtleState) => {
+  document.querySelector('nav:first-child').style.display = 'none';
+  let componentContainer = `.turtle-${turtleState}-container`;
+  if (device === 'desktop') {
+    componentContainer = `.turtle-${turtleState}-container`;
+  } else if (device === 'mobile') {
+    componentContainer = `.turtle-mob-${turtleState}-container`;
+  }
+  window.addEventListener('resize', () => resizeHandler('nav.turtle-navbar', componentContainer));
+  setTimeout(() => {
+    resizeHandler('nav.turtle-navbar', componentContainer);
+  }, 300);
+};
+
 const TurtleHomeComponent = ({ changeRoute }) => {
   pageInit('turtle-home-container', 'Turtle');
 
   React.useEffect(() => {
-    window.addEventListener('resize', () => resizeHandler('nav:first-child', '.turtle-frame'));
-    document.querySelector('nav:first-child').style.display = 'block';
-    resizeHandler('nav:first-child', '.turtle-frame');
+    document.querySelector('nav:first-child').style.display = 'none';
+    window.addEventListener('resize', () => resizeHandler('nav.turtle-navbar', '.turtle-frame'));
+    setTimeout(() => {
+      resizeHandler('nav.turtle-navbar', '.turtle-frame');
+    }, 300);
   }, []);
 
   return <>
+  <TurtleNavBar
+    // questionState={memoizedTurtleQuestionState}
+    // handleHint={handleHint}
+    isTurtleMainPage={false}
+  />
     <div className="turtle-frame">
       <div className="turtle-card">
         <div className="card-container">
@@ -80,7 +101,7 @@ const TurtleHomeComponent = ({ changeRoute }) => {
             {/* <a href="../../" className="btn btn-transparent turtle-action-btn turtle-audio-btn">
               <Img src='../../../../images/games/gameAudio.png' alt='Game Audio' />
             </a> */}
-            <a href="" className="btn btn-transparent turtle-action-btn turtle-play-btn">
+            <button className="btn btn-transparent turtle-action-btn turtle-play-btn" onClick={() => changeRoute('turtleGame')}>
               <div className="play-btn-container">
                 <Img src='../../../../images/games/gamePlay.png' className='play-btn-img' alt='Game Leaderboard' />
                 <p>
@@ -90,7 +111,7 @@ const TurtleHomeComponent = ({ changeRoute }) => {
                   />
                 </p>
               </div>
-            </a>
+            </button>
             {/* <a href="" className="btn btn-transparent turtle-action-btn turtle-leaderboard-btn">
               <Img src='../../../../images/games/gameLeaderboard.png' alt='Game Leaderboard' />
             </a> */}
@@ -265,12 +286,14 @@ const TurtlePlayGroundComponent = ({ handleRunCode, handleDrawingState, handleHi
               </a>
             </li>
           </ul>
-          <button id='runCode' className='btn runBtn' onClick={() => { toggleHintBtn(true); handleRunCode(); }}>
-            <i className="fas fa-play"></i>
-          </button>
-          <button id='continueDebugger' className='btn runBtn' onClick={() => { toggleHintBtn(true); }}>
-            <i className="fas fa-play"></i>
-          </button>
+          <div className="runBtnContainer">
+            <button id='runCode' className='btn runBtn' onClick={() => { toggleHintBtn(true); handleRunCode(); }}>
+              <i className="fas fa-play"></i>
+            </button>
+            <button id='continueDebugger' className='btn runBtn' onClick={() => { toggleHintBtn(true); }}>
+              <i className="fas fa-play"></i>
+            </button>
+          </div>
         </div>
         <div className="tab-content" id="tabsContent">
           <div className="hintBtnContainer">
@@ -291,8 +314,12 @@ const TurtlePlayGroundComponent = ({ handleRunCode, handleDrawingState, handleHi
           <div className="tab-pane fade" id="turtleOutput" role="tabpanel" aria-labelledby="turtleOutput-tab">
             <div id="outputSection">
               <div className="drawing-controls">
-                <button className="btn btn-light mt-1 zoom-control zoomIn font-weight-bold" data-zoomaction="in" title="Zoom In" disabled>+</button>
-                <button className="btn btn-light mt-1 zoom-control zoomOut font-weight-bold" data-zoomaction="out" title="Zoom Out" disabled>-</button>
+                {/* <button
+                  className="btn btn-light mt-1 zoom-control zoomIn font-weight-bold"
+                  data-zoomaction="in" title="Zoom In" disabled>+</button>
+                <button
+                  className="btn btn-light mt-1 zoom-control zoomOut font-weight-bold"
+                  data-zoomaction="out" title="Zoom Out" disabled>-</button> */}
                 <button className="btn btn-light mt-1 repositionDrawing" title="Center">
                   <i className="fa fa-crosshairs"></i>
                 </button>
@@ -451,7 +478,7 @@ const HintComponent = ({ hintDetails, handleHint }) => {
   const hideHintContainer = () => $('.hintContainer').animate({
     transform: 200,
   }, {
-    duration: 300,
+    duration: 200,
     step: (now) => {
       $('.hintContainer').css('transform', `translate(-50%, ${now}%)`);
     },
@@ -573,8 +600,12 @@ const TurtleMobComponent = ({
       <div className="tab-pane fade" id="turtleOutput" role="tabpanel" aria-labelledby="turtleOutput-tab">
         <div id="outputSection">
           <div className="drawing-controls">
-            <button className="btn btn-light mt-1 zoom-control zoomIn font-weight-bold" data-zoomaction="in" title="Zoom In" disabled>+</button>
-            <button className="btn btn-light mt-1 zoom-control zoomOut font-weight-bold" data-zoomaction="out" title="Zoom Out" disabled>-</button>
+            {/* <button
+              className="btn btn-light mt-1 zoom-control zoomIn font-weight-bold"
+              data-zoomaction="in" title="Zoom In" disabled>+</button>
+            <button
+              className="btn btn-light mt-1 zoom-control zoomOut font-weight-bold"
+              data-zoomaction="out" title="Zoom Out" disabled>-</button> */}
             <button className="btn btn-light mt-1 repositionDrawing" title="Center">
               <i className="fa fa-crosshairs"></i>
             </button>
@@ -628,31 +659,37 @@ const TurtleMobComponent = ({
         </a>
       </li>
       <li className="nav-item" role="presentation">
-        <a className="nav-link runCode" id="output-tab" data-toggle="tab" href="#turtleOutput" role="tab" aria-controls="output" aria-selected="false" onClick={handleRunCode}>
-          <svg width="24" height="24" viewBox="0 0 24 24" stroke="#A9ABAC" color="#A9ABAC" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 4V20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" stroke="currentColor" />
-            <path d="M20 12L6 20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" stroke="currentColor" />
-            <path d="M20 12L6 4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" stroke="currentColor"/>
-          </svg>
-          <p>
-            <FormattedMessage
-              defaultMessage={'Output'}
-              description={'Output tab'}
-            />
-          </p>
-        </a>
-        <a className="nav-link continueDebugger" id="output-tab" data-toggle="tab" href="#turtleOutput" role="tab" aria-controls="output" aria-selected="false" >
-          <svg width="24" height="24" viewBox="0 0 24 24" stroke="#A9ABAC" color="#A9ABAC" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 4V20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" stroke="currentColor" />
-            <path d="M20 12L6 20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" stroke="currentColor" />
-            <path d="M20 12L6 4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" stroke="currentColor"/>
-          </svg>
-          <p>
-            <FormattedMessage
-              defaultMessage={'Output'}
-              description={'Output tab'}
-            />
-          </p>
+        <a className="nav-link" id="output-tab" data-toggle="tab" href="#turtleOutput" role="tab" aria-controls="output" aria-selected="false">
+          <div className="runCode" onClick={handleRunCode}>
+            <div className="nav-link-container">
+              <svg width="24" height="24" viewBox="0 0 24 24" stroke="#A9ABAC" color="#A9ABAC" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 4V20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" stroke="currentColor" />
+                <path d="M20 12L6 20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" stroke="currentColor" />
+                <path d="M20 12L6 4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" stroke="currentColor"/>
+              </svg>
+              <p>
+                <FormattedMessage
+                  defaultMessage={'Output'}
+                  description={'Output tab'}
+                />
+              </p>
+            </div>
+          </div>
+          <div className="continueDebugger">
+            <div className="nav-link-container">
+              <svg width="24" height="24" viewBox="0 0 24 24" stroke="#A9ABAC" color="#A9ABAC" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 4V20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" stroke="currentColor" />
+                <path d="M20 12L6 20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" stroke="currentColor" />
+                <path d="M20 12L6 4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" stroke="currentColor"/>
+              </svg>
+              <p>
+                <FormattedMessage
+                  defaultMessage={'Continue'}
+                  description={'Output tab'}
+                />
+              </p>
+            </div>
+          </div>
         </a>
       </li>
     </ul>
@@ -684,7 +721,6 @@ const TurtleGameComponent = () => {
 
   const handleRunCode = () => {
     let validation;
-    console.log('handleRunCode');
     runSkulpt()
       .then((resp) => {
         validation = resp.validated;
@@ -693,9 +729,11 @@ const TurtleGameComponent = () => {
           validated: validation,
           screen: 'recognition-screen',
         }));
+        $('#loader').show();
         return submitTurtle(resp);
       })
       .then((resp) => {
+        $('#loader').hide();
         if (resp === 'access_denied') {
           if (validation) {
             successModalRef.current.show();
@@ -716,8 +754,10 @@ const TurtleGameComponent = () => {
   };
 
   const handleNextQuestion = () => {
+    $('#loader').show();
     getNextQuestion()
       .then(() => {
+        $('#loader').hide();
         successModalRef.current.hide();
       });
   };
@@ -725,8 +765,10 @@ const TurtleGameComponent = () => {
   const handleHint = (action = false) => {
     const blocks = window.manager?.workspace?.getAllBlocks();
     const blockTypes = blocks.map((value) => value.type);
+    $('#loader').show();
     return loadHints({ blockTypes, action })
       .then(() => {
+        $('#loader').hide();
         const isHintShown = $('.hintContainer').hasClass('shown');
         if (!isHintShown) {
           let transform = 10;
@@ -737,7 +779,6 @@ const TurtleGameComponent = () => {
           $('.hintContainer').animate({
             transform,
           }, {
-            duration: 500,
             start: (promise) => {
               for (let i = 0; i < promise.tweens.length; i += 1) {
                 const tween = promise.tweens[i];
@@ -771,19 +812,10 @@ const TurtleGameComponent = () => {
 
   React.useEffect(() => {
     isPageMounted.current = true;
-    document.querySelector('nav:first-child').style.display = 'none';
-    let componentContainer = '.turtle-game-container';
-    if (device === 'desktop') {
-      componentContainer = '.turtle-game-container';
-    } else if (device === 'mobile') {
-      componentContainer = '.turtle-mob-game-container';
-    }
-    window.addEventListener('resize', () => resizeHandler('nav.turtle-navbar', componentContainer));
-    setTimeout(() => {
-      resizeHandler('nav.turtle-navbar', componentContainer);
-    }, 300);
+    hideDefaultNavBar('game');
 
     if (status === 'success') {
+      $('#loader').hide();
       startTurtle({ response: turtleQuestionState });
     }
 
@@ -804,6 +836,7 @@ const TurtleGameComponent = () => {
     <TurtleNavBar
       questionState={memoizedTurtleQuestionState}
       handleHint={handleHint}
+      isTurtleMainPage={true}
     />
     {
       device === 'desktop'
@@ -876,11 +909,12 @@ const TurtleGameComponent = () => {
           nextHandler={handleNextQuestion}
         />
     </Modal>
+    <div id="loader"></div>
   </>;
 };
 
 const Turtle = () => {
-  const [turtleRoute, setTurtleRoute] = React.useState('turtleGame');
+  const [turtleRoute, setTurtleRoute] = React.useState('turtleHome');
 
   const changeRoute = (route) => setTurtleRoute(route);
 
