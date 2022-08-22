@@ -12,7 +12,7 @@ import useRegister from '../../../../hooks/pages/register';
 import {
   togglePasswordVisibility, validateInputOnChange, closeFormError, setFormErrorField,
 } from '../commonLoginRegisterFunctions';
-import { loginCheck, setUserSession } from '../../../../hooks/common/framework';
+import { loginCheck } from '../../../../hooks/common/framework';
 import VerifyOtpFormStep from '../components/VerifyOtpFormStep';
 import useOtp from '../../../../hooks/pages/otp';
 import useBackBtn from '../../../../hooks/pages/back-btn';
@@ -284,8 +284,7 @@ const RegisterFormStepThree = ({
         const { status, message } = data;
 
         if (status === 'success') {
-          const sessionDetails = data.session;
-          setUserSession(sessionDetails).then(() => pathNavigator('dashboard'));
+          pathNavigator('dashboard');
         } else if (status === 'error') {
           const errorCause = 'postData';
           switch (message) {
