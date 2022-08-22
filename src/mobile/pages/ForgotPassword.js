@@ -423,7 +423,7 @@ const ForgotPasswordStepFour = ({ navigation, style, setBackBtnStateObj }) => {
       );
     }}>
       <Text style={style.btnPrimaryText}>
-        Go to Login
+        <FormattedMessage defaultMessage={'Go to Login'} description={'Go to login button'} />
       </Text>
     </TouchableOpacity>
     </View>
