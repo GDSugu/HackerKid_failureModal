@@ -1,7 +1,9 @@
-import { useState } from 'react';
-import post from '../../common/framework';
+import { useContext, useState } from 'react';
+import post, { setUserSession } from '../../common/framework';
+import { AuthContext } from '../root';
 
 const useRegister = () => {
+  const authContext = useContext(AuthContext);
   const [stateObj, setStateObj] = useState({
     formStep: 1,
     otpTimerId: null,
@@ -26,7 +28,18 @@ const useRegister = () => {
       recaptchaVersion: Number.toString(recaptchaVersion),
     };
 
-    return post(postData, 'register/');
+    return post(postData, 'register/').then((response) => {
+      const data = JSON.parse(response);
+      if (data.status === 'success') {
+        setUserSession(data.session).then(() => {
+          authContext.setAuthState({
+            isLoggedIn: true,
+            sessionData: data,
+          });
+        });
+      }
+      return response;
+    });
   };
 
   return {

@@ -218,6 +218,10 @@
     "defaultMessage": "Not {phone} ?",
     "description": "not button"
   },
+  "FoTGQE": {
+    "defaultMessage": "Go to Login",
+    "description": "Go to login button"
+  },
   "G0AqB8": {
     "defaultMessage": "Login into Existing Account",
     "description": "Login into Exisiting Account button"

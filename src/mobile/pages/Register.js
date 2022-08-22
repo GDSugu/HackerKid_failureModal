@@ -21,7 +21,6 @@ import { closeFormError, validate } from '../common/framework';
 import useOtp from '../../hooks/pages/otp';
 import VerifyOtpFormStep from '../components/VerifyOtpFormStep';
 import getCommonStyles from '../components/commonStyles';
-import { setUserSession } from '../../hooks/common/framework';
 import Recaptchav3 from '../components/Recaptchav3';
 import Recaptchav2Modal from '../components/Recaptchav2Modal';
 
@@ -346,18 +345,7 @@ const RegisterFormStepThree = ({
       const data = JSON.parse(response);
       const { status, message } = data;
 
-      if (status === 'success' && message === 'REGISTERED') {
-        setUserSession(data.session).then(() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                { name: 'Start' },
-              ],
-            }),
-          );
-        }).catch((err) => console.log(err));
-      } else if (status === 'error') {
+      if (status === 'error') {
         switch (message) {
           case 'UNAUTHORIZED_ACCESS': {
             recaptchav2Ref.current.showModal();
