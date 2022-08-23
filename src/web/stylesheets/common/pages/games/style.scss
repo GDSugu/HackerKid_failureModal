@@ -20,3 +20,60 @@
     }
   }
 }
+
+.container {
+  width: 80%;
+  margin: auto;
+  margin-top: 1.5rem;
+}
+
+.all-game-cards {
+  display: flex;
+  flex-wrap: wrap;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .card {
+    border-radius: 1rem;
+    cursor: pointer;
+
+    .card-img-top {
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
+    }
+
+    .card-body {
+      background-color: gt.theme-var(game-card-body-bg, null, $thememaplight, $cssvars);
+      border-bottom-left-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem;
+    }
+
+    .card-title {
+      margin: 0;
+    }
+
+    .play-btn {
+      background: white;
+      border: 0;
+      border-radius: 50%;
+      padding: 0.65rem 0.5rem;
+      margin: 0;
+      outline: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .play-game-icon {
+        width: 22px;
+        height: 20px;
+      }
+    }
+  }
+}
