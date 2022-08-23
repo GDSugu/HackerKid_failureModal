@@ -9,6 +9,7 @@ import { useSharedTurtleWebView } from '../../shared/turtle';
 const getStyles = (utils) => StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'transparent',
   },
   webViewContainer: {
     flex: 1,
@@ -47,16 +48,13 @@ const TurtleEditor = () => {
             xmlWorkSpace: data.workspace,
             blockTypes: data.blockTypes,
           }));
-          console.log(turtleContext.tqState.snippet);
           break;
         case 'workspace_initialized':
-          console.log('workspace_initialized');
-          console.log(message);
           break;
         default: break;
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

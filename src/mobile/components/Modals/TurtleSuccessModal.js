@@ -11,12 +11,12 @@ import { TurtleContext } from '../../../hooks/pages/turtle';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   overlay: {
-    backgroundColor: '#00000050',
+    backgroundColor: utilColors.transparent,
     flex: 1,
     justifyContent: 'center',
   },
   modalCard: {
-    backgroundColor: 'white',
+    backgroundColor: utilColors.white,
     borderRadius: 16,
     alignItems: 'center',
     paddingVertical: 24,
@@ -127,11 +127,11 @@ const TurtleSuccessModal = () => {
   const turtleContext = React.useContext(TurtleContext);
   const style = getStyles(theme.screenMore, font, theme.utilColors);
 
-  const [modalProps, setModalProps] = React.useState({
-    modalType: 'success',
-  });
+  // const [modalProps, setModalProps] = React.useState({
+  //   modalType: 'success',
+  // });
 
-  const handleShareBtn = () => setModalProps((prevState) => ({
+  const handleShareBtn = () => turtleContext.tqSetState((prevState) => ({
     ...prevState,
     modalType: 'share',
   }));
@@ -141,7 +141,7 @@ const TurtleSuccessModal = () => {
       ...prevState,
       validated: false,
     }));
-    setModalProps((prevState) => ({
+    turtleContext.tqSetState((prevState) => ({
       ...prevState,
       modalType: 'success',
     }));
@@ -157,32 +157,37 @@ const TurtleSuccessModal = () => {
     <Modal
       visible={turtleContext.tqState.validated}
       transparent
-      animationType='slide'>
+      onRequestClose={handleCloseBtn}
+      // animationType='slide'
+      >
       <View style={style.overlay}>
         <View style={style.modalCard}>
           <View style={style.modalCardHeader}>
-          <TouchableOpacity
-            style={style.disposableIconBtn}
-            onPress={handleCloseBtn}
-          >
-            <View>
-              <Icon
-                name='close'
-                type='FontAwesome'
-                size={24}
-                color={theme.utilColors.white}
-              />
-            </View>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={style.disposableIconBtn}
+              onPress={handleCloseBtn}
+            >
+              <View>
+                <Icon
+                  name='close'
+                  type='FontAwesome'
+                  size={24}
+                  color={theme.utilColors.white}
+                />
+              </View>
+            </TouchableOpacity>
           </View>
           {
-            modalProps.modalType === 'success'
+            turtleContext.tqState.modalType === 'success'
             && <>
               <View style={style.modalCardContent}>
                 {/* <View> */}
                   <Image
                     source={SuccessHero}
-                    style={style.heroImage}
+                    style={{
+                      ...style.heroImage,
+                    }}
+                    resizeMode={'contain'}
                   />
                   <Text style={style.modalTitle}>
                     <FormattedMessage
@@ -240,7 +245,7 @@ const TurtleSuccessModal = () => {
             </>
           }
           {
-            modalProps.modalType === 'share'
+            turtleContext.tqState.modalType === 'share'
             && <>
               <View style={style.modalCardContent}>
                 <Text style={{

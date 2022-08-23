@@ -977,6 +977,13 @@ const Index = ({ route, navigation }) => {
     },
   };
 
+  const handleLoginRoute = () => {
+    authContext.setAuthState((prevState) => ({
+      ...prevState,
+      isLoggedIn: false,
+    }));
+  };
+
   if (authContext.appData.isReferesh) {
     onRefresh();
     authContext.setAuthState((prevState) => ({
@@ -997,7 +1004,11 @@ const Index = ({ route, navigation }) => {
     <>
       {
         [dashboarStatus, leaderboardStatus, challengesStatus].includes('access_denied')
-        && <AuthErrorModal navigation={navigation} route={route} />
+        && <AuthErrorModal
+          navigation={navigation}
+          route={route}
+          handleLoginRoute={handleLoginRoute}
+        />
       }
       {
         ![dashboarStatus, leaderboardStatus, challengesStatus].includes('access_denied')

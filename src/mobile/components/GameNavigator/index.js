@@ -5,6 +5,8 @@ import {
 } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as Animatable from 'react-native-animatable';
+import LinearGradient from 'react-native-linear-gradient';
+import TurtleHeader from '../Header/TurtleHeader';
 import ThemeContext from '../theme';
 import levelIcon from '../../../images/games/levelStar.png';
 import hintIcon from '../../../images/games/hint.png';
@@ -13,7 +15,7 @@ import { TurtleContext } from '../../../hooks/pages/turtle';
 
 const getStyle = (font, utilColors = {}) => StyleSheet.create({
   tabBar: {
-    backgroundColor: '#21252750',
+    backgroundColor: utilColors.darkTransparent50,
   },
   tabBarContainer: {
     flexDirection: 'row',
@@ -44,6 +46,7 @@ const getStyle = (font, utilColors = {}) => StyleSheet.create({
     padding: 16,
     alignItems: 'center',
     justifyContent: 'space-between',
+    backgroundColor: 'transparent',
   },
   row: {
     flexDirection: 'row',
@@ -74,9 +77,10 @@ const GameBottomTabBar = (props) => {
     setCurrentScreen,
     state,
     TabArray,
+    utilColors,
   } = props;
 
-  const style = getStyle(font);
+  const style = getStyle(font, utilColors);
 
   return (
     <View style={style.tabBar}>
@@ -134,7 +138,7 @@ const GameBottomTabBar = (props) => {
               >
                 {/* <FormattedMessage
                   defaultMessage={tabTitle}
-                  description='Game Navigator Text'
+                  description='Game Nafontvigator Text'
                 /> */}
                 { tabTitle }
               </Text>
@@ -147,12 +151,15 @@ const GameBottomTabBar = (props) => {
   );
 };
 
-const GameHeader = ({ currentScreen, font, utilColors }) => {
+const GameHeader = ({
+  currentScreen, font, gradients, utilColors,
+}) => {
   const style = getStyle(font, utilColors);
   const turtleContext = useContext(TurtleContext);
 
   return <>
-    <View style={[style.tabHeader, { backgroundColor: currentScreen === 'TurtleQuestion' ? 'transparent' : utilColors.dark }]}>
+    <TurtleHeader />
+    <LinearGradient colors={gradients.darkTransparent1} style={style.tabHeader}>
       <View style={style.row}>
         <Image
           source={levelIcon}
@@ -186,19 +193,20 @@ const GameHeader = ({ currentScreen, font, utilColors }) => {
           />
         </TouchableOpacity>
       </View>
-    </View>
+    </LinearGradient>
   </>;
 };
 
 const GameNavigator = ({ currentScreen, ScreenArray }) => {
   const BottomTab = createBottomTabNavigator();
-  const { font, theme: { utilColors } } = useContext(ThemeContext);
+  const { font, theme: { gradients, utilColors } } = useContext(ThemeContext);
 
   return (
     <>
     <GameHeader
           currentScreen={currentScreen.currentGameScreen}
           font={font}
+          gradients={gradients}
           utilColors={utilColors}
         />
         <BottomTab.Navigator
@@ -209,6 +217,7 @@ const GameNavigator = ({ currentScreen, ScreenArray }) => {
           {...props}
           TabArray={ScreenArray}
           font={font}
+          utilColors={utilColors}
           setCurrentScreen={currentScreen.setCurrentGameScreen}
         />
       }

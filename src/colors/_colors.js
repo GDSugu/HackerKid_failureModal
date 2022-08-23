@@ -81,6 +81,7 @@ const gradients = {
   green: ['#0F5837', '#24AA70'],
   blue: ['#00BAFF', '#0051FF'],
   purple: ['#3E16A1', '#7538C4'],
+  darkTransparent1: ['#17181875', '#17181825'],
 };
 
 const utilColors = {
@@ -99,7 +100,8 @@ const utilColors = {
   shadowColor1: '#F9A826',
   shadowColor2: '#FFE8B6',
   black: '#000000',
-  transparent: 'transparent',
+  transparent: '#00000050',
+  overlay1: '#17181875',
 };
 
 module.exports = {

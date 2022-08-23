@@ -118,15 +118,7 @@ const TurtleOutput = ({ navigation }) => {
     }
   };
 
-  const handlePlayBtn = () => {
-    if (!turtleContext.tqState.inDebugging) {
-      runCode();
-    } else {
-      handleDebugger();
-    }
-  };
-
-  if (navigation.getState().index === 2) {
+  const repositionTurtle = () => {
     if (webViewRef.current && turtleContext.tqState.status === 'success') {
       const obj = {
         action: 'repositionTurtle',
@@ -146,42 +138,72 @@ const TurtleOutput = ({ navigation }) => {
         webViewRef.current.injectJavaScript(runTurtle);
       }, 300);
     }
+  };
+
+  const handlePlayBtn = () => {
+    if (!turtleContext.tqState.inDebugging) {
+      runCode();
+    } else {
+      handleDebugger();
+    }
+  };
+
+  const handleShareBtn = () => {
+    turtleContext.tqSetState((prevState) => ({
+      ...prevState,
+      modalType: 'share',
+      validated: true,
+    }));
+  };
+
+  const submitTurtle = (data) => {
+    const request = {
+      type: 'validateQuestion',
+      questionId: Number(turtleContext.tqState.questionObject.question_id),
+      sourceCode: turtleContext.tqState.snippet,
+      xmlWorkSpace: turtleContext.tqState.xmlWorkSpace,
+      validated: data.validated,
+    };
+    let requestString = '';
+    Object.keys(request).forEach((index) => {
+      requestString += request[index];
+    });
+    const requestHash = md5(requestString + md5(requestString).toString()).toString();
+    request.requestHash = requestHash;
+    turtleContext.submitTurtle(request);
+  };
+
+  const handleDebuggingState = (debuggingState) => {
+    if (turtleContext.tqState.inDebugging !== debuggingState) {
+      turtleContext.tqSetState((prevState) => ({
+        ...prevState,
+        inDebugging: debuggingState,
+      }));
+    }
+  };
+
+  if (navigation.getState().index === 2) {
+    repositionTurtle();
     // setTimeout(handlePlayBtn, 300);
   }
 
   const handleMessage = (msg) => {
     try {
-      console.log(msg.nativeEvent.data);
       const message = JSON.parse(msg.nativeEvent.data);
       const { action, data } = message;
       switch (action) {
         case 'validated': {
-          // console.log(data);
-          // console.log(Object.keys(turtleContext.tqState));
-          const request = {
-            type: 'validateQuestion',
-            questionId: Number(turtleContext.tqState.questionObject.question_id),
-            sourceCode: turtleContext.tqState.snippet,
-            xmlWorkSpace: turtleContext.tqState.xmlWorkSpace,
-            validated: data.validated,
-          };
-          let requestString = '';
-          Object.keys(request).forEach((index) => {
-            requestString += request[index];
-          });
-          const requestHash = md5(requestString + md5(requestString).toString()).toString();
-          request.requestHash = requestHash;
-          turtleContext.submitTurtle(request);
+          submitTurtle(data);
           break;
         }
         case 'debug_state_changed': {
-          console.log(data.inDebugging);
+          handleDebuggingState(data.inDebugging);
           break;
         }
         default: break;
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -191,7 +213,6 @@ const TurtleOutput = ({ navigation }) => {
 
   React.useEffect(() => {
     setTimeout(() => {
-      console.log('webview ref: ', turtleContext.tqState.questionObject.snippet);
       if (webViewRef.current && turtleContext.tqState.status === 'success') {
         const obj = {
           action: 'renderTurtle',
@@ -233,7 +254,7 @@ const TurtleOutput = ({ navigation }) => {
             ...style.outputBtn,
             ...style.shareBtn,
           }}
-          onPress={handleDebugger}
+          onPress={handleShareBtn}
         >
           <Text
             style={{
@@ -265,10 +286,17 @@ const TurtleOutput = ({ navigation }) => {
               ...style.playBtnText,
             }}
           >
-            <FormattedMessage
-              defaultMessage={'Play'}
-              description={'Turtle Play Button'}
-            />
+            {
+              turtleContext.tqState.inDebugging
+                ? <FormattedMessage
+                  defaultMessage={'Continue'}
+                  description={'Turtle Continue Button'}
+                />
+                : <FormattedMessage
+                  defaultMessage={'Play'}
+                  description={'Turtle Play Button'}
+                />
+            }
           </Text>
           <View>
             <Icon

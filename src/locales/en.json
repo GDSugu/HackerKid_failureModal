@@ -15,6 +15,10 @@
     "defaultMessage": "This is games page",
     "description": "Games Page"
   },
+  "/Id/lz": {
+    "defaultMessage": "Yes",
+    "description": "logout"
+  },
   "/dnxym": {
     "defaultMessage": "Create a New Account",
     "description": "create new account button"
@@ -214,6 +218,10 @@
     "defaultMessage": "Try again",
     "description": "try again btn"
   },
+  "BNGdt+": {
+    "defaultMessage": "No",
+    "description": "cancel logout"
+  },
   "C8CsWY": {
     "defaultMessage": "This is Class page",
     "description": "Class Page"
@@ -404,6 +412,10 @@
   "PcqGYQ": {
     "defaultMessage": "Playground",
     "description": "Playground tab"
+  },
+  "Qb0n8J": {
+    "defaultMessage": "Are you sure you want to logout?",
+    "description": "Logout prompt message"
   },
   "Qvy78L": {
     "defaultMessage": "Profile",
@@ -635,6 +647,10 @@
   "hxLhGK": {
     "defaultMessage": "Set Password",
     "description": "Password Label"
+  },
+  "iJptwY": {
+    "defaultMessage": "Continue",
+    "description": "Turtle Continue Button"
   },
   "jDzDCp": {
     "defaultMessage": "Leaderboard",

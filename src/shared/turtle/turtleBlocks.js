@@ -1266,14 +1266,6 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {}, a
       BlocklyObj.Xml.domToWorkspace(xmlDom, workspace);
       workspace.addChangeListener(TurtleObj.handleBlocksChange);
       TurtleObj.workspace = workspace;
-      // const msg = {
-      //   action: 'turtle_import',
-      //   caller: 'initializeBlockly',
-      //   payload: {
-      //     status: 'success',
-      //   },
-      // };
-      // window.sendMessage(msg);
     } catch (error) {
       const errmsg = {
         action: 'error',
@@ -1349,7 +1341,7 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {}, a
         }
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -1391,7 +1383,7 @@ const getTurtleOutput = ({
         },
       };
       window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
-      console.log(errmsg);
+      console.error(errmsg);
     }
   };
 
@@ -1411,7 +1403,7 @@ const getTurtleOutput = ({
       }
       window.ReactNativeWebView.postMessage(JSON.stringify(outputMsg));
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -1432,7 +1424,7 @@ const getTurtleOutput = ({
       }
       managerObj.updateDebugState();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -1455,7 +1447,7 @@ const getTurtleOutput = ({
         buttonEl.title = 'Hide output';
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -1479,7 +1471,7 @@ const getTurtleOutput = ({
         reject(error);
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -1512,7 +1504,7 @@ const getTurtleOutput = ({
         },
       };
       window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
-      console.log(errmsg);
+      console.error(errmsg);
     }
   };
 
@@ -1542,7 +1534,7 @@ const getTurtleOutput = ({
       managerObj
         .updateZoomState(managerObj.canvasScale === maxScale, managerObj.canvasScale === minScale);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -1616,7 +1608,7 @@ const getTurtleOutput = ({
       if (window.ReactNativeWebView) {
         window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
       } else {
-        console.log(errmsg);
+        console.error(errmsg);
       }
     }
     return Sk.misceval.asyncToPromise(() => Sk.importMainWithBody('<stdin>', false, code.replace(/^"|"$/g, ''), true), attachDebugger);
@@ -1631,7 +1623,7 @@ const getTurtleOutput = ({
         pixelData.push(context.getImageData(0, 0, eachCanvas.height, eachCanvas.width).data);
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
     return pixelData;
   };
@@ -1670,7 +1662,7 @@ const getTurtleOutput = ({
           error,
         },
       };
-      window.sendMessage(msg);
+      window.ReactNativeWebView.postMessage(JSON.stringify(msg));
     }
     return true;
   };
@@ -1743,7 +1735,7 @@ const getTurtleOutput = ({
           request,
         },
       };
-      window.sendMessage(msg);
+      window.ReactNativeWebView.postMessage(JSON.stringify(msg));
     })
       .catch((error) => {
         // reset debugger in case of error
@@ -1755,7 +1747,7 @@ const getTurtleOutput = ({
             error,
           },
         };
-        window.sendMessage(msg);
+        window.ReactNativeWebView.postMessage(JSON.stringify(msg));
       });
   };
 

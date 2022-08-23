@@ -23,6 +23,12 @@
       "value": "This is games page"
     }
   ],
+  "/Id/lz": [
+    {
+      "type": 0,
+      "value": "Yes"
+    }
+  ],
   "/dnxym": [
     {
       "type": 0,
@@ -321,6 +327,12 @@
     {
       "type": 0,
       "value": "Try again"
+    }
+  ],
+  "BNGdt+": [
+    {
+      "type": 0,
+      "value": "No"
     }
   ],
   "C8CsWY": [
@@ -625,6 +637,12 @@
     {
       "type": 0,
       "value": "Playground"
+    }
+  ],
+  "Qb0n8J": [
+    {
+      "type": 0,
+      "value": "Are you sure you want to logout?"
     }
   ],
   "Qvy78L": [
@@ -973,6 +991,12 @@
     {
       "type": 0,
       "value": "Set Password"
+    }
+  ],
+  "iJptwY": [
+    {
+      "type": 0,
+      "value": "Continue"
     }
   ],
   "jDzDCp": [

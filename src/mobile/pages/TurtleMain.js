@@ -22,6 +22,7 @@ import TurtleSuccessModal from '../components/Modals/TurtleSuccessModal';
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'transparent',
   },
   hintContainer: {
     position: 'absolute',
@@ -83,7 +84,6 @@ const HintComponent = ({
   handleHint, handleHintVisibility, hintDetails, hintVisible, style,
 }) => {
   const navigateHint = (action) => {
-    console.log('navigateHint', action);
     handleHint(action);
   };
 
@@ -331,7 +331,7 @@ const TurtleMain = () => {
         source={turtleBg}
         style={style.container}
       >
-        <View style={[style.container, { backgroundColor: gameScreen.currentGameScreen === 'TurtleQuestion' ? 'transparent' : theme.utilColors.dark }]}>
+        <View style={style.container}>
           <TurtleContext.Provider value={{
             tqState: turtleQuestionState,
             tqSetState: setTurtleQuestionState,

@@ -108,6 +108,7 @@ const useTurtleFetchQuestion = ({
                     successMessage: parsedResponse.pointsDetails.submissionStatus.replace('{{name}}', username),
                     shareLink,
                   },
+                  modalType: 'success',
                   validated: parsedResponse.passed,
                   username,
                 }));
@@ -120,6 +121,7 @@ const useTurtleFetchQuestion = ({
                 successMessage: parsedResponse.pointsDetails.submissionStatus.replace('{{name}}', turtleQuestionInfo.username),
                 shareLink,
               },
+              modalType: 'success',
               validated: parsedResponse.passed,
             }));
           }

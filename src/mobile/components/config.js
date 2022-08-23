@@ -36,6 +36,12 @@ const screenWithHeader = {
   viewType: 'screen',
 };
 
+const screenTurtleHeader = {
+  showHeader: false,
+  showNav: false,
+  viewType: 'turtleScreen',
+};
+
 const ScreenSheet = {
   showHeader: false,
   showNav: false,
@@ -135,27 +141,27 @@ const themes = {
     },
     screenTurtleHome: {
       ...Theme.light.screenLightBlue,
-      ...fragmentIconDisposal,
+      ...screenTurtleHeader,
     },
     screenTurtleMain: {
       ...Theme.light.screenLightBlue,
-      ...fragmentIconDisposal,
+      ...screenTurtleHeader,
     },
     screenTurtleQuestion: {
       ...Theme.light.screenLightBlue,
-      ...fragmentIconDisposal,
+      ...screenTurtleHeader,
     },
     screenTurtleEditor: {
       ...Theme.light.screenLightBlue,
-      ...fragmentIconDisposal,
+      ...screenTurtleHeader,
     },
     screenTurtleOutput: {
       ...Theme.light.screenLightBlue,
-      ...fragmentIconDisposal,
+      ...screenTurtleHeader,
     },
     screenTurtleLeaderBoard: {
       ...Theme.light.screenLightBlue,
-      ...fragmentIconDisposal,
+      ...screenTurtleHeader,
     },
     screenVideo: {
       ...Theme.light.screenGreen,
@@ -182,9 +188,6 @@ const themes = {
       showHeader: false,
       showNav: false,
       viewType: 'screen',
-    },
-    screenBottomSheet: {
-      ...ScreenSheet,
     },
     screenBottomSheet: {
       ...ScreenSheet,

@@ -61,19 +61,10 @@ const useSharedTurtleWebView = () => {
     };
 
     try {
-      window.sendMessage = (message = { type: '' }) => {
-        try {
-          window.ReactNativeWebView.postMessage(JSON.stringify(message));
-        }
-        catch (err) {
-          window.ReactNativeWebView.postMessage('blockinit msg send: ' + err);
-        }
-      };
       ${getBlockly.toString()}
       const { BlocklyObj, TurtleObj } = getBlockly({ blocklyObj: Blockly });
       Blockly = BlocklyObj;
       window.Turtle = TurtleObj;
-      window.sendMessage({ type: 'blockinit', status: 'success' });
     } catch (err) {
       const msg = {
         type: 'error',
@@ -83,7 +74,7 @@ const useSharedTurtleWebView = () => {
         },
       };
       // manager.sendMessage(msg);
-      window.ReactNativeWebView.postMessage('blockinit error: ' + err);
+      window.ReactNativeWebView.postMessage(JSON.stringify(msg));
     }
     const msg = {
       type: 'initialized',
@@ -92,8 +83,7 @@ const useSharedTurtleWebView = () => {
         message: 'blockly initialized',
       },
     };
-    window.sendMessage(msg);
-    // window.ReactNativeWebView.postMessage('blockly initialized ');
+    window.ReactNativeWebView.postMessage(JSON.stringify(msg));
     true;
   `;
 
@@ -126,9 +116,7 @@ const useSharedTurtleWebView = () => {
   const editorScriptToInject = `
     editor = ace.edit('editor');
     editor.setOption('wrap', true);
-    editor.on('change',function(){
-      window.ReactNativeWebView.postMessage(editor.getValue());
-    });`;
+    `;
 
   const TurtleOutputBodyContent = () => <>
   <div id="outputSection">
@@ -336,6 +324,8 @@ const useSharedTurtleWebView = () => {
               return currentSelector.turtleInstance.update();
             })
             .then(() => {
+              managerObj.inDebugging = false;
+              managerObj.updateDebugState();
               const answerImages = managerObj.getPixelData('#answerCanvas canvas');
               const userImages = managerObj.getPixelData('#userCanvas canvas');
               return pool.exec(managerObj.validateCode, [answerImages, userImages]);
@@ -344,20 +334,10 @@ const useSharedTurtleWebView = () => {
               validated = valid;
               const request = {
                 action: 'validated',
-                // questionId: Number(managerObj.initialResponse.questionObject.question_id),
-                // sourceCode: data.snippet,
-                // xmlWorkSpace: data.workspace,
                 data: {
                   validated,
                 },
               };
-              // let requestString = '';
-              // Object.keys(request).forEach((index) => {
-              //   requestString += request[index];
-              // });
-              // const requestHash = md5(requestString + md5(requestString).toString()).toString();
-              // request.requestHash = requestString;
-              // return post(request, 'turtle/', false);
               window.ReactNativeWebView.postMessage(JSON.stringify(request));
             })
             .catch((err) => {
@@ -373,8 +353,14 @@ const useSharedTurtleWebView = () => {
             })
           }
         } catch (err) {
-          window.ReactNativeWebView.postMessage('turtleoutput execute error: ');
-          window.ReactNativeWebView.postMessage(err.message);
+          const errmsg = {
+            action: 'error',
+            data: {
+              cause: 'executeRunCode',
+              error: err.message,
+            },
+          };
+          window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
         }
       }
 
@@ -403,8 +389,14 @@ const useSharedTurtleWebView = () => {
         }
       };
     } catch (err) {
-      window.ReactNativeWebView.postMessage('turtleoutput error: ');
-      window.ReactNativeWebView.postMessage(err.message);
+      const errmsg = {
+        action: 'error',
+        data: {
+          cause: 'execute',
+          error: err.message,
+        },
+      };
+      window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
     }
   `;
 
