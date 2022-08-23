@@ -11,6 +11,10 @@
     "defaultMessage": "This is games page",
     "description": "Games Page"
   },
+  "/Gy7qZ": {
+    "defaultMessage": "Level {levelNumber}",
+    "description": "Level indicator"
+  },
   "/dnxym": {
     "defaultMessage": "Create a New Account",
     "description": "create new account button"
@@ -556,6 +560,10 @@
     "defaultMessage": "Go to Home",
     "description": "Home Navigation Button"
   },
+  "qUU2pp": {
+    "defaultMessage": "All Games",
+    "description": "Section Title"
+  },
   "qXTiEd": {
     "defaultMessage": "Grade"
   },
@@ -590,6 +598,10 @@
   "vY562d": {
     "defaultMessage": "Try the new in-built IDE",
     "description": "more card title"
+  },
+  "viQX0N": {
+    "defaultMessage": "Turtle",
+    "description": "Game Title"
   },
   "wrdAU0": {
     "defaultMessage": "Help",

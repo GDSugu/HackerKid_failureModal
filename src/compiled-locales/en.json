@@ -17,6 +17,16 @@
       "value": "This is games page"
     }
   ],
+  "/Gy7qZ": [
+    {
+      "type": 0,
+      "value": "Level "
+    },
+    {
+      "type": 1,
+      "value": "levelNumber"
+    }
+  ],
   "/dnxym": [
     {
       "type": 0,
@@ -847,6 +857,12 @@
       "value": "Go to Home"
     }
   ],
+  "qUU2pp": [
+    {
+      "type": 0,
+      "value": "All Games"
+    }
+  ],
   "qXTiEd": [
     {
       "type": 0,
@@ -899,6 +915,12 @@
     {
       "type": 0,
       "value": "Try the new in-built IDE"
+    }
+  ],
+  "viQX0N": [
+    {
+      "type": 0,
+      "value": "Turtle"
     }
   ],
   "wrdAU0": [

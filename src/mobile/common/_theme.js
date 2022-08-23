@@ -30,6 +30,7 @@ const Theme = {
       navBg: LightBlue.color500,
       navActiveBg: LightBlue.color600,
       btnBg: LightBlue.color700,
+      gameCardBg: LightBlue.color700,
       textBold: LightBlue.color900,
     },
     screenPurple: {
