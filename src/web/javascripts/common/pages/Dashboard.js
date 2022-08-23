@@ -600,6 +600,7 @@ const Dashboard = () => {
       // [dashboarStatus, leaderboardStatus, challengesStatus].includes('access_denied')
       modalVisible
       && <Modal
+        modalClass='errorModal'
         customClass={'curved'}
         modalVisible={modalVisible}
         options={{

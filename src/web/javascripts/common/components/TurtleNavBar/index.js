@@ -10,13 +10,13 @@ const TurtleNavBar = ({ questionState = {}, handleHint = () => {}, isTurtleMainP
 
   const leaderboarddHandler = () => {};
   const levelBtnHandler = () => {};
-  let level = 0;
+  // let level = 0;
 
   const { status, questionList, questionObject } = questionState;
 
-  if (status === 'success') {
-    level = questionList.find((el) => el.question_id === questionObject.question_id).level;
-  }
+  // if (status === 'success') {
+  //   level = questionList.find((el) => el.question_id === questionObject.question_id).level;
+  // }
 
   return <>
     <nav className='turtle-navbar game-navbar'>
@@ -60,7 +60,9 @@ const TurtleNavBar = ({ questionState = {}, handleHint = () => {}, isTurtleMainP
                               defaultMessage={'Level {level}'}
                               description={'Level navigation link'}
                               values={{
-                                level,
+                                level: questionList
+                                  .find((el) => el.question_id === questionObject.question_id)
+                                  .level,
                               }}
                             />
                           </p>
@@ -131,7 +133,9 @@ const TurtleNavBar = ({ questionState = {}, handleHint = () => {}, isTurtleMainP
                             defaultMessage={'Level {level}'}
                             description={'Level 1 navigation link'}
                             values={{
-                              level,
+                              level: questionList
+                                .find((el) => el.question_id === questionObject.question_id)
+                                .level,
                             }}
                           />
                         </p>

@@ -165,7 +165,8 @@ const Leaderboard = () => {
     </footer>
     {
       (state.status === 'access_denied' || !state.status) && <Modal
-        customClass={'curved'}
+      modalClass='errorModal'
+      customClass={'curved'}
         options={{
           keyboard: false,
           backdrop: 'static',

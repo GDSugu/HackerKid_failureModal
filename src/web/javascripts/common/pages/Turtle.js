@@ -42,9 +42,11 @@ const TurtleHomeComponent = ({ changeRoute }) => {
   React.useEffect(() => {
     document.querySelector('nav:first-child').style.display = 'none';
     window.addEventListener('resize', () => resizeHandler('nav.turtle-navbar', '.turtle-frame'));
-    setTimeout(() => {
+    const resizeTimeout = setTimeout(() => {
       resizeHandler('nav.turtle-navbar', '.turtle-frame');
     }, 300);
+
+    return () => clearTimeout(resizeTimeout);
   }, []);
 
   return <>
@@ -823,8 +825,6 @@ const TurtleGameComponent = () => {
       repositionTurtle('#answerCanvas', '.outputContainer');
     });
 
-    window.modalshow = successModalRef.current.show;
-
     return () => {
       document.querySelector('nav:first-child').style.display = 'block';
       isPageMounted.current = false;
@@ -896,7 +896,8 @@ const TurtleGameComponent = () => {
     <Modal
       ref={successModalRef}
       options={'hide'}
-      customClass={'successModal curved'}
+      modalClass={'successModal'}
+      customClass={'curved'}
       onHidden={() => { successModalComponentRef.current.resetScreen(); }}
       header={<div></div>}>
         <SuccessModalRefComponent
@@ -915,8 +916,14 @@ const TurtleGameComponent = () => {
 
 const Turtle = () => {
   const [turtleRoute, setTurtleRoute] = React.useState('turtleHome');
-
   const changeRoute = (route) => setTurtleRoute(route);
+
+  React.useEffect(() => {
+    const locationArray = window.location.href.split('/').filter((el) => el !== '');
+    if (locationArray.length > 3) {
+      changeRoute('turtleGame');
+    }
+  }, []);
 
   return <>
     {

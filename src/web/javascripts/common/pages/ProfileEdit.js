@@ -265,6 +265,7 @@ const Profile = () => {
     </div>
     { modalVisible
      && <Modal
+      modalClass='errorModal'
       customClass={'curved'}
       modalVisible={modalVisible}
       options={{
@@ -289,7 +290,7 @@ const Profile = () => {
       </button>
     </Modal>
     }
-    { showUpdatedModal && <Modal customClass={'curved profileSuccessModal'} modalVisible={showUpdatedModal} onHidden={() => setShowUpdatedModal(false)}>
+    { showUpdatedModal && <Modal modalClass={'profileSuccessModal'} customClass={'curved'} modalVisible={showUpdatedModal} onHidden={() => setShowUpdatedModal(false)}>
       <div className="container">
         <p className='text-center my-5'>
           <FormattedMessage

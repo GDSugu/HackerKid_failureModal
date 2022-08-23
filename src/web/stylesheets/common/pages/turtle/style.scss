@@ -60,6 +60,7 @@
 
   .turtle-frame {
     // background: url(../../../../../images/turtle/turtleBgWeb.svg) no-repeat 100% / cover;
+    overflow: auto;
 
     .turtle-card {
       position: relative;
@@ -164,7 +165,7 @@
   .turtle-game-container {
     display: flex;
     align-items: stretch;
-    height: 100%;
+    height: calc(100vh - 62px);
     padding: 1rem 0 1rem 0;
     overflow: hidden;
     // background: url(../../../../../images/turtle/turtleBgWeb.svg) no-repeat 100% / cover;
