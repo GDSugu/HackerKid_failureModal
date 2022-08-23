@@ -83,7 +83,7 @@ const Video = ({ navigation }) => {
         color={pageTheme.btnBg}
       />
       <Button
-        onPress={() => navigation.navigate('TurtleMain')}
+        onPress={() => navigation.navigate('TurtleHome')}
         title={intl.formatMessage({
           defaultMessage: 'Go to Turtle',
           description: 'Link description',

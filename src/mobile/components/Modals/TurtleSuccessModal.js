@@ -1,14 +1,13 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
-  Dimensions, Image, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View,
+  Dimensions, Image, Modal, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View,
 } from 'react-native';
 import Clipboard from '@react-native-clipboard/clipboard';
 import Icon from '../../common/Icons';
 import ThemeContext from '../theme';
 import SuccessHero from '../../../images/games/turtle-success.png';
 import { TurtleContext } from '../../../hooks/pages/turtle';
-import { ToastAndroid } from 'react-native';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   overlay: {
@@ -53,7 +52,6 @@ const getStyles = (theme, font, utilColors) => StyleSheet.create({
   },
   heroImage: {
     width: '80%',
-    textAlign: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
   },

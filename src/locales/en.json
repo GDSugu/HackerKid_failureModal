@@ -226,6 +226,10 @@
     "defaultMessage": "Coins Earned:",
     "description": "Coins Earned"
   },
+  "Ciol6I": {
+    "defaultMessage": "Output",
+    "description": "Output"
+  },
   "D/2aSY": {
     "defaultMessage": "This is about page",
     "description": "Page description"
@@ -328,10 +332,6 @@
   "In3suu": {
     "defaultMessage": "{errorMessage}",
     "description": "error text"
-  },
-  "JNotzf": {
-    "defaultMessage": "Expected Output",
-    "description": "Collapse Title - Expected Output"
   },
   "JnwRMJ": {
     "defaultMessage": "OTP",
@@ -822,6 +822,10 @@
   "z9lFwl": {
     "defaultMessage": "Name",
     "description": "Profile name label"
+  },
+  "zKBXVr": {
+    "defaultMessage": "Try Now",
+    "description": "Try Now Button"
   },
   "zMmp/q": {
     "defaultMessage": "Practise... or play with the new code editor",

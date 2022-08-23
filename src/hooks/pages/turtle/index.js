@@ -1,5 +1,4 @@
 import React from 'react';
-import md5 from 'crypto-js/md5';
 import post, { getSession, setSession } from '../../common/framework';
 
 const useTurtleFetchQuestion = ({
@@ -128,16 +127,6 @@ const useTurtleFetchQuestion = ({
       }
       return response;
     });
-  // {
-  // console.log('submitTurtle');
-  // let requestString = '';
-  // Object.keys(request).forEach((index) => {
-  //   requestString += request[index];
-  // });
-  // const requestHash = md5(requestString + md5(requestString).toString()).toString();
-  // request.requestHash = requestHash;
-  // console.log(request);
-  // };
 
   const loadHints = ({ blockTypes, action = false }) => {
     let request = {};
@@ -196,49 +185,9 @@ const useTurtleFetchQuestion = ({
 
 const TurtleContext = React.createContext();
 
-const useTurtleValidation = () => {
-  const submitTurtle = (request) => {
-    console.log('submitTurtle');
-    let requestString = '';
-    Object.keys(request).forEach((index) => {
-      requestString += request[index];
-    });
-    const requestHash = md5(requestString + md5(requestString).toString()).toString();
-    request.requestHash = requestHash;
-    console.log(request);
-    // if (TurtleContext.current)
-    // let requestString = TurtleContext;
-    // Object.keys(turtleValidationState).forEach((key) => {
-    //   if (key !== 'status') {
-    //     requestString += turtleValidationState[key];
-    //   }
-    // });
-
-    // const requestHash = md5(requestString + md5(requestString).toString()).toString();
-    // const payload = {
-    //   type: 'validateQuestion',
-    //   // questionId: turtleValidationState.questionId,
-    //   // sourceCode: turtleValidationState.sourceCode,
-    //   // xmlWorkSpace: turtleValidationState.xmlWorkSpace,
-    //   // validated: turtleValidationState.validated,
-
-    //   requestHash,
-    // };
-
-    // return post(payload, 'turtle/', false);
-  };
-
-  return {
-    // state: turtleValidationState,
-    // setState: setTurtleValidationState,
-    submitTurtle,
-  };
-};
-
 export default null;
 
 export {
   useTurtleFetchQuestion,
-  useTurtleValidation,
   TurtleContext,
 };

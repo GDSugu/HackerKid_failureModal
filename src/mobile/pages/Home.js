@@ -977,10 +977,6 @@ const Index = ({ route, navigation }) => {
     },
   };
 
-  if ([dashboarStatus, leaderboardStatus, challengesStatus].includes('access_denied')) {
-    return <AuthErrorModal navigation={navigation} route={route} />;
-  }
-
   if (authContext.appData.isReferesh) {
     onRefresh();
     authContext.setAuthState((prevState) => ({
@@ -999,79 +995,88 @@ const Index = ({ route, navigation }) => {
 
   return (
     <>
-      <ScrollView
-        style={style.container}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-          />
-        }>
-        <View style={style.container}>
-          {
-            dashboardUserData
-              && <>
-                <DashboardComponent
-                avatar={defaultUser}
+      {
+        [dashboarStatus, leaderboardStatus, challengesStatus].includes('access_denied')
+        && <AuthErrorModal navigation={navigation} route={route} />
+      }
+      {
+        ![dashboarStatus, leaderboardStatus, challengesStatus].includes('access_denied')
+        && <>
+          <ScrollView
+            style={style.container}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+              />
+            }>
+            <View style={style.container}>
+              {
+                dashboardUserData
+                  && <>
+                    <DashboardComponent
+                    avatar={defaultUser}
+                    bottomSheetRef={bottomSheetRef}
+                    dashboardUserData={dashboardUserData}
+                    gameData={gameData}
+                    style={style}
+                    navigation={navigation}
+                    reloadComponent={reloadComponent}
+                  />
+                  <HomeComponent
+                    avatar={defaultUser}
+                    dashboardUserData={dashboardUserData}
+                    navigation={navigation}
+                    style={style}
+                    reloadComponent={reloadComponent}
+                  />
+                </>
+              }
+              {
+                gameData
+                && <>
+                <GameComponent
+                  gameData={gameData}
+                  navigation={navigation}
+                  style={style}
+                  reloadComponent={reloadComponent}
+                />
+                </>
+              }
+              {
+                trendingChallenges
+                && <>
+                  <ChallengeComponent
+                    challengeData={trendingChallenges}
+                    navigation={navigation}
+                    style={style} />
+                </>
+              }
+            </View>
+          </ScrollView>
+          <BottomSheet
+            ref={bottomSheetRef}
+            customStyles={bottomSheetStyles}
+            contentPanEnabled={true}
+          >
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+            >
+              {/* <AchievementComponent navigation={navigation} style={style} /> */}
+              {/* <ClubComponent navigation={navigation} style={style} /> */}
+              {
+                leaderboardData
+                && <LeaderBoardComponent
+                leaderboardData={leaderboardData}
+                leaderBoardUserData={leaderBoardUserData}
                 bottomSheetRef={bottomSheetRef}
-                dashboardUserData={dashboardUserData}
-                gameData={gameData}
-                style={style}
-                navigation={navigation}
-                reloadComponent={reloadComponent}
-              />
-              <HomeComponent
-                avatar={defaultUser}
-                dashboardUserData={dashboardUserData}
-                navigation={navigation}
-                style={style}
-                reloadComponent={reloadComponent}
-              />
-            </>
-          }
-          {
-            gameData
-            && <>
-            <GameComponent
-              gameData={gameData}
-              navigation={navigation}
-              style={style}
-              reloadComponent={reloadComponent}
-            />
-            </>
-          }
-          {
-            trendingChallenges
-            && <>
-              <ChallengeComponent
-                challengeData={trendingChallenges}
                 navigation={navigation}
                 style={style} />
-            </>
-          }
-        </View>
-      </ScrollView>
-      <BottomSheet
-        ref={bottomSheetRef}
-        customStyles={bottomSheetStyles}
-        contentPanEnabled={true}
-      >
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-        >
-          {/* <AchievementComponent navigation={navigation} style={style} /> */}
-          {/* <ClubComponent navigation={navigation} style={style} /> */}
-          {
-            leaderboardData
-            && <LeaderBoardComponent
-            leaderboardData={leaderboardData}
-            leaderBoardUserData={leaderBoardUserData}
-            bottomSheetRef={bottomSheetRef}
-            navigation={navigation}
-            style={style} />
-          }
-        </ScrollView>
-      </BottomSheet>
+              }
+            </ScrollView>
+          </BottomSheet>
+        </>
+      }
     </>
   );
 };

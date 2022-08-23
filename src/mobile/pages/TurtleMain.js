@@ -5,7 +5,8 @@ import {
 import * as Animatable from 'react-native-animatable';
 import { FormattedMessage } from 'react-intl';
 import ThemeContext from '../components/theme';
-import turtleMainBg from '../../images/turtle/turtleMainBg.png';
+// import turtleMainBg from '../../images/turtle/turtleMainBg.png';
+import turtleBg from '../../images/turtle/turtleBg.png';
 import GameQuestion from '../../images/games/question.svg';
 import GameCode from '../../images/games/code.svg';
 import GameOutput from '../../images/games/output.svg';
@@ -327,7 +328,7 @@ const TurtleMain = () => {
   return <>
     <View style={style.container}>
       <ImageBackground
-        source={turtleMainBg}
+        source={turtleBg}
         style={style.container}
       >
         <View style={[style.container, { backgroundColor: gameScreen.currentGameScreen === 'TurtleQuestion' ? 'transparent' : theme.utilColors.dark }]}>

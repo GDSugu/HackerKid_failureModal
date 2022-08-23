@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import WebView from 'react-native-webview';
 import ThemeContext from '../components/theme';
 import webViewElement from '../components/WebView';
-import { TurtleContext, useTurtleValidation } from '../../hooks/pages/turtle';
+import { TurtleContext } from '../../hooks/pages/turtle';
 import { useSharedTurtleWebView } from '../../shared/turtle';
 
 const getStyles = (utils) => StyleSheet.create({
@@ -20,7 +20,6 @@ const TurtleEditor = () => {
   const { theme: { utilColors } } = React.useContext(ThemeContext);
   const style = getStyles(utilColors);
   const { blocklyWorkspace } = useSharedTurtleWebView();
-  const { setState } = useTurtleValidation();
   const turtleContext = React.useContext(TurtleContext);
   const webViewRef = React.useRef(null);
   let webViewString = '';

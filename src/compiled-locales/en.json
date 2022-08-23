@@ -345,6 +345,12 @@
       "value": "Coins Earned:"
     }
   ],
+  "Ciol6I": [
+    {
+      "type": 0,
+      "value": "Output"
+    }
+  ],
   "D/2aSY": [
     {
       "type": 0,
@@ -511,12 +517,6 @@
     {
       "type": 1,
       "value": "errorMessage"
-    }
-  ],
-  "JNotzf": [
-    {
-      "type": 0,
-      "value": "Expected Output"
     }
   ],
   "JnwRMJ": [
@@ -1255,6 +1255,12 @@
     {
       "type": 0,
       "value": "Name"
+    }
+  ],
+  "zKBXVr": [
+    {
+      "type": 0,
+      "value": "Try Now"
     }
   ],
   "zMmp/q": [

@@ -1,41 +1,46 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
-  Dimensions,
-  Pressable,
-  ScrollView, StyleSheet, Text, View,
+  ScrollView, StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
 import WebView from 'react-native-webview';
-import Collapsible from 'react-native-collapsible';
 import ThemeContext from '../components/theme';
 import { TurtleContext } from '../../hooks/pages/turtle';
-import Collapse from '../components/Collapse';
 import { useSharedTurtleWebView } from '../../shared/turtle';
 import webViewElement from '../components/WebView';
-import Icon from '../common/Icons';
+import TryNowSVG from '../../images/games/trynow.svg';
 
-const getStyles = (font, utilColors) => StyleSheet.create({
+const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
   },
   titleText: {
-    ...font.subtitleBold,
+    ...font.subtitle1,
     color: utilColors.white,
   },
   card: {
     borderRadius: 12,
     paddingVertical: 16,
-    marginVertical: 8,
+    marginVertical: 4,
     backgroundColor: utilColors.white,
     // backgroundColor: 'white',
   },
+  outputCard: {
+    flex: 1,
+    paddingLeft: 4,
+    paddingTop: 4,
+    paddingRight: 10,
+    paddingBottom: 10,
+    borderRadius: 12,
+    backgroundColor: utilColors.white,
+    marginVertical: 4,
+    marginBottom: 8,
+  },
   collapseCard: {
     flex: 1,
-    borderRadius: 12,
     padding: 16,
-    marginBottom: 32,
-    backgroundColor: utilColors.white,
   },
   collapseCardHeader: {
     flexDirection: 'row',
@@ -48,7 +53,9 @@ const getStyles = (font, utilColors) => StyleSheet.create({
   },
   cardProblemBg: {
     backgroundColor: '#ffffffee',
-    padding: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    height: '25%',
   },
   cardContent: {
     ...font.subtitleBold,
@@ -65,16 +72,26 @@ const getStyles = (font, utilColors) => StyleSheet.create({
     lineHeight: 24,
     // marginLeft: 16,
   },
+  tryNowBtn: {
+    width: '100%',
+    borderRadius: 12,
+    backgroundColor: theme.btnBg,
+    marginTop: 8,
+    padding: 16,
+  },
+  rowBetween: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
 });
 
-const TurtleQuestion = () => {
-  const { font, theme: { utilColors } } = React.useContext(ThemeContext);
+const TurtleQuestion = ({ navigation }) => {
+  const { font, theme } = React.useContext(ThemeContext);
+  const { utilColors } = theme;
   const turtleContext = React.useContext(TurtleContext);
   const webViewRef = React.useRef(null);
-  const [isCollapsed, setIsCollapsed] = React.useState(false);
-  const memoizedCollapseValue = React.useMemo(() => isCollapsed, [isCollapsed]);
-  const style = getStyles(font, utilColors);
-  const toggleCollapse = () => setIsCollapsed(!isCollapsed);
+  const style = getStyles(theme.screenTurtleHome, font, utilColors);
 
   const {
     turtleQuestion: {
@@ -88,137 +105,121 @@ const TurtleQuestion = () => {
     styleString,
   });
 
-  console.log('turtlequestion before jsx');
+  const repositionTurtle = () => {
+    if (webViewRef.current && turtleContext.tqState.status === 'success') {
+      const obj = {
+        action: 'repositionTurtle',
+      };
+      const runTurtle = `
+      try {
+        window.execute(${JSON.stringify(obj)});
+      } catch (err) {
+        const errmsg = {
+          action: 'error',
+          data: err.message,
+          caller: 'repositionTurtle from turtle output screen',
+        };
+        window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
+      }`;
+      setTimeout(() => {
+        webViewRef.current.injectJavaScript(runTurtle);
+      }, 300);
+    }
+  };
+
+  const renderTurtle = () => {
+    if (webViewRef.current && turtleContext.tqState.status === 'success') {
+      const obj = {
+        action: 'renderTurtle',
+        data: {
+          snippet: turtleContext.tqState.questionObject.snippet,
+          canvas: 'answerCanvas',
+        },
+      };
+
+      const init = `
+        try {
+          window.execute(${JSON.stringify(obj)});
+        } catch (err) {
+          window.ReactNativeWebView.postMessage('Script Error: ');
+          window.ReactNativeWebView.postMessage(err.message);
+        }
+      `;
+      webViewRef.current.injectJavaScript(init);
+    }
+  };
+
+  if (navigation.getState().index === 0) {
+    repositionTurtle();
+  }
 
   React.useEffect(() => {
     setTimeout(() => {
-      if (webViewRef.current && turtleContext.tqState.status === 'success') {
-        const initBlockly = `
-        try {
-            window.execute({
-              action: 'renderTurtle',
-              data: {
-                snippet: '${JSON.stringify(turtleContext.tqState.questionObject.snippet)}',
-              },
-            });
-        } catch (err) {
-          window.ReactNativeWebView.postMessage('Question Script Error: ');
-          window.ReactNativeWebView.postMessage(err.message);
-        }
-          `;
-        webViewRef.current.injectJavaScript(initBlockly);
-      }
-    }, 1000);
-  }, []);
+      renderTurtle();
+      repositionTurtle();
+    }, 100);
+  }, [turtleContext.tqState.questionObject]);
 
   return <>
-    {/* <TurtleContext.Consumer>
-      { (value) => <> */}
-        <ScrollView style={style.container}>
-          <Text style={style.titleText}>
-            <FormattedMessage
-              defaultMessage='{question}'
-              description='Question'
-              values={{
-                question: turtleContext.tqState.questionObject.Question,
-              }}
-            />
-          </Text>
-          <View style={[style.card, style.cardProblemBg]}>
-            {/* <Text style={[style.cardContent, style.mb1]}>
-              <FormattedMessage
-                defaultMessage='{question}'
-                description='Question'
-                values={{
-                  question: turtleContext.tqState.questionObject.Question,
-                }}
-              />
-            </Text> */}
-            {/* { turtleContext.tqState.questionObject.steps
-            && <Text style={style.cardContent}>
+    <View style={style.container}>
+      <Text style={style.titleText}>
+        <FormattedMessage
+          defaultMessage='{question}'
+          description='Question'
+          values={{
+            question: turtleContext.tqState.questionObject.Question,
+          }}
+        />
+      </Text>
+      <View style={[style.card, style.cardProblemBg]}>
+        <ScrollView>
+          { turtleContext.tqState.questionObject.steps
+            && turtleContext.tqState.questionObject.steps.map(
+              (step, index) => <Text key={index} style={style.problemStatement}>
                 <FormattedMessage
-                  defaultMessage='Instructions'
-                  description='Instructions'
-                />
-              </Text> } */}
-            { turtleContext.tqState.questionObject.steps
-                && turtleContext.tqState.questionObject.steps.map(
-                  (step, index) => <Text key={index} style={style.problemStatement}>
-                    <FormattedMessage
-                      defaultMessage={'{step}'}
-                      description='Steps'
-                      values={{
-                        step: step.trim(),
-                      }}
-                    />
-                  </Text>,
-                ) }
-          </View>
-        {/* <View style={style.card}></View> */}
-          {/* <Animatable.View style={style.card}>
-            <Collapse
-              style={{
-                ...style.card,
-              }}
-              title={intl.formatMessage({
-                defaultMessage: 'Expected Output',
-                description: 'Collapse Title - Expected Output',
-              })}
-              // CustomHeader={() => <Text style={style.cardContent} >Expected Output</Text>}
-            >
-              <View>
-                <WebView
-                  ref={webViewRef}
-                  source={{ html: webViewString }}
-                  originWhitelist={['*']}
-                  startInLoadingState={true}
-                  injectedJavaScript={scriptToInject}
-                  onMessage={(event) => {
-                    console.log('turtlequestion onMessage');
-                    console.log(event.nativeEvent.data);
+                  defaultMessage={'{step}'}
+                  description='Steps'
+                  values={{
+                    step: step.trim(),
                   }}
                 />
-              </View>
-            </Collapse>
-          </Animatable.View> */}
-          <View style={style.collapseCard}>
-            <Pressable
-              onPress={toggleCollapse}
-            >
-              <View style={style.collapseCardHeader}>
-                <Text style={style.collapseCardHeaderContent}>
-                  <FormattedMessage
-                    defaultMessage='Expected Output'
-                    description='Collapse Title - Expected Output'
-                  />
-                </Text>
-                <Icon type='FontAwesome5' name={ memoizedCollapseValue ? 'angle-down' : 'angle-up'} color={utilColors.black} size={24} />
-              </View>
-            </Pressable>
-            <Collapsible
-              collapsed={memoizedCollapseValue}
-            >
-            <WebView
-              ref={webViewRef}
-              style={{
-                height: Dimensions.get('window').height * 0.3,
-                width: '100%',
-                borderRadius: 12,
-              }}
-              source={{ html: webViewString }}
-              originWhitelist={['*']}
-              startInLoadingState={true}
-              injectedJavaScript={scriptToInject}
-              onMessage={(event) => {
-                console.log('turtlequestion onMessage');
-                console.log(event.nativeEvent.data);
-              }}
-            />
-          </Collapsible>
-          </View>
+              </Text>,
+            ) }
         </ScrollView>
-      {/* </> }
-    </TurtleContext.Consumer> */}
+      </View>
+      <Text style={{
+        ...style.titleText,
+        marginTop: 8,
+      }}>
+        <FormattedMessage
+          defaultMessage='Output'
+          description='Output'
+        />
+      </Text>
+      <View style={style.outputCard}>
+        <WebView
+            ref={webViewRef}
+            source={{ html: webViewString }}
+            originWhitelist={['*']}
+            startInLoadingState={true}
+            injectedJavaScript={scriptToInject}
+          />
+      </View>
+      <TouchableOpacity
+        onPress={() => { navigation.navigate('TurtleOutput'); }}
+        style={style.tryNowBtn}
+      >
+        <View style={style.rowBetween}>
+          <Text style={style.titleText}>
+            <FormattedMessage
+              defaultMessage='Try Now'
+              description='Try Now Button'
+            />
+          </Text>
+          <TryNowSVG />
+        </View>
+      </TouchableOpacity>
+    </View>
   </>;
 };
 

@@ -14,23 +14,29 @@ const useSharedTurtleWebView = () => {
 
   const turtleQuestionStyle = `
     <style>
+      body {
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none;
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        top: 0;
+        left: 0;
+      }
+
       .outputContainer {
+        width: 100vw;
+        height: 100vh;
         overflow: auto;
-        width: 100%;
-        height: 100%;
-        background-color: transparent;
+        position: relative;
       }
 
       #answerCanvas {
         position: absolute;
         width: 100%;
         // opacity: 0.5;
-        // transform: scale(6) translate(-25%, 0);
-      }
-
-      body {
-        width: 100vw;
-        height: 100vh;
+        // transform: translate(-50%, -50%);
       }
     </style>
   `;
@@ -317,6 +323,7 @@ const useSharedTurtleWebView = () => {
               const currentSelector = $('#' + data.canvas)[0];
               if (currentSelector && currentSelector.turtleInstance) {
                 currentSelector.turtleInstance.update();
+                managerObj.repositionTurtle();
               }
             });
           } else if (action === 'runCode') {

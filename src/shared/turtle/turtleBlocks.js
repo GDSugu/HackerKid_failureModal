@@ -1,16 +1,9 @@
 /* eslint-disable no-undef */
-// // import * as Blockly from 'blockly/core';
-// import 'blockly/blocks';
-// import 'blockly/python';
-// import * as en from 'blockly/msg/en';
-import $ from 'jquery';
-
 function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {}, aceObject = {} }) {
   const BlocklyObj = blocklyObj;
   const TurtleObj = turtleObj;
   const ace = aceObject;
 
-  // BlocklyObj.setLocale(en);
   BlocklyObj.Blocks.turtle_import = {
     init() {
       this.appendDummyInput()
@@ -1222,7 +1215,6 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {}, a
       const xmlBlock = response.questionObject.totalBlocks;
       const maxBlocks = response.questionObject.blockLen;
       document.querySelector('#turtleBlock').innerHTML = xmlBlock;
-      // document.querySelector('#turtleBlock').innerHTML = '<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none"><block type="turtle_movement"></block><block type="math_number"><field name="NUM">100</field></block><block type="turtle_goto"></block><block type="turtle_pendown"></block><block type="turtle_penup"></block><block type="turtle_import"></block><block type="turtle_circle_advanced"></block><block type="turtle_hide"></block><block type="turtle_turn"></block></xml>';
       const xmlTurtleCategoryElement = document.querySelector('#turtleBlock xml [name=Turtle]');
       if (xmlTurtleCategoryElement) {
         xmlTurtleCategoryElement.setAttribute('colour', TurtleObj.blockColors('turtle').category);
@@ -1348,7 +1340,6 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {}, a
             snippet: code,
             workspace: BlocklyObj.Xml.domToText(BlocklyObj.Xml.workspaceToDom(TurtleObj.workspace)),
             blockTypes,
-            // qId: TurtleObj.initialResponse.questionObject.question_id,
           },
         };
         if (window.ReactNativeWebView) {
@@ -1367,51 +1358,6 @@ function getBlockly({ blocklyObj = { Blocks: {}, Python: {} }, turtleObj = {}, a
     TurtleObj,
   };
 }
-
-// const getEditor = (blocklyObj = {}, editorObj = {}, aceObject = {}) => {
-//   const BlocklyObj = blocklyObj;
-//   const managerObj = editorObj;
-//   const ace = aceObject;
-
-//   managerObj.initializeEditor = () => {
-//     try {
-//       if (!managerObj.editor) {
-//         const editor = ace.edit('codeBlock');
-//         editor.setOptions({
-//           fontSize: 16,
-//           wrap: true,
-//           showGutter: true,
-//           showLineNumbers: true,
-//           showPrintMargin: false,
-//           scrollPastEnd: true,
-//         });
-//         editor.setTheme('ace/theme/monokai');
-//         editor.session.setMode('ace/mode/python');
-//         editor.setReadOnly(true);
-//         managerObj.editor = editor;
-//       } else {
-//         managerObj.editor.setValue('');
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   managerObj.handleBlocksChange = () => {
-//     try {
-//       if (managerObj.workspace && managerObj.editor) {
-//         const code = BlocklyObj.Python.workspaceToCode(managerObj.workspace);
-//         managerObj.editor.setValue(code, 1); // 1 moves cursor to the end of the code
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   return {
-//     managerObj,
-//   };
-// };
 
 const getTurtleOutput = ({
   blocklyObj = {}, turtleOutputObj = {}, /* skulptObj = {}, */ workerPoolObj = {},
@@ -1435,12 +1381,6 @@ const getTurtleOutput = ({
           - container.offsetHeight
         ) * 0.50,
       );
-      // container.scrollTop(
-      //   (
-      //     (content[0].scrollHeight * managerObj.canvasScale)
-      //     - container.height()
-      //   ) * 0.50,
-      // );
     } catch (error) {
       const errmsg = {
         action: 'error',
@@ -1457,24 +1397,14 @@ const getTurtleOutput = ({
 
   managerObj.updateDebugState = () => {
     try {
-      // const debugButton = document.querySelector('#continueDebugger');
-      // const runButton = document.querySelector('#runCode');
       const outputMsg = {
         action: 'debug_state_changed',
       };
       if (managerObj.inDebugging) {
-        // runButton.hide();
-        // debugButton.show();
-        // runButton.style.display = 'none';
-        // debugButton.style.display = 'block';
         outputMsg.data = {
           inDebugging: true,
         };
       } else {
-        // debugButton.hide();
-        // runButton.show();
-        // debugButton.style.display = 'none';
-        // runButton.style.display = 'block';
         outputMsg.data = {
           inDebugging: false,
         };
@@ -1490,18 +1420,14 @@ const getTurtleOutput = ({
       const buttonEl = document.querySelector('.debugToggle');
       const iconEl = document.querySelector('.debugToggle i');
       if (!managerObj.debuggingEnabled) {
-        // iconEl.removeClass('fa-pause-circle').addClass('fa-play-circle');
         iconEl.classList.remove('fa-pause-circle');
         iconEl.classList.add('fa-play-circle');
         managerObj.debuggingEnabled = true;
-        // buttonEl.attr('title', 'Disable debugger');
         buttonEl.title = 'Disable debugger';
       } else {
-        // iconEl.removeClass('fa-play-circle').addClass('fa-pause-circle');
         iconEl.classList.remove('fa-play-circle');
         iconEl.classList.add('fa-pause-circle');
         managerObj.debuggingEnabled = false;
-        // buttonEl.attr('title', 'Enable debugger');
         buttonEl.title = 'Enable debugger';
       }
       managerObj.updateDebugState();
@@ -1516,22 +1442,16 @@ const getTurtleOutput = ({
       const eyeEl = document.querySelector('.drawingToggle i');
       const answerCanvasEl = document.querySelector('#userCanvas');
       if (managerObj.drawingVisible) {
-        // answerCanvasEl.css('opacity', 0);
         answerCanvasEl.style.opacity = 0;
-        // eyeEl.removeClass('fa-eye').addClass('fa-eye-slash');
         eyeEl.classList.remove('fa-eye');
         eyeEl.classList.add('fa-eye-slash');
         managerObj.drawingVisible = false;
-        // buttonEl.attr('title', 'Show output');
         buttonEl.title = 'Show output';
       } else {
-        // answerCanvasEl.css('opacity', 1);
         answerCanvasEl.style.opacity = 1;
-        // eyeEl.removeClass('fa-eye-slash').addClass('fa-eye');
         eyeEl.classList.remove('fa-eye-slash');
         eyeEl.classList.add('fa-eye');
         managerObj.drawingVisible = true;
-        // buttonEl.attr('title', 'Hide output');
         buttonEl.title = 'Hide output';
       }
     } catch (error) {
@@ -1549,9 +1469,6 @@ const getTurtleOutput = ({
       if (!managerObj.drawingVisible) {
         managerObj.toggleDrawingState();
       }
-      // if (managerObj.windowType === 'mobile' && !$('#outputTab').hasClass('active')) {
-      //   $('#outputTab').tab('show');
-      // }
       stepData.data.promise.then((x) => {
         stepData.data.result = x;
         resolve(stepData.resume());
@@ -1567,7 +1484,6 @@ const getTurtleOutput = ({
   };
 
   managerObj.attachDebugStepper = () => {
-    // document.querySelector('#continueDebugger').addEventListener('click', () => {
     if (managerObj.suspension
       && 'resolve' in managerObj.suspension
       && 'reject' in managerObj.suspension
@@ -1578,15 +1494,12 @@ const getTurtleOutput = ({
         managerObj.suspension.reject,
       );
     }
-    // });
   };
 
   managerObj.updateZoomState = (disableZoomIn, disableZoomOut) => {
     try {
       const zoomInEl = document.querySelector('.zoomIn');
       const zoomOutEl = document.querySelector('.zoomOut');
-      // zoomInEl.attr('disabled', disableZoomIn);
-      // zoomOutEl.attr('disabled', disableZoomOut);
       zoomInEl.disabled = disableZoomIn;
       zoomOutEl.disabled = disableZoomOut;
     } catch (error) {
@@ -1628,7 +1541,6 @@ const getTurtleOutput = ({
 
       managerObj
         .updateZoomState(managerObj.canvasScale === maxScale, managerObj.canvasScale === minScale);
-
     } catch (error) {
       console.log(error);
     }
@@ -1639,7 +1551,6 @@ const getTurtleOutput = ({
   ) => {
     let attachDebugger = false;
     try {
-      code = code.replace(/^"|"$/g, '');
       Sk.configure({
         read: (x) => {
           if (Sk.builtinFiles === undefined || Sk.builtinFiles.files[x] === undefined) {
@@ -1708,7 +1619,7 @@ const getTurtleOutput = ({
         console.log(errmsg);
       }
     }
-    return Sk.misceval.asyncToPromise(() => Sk.importMainWithBody('<stdin>', false, code, true), attachDebugger);
+    return Sk.misceval.asyncToPromise(() => Sk.importMainWithBody('<stdin>', false, code.replace(/^"|"$/g, ''), true), attachDebugger);
   };
 
   managerObj.getPixelData = (selector) => {
@@ -1850,20 +1761,9 @@ const getTurtleOutput = ({
 
   managerObj.attachListeners = () => {
     try {
-      // $(document).on('click', '.repositionDrawing', () => {
-      //   managerObj.repositionTurtle();
-      // });attachLis
       document.querySelector('.repositionDrawing').addEventListener('click', () => {
         managerObj.repositionTurtle();
       });
-
-      // document.querySelector('#continueDebugger').addEventListener('click', () => {
-      //   managerObj.runDebugger();
-      // });
-
-      // document.querySelector('.continueDebugger').addEventListener('click', () => {
-      //   managerObj.runDebugger();
-      // });
 
       document.querySelector('.drawingToggle').addEventListener('click', () => {
         managerObj.toggleDrawingState();
@@ -1872,21 +1772,6 @@ const getTurtleOutput = ({
       document.querySelector('.debugToggle').addEventListener('click', () => {
         managerObj.toggleDebugState();
       });
-
-      // $($(document).on('click', '.repositionDrawing', () => {
-      //   //   managerObj.repositionTurtle();
-      //   // });document).on('click', '.debugToggle', (e) => {
-      //   e.stopPropagation();
-      //   managerObj.toggleDebugState();
-      // });
-
-      // $(document).on('click', '#continueDebugger, .continueDebugger', () => {
-      //   managerObj.runDebugger();
-      // });
-
-      // $(document).on('click', '.drawingToggle', () => {
-      //   managerObj.toggleDrawingState();
-      // });
 
       managerObj.attachZoomControls();
     } catch (error) {
