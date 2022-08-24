@@ -6,79 +6,127 @@ import {
   View,
   Image,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import { FormattedMessage } from 'react-intl';
 import { Skeleton } from '@rneui/base';
 import ThemeContext from '../components/theme';
 import turtleGameImage from '../../images/games/turtle-game-bg.png';
-import LevelIcon from '../../images/games/level-icon.svg';
+// import LevelIcon from '../../images/games/level-icon.svg';
 import PlayBtnIcon from '../../images/games/play-game-icon.svg';
 import { useDashboard } from '../../hooks/pages/dashboard';
 
-const getStyles = (theme, utilColors, font) => StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.bodyBg,
-    paddingHorizontal: 12,
-  },
-  pageHeading: {
-    color: utilColors.dark,
-    ...font.bodyBold,
-    marginVertical: 20,
-  },
-  gameCard: {
-    width: '50%',
-  },
-  imageWithLevelIndicator: {
-    width: '100%',
-  },
-  gameBg: {
-    width: '100%',
-    height: 100,
-    alignSelf: 'center',
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
-    resizeMode: 'contain',
-  },
-  levelIndicatorBtn: {
-    backgroundColor: utilColors.dark,
-    flexDirection: 'row',
-    alignItems: 'center',
-    position: 'absolute',
-    borderRadius: 5,
-    paddingHorizontal: 5,
-    paddingVertical: 3,
-    top: 8,
-    right: 10,
-  },
-  levelNumberText: {
-    marginLeft: 2,
-    color: utilColors.white,
-    ...font.body,
-  },
-  cardBody: {
-    paddingHorizontal: 8,
-    paddingVertical: 10,
-    backgroundColor: theme.gameCardBg,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-  },
-  gameTitleText: {
-    ...font.bodyBold,
-    color: utilColors.white,
-  },
-  playGameBtn: {
-    backgroundColor: utilColors.white,
-    width: 35,
-    height: 35,
-    borderRadius: 35 / 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+const getStyles = (theme, utilColors, font) => {
+  const containerPaddingHorizontal = 12;
+  const marginBtwCards = 5;
+
+  // const numberOfCol = 2;
+  // const gameCardWidth = Dimensions.get('window').width
+  /// numberOfCol - (containerPaddingHorizontal + marginBtwCards);
+  // const gameCardHeight = Dimensions.get('window').height
+  /// 4.1 - (containerPaddingHorizontal + marginBtwCards);
+
+  const numberOfCol = 1; // temporary
+  const gameCardWidth = Dimensions.get('window').width / numberOfCol - (containerPaddingHorizontal + marginBtwCards); // temporary
+  const gameCardHeight = Dimensions.get('window').height / 3 - (containerPaddingHorizontal + marginBtwCards); // temporary
+  const gameCardBorderRadius = 10; // temporary
+
+  const gameCardWithAndHeight = {
+    width: gameCardWidth,
+    height: gameCardHeight,
+  };
+
+  return StyleSheet.create({
+    container: {
+      paddingHorizontal: containerPaddingHorizontal,
+      backgroundColor: theme.bodyBg,
+      flex: 1,
+    },
+    allGameSection: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+    },
+    pageHeading: {
+      marginVertical: 15,
+      color: utilColors.dark,
+      ...font.subtitleBold,
+    },
+    skeleton: {
+      ...gameCardWithAndHeight,
+      borderRadius: gameCardBorderRadius,
+    },
+    gameCard: {
+      ...gameCardWithAndHeight,
+      marginRight: marginBtwCards,
+      marginBottom: marginBtwCards,
+      flexGrow: 1,
+      width: '100%', // temporary
+    },
+    imageWithLevelIndicator: {
+      borderTopLeftRadius: gameCardBorderRadius,
+      borderTopRightRadius: gameCardBorderRadius,
+      flex: 4,
+      overflow: 'hidden',
+    },
+    gameBg: {
+      width: '100%',
+      height: '100%',
+      alignSelf: 'center',
+      resizeMode: 'contain',
+    },
+    levelIndicatorBtn: {
+      position: 'absolute',
+      top: 8,
+      right: 10,
+      borderRadius: 5,
+      paddingHorizontal: 5,
+      paddingVertical: 3,
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: theme.levelIndicatorBtnBg,
+    },
+    levelNumberText: {
+      marginLeft: 2,
+      color: utilColors.white,
+      ...font.body,
+    },
+    cardBody: {
+      borderBottomLeftRadius: gameCardBorderRadius,
+      borderBottomRightRadius: gameCardBorderRadius,
+      paddingHorizontal: 8,
+      paddingVertical: 12,
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme.gameCardBg,
+    },
+    gameTitleText: {
+      ...font.subtitleBold,
+      color: utilColors.white,
+    },
+    playGameBtn: {
+      // width: 35,
+      // height: 35,
+      // borderRadius: 35 / 2,
+      width: 45,
+      height: 45,
+      borderRadius: 45 / 2,
+      backgroundColor: utilColors.white,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  });
+};
+
+// const LevelIndicatorBtn = ({ style, levelNumber }) => (
+//   <TouchableOpacity style={style.levelIndicatorBtn}>
+//     <LevelIcon />
+//     <Text style={style.levelNumberText}>
+//       <FormattedMessage defaultMessage={'Level {levelNumber}'} values={{ levelNumber }} />
+//     </Text>
+//   </TouchableOpacity>
+// );
 
 const Games = ({ navigation }) => {
   const isPageMounted = useRef(true);
@@ -102,28 +150,26 @@ const Games = ({ navigation }) => {
         />
       </Text>
       {
-        dashBoardData ? <View style={style.gameCard}>
-        <View style={style.imageWithLevelIndicator}>
-          <Image
-            style={style.gameBg}
-            source={turtleGameImage} resizeMode="stretch" />
-          <TouchableOpacity style={style.levelIndicatorBtn}>
-            <LevelIcon />
-            <Text style={style.levelNumberText}>
-              <FormattedMessage defaultMessage={'Level {levelNumber}'} values={{ levelNumber: dashBoardData.turtle.currentQuestionDetails.virtualId }} />
-            </Text>
-          </TouchableOpacity>
+        dashBoardData ? <View style={style.allGameSection}>
+        <TouchableOpacity onPress={() => navigation.navigate('TurtleHome')} style={{ width: '100%' }}>
+          <View style={style.gameCard}>
+            <View style={style.imageWithLevelIndicator}>
+              <Image
+                style={style.gameBg}
+                source={turtleGameImage} resizeMode='stretch' />
+            </View>
+            <View style={style.cardBody}>
+              <Text style={style.gameTitleText}>
+                <FormattedMessage defaultMessage={'Turtle'} description={'Turtle Game Title'} />
+              </Text>
+              <TouchableOpacity style={style.playGameBtn} onPress={() => navigation.navigate('TurtleHome')}>
+                <PlayBtnIcon />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableOpacity>
         </View>
-        <View style={style.cardBody}>
-          <Text style={style.gameTitleText}>
-            <FormattedMessage defaultMessage={'Turtle'} description={'Turtle Game Title'} />
-          </Text>
-          <TouchableOpacity style={style.playGameBtn} onPress={() => navigation.navigate('TurtleHome')}>
-            <PlayBtnIcon />
-          </TouchableOpacity>
-        </View>
-        </View>
-          : <Skeleton width='50%' height={100} style={{ borderRadius: 8 }} />
+          : <Skeleton style={style.skeleton} />
       }
 
     </ScrollView>
