@@ -59,6 +59,12 @@
       "value": "Login with Phone"
     }
   ],
+  "01Q2N+": [
+    {
+      "type": 0,
+      "value": "Coming Soon..."
+    }
+  ],
   "0JV99f": [
     {
       "type": 0,
@@ -233,6 +239,12 @@
       "value": "Play"
     }
   ],
+  "8R6f04": [
+    {
+      "type": 0,
+      "value": "Coming Soon..."
+    }
+  ],
   "9NID4X": [
     {
       "type": 0,
@@ -311,12 +323,6 @@
       "value": "No"
     }
   ],
-  "C8CsWY": [
-    {
-      "type": 0,
-      "value": "This is Class page"
-    }
-  ],
   "CabaPs": [
     {
       "type": 0,
@@ -369,12 +375,6 @@
       "value": "Email"
     }
   ],
-  "EG430K": [
-    {
-      "type": 0,
-      "value": "Go to More"
-    }
-  ],
   "EhuHU0": [
     {
       "type": 1,
@@ -397,12 +397,6 @@
     {
       "type": 0,
       "value": "Home"
-    }
-  ],
-  "FYwxn7": [
-    {
-      "type": 0,
-      "value": "This is Video page"
     }
   ],
   "FhTUgw": [
@@ -537,12 +531,6 @@
       "value": "hint"
     }
   ],
-  "MkkIOq": [
-    {
-      "type": 0,
-      "value": "This is challenges page"
-    }
-  ],
   "NXV57/": [
     {
       "type": 0,
@@ -673,6 +661,16 @@
     {
       "type": 1,
       "value": "errorMessage"
+    }
+  ],
+  "T/sbBG": [
+    {
+      "type": 0,
+      "value": "Level "
+    },
+    {
+      "type": 1,
+      "value": "level"
     }
   ],
   "TS73XZ": [
@@ -951,12 +949,6 @@
       "value": "Name"
     }
   ],
-  "h7B/gA": [
-    {
-      "type": 0,
-      "value": "store authtoken"
-    }
-  ],
   "hEqp4d": [
     {
       "type": 0,
@@ -967,12 +959,6 @@
     {
       "type": 0,
       "value": "Send OTP"
-    }
-  ],
-  "hjOcJT": [
-    {
-      "type": 0,
-      "value": "Go to Turtle"
     }
   ],
   "hphOHh": [
@@ -1089,10 +1075,10 @@
       "value": "Account Settings"
     }
   ],
-  "ox9lTM": [
+  "oOZkkL": [
     {
       "type": 0,
-      "value": "Go to Profile"
+      "value": "Coming Soon..."
     }
   ],
   "pEiO08": [
