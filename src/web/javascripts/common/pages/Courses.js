@@ -8,10 +8,9 @@ const Courses = () => {
   }
 
   return <>
-  <div>
-    <div>
-      Courses
-    </div>
+  <div className='w-100 mt-5'>
+    <h4 className='text-center text-secondary'>Courses</h4>
+    <h4 className='text-center text-secondary'>Coming Soon...</h4>
   </div>
   </>;
 };

@@ -13,8 +13,10 @@ import 'bootstrap/dist/js/bootstrap.min';
 import AuthNav from '../components/AuthNav/AuthNav';
 import '../../../stylesheets/common/sass/importers/_bootstrap.scss';
 import '../../../stylesheets/common/sass/importers/_fontawesome.scss';
+import Loader from '../components/Loader';
 
-const Loading = () => <div>Loading...</div>;
+// const Loading = () => <div>Loading...</div>;
+const Loading = () => <Loader />;
 
 const AccountNavBar = loadable(() => import('../components/AccountNavBar'), { fallback: <Loading /> });
 const NavBar = loadable(() => import('../components/NavBar'), { fallback: <Loading /> });

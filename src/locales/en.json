@@ -122,17 +122,9 @@
     "defaultMessage": "Rank",
     "description": "Rank table cell header"
   },
-  "5E2ZL9": {
-    "defaultMessage": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ullam deleniti nobis deserunt, eveniet, architecto incidunt sunt maiores itaque culpa voluptate molestiae pariatur voluptatem laudantium nostrum maxime obcaecati asperiores minima.",
-    "description": "Turtle description"
-  },
   "5L6FVQ": {
     "defaultMessage": "Password",
     "description": "Password Field"
-  },
-  "6+MZGf": {
-    "defaultMessage": "Challenges",
-    "description": "challenges heading"
   },
   "634LIC": {
     "defaultMessage": "PLAY",
@@ -141,10 +133,6 @@
   "6Cjk2D": {
     "defaultMessage": "Login",
     "description": "Login Button"
-  },
-  "6NWftj": {
-    "defaultMessage": "Challenges",
-    "description": "Challenges card heading"
   },
   "6V6DQY": {
     "defaultMessage": "Next",
@@ -305,10 +293,6 @@
     "defaultMessage": "Save",
     "description": "Profile save button"
   },
-  "HbJPsh": {
-    "defaultMessage": "All Challenges",
-    "description": "all challenges"
-  },
   "Hjj2+R": {
     "defaultMessage": "Register to Get help from Turtle",
     "description": "Hint message"
@@ -464,6 +448,10 @@
   "TmcPug": {
     "defaultMessage": "Edit Profile",
     "description": "edit profile"
+  },
+  "TyfKd4": {
+    "defaultMessage": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?",
+    "description": "Turtle description"
   },
   "U3AyDz": {
     "defaultMessage": "Register to save your progess and compete with others",
@@ -692,10 +680,6 @@
     "defaultMessage": "OTP",
     "description": "OTP Label"
   },
-  "mEFtca": {
-    "defaultMessage": "Continue Challenge",
-    "description": "Game Progress card primary button"
-  },
   "mm9QaY": {
     "defaultMessage": "School",
     "description": "Profile school label"
@@ -712,10 +696,6 @@
     "defaultMessage": "Get the rare collectibles with your coins now",
     "description": "more card title"
   },
-  "nGT7h4": {
-    "defaultMessage": "Scoreboard",
-    "description": "Leaderboard button"
-  },
   "nT6Ql7": {
     "defaultMessage": "{text}",
     "description": "help type text"
@@ -727,10 +707,6 @@
   "o2jxWd": {
     "defaultMessage": "Account Settings",
     "description": "more menu button"
-  },
-  "oJe49d": {
-    "defaultMessage": "All Challenges",
-    "description": "Challenges card menu"
   },
   "ox9lTM": {
     "defaultMessage": "Go to Profile",

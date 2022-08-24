@@ -66,7 +66,7 @@ const TurtleHomeComponent = ({ changeRoute }) => {
           </h1>
           <p className="gameDesc">
             <FormattedMessage
-              defaultMessage={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ullam deleniti nobis deserunt, eveniet, architecto incidunt sunt maiores itaque culpa voluptate molestiae pariatur voluptatem laudantium nostrum maxime obcaecati asperiores minima.'}
+              defaultMessage={'Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?'}
               description={'Turtle description'}
             />
           </p>
