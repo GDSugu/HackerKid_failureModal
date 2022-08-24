@@ -6,6 +6,7 @@ import {
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { enableScreens } from 'react-native-screens';
 import * as Animatable from 'react-native-animatable';
+import { FormattedMessage } from 'react-intl';
 import LinearGradient from 'react-native-linear-gradient';
 import TurtleHeader from '../Header/TurtleHeader';
 import ThemeContext from '../theme';
@@ -169,7 +170,13 @@ const GameHeader = ({
           source={levelIcon}
           style={style.tabHeaderIcon}
         />
-        <Text style={[style.tabHeaderLevelText]}>{'Level 2'}</Text>
+        <Text style={[style.tabHeaderLevelText]}>
+          <FormattedMessage
+            defaultMessage={'Level {level}'}
+            description={'Question Level'}
+            values={{ level: turtleContext?.tqState?.questionObject?.virtualId }}
+          />
+        </Text>
       </View>
       <View style={style.row}>
         {/* { currentScreen !== 'TurtleOutput' */}

@@ -39,6 +39,10 @@
     "defaultMessage": "Login with Phone",
     "description": "login with phone tab"
   },
+  "01Q2N+": {
+    "defaultMessage": "Coming Soon...",
+    "description": "More options Page"
+  },
   "0JV99f": {
     "defaultMessage": "This is index page",
     "description": "Page description"
@@ -150,9 +154,17 @@
     "defaultMessage": "Login into existing account",
     "description": "Login into existing account button"
   },
-  "9BVOVU": {
-    "defaultMessage": "Please verify to continue",
-    "description": "Recaptcha Modal heading"
+  "7PlDmO": {
+    "defaultMessage": "Play",
+    "description": "Turtle Play Button"
+  },
+  "8R6f04": {
+    "defaultMessage": "Coming Soon...",
+    "description": "Challenges Page"
+  },
+  "9NID4X": {
+    "defaultMessage": "OK",
+    "description": "OK"
   },
   "9YoD+Y": {
     "defaultMessage": "New Password",
@@ -202,10 +214,6 @@
     "defaultMessage": "No",
     "description": "cancel logout"
   },
-  "C8CsWY": {
-    "defaultMessage": "This is Class page",
-    "description": "Class Page"
-  },
   "CabaPs": {
     "defaultMessage": "Level {level}",
     "description": "Level 1 navigation link"
@@ -238,10 +246,6 @@
     "defaultMessage": "Email",
     "description": "Email label"
   },
-  "EG430K": {
-    "defaultMessage": "Go to More",
-    "description": "Home Navigation Button"
-  },
   "EhuHU0": {
     "defaultMessage": "{errorMessage}",
     "description": "password form helper"
@@ -257,10 +261,6 @@
   "FIcBXp": {
     "defaultMessage": "Home",
     "description": "home heading"
-  },
-  "FYwxn7": {
-    "defaultMessage": "This is Video page",
-    "description": "More options Page"
   },
   "FhTUgw": {
     "defaultMessage": "Not {phone} ?",
@@ -340,10 +340,6 @@
   "MfoF60": {
     "defaultMessage": "{hint}",
     "description": "Hint"
-  },
-  "MkkIOq": {
-    "defaultMessage": "This is challenges page",
-    "description": "Challenges Page"
   },
   "NXV57/": {
     "defaultMessage": "Share",
@@ -432,6 +428,10 @@
   "SpftNg": {
     "defaultMessage": "{errorMessage}",
     "description": "phoneNumber form helper"
+  },
+  "T/sbBG": {
+    "defaultMessage": "Level {level}",
+    "description": "Question Level"
   },
   "TS73XZ": {
     "defaultMessage": "Change password",
@@ -616,10 +616,6 @@
     "defaultMessage": "Name",
     "description": "Name label"
   },
-  "h7B/gA": {
-    "defaultMessage": "store authtoken",
-    "description": "authtoken temp storage btn"
-  },
   "hEqp4d": {
     "defaultMessage": "Coming Soon...",
     "description": "more card button"
@@ -627,10 +623,6 @@
   "hJpqIn": {
     "defaultMessage": "Send OTP",
     "description": "send otp button"
-  },
-  "hjOcJT": {
-    "defaultMessage": "Go to Turtle",
-    "description": "Link description"
   },
   "hphOHh": {
     "defaultMessage": "Help",
@@ -708,9 +700,9 @@
     "defaultMessage": "Account Settings",
     "description": "more menu button"
   },
-  "ox9lTM": {
-    "defaultMessage": "Go to Profile",
-    "description": "Link description"
+  "oOZkkL": {
+    "defaultMessage": "Coming Soon...",
+    "description": "Class Page"
   },
   "pEiO08": {
     "defaultMessage": "Account Settings",

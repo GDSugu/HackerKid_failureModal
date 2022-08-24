@@ -12,10 +12,10 @@ const TurtleNavBar = ({ questionState = {}, handleHint = () => {}, isTurtleMainP
   const levelBtnHandler = () => {};
   // let level = 0;
 
-  const { status, questionList, questionObject } = questionState;
+  const { status, questionObject } = questionState;
 
   // if (status === 'success') {
-  //   level = questionList.find((el) => el.question_id === questionObject.question_id).level;
+  //   console.log(questionList.find((el) => el.question_id === questionObject.question_id));
   // }
 
   return <>
@@ -60,9 +60,7 @@ const TurtleNavBar = ({ questionState = {}, handleHint = () => {}, isTurtleMainP
                               defaultMessage={'Level {level}'}
                               description={'Level navigation link'}
                               values={{
-                                level: questionList
-                                  .find((el) => el.question_id === questionObject.question_id)
-                                  .level,
+                                level: questionObject.virtualId,
                               }}
                             />
                           </p>
@@ -133,9 +131,7 @@ const TurtleNavBar = ({ questionState = {}, handleHint = () => {}, isTurtleMainP
                             defaultMessage={'Level {level}'}
                             description={'Level 1 navigation link'}
                             values={{
-                              level: questionList
-                                .find((el) => el.question_id === questionObject.question_id)
-                                .level,
+                              level: questionObject.virtualId,
                             }}
                           />
                         </p>
