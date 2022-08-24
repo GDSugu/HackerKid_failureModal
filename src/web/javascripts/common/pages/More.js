@@ -223,7 +223,9 @@ const LogoutModalComponent = ({ logoutAction, closeModal }) => <>
 </>;
 
 const More = () => {
-  pageInit('more-container', 'More');
+  if (window.location.href.includes('more')) {
+    pageInit('more-container', 'More');
+  }
 
   const isPageMounted = React.useRef(true);
   const [isDesktop, setIsDesktop] = React.useState(window.matchMedia('(min-width: 576px)').matches);

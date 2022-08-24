@@ -585,6 +585,12 @@
       "value": "Try the new in-built IDE"
     }
   ],
+  "NeX/hH": [
+    {
+      "type": 0,
+      "value": "Are you sure you want to logout?"
+    }
+  ],
   "Nn5oAD": [
     {
       "type": 0,
@@ -913,6 +919,18 @@
     {
       "type": 1,
       "value": "name"
+    }
+  ],
+  "dNWhFj": [
+    {
+      "type": 0,
+      "value": "No"
+    }
+  ],
+  "dq9osy": [
+    {
+      "type": 0,
+      "value": "Yes"
     }
   ],
   "e5Eaen": [

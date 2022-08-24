@@ -377,6 +377,10 @@
     "defaultMessage": "Try the new in-built IDE",
     "description": "More card Title"
   },
+  "NeX/hH": {
+    "defaultMessage": "Are you sure you want to logout?",
+    "description": "logout prompt message"
+  },
   "Nn5oAD": {
     "defaultMessage": "Go to login",
     "description": "Go to login button"
@@ -595,6 +599,14 @@
   "croLiZ": {
     "defaultMessage": "{name}",
     "description": "name"
+  },
+  "dNWhFj": {
+    "defaultMessage": "No",
+    "description": "logout no btn"
+  },
+  "dq9osy": {
+    "defaultMessage": "Yes",
+    "description": "logout yes btn"
   },
   "e5Eaen": {
     "defaultMessage": "Profile updated successfully",

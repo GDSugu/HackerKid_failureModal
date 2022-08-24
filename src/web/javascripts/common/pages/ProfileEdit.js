@@ -67,7 +67,9 @@ const validateField = (key, target) => {
 };
 
 const Profile = () => {
-  pageInit('profile-container', 'Profile - Settings');
+  if (window.location.href.includes('profile')) {
+    pageInit('profile-container', 'Profile - Settings');
+  }
 
   const isPageMounted = React.useRef(true);
   const { state, setState, saveProfile } = useProfileInfo({ isPageMounted });

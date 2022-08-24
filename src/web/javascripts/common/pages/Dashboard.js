@@ -485,7 +485,9 @@ const ChallengesComponent = memo(ChallengesSwiper);
 const LeaderBoardCardComponent = memo(LeaderBoardCard);
 
 const Dashboard = () => {
-  pageInit('dashboard-container', 'Dashboard');
+  if (window.location.href.includes('/dashboard')) {
+    pageInit('dashboard-container', 'Dashboard');
+  }
 
   const [isDesktop, setIsDesktop] = useState(window.matchMedia('(min-width: 576px)').matches);
   const isPageMounted = React.useRef(true);
