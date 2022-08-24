@@ -185,22 +185,10 @@
       "value": "Rank"
     }
   ],
-  "5E2ZL9": [
-    {
-      "type": 0,
-      "value": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ullam deleniti nobis deserunt, eveniet, architecto incidunt sunt maiores itaque culpa voluptate molestiae pariatur voluptatem laudantium nostrum maxime obcaecati asperiores minima."
-    }
-  ],
   "5L6FVQ": [
     {
       "type": 0,
       "value": "Password"
-    }
-  ],
-  "6+MZGf": [
-    {
-      "type": 0,
-      "value": "Challenges"
     }
   ],
   "634LIC": [
@@ -213,12 +201,6 @@
     {
       "type": 0,
       "value": "Login"
-    }
-  ],
-  "6NWftj": [
-    {
-      "type": 0,
-      "value": "Challenges"
     }
   ],
   "6V6DQY": [
@@ -483,12 +465,6 @@
       "value": "Save"
     }
   ],
-  "HbJPsh": [
-    {
-      "type": 0,
-      "value": "All Challenges"
-    }
-  ],
   "Hjj2+R": [
     {
       "type": 0,
@@ -721,6 +697,12 @@
     {
       "type": 0,
       "value": "Edit Profile"
+    }
+  ],
+  "TyfKd4": [
+    {
+      "type": 0,
+      "value": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?"
     }
   ],
   "U3AyDz": [
@@ -1065,12 +1047,6 @@
       "value": "OTP"
     }
   ],
-  "mEFtca": [
-    {
-      "type": 0,
-      "value": "Continue Challenge"
-    }
-  ],
   "mm9QaY": [
     {
       "type": 0,
@@ -1095,12 +1071,6 @@
       "value": "Get the rare collectibles with your coins now"
     }
   ],
-  "nGT7h4": [
-    {
-      "type": 0,
-      "value": "Scoreboard"
-    }
-  ],
   "nT6Ql7": [
     {
       "type": 1,
@@ -1117,12 +1087,6 @@
     {
       "type": 0,
       "value": "Account Settings"
-    }
-  ],
-  "oJe49d": [
-    {
-      "type": 0,
-      "value": "All Challenges"
     }
   ],
   "ox9lTM": [

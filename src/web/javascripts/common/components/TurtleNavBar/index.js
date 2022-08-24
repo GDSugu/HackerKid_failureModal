@@ -8,7 +8,7 @@ import Img from '../Img';
 const TurtleNavBar = ({ questionState = {}, handleHint = () => {}, isTurtleMainPage = false }) => {
   const { state: { device } } = useRootPageState();
 
-  const leaderboarddHandler = () => {};
+  // const leaderboarddHandler = () => {};
   const levelBtnHandler = () => {};
   // let level = 0;
 
@@ -74,14 +74,14 @@ const TurtleNavBar = ({ questionState = {}, handleHint = () => {}, isTurtleMainP
             </div>
             <div className="col-4 flex-end">
               <div className="d-flex align-items-center">
-                <div>
+                {/* <div>
                   <button className="btn leaderboard-btn" onClick={leaderboarddHandler}>
                     <FormattedMessage
                       defaultMessage={'Scoreboard'}
                       description={'Leaderboard button'}
                     />
                   </button>
-                </div>
+                </div> */}
                 <div className="profileImg ml-2">
                   <Link to='/profile'>
                     <img src={'../../../../../images/common/profile.png'} alt="Hackerkid User"/>
