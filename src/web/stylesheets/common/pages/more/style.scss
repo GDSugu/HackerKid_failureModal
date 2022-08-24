@@ -368,4 +368,40 @@
       }
     }
   }
+
+  .logoutModal {
+    .modal-dialog {
+      @include gm.media-breakpoint-up(md) {
+        max-width: 50%;
+      }
+    }
+
+    .modal-body {
+      padding: 0;
+    }
+
+    .modal-custom-header {
+      button.close {
+        display: none;
+      }
+    }
+
+    .logoutContainer {
+      padding: 1.5rem;
+
+      h5 {
+        text-align: center;
+      }
+
+      button {
+        width: 40%;
+        margin: 0 0.5rem;
+        margin-top: 1rem;
+
+        &.btn-primary {
+          color: gt.theme-var(text-color-2);
+        }
+      }
+    }
+  }
 }

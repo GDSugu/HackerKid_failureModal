@@ -15,6 +15,8 @@ import ideIllustration from '../../images/more/ide.png';
 // import moreFriendsIllustration from '../../images/more/moreFriends.png';
 import { LightBlue } from '../../colors/_colors';
 import { useLogout } from '../../hooks/pages/auth';
+import LogoutModal from '../components/Modals/LogoutModal';
+import { AuthContext } from '../../hooks/pages/root';
 
 const getStyles = (theme, font, utils) => StyleSheet.create({
   container: {
@@ -129,202 +131,213 @@ const More = ({ navigation }) => {
   const { font, theme } = useContext(ThemeContext);
   const pageTheme = theme.screenMore;
   const style = getStyles(pageTheme, font, theme.utilColors);
-
+  const authContext = useContext(AuthContext);
   const { logout } = useLogout();
 
-  return (
-    <View style={style.container}>
-      <ScrollView style={style.scrollContainer}>
-        {/* <TouchableOpacity onPress={() => {}}>
-          <View style={{
-            ...style.moreMenuBtn,
-            ...style.collectionBtn,
-          }}
-            >
-            <Text style={{
-              ...style.moreMenuBtnText,
-              ...style.collectionBtnText,
-            }}>
-              <FormattedMessage
-                defaultMessage="Your Collections and Perks"
-                description="Collections and Perks CTA"
-              />
-            </Text>
-            <Icon type='FontAwesome5' name={'angle-right'} size={32} color={pageTheme.textBold} />
-          </View>
-        </TouchableOpacity> */}
+  const handlelogoutBtn = () => {
+    authContext.setAuthState({
+      appData: {
+        logoutModalVisibility: true,
+      },
+    });
+  };
 
-        <View style={style.moreCard}>
-          <ImageBackground
-            source={collectionIllustration}
-            resizeMethod={'scale'}
-            resizeMode={'contain'}
-            style={style.moreCardBg}
-            imageStyle={style.collectibleImgBg}
-            >
-            <View style={style.moreCardContainer}>
-              <Text style={style.moreCardTitle}>
+  return (
+    <>
+      <View style={style.container}>
+        <ScrollView style={style.scrollContainer}>
+          {/* <TouchableOpacity onPress={() => {}}>
+            <View style={{
+              ...style.moreMenuBtn,
+              ...style.collectionBtn,
+            }}
+              >
+              <Text style={{
+                ...style.moreMenuBtnText,
+                ...style.collectionBtnText,
+              }}>
                 <FormattedMessage
-                  defaultMessage="Get the rare collectibles with your coins now"
-                  description="More card Title"
+                  defaultMessage="Your Collections and Perks"
+                  description="Collections and Perks CTA"
                 />
               </Text>
-              <View style={style.moreBtnContainer}>
-                <TouchableOpacity
-                  onPress={() => {}}
-                  style={{
-                    ...style.moreCardButton,
-                    opacity: 0.5,
-                  }}
-                  disabled={true}
-                  >
-                  <Text style={style.moreCardButtonText}>
-                    <FormattedMessage
-                      defaultMessage="Coming soon"
-                      description="More card button text"
-                    />
-                  </Text>
-                </TouchableOpacity>
-              </View>
+              <Icon type='FontAwesome5' name={'angle-right'} size={32} color={pageTheme.textBold} />
             </View>
-          </ImageBackground>
-        </View>
+          </TouchableOpacity> */}
 
-        {/* <View style={style.moreCard}>
-          <ImageBackground
-            source={moreFriendsIllustration}
-            resizeMethod={'scale'}
-            resizeMode={'contain'}
-            style={style.moreCardBg}
-            imageStyle={style.moreFriendsImgBg}
-          >
-            <View style={style.moreCardContainer}>
-              <View>
+          <View style={style.moreCard}>
+            <ImageBackground
+              source={collectionIllustration}
+              resizeMethod={'scale'}
+              resizeMode={'contain'}
+              style={style.moreCardBg}
+              imageStyle={style.collectibleImgBg}
+              >
+              <View style={style.moreCardContainer}>
                 <Text style={style.moreCardTitle}>
                   <FormattedMessage
-                    defaultMessage="More friends = More fun"
+                    defaultMessage="Get the rare collectibles with your coins now"
                     description="More card Title"
                   />
                 </Text>
-                <Text style={style.moreCardSubtitleText}>
-                  <FormattedMessage
-                    defaultMessage="Join your friends in the club"
-                    description="More card Subtitle"
-                  />
-                </Text>
+                <View style={style.moreBtnContainer}>
+                  <TouchableOpacity
+                    onPress={() => {}}
+                    style={{
+                      ...style.moreCardButton,
+                      opacity: 0.5,
+                    }}
+                    disabled={true}
+                    >
+                    <Text style={style.moreCardButtonText}>
+                      <FormattedMessage
+                        defaultMessage="Coming soon"
+                        description="More card button text"
+                      />
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-              <View style={style.moreBtnContainer}>
-                <TouchableOpacity
-                  onPress={() => {}}
-                  style={style.moreCardButton}
-                  >
-                  <Text style={style.moreCardButtonText}>
+            </ImageBackground>
+          </View>
+
+          {/* <View style={style.moreCard}>
+            <ImageBackground
+              source={moreFriendsIllustration}
+              resizeMethod={'scale'}
+              resizeMode={'contain'}
+              style={style.moreCardBg}
+              imageStyle={style.moreFriendsImgBg}
+            >
+              <View style={style.moreCardContainer}>
+                <View>
+                  <Text style={style.moreCardTitle}>
                     <FormattedMessage
-                      defaultMessage="Visit Club"
-                      description="More card button text"
+                      defaultMessage="More friends = More fun"
+                      description="More card Title"
                     />
                   </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </ImageBackground>
-        </View> */}
-
-        <View style={style.moreCard}>
-          <ImageBackground
-            source={ideIllustration}
-            resizeMethod={'scale'}
-            resizeMode={'contain'}
-            style={style.moreCardBg}
-            imageStyle={style.ideImgBg}
-          >
-            <View style={style.moreCardContainer}>
-              <View>
-                <Text style={style.moreCardTitle}>
-                  <FormattedMessage
-                    defaultMessage="Try the new in-built IDE"
-                    description="More card Title"
-                  />
-                </Text>
-                <Text style={style.moreCardSubtitleText}>
-                  <FormattedMessage
-                    defaultMessage="Practise... or play with the new code editor"
-                    description="More card Subtitle"
-                  />
-                </Text>
-              </View>
-              <View style={style.moreBtnContainer}>
-                <TouchableOpacity
-                  onPress={() => {}}
-                  style={{
-                    ...style.moreCardButton,
-                    ...style.moreCardIdeBtn,
-                    opacity: 0.5,
-                  }}
-                  disabled={true}
-                  >
-                  <Text style={style.moreCardButtonText}>
+                  <Text style={style.moreCardSubtitleText}>
                     <FormattedMessage
-                      defaultMessage="Coming soon"
-                      description="More card button text"
+                      defaultMessage="Join your friends in the club"
+                      description="More card Subtitle"
                     />
                   </Text>
-                </TouchableOpacity>
+                </View>
+                <View style={style.moreBtnContainer}>
+                  <TouchableOpacity
+                    onPress={() => {}}
+                    style={style.moreCardButton}
+                    >
+                    <Text style={style.moreCardButtonText}>
+                      <FormattedMessage
+                        defaultMessage="Visit Club"
+                        description="More card button text"
+                      />
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
+            </ImageBackground>
+          </View> */}
+
+          <View style={style.moreCard}>
+            <ImageBackground
+              source={ideIllustration}
+              resizeMethod={'scale'}
+              resizeMode={'contain'}
+              style={style.moreCardBg}
+              imageStyle={style.ideImgBg}
+            >
+              <View style={style.moreCardContainer}>
+                <View>
+                  <Text style={style.moreCardTitle}>
+                    <FormattedMessage
+                      defaultMessage="Try the new in-built IDE"
+                      description="More card Title"
+                    />
+                  </Text>
+                  <Text style={style.moreCardSubtitleText}>
+                    <FormattedMessage
+                      defaultMessage="Practise... or play with the new code editor"
+                      description="More card Subtitle"
+                    />
+                  </Text>
+                </View>
+                <View style={style.moreBtnContainer}>
+                  <TouchableOpacity
+                    onPress={() => {}}
+                    style={{
+                      ...style.moreCardButton,
+                      ...style.moreCardIdeBtn,
+                      opacity: 0.5,
+                    }}
+                    disabled={true}
+                    >
+                    <Text style={style.moreCardButtonText}>
+                      <FormattedMessage
+                        defaultMessage="Coming soon"
+                        description="More card button text"
+                      />
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </ImageBackground>
+          </View>
+
+          {/* <TouchableOpacity onPress={() => {}}>
+            <View style={style.moreMenuBtn}>
+              <Text style={style.moreMenuBtnText}>
+                <FormattedMessage
+                  defaultMessage="Doubts"
+                  description="Doubts CTA"
+                />
+              </Text>
+              <Icon
+                type='FontAwesome5' name={'angle-right'} size={32} color={theme.utilColors.dark} />
             </View>
-          </ImageBackground>
-        </View>
+          </TouchableOpacity> */}
 
-        {/* <TouchableOpacity onPress={() => {}}>
-          <View style={style.moreMenuBtn}>
-            <Text style={style.moreMenuBtnText}>
-              <FormattedMessage
-                defaultMessage="Doubts"
-                description="Doubts CTA"
-              />
-            </Text>
-            <Icon
-              type='FontAwesome5' name={'angle-right'} size={32} color={theme.utilColors.dark} />
-          </View>
-        </TouchableOpacity> */}
+          <TouchableOpacity onPress={handlelogoutBtn}>
+            <View style={style.moreMenuBtn}>
+              <Text style={style.moreMenuBtnText}>
+                <FormattedMessage
+                  defaultMessage="Logout"
+                  description="Logout Button"
+                />
+              </Text>
+              <Icon type='FontAwesome5' name={'angle-right'} size={32} color={theme.utilColors.dark} />
+            </View>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={logout}>
-          <View style={style.moreMenuBtn}>
-            <Text style={style.moreMenuBtnText}>
-              <FormattedMessage
-                defaultMessage="Logout"
-                description="Logout Button"
-              />
-            </Text>
-            <Icon type='FontAwesome5' name={'angle-right'} size={32} color={theme.utilColors.dark} />
-          </View>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('EditProfile') }>
+            <View style={style.moreMenuBtn}>
+              <Text style={style.moreMenuBtnText}>
+                <FormattedMessage
+                  defaultMessage="Account Settings"
+                  description="account settings CTA"
+                />
+              </Text>
+              <Icon type='FontAwesome5' name={'angle-right'} size={32} color={theme.utilColors.dark} />
+            </View>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate('EditProfile') }>
-          <View style={style.moreMenuBtn}>
-            <Text style={style.moreMenuBtnText}>
-              <FormattedMessage
-                defaultMessage="Account Settings"
-                description="account settings CTA"
-              />
-            </Text>
-            <Icon type='FontAwesome5' name={'angle-right'} size={32} color={theme.utilColors.dark} />
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => navigation.navigate('Help')} style={style.lastBtn}>
-          <View style={style.moreMenuBtn}>
-            <Text style={style.moreMenuBtnText}>
-              <FormattedMessage
-                defaultMessage="Help"
-                description="Help CTA"
-              />
-            </Text>
-            <Icon type='FontAwesome5' name={'angle-right'} size={32} color={theme.utilColors.dark} />
-          </View>
-        </TouchableOpacity>
-      </ScrollView>
-    </View>
+          <TouchableOpacity onPress={() => navigation.navigate('Help')} style={style.lastBtn}>
+            <View style={style.moreMenuBtn}>
+              <Text style={style.moreMenuBtnText}>
+                <FormattedMessage
+                  defaultMessage="Help"
+                  description="Help CTA"
+                />
+              </Text>
+              <Icon type='FontAwesome5' name={'angle-right'} size={32} color={theme.utilColors.dark} />
+            </View>
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
+      <LogoutModal logoutAction={logout} />
+    </>
   );
 };
 

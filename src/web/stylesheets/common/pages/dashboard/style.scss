@@ -70,9 +70,19 @@
             height: 8rem;
           }
 
+          @include gm.media-breakpoint-down(lg) {
+            transform: translateX(75%);
+          }
+
           @include gm.media-breakpoint-down(sm) {
             left: 0;
-            transform: translate(30%, 20%);
+            // transform: translate(30%, 20%);
+            transform: translateX(10%);
+          }
+
+          @include gm.media-breakpoint-down(xs) {
+            left: 0;
+            transform: translateX(15%);
           }
         }
 
@@ -370,10 +380,15 @@
               display: flex;
               align-items: center;
 
-              button {
+              a {
                 background-color: gt.theme-var(dashboard-game-btn-bg, null, $thememaplight, $cssvars);
                 border-radius: 0.75rem;
                 color: gt.theme-var(text-color-2);
+
+                &:hover {
+                  text-decoration: none;
+                  color: gt.theme-var(text-color-2);
+                }
 
                 p {
                   margin-bottom: 0;

@@ -21,7 +21,8 @@ const HelpType = ({ text, iconPath, label = '' }) => (
 
 const HelpModal = () => (
     <Modal
-      customClass='help-modal curved'
+      modalClass='help-modal'
+      customClass='curved'
       modalTitle='Help'
       options='hide'
       header = {

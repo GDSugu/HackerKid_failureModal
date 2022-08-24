@@ -1,4 +1,10 @@
 {
+  "+019EW": [
+    {
+      "type": 0,
+      "value": "PLAY"
+    }
+  ],
   "+AycvP": [
     {
       "type": 0,
@@ -63,10 +69,22 @@
       "value": "This is index page"
     }
   ],
+  "0K7noF": [
+    {
+      "type": 0,
+      "value": "Code"
+    }
+  ],
   "0Sgdtj": [
     {
       "type": 0,
       "value": "Game Progress"
+    }
+  ],
+  "0mcQbk": [
+    {
+      "type": 1,
+      "value": "message"
     }
   ],
   "13ETG6": [
@@ -81,6 +99,12 @@
       "value": "Forgot Password?"
     }
   ],
+  "1G3215": [
+    {
+      "type": 0,
+      "value": "Share"
+    }
+  ],
   "1RUvaS": [
     {
       "type": 0,
@@ -91,6 +115,12 @@
     {
       "type": 0,
       "value": "Create a New Account"
+    }
+  ],
+  "2RBdEr": [
+    {
+      "type": 0,
+      "value": "Continue"
     }
   ],
   "2Tu0HO": [
@@ -147,10 +177,22 @@
       "value": "Ok"
     }
   ],
+  "4Yb5Wa": [
+    {
+      "type": 0,
+      "value": "Please connect to the internet."
+    }
+  ],
   "53f59E": [
     {
       "type": 0,
       "value": "Rank"
+    }
+  ],
+  "5E2ZL9": [
+    {
+      "type": 0,
+      "value": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ullam deleniti nobis deserunt, eveniet, architecto incidunt sunt maiores itaque culpa voluptate molestiae pariatur voluptatem laudantium nostrum maxime obcaecati asperiores minima."
     }
   ],
   "5L6FVQ": [
@@ -163,6 +205,12 @@
     {
       "type": 0,
       "value": "Challenges"
+    }
+  ],
+  "634LIC": [
+    {
+      "type": 0,
+      "value": "PLAY"
     }
   ],
   "6Cjk2D": [
@@ -181,6 +229,12 @@
     {
       "type": 0,
       "value": "Next"
+    }
+  ],
+  "6oGVMu": [
+    {
+      "type": 0,
+      "value": "Awesome!"
     }
   ],
   "74UjvK": [
@@ -237,6 +291,12 @@
       "value": "New Password"
     }
   ],
+  "AVSoe3": [
+    {
+      "type": 0,
+      "value": "Expected output"
+    }
+  ],
   "Aevhvw": [
     {
       "type": 0,
@@ -261,16 +321,38 @@
       "value": "Try again"
     }
   ],
+  "BNGdt+": [
+    {
+      "type": 0,
+      "value": "No"
+    }
+  ],
   "C8CsWY": [
     {
       "type": 0,
       "value": "This is Class page"
     }
   ],
+  "CabaPs": [
+    {
+      "type": 0,
+      "value": "Level "
+    },
+    {
+      "type": 1,
+      "value": "level"
+    }
+  ],
   "CcB4fo": [
     {
       "type": 0,
       "value": "Coins Earned:"
+    }
+  ],
+  "Ciol6I": [
+    {
+      "type": 0,
+      "value": "Output"
     }
   ],
   "D/2aSY": [
@@ -313,6 +395,12 @@
     {
       "type": 1,
       "value": "errorMessage"
+    }
+  ],
+  "EqEa5m": [
+    {
+      "type": 0,
+      "value": "Later"
     }
   ],
   "F/vOH1": [
@@ -395,6 +483,12 @@
       "value": "All Challenges"
     }
   ],
+  "Hjj2+R": [
+    {
+      "type": 0,
+      "value": "Register to Get help from Turtle"
+    }
+  ],
   "ILnphX": [
     {
       "type": 0,
@@ -431,6 +525,18 @@
       "value": "OTP"
     }
   ],
+  "KD6lRu": [
+    {
+      "type": 0,
+      "value": "Continue"
+    }
+  ],
+  "LCt8qV": [
+    {
+      "type": 0,
+      "value": "Share"
+    }
+  ],
   "MB8h2I": [
     {
       "type": 0,
@@ -443,10 +549,22 @@
       "value": "Go to Index"
     }
   ],
+  "MfoF60": [
+    {
+      "type": 1,
+      "value": "hint"
+    }
+  ],
   "MkkIOq": [
     {
       "type": 0,
       "value": "This is challenges page"
+    }
+  ],
+  "NXV57/": [
+    {
+      "type": 0,
+      "value": "Share"
     }
   ],
   "NZqKYF": [
@@ -461,6 +579,12 @@
       "value": "Try the new in-built IDE"
     }
   ],
+  "NeX/hH": [
+    {
+      "type": 0,
+      "value": "Are you sure you want to logout?"
+    }
+  ],
   "Nn5oAD": [
     {
       "type": 0,
@@ -471,6 +595,12 @@
     {
       "type": 0,
       "value": "Collections"
+    }
+  ],
+  "OWSL0r": [
+    {
+      "type": 0,
+      "value": "Register"
     }
   ],
   "OdODwS": [
@@ -485,6 +615,12 @@
       "value": "Class"
     }
   ],
+  "PKwyq8": [
+    {
+      "type": 0,
+      "value": "Move any blocks to get hints"
+    }
+  ],
   "PMX+8G": [
     {
       "type": 1,
@@ -495,6 +631,18 @@
     {
       "type": 0,
       "value": "Home"
+    }
+  ],
+  "PcqGYQ": [
+    {
+      "type": 0,
+      "value": "Playground"
+    }
+  ],
+  "Qb0n8J": [
+    {
+      "type": 0,
+      "value": "Are you sure you want to logout?"
     }
   ],
   "Qvy78L": [
@@ -521,10 +669,22 @@
       "value": "Re-type Password"
     }
   ],
+  "Rf84nl": [
+    {
+      "type": 0,
+      "value": "ok"
+    }
+  ],
   "SL6O2c": [
     {
       "type": 0,
       "value": "Password"
+    }
+  ],
+  "SjoZlV": [
+    {
+      "type": 0,
+      "value": "Play Now"
     }
   ],
   "SpftNg": [
@@ -557,10 +717,52 @@
       "value": "Edit Profile"
     }
   ],
+  "U3AyDz": [
+    {
+      "type": 0,
+      "value": "Register to save your progess and compete with others"
+    }
+  ],
+  "UFvWGM": [
+    {
+      "type": 0,
+      "value": "Play Next"
+    }
+  ],
   "UUCx/J": [
     {
       "type": 0,
       "value": "Edit"
+    }
+  ],
+  "UkT6PM": [
+    {
+      "type": 0,
+      "value": "You have completed this level !"
+    }
+  ],
+  "UrVWqS": [
+    {
+      "type": 1,
+      "value": "step"
+    }
+  ],
+  "V365ug": [
+    {
+      "type": 0,
+      "value": "Output"
+    }
+  ],
+  "V624J+": [
+    {
+      "type": 0,
+      "value": "Copy Link"
+    }
+  ],
+  "V7hpAI": [
+    {
+      "type": 0,
+      "value": "Question"
     }
   ],
   "VdAhqD": [
@@ -597,6 +799,18 @@
     {
       "type": 0,
       "value": "Resend"
+    }
+  ],
+  "WIy+CB": [
+    {
+      "type": 0,
+      "value": "Awesome!"
+    }
+  ],
+  "WSWTC5": [
+    {
+      "type": 0,
+      "value": "Play"
     }
   ],
   "X1rCRf": [
@@ -653,16 +867,40 @@
       "value": "Create a New Account"
     }
   ],
+  "aWjMjy": [
+    {
+      "type": 0,
+      "value": "Register"
+    }
+  ],
+  "b2J6mh": [
+    {
+      "type": 0,
+      "value": "Home"
+    }
+  ],
   "bK9TWX": [
     {
       "type": 0,
       "value": "Leaderboard Rank"
     }
   ],
+  "byK6c0": [
+    {
+      "type": 0,
+      "value": "Later"
+    }
+  ],
   "c9n6Sh": [
     {
       "type": 0,
       "value": "School"
+    }
+  ],
+  "cI34g1": [
+    {
+      "type": 0,
+      "value": "Play next"
     }
   ],
   "cZDBd3": [
@@ -675,6 +913,18 @@
     {
       "type": 1,
       "value": "name"
+    }
+  ],
+  "dNWhFj": [
+    {
+      "type": 0,
+      "value": "No"
+    }
+  ],
+  "dq9osy": [
+    {
+      "type": 0,
+      "value": "Yes"
     }
   ],
   "e5Eaen": [
@@ -731,6 +981,12 @@
       "value": "Send OTP"
     }
   ],
+  "hjOcJT": [
+    {
+      "type": 0,
+      "value": "Go to Turtle"
+    }
+  ],
   "hphOHh": [
     {
       "type": 0,
@@ -741,6 +997,12 @@
     {
       "type": 0,
       "value": "Set Password"
+    }
+  ],
+  "iJptwY": [
+    {
+      "type": 0,
+      "value": "Continue"
     }
   ],
   "jDzDCp": [
@@ -755,10 +1017,22 @@
       "value": "Forgot Password"
     }
   ],
+  "k6tlKQ": [
+    {
+      "type": 0,
+      "value": "Ok"
+    }
+  ],
   "lKeCea": [
     {
       "type": 0,
       "value": "Save & Exit"
+    }
+  ],
+  "lPt9wn": [
+    {
+      "type": 1,
+      "value": "question"
     }
   ],
   "lynO1X": [
@@ -771,6 +1045,12 @@
     {
       "type": 1,
       "value": "rank"
+    }
+  ],
+  "mD5V7u": [
+    {
+      "type": 1,
+      "value": "hintMessage"
     }
   ],
   "mDpOZM": [
@@ -809,6 +1089,12 @@
       "value": "Get the rare collectibles with your coins now"
     }
   ],
+  "nGT7h4": [
+    {
+      "type": 0,
+      "value": "Scoreboard"
+    }
+  ],
   "nT6Ql7": [
     {
       "type": 1,
@@ -843,6 +1129,12 @@
     {
       "type": 0,
       "value": "Account Settings"
+    }
+  ],
+  "pVIk7O": [
+    {
+      "type": 0,
+      "value": "Turtle"
     }
   ],
   "pwy4hs": [
@@ -881,6 +1173,12 @@
       "value": "completed"
     }
   ],
+  "rZKLPy": [
+    {
+      "type": 0,
+      "value": "Copy Link"
+    }
+  ],
   "sNqwYF": [
     {
       "type": 0,
@@ -893,10 +1191,22 @@
       "value": "Go to Home"
     }
   ],
+  "tbPLF3": [
+    {
+      "type": 1,
+      "value": "step"
+    }
+  ],
   "tsF0aG": [
     {
       "type": 0,
       "value": "Continue Playing"
+    }
+  ],
+  "uGb/uS": [
+    {
+      "type": 1,
+      "value": "message"
     }
   ],
   "uhayi4": [
@@ -929,6 +1239,12 @@
       "value": "Help"
     }
   ],
+  "x1EHNZ": [
+    {
+      "type": 0,
+      "value": "Share"
+    }
+  ],
   "x8lXTv": [
     {
       "type": 0,
@@ -947,6 +1263,24 @@
       "value": "Videos"
     }
   ],
+  "xlvJ5U": [
+    {
+      "type": 0,
+      "value": "You are offline."
+    }
+  ],
+  "xs8DW+": [
+    {
+      "type": 0,
+      "value": "Register for free"
+    }
+  ],
+  "yCTEJz": [
+    {
+      "type": 1,
+      "value": "hintMessage"
+    }
+  ],
   "yujxGL": [
     {
       "type": 0,
@@ -957,6 +1291,12 @@
     {
       "type": 0,
       "value": "Name"
+    }
+  ],
+  "zKBXVr": [
+    {
+      "type": 0,
+      "value": "Try Now"
     }
   ],
   "zMmp/q": [

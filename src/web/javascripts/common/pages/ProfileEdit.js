@@ -67,7 +67,9 @@ const validateField = (key, target) => {
 };
 
 const Profile = () => {
-  pageInit('profile-container', 'Profile - Settings');
+  if (window.location.href.includes('profile')) {
+    pageInit('profile-container', 'Profile - Settings');
+  }
 
   const isPageMounted = React.useRef(true);
   const { state, setState, saveProfile } = useProfileInfo({ isPageMounted });
@@ -265,6 +267,7 @@ const Profile = () => {
     </div>
     { modalVisible
      && <Modal
+      modalClass='errorModal'
       customClass={'curved'}
       modalVisible={modalVisible}
       options={{
@@ -289,7 +292,7 @@ const Profile = () => {
       </button>
     </Modal>
     }
-    { showUpdatedModal && <Modal customClass={'curved profileSuccessModal'} modalVisible={showUpdatedModal} onHidden={() => setShowUpdatedModal(false)}>
+    { showUpdatedModal && <Modal modalClass={'profileSuccessModal'} customClass={'curved'} modalVisible={showUpdatedModal} onHidden={() => setShowUpdatedModal(false)}>
       <div className="container">
         <p className='text-center my-5'>
           <FormattedMessage

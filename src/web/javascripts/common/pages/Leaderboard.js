@@ -12,11 +12,18 @@ const Leaderboard = () => {
   const isPageMounted = React.useRef(true);
 
   const { state, setLeaderBoardData, getLeaderBoardData } = useLeaderBoard({ isPageMounted });
-  const { leaderboardData, userData, paginationDetails } = state;
+  const {
+    status, leaderboardData, userData, paginationDetails,
+  } = state;
 
-  const disablePrevBtn = paginationDetails.page <= 1;
-  const disableNextBtn = Math.ceil(paginationDetails.overallCount
-    / paginationDetails.countPerPage) === paginationDetails.page;
+  let disablePrevBtn;
+  let disableNextBtn;
+
+  if (status === 'success') {
+    disablePrevBtn = paginationDetails.page <= 1;
+    disableNextBtn = Math.ceil(paginationDetails.overallCount
+      / paginationDetails.countPerPage) === paginationDetails.page;
+  }
 
   // methods
   const previousBtnClickHandler = () => {
@@ -158,7 +165,8 @@ const Leaderboard = () => {
     </footer>
     {
       (state.status === 'access_denied' || !state.status) && <Modal
-        customClass={'curved'}
+      modalClass='errorModal'
+      customClass={'curved'}
         options={{
           keyboard: false,
           backdrop: 'static',

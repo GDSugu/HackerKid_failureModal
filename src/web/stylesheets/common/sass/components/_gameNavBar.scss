@@ -1,0 +1,75 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+
+.game-navbar {
+  background: url(../../../../../images/games/navbg.png) no-repeat 100% / cover;
+
+  @include gm.media-breakpoint-down(md) {
+    background: unset;
+  }
+
+  .flex-start {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flex-end {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .dashboard-nav-link {
+    a {
+      color: gt.theme-var(text-color-2);
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .level-btn {
+    margin-top: 1rem;
+
+    @include gm.media-breakpoint-down(md) {
+      margin-top: 0;
+    }
+
+    img {
+      width: 2rem;
+    }
+
+    p {
+      color: gt.theme-var(text-color-2);
+    }
+  }
+
+  .moreIcon {
+    img {
+      width: 2rem;
+    }
+  }
+
+  .leaderboard-btn {
+    color: gt.theme-var(text-color-2);
+    margin-right: 0.5rem;
+  }
+
+  button {
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .profileImg {
+    margin: 0;
+  }
+}

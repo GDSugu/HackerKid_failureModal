@@ -37,14 +37,14 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   },
 });
 
-const AuthErrorModal = ({ route, navigation }) => {
+const AuthErrorModal = ({ route, handleLoginRoute = () => {} }) => {
   const { font, theme } = React.useContext(ThemeContext);
   const screenTheme = theme[`screen${route.name}`];
   const style = getStyles(screenTheme, theme.utilColors, font);
 
   const [modalVisibility, setModalVisibility] = useState(true);
   return <>
-    <Modal visible={modalVisibility} transparent animationType='slide' >
+    <Modal visible={modalVisibility} transparent >
       <View style={style.errorComponent}>
         <View style={style.errorCard}>
           <Text style={style.errorCardMessageText}>
@@ -55,7 +55,8 @@ const AuthErrorModal = ({ route, navigation }) => {
           </Text>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('Video');
+              // navigation.navigate('Login');
+              handleLoginRoute();
               setModalVisibility(false);
             }} // change to Signup after signup integrated
             style={style.errorCardPrimaryBtn}

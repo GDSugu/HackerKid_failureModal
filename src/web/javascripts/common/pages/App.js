@@ -34,6 +34,8 @@ const RouteLeaderBoard = loadable(() => import('./Leaderboard'), { fallback: <Lo
 const RouteCertificates = loadable(() => import('./Certificates'), { fallback: <Loading /> });
 // const RouteAwards = loadable(() => import('./Awards'), { fallback: <Loading /> });
 // const RouteCollectibles = loadable(() => import('./Collectibles'), { fallback: <Loading /> });
+const RouteTurtle = loadable(() => import('./Turtle'), { fallback: <Loading /> });
+// const RouteSubscription = loadable(() => import('./Subscription'), { fallback: <Loading /> });
 
 const App = () => (
   <BrowserRouter>
@@ -77,6 +79,11 @@ const App = () => (
           <Route path='edit' caseSensitive={true} element={<RouteProfileEdit />} />
           {/* <Route path='subscription' caseSensitive={true} element={<RouteSubscription />} /> */}
         </Route>
+        <Route path='turtle' caseSensitive={true} element={<RouteTurtle />} />
+          <Route path='turtle/:id' element={<RouteTurtle />} />
+            <Route path='turtle/:id/:uniqueString' element={<RouteTurtle />} />
+          {/* </Route> */}
+        {/* </Route> */}
       </Route>
       <Route path='/' caseSensitive={true} element={<AuthNav/>}>
         <Route path='login' caseSensitive={true} element={<RouteLogin />} />

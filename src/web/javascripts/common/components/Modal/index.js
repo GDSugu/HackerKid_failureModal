@@ -6,43 +6,52 @@ import '../../../../stylesheets/common/sass/components/_modal.scss';
 const Modal = ({
   children,
   customClass,
+  modalClass,
   header = <></>,
   options,
   // modalTitle = '',
   onHidden = () => {},
   onShown = () => {},
   modalVisible,
-}) => {
+}, ref) => {
+  const modalRef = React.useRef(null);
+
+  const modalClassSelector = `.${modalClass}`;
+
+  React.useImperativeHandle(ref, () => ({
+    show: () => {
+      $(`#modal${modalClassSelector}`).modal('show');
+    },
+    hide: () => {
+      $(`#modal${modalClassSelector}`).modal('hide');
+    },
+  }));
+
   useEffect(() => {
     if (modalVisible) {
-      $('#modal').modal(options || 'show');
-      $('#modal').on('hidden.bs.modal', onHidden);
-      $('#modal').on('shown.bs.modal', onShown);
+      $(`#modal${modalClassSelector}`).modal(options || 'show');
     } else {
-      $('#modal').modal('hide');
-      $('#modal').off('hidden.bs.modal');
-      $('#modal').off('shown.bs.modal');
+      $(`#modal${modalClassSelector}`).modal('hide');
     }
 
+    $(`#modal${modalClassSelector}`).on('hidden.bs.modal', onHidden);
+    $(`#modal${modalClassSelector}`).on('shown.bs.modal', onShown);
+
     return () => {
-      $('#modal').off('hidden.bs.modal');
-      $('#modal').off('shown.bs.modal');
-      $('#modal').modal('hide');
+      $(`#modal${modalClassSelector}`).off('hidden.bs.modal');
+      $(`#modal${modalClassSelector}`).off('shown.bs.modal');
+      $(`#modal${modalClassSelector}`).modal('hide');
     };
   }, []);
 
   if (modalVisible) {
-    $('#modal').modal(options || 'show');
-    $('#modal').on('hidden.bs.modal', onHidden);
-    $('#modal').on('shown.bs.modal', onShown);
+    $(`#modal${modalClassSelector}`).modal(options || 'show');
   } else {
-    $('#modal').modal('hide');
-    $('#modal').off('hidden.bs.modal');
-    $('#modal').off('shown.bs.modal');
+    $(`#modal${modalClassSelector}`).modal('hide');
   }
 
   return <>
-    <div className={`modal fade ${customClass}`} id="modal" tabIndex="-1" role="dialog" aria-labelledby="errorModal" aria-hidden="true">
+    <div ref={modalRef} className={`modal fade ${modalClass} ${customClass}`} id="modal" tabIndex="-1" role="dialog" aria-labelledby="errorModal" aria-hidden="true">
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
           {/* <div className='modal-header'>
@@ -60,11 +69,13 @@ const Modal = ({
             <div className="d-flex flex-column justify-content-between">
               <div className="d-flex align-items-center justify-content-between modal-custom-header">
                 { header }
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => $(`#modal${modalClassSelector}`).modal('hide')}>
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              { children }
+              <div className='modal-container'>
+                { children }
+              </div>
             </div>
           </div>
         </div>
@@ -73,4 +84,4 @@ const Modal = ({
   </>;
 };
 
-export default Modal;
+export default React.forwardRef(Modal);

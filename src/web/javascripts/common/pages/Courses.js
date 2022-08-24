@@ -3,7 +3,9 @@ import '../../../stylesheets/common/pages/courses/style.scss';
 import { pageInit } from '../framework';
 
 const Courses = () => {
-  pageInit('courses-container', 'Courses');
+  if (window.location.href.includes('courses')) {
+    pageInit('courses-container', 'Courses');
+  }
 
   return <>
   <div>

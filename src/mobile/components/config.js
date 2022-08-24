@@ -36,6 +36,12 @@ const screenWithHeader = {
   viewType: 'screen',
 };
 
+const screenTurtleHeader = {
+  showHeader: false,
+  showNav: false,
+  viewType: 'turtleScreen',
+};
+
 const ScreenSheet = {
   showHeader: false,
   showNav: false,
@@ -133,9 +139,29 @@ const themes = {
       ...Theme.light.screenYellow,
       fragmentIconDisposal,
     },
-    screenTurtle: {
+    screenTurtleHome: {
       ...Theme.light.screenLightBlue,
-      ...fragmentIconDisposal,
+      ...screenTurtleHeader,
+    },
+    screenTurtleMain: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenTurtleQuestion: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenTurtleEditor: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenTurtleOutput: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenTurtleLeaderBoard: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
     },
     screenVideo: {
       ...Theme.light.screenGreen,
@@ -162,9 +188,6 @@ const themes = {
       showHeader: false,
       showNav: false,
       viewType: 'screen',
-    },
-    screenBottomSheet: {
-      ...ScreenSheet,
     },
     screenBottomSheet: {
       ...ScreenSheet,
@@ -261,7 +284,27 @@ const themes = {
       ...Theme.light.screenYellow,
       fragmentIconDisposal,
     },
-    screenTurtle: {
+    screenTurtleHome: {
+      ...Theme.light.screenLightBlue,
+      ...fragmentIconDisposal,
+    },
+    screenTurtleMain: {
+      ...Theme.light.screenLightBlue,
+      ...fragmentIconDisposal,
+    },
+    screenTurtleQuestion: {
+      ...Theme.light.screenLightBlue,
+      ...fragmentIconDisposal,
+    },
+    screenTurtleEditor: {
+      ...Theme.light.screenLightBlue,
+      ...fragmentIconDisposal,
+    },
+    screenTurtleOutput: {
+      ...Theme.light.screenLightBlue,
+      ...fragmentIconDisposal,
+    },
+    screenTurtleLeaderBoard: {
       ...Theme.light.screenLightBlue,
       ...fragmentIconDisposal,
     },
