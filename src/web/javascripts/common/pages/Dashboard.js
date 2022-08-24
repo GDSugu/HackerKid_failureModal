@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { $, loginCheck, pageInit } from '../framework';
 import Img from '../components/Img';
-import SwiperComponent from '../components/SwiperComponent';
+// import SwiperComponent from '../components/SwiperComponent';
 import { useDashboard } from '../../../../hooks/pages/dashboard';
 import { useLeaderBoard } from '../../../../hooks/pages/leaderboard';
 import { useGetChallenges } from '../../../../hooks/pages/challenges';
@@ -307,20 +307,15 @@ const GameContainer = ({
                     <Img src='dashboard/dashboard-turtle.png' />
                   </Link>
                 </div>
-                <div className="col-3">
+                {/* <div className="col-3">
                   <Link className="game-item" to='/zombieland'>
                     <Img src='dashboard/dashboard-zombieLand.png' />
                   </Link>
-                </div>
-                <div className="col-3">
-                  <Link className="game-item" to='/marioland'>
-                    <Img src='dashboard/dashboard-marioLand.png' />
-                  </Link>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="game-btn-block game-progress-block mt-md-1">
-              <button className='btn btn-block'>
+              <Link to='/games' className='btn btn-block'>
                 <div className="d-flex align-items-center justify-content-between">
                   <p>
                     <FormattedMessage
@@ -330,7 +325,7 @@ const GameContainer = ({
                   </p>
                   <i className="fa fa-angle-right" aria-hidden="true"></i>
                 </div>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -339,77 +334,77 @@ const GameContainer = ({
   </div>
 </>;
 
-const ChallengeSwiperSlide = ({ data }) => <>
-  <Link className='challenge-item' to={data.actionUrl}>
-    <div className="challenge-block">
-      <div className="challenge-img">
-        <Img src={data.imgPath} local={false} alt={data.challengeName} />
-      </div>
-      <div className="challenge-title">
-        <p>{data.challengeName || '--'}</p>
-      </div>
-      <div className="challenge-author">
-        <p>{`by ${data.creatorName || '--'}`}</p>
-      </div>
-    </div>
-  </Link>
-  </>;
+// const ChallengeSwiperSlide = ({ data }) => <>
+//   <Link className='challenge-item' to={data.actionUrl}>
+//     <div className="challenge-block">
+//       <div className="challenge-img">
+//         <Img src={data.imgPath} local={false} alt={data.challengeName} />
+//       </div>
+//       <div className="challenge-title">
+//         <p>{data.challengeName || '--'}</p>
+//       </div>
+//       <div className="challenge-author">
+//         <p>{`by ${data.creatorName || '--'}`}</p>
+//       </div>
+//     </div>
+//   </Link>
+//   </>;
 
-const ChallengesSwiper = ({ trendingChallenges }) => <>
-  <div className="dashboard-challenges-container dashboard-body-block">
-    <div className="challenges-heading-container d-flex align-items-end justify-content-between">
-      <p className="block-heading">
-        <FormattedMessage
-          defaultMessage={'Challenges'}
-          description={'challenges heading'}
-        />
-      </p>
-      <Link className='challenges-nav' to='/challenges'>
-        <p>
-          <FormattedMessage
-            defaultMessage={'All Challenges'}
-            description={'all challenges'}
-          />
-        </p>
-      </Link>
-    </div>
-    <div className="challenges-block">
-      <div className="row no-gutters">
-        {
-          trendingChallenges && trendingChallenges.length > 0
-          && <>
-            <SwiperComponent
-              data={trendingChallenges}
-              SlideComponent={ChallengeSwiperSlide}
-              swiperModules={{
-                navigation: true,
-              }}
-              swiperProps={{
-                spaceBetween: 10,
-                slidesPerView: 'auto',
-                className: 'trending-challenges-swiper',
-                grabCursor: true,
-                lazy: true,
-                navigation: true,
-              }} />
-          </>
-        }
-        {
-          !trendingChallenges
-          && <>
-            <div className="skeleton">
-              <div className="d-flex align-items-center skeleton-challenge-container">
-                { [1, 2, 3, 4, 5, 6].map((item, index) => (
-                  <div key={index} className='skeleton-challenge-card'></div>
-                )) }
-              </div>
-            </div>
-          </>
-        }
-      </div>
-    </div>
-  </div>
-</>;
+// const ChallengesSwiper = ({ trendingChallenges }) => <>
+//   <div className="dashboard-challenges-container dashboard-body-block">
+//     <div className="challenges-heading-container d-flex align-items-end justify-content-between">
+//       <p className="block-heading">
+//         <FormattedMessage
+//           defaultMessage={'Challenges'}
+//           description={'challenges heading'}
+//         />
+//       </p>
+//       <Link className='challenges-nav' to='/challenges'>
+//         <p>
+//           <FormattedMessage
+//             defaultMessage={'All Challenges'}
+//             description={'all challenges'}
+//           />
+//         </p>
+//       </Link>
+//     </div>
+//     <div className="challenges-block">
+//       <div className="row no-gutters">
+//         {
+//           trendingChallenges && trendingChallenges.length > 0
+//           && <>
+//             <SwiperComponent
+//               data={trendingChallenges}
+//               SlideComponent={ChallengeSwiperSlide}
+//               swiperModules={{
+//                 navigation: true,
+//               }}
+//               swiperProps={{
+//                 spaceBetween: 10,
+//                 slidesPerView: 'auto',
+//                 className: 'trending-challenges-swiper',
+//                 grabCursor: true,
+//                 lazy: true,
+//                 navigation: true,
+//               }} />
+//           </>
+//         }
+//         {
+//           !trendingChallenges
+//           && <>
+//             <div className="skeleton">
+//               <div className="d-flex align-items-center skeleton-challenge-container">
+//                 { [1, 2, 3, 4, 5, 6].map((item, index) => (
+//                   <div key={index} className='skeleton-challenge-card'></div>
+//                 )) }
+//               </div>
+//             </div>
+//           </>
+//         }
+//       </div>
+//     </div>
+//   </div>
+// </>;
 
 const LeaderBoardCard = ({ leaderboardData, leaderBoardUserData, className }) => <>
   { <>
@@ -481,7 +476,7 @@ const LeaderBoardCard = ({ leaderboardData, leaderBoardUserData, className }) =>
 const HeroComponent = memo(HeroContainer);
 const ProfileComponent = memo(ProfileContainer);
 const GameComponent = memo(GameContainer);
-const ChallengesComponent = memo(ChallengesSwiper);
+// const ChallengesComponent = memo(ChallengesSwiper);
 const LeaderBoardCardComponent = memo(LeaderBoardCard);
 
 const Dashboard = () => {
@@ -511,7 +506,7 @@ const Dashboard = () => {
 
   const {
     status: challengesStatus,
-    trendingChallenges,
+    // trendingChallenges,
   } = getChallengesState;
 
   const modalVisible = [dashboarStatus, leaderboardStatus, challengesStatus].includes('access_denied');
@@ -585,9 +580,9 @@ const Dashboard = () => {
           </div>
           </>
         }
-        <div className="col-12">
+        {/* <div className="col-12">
           <ChallengesComponent trendingChallenges={trendingChallenges} />
-        </div>
+        </div> */}
       </div>
     </div>
     {

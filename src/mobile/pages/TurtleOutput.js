@@ -151,6 +151,7 @@ const TurtleOutput = ({ navigation }) => {
 
   const handlePlayBtn = () => {
     if (!turtleContext.tqState.inDebugging && turtleContext.tqState.snippet) {
+      repositionTurtle();
       runCode();
     } else {
       handleDebugger();
