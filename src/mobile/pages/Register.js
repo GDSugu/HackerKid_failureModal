@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import PhoneInput from 'react-native-phone-number-input';
 import { CommonActions } from '@react-navigation/native';
+import API from '../../../env';
 import ThemeContext from '../components/theme';
 import RegisterFormSvg from '../../images/register/register-form-svg.svg';
 import useRegister from '../../hooks/pages/register/index';
@@ -20,7 +21,8 @@ import { closeFormError, validate } from '../common/framework';
 import useOtp from '../../hooks/pages/otp';
 import VerifyOtpFormStep from '../components/VerifyOtpFormStep';
 import getCommonStyles from '../components/commonStyles';
-import { setUserSession } from '../../hooks/common/framework';
+import Recaptchav3 from '../components/Recaptchav3';
+import Recaptchav2Modal from '../components/Recaptchav2Modal';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   ...getCommonStyles(theme, utilColors, font),
@@ -37,6 +39,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
 const RegisterFormStepOne = ({
   style, getStyleArr, theme, font, stateObj, setStateObj, setBackBtnStateObj, handleStateChange,
   errorStateObj, setError, formErrorStateObj, setFormErrorObj, navigation,
+  recaptchav2Ref, recaptchav3Ref,
 }) => {
   // hooks
   const phoneInput = useRef(null);
@@ -50,6 +53,67 @@ const RegisterFormStepOne = ({
   }, []);
 
   // handlers
+  const sendOtpRequestWithToken = (token, recaptchaVersion) => {
+    const countryCode = `+${phoneInput.current.getCallingCode()}`;
+    const countryAbbrevation = phoneInput.current.getCountryCode();
+
+    sendOtpRequest(stateObj.phoneNumber, countryCode, 'send-otp', token, recaptchaVersion).then((response) => {
+      const data = JSON.parse(response);
+      const { status, message } = data;
+
+      if (status === 'success') {
+        setStateObj((prevObj) => ({
+          ...prevObj,
+          formStep: prevObj.formStep + 1,
+          countryCode,
+          countryAbbrevation,
+        }));
+      } else if (status === 'error') {
+        switch (message) {
+          case 'ACCOUNT_EXIST': {
+            const err = new Error('Account already exists!, try logging in');
+            err.cause = 'postData';
+            err.errorType = 'ACCOUNT_EXIST';
+            err.errorFieldHighlightKey = 'phoneNumber';
+
+            throw err;
+          }
+          case 'UNAUTHORIZED_ACCESS': {
+            recaptchav2Ref.current.showModal();
+            recaptchav2Ref.current.setOnTokenFn(() => sendOtpRequestWithToken);
+
+            break;
+          }
+          default: {
+            const err = new Error('Something went wrong! Try again');
+            err.cause = 'postData';
+            err.errorType = 'ERROR';
+
+            throw err;
+          }
+        }
+      }
+    }).catch((err) => {
+      if (err.cause === 'postData') {
+        if (err.errorFieldHighlightKey) {
+          setError((prevObj) => ({ ...prevObj, [err.errorFieldHighlightKey]: true }));
+        }
+        setFormErrorObj((prevObj) => ({
+          ...prevObj,
+          formError: err.message,
+          formErrorType: err.errorType,
+        }));
+      } else {
+        console.error(err);
+        setFormErrorObj((prevObj) => ({
+          ...prevObj,
+          formError: 'Something went wrong! Try again',
+          formErrorType: 'ERROR',
+        }));
+      }
+    });
+  };
+
   const nextBtnPressHandler = () => {
     const obj = {
       phoneNumber: {
@@ -83,31 +147,10 @@ const RegisterFormStepOne = ({
     });
 
     const allValidationsPassed = checkAllValidations();
+
     if (allValidationsPassed) {
-      const countryCode = `+${phoneInput.current.getCallingCode()}`;
-      const countryAbbrevation = phoneInput.current.getCountryCode();
-
-      sendOtpRequest(stateObj.phoneNumber, countryCode, 'send-otp').then((response) => {
-        const data = JSON.parse(response);
-
-        if (data.status === 'error') {
-          setFormErrorObj({ formError: 'Something went wrong, Try again!', formErrorType: 'ERROR' });
-        }
-
-        if (data.status === 'success') {
-          setStateObj((prevObj) => ({
-            ...prevObj,
-            formStep: prevObj.formStep + 1,
-            countryCode,
-            countryAbbrevation,
-          }));
-        } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
-          setError((prevObj) => ({ ...prevObj, phoneNumber: true }));
-          setFormErrorObj((prevObj) => ({ ...prevObj, formError: 'Account already exists!, try logging in', formErrorType: 'ACCOUNT_EXIST' }));
-        }
-      }).catch((err) => {
-        console.log(err);
-      });
+      recaptchav3Ref.current.generateNewToken();
+      recaptchav3Ref.current.setOnTokenFn(() => sendOtpRequestWithToken);
     }
   };
 
@@ -225,7 +268,7 @@ const RegisterFormStepOne = ({
         {formErrorStateObj.formError
         && <Text style={[style.errorText, style.formError]}>
         {formErrorStateObj.formError}
-      </Text>}
+        </Text>}
       <TouchableOpacity
           style={[style.btnPrimary, style.nextBtn]}
           title="Next"
@@ -255,6 +298,7 @@ const RegisterFormStepThree = ({
   style, getStyleArr, font, theme, stateObj, setStateObj,
   handleStateChange, formErrorStateObj, setFormErrorObj, errorStateObj,
   setError, setBackBtnStateObj, createAccountRequest, navigation,
+  recaptchav2Ref, recaptchav3Ref,
 }) => {
   // hooks
   const [hidePasswordObj, setHidePasswordObj] = useState({
@@ -296,6 +340,38 @@ const RegisterFormStepThree = ({
     }
   };
 
+  const createAccountRequestWithToken = (token, recaptchaVersion) => {
+    createAccountRequest(token, recaptchaVersion).then((response) => {
+      const data = JSON.parse(response);
+      const { status, message } = data;
+
+      if (status === 'error') {
+        switch (message) {
+          case 'UNAUTHORIZED_ACCESS': {
+            recaptchav2Ref.current.showModal();
+            recaptchav2Ref.current.setOnTokenFn(() => createAccountRequestWithToken);
+
+            break;
+          }
+          default: {
+            const err = new Error('Something went wrong! Try again later');
+            err.errorType = 'ERROR';
+            err.cause = 'postData';
+
+            throw err;
+          }
+        }
+      }
+    }).catch((err) => {
+      if (err.cause === 'postData') {
+        setFormErrorObj({ formError: err.message, formErrorType: err.errorType });
+      } else {
+        console.error(err);
+        setFormErrorObj({ formError: 'Something went wrong! Try again', formErrorType: 'ERROR' });
+      }
+    });
+  };
+
   const createAccountBtnPressHandler = (e) => {
     e.preventDefault();
 
@@ -307,26 +383,8 @@ const RegisterFormStepThree = ({
     }
 
     if ((enteredPassword && retypedPassword) && (enteredPassword === retypedPassword)) {
-      createAccountRequest().then((response) => {
-        const data = JSON.parse(response);
-
-        if (data.status === 'success' && data.message === 'REGISTERED') {
-          setUserSession(data.session).then(() => {
-            navigation.dispatch(
-              CommonActions.reset({
-                index: 1,
-                routes: [
-                  { name: 'Start' },
-                ],
-              }),
-            );
-          }).catch((err) => console.log(err));
-        } else if (data.status === 'error') {
-          setFormErrorObj({ formError: 'Something went wrong!Try again later', formErrorType: 'ERROR' });
-        }
-      }).catch((error) => {
-        console.log(error);
-      });
+      recaptchav3Ref.current.generateNewToken();
+      recaptchav3Ref.current.setOnTokenFn(() => createAccountRequestWithToken);
     }
   };
 
@@ -478,6 +536,48 @@ const Register = ({ navigation }) => {
     }
   };
 
+  const recaptchav2Ref = useRef(null);
+  const recaptchav3Ref = useRef(null);
+
+  // common props
+  const commonProps = {
+    style,
+    getStyleArr,
+    theme,
+    font,
+    stateObj,
+    setStateObj,
+    handleStateChange,
+    errorStateObj,
+    setError,
+    setBackBtnStateObj,
+    formErrorStateObj,
+    setFormErrorObj,
+    navigation,
+    recaptchav3Ref,
+    recaptchav2Ref,
+  };
+
+  // elements
+  const loginIntoExistingAccBtn = <TouchableOpacity
+  key={ 0 }
+  style={style.btnOutlinePrimary}
+  title="Login into existing account"
+  onPress={() => {
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [
+          { name: 'Login' },
+        ],
+      }),
+    );
+  }}>
+  <Text style={style.btnOutlinePrimaryText}>
+    <FormattedMessage defaultMessage='Login into existing account' description='Login into existing account button' />
+  </Text>
+  </TouchableOpacity>;
+
   return (
     <ScrollView style={{ flex: 1 }}>
       <View style={style.container}>
@@ -495,68 +595,23 @@ const Register = ({ navigation }) => {
           </View>
           <View style={style.formSvgContainer}>
             <RegisterFormSvg/>
-        </View>
+          </View>
+        <Recaptchav3 ref={recaptchav3Ref} siteKey={API.RECAPCHAV3SITEKEY} domainURL={'https://localhost/'} />
+        <Recaptchav2Modal ref={recaptchav2Ref} siteKey={API.RECAPCHAV2SITEKEY} domainURL={'https://localhost/'} />
         {
           ((stateObj.formStep === 1)
-            && <RegisterFormStepOne
-            style={style}
-            getStyleArr = {getStyleArr}
-            theme={theme}
-            font={font}
-            stateObj={stateObj}
-            setStateObj={setStateObj}
-            setBackBtnStateObj={setBackBtnStateObj}
-            handleStateChange={handleStateChange}
-            errorStateObj={errorStateObj}
-            setError={setError}
-            formErrorStateObj={formErrorStateObj}
-            setFormErrorObj={setFormErrorObj}
-            navigation={navigation}
-            />)
+            && <RegisterFormStepOne {...commonProps} />)
           || ((stateObj.formStep === 2)
             && <VerifyOtpFormStep
-            style={style}
+            {...commonProps}
             parentStateObj={stateObj}
             setParentStateObj={setStateObj}
-            setBackBtnStateObj={setBackBtnStateObj}
-            formErrorStateObj={formErrorStateObj}
-            setFormErrorObj={setFormErrorObj}
-            navigation={navigation}
             otpRequestType={'send-otp'}
-            secondaryActionButtons={[<TouchableOpacity
-              key={ 0 }
-              style={style.btnOutlinePrimary}
-              title="Login into existing account"
-              onPress={() => {
-                navigation.dispatch(
-                  CommonActions.reset({
-                    index: 1,
-                    routes: [
-                      { name: 'Login' },
-                    ],
-                  }),
-                );
-              }}>
-              <Text style={style.btnOutlinePrimaryText}>
-                <FormattedMessage defaultMessage='Login into existing account' description='Login into existing account button' />
-              </Text>
-            </TouchableOpacity>]} />)
+            secondaryActionButtons={[loginIntoExistingAccBtn]} />)
           || ((stateObj.formStep === 3)
           && <RegisterFormStepThree
-          style={style}
-          getStyleArr={getStyleArr}
-          theme={theme}
-          font={font}
-          stateObj={stateObj}
-          setStateObj={setStateObj}
-          handleStateChange = {handleStateChange}
-          formErrorStateObj={formErrorStateObj}
-          setFormErrorObj={setFormErrorObj}
-          errorStateObj={errorStateObj}
-          setError={setError}
-          setBackBtnStateObj={setBackBtnStateObj}
+          {...commonProps}
           createAccountRequest={createAccountRequest}
-          navigation={ navigation}
             />)
         }
         </View>

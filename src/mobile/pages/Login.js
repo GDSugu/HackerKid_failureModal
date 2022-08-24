@@ -16,7 +16,6 @@ import ThemeContext from '../components/theme';
 import LoginFormSvg from '../../images/login/login-form-svg.svg';
 import useLoginMethod from '../../hooks/pages/auth';
 import getCommonStyles from '../components/commonStyles';
-import { setUserSession } from '../../hooks/common/framework';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   ...getCommonStyles(theme, utilColors, font),
@@ -115,13 +114,7 @@ const Login = ({ navigation }) => {
       const countryCode = stateObj.loginMethod === 'loginWithPhone' ? `+${phoneInput.current.getCallingCode()}` : '';
       loginWithPhone(countryCode).then((response) => {
         const data = JSON.parse(response);
-        if (data.status === 'success') {
-          // authContext.setAuthState({
-          //   isLoggedIn: true,
-          //   sessionData: data,
-          // });
-          setUserSession(data);
-        } else if (data.status === 'not-exists') {
+        if (data.status === 'not-exists') {
           setFormErrorObj({ formError: 'You are not registered user', formErrorType: 'NOT_REGISTERED' });
           setError((prevObj) => ({ ...prevObj, phoneNumber: true }));
         } else if (data.status === 'not-valid') {

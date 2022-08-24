@@ -20,3 +20,83 @@
     }
   }
 }
+
+.container {
+  margin: auto;
+  margin-top: 1.5rem;
+}
+
+.all-game-cards {
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.game-card {
+  border-radius: 1rem;
+  cursor: pointer;
+
+  .level-indicator-btn {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    border-radius: 0.75rem;
+    border: none;
+    padding: 4px 8px;
+    color: gt.theme-var(text-color-2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: gt.theme-var(bg-2);
+    background-blend-mode: overlay;
+    backdrop-filter: blur(6px);
+
+    img {
+      width: 30px;
+      height: 30px;
+      margin-right: 0.2rem;
+    }
+  }
+
+  .card-img-top {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+  }
+
+  .game-title {
+    color: gt.theme-var(text-color-2);
+  }
+
+  .card-body {
+    padding: 0.75rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: gt.theme-var(game-card-body-bg, null, $thememaplight, $cssvars);
+  }
+
+  .card-title {
+    margin: 0;
+  }
+
+  .play-btn {
+    margin: 0;
+    outline: none;
+    border: 0;
+    border-radius: 50%;
+    padding: 0.65rem 0.5rem;
+    background: gt.theme-var(bg-1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+    .play-game-icon {
+      width: 22px;
+      height: 20px;
+    }
+  }
+}

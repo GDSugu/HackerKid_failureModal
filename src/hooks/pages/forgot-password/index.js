@@ -9,12 +9,14 @@ const useForgotPassword = () => {
     formStep: 1,
   });
 
-  const changePasswordRequest = () => {
+  const changePasswordRequest = (token, recaptchaVersion) => {
     const postData = {
       type: 'changePassword',
       phone: stateObj.phoneNumber,
       countryCode: stateObj.countryCode,
       password: stateObj.password,
+      token,
+      recaptchaVersion,
     };
 
     return post(postData, 'register/');

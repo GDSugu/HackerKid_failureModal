@@ -10,18 +10,19 @@ import {
 import '../../../stylesheets/common/pages/register/style.scss';
 import useRegister from '../../../../hooks/pages/register';
 import {
-  togglePasswordVisibility, validateInputOnChange, closeFormError,
+  togglePasswordVisibility, validateInputOnChange, closeFormError, setFormErrorField,
 } from '../commonLoginRegisterFunctions';
-import { loginCheck, setUserSession } from '../../../../hooks/common/framework';
-import VerifyOtpFormStep from '../components/VerifyOtpFormStep/VeriyOtpFormStep';
+import { loginCheck } from '../../../../hooks/common/framework';
+import VerifyOtpFormStep from '../components/VerifyOtpFormStep';
 import useOtp from '../../../../hooks/pages/otp';
 import useBackBtn from '../../../../hooks/pages/back-btn';
 import showInlineLoadingSpinner from '../loader';
+import useRecapchav3 from '../../../../hooks/pages/recapchav3';
 
 const manager = {};
 
 const RegisterFormStepOne = ({
-  stateObj, setStateObj, handleStateChange, setBackBtnStateObj,
+  stateObj, setStateObj, handleStateChange, setBackBtnStateObj, getRecapchaToken,
 }) => {
   // hooks
   const { sendOtpRequest } = useOtp();
@@ -30,7 +31,7 @@ const RegisterFormStepOne = ({
     const flaginput = document.querySelector('#phone');
     manager.telInput = intlTelInput(flaginput, {
       allowDropdown: true,
-      initialCountry: 'in',
+      initialCountry: stateObj.countryAbbrevation || 'in',
       separateDialCode: true,
       utilsScript: intlTelInput.utilsScript,
     });
@@ -39,7 +40,7 @@ const RegisterFormStepOne = ({
       ...prevBackObj,
       showBackBtn: false,
     }));
-  }, []);
+  }, [stateObj.formStep]);
 
   // methods
   const nextBtnClickHandler = (e) => {
@@ -66,35 +67,69 @@ const RegisterFormStepOne = ({
       return false;
     });
 
-    const getCurrentCountryCode = () => {
-      let countryCode = manager.telInput.getSelectedCountryData();
-      countryCode = `+${countryCode.dialCode}`;
+    const getCurrentCountryData = () => {
+      const countryData = manager.telInput.getSelectedCountryData();
 
-      return countryCode;
+      return {
+        countryCode: `+${countryData.dialCode}`,
+        countryAbbrevation: countryData.iso2,
+      };
     };
 
     const allValidationsPassed = checkAllValidations();
     if (allValidationsPassed) {
       const hideInlineLoadingSpinner = showInlineLoadingSpinner('.next-btn');
-      const countryCode = getCurrentCountryCode();
+      const { countryCode, countryAbbrevation } = getCurrentCountryData();
 
-      sendOtpRequest(stateObj.phoneNumber, countryCode, 'send-otp').then((response) => {
+      getRecapchaToken({ action: 'register' }).then((token) => sendOtpRequest(stateObj.phoneNumber, countryCode, 'send-otp', token).then((response) => {
         const data = JSON.parse(response);
-        if (data.status === 'success') {
+        const { status, message } = data;
+
+        if (status === 'success') {
           setStateObj((prevObj) => ({
             ...prevObj,
             formStep: prevObj.formStep + 1,
             countryCode,
+            countryAbbrevation,
           }));
-        } else if (data.status === 'error' && data.message === 'ACCOUNT_EXIST') {
-          hideInlineLoadingSpinner();
-          $('#phone').addClass('is-invalid').removeClass('is-valid');
-          $('#form-error').text('Account already exists!, try logging in').attr('data-error-type', data.message).show();
+        } else if (status === 'error') {
+          const errorCause = 'postData';
+
+          switch (message) {
+            case 'ACCOUNT_EXIST': {
+              $('#phone').addClass('is-invalid').removeClass('is-valid');
+              const err = new Error('Account already exists!, try logging in');
+              err.errorTypeObject = { 'data-error-type': 'ACCOUNT_EXIST' };
+              err.cause = errorCause;
+
+              throw err;
+            }
+            case 'UNAUTHORIZED_ACCESS': {
+              const err = new Error('Unauthorized access, reload and try again!');
+              err.errorTypeObject = { 'data-error-type': 'ERROR' };
+              err.cause = errorCause;
+
+              throw err;
+            }
+            default: {
+              const err = new Error('Something went wrong!Try again');
+              err.errorTypeObject = { 'data-error-type': 'ERROR' };
+              err.cause = errorCause;
+
+              throw err;
+            }
+          }
         }
-      }).catch((err) => {
+      })).catch((err) => {
         hideInlineLoadingSpinner();
-        const errData = JSON.parse(err);
-        console.log(errData);
+        if (err.cause === 'postData') {
+          setFormErrorField(err.message, err.errorTypeObject);
+        } else {
+          setFormErrorField('Something went wrong! Try again', { 'data-error-type': 'ERROR' });
+
+          const errData = JSON.parse(err);
+          console.error(errData);
+        }
       });
     }
   };
@@ -116,7 +151,7 @@ const RegisterFormStepOne = ({
           handleStateChange('phoneNumber', e.target.value);
           validateInputOnChange(e);
           closeFormError(e.target);
-        }} data-close-form-error-type='ACCOUNT_EXIST' data-typename='Phone Number'/>
+        }} data-close-form-error-type='ACCOUNT_EXIST,ERROR' data-typename='Phone Number'/>
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -133,7 +168,8 @@ const RegisterFormStepOne = ({
           handleStateChange('email', e.target.value);
           validateInputOnChange(e);
           closeFormError(e.target);
-        }} data-typename='Email Address'/>
+        }} data-typename='Email Address'
+        data-close-form-error-type='ERROR'/>
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -150,7 +186,8 @@ const RegisterFormStepOne = ({
           handleStateChange('fullName', e.target.value, e);
           validateInputOnChange(e);
           closeFormError(e.target);
-        }} data-typename='Full Name'/>
+        }} data-typename='Full Name'
+        data-close-form-error-type='ERROR'/>
       </div>
       <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
@@ -167,7 +204,8 @@ const RegisterFormStepOne = ({
           handleStateChange('parentName', e.target.value, e);
           validateInputOnChange(e);
           closeFormError(e.target);
-        }} data-typename="Parent's Name" />
+        }} data-typename="Parent's Name"
+        data-close-form-error-type='ERROR'/>
       </div>
       <p className='form-error text-danger overline-bold text-center' id='form-error'></p>
       <div className='take-action-buttons mt-4'>
@@ -192,7 +230,7 @@ const RegisterFormStepOne = ({
 };
 
 const RegisterFormStepThree = ({
-  createAccountRequest, handleStateChange, setStateObj, setBackBtnStateObj,
+  createAccountRequest, handleStateChange, setStateObj, setBackBtnStateObj, getRecapchaToken,
 }) => {
   // hooks
   useEffect(() => {
@@ -241,20 +279,41 @@ const RegisterFormStepThree = ({
     if ((enteredPassword && retypedPassword) && (enteredPassword === retypedPassword)) {
       const hideInlineLoadingSpinner = showInlineLoadingSpinner('.create-account-btn');
 
-      createAccountRequest().then((response) => {
+      getRecapchaToken({ action: 'register' }).then((token) => createAccountRequest(token).then((response) => {
         const data = JSON.parse(response);
+        const { status, message } = data;
 
-        if (data.status === 'success' && data.message === 'REGISTERED') {
-          const sessionDetails = data.session;
-          setUserSession(sessionDetails);
+        if (status === 'success') {
           pathNavigator('dashboard');
-        } else if (data.status === 'error') {
-          hideInlineLoadingSpinner();
+        } else if (status === 'error') {
+          const errorCause = 'postData';
+          switch (message) {
+            case 'UNAUTHORIZED_ACCESS': {
+              const err = new Error('Unauthorized access, reload and try again!');
+              err.errorTypeObject = { 'data-error-type': 'ERROR' };
+              err.cause = errorCause;
+
+              throw err;
+            }
+            default: {
+              const err = new Error('Something went wrong! Try again', errorCause);
+              err.errorTypeObject = { 'data-error-type': 'ERROR' };
+              err.cause = errorCause;
+
+              throw err;
+            }
+          }
         }
-      }).catch((error) => {
+      })).catch((err) => {
         hideInlineLoadingSpinner();
-        const errData = JSON.parse(error);
-        console.log(errData);
+
+        if (err.cause === 'postData') {
+          setFormErrorField(err.message, err.errorTypeObject);
+        } else {
+          setFormErrorField('Something went wrong! Try again');
+
+          console.error(err);
+        }
       });
     }
   };
@@ -276,7 +335,7 @@ const RegisterFormStepThree = ({
             handleStateChange('password', e.target.value);
             validateInputOnChange(e, 'password', 'Use a stronger password');
             closeFormError(e.target);
-          }} data-close-form-error-type='INVALID_PASSWORD' required={ true} data-typename='Password' />
+          }} data-close-form-error-type='ERROR,INVALID_PASSWORD' required={ true} data-typename='Password' />
           <span className="password-toggle-icon-container">
             <i className="fa fa-fw fa-eye toggle-password" toggle="#password" onClick={togglePasswordVisibility}></i>
           </span>
@@ -299,7 +358,7 @@ const RegisterFormStepThree = ({
             validateInputOnChange(e, 'password', 'Use a stronger password');
             closeFormError(e.target);
             matchValueTo(e, '#password');
-          }} data-close-form-error-type='INVALID_PASSWORD' required={ true} data-typename='Re-type Password'/>
+          }} data-close-form-error-type='ERROR,INVALID_PASSWORD' required={true} data-typename='Re-type Password'/>
           <span className="password-toggle-icon-container">
             <i className="fa fa-fw fa-eye toggle-password" toggle="#retyped-password" onClick={togglePasswordVisibility}></i>
           </span>
@@ -323,6 +382,7 @@ const Register = () => {
   // hooks
   const { stateObj, setStateObj, createAccountRequest } = useRegister();
   const { stateObj: backBtnStateObj, setStateObj: setBackBtnStateObj } = useBackBtn();
+  const getRecapchaToken = useRecapchav3();
 
   useEffect(() => {
     loginCheck().then((response) => {
@@ -346,6 +406,14 @@ const Register = () => {
     }));
   };
 
+  const commonProps = {
+    stateObj,
+    setStateObj,
+    handleStateChange,
+    setBackBtnStateObj,
+    getRecapchaToken,
+  };
+
   return (
     <>
       <div className='form-container'>
@@ -363,18 +431,15 @@ const Register = () => {
           <img src='../../../../images/register/register-form-svg.svg' className='form-svg' />
           {
             ((stateObj.formStep === 1)
-              && <RegisterFormStepOne
-              stateObj={stateObj}
-              setStateObj={setStateObj}
-              handleStateChange={handleStateChange}
-              setBackBtnStateObj={setBackBtnStateObj}
-            />)
+              && <RegisterFormStepOne {...commonProps} />)
             || ((stateObj.formStep === 2)
               && <VerifyOtpFormStep
               parentStateObj={stateObj}
               setParentStateObj={setStateObj}
               setBackBtnStateObj={setBackBtnStateObj}
               otpRequestType={'send-otp'}
+              getRecapchaToken = {getRecapchaToken}
+              recapchaExecuteOptions = {{ action: 'register' }}
               secondaryActionButtons={[<Link key={0} to='/login' className='login-into-existing-account-btn text-link mt-3'>
               <span className='overline-bold'>
                 <FormattedMessage
@@ -386,11 +451,8 @@ const Register = () => {
                />)
             || ((stateObj.formStep === 3)
               && <RegisterFormStepThree
-              stateObj={stateObj}
-              setStateObj={setStateObj}
+              {...commonProps}
               createAccountRequest={createAccountRequest}
-              handleStateChange={handleStateChange}
-              setBackBtnStateObj={setBackBtnStateObj}
                />)
           }
         </form>

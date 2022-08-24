@@ -16,7 +16,7 @@ import getCommonStyles from '../commonStyles';
 
 const VerifyOtpFormStep = ({
   parentStateObj, setParentStateObj, setBackBtnStateObj, formErrorStateObj,
-  setFormErrorObj, navigation, otpRequestType,
+  setFormErrorObj, navigation, otpRequestType, recaptchav2Ref, recaptchav3Ref,
   secondaryActionButtons = false, additionalStyles = false,
 }) => {
   // hooks
@@ -125,22 +125,29 @@ const VerifyOtpFormStep = ({
     }));
   };
 
+  const sendOtpRequestWithToken = (token, recaptchaVersion) => {
+    sendOtpRequest(parentStateObj.phoneNumber,
+      parentStateObj.countryCode,
+      otpRequestType, token, recaptchaVersion).then((response) => {
+      const data = JSON.parse(response);
+
+      if (data.status === 'success') {
+        startOtpTimer();
+      } else if (data.status === 'error' && data.message === 'UNAUTHORIZED_ACCESS') {
+        recaptchav2Ref.current.showModal();
+        recaptchav2Ref.current.setOnTokenFn(() => sendOtpRequestWithToken);
+      } else if (data.status === 'error') {
+        setFormErrorObj((prevObj) => ({ ...prevObj, formError: 'Something went wrong! Try again', formErrorType: 'ERROR' }));
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
+
   const resendOtpPressHandler = () => {
     if (stateObj.otpTimerId === null) {
-      sendOtpRequest(parentStateObj.phoneNumber,
-        parentStateObj.countryCode,
-        otpRequestType).then((response) => {
-        const data = JSON.parse(response);
-
-        if (data.status === 'error') {
-          setFormErrorObj((prevObj) => ({ ...prevObj, formError: 'Something went wrong! Try again', formErrorType: 'ERROR' }));
-        }
-        if (data.status === 'success') {
-          startOtpTimer();
-        }
-      }).catch((err) => {
-        console.log(err);
-      });
+      recaptchav3Ref.current.generateNewToken();
+      recaptchav3Ref.current.setOnTokenFn(() => sendOtpRequestWithToken);
     }
   };
 
@@ -214,6 +221,51 @@ const VerifyOtpFormStep = ({
     }
   };
 
+  const verifyOtpRequestWithToken = (token, recaptchaVersion) => {
+    verifyOtpRequest(parentStateObj.phoneNumber,
+      parentStateObj.countryCode, token, recaptchaVersion).then((response) => {
+      const data = JSON.parse(response);
+      const { status, message } = data;
+
+      if (status === 'success') {
+        setParentStateObj((prevObj) => ({
+          ...prevObj,
+          formStep: prevObj.formStep + 1,
+        }));
+      } else if (status === 'error') {
+        switch (message) {
+          case 'OTP_EXPIRED': {
+            const err = new Error('Enter a valid OTP');
+            err.cause = 'postData';
+            err.errorType = 'OTP_EXPIRED';
+
+            throw err;
+          }
+          case 'UNAUTHORIZED_ACCESS': {
+            recaptchav2Ref.current.showModal();
+            recaptchav2Ref.current.setOnTokenFn(() => verifyOtpRequestWithToken);
+
+            break;
+          }
+          default: {
+            const err = new Error('Something went wrong! Try again');
+            err.cause = 'postData';
+            err.errorType = 'ERROR';
+
+            throw err;
+          }
+        }
+      }
+    }).catch((err) => {
+      if (err.cause === 'postData') {
+        setFormErrorObj({ formError: err.message, formErrorType: err.errorType });
+      } else {
+        setFormErrorObj({ formError: 'Something went wrong! Try again', formErrorType: 'ERROR' });
+        console.error(err);
+      }
+    });
+  };
+
   const verifyBtnPressHandler = () => {
     const { enteredOtpArr } = stateObj;
 
@@ -223,27 +275,10 @@ const VerifyOtpFormStep = ({
         formError: 'Enter a OTP to proceed',
         formErrorType: 'OTP_EXPIRED',
       }));
-      return;
     }
 
-    verifyOtpRequest(parentStateObj.phoneNumber, parentStateObj.countryCode).then((response) => {
-      const data = JSON.parse(response);
-
-      if (data.status === 'error') {
-        setFormErrorObj({ formError: 'Something went wrong! Try again later', formErrorType: 'ERROR' });
-      }
-      if (data.status === 'success') {
-        setParentStateObj((prevObj) => ({
-          ...prevObj,
-          formStep: prevObj.formStep + 1,
-        }));
-      } else if (data.status === 'error' && data.message === 'OTP_EXPIRED') {
-        setFormErrorObj({ formError: 'Enter a valid OTP', formErrorType: 'OTP_EXPIRED' });
-      }
-    }).catch((err) => {
-      const errData = JSON.parse(err);
-      console.log(errData);
-    });
+    recaptchav3Ref.current.generateNewToken();
+    recaptchav3Ref.current.setOnTokenFn(() => verifyOtpRequestWithToken);
   };
 
   useEffect(() => {
@@ -278,6 +313,7 @@ const VerifyOtpFormStep = ({
     };
   }, []);
 
+  // side effect to move to next step if all otp fields are filled
   useEffect(() => {
     if (stateObj.enteredOtpArr.join('').length === 4) {
       verifyBtnPressHandler();
@@ -363,12 +399,12 @@ const VerifyOtpFormStep = ({
             () => setParentStateObj((prevObj) => ({ ...prevObj, formStep: prevObj.formStep - 1 }))
           }>
             <Text style={style.btnAsInteractiveText}>
-              <FormattedMessage
-                defaultMessage='Not {phone} ?'
-                description="not button"
-                values={{
-                  phone: parentStateObj.phoneNumber,
-                }}
+            <FormattedMessage
+              defaultMessage='Not {phone} ?'
+              description="not button"
+              values={{
+                phone: `${parentStateObj.countryCode}${parentStateObj.phoneNumber}`,
+              }}
               />
             </Text>
         </TouchableOpacity>

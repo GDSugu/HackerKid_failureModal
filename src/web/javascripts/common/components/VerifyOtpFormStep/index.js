@@ -8,8 +8,8 @@ import '../../../../stylesheets/common/sass/components/_otp.scss';
 import showInlineLoadingSpinner from '../../loader';
 
 const VerifyOtpFormStep = ({
-  parentStateObj, setParentStateObj, setBackBtnStateObj, otpRequestType,
-  secondaryActionButtons = false,
+  parentStateObj, setParentStateObj, setBackBtnStateObj, otpRequestType, recapchaExecuteOptions,
+  getRecapchaToken, secondaryActionButtons = false,
 }) => {
   // hooks
   const {
@@ -50,16 +50,44 @@ const VerifyOtpFormStep = ({
   const resendOtpClickHandler = () => {
     $('.resend-otp').hide();
     if (stateObj.otpTimerId === null) {
-      sendOtpRequest(parentStateObj.phoneNumber,
-        parentStateObj.countryCode,
-        otpRequestType).then((response) => {
-        const data = JSON.parse(response);
-        if (data.status === 'success') {
-          startOtpTimer();
-        }
-      }).catch((err) => {
-        console.log(err);
-      });
+      getRecapchaToken(recapchaExecuteOptions)
+        .then((token) => sendOtpRequest(parentStateObj.phoneNumber,
+          parentStateObj.countryCode,
+          otpRequestType, token).then((response) => {
+          const data = JSON.parse(response);
+          const { status, message } = data;
+
+          if (status === 'success') {
+            startOtpTimer();
+          } else if (status === 'error') {
+            const errorCause = 'postData';
+            const errorTypeObject = { 'data-error-type': 'ERROR' };
+
+            switch (message) {
+              case 'UNAUTHORIZED _ACCESS': {
+                const err = new Error('Unauthorized access, reload and try again');
+                err.errorTypeObject = errorTypeObject;
+                err.cause = errorCause;
+
+                throw err;
+              }
+              default: {
+                const err = new Error('Something went wrong! Try again');
+                err.errorTypeObject = errorTypeObject;
+                err.cause = errorCause;
+
+                throw err;
+              }
+            }
+          }
+        })).catch((err) => {
+          if (err.cause === 'postData') {
+            setFormErrorField(err.message, err.errorTypeObject);
+          } else {
+            setFormErrorField('Something went wrong! Try again', { 'data-error-type': 'ERROR' });
+            console.error(err);
+          }
+        });
     }
   };
 
@@ -136,23 +164,54 @@ const VerifyOtpFormStep = ({
     }
 
     const hideInlineLoadingSpinner = showInlineLoadingSpinner('.verify-otp-btn');
-    verifyOtpRequest(parentStateObj.phoneNumber,
-      parentStateObj.countryCode).then((response) => {
-      const data = JSON.parse(response);
-      if (data.status === 'success') {
-        setParentStateObj((prevObj) => ({
-          ...prevObj,
-          formStep: prevObj.formStep + 1,
-        }));
-      } else if (data.status === 'error' && data.message === 'OTP_EXPIRED') {
+
+    getRecapchaToken(recapchaExecuteOptions)
+      .then((token) => verifyOtpRequest(parentStateObj.phoneNumber,
+        parentStateObj.countryCode, token).then((response) => {
+        const data = JSON.parse(response);
+        const { status, message } = data;
+
+        if (status === 'success') {
+          setParentStateObj((prevObj) => ({
+            ...prevObj,
+            formStep: prevObj.formStep + 1,
+          }));
+        } else if (status === 'error') {
+          const errorCause = 'postData';
+          switch (message) {
+            case 'OTP_EXPIRED': {
+              const err = new Error('Enter a valid OTP');
+              err.errorTypeObject = { 'data-error-type': message };
+              err.cause = errorCause;
+
+              throw err;
+            }
+            case 'UNAUTHORIZED _ACCESS': {
+              const err = new Error('Unauthorized access, reload and try again');
+              err.errorTypeObject = { 'data-error-type': 'ERROR' };
+              err.cause = errorCause;
+
+              throw err;
+            }
+            default: {
+              const err = new Error('Something went wrong! Try again');
+              err.errorTypeObject = { 'data-error-type': 'ERROR' };
+              err.cause = errorCause;
+
+              throw err;
+            }
+          }
+        }
+      })).catch((err) => {
         hideInlineLoadingSpinner();
-        setFormErrorField('Enter a valid OTP', { 'data-error-type': data.message });
-      }
-    }).catch((err) => {
-      hideInlineLoadingSpinner();
-      const errData = JSON.parse(err);
-      console.log(errData);
-    });
+        if (err.cause === 'postData') {
+          setFormErrorField(err.message, err.errorTypeObject);
+        } else {
+          setFormErrorField('Something went wrong! Try again', { 'data-error-type': 'ERROR' });
+
+          console.error(err);
+        }
+      });
   };
 
   useEffect(() => {
@@ -190,19 +249,19 @@ const VerifyOtpFormStep = ({
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
             onChangeHandler(e, 0);
             closeFormError(e.target);
-          }} data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler}/>
+          }} data-close-form-error-type='ERROR,OTP_EXPIRED' onKeyUp={keyUpHandler}/>
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
             onChangeHandler(e, 1);
             closeFormError(e.target);
-          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} />
+          } } data-close-form-error-type='ERROR,OTP_EXPIRED' onKeyUp={keyUpHandler} />
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
             onChangeHandler(e, 2);
             closeFormError(e.target);
-          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler} />
+          } } data-close-form-error-type='ERROR,OTP_EXPIRED' onKeyUp={keyUpHandler} />
           <input type='text' className='form-control' maxLength={1} onChange={(e) => {
             onChangeHandler(e, 3);
             closeFormError(e.target);
-          } } data-close-form-error-type='OTP_EXPIRED' onKeyUp={keyUpHandler}/>
+          } } data-close-form-error-type='ERROR,OTP_EXPIRED' onKeyUp={keyUpHandler}/>
         </div>
         <Link to='#' className='not-given-number overline-bold text-link' onClick={() => setParentStateObj((prevObj) => ({
           ...prevObj,
@@ -212,7 +271,7 @@ const VerifyOtpFormStep = ({
             defaultMessage='Not {phone} ?'
             description="not button"
             values={{
-              phone: parentStateObj.phoneNumber,
+              phone: `${parentStateObj.countryCode}${parentStateObj.phoneNumber}`,
             }}
           />
         </Link>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import post, { logout } from '../../common/framework';
+import post, { logout, setUserSession } from '../../common/framework';
 import getPlatform from '../../common/utlis';
 import { AuthContext } from '../root';
 
@@ -43,9 +43,11 @@ const useLoginMethod = () => {
       .then((response) => {
         const data = JSON.parse(response);
         if (data.status === 'success') {
-          authContext.setAuthState({
-            isLoggedIn: true,
-            sessionData: data,
+          setUserSession(data).then(() => {
+            authContext.setAuthState({
+              isLoggedIn: true,
+              sessionData: data,
+            });
           });
         }
         return response;

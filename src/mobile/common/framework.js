@@ -102,7 +102,9 @@ const openMail = (email) => {
     .catch((err) => console.error('An error occurred', err));
 };
 
-module.exports = {
+export default null;
+
+export {
   openDialer,
   openMail,
   mobAddAnalyticsEvent,

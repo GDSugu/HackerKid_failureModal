@@ -210,6 +210,25 @@ const validate = (id, type, required = 1, warnId = false, warnMsg = false,
   return data;
 };
 
+const loadScriptByURL = (id, url, async = false, defer = false, onload = false) => {
+  const isScriptExist = document.getElementById(id);
+
+  if (!isScriptExist) {
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = url;
+    script.id = id;
+    script.async = async;
+    script.defer = defer;
+    script.onload = () => {
+      if (onload) onload();
+    };
+    document.body.appendChild(script);
+  }
+
+  if (isScriptExist && onload) onload();
+};
+
 const getQueryString = (query) => {
   const search = new URLSearchParams(document.location.search.substring(1));
   return search.get(query);
@@ -362,4 +381,5 @@ export {
   updatePoints,
   debounce,
   getShareMarkup,
+  loadScriptByURL,
 };

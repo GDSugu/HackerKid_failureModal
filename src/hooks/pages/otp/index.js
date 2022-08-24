@@ -7,22 +7,26 @@ const useOtp = () => {
     enteredOtpArr: ['', '', '', ''],
   });
 
-  const sendOtpRequest = (phoneNumber, countryCode, type) => {
+  const sendOtpRequest = (phoneNumber, countryCode, type, token, recaptchaVersion) => {
     const postData = {
       type,
       phone: phoneNumber,
       countryCode,
+      token,
+      recaptchaVersion: Number.toString(recaptchaVersion),
     };
 
     return post(postData, 'register/', false, false);
   };
 
-  const verifyOtpRequest = (phoneNumber, countryCode) => {
+  const verifyOtpRequest = (phoneNumber, countryCode, token, recaptchaVersion) => {
     const postData = {
       type: 'verify-otp',
       phone: phoneNumber,
       countryCode,
       otp: stateObj.enteredOtpArr.join(''),
+      token,
+      recaptchaVersion: Number.toString(recaptchaVersion),
     };
 
     return post(postData, 'register/');

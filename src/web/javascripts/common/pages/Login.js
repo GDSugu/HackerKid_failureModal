@@ -13,7 +13,7 @@ import {
 } from '../framework';
 import '../../../stylesheets/common/pages/login/style.scss';
 import useLoginMethod from '../../../../hooks/pages/auth';
-import { setUserSession, loginCheck } from '../../../../hooks/common/framework';
+import { loginCheck } from '../../../../hooks/common/framework';
 import showInlineLoadingSpinner from '../loader';
 
 const manager = {};
@@ -87,9 +87,7 @@ const Login = () => {
         }
 
         if (data.status === 'success') {
-          setUserSession(data).then(() => {
-            pathNavigator('dashboard');
-          });
+          pathNavigator('dashboard');
         } else if (data.status === 'not-exists') {
           setFormErrorField('You are not a registered user', { 'data-error-type': 'NOT_REGISTERED' });
           $('#phone').addClass('is-invalid').removeClass('is-valid');
