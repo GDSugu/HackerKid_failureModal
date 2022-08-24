@@ -127,44 +127,47 @@ const TurtleHomeComponent = ({ changeRoute }) => {
 const TurtleQuestionComponent = ({ status, questionObject }) => <>
   <div className="turtle-question-container">
     <div className="turtle-question-block">
-      <div className="turtle-title-block">
-        <p className="turtle-question-title">
-          <FormattedMessage
-            defaultMessage={'Problem Statement'}
-            description={'Problem statement title'}
-          />
-        </p>
-      </div>
       {
         status === 'success'
-        && <div className="turtle-question-content">
-        <p className='turtle-question'>
-          <FormattedMessage
-            defaultMessage={'{question}'}
-            description={'Question'}
-            values={{ question: questionObject.Question }}
-          />
-        </p>
-        <div className="turtle-question-instructions">
-          <p className='turtle-question-instructions-title'>
+        && <>
+          <div className="turtle-title-block">
+            <p className="turtle-question-title">
+              <FormattedMessage
+                defaultMessage={'{question}'}
+                description={'Question'}
+                values={{ question: questionObject.Question }}
+              />
+            </p>
+          </div>
+          <div className="turtle-question-content">
+          {/* <p className='turtle-question'>
             <FormattedMessage
-              defaultMessage={'Instructions'}
-              description={'Instructions title'}
+              defaultMessage={'{question}'}
+              description={'Question'}
+              values={{ question: questionObject.Question }}
             />
-          </p>
-          <ul>
-            {
-              questionObject.steps.map((step, index) => <li key={index}>
-                  <FormattedMessage
-                    defaultMessage={'{step}'}
-                    description={'turtle instruction'}
-                    values={{ step: (step[step.length - 1] === '.') ? step.slice(0, -1) : step }}
-                  />
-                </li>)
-            }
-          </ul>
+          </p> */}
+          <div className="turtle-question-instructions">
+            {/* <p className='turtle-question-instructions-title'>
+              <FormattedMessage
+                defaultMessage={'Instructions'}
+                description={'Instructions title'}
+              />
+            </p> */}
+            <ul className='list-unstyled'>
+              {
+                questionObject.steps.map((step, index) => <li key={index}>
+                    <FormattedMessage
+                      defaultMessage={'{step}'}
+                      description={'turtle instruction'}
+                      values={{ step: (step[step.length - 1] === '.') ? step.slice(0, -1) : step }}
+                    />
+                  </li>)
+              }
+            </ul>
+          </div>
         </div>
-      </div>
+        </>
       }
     </div>
     <div className="turtle-exoup-block">
@@ -186,18 +189,21 @@ const TurtleQuestionComponent = ({ status, questionObject }) => <>
 const TurtleMobQuestionComponent = ({ status, questionObject }) => <>
   <div className="turtle-mob-question-container">
     <div className="turtle-mob-question-block">
-      <p className='turtle-question-header'>
-        <FormattedMessage
-          defaultMessage={'Problem Statement'}
-          description={'Problem statement title'}
-        />
-      </p>
-      <div className="turtle-question-card">
         {
           status === 'success'
           && <>
+          <p className='turtle-question-header'>
+            <FormattedMessage
+              defaultMessage={'{question}'}
+              description={'Question'}
+              values={{
+                question: questionObject.Question,
+              }}
+            />
+          </p>
+          <div className="turtle-question-card">
             <div className="turtle-question-content">
-              <p className="turtle-question-title">
+              {/* <p className="turtle-question-title">
                 <FormattedMessage
                   defaultMessage={'{question}'}
                   description={'Question'}
@@ -205,15 +211,15 @@ const TurtleMobQuestionComponent = ({ status, questionObject }) => <>
                     question: questionObject.Question,
                   }}
                 />
-              </p>
+              </p> */}
               <div className="turtle-question-instructions">
-                <p className='turtle-question-instructions-title'>
+                {/* <p className='turtle-question-instructions-title'>
                   <FormattedMessage
                     defaultMessage={'Instructions'}
                     description={'Instructions title'}
                   />
-                </p>
-                <ul>
+                </p> */}
+                <ul className='list-unstyled'>
                   {
                     questionObject.steps.map((step, index) => <li key={index}>
                         <FormattedMessage
@@ -226,9 +232,9 @@ const TurtleMobQuestionComponent = ({ status, questionObject }) => <>
                 </ul>
               </div>
             </div>
+          </div>
           </>
         }
-      </div>
     </div>
     <div className="turtle-mob-output-block">
       <button type='button' className='d-flex align-items-center justify-content-between' data-toggle="collapse" data-target="#expOupCollapse" aria-expanded="true" aria-controls='expOupCollapse'>
@@ -622,6 +628,26 @@ const TurtleMobComponent = ({
             <div id="userCanvas"></div>
             <div id="answerCanvas"></div>
           </div>
+          <div className="mob-runBtnContainer">
+            <button id='runCode' className='btn runBtn' onClick={() => { console.log('runcode'); handleRunCode(); }}>
+              <p className='mb-0'>
+                <FormattedMessage
+                  defaultMessage={'Play'}
+                  description={'Play button'}
+                />
+              </p>
+              <i className="fas fa-play"></i>
+            </button>
+            <button id='continueDebugger' className='btn runBtn'>
+              <p className='mb-0'>
+                <FormattedMessage
+                  defaultMessage={'Continue'}
+                  description={'Continue button'}
+                />
+              </p>
+              <i className="fas fa-play"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -820,6 +846,10 @@ const TurtleGameComponent = () => {
       $('#loader').hide();
       startTurtle({ response: turtleQuestionState });
     }
+
+    $('#question-tab').on('shown.bs.tab', () => {
+      repositionTurtle('#expOutCanvas', '.turtle-qnout-container');
+    });
 
     $('#output-tab').on('shown.bs.tab', () => {
       repositionTurtle('#answerCanvas', '.outputContainer');

@@ -167,12 +167,6 @@
       "value": "label"
     }
   ],
-  "4Op8zY": [
-    {
-      "type": 0,
-      "value": "Problem Statement"
-    }
-  ],
   "4Ve1r3": [
     {
       "type": 0,
@@ -537,6 +531,12 @@
       "value": "OTP"
     }
   ],
+  "KD6lRu": [
+    {
+      "type": 0,
+      "value": "Continue"
+    }
+  ],
   "LCt8qV": [
     {
       "type": 0,
@@ -813,6 +813,12 @@
       "value": "Awesome!"
     }
   ],
+  "WSWTC5": [
+    {
+      "type": 0,
+      "value": "Play"
+    }
+  ],
   "X1rCRf": [
     {
       "type": 0,
@@ -889,12 +895,6 @@
     {
       "type": 0,
       "value": "Later"
-    }
-  ],
-  "c8cENG": [
-    {
-      "type": 0,
-      "value": "Share"
     }
   ],
   "c9n6Sh": [
@@ -985,12 +985,6 @@
     {
       "type": 0,
       "value": "Send OTP"
-    }
-  ],
-  "hWyGja": [
-    {
-      "type": 0,
-      "value": "Instructions"
     }
   ],
   "hjOcJT": [

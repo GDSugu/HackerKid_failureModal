@@ -56,8 +56,8 @@ const AuthErrorModal = ({ route, handleLoginRoute = () => {} }) => {
           <TouchableOpacity
             onPress={() => {
               // navigation.navigate('Login');
-              setModalVisibility(false);
               handleLoginRoute();
+              setModalVisibility(false);
             }} // change to Signup after signup integrated
             style={style.errorCardPrimaryBtn}
           >

@@ -157,7 +157,7 @@ const TurtleQuestion = ({ navigation }) => {
     setTimeout(() => {
       renderTurtle();
       repositionTurtle();
-    }, 100);
+    }, 500);
   }, [turtleContext.tqState.questionObject]);
 
   return <>

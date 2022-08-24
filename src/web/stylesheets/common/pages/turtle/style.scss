@@ -401,9 +401,8 @@
               grid-template-rows: 50% 50%;
 
               .turtle-mob-question-block {
-                height: 95%;
+                height: 100%;
                 overflow: hidden;
-                margin-bottom: 1rem;
 
                 .turtle-question-header,
                 .turtle-question-title,
@@ -413,6 +412,7 @@
 
                 .turtle-question-header {
                   color: gt.theme-var(text-color-2);
+                  margin-bottom: 0;
                 }
 
                 .turtle-question-card {
@@ -533,6 +533,30 @@
                   width: 100%;
                   height: 100%;
                   position: absolute;
+                }
+              }
+
+              .mob-runBtnContainer {
+                position: absolute;
+                width: 95%;
+                margin: auto;
+                left: 50%;
+                transform: translate(-50%, -125%);
+                z-index: 100;
+
+                button {
+                  background-color: gt.theme-var(game-btn-bg, null, $thememaplight, $cssvars);
+                  border-radius: 0.5rem;
+                  width: 100%;
+                  color: gt.theme-var(text-color-2);
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  padding: 0.5rem;
+
+                  p {
+                    font-weight: bold;
+                  }
                 }
               }
             }

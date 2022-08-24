@@ -110,10 +110,6 @@
     "defaultMessage": "{label}",
     "description": "{description}"
   },
-  "4Op8zY": {
-    "defaultMessage": "Problem Statement",
-    "description": "Problem statement title"
-  },
   "4Ve1r3": {
     "defaultMessage": "Ok",
     "description": "confirm btn"
@@ -345,6 +341,10 @@
     "defaultMessage": "OTP",
     "description": "OTP label"
   },
+  "KD6lRu": {
+    "defaultMessage": "Continue",
+    "description": "Continue button"
+  },
   "LCt8qV": {
     "defaultMessage": "Share",
     "description": "Share Button"
@@ -529,6 +529,10 @@
     "defaultMessage": "Awesome!",
     "description": "modal title"
   },
+  "WSWTC5": {
+    "defaultMessage": "Play",
+    "description": "Play button"
+  },
   "X1rCRf": {
     "defaultMessage": "Login into existing account",
     "description": "login into existing account button"
@@ -580,10 +584,6 @@
   "byK6c0": {
     "defaultMessage": "Later",
     "description": "Later"
-  },
-  "c8cENG": {
-    "defaultMessage": "Share",
-    "description": "Turtle Output Share Button"
   },
   "c9n6Sh": {
     "defaultMessage": "School"
@@ -643,10 +643,6 @@
   "hJpqIn": {
     "defaultMessage": "Send OTP",
     "description": "send otp button"
-  },
-  "hWyGja": {
-    "defaultMessage": "Instructions",
-    "description": "Instructions title"
   },
   "hjOcJT": {
     "defaultMessage": "Go to Turtle",

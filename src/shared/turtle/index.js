@@ -306,6 +306,7 @@ const useSharedTurtleWebView = () => {
         try {
           const { action, data } = payload;
           if (action === 'renderTurtle') {
+            managerObj.resetDebugger();
             managerObj.runCode(data.snippet, data.canvas, true, 3, 0)
             .then(() => {
               const currentSelector = $('#' + data.canvas)[0];

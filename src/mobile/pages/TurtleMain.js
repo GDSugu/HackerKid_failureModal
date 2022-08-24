@@ -288,7 +288,6 @@ const TurtleMain = () => {
     },
   } = useTurtleFetchQuestion({
     isPageMounted,
-    virtualid: 3,
   });
 
   const handleHintVisibility = (visibility) => setGameScreen((prevState) => ({

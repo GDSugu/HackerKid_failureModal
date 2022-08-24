@@ -4,14 +4,17 @@ import {
   StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { enableScreens } from 'react-native-screens';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import TurtleHeader from '../Header/TurtleHeader';
 import ThemeContext from '../theme';
 import levelIcon from '../../../images/games/levelStar.png';
 import hintIcon from '../../../images/games/hint.png';
-import gameMenuIcon from '../../../images/games/gameMenu.png';
+// import gameMenuIcon from '../../../images/games/gameMenu.png';
 import { TurtleContext } from '../../../hooks/pages/turtle';
+
+enableScreens();
 
 const getStyle = (font, utilColors = {}) => StyleSheet.create({
   tabBar: {
@@ -152,7 +155,8 @@ const GameBottomTabBar = (props) => {
 };
 
 const GameHeader = ({
-  currentScreen, font, gradients, utilColors,
+  // currentScreen,
+  font, gradients, utilColors,
 }) => {
   const style = getStyle(font, utilColors);
   const turtleContext = useContext(TurtleContext);
@@ -170,8 +174,9 @@ const GameHeader = ({
       <View style={style.row}>
         {/* { currentScreen !== 'TurtleOutput' */}
           <Animatable.View
-              animation={currentScreen !== 'TurtleOutput' ? 'fadeInUp' : 'fadeOutDown'}
-              duration={currentScreen !== 'TurtleOutput' ? 500 : 1250}
+              // animation={currentScreen !== 'TurtleOutput' ? 'fadeInUp' : 'fadeOutDown'}
+              // duration={currentScreen !== 'TurtleOutput' ? 500 : 1250}
+              animation='fadeInRight'
             >
               <TouchableOpacity
                 style={style.mr12}
@@ -185,13 +190,13 @@ const GameHeader = ({
               </TouchableOpacity>
             </Animatable.View>
           {/* : <></> */}
-        <TouchableOpacity style={style.mh4}>
+        {/* <TouchableOpacity style={style.mh4}>
           <Image
             source={gameMenuIcon}
             resizeMode='contain'
             style={style.tabHeaderIcon}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </LinearGradient>
   </>;

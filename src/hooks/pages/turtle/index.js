@@ -56,6 +56,7 @@ const useTurtleFetchQuestion = ({
                 setTurtleQuestionInfo({
                   ...parsedResponse,
                   validated: false,
+                  fetchType: type,
                 });
               } else {
                 setTurtleQuestionInfo((prevState) => ({

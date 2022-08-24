@@ -133,8 +133,6 @@ const repositionTurtle = (targetSelector = '#answerCanvas', parentSelector = '.o
   }
 };
 
-window.repositionTurtle = repositionTurtle;
-
 const updateDebugState = () => {
   try {
     const debugButton = $('#continueDebugger, .continueDebugger');
@@ -168,7 +166,6 @@ const updateSeoTags = (parsedResponse) => {
 
 const toggleDebugState = () => {
   try {
-    console.log('debuggler state');
     const buttonEl = $('.debugToggle');
     const iconEl = $('.debugToggle i');
     if (!manager.debuggingEnabled) {
