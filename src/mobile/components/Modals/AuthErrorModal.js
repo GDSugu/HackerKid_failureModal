@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
   Dimensions, Modal, StyleSheet, Text, TouchableOpacity, View,
@@ -42,14 +42,19 @@ const AuthErrorModal = ({ route, handleLoginRoute = () => {} }) => {
   const screenTheme = theme[`screen${route.name}`];
   const style = getStyles(screenTheme, theme.utilColors, font);
 
-  const [modalVisibility, setModalVisibility] = useState(true);
   return <>
-    <Modal visible={modalVisibility} transparent >
+    <Modal visible={true} transparent >
       <View style={style.errorComponent}>
         <View style={style.errorCard}>
           <Text style={style.errorCardMessageText}>
             <FormattedMessage
-              defaultMessage='You are not authorized to access this page.'
+              defaultMessage='Session expired'
+              description='Not authorized message'
+            />
+          </Text>
+          <Text style={style.errorCardMessageText} >
+            <FormattedMessage
+              defaultMessage='Please login again'
               description='Not authorized message'
             />
           </Text>
@@ -57,7 +62,7 @@ const AuthErrorModal = ({ route, handleLoginRoute = () => {} }) => {
             onPress={() => {
               // navigation.navigate('Login');
               handleLoginRoute();
-              setModalVisibility(false);
+              // setModalVisibility(false);
             }} // change to Signup after signup integrated
             style={style.errorCardPrimaryBtn}
           >

@@ -977,18 +977,16 @@ const Index = ({ route, navigation }) => {
   };
 
   const handleLoginRoute = () => {
-    authContext.setAuthState((prevState) => ({
-      ...prevState,
+    authContext.setAuthState({
       isLoggedIn: false,
-    }));
+    });
   };
 
   if (authContext.appData.isReferesh) {
     onRefresh();
-    authContext.setAuthState((prevState) => ({
-      ...prevState,
+    authContext.setAuthState({
       isReferesh: false,
-    }));
+    });
   }
 
   React.useEffect(() => {
