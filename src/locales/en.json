@@ -521,13 +521,13 @@
     "defaultMessage": "Login into existing account",
     "description": "login into existing account button"
   },
+  "XQ/d5T": {
+    "defaultMessage": "Please login again",
+    "description": "Not authorized message"
+  },
   "Y+dh5z": {
     "defaultMessage": "Edit Profile",
     "description": "Home card menu"
-  },
-  "YImSKa": {
-    "defaultMessage": "You are not authorized to access this page.",
-    "description": "Not authorized message"
   },
   "YxMMzC": {
     "defaultMessage": "All Games",
@@ -671,6 +671,10 @@
   "mDpOZM": {
     "defaultMessage": "OTP",
     "description": "OTP Label"
+  },
+  "mTY3Hn": {
+    "defaultMessage": "Session expired",
+    "description": "Not authorized message"
   },
   "mm9QaY": {
     "defaultMessage": "School",
