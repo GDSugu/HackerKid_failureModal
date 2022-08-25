@@ -63,15 +63,27 @@
           width: 5rem;
           height: 5rem;
           left: 15%;
-          transform: translateX(50%);
+          transform: translateX(65%);
 
           @include gm.media-breakpoint-up(xxl) {
             width: 8rem;
             height: 8rem;
           }
 
+          @include gm.media-breakpoint-up (xxxl) {
+            transform: translateX(50%);
+          }
+
+          @include gm.media-breakpoint-down(xxl) {
+            transform: translateX(65%);
+          }
+
+          @include gm.media-breakpoint-down(xl) {
+            transform: translateX(60%);
+          }
+
           @include gm.media-breakpoint-down(lg) {
-            transform: translateX(75%);
+            transform: translateX(65%);
           }
 
           @include gm.media-breakpoint-down(sm) {
@@ -87,15 +99,49 @@
         }
 
         .hero-card-data-content {
-          display: flex;
+          display: inline-flex;
           justify-content: center;
-          width: 70%;
+          width: fit-content;
           margin-top: 0.5rem;
+          position: relative;
+          left: 15%;
+          transform: translateX(65%);
+
+          @include gm.media-breakpoint-down(xxxl) {
+            left: 0;
+            transform: translateX(50%);
+          }
+
+          @include gm.media-breakpoint-down(xxl) {
+            left: 15%;
+            transform: translateX(65%);
+          }
+
+          @include gm.media-breakpoint-down(xl) {
+            left: 15%;
+            transform: translateX(10%);
+          }
+
+          @include gm.media-breakpoint-down(lg) {
+            left: 15%;
+            transform: translateX(25%);
+          }
+
+          @include gm.media-breakpoint-down(sm) {
+            left: 0;
+            // transform: translate(30%, 20%);
+            transform: translateX(10%);
+          }
+
+          @include gm.media-breakpoint-down(xs) {
+            left: 0;
+            transform: translateX(15%);
+          }
 
           .hero-data {
             display: flex;
             align-items: center;
-            margin-left: 0.75rem;
+            // margin-left: 0.75rem;
 
             p {
               font-size: 1.125rem;
