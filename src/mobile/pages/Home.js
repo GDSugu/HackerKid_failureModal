@@ -1055,6 +1055,33 @@ const Index = ({ route, navigation }) => {
             navigation={navigation}
             style={style} />
           }
+            {
+            leaderboardData
+            && <LeaderBoardComponent
+            leaderboardData={leaderboardData}
+            leaderBoardUserData={leaderBoardUserData}
+            bottomSheetRef={bottomSheetRef}
+            navigation={navigation}
+            style={style} />
+          }
+            {
+            leaderboardData
+            && <LeaderBoardComponent
+            leaderboardData={leaderboardData}
+            leaderBoardUserData={leaderBoardUserData}
+            bottomSheetRef={bottomSheetRef}
+            navigation={navigation}
+            style={style} />
+          }
+            {
+            leaderboardData
+            && <LeaderBoardComponent
+            leaderboardData={leaderboardData}
+            leaderBoardUserData={leaderBoardUserData}
+            bottomSheetRef={bottomSheetRef}
+            navigation={navigation}
+            style={style} />
+          }
         </ScrollView>
       </BottomSheet>
     </>

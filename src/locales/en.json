@@ -7,10 +7,6 @@
     "defaultMessage": "Logout",
     "description": "more menu button"
   },
-  "/EsQT0": {
-    "defaultMessage": "This is games page",
-    "description": "Games Page"
-  },
   "/Gy7qZ": {
     "defaultMessage": "Level {levelNumber}",
     "description": "Level indicator"
@@ -82,6 +78,9 @@
     "defaultMessage": "Login with Phone",
     "description": "Login with Phone tab"
   },
+  "36lS9W": {
+    "defaultMessage": "Level {currentLevelNumber}"
+  },
   "3Wcqsy": {
     "defaultMessage": "Next",
     "description": "Next button"
@@ -125,6 +124,10 @@
   "7L3+7M": {
     "defaultMessage": "Login into existing account",
     "description": "Login into existing account button"
+  },
+  "7asVcm": {
+    "defaultMessage": "Games",
+    "description": "games page heading"
   },
   "9BVOVU": {
     "defaultMessage": "Please verify to continue",
@@ -257,6 +260,10 @@
     "defaultMessage": "Call",
     "description": "Call Button Title"
   },
+  "IUTGvr": {
+    "defaultMessage": "{totalEarnedCoins}",
+    "description": "level text"
+  },
   "IV0q/o": {
     "defaultMessage": "Help",
     "description": "Help modal title"
@@ -276,6 +283,14 @@
   "JnwRMJ": {
     "defaultMessage": "OTP",
     "description": "OTP label"
+  },
+  "KmxQM/": {
+    "defaultMessage": "All Games",
+    "description": "All games heading"
+  },
+  "LdJ4cq": {
+    "defaultMessage": "{gameTitle}",
+    "description": "game title"
   },
   "MB8h2I": {
     "defaultMessage": "Leaderboard Ranking",
@@ -304,6 +319,10 @@
   "O1sXEv": {
     "defaultMessage": "Collections",
     "description": "collectibles modal title"
+  },
+  "OCOrF9": {
+    "defaultMessage": "More Info",
+    "description": "More info button"
   },
   "OdODwS": {
     "defaultMessage": "Create Account",
@@ -337,6 +356,10 @@
     "defaultMessage": "Re-type Password",
     "description": "Re-type Password label"
   },
+  "S7vsku": {
+    "defaultMessage": "Recommended",
+    "description": "Recommended games heading"
+  },
   "SL6O2c": {
     "defaultMessage": "Password",
     "description": "Password label"
@@ -344,6 +367,10 @@
   "SpftNg": {
     "defaultMessage": "{errorMessage}",
     "description": "phoneNumber form helper"
+  },
+  "SqEb74": {
+    "defaultMessage": "PLAY",
+    "description": "play text"
   },
   "TS73XZ": {
     "defaultMessage": "Change password",
@@ -552,6 +579,10 @@
     "defaultMessage": "Account Settings",
     "description": "account settings CTA"
   },
+  "pl4ED2": {
+    "defaultMessage": "Continue Playing",
+    "description": "Continue playing heading"
+  },
   "pwy4hs": {
     "defaultMessage": "Game Progress",
     "description": "Game Progress card heading"
@@ -586,6 +617,10 @@
   "tsF0aG": {
     "defaultMessage": "Continue Playing",
     "description": "continue playing"
+  },
+  "tvsAww": {
+    "defaultMessage": "{levelText}",
+    "description": "level text"
   },
   "uhayi4": {
     "defaultMessage": "{errorMessage}",

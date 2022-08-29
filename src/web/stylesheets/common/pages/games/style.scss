@@ -48,8 +48,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: gt.theme-var(bg-2);
-    background-blend-mode: overlay;
+    background: gt.theme-var(game-level-indicator-btn-bg, null, $thememaplight, $cssvars);
     backdrop-filter: blur(6px);
 
     img {
