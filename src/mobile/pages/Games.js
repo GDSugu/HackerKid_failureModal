@@ -804,7 +804,7 @@ const Games = ({ navigation }) => {
     gameTitle: 'Turtle',
     gameCoverImage: turtleGameCover,
     currentLevelNumber: dashBoardData?.turtle?.currentQuestionDetails
-      ? dashBoardData?.turtle?.currentQuestionDetails?.virtualId : 0,
+      ? dashBoardData.turtle.currentQuestionDetails.virtualId : 0,
     totalLevels: dashBoardData?.turtle?.overAllQuestionCount,
     totalEarnedCoins: dashBoardData?.turtle?.totalPointsEarned,
     onPress: () => { navigation.navigate('TurtleHome'); },
@@ -813,7 +813,7 @@ const Games = ({ navigation }) => {
     gameTitle: 'Zombieland',
     gameCoverImage: zombieLandGameCover,
     currentLevelNumber: dashBoardData?.zombieLand?.currentQuestionDetails
-      ? dashBoardData?.zombieLand.currentQuestionDetails?.virtualId : 0,
+      ? dashBoardData.zombieLand.currentQuestionDetails.virtualId : 0,
     totalLevels: dashBoardData?.zombieLand?.overAllQuestionCount,
     totalEarnedCoins: dashBoardData?.zombieLand?.totalPointsEarned,
     onPress: () => { },
@@ -822,7 +822,7 @@ const Games = ({ navigation }) => {
     gameTitle: 'Webkata-HTML',
     gameCoverImage: webkataHtmlGameCover,
     currentLevelNumber: dashBoardData?.webkataHtml?.currentQuestionDetails
-      ? dashBoardData?.webkataHtml.currentQuestionDetails?.virtualId : 0,
+      ? dashBoardData.webkataHtml.currentQuestionDetails.virtualId : 0,
     totalLevels: dashBoardData?.webkataHtml?.overAllQuestionCount,
     totalEarnedCoins: dashBoardData?.webkataHtml?.totalPointsEarned,
     onPress: () => { },
@@ -906,10 +906,6 @@ const Games = ({ navigation }) => {
       gameProgressValue.removeAllListeners();
     };
   }, []);
-
-  useEffect(() => {
-    console.log('games page authContext', authContext);
-  }, [authContext]);
 
   return (
     <>
