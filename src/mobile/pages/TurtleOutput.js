@@ -4,9 +4,6 @@ import {
   StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
 import WebView from 'react-native-webview';
-// import {
-//   Svg, Path,
-// } from 'react-native-svg';
 import md5 from 'crypto-js/md5';
 import { TurtleContext } from '../../hooks/pages/turtle';
 import { useSharedTurtleWebView } from '../../shared/turtle';
@@ -17,24 +14,27 @@ import Icon from '../common/Icons';
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
     flex: 1,
-    // width: Dimensions.get('window').width,
   },
   btnContainer: {
+    width: '90%',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
+    alignSelf: 'center',
     backgroundColor: 'transparent',
     position: 'absolute',
-    bottom: 0,
+    bottom: 2,
   },
   outputBtn: {
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignContent: 'center',
-    borderRadius: 6,
-    padding: 12,
+    alignSelf: 'center',
+    borderRadius: 12,
+    padding: 16,
     margin: 6,
-    flex: 1,
+    // flex: 1,
     borderColor: theme.btnBg,
     borderWidth: 1,
   },
@@ -69,6 +69,10 @@ const TurtleOutput = ({ navigation }) => {
     },
   } = useSharedTurtleWebView();
   let webViewString = '';
+
+  const manager = {
+    isFirstRender: true,
+  };
 
   webViewString = webViewElement({
     BodyComponent: BodyContent,
@@ -150,11 +154,13 @@ const TurtleOutput = ({ navigation }) => {
   };
 
   const handlePlayBtn = () => {
-    if (!turtleContext.tqState.inDebugging && turtleContext.tqState.snippet) {
-      repositionTurtle();
-      runCode();
-    } else {
-      handleDebugger();
+    if (turtleContext.tqState.snippet && turtleContext.tqState.snippet.split('\n').filter((line) => line !== '').length > 1) {
+      if (!turtleContext.tqState.inDebugging) {
+        repositionTurtle();
+        runCode();
+      } else {
+        handleDebugger();
+      }
     }
   };
 
@@ -222,7 +228,11 @@ const TurtleOutput = ({ navigation }) => {
   };
 
   React.useEffect(() => {
-    setTimeout(handlePlayBtn, 300);
+    if (!manager.isFirstRender) {
+      setTimeout(handlePlayBtn, 300);
+    } else {
+      manager.isFirstRender = false;
+    }
   }, [turtleContext.tqState.snippet]);
 
   React.useEffect(() => {

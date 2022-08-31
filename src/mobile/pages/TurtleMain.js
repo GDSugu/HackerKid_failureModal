@@ -282,6 +282,7 @@ const TurtleMain = () => {
     state: turtleQuestionState,
     setState: setTurtleQuestionState,
     static: {
+      fetchTurtleQuestion,
       getNextQuestion,
       loadHints,
       submitTurtle,
@@ -335,6 +336,7 @@ const TurtleMain = () => {
             tqState: turtleQuestionState,
             tqSetState: setTurtleQuestionState,
             handleHintVisibility,
+            fetchTurtleQuestion,
             getNextQuestion,
             submitTurtle,
           }}>

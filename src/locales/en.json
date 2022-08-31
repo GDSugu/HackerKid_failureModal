@@ -11,6 +11,14 @@
     "defaultMessage": "Logout",
     "description": "more menu button"
   },
+  "+lsuwj": {
+    "defaultMessage": "Try now",
+    "description": "Continue Playing button"
+  },
+  "/EsQT0": {
+    "defaultMessage": "This is games page",
+    "description": "Games Page"
+  },
   "/Gy7qZ": {
     "defaultMessage": "Level {levelNumber}",
     "description": "Level indicator"
@@ -401,6 +409,10 @@
     "defaultMessage": "Are you sure you want to logout?",
     "description": "logout prompt message"
   },
+  "NgQ5Hl": {
+    "defaultMessage": "Continue Playing",
+    "description": "Continue Playing button"
+  },
   "Nn5oAD": {
     "defaultMessage": "Go to login",
     "description": "Go to login button"
@@ -412,6 +424,10 @@
   "O1sXEv": {
     "defaultMessage": "Collections",
     "description": "collectibles modal title"
+  },
+  "OJUwxk": {
+    "defaultMessage": "Continue Playing",
+    "description": "Continue Playing Button"
   },
   "OWSL0r": {
     "defaultMessage": "Register",
@@ -440,6 +456,10 @@
   "PcqGYQ": {
     "defaultMessage": "Playground",
     "description": "Playground tab"
+  },
+  "Px7S/2": {
+    "defaultMessage": "Close",
+    "description": "Close button"
   },
   "Qb0n8J": {
     "defaultMessage": "Are you sure you want to logout?",
@@ -831,6 +851,10 @@
     "defaultMessage": "Logout",
     "description": "Logout Button"
   },
+  "sXlZLv": {
+    "defaultMessage": "Levels",
+    "description": "Game Level"
+  },
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
@@ -879,6 +903,10 @@
     "defaultMessage": "Help",
     "description": "Help CTA"
   },
+  "x13dma": {
+    "defaultMessage": "{level}",
+    "description": "Level"
+  },
   "x1EHNZ": {
     "defaultMessage": "Share",
     "description": "Share message"
@@ -894,6 +922,10 @@
   "xW6DFp": {
     "defaultMessage": "Videos",
     "description": "videos nav text"
+  },
+  "xXEsL7": {
+    "defaultMessage": "{level}",
+    "description": "Level Button"
   },
   "xlvJ5U": {
     "defaultMessage": "You are offline.",

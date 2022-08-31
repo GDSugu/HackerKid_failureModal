@@ -57,7 +57,7 @@ const TurtleHeader = () => {
         <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
           <ImgComponent
             style={style.profileImg}
-            url={authContext.sessionData.profileLink}
+            url={authContext?.sessionData?.profileLink || authContext?.sessionData?.profileImage}
             fallback={profileImg}
           />
         </TouchableOpacity>

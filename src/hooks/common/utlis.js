@@ -18,8 +18,32 @@ const getDevice = () => {
   return device;
 };
 
+const throttle = (fn, delay) => {
+  let lastCall = 0;
+  return ((...args) => {
+    const now = new Date().getTime();
+    if (now - lastCall < delay) {
+      return;
+    }
+    lastCall = now;
+    fn(...args);
+  })();
+};
+
+const debounce = (fn, delay) => {
+  let timer;
+  return ((...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn(...args);
+    }, delay);
+  })();
+};
+
 export default getPlatform;
 
 export {
+  debounce,
+  throttle,
   getDevice,
 };
