@@ -5,16 +5,19 @@ const ImgComponent = ({
   url, fallback, style, resizeMethod, resizeMode,
 }) => {
   const [img, setImg] = React.useState(fallback);
-  if (url) {
-    fetch(url)
-      .then((res) => {
-        if (res.status === '200') {
-          setImg({
-            uri: url,
-          });
-        }
-      });
-  }
+
+  React.useEffect(() => {
+    if (url) {
+      fetch(url)
+        .then((res) => {
+          if (res.status === 200) {
+            setImg({
+              uri: url,
+            });
+          }
+        });
+    }
+  }, []);
 
   return <>
     <Image

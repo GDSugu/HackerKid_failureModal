@@ -8,13 +8,17 @@ import 'blockly/python';
 import Blockly from './turtleBlocks';
 import Sk from '../../../vendors/skulpt/skulpt.min';
 import '../../../vendors/skulpt/skulpt-stdlib';
+import { throttle } from '../../../../../hooks/common/utlis';
 import {
   upsertDescription, upsertFBMeta, upsertTitle, upsertTwitterMeta,
 } from '../../seo';
 
 const manager = {
   windowType: 'desktop',
-  canvasScale: 1.0,
+  canvasScale: {
+    qnCanvas: 1.0,
+    outputCanvas: 1.0,
+  },
   drawingVisible: true,
   debuggingEnabled: false,
   inDebugging: false,
@@ -112,19 +116,20 @@ const initializeBlockly = (response) => {
   }
 };
 
-const repositionTurtle = (targetSelector = '#answerCanvas', parentSelector = '.outputContainer') => {
+const repositionTurtle = (targetSelector = '#answerCanvas', parentSelector = '.outputContainer', canvas = 'output' || 'question') => {
   try {
     const container = $(parentSelector);
     const content = $(targetSelector);
+    const canvasScale = canvas === 'answer' ? manager.canvasScale.outputCanvas : manager.canvasScale.qnCanvas;
     container.scrollLeft(
       (
-        (content[0].scrollWidth * manager.canvasScale)
+        (content[0].scrollWidth * canvasScale)
         - container.width()
       ) * 0.50,
     );
     container.scrollTop(
       (
-        (content[0].scrollHeight * manager.canvasScale)
+        (content[0].scrollHeight * canvasScale)
         - container.height()
       ) * 0.50,
     );
@@ -547,46 +552,53 @@ const attachFullScreenHandler = () => {
   }
 };
 
-const updateZoomState = (disableZoomIn, disableZoomOut) => {
-  try {
-    const zoomInEl = $('.zoomIn');
-    const zoomOutEl = $('.zoomOut');
-    zoomInEl.attr('disabled', disableZoomIn);
-    zoomOutEl.attr('disabled', disableZoomOut);
-  } catch (error) {
-    console.log(error);
-  }
-};
+// const updateZoomState = (disableZoomIn, disableZoomOut) => {
+//   try {
+//     const zoomInEl = $('.zoomIn');
+//     const zoomOutEl = $('.zoomOut');
+//     zoomInEl.attr('disabled', disableZoomIn);
+//     zoomOutEl.attr('disabled', disableZoomOut);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 const attachZoomControls = () => {
   try {
-    const maxScale = 1.3;
+    const maxScale = 1.1;
     const minScale = 0.2;
     const scaleStep = 0.1;
 
-    const zoomCanvas = (e) => {
+    const zoomCanvas = (e, canvas = 'output' || 'question') => {
       const delta = e.originalEvent.deltaY;
+      const canvasKey = canvas === 'output' ? 'outputCanvas' : 'questionCanvas';
       if (delta > 0) {
-        if (manager.canvasScale > minScale) {
-          manager.canvasScale = Number((manager.canvasScale - scaleStep).toFixed(1));
+        if (manager.canvasScale[canvasKey] > minScale) {
+          manager
+            .canvasScale[canvasKey] = Number((manager.canvasScale[canvasKey] - scaleStep)
+              .toFixed(1));
         }
       } else if (delta <= 0) {
-        if (manager.canvasScale < maxScale) {
-          manager.canvasScale = Number((manager.canvasScale + scaleStep).toFixed(1));
+        if (manager.canvasScale[canvasKey] < maxScale) {
+          manager
+            .canvasScale[canvasKey] = Number((manager.canvasScale[canvasKey] + scaleStep)
+              .toFixed(1));
         }
       }
     };
 
     $('.outputContainer').on('wheel', (e) => {
       e.preventDefault();
-      zoomCanvas(e);
-      $('#answerCanvas, #userCanvas').css('transform', `scale(${manager.canvasScale})`);
+      // zoomCanvas(e);
+      throttle(() => { zoomCanvas(e, 'output'); }, 300);
+      $('#answerCanvas, #userCanvas').css('transform', `scale(${manager.canvasScale.outputCanvas})`);
     });
 
     $('.turtle-qnout-container').on('wheel', (e) => {
       e.preventDefault();
-      zoomCanvas(e);
-      $('#expOutCanvas').css('transform', `scale(${manager.canvasScale})`);
+      // zoomCanvas(e);
+      throttle(() => { zoomCanvas(e, 'question'); }, 300);
+      $('#expOutCanvas').css('transform', `scale(${manager.canvasScale.qnCanvas})`);
     });
 
     // $(document).on('click', '.zoom-control', (event) => {
@@ -602,7 +614,7 @@ const attachZoomControls = () => {
     //   repositionTurtle();
     // });
     // initialState
-    updateZoomState(manager.canvasScale === maxScale, manager.canvasScale === minScale);
+    // updateZoomState(manager.canvasScale === maxScale, manager.canvasScale === minScale);
   } catch (error) {
     console.log(error);
   }
@@ -675,7 +687,8 @@ const attachResizeHandler = () => {
   });
 
   $(document).on('click', '.repositionDrawing', () => {
-    repositionTurtle();
+    repositionTurtle('#answerCanvas', '.outputContainer');
+    repositionTurtle('#expOutCanvas', '.turtle-qnout-container');
   });
 };
 
@@ -714,6 +727,7 @@ const startTurtle = ({ response }) => {
 export default null;
 
 export {
+  attachDragHandler,
   copyHandler,
   toggleDrawingState,
   repositionTurtle,

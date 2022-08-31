@@ -17,6 +17,12 @@
       "value": "Logout"
     }
   ],
+  "+lsuwj": [
+    {
+      "type": 0,
+      "value": "Try now"
+    }
+  ],
   "/EsQT0": [
     {
       "type": 0,
@@ -543,6 +549,12 @@
       "value": "Are you sure you want to logout?"
     }
   ],
+  "NgQ5Hl": [
+    {
+      "type": 0,
+      "value": "Continue Playing"
+    }
+  ],
   "Nn5oAD": [
     {
       "type": 0,
@@ -553,6 +565,12 @@
     {
       "type": 0,
       "value": "Collections"
+    }
+  ],
+  "OJUwxk": [
+    {
+      "type": 0,
+      "value": "Continue Playing"
     }
   ],
   "OWSL0r": [
@@ -595,6 +613,12 @@
     {
       "type": 0,
       "value": "Playground"
+    }
+  ],
+  "Px7S/2": [
+    {
+      "type": 0,
+      "value": "Close"
     }
   ],
   "Qb0n8J": [
@@ -1135,6 +1159,12 @@
       "value": "Logout"
     }
   ],
+  "sXlZLv": [
+    {
+      "type": 0,
+      "value": "Levels"
+    }
+  ],
   "swkU6w": [
     {
       "type": 0,
@@ -1189,6 +1219,12 @@
       "value": "Help"
     }
   ],
+  "x13dma": [
+    {
+      "type": 1,
+      "value": "level"
+    }
+  ],
   "x1EHNZ": [
     {
       "type": 0,
@@ -1211,6 +1247,12 @@
     {
       "type": 0,
       "value": "Videos"
+    }
+  ],
+  "xXEsL7": [
+    {
+      "type": 1,
+      "value": "level"
     }
   ],
   "xlvJ5U": [
