@@ -12,6 +12,7 @@ import {
   repositionTurtle, runSkulpt, startTurtle, toggleDebugState, toggleDrawingState,
 } from '../Functions/turtle';
 import useRootPageState from '../../../../hooks/pages/root';
+import GameLevelComponent from '../components/GameLevelComponent';
 
 const resizeHandler = (nav = 'nav', selector) => {
   try {
@@ -40,21 +41,20 @@ const TurtleHomeComponent = ({ changeRoute }) => {
   pageInit('turtle-home-container', 'Turtle');
 
   React.useEffect(() => {
-    document.querySelector('nav:first-child').style.display = 'none';
-    window.addEventListener('resize', () => resizeHandler('nav.turtle-navbar', '.turtle-frame'));
+    window.addEventListener('resize', () => resizeHandler('nav', '.turtle-frame'));
     const resizeTimeout = setTimeout(() => {
-      resizeHandler('nav.turtle-navbar', '.turtle-frame');
+      resizeHandler('nav', '.turtle-frame');
     }, 300);
 
     return () => clearTimeout(resizeTimeout);
   }, []);
 
   return <>
-  <TurtleNavBar
+  {/* <TurtleNavBar
     // questionState={memoizedTurtleQuestionState}
     // handleHint={handleHint}
     isTurtleMainPage={false}
-  />
+  /> */}
     <div className="turtle-frame">
       <div className="turtle-card">
         <div className="card-container">
@@ -251,6 +251,20 @@ const TurtleMobQuestionComponent = ({ status, questionObject }) => <>
           <div id="expOutCanvas"></div>
         </div>
       </div>
+    </div>
+    <div className="turtle-mob-hero-btn-block">
+      <button type='button' className='btn d-flex align-items-center justify-content-between' onClick={() => { $('#output-tab').tab('show'); }}>
+        <p>
+          <FormattedMessage
+            defaultMessage={'Try now'}
+            description={'Continue Playing button'}
+          />
+        </p>
+        <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 30L12.064 35.936C11.4033 36.5965 10.5617 37.0463 9.6454 37.2285C8.72913 37.4107 7.77941 37.3172 6.9163 36.9597C6.0532 36.6022 5.31546 35.9968 4.79637 35.2201C4.27729 34.4434 4.00015 33.5302 4 32.596V30L6.714 16.432C7.07649 14.6184 8.05612 12.9865 9.48623 11.8138C10.9163 10.6412 12.7086 10.0002 14.558 10H33.442C35.2914 10.0002 37.0837 10.6412 38.5138 11.8138C39.9439 12.9865 40.9235 14.6184 41.286 16.432L44 30V32.594C43.9999 33.5282 43.7227 34.4414 43.2036 35.2181C42.6845 35.9948 41.9468 36.6002 41.0837 36.9577C40.2206 37.3152 39.2709 37.4087 38.3546 37.2265C37.4383 37.0443 36.5967 36.5945 35.936 35.934L30 30H18Z" stroke="#FFFFFF" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M18 10L20 14H28L30 10" stroke="#FFFFFF" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </button>
     </div>
   </div>
 </>;
@@ -732,13 +746,16 @@ const TurtleGameComponent = () => {
   const isPageMounted = React.useRef(true);
   const successModalRef = React.useRef();
   const successModalComponentRef = React.useRef();
+  const levelComponentRef = React.useRef();
 
   const { id } = useParams();
 
   const {
     state: turtleQuestionState,
     setState: setTurtleQuestionState,
-    static: { getNextQuestion, loadHints, submitTurtle },
+    static: {
+      fetchTurtleQuestion, getNextQuestion, loadHints, submitTurtle,
+    },
   } = useTurtleFetchQuestion({ isPageMounted, virtualid: id });
   const {
     status, questionObject, validated, validationDetails,
@@ -746,6 +763,8 @@ const TurtleGameComponent = () => {
 
   const memoizedTurtleQuestionState = React.useMemo(() => turtleQuestionState,
     [turtleQuestionState]);
+
+  const showLevel = () => levelComponentRef.current.show();
 
   const handleRunCode = () => {
     let validation;
@@ -784,6 +803,18 @@ const TurtleGameComponent = () => {
   const handleNextQuestion = () => {
     $('#loader').show();
     getNextQuestion()
+      .then(() => {
+        $('#loader').hide();
+        successModalRef.current.hide();
+      });
+  };
+
+  const handleFetchQuestion = (questionId) => {
+    $('#loader').show();
+    fetchTurtleQuestion({
+      type: 'getQuestionById',
+      questionId,
+    })
       .then(() => {
         $('#loader').hide();
         successModalRef.current.hide();
@@ -829,10 +860,37 @@ const TurtleGameComponent = () => {
   };
 
   React.useEffect(() => {
+    // let cleanUp = () => {};
+
     if (status === 'success') {
+      // if (isFirstLoad) {
+      //   isPageMounted.current = true;
+      //   hideDefaultNavBar('game');
+
+      //   $('#question-tab').on('shown.bs.tab', () => {
+      //     repositionTurtle('#expOutCanvas', '.turtle-qnout-container');
+      //   });
+
+      //   $('#output-tab').on('shown.bs.tab', () => {
+      //     repositionTurtle('#answerCanvas', '.outputContainer');
+      //   });
+
+      //   $('#loader').hide();
+
+      //   $('#question-tab').on('shown.bs.tab', () => {
+      //     repositionTurtle('#expOutCanvas', '.turtle-qnout-container');
+      //   });
+
+      //   $('#output-tab').on('shown.bs.tab', () => {
+      //     repositionTurtle('#answerCanvas', '.outputContainer');
+      //   });
+
+      //   isFirstLoad = false;
+      // }
+
       setTimeout(() => {
-        repositionTurtle('#answerCanvas', '.outputContainer');
-        repositionTurtle('#expOutCanvas', '.turtle-qnout-container');
+        repositionTurtle('#answerCanvas', '.outputContainer', 'output');
+        repositionTurtle('#expOutCanvas', '.turtle-qnout-container', 'question');
       }, 500);
       startTurtle({ response: turtleQuestionState });
     }
@@ -842,17 +900,17 @@ const TurtleGameComponent = () => {
     isPageMounted.current = true;
     hideDefaultNavBar('game');
 
-    if (status === 'success') {
-      $('#loader').hide();
-      startTurtle({ response: turtleQuestionState });
-    }
+    // if (status === 'success') {
+    //   $('#loader').hide();
+    //   startTurtle({ response: turtleQuestionState });
+    // }
 
     $('#question-tab').on('shown.bs.tab', () => {
-      repositionTurtle('#expOutCanvas', '.turtle-qnout-container');
+      repositionTurtle('#expOutCanvas', '.turtle-qnout-container', 'question');
     });
 
     $('#output-tab').on('shown.bs.tab', () => {
-      repositionTurtle('#answerCanvas', '.outputContainer');
+      repositionTurtle('#answerCanvas', '.outputContainer', 'output');
     });
 
     return () => {
@@ -866,6 +924,7 @@ const TurtleGameComponent = () => {
     <TurtleNavBar
       questionState={memoizedTurtleQuestionState}
       handleHint={handleHint}
+      levelBtnHandler={showLevel}
       isTurtleMainPage={true}
     />
     {
@@ -940,6 +999,15 @@ const TurtleGameComponent = () => {
           nextHandler={handleNextQuestion}
         />
     </Modal>
+    {
+      memoizedTurtleQuestionState.status === 'success'
+      && <>
+        <GameLevelComponent
+          ref={levelComponentRef}
+          handleFetchQuestion={handleFetchQuestion}
+          gameData={memoizedTurtleQuestionState} />
+      </>
+    }
     <div id="loader"></div>
   </>;
 };
