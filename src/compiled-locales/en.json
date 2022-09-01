@@ -21,6 +21,12 @@
       "value": "levelNumber"
     }
   ],
+  "/Urdq7": [
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
   "/dnxym": [
     {
       "type": 0,
@@ -81,6 +87,12 @@
       "value": "Profile Settings"
     }
   ],
+  "1XHwzQ": [
+    {
+      "type": 1,
+      "value": "levelNumber"
+    }
+  ],
   "1x4WPP": [
     {
       "type": 0,
@@ -139,6 +151,12 @@
       "value": "Next"
     }
   ],
+  "3kbAe7": [
+    {
+      "type": 0,
+      "value": "Continue playing"
+    }
+  ],
   "3lLFC/": [
     {
       "type": 1,
@@ -191,6 +209,12 @@
     {
       "type": 0,
       "value": "Login to existing Account"
+    }
+  ],
+  "76OIt3": [
+    {
+      "type": 0,
+      "value": "Show Leaderboard"
     }
   ],
   "7L3+7M": [
@@ -369,6 +393,12 @@
       "value": "Login into Existing Account"
     }
   ],
+  "G5q8OG": [
+    {
+      "type": 0,
+      "value": "rank"
+    }
+  ],
   "GQwBTI": [
     {
       "type": 0,
@@ -471,6 +501,12 @@
       "value": "Go to Index"
     }
   ],
+  "Mh1d7/": [
+    {
+      "type": 0,
+      "value": "Loading..."
+    }
+  ],
   "MkkIOq": [
     {
       "type": 0,
@@ -553,6 +589,22 @@
     {
       "type": 0,
       "value": "Re-type Password"
+    }
+  ],
+  "RRxr7k": [
+    {
+      "type": 0,
+      "value": "#"
+    },
+    {
+      "type": 1,
+      "value": "rank"
+    }
+  ],
+  "S7XoqJ": [
+    {
+      "type": 0,
+      "value": "PLAY"
     }
   ],
   "S7vsku": [
@@ -651,6 +703,12 @@
       "value": "Login into existing account"
     }
   ],
+  "XeLSF2": [
+    {
+      "type": 0,
+      "value": "Leaderboard"
+    }
+  ],
   "Y+dh5z": [
     {
       "type": 0,
@@ -673,6 +731,16 @@
     {
       "type": 0,
       "value": "Go to About"
+    }
+  ],
+  "ZMimja": [
+    {
+      "type": 0,
+      "value": "Your rank: #"
+    },
+    {
+      "type": 1,
+      "value": "rank"
     }
   ],
   "ZXYzUQ": [
@@ -703,6 +771,12 @@
     {
       "type": 0,
       "value": "Leaderboard Rank"
+    }
+  ],
+  "bvFe7G": [
+    {
+      "type": 0,
+      "value": "Coins Earned:"
     }
   ],
   "c9n6Sh": [
@@ -741,6 +815,12 @@
       "value": "Set a Password"
     }
   ],
+  "fkpavG": [
+    {
+      "type": 0,
+      "value": "Games"
+    }
+  ],
   "g0zp7w": [
     {
       "type": 0,
@@ -757,6 +837,12 @@
     {
       "type": 0,
       "value": "Name"
+    }
+  ],
+  "gPWy9r": [
+    {
+      "type": 1,
+      "value": "gameTitle"
     }
   ],
   "h7B/gA": [
@@ -801,10 +887,26 @@
       "value": "Forgot Password"
     }
   ],
+  "jpb70D": [
+    {
+      "type": 0,
+      "value": "#"
+    },
+    {
+      "type": 1,
+      "value": "rankNumber"
+    }
+  ],
   "lKeCea": [
     {
       "type": 0,
       "value": "Save & Exit"
+    }
+  ],
+  "lSOrgC": [
+    {
+      "type": 1,
+      "value": "coins"
     }
   ],
   "lynO1X": [
@@ -829,6 +931,12 @@
     {
       "type": 0,
       "value": "Continue Challenge"
+    }
+  ],
+  "mfMsri": [
+    {
+      "type": 0,
+      "value": "Recommended Games"
     }
   ],
   "mm9QaY": [
@@ -859,6 +967,12 @@
     {
       "type": 1,
       "value": "text"
+    }
+  ],
+  "nhSC1Z": [
+    {
+      "type": 0,
+      "value": "Leaderboard Ranking"
     }
   ],
   "nlYt8p": [
@@ -975,12 +1089,6 @@
       "value": "Try the new in-built IDE"
     }
   ],
-  "viQX0N": [
-    {
-      "type": 0,
-      "value": "Turtle"
-    }
-  ],
   "wrdAU0": [
     {
       "type": 0,
@@ -1005,10 +1113,22 @@
       "value": "Videos"
     }
   ],
+  "ya4qNs": [
+    {
+      "type": 1,
+      "value": "totalEarnedCoins"
+    }
+  ],
   "yujxGL": [
     {
       "type": 0,
       "value": "Your Collections and Perks"
+    }
+  ],
+  "z4ekJP": [
+    {
+      "type": 1,
+      "value": "earnedCoins"
     }
   ],
   "z9lFwl": [
