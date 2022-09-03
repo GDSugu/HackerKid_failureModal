@@ -5,7 +5,7 @@ import * as Animatable from 'react-native-animatable';
 import { AuthContext } from '../../../hooks/pages/root';
 import ThemeContext from '../theme';
 import IconHomeGame from '../../../images/navbar/iconHomeGame.svg';
-// import IconLeaderboard from '../../../images/games/Leaderboard.svg';
+import IconLeaderboard from '../../../images/games/Leaderboard.svg';
 import profileImg from '../../../images/common/profile.png';
 import ImgComponent from '../ImgComponent';
 
@@ -51,9 +51,9 @@ const TurtleHeader = () => {
         animation='fadeInRight'
         style={style.flexHorizontal}
       >
-        {/* <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={() => {}}>
           <IconLeaderboard />
-        </TouchableOpacity> */}
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
           <ImgComponent
             style={style.profileImg}

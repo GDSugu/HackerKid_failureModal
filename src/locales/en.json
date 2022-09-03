@@ -138,9 +138,17 @@
     "defaultMessage": "Please connect to the internet.",
     "description": "offline message"
   },
+  "52hsYP": {
+    "defaultMessage": "#{rank}",
+    "description": "Rank"
+  },
   "53f59E": {
     "defaultMessage": "Rank",
     "description": "Rank table cell header"
+  },
+  "5EmC6p": {
+    "defaultMessage": "Student Name",
+    "description": "Student Name"
   },
   "5L6FVQ": {
     "defaultMessage": "Password",
@@ -238,6 +246,10 @@
     "defaultMessage": "Login with Email",
     "description": "Login with Email tab"
   },
+  "Atd3d5": {
+    "defaultMessage": "/{totalSubmissions}",
+    "description": "Total Submissions"
+  },
   "B7znij": {
     "defaultMessage": "Create a New Account",
     "description": "Create a New Account button"
@@ -333,6 +345,10 @@
   "H2rvzb": {
     "defaultMessage": "Password changed successfully",
     "description": "Password changed text"
+  },
+  "H9m7jW": {
+    "defaultMessage": "{timeSpent}",
+    "description": "Time Spent"
   },
   "HAlOn1": {
     "defaultMessage": "Name"
@@ -605,6 +621,10 @@
     "defaultMessage": "Edit Profile",
     "description": "Home card menu"
   },
+  "YRA/RQ": {
+    "defaultMessage": "{username}",
+    "description": "Username"
+  },
   "YxMMzC": {
     "defaultMessage": "All Games",
     "description": "Game Progress card menu"
@@ -629,9 +649,17 @@
     "defaultMessage": "Create a New Account",
     "description": "Create Account Button"
   },
+  "a8vHtW": {
+    "defaultMessage": "{studentNamt}",
+    "description": "Student Name"
+  },
   "aWjMjy": {
     "defaultMessage": "Register",
     "description": "Register button"
+  },
+  "apr16P": {
+    "defaultMessage": "Leaderboard",
+    "description": "Leaderboard Title"
   },
   "b2J6mh": {
     "defaultMessage": "Home",
@@ -680,6 +708,10 @@
     "defaultMessage": "Profile updated successfully",
     "description": "success modal"
   },
+  "esK7Em": {
+    "defaultMessage": "Earned Awards",
+    "description": "Earned Awards"
+  },
   "f1vl6A": {
     "defaultMessage": "Show Leaderboard",
     "description": "show leaderboard"
@@ -688,9 +720,12 @@
     "defaultMessage": "Set a Password",
     "description": "Set password label"
   },
-  "fcrHSq": {
-    "defaultMessage": "{languageDisplayName}",
-    "description": "language option"
+  "fT7uau": {
+    "defaultMessage": "completed"
+  },
+  "fr893W": {
+    "defaultMessage": "{validSubmissions}",
+    "description": "Valid Submissions"
   },
   "g0zp7w": {
     "defaultMessage": "Continue Playing",
@@ -732,6 +767,10 @@
     "defaultMessage": "Forgot Password",
     "description": "Forgot Password Heading"
   },
+  "jZl4zg": {
+    "defaultMessage": "{xp}",
+    "description": "XP"
+  },
   "k6tlKQ": {
     "defaultMessage": "Ok",
     "description": "closing modal button"
@@ -768,6 +807,10 @@
     "defaultMessage": "Session expired",
     "description": "Not authorized message"
   },
+  "mb5De+": {
+    "defaultMessage": "Rank",
+    "description": "Rank"
+  },
   "mm9QaY": {
     "defaultMessage": "School",
     "description": "Profile school label"
@@ -784,13 +827,17 @@
     "defaultMessage": "Get the rare collectibles with your coins now",
     "description": "more card title"
   },
+  "nGT7h4": {
+    "defaultMessage": "Scoreboard",
+    "description": "Leaderboard button"
+  },
   "nT6Ql7": {
     "defaultMessage": "{text}",
     "description": "help type text"
   },
-  "nTxUJZ": {
-    "defaultMessage": "Try IDE Now",
-    "description": "more card button"
+  "njn/ZL": {
+    "defaultMessage": "XP",
+    "description": "XP"
   },
   "nlYt8p": {
     "defaultMessage": "View more",
@@ -824,9 +871,13 @@
     "defaultMessage": "Game Progress",
     "description": "Game Progress card heading"
   },
-  "qUU2pp": {
-    "defaultMessage": "All Games",
-    "description": "Section Title"
+  "q86PwV": {
+    "defaultMessage": "Go to Home",
+    "description": "Home Navigation Button"
+  },
+  "qTQ8nP": {
+    "defaultMessage": "{coinsEarned}",
+    "description": "Coins Earned"
   },
   "qXTiEd": {
     "defaultMessage": "Grade"
@@ -859,9 +910,9 @@
     "defaultMessage": "Go to Home",
     "description": "Link description"
   },
-  "t5hBAx": {
-    "defaultMessage": "Output will be shown here",
-    "description": "output box placeholder text"
+  "tRGm5z": {
+    "defaultMessage": "Time Spent:",
+    "description": "Time Spent"
   },
   "tbPLF3": {
     "defaultMessage": "{step}",
