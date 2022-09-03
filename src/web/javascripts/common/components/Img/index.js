@@ -5,14 +5,29 @@ const imgPath = '../../../../images/';
 const Img = ({
   alt = 'Hackerkid resource',
   className = '',
+  fallback = 'resized/default_user-1000w.webp',
   local = true,
   src = 'resized/default_user-1000w.webp',
   style = null,
   useSource = true,
 }) => {
+  const [imgSrc, setImgSrc] = React.useState(src);
   const filePath = src.split('/').pop();
   const fileName = filePath.split('.')[0];
   const fileExtension = filePath.split('.').pop();
+
+  React.useEffect(() => {
+    if (!local) {
+      fetch(src)
+        .then((res) => {
+          if (res.status === 200) {
+            setImgSrc(src);
+          } else {
+            setImgSrc(`${imgPath + fallback}`);
+          }
+        });
+    }
+  }, []);
 
   return <>
   {local && <picture style={style} className={className}>
@@ -21,7 +36,7 @@ const Img = ({
     <source srcSet={`${imgPath}/webps/${fileName}.webp`} type="image/webp"></source>
     <img srcSet={`${imgPath}/resized/${fileName}-1000w.${fileExtension} 1000w`} src={`${imgPath + src}`} alt={alt} />
   </picture>}
-    {!local && <img src={src} style={style} className={className} alt={alt } />}
+    {!local && <img src={imgSrc} style={style} className={className} alt={alt} />}
   </>;
 };
 

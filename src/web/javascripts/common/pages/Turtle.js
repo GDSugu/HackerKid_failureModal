@@ -13,6 +13,7 @@ import {
 } from '../Functions/turtle';
 import useRootPageState from '../../../../hooks/pages/root';
 import GameLevelComponent from '../components/GameLevelComponent';
+import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
 
 const resizeHandler = (nav = 'nav', selector) => {
   try {
@@ -747,6 +748,7 @@ const TurtleGameComponent = () => {
   const successModalRef = React.useRef();
   const successModalComponentRef = React.useRef();
   const levelComponentRef = React.useRef();
+  const leaderboardComponentRef = React.useRef();
 
   const { id } = useParams();
 
@@ -765,6 +767,28 @@ const TurtleGameComponent = () => {
     [turtleQuestionState]);
 
   const showLevel = () => levelComponentRef.current.show();
+  const toggleLeaderboard = () => leaderboardComponentRef.current.toggle();
+
+  const toggleTurtle = (action = 'show' || 'hide') => {
+    if (action === 'show') {
+      $('.turtle-game-container').slideDown();
+      $('.level-navbar').slideDown({
+        complete: () => {
+          $('.level-navbar').css('display', 'flex');
+        },
+      });
+      $('.game-mob-container').slideDown();
+      $('.leaderboard-btn').removeClass('active');
+    } else if (action === 'hide') {
+      $('.turtle-game-container').slideUp();
+      $('.game-mob-container').slideUp({
+        complete: () => {
+          $('.level-navbar').slideUp();
+        },
+      });
+      $('.leaderboard-btn').addClass('active');
+    }
+  };
 
   const handleRunCode = () => {
     let validation;
@@ -926,6 +950,7 @@ const TurtleGameComponent = () => {
       handleHint={handleHint}
       levelBtnHandler={showLevel}
       isTurtleMainPage={true}
+      leaderboardHandler={toggleLeaderboard}
     />
     {
       device === 'desktop'
@@ -999,6 +1024,11 @@ const TurtleGameComponent = () => {
           nextHandler={handleNextQuestion}
         />
     </Modal>
+    <GameLeaderboardComponent
+      ref={leaderboardComponentRef}
+      game={'turtle'}
+      beforeShown={() => { toggleTurtle('hide'); }}
+      beforeHidden={() => { toggleTurtle('show'); }} />
     {
       memoizedTurtleQuestionState.status === 'success'
       && <>

@@ -195,10 +195,26 @@
       "value": "Please connect to the internet."
     }
   ],
+  "52hsYP": [
+    {
+      "type": 0,
+      "value": "#"
+    },
+    {
+      "type": 1,
+      "value": "rank"
+    }
+  ],
   "53f59E": [
     {
       "type": 0,
       "value": "Rank"
+    }
+  ],
+  "5EmC6p": [
+    {
+      "type": 0,
+      "value": "Student Name"
     }
   ],
   "5L6FVQ": [
@@ -301,6 +317,16 @@
     {
       "type": 0,
       "value": "Login with Email"
+    }
+  ],
+  "Atd3d5": [
+    {
+      "type": 0,
+      "value": "/"
+    },
+    {
+      "type": 1,
+      "value": "totalSubmissions"
     }
   ],
   "B7znij": [
@@ -439,6 +465,12 @@
     {
       "type": 0,
       "value": "Password changed successfully"
+    }
+  ],
+  "H9m7jW": [
+    {
+      "type": 1,
+      "value": "timeSpent"
     }
   ],
   "HAlOn1": [
@@ -829,6 +861,12 @@
       "value": "Edit Profile"
     }
   ],
+  "YRA/RQ": [
+    {
+      "type": 1,
+      "value": "username"
+    }
+  ],
   "YxMMzC": [
     {
       "type": 0,
@@ -865,10 +903,22 @@
       "value": "Create a New Account"
     }
   ],
+  "a8vHtW": [
+    {
+      "type": 1,
+      "value": "studentNamt"
+    }
+  ],
   "aWjMjy": [
     {
       "type": 0,
       "value": "Register"
+    }
+  ],
+  "apr16P": [
+    {
+      "type": 0,
+      "value": "Leaderboard"
     }
   ],
   "b2J6mh": [
@@ -931,6 +981,12 @@
       "value": "Profile updated successfully"
     }
   ],
+  "esK7Em": [
+    {
+      "type": 0,
+      "value": "Earned Awards"
+    }
+  ],
   "f1vl6A": [
     {
       "type": 0,
@@ -941,6 +997,18 @@
     {
       "type": 0,
       "value": "Set a Password"
+    }
+  ],
+  "fT7uau": [
+    {
+      "type": 0,
+      "value": "completed"
+    }
+  ],
+  "fr893W": [
+    {
+      "type": 1,
+      "value": "validSubmissions"
     }
   ],
   "g0zp7w": [
@@ -1003,6 +1071,12 @@
       "value": "Forgot Password"
     }
   ],
+  "jZl4zg": [
+    {
+      "type": 1,
+      "value": "xp"
+    }
+  ],
   "k6tlKQ": [
     {
       "type": 0,
@@ -1051,6 +1125,12 @@
       "value": "Session expired"
     }
   ],
+  "mb5De+": [
+    {
+      "type": 0,
+      "value": "Rank"
+    }
+  ],
   "mm9QaY": [
     {
       "type": 0,
@@ -1075,10 +1155,22 @@
       "value": "Get the rare collectibles with your coins now"
     }
   ],
+  "nGT7h4": [
+    {
+      "type": 0,
+      "value": "Scoreboard"
+    }
+  ],
   "nT6Ql7": [
     {
       "type": 1,
       "value": "text"
+    }
+  ],
+  "njn/ZL": [
+    {
+      "type": 0,
+      "value": "XP"
     }
   ],
   "nlYt8p": [
@@ -1123,10 +1215,10 @@
       "value": "Go to Home"
     }
   ],
-  "qUU2pp": [
+  "qTQ8nP": [
     {
-      "type": 0,
-      "value": "All Games"
+      "type": 1,
+      "value": "coinsEarned"
     }
   ],
   "qXTiEd": [
@@ -1169,6 +1261,12 @@
     {
       "type": 0,
       "value": "Go to Home"
+    }
+  ],
+  "tRGm5z": [
+    {
+      "type": 0,
+      "value": "Time Spent:"
     }
   ],
   "tbPLF3": [

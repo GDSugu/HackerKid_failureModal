@@ -50,6 +50,12 @@
 
       .leaderboard-btn {
         background-color: gt.theme-var(game-leaderboard-btn-bg, null, $thememaplight, $cssvars);
+        font-weight: bold;
+
+        &.active {
+          background-color: gt.theme-var(bg-1);
+          color: gt.theme-var(game-leaderboard-btn-bg, null, $thememaplight, $cssvars);
+        }
       }
 
       // .profileImg {

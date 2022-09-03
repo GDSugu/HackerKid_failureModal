@@ -25,7 +25,6 @@ const GameLevelButton = ({
 
 const GameLevelComponent = ({ gameData, handleFetchQuestion }, ref) => {
   const { state: { device } } = useRootPageState();
-  const modalRef = React.useRef(null);
 
   const isCurrentQuestion = gameData.questionList
     .findIndex((el) => el.question_id === gameData.questionObject.question_id) + 1;
@@ -64,7 +63,7 @@ const GameLevelComponent = ({ gameData, handleFetchQuestion }, ref) => {
   }, []);
 
   return <>
-    <div ref={modalRef} className='game-navbar game-level-component' style={{
+    <div className='game-navbar game-level-component' style={{
       display: 'none',
     }}>
       <div className="game-level-container">
