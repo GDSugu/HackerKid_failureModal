@@ -40,6 +40,19 @@ const Img = ({
     }
   }, []);
 
+  React.useEffect(() => {
+    if (!local) {
+      fetch(src)
+        .then((res) => {
+          if (res.status === 200) {
+            setImgSrc(src);
+          } else {
+            setImgSrc(`${imgPath + fallback}`);
+          }
+        });
+    }
+  }, []);
+
   return <>
   {local && <picture style={style} className={className}>
     <source media='(max-width: 500px)' srcSet={`${imgPath}/resized/${fileName}-1000w.webp`} type="image/webp" />
