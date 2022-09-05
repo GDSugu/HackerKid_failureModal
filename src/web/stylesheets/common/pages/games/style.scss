@@ -6,6 +6,21 @@
 
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 
+// variables declarations
+$universal-border-radius: 1rem;
+$hero-component-cards-min-height: 200px;
+$more-info-btn-text-color: gt.theme-var(game-more-info-btn-text-color, null, $thememaplight, $cssvars);
+$game-cards-height: 13.1rem;
+$game-variant0-card-width-after-xs: 93%;
+$game-varint0-card-width-after-sm: 48%;
+$game-variant0-card-width-after-ml: 38%;
+$game-variant0-card-width-after-lg: 33%;
+$game-variant0-card-width-after-xxl: 28%;
+$stat-icon-width: 30px;
+$stat-icon-height: 31px;
+$level-progress-gradient-color1: gt.theme-var(game-level-progress-gradient-1, null, $thememaplight, $cssvars);
+$level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, null, $thememaplight, $cssvars);
+
 .games-container {
   background-color: gt.theme-var(game-body-bg, null, $thememaplight, $cssvars);
 
@@ -21,295 +36,6 @@
     }
   }
 }
-
-.all-games-section,
-.recommended-games-section,
-.continue-playing-games-section {
-  margin-top: 1rem;
-}
-
-.all-game-cards,
-.recommended-game-cards,
-.continue-playing-game-cards {
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-}
-
-$game-cards-height: 12.1rem;
-
-.game-card {
-  border-radius: 1rem;
-  cursor: pointer;
-
-  .card-img-top {
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
-
-    @include gm.media-breakpoint-down(xxxl) {
-      @include gm.box(100%, $game-cards-height);
-    }
-  }
-
-  .game-title {
-    color: gt.theme-var(text-color-2);
-  }
-
-  .card-body {
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: gt.theme-var(game-card-body-bg, null, $thememaplight, $cssvars);
-  }
-
-  .card-title {
-    margin: 0;
-  }
-
-  .play-btn {
-    @include gm.flex-center();
-
-    outline: none;
-    margin: 0;
-    border: 0;
-    border-radius: 50%;
-    background: gt.theme-var(bg-1);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  }
-}
-
-.game-card.variant1 {
-  .card-body {
-    padding: 0.75rem;
-  }
-
-  .play-btn {
-    @include gm.box(40px, 40px);
-  }
-
-  .play-game-icon {
-    @include gm.box(22px, 20px);
-  }
-}
-
-.game-card.variant0 {
-  position: relative;
-  overflow: hidden;
-
-  .level-indicator-btn {
-    @include gm.absolute-tr(12px, 10px);
-    @include gm.flex-center();
-
-    border: none;
-    border-radius: 0.75rem;
-    padding: 4px 8px;
-    color: gt.theme-var(text-color-2);
-    background: gt.theme-var(game-level-indicator-btn-bg, null, $thememaplight, $cssvars);
-    backdrop-filter: blur(6px);
-
-    img {
-      @include gm.box(30px, 30px);
-
-      margin-right: 0.2rem;
-    }
-
-    &:hover ~ .game-stats-container {
-      transform: translateY(0);
-    }
-  }
-
-  .card-body {
-    position: relative;
-    padding: 1.5rem 0.75rem;
-  }
-
-  .play-btn {
-    @include gm.absolute-tr(0, 20px);
-    @include gm.box(60px, 60px);
-    @include gm.flex-center(column);
-
-    padding-top: 1rem;
-    padding-bottom: 0.7rem;
-    transform: translateY(-50%);
-
-    .play-game-icon {
-      @include gm.box(32px, 20px);
-    }
-
-    .play-btn-text {
-      color: gt.theme-var(game-play-btn-text-color, null, $thememaplight, $cssvars);
-      font-size: 12px;
-    }
-  }
-
-  .game-stats-container {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    border-radius: 1rem;
-    background-color: gt.theme-var(bg-4);
-    transform: translateY(100%);
-    transition: transform 0.3s ease-in-out;
-    z-index: 10;
-  }
-
-  .other-stats-with-level-progress-bar {
-    border-radius: 0.8rem;
-    padding: 0.75rem 1.12rem;
-    background-color: gt.theme-var(bg-1);
-  }
-
-  .level-progress-bar {
-    margin-top: 1rem;
-  }
-}
-
-$stat-icon-width: 30px;
-$stat-icon-height: 31px;
-
-.level-progress-indicator {
-  @include gm.flex-align-center();
-
-  padding: 0.75rem 1.12rem;
-
-  .level-indicator-text {
-    margin-left: 0.2rem;
-  }
-
-  .level-icon {
-    @include gm.box($stat-icon-width, $stat-icon-height);
-  }
-}
-
-.other-stats {
-  @include gm.flex-justify-align(null, space-between, center);
-
-  .game-stat {
-    @include gm.flex-align-center();
-  }
-
-  .game-stat-icon {
-    @include gm.box($stat-icon-width, $stat-icon-height);
-  }
-
-  .game-stat-text {
-    margin-left: 0.3rem;
-  }
-}
-
-.level-progress-bar {
-  @include gm.box(100%, 8px);
-
-  border-radius: 12px;
-  background-color: gt.theme-var(game-level-progress-bar-bg, null, $thememaplight, $cssvars);
-  margin-top: 1rem;
-
-  $color1: gt.theme-var(game-level-progress-gradient-1, null, $thememaplight, $cssvars);
-  $color2: gt.theme-var(game-level-progress-gradient-2, null, $thememaplight, $cssvars);
-
-  .level-progress {
-    height: 100%;
-    border-radius: inherit;
-    background-image: linear-gradient(to right, $color1, $color2);
-  }
-}
-
-.slide-up-animation {
-  animation: slide_up 0.5s ease;
-  animation-fill-mode: forwards;
-}
-
-.slide-down-animation {
-  animation: slide_down 0.5s ease;
-  animation-fill-mode: forwards;
-}
-
-$game-cards-width-after-xs: 90%;
-$game-cards-width-after-sm: 45%;
-$game-cards-width-after-ml: 35%;
-$game-cards-width-after-lg: 30%;
-$game-cards-width-after-xxl: 25%;
-
-.recommended-game-cards,
-.continue-playing-game-cards {
-  .swiper-slide {
-    width: $game-cards-width-after-xs;
-
-    @include gm.media-breakpoint-up(sm) {
-      width: $game-cards-width-after-sm;
-    }
-
-    @include gm.media-breakpoint-up(ml) {
-      width: $game-cards-width-after-ml;
-    }
-
-    @include gm.media-breakpoint-up(lg) {
-      width: $game-cards-width-after-lg;
-    }
-
-    @include gm.media-breakpoint-up(xxl) {
-      width: $game-cards-width-after-xxl;
-    }
-  }
-
-  .swiper-button-next,
-  .swiper-button-prev {
-    &:after {
-      font-size: 1.75rem;
-      font-weight: bolder;
-    }
-
-    &.swiper-button-disabled {
-      display: none;
-    }
-
-    top: 8%;
-    height: 100%;
-    padding: 0 2rem 0;
-  }
-
-  .swiper-button-next {
-    right: 0;
-    background: linear-gradient(to right, transparent, gt.theme-var(game-body-bg, null, $thememaplight, $cssvars));
-  }
-
-  .swiper-button-prev {
-    left: 0;
-    background: linear-gradient(to left, transparent, gt.theme-var(game-body-bg, null, $thememaplight, $cssvars));
-  }
-
-  .skeleton-game-cards-container {
-    @include gm.box(100%, 100%);
-
-    padding-bottom: 0.5rem;
-    overflow-x: scroll;
-  }
-
-  .skeleton-game-card {
-    @include gm.box($game-cards-width-after-xs, $game-cards-height);
-
-    margin-right: 1rem;
-    flex: none;
-
-    @include gm.media-breakpoint-up(sm) {
-      width: $game-cards-width-after-sm;
-    }
-
-    @include gm.media-breakpoint-up(ml) {
-      width: $game-cards-width-after-ml;
-    }
-
-    @include gm.media-breakpoint-up(lg) {
-      width: $game-cards-width-after-lg;
-    }
-  }
-}
-
-$hero-component-cards-border-radius: 1rem;
-$hero-component-cards-min-height: 210px;
 
 .hero-card {
   display: flex;
@@ -411,8 +137,9 @@ $hero-component-cards-min-height: 210px;
 
     .circle-progress {
       min-height: $hero-component-cards-min-height;
-      background-color: gt.theme-var(game-body-bg, null, $thememaplight, $cssvars);
-      border-radius: 1rem;
+      background-color: gt.theme-var(game-hero-card-bg, null, $thememaplight, $cssvars);
+      border-radius: $universal-border-radius;
+      backdrop-filter: blur(4px);
 
       svg {
         width: 100%;
@@ -422,7 +149,8 @@ $hero-component-cards-min-height: 210px;
 
     .desktop-leaderboard-card {
       height: $hero-component-cards-min-height;
-      background-color: gt.theme-var(game-body-bg, null, $thememaplight, $cssvars);
+      background-color: gt.theme-var(game-hero-card-bg, null, $thememaplight, $cssvars);
+      backdrop-filter: blur(4px);
 
       $leaderboard-card-vertical-padding: 1rem;
       $leaderboard-card-horizontal-padding:1.25rem;
@@ -449,6 +177,267 @@ $hero-component-cards-min-height: 210px;
   }
 }
 
+.all-games-section,
+.recommended-games-section,
+.continue-playing-games-section {
+  margin-top: 1rem;
+}
+
+.all-game-cards,
+.recommended-game-cards,
+.continue-playing-game-cards {
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.game-card {
+  border-radius: $universal-border-radius;
+  cursor: pointer;
+
+  .card-img-top img {
+    width: 100%;
+    border-top-left-radius: $universal-border-radius;
+    border-top-right-radius: $universal-border-radius;
+    flex-shrink: 0;
+    aspect-ratio: 16/8;
+  }
+
+  .game-title {
+    color: gt.theme-var(text-color-2);
+  }
+
+  .card-body {
+    border-bottom-left-radius: $universal-border-radius;
+    border-bottom-right-radius: $universal-border-radius;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: gt.theme-var(game-card-body-bg, null, $thememaplight, $cssvars);
+  }
+
+  .card-title {
+    margin: 0;
+  }
+
+  .play-btn {
+    @include gm.flex-center();
+
+    margin: 0;
+    border: 0;
+    border-radius: 50%;
+    background: gt.theme-var(bg-1);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.game-card.variant1 {
+  .card-body {
+    padding: 0.75rem;
+  }
+
+  .play-btn {
+    @include gm.box(40px, 40px);
+  }
+
+  .play-game-icon {
+    @include gm.box(22px, 20px);
+  }
+}
+
+.game-card.variant0 {
+  position: relative;
+  overflow: hidden;
+
+  .level-indicator-btn {
+    @include gm.absolute-tr(12px, 10px);
+    @include gm.flex-center();
+
+    border: none;
+    border-radius: 0.75rem;
+    padding: 4px 8px;
+    color: gt.theme-var(text-color-2);
+    background: gt.theme-var(game-level-indicator-btn-bg, null, $thememaplight, $cssvars);
+    backdrop-filter: blur(6px);
+
+    img {
+      @include gm.box(30px, 30px);
+
+      margin-right: 0.2rem;
+    }
+  }
+
+  .game-stats-container.game-stats-container-slide-up {
+    transform: translateY(0);
+  }
+
+  .card-body {
+    position: relative;
+    padding: 1.5rem 0.75rem;
+  }
+
+  .play-btn {
+    @include gm.absolute-tr(0, 20px);
+    @include gm.box(60px, 60px);
+    @include gm.flex-center(column);
+
+    padding-top: 1rem;
+    padding-bottom: 0.7rem;
+    transform: translateY(-50%);
+
+    .play-game-icon {
+      @include gm.box(32px, 20px);
+    }
+
+    .play-btn-text {
+      color: gt.theme-var(game-play-btn-text-color, null, $thememaplight, $cssvars);
+      font-size: 12px;
+    }
+  }
+
+  .game-stats-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-radius: $universal-border-radius;
+    background-color: gt.theme-var(bg-6);
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 10;
+  }
+
+  .other-stats-with-level-progress-bar {
+    border-radius: 0.8rem;
+    padding: 0.75rem 1.12rem;
+    background-color: gt.theme-var(bg-1);
+  }
+
+  .level-progress-bar {
+    margin-top: 1rem;
+  }
+}
+
+.level-progress-indicator {
+  @include gm.flex-align-center();
+
+  padding: 0.75rem 1.12rem;
+
+  .level-indicator-text {
+    margin-left: 0.3rem;
+  }
+
+  .level-icon {
+    @include gm.box($stat-icon-width, $stat-icon-height);
+  }
+}
+
+.other-stats {
+  @include gm.flex-justify-align(null, space-between, center);
+
+  .game-stat {
+    @include gm.flex-align-center();
+  }
+
+  .game-stat-icon img {
+    @include gm.box($stat-icon-width, $stat-icon-height);
+  }
+
+  .game-stat-text {
+    margin-left: 0.3rem;
+  }
+}
+
+.level-progress-bar {
+  @include gm.box(100%, 8px);
+
+  border-radius: 0.75rem;
+  background-color: gt.theme-var(game-level-progress-bar-bg, null, $thememaplight, $cssvars);
+  margin-top: 1rem;
+
+  .level-progress {
+    height: 100%;
+    border-radius: inherit;
+    background-image: linear-gradient(to right, $level-progress-gradient-color1, $level-progress-gradient-color2);
+  }
+}
+
+.recommended-game-cards,
+.continue-playing-game-cards {
+  .swiper-slide {
+    width: $game-variant0-card-width-after-xs;
+
+    @include gm.media-breakpoint-up(sm) {
+      width: $game-varint0-card-width-after-sm;
+    }
+
+    @include gm.media-breakpoint-up(ml) {
+      width: $game-variant0-card-width-after-ml;
+    }
+
+    @include gm.media-breakpoint-up(lg) {
+      width: $game-variant0-card-width-after-lg;
+    }
+
+    @include gm.media-breakpoint-up(xxl) {
+      width: $game-variant0-card-width-after-xxl;
+    }
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    &:after {
+      font-size: 1.75rem;
+      font-weight: bolder;
+    }
+
+    &.swiper-button-disabled {
+      display: none;
+    }
+
+    top: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0 2rem 0;
+  }
+
+  .swiper-button-next {
+    right: 0;
+    background: linear-gradient(to right, transparent, gt.theme-var(game-body-bg, null, $thememaplight, $cssvars));
+  }
+
+  .swiper-button-prev {
+    left: 0;
+    background: linear-gradient(to left, transparent, gt.theme-var(game-body-bg, null, $thememaplight, $cssvars));
+  }
+
+  .skeleton-game-cards-container {
+    @include gm.box(100%, 100%);
+
+    padding-bottom: 0.5rem;
+    overflow-x: scroll;
+  }
+
+  .skeleton-game-card {
+    @include gm.box($game-variant0-card-width-after-xs, $game-cards-height);
+
+    margin-right: 1rem;
+    flex: none;
+
+    @include gm.media-breakpoint-up(sm) {
+      width: $game-varint0-card-width-after-sm;
+    }
+
+    @include gm.media-breakpoint-up(ml) {
+      width: $game-variant0-card-width-after-ml;
+    }
+
+    @include gm.media-breakpoint-up(lg) {
+      width: $game-variant0-card-width-after-lg;
+    }
+  }
+}
+
 .circle-progress {
   display: grid;
   place-content: center;
@@ -456,11 +445,11 @@ $hero-component-cards-min-height: 210px;
   svg {
     #gradient {
       .start {
-        stop-color: gt.theme-var(game-level-progress-gradient-2, null, $thememaplight, $cssvars);
+        stop-color: $level-progress-gradient-color2;
       }
 
       .end {
-        stop-color: gt.theme-var(game-level-progress-gradient-1, null, $thememaplight, $cssvars);
+        stop-color: $level-progress-gradient-color1;
       }
     }
 
@@ -474,7 +463,7 @@ $hero-component-cards-min-height: 210px;
 }
 
 .leaderboard-card {
-  border-radius: 1rem;
+  border-radius: $universal-border-radius;
 
   .title {
     color: gt.theme-var(game-hero-leaderboard-title-color, null, $thememaplight, $cssvars);
@@ -490,6 +479,11 @@ $hero-component-cards-min-height: 210px;
   .rank-listing {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 0.5rem;
+
+    p {
+      margin: 0;
+    }
 
     .rank-number-with-name {
       display: flex;
@@ -524,11 +518,8 @@ $hero-component-cards-min-height: 210px;
       margin: 0;
     }
 
-    $more-info-btn-text-color: gt.theme-var(game-more-info-btn-text-color, null, $thememaplight, $cssvars);
-
     .more-info-btn {
       border: none;
-      outline: none;
       background: none;
       color: $more-info-btn-text-color;
     }
@@ -537,17 +528,17 @@ $hero-component-cards-min-height: 210px;
   .other-stats {
     padding: 1.12rem;
     margin-top: 0.8rem;
-    border-radius: 1rem;
+    border-radius: $universal-border-radius;
     background-color: gt.theme-var(bg-1);
   }
 }
 
 #viewMoreSheet {
   .individual-game-summary-card {
-    background-color: gt.theme-var(bg-1);
     padding: 1rem;
-    border-radius: 1rem;
+    border-radius: $universal-border-radius;
     margin-top: 1rem;
+    background-color: gt.theme-var(bg-1);
     cursor: pointer;
 
     .game-cover-with-title {
@@ -559,7 +550,7 @@ $hero-component-cards-min-height: 210px;
         img {
           @include gm.box(100%, 100%);
 
-          border-radius: 1rem;
+          border-radius: $universal-border-radius;
         }
       }
 
@@ -577,7 +568,7 @@ $hero-component-cards-min-height: 210px;
       margin-top: 0.5rem;
       background-color: gt.theme-var(bg-5);
       padding: 0.75rem 1rem;
-      border-radius: 1rem;
+      border-radius: $universal-border-radius;
     }
   }
 
@@ -585,11 +576,11 @@ $hero-component-cards-min-height: 210px;
     display: flex;
     background-color: gt.theme-var(bg-1);
     padding: 1rem;
-    border-radius: 1rem;
+    border-radius: $universal-border-radius;
     margin-top: 1rem;
 
     .mobile-circle-progress {
-      flex-grow: 1;
+      width: 50%;
 
       svg {
         width: 100%;
@@ -600,7 +591,7 @@ $hero-component-cards-min-height: 210px;
     .coins-earned-with-average-time {
       @include gm.flex-center();
 
-      flex-grow: 1;
+      width: 50%;
 
       .coins-earned {
         @include gm.flex-align-center();
@@ -654,19 +645,17 @@ $hero-component-cards-min-height: 210px;
   }
 }
 
-$other-stats-margin-top: 0.8rem;
-
 .skeleton-game-card,
 .skeleton-card {
-  border-radius: 1rem;
+  border-radius: $universal-border-radius;
   animation: refresh 2.5s ease-out infinite;
   background-image: linear-gradient(90deg, gt.theme-var(text-color-6), gt.theme-var(bg-3) 30px, gt.theme-var(skeleton-bg) 60px);
   background-size: 200%;
 }
 
 .other-stats-skeleton {
-  border-radius: 1rem;
-  margin-top: $other-stats-margin-top;
+  border-radius: $universal-border-radius;
+  margin-top: 0.8rem;
   min-height: 4rem;
 }
 

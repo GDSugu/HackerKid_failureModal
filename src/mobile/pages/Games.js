@@ -19,10 +19,10 @@ import { Skeleton } from '@rneui/base';
 import LinearGradient from 'react-native-linear-gradient';
 import ThemeContext from '../components/theme';
 import turtleGameCover from '../../images/games/turtle-game-cover.png';
-import zombieLandGameCover from '../../images/games/zombie-game-cover.png';
-import webkataHtmlGameCover from '../../images/games/webkata-html-game-cover.png';
-import webkataCssGameCover from '../../images/games/webkata-css-game-cover.png';
-import webkataJsGameCover from '../../images/games/webkata-js-game-cover.png';
+// import zombieLandGameCover from '../../images/games/zombie-game-cover.png';
+// import webkataHtmlGameCover from '../../images/games/webkata-html-game-cover.png';
+// import webkataCssGameCover from '../../images/games/webkata-css-game-cover.png';
+// import webkataJsGameCover from '../../images/games/webkata-js-game-cover.png';
 import LevelIcon from '../../images/games/level-icon.svg';
 import PlayBtnIcon from '../../images/games/play-game-icon.svg';
 import { useDashboard } from '../../hooks/pages/dashboard';
@@ -155,8 +155,7 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => {
     cardBody: {
       borderBottomLeftRadius: gameCardBorderRadius,
       borderBottomRightRadius: gameCardBorderRadius,
-      paddingHorizontal: 8,
-      paddingVertical: 12,
+      padding: 8,
       backgroundColor: theme.gameCardBg,
       flex: 2,
       flexDirection: 'row',
@@ -164,9 +163,18 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => {
       alignItems: 'center',
     },
     gameTitleText: {
-      ...font.subtitleBold,
-      color: utilColors.white,
-      flex: 1,
+      variant0: {
+        marginLeft: 3,
+        ...font.heading6,
+        color: utilColors.white,
+        flex: 1,
+      },
+      variant1: {
+        marginLeft: 3,
+        ...font.subtitleBold,
+        color: utilColors.white,
+        flex: 1,
+      },
     },
     playGameBtn: {
       variant0: {
@@ -210,22 +218,27 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => {
       bottom: 0,
       width: '100%',
       borderRadius: gameCardBorderRadius,
-      backgroundColor: utilColors.bg2,
+      backgroundColor: utilColors.bg3,
       overflow: 'hidden',
       zIndex: 1,
+    },
+    gameStatsOtherStatsWithProgress: {
+      backgroundColor: utilColors.bg2,
+      borderTopLeftRadius: gameCardBorderRadius,
+      borderTopRightRadius: gameCardBorderRadius,
+      padding: 10,
     },
     gameStat: {
       flexDirection: 'row',
       alignItems: 'center',
     },
     gameStatText: {
-      ...font.captionBold,
+      ...font.bodyBold,
       marginLeft: 5,
       color: utilColors.dark,
     },
     levelProgressIndicator: {
-      paddingHorizontal: 10,
-      paddingVertical: 8,
+      padding: 10,
       flexDirection: 'row',
       alignItems: 'center',
     },
@@ -237,12 +250,6 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => {
     gameStatsCoinsIcon: {
       width: 22,
       height: 22,
-    },
-    levelProgressBarContainer: {
-      width: '100%',
-      borderRadius: 10,
-      paddingHorizontal: 10,
-      paddingVertical: 8,
     },
     levelProgressBar: {
       overflow: 'hidden',
@@ -407,6 +414,7 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => {
   });
 };
 
+// Bottom sheet components
 const LeaderBoardCard = ({
   leaderboardData, leaderBoardUserData, navigation, style, bottomSheetRef,
 }) => <>
@@ -476,8 +484,40 @@ const LeaderBoardCard = ({
       </Text>
     </TouchableOpacity>
   </View>
-</>;
+  </>;
 
+const IndividualGameSummaryCard = ({
+  style, contentContainerStyles = {}, gameTitle, gameCoverImage, currentLevelNumber, totalLevels,
+  totalEarnedCoins,
+}) => (
+    <View style={[style.gameSummaryCard, contentContainerStyles]}>
+      <View style={style.gameSummaryCoverImageAndTitle}>
+      <Image style={style.gameSummaryGameCoverImage} source={gameCoverImage} resizeMode={'stretch'} />
+        <View style={style.gameSummaryGameTitleAndLevelProgress}>
+        <Text style={style.gameSummaryGameTitleText}>
+          <FormattedMessage defaultMessage={'{gameTitle}'} description={'game title'} values={{ gameTitle }} />
+        </Text>
+        <View style={style.levelProgressIndicator}>
+          <LevelIcon />
+          <Text style={style.gameStatText}>
+            <FormattedMessage defaultMessage={'{levelText}'} description='level text' values={{ levelText: `${currentLevelNumber}/${totalLevels}` }}/>
+          </Text>
+        </View>
+        </View>
+    </View>
+    <View style={style.gameSummaryOtherStatsAndProgressBar}>
+      <OtherStats
+        style={style}
+        totalEarnedCoins={totalEarnedCoins}
+        contentContainerSyle={{ marginBottom: 10 }} />
+      <LinearProgressBar
+        style={style}
+        step={currentLevelNumber} steps={totalLevels} />
+    </View>
+    </View>
+);
+
+// in page re-usable components
 const OtherStats = ({
   style, totalEarnedCoins, contentContainerSyle = {},
   // totalEarnedXp = 0, averageTime = 0,
@@ -502,6 +542,7 @@ const LinearProgressBar = ({ style, step, steps }) => (
     </View>
 );
 
+// game card component
 const GameCard = ({
   style, gameDetails, onPress, gameCardVariant,
 }) => {
@@ -537,18 +578,18 @@ const GameCard = ({
           <FormattedMessage defaultMessage={'{levelText}'} description='level text' values={{ levelText: `${currentLevelNumber}/${totalLevels}` }}/>
         </Text>
       </View>
-      <OtherStats style={style} totalEarnedCoins={totalEarnedCoins} contentContainerSyle={{
-        backgroundColor: 'transparent',
-        paddingHorizontal: 10,
-        paddingVertical: 8,
-      }}/>
-      <View style={style.levelProgressBarContainer}>
+      <View style={style.gameStatsOtherStatsWithProgress}>
+        <OtherStats style={style} totalEarnedCoins={totalEarnedCoins} contentContainerSyle={{
+          backgroundColor: 'transparent',
+          marginBottom: 12,
+        }}/>
         <LinearProgressBar
           step={currentLevelNumber}
           steps={totalLevels}
           style={style} />
       </View>
-    </Animated.View>);
+    </Animated.View>
+  );
 
   return (
     <TouchableOpacity onPress={onPress}>
@@ -574,7 +615,7 @@ const GameCard = ({
         }
       </View>
       <View style={gameCardVariant === 0 ? [style.cardBody, { position: 'relative' }] : style.cardBody}>
-        <Text style={style.gameTitleText} numberOfLines={1} ellipsizeMode={'middle'}>
+        <Text style={gameCardVariant === 0 ? style.gameTitleText.variant0 : style.gameTitleText.variant1} numberOfLines={1} ellipsizeMode={'middle'}>
           <FormattedMessage defaultMessage={'{gameTitle}'} description={'game title'} values={{ gameTitle: gameDetails.gameTitle }} />
         </Text>
           <TouchableOpacity
@@ -601,6 +642,7 @@ const GameCard = ({
   );
 };
 
+// continue playing section
 const ContinuePlayingSection = ({ style, gameCardsData }) => (
   <View style={style.continuePlayingSection}>
     <Text style={style.sectionHeading}>
@@ -647,6 +689,7 @@ const ContinuePlayingSection = ({ style, gameCardsData }) => (
   </View>
 );
 
+// recommended games section
 const RecommendedGamesSection = ({ style, gameCardsData }) => (
   <View style={style.recommendedGamesSection}>
     <Text style={style.sectionHeading}>
@@ -693,6 +736,7 @@ const RecommendedGamesSection = ({ style, gameCardsData }) => (
   </View>
 );
 
+// all games section
 const AllGamesSection = ({ style, gameCardsData }) => (
   <>
     <Text style={style.sectionHeading}>
@@ -733,37 +777,7 @@ const AllGamesSection = ({ style, gameCardsData }) => (
   </>
 );
 
-const IndividualGameSummaryCard = ({
-  style, contentContainerStyles = {}, gameTitle, gameCoverImage, currentLevelNumber, totalLevels,
-  totalEarnedCoins,
-}) => (
-    <View style={[style.gameSummaryCard, contentContainerStyles]}>
-      <View style={style.gameSummaryCoverImageAndTitle}>
-      <Image style={style.gameSummaryGameCoverImage} source={gameCoverImage} resizeMode={'stretch'} />
-        <View style={style.gameSummaryGameTitleAndLevelProgress}>
-        <Text style={style.gameSummaryGameTitleText}>
-          <FormattedMessage defaultMessage={'{gameTitle}'} description={'game title'} values={{ gameTitle }} />
-        </Text>
-        <View style={style.levelProgressIndicator}>
-          <LevelIcon />
-          <Text style={style.gameStatText}>
-            <FormattedMessage defaultMessage={'{levelText}'} description='level text' values={{ levelText: `${currentLevelNumber}/${totalLevels}` }}/>
-          </Text>
-        </View>
-        </View>
-    </View>
-    <View style={style.gameSummaryOtherStatsAndProgressBar}>
-      <OtherStats
-        style={style}
-        totalEarnedCoins={totalEarnedCoins}
-        contentContainerSyle={{ marginBottom: 10 }} />
-      <LinearProgressBar
-        style={style}
-        step={currentLevelNumber} steps={totalLevels} />
-    </View>
-    </View>
-);
-
+// top level component
 const Games = ({ navigation }) => {
   const isPageMounted = useRef(true);
   // hooks
@@ -809,42 +823,43 @@ const Games = ({ navigation }) => {
     totalEarnedCoins: dashBoardData?.turtle?.totalPointsEarned,
     onPress: () => { navigation.navigate('TurtleHome'); },
   },
-  {
-    gameTitle: 'Zombieland',
-    gameCoverImage: zombieLandGameCover,
-    currentLevelNumber: dashBoardData?.zombieLand?.currentQuestionDetails
-      ? dashBoardData.zombieLand.currentQuestionDetails.virtualId : 0,
-    totalLevels: dashBoardData?.zombieLand?.overAllQuestionCount,
-    totalEarnedCoins: dashBoardData?.zombieLand?.totalPointsEarned,
-    onPress: () => { },
-  },
-  {
-    gameTitle: 'Webkata-HTML',
-    gameCoverImage: webkataHtmlGameCover,
-    currentLevelNumber: dashBoardData?.webkataHtml?.currentQuestionDetails
-      ? dashBoardData.webkataHtml.currentQuestionDetails.virtualId : 0,
-    totalLevels: dashBoardData?.webkataHtml?.overAllQuestionCount,
-    totalEarnedCoins: dashBoardData?.webkataHtml?.totalPointsEarned,
-    onPress: () => { },
-  },
-  {
-    gameTitle: 'Webkata-CSS',
-    gameCoverImage: webkataCssGameCover,
-    currentLevelNumber: dashBoardData?.webkataCss?.currentQuestionDetails
-      ? dashBoardData?.webkataCss?.currentQuestionDetails?.virtualId : 0,
-    totalLevels: dashBoardData?.webkataCss?.overAllQuestionCount,
-    totalEarnedCoins: dashBoardData?.webkataCss?.totalPointsEarned,
-    onPress: () => { },
-  },
-  {
-    gameTitle: 'Webkata-JS',
-    gameCoverImage: webkataJsGameCover,
-    currentLevelNumber: dashBoardData?.webkataJs?.currentQuestionDetails
-      ? dashBoardData?.webkataJs?.currentQuestionDetails?.virtualId : 0,
-    totalLevels: dashBoardData?.webkataJs?.overAllQuestionCount,
-    totalEarnedCoins: dashBoardData?.webkataJs?.totalPointsEarned,
-    onPress: () => { },
-  }];
+  // {
+  //   gameTitle: 'Zombieland',
+  //   gameCoverImage: zombieLandGameCover,
+  //   currentLevelNumber: dashBoardData?.zombieLand?.currentQuestionDetails
+  //     ? dashBoardData.zombieLand.currentQuestionDetails.virtualId : 0,
+  //   totalLevels: dashBoardData?.zombieLand?.overAllQuestionCount,
+  //   totalEarnedCoins: dashBoardData?.zombieLand?.totalPointsEarned,
+  //   onPress: () => { },
+  // },
+  // {
+  //   gameTitle: 'Webkata-HTML',
+  //   gameCoverImage: webkataHtmlGameCover,
+  //   currentLevelNumber: dashBoardData?.webkataHtml?.currentQuestionDetails
+  //     ? dashBoardData.webkataHtml.currentQuestionDetails.virtualId : 0,
+  //   totalLevels: dashBoardData?.webkataHtml?.overAllQuestionCount,
+  //   totalEarnedCoins: dashBoardData?.webkataHtml?.totalPointsEarned,
+  //   onPress: () => { },
+  // },
+  // {
+  //   gameTitle: 'Webkata-CSS',
+  //   gameCoverImage: webkataCssGameCover,
+  //   currentLevelNumber: dashBoardData?.webkataCss?.currentQuestionDetails
+  //     ? dashBoardData?.webkataCss?.currentQuestionDetails?.virtualId : 0,
+  //   totalLevels: dashBoardData?.webkataCss?.overAllQuestionCount,
+  //   totalEarnedCoins: dashBoardData?.webkataCss?.totalPointsEarned,
+  //   onPress: () => { },
+  // },
+  // {
+  //   gameTitle: 'Webkata-JS',
+  //   gameCoverImage: webkataJsGameCover,
+  //   currentLevelNumber: dashBoardData?.webkataJs?.currentQuestionDetails
+  //     ? dashBoardData?.webkataJs?.currentQuestionDetails?.virtualId : 0,
+  //   totalLevels: dashBoardData?.webkataJs?.overAllQuestionCount,
+  //   totalEarnedCoins: dashBoardData?.webkataJs?.totalPointsEarned,
+  //   onPress: () => { },
+  //   }
+  ];
 
   if (authContext.appData.isReferesh) {
     onRefresh();
@@ -876,6 +891,7 @@ const Games = ({ navigation }) => {
     }
   });
 
+  // handlers
   const onBottomSheetOpen = () => {
     Animated.timing(gameProgressValue, {
       toValue: gameData.gameProgress,
@@ -889,6 +905,7 @@ const Games = ({ navigation }) => {
     gameProgressValue.resetAnimation();
   };
 
+  // initial render side effect
   useEffect(() => {
     const initialState = {
       reloadComponent: 0,
@@ -941,6 +958,7 @@ const Games = ({ navigation }) => {
           gameCardsData={gameCardsDataArr}
           style={style} />
     </ScrollView>
+      {/* bottom sheet */}
     <BottomSheet
         ref={bottomSheetRef}
         customStyles={bottomSheetStyles}

@@ -9,6 +9,7 @@ const darkTheme = Theme.dark;
 const thememaplight = {
   'game-text-color-1': lightTheme.utilColors.dark,
   'game-btn-bg': lightTheme.screenLightBlue.btnBg,
+  'game-hero-card-bg': '#00BAFF26',
   'game-hero-card-box-shadow': '#00BAFF40',
   'game-hero-leaderboard-title-color': lightTheme.screenLightBlue.textBold,
   'game-hero-leaderboard-br-color': lightTheme.screenLightBlue.navBg,
@@ -29,6 +30,7 @@ const thememaplight = {
 const thememapdark = {
   'game-text-color-1': darkTheme.utilColors.dark,
   'game-btn-bg': darkTheme.screenLightBlue.btnBg,
+  'game-hero-card-bg': '#00BAFF26',
   'game-hero-card-box-shadow': '#00BAFF40',
   'game-hero-leaderboard-title-color': lightTheme.screenLightBlue.textBold,
   'game-hero-leaderboard-br-color': lightTheme.screenLightBlue.navBg,
@@ -51,6 +53,7 @@ const cssvars = {
   'game-body-bg': '--game-body-bg',
   'game-nav-bg': '--game-nav-bg',
   'game-nav-active-bg': '--game-nav-active-bg',
+  'game-hero-card-bg': '--game-hero-card-bg',
   'game-hero-card-box-shadow': '--game-hero-card-box-shadow',
   'game-hero-leaderboard-title-color': '--game-hero-leaderboard-title-color',
   'game-hero-leaderboard-br-color': '--game-hero-leaderboard-br-color',

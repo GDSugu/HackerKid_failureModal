@@ -15,6 +15,7 @@ const showBottomSheet = () => {
   });
 };
 
+// Bottomsheet components
 const IndividualGameSummaryCard = ({ gameDetails, contentContainerCustomClass, onClick }) => (
   <div className={`individual-game-summary-card ${contentContainerCustomClass}`} onClick={onClick}>
     <div className='game-cover-with-title'>
@@ -121,6 +122,7 @@ const LeaderBoardCard = ({
   </div>
 );
 
+// re-usable in-page components
 const CircleProgressBar = ({ step, steps, contentContainerCustomClass = '' }) => (
     <div className={`circle-progress ${contentContainerCustomClass}`}>
       <svg xmlns="http://www.w3.org/2000/svg" id="yourScoreAnimated" viewBox="0 0 100 100">
@@ -149,6 +151,140 @@ const CircleProgressBar = ({ step, steps, contentContainerCustomClass = '' }) =>
     </div>
 );
 
+const LinearProgressBar = ({ step, steps, contentContainerCustomClass = '' }) => (
+  <div className={`level-progress-bar-container ${contentContainerCustomClass}`}>
+    <div className='level-progress-bar'>
+      <div className='level-progress' style={{ width: `${(step / steps) * 100}%` }}></div>
+    </div>
+  </div>
+);
+
+const OtherStats = ({
+  totalEarnedCoins, contentContainerCustomClass = '',
+  // totalEarnedXp, averageTime
+}) => (
+  <div className={`other-stats ${contentContainerCustomClass}`}>
+      <div className='game-stat'>
+        <Img className='game-stat-icon' src='common/hkcoin.png' />
+        <span className='game-stat-text body'>
+          <FormattedMessage defaultMessage={'{totalEarnedCoins}'} description={'total earned coins'} values={{ totalEarnedCoins }} />
+        </span>
+      </div>
+    </div>
+);
+
+// helper component for GameCard
+const GameStats = ({
+  currentLevelNumber, totalLevels, totalEarnedCoins, contentContainerCustomClass = '',
+  // totalEarnedXp, averageTime
+}) => (
+    <div className={`game-stats-container ${contentContainerCustomClass}`} >
+      <div className='level-progress-indicator'>
+        <img className='level-icon' alt='level-icon' src='../../../../images/games/level-icon.svg' />
+          <span className='level-indicator-text caption-bold'>
+            <FormattedMessage defaultMessage={'{levelNumber}'}
+              description={'Level indicator'}
+              values={{
+                levelNumber: `${currentLevelNumber}/${totalLevels}`,
+              }} />
+          </span>
+      </div>
+      <div className='other-stats-with-level-progress-bar'>
+        <OtherStats totalEarnedCoins={totalEarnedCoins} />
+      <LinearProgressBar step={currentLevelNumber} steps={totalLevels}/>
+      </div>
+    </div>
+);
+
+// Game card component
+const GameCard = ({
+  gameDetails, gameCardVariant, onClick, isDesktop, contentContainerCustomClass = '',
+}) => {
+  const onMouseEnter = (e) => {
+    const { target } = e;
+    const jTarget = $(target);
+
+    if (jTarget.hasClass('level-indicator-btn')) {
+      jTarget.siblings('.game-stats-container').addClass('game-stats-container-slide-up');
+    } else {
+      const jParent = jTarget.parent('.level-indicator-btn');
+      jParent.siblings('.game-stats-container').addClass('game-stats-container-slide-up');
+    }
+  };
+
+  const onMouseLeave = (e) => {
+    const { target } = e;
+    const jTarget = $(target);
+
+    if (jTarget.hasClass('level-indicator-btn')) {
+      jTarget.siblings('.game-stats-container').removeClass('game-stats-container-slide-up');
+    } else {
+      const jParent = jTarget.parent('.level-indicator-btn');
+
+      jParent.siblings('.game-stats-container').removeClass('game-stats-container-slide-up');
+    }
+  };
+
+  const onClickMobile = (e) => {
+    e.stopPropagation();
+    const { target } = e;
+    const jTarget = $(target);
+
+    if (jTarget.hasClass('level-indicator-btn')) {
+      jTarget.siblings('.game-stats-container').toggleClass('game-stats-container-slide-up');
+    } else {
+      const jParent = jTarget.parent('.level-indicator-btn');
+      jParent.siblings('.game-stats-container').toggleClass('game-stats-container-slide-up');
+    }
+  };
+
+  const handlers = isDesktop ? { onMouseEnter, onMouseLeave } : { onClick: onClickMobile };
+
+  return (
+  <div className={contentContainerCustomClass} onClick={onClick}>
+    <div className={`game-card card ${gameCardVariant === 0 ? 'variant0' : 'variant1'}`} tabIndex='0'>
+      <div className='gameimage-levelindicator-gamestats-container'>
+        <Img className='card-img-top' src={gameDetails.gameCoverURL} alt="game cover" />
+        {
+          gameCardVariant === 0
+            && <button className='level-indicator-btn' {...handlers}>
+            <img alt='level-icon' src='../../../../images/games/level-icon.svg' />
+            <span className='body'>
+              <FormattedMessage defaultMessage={'Level {levelNumber}'}
+                description={'Level indicator'}
+                values={{
+                  levelNumber: gameDetails.currentLevelNumber,
+                }} />
+            </span>
+          </button>
+        }
+        {
+          gameCardVariant === 0 && <GameStats
+            currentLevelNumber={Number(gameDetails.currentLevelNumber)}
+            totalLevels={Number(gameDetails.totalLevels)}
+            totalEarnedCoins={Number(gameDetails.totalEarnedCoins)}
+          />
+        }
+      </div>
+      <div className="card-body">
+        <h5 className={`game-title card-title ${gameCardVariant === 0 ? 'subtitle1' : 'body-bold'}`}>
+          <FormattedMessage defaultMessage={'{gameTitle}'} description={'Game Title'} values={{ gameTitle: gameDetails.gameTitle }} />
+        </h5>
+        <button className='play-btn'>
+          <img className='play-game-icon' alt='play-game-icon' src='../../../../images/games/play-game-icon.svg' />
+          {
+            gameCardVariant === 0 && <span className='play-btn-text overline-bold'>
+              <FormattedMessage defaultMessage={'PLAY'} description={'play btn text'} />
+            </span>
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+  );
+};
+
+// Hero card component
 const HeroComponent = ({
   dashboardUserData, gameData, leaderBoardData, leaderBoardUserData, isDesktop, session,
 }) => {
@@ -223,98 +359,11 @@ const HeroComponent = ({
   );
 };
 
-const LinearProgressBar = ({ step, steps, contentContainerCustomClass = '' }) => (
-  <div className={`level-progress-bar-container ${contentContainerCustomClass}`}>
-    <div className='level-progress-bar'>
-      <div className='level-progress' style={{ width: `${(step / steps) * 100}%` }}></div>
-    </div>
-  </div>
-);
-
-const OtherStats = ({
-  totalEarnedCoins, contentContainerCustomClass = '',
-  // totalEarnedXp, averageTime
-}) => (
-  <div className={`other-stats ${contentContainerCustomClass}`}>
-      <div className='game-stat'>
-        <img className='game-stat-icon' src='../../../../images/common/hkcoin.png' />
-        <span className='game-stat-text body'>
-          <FormattedMessage defaultMessage={'{totalEarnedCoins}'} description={'total earned coins'} values={{ totalEarnedCoins }} />
-        </span>
-      </div>
-    </div>
-);
-
-const GameStats = ({
-  currentLevelNumber, totalLevels, totalEarnedCoins, contentContainerCustomClass = '',
-  // totalEarnedXp, averageTime
-}) => (
-    <div className={`game-stats-container ${contentContainerCustomClass}`} >
-      <div className='level-progress-indicator'>
-        <img className='level-icon' alt='level-icon' src='../../../../images/games/level-icon.svg' />
-          <span className='level-indicator-text caption-bold'>
-            <FormattedMessage defaultMessage={'{levelNumber}'}
-              description={'Level indicator'}
-              values={{
-                levelNumber: `${currentLevelNumber}/${totalLevels}`,
-              }} />
-          </span>
-      </div>
-      <div className='other-stats-with-level-progress-bar'>
-        <OtherStats totalEarnedCoins={totalEarnedCoins} />
-      <LinearProgressBar step={currentLevelNumber} steps={totalLevels}/>
-      </div>
-    </div>
-);
-
-const GameCard = ({
-  gameDetails, gameCardVariant, onClick, contentContainerCustomClass = '',
-}) => (
-    <div className={contentContainerCustomClass} onClick={onClick}>
-    <div className={`game-card card ${gameCardVariant === 0 ? 'variant0' : 'variant1'}`}>
-      <div className='gameimage-levelindicator-gamestats-container'>
-        <img className='card-img-top img-fluid' src={gameDetails.gameCoverURL} alt="game cover" />
-        {
-          gameCardVariant === 0
-          && <button className='level-indicator-btn'>
-            <img alt='level-icon' src='../../../../images/games/level-icon.svg' />
-            <span className='body'>
-              <FormattedMessage defaultMessage={'Level {levelNumber}'}
-                description={'Level indicator'}
-                values={{
-                  levelNumber: gameDetails.currentLevelNumber,
-                }} />
-            </span>
-          </button>
-        }
-        {
-          gameCardVariant === 0 && <GameStats
-            currentLevelNumber={Number(gameDetails.currentLevelNumber)}
-            totalLevels={Number(gameDetails.totalLevels)}
-            totalEarnedCoins={Number(gameDetails.totalEarnedCoins)}
-          />
-        }
-      </div>
-      <div className="card-body">
-        <h5 className="game-title card-title body-bold">
-          <FormattedMessage defaultMessage={'{gameTitle}'} description={'Game Title'} values={{ gameTitle: gameDetails.gameTitle }} />
-        </h5>
-        <button className='play-btn'>
-          <img className='play-game-icon' alt='play-game-icon' src='../../../../images/games/play-game-icon.svg' />
-          {
-            gameCardVariant === 0 && <span className='play-btn-text overline-bold'>
-              <FormattedMessage defaultMessage={'PLAY'} description={'play btn text'}/>
-            </span>
-          }
-        </button>
-      </div>
-    </div>
-  </div>
-);
-
+// top level component
 const Games = () => {
   pageInit('games-container', 'Games');
 
+  // hooks
   const navigate = useNavigate();
   const isPageMounted = React.useRef(true);
   const { state: dashboardState } = useDashboard({ isPageMounted });
@@ -329,8 +378,10 @@ const Games = () => {
     userData: leaderBoardUserData,
   } = leaderBoardState;
 
+  // local state
   const [isDesktop, setIsDesktop] = useState(window.matchMedia('(min-width: 590px)').matches);
 
+  // methods
   const populateScore = (selectorPrefix, score, percentage) => {
     if (score) {
       $({ Counter: 0, percent: 0 }).animate({
@@ -365,6 +416,7 @@ const Games = () => {
     });
   }, []);
 
+  // games data
   const gameCardsDataArr = [{
     gameTitle: 'Turtle',
     currentLevelNumber: dashBoardData?.turtle?.currentQuestionDetails
@@ -372,52 +424,54 @@ const Games = () => {
     totalEarnedCoins: dashBoardData?.turtle?.totalPointsEarned
       ? dashBoardData.turtle.totalPointsEarned : 0,
     totalLevels: dashBoardData?.turtle?.overAllQuestionCount,
-    gameCoverURL: '../../../../images/games/turtle-game-cover.png',
+    gameCoverURL: 'games/turtle-game-cover.png',
     onClick: () => { navigate('/turtle'); },
   },
-  {
-    gameTitle: 'Zombieland',
-    currentLevelNumber: dashBoardData?.zombieLand?.currentQuestionDetails
-      ? dashBoardData.zombieLand.currentQuestionDetails.virtualId : 0,
-    totalEarnedCoins: dashBoardData?.zombieLand?.totalPointsEarned
-      ? dashBoardData.zombieLand.totalPointsEarned : 0,
-    totalLevels: dashBoardData?.zombieLand?.overAllQuestionCount,
-    gameCoverURL: '../../../../images/games/zombie-game-cover.png',
-    onClick: () => {},
-  },
-  {
-    gameTitle: 'Webkata-CSS',
-    currentLevelNumber: dashBoardData?.webkataCss?.currentQuestionDetails
-      ? dashBoardData.webkataCss.currentQuestionDetails.virtualId : 0,
-    totalEarnedCoins: dashBoardData?.webkataCss?.totalPointsEarned
-      ? dashBoardData.webkataCss.totalPointsEarned : 0,
-    totalLevels: dashBoardData?.webkataCss?.overAllQuestionCount,
-    gameCoverURL: '../../../../images/games/webkata-css-game-cover.png',
-    onClick: () => {},
-  },
-  {
-    gameTitle: 'Webkata-HTML',
-    currentLevelNumber: dashBoardData?.webkataHtml?.currentQuestionDetails
-      ? dashBoardData.webkataHtml.currentQuestionDetails.virtualId : 0,
-    totalEarnedCoins: dashBoardData?.webkataHtml?.totalPointsEarned
-      ? dashBoardData.webkataHtml.totalPointsEarned : 0,
-    totalLevels: dashBoardData?.webkataHtml?.overAllQuestionCount,
-    gameCoverURL: '../../../../images/games/webkata-html-game-cover.png',
-    onClick: () => {},
-  },
-  {
-    gameTitle: 'Webkata-JS',
-    currentLevelNumber: dashBoardData?.webkataJs?.currentQuestionDetails
-      ? dashBoardData.webkataJs.currentQuestionDetails.virtualId : 0,
-    totalEarnedCoins: dashBoardData?.webkataJs?.totalPointsEarned
-      ? dashBoardData.webkataJs.totalPointsEarned : 0,
-    totalLevels: dashBoardData?.webkataJs?.overAllQuestionCount,
-    gameCoverURL: '../../../../images/games/webkata-js-game-cover.png',
-    onClick: () => {},
-  }];
+  // {
+  //   gameTitle: 'Zombieland',
+  //   currentLevelNumber: dashBoardData?.zombieLand?.currentQuestionDetails
+  //     ? dashBoardData.zombieLand.currentQuestionDetails.virtualId : 0,
+  //   totalEarnedCoins: dashBoardData?.zombieLand?.totalPointsEarned
+  //     ? dashBoardData.zombieLand.totalPointsEarned : 0,
+  //   totalLevels: dashBoardData?.zombieLand?.overAllQuestionCount,
+  //   gameCoverURL: 'games/zombie-game-cover.png',
+  //   onClick: () => {},
+  // },
+  // {
+  //   gameTitle: 'Webkata-CSS',
+  //   currentLevelNumber: dashBoardData?.webkataCss?.currentQuestionDetails
+  //     ? dashBoardData.webkataCss.currentQuestionDetails.virtualId : 0,
+  //   totalEarnedCoins: dashBoardData?.webkataCss?.totalPointsEarned
+  //     ? dashBoardData.webkataCss.totalPointsEarned : 0,
+  //   totalLevels: dashBoardData?.webkataCss?.overAllQuestionCount,
+  //   gameCoverURL: 'games/webkata-css-game-cover.png',
+  //   onClick: () => {},
+  // },
+  // {
+  //   gameTitle: 'Webkata-HTML',
+  //   currentLevelNumber: dashBoardData?.webkataHtml?.currentQuestionDetails
+  //     ? dashBoardData.webkataHtml.currentQuestionDetails.virtualId : 0,
+  //   totalEarnedCoins: dashBoardData?.webkataHtml?.totalPointsEarned
+  //     ? dashBoardData.webkataHtml.totalPointsEarned : 0,
+  //   totalLevels: dashBoardData?.webkataHtml?.overAllQuestionCount,
+  //   gameCoverURL: 'games/webkata-html-game-cover.png',
+  //   onClick: () => {},
+  // },
+  // {
+  //   gameTitle: 'Webkata-JS',
+  //   currentLevelNumber: dashBoardData?.webkataJs?.currentQuestionDetails
+  //     ? dashBoardData.webkataJs.currentQuestionDetails.virtualId : 0,
+  //   totalEarnedCoins: dashBoardData?.webkataJs?.totalPointsEarned
+  //     ? dashBoardData.webkataJs.totalPointsEarned : 0,
+  //   totalLevels: dashBoardData?.webkataJs?.overAllQuestionCount,
+  //   gameCoverURL: 'games/webkata-js-game-cover.png',
+  //   onClick: () => {},
+  // },
+  ];
 
   return (
     <div className='col-12 col-md-11 col-xl-10 mx-auto mx-auto'>
+      {/* hero section */}
       <HeroComponent
         dashboardUserData={dashboardUserData}
         isDesktop={isDesktop}
@@ -425,53 +479,58 @@ const Games = () => {
         gameData={gameData}
         leaderBoardUserData={leaderBoardUserData}
         leaderBoardData={leaderboardData} />
+      {/* continue playing section */}
       <section className='continue-playing-games-section'>
-      <header className='subtitle1 mb-2'>
-        <FormattedMessage defaultMessage={'Continue playing'} description={'Section Title'} />
-      </header>
-      <div className='continue-playing-game-cards'>
+        <header className='subtitle1 mb-2'>
+          <FormattedMessage defaultMessage={'Continue playing'} description={'Section Title'} />
+        </header>
+        <div className='continue-playing-game-cards'>
+          {
+            dashBoardData && <SwiperComponent
+            data={gameCardsDataArr}
+            SlideComponent={({ data }) => (
+              <GameCard
+              isDesktop={isDesktop}
+              onClick={data.onClick}
+              gameCardVariant={0}
+              gameDetails={{
+                gameTitle: data.gameTitle,
+                currentLevelNumber: data.currentLevelNumber,
+                totalLevels: data.totalLevels,
+                totalEarnedCoins: data.totalEarnedCoins,
+                gameCoverURL: data.gameCoverURL,
+              }}/>
+            )}
+            swiperModules={{
+              navigation: true,
+            }}
+            swiperProps={{
+              spaceBetween: 10,
+              slidesPerView: 'auto',
+              className: 'recommended-games-swiper',
+              grabCursor: true,
+              lazy: true,
+              navigation: true,
+            }}>
+          </SwiperComponent>
+        }
         {
-          dashBoardData && <SwiperComponent
-          data={gameCardsDataArr}
-          SlideComponent={({ data }) => (
-            <GameCard
-            onClick={data.onClick}
-            gameCardVariant={0}
-            gameDetails={{
-              gameTitle: data.gameTitle,
-              currentLevelNumber: data.currentLevelNumber,
-              totalLevels: data.totalLevels,
-              totalEarnedCoins: data.totalEarnedCoins,
-              gameCoverURL: data.gameCoverURL,
-            }}/>
-          )}
-          swiperModules={{
-            navigation: true,
-          }}
-          swiperProps={{
-            spaceBetween: 10,
-            slidesPerView: 'auto',
-            className: 'recommended-games-swiper',
-            grabCursor: true,
-            lazy: true,
-            navigation: true,
-          }}>
-        </SwiperComponent>
-      }
-      {
-        !dashBoardData
-        && <>
-          <div className="skeleton">
-            <div className="d-flex align-items-center skeleton-game-cards-container">
-              { [1, 2, 3, 4, 5, 6].map((item, index) => (
-                <div key={index} className='skeleton-game-card'></div>
-              )) }
+          !dashBoardData
+          && <>
+            <div className="skeleton">
+              <div className="d-flex align-items-center skeleton-game-cards-container">
+                  {[1,
+                    // 2, 3, 4, 5, 6
+                  ].map((item, index) => (
+                  <div key={index} className='skeleton-game-card'></div>
+                  )) }
+              </div>
             </div>
-          </div>
-        </>
-      }
-      </div>
+          </>
+        }
+        </div>
     </section>
+    {/* recommended games section */}
     <section className='recommended-games-section'>
       <header className='subtitle1 mb-2'>
         <FormattedMessage defaultMessage={'Recommended Games'} description={'Section Title'} />
@@ -482,6 +541,7 @@ const Games = () => {
           data={gameCardsDataArr}
           SlideComponent={({ data }) => (
             <GameCard
+            isDesktop={isDesktop}
             onClick={data.onClick}
             gameCardVariant={0}
             gameDetails={{
@@ -510,15 +570,18 @@ const Games = () => {
         && <>
           <div className="skeleton">
             <div className="d-flex align-items-center skeleton-game-cards-container">
-              { [1, 2, 3, 4, 5, 6].map((item, index) => (
+                  {[1,
+                    // 2, 3, 4, 5, 6
+                  ].map((item, index) => (
                 <div key={index} className='skeleton-game-card'></div>
-              )) }
+                  )) }
             </div>
           </div>
         </>
       }
       </div>
     </section>
+    {/* all games section */}
     <section className='all-games-section'>
       <header className='subtitle1'>
         <FormattedMessage defaultMessage={'All Games'} description={'Section Title'} />
@@ -527,72 +590,80 @@ const Games = () => {
         {
           dashBoardData && <>
             <GameCard
+            isDesktop={isDesktop}
             onClick = {() => navigate('/turtle')}
             gameCardVariant={1}
-            contentContainerCustomClass={'col-12 col-sm-6 col-ml-4 col-xl-3 p-1 p-md-2'}
+            contentContainerCustomClass={'col-6 col-sm-4 col-xl-3 p-1 p-md-2'}
             gameDetails={{
               gameTitle: 'Turtle',
               currentLevelNumber: dashBoardData.turtle.currentQuestionDetails
                 ? dashBoardData.turtle.currentQuestionDetails.virtualId : 0,
               totalLevels: dashBoardData.turtle.overAllQuestionCount,
-              gameCoverURL: '../../../../images/games/turtle-game-cover.png',
+              gameCoverURL: 'games/turtle-game-cover.png',
             }} />
-            <GameCard
+            {/* <GameCard
+            isDesktop={isDesktop}
             onClick={() => {}}
             gameCardVariant={1}
-            contentContainerCustomClass={'col-12 col-sm-6 col-ml-4 col-xl-3 p-1 p-md-2'}
+            contentContainerCustomClass={'col-6 col-sm-4 col-xl-3 p-1 p-md-2'}
             gameDetails={{
               gameTitle: 'Zombieland',
               currentLevelNumber: dashBoardData.zombieLand.currentQuestionDetails
                 ? dashBoardData.zombieLand.currentQuestionDetails.virtualId : 0,
               totalLevels: dashBoardData.turtle.overAllQuestionCount,
-              gameCoverURL: '../../../../images/games/zombie-game-cover.png',
+              gameCoverURL: 'games/zombie-game-cover.png',
             }} />
             <GameCard
+            isDesktop={isDesktop}
             onClick={() => {}}
             gameCardVariant={1}
-            contentContainerCustomClass={'col-12 col-sm-6 col-ml-4 col-xl-3 p-1 p-md-2'}
+            contentContainerCustomClass={'col-6 col-sm-4 col-xl-3 p-1 p-md-2'}
             gameDetails={{
               gameTitle: 'Webkata-CSS',
               currentLevelNumber: dashBoardData.turtle.currentQuestionDetails.virtualId,
               totalLevels: dashBoardData.turtle.overAllQuestionCount,
-              gameCoverURL: '../../../../images/games/webkata-css-game-cover.png',
+              gameCoverURL: 'games/webkata-css-game-cover.png',
             }} />
-            <GameCard
+              <GameCard
+            isDesktop={isDesktop}
             onClick={() => {}}
             gameCardVariant={1}
-            contentContainerCustomClass={'col-12 col-sm-6 col-ml-4 col-xl-3 p-1 p-md-2'}
+            contentContainerCustomClass={'col-6 col-sm-4 col-xl-3 p-1 p-md-2'}
             gameDetails={{
               gameTitle: 'Webkata-HTML',
               currentLevelNumber: dashBoardData.turtle.currentQuestionDetails.virtualId,
               totalLevels: dashBoardData.turtle.overAllQuestionCount,
-              gameCoverURL: '../../../../images/games/webkata-html-game-cover.png',
+              gameCoverURL: 'games/webkata-html-game-cover.png',
             }} />
             <GameCard
+            isDesktop={isDesktop}
             onClick={() => {}}
             gameCardVariant={1}
-            contentContainerCustomClass={'col-12 col-sm-6 col-ml-4 col-xl-3 p-1 p-md-2'}
+            contentContainerCustomClass={'col-6 col-sm-4 col-xl-3 p-1 p-md-2'}
             gameDetails={{
               gameTitle: 'Webkata-JS',
               currentLevelNumber: dashBoardData.turtle.currentQuestionDetails.virtualId,
               totalLevels: dashBoardData.turtle.overAllQuestionCount,
-              gameCoverURL: '../../../../images/games/webkata-js-game-cover.png',
-            }} />
+              gameCoverURL: 'games/webkata-js-game-cover.png',
+            }} /> */}
           </>
         }
         {
           !dashBoardData && <>
             {
-              [1, 2, 3, 4, 5].map((val) => (
-                <div key={val} className='col-12 col-sm-6 col-ml-4 col-xl-3 p-1 p-md-2'>
+                [1,
+                  // 2, 3, 4, 5,
+                ].map((val) => (
+                <div key={val} className='col-6 col-sm-4 col-xl-3 p-1 p-md-2'>
                   <div className='skeleton-game-card'></div>
                 </div>
-              ))
+                ))
             }
           </>
         }
       </div>
       </section>
+      {/* bottomSheet for mobile */}
       {
       !isDesktop
       && <>
