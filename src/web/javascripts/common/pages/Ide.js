@@ -42,7 +42,7 @@ const CodeEditor = ({
 
     // listen for change event
     editor.on('change', () => {
-      setSession('ideInteracted', true);
+      setSession('ideInteracted', 'true');
     });
 
     return () => {
@@ -186,7 +186,7 @@ const updateCodeEditor = (codeEditorId, code, mode) => {
   if (mode) {
     currentEditorInstance.setOption('mode', `ace/mode/${mode}`);
   }
-  setSession('ideInteracted', false);
+  setSession('ideInteracted', 'false');
 };
 
 const updateOuputBox = (outputBoxId, compilationDetails) => {
@@ -250,7 +250,7 @@ const onLanguageOptionClick = async (e, editorId, inputBoxId, outputBoxId) => {
   resetInputAndOutputBox(inputBoxId, outputBoxId);
 
   // if ide interacted
-  if (ideInteracted) {
+  if (ideInteracted === 'true') {
     $('.keep-code-changes-modal').modal({
       backdrop: 'static',
       keyboard: false,
@@ -377,7 +377,7 @@ const Ide = () => {
             languagesAvailable={valueToLanguageDisplayNameMap}
             onBackBtnClick={() => navigate(-1)}
             onLanguageOptionClick={
-              (e) => onLanguageOptionClick(e, `#${EDITORID}`, `#${INPUTBOXID}`, `#${OUTPUTBOXID}`)
+              (e) => onLanguageOptionClick(e, EDITORID, `#${INPUTBOXID}`, `#${OUTPUTBOXID}`)
             }
           />
           <div className='container-fluid'>
@@ -425,7 +425,7 @@ const Ide = () => {
             languagesAvailable={valueToLanguageDisplayNameMap}
             onBackBtnClick={() => navigate(-1)}
             onLanguageOptionClick={(e) => {
-              onLanguageOptionClick(e, `#${EDITORID}`, `#${INPUTBOXID}`, `#${OUTPUTBOXID}`);
+              onLanguageOptionClick(e, EDITORID, `#${INPUTBOXID}`, `#${OUTPUTBOXID}`);
             }} />
           <div className='container-fluid code-editor-with-input-output'>
             <div className='editor-container'>
