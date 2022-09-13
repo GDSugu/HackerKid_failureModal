@@ -11,16 +11,16 @@
       "value": "Email"
     }
   ],
+  "+U3h21": [
+    {
+      "type": 0,
+      "value": "Keep the code changes"
+    }
+  ],
   "+g4yFF": [
     {
       "type": 0,
       "value": "Logout"
-    }
-  ],
-  "/EsQT0": [
-    {
-      "type": 0,
-      "value": "This is games page"
     }
   ],
   "/Gy7qZ": [
@@ -31,6 +31,12 @@
     {
       "type": 1,
       "value": "levelNumber"
+    }
+  ],
+  "/Id/lz": [
+    {
+      "type": 0,
+      "value": "Yes"
     }
   ],
   "/dnxym": [
@@ -219,6 +225,12 @@
       "value": "Next"
     }
   ],
+  "6kktdG": [
+    {
+      "type": 0,
+      "value": "Output will be shown here"
+    }
+  ],
   "6oGVMu": [
     {
       "type": 0,
@@ -237,10 +249,34 @@
       "value": "Login into existing account"
     }
   ],
+  "7PlDmO": [
+    {
+      "type": 0,
+      "value": "Play"
+    }
+  ],
+  "8R6f04": [
+    {
+      "type": 0,
+      "value": "Coming Soon..."
+    }
+  ],
+  "9+2Mm0": [
+    {
+      "type": 0,
+      "value": "IDE"
+    }
+  ],
   "9BVOVU": [
     {
       "type": 0,
       "value": "Please verify to continue"
+    }
+  ],
+  "9NID4X": [
+    {
+      "type": 0,
+      "value": "OK"
     }
   ],
   "9YoD+Y": [
@@ -331,6 +367,12 @@
       "value": "Coins Earned:"
     }
   ],
+  "CfsqV9": [
+    {
+      "type": 0,
+      "value": "All Games"
+    }
+  ],
   "Ciol6I": [
     {
       "type": 0,
@@ -403,6 +445,16 @@
     {
       "type": 0,
       "value": " ?"
+    }
+  ],
+  "Fl1ECE": [
+    {
+      "type": 0,
+      "value": "Level "
+    },
+    {
+      "type": 1,
+      "value": "level"
     }
   ],
   "FoTGQE": [
@@ -489,6 +541,12 @@
       "value": "OTP"
     }
   ],
+  "K+HWzs": [
+    {
+      "type": 0,
+      "value": "Console"
+    }
+  ],
   "KD6lRu": [
     {
       "type": 0,
@@ -547,6 +605,12 @@
     {
       "type": 0,
       "value": "Go to login"
+    }
+  ],
+  "NsygW3": [
+    {
+      "type": 0,
+      "value": "Run"
     }
   ],
   "O1sXEv": [
@@ -799,6 +863,12 @@
       "value": "Please login again"
     }
   ],
+  "XVQ4du": [
+    {
+      "type": 0,
+      "value": "No"
+    }
+  ],
   "Y+dh5z": [
     {
       "type": 0,
@@ -901,6 +971,12 @@
       "value": "Yes"
     }
   ],
+  "dreQIo": [
+    {
+      "type": 0,
+      "value": "Inputs"
+    }
+  ],
   "e5Eaen": [
     {
       "type": 0,
@@ -917,6 +993,12 @@
     {
       "type": 0,
       "value": "Set a Password"
+    }
+  ],
+  "fcrHSq": [
+    {
+      "type": 1,
+      "value": "languageDisplayName"
     }
   ],
   "g0zp7w": [
@@ -1021,6 +1103,12 @@
       "value": "OTP"
     }
   ],
+  "mMH50/": [
+    {
+      "type": 0,
+      "value": "Code"
+    }
+  ],
   "mTY3Hn": [
     {
       "type": 0,
@@ -1063,10 +1151,22 @@
       "value": "View more"
     }
   ],
+  "nsIAsY": [
+    {
+      "type": 0,
+      "value": "Run"
+    }
+  ],
   "o2jxWd": [
     {
       "type": 0,
       "value": "Account Settings"
+    }
+  ],
+  "oDenEU": [
+    {
+      "type": 0,
+      "value": "Turtle"
     }
   ],
   "oOZkkL": [
@@ -1091,12 +1191,6 @@
     {
       "type": 0,
       "value": "Game Progress"
-    }
-  ],
-  "q86PwV": [
-    {
-      "type": 0,
-      "value": "Go to Home"
     }
   ],
   "qUU2pp": [
@@ -1127,6 +1221,12 @@
     {
       "type": 0,
       "value": "Copy Link"
+    }
+  ],
+  "sC1GR3": [
+    {
+      "type": 0,
+      "value": "Yes"
     }
   ],
   "sNqwYF": [

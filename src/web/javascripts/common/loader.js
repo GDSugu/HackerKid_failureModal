@@ -5,12 +5,17 @@ const showInlineLoadingSpinner = (selector) => {
   $(loadingSpinner).attr('id', 'loader-partial');
 
   const htmlBeforeLoading = $(selector).html();
+  const widthBeforeLoading = $(selector)[0].offsetWidth;
+  const heightBeforeLoading = $(selector)[0].offsetHeight;
 
   const hideInlineLoadingSpinner = () => {
     $(selector).empty();
     $(selector).removeAttr('disabled');
+    $(selector).removeAttr('style');
     $(selector).html(htmlBeforeLoading);
   };
+  $(selector).css('width', `${widthBeforeLoading}px`);
+  $(selector).css('height', `${heightBeforeLoading}px`);
   $(selector).attr('disabled', true);
   $(selector).empty();
   $(selector).append(loadingSpinner);
@@ -18,4 +23,24 @@ const showInlineLoadingSpinner = (selector) => {
   return hideInlineLoadingSpinner;
 };
 
-export default showInlineLoadingSpinner;
+const showFullScreenLoadingSpinner = () => {
+  const loadingSpinner = document.createElement('div');
+  $(loadingSpinner).attr('id', 'loader');
+
+  const hideFullScreenLoadingSpinner = () => {
+    $('#loader').hide();
+    $('#loader').remove();
+  };
+
+  $('body').append(loadingSpinner);
+  $('#loader').show();
+
+  return hideFullScreenLoadingSpinner;
+};
+
+export default null;
+
+export {
+  showInlineLoadingSpinner,
+  showFullScreenLoadingSpinner,
+};
