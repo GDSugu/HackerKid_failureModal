@@ -14,7 +14,7 @@ import {
   getCompilerIdFromValue,
   getBoilerPlateCodeFromValue,
 } from '../Functions/ide';
-import { showInlineLoadingSpinner, showFullScreenLoadingSpinner } from '../loader';
+import { showFullScreenLoadingSpinner } from '../loader';
 import { useIde } from '../../../../hooks/pages/ide';
 
 // constant
@@ -288,23 +288,18 @@ const Ide = () => {
   const EDITORID = 'editor';
   const INPUTBOXID = 'input-box';
   const OUTPUTBOXID = 'output-box';
+  const device = getDevice();
 
   // hooks
   const runCodeRequest = useIde();
   const getRecapchaToken = useRecapchav3();
   const navigate = useNavigate();
 
-  const device = getDevice();
-
   // methods
-  const runCode = (sourceCode, input, compilerId) => getRecapchaToken({ action: 'runCode' }).then((token) => {
-    const recaptchaVersion = 3;
+  const runCode = (sourceCode, input, compilerId) => getRecapchaToken({ action: 'runCode' }).then((token) => runCodeRequest(sourceCode, input, compilerId, token));
 
-    return runCodeRequest(sourceCode, input, compilerId, token, recaptchaVersion);
-  });
-
-  const mobileRunBtnClickHandler = () => {
-    const hideFullScreenLoader = showFullScreenLoadingSpinner();
+  const runCodeBtnClickHandler = () => {
+    const hideFullScreenLoader = showFullScreenLoadingSpinner('.to-show-loading-container');
 
     const input = $(`#${INPUTBOXID}`).val();
     const sourceCode = ace.edit(EDITORID).getValue();
@@ -336,43 +331,10 @@ const Ide = () => {
     });
   };
 
-  const desktopRunBtnClickHandler = () => {
-    const hideInLineLoadingSpinner = showInlineLoadingSpinner('.run-code-btn');
-
-    const input = $(`#${INPUTBOXID}`).val();
-    const sourceCode = ace.edit(EDITORID).getValue();
-    const selectedLanguageValue = $('.dropdown-item.active').attr('data-language-value');
-    const compilerId = getCompilerIdFromValue(selectedLanguageValue);
-
-    setSession('previousSourceCode', sourceCode);
-    setSession('previousLanguageValue', selectedLanguageValue);
-
-    runCode(sourceCode, input, compilerId).then((response) => {
-      const parsedData = JSON.parse(response);
-
-      if (parsedData.status === 'success') {
-        hideInLineLoadingSpinner();
-        updateOuputBox(`#${OUTPUTBOXID}`, parsedData.compilationDetails);
-      } else if (parsedData.status === 'error') {
-        const err = new Error(parsedData.message);
-        err.cause = 'postData';
-
-        throw err;
-      }
-    }).catch((err) => {
-      hideInLineLoadingSpinner();
-      if (err.cause === 'postData') {
-        console.log('Something went wrong! Please try again');
-      } else {
-        console.error(err);
-      }
-    });
-  };
-
   return (
     <>
       {
-        device === 'mobile' && <div className='mobile-container'>
+        device === 'mobile' && <div className='mobile-container to-show-loading-container'>
           <LanguageSelectorWithBackBtn
             languagesAvailable={valueToLanguageDisplayNameMap}
             onBackBtnClick={() => navigate(-1)}
@@ -400,7 +362,7 @@ const Ide = () => {
                 }}/>
               <MobileFooterTabs
                 tabTargetIds={['#code-editor-tabpanel', '#console-tabpanel']}
-                onRunCode={mobileRunBtnClickHandler}
+                onRunCode={runCodeBtnClickHandler}
                 tabEventHandlers={[
                   {
                     onShow: () => {
@@ -420,7 +382,7 @@ const Ide = () => {
         </div>
       }
       {
-        device === 'desktop' && <div className='desktop-container'>
+        device === 'desktop' && <div className='desktop-container to-show-loading-container'>
           <LanguageSelectorWithBackBtn
             languagesAvailable={valueToLanguageDisplayNameMap}
             onBackBtnClick={() => navigate(-1)}
@@ -437,7 +399,7 @@ const Ide = () => {
                 <i className='fa fa-chevron-right'></i>
               </button>
               <CodeEditor id={EDITORID} onload={onCodeEditorLoad} />
-              <button type='button' id='runCodeBtn' className='run-code-btn btn btn-primary' onClick={desktopRunBtnClickHandler}>
+              <button type='button' id='runCodeBtn' className='run-code-btn btn btn-primary' onClick={runCodeBtnClickHandler}>
                 <span>
                   <FormattedMessage defaultMessage='Run' description='Run code button' />
                 </span>

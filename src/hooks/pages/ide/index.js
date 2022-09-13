@@ -1,7 +1,7 @@
 import post from '../../common/framework';
 
 const useIde = () => {
-  const runCodeRequest = (sourceCode, input, compilerId, token, recaptchaVersion) => post({
+  const runCodeRequest = (sourceCode, input, compilerId, token, recaptchaVersion = 3) => post({
     type: 'runCode',
     source: sourceCode,
     user_input: input,

@@ -23,7 +23,7 @@ const showInlineLoadingSpinner = (selector) => {
   return hideInlineLoadingSpinner;
 };
 
-const showFullScreenLoadingSpinner = () => {
+const showFullScreenLoadingSpinner = (selector = '') => {
   const loadingSpinner = document.createElement('div');
   $(loadingSpinner).attr('id', 'loader');
 
@@ -32,7 +32,12 @@ const showFullScreenLoadingSpinner = () => {
     $('#loader').remove();
   };
 
-  $('body').append(loadingSpinner);
+  if (!selector) {
+    $('body').append(loadingSpinner);
+  } else {
+    $(selector).append(loadingSpinner);
+  }
+
   $('#loader').show();
 
   return hideFullScreenLoadingSpinner;

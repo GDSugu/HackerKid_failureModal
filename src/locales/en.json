@@ -166,6 +166,10 @@
     "defaultMessage": "Play",
     "description": "Turtle Play Button"
   },
+  "7mn7eO": {
+    "defaultMessage": "Output will appear here",
+    "description": "output placeholder"
+  },
   "8R6f04": {
     "defaultMessage": "Coming Soon...",
     "description": "Challenges Page"

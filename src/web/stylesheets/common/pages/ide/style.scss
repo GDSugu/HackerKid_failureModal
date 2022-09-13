@@ -380,6 +380,19 @@
   }
 }
 
+.to-show-loading-container {
+  position: relative;
+
+  #loader {
+    position: absolute;
+
+    &:after {
+      border-color: gt.theme-var(bg-1);
+      border-top-color: transparent;
+    }
+  }
+}
+
 ::-webkit-scrollbar {
   width: 0.5rem;
   height: 0.5rem;

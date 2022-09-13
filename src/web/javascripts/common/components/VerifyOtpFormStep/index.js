@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { closeFormError, setFormErrorField } from '../../commonLoginRegisterFunctions';
 import useOtp from '../../../../../hooks/pages/otp';
 import '../../../../stylesheets/common/sass/components/_otp.scss';
-import showInlineLoadingSpinner from '../../loader';
+import { showInlineLoadingSpinner } from '../../loader';
 
 const VerifyOtpFormStep = ({
   parentStateObj, setParentStateObj, setBackBtnStateObj, otpRequestType, recapchaExecuteOptions,
