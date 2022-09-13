@@ -118,6 +118,7 @@
     }
 
     .code-editor-with-input-output {
+      position: relative;
       display: flex;
       flex-grow: 1;
     }
@@ -191,7 +192,7 @@
     }
 
     .input-output-container {
-      position: fixed;
+      position: absolute;
       right: 0;
       width: 50%;
       height: 100%;
@@ -213,7 +214,7 @@
       }
 
       .output-box {
-        flex-basis: 51%;
+        flex-basis: 70%;
       }
     }
   }
