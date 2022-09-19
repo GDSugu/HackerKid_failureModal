@@ -28,6 +28,11 @@
   #editor {
     background-color: gt.theme-var(ide-bg-2, null, $thememaplight, $cssvars);
     color: gt.theme-var(ide-text-color-1, null, $thememaplight, $cssvars);
+
+    .ace_gutter {
+      background-color: gt.theme-var(ide-bg-1, null, $thememaplight, $cssvars);
+      color: gt.theme-var(ide-text-color-1, null, $thememaplight, $cssvars);
+    }
   }
 
   .input-box,
@@ -136,11 +141,6 @@
       #editor {
         position: relative;
         height: 100%;
-
-        .ace_gutter {
-          background-color: gt.theme-var(ide-bg-1, null, $thememaplight, $cssvars);
-          color: gt.theme-var(ide-text-color-1, null, $thememaplight, $cssvars);
-        }
       }
 
       .toggle-full-width-editor {
@@ -252,11 +252,6 @@
       position: relative;
       width: 100%;
       height: 100%;
-
-      .ace_gutter {
-        background-color: gt.theme-var(ide-bg-1, null, $thememaplight, $cssvars);
-        color: gt.theme-var(ide-text-color-1, null, $thememaplight, $cssvars);
-      }
     }
 
     footer {

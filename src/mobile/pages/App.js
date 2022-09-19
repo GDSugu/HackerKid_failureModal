@@ -25,7 +25,7 @@ import RouteLogin from './Login';
 import RouteRegister from './Register';
 import RouteForgotPassword from './ForgotPassword';
 import RouteLeaderboard from './Leaderboard';
-
+import RouteIde from './Ide';
 import BottomSheet from '../components/BottomSheet';
 import RouteHelp from './Help';
 import RouteTurtleHome from './TurtleHome';
@@ -261,6 +261,7 @@ const App = () => {
                     <Stack.Screen name='Class' component={RouteClass} />
                     <Stack.Screen name='EditProfile' component={RouteProfile} />
                     <Stack.Screen name='Leaderboard' component={RouteLeaderboard} />
+                    <Stack.Screen name='Ide' component={RouteIde} />
                     <Stack.Screen name='TurtleHome'>
                       {(props) => <RouteTurtleHome {...props} routeName={routeName} /> }
                     </Stack.Screen>

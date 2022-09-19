@@ -541,6 +541,12 @@
       "value": "errorMessage"
     }
   ],
+  "Iyx0jU": [
+    {
+      "type": 0,
+      "value": "Output"
+    }
+  ],
   "JnwRMJ": [
     {
       "type": 0,
@@ -551,6 +557,12 @@
     {
       "type": 0,
       "value": "Console"
+    }
+  ],
+  "K6/Xyh": [
+    {
+      "type": 1,
+      "value": "memory"
     }
   ],
   "KD6lRu": [
@@ -875,6 +887,12 @@
       "value": "No"
     }
   ],
+  "XrpVOM": [
+    {
+      "type": 1,
+      "value": "output"
+    }
+  ],
   "Y+dh5z": [
     {
       "type": 0,
@@ -981,6 +999,12 @@
     {
       "type": 0,
       "value": "Inputs"
+    }
+  ],
+  "dtriXn": [
+    {
+      "type": 0,
+      "value": "Try Now"
     }
   ],
   "e5Eaen": [
@@ -1187,6 +1211,12 @@
       "value": "Account Settings"
     }
   ],
+  "pQM50G": [
+    {
+      "type": 1,
+      "value": "executionTime"
+    }
+  ],
   "pVIk7O": [
     {
       "type": 0,
@@ -1215,6 +1245,12 @@
     {
       "type": 0,
       "value": "Phone"
+    }
+  ],
+  "quv5CI": [
+    {
+      "type": 0,
+      "value": "Memory"
     }
   ],
   "rECW1h": [
@@ -1247,6 +1283,12 @@
       "value": "Go to Home"
     }
   ],
+  "t5hBAx": [
+    {
+      "type": 0,
+      "value": "Output will be shown here"
+    }
+  ],
   "tbPLF3": [
     {
       "type": 1,
@@ -1265,10 +1307,22 @@
       "value": "message"
     }
   ],
+  "uPz4GT": [
+    {
+      "type": 0,
+      "value": "Run"
+    }
+  ],
   "uhayi4": [
     {
       "type": 1,
       "value": "errorMessage"
+    }
+  ],
+  "uipkRi": [
+    {
+      "type": 0,
+      "value": "Inputs"
     }
   ],
   "vChW6P": [
@@ -1335,6 +1389,12 @@
     {
       "type": 1,
       "value": "hintMessage"
+    }
+  ],
+  "yGiS9f": [
+    {
+      "type": 0,
+      "value": "Execution Time"
     }
   ],
   "yujxGL": [
