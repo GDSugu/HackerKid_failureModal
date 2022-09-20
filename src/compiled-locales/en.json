@@ -549,12 +549,6 @@
       "value": "Password changed successfully"
     }
   ],
-  "H9m7jW": [
-    {
-      "type": 1,
-      "value": "timeSpent"
-    }
-  ],
   "HAlOn1": [
     {
       "type": 0,
@@ -1141,6 +1135,12 @@
       "value": "Login Into Existing Account"
     }
   ],
+  "g8RtbX": [
+    {
+      "type": 0,
+      "value": "Coins"
+    }
+  ],
   "gOkIvb": [
     {
       "type": 0,
@@ -1187,12 +1187,6 @@
     {
       "type": 0,
       "value": "Forgot Password"
-    }
-  ],
-  "jZl4zg": [
-    {
-      "type": 1,
-      "value": "xp"
     }
   ],
   "k6tlKQ": [
@@ -1289,12 +1283,6 @@
     {
       "type": 1,
       "value": "text"
-    }
-  ],
-  "njn/ZL": [
-    {
-      "type": 0,
-      "value": "XP"
     }
   ],
   "nlYt8p": [
@@ -1403,12 +1391,6 @@
     {
       "type": 0,
       "value": "Go to Home"
-    }
-  ],
-  "tRGm5z": [
-    {
-      "type": 0,
-      "value": "Time Spent:"
     }
   ],
   "tbPLF3": [

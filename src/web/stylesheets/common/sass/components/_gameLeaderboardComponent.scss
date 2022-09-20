@@ -52,6 +52,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
+    position: relative;
 
     @include gm.media-breakpoint-down(md) {
       align-items: unset;
@@ -99,60 +100,81 @@
         overflow-x: hidden;
         overflow-y: auto;
         position: relative;
+        display: flex;
+        flex-direction: column;
 
-        table {
-          table-layout: fixed;
+        .game-table {
+          flex: 1;
 
-          thead {
-            background-color: gt.theme-var(bg-4);
-            position: sticky;
-            top: 0;
-            padding: 1rem;
+          table {
+            table-layout: fixed;
+            margin-bottom: 0;
 
-            th {
+            thead {
+              background-color: gt.theme-var(bg-4);
+              position: sticky;
+              top: 0;
               padding: 1rem;
-              vertical-align: middle;
-              text-align: center;
 
-              &:nth-child(3) {
-                p {
-                  border-radius: 0.5rem;
-                  border: 2px solid gt.theme-var(text-color-12);
-                  padding: 0.5rem 1.75rem;
-                  display: inline-block;
-                }
-              }
-
-              p {
-                margin-bottom: 0;
+              th {
+                padding: 1rem;
+                vertical-align: middle;
                 text-align: center;
-                font-size: 0.85rem;
-                color: gt.theme-var(text-color-2);
-              }
-            }
-          }
 
-          tbody {
-            tr {
-              td {
+                &:nth-child(3) {
+                  p {
+                    border-radius: 0.5rem;
+                    border: 2px solid gt.theme-var(text-color-12);
+                    padding: 0.5rem 1.75rem;
+                    display: inline-block;
+                  }
+                }
+
                 p {
                   margin-bottom: 0;
                   text-align: center;
+                  font-size: 0.85rem;
                   color: gt.theme-var(text-color-2);
                 }
+              }
+            }
 
-                img {
-                  width: 2.5rem;
-                  height: 2.5rem;
-                  border-radius: 100%;
-                  margin-right: 0.5rem;
-                }
+            tbody,
+            tfoot {
+              tr {
+                td {
+                  vertical-align: middle;
 
-                &:nth-child(2) {
                   p {
-                    text-align: unset;
+                    margin-bottom: 0;
+                    text-align: center;
+                    color: gt.theme-var(text-color-2);
+                  }
+
+                  img {
+                    width: 2.5rem;
+                    height: 2.5rem;
+                    border-radius: 100%;
+                    margin-right: 0.5rem;
+                  }
+
+                  &:nth-child(2) {
+                    p {
+                      text-align: unset;
+                    }
                   }
                 }
+              }
+            }
+
+            tfoot {
+              background-color: gt.theme-var(bg-7);
+              backdrop-filter: blur(0.5rem);
+              position: sticky;
+              bottom: 64px;
+
+              @include gm.media-breakpoint-down(md) {
+                display: none;
               }
             }
           }
@@ -161,6 +183,7 @@
         .pagination-container {
           background-color: gt.theme-var(bg-4);
           position: sticky;
+          width: 100%;
           bottom: 0;
           padding: 0.75rem 1rem;
 
@@ -177,10 +200,14 @@
           button {
             border-radius: 100%;
 
+            &:focus {
+              box-shadow: none;
+            }
+
             &.pagination-navigation-btn {
               border: 2px solid gt.theme-var(text-color-3);
               color: gt.theme-var(text-color-3);
-        
+
               &.disabled {
                 border: 2px solid gt.theme-var(text-color-13);
                 color: gt.theme-var(text-color-13);
@@ -205,6 +232,8 @@
       .game-overview-container {
         display: grid;
         place-items: center;
+        height: 100%;
+        overflow: auto;
 
         @include gm.media-breakpoint-down(md) {
           display: block;
@@ -212,7 +241,7 @@
         }
 
         .game-overview-content-container {
-          margin: auto;
+          margin: 3.5rem auto;
           padding: 0;
 
           .profile-container {
@@ -253,7 +282,7 @@
               }
 
               .stats-block-container {
-                display:flex;
+                display: flex;
                 align-items: center;
 
                 @include gm.media-breakpoint-down(md) {
@@ -292,8 +321,8 @@
                         }
                       }
 
-                      #yourScoreCount tspan
-                      #yourScore{
+                      #yourScoreCount tspan,
+                      #yourScore {
                         color: gt.theme-var(text-color-2);
                       }
                     }
@@ -370,37 +399,84 @@
     }
   }
 
-  .pagination-container-mob {
-    background-color: gt.theme-var(bg-4);
-    position: sticky;
+  .pos-mob-abs {
+    position: absolute;
     bottom: 0;
-    padding: 0.75rem 1rem;
+    width: 100%;
 
     @include gm.media-breakpoint-up(md) {
       display: none;
     }
 
-    .pagination-block {
-      width: 75%;
-      display: flex;
-      justify-content: space-evenly;
-    }
-
-    button {
-      border-radius: 100%;
-
-      &.pagination-navigation-btn {
-        border: 2px solid gt.theme-var(text-color-3);
-        color: gt.theme-var(text-color-3);
-  
-        &.disabled {
-          border: 2px solid gt.theme-var(text-color-13);
-          color: gt.theme-var(text-color-13);
-        }
+    .footer-mob {
+      table {
+        margin-bottom: 0;
+        table-layout: fixed;
       }
 
-      &.current {
-        color: gt.theme-var(text-color-3);
+      tfoot {
+        position: sticky;
+
+        tr {
+          background-color: gt.theme-var(bg-7);
+          backdrop-filter: blur(0.5rem);
+
+          td {
+            vertical-align: middle;
+
+            p {
+              margin-bottom: 0;
+              text-align: center;
+              color: gt.theme-var(text-color-2);
+            }
+
+            img {
+              width: 2.5rem;
+              height: 2.5rem;
+              border-radius: 100%;
+              margin-right: 0.5rem;
+            }
+
+            &:nth-child(2) {
+              p {
+                text-align: unset;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .pagination-container-mob {
+      background-color: gt.theme-var(bg-4);
+      padding: 0.75rem 1rem;
+
+      @include gm.media-breakpoint-up(md) {
+        display: none;
+      }
+
+      .pagination-block {
+        width: 75%;
+        display: flex;
+        justify-content: space-evenly;
+      }
+
+      button {
+        border-radius: 100%;
+
+        &.pagination-navigation-btn {
+          border: 2px solid gt.theme-var(text-color-3);
+          color: gt.theme-var(text-color-3);
+
+          &.disabled {
+            border: 2px solid gt.theme-var(text-color-13);
+            color: gt.theme-var(text-color-13);
+          }
+        }
+
+        &.current {
+          color: gt.theme-var(text-color-3);
+        }
       }
     }
   }

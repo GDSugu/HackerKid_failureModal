@@ -100,9 +100,7 @@
           cursor: grab;
         }
 
-        &.open,
-        &.locked,
-        &.current {
+        &.locked {
           background: url(../../../../../images/games/level_not_completed.png) no-repeat center / contain;
         }
 
@@ -110,8 +108,13 @@
           background: url(../../../../../images/games/level_completed.png) no-repeat center / contain;
         }
 
-        &.current-question {
+        &.current-question,
+        &.open {
           background: url(../../../../../images/games/level_current.png) no-repeat center / contain;
+        }
+
+        &.current-question {
+          transform: scale(1.25);
         }
 
         &:not(:last-child):before {
