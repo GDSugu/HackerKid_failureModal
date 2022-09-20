@@ -42,14 +42,16 @@ const Img = ({
 
   React.useEffect(() => {
     if (!local) {
-      fetch(src)
-        .then((res) => {
-          if (res.status === 200) {
-            setImgSrc(src);
-          } else {
-            setImgSrc(`${imgPath + fallback}`);
-          }
-        });
+      if (src) {
+        fetch(src)
+          .then((res) => {
+            if (res.status !== 200) {
+              setImgSrc(`${imgPath + fallback}`);
+            }
+          });
+      } else {
+        setImgSrc(`${imgPath + fallback}`);
+      }
     }
   }, []);
 

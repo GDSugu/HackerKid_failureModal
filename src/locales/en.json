@@ -350,10 +350,6 @@
     "defaultMessage": "Password changed successfully",
     "description": "Password changed text"
   },
-  "H9m7jW": {
-    "defaultMessage": "{timeSpent}",
-    "description": "Time Spent"
-  },
   "HAlOn1": {
     "defaultMessage": "Name"
   },
@@ -771,10 +767,6 @@
     "defaultMessage": "Forgot Password",
     "description": "Forgot Password Heading"
   },
-  "jZl4zg": {
-    "defaultMessage": "{xp}",
-    "description": "XP"
-  },
   "k6tlKQ": {
     "defaultMessage": "Ok",
     "description": "closing modal button"
@@ -838,10 +830,6 @@
   "nT6Ql7": {
     "defaultMessage": "{text}",
     "description": "help type text"
-  },
-  "njn/ZL": {
-    "defaultMessage": "XP",
-    "description": "XP"
   },
   "nlYt8p": {
     "defaultMessage": "View more",
@@ -913,10 +901,6 @@
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
-  },
-  "tRGm5z": {
-    "defaultMessage": "Time Spent:",
-    "description": "Time Spent"
   },
   "tbPLF3": {
     "defaultMessage": "{step}",
