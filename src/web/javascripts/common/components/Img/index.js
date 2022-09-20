@@ -12,20 +12,27 @@ const Img = ({
   useSource = true,
 }) => {
   const [imgSrc, setImgSrc] = React.useState(src);
-  const filePath = src.split('/').pop();
-  const fileName = filePath.split('.')[0];
-  const fileExtension = filePath.split('.').pop();
+  let filePath;
+  let fileName;
+  let fileExtension;
+  if (local) {
+    filePath = src.split('/').pop();
+    [fileName] = filePath.split('.');
+    fileExtension = filePath.split('.').pop();
+  }
 
   React.useEffect(() => {
     if (!local) {
-      fetch(src)
-        .then((res) => {
-          if (res.status === 200) {
-            setImgSrc(src);
-          } else {
-            setImgSrc(`${imgPath + fallback}`);
-          }
-        });
+      if (src) {
+        fetch(src)
+          .then((res) => {
+            if (res.status !== 200) {
+              setImgSrc(`${imgPath + fallback}`);
+            }
+          });
+      } else {
+        setImgSrc(`${imgPath + fallback}`);
+      }
     }
   }, []);
 

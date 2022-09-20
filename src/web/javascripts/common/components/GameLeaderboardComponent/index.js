@@ -6,7 +6,7 @@ import '../../../../stylesheets/common/sass/components/_gameLeaderboardComponent
 import Img from '../Img';
 import { AuthContext } from '../../../../../hooks/pages/root';
 
-const LeaderboardUserComponent = () => <>
+const LeaderboardUserComponent = ({ user }) => <>
   <tr>
     <td>
       <p>
@@ -14,7 +14,7 @@ const LeaderboardUserComponent = () => <>
           defaultMessage={'#{rank}'}
           description={'Rank'}
           values={{
-            rank: 1,
+            rank: user.rank,
           }}
         />
       </p>
@@ -22,7 +22,7 @@ const LeaderboardUserComponent = () => <>
     <td>
       <div className="d-flex align-items-center">
         <Img
-          src={'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?s=200&d=identicon&r=PG'}
+          src={user.profileImage}
           local={false}
           fallback={'profile/default_user.png'}
         />
@@ -31,7 +31,7 @@ const LeaderboardUserComponent = () => <>
             defaultMessage={'{studentNamt}'}
             description={'Student Name'}
             values={{
-              studentNamt: 'John Doe',
+              studentNamt: user.name,
             }}
           />
         </p>
@@ -40,10 +40,10 @@ const LeaderboardUserComponent = () => <>
     <td>
       <p>
         <FormattedMessage
-          defaultMessage={'{xp}'}
-          description={'XP'}
+          defaultMessage={'{coins}'}
+          description={'Coins'}
           values={{
-            xp: '100',
+            coins: user.points,
           }}
         />
       </p>
@@ -51,7 +51,7 @@ const LeaderboardUserComponent = () => <>
   </tr>
 </>;
 
-const LeaderboardPaginationComponent = ({ paginationDetails }) => {
+const LeaderboardPaginationComponent = ({ handlePagination, paginationDetails }) => {
   const totalPage = Math.ceil(paginationDetails?.overallCount / paginationDetails?.countPerPage);
   let paginationFlag = false;
   if (totalPage > 5) {
@@ -67,9 +67,9 @@ const LeaderboardPaginationComponent = ({ paginationDetails }) => {
             || paginationDetails?.page === idx - 1
             || paginationDetails?.page === idx + 1
             || idx === totalPage);
-          return <button key={index} className={`btn paginate_button paginate_numbers ${pageToShow ? '' : 'd-none'} ${idx === paginationDetails.page ? 'current' : ''}`} aria-controls={'leaderboard'} tabIndex="0">{idx}</button>;
+          return <button key={index} className={`btn paginate_button paginate_numbers ${pageToShow ? '' : 'd-none'} ${idx === paginationDetails.page ? 'current' : ''}`} aria-controls={'leaderboard'} tabIndex="0" onClick={() => handlePagination(idx)} >{idx}</button>;
         }
-        return <button key={index} className={`btn paginate_button paginate_numbers ${idx === paginationDetails.page ? 'current' : ''}`} aria-controls={'leaderboard'} tabIndex="0">{idx}</button>;
+        return <button key={index} className={`btn paginate_button paginate_numbers ${idx === paginationDetails.page ? 'current' : ''}`} aria-controls={'leaderboard'} tabIndex="0" onClick={() => handlePagination(idx)} >{idx}</button>;
       })
     }
   </>;
@@ -82,35 +82,7 @@ const GameLeaderboardComponent = ({
   const isPageMounted = React.useRef(true);
   const authContext = React.useContext(AuthContext);
 
-  const showLeaderboard = () => {
-    beforeShown();
-    $('.game-leaderboard-component').slideDown({
-      complete: onshown,
-    });
-  };
-
-  const closeLeaderboard = () => {
-    beforeHidden();
-    $('.game-leaderboard-component').slideUp({
-      complete: onhidden,
-    });
-  };
-
-  const toggleLeaderboard = () => {
-    if ($('.game-leaderboard-component').is(':visible')) {
-      closeLeaderboard();
-    } else {
-      showLeaderboard();
-    }
-  };
-
-  React.useImperativeHandle(ref, () => ({
-    show: showLeaderboard,
-    hide: closeLeaderboard,
-    toggle: toggleLeaderboard,
-  }));
-
-  // const { state, getLeaderBoardData } = useLeaderBoard({ isPageMounted });
+  const { state, getLeaderBoardData } = useLeaderBoard({ initializeData: false, isPageMounted });
 
   const populateScore = (selectorPrefix, score, percentage) => {
     if (score) {
@@ -119,29 +91,6 @@ const GameLeaderboardComponent = ({
     if (percentage) {
       $(`${selectorPrefix}Progress`).attr('stroke-dasharray', `${percentage * 251.2 * 0.01}, 251.2`);
     }
-  };
-
-  const generatePageNumbers = (paginationDetails) => {
-    // eslint-disable-next-line max-len
-    const totalPage = Math.ceil(paginationDetails?.overallCount / paginationDetails?.countPerPage);
-    let pageButtonString = '';
-    let paginationFlag = false;
-    if (totalPage > 5) {
-      paginationFlag = true;
-    }
-    for (let i = 1; i <= totalPage; i += 1) {
-      if (paginationFlag) {
-        // eslint-disable-next-line max-len
-        if (paginationDetails?.page === i || paginationDetails?.page === i - 1 || paginationDetails?.page === i + 1 || i === totalPage) {
-          pageButtonString += `<a class="paginate_button paginate_numbers ${i === paginationDetails?.page ? 'current' : ''}" aria-controls="individual-leaderboard" data-dt-idx="${i}" tabindex="0">${i}</a>`;
-        } else {
-          pageButtonString += `<a class="paginate_button paginate_numbers d-none" aria-controls="individual-leaderboard" data-dt-idx="${i}" tabindex="0">${i}</a>`;
-        }
-      } else {
-        pageButtonString += `<a class="paginate_button paginate_numbers ${i === paginationDetails?.page ? 'current' : ''}" aria-controls="individual-leaderboard" data-dt-idx="${i}" tabindex="0">${i}</a>`;
-      }
-    }
-    $('.pagination-block, .pagination-block-mob').html(pageButtonString);
   };
 
   const pageSelector = (page, paginationDetails) => {
@@ -178,7 +127,6 @@ const GameLeaderboardComponent = ({
       } else {
         $(`${selector} .leaderboard-previous`).removeClass('disabled');
       }
-      console.log('pagesel ', page, totalPage);
       if (page === totalPage) {
         $(`${selector} .leaderboard-next`).addClass('disabled');
       } else {
@@ -188,26 +136,104 @@ const GameLeaderboardComponent = ({
 
     alterPagination('.pagination-container');
     alterPagination('.pagination-container-mob');
+    $('.game-leaderboard-container').scrollTop(0);
   };
 
+  const handleLeaderboardPage = (page) => {
+    getLeaderBoardData({ pageNumber: page, game: 'turtle' });
+  };
+
+  const handlePaginationNavigation = (action) => {
+    if (state.status === 'success') {
+      if (action === 'next') {
+        const totalPage = Math.ceil(
+          state.paginationDetails.overallCount / state.paginationDetails.countPerPage,
+        );
+        const currPage = state.paginationDetails.page;
+        const nextPage = currPage < totalPage ? currPage + 1 : currPage;
+        if (nextPage !== currPage) {
+          getLeaderBoardData({
+            pageNumber: nextPage,
+            game: 'turtle',
+          });
+        }
+      } else if (action === 'previous') {
+        const currPage = state.paginationDetails.page;
+        const prevPage = currPage > 1 ? currPage - 1 : currPage;
+        if (prevPage !== currPage) {
+          getLeaderBoardData({
+            pageNumber: prevPage,
+            game: 'turtle',
+          });
+        }
+      }
+    }
+  };
+
+  const footerToggle = (page, countPerPage) => {
+    if (page === Math.ceil(state.userData.rank / countPerPage) || state.userData.rank === '--') {
+      $('.game-table tfoot, .footer-mob').addClass('d-none');
+    } else {
+      $('.game-table tfoot, .footer-mob').removeClass('d-none');
+    }
+    $('.game-leaderboard-block').css('margin-bottom', `${$('.pos-mob-abs').height()}px`);
+  };
+
+  const showLeaderboard = () => {
+    beforeShown();
+    $('.game-leaderboard-component').slideDown({
+      complete: () => {
+        onshown();
+        if (state.status === 'success' && state.paginationDetails) {
+          footerToggle(state.paginationDetails.page, state.paginationDetails.countPerPage);
+        }
+      },
+    });
+  };
+
+  const closeLeaderboard = () => {
+    beforeHidden();
+    $('.game-leaderboard-component').slideUp({
+      complete: onhidden,
+    });
+  };
+
+  const toggleLeaderboard = () => {
+    if ($('.game-leaderboard-component').is(':visible')) {
+      closeLeaderboard();
+    } else {
+      showLeaderboard();
+    }
+  };
+
+  React.useImperativeHandle(ref, () => ({
+    show: showLeaderboard,
+    hide: closeLeaderboard,
+    toggle: toggleLeaderboard,
+  }));
+
   React.useEffect(() => {
-    // populateScore('#yourScore', gameData.gameProgress, parseInt((gameData.gameProgress / gameData.totalGames) * 100, 10));
-    populateScore('#yourScore', 50, parseInt((50 / 200) * 100, 10));
-    // generatePageNumbers({
-    //   page: 5,
-    //   countPerPage: 10,
-    //   overallCount: 100,
-    // });
-    pageSelector(10, {
-      page: 1,
-      countPerPage: 10,
-      overallCount: 100,
+    getLeaderBoardData({
+      pageNumber: 1,
+      game: 'turtle',
     });
 
     return () => {
       isPageMounted.current = false;
     };
   }, []);
+
+  React.useEffect(() => {
+    if (state.status === 'success' && isPageMounted.current) {
+      if (state.paginationDetails) {
+        pageSelector(state.paginationDetails.page, state.paginationDetails);
+        footerToggle(state.paginationDetails.page, state.paginationDetails.countPerPage);
+      }
+      if (state.gameProgress) {
+        populateScore('#yourScore', state.gameProgress.completedQuestions, parseInt((state.gameProgress.completedQuestions / state.gameProgress.totalQuestions) * 100, 10));
+      }
+    }
+  }, [state]);
 
   return <>
     <div className={`game-leaderboard-component ${game}-leaderboard`} style={{ display: 'none' }}>
@@ -225,56 +251,66 @@ const GameLeaderboardComponent = ({
       <div className="game-leaderboard-main-block">
         <div className="col-12 col-md-4 game-leaderboard-block">
           <div className="game-leaderboard-container">
-            <table className='table table-borderless'>
-              <thead>
-                <tr>
-                  <th>
-                    <p>
-                      <FormattedMessage
-                        defaultMessage={'Rank'}
-                        description={'Rank'}
-                      />
-                    </p>
-                  </th>
-                  <th>
-                    <p>
-                      <FormattedMessage
-                        defaultMessage={'Student Name'}
-                        description={'Student Name'}
-                      />
-                    </p>
-                  </th>
-                  <th>
-                    <p>
-                      <FormattedMessage
-                        defaultMessage={'XP'}
-                        description={'XP'}
-                      />
-                    </p>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  Array(10).fill(0).map((_, index) => <LeaderboardUserComponent key={index} />)
-                }
-              </tbody>
-            </table>
+            <div className="game-table">
+              <table className='table table-borderless'>
+                <thead>
+                  <tr>
+                    <th>
+                      <p>
+                        <FormattedMessage
+                          defaultMessage={'Rank'}
+                          description={'Rank'}
+                        />
+                      </p>
+                    </th>
+                    <th>
+                      <p>
+                        <FormattedMessage
+                          defaultMessage={'Student Name'}
+                          description={'Student Name'}
+                        />
+                      </p>
+                    </th>
+                    <th>
+                      <p>
+                        <FormattedMessage
+                          defaultMessage={'Coins'}
+                          description={'Coins'}
+                        />
+                      </p>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    state.status === 'success'
+                    && state.leaderboardData.map(
+                      (userData, index) => <LeaderboardUserComponent key={index} user={userData} />,
+                    )
+                  }
+                </tbody>
+                <tfoot>
+                  {
+                    state.status === 'success'
+                    && <LeaderboardUserComponent user={state.userData} />
+                  }
+                </tfoot>
+              </table>
+            </div>
             <div className="pagination-container">
               <div className="d-flex align-items-center justify-content-between">
-                <button className="btn pagination-navigation-btn leaderboard-previous">
+                <button className="btn pagination-navigation-btn leaderboard-previous" onClick={() => handlePaginationNavigation('previous')}>
                   <i className="fas fa-angle-left"></i>
                 </button>
                 <div className="pagination-block">
-                  <LeaderboardPaginationComponent
-                    paginationDetails={{
-                      page: 1,
-                      countPerPage: 10,
-                      overallCount: 100,
-                    }}
-                  />
+                  {
+                    state.status === 'success' && state.paginationDetails
+                    && <LeaderboardPaginationComponent
+                    paginationDetails={state.paginationDetails}
+                    handlePagination={handleLeaderboardPage}/>
+                  }
                 </div>
-                <button className="btn pagination-navigation-btn leaderboard-next">
+                <button className="btn pagination-navigation-btn leaderboard-next" onClick={() => handlePaginationNavigation('next')}>
                   <i className="fas fa-angle-right"></i>
                 </button>
               </div>
@@ -304,7 +340,7 @@ const GameLeaderboardComponent = ({
                 </p>
               </div>
               <div className="stats-container">
-                <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center justify-content-around">
                   <div className="col-4 stats-block">
                     <div className="stats-block-container">
                       <div className="stats-icon-container">
@@ -329,7 +365,7 @@ const GameLeaderboardComponent = ({
                               defaultMessage={'{validSubmissions}'}
                               description={'Valid Submissions'}
                               values={{
-                                validSubmissions: 134 || 0,
+                                validSubmissions: state?.gameProgress?.completedQuestions || 0,
                               }}
                             />
                           </span>
@@ -338,7 +374,7 @@ const GameLeaderboardComponent = ({
                               defaultMessage={'/{totalSubmissions}'}
                               description={'Total Submissions'}
                               values={{
-                                totalSubmissions: 200 || 0,
+                                totalSubmissions: state?.gameProgress?.totalQuestions || 0,
                               }}
                             />
                           </span>
@@ -373,7 +409,7 @@ const GameLeaderboardComponent = ({
                               defaultMessage={'{coinsEarned}'}
                               description={'Coins Earned'}
                               values={{
-                                coinsEarned: 134 || 0,
+                                coinsEarned: state?.userData?.points || 0,
                               }}
                             />
                           </span>
@@ -381,7 +417,7 @@ const GameLeaderboardComponent = ({
                       </div>
                     </div>
                   </div>
-                  <div className="col-4 stats-block">
+                  {/* <div className="col-4 stats-block">
                     <div className="stats-block-container">
                       <div className="stats-icon-container">
                         <Img
@@ -410,7 +446,7 @@ const GameLeaderboardComponent = ({
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="awards-container">
@@ -452,23 +488,34 @@ const GameLeaderboardComponent = ({
           </div>
         </div>
       </div>
-      <div className="pagination-container-mob">
-        <div className="d-flex align-items-center justify-content-between">
-          <button className="btn pagination-navigation-btn leaderboard-previous">
-            <i className="fas fa-angle-left"></i>
-          </button>
-          <div className="pagination-block">
-            <LeaderboardPaginationComponent
-              paginationDetails={{
-                page: 1,
-                countPerPage: 10,
-                overallCount: 100,
-              }}
-            />
+      <div className="pos-mob-abs">
+        <div className="footer-mob">
+          <table className='table table-borderless'>
+            <tfoot>
+              {
+                state.status === 'success'
+                && <LeaderboardUserComponent user={state.userData} />
+              }
+            </tfoot>
+          </table>
+        </div>
+        <div className="pagination-container-mob">
+          <div className="d-flex align-items-center justify-content-between">
+            <button className="btn pagination-navigation-btn leaderboard-previous" onClick={() => handlePaginationNavigation('previous')}>
+              <i className="fas fa-angle-left"></i>
+            </button>
+            <div className="pagination-block">
+              {
+                state.status === 'success' && state.paginationDetails
+                && <LeaderboardPaginationComponent
+                paginationDetails={state.paginationDetails}
+                handlePagination={handleLeaderboardPage}/>
+              }
+            </div>
+            <button className="btn pagination-navigation-btn leaderboard-next" onClick={() => handlePaginationNavigation('next')}>
+              <i className="fas fa-angle-right"></i>
+            </button>
           </div>
-          <button className="btn pagination-navigation-btn leaderboard-next">
-            <i className="fas fa-angle-right"></i>
-          </button>
         </div>
       </div>
     </div>

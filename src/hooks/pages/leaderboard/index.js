@@ -9,11 +9,14 @@ const useLeaderBoard = ({ initializeData = true, isPageMounted }) => {
     leaderboardData: false,
     userData: false,
     paginationDetails: false,
+    gameProgress: false,
   });
 
   const authContext = useContext(AuthContext);
 
-  const getLeaderBoardData = ({ pageNumber = 1 }) => post({ type: 'getLeaderBoard', page: pageNumber, s3Prefix: API.S3PREFIX }, 'turtle/')
+  const getLeaderBoardData = ({ pageNumber = 1, game = 'all' }) => post({
+    type: 'getLeaderBoard', game, page: pageNumber, s3Prefix: API.S3PREFIX,
+  }, 'leaderboard/')
     .then((res) => {
       if (isPageMounted.current) {
         if (res === 'access_denied') {
