@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, {
-  useRef, useContext, useState, useEffect,
+  useRef, useContext, useState,
 } from 'react';
 import {
   Text, TextInput, View, TouchableOpacity, StyleSheet, ActivityIndicator,
@@ -31,6 +31,17 @@ const defaultLanguageValue = 'python3';
 
 // get styles global function
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
+  container: {
+    height: '100%',
+  },
+  loader: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    zIndex: 9999,
+    backgroundColor: utilColors.darkTransparent50,
+    margin: 0,
+  },
   bg1: {
     backgroundColor: utilColors.dark1,
   },
@@ -53,12 +64,13 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     color: theme.navBg,
   },
   tabBtn: {
+    marginHorizontal: 10,
     flex: 1,
     alignItems: 'center',
-    marginHorizontal: 10,
   },
   codeEditorWebViewContainer: {
     flex: 1,
+    zIndex: -1,
   },
   outputBoxContainer: {
     height: '100%',
@@ -77,15 +89,15 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     ...font.subtitle1,
   },
   inputDrawer: {
-    padding: 15,
     position: 'absolute',
     bottom: 0,
     width: '100%',
+    padding: 15,
   },
   inputDrawBtn: {
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   inputDrawerLabel: {
     ...font.subtitle1,
@@ -126,10 +138,10 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     borderColor: theme.borderDark,
   },
   languageSelectorItem: {
+    borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 15,
     backgroundColor: utilColors.white,
-    borderRadius: 8,
   },
   languageSelectorItemText: {
     color: utilColors.dark,
@@ -170,19 +182,19 @@ const LanguageSelector = ({
 
   return (
     <DropDownPicker
+      open={localState.languageSelectorOpen}
+      setOpen={setOpen}
+      setValue={setValue}
       onChangeValue={onChangeValue}
       value={localState.selectedLanguageValue}
+      items={items}
+      setItems={setItems}
       style={style.languageSelector}
       dropDownContainerStyle={style.languageSelectorDropdown}
       selectedItemContainerStyle={style.languageSelectorActiveItem}
-      autoScroll={true}
       textStyle={style.languageSelectorItemText}
+      autoScroll={true}
       showTickIcon={false}
-      open={localState.languageSelectorOpen}
-      items={items}
-      setOpen={setOpen}
-      setValue={setValue}
-      setItems={setItems}
       searchable={false}
     />
   );
@@ -322,7 +334,7 @@ const CodeEditor = ({
     };`;
 
   return (
-    <View style={{ flex: 1, zIndex: -1 }}>
+    <View style={style.codeEditorWebViewContainer}>
       <WebView
         ref={codeEditorWebViewRef}
         originWhitelist={['*']}
@@ -377,44 +389,44 @@ const InputDrawer = ({
 };
 
 const Console = ({ style, localState }) => (
-    <View style={[style.outputBoxContainer, style.bg1]}>
-      <View style={[style.outputBox, style.bg2]}>
-        {
-          localState.output && localState.executionTime && localState.memory
-          && <>
+  <View style={[style.outputBoxContainer, style.bg1]}>
+    <View style={[style.outputBox, style.bg2]}>
+      {
+        localState.output && localState.executionTime && localState.memory
+        && <>
           <View style={style.outputBlock}>
             <Text style={[style.outputBoxText, style.textColor1]}>
-              <FormattedMessage defaultMessage={'Output'} description='main output label'/>
+              <FormattedMessage defaultMessage={'Output'} description='main output label' />
             </Text>
             <Text style={[style.outputBoxText, style.textColor2]}>
-              <FormattedMessage defaultMessage={'{output}'} description='main output' values={{ output: localState.output.trim() }}/>
+              <FormattedMessage defaultMessage={'{output}'} description='main output' values={{ output: localState.output.trim() }} />
             </Text>
           </View>
           <View style={style.outputBlock}>
             <Text style={[style.outputBoxText, style.textColor1]}>
-              <FormattedMessage defaultMessage={'Execution Time'} description='execution time label'/>
+              <FormattedMessage defaultMessage={'Execution Time'} description='execution time label' />
             </Text>
             <Text style={[style.outputBoxText, style.textColor2]}>
-              <FormattedMessage defaultMessage={'{executionTime}'} description='execution time' values={{ executionTime: localState.executionTime }}/>
+              <FormattedMessage defaultMessage={'{executionTime}'} description='execution time' values={{ executionTime: localState.executionTime }} />
             </Text>
           </View>
           <View style={style.outputBlock}>
             <Text style={[style.outputBoxText, style.textColor1]}>
-              <FormattedMessage defaultMessage={'Memory'} description='memory label'/>
+              <FormattedMessage defaultMessage={'Memory'} description='memory label' />
             </Text>
             <Text style={[style.outputBoxText, style.textColor2]}>
-              <FormattedMessage defaultMessage={'{memory}'} description='memory used' values={{ memory: localState.memory }}/>
+              <FormattedMessage defaultMessage={'{memory}'} description='memory used' values={{ memory: localState.memory }} />
             </Text>
           </View>
-          </>
-        }
-        {
+        </>
+      }
+      {
         (!localState.output || !localState.executionTime || !localState.memory)
         && <Text style={[style.outputBoxText, style.textColor1]}>
-            <FormattedMessage defaultMessage={'Output will be shown here'} description='output box placeholder text'/>
+          <FormattedMessage defaultMessage={'Output will be shown here'} description='output box placeholder text' />
         </Text>
-        }
-      </View>
+      }
+    </View>
   </View>
 );
 
@@ -604,10 +616,6 @@ const Ide = ({ navigation, route }) => {
     memory: false,
   });
 
-  useEffect(() => {
-    console.log(localState);
-  }, [localState]);
-
   // styles
   const { font, theme } = useContext(ThemeContext);
   const screenTheme = theme.screenIde;
@@ -636,17 +644,22 @@ const Ide = ({ navigation, route }) => {
 
       let mode;
       let code;
+      let selectedLanguageValue;
 
       if (previousLanguageValue && previousSourceCode) {
+        selectedLanguageValue = previousLanguageValue;
         mode = getModeFromValue(previousLanguageValue);
         code = previousSourceCode;
       } else {
         mode = getModeFromValue(defaultLanguageValue);
         code = getBoilerPlateCodeFromValue(defaultLanguageValue);
+        selectedLanguageValue = defaultLanguageValue;
       }
 
+      // update codeEditor
       codeEditorWebViewRef.current.injectJavaScript(updateCodeEditorJSString(mode, code));
-      setLocalState((prev) => ({ ...prev, selectedLanguageValue: previousLanguageValue }));
+      // update language selector
+      setLocalState((prev) => ({ ...prev, selectedLanguageValue }));
       setLocalState((prev) => ({ ...prev, keepCodeChangesModalOpen: false }));
     });
   };
@@ -771,7 +784,7 @@ const Ide = ({ navigation, route }) => {
   };
 
   return (
-    <View style={{ height: '100%' }}>
+    <View style={style.container}>
     {
       localState.isLoading && <ActivityIndicator
       // visibility of Overlay Loading Spinner
@@ -782,14 +795,7 @@ const Ide = ({ navigation, route }) => {
       textStyle={{ color: 'black' }}
       size={'large'}
       color={style.textColor2.color}
-      style={{
-        width: '100%',
-        height: '100%',
-        position: 'absolute',
-        zIndex: 9999,
-        backgroundColor: theme.utilColors.darkTransparent50,
-        margin: 0,
-      }}
+      style={style.loader}
     />
   }
     <Tab.Navigator
@@ -826,7 +832,7 @@ const Ide = ({ navigation, route }) => {
       </Tab.Screen>
       <Tab.Screen name='Console'>
         {
-          () => <Console {...commonProps} />
+            () => <Console {...commonProps} />
         }
       </Tab.Screen>
     </Tab.Navigator>

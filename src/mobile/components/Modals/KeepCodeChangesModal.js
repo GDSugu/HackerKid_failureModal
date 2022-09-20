@@ -6,6 +6,11 @@ import {
 import ThemeContext from '../theme';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
+  modalTitle: {
+    ...font.heading6,
+    color: utilColors.dark,
+    textAlign: 'center',
+  },
   centeredView: {
     backgroundColor: '#00000050',
     flex: 1,
@@ -43,10 +48,11 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     color: utilColors.dark,
     ...font.subtitle1,
   },
-  modalTitle: {
-    ...font.heading6,
-    color: utilColors.dark,
-    textAlign: 'center',
+  footerBtnGroup: {
+    marginTop: 20,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 
@@ -67,9 +73,7 @@ const KeepCodeChangesModal = ({
               description='warning message'
             />
           </Text>
-          <View style={{
-            marginTop: 20, width: '100%', flexDirection: 'row', justifyContent: 'space-between',
-          }}>
+          <View style={style.footerBtnGroup}>
             <TouchableOpacity
                 onPress={doNotKeepChangesHandler}
                 style={[style.btn, style.secondaryBtn]}

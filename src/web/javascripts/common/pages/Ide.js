@@ -335,16 +335,16 @@ const Ide = () => {
     <>
       {
         device === 'mobile' && <div className='mobile-container to-show-loading-container'>
-          <LanguageSelectorWithBackBtn
-            languagesAvailable={valueToLanguageDisplayNameMap}
-            onBackBtnClick={() => navigate(-1)}
-            onLanguageOptionClick={
-              (e) => onLanguageOptionClick(e, EDITORID, `#${INPUTBOXID}`, `#${OUTPUTBOXID}`)
-            }
-          />
           <div className='container-fluid'>
           <div className="tab-content" id="pills-tabContent">
             <div className="editor-container tab-pane fade show active" id="code-editor-tabpanel" role="tabpanel" aria-labelledby="code-editor-tab">
+              <LanguageSelectorWithBackBtn
+                languagesAvailable={valueToLanguageDisplayNameMap}
+                onBackBtnClick={() => navigate(-1)}
+                onLanguageOptionClick={
+                  (e) => onLanguageOptionClick(e, EDITORID, `#${INPUTBOXID}`, `#${OUTPUTBOXID}`)
+                }
+              />
               <CodeEditor id={EDITORID} onload={onCodeEditorLoad} />
             </div>
             <div className="output-box-container tab-pane fade" id="console-tabpanel" role="tabpanel" aria-labelledby="console-tab">

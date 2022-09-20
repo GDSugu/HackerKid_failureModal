@@ -183,6 +183,12 @@
       "value": "label"
     }
   ],
+  "4+tKRC": [
+    {
+      "type": 0,
+      "value": "Yes"
+    }
+  ],
   "4Ve1r3": [
     {
       "type": 0,
@@ -307,6 +313,12 @@
     {
       "type": 0,
       "value": "Student's Name"
+    }
+  ],
+  "A4oydH": [
+    {
+      "type": 0,
+      "value": "Keep the code changes?"
     }
   ],
   "A5tWte": [
@@ -467,6 +479,12 @@
     {
       "type": 0,
       "value": "Go to Login"
+    }
+  ],
+  "Fr6aaO": [
+    {
+      "type": 0,
+      "value": "No"
     }
   ],
   "G0AqB8": [

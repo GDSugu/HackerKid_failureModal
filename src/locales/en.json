@@ -118,6 +118,10 @@
     "defaultMessage": "{label}",
     "description": "{description}"
   },
+  "4+tKRC": {
+    "defaultMessage": "Yes",
+    "description": "Keep Changes button text"
+  },
   "4Ve1r3": {
     "defaultMessage": "Ok",
     "description": "confirm btn"
@@ -201,6 +205,10 @@
   "A/XB4F": {
     "defaultMessage": "Student's Name",
     "description": "Student Name cell header"
+  },
+  "A4oydH": {
+    "defaultMessage": "Keep the code changes?",
+    "description": "warning message"
   },
   "A5tWte": {
     "defaultMessage": "{formError}",
@@ -297,6 +305,10 @@
   "FoTGQE": {
     "defaultMessage": "Go to Login",
     "description": "Go to login button"
+  },
+  "Fr6aaO": {
+    "defaultMessage": "No",
+    "description": "Do not keep changes"
   },
   "G0AqB8": {
     "defaultMessage": "Login into Existing Account",
