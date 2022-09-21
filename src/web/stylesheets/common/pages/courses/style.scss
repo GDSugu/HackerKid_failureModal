@@ -20,3 +20,147 @@
     }
   }
 }
+
+.course-card {
+  width: 20rem;
+  height: 11.25rem;
+  position: relative;
+  display: inline-block;
+
+  img {
+    border-radius: 12px 12px 0 0;
+  }
+
+  .play-btn {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  .video-type {
+    position: absolute;
+    color: gt.theme-var(course-text-color-1, null, $thememaplight, $cssvars);
+    padding: 4px 8px;
+    border-radius: 12px;
+    right: 8px;
+    top: 8px;
+    font-size: 14px;
+    background-color: gt.theme-var(text-color-2);
+    margin: 0;
+  }
+
+  .card-foot {
+    background: gt.theme-var(videos-progress-gradient-1, null, $thememaplight, $cssvars);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-radius: 0 0 12px 12px;
+
+    p {
+      color: gt.theme-var(text-color-2);
+      font-size: 20px;
+      margin: 0 1rem;
+      padding: 0.5rem;
+    }
+  }
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  width: 72px !important;
+  height: 213px !important;
+  top: 0 !important;
+}
+
+.swiper-button-next {
+  right: 0 !important;
+  background: linear-gradient(270deg, #e5f4ed 0%, rgba(229, 244, 237, 0) 100%);
+}
+
+.swiper-button-prev {
+  left: 0 !important;
+  background: linear-gradient(90deg, #e5f4ed 0%, rgba(229, 244, 237, 0) 100%);
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  color: gt.theme-var(videos-progress-gradient-1, null, $thememaplight, $cssvars);
+  font-size: 24px !important;
+  font-weight: 900;
+}
+
+.swiper-button-disabled {
+  display: none !important;
+}
+
+.swiper-slide {
+  width: auto !important;
+}
+
+.course-card-container {
+  padding: 0 9.5rem;
+}
+
+.circular-progress-container {
+  padding: 3.125rem;
+  border-radius: 12px;
+  background-color: gt.theme-var(course-body-bg, null, $thememaplight, $cssvars);
+  display: inline-block;
+}
+
+.circle-progress {
+  width: 5.6rem;
+  height: 5.5rem;
+
+  svg {
+    #gradient {
+      .start {
+        stop-color: gt.theme-var(videos-progress-gradient-2, null, $thememaplight, $cssvars);
+      }
+
+      .end {
+        stop-color: gt.theme-var(videos-progress-gradient-1, null, $thememaplight, $cssvars);
+      }
+    }
+
+    path {
+      &.progress-bar {
+        fill: none;
+        stroke: url(#gradient);
+      }
+    }
+  }
+}
+
+.module-icons {
+  img {
+    width: 19px;
+  }
+}
+
+.linear-progress-bar {
+  width: 19rem;
+  height: 8px;
+  border-radius: 12px;
+  background-color: gt.theme-var(course-body-bg, null, $thememaplight, $cssvars);
+
+  .progress-done {
+    height: 100%;
+    width: 10%;
+    border-radius: 12px;
+    background: linear-gradient(to left, gt.theme-var(videos-progress-gradient-1, null, $thememaplight, $cssvars), gt.theme-var(videos-progress-gradient-2, null, $thememaplight, $cssvars));
+  }
+}
+
+@media (max-width: 768px) {
+  .swiper-wrapper {
+    padding: 0 1.25rem;
+  }
+
+  .course-card-container {
+    padding: 0;
+  }
+}

@@ -28,6 +28,7 @@ const RouteForgotPassword = loadable(() => import('./ForgotPassword'), { fallbac
 const RouteDashboard = loadable(() => import('./Dashboard'), { fallback: <Loading /> });
 const RouteGames = loadable(() => import('./Games'), { fallback: <Loading /> });
 const RouteCourses = loadable(() => import('./Courses'), { fallback: <Loading /> });
+const RouteVideos = loadable(() => import('./Videos'), { fallback: <Loading /> });
 const RouteChallenges = loadable(() => import('./Challenges'), { fallback: <Loading /> });
 const RouteMore = loadable(() => import('./More'), { fallback: <Loading /> });
 const RouteProfileEdit = loadable(() => import('./ProfileEdit'), { fallback: <Loading /> });
@@ -47,6 +48,8 @@ const App = () => (
         <Route path='dashboard' caseSensitive={true} element={<RouteDashboard />} />
         <Route path='games' caseSensitive={true} element={<RouteGames />} />
         <Route path='courses' caseSensitive={true} element={<RouteCourses />} />
+        <Route path='videos' caseSensitive={true} element={<RouteCourses />} />
+        <Route path='videos/:moduleId/:id' element={<RouteVideos />} />
         <Route path='challenges' caseSensitive={true} element={<RouteChallenges />} />
         {/* <Route path='more' caseSensitive={true} element={<RouteMore />} /> */}
         <Route path='more' caseSensitive={true} element={<RouteMore />} />
