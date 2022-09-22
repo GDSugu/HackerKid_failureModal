@@ -83,7 +83,7 @@ nav {
     align-items: center;
     gap: 0.5rem;
 
-    .selected-language-display-name {
+    #selected-language-display-name {
       display: inline-block;
       text-align: left;
       pointer-events: none;
@@ -101,6 +101,11 @@ nav {
     .dropdown-icon.rotate180 {
       transform: rotate(180deg);
     }
+  }
+
+  .dropdown.show > .dropdown-toggle {
+    background-color: inherit;
+    color: inherit;
   }
 
   #language-selector-dropdown {
@@ -122,7 +127,7 @@ nav {
 
   .language-selector-with-back-btn {
     .dropdown-toggle {
-      .selected-language-display-name {
+      #selected-language-display-name {
         min-width: 300px;
       }
     }
@@ -253,7 +258,7 @@ nav {
 
   .language-selector-with-back-btn {
     .dropdown-toggle {
-      .selected-language-display-name {
+      #selected-language-display-name {
         min-width: 100px;
       }
     }

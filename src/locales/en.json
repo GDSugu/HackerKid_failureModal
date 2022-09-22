@@ -7,10 +7,6 @@
     "defaultMessage": "Email",
     "description": "Email Button Title"
   },
-  "+U3h21": {
-    "defaultMessage": "Keep the code changes",
-    "description": "keep the code changes modal title"
-  },
   "+g4yFF": {
     "defaultMessage": "Logout",
     "description": "more menu button"
@@ -500,6 +496,10 @@
   "TbteVJ": {
     "defaultMessage": "{studentName}",
     "description": "student name"
+  },
+  "TmNnc7": {
+    "defaultMessage": "Keep the code changes?",
+    "description": "keep the code changes modal title"
   },
   "TmcPug": {
     "defaultMessage": "Edit Profile",

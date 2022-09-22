@@ -14,7 +14,6 @@ import {
   getCompilerIdFromValue,
   getBoilerPlateCodeFromValue,
 } from '../Functions/ide';
-import { showFullScreenLoadingSpinner } from '../loader';
 import { useIde } from '../../../../hooks/pages/ide';
 
 // constant
@@ -215,6 +214,7 @@ const resetInputAndOutputBox = (inputBoxId, outputBoxId) => {
 const closeInputDrawer = () => {
   if ($('.input-box-container').hasClass('show')) {
     $('.input-box-container').removeClass('show');
+    $('.input-draw-btn i').removeClass('rotate180');
   }
 };
 
@@ -416,7 +416,7 @@ const Ide = () => {
                 selectedLanguageDisplayId={SELECTEDLANGUAGEDISPLAYID}
                 languagesAvailable={valueToLanguageDisplayNameMap}
                 onDropDownToggleBtnClick={closeInputDrawer}
-                onLanguageOptionClick={(e) => onLanguageOptionClick(e, `#${EDITORID}`, `#${INPUTBOXID}`, `#${OUTPUTBOXID}`)}
+                onLanguageOptionClick={(e) => onLanguageOptionClick(e, EDITORID, `#${INPUTBOXID}`, `#${OUTPUTBOXID}`, `#${SELECTEDLANGUAGEDISPLAYID}`)}
               />
           </div>
           <div className="tab-content" id="pills-tabContent">
@@ -474,7 +474,7 @@ const Ide = () => {
                 dropdownId={LANGUAGESELECTORDROPDOWNID}
                 selectedLanguageDisplayId={SELECTEDLANGUAGEDISPLAYID}
                 languagesAvailable={valueToLanguageDisplayNameMap}
-                onLanguageOptionClick={(e) => onLanguageOptionClick(e, `#${EDITORID}`, `#${INPUTBOXID}`, `#${OUTPUTBOXID}`)}
+                onLanguageOptionClick={(e) => onLanguageOptionClick(e, EDITORID, `#${INPUTBOXID}`, `#${OUTPUTBOXID}`, `#${SELECTEDLANGUAGEDISPLAYID}`)}
               />
           </div>
           <div className='container-fluid code-editor-with-input-output'>
