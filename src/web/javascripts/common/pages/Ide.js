@@ -72,17 +72,17 @@ const LanguageSelector = ({
   useEffect(() => {
     onLoad(selectedLanguageDisplayId);
 
-    $('#myDropdown').on('show.bs.dropdown', onDropDownOpen);
+    $('.dropdown').on('show.bs.dropdown', onDropDownOpen);
 
     return () => {
-      $('#myDropdown').off('show.bs.dropdown');
+      $('.dropdown').off('show.bs.dropdown');
     };
   }, []);
 
   return (
   <div className={`language-selector-container ${className}`}>
   <div className='dropdown mr-4'>
-    <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" onClick={onDropDownToggleBtnClick}>
+    <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
       <span className='overline' id={selectedLanguageDisplayId}></span>
       <i className='fa fa-chevron-down dropdown-icon'></i>
     </button>
