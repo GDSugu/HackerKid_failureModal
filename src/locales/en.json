@@ -19,6 +19,10 @@
     "defaultMessage": "Yes",
     "description": "logout"
   },
+  "/O26Yc": {
+    "defaultMessage": "{line}",
+    "description": "console line"
+  },
   "/dnxym": {
     "defaultMessage": "Create a New Account",
     "description": "create new account button"
@@ -353,10 +357,6 @@
     "defaultMessage": "{errorMessage}",
     "description": "error text"
   },
-  "Iyx0jU": {
-    "defaultMessage": "Output",
-    "description": "main output label"
-  },
   "JnwRMJ": {
     "defaultMessage": "OTP",
     "description": "OTP label"
@@ -364,10 +364,6 @@
   "K+HWzs": {
     "defaultMessage": "Console",
     "description": "code button text"
-  },
-  "K6/Xyh": {
-    "defaultMessage": "{memory}",
-    "description": "memory used"
   },
   "KD6lRu": {
     "defaultMessage": "Continue",
@@ -585,10 +581,6 @@
     "defaultMessage": "No",
     "description": "no button text"
   },
-  "XrpVOM": {
-    "defaultMessage": "{output}",
-    "description": "main output"
-  },
   "Y+dh5z": {
     "defaultMessage": "Edit Profile",
     "description": "Home card menu"
@@ -776,6 +768,10 @@
     "defaultMessage": "{text}",
     "description": "help type text"
   },
+  "nTxUJZ": {
+    "defaultMessage": "Try IDE Now",
+    "description": "more card button"
+  },
   "nlYt8p": {
     "defaultMessage": "View more",
     "description": "View More Bottomsheet Btn"
@@ -800,10 +796,6 @@
     "defaultMessage": "Account Settings",
     "description": "account settings CTA"
   },
-  "pQM50G": {
-    "defaultMessage": "{executionTime}",
-    "description": "execution time"
-  },
   "pVIk7O": {
     "defaultMessage": "Turtle",
     "description": "Turtle title"
@@ -822,10 +814,6 @@
   "quRCCv": {
     "defaultMessage": "Phone",
     "description": "Phone label"
-  },
-  "quv5CI": {
-    "defaultMessage": "Memory",
-    "description": "memory label"
   },
   "rECW1h": {
     "defaultMessage": "completed",
@@ -918,10 +906,6 @@
   "yCTEJz": {
     "defaultMessage": "{hintMessage}",
     "description": "Hint message"
-  },
-  "yGiS9f": {
-    "defaultMessage": "Execution Time",
-    "description": "execution time label"
   },
   "yujxGL": {
     "defaultMessage": "Your Collections and Perks",

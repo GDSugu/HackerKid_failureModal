@@ -66,11 +66,17 @@ const InputnOutput = ({ className = '', inputBoxId, outputBoxId }) => (
 );
 
 const LanguageSelector = ({
-  className = '', dropdownId, selectedLanguageDisplayId, onLanguageOptionClick, onDropDownToggleBtnClick = () => {},
+  className = '', dropdownId, selectedLanguageDisplayId, onLanguageOptionClick, onDropDownOpen = () => {},
   languagesAvailable, onLoad,
 }) => {
   useEffect(() => {
     onLoad(selectedLanguageDisplayId);
+
+    $('#myDropdown').on('show.bs.dropdown', onDropDownOpen);
+
+    return () => {
+      $('#myDropdown').off('show.bs.dropdown');
+    };
   }, []);
 
   return (
@@ -283,6 +289,10 @@ const onLanguageSelectorLoad = (selectedLanguageDisplayId) => {
   });
 };
 
+const onLanguageSelectorOpen = () => {
+  closeInputDrawer();
+};
+
 const onLanguageOptionClick = async (e, editorId, inputBoxId, outputBoxId,
   selectedLanguageDisplayId) => {
   const jTarget = $(e.target);
@@ -415,7 +425,7 @@ const Ide = () => {
                 dropdownId={LANGUAGESELECTORDROPDOWNID}
                 selectedLanguageDisplayId={SELECTEDLANGUAGEDISPLAYID}
                 languagesAvailable={valueToLanguageDisplayNameMap}
-                onDropDownToggleBtnClick={closeInputDrawer}
+                onDropDownOpen={onLanguageSelectorOpen}
                 onLanguageOptionClick={(e) => onLanguageOptionClick(e, EDITORID, `#${INPUTBOXID}`, `#${OUTPUTBOXID}`, `#${SELECTEDLANGUAGEDISPLAYID}`)}
               />
           </div>
@@ -471,6 +481,7 @@ const Ide = () => {
             </div>
             <LanguageSelector
                 onLoad={onLanguageSelectorLoad}
+                onDropDownOpen={onLanguageSelectorOpen}
                 dropdownId={LANGUAGESELECTORDROPDOWNID}
                 selectedLanguageDisplayId={SELECTEDLANGUAGEDISPLAYID}
                 languagesAvailable={valueToLanguageDisplayNameMap}

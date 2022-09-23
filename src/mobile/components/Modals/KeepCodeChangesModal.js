@@ -27,8 +27,8 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   btn: {
     marginTop: 16,
     paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 12,
+    paddingHorizontal: 25,
+    borderRadius: 8,
     alignItems: 'center',
   },
   primaryBtn: {
@@ -49,10 +49,10 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     ...font.subtitle1,
   },
   footerBtnGroup: {
-    marginTop: 20,
+    marginTop: 15,
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
   },
 });
 
