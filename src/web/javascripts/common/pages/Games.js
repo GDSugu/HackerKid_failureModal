@@ -267,7 +267,7 @@ const GameCard = ({
         }
       </div>
       <div className="card-body">
-        <h5 className={`game-title card-title ${gameCardVariant === 0 ? 'subtitle1' : 'body-bold'}`}>
+        <h5 className={`game-title card-title ${gameCardVariant === 0 ? 'heading5' : 'body-bold'}`}>
           <FormattedMessage defaultMessage={'{gameTitle}'} description={'Game Title'} values={{ gameTitle: gameDetails.gameTitle }} />
         </h5>
         <button className='play-btn'>

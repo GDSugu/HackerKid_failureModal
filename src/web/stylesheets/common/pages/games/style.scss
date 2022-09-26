@@ -10,12 +10,12 @@
 $universal-border-radius: 1rem;
 $hero-component-cards-min-height: 200px;
 $more-info-btn-text-color: gt.theme-var(game-more-info-btn-text-color, null, $thememaplight, $cssvars);
-$game-cards-height: 13.1rem;
+$game-cards-height: 10.1rem;
 $game-variant0-card-width-after-xs: 93%;
 $game-varint0-card-width-after-sm: 48%;
-$game-variant0-card-width-after-ml: 38%;
-$game-variant0-card-width-after-lg: 33%;
-$game-variant0-card-width-after-xxl: 28%;
+$game-variant0-card-width-after-ml: 40%;
+$game-variant0-card-width-after-lg: 36%;
+$game-variant0-card-width-after-xxl: 27%;
 $stat-icon-width: 30px;
 $stat-icon-height: 31px;
 $level-progress-gradient-color1: gt.theme-var(game-level-progress-gradient-1, null, $thememaplight, $cssvars);
@@ -180,7 +180,7 @@ $level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, nu
 .all-games-section,
 .recommended-games-section,
 .continue-playing-games-section {
-  margin-top: 1rem;
+  margin-top: 1.7rem;
 }
 
 .all-game-cards,
@@ -202,6 +202,10 @@ $level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, nu
     border-top-right-radius: $universal-border-radius;
     flex-shrink: 0;
     aspect-ratio: 16/8;
+
+    @include gm.media-breakpoint-up(md) {
+      aspect-ratio: 15/6;
+    }
   }
 
   .game-title {
@@ -233,6 +237,18 @@ $level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, nu
 }
 
 .game-card.variant1 {
+  .card-img-top img {
+    aspect-ratio: 1.6;
+
+    @include gm.media-breakpoint-up(sm) {
+      aspect-ratio: 2;
+    }
+
+    @include gm.media-breakpoint-up(md) {
+      aspect-ratio: 16/7;
+    }
+  }
+
   .card-body {
     padding: 0.75rem;
   }
