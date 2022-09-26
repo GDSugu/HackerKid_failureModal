@@ -1,14 +1,12 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, {
-  useRef, useContext, useState,
+  useRef, useContext, useState, useEffect,
 } from 'react';
 import {
   Text, TextInput, View, TouchableOpacity, StyleSheet, ActivityIndicator,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { FormattedMessage } from 'react-intl';
-import WebView from 'react-native-webview';
-import DropDownPicker from 'react-native-dropdown-picker';
 import ThemeContext from '../components/theme';
 import CodeEditorIcon from '../../images/ide/code-icon.svg';
 import ConsoleIcon from '../../images/ide/console-icon.svg';
@@ -18,16 +16,15 @@ import Icon from '../common/Icons';
 import { getSession, setSession } from '../../hooks/common/framework';
 import {
   getBoilerPlateCodeFromValue, getCompilerIdFromValue, getModeFromValue,
-  getValueToLanguageDisplayNameMap,
 } from '../../web/javascripts/common/Functions/ide';
 import Recaptchav3 from '../components/Recaptchav3';
 import { useIde } from '../../hooks/pages/ide';
 import API from '../../../env';
-import webViewElement from '../components/WebView';
 import KeepCodeChangesModal from '../components/Modals/KeepCodeChangesModal';
+import LanguageSelector from '../components/LanguageSelector';
+import CodeEditor from '../components/CodeEditor';
 
 // constants
-const valueToLanguageDisplayNameMap = getValueToLanguageDisplayNameMap();
 const defaultLanguageValue = 'python3';
 let ideInteracted;
 
@@ -162,239 +159,8 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
 });
 
 // in-page componenets
-const LanguageSelector = ({
-  style, valueToLanguageNameMap, localState, setLocalState, onChangeValue,
-}) => {
-  const [items, setItems] = useState(() => Object.keys(valueToLanguageNameMap).map((key) => ({
-    label: valueToLanguageNameMap[key],
-    value: key,
-  })));
-
-  const setOpen = () => {
-    setLocalState((prev) => (
-      prev.inputDrawerOpen
-        ? { ...prev, inputDrawerOpen: false, languageSelectorOpen: !prev.languageSelectorOpen }
-        : { ...prev, languageSelectorOpen: !prev.languageSelectorOpen }));
-  };
-
-  const setValue = (getValueFn) => {
-    const value = getValueFn();
-    setLocalState((prev) => ({
-      ...prev,
-      selectedLanguageValue: value,
-    }));
-  };
-
-  return (
-    <DropDownPicker
-      open={localState.languageSelectorOpen}
-      setOpen={setOpen}
-      setValue={setValue}
-      onChangeValue={onChangeValue}
-      value={localState.selectedLanguageValue}
-      items={items}
-      setItems={setItems}
-      style={style.languageSelector}
-      dropDownContainerStyle={style.languageSelectorDropdown}
-      selectedItemContainerStyle={style.languageSelectorActiveItem}
-      textStyle={style.languageSelectorItemText}
-      autoScroll={true}
-      showTickIcon={false}
-      searchable={false}
-    />
-  );
-};
-
-const LanguageSelectorWidthBackBtn = ({
-  style, onBackBtnPress, languageSelectorProps,
-}) => (
-  <View style={style.languageSelectorWithBackBtn}>
-  <View style={style.backBtnWithPageTitle}>
-    <TouchableOpacity style={style.backBtn} onPress={onBackBtnPress}>
-      <Icon
-      name={'arrow-left'}
-      type='FontAwesome'
-      size={15}
-      color={style.textColor3.color}
-    />
-    </TouchableOpacity>
-    <Text style={[style.pageTitle, style.textColor3]}>
-      <FormattedMessage defaultMessage={'IDE'} description='page title'/>
-    </Text>
-    </View>
-    <View style={style.languageSelectorContainer}>
-      <LanguageSelector
-        {...languageSelectorProps}
-        style={style}
-      />
-    </View>
-  </View>
-);
-
-const CodeEditor = ({
-  style,
-  id = 'editor',
-  theme = 'monokai',
-  onload,
-  onCodeEditorChanged,
-  onCodeEditorClicked,
-  onCodeEditorUpdateFinish,
-  codeEditorWebViewRef,
-  hideLoadingSpinner,
-}) => {
-  const BodyComponent = () => <div id={id}></div>;
-
-  const ScriptComponent = () => <>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossOrigin="anonymous"></script>
-    <script src="https://unpkg.com/ace-builds@1.4.8/src-min-noconflict/ace.js" type="text/javascript"></script>
-  </>;
-
-  const styleString = `
-  * {
-    padding:0;
-    margin:0;
-    box-sizing: border-box;
-  }
-
-  #editor {
-    position:relative;
-    width:100vw;
-    height:100vh;
-    background-color: ${style.bg1.backgroundColor};
-    color: ${style.textColor1.color};
-  }
-
-  .ace-monokai .ace_gutter {
-    background: ${style.bg2.backgroundColor};
-    color: ${style.textColor1.color};
-  }`;
-
-  const webViewHTML = webViewElement({
-    BodyComponent,
-    ScriptComponent,
-    styleString,
-  });
-
-  const getInitialScript = () => `
-  try{
-    const editor = ace.edit('${id}');
-
-    editor.setOptions({
-      theme: 'ace/theme/${theme}',
-      fontSize: 16,
-      showPrintMargin: false,
-      scrollPastEnd: true,
-      wrap: true,
-      enableLiveAutocompletion: true,
-    });
-
-    editor.on('change', (e)=>{
-      const obj = {
-        action:'codeEditorChanged',
-        data: {
-          code: editor.getValue(),
-        }
-      };
-
-      window.ReactNativeWebView.postMessage(JSON.stringify(obj));
-    });
-
-    editor.on('click', (e)=>{
-      const obj={
-        action: 'codeEditorClicked'
-      };
-
-      window.ReactNativeWebView.postMessage(JSON.stringify(obj));
-    })
-
-    function updateCodeEditor(mode, code) {
-      if(mode) {
-        editor.setOption('mode', 'ace/mode/'+mode);
-      }
-
-      if(code) {
-        editor.setValue(code);
-      }
-
-      const obj={
-        action:'codeEditorUpdateFinish'
-      };
-
-      window.ReactNativeWebView.postMessage(JSON.stringify(obj));
-    }
-
-    window.execute = function(payload){
-        switch (payload.action) {
-          case 'updateCodeEditor':
-            const {data} = payload;
-
-            updateCodeEditor(data.mode, data.code);
-            break;
-          default: break;
-        }
-      }
-    }catch(err){
-      const errmsg = {
-          action: 'error',
-          data: {
-            cause: 'initial script',
-            error: err.message,
-          },
-        };
-
-      window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
-    };`;
-
-  // handle message from CodeEditorWebView
-  const handleMessageFromWebView = (msg) => {
-    try {
-      const message = JSON.parse(msg.nativeEvent.data);
-      const { action, data } = message;
-      switch (action) {
-        case 'codeEditorClicked': {
-          onCodeEditorClicked();
-          break;
-        }
-        case 'codeEditorChanged': {
-          onCodeEditorChanged(data.code);
-
-          break;
-        }
-        case 'codeEditorUpdateFinish': {
-          onCodeEditorUpdateFinish();
-          break;
-        }
-        case 'error': {
-          console.error(message);
-          break;
-        }
-        default: break;
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  return (
-    <View style={style.codeEditorWebViewContainer}>
-      <WebView
-        ref={codeEditorWebViewRef}
-        originWhitelist={['*']}
-        javaScriptEnabledAndroid={true}
-        source={{ html: webViewHTML }}
-        injectedJavaScript={getInitialScript()}
-        onMessage={handleMessageFromWebView}
-        onLoad={() => {
-          onload();
-          hideLoadingSpinner();
-        }}
-      />
-    </View>
-  );
-};
-
 const InputDrawer = ({
-  style, localState, setLocalState,
+  style, ideState, setIdeState, localState, setLocalState,
 }) => {
   const onInputDrawerPress = () => {
     setLocalState((prev) => (
@@ -431,8 +197,8 @@ const InputDrawer = ({
         <View style={localState.inputDrawerOpen ? [style.inputBoxContainer, style.bg1]
           : [style.inputBoxContainer, style.bg1, style.hideInputBox]}>
         <TextInput style={[style.inputBox, style.bg2]} multiline={true} textAlignVertical={'top'} placeholder='Enter inputs if any'
-          value={localState.input} onChangeText={(value) => {
-            setLocalState((prev) => ({ ...prev, input: value }));
+          value={ideState.input} onChangeText={(value) => {
+            setIdeState((prev) => ({ ...prev, input: value }));
           }} />
       </View>
     </View>
@@ -440,13 +206,13 @@ const InputDrawer = ({
   );
 };
 
-const Console = ({ style, localState }) => (
+const Console = ({ style, ideState }) => (
   <View style={[style.outputBoxContainer, style.bg1]}>
     <View style={[style.outputBox, style.bg2]}>
       {
-        localState.output && <>
+        ideState.output && <>
           {
-            localState.output.map((line, idx) => <View key={idx} style={style.outputBlock}>
+            ideState.output.map((line, idx) => <View key={idx} style={style.outputBlock}>
             <ConsoleLineIndicatorArrowIcon />
             <Text style={[style.outputBoxText, style.textColor2]}>
               <FormattedMessage defaultMessage={'{line}'} description='console line' values={{ line }}/>
@@ -456,7 +222,7 @@ const Console = ({ style, localState }) => (
         </>
       }
       {
-        !localState.output
+        !ideState.output
         && <Text style={[style.outputBoxText, style.textColor1]}>
           <FormattedMessage defaultMessage={'Output will be shown here'} description='output box placeholder text' />
         </Text>
@@ -614,39 +380,43 @@ const Ide = ({ navigation, route }) => {
   // hooks
   const codeEditorWebViewRef = useRef(null);
   const recaptchav3Ref = useRef(null);
-  const runCodeRequest = useIde();
+  const {
+    runCodeRequest,
+    state: ideState,
+    setState: setIdeState,
+  } = useIde();
   const [localState, setLocalState] = useState({
-    isLoading: true,
     inputDrawerOpen: false,
     languageSelectorOpen: false,
     keepCodeChangesModalOpen: false,
-    input: '',
-    selectedLanguageValue: defaultLanguageValue,
-    output: false,
-    executionTime: false,
-    memory: false,
-    writtenCode: false,
   });
 
   // styles
   const { font, theme } = useContext(ThemeContext);
   const screenTheme = theme.screenIde;
   const style = getStyles(screenTheme, theme.utilColors, font);
+  const styleStringForDocumentInsideWebView = `#editor {
+    background-color: ${style.bg1.backgroundColor};
+    color: ${style.textColor1.color};
+  }
+
+  .ace-monokai .ace_gutter {
+    background: ${style.bg2.backgroundColor};
+    color: ${style.textColor1.color};
+  }`;
 
   // methods - event handlers
-  const showLoadingSpinner = () => {
-    setLocalState((prev) => ({
-      ...prev,
-      isLoading: true,
-    }));
-  };
-
-  const hideLoadingSpinner = () => {
-    setLocalState((prev) => ({
-      ...prev,
-      isLoading: false,
-    }));
-  };
+  const returnCodeEditorLoader = () => (<ActivityIndicator
+      // visibility of Overlay Loading Spinner
+      visible={localState.isLoading}
+      // Text with the Spinner
+      textContent={'Loading...'}
+      // Text style of the Spinner Text
+      textStyle={{ color: 'black' }}
+      size={'large'}
+      color={style.textColor2.color}
+      style={style.loader}
+    />);
 
   const onCodeEditorLoad = () => {
     const promisesArr = [getSession('previousLanguageValue'), getSession('previousSourceCode')];
@@ -656,35 +426,46 @@ const Ide = ({ navigation, route }) => {
 
       let mode;
       let code;
-      let selectedLanguageValue;
 
       if (previousLanguageValue && previousSourceCode) {
-        selectedLanguageValue = previousLanguageValue;
         mode = getModeFromValue(previousLanguageValue);
         code = previousSourceCode;
       } else {
         mode = getModeFromValue(defaultLanguageValue);
         code = getBoilerPlateCodeFromValue(defaultLanguageValue);
-        selectedLanguageValue = defaultLanguageValue;
       }
 
       // update codeEditor
       codeEditorWebViewRef.current.injectJavaScript(updateCodeEditorJSString(mode, code));
-      // update language selector
-      setLocalState((prev) => ({ ...prev, selectedLanguageValue }));
-      setLocalState((prev) => ({ ...prev, keepCodeChangesModalOpen: false }));
     });
   };
 
-  const onRunCodePress = (innerTabNavigation) => {
-    const code = localState.writtenCode;
+  const onCodeEditorClicked = () => {
+    setLocalState((prev) => ({ ...prev, languageSelectorOpen: false, inputDrawerOpen: false }));
+  };
 
-    setLocalState((prev) => ({
+  const onCodeEditorChanged = (code) => {
+    setIdeState((prev) => ({ ...prev, writtenCode: code }));
+    // set 'ideInteracted' to true if user has changed something inside the code editor
+    ideInteracted = true;
+  };
+
+  const onCodeEditorUpdateFinish = () => {
+    // set 'ideInteracted' to false,
+    // if something was changed inside
+    // code editor internally(programatically)
+    ideInteracted = false;
+  };
+
+  const onRunCodePress = (innerTabNavigation) => {
+    const code = ideState.writtenCode;
+
+    setIdeState((prev) => ({
       ...prev,
       output: ['Compiling your code...'],
     }));
 
-    setSession('previousLanguageValue', localState.selectedLanguageValue);
+    setSession('previousLanguageValue', ideState.selectedLanguageValue);
     setSession('previousSourceCode', code);
 
     innerTabNavigation.navigate('Console');
@@ -692,7 +473,7 @@ const Ide = ({ navigation, route }) => {
     recaptchav3Ref.current.generateNewToken();
     recaptchav3Ref.current.setOnTokenFn(() => (token, recaptchaVersion) => {
       const sourceCode = code;
-      const { input, selectedLanguageValue } = localState;
+      const { input, selectedLanguageValue } = ideState;
       const compilerId = getCompilerIdFromValue(selectedLanguageValue);
 
       runCodeRequest(sourceCode, input, compilerId, token, recaptchaVersion)
@@ -701,7 +482,7 @@ const Ide = ({ navigation, route }) => {
           const { compilationDetails } = parsedData;
 
           if (parsedData.status === 'success') {
-            setLocalState((prev) => ({
+            setIdeState((prev) => ({
               ...prev,
               output: [...prev.output, (compilationDetails.output ? compilationDetails.output.trim() : 'Nil')],
             }));
@@ -721,39 +502,37 @@ const Ide = ({ navigation, route }) => {
     });
   };
 
-  const onLanguageSelectorChange = async (value) => {
+  const onLanguageSelectorLoad = () => {
+    getSession('previousLanguageValue').then((previousLanguageValue) => {
+      let selectedLanguageValue;
+
+      if (previousLanguageValue) {
+        selectedLanguageValue = previousLanguageValue;
+      } else {
+        selectedLanguageValue = defaultLanguageValue;
+      }
+
+      setIdeState((prev) => ({ ...prev, selectedLanguageValue }));
+    });
+  };
+
+  const onLanguageSelectorChange = (value) => {
     const mode = getModeFromValue(value);
     codeEditorWebViewRef.current.injectJavaScript(updateCodeEditorJSString(mode, false));
 
     // reset input and output box on every language change
-    setLocalState((prev) => ({
-      ...prev, input: '', output: false, executionTime: false, memory: false,
-    }));
+    if (ideState.input || ideState.output) {
+      setIdeState((prev) => ({
+        ...prev, input: '', output: false,
+      }));
+    }
 
-    if (ideInteracted) {
+    if (ideInteracted === true) {
       setLocalState((prev) => ({ ...prev, keepCodeChangesModalOpen: true }));
-    } else {
+    } else if (ideInteracted === false) {
       const code = getBoilerPlateCodeFromValue(value);
       codeEditorWebViewRef.current.injectJavaScript(updateCodeEditorJSString(false, code));
     }
-  };
-
-  // on code reply from webview after invoking in onRunCodePress
-  const onCodeEditorClicked = () => {
-    setLocalState((prev) => ({ ...prev, languageSelectorOpen: false, inputDrawerOpen: false }));
-  };
-
-  const onCodeEditorChanged = (code) => {
-    setLocalState((prev) => ({ ...prev, writtenCode: code }));
-    // set 'ideInteracted' to true if user has changed something inside the code editor
-    ideInteracted = true;
-  };
-
-  const onCodeEditorUpdateFinish = () => {
-    // set 'ideInteracted' to false,
-    // if something was changed inside
-    // code editor internally(programatically)
-    ideInteracted = false;
   };
 
   const onKeepCodeChanges = () => {
@@ -763,34 +542,25 @@ const Ide = ({ navigation, route }) => {
   const onDoNotKeepCodeChanges = () => {
     setLocalState((prev) => ({ ...prev, keepCodeChangesModalOpen: false }));
 
-    const code = getBoilerPlateCodeFromValue(localState.selectedLanguageValue);
+    const code = getBoilerPlateCodeFromValue(ideState.selectedLanguageValue);
     codeEditorWebViewRef.current.injectJavaScript(updateCodeEditorJSString(false, code));
   };
 
   // common props;
   const commonProps = {
     style,
+    ideState,
+    setIdeState,
     localState,
     setLocalState,
-    showLoadingSpinner,
-    hideLoadingSpinner,
   };
+
+  useEffect(() => () => {
+    ideInteracted = undefined;
+  }, []);
 
   return (
     <View style={style.container}>
-      {
-        localState.isLoading && <ActivityIndicator
-        // visibility of Overlay Loading Spinner
-        visible={localState.isLoading}
-        // Text with the Spinner
-        textContent={'Loading...'}
-        // Text style of the Spinner Text
-        textStyle={{ color: 'black' }}
-        size={'large'}
-        color={style.textColor2.color}
-        style={style.loader}
-      />
-    }
       <Tab.Navigator
         screenOptions={{ headerShown: false }}
         backBehavior={'none'}
@@ -804,24 +574,61 @@ const Ide = ({ navigation, route }) => {
           />}>
         <Tab.Screen name='Code'>
           {
-              ({ navigation: innerTabNavigation }) => <>
-                <LanguageSelectorWidthBackBtn
-                  {...commonProps}
-                  onBackBtnPress = {() => navigation.goBack()}
-                  languageSelectorProps={{
-                    localState,
-                    setLocalState,
-                    valueToLanguageNameMap: valueToLanguageDisplayNameMap,
-                    onChangeValue: onLanguageSelectorChange,
-                  }}
-                />
-                <CodeEditor {...commonProps}
-                  navigation={innerTabNavigation}
+            () => <>
+            <View style={style.languageSelectorWithBackBtn}>
+              <View style={style.backBtnWithPageTitle}>
+                <TouchableOpacity style={style.backBtn} onPress={() => navigation.goBack()}>
+                  <Icon
+                    name={'arrow-left'}
+                    type='FontAwesome'
+                    size={15}
+                    color={style.textColor3.color}
+                  />
+                  </TouchableOpacity>
+                  <Text style={[style.pageTitle, style.textColor3]}>
+                    <FormattedMessage defaultMessage={'IDE'} description='page title'/>
+                  </Text>
+                </View>
+                <View style={style.languageSelectorContainer}>
+                  <LanguageSelector
+                    style={style}
+                    value={ideState.selectedLanguageValue}
+                    setValue={(getValueFn) => {
+                      const value = getValueFn();
+                      setIdeState((prev) => ({
+                        ...prev,
+                        selectedLanguageValue: value,
+                      }));
+                    }}
+                    open={localState.languageSelectorOpen}
+                    setOpen={() => {
+                      setLocalState((prev) => (
+                        prev.inputDrawerOpen
+                          ? {
+                            ...prev,
+                            inputDrawerOpen: false,
+                            languageSelectorOpen: !prev.languageSelectorOpen,
+                          }
+                          : {
+                            ...prev,
+                            languageSelectorOpen: !prev.languageSelectorOpen,
+                          }));
+                    }}
+                    onload={onLanguageSelectorLoad}
+                    onChangeValue={onLanguageSelectorChange}
+                  />
+                </View>
+                </View>
+                <CodeEditor
                   codeEditorWebViewRef={codeEditorWebViewRef}
+                  style={style}
+                  styleStringForDocumentInsideWebView={styleStringForDocumentInsideWebView}
                   onload={onCodeEditorLoad}
                   onCodeEditorChanged={onCodeEditorChanged}
                   onCodeEditorClicked={onCodeEditorClicked}
                   onCodeEditorUpdateFinish={onCodeEditorUpdateFinish}
+                  showLoader={true}
+                  loadingFunction={returnCodeEditorLoader}
               />
               <InputDrawer {...commonProps} />
               </>

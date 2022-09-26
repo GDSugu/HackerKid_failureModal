@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
-import ace from 'ace-builds';
-import 'ace-builds/webpack-resolver';
-import 'ace-builds/src-min-noconflict/ext-language_tools';
 import '../../../stylesheets/common/pages/ide/style.scss';
+import ace from 'ace-builds';
 import { FormattedMessage } from 'react-intl';
 import { Link, useNavigate } from 'react-router-dom';
 import { $, pageInit } from '../framework';
@@ -10,97 +8,54 @@ import { getDevice } from '../../../../hooks/common/utlis';
 import useRecapchav3 from '../../../../hooks/pages/recapchav3';
 import { getSession, setSession } from '../../../../hooks/common/framework';
 import {
-  getValueToLanguageDisplayNameMap, getLanguageDisplayNameFromValue, getModeFromValue,
+  getModeFromValue,
   getCompilerIdFromValue,
   getBoilerPlateCodeFromValue,
 } from '../Functions/ide';
 import { useIde } from '../../../../hooks/pages/ide';
+import LanguageSelector from '../components/LanguageSelector';
+import CodeEditor from '../components/Ide';
 
 // constant
-const valueToLanguageDisplayNameMap = getValueToLanguageDisplayNameMap();
 const defaultLanguageValue = 'python3';
 let ideInteracted;
-
 // componenets used in large resolutions
-const CodeEditor = ({
-  id = 'editor', className = '', theme = 'monokai', otherEditorOptions = {}, onload, onChange, onClick,
-}) => {
-  useEffect(() => {
-    const editor = ace.edit('editor');
-
-    // set code editor options
-    editor.setOptions({
-      theme: `ace/theme/${theme}`,
-      fontSize: 16,
-      showPrintMargin: false,
-      scrollPastEnd: true,
-      wrap: true,
-      enableLiveAutocompletion: true,
-      ...otherEditorOptions,
-    });
-
-    onload(id);
-
-    // listen for change event
-    editor.on('change', onChange);
-    editor.on('click', onClick);
-
-    return () => {
-      editor.off('change');
-      editor.off('click');
-    };
-  }, []);
-
-  return (
-    <div id={id} className={className}></div>
-  );
-};
-
-const InputnOutput = ({ className = '', inputBoxId, outputBoxId }) => (
+const InputnOutput = ({
+  className = '', onInputBoxChange, input, output,
+}) => (
   <div className={`input-output-container ${className}`}>
-    <textarea id={inputBoxId} className='input-box' placeholder='Enter inputs if any'></textarea>
-    <div id={outputBoxId} className='output-box' aria-readonly='true'>
-      <FormattedMessage defaultMessage={'Output will be shown here'} description='placeholder'/>
+    <textarea
+      className='input-box'
+      placeholder='Enter inputs if any'
+      value={input}
+      onChange={onInputBoxChange}
+    ></textarea>
+    <div className='output-box' aria-readonly='true'>
+    {
+      !output && <FormattedMessage defaultMessage={'Output will appear here'} description='output placeholder'/>
+    }
+    {
+      output && output.map((line, idx) => <pre key={idx} className='console-line'>
+        <img
+          src='../../../../images/ide/console-line-indicator-arrow.svg'
+          alt='console-line-arrow' />
+        <span className='console-line-text-content'>
+        <FormattedMessage
+          defaultMessage={'{line}'}
+          description={'console line'}
+          values={{ line }}
+        />
+        </span>
+      </pre>)
+      }
     </div>
   </div>
 );
 
-const LanguageSelector = ({
-  className = '', dropdownId, selectedLanguageDisplayId, onLanguageOptionClick, onDropDownOpen = () => {},
-  languagesAvailable, onLoad,
-}) => {
-  useEffect(() => {
-    onLoad(selectedLanguageDisplayId);
-
-    $('.dropdown').on('show.bs.dropdown', onDropDownOpen);
-
-    return () => {
-      $('.dropdown').off('show.bs.dropdown');
-    };
-  }, []);
-
-  return (
-  <div className={`language-selector-container ${className}`}>
-  <div className='dropdown mr-4'>
-    <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-      <span className='overline' id={selectedLanguageDisplayId}></span>
-      <i className='fa fa-chevron-down dropdown-icon'></i>
-    </button>
-      <div className="dropdown-menu dropdown-menu-left" id={dropdownId}>
-      {
-        Object.keys(languagesAvailable)
-          .map((value, index) => <button className={`dropdown-item ${value}-option-btn overline`} key={index} data-language-value={value} onClick={onLanguageOptionClick}>
-            <FormattedMessage defaultMessage={'{languageDisplayName}'} description='language option' values={{ languageDisplayName: languagesAvailable[value] }}/>
-          </button>)
-      }
-    </div>
-  </div>
-  </div>
-  );
-};
-
 // components used in mobile resolution
-const MobileInputDrawer = ({ inputBoxId, className = '', onClick = () => {} }) => (
+const MobileInputDrawer = ({
+  className = '', onClick = () => {}, onInputBoxChange, input,
+}) => (
   <div className={`input-box-drawer ${className}`}>
     <button type='button' className='input-draw-btn' onClick={onClick}>
       <FormattedMessage defaultMessage={'Inputs'} description='input draw btn' />
@@ -108,7 +63,13 @@ const MobileInputDrawer = ({ inputBoxId, className = '', onClick = () => {} }) =
     </button>
     <div className='input-box-container'>
       <div className='p-3'>
-        <textarea id={inputBoxId} className='input-box' rows={5} placeholder='Enter inputs if any' />
+        <textarea
+          className='input-box'
+          rows={5}
+          placeholder='Enter inputs if any'
+          value={input}
+          onChange={onInputBoxChange}
+        />
       </div>
     </div>
   </div>
@@ -173,13 +134,6 @@ const MobileFooterTabs = ({
 };
 
 // common methods for mobile and large resolutions
-const updateLanguageSelector = (selectedLangugeDisplayId, selectedLanguageOption,
-  selectedLanguage) => {
-  $(selectedLangugeDisplayId).text(selectedLanguage);
-  $('.dropdown-item.active').removeClass('active');
-  $(selectedLanguageOption).addClass('active');
-};
-
 const updateCodeEditor = (codeEditorId, code, mode) => {
   const currentEditorInstance = ace.edit(codeEditorId);
 
@@ -191,30 +145,6 @@ const updateCodeEditor = (codeEditorId, code, mode) => {
     currentEditorInstance.setOption('mode', `ace/mode/${mode}`);
   }
   ideInteracted = false;
-};
-
-const insertConsoleLine = (outputBoxId, lineTextContent) => {
-  const preTag = document.createElement('pre');
-  preTag.className = 'console-line';
-  const img = document.createElement('img');
-
-  img.alt = 'console line indicator';
-  img.src = '../../../../images/ide/console-line-indicator-arrow.svg';
-
-  const lineTextContentSpan = document.createElement('span');
-  lineTextContentSpan.innerText = lineTextContent;
-  lineTextContentSpan.className = 'console-line-text-content';
-
-  $(preTag).append($(img));
-  $(preTag).append($(lineTextContentSpan));
-
-  $(outputBoxId).append($(preTag));
-};
-
-const resetInputAndOutputBox = (inputBoxId, outputBoxId) => {
-  $(inputBoxId).val('');
-  $(outputBoxId).empty();
-  $(outputBoxId).text('Output will be shown here');
 };
 
 const closeInputDrawer = () => {
@@ -230,139 +160,141 @@ const closeLanguageSelector = () => {
   }
 };
 
-// methods - event handlers
-const onCodeEditorChange = () => {
-  ideInteracted = true;
-};
-
-const onCodeEditorClick = () => {
-  closeInputDrawer();
-  closeLanguageSelector();
-};
-
-const onCodeEditorLoad = (editorId) => {
-  const previousLanguageValuePromise = getSession('previousLanguageValue');
-  const previousSourceCodePromise = getSession('previousSourceCode');
-
-  Promise.all([previousLanguageValuePromise, previousSourceCodePromise]).then((values) => {
-    const [previousLanguageValue, previousSourceCode] = values;
-
-    let languageMode;
-    let code;
-
-    if (previousLanguageValue && previousSourceCode) {
-      languageMode = getModeFromValue(previousLanguageValue);
-      code = previousSourceCode;
-    } else {
-      languageMode = getModeFromValue(defaultLanguageValue);
-      code = getBoilerPlateCodeFromValue(defaultLanguageValue);
-    }
-    updateCodeEditor(editorId, code, languageMode);
-  });
-};
-
-const onInputDrawerToggleBtnClick = () => {
-  $('.input-box-container').toggleClass('show');
-  $('.input-draw-btn .fa-chevron-up').toggleClass('rotate180');
-  closeLanguageSelector();
-};
-
-const onLanguageSelectorLoad = (selectedLanguageDisplayId) => {
-  const previousLanguageValuePromise = getSession('previousLanguageValue');
-
-  previousLanguageValuePromise.then((previousLanguageValue) => {
-    let languageDisplayName;
-    let languageOptionToSelectSelector;
-    if (previousLanguageValue) {
-      languageDisplayName = getLanguageDisplayNameFromValue(previousLanguageValue);
-      languageOptionToSelectSelector = `.${previousLanguageValue}-option-btn`;
-    } else {
-      languageDisplayName = getLanguageDisplayNameFromValue(defaultLanguageValue);
-      languageOptionToSelectSelector = `.${defaultLanguageValue}-option-btn`;
-    }
-
-    updateLanguageSelector(
-      `#${selectedLanguageDisplayId}`,
-      languageOptionToSelectSelector,
-      languageDisplayName,
-    );
-  });
-};
-
-const onLanguageSelectorOpen = () => {
-  closeInputDrawer();
-};
-
-const onLanguageOptionClick = async (e, editorId, inputBoxId, outputBoxId,
-  selectedLanguageDisplayId) => {
-  const jTarget = $(e.target);
-
-  const languageOption = jTarget;
-  const languageDisplayName = jTarget.text();
-  const languageValue = jTarget.attr('data-language-value');
-
-  updateLanguageSelector(selectedLanguageDisplayId, languageOption, languageDisplayName);
-  resetInputAndOutputBox(inputBoxId, outputBoxId);
-
-  // if ide interacted
-  if (ideInteracted) {
-    $('.keep-code-changes-modal').modal({
-      backdrop: 'static',
-      keyboard: false,
-    });
-  } else {
-    // update code editor
-    const boilerPlateCode = getBoilerPlateCodeFromValue(languageValue);
-    const mode = getModeFromValue(languageValue);
-
-    updateCodeEditor(editorId, boilerPlateCode, mode);
-  }
-};
-
-const onKeepCodeChanges = (editorId) => {
-  const selectedLanguageValue = $('.dropdown-item.active').attr('data-language-value');
-  const languageMode = getModeFromValue(selectedLanguageValue);
-
-  updateCodeEditor(editorId, false, languageMode);
-  $('.keep-code-changes-modal').modal('hide');
-};
-
-const onDontKeepCodeChanges = (editorId) => {
-  const selectedLanguageValue = $('.dropdown-item.active').attr('data-language-value');
-  const boilerPlateCode = getBoilerPlateCodeFromValue(selectedLanguageValue);
-  const mode = getModeFromValue(selectedLanguageValue);
-
-  updateCodeEditor(editorId, boilerPlateCode, mode);
-  $('.keep-code-changes-modal').modal('hide');
-};
-
 // ide component
 const Ide = () => {
   // constants
   const EDITORID = 'editor';
-  const INPUTBOXID = 'input-box';
-  const OUTPUTBOXID = 'output-box';
-  const SELECTEDLANGUAGEDISPLAYID = 'selected-language-display-name';
-  const LANGUAGESELECTORDROPDOWNID = 'language-selector-dropdown';
   const device = getDevice();
 
   pageInit(device === 'mobile' ? 'ide-container mobile-container' : 'ide-container desktop-container', 'IDE');
   // hooks
-  const runCodeRequest = useIde();
+  const { runCodeRequest, state, setState } = useIde();
   const getRecapchaToken = useRecapchav3();
   const navigate = useNavigate();
 
-  // methods
+  // methods - event handlers
+  const onCodeEditorLoad = (editorId) => {
+    const previousLanguageValuePromise = getSession('previousLanguageValue');
+    const previousSourceCodePromise = getSession('previousSourceCode');
+
+    Promise.all([previousLanguageValuePromise, previousSourceCodePromise]).then((values) => {
+      const [previousLanguageValue, previousSourceCode] = values;
+
+      let languageMode;
+      let code;
+
+      if (previousLanguageValue && previousSourceCode) {
+        languageMode = getModeFromValue(previousLanguageValue);
+        code = previousSourceCode;
+      } else {
+        languageMode = getModeFromValue(defaultLanguageValue);
+        code = getBoilerPlateCodeFromValue(defaultLanguageValue);
+      }
+
+      updateCodeEditor(editorId, code, languageMode);
+    });
+  };
+
+  const onCodeEditorClick = () => {
+    closeInputDrawer();
+    closeLanguageSelector();
+  };
+
+  const onCodeEditorChange = () => {
+    ideInteracted = true;
+
+    setState((prev) => {
+      const editor = ace.edit(EDITORID);
+
+      return {
+        ...prev,
+        writtenCode: editor.getValue(),
+      };
+    });
+  };
+
+  const onLanguageSelectorOpen = () => {
+    closeInputDrawer();
+  };
+
+  const onLanguageSelectorLoad = () => {
+    const previousLanguageValuePromise = getSession('previousLanguageValue');
+
+    previousLanguageValuePromise.then((previousLanguageValue) => {
+      let selectedLanguageValue;
+
+      if (previousLanguageValue) {
+        selectedLanguageValue = previousLanguageValue;
+      } else {
+        selectedLanguageValue = defaultLanguageValue;
+      }
+
+      setState((prev) => ({ ...prev, selectedLanguageValue }));
+    });
+  };
+
+  const onLanguageOptionClick = (e) => {
+    const jTarget = $(e.target);
+
+    const languageValue = jTarget.attr('data-language-value');
+
+    setState((prev) => ({ ...prev, selectedLanguageValue: languageValue }));
+
+    if (state.input || state.output) {
+      setState((prev) => ({ ...prev, input: '', output: '' }));
+    }
+    // if ide interacted
+    if (ideInteracted === true) {
+      $('.keep-code-changes-modal').modal({
+        backdrop: 'static',
+        keyboard: false,
+      });
+    } else if (ideInteracted === false) {
+    // update code editor
+      const boilerPlateCode = getBoilerPlateCodeFromValue(languageValue);
+      const mode = getModeFromValue(languageValue);
+
+      updateCodeEditor(EDITORID, boilerPlateCode, mode);
+    }
+  };
+
+  const onInputDrawerToggleBtnClick = () => {
+    $('.input-box-container').toggleClass('show');
+    $('.input-draw-btn .fa-chevron-up').toggleClass('rotate180');
+    closeLanguageSelector();
+  };
+
+  const onInputBoxChange = (e) => {
+    const newValue = e.target.value;
+
+    setState((prev) => ({ ...prev, input: newValue }));
+  };
+
+  const onKeepCodeChanges = (editorId) => {
+    const languageMode = getModeFromValue(state.selectedLanguageValue);
+
+    updateCodeEditor(editorId, false, languageMode);
+    $('.keep-code-changes-modal').modal('hide');
+  };
+
+  const onDontKeepCodeChanges = (editorId) => {
+    const boilerPlateCode = getBoilerPlateCodeFromValue(state.selectedLanguageValue);
+    const mode = getModeFromValue(state.selectedLanguageValue);
+
+    updateCodeEditor(editorId, boilerPlateCode, mode);
+    $('.keep-code-changes-modal').modal('hide');
+  };
+
   const runCode = (sourceCode, input, compilerId) => getRecapchaToken({ action: 'runCode' }).then((token) => runCodeRequest(sourceCode, input, compilerId, token));
 
   const runCodeBtnClickHandler = (e) => {
-    $(`#${OUTPUTBOXID}`).html('');
-    insertConsoleLine(`#${OUTPUTBOXID}`, 'Compiling your code...');
     $(e.target).attr('disabled', 'true');
 
-    const input = $(`#${INPUTBOXID}`).val();
-    const sourceCode = ace.edit(EDITORID).getValue();
-    const selectedLanguageValue = $('.dropdown-item.active').attr('data-language-value');
+    setState((prev) => ({ ...prev, output: ['Compiling your code...'] }));
+
+    const { input } = state;
+    const sourceCode = state.writtenCode;
+    const { selectedLanguageValue } = state;
     const compilerId = getCompilerIdFromValue(selectedLanguageValue);
 
     setSession('previousSourceCode', sourceCode);
@@ -373,7 +305,10 @@ const Ide = () => {
 
       $(e.target).removeAttr('disabled');
       if (parsedData.status === 'success') {
-        insertConsoleLine(`#${OUTPUTBOXID}`, parsedData.compilationDetails.output.trim());
+        setState((prev) => ({
+          ...prev,
+          output: [...prev.output, parsedData.compilationDetails.output.trim()],
+        }));
       } else if (parsedData.status === 'error') {
         const err = new Error(parsedData.message);
         err.cause = 'postData';
@@ -421,12 +356,10 @@ const Ide = () => {
               </span>
             </div>
               <LanguageSelector
+                selectedLanguageValue={state.selectedLanguageValue}
                 onLoad = {onLanguageSelectorLoad}
-                dropdownId={LANGUAGESELECTORDROPDOWNID}
-                selectedLanguageDisplayId={SELECTEDLANGUAGEDISPLAYID}
-                languagesAvailable={valueToLanguageDisplayNameMap}
                 onDropDownOpen={onLanguageSelectorOpen}
-                onLanguageOptionClick={(e) => onLanguageOptionClick(e, EDITORID, `#${INPUTBOXID}`, `#${OUTPUTBOXID}`, `#${SELECTEDLANGUAGEDISPLAYID}`)}
+                onLanguageOptionClick={(e) => onLanguageOptionClick(e)}
               />
           </div>
           <div className="tab-content" id="pills-tabContent">
@@ -438,15 +371,34 @@ const Ide = () => {
                 onClick={onCodeEditorClick} />
             </div>
             <div className="output-box-container tab-pane fade" id="console-tabpanel" role="tabpanel" aria-labelledby="console-tab">
-              <div className='output-box' id={OUTPUTBOXID} placeholder='output will appear here'>
-                <FormattedMessage defaultMessage={'Output will appear here'} description='output placeholder'/>
+              <div className='output-box'>
+                {
+                  !state.output.length && <FormattedMessage defaultMessage={'Output will appear here'} description='output placeholder'/>
+                }
+                {
+                  state.output.length && state.output.map((line, idx) => <pre key={idx} className='console-line'>
+                      <img
+                        src='../../../../images/ide/console-line-indicator-arrow.svg'
+                        alt='console-line-arrow' />
+                      <span className='console-line-text-content'>
+                      <FormattedMessage
+                        defaultMessage={'{line}'}
+                        description={'console line'}
+                        values={{ line }}
+                      />
+                      </span>
+                  </pre>)
+                }
               </div>
             </div>
           </div>
             <footer>
               <MobileInputDrawer
-                inputBoxId={INPUTBOXID}
-                onClick={onInputDrawerToggleBtnClick}/>
+                input={state.input}
+                setState={setState}
+                onClick={onInputDrawerToggleBtnClick}
+                onInputBoxChange={onInputBoxChange}
+              />
               <MobileFooterTabs
                 tabTargetIds={['#code-editor-tabpanel', '#console-tabpanel']}
                 onRunCode={runCodeBtnClickHandler}
@@ -480,12 +432,10 @@ const Ide = () => {
               </span>
             </div>
             <LanguageSelector
+                selectedLanguageValue={state.selectedLanguageValue}
                 onLoad={onLanguageSelectorLoad}
                 onDropDownOpen={onLanguageSelectorOpen}
-                dropdownId={LANGUAGESELECTORDROPDOWNID}
-                selectedLanguageDisplayId={SELECTEDLANGUAGEDISPLAYID}
-                languagesAvailable={valueToLanguageDisplayNameMap}
-                onLanguageOptionClick={(e) => onLanguageOptionClick(e, EDITORID, `#${INPUTBOXID}`, `#${OUTPUTBOXID}`, `#${SELECTEDLANGUAGEDISPLAYID}`)}
+                onLanguageOptionClick={(e) => onLanguageOptionClick(e)}
               />
           </div>
           <div className='container-fluid code-editor-with-input-output'>
@@ -509,7 +459,10 @@ const Ide = () => {
                 <i className="fa fa-play"></i>
               </button>
             </div>
-            <InputnOutput inputBoxId={INPUTBOXID} outputBoxId={OUTPUTBOXID} />
+            <InputnOutput
+              input={state.input}
+              onInputBoxChange={onInputBoxChange}
+              output={state.output} />
          </div>
         </div>
       }
