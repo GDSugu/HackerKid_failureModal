@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
+  BackHandler,
   ScrollView, StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
 import WebView from 'react-native-webview';
@@ -154,10 +155,41 @@ const TurtleQuestion = ({ navigation }) => {
   }
 
   React.useEffect(() => {
+    const closeLevel = () => {
+      if (turtleContext?.tqState?.uiData?.showGameLevel) {
+        turtleContext.tqSetState((prevState) => ({
+          ...prevState,
+          uiData: {
+            ...prevState.uiData,
+            showGameLevel: false,
+          },
+        }));
+        return true;
+      }
+      return false;
+    };
+
+    BackHandler.addEventListener('hardwareBackPress', closeLevel);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', closeLevel);
+    };
+  }, [turtleContext.tqState]);
+
+  React.useEffect(() => {
     setTimeout(() => {
       renderTurtle();
       repositionTurtle();
     }, 500);
+
+    if (turtleContext?.tqState?.uiData) {
+      turtleContext.tqSetState((prevState) => ({
+        ...prevState,
+        uiData: {
+          ...prevState.uiData,
+          refreshKey: parseInt(Math.random() * 10, 10),
+        },
+      }));
+    }
   }, [turtleContext.tqState.questionObject]);
 
   return <>

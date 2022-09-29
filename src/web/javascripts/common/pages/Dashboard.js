@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { $, loginCheck, pageInit } from '../framework';
+import { $, pageInit } from '../framework';
 import Img from '../components/Img';
 // import SwiperComponent from '../components/SwiperComponent';
 import { useDashboard } from '../../../../hooks/pages/dashboard';
@@ -539,7 +539,6 @@ const Dashboard = () => {
   populateScore('#yourScore', gameData.gameProgress, parseInt((gameData.gameProgress / gameData.totalGames) * 100, 10));
 
   useEffect(() => {
-    loginCheck();
     window.addEventListener('resize', () => {
       setIsDesktop(window.matchMedia('(min-width: 576px)').matches);
     });

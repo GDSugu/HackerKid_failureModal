@@ -14,6 +14,7 @@ import levelIcon from '../../../images/games/levelStar.png';
 import hintIcon from '../../../images/games/hint.png';
 // import gameMenuIcon from '../../../images/games/gameMenu.png';
 import { TurtleContext } from '../../../hooks/pages/turtle';
+import GameLevelComponent from '../GameLevelComponent';
 
 enableScreens();
 
@@ -165,19 +166,29 @@ const GameHeader = ({
   return <>
     <TurtleHeader />
     <LinearGradient colors={gradients.darkTransparent1} style={style.tabHeader}>
-      <View style={style.row}>
-        <Image
-          source={levelIcon}
-          style={style.tabHeaderIcon}
-        />
-        <Text style={[style.tabHeaderLevelText]}>
-          <FormattedMessage
-            defaultMessage={'Level {level}'}
-            description={'Question Level'}
-            values={{ level: turtleContext?.tqState?.questionObject?.virtualId }}
+      <TouchableOpacity
+        onPress={() => turtleContext.tqSetState((prevState) => ({
+          ...prevState,
+          uiData: {
+            ...prevState.uiData,
+            showGameLevel: true,
+          },
+        })) }
+      >
+        <View style={style.row}>
+          <Image
+            source={levelIcon}
+            style={style.tabHeaderIcon}
           />
-        </Text>
-      </View>
+          <Text style={[style.tabHeaderLevelText]}>
+            <FormattedMessage
+              defaultMessage={'Level {level}'}
+              description={'Question Level'}
+              values={{ level: turtleContext?.tqState?.questionObject?.virtualId }}
+            />
+          </Text>
+        </View>
+      </TouchableOpacity>
       <View style={style.row}>
         {/* { currentScreen !== 'TurtleOutput' */}
           <Animatable.View
@@ -211,7 +222,9 @@ const GameHeader = ({
 
 const GameNavigator = ({ currentScreen, ScreenArray }) => {
   const BottomTab = createBottomTabNavigator();
-  const { font, theme: { gradients, utilColors } } = useContext(ThemeContext);
+  const { font, theme } = useContext(ThemeContext);
+  const { gradients, utilColors } = theme;
+  const turtleContext = useContext(TurtleContext);
 
   return (
     <>
@@ -257,6 +270,15 @@ const GameNavigator = ({ currentScreen, ScreenArray }) => {
         />
       ))}
     </BottomTab.Navigator>
+    <GameLevelComponent
+      context={turtleContext}
+      game={'turtle'}
+      font={font}
+      gradients={gradients}
+      utilColors={utilColors}
+      theme={theme}
+      themeKey={'screenTurtleQuestion'}
+    />
     </>
   );
 };

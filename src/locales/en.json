@@ -11,6 +11,10 @@
     "defaultMessage": "Logout",
     "description": "more menu button"
   },
+  "+lsuwj": {
+    "defaultMessage": "Try now",
+    "description": "Continue Playing button"
+  },
   "/EsQT0": {
     "defaultMessage": "This is games page",
     "description": "Games Page"
@@ -38,6 +42,10 @@
   "/x0h9E": {
     "defaultMessage": "Login with Phone",
     "description": "login with phone tab"
+  },
+  "/yRdu/": {
+    "defaultMessage": "Start Playing",
+    "description": "Play button"
   },
   "01Q2N+": {
     "defaultMessage": "Coming Soon...",
@@ -122,9 +130,17 @@
     "defaultMessage": "Please connect to the internet.",
     "description": "offline message"
   },
+  "52hsYP": {
+    "defaultMessage": "#{rank}",
+    "description": "Rank"
+  },
   "53f59E": {
     "defaultMessage": "Rank",
     "description": "Rank table cell header"
+  },
+  "5EmC6p": {
+    "defaultMessage": "Student Name",
+    "description": "Student Name"
   },
   "5L6FVQ": {
     "defaultMessage": "Password",
@@ -201,6 +217,10 @@
   "AhFvSt": {
     "defaultMessage": "Login with Email",
     "description": "Login with Email tab"
+  },
+  "Atd3d5": {
+    "defaultMessage": "/{totalSubmissions}",
+    "description": "Total Submissions"
   },
   "B7znij": {
     "defaultMessage": "Create a New Account",
@@ -357,6 +377,10 @@
     "defaultMessage": "Are you sure you want to logout?",
     "description": "logout prompt message"
   },
+  "NgQ5Hl": {
+    "defaultMessage": "Continue Playing",
+    "description": "Continue Playing button"
+  },
   "Nn5oAD": {
     "defaultMessage": "Go to login",
     "description": "Go to login button"
@@ -364,6 +388,10 @@
   "O1sXEv": {
     "defaultMessage": "Collections",
     "description": "collectibles modal title"
+  },
+  "OJUwxk": {
+    "defaultMessage": "Continue Playing",
+    "description": "Continue Playing Button"
   },
   "OWSL0r": {
     "defaultMessage": "Register",
@@ -393,6 +421,10 @@
     "defaultMessage": "Playground",
     "description": "Playground tab"
   },
+  "Px7S/2": {
+    "defaultMessage": "Close",
+    "description": "Close button"
+  },
   "Qb0n8J": {
     "defaultMessage": "Are you sure you want to logout?",
     "description": "Logout prompt message"
@@ -420,10 +452,6 @@
   "SL6O2c": {
     "defaultMessage": "Password",
     "description": "Password label"
-  },
-  "SjoZlV": {
-    "defaultMessage": "Play Now",
-    "description": "Play button"
   },
   "SpftNg": {
     "defaultMessage": "{errorMessage}",
@@ -529,6 +557,10 @@
     "defaultMessage": "Edit Profile",
     "description": "Home card menu"
   },
+  "YRA/RQ": {
+    "defaultMessage": "{username}",
+    "description": "Username"
+  },
   "YxMMzC": {
     "defaultMessage": "All Games",
     "description": "Game Progress card menu"
@@ -553,9 +585,17 @@
     "defaultMessage": "Create a New Account",
     "description": "Create Account Button"
   },
+  "a8vHtW": {
+    "defaultMessage": "{studentNamt}",
+    "description": "Student Name"
+  },
   "aWjMjy": {
     "defaultMessage": "Register",
     "description": "Register button"
+  },
+  "apr16P": {
+    "defaultMessage": "Leaderboard",
+    "description": "Leaderboard Title"
   },
   "b2J6mh": {
     "defaultMessage": "Home",
@@ -596,6 +636,10 @@
     "defaultMessage": "Profile updated successfully",
     "description": "success modal"
   },
+  "esK7Em": {
+    "defaultMessage": "Earned Awards",
+    "description": "Earned Awards"
+  },
   "f1vl6A": {
     "defaultMessage": "Show Leaderboard",
     "description": "show leaderboard"
@@ -604,6 +648,13 @@
     "defaultMessage": "Set a Password",
     "description": "Set password label"
   },
+  "fT7uau": {
+    "defaultMessage": "completed"
+  },
+  "fr893W": {
+    "defaultMessage": "{validSubmissions}",
+    "description": "Valid Submissions"
+  },
   "g0zp7w": {
     "defaultMessage": "Continue Playing",
     "description": "Game Progress card primary button"
@@ -611,6 +662,10 @@
   "g2zl2J": {
     "defaultMessage": "Login Into Existing Account",
     "description": "Login Into existing account button"
+  },
+  "g8RtbX": {
+    "defaultMessage": "Coins",
+    "description": "Coins"
   },
   "gOkIvb": {
     "defaultMessage": "Name",
@@ -676,6 +731,10 @@
     "defaultMessage": "Session expired",
     "description": "Not authorized message"
   },
+  "mb5De+": {
+    "defaultMessage": "Rank",
+    "description": "Rank"
+  },
   "mm9QaY": {
     "defaultMessage": "School",
     "description": "Profile school label"
@@ -691,6 +750,10 @@
   "n6bCYe": {
     "defaultMessage": "Get the rare collectibles with your coins now",
     "description": "more card title"
+  },
+  "nGT7h4": {
+    "defaultMessage": "Scoreboard",
+    "description": "Leaderboard button"
   },
   "nT6Ql7": {
     "defaultMessage": "{text}",
@@ -724,9 +787,9 @@
     "defaultMessage": "Go to Home",
     "description": "Home Navigation Button"
   },
-  "qUU2pp": {
-    "defaultMessage": "All Games",
-    "description": "Section Title"
+  "qTQ8nP": {
+    "defaultMessage": "{coinsEarned}",
+    "description": "Coins Earned"
   },
   "qXTiEd": {
     "defaultMessage": "Grade"
@@ -746,6 +809,10 @@
   "sNqwYF": {
     "defaultMessage": "Logout",
     "description": "Logout Button"
+  },
+  "sXlZLv": {
+    "defaultMessage": "Levels",
+    "description": "Game Level"
   },
   "swkU6w": {
     "defaultMessage": "Go to Home",
@@ -787,6 +854,10 @@
     "defaultMessage": "Help",
     "description": "Help CTA"
   },
+  "x13dma": {
+    "defaultMessage": "{level}",
+    "description": "Level"
+  },
   "x1EHNZ": {
     "defaultMessage": "Share",
     "description": "Share message"
@@ -802,6 +873,10 @@
   "xW6DFp": {
     "defaultMessage": "Videos",
     "description": "videos nav text"
+  },
+  "xXEsL7": {
+    "defaultMessage": "{level}",
+    "description": "Level Button"
   },
   "xlvJ5U": {
     "defaultMessage": "You are offline.",
