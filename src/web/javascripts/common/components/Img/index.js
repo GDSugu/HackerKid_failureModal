@@ -11,7 +11,11 @@ const Img = ({
   style = null,
   useSource = true,
 }) => {
-  const [imgSrc, setImgSrc] = React.useState(src);
+  let imgSource = `${imgPath + fallback}`;
+  if (src) {
+    imgSource = src;
+  }
+  const [imgSrc, setImgSrc] = React.useState(imgSource);
   let filePath;
   let fileName;
   let fileExtension;
