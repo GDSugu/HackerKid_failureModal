@@ -81,6 +81,12 @@
       "value": "Login with Phone"
     }
   ],
+  "/yRdu/": [
+    {
+      "type": 0,
+      "value": "Start Playing"
+    }
+  ],
   "01Q2N+": [
     {
       "type": 0,
@@ -489,12 +495,6 @@
       "value": "Home"
     }
   ],
-  "FKN6N8": [
-    {
-      "type": 0,
-      "value": "Add a block"
-    }
-  ],
   "FhTUgw": [
     {
       "type": 0,
@@ -787,12 +787,6 @@
     {
       "type": 0,
       "value": "Password"
-    }
-  ],
-  "SjoZlV": [
-    {
-      "type": 0,
-      "value": "Play Now"
     }
   ],
   "SpftNg": [
