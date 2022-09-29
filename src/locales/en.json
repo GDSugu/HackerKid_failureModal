@@ -43,6 +43,10 @@
     "defaultMessage": "Login with Phone",
     "description": "login with phone tab"
   },
+  "/yRdu/": {
+    "defaultMessage": "Start Playing",
+    "description": "Play button"
+  },
   "01Q2N+": {
     "defaultMessage": "Coming Soon...",
     "description": "More options Page"
@@ -278,10 +282,6 @@
     "defaultMessage": "Home",
     "description": "home heading"
   },
-  "FKN6N8": {
-    "defaultMessage": "Add a block",
-    "description": "Add a block title"
-  },
   "FhTUgw": {
     "defaultMessage": "Not {phone} ?",
     "description": "not button"
@@ -452,10 +452,6 @@
   "SL6O2c": {
     "defaultMessage": "Password",
     "description": "Password label"
-  },
-  "SjoZlV": {
-    "defaultMessage": "Play Now",
-    "description": "Play button"
   },
   "SpftNg": {
     "defaultMessage": "{errorMessage}",

@@ -9,7 +9,10 @@ $grid-breakpoints: (
   ml: 900px,
   lg: 992px,
   xl: 1200px,
-  xxl: 1440px
+  xxl: 1440px,
+  xxxl: 1600px,
+  xxxxl: 1920px,
+  xxxxxl: 2560px
 ) !default;
 
 $container-max-widths: (
@@ -19,7 +22,10 @@ $container-max-widths: (
   ml: 900px,
   lg: 992px,
   xl: 1200px,
-  xxl: 1440px
+  xxl: 1440px,
+  xxxl: 1600px,
+  xxxxl: 1920px,
+  xxxxxl: 2560px
 );
 
 // stylelint-disable value-keyword-case
