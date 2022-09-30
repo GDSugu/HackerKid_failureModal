@@ -11,13 +11,13 @@
     "defaultMessage": "Logout",
     "description": "more menu button"
   },
-  "/EsQT0": {
-    "defaultMessage": "This is games page",
-    "description": "Games Page"
-  },
   "/Gy7qZ": {
     "defaultMessage": "Level {levelNumber}",
     "description": "Level indicator"
+  },
+  "/Id/lz": {
+    "defaultMessage": "Yes",
+    "description": "logout"
   },
   "/dnxym": {
     "defaultMessage": "Create a New Account",
@@ -106,6 +106,10 @@
     "defaultMessage": "Login with Phone",
     "description": "Login with Phone tab"
   },
+  "33dFbN": {
+    "defaultMessage": "Created \"{lastCreatedChallengeName}\" challenge",
+    "description": "last created challenge log"
+  },
   "3Wcqsy": {
     "defaultMessage": "Next",
     "description": "Next button"
@@ -161,6 +165,10 @@
   "8R6f04": {
     "defaultMessage": "Coming Soon...",
     "description": "Challenges Page"
+  },
+  "9BVOVU": {
+    "defaultMessage": "Please verify to continue",
+    "description": "Recaptcha Modal heading"
   },
   "9NID4X": {
     "defaultMessage": "OK",
@@ -222,6 +230,10 @@
     "defaultMessage": "Coins Earned:",
     "description": "Coins Earned"
   },
+  "CfsqV9": {
+    "defaultMessage": "All Games",
+    "description": "Games Page"
+  },
   "Ciol6I": {
     "defaultMessage": "Output",
     "description": "Output"
@@ -265,6 +277,10 @@
   "FhTUgw": {
     "defaultMessage": "Not {phone} ?",
     "description": "not button"
+  },
+  "Fl1ECE": {
+    "defaultMessage": "Level {level}",
+    "description": "Level navigation link"
   },
   "FoTGQE": {
     "defaultMessage": "Go to Login",
@@ -388,6 +404,10 @@
   "PSx95N": {
     "defaultMessage": "Home",
     "description": "Home card heading"
+  },
+  "PaprdD": {
+    "defaultMessage": "No challenges published yet !",
+    "description": "last created challenge log"
   },
   "PcqGYQ": {
     "defaultMessage": "Playground",
@@ -529,6 +549,10 @@
     "defaultMessage": "Edit Profile",
     "description": "Home card menu"
   },
+  "YCPu3A": {
+    "defaultMessage": "Newly Trending",
+    "description": "heading"
+  },
   "YxMMzC": {
     "defaultMessage": "All Games",
     "description": "Game Progress card menu"
@@ -640,6 +664,10 @@
     "defaultMessage": "Leaderboard",
     "description": "Leaderboard page title"
   },
+  "jMKyRW": {
+    "defaultMessage": "Create a Challenge",
+    "description": "create a challenge button text"
+  },
   "jZhy7I": {
     "defaultMessage": "Forgot Password",
     "description": "Forgot Password Heading"
@@ -659,6 +687,10 @@
   "lynO1X": {
     "defaultMessage": "Change Password",
     "description": "Change password button text"
+  },
+  "m+YcJ4": {
+    "defaultMessage": "View your challenges",
+    "description": "view your challenges button text"
   },
   "m19v5I": {
     "defaultMessage": "{rank}",
@@ -704,6 +736,10 @@
     "defaultMessage": "Account Settings",
     "description": "more menu button"
   },
+  "oDenEU": {
+    "defaultMessage": "Turtle",
+    "description": "Turtle Game Title"
+  },
   "oOZkkL": {
     "defaultMessage": "Coming Soon...",
     "description": "Class Page"
@@ -719,10 +755,6 @@
   "pwy4hs": {
     "defaultMessage": "Game Progress",
     "description": "Game Progress card heading"
-  },
-  "q86PwV": {
-    "defaultMessage": "Go to Home",
-    "description": "Home Navigation Button"
   },
   "qUU2pp": {
     "defaultMessage": "All Games",
@@ -755,6 +787,10 @@
     "defaultMessage": "{step}",
     "description": "turtle instruction"
   },
+  "tdinI3": {
+    "defaultMessage": "Trending",
+    "description": "trending challenges heading"
+  },
   "tsF0aG": {
     "defaultMessage": "Continue Playing",
     "description": "continue playing"
@@ -774,10 +810,6 @@
   "vY562d": {
     "defaultMessage": "Try the new in-built IDE",
     "description": "more card title"
-  },
-  "viQX0N": {
-    "defaultMessage": "Turtle",
-    "description": "Game Title"
   },
   "viQX0N": {
     "defaultMessage": "Turtle",

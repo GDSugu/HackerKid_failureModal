@@ -97,6 +97,94 @@ const useGetChallenges = ({ initializeData = true, isPageMounted }) => {
   };
 };
 
+const useGetMyChallenges = ({ initializeData = true, isPageMounted }) => {
+  const [myChallenges, setMyChallenges] = useState({
+    status: true,
+    myChallenges: false,
+  });
+
+  const authContext = useContext(AuthContext);
+
+  const setState = (args) => {
+    setMyChallenges((prevState) => ({
+      ...prevState,
+      ...args,
+    }));
+    authContext.setAuthState({
+      appData: {
+        myChallengesHook: {
+          ...myChallenges,
+          ...args,
+        },
+      },
+    });
+  };
+
+  const getMyChallenges = ({ cached = true }) => {
+    const payload = {
+      type: 'getMyChallenges',
+      s3Prefix: API.S3PREFIX,
+    };
+
+    let result;
+
+    if (cached && authContext.appData.getChallengesHook) {
+      result = new Promise((resolve) => {
+        const { myChallengesHook } = authContext.appData;
+        setMyChallenges(() => ({
+          ...myChallengesHook,
+        }));
+        resolve(true);
+      });
+    } else {
+      result = post(payload, 'challenge/')
+        .then((res) => {
+          if (isPageMounted.current) {
+            if (res === 'access_denied') {
+              setMyChallenges((prevState) => ({
+                ...prevState,
+                status: 'access_denied',
+              }));
+            } else {
+              const parsedResponse = JSON.parse(res);
+              if (parsedResponse.status === 'success') {
+                setMyChallenges(() => ({
+                  ...parsedResponse,
+                }));
+                authContext.setAuthState({
+                  appData: {
+                    myChallengesHook: {
+                      ...parsedResponse,
+                    },
+                  },
+                });
+              } else {
+                setMyChallenges(() => ({
+                  ...parsedResponse,
+                  status: false,
+                }));
+              }
+            }
+          }
+        });
+    }
+
+    return result;
+  };
+
+  useEffect(() => {
+    if (initializeData) getMyChallenges({});
+  }, []);
+
+  return {
+    state: myChallenges,
+    setState,
+    static: {
+      getMyChallenges,
+    },
+  };
+};
+
 const useTakeChallenge = ({ isPageMounted }) => {
   const [takeChallenge, setTakeChallenge] = useState({
     status: true,
@@ -188,4 +276,5 @@ export default null;
 export {
   useGetChallenges,
   useTakeChallenge,
+  useGetMyChallenges,
 };
