@@ -38,6 +38,7 @@ const RouteCertificates = loadable(() => import('./Certificates'), { fallback: <
 // const RouteAwards = loadable(() => import('./Awards'), { fallback: <Loading /> });
 // const RouteCollectibles = loadable(() => import('./Collectibles'), { fallback: <Loading /> });
 const RouteTurtle = loadable(() => import('./Turtle'), { fallback: <Loading /> });
+const RouteZombieLand = loadable(() => import('./ZombieLand'), { fallback: <Loading /> });
 // const RouteSubscription = loadable(() => import('./Subscription'), { fallback: <Loading /> });
 
 const App = () => {
@@ -86,10 +87,13 @@ const App = () => {
           {/* <Route path='subscription' caseSensitive={true} element={<RouteSubscription />} /> */}
         </Route>
         <Route path='turtle' caseSensitive={true} element={<RouteTurtle />} />
-          <Route path='turtle/:id' element={<RouteTurtle />} />
-            <Route path='turtle/:id/:uniqueString' element={<RouteTurtle />} />
+        <Route path='turtle/:id' element={<RouteTurtle />} />
+        <Route path='turtle/:id/:uniqueString' element={<RouteTurtle />} />
           {/* </Route> */}
         {/* </Route> */}
+        <Route path='zombieland' caseSensitive={true} element={<RouteZombieLand />} />
+        <Route path='zombieland/:id' element={<RouteZombieLand />} />
+        <Route path='zombieland/:id/:uniqueString' element={<RouteZombieLand />} />
       </Route>
       <Route path='/' caseSensitive={true} element={<AuthNav/>}>
         <Route path='login' caseSensitive={true} element={<RouteLogin />} />

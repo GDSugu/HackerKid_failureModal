@@ -1,0 +1,142 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+@use '../../sass/components/gameNavBar';
+@use '../../sass/components/loading';
+
+@import './_zombieLandTheme.js';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+.zombieLand-home-container,
+.zombieLand-game-container {
+  height: 100vh;
+  width: 100vw;
+
+  nav {
+    background-color: gt.theme-var(game-nav-bg, null, $thememaplight, $cssvars);
+
+    .navigation-container {
+      .navigation-item {
+        &.active {
+          background-color: gt.theme-var(game-nav-active-bg, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+  }
+
+  .zombieLand-frame {
+    overflow: auto;
+
+    .zombieLand-card-container {
+      position: relative;
+      left: 50%;
+      width: 45%;
+      transform: translateX(-50%);
+      display: inline-block;
+
+      @include gm.media-breakpoint-down(md) {
+        display: none;
+      }
+
+      .zombieLand-card {
+        width: 100%;
+        border-radius: 12px;
+        background-color: gt.theme-var(game-dark-transparent, null, $thememaplight, $cssvars);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 2rem;
+        margin-top: 2.5rem;
+        color: gt.theme-var(text-color-2);
+
+        .card-container {
+          text-align: center;
+
+          .gameTitle {
+            font-size: 4rem;
+            margin: 0;
+          }
+
+          .gameDesc {
+            font-size: 1.25rem;
+            line-height: 1.5;
+            margin: 1rem 0;
+          }
+        }
+      }
+
+      .gameBtn {
+        border-radius: 0.75rem;
+        background-color: gt.theme-var(bg-1);
+        padding: 0.65rem 0;
+        margin: 0.5rem 0;
+
+        .gameBtnDesc {
+          font-weight: bold;
+          font-size: 1.5rem;
+          margin-bottom: 0;
+          margin-left: 0.5rem;
+        }
+      }
+    }
+
+    .zombieLand-mob-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+
+      @include gm.media-breakpoint-up(md) {
+        display: none;
+      }
+
+      .zl-title,
+      .zl-actions {
+        display: grid;
+        place-content: center;
+      }
+
+      .zl-title {
+        flex: 4;
+
+        .gameTitle {
+          color: gt.theme-var(text-color-2);
+          margin-bottom: 0;
+        }
+      }
+
+      .zl-actions {
+        flex: 1;
+
+        img {
+          width: 2.5rem;
+        }
+
+        .zl-play-btn {
+          .play-btn-container {
+            background-color: gt.theme-var(bg-1);
+            border-radius: 50%;
+            box-shadow: gt.theme-var(game-btn-shadow, null, $thememaplight, $cssvars);
+            padding: 1rem 1.25rem;
+
+            p {
+              color: gt.theme-var(game-btn-text-color, null, $thememaplight, $cssvars);
+              margin-bottom: 0;
+              margin-top: 0.125rem;
+              font-size: 0.85rem;
+              letter-spacing: 2.25px;
+            }
+          }
+        }
+      }
+
+    }
+  }
+}
+
+.zombieLand-home-container {
+  background: url(../../../../../images/zombieLand/zombieLand-home-bg.svg) no-repeat 100% / cover;
+
+  @include gm.media-breakpoint-down(md) {
+    background-image: url(../../../../../images/zombieLand/zombieLand-home-mob-bg.svg);
+  }
+}
