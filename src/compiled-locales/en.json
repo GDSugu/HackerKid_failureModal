@@ -17,18 +17,6 @@
       "value": "Logout"
     }
   ],
-  "+lsuwj": [
-    {
-      "type": 0,
-      "value": "Try now"
-    }
-  ],
-  "/EsQT0": [
-    {
-      "type": 0,
-      "value": "This is games page"
-    }
-  ],
   "/Gy7qZ": [
     {
       "type": 0,
@@ -37,6 +25,12 @@
     {
       "type": 1,
       "value": "levelNumber"
+    }
+  ],
+  "/Id/lz": [
+    {
+      "type": 0,
+      "value": "Yes"
     }
   ],
   "/dnxym": [
@@ -177,6 +171,20 @@
       "value": "Login with Phone"
     }
   ],
+  "33dFbN": [
+    {
+      "type": 0,
+      "value": "Created \""
+    },
+    {
+      "type": 1,
+      "value": "lastCreatedChallengeName"
+    },
+    {
+      "type": 0,
+      "value": "\" challenge"
+    }
+  ],
   "3Wcqsy": [
     {
       "type": 0,
@@ -265,10 +273,28 @@
       "value": "Login into existing account"
     }
   ],
+  "7PlDmO": [
+    {
+      "type": 0,
+      "value": "Play"
+    }
+  ],
+  "8R6f04": [
+    {
+      "type": 0,
+      "value": "Coming Soon..."
+    }
+  ],
   "9BVOVU": [
     {
       "type": 0,
       "value": "Please verify to continue"
+    }
+  ],
+  "9NID4X": [
+    {
+      "type": 0,
+      "value": "OK"
     }
   ],
   "9YoD+Y": [
@@ -369,6 +395,12 @@
       "value": "Coins Earned:"
     }
   ],
+  "CfsqV9": [
+    {
+      "type": 0,
+      "value": "All Games"
+    }
+  ],
   "Ciol6I": [
     {
       "type": 0,
@@ -441,6 +473,16 @@
     {
       "type": 0,
       "value": " ?"
+    }
+  ],
+  "Fl1ECE": [
+    {
+      "type": 0,
+      "value": "Level "
+    },
+    {
+      "type": 1,
+      "value": "level"
     }
   ],
   "FoTGQE": [
@@ -639,6 +681,12 @@
     {
       "type": 0,
       "value": "Home"
+    }
+  ],
+  "PaprdD": [
+    {
+      "type": 0,
+      "value": "No challenges published yet !"
     }
   ],
   "PcqGYQ": [
@@ -855,10 +903,10 @@
       "value": "Edit Profile"
     }
   ],
-  "YRA/RQ": [
+  "YCPu3A": [
     {
-      "type": 1,
-      "value": "username"
+      "type": 0,
+      "value": "Newly Trending"
     }
   ],
   "YxMMzC": [
@@ -1065,6 +1113,12 @@
       "value": "Leaderboard"
     }
   ],
+  "jMKyRW": [
+    {
+      "type": 0,
+      "value": "Create a Challenge"
+    }
+  ],
   "jZhy7I": [
     {
       "type": 0,
@@ -1093,6 +1147,12 @@
     {
       "type": 0,
       "value": "Change Password"
+    }
+  ],
+  "m+YcJ4": [
+    {
+      "type": 0,
+      "value": "View your challenges"
     }
   ],
   "m19v5I": [
@@ -1173,6 +1233,12 @@
       "value": "Account Settings"
     }
   ],
+  "oDenEU": [
+    {
+      "type": 0,
+      "value": "Turtle"
+    }
+  ],
   "oOZkkL": [
     {
       "type": 0,
@@ -1197,13 +1263,7 @@
       "value": "Game Progress"
     }
   ],
-  "q86PwV": [
-    {
-      "type": 0,
-      "value": "Go to Home"
-    }
-  ],
-  "qTQ8nP": [
+  "qUU2pp": [
     {
       "type": 1,
       "value": "coinsEarned"
@@ -1255,6 +1315,12 @@
     {
       "type": 1,
       "value": "step"
+    }
+  ],
+  "tdinI3": [
+    {
+      "type": 0,
+      "value": "Trending"
     }
   ],
   "tsF0aG": [
