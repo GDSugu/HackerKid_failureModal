@@ -2,7 +2,7 @@ import React from 'react';
 import '../../../../stylesheets/common/pages/courses/style.scss';
 
 const courseCard = ({ data }) => (
-  <a href={`./videos/${data.moduleId}/${data.number}`}>
+  <a href={`${window.location.origin}/videos/${data.moduleId}/${data.number}`}>
     <div className='course-card'>
       <p className='video-type'>{data.type}</p>
       <img className='play-btn' src='../../../../../images/courses/play-btn.png' />

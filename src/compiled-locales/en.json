@@ -339,6 +339,12 @@
       "value": "Play"
     }
   ],
+  "8R6f04": [
+    {
+      "type": 0,
+      "value": "Coming Soon..."
+    }
+  ],
   "9BVOVU": [
     {
       "type": 0,
@@ -1447,18 +1453,6 @@
     {
       "type": 0,
       "value": "Game Progress"
-    }
-  ],
-  "qJ7EK+": [
-    {
-      "type": 1,
-      "value": "challengeName"
-    }
-  ],
-  "qTQ8nP": [
-    {
-      "type": 1,
-      "value": "coinsEarned"
     }
   ],
   "qUU2pp": [
