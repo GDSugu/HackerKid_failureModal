@@ -3,7 +3,7 @@ const {
 } = require('../../../../javascripts/common/_theme');
 
 const {
-  Green,
+  Green, Yellow, utilColors,
 } = require('../../../../../colors/_colors');
 
 const lightTheme = Theme.light;
@@ -17,6 +17,9 @@ const thememaplight = {
   'course-nav-active-bg': lightTheme.screenGreen.navActiveBg,
   'videos-progress-gradient-1': Green.color900,
   'videos-progress-gradient-2': Green.color500,
+  'rating-color': Yellow.color500,
+  'rating-background': utilColors.dimGrey,
+  'color-sub-topic': utilColors.lightGrey,
 };
 // just copied the light theme colors to the dark for now
   // TODO: make this a real dark theme with appropriate colors
@@ -28,6 +31,9 @@ const thememapdark = {
   'course-nav-active-bg': darkTheme.screenGreen.navActiveBg,
   'videos-progress-gradient-1': Green.color900,
   'videos-progress-gradient-2': Green.color500,
+  'rating-color': Yellow.color500,
+  'rating-background': utilColors.dimGrey,
+  'color-sub-topic': utilColors.lightGrey,
 };
 
 const cssvars = {
@@ -38,6 +44,9 @@ const cssvars = {
   'course-nav-active-bg': '--course-nav-active-bg',
   'videos-progress-gradient-1': '--videos-progress-gradient-1',
   'videos-progress-gradient-2': '--videos-progress-gradient-2',
+  'rating-color': '--rating-color',
+  'rating-background': '--rating-background',
+  'color-sub-topic': '--color-sub-topic',
 };
 
 module.exports = {

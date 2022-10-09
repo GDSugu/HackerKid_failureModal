@@ -155,7 +155,184 @@
   }
 }
 
+.video-page-container {
+  margin: 1rem 9.5rem;
+  max-width: 1136px;
+}
+
+.video-player-container {
+  margin: 0 auto;
+  max-height: 640px;
+  position: relative;
+}
+
+.video-discription-container {
+  margin: 1.5rem auto 0;
+}
+
+.rating-tags-container {
+  min-width: 324px;
+  min-height: 164px;
+  max-height: 164px;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  
+  hr,
+  p,
+  h4 {
+    margin: 0;
+  }
+
+  .color-sub {
+    color: gt.theme-var(color-sub-topic, null, $thememaplight, $cssvars);;
+  }
+
+  .tag-container {
+    margin-top: 1rem;
+  }
+}
+
+.plyr--paused:after {
+  position: absolute;
+  content: '';
+  background-image: url('../../../../../images/courses/play-btn.svg');
+  background-size: 5rem;
+  width: 5rem;
+  height: 5rem;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.rating-star {
+  color: gt.theme-var(rating-color, null, $thememaplight, $cssvars);
+}
+
+.rated-star {
+  color: gt.theme-var(rating-color, null, $thememaplight, $cssvars);
+}
+
+.unrated-star {
+  color: #fff;
+}
+
+.fa-star-half {
+  position: relative;
+  z-index: 2;
+}
+
+.background-star {
+  color: gt.theme-var(rating-background, null, $thememaplight, $cssvars);
+  margin-left: -18px;
+  z-index: 1;
+}
+
+.empty-star {
+  color: gt.theme-var(rating-background, null, $thememaplight, $cssvars);
+}
+
+.video-tags {
+  color: gt.theme-var(videos-progress-gradient-1, null, $thememaplight, $cssvars);
+}
+
+.rating-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rating-star-container {
+
+  margin: 3.5rem 0;
+
+  /* use display:inline-flex to prevent whitespace issues. alternatively, you can put all the children of .rating-group on a single line */
+  .rating-group {
+    display: inline-flex;
+  }
+  
+  /* make hover effect work properly in IE */
+  // .rating__icon {
+  //   pointer-events: none;
+  // }
+  
+  /* hide radio inputs */
+  .rating__input {
+   position: absolute !important;
+   left: -9999px !important;
+  }
+  
+  /* hide 'none' input from screenreaders */
+  .rating__input--none {
+    display: none
+  }
+
+  /* set icon padding and size */
+  .rating__label {
+    cursor: pointer;
+    padding: 0 0.1em;
+    font-size: 2rem;
+  }
+  
+  /* set default star color */
+  .unchecked {
+    .rating__icon--star {
+      color:#ddd;
+    }
+  }
+
+  .rating__icon--star {
+    color: orange;
+  }
+
+  /* if any input is checked, make its following siblings grey */
+  .rating__input:checked ~ .rating__label .rating__icon--star {
+    color: #ddd;
+  }
+  
+  /* make all stars orange on rating group hover */
+  .rating-group:hover .rating__label .rating__icon--star {
+    color: orange;
+  }
+
+  /* make hovered input's following siblings grey on hover */
+  .rating__input:hover ~ .rating__label .rating__icon--star {
+    color: #ddd;
+  }
+}
+
+.rating-modal-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  button {
+    max-width: 220px;
+    width: 100%;
+    padding: auto;
+  }
+}
+
+.video-page-container {
+  .course-card-container {
+    padding: 0;
+  }
+}
+
 @media (max-width: 768px) {
+
+  .course-card {
+    width: 272px;
+    height: 154px;
+  }
+
+  .course-card-container {
+    h5 {
+      margin-left: 1rem;
+    }
+  }
+
   .swiper-wrapper {
     padding: 0 1.25rem;
   }
@@ -163,4 +340,23 @@
   .course-card-container {
     padding: 0;
   }
+
+  .video-page-container {
+    margin: 1rem 0;
+  }
+
+  .video-discription-container {
+    padding: 0 1rem;
+  }
+
+  .rating-tags-container {
+    min-width: 200px;
+    max-height: 164px;
+  }
+
+  // .video-page-container {
+  //   .course-card-container {
+  //     padding: 0 1rem;
+  //   }
+  // }
 }
