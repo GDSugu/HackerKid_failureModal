@@ -1,0 +1,81 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+@use '../../sass/components/_paginator.scss' as paginator;
+
+@import '../challenges/_challengesTheme.js';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+.your-challenges-container {
+  background-color: gt.theme-var(challenges-body-bg, null, $thememaplight, $cssvars);
+  margin-bottom: paginator.$pagination-offset;
+
+  @include gm.media-breakpoint-up(lg) {
+    margin-bottom: paginator.$pagination-offset-after-lg;
+  }
+
+  nav {
+    background-color: gt.theme-var(challenges-nav-bg, null, $thememaplight, $cssvars);
+
+    .navigation-container {
+      .navigation-item {
+        &.active {
+          background-color: gt.theme-var(challenges-nav-active-bg, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+  }
+
+  .my-challenges-section {
+    margin: 1.6rem 0;
+
+    @include gm.media-breakpoint-down(sm) {
+      margin: 1rem 0;
+    }
+  }
+
+  .pagination-footer {
+    .pagination {
+      .page-item {
+        &:first-child,
+        &:last-child {
+          .page-link {
+            svg {
+              fill: gt.theme-var(challenges-btn-bg, null, $thememaplight, $cssvars);
+            }
+          }
+        }
+
+        .page-link {
+          color: gt.theme-var(challenges-text-color-1, null, $thememaplight, $cssvars);
+        }
+
+        &.active {
+          .page-link {
+            color: gt.theme-var(challenges-text-color-3, null, $thememaplight, $cssvars);
+          }
+        }
+
+        &.disabled {
+          .page-link {
+            color: gt.theme-var(text-color-5);
+          }
+        }
+      }
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background: gt.theme-var(text-color-6);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: gt.theme-var(skeleton-bg);
+  border-radius: 0.5rem;
+}

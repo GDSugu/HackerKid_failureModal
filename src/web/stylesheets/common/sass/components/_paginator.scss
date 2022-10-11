@@ -1,0 +1,84 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+
+$pagination-offset: 7vh;
+$pagination-offset-after-lg: 6vh;
+
+.pagination-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: $pagination-offset;
+
+  @include gm.media-breakpoint-up(lg) {
+    height: $pagination-offset-after-lg;
+  }
+
+  .pagination-nav {
+    width: 100%;
+    height: 100%;
+    background-color: gt.theme-var(bg-1);
+    display: flex;
+    justify-content: center;
+
+    .pagination {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      margin: 0;
+
+      @include gm.media-breakpoint-up(md) {
+        width: 80%;
+      }
+
+      @include gm.media-breakpoint-up(lg) {
+        width: 60%;
+      }
+
+      @include gm.media-breakpoint-up(xl) {
+        width: 35%;
+      }
+
+      .page-item {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+
+        .page-link {
+          border: none;
+          background-color: inherit;
+          box-shadow: none;
+          color: gt.theme-var(text-color-1);
+          padding: 0;
+        }
+
+        &.active {
+          .page-link {
+            color: gt.theme-var(text-color-8);
+          }
+        }
+
+        &:first-child,
+        &:last-child {
+          .page-link {
+            svg {
+              fill: gt.theme-var(text-color-8);
+            }
+          }
+        }
+
+        &:first-child.disabled,
+        &:last-child.disabled {
+          pointer-events: none;
+
+          .page-link {
+            svg {
+              fill: gt.theme-var(text-color-5);
+            }
+          }
+        }
+      }
+    }
+  }
+}

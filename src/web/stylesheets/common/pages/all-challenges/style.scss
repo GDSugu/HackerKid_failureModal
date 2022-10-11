@@ -1,0 +1,212 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+@use '../../sass/components/_challenges-grid.scss';
+@use '../../sass/components/_paginator.scss' as paginator;
+
+@import '../challenges/_challengesTheme.js';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+.all-challenges-container {
+  background-color: gt.theme-var(challenges-body-bg, null, $thememaplight, $cssvars);
+  margin-bottom: paginator.$pagination-offset;
+
+  @include gm.media-breakpoint-up(lg) {
+    margin-bottom: paginator.$pagination-offset-after-lg;
+  }
+
+  nav {
+    background-color: gt.theme-var(challenges-nav-bg, null, $thememaplight, $cssvars);
+
+    .navigation-container {
+      .navigation-item {
+        &.active {
+          background-color: gt.theme-var(challenges-nav-active-bg, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+  }
+
+  .all-challenges-section {
+    margin: 1.6rem 0;
+
+    @include gm.media-breakpoint-down(sm) {
+      margin: 1rem 0;
+    }
+  }
+
+  .controls {
+    $universal-border-radius: 0.75rem;
+    $padding: 0.65rem 1.1rem;
+    $icon-width: 20px;
+    $icon-height: 20px;
+
+    position: relative;
+    display: flex;
+    gap: 1rem;
+
+    @include gm.media-breakpoint-down(md) {
+      gap: 0.5rem;
+    }
+
+    .sort-dropdown {
+      position: relative;
+      flex-basis: 20%;
+      max-width: 35%;
+
+      .sort-dropdown-toggle {
+        width: 100%;
+        border: none;
+        border-radius: $universal-border-radius;
+        padding: $padding;
+        background-color: gt.theme-var(bg-1);
+        color: gt.theme-var(challenges-text-color-1, null, $thememaplight, $cssvars);
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+
+        .sort-icon {
+          width: $icon-width;
+          height: $icon-height;
+        }
+
+        .sort-display-name {
+          display: inline-block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        &:after {
+          display: none;
+        }
+      }
+
+      .dropdown-menu {
+        min-width: 100%;
+
+        .dropdown-item {
+          display: flex;
+          gap: 2rem;
+          justify-content: space-between;
+          padding: 0.5rem 0.75rem;
+          cursor: pointer;
+
+          &:active,
+          &.active {
+            background-color: inherit;
+            color: gt.theme-var(challenges-text-color-3, null, $thememaplight, $cssvars);
+          }
+        }
+
+        .dropdown-item-container {
+          position: relative;
+
+          .ascending-descending-selectors {
+            position: absolute;
+            display: flex;
+            gap: 0.3rem;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+
+            button {
+              border: none;
+              background: transparent;
+              outline: none;
+
+              &:focus-visible {
+                outline: auto;
+              }
+            }
+
+            button:active,
+            button.active {
+              color: gt.theme-var(challenges-text-color-3, null, $thememaplight, $cssvars);
+            }
+          }
+        }
+      }
+    }
+
+    .search-box-with-icon {
+      position: relative;
+      flex-basis: 80%;
+
+      .search-icon {
+        width: $icon-width;
+        height: $icon-height;
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+      }
+
+      .all-challenges-search-box {
+        width: 100%;
+        border: none;
+        border-radius: $universal-border-radius;
+        outline: none;
+        padding: $padding;
+        padding-left: calc($icon-width + 1rem);
+        color: gt.theme-var(challenges-text-color-1, null, $thememaplight, $cssvars);
+
+        &::placeholder {
+          color: gt.theme-var(challenges-text-color-1, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+
+    .sort-dropdown-toggle:focus,
+    .all-challenges-search-box:focus {
+      $box-shadow-color: map-get($thememaplight, challenges-nav-bg);
+
+      border-color: gt.theme-var(challenges-nav-bg, null, $thememaplight, $cssvars);
+      box-shadow: 0 0 0 3px rgba($box-shadow-color, 0.2);
+    }
+  }
+
+  .pagination-footer {
+    .pagination {
+      .page-item {
+        &:first-child,
+        &:last-child {
+          .page-link {
+            svg {
+              fill: gt.theme-var(challenges-btn-bg, null, $thememaplight, $cssvars);
+            }
+          }
+        }
+
+        .page-link {
+          color: gt.theme-var(challenges-text-color-1, null, $thememaplight, $cssvars);
+        }
+
+        &.active {
+          .page-link {
+            color: gt.theme-var(challenges-text-color-3, null, $thememaplight, $cssvars);
+          }
+        }
+
+        &.disabled {
+          .page-link {
+            color: gt.theme-var(text-color-5);
+          }
+        }
+      }
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background: gt.theme-var(text-color-6);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: gt.theme-var(skeleton-bg);
+  border-radius: 0.5rem;
+}

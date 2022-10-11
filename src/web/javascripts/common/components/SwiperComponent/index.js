@@ -5,7 +5,7 @@ import 'swiper/swiper.scss';
 import 'swiper/modules/navigation/navigation.scss';
 
 const SwiperComponent = ({
-  data, SlideComponent, swiperModules, swiperProps,
+  data, SlideComponent, swiperModules, swiperProps, LastSlideComponent = false,
 }) => {
   const modulesList = [];
 
@@ -23,6 +23,11 @@ const SwiperComponent = ({
               <SlideComponent data={item} />
             </SwiperSlide>
           ))
+        }
+        {
+          LastSlideComponent && <SwiperSlide>
+            <LastSlideComponent />
+          </SwiperSlide>
         }
       </Swiper>
     </>

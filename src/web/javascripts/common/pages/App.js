@@ -9,7 +9,6 @@ import {
 import loadable from '@loadable/component';
 import { FormattedMessage } from 'react-intl';
 import 'bootstrap';
-import 'bootstrap/dist/js/bootstrap.min';
 import AuthNav from '../components/AuthNav/AuthNav';
 import '../../../stylesheets/common/sass/importers/_bootstrap.scss';
 import '../../../stylesheets/common/sass/importers/_fontawesome.scss';
@@ -29,7 +28,10 @@ const RouteForgotPassword = loadable(() => import('./ForgotPassword'), { fallbac
 const RouteDashboard = loadable(() => import('./Dashboard'), { fallback: <Loading /> });
 const RouteGames = loadable(() => import('./Games'), { fallback: <Loading /> });
 const RouteCourses = loadable(() => import('./Courses'), { fallback: <Loading /> });
+const RouteAllChallenges = loadable(() => import('./AllChallenges'), { fallback: <Loading /> });
 const RouteChallenges = loadable(() => import('./Challenges'), { fallback: <Loading /> });
+const RouteYourChallenges = loadable(() => import('./YourChallenges'), { fallback: <Loading /> });
+const RouteYourDraftChallenges = loadable(() => import('./YourDraftChallenges'), { fallback: <Loading /> });
 const RouteMore = loadable(() => import('./More'), { fallback: <Loading /> });
 const RouteProfileEdit = loadable(() => import('./ProfileEdit'), { fallback: <Loading /> });
 // const RouteSubscription = loadable(() => import('./Subscription'), { fallback: <Loading /> });
@@ -51,7 +53,10 @@ const App = () => {
         <Route path='dashboard' caseSensitive={true} element={<RouteDashboard />} />
         <Route path='games' caseSensitive={true} element={<RouteGames />} />
         <Route path='courses' caseSensitive={true} element={<RouteCourses />} />
+        <Route path='all-challenges' caseSensitive={true} element={<RouteAllChallenges />} />
         <Route path='challenges' caseSensitive={true} element={<RouteChallenges />} />
+        <Route path='your-challenges' caseSensitive={true} element={<RouteYourChallenges />} />
+        <Route path='your-challenges/drafts' caseSensitive={true} element={<RouteYourDraftChallenges />}/>
         {/* <Route path='more' caseSensitive={true} element={<RouteMore />} /> */}
         <Route path='more' caseSensitive={true} element={<RouteMore />} />
         <Route path='leaderboard' caseSensitive={true} element={<RouteLeaderBoard />} />

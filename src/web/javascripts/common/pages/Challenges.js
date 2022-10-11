@@ -1,14 +1,101 @@
-import React, { useRef, memo, useEffect } from 'react';
+import React, {
+  useRef, memo, useEffect, useState,
+} from 'react';
 import { Link } from 'react-router-dom';
 import '../../../stylesheets/common/pages/challenges/style.scss';
 import { FormattedMessage } from 'react-intl';
 import { loginCheck, pageInit } from '../framework';
 import Img from '../components/Img';
 import SwiperComponent from '../components/SwiperComponent';
-import { useGetChallenges, useGetMyChallenges } from '../../../../hooks/pages/challenges';
+import { useGetAttemptedChallenges, useGetChallenges, useGetMyChallenges } from '../../../../hooks/pages/challenges';
 import Modal from '../components/Modal';
+import { useDashboard } from '../../../../hooks/pages/dashboard';
 
-const ChallengeSwiperSlide = ({ data }) => <>
+const HeroContainer = ({
+  dashboardUserData,
+  isDesktop,
+  session,
+  NewlyTrendingChallengeComponent,
+  ChallengesActivityComponent,
+}) => {
+  let profileImg = '../../../../images/profile/default_user.png';
+  if (session && dashboardUserData) {
+    profileImg = (session.profileLink ? session.profileLink : dashboardUserData.profileImage)
+      .toString()
+      .replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`);
+  }
+
+  return <>
+    {
+      isDesktop && <div className='hero-card'>
+      <div className='hero-card-data col-6 col-sm-4'>
+        <div className="hero-card-img"
+            style={(session.profileLink || dashboardUserData.profileImage)
+              ? { backgroundImage: `url(${profileImg})` }
+              : {}
+          }></div>
+        <div className="hero-card-data-content">
+          <div className="hero-data">
+            <Img src='common/hkcoin.png' />
+            <p className='mb-0'>{`${session.pointsEarned || '--'} coins`}</p>
+          </div>
+          {/* <div className="hero-data">
+            <Img src='common/xp.png' />
+            <p className='mb-0'>
+              <FormattedMessage
+                defaultMessage={`${12345 || '--'} XP`}
+                description={'hk XP'}
+              />
+            </p>
+          </div> */}
+        </div>
+      </div>
+      <div className="hero-card-nav col-6 col-sm-8">
+        <div className='hero-nav-cards-container'>
+          <NewlyTrendingChallengeComponent />
+          <div className='last-challenge-with-create-challenge-btn'>
+            <ChallengesActivityComponent />
+            <Link to={'#'} className='btn btn-primary btn-block create-challenge-btn'>
+              <FormattedMessage defaultMessage={'Create a Challenge'} description='create a challenge button text' />
+              <i className='fa fa-chevron-right'/>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+    {
+      !isDesktop
+      && <div className='mobile-hero-card'>
+      <h6 className='heading6 page-title'>
+        <FormattedMessage defaultMessage={'Challenges'} description='page title'/>
+      </h6>
+      {
+        !isDesktop && (!dashboardUserData || !session) && <div className='mobile-hero-card-skeleton'></div>
+      }
+      {
+        !isDesktop && (dashboardUserData && session)
+        && <div className='game-stat-container'>
+        <div className='game-stat'>
+          <Img className='game-stat-icon' src='common/hkcoin.png' />
+          <span className='game-stat-text body'>
+            <FormattedMessage defaultMessage={'{totalEarnedCoins}'} description={'total earned coins'} values={{
+              totalEarnedCoins: session.pointsEarned || '--',
+            }} />
+          </span>
+        </div>
+      </div>
+      }
+      <Link to={'#'} className='btn btn-primary btn-block create-challenge-btn'>
+        <FormattedMessage defaultMessage={'Create a Challenge'} description='create a challenge button text' />
+        <i className='fa fa-chevron-right'/>
+      </Link>
+    </div>
+    }
+  </>;
+};
+
+const ChallengeSwiperSlide = ({ data, showChallengeAuthorName }) => <>
   <Link className='challenge-item' to={data.actionUrl}>
     <div className="challenge-block">
       <div className="challenge-img">
@@ -17,65 +104,98 @@ const ChallengeSwiperSlide = ({ data }) => <>
       <div className="challenge-title">
         <p>{data.challengeName || '--'}</p>
       </div>
-      <div className="challenge-author">
+      {
+        showChallengeAuthorName && <div className="challenge-author">
         <p>{`by ${data.creatorName || '--'}`}</p>
       </div>
+      }
     </div>
   </Link>
-  </>;
+</>;
 
-const ChallengesSwiper = ({ trendingChallenges }) => <>
-  <div className="challenges-container">
-    <div className="challenges-heading-container d-flex align-items-end justify-content-between">
-      <h5 className="block-heading heading6">
-        <FormattedMessage
-          defaultMessage={'Trending'}
-          description={'trending challenges heading'}
-        />
-      </h5>
-    </div>
-    <div className="challenges-block">
-      <div className="row no-gutters">
-        {
-          trendingChallenges && trendingChallenges.length > 0
-          && <>
-            <SwiperComponent
-              data={trendingChallenges}
-              SlideComponent={ChallengeSwiperSlide}
-              swiperModules={{
-                navigation: true,
-              }}
-              swiperProps={{
-                spaceBetween: 10,
-                slidesPerView: 'auto',
-                className: 'trending-challenges-swiper',
-                grabCursor: true,
-                lazy: true,
-                navigation: true,
-              }} />
-          </>
-        }
-        {
-          !trendingChallenges
-          && <>
-            <div className="skeleton">
-              <div className="d-flex align-items-center challenge-skeleton-container">
-                { [1, 2, 3, 4, 5, 6].map((item, index) => (
-                  <div key={index} className='challenge-skeleton-card'></div>
-                )) }
-              </div>
-            </div>
-          </>
-        }
+const NavigationSlide = ({ to, navigationText }) => <>
+  <Link to={to} className='navigation-slide'>
+    <FormattedMessage defaultMessage={'{navigationText}'} description='navigation slide text' values={{
+      navigationText,
+    }}/>
+  </Link>
+</>;
+
+const ChallengesSwiper = ({
+  challenges, swiperClassName = '', swiperHeading, totalNumberOfSlides, NavigationSlideComponent = false,
+  showChallengeAuthorName = true,
+}) => (
+  <div>
+    {
+      challenges && challenges.length > 0
+      && <div className="challenges-container">
+      <div className="challenges-heading-container d-flex align-items-end justify-content-between">
+        <h5 className="block-heading heading6">
+          <FormattedMessage
+            defaultMessage={'{swiperHeading}'}
+            description={'swiper heading'}
+            values={{ swiperHeading }}
+          />
+        </h5>
+      </div>
+      <div className="challenges-block">
+        <div className="row no-gutters">
+          <SwiperComponent
+            data={challenges}
+            SlideComponent={({ data }) => <ChallengeSwiperSlide
+                  data={data} showChallengeAuthorName={showChallengeAuthorName} />}
+            LastSlideComponent={NavigationSlideComponent}
+            swiperModules={{
+              navigation: true,
+            }}
+            swiperProps={{
+              spaceBetween: 10,
+              slidesPerView: 'auto',
+              className: `challenges-swiper ${swiperClassName}`,
+              grabCursor: true,
+              lazy: true,
+              navigation: true,
+            }} />
+        </div>
       </div>
     </div>
+    }
+    {
+      !challenges && <div className="challenges-container">
+      <div className="challenges-heading-container d-flex align-items-end justify-content-between">
+        <h5 className="block-heading heading6">
+          <FormattedMessage
+            defaultMessage={'{swiperHeading}'}
+            description={'swiper heading'}
+            values={{ swiperHeading }}
+          />
+        </h5>
+      </div>
+      <div className="challenges-block">
+        <div className="row no-gutters">
+          {
+              !challenges
+              && <>
+                <div className="skeleton">
+                  <div className="d-flex align-items-center challenge-skeleton-container">
+                    { new Array(totalNumberOfSlides).fill(1).map((item, index) => (
+                      <div key={index} className='challenge-skeleton-card'></div>
+                    )) }
+                  </div>
+                </div>
+              </>
+            }
+          </div>
+      </div>
+    </div>
+    }
   </div>
-</>;
+);
 
 const NewlyTrendingChallenge = ({ challenge }) => (
   <>
     {
-      challenge && <div className='newly-trending-challenge-container hero-card'>
+      challenge && <div className='newly-trending-challenge-container hero-nav-card'>
       <h5 className='caption-bold text-center title'>
         <FormattedMessage defaultMessage={'Newly Trending'} description='heading' />
       </h5>
@@ -90,59 +210,64 @@ const NewlyTrendingChallenge = ({ challenge }) => (
   </>
 );
 
-const ChallengesActivity = ({ myChallenges }) => (
-  <>
+const ChallengesActivity = ({ myChallenges }) => <>
     {
-      myChallenges && <div className='challenges-activity hero-card'>
-      {
-        myChallenges[0] && <div className='last-challenge'>
-          <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M7.72908 9.94814L5.25399 12.4232C4.97852 12.6986 4.62757 12.8862 4.24552 12.9622C3.86347 13.0381 3.46747 12.9991 3.10759 12.8501C2.74771 12.701 2.4401 12.4486 2.22366 12.1247C2.00722 11.8009 1.89166 11.4201 1.8916 11.0306V9.94814L3.02324 4.29079C3.17438 3.53461 3.58285 2.85415 4.17915 2.36518C4.77546 1.87622 5.52275 1.60897 6.29389 1.60889H14.1678C14.939 1.60897 15.6862 1.87622 16.2825 2.36518C16.8789 2.85415 17.2873 3.53461 17.4385 4.29079L18.5701 9.94814V11.0297C18.57 11.4193 18.4545 11.8 18.238 12.1239C18.0216 12.4478 17.714 12.7002 17.3541 12.8492C16.9942 12.9983 16.5982 13.0373 16.2162 12.9613C15.8341 12.8854 15.4832 12.6978 15.2077 12.4224L12.7326 9.94814H7.72908Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          <span className='challenge-name caption'>
-            <FormattedMessage
-              defaultMessage={'Created "{lastCreatedChallengeName}" challenge'}
-              description='last created challenge log'
-              values={{ lastCreatedChallengeName: myChallenges[0].challengeName }}
-            />
-          </span>
-          <Link to={'#'} className='open-challenge-btn'>
-            <img src='../../../../images/challenges/open-challenge-icon.svg' alt='open-challenge-icon'/>
-          </Link>
-        </div>
-      }
-      {
-        !myChallenges[0]
-        && <div className='last-challenge'>
+      myChallenges && <div className='challenges-activity hero-nav-card'>
+        {
+          myChallenges[0] && <div className='last-challenge'>
+            <img className='icon' src='../../../../images/challenges/joystick-icon.svg' alt='joystick-icon'/>
+            <span className='challenge-name caption'>
+              <FormattedMessage
+                defaultMessage={'Created "{lastCreatedChallengeName}" challenge'}
+                description='last created challenge log'
+                values={{ lastCreatedChallengeName: myChallenges[0].challengeName }}
+              />
+            </span>
+            <Link to={myChallenges[0].actionUrl} className='open-challenge-btn'>
+              <img className='icon' src='../../../../images/challenges/open-challenge-icon.svg' alt='open-challenge-icon' />
+            </Link>
+          </div>
+        }
+        {
+          !myChallenges[0]
+          && <div className='last-challenge'>
             <span className='caption'>
               <FormattedMessage
-              defaultMessage={'No challenges published yet !'}
-              description='last created challenge log' />
-          </span>
-        </div>
-      }
-      <Link to={'#'} className='view-your-challenges-text-btn caption-bold'>
-        <FormattedMessage defaultMessage={'View your challenges'} description='view your challenges button text'/>
-      </Link>
-    </div>
+                defaultMessage={'No challenges published yet !'}
+                description='last created challenge log' />
+            </span>
+          </div>
+        }
+        <Link to={'/your-challenges'} className='view-your-challenges-text-btn caption-bold'>
+          <FormattedMessage defaultMessage={'View your challenges'} description='view your challenges button text' />
+        </Link>
+      </div>
     }
     {
       !myChallenges && <div className='challenges-activity-skeleton'>
       </div>
     }
-  </>
-);
+  </>;
 
+const HeroComponent = memo(HeroContainer);
 const NewlyTrendingChallengeComponent = memo(NewlyTrendingChallenge);
 const ChallengesActivityComponent = memo(ChallengesActivity);
-const TrendingChallengesSwiperComponent = memo(ChallengesSwiper);
+const ChallengesSwiperComponent = memo(ChallengesSwiper);
 
 const Challenges = () => {
   const isPageMounted = useRef(true);
+  const numberOfChallengesSlideToShow = 7;
   pageInit('challenges-container', 'Challenges');
 
-  const { state: getChallengesState } = useGetChallenges({ isPageMounted });
+  const [isDesktop, setIsDesktop] = useState(window.matchMedia('(min-width: 768px)').matches);
+
+  const {
+    state: getChallengesState,
+    static: { getChallenges },
+  } = useGetChallenges({ initializeData: false, isPageMounted });
   const { state: getMyChallengesState } = useGetMyChallenges({ isPageMounted });
+  const { state: getAttemptedChallengesState } = useGetAttemptedChallenges({ isPageMounted });
+  const { state: getDashboardUserState } = useDashboard({ isPageMounted });
 
   const {
     status: challengesStatus,
@@ -150,30 +275,77 @@ const Challenges = () => {
   } = getChallengesState;
 
   const {
+    status: attemptedChallengesStatus,
+    attemptedChallenges,
+  } = getAttemptedChallengesState;
+
+  const {
     status: myChallengesStatus,
     myChallenges,
   } = getMyChallengesState;
 
-  const modalVisible = [myChallengesStatus, challengesStatus].includes('access_denied');
+  const {
+    status: dashboardUserDataStatus,
+    userData: dashboardUserData,
+    sessionData,
+  } = getDashboardUserState;
+
+  const modalVisible = [myChallengesStatus, challengesStatus, dashboardUserDataStatus, attemptedChallengesStatus].includes('access_denied');
 
   useEffect(() => {
     loginCheck();
+
+    window.addEventListener('resize', () => {
+      setIsDesktop(window.matchMedia('(min-width: 768px)').matches);
+    });
+
+    return () => {
+      isPageMounted.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    getChallenges({ cached: false });
   }, []);
 
   return <>
   <div className="col-12 col-md-11 col-xl-10 mx-auto">
-    <div className='new-trending-challenge-with-last-challenge'>
-      <NewlyTrendingChallengeComponent challenge={trendingChallenges[0]} />
-       <div className='last-challenge-with-create-challenge-btn'>
-          <ChallengesActivityComponent
-            myChallenges={myChallenges} />
-        <Link to={'#'} className='btn btn-primary btn-block create-your-challenge-btn'>
-          <FormattedMessage defaultMessage={'Create a Challenge'} description='create a challenge button text' />
-          <i className='fa fa-chevron-right'/>
-        </Link>
-      </div>
-    </div>
-      <TrendingChallengesSwiperComponent trendingChallenges={trendingChallenges} />
+      <HeroComponent
+        isDesktop={isDesktop}
+        dashboardUserData={dashboardUserData}
+        session={sessionData}
+        NewlyTrendingChallengeComponent={
+          () => <NewlyTrendingChallengeComponent challenge={trendingChallenges[0]} />
+        }
+        ChallengesActivityComponent={
+          () => <ChallengesActivityComponent myChallenges={myChallenges} />
+        }
+      />
+      <ChallengesSwiperComponent
+        showChallengeAuthorName={false}
+        swiperClassName='my-challenges-swiper'
+        swiperHeading='My Challenges'
+        totalNumberOfSlides={numberOfChallengesSlideToShow}
+        challenges={myChallenges.length >= numberOfChallengesSlideToShow
+          ? myChallenges.slice(0, numberOfChallengesSlideToShow) : myChallenges}
+        NavigationSlideComponent={() => <NavigationSlide to={'/your-challenges'} navigationText='View My Challenges'/>}
+      />
+      <ChallengesSwiperComponent
+        swiperClassName='continue-challenges-swiper'
+        swiperHeading='Continue'
+        totalNumberOfSlides={numberOfChallengesSlideToShow}
+        challenges={attemptedChallenges.length >= numberOfChallengesSlideToShow
+          ? attemptedChallenges.slice(0, numberOfChallengesSlideToShow) : attemptedChallenges}
+        NavigationSlideComponent={() => <NavigationSlide to={'/all-challenges'} navigationText='View All Challenges'/>}
+      />
+      <ChallengesSwiperComponent
+        swiperClassName='trending-challenges-swiper'
+        swiperHeading='Trending'
+        totalNumberOfSlides={numberOfChallengesSlideToShow}
+        challenges={trendingChallenges.length >= numberOfChallengesSlideToShow
+          ? trendingChallenges.slice(0, numberOfChallengesSlideToShow) : trendingChallenges}
+        NavigationSlideComponent={() => <NavigationSlide to={'/all-challenges'} navigationText='View All Challenges'/>}
+      />
     </div>
     {
       modalVisible

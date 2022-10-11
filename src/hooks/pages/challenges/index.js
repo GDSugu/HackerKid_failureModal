@@ -59,10 +59,8 @@ const useGetChallenges = ({ initializeData = true, isPageMounted }) => {
               }));
             } else {
               const parsedResponse = JSON.parse(res);
+
               if (parsedResponse.status === 'success') {
-                setChallenges(() => ({
-                  ...parsedResponse,
-                }));
                 authContext.setAuthState({
                   appData: {
                     getChallengesHook: {
@@ -70,6 +68,10 @@ const useGetChallenges = ({ initializeData = true, isPageMounted }) => {
                     },
                   },
                 });
+
+                setChallenges(() => ({
+                  ...parsedResponse,
+                }));
               } else {
                 setChallenges(() => ({
                   ...parsedResponse,
@@ -101,6 +103,8 @@ const useGetMyChallenges = ({ initializeData = true, isPageMounted }) => {
   const [myChallenges, setMyChallenges] = useState({
     status: true,
     myChallenges: false,
+    publishedChallengesCount: false,
+    draftChallengesCount: false,
   });
 
   const authContext = useContext(AuthContext);
@@ -128,7 +132,7 @@ const useGetMyChallenges = ({ initializeData = true, isPageMounted }) => {
 
     let result;
 
-    if (cached && authContext.appData.getChallengesHook) {
+    if (cached && authContext.appData.myChallengesHook) {
       result = new Promise((resolve) => {
         const { myChallengesHook } = authContext.appData;
         setMyChallenges(() => ({
@@ -148,13 +152,27 @@ const useGetMyChallenges = ({ initializeData = true, isPageMounted }) => {
             } else {
               const parsedResponse = JSON.parse(res);
               if (parsedResponse.status === 'success') {
+                let publishedChallengesCount = 0;
+                let draftChallengesCount = 0;
+
+                parsedResponse.myChallenges.forEach((challenge) => {
+                  if (challenge.challengeState === 'published') {
+                    publishedChallengesCount += 1;
+                  } else if (challenge.challengeState === 'draft') {
+                    draftChallengesCount += 1;
+                  }
+                });
                 setMyChallenges(() => ({
                   ...parsedResponse,
+                  publishedChallengesCount,
+                  draftChallengesCount,
                 }));
                 authContext.setAuthState({
                   appData: {
                     myChallengesHook: {
                       ...parsedResponse,
+                      publishedChallengesCount,
+                      draftChallengesCount,
                     },
                   },
                 });
@@ -181,6 +199,94 @@ const useGetMyChallenges = ({ initializeData = true, isPageMounted }) => {
     setState,
     static: {
       getMyChallenges,
+    },
+  };
+};
+
+const useGetAttemptedChallenges = ({ initializeData = true, isPageMounted }) => {
+  const [attemptedChallenges, setAttemptedChallenges] = useState({
+    status: true,
+    attemptedChallenges: false,
+  });
+
+  const authContext = useContext(AuthContext);
+
+  const setState = (args) => {
+    setAttemptedChallenges((prevState) => ({
+      ...prevState,
+      ...args,
+    }));
+    authContext.setAuthState({
+      appData: {
+        attemptedChallengesHook: {
+          ...attemptedChallenges,
+          ...args,
+        },
+      },
+    });
+  };
+
+  const getAttemptedChallenges = ({ cached = true }) => {
+    const payload = {
+      type: 'getAttemptedChallenges',
+      s3Prefix: API.S3PREFIX,
+    };
+
+    let result;
+
+    if (cached && authContext.appData.attemptedChallengesHook) {
+      result = new Promise((resolve) => {
+        const { attemptedChallengesHook } = authContext.appData;
+        setAttemptedChallenges(() => ({
+          ...attemptedChallengesHook,
+        }));
+        resolve(true);
+      });
+    } else {
+      result = post(payload, 'challenge/')
+        .then((res) => {
+          if (isPageMounted.current) {
+            if (res === 'access_denied') {
+              setAttemptedChallenges((prevState) => ({
+                ...prevState,
+                status: 'access_denied',
+              }));
+            } else {
+              const parsedResponse = JSON.parse(res);
+              if (parsedResponse.status === 'success') {
+                setAttemptedChallenges(() => ({
+                  ...parsedResponse,
+                }));
+                authContext.setAuthState({
+                  appData: {
+                    attemptedChallengesHook: {
+                      ...parsedResponse,
+                    },
+                  },
+                });
+              } else {
+                setAttemptedChallenges(() => ({
+                  ...parsedResponse,
+                  status: false,
+                }));
+              }
+            }
+          }
+        });
+    }
+
+    return result;
+  };
+
+  useEffect(() => {
+    if (initializeData) getAttemptedChallenges({});
+  }, []);
+
+  return {
+    state: attemptedChallenges,
+    setState,
+    static: {
+      getAttemptedChallenges,
     },
   };
 };
@@ -277,4 +383,5 @@ export {
   useGetChallenges,
   useTakeChallenge,
   useGetMyChallenges,
+  useGetAttemptedChallenges,
 };
