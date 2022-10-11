@@ -910,6 +910,10 @@
     "defaultMessage": "{step}",
     "description": "turtle instruction"
   },
+  "tdinI3": {
+    "defaultMessage": "Trending",
+    "description": "trending challenges heading"
+  },
   "tsF0aG": {
     "defaultMessage": "Continue Playing",
     "description": "continue playing"
