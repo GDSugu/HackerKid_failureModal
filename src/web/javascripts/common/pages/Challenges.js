@@ -99,7 +99,7 @@ const ChallengeSwiperSlide = ({ data, showChallengeAuthorName }) => <>
   <Link className='challenge-item' to={data.actionUrl}>
     <div className="challenge-block">
       <div className="challenge-img">
-        <Img src={data.imgPath} local={false} alt={data.challengeName} />
+        <img src={data.imgPath} alt={data.challengeName} />
       </div>
       <div className="challenge-title">
         <p>{data.challengeName || '--'}</p>
@@ -200,7 +200,7 @@ const NewlyTrendingChallenge = ({ challenge }) => (
         <FormattedMessage defaultMessage={'Newly Trending'} description='heading' />
       </h5>
       <div className="challenge-img">
-        <Img src={challenge.imgPath} local={false} alt={challenge.challengeName} />
+        <img src={challenge.imgPath} alt={challenge.challengeName} />
       </div>
     </div>
     }
