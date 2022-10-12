@@ -42,6 +42,12 @@ const screenTurtleHeader = {
   viewType: 'turtleScreen',
 };
 
+const screenChallengesHeader = {
+  showHeader: false,
+  showNav: false,
+  showBackbtn: true,
+};
+
 const ScreenSheet = {
   showHeader: false,
   showNav: false,
@@ -73,6 +79,18 @@ const themes = {
     screenChallenges: {
       ...Theme.light.screenBlue,
       ...screenWithHeader,
+    },
+    screenAllChallenges: {
+      ...Theme.light.screenBlue,
+      ...screenChallengesHeader,
+    },
+    screenYourChallenges: {
+      ...Theme.light.screenBlue,
+      ...screenChallengesHeader,
+    },
+    screenYourDraftChallenges: {
+      ...Theme.light.screenBlue,
+      ...screenChallengesHeader,
     },
     screenClass: {
       ...Theme.light.screenPurple,
@@ -217,6 +235,17 @@ const themes = {
       ...fragmentIconDisposal,
     },
     screenChallenges: {
+      ...Theme.light.screenBlue,
+      ...screenWithHeader,
+    },
+    screenAllChallenges: {
+      ...Theme.light.screenBlue,
+    },
+    screenYourChallenges: {
+      ...Theme.light.screenBlue,
+      ...screenWithHeader,
+    },
+    screenYourDraftChallenges: {
       ...Theme.light.screenBlue,
       ...screenWithHeader,
     },

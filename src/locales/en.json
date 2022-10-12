@@ -206,10 +206,6 @@
     "defaultMessage": "Play",
     "description": "Turtle Play Button"
   },
-  "8R6f04": {
-    "defaultMessage": "Coming Soon...",
-    "description": "Challenges Page"
-  },
   "9BVOVU": {
     "defaultMessage": "Please verify to continue",
     "description": "Recaptcha Modal heading"
@@ -397,6 +393,10 @@
     "defaultMessage": "OTP",
     "description": "OTP label"
   },
+  "K1GXSf": {
+    "defaultMessage": "{backBtnText}",
+    "description": "back button text"
+  },
   "KD6lRu": {
     "defaultMessage": "Continue",
     "description": "Continue button"
@@ -465,6 +465,13 @@
     "defaultMessage": "Class",
     "description": "class nav text"
   },
+  "P+VjyT": {
+    "defaultMessage": "Challenges",
+    "description": "page heading"
+  },
+  "P3S8Yh": {
+    "defaultMessage": "Create a Challenge"
+  },
   "PKwyq8": {
     "defaultMessage": "Move any blocks to get hints",
     "description": "Hint message"
@@ -508,6 +515,9 @@
   "RHM1lo": {
     "defaultMessage": "Re-type Password",
     "description": "Re-type Password label"
+  },
+  "RSglQH": {
+    "defaultMessage": "View all Challenges"
   },
   "Rf84nl": {
     "defaultMessage": "ok",
@@ -759,6 +769,10 @@
     "defaultMessage": "Continue",
     "description": "Turtle Continue Button"
   },
+  "iaEqzE": {
+    "defaultMessage": "{navigationText}",
+    "description": "navigational text"
+  },
   "jDzDCp": {
     "defaultMessage": "Leaderboard",
     "description": "Leaderboard page title"
@@ -910,10 +924,6 @@
     "defaultMessage": "{step}",
     "description": "turtle instruction"
   },
-  "tdinI3": {
-    "defaultMessage": "Trending",
-    "description": "trending challenges heading"
-  },
   "tsF0aG": {
     "defaultMessage": "Continue Playing",
     "description": "continue playing"
@@ -957,6 +967,10 @@
   "x8lXTv": {
     "defaultMessage": "Resend",
     "description": "Resend otp button text"
+  },
+  "xHkGSg": {
+    "defaultMessage": "{swiperHeading}",
+    "description": "Challenges card heading"
   },
   "xT1NKB": {
     "defaultMessage": "Games",

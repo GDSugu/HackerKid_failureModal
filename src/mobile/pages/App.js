@@ -19,6 +19,7 @@ import RouteGames from './Games';
 import RouteHome from './Home';
 import RouteVideo from './Video';
 import RouteChallenges from './Challenges';
+import RouteAllChallenges from './AllChallenges';
 import RouteMore from './More';
 import RouteProfile from './EditProfile';
 import RouteLogin from './Login';
@@ -261,6 +262,7 @@ const App = () => {
                     <Stack.Screen name='Class' component={RouteClass} />
                     <Stack.Screen name='EditProfile' component={RouteProfile} />
                     <Stack.Screen name='Leaderboard' component={RouteLeaderboard} />
+                    <Stack.Screen name='AllChallenges' component={RouteAllChallenges} />
                     <Stack.Screen name='TurtleHome'>
                       {(props) => <RouteTurtleHome {...props} routeName={routeName} /> }
                     </Stack.Screen>

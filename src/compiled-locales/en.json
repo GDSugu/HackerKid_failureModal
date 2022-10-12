@@ -327,12 +327,6 @@
       "value": "Play"
     }
   ],
-  "8R6f04": [
-    {
-      "type": 0,
-      "value": "Coming Soon..."
-    }
-  ],
   "9BVOVU": [
     {
       "type": 0,
@@ -635,6 +629,12 @@
       "value": "OTP"
     }
   ],
+  "K1GXSf": [
+    {
+      "type": 1,
+      "value": "backBtnText"
+    }
+  ],
   "KD6lRu": [
     {
       "type": 0,
@@ -737,6 +737,18 @@
       "value": "Class"
     }
   ],
+  "P+VjyT": [
+    {
+      "type": 0,
+      "value": "Challenges"
+    }
+  ],
+  "P3S8Yh": [
+    {
+      "type": 0,
+      "value": "Create a Challenge"
+    }
+  ],
   "PKwyq8": [
     {
       "type": 0,
@@ -801,6 +813,12 @@
     {
       "type": 0,
       "value": "Re-type Password"
+    }
+  ],
+  "RSglQH": [
+    {
+      "type": 0,
+      "value": "View all Challenges"
     }
   ],
   "Rf84nl": [
@@ -1185,6 +1203,12 @@
       "value": "Continue"
     }
   ],
+  "iaEqzE": [
+    {
+      "type": 1,
+      "value": "navigationText"
+    }
+  ],
   "jDzDCp": [
     {
       "type": 0,
@@ -1413,12 +1437,6 @@
       "value": "step"
     }
   ],
-  "tdinI3": [
-    {
-      "type": 0,
-      "value": "Trending"
-    }
-  ],
   "tsF0aG": [
     {
       "type": 0,
@@ -1483,6 +1501,12 @@
     {
       "type": 0,
       "value": "Resend"
+    }
+  ],
+  "xHkGSg": [
+    {
+      "type": 1,
+      "value": "swiperHeading"
     }
   ],
   "xT1NKB": [

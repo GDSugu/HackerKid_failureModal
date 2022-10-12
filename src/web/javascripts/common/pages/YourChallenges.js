@@ -94,7 +94,7 @@ const YourChallenges = () => {
       totalItems={Number(publishedChallengesCount)}
       countPerPage={Number(countPerPage)}
       currentPageNumber={page}
-      initialWindow={5}
+      initialWindow={isDesktop ? 5 : 3}
       onPageChange={onPageChange}
       onNextBtnClick={onNextBtnClick}
       onPrevBtnClick={onPrevBtnClick}
