@@ -131,31 +131,31 @@ const TurtleSuccessModal = () => {
   //   modalType: 'success',
   // });
 
-  const handleShareBtn = () => turtleContext.tqSetState((prevState) => ({
+  const handleShareBtn = () => turtleContext.ctxSetState((prevState) => ({
     ...prevState,
     modalType: 'share',
   }));
 
   const handleCloseBtn = () => {
-    turtleContext.tqSetState((prevState) => ({
+    turtleContext.ctxSetState((prevState) => ({
       ...prevState,
       validated: false,
     }));
-    turtleContext.tqSetState((prevState) => ({
+    turtleContext.ctxSetState((prevState) => ({
       ...prevState,
       modalType: 'success',
     }));
   };
 
   const handleCopyBtn = () => {
-    Clipboard.setString(turtleContext.tqState?.responseObject?.shareLink);
+    Clipboard.setString(turtleContext.ctxState?.responseObject?.shareLink);
     ToastAndroid.show('Link copied to clipboard', ToastAndroid.SHORT);
   };
 
   return (
     <>
     <Modal
-      visible={turtleContext.tqState.validated}
+      visible={turtleContext.ctxState.validated}
       transparent
       onRequestClose={handleCloseBtn}
       // animationType='slide'
@@ -178,7 +178,7 @@ const TurtleSuccessModal = () => {
             </TouchableOpacity>
           </View>
           {
-            turtleContext.tqState.modalType === 'success'
+            turtleContext.ctxState.modalType === 'success'
             && <>
               <View style={style.modalCardContent}>
                 {/* <View> */}
@@ -200,7 +200,7 @@ const TurtleSuccessModal = () => {
                       defaultMessage={'{message}'}
                       description={'modal caption'}
                       values={{
-                        message: turtleContext.tqState?.responseObject?.successMessage || 'Congratulations Username, you have cleared this level',
+                        message: turtleContext.ctxState?.responseObject?.successMessage || 'Congratulations Username, you have cleared this level',
                       }}
                     />
                   </Text>
@@ -245,7 +245,7 @@ const TurtleSuccessModal = () => {
             </>
           }
           {
-            turtleContext.tqState.modalType === 'share'
+            turtleContext.ctxState.modalType === 'share'
             && <>
               <View style={style.modalCardContent}>
                 <Text style={{
@@ -261,7 +261,7 @@ const TurtleSuccessModal = () => {
                   <View style={style.textInputContainer}>
                     <TextInput
                       style={style.textInput}
-                      value={turtleContext.tqState?.responseObject?.shareLink || 'https://www.hackerkid.org/turtle/submissions/'}
+                      value={turtleContext.ctxState?.responseObject?.shareLink || 'https://www.hackerkid.org/turtle/submissions/'}
                       editable={false}
                       selection={{
                         start: 0,

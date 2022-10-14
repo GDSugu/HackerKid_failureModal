@@ -31,6 +31,8 @@ import RouteHelp from './Help';
 import RouteTurtleHome from './TurtleHome';
 import RouteTurtleMain from './TurtleMain';
 import RouteTurtleLeaderBoard from './TurtleLeaderBoard';
+import RouteZombieLandHome from './ZombieLandHome';
+import RouteZombieLandMain from './ZombieLandMain';
 
 import IconGame from '../../images/navbar/iconGame.svg';
 import IconHome from '../../images/navbar/iconHome.svg';
@@ -272,6 +274,16 @@ const App = () => {
                       <Stack.Screen name='TurtleMain' component={RouteTurtleMain} />
                     </Stack.Group>
                     <Stack.Screen name='TurtleLeaderBoard' component={RouteTurtleLeaderBoard} options={{ presentation: 'transparentModal' }} />
+                    <Stack.Screen name='ZombieLandHome'>
+                      {(props) => <RouteZombieLandHome {...props} routeName={routeName} />}
+                    </Stack.Screen>
+                    <Stack.Group
+                      screenOptions={{
+                        animation: 'slide_from_right',
+                      }}
+                    >
+                      <Stack.Screen name='ZombieLandMain' component={RouteZombieLandMain} />
+                    </Stack.Group>
                     </>
                     : <>
                       <Stack.Screen name='Login' component={RouteLogin} />

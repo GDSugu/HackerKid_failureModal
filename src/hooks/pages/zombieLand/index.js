@@ -14,7 +14,15 @@ const useZombieLand = ({
     passed: false,
     pointsDetails: false,
     profileDetails: false,
+    responseObject: false,
     route: 'zombieLandHome',
+    uiData: {
+      currentGameScreen: 'ZombieLandHome',
+      hintContainerVisible: false,
+      zlErrorMsg: '',
+      isFailureModalOpen: false,
+      isSuccessModalOpen: false,
+    },
   });
 
   const changeRoute = (route) => setZombieLandState((prevState) => ({
@@ -34,7 +42,7 @@ const useZombieLand = ({
     }
 
     if (payload) {
-      qnResult = post(payload, 'zombieLand/')
+      qnResult = post(payload, 'zombieland/')
         .then((response) => {
           if (isPageMounted.current) {
             if (response === 'access_denied') {
@@ -46,14 +54,16 @@ const useZombieLand = ({
             } else {
               const parsedResponse = JSON.parse(response);
               if (parsedResponse.status === 'success') {
-                setZombieLandState({
+                setZombieLandState((prevState) => ({
+                  ...prevState,
                   ...parsedResponse,
-                });
+                }));
               } else {
-                setZombieLandState({
+                setZombieLandState((prevState) => ({
+                  ...prevState,
                   status: 'error',
                   response: parsedResponse,
-                });
+                }));
               }
             }
           }
@@ -62,11 +72,17 @@ const useZombieLand = ({
     return qnResult;
   };
 
-  const submitZombieLandQuestion = (request) => post(request, 'zombieLand/', false)
+  const submitZombieLandQuestion = (request) => post(request, 'zombieland/', false)
     .then((response) => {
       if (response !== 'access_denied') {
         const parsedResponse = JSON.parse(response);
-        if (parsedResponse.status === 'success' && parsedResponse.passed) {
+        if (parsedResponse.status === 'error') {
+          setZombieLandState((prevState) => ({
+            ...prevState,
+            status: 'error',
+            response: parsedResponse,
+          }));
+        } else if (parsedResponse.status === 'success' && parsedResponse.passed) {
           if (parsedResponse.pointsDetails.addedPoints) {
             getSession('pointsEarned')
               .then((pointsEarned) => {
@@ -75,17 +91,32 @@ const useZombieLand = ({
                   + Number(parsedResponse.pointsDetails.addedPoints);
                 setSession('pointsEarned', newPoints);
               });
-            if (parsedResponse?.profileDetails?.name) {
-              setZombieLandState((prevState) => ({
-                ...prevState,
-                responseObject: {
-                  ...parsedResponse,
-                  successMessage: parsedResponse.pointsDetails.submissionStatus.replace('{{name}}', parsedResponse?.profileDetails?.name),
-                },
-              }));
-            }
           }
+          if (parsedResponse?.profileDetails?.name) {
+            setZombieLandState((prevState) => ({
+              ...prevState,
+              responseObject: {
+                ...parsedResponse,
+                successMessage: parsedResponse.pointsDetails.submissionStatus.replace('{{name}}', parsedResponse?.profileDetails?.name),
+              },
+            }));
+          }
+        } else {
+          setZombieLandState((prevState) => ({
+            ...prevState,
+            responseObject: {
+              ...parsedResponse,
+            },
+          }));
         }
+      } else {
+        setZombieLandState((prevState) => ({
+          status: 'access_denied',
+          ...prevState,
+          responseObject: {
+            status: response,
+          },
+        }));
       }
 
       return response;

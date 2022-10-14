@@ -42,6 +42,60 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: $font-family-dm-mono;
+  src: url('../../../fonts/DMMono-Light.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $font-family-dm-mono;
+  src: url('../../../fonts/DMMono-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $font-family-dm-mono;
+  src: url('../../../fonts/DMMono-Medium.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 500;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $font-family-dm-mono;
+  src: url('../../../fonts/DMMono-Italic.ttf') format('truetype');
+  font-style: italic;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $font-family-dm-mono;
+  src: url('../../../fonts/DMMono-LightItalic.ttf') format('truetype');
+  font-style: italic;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $font-family-dm-mono;
+  src: url('../../../fonts/DMMono-MediumItalic.ttf') format('truetype');
+  font-style: italic;
+  font-weight: 500;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
 @mixin spread-typography-map($map) {
   @each $key,$value in $map {
     .#{$key} {

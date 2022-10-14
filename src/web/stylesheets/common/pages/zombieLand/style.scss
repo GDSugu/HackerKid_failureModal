@@ -8,7 +8,7 @@
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 
 .zombieLand-home-container,
-.zombieLand-game-container {
+.zombieLand-main-container {
   height: 100vh;
   width: 100vw;
 
@@ -20,6 +20,24 @@
         &.active {
           background-color: gt.theme-var(game-nav-active-bg, null, $thememaplight, $cssvars);
         }
+      }
+    }
+
+    &.game-navbar {
+      background-color: transparent;
+
+      .leaderboard-btn {
+        background-color: gt.theme-var(game-leaderboard-btn-bg, null, $thememaplight, $cssvars);
+        font-weight: bold;
+
+        &.active {
+          background-color: gt.theme-var(bg-1);
+          color: gt.theme-var(game-leaderboard-btn-bg, null, $thememaplight, $cssvars);
+        }
+      }
+
+      .level-navbar {
+        background: linear-gradient(to bottom, gt.theme-var(game-level-nav-bg1, null, $thememaplight, $cssvars), gt.theme-var(game-level-nav-bg2, null, $thememaplight, $cssvars));
       }
     }
   }
@@ -112,6 +130,10 @@
         }
 
         .zl-play-btn {
+          &.active {
+            box-shadow: none;
+          }
+
           .play-btn-container {
             background-color: gt.theme-var(bg-1);
             border-radius: 50%;
@@ -128,7 +150,791 @@
           }
         }
       }
+    }
+  }
 
+  .zombieLand-game-container {
+    display: flex;
+    align-items: stretch;
+    height: calc(100vh - 62px);
+    padding: 1rem 0 1rem 0;
+    overflow: hidden;
+
+    .game-container-block {
+      position: relative;
+
+      .zombieLand-editor-container {
+        overflow: visible;
+      }
+    }
+
+    .zombieLand-question-container,
+    .zombieLand-block-container,
+    .zombieLand-editor-container {
+      height: 100%;
+      border-radius: 0.75rem;
+      overflow: hidden;
+
+      #tabsContent {
+        height: calc(100% - 49px);
+
+        .hintBtnContainer {
+          position: absolute;
+          right: 0;
+          transform: translateX(-25%);
+          z-index: 100;
+
+          .hintBtn {
+            &:focus {
+              box-shadow: none;
+            }
+
+            &.hintBtn-dark {
+              transform: translateY(48px);
+
+              svg {
+                path {
+                  fill: gt.theme-var(text-color-1);
+                }
+              }
+            }
+          }
+        }
+
+        .tab-pane {
+          height: 100%;
+
+          &#zombieLandBlock {
+            width: 100%;
+            height: 100%;
+
+            #playground {
+              height: 100%;
+              width: 100%;
+              padding: 1rem;
+
+              .object,
+              .popup {
+                margin: 0 1rem;
+                border-radius: 0.25rem;
+
+                .ellipsis-span {
+                  display: inline;
+                  padding-right: 0.5rem;
+                }
+
+                p {
+                  color: gt.theme-var(text-color-2);
+                  font-family: var($playgroundfont);
+
+                  .edit-span {
+                    display: none;
+                  }
+                }
+
+                &:hover {
+                  .edit-span {
+                    display: inline;
+                  }
+                }
+
+                .blockInput {
+                  width: 3rem;
+                  background-color: transparent;
+                  color: var(--text-color-2);
+                }
+
+                &.ui-state-default {
+                  border: 1px solid orange;
+                  padding: 0.5rem;
+                }
+              }
+            }
+          }
+
+          &#zombieLandOutput {
+            .outputContainer {
+              height: 100%;
+              width: 100%;
+              position: relative;
+              overflow: auto;
+
+              #userCanvas {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .zombieLand-question-container {
+      display: flex;
+      flex-direction: column;
+
+      .zombieLand-question-block {
+        flex-basis: 0;
+        flex-grow: 1;
+        height: 50%;
+        background-color: gt.theme-var(game-transparent-bg, null, $thememaplight, $cssvars);
+      }
+
+      .zombieLand-title-block {
+        background-color: gt.theme-var(game-question-title-bg, null, $thememaplight, $cssvars);
+        padding: 0.6rem;
+
+        .zombieLand-question-title {
+          color: gt.theme-var(text-color-1);
+          font-weight: bold;
+          font-size: 1.125rem;
+          margin-bottom: 0;
+        }
+      }
+
+      .zombieLand-question-content {
+        height: calc(100% - 51px);
+        overflow-y: auto;
+        padding: 0.5rem;
+
+        .zombieLand-question {
+          font-weight: bold;
+        }
+
+        .zombieLand-question-instructions {
+          .zombieLand-question-instruction-title {
+            font-weight: bold;
+            margin-bottom: 0;
+          }
+
+          .zl-instruction {
+            margin-bottom: 0;
+            line-height: 2;
+          }
+        }
+      }
+    }
+
+    .zombieLand-block-container {
+      display: flex;
+      flex-direction: column;
+
+      .zombieLand-codeblocks-container {
+        background-color: gt.theme-var(bg-4);
+        padding: 0.6rem;
+
+        .zombieLand-codeblocks-title {
+          color: gt.theme-var(text-color-2);
+          font-weight: bold;
+          font-size: 1.125rem;
+          margin-bottom: 0;
+        }
+      }
+
+      .zombieLand-toolbox {
+        flex: 1;
+        background: gt.theme-var(overlay1);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+
+        .statemant-container {
+          .commandBlocks {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .code-blk {
+              display: inline-block;
+              background-color: gt.theme-var(game-btn-text-color, null, $thememaplight, $cssvars);
+              border-radius: 12px;
+              border: 2px solid gt.theme-var(game-code-blk-bg, null, $thememaplight, $cssvars);
+              box-shadow: 2px 4px 0 gt.theme-var(game-code-blk-bg, null, $thememaplight, $cssvars);
+              margin: 0.5rem 0;
+              padding: 0.5rem;
+              text-align: center;
+
+              .edit-span,
+              .ellipsis-span {
+                display: none;
+              }
+
+              p {
+                margin-bottom: 0;
+                color: gt.theme-var(text-color-2);
+              }
+
+              &:hover {
+                cursor: pointer;
+                transform: translate(2px, 4px);
+                box-shadow: unset;
+
+                // .edit-span {
+                //   display: inline-block;
+                // }
+              }
+
+              &.popup {
+                .blockInput {
+                  width: 2rem;
+                  background-color: transparent;
+                  outline: none;
+                  border: none;
+                  color: gt.theme-var(text-color-2);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .zombieLand-editor-container {
+      background-color: gt.theme-var(bg-2);
+
+      .zombieLand-editor-title {
+        background-color: gt.theme-var(bg-4);
+        padding-top: 0.25rem;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 0.75rem 0.75rem 0 0;
+
+        .nav-tabs {
+          .nav-item {
+            .nav-link {
+              color: gt.theme-var(text-color-2);
+              border: unset;
+              font-weight: bold;
+              padding-bottom: 0.75rem;
+
+              &.active {
+                color: gt.theme-var(text-color-2);
+                background: gt.theme-var(game-white-gradient-bg, null, $thememaplight, $cssvars);
+                background-size: 100% 0.25rem;
+                background-position: bottom 0 left 0, bottom 0.25rem left 0;
+                background-repeat: no-repeat;
+              }
+
+              &:hover {
+                border: unset;
+              }
+            }
+          }
+        }
+
+        .runBtnContainer {
+          position: relative;
+
+          .runBtn {
+            color: gt.theme-var(text-color-2);
+
+            &:focus {
+              box-shadow: none;
+            }
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .game-mob-container {
+    position: relative;
+    height: calc(100vh - 62px - 88px);
+    overflow: hidden;
+
+    .zombieLand-mob-game-container {
+      display: flex;
+      flex-direction: column;
+
+      #tabsContent {
+        flex: 1;
+        height: calc(100vh - 62px - 88px - 82px);
+        overflow: auto;
+
+        .tab-pane {
+          // background-color: gt.theme-var(bg-2);
+          height: calc(100vh - 62px - 88px - 82px);
+
+          &#questionBlock {
+            background-color: transparent;
+
+            .zombieLand-mob-question-container {
+              padding: 0 1rem;
+              height: 100%;
+              display: grid;
+              grid-template-rows: 86% 14%;
+
+              .zombieLand-mob-question-block {
+                height: 100%;
+                overflow: hidden;
+
+                .zombieLand-question-header,
+                .zombieLand-question-title,
+                .zombieLand-question-instructions-title {
+                  font-weight: bold;
+                }
+
+                .zombieLand-question-header {
+                  color: gt.theme-var(text-color-2);
+                  margin-bottom: 0.5rem;
+                }
+
+                .zombieLand-question-card {
+                  background-color: gt.theme-var(game-transparent-bg, null, $thememaplight, $cssvars);
+                  border-radius: 0.75rem;
+                  padding: 1rem;
+                  color: gt.theme-var(text-color-1);
+                  // height: calc(100% - 40px);
+                  overflow: auto;
+
+                  .zombieLand-question-content {
+                    .zombieLand-question-instructions {
+                      ul {
+                        margin-bottom: 0;
+
+                        li {
+                          p {
+                            margin-bottom: 0;
+                            line-height: 2;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
+              .zombieLand-mob-output-block {
+                background-color: transparent;
+                border-radius: 0.75rem;
+                max-height: 100%;
+                flex-grow: 1;
+                flex-basis: 0;
+                overflow: hidden;
+
+                button {
+                  background-color: gt.theme-var(bg-1);
+                  border: unset;
+                  border-radius: 0.75rem;
+                  width: 100%;
+                  padding: 1rem;
+                  transition: all 0.3s ease-in-out;
+                  outline: none;
+
+                  &[aria-expanded=true] {
+                    border-radius: unset;
+
+                    i {
+                      &:before {
+                        content: '\f106';
+                      }
+                    }
+                  }
+
+                  p,
+                  i {
+                    color: gt.theme-var(text-color-1);
+                    font-weight: bold;
+                  }
+
+                  i {
+                    font-size: 1.75rem;
+                  }
+                }
+              }
+
+              .zombieLand-mob-hero-btn-block {
+                display: flex;
+                align-items: center;
+
+                button {
+                  background-color: gt.theme-var(game-btn-bg, null, $thememaplight, $cssvars);
+                  border-radius: 0.75rem;
+                  width: 100%;
+                  margin: 0 auto;
+                  padding: 0.75rem;
+
+                  p {
+                    color: gt.theme-var(text-color-2);
+                    font-weight: bold;
+                    font-size: 1.125rem;
+                    margin-bottom: 0;
+                  }
+                }
+              }
+            }
+          }
+
+          &#zombieLandOutput {
+            .outputContainer {
+              height: 100%;
+              width: 100%;
+              position: relative;
+              overflow: auto;
+
+              #userCanvas {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+              }
+            }
+
+            .mob-runBtnContainer {
+              position: absolute;
+              width: 95%;
+              margin: auto;
+              left: 50%;
+              transform: translate(-50%, -125%);
+              z-index: 100;
+
+              button {
+                background-color: gt.theme-var(game-btn-bg, null, $thememaplight, $cssvars);
+                border-radius: 0.75rem;
+                width: 97%;
+                margin: auto;
+                color: gt.theme-var(text-color-2);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem;
+
+                p {
+                  font-weight: bold;
+                }
+              }
+            }
+          }
+
+          &#zombieLandBlock {
+            .toolboxCollapse {
+              width: 100%;
+              color: gt.theme-var(text-color-2);
+              font-weight: bold;
+              text-decoration: none;
+              background-color: gt.theme-var(bg-4);
+
+              &:hover {
+                text-decoration: none;
+              }
+
+              .d-flex {
+                background-color: gt.theme-var(bg-4);
+                padding: 1rem;
+
+                p {
+                  margin: 0;
+                }
+
+                i {
+                  font-size: 1.75rem;
+                }
+              }
+            }
+
+            #zl-toolbox {
+              .zombieLand-toolbox {
+                .statemant-container {
+                  .commandBlocks {
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: gt.theme-var(bg-4);
+                    padding: 0.75rem 0;
+
+                    .code-blk {
+                      display: inline-block;
+                      background-color: gt.theme-var(game-btn-text-color, null, $thememaplight, $cssvars);
+                      border-radius: 12px;
+                      border: 2px solid gt.theme-var(game-code-blk-bg, null, $thememaplight, $cssvars);
+                      box-shadow: 2px 4px 0 gt.theme-var(game-code-blk-bg, null, $thememaplight, $cssvars);
+                      padding: 0.5rem;
+                      text-align: center;
+                      margin: 0.75rem 0.5rem;
+
+                      .ellipsis-span {
+                        display: none;
+                      }
+
+                      p {
+                        margin-bottom: 0;
+                        color: gt.theme-var(text-color-2);
+                        font-size: 18px;
+                      }
+
+                      &:hover {
+                        cursor: pointer;
+                        transform: translate(2px, 4px);
+                        box-shadow: unset;
+                      }
+
+                      &.popup {
+                        .blockInput {
+                          width: 2rem;
+                          background-color: transparent;
+                          outline: none;
+                          border: none;
+                          color: gt.theme-var(text-color-2);
+                        }
+                      }
+                    }
+
+                    .d-block {
+                      width: 100%;
+                      text-align: center;
+
+                      .code-blk {
+                        margin-top: 1.25rem;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            #playground {
+              width: 100%;
+              height: 100%;
+              padding: 1rem;
+
+              .object,
+              .popup {
+                margin: 0 1rem;
+                border-radius: 0.25rem;
+
+                .ellipsis-span {
+                  display: inline;
+                  padding-right: 0.5rem;
+                }
+
+                p {
+                  color: gt.theme-var(text-color-2);
+                  font-family: var($playgroundfont);
+                }
+
+                .blockInput {
+                  width: 3rem;
+                  background-color: transparent;
+                  color: var(--text-color-2);
+                }
+
+                &.ui-state-default {
+                  border: 1px solid orange;
+                  padding: 0.5rem;
+                }
+              }
+            }
+
+            .dustbin-mob {
+              position: fixed;
+              bottom: 0;
+            }
+          }
+        }
+      }
+
+      .nav-tabs {
+        background-color: gt.theme-var(game-dark-transparent, null, $thememaplight, $cssvars);
+        backdrop-filter: blur(4px);
+
+        .nav-item {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+
+          .nav-link,
+          .nav-link-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            &.active {
+              background: unset;
+              border: unset;
+
+              svg,
+              p {
+                color: gt.theme-var(game-nav-active-color, null, $thememaplight, $cssvars);
+              }
+            }
+
+            p {
+              color: gt.theme-var(text-color-2);
+            }
+
+            &:hover {
+              border: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .hintContainer {
+    position: absolute;
+    background-color: gt.theme-var(bg-1);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    width: 50%;
+    z-index: 100;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translate(-50%, 100%);
+    max-height: 75vh;
+    overflow: auto;
+
+    @include gm.media-breakpoint-down(md) {
+      width: 90%;
+      transform: translate(-50%, 150%);
+    }
+
+    button {
+      border-radius: 0.75rem;
+      border: 2px solid gt.theme-var(game-hint-btn-bg, null, $thememaplight, $cssvars);
+      background-color: transparent;
+
+      &:hover {
+        background-color: gt.theme-var(game-hint-btn-bg, null, $thememaplight, $cssvars);
+        color: gt.theme-var(text-color-2);
+      }
+
+      &.close {
+        color: gt.theme-var(nav-bg-red);
+        line-height: 0.5;
+        font-size: 2.5rem;
+        border: none;
+
+        &:hover {
+          background-color: unset;
+        }
+      }
+
+      &.registerBtn {
+        background-color: gt.theme-var(game-hint-btn-bg, null, $thememaplight, $cssvars);
+        color: gt.theme-var(text-color-2);
+      }
+
+      &.navigateHint {
+        border-radius: 50%;
+        border: 2px solid gt.theme-var(game-hint-btn-bg, null, $thememaplight, $cssvars);
+        color: gt.theme-var(game-hint-btn-bg, null, $thememaplight, $cssvars);
+        font-size: 1rem;
+        line-height: 0.5;
+
+        &:hover {
+          background-color: gt.theme-var(game-hint-btn-bg, null, $thememaplight, $cssvars);
+          color: gt.theme-var(text-color-2);
+        }
+
+        & > * {
+          pointer-events: none;
+        }
+      }
+    }
+
+    .hint-img-container {
+      width: 100%;
+      margin: 2.5rem auto 1rem auto;
+      text-align: center;
+
+      .instruction-picture {
+        border-radius: 0.5rem;
+      }
+    }
+
+    #currentHint {
+      width: 90%;
+    }
+  }
+
+  .successZLModal,
+  .errorZLModal {
+    .modal-custom-header {
+      button.close {
+        color: gt.theme-var(text-color-2);
+        font-size: 2rem;
+        background: gt.theme-var(game-modal-close-btn-bg, null, $thememaplight, $cssvars);
+        padding: 0.125rem 0.6rem 0.45rem;
+        line-height: 0.75;
+        opacity: 1;
+      }
+    }
+
+    .success-modal-content,
+    .failure-modal-content {
+      .recognition-content {
+        display: grid;
+        place-items: center;
+
+        h5,
+        p {
+          text-align: center;
+          margin: 1rem 0;
+        }
+
+        p {
+          line-height: 1.5;
+        }
+
+        i {
+          margin-left: 1.5rem;
+          font-size: 1.25rem;
+        }
+
+        img {
+          width: 12rem;
+        }
+
+        input {
+          border: 1px solid gt.theme-var(game-input-border-color, null, $thememaplight, $cssvars);
+        }
+
+        button {
+          margin: 0 0.25rem;
+          border-width: 2px;
+          border-radius: 0.75rem;
+          font-weight: bold;
+
+          &.btn-primary {
+            color: gt.theme-var(text-color-2);
+          }
+
+          &.btn-outline-primary {
+            &:hover {
+              color: gt.theme-var(text-color-2);
+            }
+          }
+        }
+      }
+    }
+
+    .failure-modal-content {
+      .failure-img {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  ::-webkit-scrollbar {
+    @include gm.media-breakpoint-up(md) {
+      width: 0.25rem;
+      height: 0.25rem;
+    }
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: gt.theme-var(skeleton-bg);
+
+    @include gm.media-breakpoint-up(md) {
+      border-radius: 1rem;
     }
   }
 }
@@ -138,5 +944,24 @@
 
   @include gm.media-breakpoint-down(md) {
     background-image: url(../../../../../images/zombieLand/zombieLand-home-mob-bg.svg);
+  }
+}
+
+.zombieLand-main-container {
+  background: url(../../../../../images/zombieLand/zombieLand-game-bg.svg) no-repeat 100% / cover;
+  background-position: right center;
+  max-width: 100vw;
+  width: unset;
+
+  .game-level-component {
+    .game-level-container {
+      .close-btn-mob {
+        background-color: gt.theme-var(game-btn-bg, null, $thememaplight, $cssvars);
+      }
+    }
+  }
+
+  @include gm.media-breakpoint-down(md) {
+    background-image: url(../../../../../images/zombieLand/zombieLand-game-mob-bg.svg);
   }
 }

@@ -15,9 +15,10 @@ const thememaplight = {
   'game-input-border-color': Yellow.color100,
   'game-leaderboard-btn-bg': Purple.color500,
   'game-hint-btn-bg': Yellow.color700,
-  'game-nav-active-color': LightBlue.color300,
+  'game-nav-active-color': Yellow.color500,
   'game-modal-close-btn-bg': utilColors.disposableIconBg,
   'game-white-gradient-bg': 'linear-gradient(90deg, #fff, #fff)',
+  'game-code-blk-bg': '#004576',
   ...gameThemeMapLight,
 };
 
@@ -31,9 +32,10 @@ const thememapdark = {
   'game-input-border-color': Yellow.color100,
   'game-leaderboard-btn-bg': Purple.color500,
   'game-hint-btn-bg': Yellow.color700,
-  'game-nav-active-color': LightBlue.color300,
+  'game-nav-active-color': Yellow.color500,
   'game-modal-close-btn-bg': utilColors.disposableIconBg,
   'game-white-gradient-bg': 'linear-gradient(90deg, #fff, #fff)',
+  'game-code-blk-bg': '#004576',
   ...gameThemeMapDark,
 };
 
@@ -48,11 +50,15 @@ const cssvars = {
   'game-nav-active-color': '--game-nav-active-color',
   'game-modal-close-btn-bg': '--game-modal-close-btn-bg',
   'game-white-gradient-bg': '--game-white-gradient-bg',
+  'game-code-blk-bg': '--game-code-blk-bg',
   ...gameCssVars,
 };
+
+const playgroundfont = 'Averia Sans Libre';
 
 module.exports = {
   thememapdark,
   thememaplight,
   cssvars,
+  playgroundfont,
 };

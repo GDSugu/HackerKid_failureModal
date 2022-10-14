@@ -13,6 +13,8 @@ const thememaplight = {
   'game-nav-bg': lightTheme.screenLightBlue.navBg,
   'game-nav-active-bg': lightTheme.screenLightBlue.navActiveBg,
   'game-dark-transparent': lightTheme.utilColors.darkTransparent50,
+  'game-level-nav-bg1': '#171818bf',
+  'game-level-nav-bg2': '#17181840',
 };
 // just copied the light theme colors to the dark for now
   // TODO: make this a real dark theme with appropriate colors
@@ -24,6 +26,8 @@ const thememapdark = {
   'game-nav-bg': darkTheme.screenLightBlue.navBg,
   'game-nav-active-bg': darkTheme.screenLightBlue.navActiveBg,
   'game-dark-transparent': darkTheme.utilColors.darkTransparent50,
+  'game-level-nav-bg1': '#171818bf',
+  'game-level-nav-bg2': '#17181840',
 };
 
 const cssvars = {
@@ -34,6 +38,8 @@ const cssvars = {
   'game-nav-active-bg': '--game-nav-active-bg',
   'game-card-body-bg': '--game-card-body-bg',
   'game-dark-transparent': '--game-dark-transparent',
+  'game-level-nav-bg1': '--game-level-nav-bg1',
+  'game-level-nav-bg2': '--game-level-nav-bg2',
 };
 
 module.exports = {

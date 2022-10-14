@@ -9,7 +9,7 @@ import turtleBg from '../../images/turtle/turtleBg.png';
 // import toggleAudio from '../../images/games/gameAudio.png';
 import playBtnImg from '../../images/games/gamePlay.png';
 // import leaderboardImg from '../../images/games/gameLeaderboard.png';
-import TurtleHeader from '../components/Header/TurtleHeader';
+import GameHeader from '../components/Header/GameHeader';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -80,7 +80,7 @@ const TurtleHome = ({ navigation, routeName }) => {
           style={style.gameContainer}
         >
           {/* <View></View> */}
-          <TurtleHeader />
+          <GameHeader />
           <View>
             <Text style={style.gameTitle}>
               <FormattedMessage

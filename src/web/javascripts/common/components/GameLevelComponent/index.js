@@ -7,12 +7,23 @@ import { $ } from '../../framework';
 import { attachDragHandler } from '../../Functions/turtle';
 
 const GameLevelButton = ({
+  game = 'all',
   handleFetchQuestion,
   question,
+  gameState,
   isCurrentQuestion,
   virtualId,
 }) => (<>
-    <button id={`turtle-${virtualId}`} className={`btn game-level-button ${question.state || 'open'} ${isCurrentQuestion ? 'current-question' : ''}`} onClick={() => { handleFetchQuestion(question.question_id); }}>
+    <button
+      id={`turtle-${virtualId}`}
+      className={`btn game-level-button ${gameState} ${isCurrentQuestion ? 'current-question' : ''}`}
+      onClick={() => {
+        if (game === 'turtle') {
+          handleFetchQuestion(question.question_id);
+        } else if (game === 'zombieLand') {
+          handleFetchQuestion(question.virtualId);
+        }
+      }}>
       <p>
         <FormattedMessage
           defaultMessage={'{level}'}
@@ -23,11 +34,17 @@ const GameLevelButton = ({
     </button>
   </>);
 
-const GameLevelComponent = ({ gameData, handleFetchQuestion }, ref) => {
+const GameLevelComponent = ({ game, gameData, handleFetchQuestion }, ref) => {
   const { state: { device } } = useRootPageState();
 
-  const isCurrentQuestion = gameData.questionList
-    .findIndex((el) => el.question_id === gameData.questionObject.question_id) + 1;
+  let currentQuestion = '';
+  if (game === 'turtle') {
+    currentQuestion = gameData.questionList
+      .findIndex((el) => el.question_id === gameData.questionObject.question_id) + 1;
+  } else {
+    currentQuestion = gameData.questionList
+      .findIndex((el) => el.virtualId === gameData.questionObject.virtualId) + 1;
+  }
 
   const closeLevelComponent = () => {
     $('.game-level-component').slideUp();
@@ -38,8 +55,18 @@ const GameLevelComponent = ({ gameData, handleFetchQuestion }, ref) => {
     closeLevelComponent();
   };
 
+  const isCurrentQuestion = (question, index) => {
+    let isCurrent = false;
+    if (game === 'turtle') {
+      isCurrent = currentQuestion === index + 1;
+    } else if (game === 'zombieLand') {
+      isCurrent = gameData?.questionObject?.qid === question?.qid;
+    }
+    return isCurrent;
+  };
+
   const scrollToQuestion = () => {
-    const questionElement = document.getElementById(`turtle-${isCurrentQuestion}`);
+    const questionElement = document.getElementById(`turtle-${currentQuestion}`);
     questionElement.scrollIntoView({
       behavior: 'smooth',
       block: 'center',
@@ -127,11 +154,14 @@ const GameLevelComponent = ({ gameData, handleFetchQuestion }, ref) => {
             <div className="game-levels-list">
               {
                 gameData.questionList.map((question, index) => <GameLevelButton
+                  game={game}
                   key={index}
                   handleFetchQuestion={fetchQuestion}
                   question={question}
+                  gameState={((question.state === 'current') && (question.id !== gameData?.questionObject?.qid)) ? 'open' : (question.state || 'open')}
                   virtualId={index + 1}
-                  isCurrentQuestion={isCurrentQuestion === index + 1}
+                  // isCurrentQuestion={currentQuestion === index + 1}
+                  isCurrentQuestion={isCurrentQuestion(question, index)}
                 />)
 
                   // <GameLevelButton
@@ -161,7 +191,7 @@ const GameLevelComponent = ({ gameData, handleFetchQuestion }, ref) => {
           device === 'mobile'
           && <>
             <div className="close-btn-mob btn" onClick={closeLevelComponent}>
-              <d className="d-flex align-items-center justify-content-between w-100">
+              <div className="d-flex align-items-center justify-content-between w-100">
                 <p>
                   <FormattedMessage
                     defaultMessage={'Continue Playing'}
@@ -172,7 +202,7 @@ const GameLevelComponent = ({ gameData, handleFetchQuestion }, ref) => {
                   <path d="M18 30L12.064 35.936C11.4033 36.5965 10.5617 37.0463 9.6454 37.2285C8.72913 37.4107 7.77941 37.3172 6.9163 36.9597C6.0532 36.6022 5.31546 35.9968 4.79637 35.2201C4.27729 34.4434 4.00015 33.5302 4 32.596V30L6.714 16.432C7.07649 14.6184 8.05612 12.9865 9.48623 11.8138C10.9163 10.6412 12.7086 10.0002 14.558 10H33.442C35.2914 10.0002 37.0837 10.6412 38.5138 11.8138C39.9439 12.9865 40.9235 14.6184 41.286 16.432L44 30V32.594C43.9999 33.5282 43.7227 34.4414 43.2036 35.2181C42.6845 35.9948 41.9468 36.6002 41.0837 36.9577C40.2206 37.3152 39.2709 37.4087 38.3546 37.2265C37.4383 37.0443 36.5967 36.5945 35.936 35.934L30 30H18Z" stroke="#FFFFFF" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M18 10L20 14H28L30 10" stroke="#FFFFFF" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-              </d>
+              </div>
             </div>
           </>
         }

@@ -5,6 +5,13 @@ const fontAveria = {
   regular: 'AveriaSansLibre-Regular',
 };
 
+const fontFamilyDmMono = 'DM Mono';
+const fontDmMono = {
+  bold: 'DM Mono Bold',
+  light: 'DM Mono Light',
+  regular: 'DM Mono Regular',
+};
+
 const mobileTypography = {
   heading1: {
     fontFamily: fontAveria.bold,
@@ -46,8 +53,16 @@ const mobileTypography = {
     fontFamily: fontAveria.bold,
     fontSize: 16,
   },
+  subtitle1DMMono: {
+    fontFamily: fontDmMono.bold,
+    fontSize: 16,
+  },
   subtitle2: {
     fontFamily: fontAveria.regular,
+    fontSize: 16,
+  },
+  subtitle2DMMono: {
+    fontFamily: fontDmMono.regular,
     fontSize: 16,
   },
   body: {
@@ -147,6 +162,7 @@ const webTypography = {
 
 module.exports = {
   fontFamily,
+  fontFamilyDmMono,
   mobileTypography,
   webTypography,
 };

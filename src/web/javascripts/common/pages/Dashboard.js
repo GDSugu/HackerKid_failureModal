@@ -307,11 +307,11 @@ const GameContainer = ({
                     <Img src='dashboard/dashboard-turtle.png' />
                   </Link>
                 </div>
-                {/* <div className="col-3">
+                <div className="col-3">
                   <Link className="game-item" to='/zombieland'>
                     <Img src='dashboard/dashboard-zombieLand.png' />
                   </Link>
-                </div> */}
+                </div>
               </div>
             </div>
             <div className="game-btn-block game-progress-block mt-md-1">

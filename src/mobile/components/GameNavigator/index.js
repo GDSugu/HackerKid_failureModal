@@ -8,13 +8,15 @@ import { enableScreens } from 'react-native-screens';
 import * as Animatable from 'react-native-animatable';
 import { FormattedMessage } from 'react-intl';
 import LinearGradient from 'react-native-linear-gradient';
-import TurtleHeader from '../Header/TurtleHeader';
+import GameHeader from '../Header/GameHeader';
 import ThemeContext from '../theme';
 import levelIcon from '../../../images/games/levelStar.png';
 import hintIcon from '../../../images/games/hint.png';
 // import gameMenuIcon from '../../../images/games/gameMenu.png';
-import { TurtleContext } from '../../../hooks/pages/turtle';
 import GameLevelComponent from '../GameLevelComponent';
+import { TurtleContext } from '../../../hooks/pages/turtle';
+import { ZombieLandContext } from '../../../hooks/pages/zombieLand';
+import { LightBlue, Yellow } from '../../../colors/_colors';
 
 enableScreens();
 
@@ -83,9 +85,20 @@ const GameBottomTabBar = (props) => {
     state,
     TabArray,
     utilColors,
+    game,
   } = props;
 
+  let activeColor = '';
   const style = getStyle(font, utilColors);
+  switch (game) {
+    case 'turtle':
+      activeColor = LightBlue.color300;
+      break;
+    case 'zombieLand':
+      activeColor = Yellow.color500;
+      break;
+    default: break;
+  }
 
   return (
     <View style={style.tabBar}>
@@ -105,10 +118,11 @@ const GameBottomTabBar = (props) => {
 
           if (!isFocused && !event.defaultPrevented) {
             navigation.navigate({ name: route.name, merge: true });
-            setCurrentScreen((prevState) => ({
-              ...prevState,
-              currentGameScreen: route.name,
-            }));
+            // setCurrentScreen((prevState) => ({
+            //   ...prevState,
+            //   currentGameScreen: route.name,
+            // }));
+            setCurrentScreen(route.name);
           }
         };
 
@@ -130,16 +144,19 @@ const GameBottomTabBar = (props) => {
             onLongPress={onLongPress}
             style={style.tabBarItem}
           >
-            <View style={[style.tabBarActiveHead, { backgroundColor: isFocused ? '#00D0FF' : 'transparent' }]}></View>
+            <View style={[style.tabBarActiveHead, { backgroundColor: isFocused ? activeColor : 'transparent' }]}></View>
             <Animatable.View
               duration={500}
               animation={isFocused ? 'bounceIn' : 'pulse'}
               useNativeDriver={true}
               style={style.tabBarItemContainer}
             >
-              <Icon color={isFocused ? '#00D0FF' : '#A9ABAC'} />
+              <Icon color={isFocused ? activeColor : utilColors.lightGrey} />
               <Text
-                style={[style.tabBarItemText, { color: isFocused ? '#00D0FF' : '#A9ABAC' }]}
+                style={[
+                  style.tabBarItemText,
+                  { color: isFocused ? activeColor : utilColors.lightGrey },
+                ]}
               >
                 {/* <FormattedMessage
                   defaultMessage={tabTitle}
@@ -156,24 +173,67 @@ const GameBottomTabBar = (props) => {
   );
 };
 
-const GameHeader = ({
+const GameNavBar = ({
   // currentScreen,
-  font, gradients, utilColors,
+  font, game, gradients, utilColors,
 }) => {
   const style = getStyle(font, utilColors);
-  const turtleContext = useContext(TurtleContext);
+  let context = false;
+
+  switch (game) {
+    case 'turtle':
+      context = useContext(TurtleContext);
+      break;
+    case 'zombieLand':
+      context = useContext(ZombieLandContext);
+      break;
+    default: break;
+  }
+
+  const handleShowLevel = () => {
+    // switch (game) {
+    //   case 'turtle':
+
+    //     break;
+    //   case 'zombieLand':
+    //     break;
+    //   default: break;
+    // }
+    context.ctxSetState((prevState) => ({
+      ...prevState,
+      uiData: {
+        ...prevState.uiData,
+        showGameLevel: true,
+      },
+    }));
+  };
+
+  const levelId = () => {
+    let level = 0;
+    switch (game) {
+      case 'turtle':
+        level = context?.ctxState?.questionObject?.virtualId;
+        break;
+      case 'zombieLand':
+        level = context?.ctxState?.questionObject?.virtualId;
+        break;
+      default: break;
+    }
+    return level;
+  };
 
   return <>
-    <TurtleHeader />
+    <GameHeader />
     <LinearGradient colors={gradients.darkTransparent1} style={style.tabHeader}>
       <TouchableOpacity
-        onPress={() => turtleContext.tqSetState((prevState) => ({
-          ...prevState,
-          uiData: {
-            ...prevState.uiData,
-            showGameLevel: true,
-          },
-        })) }
+        // onPress={() => context.ctxSetState((prevState) => ({
+        //   ...prevState,
+        //   uiData: {
+        //     ...prevState.uiData,
+        //     showGameLevel: true,
+        //   },
+        // })) }
+        onPress={handleShowLevel}
       >
         <View style={style.row}>
           <Image
@@ -184,7 +244,8 @@ const GameHeader = ({
             <FormattedMessage
               defaultMessage={'Level {level}'}
               description={'Question Level'}
-              values={{ level: turtleContext?.tqState?.questionObject?.virtualId }}
+              // values={{ level: context?.ctxState?.questionObject?.virtualId }}
+              values={{ level: levelId() }}
             />
           </Text>
         </View>
@@ -198,7 +259,7 @@ const GameHeader = ({
             >
               <TouchableOpacity
                 style={style.mr12}
-                onPress={() => { turtleContext.handleHintVisibility(true); }}
+                onPress={() => { context.handleHintVisibility(true); }}
               >
                 <Image
                   source={hintIcon}
@@ -220,65 +281,79 @@ const GameHeader = ({
   </>;
 };
 
-const GameNavigator = ({ currentScreen, ScreenArray }) => {
+const GameNavigator = ({
+  currentScreen, game, initialRoute, ScreenArray, themeKey,
+}) => {
   const BottomTab = createBottomTabNavigator();
   const { font, theme } = useContext(ThemeContext);
   const { gradients, utilColors } = theme;
-  const turtleContext = useContext(TurtleContext);
+  let context;
+
+  switch (game) {
+    case 'turtle':
+      context = useContext(TurtleContext);
+      break;
+    case 'zombieLand':
+      context = useContext(ZombieLandContext);
+      break;
+    default: break;
+  }
 
   return (
     <>
-    <GameHeader
-          currentScreen={currentScreen.currentGameScreen}
-          font={font}
-          gradients={gradients}
-          utilColors={utilColors}
-        />
-        <BottomTab.Navigator
-      initialRouteName='TurtleQuestion'
-      detachInactiveScreens={false}
-      tabBar={
-        (props) => <GameBottomTabBar
-          {...props}
-          TabArray={ScreenArray}
-          font={font}
-          utilColors={utilColors}
-          setCurrentScreen={currentScreen.setCurrentGameScreen}
-        />
-      }
-      screenOptions={{
-        animationEnabled: true,
-        swipeEnabled: false,
-        headerShown: false,
-        // lazy: false,
-        // header: (props) => <GameHeader
-        //   {...props}
-        //   currentScreen={currentScreen.currentGameScreen}
-        //   font={font}
-        //   utilColors={utilColors}
-        // />,
-      }}
-      sceneContainerStyle={{
-        backgroundColor: 'transparent',
-      }}
-    >
-      {ScreenArray.map((item, index) => (
-        <BottomTab.Screen
-          key={index}
-          name={item.name}
-          component={item.component}
-        />
-      ))}
-    </BottomTab.Navigator>
-    <GameLevelComponent
-      context={turtleContext}
-      game={'turtle'}
-      font={font}
-      gradients={gradients}
-      utilColors={utilColors}
-      theme={theme}
-      themeKey={'screenTurtleQuestion'}
-    />
+      <GameNavBar
+        currentScreen={currentScreen.currentGameScreen}
+        font={font}
+        game={game}
+        gradients={gradients}
+        utilColors={utilColors}
+      />
+      <BottomTab.Navigator
+        initialRouteName={initialRoute}
+        detachInactiveScreens={false}
+        tabBar={
+          (props) => <GameBottomTabBar
+            {...props}
+            TabArray={ScreenArray}
+            font={font}
+            utilColors={utilColors}
+            setCurrentScreen={currentScreen.setCurrentGameScreen}
+            game={game}
+          />
+        }
+        screenOptions={{
+          animationEnabled: true,
+          swipeEnabled: false,
+          headerShown: false,
+          // lazy: false,
+          // header: (props) => <GameHeader
+          //   {...props}
+          //   currentScreen={currentScreen.currentGameScreen}
+          //   font={font}
+          //   utilColors={utilColors}
+          // />,
+        }}
+        sceneContainerStyle={{
+          backgroundColor: 'transparent',
+        }}
+      >
+        {ScreenArray.map((item, index) => (
+          <BottomTab.Screen
+            key={index}
+            name={item.name}
+            component={item.component}
+          />
+        ))}
+      </BottomTab.Navigator>
+      <GameLevelComponent
+        context={context}
+        game={game}
+        font={font}
+        gradients={gradients}
+        utilColors={utilColors}
+        theme={theme}
+        themeKey={themeKey}
+      />
     </>
   );
 };

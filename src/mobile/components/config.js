@@ -167,9 +167,29 @@ const themes = {
       ...Theme.light.screenGreen,
       ...screenWithHeader,
     },
-    screenZombieLand: {
+    screenZombieLandHome: {
       ...Theme.light.screenLightBlue,
-      ...fragmentIconDisposal,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandMain: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandQuestion: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandEditor: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandOutput: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandLeaderBoard: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
     },
     screenLogin: {
       ...Theme.light.screenYellow,
@@ -312,9 +332,29 @@ const themes = {
       ...Theme.light.screenGreen,
       ...screenWithHeader,
     },
-    screenZombieLand: {
+    screenZombieLandHome: {
       ...Theme.light.screenLightBlue,
-      ...fragmentIconDisposal,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandMain: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandQuestion: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandEditor: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandOutput: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandLeaderBoard: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
     },
     screenLogin: {
       ...Theme.light.screenYellow,
