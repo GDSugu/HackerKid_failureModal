@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { useGetChallenges } from '../../../../hooks/pages/challenges';
 import '../../../stylesheets/common/pages/all-challenges/style.scss';
 import ChallengesGrid from '../components/ChallengesGrid/ChallengesGrid';
+import ChallengesNavBar from '../components/ChallengesNavBar';
 import Paginator from '../components/Paginator';
 import { loginCheck, pageInit } from '../framework';
 
@@ -272,22 +273,24 @@ const AllChallenges = () => {
   }, []);
 
   return <>
+   <ChallengesNavBar isDesktop={isDesktop} />
     <main className="col-12 col-md-11 col-xl-10 mx-auto">
-    <div className='controls mt-3'>
-      <SortDropdown isDesktop={isDesktop} sort={sort} onSortOptionClick={onSortOptionClick} />
-      <SearchBox onChange={debounce(onSearchBoxChange, 800)}/>
-    </div>
-    <ChallengesGrid
-    challenges={trendingChallenges}
-    heading={'All Challenges'}
-    contentContainerClassName='all-challenges-section'
-    navLinkText='My Challenges'
-    navLinkTo={'/your-challenges'}
-    showEmptyState={true}
-    showCreateChallengeButtonInEmptyState={false}
-    emptyStateText={'No Challenges found!'}
-    numberOfSkeletonCards={12}
-    />
+      <div className='controls mt-3'>
+        <SortDropdown isDesktop={isDesktop} sort={sort} onSortOptionClick={onSortOptionClick} />
+        <SearchBox onChange={debounce(onSearchBoxChange, 800)}/>
+      </div>
+      <ChallengesGrid
+      challenges={trendingChallenges}
+      heading={'All Challenges'}
+      contentContainerClassName='all-challenges-section'
+      navLinkText='My Challenges'
+      navLinkTo={'/your-challenges'}
+      showEmptyState={true}
+      showCreateChallengeButtonInEmptyState={false}
+      emptyStateText={'No Challenges found!'}
+      numberOfSkeletonCards={12}
+      challengeCardType='link'
+      />
     </main>
     {
       Boolean(Number(overAllChallengesCount))

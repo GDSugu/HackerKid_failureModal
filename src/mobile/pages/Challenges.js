@@ -7,15 +7,18 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  RefreshControl,
 } from 'react-native';
 import { FormattedMessage } from 'react-intl';
 import { Skeleton } from '@rneui/base';
+import { useFocusEffect } from '@react-navigation/native';
 import ThemeContext from '../components/theme';
 import Icon from '../common/Icons';
 import hkcoin from '../../images/common/hkcoin.png';
 import { useGetAttemptedChallenges, useGetChallenges, useGetMyChallenges } from '../../hooks/pages/challenges';
 import { useDashboard } from '../../hooks/pages/dashboard';
 import { loginCheck } from '../../hooks/common/framework';
+import { AuthContext } from '../../hooks/pages/root';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
@@ -152,7 +155,7 @@ const ChallengesSwiper = ({
   showChallengeAuthorName = true,
   numberOfSlidesToShow,
   navigationCardData,
-  hideNavigationCard = false,
+  showNavigationalCard = true,
 }) => {
   const challengeCardItem = ({ item }) => <>
     {
@@ -195,7 +198,10 @@ const ChallengesSwiper = ({
   </>;
 
   return <>
-    <View style={style.challengesSwiper}>
+    {
+      challenges
+      && challenges.length > 0
+      && <View style={style.challengesSwiper}>
       <Text style={style.swiperHeading}>
         <FormattedMessage
           defaultMessage="{swiperHeading}"
@@ -207,7 +213,7 @@ const ChallengesSwiper = ({
         {
           challenges && <>
             <FlatList
-              data={!hideNavigationCard
+              data={showNavigationalCard
                 ? [...challenges.slice(0, numberOfSlidesToShow), navigationCardData]
                 : challenges.slice(0, numberOfSlidesToShow)
               }
@@ -226,6 +232,18 @@ const ChallengesSwiper = ({
             />
           </>
         }
+      </View>
+    </View>
+    }
+    {
+      !challenges && <View>
+      <Text style={style.swiperHeading}>
+        <FormattedMessage
+          defaultMessage="{swiperHeading}"
+          description="Challenges card heading"
+          values={{ swiperHeading }}
+        />
+      </Text>
         {
           !challenges && <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             { [1, 2, 3, 4].map((item) => (
@@ -240,7 +258,7 @@ const ChallengesSwiper = ({
           </ScrollView>
         }
       </View>
-    </View>
+    }
   </>;
 };
 
@@ -256,46 +274,88 @@ const Challenges = ({ navigation }) => {
     state: getChallengesState,
     static: { getChallenges },
   } = useGetChallenges({ initializeData: false, isPageMounted });
-  const { state: getMyChallengesState } = useGetMyChallenges({ isPageMounted });
-  const { state: getAttemptedChallengesState } = useGetAttemptedChallenges({ isPageMounted });
+
+  const {
+    state: getMyChallengesState,
+    static: {
+      getMyChallenges,
+    },
+  } = useGetMyChallenges({ isPageMounted });
+
+  const {
+    state: getAttemptedChallengesState,
+    static: {
+      getAttemptedChallenges,
+    },
+  } = useGetAttemptedChallenges({ isPageMounted });
   const { state: getDashboardUserState } = useDashboard({ isPageMounted });
 
   const {
-    status: challengesStatus,
+    // status: challengesStatus,
     trendingChallenges,
   } = getChallengesState;
 
   const {
-    status: attemptedChallengesStatus,
+    // status: attemptedChallengesStatus,
     attemptedChallenges,
   } = getAttemptedChallengesState;
 
   const {
-    status: myChallengesStatus,
+    // status: myChallengesStatus,
     myChallenges,
   } = getMyChallengesState;
 
   const {
-    status: dashboardUserDataStatus,
-    userData: dashboardUserData,
+    // status: dashboardUserDataStatus,
     gameData: dashboardGameData,
-    sessionData,
   } = getDashboardUserState;
+
+  const [reloadComponent, setReloadComponent] = React.useState(0);
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const authContext = useContext(AuthContext);
+  // methods
+  const onRefresh = () => {
+    setRefreshing(true);
+    Promise.all([
+      getChallenges({ cached: false }),
+      getMyChallenges({ cached: false }),
+      getAttemptedChallenges({ cached: false }),
+    ]).then(() => {
+      setReloadComponent(reloadComponent + 1);
+      setRefreshing(false);
+    })
+      .catch(() => {
+        // show snackbar of error
+        setRefreshing(false);
+      });
+  };
 
   useEffect(() => {
     loginCheck();
+    onRefresh();
 
     return () => {
       isPageMounted.current = false;
     };
   }, []);
 
-  useEffect(() => {
-    getChallenges({ cached: false });
-  }, []);
+  // run on focus side effect
+  useFocusEffect(React.useCallback(() => {
+    if (authContext.appData.isRefresh) {
+      onRefresh();
+    }
+  }, [authContext.appData.isRefresh]));
 
   return (
-    <ScrollView style={style.container}>
+    <ScrollView
+      style={style.container}
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+        />
+      }>
       <Text style={style.pageHeading}>
         <FormattedMessage defaultMessage={'Challenges'} description='page heading' />
       </Text>
@@ -316,14 +376,14 @@ const Challenges = ({ navigation }) => {
       <ChallengesSwiper
         swiperHeading={'My Challenges'}
         showChallengeAuthorName={false}
-        challenges={myChallenges}
+        challenges={myChallenges && myChallenges.filter((challenge) => challenge.challengeState === 'published')}
         navigation={navigation}
         style={style}
         numberOfSlidesToShow={numberOfChallengesSlideToShow}
-        hideNavigationCard={myChallenges && myChallenges.length < 3}
+        showNavigationalCard={myChallenges && myChallenges.filter((challenge) => challenge.challengeState === 'published').length > 3}
         navigationCardData={{
           type: 'navigationalCard',
-          navigateTo: 'MyChallenges',
+          navigateTo: 'YourChallenges',
           navigationText: 'View My Challenges',
         }}
       />

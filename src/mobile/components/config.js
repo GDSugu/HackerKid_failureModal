@@ -210,6 +210,12 @@ const themes = {
     screenBottomSheet: {
       ...ScreenSheet,
     },
+    screenYourChallengesActions: {
+      ...Theme.light.screenBlue,
+      toastBtnBorderColor: Theme.light.screenYellow.fadedBtnTextColor,
+      toastBtnTextColor: Theme.light.screenYellow.fadedBtnTextColor,
+      ...ScreenSheet,
+    },
     utilColors: Theme.light.utilColors,
     gradients: Theme.light.gradients,
   },
@@ -352,6 +358,12 @@ const themes = {
       viewType: 'screen',
     },
     screenBottomSheet: {
+      ...ScreenSheet,
+    },
+    screenYourChallengesActions: {
+      ...Theme.light.screenBlue,
+      toastBtnBorderColor: Theme.light.screenYellow.fadedBtnTextColor,
+      toastBtnTextColor: Theme.light.screenYellow.fadedBtnTextColor,
       ...ScreenSheet,
     },
     utilColors: Theme.dark.utilColors,

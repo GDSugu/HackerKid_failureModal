@@ -53,8 +53,8 @@ const App = () => {
         <Route path='dashboard' caseSensitive={true} element={<RouteDashboard />} />
         <Route path='games' caseSensitive={true} element={<RouteGames />} />
         <Route path='courses' caseSensitive={true} element={<RouteCourses />} />
-        <Route path='all-challenges' caseSensitive={true} element={<RouteAllChallenges />} />
         <Route path='challenges' caseSensitive={true} element={<RouteChallenges />} />
+        <Route path='all-challenges' caseSensitive={true} element={<RouteAllChallenges />} />
         <Route path='your-challenges' caseSensitive={true} element={<RouteYourChallenges />} />
         <Route path='your-challenges/drafts' caseSensitive={true} element={<RouteYourDraftChallenges />}/>
         {/* <Route path='more' caseSensitive={true} element={<RouteMore />} /> */}
@@ -67,7 +67,7 @@ const App = () => {
         <Route
           path='profile'
           caseSensitive={true}
-          element={
+            element={
             <AccountNavBar backNavigationUrl='/dashboard' NavItems={(screen) => <>
               <div className={`account-nav-item ${screen === 'edit' ? 'active' : ''}`}>
                 <Link to='edit'>

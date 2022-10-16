@@ -6,7 +6,9 @@ import '../../../stylesheets/common/sass/components/_challenges-grid.scss';
 import '../../../stylesheets/common/pages/your-draft-challenges/style.scss';
 import { useGetMyChallenges } from '../../../../hooks/pages/challenges';
 import ChallengesGrid from '../components/ChallengesGrid/ChallengesGrid';
+import ChallengesNavBar from '../components/ChallengesNavBar';
 import Paginator from '../components/Paginator';
+import YourChallengeActionsModal from '../components/YourChallengeActionModal';
 
 const DraftChallengesComponent = memo(ChallengesGrid);
 
@@ -19,8 +21,14 @@ const YourDraftChallenges = () => {
     paginatedResults: false,
     page: 1,
     countPerPage: 9,
+    actionsModalOpen: false,
+    challengeToTakeActionOn: false,
+    actionTaken: false,
   });
-  const { state: getMyChallengesState } = useGetMyChallenges({ isPageMounted });
+  const {
+    state: getMyChallengesState,
+    static: { getMyChallenges },
+  } = useGetMyChallenges({ isPageMounted });
 
   const {
     myChallenges,
@@ -31,6 +39,9 @@ const YourDraftChallenges = () => {
     page,
     countPerPage,
     paginatedResults,
+    actionsModalOpen,
+    actionTaken,
+    challengeToTakeActionOn,
   } = localState;
 
   const paginate = (pageNumber) => {
@@ -74,8 +85,31 @@ const YourDraftChallenges = () => {
     setLocalState((prev) => ({ ...prev, page: prev.page - 1 }));
   };
 
+  const onChallengeCardClick = (challenge) => {
+    setLocalState((prev) => ({
+      ...prev,
+      actionsModalOpen: true,
+      challengeToTakeActionOn: challenge,
+    }));
+  };
+
+  const setActionTaken = () => {
+    setLocalState((prev) => ({ ...prev, actionTaken: true }));
+  };
+
+  const onActionsModalHide = () => {
+    setLocalState((prev) => ({ ...prev, actionsModalOpen: false }));
+  };
+
+  useEffect(() => {
+    if (actionTaken === true) {
+      getMyChallenges({ cached: false });
+    }
+  }, [actionTaken]);
+
   return (
     <>
+    <ChallengesNavBar isDesktop={isDesktop} />
       <main className='col-12 col-md-11 col-xl-10 mx-auto'>
         <DraftChallengesComponent
           heading={'Drafts'}
@@ -87,6 +121,7 @@ const YourDraftChallenges = () => {
           showChallengeAuthorName={false}
           challenges={paginatedResults}
           isDesktop={isDesktop}
+          onChallengeCardClick={onChallengeCardClick}
         />
     </main>
     {
@@ -100,7 +135,16 @@ const YourDraftChallenges = () => {
       onNextBtnClick={onNextBtnClick}
       onPrevBtnClick={onPrevBtnClick}
     />
-    }
+      }
+      <YourChallengeActionsModal
+        open={actionsModalOpen}
+        setOpen={(value) => {
+          setLocalState((prev) => ({ ...prev, actionsModalOpen: value }));
+        }}
+        challenge={challengeToTakeActionOn}
+        setActionTaken={setActionTaken}
+        onActionsModalHide={onActionsModalHide}
+      />
     </>
   );
 };

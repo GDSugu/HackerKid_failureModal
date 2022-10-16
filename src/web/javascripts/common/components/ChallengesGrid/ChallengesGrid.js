@@ -14,6 +14,8 @@ const ChallengesGrid = ({
   emptyStateText = '',
   showCreateChallengeButtonInEmptyState = true,
   numberOfSkeletonCards = 6,
+  challengeCardType = 'clickable',
+  onChallengeCardClick = () => {},
 }) => (
   <section className={`grid-container ${contentContainerClassName}`}>
     {
@@ -46,7 +48,27 @@ const ChallengesGrid = ({
         {
           challenges.map((challenge, idx) => (
             <div className='col-12 col-sm-6 col-md-4' key={idx}>
-              <Link className='challenge-item' to={challenge.actionUrl} >
+              {
+                challengeCardType === 'clickable'
+                && <div tabIndex={0} className='challenge-item' onClick={() => onChallengeCardClick(challenge)} style={{ cursor: 'pointer' }}>
+                <div className="challenge-block">
+                  <div className="challenge-img">
+                    <img src={challenge.imgPath} alt={challenge.challengeName} />
+                  </div>
+                  <div className="challenge-title">
+                    <p>{challenge.challengeName || '--'}</p>
+                  </div>
+                  {
+                    showChallengeAuthorName && <div className="challenge-author">
+                      <p>{`by ${challenge.creatorName || '--'}`}</p>
+                    </div>
+                  }
+                </div>
+              </div>
+              }
+              {
+                challengeCardType === 'link'
+                && <Link className='challenge-item' to={challenge.actionUrl} >
                 <div className="challenge-block">
                   <div className="challenge-img">
                     <img src={challenge.imgPath} alt={challenge.challengeName} />
@@ -61,6 +83,7 @@ const ChallengesGrid = ({
                   }
                 </div>
               </Link>
+              }
             </div>
           ))
         }

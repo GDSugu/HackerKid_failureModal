@@ -2,15 +2,33 @@ import React, {
   useContext, useEffect, useRef, useState,
 } from 'react';
 import {
-  ScrollView, Text, StyleSheet, View, TextInput,
+  StyleSheet, View, TextInput, ScrollView, LogBox, RefreshControl,
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { NavigationContext } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import ChallengesHeader from '../components/Header/ChallengesHeader';
 import ThemeContext from '../components/theme';
 import SortIconSvg from '../../images/common/sort-icon.svg';
+import SearchIconSvg from '../../images/common/search-icon-svg.svg';
 import { loginCheck } from '../../hooks/common/framework';
 import { useGetChallenges } from '../../hooks/pages/challenges';
+import ChallengesList from '../components/ChallengesList/ChallengesList';
+import Paginator from '../components/Paginator';
+import { AuthContext } from '../../hooks/pages/root';
+
+const debounce = (fn, delay) => {
+  let timerId;
+
+  return (...args) => {
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+
+    timerId = setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
+};
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
@@ -21,7 +39,6 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   },
   controls: {
     flexDirection: 'row',
-    padding: 15,
   },
   sortSelectorIcon: {
     color: theme.textColor1,
@@ -34,11 +51,11 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   },
   sortSelector: {
     flexDirection: 'row-reverse',
-    borderColor: 'transparent',
+    borderColor: theme.borderColor,
     paddingVertical: 14,
     paddingHorizontal: 10,
     alignItems: 'center',
-    borderRadius: 8,
+    borderRadius: 12,
   },
   sortSelectorText: {
     color: theme.textColor1,
@@ -48,23 +65,36 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   sortSelectorDropdown: {
     width: 200,
     position: 'absolute',
-    borderColor: 'transparent',
+    borderColor: theme.borderColor,
     borderRadius: 8,
     borderTopLeftRadius: 8,
   },
   sortSelectorActiveLabel: {
     color: theme.textBold,
   },
+  searchIcon: {
+    position: 'absolute',
+    top: '50%',
+    left: 15,
+    transform: [{ translateY: -9 }],
+  },
+  searchBoxContainer: {
+    flex: 1,
+    position: 'relative',
+  },
   searchBox: {
     flex: 1,
     height: 48,
-    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: theme.borderColor,
+    borderRadius: 12,
     paddingVertical: 14,
     paddingHorizontal: 14,
+    paddingLeft: 32,
     backgroundColor: theme.bg1,
     ...font.subtitle1,
     color: theme.textColor1,
-    marginLeft: 10,
+    marginLeft: 5,
   },
   textColor1: {
     color: theme.textColor1,
@@ -77,7 +107,7 @@ const SortDropDown = ({
   const [items, setItems] = useState([
     { label: 'Trending ', value: 'popularity' },
     { label: 'Alphabetically ', value: 'alphabetical' },
-    { label: 'Reverse Alphabetically', value: 'reverse-alphabetically' },
+    { label: 'Reverse Alphabetically', value: 'reverse-alphabetical' },
     { label: 'Newest to Oldest', value: 'posted' },
     { label: 'Oldest to Newest', value: 'reverse-posted' },
   ]);
@@ -127,9 +157,15 @@ const AllChallenges = ({ navigation }) => {
     static: { getChallenges },
   } = useGetChallenges({ isPageMounted });
 
+  const authContext = useContext(AuthContext);
+
   const {
     // status: challengesStatus,
     trendingChallenges,
+    paginationInfo: {
+      perPageCount,
+      overAllChallengesCount,
+    },
   } = getChallengesState;
 
   const {
@@ -140,6 +176,72 @@ const AllChallenges = ({ navigation }) => {
     sortDropdownOpen,
   } = localState;
 
+  const [reloadComponent, setReloadComponent] = React.useState(0);
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  // styles
+  const { theme, font } = useContext(ThemeContext);
+  const pageTheme = theme.screenAllChallenges;
+  const style = getStyles(pageTheme, theme.utilColors, font);
+
+  // methods
+  const onSearchBoxChange = (value) => {
+    setLocalState((prev) => ({ ...prev, search: value }));
+  };
+
+  const onSetSort = (getValueFn) => {
+    const value = getValueFn();
+    setLocalState((prev) => ({
+      ...prev,
+      sort: value,
+    }));
+  };
+
+  const onPageChange = (pageNumber) => {
+    setLocalState((prev) => {
+      const newState = prev.search ? {
+        ...prev,
+        searchPage: pageNumber,
+      } : {
+        ...prev,
+        page: pageNumber,
+      };
+
+      return newState;
+    });
+  };
+
+  const onNextBtnPress = () => {
+    setLocalState((prev) => {
+      const newState = prev.search ? { ...prev, searchPage: prev.searchPage + 1 }
+        : { ...prev, page: prev.page + 1 };
+
+      return newState;
+    });
+  };
+
+  const onPrevBtnPress = () => {
+    setLocalState((prev) => {
+      const newState = prev.search ? { ...prev, searchPage: prev.searchPage - 1 }
+        : { ...prev, page: prev.page - 1 };
+
+      return newState;
+    });
+  };
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    getChallenges({ cached: false }).then((res) => {
+      console.log(res);
+      setReloadComponent(reloadComponent + 1);
+      setRefreshing(false);
+    })
+      .catch(() => {
+        // show snackbar of error
+        setRefreshing(false);
+      });
+  };
+
   useEffect(() => {
     const filterObj = {
       sort,
@@ -149,53 +251,86 @@ const AllChallenges = ({ navigation }) => {
     getChallenges({ filterObj, cached: false });
   }, [sort, search, page, searchPage]);
 
-  // styles
-  const { theme, font } = useContext(ThemeContext);
-  const pageTheme = theme.screenAllChallenges;
-  const style = getStyles(pageTheme, theme.utilColors, font);
-
   useEffect(() => {
     loginCheck();
+    onRefresh();
 
     navigation?.setOptions({
       contentStyle: {
         backgroundColor: pageTheme.bodyBg,
       },
     });
+
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+
     return () => {
       isPageMounted.current = false;
     };
   }, []);
 
+  // run on focus side effect
+  useFocusEffect(React.useCallback(() => {
+    if (authContext.appData.isRefresh) {
+      onRefresh();
+    }
+  }, [authContext.appData.isRefresh]));
+
   return (
     <>
-    <ChallengesHeader />
-        <View style={style.controls}>
-          <SortDropDown
-            style={style}
-            activeSortValue={sort}
-            setSort={(getValueFn) => {
-              const value = getValueFn();
-              setLocalState((prev) => ({
-                ...prev,
-                sort: value,
-              }));
-            }}
-            open={sortDropdownOpen}
-            setOpen={() => {
-              setLocalState((prev) => ({ ...prev, sortDropdownOpen: !prev.sortDropdownOpen }));
-            }}
-            onChangeValue={() => {}}
+      <ChallengesHeader />
+      <ScrollView
+        style={style.container}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
           />
-          <TextInput
-            multiline={false}
-            placeholder={'Search'}
-            style={style.searchBox}
-            placeholderTextColor={style.textColor1.color}
+        }
+      >
+          <View style={style.controls}>
+            <SortDropDown
+              style={style}
+              activeSortValue={sort}
+              setSort={onSetSort}
+              open={sortDropdownOpen}
+              setOpen={() => {
+                setLocalState((prev) => ({ ...prev, sortDropdownOpen: !prev.sortDropdownOpen }));
+              }}
+              onChangeValue={() => {}}
+            />
+            <View style={style.searchBoxContainer}>
+              <TextInput
+                multiline={false}
+                placeholder={'Search'}
+                style={style.searchBox}
+                placeholderTextColor={style.textColor1.color}
+                onChangeText={debounce(onSearchBoxChange, 800)}
+              />
+            <SearchIconSvg style={style.searchIcon} />
+            </View>
+          </View>
+          <ChallengesList
+            challenges={trendingChallenges}
+            heading={'All Challenges'}
+            navLinkText={'My Challenges'}
+            navLinkNavigateTo={'YourChallenges'}
+            emptyStateText='No Challenges found !'
+            numberOfSkeletonCardsToShow={12}
+            challengeCardType='link'
           />
-        </View>
-    <ScrollView style={style.container}>
-    </ScrollView>
+      </ScrollView>
+      {
+        trendingChallenges
+        && <Paginator
+          currentPageNumber={search ? searchPage : page}
+          totalItems={Number(overAllChallengesCount)}
+          countPerPage={perPageCount}
+          initialWindow={3}
+          onPageChange={onPageChange}
+          onNextBtnPress={onNextBtnPress}
+          onPrevBtnPress={onPrevBtnPress}
+      />
+      }
     </>
   );
 };

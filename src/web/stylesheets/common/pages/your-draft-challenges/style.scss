@@ -15,6 +15,11 @@
   }
 
   nav {
+    display: none;
+  }
+
+  .challenges-nav {
+    display: block;
     background-color: gt.theme-var(challenges-nav-bg, null, $thememaplight, $cssvars);
 
     .navigation-container {
@@ -23,6 +28,44 @@
           background-color: gt.theme-var(challenges-nav-active-bg, null, $thememaplight, $cssvars);
         }
       }
+    }
+
+    .back-btn-container {
+      margin-left: 1rem;
+
+      @include gm.media-breakpoint-down(md) {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .back-btn {
+        $bg: map-get($thememaplight, challenges-btn-bg-1);
+
+        border: none;
+        border-radius: 0.65rem;
+        outline: none;
+        padding: 0.4rem 1rem;
+        color: gt.theme-var(challenges-text-color-1, null, $thememaplight, $cssvars);
+        background-color: $bg;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        &:hover,
+        &:focus {
+          background-color: darken($bg, 5);
+          text-decoration: none;
+        }
+
+        i {
+          color: gt.theme-var(challenges-text-color-1, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+
+    .home-button {
+      margin: 1rem;
+      color: gt.theme-var(challenges-btn-bg-1, null, $thememaplight, $cssvars);
     }
   }
 

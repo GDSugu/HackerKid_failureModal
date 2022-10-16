@@ -279,6 +279,12 @@
       "value": "Password"
     }
   ],
+  "5Ls4nU": [
+    {
+      "type": 0,
+      "value": "Publish"
+    }
+  ],
   "5Vj22e": [
     {
       "type": 1,
@@ -319,6 +325,12 @@
     {
       "type": 0,
       "value": "Login into existing account"
+    }
+  ],
+  "7MgXZW": [
+    {
+      "type": 1,
+      "value": "emptyStateText"
     }
   ],
   "7PlDmO": [
@@ -421,6 +433,12 @@
       "value": "Try again"
     }
   ],
+  "BI7XwF": [
+    {
+      "type": 0,
+      "value": "Edit Challenge"
+    }
+  ],
   "BNGdt+": [
     {
       "type": 0,
@@ -521,6 +539,12 @@
       "value": "Home"
     }
   ],
+  "FhNWty": [
+    {
+      "type": 0,
+      "value": "Publish"
+    }
+  ],
   "FhTUgw": [
     {
       "type": 0,
@@ -561,6 +585,12 @@
     {
       "type": 0,
       "value": "Verify OTP and proceed"
+    }
+  ],
+  "Gmgyiq": [
+    {
+      "type": 0,
+      "value": "Move to drafts"
     }
   ],
   "Gon8SN": [
@@ -617,6 +647,12 @@
       "value": "Previous"
     }
   ],
+  "IloyRB": [
+    {
+      "type": 1,
+      "value": "heading"
+    }
+  ],
   "In3suu": [
     {
       "type": 1,
@@ -645,6 +681,12 @@
     {
       "type": 0,
       "value": "Share"
+    }
+  ],
+  "LbCDj2": [
+    {
+      "type": 0,
+      "value": "Move to Drafts"
     }
   ],
   "MB8h2I": [
@@ -815,6 +857,12 @@
       "value": "Re-type Password"
     }
   ],
+  "RMQ7RR": [
+    {
+      "type": 0,
+      "value": "Dismiss"
+    }
+  ],
   "RSglQH": [
     {
       "type": 0,
@@ -831,6 +879,12 @@
     {
       "type": 0,
       "value": "Password"
+    }
+  ],
+  "STCi24": [
+    {
+      "type": 0,
+      "value": "Delete Challenge"
     }
   ],
   "SpftNg": [
@@ -1017,6 +1071,12 @@
       "value": "Go to About"
     }
   ],
+  "ZUKwtW": [
+    {
+      "type": 1,
+      "value": "pageNumber"
+    }
+  ],
   "ZXYzUQ": [
     {
       "type": 0,
@@ -1047,6 +1107,12 @@
       "value": "studentNamt"
     }
   ],
+  "aNoleS": [
+    {
+      "type": 0,
+      "value": "Dismiss"
+    }
+  ],
   "aWjMjy": [
     {
       "type": 0,
@@ -1069,6 +1135,12 @@
     {
       "type": 0,
       "value": "Leaderboard Rank"
+    }
+  ],
+  "bhtTKn": [
+    {
+      "type": 1,
+      "value": "toastMessage"
     }
   ],
   "byK6c0": [
@@ -1375,6 +1447,12 @@
     {
       "type": 0,
       "value": "Game Progress"
+    }
+  ],
+  "qJ7EK+": [
+    {
+      "type": 1,
+      "value": "challengeName"
     }
   ],
   "qTQ8nP": [

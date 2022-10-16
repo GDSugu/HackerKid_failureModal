@@ -15,6 +15,7 @@ const HeroContainer = ({
   dashboardUserData,
   isDesktop,
   session,
+  gameData,
   NewlyTrendingChallengeComponent,
   ChallengesActivityComponent,
 }) => {
@@ -37,7 +38,7 @@ const HeroContainer = ({
         <div className="hero-card-data-content">
           <div className="hero-data">
             <Img src='common/hkcoin.png' />
-            <p className='mb-0'>{`${session.pointsEarned || '--'} coins`}</p>
+            <p className='mb-0'>{`${gameData.totalPointsEarned || '--'} coins`}</p>
           </div>
           {/* <div className="hero-data">
             <Img src='common/xp.png' />
@@ -80,7 +81,7 @@ const HeroContainer = ({
           <Img className='game-stat-icon' src='common/hkcoin.png' />
           <span className='game-stat-text body'>
             <FormattedMessage defaultMessage={'{totalEarnedCoins}'} description={'total earned coins'} values={{
-              totalEarnedCoins: session.pointsEarned || '--',
+              totalEarnedCoins: gameData.totalPointsEarned || '--',
             }} />
           </span>
         </div>
@@ -288,6 +289,7 @@ const Challenges = () => {
     status: dashboardUserDataStatus,
     userData: dashboardUserData,
     sessionData,
+    gameData,
   } = getDashboardUserState;
 
   const modalVisible = [myChallengesStatus, challengesStatus, dashboardUserDataStatus, attemptedChallengesStatus].includes('access_denied');
@@ -314,6 +316,7 @@ const Challenges = () => {
         isDesktop={isDesktop}
         dashboardUserData={dashboardUserData}
         session={sessionData}
+        gameData={gameData}
         NewlyTrendingChallengeComponent={
           () => <NewlyTrendingChallengeComponent challenge={trendingChallenges[0]} />
         }
@@ -326,8 +329,7 @@ const Challenges = () => {
         swiperClassName='my-challenges-swiper'
         swiperHeading='My Challenges'
         totalNumberOfSlides={numberOfChallengesSlideToShow}
-        challenges={myChallenges.length >= numberOfChallengesSlideToShow
-          ? myChallenges.slice(0, numberOfChallengesSlideToShow) : myChallenges}
+        challenges={myChallenges && myChallenges.filter((challenge) => challenge.challengeState === 'published').slice(0, numberOfChallengesSlideToShow)}
         NavigationSlideComponent={() => <NavigationSlide to={'/your-challenges'} navigationText='View My Challenges'/>}
       />
       <ChallengesSwiperComponent
