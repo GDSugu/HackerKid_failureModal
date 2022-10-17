@@ -285,6 +285,7 @@ const App = () => {
                       <Stack.Screen name='TurtleMain' component={RouteTurtleMain} />
                     </Stack.Group>
                     <Stack.Screen name='TurtleLeaderBoard' component={RouteTurtleLeaderBoard} options={{ presentation: 'transparentModal' }} />
+
                     </>
                   : <>
                       <Stack.Screen name='Login' component={RouteLogin} />

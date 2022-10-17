@@ -105,15 +105,15 @@
 }
 
 .circular-progress-container {
-  padding: 3.125rem;
+  padding: 1.5rem;
   border-radius: 12px;
   background-color: gt.theme-var(course-body-bg, null, $thememaplight, $cssvars);
   display: inline-block;
 }
 
 .circle-progress {
-  width: 5.6rem;
-  height: 5.5rem;
+  width: 6.5rem;
+  height: 6.5rem;
 
   svg {
     #gradient {
@@ -143,13 +143,12 @@
 
 .linear-progress-bar {
   width: 19rem;
-  height: 8px;
+  height: 4px;
   border-radius: 12px;
   background-color: gt.theme-var(course-body-bg, null, $thememaplight, $cssvars);
 
   .progress-done {
     height: 100%;
-    width: 10%;
     border-radius: 12px;
     background: linear-gradient(to left, gt.theme-var(videos-progress-gradient-1, null, $thememaplight, $cssvars), gt.theme-var(videos-progress-gradient-2, null, $thememaplight, $cssvars));
   }
@@ -158,6 +157,10 @@
 .video-page-container {
   margin: 1rem 9.5rem;
   max-width: 1136px;
+
+  .course-card-container {
+    padding: 0;
+  }
 }
 
 .video-player-container {
@@ -177,7 +180,7 @@
   background-color: #fff;
   border-radius: 12px;
   padding: 1rem;
-  
+
   hr,
   p,
   h4 {
@@ -185,7 +188,7 @@
   }
 
   .color-sub {
-    color: gt.theme-var(color-sub-topic, null, $thememaplight, $cssvars);;
+    color: gt.theme-var(color-sub-topic, null, $thememaplight, $cssvars);
   }
 
   .tag-container {
@@ -244,61 +247,47 @@
 }
 
 .rating-star-container {
-
   margin: 3.5rem 0;
 
-  /* use display:inline-flex to prevent whitespace issues. alternatively, you can put all the children of .rating-group on a single line */
   .rating-group {
     display: inline-flex;
   }
-  
-  /* make hover effect work properly in IE */
-  // .rating__icon {
-  //   pointer-events: none;
-  // }
-  
-  /* hide radio inputs */
+
   .rating__input {
-   position: absolute !important;
-   left: -9999px !important;
-  }
-  
-  /* hide 'none' input from screenreaders */
-  .rating__input--none {
-    display: none
+    position: absolute !important;
+    left: -9999px !important;
   }
 
-  /* set icon padding and size */
+  .rating__input--none {
+    display: none;
+  }
+
   .rating__label {
     cursor: pointer;
     padding: 0 0.1em;
     font-size: 2rem;
   }
-  
-  /* set default star color */
+
   .unchecked {
     .rating__icon--star {
-      color:#ddd;
+      color: gt.theme-var(rating-background, null, $thememaplight, $cssvars);
     }
   }
 
   .rating__icon--star {
-    color: orange;
+    color: gt.theme-var(rating-color, null, $thememaplight, $cssvars);
   }
 
-  /* if any input is checked, make its following siblings grey */
   .rating__input:checked ~ .rating__label .rating__icon--star {
-    color: #ddd;
-  }
-  
-  /* make all stars orange on rating group hover */
-  .rating-group:hover .rating__label .rating__icon--star {
-    color: orange;
+    color: gt.theme-var(rating-background, null, $thememaplight, $cssvars);
   }
 
-  /* make hovered input's following siblings grey on hover */
+  .rating-group:hover .rating__label .rating__icon--star {
+    color: gt.theme-var(rating-color, null, $thememaplight, $cssvars);
+  }
+
   .rating__input:hover ~ .rating__label .rating__icon--star {
-    color: #ddd;
+    color: gt.theme-var(rating-background, null, $thememaplight, $cssvars);
   }
 }
 
@@ -314,20 +303,189 @@
   }
 }
 
-.video-page-container {
-  .course-card-container {
-    padding: 0;
+.top-session {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 1rem;
+
+  p {
+    margin: 0;
   }
 }
 
-@media (max-width: 768px) {
+.more-info {
+  color: gt.theme-var(videos-progress-gradient-1, null, $thememaplight, $cssvars);
+}
 
+.filter-n-search {
+  display: flex;
+  margin: 0 1rem;
+}
+
+.filter-cont {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  padding: 0 1rem;
+  margin-right: 12px;
+  border-radius: 12px;
+  background-color: #fff;
+}
+
+.search-cont {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  border-radius: 12px;
+  border: none;
+}
+
+.search-input {
+  border: none;
+  width: 100%;
+}
+
+.search-icon {
+  width: 20px;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: gt.theme-var(course-text-color-1, null, $thememaplight, $cssvars);
+  font-size: 16px;
+}
+
+.selection-circle {
+  background: #fff;
+  width: 14px;
+  height: 14px;
+  border: gt.theme-var(videos-progress-gradient-2, null, $thememaplight, $cssvars) solid 1px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.filter-cat {
+  display: flex;
+  align-items: center;
+
+  .selected {
+    background: gt.theme-var(videos-progress-gradient-2, null, $thememaplight, $cssvars);
+  }
+}
+
+.filter-cat-cont {
+  background-color: #fff;
+  padding: 1rem;
+  width: fit-content;
+  border-radius: 12px;
+  margin: 1rem;
+  position: absolute;
+  z-index: 5;
+}
+
+@media (max-width: 364px) {
+  .video-card-cont {
+    .course-card {
+      width: 90%;
+      height: 11.25rem;
+    }
+  }
+}
+
+.overall-progress-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.progress-card-cont {
+  display: flex;
+  justify-content: space-between;
+  margin: 1.5rem 9.5rem;
+  border-radius: 12px;
+  background: linear-gradient(to left ,rgba(255, 255, 255, 1), #fafafa);
+}
+
+.xp-coins-cont {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.25rem 2.75rem;
+  background: linear-gradient(to right ,rgba(255, 255, 255, 1), #fafafa);
+  border-bottom-left-radius: 12px;
+}
+
+.kids-img-cont {
+  background: url('../../../../../images/courses/confetti.png') no-repeat;
+  padding-top: 2.75rem;
+  padding-bottom: 1.25rem;
+  text-align: center;
+  border-top-left-radius: 12px;
+}
+
+.progress-cont {
+  display: flex;
+  padding: 2.5rem 6rem;
+  background: url('../../../../../images/courses/backGround.png') no-repeat;
+}
+
+.module-card-cont {
+  display: flex;
+  margin: 1rem;
+}
+
+.module-img {
+  width: 80px;
+  height: 45px;
+  border-radius: 12px;
+  margin-right: 0.5rem;
+}
+
+.module-progress-container {
+  border-radius: 12px;
+  background-color: gt.theme-var(course-body-bg, null, $thememaplight, $cssvars);
+  margin-left: 1rem;
+}
+
+.module-progress {
+  background-color: #fafafa;
+  margin: 0 1rem;
+  padding: 0.5rem;
+  border-radius: 12px;
+}
+
+.xp-text {
+  margin: 0 0 0 6px;
+}
+
+@media (max-width: 768px) {
   .course-card {
     width: 272px;
     height: 154px;
+
+    p {
+      font-size: 16px;
+    }
+
+    .card-foot {
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .video-card-cont {
+    .course-card {
+      width: 20rem;
+      height: 11.25rem;
+    }
   }
 
   .course-card-container {
+    padding: 0;
+
     h5 {
       margin-left: 1rem;
     }
@@ -337,12 +495,8 @@
     padding: 0 1.25rem;
   }
 
-  .course-card-container {
-    padding: 0;
-  }
-
   .video-page-container {
-    margin: 1rem 0;
+    margin: 0 0 1rem 0;
   }
 
   .video-discription-container {
@@ -354,9 +508,40 @@
     max-height: 164px;
   }
 
-  // .video-page-container {
-  //   .course-card-container {
-  //     padding: 0 1rem;
-  //   }
-  // }
+  .mobile-only-card {
+    background-color: #fff;
+    color: #000;
+    border-radius: 12px;
+
+    .mobile-play-btn {
+      position: absolute;
+      bottom: -18px;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+  }
+
+  .progress-card-cont {
+    margin: 1.5rem 1.25rem;
+  }
+}
+
+.video-card-cont {
+  padding: 0 1rem;
+
+  .course-card {
+    width: fit-content;
+    height: fit-content;
+  }
+
+  .thumbnail-img {
+    border-radius: 12px;
+  }
+
+  .card-foot {
+    p {
+      text-align: left;
+    }
+  }
 }

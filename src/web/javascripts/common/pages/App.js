@@ -58,6 +58,7 @@ const App = () => {
         <Route path='ide' caseSensitive={true} element={<RouteIde/>} />
         <Route path='courses' caseSensitive={true} element={<RouteCourses />} />
         <Route path='videos' caseSensitive={true} element={<RouteCourses />} />
+        <Route path='videos/:moduleId' element={<RouteVideos />} />
         <Route path='videos/:moduleId/:id' element={<RouteVideos />} />
         <Route path='challenges' caseSensitive={true} element={<RouteChallenges />} />
         <Route path='all-challenges' caseSensitive={true} element={<RouteAllChallenges />} />

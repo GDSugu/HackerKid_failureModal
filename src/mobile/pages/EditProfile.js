@@ -281,6 +281,7 @@ const EditProfile = ({ navigation }) => {
       setAvatar({
         uri: profileImage,
       });
+      console.log(profileImage);
     }
 
     // return () => {

@@ -1,11 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Plyr from 'plyr-react';
 import Hls from 'hls.js';
+import FuzzySearch from 'fuzzy-search';
 import { pageInit, $, pathNavigator } from '../framework';
 import '../../../stylesheets/common/pages/courses/style.scss';
 import '../../../../../node_modules/plyr-react/plyr.css';
 import useVideos from '../../../../hooks/pages/videos';
-import CourseCard from '../components/courseCard';
+import CourseCard, { TopContainer } from '../components/courseCard';
 import SwiperComponent from '../components/SwiperComponent';
 
 const WatchNextComponent = ({ items }) => <>
@@ -201,34 +202,64 @@ const videoPlayerProcess = ({
   });
 };
 
+const getUrlData = () => {
+  const url = window.location.href;
+  const urlArray = url.split('/');
+  const index = urlArray.indexOf('videos');
+  const video = {};
+  video.number = parseInt(urlArray[index + 2], 10);
+  video.moduleId = urlArray[index + 1];
+  return video;
+};
+
 const Videos = () => {
   if (window.location.href.includes('videos')) {
     pageInit('courses-container', 'Courses');
   }
 
   const isPageMounted = React.useRef(true);
+  const urlData = getUrlData();
 
-  const { videoData, submitRating, timeActivity } = useVideos({ isPageMounted });
+  const {
+    videoData, submitRating, timeActivity, invidualModuleData,
+  } = useVideos({ isPageMounted, urlData });
 
   const [showRatingModal, setRatingModal] = useState(false);
 
   const { currentQuestion, watchNext } = videoData;
   const ref = useRef();
+  if (urlData.number) {
+    videoPlayerProcess({
+      currentQuestion, ref, timeActivity, setRatingModal,
+    });
+  }
+  const { moduleData } = invidualModuleData;
+  const [filteredData, setFilterData] = useState(false);
+  const [page, selectPage] = useState(1);
 
-  videoPlayerProcess({
-    currentQuestion, ref, timeActivity, setRatingModal,
-  });
-
-  const data = {
-    title: 'How to create variables?',
-    discription: 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac convallis morbi cursus massa, sed risus, scelerisque urna mauris.',
-    viewCount: 500,
-    averageRating: 3.5,
-    tags: ['python', 'one', 'bodn'],
+  const searcher = new FuzzySearch(moduleData.videos, ['title']);
+  const onSearch = (e) => {
+    const keyword = e.target.value;
+    const result = searcher.search(keyword);
+    setFilterData(result);
   };
 
+  const isDesktop = window.matchMedia('(min-width: 576px)').matches;
+
   return (
-      <div className='video-page-container'>
+    (!urlData.number) ? <>{!isDesktop && <TopContainer
+      searchOnChange={onSearch}
+    />}<div className='video-page-container'>
+      <h5 className='m-3'>{moduleData.moduleName} - {moduleData.type}</h5>
+      <div className='text-center'>
+      {filteredData ? filteredData.map((items, index) => <div className='mb-2 video-card-cont' key={index}><CourseCard
+      data={items}
+      /> </div>) : (moduleData) && moduleData.videos.map((items, index) => <div className='mb-2 video-card-cont' key={index}><CourseCard
+      data={items}
+      /> </div>)}
+      </div>
+    </div><div>
+      <p>1</p></div></> : <div className='video-page-container'>
       <div className="video-player-container">
         <Plyr id="video-player" ref={ref} />
       </div>

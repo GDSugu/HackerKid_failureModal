@@ -1,21 +1,22 @@
 import { useState, useEffect } from 'react';
 import post from '../../common/framework';
 
-const getUrlData = () => {
-  const url = window.location.href;
-  const urlArray = url.split('/');
-  const video = {};
-  video.number = parseInt(urlArray[urlArray.length - 1], 10);
-  video.moduleId = urlArray[urlArray.length - 2];
-  return video;
-};
-
-const getVideoData = ({ isPageMounted, setVideoData }) => {
-  const { number, moduleId } = getUrlData();
+const getVideoData = ({
+  isPageMounted, setVideoData, moduleId, number,
+}) => {
   post({ type: 'fetchVideoPlayer', number, moduleId }, 'videos/').then((res) => {
     if (isPageMounted.current) {
       const parsedRes = JSON.parse(res);
       setVideoData(parsedRes);
+    }
+  });
+};
+
+const getInvidualModuleData = ({ isPageMounted, setInvidualModuleData, moduleId }) => {
+  post({ type: 'fetchModuleVideos', moduleId }, 'videos/').then((res) => {
+    if (isPageMounted.current) {
+      const parsedRes = JSON.parse(res);
+      setInvidualModuleData(parsedRes);
     }
   });
 };
@@ -28,11 +29,16 @@ const timeActivity = ({ videoData }) => post({
   timeTracked: parseInt(videoData.timeTracked, 10),
 }, 'videos/').then((res) => JSON.parse(res));
 
-const useVideos = ({ isPageMounted }) => {
+const useVideos = ({ isPageMounted, urlData }) => {
   const [videoData, setVideoData] = useState({
     status: true,
     currentQuestion: false,
     watchNext: [],
+  });
+
+  const [invidualModuleData, setInvidualModuleData] = useState({
+    status: true,
+    moduleData: false,
   });
 
   const submitRating = (rating) => {
@@ -41,9 +47,17 @@ const useVideos = ({ isPageMounted }) => {
       type: 'submitRating', moduleId, number, rating, videoId,
     }, 'videos/').then((res) => JSON.parse(res));
   };
-
+  const { moduleId, number } = urlData;
   useEffect(() => {
-    getVideoData({ isPageMounted, setVideoData, videoData });
+    if (number) {
+      getVideoData({
+        isPageMounted, setVideoData, moduleId, number,
+      });
+    } else {
+      getInvidualModuleData({
+        isPageMounted, setInvidualModuleData, moduleId,
+      });
+    }
   }, []);
 
   const result = {
@@ -51,6 +65,8 @@ const useVideos = ({ isPageMounted }) => {
     setVideoData,
     submitRating,
     timeActivity,
+    invidualModuleData,
+    setInvidualModuleData,
   };
 
   return result;
