@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import post from '../../common/framework';
-import { AuthContext } from '../root';
 
 const getVideosData = ({ isPageMounted, setCourseData }) => {
   post({ type: 'fetchVideoHome' }, 'videos/').then((res) => {
@@ -16,8 +15,6 @@ const useCourses = ({ isPageMounted }) => {
     status: true,
     moduleData: false,
   });
-
-  const authContext = useContext(AuthContext);
 
   useEffect(() => {
     getVideosData({ isPageMounted, setCourseData });

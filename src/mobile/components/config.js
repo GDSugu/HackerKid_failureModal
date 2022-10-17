@@ -185,6 +185,18 @@ const themes = {
       ...Theme.light.screenGreen,
       ...screenWithHeader,
     },
+    screenVideoHome: {
+      ...Theme.light.screenGreen,
+      ...screenWithHeader,
+    },
+    screenVideoPlayer: {
+      ...Theme.light.screenGreen,
+      ...screenWithHeader,
+    },
+    screenVideoByModule: {
+      ...Theme.light.screenGreen,
+      ...screenWithHeader,
+    },
     screenZombieLand: {
       ...Theme.light.screenLightBlue,
       ...fragmentIconDisposal,
