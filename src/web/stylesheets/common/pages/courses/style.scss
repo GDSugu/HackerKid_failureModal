@@ -142,7 +142,7 @@
 }
 
 .linear-progress-bar {
-  width: 19rem;
+  width: 100%;
   height: 4px;
   border-radius: 12px;
   background-color: gt.theme-var(course-body-bg, null, $thememaplight, $cssvars);
@@ -406,14 +406,14 @@
   justify-content: space-between;
   margin: 1.5rem 9.5rem;
   border-radius: 12px;
-  background: linear-gradient(to left ,rgba(255, 255, 255, 1), #fafafa);
+  background: linear-gradient(to left, rgba(255, 255, 255, 1), #fafafa);
 }
 
 .xp-coins-cont {
   display: flex;
   justify-content: space-between;
   padding: 1.25rem 2.75rem;
-  background: linear-gradient(to right ,rgba(255, 255, 255, 1), #fafafa);
+  background: linear-gradient(to right, rgba(255, 255, 255, 1), #fafafa);
   border-bottom-left-radius: 12px;
 }
 
@@ -426,6 +426,7 @@
 }
 
 .progress-cont {
+  width: 50rem;
   display: flex;
   padding: 2.5rem 6rem;
   background: url('../../../../../images/courses/backGround.png') no-repeat;
@@ -444,6 +445,7 @@
 }
 
 .module-progress-container {
+  width: 100%;
   border-radius: 12px;
   background-color: gt.theme-var(course-body-bg, null, $thememaplight, $cssvars);
   margin-left: 1rem;
@@ -474,6 +476,12 @@
         font-size: 16px;
       }
     }
+  }
+
+  .video-type {
+    right: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
   }
 
   .video-card-cont {
@@ -543,5 +551,65 @@
     p {
       text-align: left;
     }
+  }
+}
+
+.pagination-footer {
+  .pagination-nav {
+    .pagination {
+      .page-item.active {
+        .page-link {
+          color: gt.theme-var(videos-progress-gradient-2, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+  }
+}
+
+.pagination-footer .pagination-nav .pagination .page-item:first-child .page-link svg,
+.pagination-footer .pagination-nav .pagination .page-item:last-child .page-link svg {
+  fill: gt.theme-var(videos-progress-gradient-2, null, $thememaplight, $cssvars);
+}
+
+.course-videos-container {
+  margin-bottom: 5rem;
+}
+
+.xp-title {
+  margin-bottom: 0;
+  color: #a9abac;
+  font-size: 12px;
+}
+
+.xp-card-cont {
+  margin-left: 1.75rem;
+}
+
+.overall-mobile-cont {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.25rem 3.7rem 2.25rem 2rem;
+  background-color: #fff;
+  border-radius: 12px;
+}
+
+.course-details-mobile {
+  .module-progress-container {
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 12px;
+    margin: 0.5rem 0;
+  }
+}
+
+.watched-count {
+  color: #a9abac;
+  font-size: 12px;
+}
+
+@media (max-width: 370px) {
+  .overall-mobile-cont {
+    padding: 2.25rem 1.7rem 2.25rem 1rem;
   }
 }

@@ -217,7 +217,6 @@ const VideoHome = ({ navigation }) => {
   const [filterVisible, setFilterVisible] = useState(false);
   const [filter, setFilter] = useState(false);
   const bottomSheetRef = useRef();
-  console.log(overallProgress);
   const bottomSheetStyles = {
     draggableIcon: {
       backgroundColor: theme.utilColors.white,

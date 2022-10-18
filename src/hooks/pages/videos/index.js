@@ -33,7 +33,7 @@ const useVideos = ({ isPageMounted, urlData }) => {
   const [videoData, setVideoData] = useState({
     status: true,
     currentQuestion: false,
-    watchNext: [],
+    watchNext: false,
   });
 
   const [invidualModuleData, setInvidualModuleData] = useState({
