@@ -13,6 +13,7 @@ import ThemeContext from '../components/theme';
 import useVideos from '../../hooks/pages/videos';
 import SearchIcon from '../../images/courses/search.svg';
 import { CourseCard } from '../components/CourseComponents';
+import Paginator from '../components/Paginator';
 
 const getStyles = (theme, font) => {
   const totalWidth = Dimensions.get('window').width;
@@ -54,6 +55,9 @@ const getStyles = (theme, font) => {
       ...font.body,
       color: '#000',
     },
+    pageBtn: {
+      color: theme.btnBg,
+    },
   });
 };
 
@@ -65,7 +69,7 @@ const VideoHome = ({ navigation, route }) => {
   const isPageMounted = useRef(true);
   const { invidualModuleData } = useVideos({ isPageMounted, urlData: { moduleId } });
   const { moduleData } = invidualModuleData;
-
+  const [page, selectPage] = useState(1);
   const [filteredData, setFilterData] = useState(false);
   const searcher = new FuzzySearch(moduleData.videos, ['title']);
   const onSearch = (keyword) => {
@@ -99,7 +103,8 @@ const VideoHome = ({ navigation, route }) => {
         </View>
         <View>
           {filteredData
-            ? filteredData.map((item, index) => (
+            ? filteredData.map((item, index) => index < page * 10
+            && index > page * 10 - 10 && (
                 <CourseCard
                   key={index}
                   item={item}
@@ -112,7 +117,8 @@ const VideoHome = ({ navigation, route }) => {
                 />
             ))
             : moduleData
-              && moduleData.videos.map((item, index) => (
+              && moduleData.videos.map((item, index) => index < page * 10
+              && index > page * 10 - 11 && (
                 <CourseCard
                   key={index}
                   item={item}
@@ -126,6 +132,19 @@ const VideoHome = ({ navigation, route }) => {
               ))}
         </View>
       </ScrollView>
+      {moduleData && <Paginator
+      totalItems={
+        filteredData ? filteredData.length : moduleData.videos.length
+      }
+      countPerPage={10}
+      currentPageNumber={page}
+      onPageChange={(value) => selectPage(value)}
+      onNextBtnPress={() => selectPage(page + 1)}
+      onPrevBtnPress={() => selectPage(page - 1)}
+      pageTheme={pageTheme}
+      styleNextBtn={style.pageBtn}
+      stylePrevBtn={style.pageBtn}
+      styleActiveBtn={style.pageBtn}/>}
     </View>
   );
 };

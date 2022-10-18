@@ -17,11 +17,10 @@ import { FormattedMessage } from 'react-intl';
 import ThemeContext from '../components/theme';
 import useVideos from '../../hooks/pages/videos';
 import PlayBtnIcon from '../../images/courses/play-btn.svg';
-import StarIcon from '../../images/courses/star-icon.svg';
 import starSelectIcon from '../../images/courses/star.png';
 import emptySelectIcon from '../../images/courses/emptyStar.png';
-import EmptyStar from '../../images/courses/empty-star.svg';
 import HalfStar from '../../images/courses/half-star.svg';
+import { ModuleContainer } from '../components/CourseComponents';
 
 const getStyles = (theme) => {
   const cardWidth = Dimensions.get('window').width;
@@ -86,6 +85,7 @@ const getStyles = (theme) => {
       flexDirection: 'row',
       justifyContent: 'space-between',
       paddingHorizontal: 56,
+      marginTop: 47,
     },
     starSize: {
       width: 32,
@@ -99,6 +99,29 @@ const getStyles = (theme) => {
     },
     cancelBtn: {
       color: theme.primaryBtn,
+    },
+    cancelBtnCont: {
+      borderColor: theme.primaryBtn,
+      borderWidth: 1,
+      paddingVertical: 13,
+      paddingHorizontal: 50,
+      borderRadius: 12,
+    },
+    saveBtnCont: {
+      backgroundColor: theme.secondaryBtn,
+      paddingVertical: 13,
+      paddingHorizontal: 50,
+      borderRadius: 12,
+    },
+    saveBtn: {
+      color: '#fff',
+    },
+    btnCont: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      paddingHorizontal: 16,
+      marginBottom: 16,
+      marginTop: 30,
     },
   });
 };
@@ -148,15 +171,27 @@ const VideoPlayerPage = ({ navigation, route }) => {
     number,
   };
 
-  const [rating, setRating] = useState(2);
+  const [rating, setRating] = useState(1);
+  const [ratingVisible, setModalVisible] = useState(false);
+  const { videoData, timeActivity, submitRating } = useVideos({ isPageMounted, urlData });
+  const { currentQuestion, watchNext } = videoData;
+  const source = `https://d11kzy43d5zaui.cloudfront.net${currentQuestion.videoLink}`;
+  const [isPaused, setIsPaused] = useState(true);
+  const [handel, setHandel] = useState(false);
+  const onSubmitRating = () => {
+    submitRating(rating);
+    setModalVisible(false);
+  };
 
   const RatingModal = () => <Modal
-  visible={false}
+  visible={ratingVisible}
   transparent
   ref={ratingRef}>
     <View style={style.ratingModalContent}>
     <View
     style={style.selectRating}>
+      <TouchableOpacity
+      onPress={() => setRating(1)}>
       <View>
         {rating > 0 ? <Image
         style={style.starSize}
@@ -164,6 +199,9 @@ const VideoPlayerPage = ({ navigation, route }) => {
         style={style.starSize}
         source={emptySelectIcon}/>}
       </View>
+      </TouchableOpacity>
+      <TouchableOpacity
+      onPress={() => setRating(2)}>
       <View>
         {rating > 1 ? <Image
         style={style.starSize}
@@ -171,6 +209,9 @@ const VideoPlayerPage = ({ navigation, route }) => {
         style={style.starSize}
         source={emptySelectIcon}/>}
       </View>
+      </TouchableOpacity>
+      <TouchableOpacity
+      onPress={() => setRating(3)}>
       <View>
         {rating > 2 ? <Image
         style={style.starSize}
@@ -178,6 +219,9 @@ const VideoPlayerPage = ({ navigation, route }) => {
         style={style.starSize}
         source={emptySelectIcon}/>}
       </View>
+      </TouchableOpacity>
+      <TouchableOpacity
+      onPress={() => setRating(4)}>
       <View>
         {rating > 3 ? <Image
         style={style.starSize}
@@ -185,6 +229,9 @@ const VideoPlayerPage = ({ navigation, route }) => {
         style={style.starSize}
         source={emptySelectIcon}/>}
       </View>
+      </TouchableOpacity>
+      <TouchableOpacity
+      onPress={() => setRating(5)}>
       <View>
         {rating > 4 ? <Image
         style={style.starSize}
@@ -192,31 +239,32 @@ const VideoPlayerPage = ({ navigation, route }) => {
         style={style.starSize}
         source={emptySelectIcon}/>}
       </View>
+      </TouchableOpacity>
     </View>
-    <View>
-      <View>
+    <View style={style.btnCont}>
+      <TouchableOpacity
+      onPress={() => setModalVisible(false)}>
+      <View style={style.cancelBtnCont}>
         <Text style={style.cancelBtn}>
           <FormattedMessage
           defaultMessage={'Cancel'}
           description={'Cancel Button'}/>
         </Text>
       </View>
-      <View>
+      </TouchableOpacity>
+      <TouchableOpacity
+      onPress={onSubmitRating}>
+      <View style={style.saveBtnCont}>
         <Text style={style.saveBtn}>
           <FormattedMessage
-          defaultMessage={'Cancel'}
-          description={'Cancel Button'}/>
+          defaultMessage={'Submit'}
+          description={'Submit Button'}/>
         </Text>
       </View>
+      </TouchableOpacity>
     </View>
     </View>
   </Modal>;
-
-  const { videoData, timeActivity } = useVideos({ isPageMounted, urlData });
-  const { currentQuestion } = videoData;
-  const source = `https://d11kzy43d5zaui.cloudfront.net${currentQuestion.videoLink}`;
-  const [isPaused, setIsPaused] = useState(true);
-  const [handel, setHandel] = useState(false);
 
   const videoRef = useRef();
   let presentTime = 0; let playBackTime = 0; let
@@ -236,36 +284,39 @@ const VideoPlayerPage = ({ navigation, route }) => {
       };
       completeUpdated = true;
       timeActivity({ videoData: data });
-      setHandel(true);
+      setHandel(false);
     }
   };
 
   useEffect(
-    () => navigation.addListener('beforeRemove', (e) => {
-      e.preventDefault();
+    () => {
       if (handel) {
-        return;
+        navigation.addListener('beforeRemove', (e) => {
+          e.preventDefault();
+          const data = {
+            moduleId: currentQuestion.moduleId,
+            videoId: currentQuestion.videoId,
+            timeTracked: presentTime,
+          };
+          timeActivity({ videoData: data });
+          Alert.alert(
+            'Discard changes?',
+            'You have unsaved changes. Are you sure to discard them and leave the screen?',
+            [
+              { text: "Don't leave", style: 'cancel', onPress: () => {} },
+              {
+                text: 'Discard',
+                style: 'destructive',
+                onPress: () => navigation.dispatch(e.data.action),
+              },
+            ],
+          );
+        });
+      } else {
+        navigation.removeListener('beforeRemove');
       }
-      const data = {
-        moduleId: currentQuestion.moduleId,
-        videoId: currentQuestion.videoId,
-        timeTracked: presentTime,
-      };
-      timeActivity({ videoData: data });
-      Alert.alert(
-        'Discard changes?',
-        'You have unsaved changes. Are you sure to discard them and leave the screen?',
-        [
-          { text: "Don't leave", style: 'cancel', onPress: () => {} },
-          {
-            text: 'Discard',
-            style: 'destructive',
-            onPress: () => navigation.dispatch(e.data.action),
-          },
-        ],
-      );
-    }),
-    [navigation, currentQuestion, presentTime],
+    },
+    [navigation, currentQuestion, presentTime, handel],
   );
 
   const onSeek = (value) => {
@@ -276,7 +327,7 @@ const VideoPlayerPage = ({ navigation, route }) => {
   };
 
   const onEnd = () => {
-
+    setModalVisible(true);
   };
 
   const TagsContainer = ({ tags }) => (
@@ -325,7 +376,7 @@ const VideoPlayerPage = ({ navigation, route }) => {
           />
           {isPaused && (
             <View style={style.playBtn}>
-              <TouchableOpacity onPress={() => setIsPaused(false)}>
+              <TouchableOpacity onPress={() => { setIsPaused(false); setHandel(true); }}>
                 <PlayBtnIcon />
               </TouchableOpacity>
             </View>
@@ -424,6 +475,11 @@ const VideoPlayerPage = ({ navigation, route }) => {
             </View>
           </View>
         </View>
+        <ModuleContainer
+            data={watchNext}
+            navigator={navigation}
+            customModuleName={'Watch Next'}
+          />
       </ScrollView>}
     </View>
       <RatingModal/>

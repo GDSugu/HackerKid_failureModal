@@ -168,7 +168,7 @@ const navigateModule = (moduleId, navigation) => {
 };
 
 const CourseCard = ({
-  item, index, font, theme, navigator, moduleData, customVideo, customCardStyle
+  item, index, font, theme, navigator, moduleData, customVideo, customCardStyle,
 }) => {
   const pageTheme = theme.screenVideo;
   const style = getStyles(pageTheme);
@@ -253,7 +253,9 @@ const CourseCard = ({
   );
 };
 
-const ModuleContainer = ({ data, navigator, continueWatch }) => {
+const ModuleContainer = ({
+  data, navigator, continueWatch = false, customModuleName = false,
+}) => {
   const [inViewPort, setInViewPort] = useState(0);
   const faltItemRef = useRef();
   const { font, theme } = useContext(ThemeContext);
@@ -301,11 +303,15 @@ const ModuleContainer = ({ data, navigator, continueWatch }) => {
           marginHorizontal: 18,
           marginBottom: 12,
         }}>
-        <FormattedMessage
+        {customModuleName ? <FormattedMessage
+          defaultMessage={'{name}'}
+          description={'Course Name'}
+          values={{ name: customModuleName }}
+        /> : <FormattedMessage
           defaultMessage={'{title} - {type}'}
           description={'Course Name'}
           values={{ title: data.moduleName, type: data.type }}
-        />
+        />}
       </Text>}
       <View>
         {!(inViewPort === 3 || (videoData.length === 3 && inViewPort > 0)) && videoData.length > 2
@@ -334,7 +340,7 @@ const ModuleContainer = ({ data, navigator, continueWatch }) => {
               moduleData={data}
               customVideo={continueWatch}
             />}
-          keyExtractor={(key) => key.number}
+          keyExtractor={(key) => key.videoId}
         />
         {(inViewPort > 0 && videoData.length > 2) && (
           <View style={style.prevBtnCont}>
