@@ -326,14 +326,16 @@ const Challenges = () => {
         swiperClassName='continue-challenges-swiper'
         swiperHeading='Continue'
         totalNumberOfSlides={numberOfChallengesSlideToShow}
-        challenges={attemptedChallenges.slice(0, numberOfChallengesSlideToShow)}
+        challenges={attemptedChallenges
+          && attemptedChallenges.slice(0, numberOfChallengesSlideToShow)}
         NavigationSlideComponent={() => <NavigationSlide to={'/all-challenges'} navigationText='View All Challenges'/>}
       />
       <ChallengesSwiperComponent
         swiperClassName='trending-challenges-swiper'
         swiperHeading='Trending'
         totalNumberOfSlides={numberOfChallengesSlideToShow}
-        challenges={trendingChallenges.slice(0, numberOfChallengesSlideToShow)}
+        challenges={trendingChallenges
+          && trendingChallenges.slice(0, numberOfChallengesSlideToShow)}
         NavigationSlideComponent={() => <NavigationSlide to={'/all-challenges'} navigationText='View All Challenges'/>}
       />
     </div>
