@@ -1,7 +1,7 @@
 import React, {
   memo, useRef, useState, useEffect,
 } from 'react';
-import { loginCheck, pageInit } from '../framework';
+import { $, loginCheck, pageInit } from '../framework';
 import '../../../stylesheets/common/sass/components/_challenges-grid.scss';
 import '../../../stylesheets/common/pages/your-draft-challenges/style.scss';
 import { useGetMyChallenges } from '../../../../hooks/pages/challenges';
@@ -54,24 +54,6 @@ const YourDraftChallenges = () => {
     setLocalState((prev) => ({ ...prev, paginatedResults: challenges }));
   };
 
-  useEffect(() => {
-    if (myChallenges) {
-      paginate(page);
-    }
-  }, [myChallenges, page]);
-
-  useEffect(() => {
-    loginCheck();
-
-    window.addEventListener('resize', () => {
-      setIsDesktop(window.matchMedia('(min-width: 576px)').matches);
-    });
-
-    return () => {
-      isPageMounted.current = false;
-    };
-  }, []);
-
   // methods
   const onPageChange = (pageNumber) => {
     setLocalState((prev) => ({ ...prev, page: pageNumber }));
@@ -106,6 +88,26 @@ const YourDraftChallenges = () => {
       getMyChallenges({ cached: false });
     }
   }, [actionTaken]);
+
+  useEffect(() => {
+    if (myChallenges) {
+      paginate(page);
+    }
+  }, [myChallenges, page]);
+
+  useEffect(() => {
+    $('nav:first-child').css('display', 'none');
+    loginCheck();
+
+    window.addEventListener('resize', () => {
+      setIsDesktop(window.matchMedia('(min-width: 576px)').matches);
+    });
+
+    return () => {
+      $('nav:first-child').css('display', 'block');
+      isPageMounted.current = false;
+    };
+  }, []);
 
   return (
     <>

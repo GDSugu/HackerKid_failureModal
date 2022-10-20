@@ -5,7 +5,7 @@ import '../../../stylesheets/common/pages/all-challenges/style.scss';
 import ChallengesGrid from '../components/ChallengesGrid/ChallengesGrid';
 import ChallengesNavBar from '../components/ChallengesNavBar';
 import Paginator from '../components/Paginator';
-import { loginCheck, pageInit } from '../framework';
+import { $, loginCheck, pageInit } from '../framework';
 
 const debounce = (fn, delay) => {
   let timerId;
@@ -261,6 +261,7 @@ const AllChallenges = () => {
   }, [sort, search, page, searchPage]);
 
   useEffect(() => {
+    $('nav:first-child').css('display', 'none');
     loginCheck();
 
     window.addEventListener('resize', () => {
@@ -268,6 +269,7 @@ const AllChallenges = () => {
     });
 
     return () => {
+      $('nav:first-child').css('display', 'block');
       isPageMounted.current = false;
     };
   }, []);

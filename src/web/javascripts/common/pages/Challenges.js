@@ -9,13 +9,12 @@ import Img from '../components/Img';
 import SwiperComponent from '../components/SwiperComponent';
 import { useGetAttemptedChallenges, useGetChallenges, useGetMyChallenges } from '../../../../hooks/pages/challenges';
 import Modal from '../components/Modal';
-import { useDashboard } from '../../../../hooks/pages/dashboard';
+import { useGetSession } from '../../../../hooks/pages/root';
 
 const HeroContainer = ({
   dashboardUserData,
   isDesktop,
   session,
-  gameData,
   NewlyTrendingChallengeComponent,
   ChallengesActivityComponent,
 }) => {
@@ -31,14 +30,14 @@ const HeroContainer = ({
       isDesktop && <div className='hero-card'>
       <div className='hero-card-data col-6 col-sm-4'>
         <div className="hero-card-img"
-            style={(session.profileLink || dashboardUserData.profileImage)
+            style={(session.profileLink)
               ? { backgroundImage: `url(${profileImg})` }
               : {}
           }></div>
         <div className="hero-card-data-content">
           <div className="hero-data">
             <Img src='common/hkcoin.png' />
-            <p className='mb-0'>{`${gameData.totalPointsEarned || '--'} coins`}</p>
+            <p className='mb-0'>{`${session.pointsEarned || '--'} coins`}</p>
           </div>
           {/* <div className="hero-data">
             <Img src='common/xp.png' />
@@ -72,16 +71,16 @@ const HeroContainer = ({
         <FormattedMessage defaultMessage={'Challenges'} description='page title'/>
       </h6>
       {
-        !isDesktop && (!dashboardUserData || !session) && <div className='mobile-hero-card-skeleton'></div>
+        !isDesktop && (!session) && <div className='mobile-hero-card-skeleton'></div>
       }
       {
-        !isDesktop && (dashboardUserData && session)
+        !isDesktop && (session)
         && <div className='game-stat-container'>
         <div className='game-stat'>
           <Img className='game-stat-icon' src='common/hkcoin.png' />
           <span className='game-stat-text body'>
             <FormattedMessage defaultMessage={'{totalEarnedCoins}'} description={'total earned coins'} values={{
-              totalEarnedCoins: gameData.totalPointsEarned || '--',
+              totalEarnedCoins: session.pointsEarned || '--',
             }} />
           </span>
         </div>
@@ -268,7 +267,7 @@ const Challenges = () => {
   } = useGetChallenges({ initializeData: false, isPageMounted });
   const { state: getMyChallengesState } = useGetMyChallenges({ isPageMounted });
   const { state: getAttemptedChallengesState } = useGetAttemptedChallenges({ isPageMounted });
-  const { state: getDashboardUserState } = useDashboard({ isPageMounted });
+  const { session } = useGetSession({ sessionAttr: ['pointsEarned', 'profileLink'], isPageMounted });
 
   const {
     status: challengesStatus,
@@ -285,14 +284,7 @@ const Challenges = () => {
     myChallenges,
   } = getMyChallengesState;
 
-  const {
-    status: dashboardUserDataStatus,
-    userData: dashboardUserData,
-    sessionData,
-    gameData,
-  } = getDashboardUserState;
-
-  const modalVisible = [myChallengesStatus, challengesStatus, dashboardUserDataStatus, attemptedChallengesStatus].includes('access_denied');
+  const modalVisible = [myChallengesStatus, challengesStatus, attemptedChallengesStatus].includes('access_denied');
 
   useEffect(() => {
     loginCheck();
@@ -314,9 +306,7 @@ const Challenges = () => {
   <div className="col-12 col-md-11 col-xl-10 mx-auto">
       <HeroComponent
         isDesktop={isDesktop}
-        dashboardUserData={dashboardUserData}
-        session={sessionData}
-        gameData={gameData}
+        session={session}
         NewlyTrendingChallengeComponent={
           () => <NewlyTrendingChallengeComponent challenge={trendingChallenges[0]} />
         }
@@ -330,22 +320,20 @@ const Challenges = () => {
         swiperHeading='My Challenges'
         totalNumberOfSlides={numberOfChallengesSlideToShow}
         challenges={myChallenges && myChallenges.filter((challenge) => challenge.challengeState === 'published').slice(0, numberOfChallengesSlideToShow)}
-        NavigationSlideComponent={() => <NavigationSlide to={'/your-challenges'} navigationText='View My Challenges'/>}
+        NavigationSlideComponent={() => myChallenges && myChallenges.length > 3 && <NavigationSlide to={'/your-challenges'} navigationText='View My Challenges'/>}
       />
       <ChallengesSwiperComponent
         swiperClassName='continue-challenges-swiper'
         swiperHeading='Continue'
         totalNumberOfSlides={numberOfChallengesSlideToShow}
-        challenges={attemptedChallenges.length >= numberOfChallengesSlideToShow
-          ? attemptedChallenges.slice(0, numberOfChallengesSlideToShow) : attemptedChallenges}
+        challenges={attemptedChallenges.slice(0, numberOfChallengesSlideToShow)}
         NavigationSlideComponent={() => <NavigationSlide to={'/all-challenges'} navigationText='View All Challenges'/>}
       />
       <ChallengesSwiperComponent
         swiperClassName='trending-challenges-swiper'
         swiperHeading='Trending'
         totalNumberOfSlides={numberOfChallengesSlideToShow}
-        challenges={trendingChallenges.length >= numberOfChallengesSlideToShow
-          ? trendingChallenges.slice(0, numberOfChallengesSlideToShow) : trendingChallenges}
+        challenges={trendingChallenges.slice(0, numberOfChallengesSlideToShow)}
         NavigationSlideComponent={() => <NavigationSlide to={'/all-challenges'} navigationText='View All Challenges'/>}
       />
     </div>

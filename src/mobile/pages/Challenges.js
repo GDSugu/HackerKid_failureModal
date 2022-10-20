@@ -16,9 +16,8 @@ import ThemeContext from '../components/theme';
 import Icon from '../common/Icons';
 import hkcoin from '../../images/common/hkcoin.png';
 import { useGetAttemptedChallenges, useGetChallenges, useGetMyChallenges } from '../../hooks/pages/challenges';
-import { useDashboard } from '../../hooks/pages/dashboard';
 import { loginCheck } from '../../hooks/common/framework';
-import { AuthContext } from '../../hooks/pages/root';
+import { AuthContext, useGetSession } from '../../hooks/pages/root';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
@@ -288,7 +287,8 @@ const Challenges = ({ navigation }) => {
       getAttemptedChallenges,
     },
   } = useGetAttemptedChallenges({ isPageMounted });
-  const { state: getDashboardUserState } = useDashboard({ isPageMounted });
+
+  const { session } = useGetSession({ isPageMounted, sessionAttr: ['pointsEarned'] });
 
   const {
     // status: challengesStatus,
@@ -304,11 +304,6 @@ const Challenges = ({ navigation }) => {
     // status: myChallengesStatus,
     myChallenges,
   } = getMyChallengesState;
-
-  const {
-    // status: dashboardUserDataStatus,
-    gameData: dashboardGameData,
-  } = getDashboardUserState;
 
   const [reloadComponent, setReloadComponent] = React.useState(0);
   const [refreshing, setRefreshing] = React.useState(false);
@@ -361,7 +356,7 @@ const Challenges = ({ navigation }) => {
       </Text>
       <HeroComponent
         style={style}
-        totalEarnedCoins={dashboardGameData ? dashboardGameData.totalPointsEarned : 0} />
+        totalEarnedCoins={session.pointsEarned || 0} />
       <TouchableOpacity style={style.primaryBtn}>
         <Text style={style.primaryBtnText}>
           <FormattedMessage defaultMessage={'Create a Challenge'} />

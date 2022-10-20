@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import {
   View, Text, StyleSheet, Image, TouchableOpacity, Animated, Dimensions,
 } from 'react-native';
-import { useUpdateChallengeStateOnly } from '../../../hooks/pages/challenges';
+import { useDeleteChallenge, useUpdateChallengeStateOnly } from '../../../hooks/pages/challenges';
 import { AuthContext } from '../../../hooks/pages/root';
 import ThemeContext from '../theme';
 
@@ -85,12 +85,15 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   },
   secondaryBtn: {
     borderRadius: 15,
-    backgroundColor: 'white',
+    backgroundColor: utilColors.white,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 15,
     flexDirection: 'row',
     marginBottom: 10,
+  },
+  disbabledSecondaryBtn: {
+    opacity: 0.5,
   },
   dangerBtn: {
     borderRadius: 15,
@@ -100,6 +103,9 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     padding: 15,
     flexDirection: 'row',
     marginBottom: 10,
+  },
+  disabledDangerBtn: {
+    opacity: 0.5,
   },
   dangerBtnText: {
     ...font.subtitle1,
@@ -172,12 +178,13 @@ const YourChallengesActions = ({ navigation, route }) => {
   const [state, setState] = useState({
     toastModalOpen: false,
     toastMessage: false,
-    actionBtnDisabled: false,
+    btnsDisabled: false,
   });
 
   const authContext = useContext(AuthContext);
 
   const updateChallengeStateOnly = useUpdateChallengeStateOnly();
+  const deleteChallengeRequest = useDeleteChallenge();
 
   // styles
   const { theme, font } = useContext(ThemeContext);
@@ -187,9 +194,8 @@ const YourChallengesActions = ({ navigation, route }) => {
   const { challenge, routeCalling } = route.params;
 
   // methods
-  const onTakeActionBtnPress = (changeChallengeStateTo) => {
-    setState((prev) => ({ ...prev, actionBtnDisabled: true }));
-    updateChallengeStateOnly(challenge.challengeId, changeChallengeStateTo).then((res) => {
+  const onTakeActionBtnPress = (changeChallengeStateTo, challengeId) => {
+    updateChallengeStateOnly(challengeId, changeChallengeStateTo).then((res) => {
       const data = JSON.parse(res);
 
       if (data.status === 'success') {
@@ -197,6 +203,7 @@ const YourChallengesActions = ({ navigation, route }) => {
           ...prev,
           toastModalOpen: true,
           toastMessage: changeChallengeStateTo === 'published' ? 'Challenge published successfully' : 'Challenge moved to drafts',
+          btnsDisabled: true,
         }));
         authContext.setAuthState({
           appData: {
@@ -208,7 +215,34 @@ const YourChallengesActions = ({ navigation, route }) => {
           ...prev,
           toastModalOpen: true,
           toastMessage: 'Something went wrong! Please try again',
-          actionBtnDisabled: false,
+          btnsDisabled: false,
+        }));
+      }
+    });
+  };
+
+  const onDeleteChallengeBtnPress = (challengeId) => {
+    deleteChallengeRequest(challengeId).then((res) => {
+      const data = JSON.parse(res);
+
+      if (data.status === 'success') {
+        setState((prev) => ({
+          ...prev,
+          toastModalOpen: true,
+          toastMessage: 'Challenge deleted successfully',
+          btnsDisabled: true,
+        }));
+        authContext.setAuthState({
+          appData: {
+            isRefresh: true,
+          },
+        });
+      } else if (data.status === 'error') {
+        setState((prev) => ({
+          ...prev,
+          toastModalOpen: true,
+          toastMessage: 'Something went wrong! Please try again',
+          btnsDisabled: false,
         }));
       }
     });
@@ -250,9 +284,11 @@ const YourChallengesActions = ({ navigation, route }) => {
         <View style={style.btnGroup}>
           {
             routeCalling === 'YourChallenges' && <TouchableOpacity
-              style={style.secondaryBtn}
-              onPress={() => onTakeActionBtnPress('draft')}
-              disabled={state.actionBtnDisabled}>
+              style={state.btnsDisabled
+                ? [style.secondaryBtn, style.disbabledSecondaryBtn]
+                : style.secondaryBtn}
+              onPress={() => onTakeActionBtnPress('draft', challenge.challengeId)}
+              disabled={state.btnsDisabled}>
             <Text style={style.secondaryBtnText}>
               <FormattedMessage defaultMessage={'Move to drafts'} description='move to drafts button text'/>
             </Text>
@@ -260,9 +296,11 @@ const YourChallengesActions = ({ navigation, route }) => {
           }
           {
             routeCalling === 'YourDraftChallenges' && <TouchableOpacity
-              style={style.secondaryBtn}
-              disabled={state.actionBtnDisabled}
-              onPress={() => onTakeActionBtnPress('published')}
+              style={state.btnsDisabled
+                ? [style.secondaryBtn, style.disbabledSecondaryBtn]
+                : style.secondaryBtn}
+              disabled={state.btnsDisabled}
+              onPress={() => onTakeActionBtnPress('published', challenge.challengeId)}
             >
             <Text style={style.secondaryBtnText}>
               <FormattedMessage defaultMessage={'Publish'} description='publish challenge button text'/>
@@ -274,7 +312,13 @@ const YourChallengesActions = ({ navigation, route }) => {
               <FormattedMessage defaultMessage={'Edit Challenge'} description='edit challenge button'/>
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={style.dangerBtn} disabled={true}>
+          <TouchableOpacity
+            style={state.btnsDisabled
+              ? [style.dangerBtn, style.disabledDangerBtn]
+              : style.dangerBtn}
+            disabled={state.btnsDisabled}
+            onPress={() => onDeleteChallengeBtnPress(challenge.challengeId)}
+          >
             <Text style={style.dangerBtnText}>
               <FormattedMessage defaultMessage={'Delete Challenge'} description='delete challenge button'/>
             </Text>
