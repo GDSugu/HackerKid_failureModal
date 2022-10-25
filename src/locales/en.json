@@ -726,6 +726,10 @@
     "defaultMessage": "Name",
     "description": "Name label"
   },
+  "gTzQSp": {
+    "defaultMessage": "moveUp",
+    "description": "moveUp function"
+  },
   "gXLFip": {
     "defaultMessage": "in",
     "description": "in"

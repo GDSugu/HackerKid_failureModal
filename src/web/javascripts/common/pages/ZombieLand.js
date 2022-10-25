@@ -287,7 +287,7 @@ const ZombieLandMobComponent = ({
         </a>
         <div className="collapse" id="zl-toolbox">
           <div className="zombieLand-toolbox">
-            <div className="statemant-container">
+            <div className="statement-container">
               <div className="commandBlocks">
                 <div className="code-blk popup" draggable="true" data-id="for_loop">
                   <p className="loop">
@@ -360,7 +360,12 @@ const ZombieLandMobComponent = ({
                         <i className="fas fa-ellipsis-v"></i>
                         <i className="fas fa-ellipsis-v"></i>
                       </span>
-                      <span className="expression functions">moveUp</span>()
+                      <span className="expression functions">
+                        <FormattedMessage
+                          defaultMessage={'moveUp'}
+                          description={'moveUp function'}
+                        />
+                      </span>()
                     </p>
                   </div>
                 </div>
@@ -952,7 +957,7 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
                 </p>
               </div>
               <div className="zombieLand-toolbox">
-                <div className="statemant-container">
+                <div className="statement-container">
                   <div className="commandBlocks">
                     <div className="code-blk object move" draggable="true" data-id="moveUp()">
                       <p>

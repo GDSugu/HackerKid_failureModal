@@ -1,8 +1,119 @@
 import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import WebView from 'react-native-webview';
+import { useSharedZLWebView } from '../../shared/zombieLand/zlwebview';
+import ThemeContext from '../components/theme';
+import webViewElement from '../components/WebView';
+import { ZombieLandContext } from '../../hooks/pages/zombieLand';
+
+const getStyles = (utils) => StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'transparent',
+  },
+  webViewContainer: {
+    flex: 1,
+    backgroundColor: utils.dark,
+  },
+});
 
 const ZombieLandEditor = () => {
-  console.log();
-  return <></>;
+  const { theme: { utilColors } } = React.useContext(ThemeContext);
+  const style = getStyles(utilColors);
+  const { zlEditor } = useSharedZLWebView();
+  const zlContext = React.useContext(ZombieLandContext);
+  const webViewRef = React.useRef(null);
+  let webViewString = '';
+
+  const {
+    BodyContent, ScriptContent, styleString, scriptToInject,
+  } = zlEditor;
+
+  webViewString = webViewElement({
+    BodyComponent: BodyContent,
+    ScriptComponent: ScriptContent,
+    styleString,
+  });
+
+  const handleMessage = (msg) => {
+    try {
+      const message = JSON.parse(msg.nativeEvent.data);
+      const { action, data } = message;
+
+      switch (action) {
+        case 'codeChanged':
+          zlContext.ctxSetState((prevState) => ({
+            ...prevState,
+            snippet: data.snippet,
+          }));
+          break;
+        case 'popupBox':
+          console.warn('case editor popupBox: ', data);
+          break;
+        case 'log':
+          console.log('case editor log: ', data);
+          break;
+        case 'error':
+          console.error('case editor error: ', data);
+          break;
+        default: break;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      if (webViewRef.current && zlContext.ctxState.status === 'success') {
+        const obj = {
+          action: 'startGame',
+          data: {
+            zlState: zlContext.ctxState,
+            endGame: () => {},
+            popupBox: () => {},
+          },
+        };
+
+        const initScript = `
+        try {
+            function initEditor() {
+              if (window.execute) {
+                window.execute(${JSON.stringify(obj)});
+              } else {
+                setTimeout(initEditor, 1000);
+              }
+            }
+            initEditor();
+          } catch (err) {
+            const errmsg = {
+              action: 'error',
+              data: {
+                error: err,
+                message: err.message,
+                caller: 'initScript from zombieLandOutput'
+              },
+            };
+            window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
+          }
+        `;
+        webViewRef.current.injectJavaScript(initScript);
+      }
+    }, 1000);
+  }, [zlContext.ctxState.questionObject]);
+
+  return <>
+    <View style={style.container}>
+      <WebView
+        style={style.webViewContainer}
+        ref={webViewRef}
+        source={{ html: webViewString }}
+        originWhitelist={['*']}
+        injectedJavaScript={scriptToInject}
+        onMessage={handleMessage}
+      />
+    </View>
+  </>;
 };
 
 export default ZombieLandEditor;

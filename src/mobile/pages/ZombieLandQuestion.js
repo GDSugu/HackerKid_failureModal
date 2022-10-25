@@ -1,9 +1,11 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { FormattedMessage } from 'react-intl';
+import {
+  ScrollView, StyleSheet, Text, TouchableOpacity, View,
+} from 'react-native';
 import { ZombieLandContext } from '../../hooks/pages/zombieLand';
 import ThemeContext from '../components/theme';
-import { getGameFunctions } from '../../shared/zombieLand/gameFunctions';
-import { getBlockly } from '../../shared/turtle/turtleBlocks';
+import TryNowSVG from '../../images/games/trynow.svg';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -85,24 +87,51 @@ const ZombieLandQuestion = ({ navigation }) => {
   const { font, theme } = React.useContext(ThemeContext);
   const { utilColors } = theme;
   const zlContext = React.useContext(ZombieLandContext);
-  const webViewRef = React.useRef(null);
+  // const webViewRef = React.useRef(null);
   const style = getStyles(theme.screenZombieLandQuestion, font, utilColors);
 
   return <>
-  <ScrollView>
-    {/* {
-      Object.keys(gameFunctions)
-        .map((key, idx) => <Text
-        key={idx}
-        style={{ color: 'white' }}>
-          {gameFunctions[key]?.toString()}
-        </Text>)
-    } */}
-    <Text
-    style={{ color: 'white' }}>
-      { getGameFunctions.toString() }
-    </Text>
-  </ScrollView>
+    <View style={style.container} >
+      <Text style={style.titleText}>
+        <FormattedMessage
+          defaultMessage='{question}'
+          description='Question'
+          values={{
+            question: zlContext.ctxState.questionObject.qname,
+          }}
+        />
+      </Text>
+      <View style={[style.card, style.cardProblemBg]}>
+        <ScrollView>
+          { zlContext.ctxState.questionObject.q_instruction
+            && zlContext.ctxState.questionObject.q_instruction.map(
+              (step, index) => <Text key={index} style={style.problemStatement}>
+                <FormattedMessage
+                  defaultMessage={'{step}'}
+                  description='Steps'
+                  values={{
+                    step: (step[step.length - 1] === '.') ? step.slice(0, -1) : step,
+                  }}
+                />
+              </Text>,
+            ) }
+        </ScrollView>
+      </View>
+      <TouchableOpacity
+        onPress={() => { navigation.navigate('ZombieLandOutput'); }}
+        style={style.tryNowBtn}
+      >
+        <View style={style.rowBetween}>
+          <Text style={style.titleText}>
+            <FormattedMessage
+              defaultMessage='Try Now'
+              description='Try Now Button'
+            />
+          </Text>
+          <TryNowSVG />
+        </View>
+      </TouchableOpacity>
+    </View>
   </>;
 };
 
