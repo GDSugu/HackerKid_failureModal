@@ -32,6 +32,9 @@ import RouteTurtleHome from './TurtleHome';
 import RouteTurtleMain from './TurtleMain';
 import RouteTurtleLeaderBoard from './TurtleLeaderBoard';
 
+import RouteCodekata from './Codekata';
+import RouteCodekataMain from './CodekataMain';
+
 import IconGame from '../../images/navbar/iconGame.svg';
 import IconHome from '../../images/navbar/iconHome.svg';
 import IconMore from '../../images/navbar/iconMore.svg';
@@ -259,11 +262,15 @@ const App = () => {
                       })}
                     </Stack.Screen>
                     <Stack.Screen name='Class' component={RouteClass} />
+                    {/* <Stack.Screen name='Codekata' component={RouteCodekata} /> */}
                     <Stack.Screen name='EditProfile' component={RouteProfile} />
                     <Stack.Screen name='Leaderboard' component={RouteLeaderboard} />
                     <Stack.Screen name='Ide' component={RouteIde} />
                     <Stack.Screen name='TurtleHome'>
                       {(props) => <RouteTurtleHome {...props} routeName={routeName} /> }
+                    </Stack.Screen>
+                    <Stack.Screen name='Codekata'>
+                      {(props) => <RouteCodekata {...props} routeName={routeName} /> }
                     </Stack.Screen>
                     <Stack.Group
                       screenOptions={{
@@ -271,6 +278,7 @@ const App = () => {
                       }}
                     >
                       <Stack.Screen name='TurtleMain' component={RouteTurtleMain} />
+                      <Stack.Screen name='CodekataMain' component={RouteCodekataMain} />
                     </Stack.Group>
                     <Stack.Screen name='TurtleLeaderBoard' component={RouteTurtleLeaderBoard} options={{ presentation: 'transparentModal' }} />
                     </>

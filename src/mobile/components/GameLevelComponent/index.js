@@ -6,14 +6,16 @@ import {
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import TryNowSVG from '../../../images/games/trynow.svg';
+import PlayBtn from '../../../images/games/playBtn.svg';
 import levelCurrentImg from '../../../images/games/level_current.png';
 import levelCompletedImg from '../../../images/games/level_completed.png';
 import levelNotCompletedImg from '../../../images/games/level_not_completed.png';
+import { Yellow } from '../../../colors/_colors';
 
-const getStyle = (font, theme, utilColors) => StyleSheet.create({
+const getStyle = (font, theme, utilColors, forCodekata = false) => StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFill,
-    height: Dimensions.get('window').height - 83 - 80,
+    height: forCodekata ? Dimensions.get('window').height - 83 : Dimensions.get('window').height - 83 - 80,
     marginTop: 68,
     backgroundColor: 'transparent',
   },
@@ -30,7 +32,7 @@ const getStyle = (font, theme, utilColors) => StyleSheet.create({
   tryNowBtn: {
     width: '90%',
     borderRadius: 12,
-    backgroundColor: theme.btnBg,
+    backgroundColor: forCodekata ? Yellow.color900 : theme.btnBg,
     alignSelf: 'center',
     padding: 16,
     position: 'absolute',
@@ -69,7 +71,7 @@ const getStyle = (font, theme, utilColors) => StyleSheet.create({
 });
 
 const LevelButton = ({
-  currentQuestionId, fetchQuestion, isLast, question, style, virtualId,
+  currentQuestionId, fetchQuestion, isLast, question, style, virtualId, forCodekata = false,
 }) => {
   let bgImg = levelNotCompletedImg;
 
@@ -84,8 +86,10 @@ const LevelButton = ({
   }
 
   const handleLevel = () => {
-    if (question) {
+    if (question && !forCodekata) {
       fetchQuestion({ type: 'getQuestionById', questionId: question.question_id });
+    } else {
+      fetchQuestion(question.virtualId);
     }
   };
 
@@ -115,9 +119,9 @@ const LevelButton = ({
 const LevelButtonComponent = React.memo(LevelButton);
 
 const GameLevelComponent = ({
-  context, font, game, gradients, theme, themeKey, utilColors,
+  context, font, game, gradients, theme, themeKey, utilColors, forCodekata = false,
 }) => {
-  const style = getStyle(font, theme[themeKey], utilColors);
+  const style = getStyle(font, theme[themeKey], utilColors, forCodekata);
   let screenContext;
   let questionList;
   let currentQuestionId;
@@ -127,10 +131,19 @@ const GameLevelComponent = ({
   if (game === 'turtle') {
     screenContext = context.tqState;
     questionList = screenContext.questionList;
-    fetchQuestion = context.fetchTurtleQuestion;
-    if (questionList) {
+
+    if (forCodekata) {
+      fetchQuestion = context.getCodekataQuestions;
+    } else {
+      fetchQuestion = context.fetchTurtleQuestion;
+    }
+
+    if (questionList && !forCodekata) {
       currentQuestionId = questionList
         .findIndex((el) => el.question_id === screenContext.questionObject.question_id) + 1;
+    } else if (questionList) {
+      currentQuestionId = questionList
+        .findIndex((el) => el.questionId === screenContext.questionObject.questionId) + 1;
     }
 
     closeLevel = () => {
@@ -181,6 +194,7 @@ const GameLevelComponent = ({
                         style={style}
                         virtualId={index + 1}
                         isLast={index === questionList.length - 1}
+                        forCodekata={forCodekata}
                       />
                     </>)}
                   />
@@ -195,7 +209,7 @@ const GameLevelComponent = ({
                 description='Continue Playing Button'
               />
             </Text>
-            <TryNowSVG />
+            {forCodekata ? <PlayBtn/> : <TryNowSVG />}
           </View>
         </TouchableOpacity>
       </LinearGradient>

@@ -37,6 +37,7 @@ const RouteCertificates = loadable(() => import('./Certificates'), { fallback: <
 // const RouteAwards = loadable(() => import('./Awards'), { fallback: <Loading /> });
 // const RouteCollectibles = loadable(() => import('./Collectibles'), { fallback: <Loading /> });
 const RouteTurtle = loadable(() => import('./Turtle'), { fallback: <Loading /> });
+const RouteCodekata = loadable(() => import('./Codekata'), { fallback: <Loading /> });
 // const RouteSubscription = loadable(() => import('./Subscription'), { fallback: <Loading /> });
 const RouteIde = loadable(() => import('./Ide'), { fallback: <Loading /> });
 
@@ -89,6 +90,8 @@ const App = () => {
         <Route path='turtle' caseSensitive={true} element={<RouteTurtle />} />
           <Route path='turtle/:id' element={<RouteTurtle />} />
             <Route path='turtle/:id/:uniqueString' element={<RouteTurtle />} />
+            <Route path='codekata' caseSensitive={true} element={<RouteCodekata />} />
+          <Route path='codekata/:id' element={<RouteCodekata />} />
           {/* </Route> */}
         {/* </Route> */}
       </Route>

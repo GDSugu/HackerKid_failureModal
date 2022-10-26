@@ -596,7 +596,7 @@ const GameBlock = ({ style, navigation, gameData }) => {
       <View style={[style.bodyCardContent, style.gameInnerCard]}>
         <ScrollView horizontal={true} >
           <View style={style.gameCardImageContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate('TurtleHome')} >
+            <TouchableOpacity onPress={() => navigation.navigate('Codekata')} >
               <Image style={style.gameCardImage} source={turtle} />
             </TouchableOpacity>
           </View>

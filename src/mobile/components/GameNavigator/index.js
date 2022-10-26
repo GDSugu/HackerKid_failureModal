@@ -220,6 +220,7 @@ const GameHeader = ({
   </>;
 };
 
+
 const GameNavigator = ({ currentScreen, ScreenArray }) => {
   const BottomTab = createBottomTabNavigator();
   const { font, theme } = useContext(ThemeContext);

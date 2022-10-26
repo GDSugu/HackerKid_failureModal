@@ -139,6 +139,14 @@ const themes = {
       ...Theme.light.screenYellow,
       fragmentIconDisposal,
     },
+    screenCodekata: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenCodekataMain: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
     screenTurtleHome: {
       ...Theme.light.screenLightBlue,
       ...screenTurtleHeader,

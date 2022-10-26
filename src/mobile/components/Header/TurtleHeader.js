@@ -1,5 +1,8 @@
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  View, TouchableOpacity, StyleSheet, Image, Text,
+} from 'react-native';
+import { FormattedMessage } from 'react-intl';
 import { useNavigation } from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
 import { AuthContext } from '../../../hooks/pages/root';
@@ -8,6 +11,7 @@ import IconHomeGame from '../../../images/navbar/iconHomeGame.svg';
 import IconLeaderboard from '../../../images/games/Leaderboard.svg';
 import profileImg from '../../../images/common/profile.png';
 import ImgComponent from '../ImgComponent';
+import levelIcon from '../../../images/games/levelStar.png';
 
 const getStyles = (utilColors) => StyleSheet.create({
   turtleHeader: {
@@ -30,7 +34,7 @@ const getStyles = (utilColors) => StyleSheet.create({
   },
 });
 
-const TurtleHeader = () => {
+const TurtleHeader = ({ forCodekata, level, onpressLevel }) => {
   const navigation = useNavigation();
   const { theme: { utilColors } } = React.useContext(ThemeContext);
   const authContext = React.useContext(AuthContext);
@@ -47,6 +51,35 @@ const TurtleHeader = () => {
           <IconHomeGame />
         </TouchableOpacity>
       </Animatable.View>
+      {forCodekata && <TouchableOpacity
+      onPress={onpressLevel}
+      >
+       <View style={{
+         flex: 1,
+         flexDirection: 'row',
+         alignItems: 'center',
+         justifyContent: 'center',
+         marginLeft: 30,
+       }}>
+          <Image
+            source={levelIcon}
+            style={{
+              width: 28,
+              height: 28,
+            }}
+          />
+          <Text style={{
+            color: '#fff',
+            marginLeft: 5,
+          }}>
+            <FormattedMessage
+              defaultMessage={'{level}'}
+              description={'Question Level'}
+              values={{ level }}
+            />
+          </Text>
+        </View>
+      </TouchableOpacity>}
       <Animatable.View
         animation='fadeInRight'
         style={style.flexHorizontal}
