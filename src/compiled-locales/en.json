@@ -23,12 +23,6 @@
       "value": "Try now"
     }
   ],
-  "/EsQT0": [
-    {
-      "type": 0,
-      "value": "This is games page"
-    }
-  ],
   "/Gy7qZ": [
     {
       "type": 0,
@@ -37,6 +31,12 @@
     {
       "type": 1,
       "value": "levelNumber"
+    }
+  ],
+  "/Id/lz": [
+    {
+      "type": 0,
+      "value": "Yes"
     }
   ],
   "/dnxym": [
@@ -265,10 +265,28 @@
       "value": "Login into existing account"
     }
   ],
+  "7PlDmO": [
+    {
+      "type": 0,
+      "value": "Play"
+    }
+  ],
+  "8R6f04": [
+    {
+      "type": 0,
+      "value": "Coming Soon..."
+    }
+  ],
   "9BVOVU": [
     {
       "type": 0,
       "value": "Please verify to continue"
+    }
+  ],
+  "9NID4X": [
+    {
+      "type": 0,
+      "value": "OK"
     }
   ],
   "9YoD+Y": [
@@ -347,6 +365,12 @@
       "value": "Try again"
     }
   ],
+  "BDYnsl": [
+    {
+      "type": 0,
+      "value": "WebKata - HTML"
+    }
+  ],
   "BNGdt+": [
     {
       "type": 0,
@@ -367,6 +391,12 @@
     {
       "type": 0,
       "value": "Coins Earned:"
+    }
+  ],
+  "CfsqV9": [
+    {
+      "type": 0,
+      "value": "All Games"
     }
   ],
   "Ciol6I": [
@@ -441,6 +471,16 @@
     {
       "type": 0,
       "value": " ?"
+    }
+  ],
+  "Fl1ECE": [
+    {
+      "type": 0,
+      "value": "Level "
+    },
+    {
+      "type": 1,
+      "value": "level"
     }
   ],
   "FoTGQE": [
@@ -849,6 +889,12 @@
       "value": "Please login again"
     }
   ],
+  "XfY3VU": [
+    {
+      "type": 0,
+      "value": "WebKata - HTML"
+    }
+  ],
   "Y+dh5z": [
     {
       "type": 0,
@@ -985,6 +1031,12 @@
     {
       "type": 0,
       "value": "Show Leaderboard"
+    }
+  ],
+  "fAOneF": [
+    {
+      "type": 0,
+      "value": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?"
     }
   ],
   "fOZCSk": [
@@ -1173,6 +1225,12 @@
       "value": "Account Settings"
     }
   ],
+  "oDenEU": [
+    {
+      "type": 0,
+      "value": "Turtle"
+    }
+  ],
   "oOZkkL": [
     {
       "type": 0,
@@ -1197,16 +1255,16 @@
       "value": "Game Progress"
     }
   ],
-  "q86PwV": [
-    {
-      "type": 0,
-      "value": "Go to Home"
-    }
-  ],
   "qTQ8nP": [
     {
       "type": 1,
       "value": "coinsEarned"
+    }
+  ],
+  "qUU2pp": [
+    {
+      "type": 0,
+      "value": "All Games"
     }
   ],
   "qXTiEd": [
