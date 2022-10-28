@@ -18,6 +18,7 @@ const getStyle = (font, theme, utilColors, forCodekata = false) => StyleSheet.cr
     height: forCodekata ? Dimensions.get('window').height - 83 : Dimensions.get('window').height - 83 - 80,
     marginTop: 68,
     backgroundColor: 'transparent',
+    zIndex: 5002,
   },
   levelContainer: {
     backgroundColor: utilColors.overlay1,

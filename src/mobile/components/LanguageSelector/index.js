@@ -12,6 +12,7 @@ const LanguageSelector = ({
   setOpen,
   onload,
   onChangeValue,
+  theme,
 }) => {
   const [items, setItems] = React.useState(() => Object.keys(
     valueToLanguageDisplayNameMap,
@@ -33,6 +34,7 @@ const LanguageSelector = ({
       value={value}
       items={items}
       setItems={setItems}
+      theme={theme}
       style={style.languageSelector}
       dropDownContainerStyle={style.languageSelectorDropdown}
       selectedItemContainerStyle={style.languageSelectorActiveItem}
