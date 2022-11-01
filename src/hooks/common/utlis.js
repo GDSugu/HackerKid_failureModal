@@ -40,10 +40,25 @@ const debounce = (fn, delay) => {
   })();
 };
 
+const debounce1 = (fn, delay) => {
+  let timerId;
+
+  return (...args) => {
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+
+    timerId = setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
+};
+
 export default getPlatform;
 
 export {
   debounce,
   throttle,
   getDevice,
+  debounce1,
 };

@@ -186,6 +186,10 @@
     "defaultMessage": "OK",
     "description": "OK"
   },
+  "9TkiF9": {
+    "defaultMessage": "{languageTabName}",
+    "description": "tab button text"
+  },
   "9YoD+Y": {
     "defaultMessage": "New Password",
     "description": "New Password Label"
@@ -234,10 +238,6 @@
     "defaultMessage": "Try again",
     "description": "try again btn"
   },
-  "BDYnsl": {
-    "defaultMessage": "WebKata - HTML",
-    "description": "Webkata title"
-  },
   "BNGdt+": {
     "defaultMessage": "No",
     "description": "cancel logout"
@@ -278,6 +278,10 @@
     "defaultMessage": "Email",
     "description": "Email label"
   },
+  "E4eXSS": {
+    "defaultMessage": "Live Preview",
+    "description": "tab button text"
+  },
   "EhuHU0": {
     "defaultMessage": "{errorMessage}",
     "description": "password form helper"
@@ -293,6 +297,10 @@
   "FIcBXp": {
     "defaultMessage": "Home",
     "description": "home heading"
+  },
+  "Fbud0n": {
+    "defaultMessage": "{problemStatement}",
+    "description": "problem statement"
   },
   "FhTUgw": {
     "defaultMessage": "Not {phone} ?",
@@ -328,6 +336,10 @@
   "HI8bPV": {
     "defaultMessage": "Save",
     "description": "Profile save button"
+  },
+  "HZrPcB": {
+    "defaultMessage": "Validated Result",
+    "description": "tab button text"
   },
   "Hjj2+R": {
     "defaultMessage": "Register to Get help from Turtle",
@@ -380,6 +392,10 @@
   "NXV57/": {
     "defaultMessage": "Share",
     "description": "Modal Title"
+  },
+  "NYGsGb": {
+    "defaultMessage": "{level}",
+    "description": "Level navigation link"
   },
   "NZqKYF": {
     "defaultMessage": "Forgot Password?",
@@ -464,6 +480,10 @@
   "Rf84nl": {
     "defaultMessage": "ok",
     "description": "ok button"
+  },
+  "SI6+pb": {
+    "defaultMessage": "Problem Statement",
+    "description": "problem statement label"
   },
   "SL6O2c": {
     "defaultMessage": "Password",
@@ -561,6 +581,10 @@
     "defaultMessage": "Play",
     "description": "Play button"
   },
+  "WsWDuq": {
+    "defaultMessage": "Click \"Run\" to validate your code",
+    "description": "empty validated result text"
+  },
   "X1rCRf": {
     "defaultMessage": "Login into existing account",
     "description": "login into existing account button"
@@ -576,6 +600,10 @@
   "Y+dh5z": {
     "defaultMessage": "Edit Profile",
     "description": "Home card menu"
+  },
+  "YLRLEA": {
+    "defaultMessage": "WebKata - {concept}",
+    "description": "Webkata title"
   },
   "YRA/RQ": {
     "defaultMessage": "{username}",
@@ -612,6 +640,10 @@
   "aWjMjy": {
     "defaultMessage": "Register",
     "description": "Register button"
+  },
+  "aZ9udC": {
+    "defaultMessage": "Private test case {testCaseNumber} - {result}",
+    "description": "test case text"
   },
   "apr16P": {
     "defaultMessage": "Leaderboard",
@@ -787,6 +819,10 @@
     "defaultMessage": "View more",
     "description": "View More Bottomsheet Btn"
   },
+  "o2Pken": {
+    "defaultMessage": "Run",
+    "description": "run webkata button text"
+  },
   "o2jxWd": {
     "defaultMessage": "Account Settings",
     "description": "more menu button"
@@ -821,6 +857,10 @@
   },
   "qXTiEd": {
     "defaultMessage": "Grade"
+  },
+  "qs67OI": {
+    "defaultMessage": "Problem Statement:",
+    "description": "problem statement label"
   },
   "quRCCv": {
     "defaultMessage": "Phone",

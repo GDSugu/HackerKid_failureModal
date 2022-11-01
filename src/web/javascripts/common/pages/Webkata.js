@@ -1,14 +1,23 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import { $, pageInit } from '../framework';
 import Img from '../components/Img';
 import '../../../stylesheets/common/pages/webkata/style.scss';
 import useRootPageState from '../../../../hooks/pages/root';
-import { useWebkataFetchQuestion } from '../../../../hooks/pages/webkata';
+import { useWebkataFetchQuestion, useWebkataSubmitQuestion } from '../../../../hooks/pages/webkata';
 import WebkataLevelComponent from '../components/WebkataLevelComponent';
 import WebkataNavBar from '../components/WebkataNavBar';
 import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
+import Modal from '../components/Modal';
+import CodeEditor from '../components/CodeEditor';
+import 'ace-builds/webpack-resolver';
+import 'ace-builds/src-min-noconflict/ext-language_tools';
+import {
+  getCurrentEditorInstances, initializeWebkata, runUnitTests, updateLivePreview,
+} from '../Functions/webkata';
+import showInlineLoadingSpinner from '../loader';
+import { debounce1 as debounce } from '../../../../hooks/common/utlis';
 
 const updateHistory = (response) => {
   try {
@@ -19,12 +28,30 @@ const updateHistory = (response) => {
   }
 };
 
-const resizeHandler = (nav = 'nav', selector) => {
+const resizeHandler = (nav = 'nav', selector, unit = 'vh') => {
   try {
     const navHeight = document.querySelector(nav).offsetHeight;
-    document.querySelector(selector).style.height = `calc(100vh - ${navHeight}px)`;
+    document.querySelector(selector).style.height = `calc(100${unit} - ${navHeight}px)`;
   } catch (e) {
     console.log(e);
+  }
+};
+
+const resizeEditor = () => {
+  try {
+    const containerElement = document.querySelector('.webkata-game-container');
+    const questionElement = document.querySelector('.question') ? document.querySelector('.question') : document.querySelector('.mobile-question-container');
+
+    const containerStyles = getComputedStyle(containerElement);
+    const padding = parseInt(containerStyles.paddingTop, 10)
+      + parseInt(containerStyles.paddingBottom, 10);
+
+    const containerHeight = containerElement.offsetHeight;
+    const questionHeight = questionElement.offsetHeight;
+
+    document.querySelector('.editor-with-live-preview').style.height = `${containerHeight - questionHeight - padding - 8}px`;
+  } catch (e) {
+    console.error(e);
   }
 };
 
@@ -42,16 +69,22 @@ const hideDefaultNavBar = (device, turtleState) => {
   }, 300);
 };
 
+// inpage components
 const WebkataHomeComponent = ({ changeRoute }) => {
-  pageInit('webkata-home-container', 'WebKata');
+  const { conceptId } = useParams();
+  pageInit(`webkata-home-container webkata-${conceptId}-bg`, 'WebKata');
+  const onResize = () => resizeHandler('nav', '.webkata-frame');
 
   React.useEffect(() => {
-    window.addEventListener('resize', () => resizeHandler('nav', '.webkata-frame'));
+    window.addEventListener('resize', onResize);
     const resizeTimeout = setTimeout(() => {
       resizeHandler('nav', '.webkata-frame');
     }, 300);
 
-    return () => clearTimeout(resizeTimeout);
+    return () => {
+      window.removeEventListener('resize', onResize);
+      clearTimeout(resizeTimeout);
+    };
   }, []);
 
   return <>
@@ -66,8 +99,11 @@ const WebkataHomeComponent = ({ changeRoute }) => {
           <div className="card-container">
             <h1 className='game-title'>
               <FormattedMessage
-                defaultMessage={'WebKata - HTML'}
+                defaultMessage={'WebKata - {concept}'}
                 description={'Webkata title'}
+                values={{
+                  concept: conceptId.toUpperCase(),
+                }}
               />
             </h1>
             <p className="game-description">
@@ -80,7 +116,7 @@ const WebkataHomeComponent = ({ changeRoute }) => {
         </div>
         <button
           className='btn btn-block game-btn'
-          onClick={() => changeRoute('webkataGame')}>
+          onClick={() => changeRoute('game')}>
           <p className='gameBtnDesc'>
             <FormattedMessage
               defaultMessage={'Start Playing'}
@@ -103,7 +139,7 @@ const WebkataHomeComponent = ({ changeRoute }) => {
             {/* <a href="../../" className="btn btn-transparent turtle-action-btn turtle-audio-btn">
               <Img src='../../../../images/games/gameAudio.png' alt='Game Audio' />
             </a> */}
-            <button className="btn btn-transparent turtle-action-btn webkata-play-btn" onClick={() => changeRoute('webkataGame')}>
+            <button className="btn btn-transparent turtle-action-btn webkata-play-btn" onClick={() => changeRoute('game')}>
               <div className="play-btn-container">
                 <Img src='../../../../images/games/gamePlay.png' className='play-btn-img' alt='Game Leaderboard' />
                 <p>
@@ -124,79 +160,13 @@ const WebkataHomeComponent = ({ changeRoute }) => {
   </>;
 };
 
-const WebkataGameComponent = () => {
-  const isPageMounted = useRef(true);
-  const levelComponentRef = useRef(null);
-  const leaderboardComponentRef = useRef(null);
-
-  pageInit('webkata-main-container', 'Webkata');
-
-  const { state: { device } } = useRootPageState();
-  const { conceptId, id } = useParams();
-
-  const {
-    state: webkataState,
-    fetchWebkataQuestion,
-  } = useWebkataFetchQuestion({
-    isPageMounted, initializeData: true, conceptid: conceptId, virtualid: id,
-  });
-
-  const {
-    status,
-    questionList,
-    questionObject,
-  } = webkataState;
-
-  const memorizedWebkataQuestionState = React.useMemo(() => webkataState,
-    [questionList]);
-
-  useEffect(() => {
-    hideDefaultNavBar(device, 'game');
-
-    return () => {
-      document.querySelector('nav:first-child').style.display = 'block';
-    };
-  }, []);
-
-  useEffect(() => {
-    updateHistory(memorizedWebkataQuestionState);
-  }, [memorizedWebkataQuestionState.questionObject]);
-
-  // methods
-  const handleFetchQuestion = (clickedUponVirtualId) => fetchWebkataQuestion(conceptId,
-    clickedUponVirtualId);
-  const onLevelIndicatorClick = () => {
-    levelComponentRef.current.show();
-  };
-
-  const onLeaderboardBtnClick = () => {
-    leaderboardComponentRef.current.toggle();
-  };
-
-  const toggleWebkata = (action = 'show' || 'hide') => {
-    if (action === 'show') {
-      $('.webkata-game-container').slideDown();
-      $('.level-navbar').slideDown({
-        complete: () => {
-          $('.level-navbar').css('display', 'flex');
-        },
-      });
-      $('.game-mob-container').slideDown();
-      $('.leaderboard-btn').removeClass('active');
-    } else if (action === 'hide') {
-      $('.webkata-game-container').slideUp();
-      $('.game-mob-container').slideUp({
-        complete: () => {
-          $('.level-navbar').slideUp();
-        },
-      });
-      $('.leaderboard-btn').addClass('active');
-    }
-  };
-
-  const ProblemStatement = ({ currentDevice, currentQuestion }) => <>
+const ProblemStatement = ({
+  currentDevice,
+  currentQuestion,
+  isDesktop,
+}) => <>
     {
-      currentDevice === 'desktop'
+      (currentDevice === 'desktop' && isDesktop)
       && <div className='question'>
         <label className='problem-statement-label body-bold'>
           <FormattedMessage defaultMessage={'Problem Statement:'} description='problem statement label' />
@@ -209,7 +179,7 @@ const WebkataGameComponent = () => {
       </div>
     }
     {
-      currentDevice === 'mobile'
+      (currentDevice === 'mobile' || !isDesktop)
       && <div className='mobile-question-container'>
         <button
           type='button'
@@ -242,6 +212,339 @@ const WebkataGameComponent = () => {
     }
   </>;
 
+const CodeEditors = ({
+  files, entry, onCodeEditorChange, onRunBtnClick,
+}) => <div className='editor-with-header'>
+    <header className='tabs-container'>
+      <ul className="nav nav-pills" id="pills-tab" role="tablist">
+        <>
+          {
+            files
+            && Object.keys(files)
+              .map((filePath, idx) => {
+                const currentLanguageName = files[filePath].name;
+
+                return <li key={idx} className="nav-item" role="presentation">
+                  <button
+                    className={`nav-link ${filePath === entry ? 'active' : ''}`}
+                    id={`pills-${currentLanguageName.toLowerCase()}-tab`}
+                    data-toggle="pill"
+                    data-target={`#pills-${currentLanguageName.toLowerCase()}`}
+                    type="button"
+                    role="tab"
+                    aria-controls={`#pills-${currentLanguageName.toLowerCase()}`}
+                    aria-selected={filePath === entry}>
+                    <FormattedMessage
+                      defaultMessage={'{languageTabName}'}
+                      description='tab button text'
+                      values={{
+                        languageTabName: currentLanguageName,
+                      }}
+                    />
+                    <span className='active-indicator'></span>
+                  </button>
+                </li>;
+              })
+          }
+        </>
+      </ul>
+    </header>
+    <div className="tab-content" id="pills-editors">
+      <>
+        {
+          files
+          && Object.keys(files)
+            .map((filePath, idx) => {
+              const {
+                name: currentLanguageName,
+              } = files[filePath];
+
+              return <div
+                key={idx}
+                className={`tab-pane fade show ${entry === filePath ? 'active' : ''}`}
+                id={`pills-${currentLanguageName.toLowerCase()}`}
+                role="tabpanel"
+                aria-labelledby={`pills-${currentLanguageName.toLowerCase()}`}>
+                <CodeEditor
+                  className='test-editor'
+                  id={`${currentLanguageName.toLowerCase()}-editor`}
+                  onChange={debounce(onCodeEditorChange, 800)}
+                />
+              </div>;
+            })
+        }
+      </>
+      <button
+        type='button'
+        className='run-btn btn btn-primary'
+        onClick={onRunBtnClick}
+      >
+        <FormattedMessage defaultMessage={'Run'} description='run webkata button text' />
+        <i className="fa fa-play" />
+      </button>
+    </div>
+  </div>;
+
+const ValidatedResult = ({ evaluationDetails, onRunBtnClick }) => <div className='validated-result'>
+  {
+    !evaluationDetails
+    && <div className='not-validated'>
+      <span className='body-bold'>
+        <FormattedMessage
+          defaultMessage={'Click "Run" to validate your code'}
+          description='empty validated result text'
+        />
+      </span>
+      <button
+        type='button'
+        className='run-btn btn btn-primary'
+        onClick={onRunBtnClick}
+      >
+        <FormattedMessage defaultMessage={'Run'} description='run webkata button text' />
+        <i className="fa fa-play" />
+      </button>
+    </div>
+  }
+  {
+    evaluationDetails
+    && <div className='validated'>
+      <ol className='test-cases-list'>
+        {
+          evaluationDetails.result.map((testObj, idx) => <li key={idx} className='test-case'>
+            <img
+              className='test-case-pass-fail-icon'
+              src={`../../../../images/webkata/${testObj.passed ? 'test-case-passed-icon.svg' : 'test-case-failed-icon.svg'} `}
+              alt='pass-fail-icon' />
+            <span className='test-case-text body-bold'>
+              <FormattedMessage
+                defaultMessage={'Private test case {testCaseNumber} - {result}'}
+                description='test case text'
+                values={{
+                  testCaseNumber: idx + 1,
+                  result: testObj.passed ? 'Passed' : 'Failed',
+                }}
+              />
+            </span>
+          </li>)
+        }
+      </ol>
+    </div>
+  }
+</div>;
+
+const SuccessModalComponent = ({
+  passedAllTestCases, message = false, userName = 'user', nextHandler = () => { },
+}) => <>
+    {
+      passedAllTestCases
+      && <>
+        <div className='success-modal-content'>
+          <Img
+            src={'../../../../images/games/turtle-success.png'}
+          />
+          <div className='col-10 mx-auto'>
+            <h5 className='main-message'>
+              <FormattedMessage
+                defaultMessage={'Awesome!'}
+                description={'Success message'}
+              />
+            </h5>
+            {
+              message
+              && <>
+                <p className='congrajulations-message'>
+                  <FormattedMessage
+                    defaultMessage={'{message}'}
+                    description={'Success message'}
+                    values={{
+                      message: message.replace('{{name}}', userName),
+                    }}
+                  />
+                </p>
+                <div className='d-flex align-items-center justify-content-center'>
+                  <button className='btn btn-primary play-next-btn' onClick={nextHandler}>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <FormattedMessage
+                        defaultMessage={'Play next'}
+                        description={'Play next button'}
+                      />
+                      <i className="fas fa-angle-right "></i>
+                    </div>
+                  </button>
+                </div>
+              </>
+            }
+          </div>
+        </div>
+      </>
+    }
+  </>;
+
+const WebkataGameComponent = () => {
+  const isPageMounted = useRef(true);
+  const levelComponentRef = useRef(null);
+  const leaderboardComponentRef = useRef(null);
+  const successModalRef = useRef(null);
+
+  const { state: { device } } = useRootPageState();
+  const { conceptId, id } = useParams();
+
+  pageInit(`webkata-main-container webkata-${conceptId}-bg`, 'Webkata');
+  const [isDesktop, setIsDesktop] = useState(window.matchMedia('(min-width: 1024px)').matches);
+  const [showLivePreview, setShowLivePreview] = useState(false);
+
+  const {
+    state: webkataState,
+    fetchWebkataQuestion,
+  } = useWebkataFetchQuestion({
+    isPageMounted, initializeData: true, conceptid: conceptId, virtualid: id,
+  });
+
+  const {
+    state: webkataSubmitState,
+    submitWebkataQuestion,
+    resetWebkataSubmitState,
+  } = useWebkataSubmitQuestion({ isPageMounted });
+
+  const {
+    status,
+    questionList,
+    questionObject,
+    submissionDetails,
+  } = webkataState;
+
+  const memorizedWebkataQuestionState = React.useMemo(() => webkataState,
+    [questionList]);
+
+  // methods
+  const toggleWebkata = (action = 'show' || 'hide') => {
+    if (action === 'show') {
+      $('.webkata-game-container').slideDown();
+      $('.level-navbar').slideDown({
+        complete: () => {
+          $('.level-navbar').css('display', 'flex');
+        },
+      });
+      $('.game-mob-container').slideDown();
+      $('.leaderboard-btn').removeClass('active');
+    } else if (action === 'hide') {
+      $('.webkata-game-container').slideUp();
+      $('.game-mob-container').slideUp({
+        complete: () => {
+          $('.level-navbar').slideUp();
+        },
+      });
+      $('.leaderboard-btn').addClass('active');
+    }
+  };
+
+  const toggleCollapseLivePreview = () => {
+    setShowLivePreview((prev) => !prev);
+  };
+
+  // event handlers
+  const onCodeEditorChange = () => {
+    updateLivePreview($('#live-preview')[0]);
+  };
+
+  const handleFetchQuestion = (clickedUponVirtualId) => fetchWebkataQuestion(conceptId,
+    clickedUponVirtualId);
+  const onLevelIndicatorClick = () => {
+    levelComponentRef.current.show();
+  };
+
+  const onLeaderboardBtnClick = () => {
+    leaderboardComponentRef.current.toggle();
+  };
+
+  const onRunBtnClick = () => {
+    const hideInLineLoadingSpinner = showInlineLoadingSpinner('.run-btn');
+    const currentEditorInstances = getCurrentEditorInstances();
+
+    const {
+      questionObject: currentQuestionObject,
+    } = memorizedWebkataQuestionState;
+
+    const {
+      questionId,
+      testCases,
+      questionSetup,
+      conceptId: conceptIdentifier,
+    } = currentQuestionObject;
+    const currentQuestionSetup = { ...questionSetup };
+    const { files } = currentQuestionSetup;
+
+    const testResult = runUnitTests(testCases, '#live-preview');
+
+    Object.keys(currentEditorInstances).forEach((concept) => {
+      const { editorInstance, filePath } = currentEditorInstances[concept];
+      const file = files[filePath];
+
+      file.code = editorInstance.getValue();
+    });
+
+    submitWebkataQuestion(questionId, testResult, currentQuestionSetup, conceptIdentifier)
+      .then(() => {
+        hideInLineLoadingSpinner();
+
+        $('#pills-validated-result-tab').trigger('click');
+      });
+  };
+
+  // side effects
+  useEffect(() => {
+    hideDefaultNavBar(device, 'game');
+    window.addEventListener('resize', () => {
+      resizeEditor();
+      setIsDesktop(window.matchMedia('(min-width: 1024px)').matches);
+    });
+
+    const timer = setTimeout(() => {
+      resizeEditor();
+    }, 300);
+
+    return () => {
+      clearTimeout(timer);
+      successModalRef.current.hide();
+      document.querySelector('nav:first-child').style.display = 'block';
+    };
+  }, []);
+
+  useEffect(() => {
+    if (status && status === 'success') {
+      resizeEditor();
+      // choosing setup
+      const questionSetup = submissionDetails.isSubmitted
+        ? submissionDetails.submissionSetup : questionObject.questionSetup;
+
+      // initialize code editor instances
+      initializeWebkata(['HTML', 'CSS', 'JS'].includes(questionObject.conceptId) ? 'static' : questionObject.conceptId,
+        questionSetup, $('#live-preview')[0]);
+      // reset validation and come back to live preview tab
+      resetWebkataSubmitState();
+      $('#pills-live-preview-tab').trigger('click');
+      // close modal if open
+      successModalRef.current.hide();
+    } else if (status === 'error') {
+      const { origin } = window.location;
+      window.location.href = `${origin}/webkata/${conceptId}`;
+    }
+  }, [webkataState]);
+
+  useEffect(() => {
+    updateHistory(memorizedWebkataQuestionState);
+  }, [memorizedWebkataQuestionState.questionObject]);
+
+  useEffect(() => {
+    if (webkataSubmitState.status === 'success') {
+      if (webkataSubmitState.passed) {
+        successModalRef.current.show();
+      } else if (!webkataSubmitState.passed && !showLivePreview) {
+        setShowLivePreview(true);
+      }
+    }
+  }, [webkataSubmitState]);
+
   return <>
     <WebkataNavBar
       levelBtnHandler={onLevelIndicatorClick}
@@ -249,10 +552,112 @@ const WebkataGameComponent = () => {
       questionState={memorizedWebkataQuestionState}
       isWebkataGamePage={true}
     />
-    <main className='webkata-game-container'>
-      <ProblemStatement currentDevice={device} currentQuestion={questionObject} />
-      
+    <main className={`webkata-game-container ${(device === 'mobile' || !isDesktop) ? 'webkata-game-mob-container' : ''}`}>
+      <ProblemStatement
+        currentDevice={device}
+        currentQuestion={questionObject}
+        isDesktop={isDesktop} />
+      <div className='editor-with-live-preview'>
+        <CodeEditors
+          files={memorizedWebkataQuestionState.questionObject?.questionSetup?.files}
+          entry={memorizedWebkataQuestionState.questionObject?.questionSetup?.entry}
+          onCodeEditorChange={onCodeEditorChange}
+          onRunBtnClick={onRunBtnClick}
+        />
+        <div className={`live-preview-with-validated-result ${showLivePreview ? 'open' : ''}`}>
+          {
+            (!isDesktop || device === 'mobile')
+            && <div className={`collapse-live-preview-btn-container ${showLivePreview ? 'open' : ''}`}>
+              <button
+                type='button'
+                className={`collapse-live-preview-btn ${showLivePreview ? 'open' : ''}`}
+                onClick={toggleCollapseLivePreview}
+              >
+                <i className={`fa fa-chevron-left ${showLivePreview ? 'fa-chevron-right' : ''}`} />
+              </button>
+            </div>
+          }
+          <div className='tabs-container-with-tab-content'>
+            <header className='tabs-container'>
+              <ul className="nav nav-pills" id="pills-tab" role="tablist">
+                <li className="nav-item" role="presentation">
+                  <button
+                    className='nav-link active'
+                    id='pills-live-preview-tab'
+                    data-toggle="pill"
+                    data-target='#pills-live-preview'
+                    type="button"
+                    role="tab"
+                    aria-controls='#pills-live-preview'
+                    aria-selected='true'>
+                    <FormattedMessage
+                      defaultMessage={'Live Preview'}
+                      description='tab button text'
+                    />
+                    <span className='active-indicator'></span>
+                  </button>
+                </li>
+                <li className="nav-item" role="presentation">
+                  <button
+                    className='nav-link'
+                    id='pills-validated-result-tab'
+                    data-toggle="pill"
+                    data-target='#pills-validated-result'
+                    type="button"
+                    role="tab"
+                    aria-controls='#pills-validated-result'
+                    aria-selected='true'>
+                    <FormattedMessage
+                      defaultMessage={'Validated Result'}
+                      description='tab button text'
+                    />
+                    <span className='active-indicator'></span>
+                  </button>
+                </li>
+              </ul>
+            </header>
+            <div className='tab-content' id='live-preview-with-validated-result'>
+              <div
+                className={'tab-pane fade show active'}
+                id='pills-live-preview'
+                role="tabpanel"
+                aria-labelledby='#pills-live-preview-tab'>
+                <iframe
+                  id='live-preview'
+                  sandbox='allow-forms allow-modals allow-same-origin allow-popups allow-presentation allow-scripts' />
+              </div>
+              <div
+                className={'tab-pane fade'}
+                id='pills-validated-result'
+                role="tabpanel"
+                aria-labelledby='#pills-validated-result-tab'>
+                <ValidatedResult
+                  evaluationDetails={webkataSubmitState.evaluationDetails}
+                  onRunBtnClick={onRunBtnClick}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
+    <Modal
+      ref={successModalRef}
+      options={'hide'}
+      modalClass={'success-modal'}
+      customClass={'curved'}
+      header={<div></div>}>
+      <SuccessModalComponent
+        passedAllTestCases={webkataSubmitState.passed}
+        message={webkataSubmitState.pointsDetails.submissionStatus}
+        userName={webkataSubmitState.profileDetails.name}
+        nextHandler={() => fetchWebkataQuestion(
+          memorizedWebkataQuestionState.questionObject.conceptId,
+          memorizedWebkataQuestionState.questionObject.virtualId + 1,
+        )
+        }
+      />
+    </Modal>
     <GameLeaderboardComponent
       ref={leaderboardComponentRef}
       game={'webkata'}
@@ -269,22 +674,22 @@ const WebkataGameComponent = () => {
 };
 
 const Webkata = () => {
-  const [webkataRoute, setWebaktaRoute] = React.useState('webkataHome');
+  const [webkataRoute, setWebaktaRoute] = React.useState('home');
   const changeRoute = (route) => setWebaktaRoute(route);
 
   React.useEffect(() => {
     const locationArray = window.location.href.split('/').filter((el) => el !== '');
     if (locationArray.length > 4) {
-      changeRoute('webkataGame');
+      changeRoute('game');
     }
   }, []);
 
   return <>
     {
-      webkataRoute === 'webkataHome' && <WebkataHomeComponent changeRoute={changeRoute} />
+      webkataRoute === 'home' && <WebkataHomeComponent changeRoute={changeRoute} />
     }
     {
-      webkataRoute === 'webkataGame' && <WebkataGameComponent />
+      webkataRoute === 'game' && <WebkataGameComponent />
     }
   </>;
 };

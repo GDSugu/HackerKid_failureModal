@@ -14,6 +14,13 @@ const thememaplight = {
   'game-btn-shadow': '0 4px 4px 0 rgba(0, 0, 0, 0.25)',
   'game-leaderboard-btn-bg': Purple.color500,
   'game-label-color': Theme.light.utilColors.grey,
+  'webkata-bg-1': Theme.light.utilColors.black,
+  'webkata-bg-2': Theme.light.utilColors.white,
+  'webkata-bg-3': Theme.light.utilColors.grey,
+  'webkata-text-color-1': Theme.light.utilColors.white,
+  'webkata-text-color-2': Theme.light.utilColors.lightGrey,
+  'webkata-run-btn-bg': Theme.light.screenYellow.fadedBtnTextColor,
+  'webkata-code-editor-transparent-bg': '#00000061',
   ...gameThemeMapLight,
 };
 
@@ -24,6 +31,13 @@ const thememapdark = {
   'game-btn-shadow': '0 4px 4px 0 rgba(0, 0, 0, 0.25)',
   'game-leaderboard-btn-bg': Purple.color500,
   'game-label-color': Theme.light.utilColors.grey,
+  'webkata-bg-1': Theme.light.utilColors.black,
+  'webkata-bg-2': Theme.light.utilColors.white,
+  'webkata-bg-3': Theme.light.utilColors.grey,
+  'webkata-text-color-1': Theme.light.utilColors.white,
+  'webkata-text-color-2': Theme.light.utilColors.lightGrey,
+  'webkata-run-btn-bg': Theme.light.screenYellow.fadedBtnTextColor,
+  'webkata-code-editor-transparent-bg': '#00000061',
   ...gameThemeMapDark,
 };
 
@@ -32,6 +46,13 @@ const cssvars = {
   'game-btn-shadow': '--game-btn-shadow',
   'game-leaderboard-btn-bg': '--game-leaderboard-btn-bg',
   'game-label-color': '--game-label-color',
+  'webkata-bg-1': '--webkata-bg-1',
+  'webkata-bg-2': '--webkata-bg-2',
+  'webkata-bg-3': '--webkata-bg-3',
+  'webkata-run-btn-bg': '--webkata-run-btn-bg',
+  'webkata-text-color-1': '--webkata-text-color-1',
+  'webkata-text-color-2': '--webkata-text-color-2',
+  'webkata-code-editor-transparent-bg': '--webkata-code-editor-transparent-bg',
   ...gameCssVars,
 };
 

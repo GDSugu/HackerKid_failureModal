@@ -289,6 +289,12 @@
       "value": "OK"
     }
   ],
+  "9TkiF9": [
+    {
+      "type": 1,
+      "value": "languageTabName"
+    }
+  ],
   "9YoD+Y": [
     {
       "type": 0,
@@ -365,12 +371,6 @@
       "value": "Try again"
     }
   ],
-  "BDYnsl": [
-    {
-      "type": 0,
-      "value": "WebKata - HTML"
-    }
-  ],
   "BNGdt+": [
     {
       "type": 0,
@@ -435,6 +435,12 @@
       "value": "Email"
     }
   ],
+  "E4eXSS": [
+    {
+      "type": 0,
+      "value": "Live Preview"
+    }
+  ],
   "EhuHU0": [
     {
       "type": 1,
@@ -457,6 +463,12 @@
     {
       "type": 0,
       "value": "Home"
+    }
+  ],
+  "Fbud0n": [
+    {
+      "type": 1,
+      "value": "problemStatement"
     }
   ],
   "FhTUgw": [
@@ -523,6 +535,12 @@
     {
       "type": 0,
       "value": "Save"
+    }
+  ],
+  "HZrPcB": [
+    {
+      "type": 0,
+      "value": "Validated Result"
     }
   ],
   "Hjj2+R": [
@@ -601,6 +619,12 @@
     {
       "type": 0,
       "value": "Share"
+    }
+  ],
+  "NYGsGb": [
+    {
+      "type": 1,
+      "value": "level"
     }
   ],
   "NZqKYF": [
@@ -727,6 +751,12 @@
     {
       "type": 0,
       "value": "ok"
+    }
+  ],
+  "SI6+pb": [
+    {
+      "type": 0,
+      "value": "Problem Statement"
     }
   ],
   "SL6O2c": [
@@ -877,6 +907,12 @@
       "value": "Play"
     }
   ],
+  "WsWDuq": [
+    {
+      "type": 0,
+      "value": "Click \"Run\" to validate your code"
+    }
+  ],
   "X1rCRf": [
     {
       "type": 0,
@@ -899,6 +935,16 @@
     {
       "type": 0,
       "value": "Edit Profile"
+    }
+  ],
+  "YLRLEA": [
+    {
+      "type": 0,
+      "value": "WebKata - "
+    },
+    {
+      "type": 1,
+      "value": "concept"
     }
   ],
   "YRA/RQ": [
@@ -953,6 +999,24 @@
     {
       "type": 0,
       "value": "Register"
+    }
+  ],
+  "aZ9udC": [
+    {
+      "type": 0,
+      "value": "Private test case "
+    },
+    {
+      "type": 1,
+      "value": "testCaseNumber"
+    },
+    {
+      "type": 0,
+      "value": " - "
+    },
+    {
+      "type": 1,
+      "value": "result"
     }
   ],
   "apr16P": [
@@ -1219,6 +1283,12 @@
       "value": "View more"
     }
   ],
+  "o2Pken": [
+    {
+      "type": 0,
+      "value": "Run"
+    }
+  ],
   "o2jxWd": [
     {
       "type": 0,
@@ -1271,6 +1341,12 @@
     {
       "type": 0,
       "value": "Grade"
+    }
+  ],
+  "qs67OI": [
+    {
+      "type": 0,
+      "value": "Problem Statement:"
     }
   ],
   "quRCCv": [
