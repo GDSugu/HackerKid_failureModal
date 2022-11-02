@@ -21,6 +21,8 @@ const thememaplight = {
   'webkata-text-color-2': Theme.light.utilColors.lightGrey,
   'webkata-run-btn-bg': Theme.light.screenYellow.fadedBtnTextColor,
   'webkata-code-editor-transparent-bg': '#00000061',
+  'webkata-background-img-gradient-color-1': '#242b2c',
+  'webkata-background-img-gradient-color-2': 'rgba(0, 0, 0, 0)',
   ...gameThemeMapLight,
 };
 
@@ -38,6 +40,8 @@ const thememapdark = {
   'webkata-text-color-2': Theme.light.utilColors.lightGrey,
   'webkata-run-btn-bg': Theme.light.screenYellow.fadedBtnTextColor,
   'webkata-code-editor-transparent-bg': '#00000061',
+  'webkata-background-img-gradient-color-1': '#242b2c',
+  'webkata-background-img-gradient-color-2': 'rgba(0, 0, 0, 0)',
   ...gameThemeMapDark,
 };
 
@@ -53,6 +57,8 @@ const cssvars = {
   'webkata-text-color-1': '--webkata-text-color-1',
   'webkata-text-color-2': '--webkata-text-color-2',
   'webkata-code-editor-transparent-bg': '--webkata-code-editor-transparent-bg',
+  'webkata-background-img-gradient-color-1': '--webkata-background-img-gradient-color-1',
+  'webkata-background-img-gradient-color-2': '--webkata-background-img-gradient-color-2',
   ...gameCssVars,
 };
 

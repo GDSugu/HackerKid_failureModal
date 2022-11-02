@@ -2,164 +2,31 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import { $, pageInit } from '../framework';
-import Img from '../components/Img';
-import '../../../stylesheets/common/pages/webkata/style.scss';
 import useRootPageState from '../../../../hooks/pages/root';
 import { useWebkataFetchQuestion, useWebkataSubmitQuestion } from '../../../../hooks/pages/webkata';
+import '../../../stylesheets/common/pages/webkata/style.scss';
+import Img from '../components/Img';
 import WebkataLevelComponent from '../components/WebkataLevelComponent';
 import WebkataNavBar from '../components/WebkataNavBar';
 import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
 import Modal from '../components/Modal';
 import CodeEditor from '../components/CodeEditor';
-import 'ace-builds/webpack-resolver';
-import 'ace-builds/src-min-noconflict/ext-language_tools';
 import {
-  getCurrentEditorInstances, initializeWebkata, runUnitTests, updateLivePreview,
+  getCurrentEditorInstances,
+  hideDefaultNavBar,
+  initializeWebkata,
+  resizeEditor,
+  resizeHandler,
+  runUnitTests,
+  updateHistory,
+  updateLivePreview,
 } from '../Functions/webkata';
 import showInlineLoadingSpinner from '../loader';
 import { debounce1 as debounce } from '../../../../hooks/common/utlis';
-
-const updateHistory = (response) => {
-  try {
-    const { uniqueString, virtualId, conceptId } = response.questionObject;
-    window.history.replaceState({}, '', `/webkata/${conceptId.toLowerCase()}/${virtualId}/${uniqueString}`);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const resizeHandler = (nav = 'nav', selector, unit = 'vh') => {
-  try {
-    const navHeight = document.querySelector(nav).offsetHeight;
-    document.querySelector(selector).style.height = `calc(100${unit} - ${navHeight}px)`;
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-const resizeEditor = () => {
-  try {
-    const containerElement = document.querySelector('.webkata-game-container');
-    const questionElement = document.querySelector('.question') ? document.querySelector('.question') : document.querySelector('.mobile-question-container');
-
-    const containerStyles = getComputedStyle(containerElement);
-    const padding = parseInt(containerStyles.paddingTop, 10)
-      + parseInt(containerStyles.paddingBottom, 10);
-
-    const containerHeight = containerElement.offsetHeight;
-    const questionHeight = questionElement.offsetHeight;
-
-    document.querySelector('.editor-with-live-preview').style.height = `${containerHeight - questionHeight - padding - 8}px`;
-  } catch (e) {
-    console.error(e);
-  }
-};
-
-const hideDefaultNavBar = (device, turtleState) => {
-  document.querySelector('nav:first-child').style.display = 'none';
-  let componentContainer = `.webkata-${turtleState}-container`;
-  if (device === 'desktop') {
-    componentContainer = `.webkata-${turtleState}-container`;
-  } else if (device === 'mobile') {
-    componentContainer = `.webkata-mob-${turtleState}-container`;
-  }
-  window.addEventListener('resize', () => resizeHandler('nav.turtle-navbar', componentContainer));
-  setTimeout(() => {
-    resizeHandler('nav.turtle-navbar', componentContainer);
-  }, 300);
-};
+import 'ace-builds/webpack-resolver';
+import 'ace-builds/src-min-noconflict/ext-language_tools';
 
 // inpage components
-const WebkataHomeComponent = ({ changeRoute }) => {
-  const { conceptId } = useParams();
-  pageInit(`webkata-home-container webkata-${conceptId}-bg`, 'WebKata');
-  const onResize = () => resizeHandler('nav', '.webkata-frame');
-
-  React.useEffect(() => {
-    window.addEventListener('resize', onResize);
-    const resizeTimeout = setTimeout(() => {
-      resizeHandler('nav', '.webkata-frame');
-    }, 300);
-
-    return () => {
-      window.removeEventListener('resize', onResize);
-      clearTimeout(resizeTimeout);
-    };
-  }, []);
-
-  return <>
-    {/* <TurtleNavBar
-    // questionState={memoizedTurtleQuestionState}
-    // handleHint={handleHint}
-    isTurtleMainPage={false}
-  /> */}
-    <div className="webkata-frame">
-      <div className="webkata-card-container">
-        <div className="webkata-card">
-          <div className="card-container">
-            <h1 className='game-title'>
-              <FormattedMessage
-                defaultMessage={'WebKata - {concept}'}
-                description={'Webkata title'}
-                values={{
-                  concept: conceptId.toUpperCase(),
-                }}
-              />
-            </h1>
-            <p className="game-description">
-              <FormattedMessage
-                defaultMessage={'Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?'}
-                description={'WebKata description'}
-              />
-            </p>
-          </div>
-        </div>
-        <button
-          className='btn btn-block game-btn'
-          onClick={() => changeRoute('game')}>
-          <p className='gameBtnDesc'>
-            <FormattedMessage
-              defaultMessage={'Start Playing'}
-              description={'Play button'}
-            />
-          </p>
-        </button>
-      </div>
-      <div className="webkata-mob-card">
-        <div className="webkata-title">
-          <h1 className='game-title'>
-            <FormattedMessage
-              defaultMessage={'WebKata - HTML'}
-              description={'webkata title'}
-            />
-          </h1>
-        </div>
-        <div className="webkata-actions">
-          <div className="d-flex align-items-center">
-            {/* <a href="../../" className="btn btn-transparent turtle-action-btn turtle-audio-btn">
-              <Img src='../../../../images/games/gameAudio.png' alt='Game Audio' />
-            </a> */}
-            <button className="btn btn-transparent turtle-action-btn webkata-play-btn" onClick={() => changeRoute('game')}>
-              <div className="play-btn-container">
-                <Img src='../../../../images/games/gamePlay.png' className='play-btn-img' alt='Game Leaderboard' />
-                <p>
-                  <FormattedMessage
-                    defaultMessage={'PLAY'}
-                    description={'Play button'}
-                  />
-                </p>
-              </div>
-            </button>
-            {/* <a href="" className="btn btn-transparent turtle-action-btn turtle-leaderboard-btn">
-              <Img src='../../../../images/games/gameLeaderboard.png' alt='Game Leaderboard' />
-            </a> */}
-          </div>
-        </div>
-      </div>
-    </div>
-  </>;
-};
-
 const ProblemStatement = ({
   currentDevice,
   currentQuestion,
@@ -379,6 +246,99 @@ const SuccessModalComponent = ({
       </>
     }
   </>;
+
+const WebkataHomeComponent = ({ changeRoute }) => {
+  const { conceptId } = useParams();
+  pageInit(`webkata-home-container webkata-${conceptId}-bg`, 'WebKata');
+  const onResize = () => resizeHandler('nav', '.webkata-frame');
+
+  React.useEffect(() => {
+    window.addEventListener('resize', onResize);
+    const resizeTimeout = setTimeout(() => {
+      resizeHandler('nav', '.webkata-frame');
+    }, 300);
+
+    return () => {
+      window.removeEventListener('resize', onResize);
+      clearTimeout(resizeTimeout);
+    };
+  }, []);
+
+  return <>
+    {/* <TurtleNavBar
+    // questionState={memoizedTurtleQuestionState}
+    // handleHint={handleHint}
+    isTurtleMainPage={false}
+  /> */}
+    <div className="webkata-frame">
+      <div className="webkata-card-container">
+        <div className="webkata-card">
+          <div className="card-container">
+            <h1 className='game-title'>
+              <FormattedMessage
+                defaultMessage={'WebKata - {concept}'}
+                description={'Webkata title'}
+                values={{
+                  concept: conceptId.toUpperCase(),
+                }}
+              />
+            </h1>
+            <p className="game-description">
+              <FormattedMessage
+                defaultMessage={'Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?'}
+                description={'WebKata description'}
+              />
+            </p>
+          </div>
+        </div>
+        <button
+          className='btn btn-block game-btn'
+          onClick={() => changeRoute('game')}>
+          <p className='gameBtnDesc'>
+            <FormattedMessage
+              defaultMessage={'Start Playing'}
+              description={'Play button'}
+            />
+          </p>
+        </button>
+      </div>
+      <div className="webkata-mob-card">
+        <div className="webkata-title">
+          <h1 className='game-title'>
+            <FormattedMessage
+               defaultMessage={'WebKata - {concept}'}
+               description={'Webkata title'}
+               values={{
+                 concept: conceptId.toUpperCase(),
+               }}
+            />
+          </h1>
+        </div>
+        <div className="webkata-actions">
+          <div className="d-flex align-items-center">
+            {/* <a href="../../" className="btn btn-transparent turtle-action-btn turtle-audio-btn">
+              <Img src='../../../../images/games/gameAudio.png' alt='Game Audio' />
+            </a> */}
+            <button className="btn btn-transparent turtle-action-btn webkata-play-btn" onClick={() => changeRoute('game')}>
+              <div className="play-btn-container">
+                <Img src='../../../../images/games/gamePlay.png' className='play-btn-img' alt='Game Leaderboard' />
+                <p>
+                  <FormattedMessage
+                    defaultMessage={'PLAY'}
+                    description={'Play button'}
+                  />
+                </p>
+              </div>
+            </button>
+            {/* <a href="" className="btn btn-transparent turtle-action-btn turtle-leaderboard-btn">
+              <Img src='../../../../images/games/gameLeaderboard.png' alt='Game Leaderboard' />
+            </a> */}
+          </div>
+        </div>
+      </div>
+    </div>
+  </>;
+};
 
 const WebkataGameComponent = () => {
   const isPageMounted = useRef(true);

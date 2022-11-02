@@ -12,21 +12,21 @@
 .webkata-main-container {
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(0deg, #242b2c 0%, rgba(0, 0, 0, 0) 100%), url(../../../../../images/webkata/webkataHtmlBgWeb.png) no-repeat 100% / cover;
+  background: linear-gradient(0deg, gt.theme-var(webkata-background-img-gradient-color-1, null, $thememaplight, $cssvars) 0%, gt.theme-var(webkata-background-img-gradient-color-2, null, $thememaplight, $cssvars) 100%), url(../../../../../images/webkata/webkataHtmlBgWeb.png) no-repeat 100% / cover;
   background-blend-mode: multiply, normal;
 
   &.webkata-html-bg {
-    background: linear-gradient(0deg, #242b2c 0%, rgba(0, 0, 0, 0) 100%), url(../../../../../images/webkata/webkataHtmlBgWeb.png) no-repeat 100% / cover;
+    background: linear-gradient(0deg, gt.theme-var(webkata-background-img-gradient-color-1, null, $thememaplight, $cssvars) 0%, gt.theme-var(webkata-background-img-gradient-color-2, null, $thememaplight, $cssvars) 100%), url(../../../../../images/webkata/webkataHtmlBgWeb.png) no-repeat 100% / cover;
     background-position-x: left;
   }
 
   &.webkata-css-bg {
-    background: linear-gradient(0deg, #242b2c 0%, rgba(0, 0, 0, 0) 100%), url(../../../../../images/webkata/webkataCssBgWeb.png) no-repeat 100% / cover;
+    background: linear-gradient(0deg, gt.theme-var(webkata-background-img-gradient-color-1, null, $thememaplight, $cssvars) 0%, gt.theme-var(webkata-background-img-gradient-color-2, null, $thememaplight, $cssvars) 100%), url(../../../../../images/webkata/webkataCssBgWeb.png) no-repeat 100% / cover;
     background-position-x: left;
   }
 
   &.webkata-js-bg {
-    background: linear-gradient(0deg, #242b2c 0%, rgba(0, 0, 0, 0) 100%), url(../../../../../images/webkata/webkataJsBgWeb.png) no-repeat 100% / cover;
+    background: linear-gradient(0deg, gt.theme-var(webkata-background-img-gradient-color-1, null, $thememaplight, $cssvars) 0%, gt.theme-var(webkata-background-img-gradient-color-2, null, $thememaplight, $cssvars) 100%), url(../../../../../images/webkata/webkataJsBgWeb.png) no-repeat 100% / cover;
     background-position-x: left;
   }
 
@@ -73,6 +73,7 @@
     }
   }
 
+  // webkata home styles
   .webkata-frame {
     overflow: auto;
 
@@ -186,15 +187,16 @@
     }
   }
 
+  // webkata game styles
   .webkata-game-container {
     padding: 1rem;
 
     .question {
-      display: flex;
-      align-items: center;
+      border-radius: 12px;
       padding: 1.5rem 1.5rem 1.65rem 1.5rem;
       background-color: white;
-      border-radius: 12px;
+      display: flex;
+      align-items: center;
 
       .problem-statement-label,
       .problem-statement {
@@ -202,9 +204,9 @@
       }
 
       .problem-statement-label {
-        white-space: nowrap;
         margin-right: 0.65rem;
         color: gt.theme-var(game-label-color, null, $thememaplight, $cssvars);
+        white-space: nowrap;
       }
 
       .problem-statement {
@@ -217,12 +219,12 @@
 
       .mobile-question-revealer {
         border: none;
+        border-radius: 12px;
+        padding: 1.5rem 1.5rem 1.65rem 1.5rem;
+        background-color: white;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1.5rem 1.5rem 1.65rem 1.5rem;
-        background-color: white;
-        border-radius: 12px;
 
         &.question-open {
           border-bottom-left-radius: unset;
@@ -241,10 +243,10 @@
       .problem-statement-container {
         position: absolute;
         width: 100%;
-        padding: 0 1.5rem 1.65rem 1.5rem;
-        background-color: white;
         border-bottom-left-radius: 12px;
         border-bottom-right-radius: 12px;
+        padding: 0 1.5rem 1.65rem 1.5rem;
+        background-color: white;
         transform: translateY(-100%);
         opacity: 0;
         z-index: -1;
@@ -280,25 +282,25 @@
         align-items: center;
 
         .nav-link {
-          padding: 0.8rem;
-          display: flex;
-          flex-direction: column;
           position: relative;
           border: none;
+          padding: 0.8rem;
           background: none;
           color: inherit;
+          display: flex;
+          flex-direction: column;
 
           &.active {
             color: gt.theme-var(webkata-text-color-1, null, $thememaplight, $cssvars);
 
             .active-indicator {
-              display: inline-block;
+              position: absolute;
+              left: 0;
+              bottom: 0;
               width: 100%;
               height: 2px;
-              position: absolute;
               background-color: gt.theme-var(webkata-text-color-1, null, $thememaplight, $cssvars);
-              bottom: 0;
-              left: 0;
+              display: inline-block;
             }
           }
         }
@@ -306,11 +308,11 @@
 
       .editor-with-header,
       .live-preview-with-validated-result {
+        border-radius: 12px;
         width: 50%;
         height: 100%;
         display: flex;
         flex-direction: column;
-        border-radius: 12px;
 
         .tab-content {
           width: 100%;
@@ -323,10 +325,10 @@
         }
 
         .run-btn {
+          border-radius: 0.5rem;
+          border-color: gt.theme-var(webkata-run-btn-bg, null, $thememaplight, $cssvars);
           min-width: 77px;
           background-color: gt.theme-var(webkata-run-btn-bg, null, $thememaplight, $cssvars);
-          border-color: gt.theme-var(webkata-run-btn-bg, null, $thememaplight, $cssvars);
-          border-radius: 0.5rem;
           color: gt.theme-var(webkata-text-color-1, null, $thememaplight, $cssvars);
           display: flex;
           align-items: center;
@@ -339,10 +341,10 @@
         background-color: gt.theme-var(webkata-code-editor-transparent-bg, null, $thememaplight, $cssvars);
 
         .test-editor {
-          width: 100%;
-          height: 100%;
           border-bottom-left-radius: 12px;
           border-bottom-right-radius: 12px;
+          width: 100%;
+          height: 100%;
           background: transparent;
           backdrop-filter: blur(70px);
         }
@@ -373,12 +375,12 @@
 
         #live-preview,
         .validated-result {
-          background-color: gt.theme-var(webkata-bg-2, null, $thememaplight, $cssvars);
           border: 0;
-          width: 100%;
-          height: 100%;
           border-bottom-left-radius: 12px;
           border-bottom-right-radius: 12px;
+          background-color: gt.theme-var(webkata-bg-2, null, $thememaplight, $cssvars);
+          width: 100%;
+          height: 100%;
         }
 
         .validated-result {
@@ -395,8 +397,8 @@
             height: 100%;
 
             .test-cases-list {
-              height: 100%;
               margin: 0;
+              height: 100%;
               list-style: none;
               padding: 1rem;
 
@@ -434,18 +436,22 @@
       position: relative;
 
       .editor-with-header {
-        width: 100%;
         border-radius: 0;
+        width: 100%;
 
         .run-btn {
-          width: 95%;
           left: 50%;
           bottom: 10px;
+          width: 95%;
           transform: translateX(-50%);
 
           i {
             display: inline-block;
             margin-left: auto;
+          }
+
+          #loader-partial:after {
+            left: 50%;
           }
         }
 
@@ -460,8 +466,8 @@
 
       .live-preview-with-validated-result {
         position: absolute;
-        width: calc(100% - 46px);
         right: 0;
+        width: calc(100% - 46px);
         transform: translateX(100%);
         flex-direction: row;
         transition: transform 0.5s ease;
@@ -558,43 +564,43 @@
       left: 30%;
     }
   }
-}
 
-::-webkit-scrollbar {
-  width: 0.5rem;
-  height: 0.5rem;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0);
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: gt.theme-var(skeleton-bg);
-  border-radius: 0.5rem;
-}
-
-@keyframes slidedown {
-  0% {
-    opacity: 0;
-    transform: translateY(-100%);
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
   }
 
-  100% {
-    opacity: 1;
-    transform: none;
-    z-index: 999;
-  }
-}
-
-@keyframes slideup {
-  0% {
-    opacity: 1;
-    transform: none;
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0);
   }
 
-  100% {
-    opacity: 0;
-    transform: translateY(-100%);
+  ::-webkit-scrollbar-thumb {
+    background-color: gt.theme-var(skeleton-bg);
+    border-radius: 0.5rem;
+  }
+
+  @keyframes slidedown {
+    0% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+
+    100% {
+      opacity: 1;
+      transform: none;
+      z-index: 999;
+    }
+  }
+
+  @keyframes slideup {
+    0% {
+      opacity: 1;
+      transform: none;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
   }
 }

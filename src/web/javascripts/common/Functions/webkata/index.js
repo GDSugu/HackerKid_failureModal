@@ -2,6 +2,7 @@ import ace from 'ace-builds';
 import 'ace-builds/webpack-resolver';
 import 'ace-builds/src-min-noconflict/ext-language_tools';
 
+// functions without DOM interactions
 const manager = {
   currentEditorInstances: {},
 };
@@ -251,6 +252,7 @@ const initializeCodeEditors = (editorInstances) => {
   }
 };
 
+// functions with DOM interactions
 const updateLivePreview = (livePreviewElement,
   editorInstances = manager.currentEditorInstances) => {
   try {
@@ -309,10 +311,66 @@ const initializeWebkata = (selectedTemplate, questionSetup, livePreviewElement) 
   }
 };
 
+const updateHistory = (response) => {
+  if (!response.status) return;
+  try {
+    const { uniqueString, virtualId, conceptId } = response.questionObject;
+    window.history.replaceState({}, '', `/webkata/${conceptId.toLowerCase()}/${virtualId}/${uniqueString}`);
+  } catch (error) {
+    console.log(response);
+    console.log(error);
+  }
+};
+
+const resizeHandler = (nav = 'nav', selector, unit = 'vh') => {
+  try {
+    const navHeight = document.querySelector(nav).offsetHeight;
+    document.querySelector(selector).style.height = `calc(100${unit} - ${navHeight}px)`;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const resizeEditor = () => {
+  try {
+    const containerElement = document.querySelector('.webkata-game-container');
+    const questionElement = document.querySelector('.question') ? document.querySelector('.question') : document.querySelector('.mobile-question-container');
+
+    const containerStyles = getComputedStyle(containerElement);
+    const padding = parseInt(containerStyles.paddingTop, 10)
+      + parseInt(containerStyles.paddingBottom, 10);
+
+    const containerHeight = containerElement.offsetHeight;
+    const questionHeight = questionElement.offsetHeight;
+
+    document.querySelector('.editor-with-live-preview').style.height = `${containerHeight - questionHeight - padding - 8}px`;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+const hideDefaultNavBar = (device, turtleState) => {
+  document.querySelector('nav:first-child').style.display = 'none';
+  let componentContainer = `.webkata-${turtleState}-container`;
+  if (device === 'desktop') {
+    componentContainer = `.webkata-${turtleState}-container`;
+  } else if (device === 'mobile') {
+    componentContainer = `.webkata-mob-${turtleState}-container`;
+  }
+  window.addEventListener('resize', () => resizeHandler('nav.turtle-navbar', componentContainer));
+  setTimeout(() => {
+    resizeHandler('nav.turtle-navbar', componentContainer);
+  }, 300);
+};
+
 export default null;
 export {
   initializeWebkata,
   updateLivePreview,
   runUnitTests,
   getCurrentEditorInstances,
+  updateHistory,
+  resizeEditor,
+  resizeHandler,
+  hideDefaultNavBar,
 };
