@@ -7,6 +7,8 @@ import { FormattedMessage } from 'react-intl';
 import * as Animatable from 'react-native-animatable';
 import ThemeContext from '../components/theme';
 import GameHeader from '../components/Header/GameHeader';
+import toggleAudio from '../../images/games/gameAudio.png';
+import leaderboardImg from '../../images/games/gameLeaderboard.png';
 import zlBg from '../../images/zombieLand/zombieLand-home-mob-bg.png';
 import playBtnImg from '../../images/games/gamePlay.png';
 
@@ -76,7 +78,7 @@ const ZombieLandHome = ({ navigation, routeName }) => {
         style={style.container}
       >
         <View style={style.gameContainer}>
-          <GameHeader />
+          <GameHeader game={'zombieLand'} route={routeName}/>
           <View>
             <Text style={style.gameTitle}>
               <FormattedMessage
@@ -86,6 +88,21 @@ const ZombieLandHome = ({ navigation, routeName }) => {
             </Text>
           </View>
           <View style={style.gameOptionsContainer}>
+          <Animatable.View
+              useNativeDriver={true}
+              animation={routeName === 'ZombieLandHome' ? 'fadeInLeft' : 'fadeOutLeft'}
+              delay={500}
+              duration={300}
+            >
+              <TouchableOpacity>
+                <View style={style.gameOptions}>
+                  <Image
+                    source={toggleAudio}
+                    style={style.gameOptionBtnImg}
+                  />
+                </View>
+              </TouchableOpacity>
+            </Animatable.View>
             <Animatable.View
               useNativeDriver={true}
               animation={routeName === 'ZombieLandHome' ? 'fadeInDown' : 'fadeOutUp'}
@@ -111,6 +128,25 @@ const ZombieLandHome = ({ navigation, routeName }) => {
                       description={'Play Button'}
                     />
                   </Text>
+                </View>
+              </TouchableOpacity>
+            </Animatable.View>
+            <Animatable.View
+              useNativeDriver={true}
+              animation={routeName === 'ZombieLandHome' ? 'fadeInRight' : 'fadeOutRight'}
+              delay={500}
+              duration={300}
+            >
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('GameLeaderBoard', { game: 'zombieLand' });
+                }}
+              >
+                <View style={style.gameOptions}>
+                  <Image
+                    source={leaderboardImg}
+                    style={style.gameOptionBtnImg}
+                  />
                 </View>
               </TouchableOpacity>
             </Animatable.View>

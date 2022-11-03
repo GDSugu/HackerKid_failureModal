@@ -81,6 +81,16 @@
       "value": "Coming Soon..."
     }
   ],
+  "0By1LZ": [
+    {
+      "type": 1,
+      "value": "timeInMinutes"
+    },
+    {
+      "type": 0,
+      "value": " Mins"
+    }
+  ],
   "0JV99f": [
     {
       "type": 0,
@@ -229,6 +239,12 @@
       "value": "Password"
     }
   ],
+  "5jxN1p": [
+    {
+      "type": 1,
+      "value": "points"
+    }
+  ],
   "634LIC": [
     {
       "type": 0,
@@ -275,6 +291,12 @@
     {
       "type": 0,
       "value": "Coming Soon..."
+    }
+  ],
+  "8cISRy": [
+    {
+      "type": 0,
+      "value": "Time Spent:"
     }
   ],
   "9BVOVU": [
@@ -549,6 +571,12 @@
       "value": "Register to Get help from Turtle"
     }
   ],
+  "I1oDxa": [
+    {
+      "type": 0,
+      "value": "Loading failed due to some unknown error! Please try again later."
+    }
+  ],
   "ILnphX": [
     {
       "type": 0,
@@ -591,6 +619,12 @@
       "value": "Continue"
     }
   ],
+  "KmuT+3": [
+    {
+      "type": 0,
+      "value": "Loading..."
+    }
+  ],
   "LCt8qV": [
     {
       "type": 0,
@@ -619,6 +653,12 @@
     {
       "type": 0,
       "value": "Add a block"
+    }
+  ],
+  "NVk/jo": [
+    {
+      "type": 1,
+      "value": "page"
     }
   ],
   "NXV57/": [
@@ -815,6 +855,12 @@
     {
       "type": 0,
       "value": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?"
+    }
+  ],
+  "U11WOi": [
+    {
+      "type": 0,
+      "value": "Coins Earned:"
     }
   ],
   "U3AyDz": [
@@ -1315,6 +1361,16 @@
       "value": "Turtle"
     }
   ],
+  "pmy91K": [
+    {
+      "type": 1,
+      "value": "coins"
+    },
+    {
+      "type": 0,
+      "value": " coins"
+    }
+  ],
   "pwy4hs": [
     {
       "type": 0,
@@ -1367,6 +1423,12 @@
     {
       "type": 0,
       "value": "completed"
+    }
+  ],
+  "rWdMcQ": [
+    {
+      "type": 0,
+      "value": "XP"
     }
   ],
   "rZKLPy": [
@@ -1439,6 +1501,12 @@
     {
       "type": 0,
       "value": "Turtle"
+    }
+  ],
+  "wEEL+e": [
+    {
+      "type": 1,
+      "value": "studentName"
     }
   ],
   "wrdAU0": [
@@ -1535,6 +1603,20 @@
     {
       "type": 0,
       "value": "sleep"
+    }
+  ],
+  "zm0wU/": [
+    {
+      "type": 1,
+      "value": "idx"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "step"
     }
   ],
   "zombieLand description": [

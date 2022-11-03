@@ -51,6 +51,10 @@
     "defaultMessage": "Coming Soon...",
     "description": "More options Page"
   },
+  "0By1LZ": {
+    "defaultMessage": "{timeInMinutes} Mins",
+    "description": "Time spent"
+  },
   "0JV99f": {
     "defaultMessage": "This is index page",
     "description": "Page description"
@@ -146,6 +150,10 @@
     "defaultMessage": "Password",
     "description": "Password Field"
   },
+  "5jxN1p": {
+    "defaultMessage": "{points}",
+    "description": "user points"
+  },
   "634LIC": {
     "defaultMessage": "PLAY",
     "description": "Play button"
@@ -177,6 +185,10 @@
   "8R6f04": {
     "defaultMessage": "Coming Soon...",
     "description": "Challenges Page"
+  },
+  "8cISRy": {
+    "defaultMessage": "Time Spent:",
+    "description": "Time spent title"
   },
   "9BVOVU": {
     "defaultMessage": "Please verify to continue",
@@ -344,6 +356,10 @@
     "defaultMessage": "Register to Get help from Turtle",
     "description": "Hint message"
   },
+  "I1oDxa": {
+    "defaultMessage": "Loading failed due to some unknown error! Please try again later.",
+    "description": "Error"
+  },
   "ILnphX": {
     "defaultMessage": "Call",
     "description": "Call Button Title"
@@ -372,6 +388,10 @@
     "defaultMessage": "Continue",
     "description": "Continue button"
   },
+  "KmuT+3": {
+    "defaultMessage": "Loading...",
+    "description": "Loading"
+  },
   "LCt8qV": {
     "defaultMessage": "Share",
     "description": "Share Button"
@@ -391,6 +411,10 @@
   "NRDu9u": {
     "defaultMessage": "Add a block",
     "description": "Add a block"
+  },
+  "NVk/jo": {
+    "defaultMessage": "{page}",
+    "description": "Page"
   },
   "NXV57/": {
     "defaultMessage": "Share",
@@ -519,6 +543,10 @@
   "TyfKd4": {
     "defaultMessage": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?",
     "description": "Turtle description"
+  },
+  "U11WOi": {
+    "defaultMessage": "Coins Earned:",
+    "description": "Coins Earned Title"
   },
   "U3AyDz": {
     "defaultMessage": "Register to save your progess and compete with others",
@@ -850,6 +878,10 @@
     "defaultMessage": "Turtle",
     "description": "Turtle title"
   },
+  "pmy91K": {
+    "defaultMessage": "{coins} coins",
+    "description": "Coins"
+  },
   "pwy4hs": {
     "defaultMessage": "Game Progress",
     "description": "Game Progress card heading"
@@ -884,6 +916,10 @@
   "rECW1h": {
     "defaultMessage": "completed",
     "description": "Game Progress card caption"
+  },
+  "rWdMcQ": {
+    "defaultMessage": "XP",
+    "description": "LeaderBoard Points"
   },
   "rZKLPy": {
     "defaultMessage": "Copy Link",
@@ -932,6 +968,10 @@
   "viQX0N": {
     "defaultMessage": "Turtle",
     "description": "Game Title"
+  },
+  "wEEL+e": {
+    "defaultMessage": "{studentName}",
+    "description": "Student Name"
   },
   "wrdAU0": {
     "defaultMessage": "Help",
@@ -996,6 +1036,10 @@
   "zXjEvn": {
     "defaultMessage": "sleep",
     "description": "sleep function"
+  },
+  "zm0wU/": {
+    "defaultMessage": "{idx} {step}",
+    "description": "Steps"
   },
   "zombieLand description": {
     "defaultMessage": "Zombieland is a gamified approach where you will use your mind to code and help the protagonist Zombie reach his destination."

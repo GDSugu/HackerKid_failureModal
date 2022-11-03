@@ -8,14 +8,18 @@ import ThemeContext from '../components/theme';
 import TryNowSVG from '../../images/games/trynow.svg';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
+  flexContainer: {
+    flex: 1,
+    paddingVertical: 8,
+  },
   container: {
     flex: 1,
     paddingHorizontal: 16,
-    paddingVertical: 8,
   },
   titleText: {
     ...font.subtitle1,
     color: utilColors.white,
+    marginBottom: 8,
   },
   card: {
     borderRadius: 12,
@@ -52,7 +56,7 @@ const getStyles = (theme, font, utilColors) => StyleSheet.create({
     backgroundColor: '#ffffffee',
     paddingVertical: 8,
     paddingHorizontal: 16,
-    height: '25%',
+    maxHeight: '35%',
   },
   cardContent: {
     ...font.subtitleBold,
@@ -91,31 +95,34 @@ const ZombieLandQuestion = ({ navigation }) => {
   const style = getStyles(theme.screenZombieLandQuestion, font, utilColors);
 
   return <>
-    <View style={style.container} >
-      <Text style={style.titleText}>
-        <FormattedMessage
-          defaultMessage='{question}'
-          description='Question'
-          values={{
-            question: zlContext.ctxState.questionObject.qname,
-          }}
-        />
-      </Text>
-      <View style={[style.card, style.cardProblemBg]}>
-        <ScrollView>
-          { zlContext.ctxState.questionObject.q_instruction
-            && zlContext.ctxState.questionObject.q_instruction.map(
-              (step, index) => <Text key={index} style={style.problemStatement}>
-                <FormattedMessage
-                  defaultMessage={'{step}'}
-                  description='Steps'
-                  values={{
-                    step: (step[step.length - 1] === '.') ? step.slice(0, -1) : step,
-                  }}
-                />
-              </Text>,
-            ) }
-        </ScrollView>
+    <View style={style.flexContainer} >
+      <View style={style.container}>
+        <Text style={style.titleText}>
+          <FormattedMessage
+            defaultMessage='{question}'
+            description='Question'
+            values={{
+              question: zlContext.ctxState.questionObject.qname,
+            }}
+          />
+        </Text>
+        <View style={[style.card, style.cardProblemBg]}>
+          <ScrollView>
+            { zlContext.ctxState.questionObject.q_instruction
+              && zlContext.ctxState.questionObject.q_instruction.map(
+                (step, index) => <Text key={index} style={style.problemStatement}>
+                  <FormattedMessage
+                    defaultMessage={'{idx} {step}'}
+                    description='Steps'
+                    values={{
+                      step: (step[step.length - 1] === '.') ? step.slice(0, -1) : step,
+                      idx: `${index + 1}. `,
+                    }}
+                  />
+                </Text>,
+              ) }
+          </ScrollView>
+        </View>
       </View>
       <TouchableOpacity
         onPress={() => { navigation.navigate('ZombieLandOutput'); }}

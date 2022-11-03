@@ -30,7 +30,9 @@ const getStyles = (utilColors) => StyleSheet.create({
   },
 });
 
-const GameHeader = ({ handleGameLeaderBoard = () => {} }) => {
+const GameHeader = ({
+  game, route, closeLeaderBoard = false, animation = true,
+}) => {
   const navigation = useNavigation();
   const { theme: { utilColors } } = React.useContext(ThemeContext);
   const authContext = React.useContext(AuthContext);
@@ -39,7 +41,7 @@ const GameHeader = ({ handleGameLeaderBoard = () => {} }) => {
   return <>
     <View style={style.gameHeader}>
       <Animatable.View
-        animation='fadeInLeft'
+        animation={ animation ? 'fadeInLeft' : '' }
       >
         <TouchableOpacity
           onPress={() => navigation.navigate('Home')}
@@ -48,12 +50,23 @@ const GameHeader = ({ handleGameLeaderBoard = () => {} }) => {
         </TouchableOpacity>
       </Animatable.View>
       <Animatable.View
-        animation='fadeInRight'
+        animation={ animation ? 'fadeInRight' : ''}
         style={style.flexHorizontal}
       >
-        <TouchableOpacity onPress={handleGameLeaderBoard}>
-          <IconLeaderboard />
-        </TouchableOpacity>
+        {
+          !(route.includes('Home'))
+          && <>
+            <TouchableOpacity onPress={() => {
+              if (!closeLeaderBoard) {
+                navigation.navigate('GameLeaderBoard', { game });
+              } else {
+                navigation.goBack();
+              }
+            }}>
+              <IconLeaderboard />
+            </TouchableOpacity>
+          </>
+        }
         <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
           <ImgComponent
             style={style.profileImg}

@@ -175,7 +175,7 @@ const GameBottomTabBar = (props) => {
 
 const GameNavBar = ({
   // currentScreen,
-  font, game, gradients, utilColors,
+  font, game, gradients, utilColors, route,
 }) => {
   const style = getStyle(font, utilColors);
   let context = false;
@@ -223,7 +223,7 @@ const GameNavBar = ({
   };
 
   return <>
-    <GameHeader />
+    <GameHeader route={route} game={game} />
     <LinearGradient colors={gradients.darkTransparent1} style={style.tabHeader}>
       <TouchableOpacity
         // onPress={() => context.ctxSetState((prevState) => ({
@@ -307,6 +307,7 @@ const GameNavigator = ({
         game={game}
         gradients={gradients}
         utilColors={utilColors}
+        route={initialRoute}
       />
       <BottomTab.Navigator
         initialRouteName={initialRoute}
