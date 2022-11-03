@@ -497,7 +497,7 @@ const GameLeaderBoard = ({ route }) => {
             <TouchableOpacity style={style.leaderBoardBtn} onPress={() => {}} disabled={true}>
               <Text style={style.leaderBoardTitleText}>
                 <FormattedMessage
-                  defaultMessage={'XP'}
+                  defaultMessage={'Coins'}
                   description={'LeaderBoard Points'}
                 />
               </Text>
