@@ -699,6 +699,12 @@
       "value": "coins"
     }
   ],
+  "PSqen2": [
+    {
+      "type": 1,
+      "value": "level"
+    }
+  ],
   "PSx95N": [
     {
       "type": 0,
@@ -925,12 +931,6 @@
       "value": "Please login again"
     }
   ],
-  "XfY3VU": [
-    {
-      "type": 0,
-      "value": "WebKata - HTML"
-    }
-  ],
   "Y+dh5z": [
     {
       "type": 0,
@@ -1065,6 +1065,16 @@
     {
       "type": 1,
       "value": "name"
+    }
+  ],
+  "d9u+8x": [
+    {
+      "type": 0,
+      "value": "Webkata - "
+    },
+    {
+      "type": 1,
+      "value": "concept"
     }
   ],
   "dNWhFj": [
@@ -1241,6 +1251,12 @@
       "value": "Rank"
     }
   ],
+  "mhUyfM": [
+    {
+      "type": 1,
+      "value": "question"
+    }
+  ],
   "mm9QaY": [
     {
       "type": 0,
@@ -1329,6 +1345,12 @@
     {
       "type": 1,
       "value": "coinsEarned"
+    }
+  ],
+  "qTebrI": [
+    {
+      "type": 0,
+      "value": "Problem Statement"
     }
   ],
   "qUU2pp": [

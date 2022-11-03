@@ -171,7 +171,21 @@ const Games = ({ navigation }) => {
         </View>
           : <Skeleton style={style.skeleton} />
       }
-
+      <TouchableOpacity onPress={() => navigation.navigate('WebkataHome', {
+        conceptId: 'HTML',
+      })}>
+        <Text>Webkata-HTML</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('WebkataHome', {
+        conceptId: 'CSS',
+      })}>
+        <Text>Webkata-CSS</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('WebkataHome', {
+        conceptId: 'JS',
+      })}>
+        <Text>Webkata-JS</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };

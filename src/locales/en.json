@@ -445,6 +445,10 @@
     "defaultMessage": "{coins}",
     "description": "coins"
   },
+  "PSqen2": {
+    "defaultMessage": "{level}",
+    "description": "Question Level"
+  },
   "PSx95N": {
     "defaultMessage": "Home",
     "description": "Home card heading"
@@ -593,10 +597,6 @@
     "defaultMessage": "Please login again",
     "description": "Not authorized message"
   },
-  "XfY3VU": {
-    "defaultMessage": "WebKata - HTML",
-    "description": "webkata title"
-  },
   "Y+dh5z": {
     "defaultMessage": "Edit Profile",
     "description": "Home card menu"
@@ -675,6 +675,10 @@
   "croLiZ": {
     "defaultMessage": "{name}",
     "description": "name"
+  },
+  "d9u+8x": {
+    "defaultMessage": "Webkata - {concept}",
+    "description": "Game Title"
   },
   "dNWhFj": {
     "defaultMessage": "No",
@@ -791,6 +795,10 @@
     "defaultMessage": "Rank",
     "description": "Rank"
   },
+  "mhUyfM": {
+    "defaultMessage": "{question}",
+    "description": "problem statement"
+  },
   "mm9QaY": {
     "defaultMessage": "School",
     "description": "Profile school label"
@@ -850,6 +858,10 @@
   "qTQ8nP": {
     "defaultMessage": "{coinsEarned}",
     "description": "Coins Earned"
+  },
+  "qTebrI": {
+    "defaultMessage": "Problem Statement",
+    "description": "button text"
   },
   "qUU2pp": {
     "defaultMessage": "All Games",

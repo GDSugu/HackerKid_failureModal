@@ -373,4 +373,7 @@ export {
   resizeEditor,
   resizeHandler,
   hideDefaultNavBar,
+  getModeFromConceptId,
+  formatCode,
+  getQuestionSetup,
 };
