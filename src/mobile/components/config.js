@@ -131,6 +131,10 @@ const themes = {
       ...Theme.light.screenLightBlue,
       ...screenTurtleHeader,
     },
+    screenLivePreviewTab: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
     screenHome: {
       ...Theme.light.screenYellow,
       ...screenWithHeader,
@@ -233,6 +237,10 @@ const themes = {
       ...screenTurtleHeader,
     },
     screenJSTab: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenLivePreviewTab: {
       ...Theme.light.screenLightBlue,
       ...screenTurtleHeader,
     },

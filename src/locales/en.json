@@ -377,6 +377,10 @@
     "defaultMessage": "Share",
     "description": "Share Button"
   },
+  "LoAPT7": {
+    "defaultMessage": "Live Preview",
+    "description": "Live preview tab"
+  },
   "MB8h2I": {
     "defaultMessage": "Leaderboard Ranking",
     "description": "Leaderboard card heading text"
@@ -508,6 +512,10 @@
   "TVjEEI": {
     "defaultMessage": "Create Account",
     "description": "Create Account Button"
+  },
+  "TXXReR": {
+    "defaultMessage": "Validated Result",
+    "description": "validated result"
   },
   "TbteVJ": {
     "defaultMessage": "{studentName}",
@@ -648,6 +656,10 @@
   "apr16P": {
     "defaultMessage": "Leaderboard",
     "description": "Leaderboard Title"
+  },
+  "at+N1s": {
+    "defaultMessage": "Run",
+    "description": "run button text"
   },
   "b2J6mh": {
     "defaultMessage": "Home",
@@ -905,6 +917,10 @@
   "tsF0aG": {
     "defaultMessage": "Continue Playing",
     "description": "continue playing"
+  },
+  "u1+78Y": {
+    "defaultMessage": "Continue Playing",
+    "description": "run button text"
   },
   "uGb/uS": {
     "defaultMessage": "{message}",

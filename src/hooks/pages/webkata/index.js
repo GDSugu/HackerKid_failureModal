@@ -79,6 +79,7 @@ const useWebkataSubmitQuestion = ({ isPageMounted }) => {
     };
 
     let result;
+    console.log(result);
 
     if (isPageMounted.current) {
       result = post(payload, 'webkata/').then((res) => {

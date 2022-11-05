@@ -8,6 +8,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import levelCurrentImg from '../../../images/games/level_current.png';
 import levelCompletedImg from '../../../images/games/level_completed.png';
 import levelNotCompletedImg from '../../../images/games/level_not_completed.png';
+import Icon from '../../common/Icons';
 
 const getStyle = (font, theme, utilColors) => StyleSheet.create({
   container: {
@@ -56,10 +57,27 @@ const getStyle = (font, theme, utilColors) => StyleSheet.create({
     top: '50%',
     transform: [{ translateX: 50 }],
   },
+  continuePlayingBtn: {
+    position: 'absolute',
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    bottom: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    alignSelf: 'center',
+    backgroundColor: '#FE6A07',
+    borderRadius: 10,
+    width: '95%',
+  },
+  continuePlayingBtnText: {
+    ...font.subtitleBold,
+    color: utilColors.white,
+  },
 });
 
 const LevelButton = ({
-  currentQuestionId, onLevelButtonPress, isLast, question, style, virtualId,
+  currentQuestionId, onLevelButtonPress, isLast, question, style, virtualId, closeLevels,
 }) => {
   let bgImg = levelNotCompletedImg;
 
@@ -76,6 +94,7 @@ const LevelButton = ({
   const handleLevel = () => {
     if (question) {
       onLevelButtonPress(virtualId);
+      closeLevels();
     }
   };
 
@@ -106,6 +125,7 @@ const LevelButtonComponent = React.memo(LevelButton);
 
 const WebkataGameLevelComponent = ({
   showLevels,
+  closeLevels,
   webkataState,
   onLevelButtonPress,
   font,
@@ -123,20 +143,6 @@ const WebkataGameLevelComponent = ({
     currentQuestionId = questionList
       .findIndex((el) => el.questionId === webkataState.questionObject.questionId) + 1;
   }
-
-  // closeLevel = () => {
-  //   if (showLevels) {
-  //     webkataState.tqSetState((prevState) => ({
-  //       ...prevState,
-  //       uiData: {
-  //         ...prevState.uiData,
-  //         showGameLevel: false,
-  //       },
-  //     }));
-  //     return true;
-  //   }
-  //   return false;
-  // };
 
   return <>
     {
@@ -165,6 +171,7 @@ const WebkataGameLevelComponent = ({
                   renderItem={({ item, index }) => (<>
                     <LevelButtonComponent
                       key={index}
+                      closeLevels={closeLevels}
                       currentQuestionId={currentQuestionId}
                       onLevelButtonPress={onLevelButtonPress}
                       question={item}
@@ -177,6 +184,17 @@ const WebkataGameLevelComponent = ({
               </>
             }
           </Animatable.View>
+          <TouchableOpacity style={style.continuePlayingBtn} onPress={closeLevels}>
+            <Text style={[style.continuePlayingBtnText]}>
+              <FormattedMessage defaultMessage={'Continue Playing'} description='run button text' />
+            </Text>
+            <Icon
+              name='play'
+              type='FontAwesome'
+              size={18}
+              color={style.continuePlayingBtnText.color}
+            />
+          </TouchableOpacity>
         </LinearGradient>
       </>
     }

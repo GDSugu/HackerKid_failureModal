@@ -597,6 +597,12 @@
       "value": "Share"
     }
   ],
+  "LoAPT7": [
+    {
+      "type": 0,
+      "value": "Live Preview"
+    }
+  ],
   "MB8h2I": [
     {
       "type": 0,
@@ -797,6 +803,12 @@
     {
       "type": 0,
       "value": "Create Account"
+    }
+  ],
+  "TXXReR": [
+    {
+      "type": 0,
+      "value": "Validated Result"
     }
   ],
   "TbteVJ": [
@@ -1023,6 +1035,12 @@
     {
       "type": 0,
       "value": "Leaderboard"
+    }
+  ],
+  "at+N1s": [
+    {
+      "type": 0,
+      "value": "Run"
     }
   ],
   "b2J6mh": [
@@ -1414,6 +1432,12 @@
     }
   ],
   "tsF0aG": [
+    {
+      "type": 0,
+      "value": "Continue Playing"
+    }
+  ],
+  "u1+78Y": [
     {
       "type": 0,
       "value": "Continue Playing"
