@@ -513,6 +513,24 @@
       "value": "Verify OTP and proceed"
     }
   ],
+  "GhmnMb": [
+    {
+      "type": 0,
+      "value": "Private Test Case "
+    },
+    {
+      "type": 1,
+      "value": "testCaseNumber"
+    },
+    {
+      "type": 0,
+      "value": " - "
+    },
+    {
+      "type": 1,
+      "value": "result"
+    }
+  ],
   "Gon8SN": [
     {
       "type": 0,
@@ -905,6 +923,12 @@
     {
       "type": 1,
       "value": "coins"
+    }
+  ],
+  "W04w16": [
+    {
+      "type": 0,
+      "value": "Click \"Run\" to validate"
     }
   ],
   "W5zEev": [

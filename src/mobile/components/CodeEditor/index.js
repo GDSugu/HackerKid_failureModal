@@ -82,7 +82,7 @@ const CodeEditor = ({
         editor.setOption('mode', 'ace/mode/'+mode);
       }
 
-      if(code) {
+      if(code || code === '') {
         editor.setValue(code);
       }
 

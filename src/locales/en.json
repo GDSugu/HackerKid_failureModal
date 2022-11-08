@@ -322,6 +322,10 @@
     "defaultMessage": "Verify OTP and proceed",
     "description": "verify otp button"
   },
+  "GhmnMb": {
+    "defaultMessage": "Private Test Case {testCaseNumber} - {result}",
+    "description": "test case result text"
+  },
   "Gon8SN": {
     "defaultMessage": "Login with Email",
     "description": "Login with email tab"
@@ -580,6 +584,10 @@
   "VyTY/V": {
     "defaultMessage": "{coins}",
     "description": "Coins"
+  },
+  "W04w16": {
+    "defaultMessage": "Click \"Run\" to validate",
+    "description": "not validated text"
   },
   "W5zEev": {
     "defaultMessage": "Resend",

@@ -8,6 +8,7 @@ import {
   View,
   ImageBackground,
   Dimensions,
+  ScrollView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { FormattedMessage } from 'react-intl';
@@ -23,6 +24,10 @@ import WebkataGameLevelComponent from '../components/WebkataGameLevelComponent';
 import ThemeContext from '../components/theme';
 import CodeEditor from '../components/CodeEditor';
 import useOrientation from '../../hooks/common/orientation';
+import WebkataSuccessModal from '../components/Modals/WebkataSuccessModal';
+import TestCasePassedIcon from '../../images/webkata/test-case-passed-icon.svg';
+import TestCaseFailedIcon from '../../images/webkata/test-case-failed-icon.svg';
+import { debounce1 } from '../../hooks/common/utlis';
 
 // tab navigators
 const CodeEditorsTab = createMaterialTopTabNavigator();
@@ -52,6 +57,9 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   },
   bg3: {
     backgroundColor: '#282D2F',
+  },
+  bg4: {
+    backgroundColor: utilColors.white,
   },
   problemStatementContainer: {
     position: 'relative',
@@ -97,7 +105,6 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     flex: 1,
     position: 'absolute',
     width: '100%',
-    bottom: 0,
     flexDirection: 'row',
   },
   revealerContainer: {
@@ -115,7 +122,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     position: 'absolute',
     paddingVertical: 8,
     paddingHorizontal: 10,
-    bottom: 20,
+    top: Dimensions.get('window').height - 60,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -129,6 +136,40 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   },
   darkTransparentBg: {
     backgroundColor: utilColors.overlay1,
+  },
+  notValidated: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  notValidatedRunBtn: {
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    alignSelf: 'center',
+    backgroundColor: '#FE6A07',
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  notValidatedRunBtnText: {
+    marginRight: 5,
+  },
+  testCaseResults: {
+    padding: 18,
+  },
+  testCaseResult: {
+    flexDirection: 'row',
+    marginBottom: 10,
+    alignItems: 'center',
+  },
+  testCaseResultText: {
+    marginLeft: 10,
+    ...font.subtitle2,
+  },
+  testCasePassedFailedIcon: {
+    width: font.subtitle1.fontSize,
+    height: font.subtitle1.fontSize,
   },
 });
 
@@ -499,22 +540,64 @@ const SecondaryTabBar = ({
   </View>;
 
 const ValidatedResult = ({
+  visible,
   style,
   evaluationDetails,
-}) => <View style={style.container}>
+  onRunBtnPress,
+}) => <View style={[style.container, { display: visible ? 'flex' : 'none' }, style.bg4]}>
     {
-      evaluationDetails.passed && <View>
-        <Text>validated</Text>
-      </View>
+      evaluationDetails
+      && <ScrollView style={[style.container, style.testCaseResults]}>
+        {
+          evaluationDetails.result.map((resultObj, idx) => (
+            <View key={idx} style={style.testCaseResult}>
+              {
+                resultObj.passed
+                && <TestCasePassedIcon style={style.testCasePassedFailedIcon} />
+              }
+              {
+                !resultObj.passed
+                && <TestCaseFailedIcon style={style.testCasePassedFailedIcon} />
+              }
+              <Text style={[style.testCaseResultText, style.textColor1]}>
+                <FormattedMessage
+                  defaultMessage={'Private Test Case {testCaseNumber} - {result}'}
+                  description='test case result text'
+                  values={{
+                    testCaseNumber: idx + 1,
+                    result: resultObj.passed ? 'Passed' : 'Failed',
+                  }}
+                />
+              </Text>
+            </View>
+          ))
+        }
+      </ScrollView>
     }
     {
-      !evaluationDetails.passed && <View>
-        <Text>Click Run to Validate</Text>
+      !evaluationDetails
+      && <View
+        style={[style.container, style.notValidated]}>
+        <Text style={[style.text, style.textColor1]}>
+          <FormattedMessage defaultMessage={'Click "Run" to validate'} description='not validated text' />
+        </Text>
+        <TouchableOpacity style={style.notValidatedRunBtn} onPress={onRunBtnPress}>
+          <Text style={[style.runBtnText, style.textColor2, style.notValidatedRunBtnText]}>
+            <FormattedMessage defaultMessage={'Run'} description='run button text' />
+          </Text>
+          <Icon
+            name='play'
+            type='FontAwesome'
+            size={style.runBtnText.fontSize}
+            color={style.textColor2.color}
+          />
+        </TouchableOpacity>
       </View>
     }
   </View>;
 
 const LivePreview = ({
+  visible,
   livePreviewWebViewRef,
   style,
   codeState,
@@ -612,7 +695,7 @@ const LivePreview = ({
     updateLivePreview();
   }, [codeState]);
 
-  return <View style={style.container}>
+  return <View style={[style.container, { display: visible ? 'flex' : 'none' }]}>
     <WebView
       ref={livePreviewWebViewRef}
       scalesPageToFit
@@ -653,6 +736,7 @@ const WebkataMain = ({ route }) => {
     showLevels: false,
     problemStatementOpen: false,
     livePreviewOpen: false,
+    successModalOpen: false,
   });
   const [codeState, setCodeState] = useState({});
   const [secondaryActiveTab, setSecondaryActiveTab] = useState('livePreview');
@@ -672,6 +756,7 @@ const WebkataMain = ({ route }) => {
   const {
     state: webkataSubmitState,
     submitWebkataQuestion,
+    resetWebkataSubmitState,
   } = useWebkataSubmitQuestion({ isPageMounted });
 
   const {
@@ -700,16 +785,19 @@ const WebkataMain = ({ route }) => {
   const updateCodeEditor = (setup) => {
     try {
       const { files } = setup;
+      const newCodeState = {};
 
       Object.keys(files).forEach((filePath) => {
         const { name, code } = setup.files[filePath];
         const mode = getModeFromConceptId(name);
 
-        setCodeState((prev) => ({ ...prev, [name]: code }));
-        codeEditorsRefs.current[name]?.injectJavaScript(
-          updateCodeEditorJSString(mode, code),
-        );
+        newCodeState[name] = code;
+
+        const toInjectScript = updateCodeEditorJSString(mode, code);
+        codeEditorsRefs.current[name]?.injectJavaScript(toInjectScript);
       });
+
+      setCodeState(newCodeState);
     } catch (e) {
       console.error(e);
     }
@@ -723,7 +811,6 @@ const WebkataMain = ({ route }) => {
   const onCodeEditorLoad = () => {
     try {
       const setup = getCurrentQuestionSetup(webkataQuestionState);
-
       updateCodeEditor(setup);
     } catch (e) {
       console.error(e);
@@ -756,20 +843,10 @@ const WebkataMain = ({ route }) => {
       file.code = codeState[name];
     });
 
-    const payload = {
-      questionId,
-      testResult,
-      currentQuestionSetup,
-      conceptId: questionObject.conceptId,
-    };
-    console.log(payload);
     submitWebkataQuestion(questionId,
       testResult,
       currentQuestionSetup,
-      questionObject.conceptId)
-      .then((data) => {
-        console.log(data);
-      });
+      questionObject.conceptId);
   };
 
   const onMessageFromLivePreviewWebView = (msg) => {
@@ -790,7 +867,7 @@ const WebkataMain = ({ route }) => {
     }
   };
 
-  const runBtnPress = () => {
+  const onRunBtnPress = () => {
     const { testCases } = questionObject;
     const toInjectScript = invokeRunProccessJSString(testCases);
 
@@ -800,13 +877,22 @@ const WebkataMain = ({ route }) => {
   // sideEffects
   useEffect(() => {
     if (questionObject) {
+      // reseting every states when user moves to different level
+      resetWebkataSubmitState();
       setCodeState({
         HTML: '',
         CSS: '',
         JS: '',
       });
-      const questionSetup = getCurrentQuestionSetup(webkataQuestionState);
+      setLocalState({
+        showLevels: false,
+        problemStatementOpen: false,
+        livePreviewOpen: false,
+        successModalOpen: false,
+      });
+      setSecondaryActiveTab('livePreview');
 
+      const questionSetup = getCurrentQuestionSetup(webkataQuestionState);
       updateCodeEditor(questionSetup);
 
       // delete refs which are not needed
@@ -819,6 +905,15 @@ const WebkataMain = ({ route }) => {
       });
     }
   }, [questionObject]);
+
+  useEffect(() => {
+    if (evaluationDetails && passed) {
+      setLocalState((prev) => ({ ...prev, successModalOpen: true }));
+    } else if (evaluationDetails && !passed) {
+      setLocalState((prev) => ({ ...prev, livePreviewOpen: true }));
+      setSecondaryActiveTab('validatedResult');
+    }
+  }, [webkataSubmitState]);
 
   useEffect(() => {
     if (localState.livePreviewOpen) {
@@ -854,92 +949,96 @@ const WebkataMain = ({ route }) => {
             toggleProblemStatement={toggleProblemStatement}
             question={questionObject?.question}
             style={style} />
-          {
-            questionObject
-            && <CodeEditorsTab.Navigator
-              initialLayout={{
-                width: Dimensions.get('window').width,
-              }}
-              screenOptions={{
-                lazy: false,
-                swipeEnabled: false,
-                tabBarStyle: {
-                  ...style.bg1,
-                },
-                tabBarLabelStyle: { ...style.text },
-                tabBarActiveTintColor: style.textColor2.color,
-                tabBarIndicatorStyle: {
-                  backgroundColor: style.textColor2.color,
-                },
-                tabBarInactiveTintColor: style.textColor3.color,
-                tabBarItemStyle: {
-                  width: 80,
-                },
-              }}
-            >
-              {
-                Object.keys(questionObject.questionSetup.files)
-                  .map((filePath, idx) => {
-                    const { files } = memorizedWebkataQuestionState.questionObject.questionSetup;
-                    const { name } = files[filePath];
-                    return <CodeEditorsTab.Screen name={`${name}Tab`} key={idx} options={{ tabBarLabel: name }}>
-                      {(props) => <CodeEditor {...props}
-                        codeEditorWebViewRef={(el) => {
-                          codeEditorsRefs.current[name] = el;
-                        }}
-                        style={style}
-                        onload={onCodeEditorLoad}
-                        styleStringForDocumentInsideWebView={styleStringForDocumentInsideWebView}
-                        onCodeEditorChanged={(code) => onCodeEditorChange(name, code)}
-                      />}
-                    </CodeEditorsTab.Screen>;
-                  })
-              }
-            </CodeEditorsTab.Navigator>
-          }
-          <View style={[style.containerWithRevealerBtn, {
-            height: orientation === 'PORTRAIT' ? Dimensions.get('window').height - 130 : Dimensions.get('window').height - 105,
-            transform:
-              [{ translateX: livePreviewOpen ? 0 : Dimensions.get('window').width - 50 }],
-            zIndex: livePreviewOpen ? 1 : undefined,
-          }]}>
-            <RevealerButton
-              style={style}
-              revealed={livePreviewOpen}
-              toggleReveal={() => {
-                setLocalState((prev) => ({
-                  ...prev,
-                  livePreviewOpen: !prev.livePreviewOpen,
-                }));
-              }}
-            />
-            <View style={style.container}>
-              <SecondaryTabBar
+          <View style={{
+            flex: 1,
+            position: 'relative',
+          }}>
+            {
+              questionObject
+              && <CodeEditorsTab.Navigator
+                initialLayout={{
+                  width: Dimensions.get('window').width,
+                }}
+                screenOptions={{
+                  lazy: false,
+                  swipeEnabled: false,
+                  tabBarStyle: {
+                    ...style.bg1,
+                  },
+                  tabBarLabelStyle: { ...style.text },
+                  tabBarActiveTintColor: style.textColor2.color,
+                  tabBarIndicatorStyle: {
+                    backgroundColor: style.textColor2.color,
+                  },
+                  tabBarInactiveTintColor: style.textColor3.color,
+                  tabBarItemStyle: {
+                    width: 80,
+                  },
+                }}
+              >
+                {
+                  Object.keys(questionObject.questionSetup.files)
+                    .map((filePath, idx) => {
+                      const { files } = memorizedWebkataQuestionState.questionObject.questionSetup;
+                      const { name } = files[filePath];
+                      return <CodeEditorsTab.Screen name={`${name}Tab`} key={idx} options={{ tabBarLabel: name }}>
+                        {(props) => <CodeEditor {...props}
+                          codeEditorWebViewRef={(el) => {
+                            codeEditorsRefs.current[name] = el;
+                          }}
+                          style={style}
+                          onload={onCodeEditorLoad}
+                          styleStringForDocumentInsideWebView={styleStringForDocumentInsideWebView}
+                          onCodeEditorChanged={
+                            debounce1((code) => onCodeEditorChange(name, code), 500)
+                          }
+                        />}
+                      </CodeEditorsTab.Screen>;
+                    })
+                }
+              </CodeEditorsTab.Navigator>
+            }
+            <View style={[style.containerWithRevealerBtn, {
+              height: orientation === 'PORTRAIT' ? Dimensions.get('window').height - 130 : Dimensions.get('window').height - 105,
+              transform:
+                [{ translateX: livePreviewOpen ? 0 : Dimensions.get('window').width - 50 }],
+              zIndex: livePreviewOpen ? 1 : undefined,
+            }]}>
+              <RevealerButton
                 style={style}
-                activeTab={secondaryActiveTab}
-                changeTab={(tabToSet) => {
-                  setSecondaryActiveTab(tabToSet);
+                revealed={livePreviewOpen}
+                toggleReveal={() => {
+                  setLocalState((prev) => ({
+                    ...prev,
+                    livePreviewOpen: !prev.livePreviewOpen,
+                  }));
                 }}
               />
-              {
-                secondaryActiveTab === 'livePreview'
-                && <LivePreview
+              <View style={style.container}>
+                <SecondaryTabBar
+                  style={style}
+                  activeTab={secondaryActiveTab}
+                  changeTab={(tabToSet) => {
+                    setSecondaryActiveTab(tabToSet);
+                  }}
+                />
+                <LivePreview
+                  visible={secondaryActiveTab === 'livePreview'}
                   style={style}
                   livePreviewWebViewRef={livePreviewWebViewRef}
                   codeState={codeState}
                   onMessageFromLivePreviewWebView={onMessageFromLivePreviewWebView}
                 />
-              }
-              {
-                secondaryActiveTab === 'validatedResult'
-                && <ValidatedResult
+                <ValidatedResult
+                  visible={secondaryActiveTab === 'validatedResult'}
                   style={style}
+                  onRunBtnPress={onRunBtnPress}
                   evaluationDetails={evaluationDetails}
                 />
-              }
+              </View>
             </View>
           </View>
-          <TouchableOpacity style={style.runBtn} onPress={runBtnPress}>
+          <TouchableOpacity style={style.runBtn} onPress={onRunBtnPress}>
             <Text style={[style.runBtnText, style.textColor2]}>
               <FormattedMessage defaultMessage={'Run'} description='run button text' />
             </Text>
@@ -963,6 +1062,12 @@ const WebkataMain = ({ route }) => {
       themeKey={'screenWebkataMain'}
       utilColors={theme.utilColors}
       gradients={theme.gradients}
+    />
+    <WebkataSuccessModal
+      visible={localState.successModalOpen}
+      closeModal={() => setLocalState((prev) => ({ ...prev, successModalOpen: false }))}
+      modalBodyText={pointsDetails?.submissionStatus?.replace('{{name}}', profileDetails.name)}
+      getNextQuestion={() => fetchWebkataQuestion(conceptId, id + 1)}
     />
   </>;
 };
