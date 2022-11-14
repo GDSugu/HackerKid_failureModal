@@ -420,6 +420,73 @@
   }
 
   .collectibles-modal {
+    .mob-hero-card {
+      margin-top: 1rem;
+
+      .stats-container {
+        background-color: gt.theme-var(more-award-card-bg, null, $thememaplight, $cssvars);
+        padding: 1rem;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .hero-data {
+          display: flex;
+          align-items: center;
+
+          img {
+            width: 25px;
+            height: 25px;
+            margin-right: 0.3rem;
+          }
+        }
+      }
+
+      .leaderboard-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 2rem;
+
+        a.view-more-btn {
+          border-radius: 14px;
+          padding: 0.75rem;
+          color: gt.theme-var(text-color-2);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          text-decoration: none;
+
+          i {
+            font-size: 1.5rem;
+            margin-left: 1rem;
+          }
+        }
+      }
+    }
+
+    &.mob-collectibles-modal {
+      padding: 0 !important; // override inline padding-right added from js
+
+      .modal-dialog {
+        width: 100%;
+        max-width: none;
+        height: 100%;
+        margin: 0;
+      }
+
+      .modal-content {
+        height: 100%;
+        border: 0;
+        border-radius: 0;
+      }
+
+      .modal-body {
+        overflow-y: auto;
+      }
+    }
+
     .modal-dialog {
       @include gm.media-breakpoint-up(md) {
         max-width: 50%;
@@ -448,8 +515,50 @@
       }
     }
 
+    .certificates-block {
+      .collection-header {
+        h5 {
+          margin: 0;
+        }
+      }
+
+      .certificates-list {
+        list-style: none;
+        margin: 0;
+        padding: 0.75rem 0.5rem;
+
+        li {
+          padding-top: 0.75rem;
+          padding-bottom: 0.75rem;
+          text-align: start;
+          display: flex;
+          align-items: center;
+          border-bottom: 1px solid gt.theme-var(bg-3);
+
+          .list-icon {
+            width: 25px;
+            height: 25px;
+            margin-right: 0.75rem;
+          }
+
+          .share-btn {
+            margin-left: auto;
+            border: none;
+            outline: none;
+            background: none;
+            display: flex;
+            align-items: center;
+
+            img {
+              width: 16px;
+            }
+          }
+        }
+      }
+    }
+
     .collection-block {
-      margin: 2rem 0;
+      margin: 1.5rem 0;
 
       .collection-header {
         h5 {
@@ -466,6 +575,45 @@
           font-size: 0.875rem;
           color: gt.theme-var(text-color-5);
         }
+      }
+
+      .navigation-link {
+        color: gt.theme-var(more-navigation-card-text-color, null, $thememaplight, $cssvars);
+        text-decoration: none;
+      }
+
+      a.view-more-btn {
+        border-radius: 14px;
+        padding: 0.75rem;
+        color: gt.theme-var(text-color-2);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-decoration: none;
+
+        i {
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+    .awards-block {
+      &.mob-awards-block {
+        .award-card {
+          img {
+            width: 32px;
+          }
+        }
+      }
+
+      .collection-content {
+        margin-top: 1rem;
+      }
+    }
+
+    .collectibles-block {
+      .collection-content {
+        margin-top: 1rem;
       }
     }
 

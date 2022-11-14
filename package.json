@@ -82,6 +82,7 @@
     "list.js": "^1.5.0",
     "magic-snowflakes": "^6.0.1",
     "material-design-icons-iconfont": "^6.1.0",
+    "moment": "^2.29.4",
     "node-sass-json-importer": "^4.3.0",
     "path-to-regexp": "^6.2.0",
     "phaser": "3.12.0",

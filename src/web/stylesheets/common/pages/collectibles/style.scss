@@ -1,5 +1,6 @@
 @use '../../sass/themes/_default' as gt;
 @use '../../sass/base/_mixins' as gm;
+@use '../../sass/components/controls';
 
 @import './_collectibleTheme.js';
 
@@ -25,6 +26,49 @@
       .account-nav-item-container {
         .account-nav-item {
           padding: 0.75rem;
+        }
+      }
+    }
+  }
+
+  .controls {
+    .control {
+      $box-shadow-color: map-get($thememaplight, collectibles-box-shadow-color);
+
+      border: 1px solid gt.theme-var(collectibles-controls-border-color, null, $thememaplight, $cssvars);
+      box-shadow: 0px 4px 4px $box-shadow-color;
+    }
+
+    .sort-dropdown {
+      .sort-dropdown-toggle {
+        background-color: gt.theme-var(bg-1);
+        color: gt.theme-var(collectibles-text-color-1, null, $thememaplight, $cssvars);
+      }
+
+      .dropdown-menu {
+        .dropdown-item {
+          background: none;
+          color: gt.theme-var(collectibles-text-color-1, null, $thememaplight, $cssvars);
+        }
+
+        .dropdown-item-container {
+          .ascending-descending-selectors {
+
+            button:active,
+            button.active {
+              background-color: gt.theme-var(collectibles-body-bg, null, $thememaplight, $cssvars);
+            }
+          }
+        }
+      }
+    }
+
+    .search-box-with-icon {
+      .awards-search-box {
+        color: gt.theme-var(collectibles-text-color-1, null, $thememaplight, $cssvars);
+
+        &::placeholder {
+          color: gt.theme-var(collectibles-text-color-1, null, $thememaplight, $cssvars);
         }
       }
     }

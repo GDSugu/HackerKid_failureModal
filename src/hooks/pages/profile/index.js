@@ -206,6 +206,7 @@ const useProfileInfo = ({
     state: profileInfo,
     setState,
     saveProfile,
+    getProfileData,
   };
 
   useEffect(() => {

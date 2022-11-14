@@ -23,12 +23,6 @@
       "value": "Try now"
     }
   ],
-  "/EsQT0": [
-    {
-      "type": 0,
-      "value": "This is games page"
-    }
-  ],
   "/Gy7qZ": [
     {
       "type": 0,
@@ -37,6 +31,12 @@
     {
       "type": 1,
       "value": "levelNumber"
+    }
+  ],
+  "/Id/lz": [
+    {
+      "type": 0,
+      "value": "Yes"
     }
   ],
   "/dnxym": [
@@ -135,6 +135,12 @@
       "value": "Create a New Account"
     }
   ],
+  "2ERxYL": [
+    {
+      "type": 0,
+      "value": "Oldest to Newest"
+    }
+  ],
   "2RBdEr": [
     {
       "type": 0,
@@ -177,6 +183,12 @@
       "value": "Login with Phone"
     }
   ],
+  "3M/P3n": [
+    {
+      "type": 1,
+      "value": "dateString"
+    }
+  ],
   "3Wcqsy": [
     {
       "type": 0,
@@ -189,6 +201,12 @@
       "value": "label"
     }
   ],
+  "48yQvt": [
+    {
+      "type": 1,
+      "value": "activeSortName"
+    }
+  ],
   "4Ve1r3": [
     {
       "type": 0,
@@ -199,6 +217,12 @@
     {
       "type": 0,
       "value": "Please connect to the internet."
+    }
+  ],
+  "4wgAGs": [
+    {
+      "type": 0,
+      "value": "Date"
     }
   ],
   "52hsYP": [
@@ -221,6 +245,12 @@
     {
       "type": 0,
       "value": "Student Name"
+    }
+  ],
+  "5HcA72": [
+    {
+      "type": 0,
+      "value": "Awards"
     }
   ],
   "5L6FVQ": [
@@ -265,10 +295,28 @@
       "value": "Login into existing account"
     }
   ],
+  "7PlDmO": [
+    {
+      "type": 0,
+      "value": "Play"
+    }
+  ],
+  "8R6f04": [
+    {
+      "type": 0,
+      "value": "Coming Soon..."
+    }
+  ],
   "9BVOVU": [
     {
       "type": 0,
       "value": "Please verify to continue"
+    }
+  ],
+  "9NID4X": [
+    {
+      "type": 0,
+      "value": "OK"
     }
   ],
   "9YoD+Y": [
@@ -353,6 +401,24 @@
       "value": "No"
     }
   ],
+  "BVEoZl": [
+    {
+      "type": 0,
+      "value": "See more"
+    }
+  ],
+  "BwliRZ": [
+    {
+      "type": 0,
+      "value": "Newest to Oldest"
+    }
+  ],
+  "CJJGyw": [
+    {
+      "type": 0,
+      "value": "Collectibles"
+    }
+  ],
   "CabaPs": [
     {
       "type": 0,
@@ -367,6 +433,12 @@
     {
       "type": 0,
       "value": "Coins Earned:"
+    }
+  ],
+  "CfsqV9": [
+    {
+      "type": 0,
+      "value": "All Games"
     }
   ],
   "Ciol6I": [
@@ -405,6 +477,12 @@
       "value": "Email"
     }
   ],
+  "EQupmg": [
+    {
+      "type": 0,
+      "value": "Alphabetical"
+    }
+  ],
   "EhuHU0": [
     {
       "type": 1,
@@ -441,6 +519,16 @@
     {
       "type": 0,
       "value": " ?"
+    }
+  ],
+  "Fl1ECE": [
+    {
+      "type": 0,
+      "value": "Level "
+    },
+    {
+      "type": 1,
+      "value": "level"
     }
   ],
   "FoTGQE": [
@@ -527,6 +615,12 @@
       "value": "OTP"
     }
   ],
+  "K+0Pvy": [
+    {
+      "type": 0,
+      "value": "Certificates"
+    }
+  ],
   "KD6lRu": [
     {
       "type": 0,
@@ -537,6 +631,12 @@
     {
       "type": 0,
       "value": "Share"
+    }
+  ],
+  "LvSOa2": [
+    {
+      "type": 1,
+      "value": "rarity"
     }
   ],
   "MB8h2I": [
@@ -555,6 +655,12 @@
     {
       "type": 1,
       "value": "hint"
+    }
+  ],
+  "Mso7+b": [
+    {
+      "type": 0,
+      "value": "See More"
     }
   ],
   "NXV57/": [
@@ -689,6 +795,12 @@
       "value": "ok"
     }
   ],
+  "RlFXhC": [
+    {
+      "type": 0,
+      "value": "Previous Awards"
+    }
+  ],
   "SL6O2c": [
     {
       "type": 0,
@@ -741,6 +853,12 @@
       "value": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?"
     }
   ],
+  "U+1A/4": [
+    {
+      "type": 0,
+      "value": "View Awards"
+    }
+  ],
   "U3AyDz": [
     {
       "type": 0,
@@ -759,6 +877,12 @@
       "value": "Edit"
     }
   ],
+  "UYVF80": [
+    {
+      "type": 0,
+      "value": "Recently Collected"
+    }
+  ],
   "UkT6PM": [
     {
       "type": 0,
@@ -769,6 +893,16 @@
     {
       "type": 1,
       "value": "step"
+    }
+  ],
+  "V+JV6m": [
+    {
+      "type": 0,
+      "value": "Received "
+    },
+    {
+      "type": 1,
+      "value": "certificateName"
     }
   ],
   "V365ug": [
@@ -787,12 +921,6 @@
     {
       "type": 0,
       "value": "Question"
-    }
-  ],
-  "VdAhqD": [
-    {
-      "type": 0,
-      "value": "Coming Soon"
     }
   ],
   "VoYGmQ": [
@@ -909,6 +1037,12 @@
       "value": "Register"
     }
   ],
+  "agfAla": [
+    {
+      "type": 1,
+      "value": "subtitle"
+    }
+  ],
   "apr16P": [
     {
       "type": 0,
@@ -961,6 +1095,12 @@
     {
       "type": 0,
       "value": "No"
+    }
+  ],
+  "dh77ji": [
+    {
+      "type": 0,
+      "value": "View Certificates"
     }
   ],
   "dq9osy": [
@@ -1071,10 +1211,22 @@
       "value": "Forgot Password"
     }
   ],
+  "jmSDeU": [
+    {
+      "type": 0,
+      "value": "Reverse Alphabetical"
+    }
+  ],
   "k6tlKQ": [
     {
       "type": 0,
       "value": "Ok"
+    }
+  ],
+  "km5SOz": [
+    {
+      "type": 0,
+      "value": "View all collections"
     }
   ],
   "lKeCea": [
@@ -1111,6 +1263,12 @@
     {
       "type": 0,
       "value": "OTP"
+    }
+  ],
+  "mLzIvk": [
+    {
+      "type": 1,
+      "value": "certificateName"
     }
   ],
   "mTY3Hn": [
@@ -1173,10 +1331,22 @@
       "value": "Account Settings"
     }
   ],
+  "oDenEU": [
+    {
+      "type": 0,
+      "value": "Turtle"
+    }
+  ],
   "oOZkkL": [
     {
       "type": 0,
       "value": "Coming Soon..."
+    }
+  ],
+  "oWqUok": [
+    {
+      "type": 1,
+      "value": "title"
     }
   ],
   "pEiO08": [
@@ -1197,16 +1367,16 @@
       "value": "Game Progress"
     }
   ],
-  "q86PwV": [
-    {
-      "type": 0,
-      "value": "Go to Home"
-    }
-  ],
   "qTQ8nP": [
     {
       "type": 1,
       "value": "coinsEarned"
+    }
+  ],
+  "qUU2pp": [
+    {
+      "type": 0,
+      "value": "All Games"
     }
   ],
   "qXTiEd": [
@@ -1257,6 +1427,12 @@
       "value": "step"
     }
   ],
+  "toPdTf": [
+    {
+      "type": 0,
+      "value": "Leaderboard"
+    }
+  ],
   "tsF0aG": [
     {
       "type": 0,
@@ -1273,6 +1449,12 @@
     {
       "type": 1,
       "value": "errorMessage"
+    }
+  ],
+  "v7hkfc": [
+    {
+      "type": 0,
+      "value": "Today"
     }
   ],
   "vChW6P": [

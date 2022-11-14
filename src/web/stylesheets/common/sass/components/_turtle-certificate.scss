@@ -1,11 +1,7 @@
 @use '../themes/_default' as gt;
 @use '../base/_mixins' as gm;
 @use '../base/_variables' as gv;
-// @use '_font-dancing-bold';
-
-// turtle certificate component specific theme
-
-@include gt.populate-theme(gt.$thememaplight, gt.$thememapdark, gt.$cssvars);
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=DM+Sans&display=swap');
 
 .imageTemplate {
   height: 720px;
@@ -22,7 +18,7 @@
   position: fixed;
   top: 0;
 
-  & > div {
+  &>div {
     height: 0;
     width: 0;
     overflow: scroll;
@@ -32,30 +28,37 @@
 .userName {
   position: absolute;
   top: 330px;
-  font-size: 48px;
-  font-family: 'DancingScriptBold', sans-serif;
-  color: gt.theme-var(tc-font-color, null, gt.$thememaplight, gt.$cssvars);
+  right: 97px;
+  font-size: 80px;
+  font-family: 'Courgette', cursive, sans-serif;
 }
 
 .certificateName {
+  max-width: 700px;
+  text-align: right;
   position: absolute;
-  top: 470px;
-  font-size: 24px;
-  color: gt.theme-var(tc-font-color, null, gt.$thememaplight, gt.$cssvars);
-  font-weight: bold;
+  top: 450px;
+  right: 110px;
+  font-family: 'DM Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
 }
 
 .certificateId {
   position: absolute;
-  top: 35px;
+  top: 10px;
+  right: 25px;
   font-size: 18px;
-  left: 35px;
-  color: gt.theme-var(tc-font-color, null, gt.$thememaplight, gt.$cssvars);
+  font-family: 'DM Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
 }
 
 .certificateSign {
-  height: 80px;
-  width: 160px;
   position: absolute;
   top: 520px;
+  right: 110px;
+  height: 80px;
+  width: 160px;
 }
