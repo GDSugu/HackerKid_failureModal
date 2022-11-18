@@ -23,6 +23,12 @@
       "value": "Try now"
     }
   ],
+  "/+d/C7": [
+    {
+      "type": 0,
+      "value": "XP"
+    }
+  ],
   "/Gy7qZ": [
     {
       "type": 0,
@@ -97,6 +103,12 @@
     {
       "type": 0,
       "value": "Code"
+    }
+  ],
+  "0NXxp2": [
+    {
+      "type": 0,
+      "value": "Sort by:"
     }
   ],
   "0Sgdtj": [
@@ -301,6 +313,12 @@
       "value": "Awesome!"
     }
   ],
+  "6rYo7u": [
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
   "74UjvK": [
     {
       "type": 0,
@@ -413,10 +431,22 @@
       "value": "Try again"
     }
   ],
+  "BC2OuR": [
+    {
+      "type": 1,
+      "value": "points"
+    }
+  ],
   "BNGdt+": [
     {
       "type": 0,
       "value": "No"
+    }
+  ],
+  "C8QChP": [
+    {
+      "type": 0,
+      "value": "Top Members"
     }
   ],
   "CabaPs": [
@@ -661,6 +691,12 @@
     {
       "type": 1,
       "value": "hint"
+    }
+  ],
+  "N930gg": [
+    {
+      "type": 1,
+      "value": "message"
     }
   ],
   "NXV57/": [
@@ -1159,6 +1195,12 @@
       "value": "Coins"
     }
   ],
+  "gFogim": [
+    {
+      "type": 1,
+      "value": "state"
+    }
+  ],
   "gOkIvb": [
     {
       "type": 0,
@@ -1265,6 +1307,16 @@
     {
       "type": 0,
       "value": "Rank"
+    }
+  ],
+  "mfZLuH": [
+    {
+      "type": 0,
+      "value": "#"
+    },
+    {
+      "type": 1,
+      "value": "rank"
     }
   ],
   "mm9QaY": [
@@ -1565,6 +1617,12 @@
     {
       "type": 0,
       "value": "Coming soon"
+    }
+  ],
+  "zqaCs9": [
+    {
+      "type": 1,
+      "value": "country"
     }
   ]
 }

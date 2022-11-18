@@ -15,6 +15,10 @@
     "defaultMessage": "Try now",
     "description": "Continue Playing button"
   },
+  "/+d/C7": {
+    "defaultMessage": "XP",
+    "description": "xp"
+  },
   "/Gy7qZ": {
     "defaultMessage": "Level {levelNumber}",
     "description": "Level indicator"
@@ -62,6 +66,10 @@
   "0K7noF": {
     "defaultMessage": "Code",
     "description": "Code tab"
+  },
+  "0NXxp2": {
+    "defaultMessage": "Sort by:",
+    "description": "Sort by:"
   },
   "0Sgdtj": {
     "defaultMessage": "Game Progress",
@@ -185,6 +193,10 @@
     "defaultMessage": "Awesome!",
     "description": "Success message"
   },
+  "6rYo7u": {
+    "defaultMessage": "{name}",
+    "description": "member name"
+  },
   "74UjvK": {
     "defaultMessage": "Login to existing Account",
     "description": "Login to existing account button"
@@ -257,9 +269,17 @@
     "defaultMessage": "Try again",
     "description": "try again btn"
   },
+  "BC2OuR": {
+    "defaultMessage": "{points}",
+    "description": "member points"
+  },
   "BNGdt+": {
     "defaultMessage": "No",
     "description": "cancel logout"
+  },
+  "C8QChP": {
+    "defaultMessage": "Top Members",
+    "description": "Top Members"
   },
   "CabaPs": {
     "defaultMessage": "Level {level}",
@@ -411,6 +431,10 @@
   "MfoF60": {
     "defaultMessage": "{hint}",
     "description": "Hint"
+  },
+  "N930gg": {
+    "defaultMessage": "{message}",
+    "description": "feed message"
   },
   "NXV57/": {
     "defaultMessage": "Share",
@@ -738,6 +762,10 @@
     "defaultMessage": "Coins",
     "description": "Coins"
   },
+  "gFogim": {
+    "defaultMessage": "{state}",
+    "description": "state"
+  },
   "gOkIvb": {
     "defaultMessage": "Name",
     "description": "Name label"
@@ -809,6 +837,10 @@
   "mb5De+": {
     "defaultMessage": "Rank",
     "description": "Rank"
+  },
+  "mfZLuH": {
+    "defaultMessage": "#{rank}",
+    "description": "rank"
   },
   "mm9QaY": {
     "defaultMessage": "School",
@@ -1000,5 +1032,9 @@
   "zROcjU": {
     "defaultMessage": "Coming soon",
     "description": "More card button text"
+  },
+  "zqaCs9": {
+    "defaultMessage": "{country}",
+    "description": "country"
   }
 }
