@@ -54,6 +54,10 @@ const themes = {
       ...Theme.light.screenYellow,
       ...fragmentIconDisposal,
     },
+    screenAwardsCollectibles: {
+      ...Theme.light.screenYellow,
+      ...fragmentIconDisposal,
+    },
     screenAskHelp: {
       ...Theme.light.screenYellow,
       ...screenWithHeader,
@@ -200,6 +204,18 @@ const themes = {
       ...Theme.light.screenYellow,
       ...fragmentIconDisposal,
     },
+    screenAwardsCollectibles: {
+      ...Theme.light.screenYellow,
+      ...fragmentIconDisposal,
+    },
+    screenAwards: {
+      ...Theme.light.screenYellow,
+      ...fragmentIconDisposal,
+    },
+    screenCollectibles: {
+      ...Theme.light.screenYellow,
+      ...fragmentIconDisposal,
+    },
     screenAskHelp: {
       ...Theme.light.screenYellow,
       ...screenWithHeader,
@@ -207,10 +223,6 @@ const themes = {
     screenAssignments: {
       ...Theme.light.screenYellow,
       ...screenWithHeader,
-    },
-    screenAwards: {
-      ...Theme.light.screenYellow,
-      ...fragmentIconDisposal,
     },
     screenCertificates: {
       ...Theme.light.screenYellow,
@@ -233,10 +245,6 @@ const themes = {
       ...fragmentIconDisposal,
     },
     screenClubInfo: {
-      ...Theme.light.screenYellow,
-      ...fragmentIconDisposal,
-    },
-    screenCollectibles: {
       ...Theme.light.screenYellow,
       ...fragmentIconDisposal,
     },

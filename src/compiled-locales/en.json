@@ -159,6 +159,12 @@
       "value": "Bio"
     }
   ],
+  "2X3jYB": [
+    {
+      "type": 0,
+      "value": "is here by awarded the certification of achievement for the successfull completion of"
+    }
+  ],
   "2bMdhC": [
     {
       "type": 0,
@@ -183,6 +189,12 @@
       "value": "Login with Phone"
     }
   ],
+  "369aS4": [
+    {
+      "type": 1,
+      "value": "collectibleRarity"
+    }
+  ],
   "3M/P3n": [
     {
       "type": 1,
@@ -205,6 +217,12 @@
     {
       "type": 1,
       "value": "activeSortName"
+    }
+  ],
+  "4M3tqk": [
+    {
+      "type": 1,
+      "value": "awardSubtitle"
     }
   ],
   "4Ve1r3": [
@@ -319,6 +337,16 @@
       "value": "OK"
     }
   ],
+  "9VZomF": [
+    {
+      "type": 1,
+      "value": "nextStreakCount"
+    },
+    {
+      "type": 0,
+      "value": " days"
+    }
+  ],
   "9YoD+Y": [
     {
       "type": 0,
@@ -381,6 +409,12 @@
     {
       "type": 1,
       "value": "totalSubmissions"
+    }
+  ],
+  "B/mNN3": [
+    {
+      "type": 0,
+      "value": "See All Awards"
     }
   ],
   "B7znij": [
@@ -453,6 +487,12 @@
       "value": "This is about page"
     }
   ],
+  "D81PjZ": [
+    {
+      "type": 1,
+      "value": "collectibleName"
+    }
+  ],
   "DBTgpi": [
     {
       "type": 0,
@@ -475,6 +515,12 @@
     {
       "type": 0,
       "value": "Email"
+    }
+  ],
+  "EOKZu2": [
+    {
+      "type": 1,
+      "value": "text"
     }
   ],
   "EQupmg": [
@@ -505,6 +551,12 @@
     {
       "type": 0,
       "value": "Home"
+    }
+  ],
+  "FKWXaq": [
+    {
+      "type": 1,
+      "value": "awardSubtitle"
     }
   ],
   "FhTUgw": [
@@ -579,6 +631,12 @@
       "value": "Register to Get help from Turtle"
     }
   ],
+  "I+EuqZ": [
+    {
+      "type": 1,
+      "value": "pointsEarned"
+    }
+  ],
   "ILnphX": [
     {
       "type": 0,
@@ -609,6 +667,18 @@
       "value": "errorMessage"
     }
   ],
+  "JGS8Gf": [
+    {
+      "type": 0,
+      "value": "Awards"
+    }
+  ],
+  "JL7NkW": [
+    {
+      "type": 0,
+      "value": "See More"
+    }
+  ],
   "JnwRMJ": [
     {
       "type": 0,
@@ -621,10 +691,22 @@
       "value": "Certificates"
     }
   ],
+  "K19PhT": [
+    {
+      "type": 1,
+      "value": "awardTitle"
+    }
+  ],
   "KD6lRu": [
     {
       "type": 0,
       "value": "Continue"
+    }
+  ],
+  "KzGZsa": [
+    {
+      "type": 0,
+      "value": "No Certificates Found"
     }
   ],
   "LCt8qV": [
@@ -637,6 +719,12 @@
     {
       "type": 1,
       "value": "rarity"
+    }
+  ],
+  "LxWtp6": [
+    {
+      "type": 0,
+      "value": "Next award:"
     }
   ],
   "MB8h2I": [
@@ -661,6 +749,12 @@
     {
       "type": 0,
       "value": "See More"
+    }
+  ],
+  "NWMgba": [
+    {
+      "type": 0,
+      "value": "Share"
     }
   ],
   "NXV57/": [
@@ -805,6 +899,12 @@
     {
       "type": 0,
       "value": "Password"
+    }
+  ],
+  "SccqZN": [
+    {
+      "type": 0,
+      "value": "Download"
     }
   ],
   "SpftNg": [
@@ -959,10 +1059,22 @@
       "value": "Awesome!"
     }
   ],
+  "WR+Too": [
+    {
+      "type": 0,
+      "value": "No Certificates Found"
+    }
+  ],
   "WSWTC5": [
     {
       "type": 0,
       "value": "Play"
+    }
+  ],
+  "WmjFlm": [
+    {
+      "type": 0,
+      "value": "Download"
     }
   ],
   "X1rCRf": [
@@ -1085,10 +1197,26 @@
       "value": "Coins"
     }
   ],
+  "cergd0": [
+    {
+      "type": 1,
+      "value": "studentName"
+    }
+  ],
   "croLiZ": [
     {
       "type": 1,
       "value": "name"
+    }
+  ],
+  "d6pc+m": [
+    {
+      "type": 1,
+      "value": "currentStreakCount"
+    },
+    {
+      "type": 0,
+      "value": " days"
     }
   ],
   "dNWhFj": [
@@ -1229,6 +1357,12 @@
       "value": "View all collections"
     }
   ],
+  "lK2LOr": [
+    {
+      "type": 1,
+      "value": "certificateName"
+    }
+  ],
   "lKeCea": [
     {
       "type": 0,
@@ -1305,6 +1439,12 @@
     {
       "type": 0,
       "value": "Get the rare collectibles with your coins now"
+    }
+  ],
+  "n75iGj": [
+    {
+      "type": 0,
+      "value": "No Certificates Found"
     }
   ],
   "nGT7h4": [
@@ -1397,6 +1537,16 @@
       "value": "completed"
     }
   ],
+  "rSMu2Q": [
+    {
+      "type": 0,
+      "value": "ID: "
+    },
+    {
+      "type": 1,
+      "value": "certificateId"
+    }
+  ],
   "rZKLPy": [
     {
       "type": 0,
@@ -1419,6 +1569,12 @@
     {
       "type": 0,
       "value": "Go to Home"
+    }
+  ],
+  "sxkyOB": [
+    {
+      "type": 0,
+      "value": "Collectibles"
     }
   ],
   "tbPLF3": [
@@ -1445,10 +1601,28 @@
       "value": "message"
     }
   ],
+  "uLdABz": [
+    {
+      "type": 1,
+      "value": "collectibleType"
+    }
+  ],
   "uhayi4": [
     {
       "type": 1,
       "value": "errorMessage"
+    }
+  ],
+  "urqfpL": [
+    {
+      "type": 0,
+      "value": "Share"
+    }
+  ],
+  "v6AMff": [
+    {
+      "type": 0,
+      "value": "Certificates"
     }
   ],
   "v7hkfc": [
@@ -1473,6 +1647,12 @@
     {
       "type": 0,
       "value": "Turtle"
+    }
+  ],
+  "wQ0dFp": [
+    {
+      "type": 0,
+      "value": "See Less Awards"
     }
   ],
   "wrdAU0": [
@@ -1533,6 +1713,12 @@
     {
       "type": 1,
       "value": "hintMessage"
+    }
+  ],
+  "yeNTz5": [
+    {
+      "type": 0,
+      "value": "Your Collections and Perks"
     }
   ],
   "yujxGL": [
