@@ -150,10 +150,6 @@
     "defaultMessage": "Next",
     "description": "Next Button"
   },
-  "6kktdG": {
-    "defaultMessage": "Output will be shown here",
-    "description": "placeholder"
-  },
   "6oGVMu": {
     "defaultMessage": "Awesome!",
     "description": "Success message"
@@ -775,6 +771,10 @@
   "nlYt8p": {
     "defaultMessage": "View more",
     "description": "View More Bottomsheet Btn"
+  },
+  "nnfaF3": {
+    "defaultMessage": "{selectedLanguageDisplayName}",
+    "description": "selected language display name"
   },
   "nsIAsY": {
     "defaultMessage": "Run",

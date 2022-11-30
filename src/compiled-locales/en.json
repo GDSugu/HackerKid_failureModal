@@ -231,12 +231,6 @@
       "value": "Next"
     }
   ],
-  "6kktdG": [
-    {
-      "type": 0,
-      "value": "Output will be shown here"
-    }
-  ],
   "6oGVMu": [
     {
       "type": 0,
@@ -1191,6 +1185,12 @@
     {
       "type": 0,
       "value": "View more"
+    }
+  ],
+  "nnfaF3": [
+    {
+      "type": 1,
+      "value": "selectedLanguageDisplayName"
     }
   ],
   "nsIAsY": [

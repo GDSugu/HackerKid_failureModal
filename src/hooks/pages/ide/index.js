@@ -1,7 +1,7 @@
 import React from 'react';
 import post from '../../common/framework';
 
-const useIde = () => {
+const useIde = ({ isPageMounted }) => {
   const [state, setState] = React.useState({
     selectedLanguageValue: '',
     input: '',
@@ -9,14 +9,22 @@ const useIde = () => {
     writtenCode: false,
   });
 
-  const runCodeRequest = (sourceCode, input, compilerId, token, recaptchaVersion = 3) => post({
-    type: 'runCode',
-    source: sourceCode,
-    user_input: input,
-    compilerId,
-    token,
-    recaptchaVersion,
-  }, 'ide/');
+  const runCodeRequest = (sourceCode, input, compilerId, token, recaptchaVersion = 3) => {
+    let result;
+
+    if (isPageMounted.current) {
+      result = post({
+        type: 'runCode',
+        source: sourceCode,
+        user_input: input,
+        compilerId,
+        token,
+        recaptchaVersion,
+      }, 'ide/');
+    }
+
+    return result;
+  };
 
   return { runCodeRequest, state, setState };
 };

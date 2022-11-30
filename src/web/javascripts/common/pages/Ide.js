@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import '../../../stylesheets/common/pages/ide/style.scss';
 import ace from 'ace-builds';
 import { FormattedMessage } from 'react-intl';
@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { $, pageInit } from '../framework';
 import { getDevice } from '../../../../hooks/common/utlis';
 import useRecapchav3 from '../../../../hooks/pages/recapchav3';
-import { getSession, setSession } from '../../../../hooks/common/framework';
+import { getSession, loginCheck, setSession } from '../../../../hooks/common/framework';
 import {
   getModeFromValue,
   getCompilerIdFromValue,
@@ -31,22 +31,22 @@ const InputnOutput = ({
       onChange={onInputBoxChange}
     ></textarea>
     <div className='output-box' aria-readonly='true'>
-    {
-      !output && <FormattedMessage defaultMessage={'Output will appear here'} description='output placeholder'/>
-    }
-    {
-      output && output.map((line, idx) => <pre key={idx} className='console-line'>
-        <img
-          src='../../../../images/ide/console-line-indicator-arrow.svg'
-          alt='console-line-arrow' />
-        <span className='console-line-text-content'>
-        <FormattedMessage
-          defaultMessage={'{line}'}
-          description={'console line'}
-          values={{ line }}
-        />
-        </span>
-      </pre>)
+      {
+        !output && <FormattedMessage defaultMessage={'Output will appear here'} description='output placeholder' />
+      }
+      {
+        output && output.map((line, idx) => <pre key={idx} className='console-line'>
+          <img
+            src='../../../../images/ide/console-line-indicator-arrow.svg'
+            alt='console-line-arrow' />
+          <span className='console-line-text-content'>
+            <FormattedMessage
+              defaultMessage={'{line}'}
+              description={'console line'}
+              values={{ line }}
+            />
+          </span>
+        </pre>)
       }
     </div>
   </div>
@@ -54,7 +54,7 @@ const InputnOutput = ({
 
 // components used in mobile resolution
 const MobileInputDrawer = ({
-  className = '', onClick = () => {}, onInputBoxChange, input,
+  className = '', onClick = () => { }, onInputBoxChange, input,
 }) => (
   <div className={`input-box-drawer ${className}`}>
     <button type='button' className='input-draw-btn' onClick={onClick}>
@@ -94,41 +94,41 @@ const MobileFooterTabs = ({
 
   return (
     <ul className={`nav nav-pills nav-fill ${className}`} id="pills-tab" role="tablist">
-    <li className="nav-item" role={'presentation'}>
-      <button
-        type='button'
-        id="code-editor-tab"
-        className="footer-tab nav-link active"
-        data-toggle="pill"
-        data-target={[tabTargetIds[0]]}
-        role="tab"
-        aria-controls="home"
-        aria-selected="true">
-        <img className='tab-icon' src='../../../../images/ide/code-icon.svg' alt='tab-icon' />
-        <FormattedMessage defaultMessage={'Code'} description='code button text' />
-      </button>
-    </li>
-    <li className="nav-item" role={'presentation'} >
-      <button
-        type='button'
-        id="console-tab"
-        className="footer-tab nav-link"
-        data-toggle="pill"
-        data-target={[tabTargetIds[1]]}
-        role="tab"
-        aria-controls="console"
-        aria-selected="false">
-        <img className='tab-icon' src='../../../../images/ide/console-icon.svg' alt='tab-icon' />
-        <FormattedMessage defaultMessage={'Console'} description='code button text' />
-      </button>
-    </li>
-    <li className='nav-item' role={'presentation'}>
-      <button type='button' role={'button'} className='run-code-btn footer-tab nav-link' onClick={onRunCodeClick}>
-        <img className='tab-icon' src='../../../../images/ide/run-icon.svg' alt='tab-icon' />
-        <FormattedMessage defaultMessage={'Run'} description='run code button text' />
-      </button>
-    </li>
-  </ul>
+      <li className="nav-item" role={'presentation'}>
+        <button
+          type='button'
+          id="code-editor-tab"
+          className="footer-tab nav-link active"
+          data-toggle="pill"
+          data-target={[tabTargetIds[0]]}
+          role="tab"
+          aria-controls="home"
+          aria-selected="true">
+          <img className='tab-icon' src='../../../../images/ide/code-icon.svg' alt='tab-icon' />
+          <FormattedMessage defaultMessage={'Code'} description='code button text' />
+        </button>
+      </li>
+      <li className="nav-item" role={'presentation'} >
+        <button
+          type='button'
+          id="console-tab"
+          className="footer-tab nav-link"
+          data-toggle="pill"
+          data-target={[tabTargetIds[1]]}
+          role="tab"
+          aria-controls="console"
+          aria-selected="false">
+          <img className='tab-icon' src='../../../../images/ide/console-icon.svg' alt='tab-icon' />
+          <FormattedMessage defaultMessage={'Console'} description='code button text' />
+        </button>
+      </li>
+      <li className='nav-item' role={'presentation'}>
+        <button type='button' role={'button'} className='run-code-btn footer-tab nav-link' onClick={onRunCodeClick}>
+          <img className='tab-icon' src='../../../../images/ide/run-icon.svg' alt='tab-icon' />
+          <FormattedMessage defaultMessage={'Run'} description='run code button text' />
+        </button>
+      </li>
+    </ul>
 
   );
 };
@@ -162,13 +162,14 @@ const closeLanguageSelector = () => {
 
 // ide component
 const Ide = () => {
+  const isPageMounted = useRef(true);
   // constants
   const EDITORID = 'editor';
   const device = getDevice();
 
   pageInit(device === 'mobile' ? 'ide-container mobile-container' : 'ide-container desktop-container', 'IDE');
   // hooks
-  const { runCodeRequest, state, setState } = useIde();
+  const { runCodeRequest, state, setState } = useIde({ isPageMounted });
   const getRecapchaToken = useRecapchav3();
   const navigate = useNavigate();
 
@@ -250,7 +251,7 @@ const Ide = () => {
         keyboard: false,
       });
     } else if (ideInteracted === false) {
-    // update code editor
+      // update code editor
       const boilerPlateCode = getBoilerPlateCodeFromValue(languageValue);
       const mode = getModeFromValue(languageValue);
 
@@ -325,6 +326,13 @@ const Ide = () => {
     });
   };
 
+  useEffect(() => {
+    loginCheck();
+    return () => {
+      isPageMounted.current = false;
+    };
+  }, []);
+
   return (
     <>
       {
@@ -335,63 +343,63 @@ const Ide = () => {
                 hackerkid logo
               </div>
               <Link to={'/dashboard'} className={'dashboard-link'}>
-              <div className="nav-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke='#212427' xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M9 22V12H15V22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <div className="nav-bar"></div>
-            </Link>
+                <div className="nav-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke='#212427' xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M9 22V12H15V22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <div className="nav-bar"></div>
+              </Link>
             </div>
           </nav>
           <div className='container-fluid'>
-          <div className='language-selector-with-back-btn'>
-            <div className='back-btn-with-title overline-bold'>
-              <button className='back-btn' onClick={() => navigate(-1)}>
-                <i className="fa fa-arrow-left"></i>
-              </button>
-              <span className='page-title ml-2 overline-bold'>
-                <FormattedMessage defaultMessage={'IDE'} description='page title' />
-              </span>
-            </div>
+            <div className='language-selector-with-back-btn'>
+              <div className='back-btn-with-title overline-bold'>
+                <button className='back-btn' onClick={() => navigate('/more')}>
+                  <i className="fa fa-arrow-left"></i>
+                </button>
+                <span className='page-title ml-2 overline-bold'>
+                  <FormattedMessage defaultMessage={'IDE'} description='page title' />
+                </span>
+              </div>
               <LanguageSelector
                 selectedLanguageValue={state.selectedLanguageValue}
-                onLoad = {onLanguageSelectorLoad}
+                onLoad={onLanguageSelectorLoad}
                 onDropDownOpen={onLanguageSelectorOpen}
                 onLanguageOptionClick={(e) => onLanguageOptionClick(e)}
               />
-          </div>
-          <div className="tab-content" id="pills-tabContent">
-            <div className="editor-container tab-pane fade show active" id="code-editor-tabpanel" role="tabpanel" aria-labelledby="code-editor-tab">
-              <CodeEditor
-                id={EDITORID}
-                onload={onCodeEditorLoad}
-                onChange={onCodeEditorChange}
-                onClick={onCodeEditorClick} />
             </div>
-            <div className="output-box-container tab-pane fade" id="console-tabpanel" role="tabpanel" aria-labelledby="console-tab">
-              <div className='output-box'>
-                {
-                  !state.output.length && <FormattedMessage defaultMessage={'Output will appear here'} description='output placeholder'/>
-                }
-                {
-                  state.output.length && state.output.map((line, idx) => <pre key={idx} className='console-line'>
+            <div className="tab-content" id="pills-tabContent">
+              <div className="editor-container tab-pane fade show active" id="code-editor-tabpanel" role="tabpanel" aria-labelledby="code-editor-tab">
+                <CodeEditor
+                  id={EDITORID}
+                  onload={onCodeEditorLoad}
+                  onChange={onCodeEditorChange}
+                  onClick={onCodeEditorClick} />
+              </div>
+              <div className="output-box-container tab-pane fade" id="console-tabpanel" role="tabpanel" aria-labelledby="console-tab">
+                <div className='output-box'>
+                  {
+                    !state.output.length && <FormattedMessage defaultMessage={'Output will appear here'} description='output placeholder' />
+                  }
+                  {
+                    state.output.length && state.output.map((line, idx) => <pre key={idx} className='console-line'>
                       <img
                         src='../../../../images/ide/console-line-indicator-arrow.svg'
                         alt='console-line-arrow' />
                       <span className='console-line-text-content'>
-                      <FormattedMessage
-                        defaultMessage={'{line}'}
-                        description={'console line'}
-                        values={{ line }}
-                      />
+                        <FormattedMessage
+                          defaultMessage={'{line}'}
+                          description={'console line'}
+                          values={{ line }}
+                        />
                       </span>
-                  </pre>)
-                }
+                    </pre>)
+                  }
+                </div>
               </div>
             </div>
-          </div>
             <footer>
               <MobileInputDrawer
                 input={state.input}
@@ -424,7 +432,7 @@ const Ide = () => {
         device === 'desktop' && <div className='main-content to-show-loading-container'>
           <div className='language-selector-with-back-btn'>
             <div className='back-btn-with-title overline-bold'>
-              <button className='back-btn' onClick={() => navigate(-1)}>
+              <button className='back-btn' onClick={() => navigate('/more')}>
                 <i className="fa fa-arrow-left"></i>
               </button>
               <span className='page-title ml-2 overline-bold'>
@@ -432,11 +440,11 @@ const Ide = () => {
               </span>
             </div>
             <LanguageSelector
-                selectedLanguageValue={state.selectedLanguageValue}
-                onLoad={onLanguageSelectorLoad}
-                onDropDownOpen={onLanguageSelectorOpen}
-                onLanguageOptionClick={(e) => onLanguageOptionClick(e)}
-              />
+              selectedLanguageValue={state.selectedLanguageValue}
+              onLoad={onLanguageSelectorLoad}
+              onDropDownOpen={onLanguageSelectorOpen}
+              onLanguageOptionClick={(e) => onLanguageOptionClick(e)}
+            />
           </div>
           <div className='container-fluid code-editor-with-input-output'>
             <div className='editor-container'>
@@ -451,7 +459,7 @@ const Ide = () => {
                 id={EDITORID}
                 onload={onCodeEditorLoad}
                 onChange={onCodeEditorChange}
-                onClick={onCodeEditorClick}/>
+                onClick={onCodeEditorClick} />
               <button type='button' id='runCodeBtn' className='run-code-btn btn btn-primary' onClick={runCodeBtnClickHandler}>
                 <span>
                   <FormattedMessage defaultMessage='Run' description='Run code button' />
@@ -463,21 +471,21 @@ const Ide = () => {
               input={state.input}
               onInputBoxChange={onInputBoxChange}
               output={state.output} />
-         </div>
+          </div>
         </div>
       }
       <div className="modal keep-code-changes-modal" tabIndex="-1">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <h4 className='title text-center mb-5'>
-              <FormattedMessage defaultMessage={'Keep the code changes?'} description='keep the code changes modal title'/>
+              <FormattedMessage defaultMessage={'Keep the code changes?'} description='keep the code changes modal title' />
             </h4>
             <div className='yes-no-btn-container'>
               <button type='button' className='btn btn-outline-primary overline' onClick={() => onDontKeepCodeChanges(EDITORID)}>
-                <FormattedMessage defaultMessage={'No'} description='no button text'/>
+                <FormattedMessage defaultMessage={'No'} description='no button text' />
               </button>
               <button type='button' className='btn btn-primary overline' onClick={() => onKeepCodeChanges(EDITORID)}>
-                <FormattedMessage defaultMessage={'Yes'} description='yes button text'/>
+                <FormattedMessage defaultMessage={'Yes'} description='yes button text' />
               </button>
             </div>
           </div>
