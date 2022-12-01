@@ -96,7 +96,7 @@ const ChallengesGrid = ({
           <FormattedMessage defaultMessage={'{emptyStateText}'} description={'no challenges'} values={{ emptyStateText }} />
         </h6>
         {
-          isDesktop && showCreateChallengeButtonInEmptyState && <Link to={'#'} className='create-challenge-btn'>
+          isDesktop && showCreateChallengeButtonInEmptyState && <Link to={'/turtle/challanges/create/new'} className='create-challenge-btn'>
             <FormattedMessage defaultMessage={'Create a Challenge'} description={'create challenge button'} />
             <i className='fa fa-chevron-right' />
           </Link>

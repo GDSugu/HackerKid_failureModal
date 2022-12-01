@@ -76,6 +76,7 @@
   .pagination-footer {
     .pagination {
       .page-item {
+
         &:first-child,
         &:last-child {
           .page-link {
@@ -102,6 +103,10 @@
         }
       }
     }
+  }
+
+  .toast-dismiss-btn {
+    border-radius: 12px;
   }
 }
 

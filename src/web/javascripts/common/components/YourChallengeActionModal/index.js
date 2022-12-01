@@ -81,67 +81,69 @@ const YourChallengeActionsModal = ({
   };
 
   return (
-  <div className="modal fade" id="yourChallengesActionsModal" tabIndex="-1" aria-labelledby="yourChallengesActionsModal" aria-hidden="true">
-    <div className="modal-dialog modal-dialog-centered">
-      <div className="modal-content">
-        <div className="modal-header">
-          <h5 className="modal-title" id="yourChallengesActionsModalLabel">
-            <FormattedMessage defaultMessage={'{challengeName}'} description='modal title' values={{
-              challengeName: challenge.challengeName,
-            }}/>
-          </h5>
-          <button type="button" className="close-btn" onClick={() => setOpen(false)}>
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div className="modal-body">
-          <img src={challenge.imgPath} alt='challenge image' className='challenge-image-preview' />
-          <div className='btn-group'>
-            {
-                challenge.challengeState === 'published' && <button
-                  type='button'
-                  className='btn-block action-btn caption-bold'
-                  onClick={(e) => onTakeActionButtonClick(e, challenge.challengeId, 'draft')}
-                  disabled={state.btnsDisabled}
-                >
-                <FormattedMessage defaultMessage={'Move to Drafts'} description='move to drafts button'/>
+    <div className="modal fade" id="yourChallengesActionsModal" tabIndex="-1" aria-labelledby="yourChallengesActionsModal" aria-hidden="true">
+      <div className="modal-dialog modal-dialog-centered">
+        {
+          !state.toastOpen && <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="yourChallengesActionsModalLabel">
+                <FormattedMessage defaultMessage={'{challengeName}'} description='modal title' values={{
+                  challengeName: challenge.challengeName,
+                }} />
+              </h5>
+              <button type="button" className="close-btn" onClick={() => setOpen(false)}>
+                <span aria-hidden="true">&times;</span>
               </button>
-            }
-            {
-                challenge.challengeState === 'draft' && <button
+            </div>
+            <div className="modal-body">
+              <img src={challenge.imgPath} alt='challenge image' className='challenge-image-preview' />
+              <div className='btn-group'>
+                {
+                  challenge.challengeState === 'published' && <button
+                    type='button'
+                    className='btn-block action-btn caption-bold'
+                    onClick={(e) => onTakeActionButtonClick(e, challenge.challengeId, 'draft')}
+                    disabled={state.btnsDisabled}
+                  >
+                    <FormattedMessage defaultMessage={'Move to Drafts'} description='move to drafts button' />
+                  </button>
+                }
+                {
+                  challenge.challengeState === 'draft' && <button
+                    type='button'
+                    className='btn-block action-btn caption-bold'
+                    onClick={(e) => onTakeActionButtonClick(e, challenge.challengeId, 'published')}
+                    disabled={state.btnsDisabled}
+                  >
+                    <FormattedMessage defaultMessage={'Publish'} description='publish challenge button' />
+                  </button>
+                }
+                <Link to={`/turtle/challenges/create/${challenge.challengeId}/${challenge.challengeName}`} className='btn-block action-btn caption-bold'>
+                  <FormattedMessage defaultMessage={'Edit Challenge'} description='edit challenge button' />
+                </Link>
+                <button
                   type='button'
-                  className='btn-block action-btn caption-bold'
-                  onClick={(e) => onTakeActionButtonClick(e, challenge.challengeId, 'published')}
+                  className='btn btn-block btn-danger delete-challenge-button caption-bold'
+                  onClick={(e) => onDeleteChallengeClick(e, challenge.challengeId)}
                   disabled={state.btnsDisabled}
                 >
-              <FormattedMessage defaultMessage={'Publish'} description='publish challenge button'/>
-            </button>
-            }
-            <Link to={'#'} className='btn-block action-btn caption-bold'>
-              <FormattedMessage defaultMessage={'Edit Challenge'} description='edit challenge button'/>
-            </Link>
-              <button
-                type='button'
-                className='btn btn-block btn-danger delete-challenge-button caption-bold'
-                onClick={(e) => onDeleteChallengeClick(e, challenge.challengeId)}
-                disabled={state.btnsDisabled}
-              >
-              <FormattedMessage defaultMessage={'Delete Challenge'} description='delete challenge button'/>
-            </button>
+                  <FormattedMessage defaultMessage={'Delete Challenge'} description='delete challenge button' />
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
+        }
+      </div>
+      <div className={`modal-toast ${state.toastOpen === false ? 'hide' : ''}`}>
+        <h6 className='toast-message caption'>
+          <FormattedMessage defaultMessage={'{toastMessage}'} description='toast message'
+            values={{ toastMessage: state.toastMessage }} />
+        </h6>
+        <button type='button' className='btn btn-outline-primary btn-block toast-dismiss-btn' onClick={() => setOpen(false)}>
+          <FormattedMessage defaultMessage={'Dismiss'} description='dismiss btn' />
+        </button>
       </div>
     </div>
-      <div className={`modal-toast ${state.toastOpen === false ? 'hide' : ''}`}>
-      <h6 className='toast-message caption'>
-        <FormattedMessage defaultMessage={'{toastMessage}'} description='toast message'
-          values={{ toastMessage: state.toastMessage }}/>
-      </h6>
-      <button type='button' className='btn btn-outline-primary btn-block' onClick={() => setState((prev) => ({ ...prev, toastOpen: false }))}>
-        <FormattedMessage defaultMessage={'Dismiss'} description='dismiss btn' />
-      </button>
-    </div>
-  </div>
   );
 };
 

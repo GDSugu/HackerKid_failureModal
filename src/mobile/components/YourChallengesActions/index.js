@@ -10,7 +10,11 @@ import { AuthContext } from '../../../hooks/pages/root';
 import ThemeContext from '../theme';
 
 const ToastModal = ({
-  style, toastModalOpen, toastMessage, onToastHide,
+  style,
+  toastModalOpen,
+  toastMessage,
+  // onToastHide,
+  navigation,
 }) => {
   const deviceHeight = Dimensions.get('window').height;
 
@@ -40,39 +44,45 @@ const ToastModal = ({
         useNativeDriver: true,
       }).start();
     } else if (!toastOpen) {
-      Animated.timing(toastY, {
-        duration: 100,
-        toValue: -deviceHeight,
-        useNativeDriver: true,
-      }).start(() => {
-        onToastHide();
-      });
+      // navigation.goBack();
+      // onToastHide();
+      // Animated.timing(toastY, {
+      //   duration: 100,
+      //   toValue: -deviceHeight,
+      //   useNativeDriver: true,
+      // }).start(() => {
+      //   onToastHide();
+      // });
     }
   }, [state.toastOpen]);
 
   return <>
     {
       toastModalOpen && <View style={style.toastModal}>
-      <Animated.View style={[style.toastModalBody, {
-        transform: [
-          { translateY: toastY },
-        ],
-      }]}>
-        <Text style={style.toastMessage}>
-          <FormattedMessage defaultMessage={'{toastMessage}'} description='toast message' values={{ toastMessage }}/>
-        </Text>
+        <Animated.View style={[style.toastModalBody, {
+          transform: [
+            { translateY: toastY },
+          ],
+        }]}>
+          <Text style={style.toastMessage}>
+            <FormattedMessage defaultMessage={'{toastMessage}'} description='toast message' values={{ toastMessage }} />
+          </Text>
           <TouchableOpacity
             style={style.dismissToastBtn}
-            onPress={() => setState((prev) => ({ ...prev, toastOpen: false }))}>
-          <Text style={style.dismissToastBtnText}>
-            <FormattedMessage defaultMessage={'Dismiss'} description='dismiss modal button'/>
-          </Text>
-        </TouchableOpacity>
-    </Animated.View>
-    </View>
+            onPress={() => {
+              // setState((prev) => ({ ...prev, toastOpen: false }));
+              navigation.goBack();
+            }}>
+            <Text style={style.dismissToastBtnText}>
+              <FormattedMessage defaultMessage={'Dismiss'} description='dismiss modal button' />
+            </Text>
+          </TouchableOpacity>
+        </Animated.View>
+      </View>
     }
   </>;
 };
+
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
     flex: 1,
@@ -272,15 +282,15 @@ const YourChallengesActions = ({ navigation, route }) => {
   return (
     <>
       <View style={style.container}>
-         <View style={style.challengeCardItem}>
-           <Text style={style.challengeCardTitle}>{challenge.challengeName}</Text>
-            <Image
-              source={{
-                uri: challenge.imgPath,
-              }}
-              style={style.challengeCardImage}
-            />
-          </View>
+        <View style={style.challengeCardItem}>
+          <Text style={style.challengeCardTitle}>{challenge.challengeName}</Text>
+          <Image
+            source={{
+              uri: challenge.imgPath,
+            }}
+            style={style.challengeCardImage}
+          />
+        </View>
         <View style={style.btnGroup}>
           {
             routeCalling === 'YourChallenges' && <TouchableOpacity
@@ -289,10 +299,10 @@ const YourChallengesActions = ({ navigation, route }) => {
                 : style.secondaryBtn}
               onPress={() => onTakeActionBtnPress('draft', challenge.challengeId)}
               disabled={state.btnsDisabled}>
-            <Text style={style.secondaryBtnText}>
-              <FormattedMessage defaultMessage={'Move to drafts'} description='move to drafts button text'/>
-            </Text>
-          </TouchableOpacity>
+              <Text style={style.secondaryBtnText}>
+                <FormattedMessage defaultMessage={'Move to drafts'} description='move to drafts button text' />
+              </Text>
+            </TouchableOpacity>
           }
           {
             routeCalling === 'YourDraftChallenges' && <TouchableOpacity
@@ -302,14 +312,14 @@ const YourChallengesActions = ({ navigation, route }) => {
               disabled={state.btnsDisabled}
               onPress={() => onTakeActionBtnPress('published', challenge.challengeId)}
             >
-            <Text style={style.secondaryBtnText}>
-              <FormattedMessage defaultMessage={'Publish'} description='publish challenge button text'/>
-            </Text>
-          </TouchableOpacity>
+              <Text style={style.secondaryBtnText}>
+                <FormattedMessage defaultMessage={'Publish'} description='publish challenge button text' />
+              </Text>
+            </TouchableOpacity>
           }
           <TouchableOpacity style={style.secondaryBtn}>
             <Text style={style.secondaryBtnText}>
-              <FormattedMessage defaultMessage={'Edit Challenge'} description='edit challenge button'/>
+              <FormattedMessage defaultMessage={'Edit Challenge'} description='edit challenge button' />
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -320,7 +330,7 @@ const YourChallengesActions = ({ navigation, route }) => {
             onPress={() => onDeleteChallengeBtnPress(challenge.challengeId)}
           >
             <Text style={style.dangerBtnText}>
-              <FormattedMessage defaultMessage={'Delete Challenge'} description='delete challenge button'/>
+              <FormattedMessage defaultMessage={'Delete Challenge'} description='delete challenge button' />
             </Text>
           </TouchableOpacity>
         </View>
@@ -329,7 +339,9 @@ const YourChallengesActions = ({ navigation, route }) => {
         style={style}
         toastMessage={state.toastMessage}
         toastModalOpen={state.toastModalOpen}
-        onToastHide={onToastHide} />
+        onToastHide={onToastHide}
+        navigation={navigation}
+      />
     </>
   );
 };
