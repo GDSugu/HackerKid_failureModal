@@ -19,10 +19,10 @@ import { Skeleton } from '@rneui/base';
 import LinearGradient from 'react-native-linear-gradient';
 import ThemeContext from '../components/theme';
 import turtleGameCover from '../../images/games/turtle-game-cover.png';
-// import zombieLandGameCover from '../../images/games/zombie-game-cover.png';
-// import webkataHtmlGameCover from '../../images/games/webkata-html-game-cover.png';
-// import webkataCssGameCover from '../../images/games/webkata-css-game-cover.png';
-// import webkataJsGameCover from '../../images/games/webkata-js-game-cover.png';
+import zombieLandGameCover from '../../images/games/zombie-game-cover.png';
+import webkataHtmlGameCover from '../../images/games/webkata-html-game-cover.png';
+import webkataCssGameCover from '../../images/games/webkata-css-game-cover.png';
+import webkataJsGameCover from '../../images/games/webkata-js-game-cover.png';
 import LevelIcon from '../../images/games/level-icon.svg';
 import PlayBtnIcon from '../../images/games/play-game-icon.svg';
 import { useDashboard } from '../../hooks/pages/dashboard';
@@ -89,6 +89,7 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => {
     },
     sectionHeading: {
       marginVertical: 15,
+      marginTop: 20,
       color: utilColors.dark,
       ...font.subtitleBold,
     },
@@ -397,8 +398,9 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => {
     },
     gameSummaryGameCoverImage: {
       flex: 1,
+      width: '100%',
+      height: '100%',
       borderRadius: 20,
-      height: 60,
       alignSelf: 'center',
       resizeMode: 'contain',
     },
@@ -418,47 +420,47 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => {
 const LeaderBoardCard = ({
   leaderboardData, leaderBoardUserData, navigation, style, bottomSheetRef,
 }) => <>
-  <View style={[style.sheetCard]}>
-    <View style={style.sheetCardHeading}>
-      <Text style={[style.sheetCardHeadingText, style.sheetLeaderboardHeadingText]}>
-        <FormattedMessage
-          defaultMessage='Leaderboard Ranking'
-          description='Leaderboard card heading text'
-        />
-      </Text>
-    </View>
-    {
-      leaderBoardUserData && <>
-      <View style={style.sheetCardHeroContent}>
-        <Text
-          style={[style.sheetCardTextColor, style.sheetCardHeroTitle]}
-          >#{leaderBoardUserData.rank}</Text>
-        <Text style={style.sheetCardBodyText}>
+    <View style={[style.sheetCard]}>
+      <View style={style.sheetCardHeading}>
+        <Text style={[style.sheetCardHeadingText, style.sheetLeaderboardHeadingText]}>
           <FormattedMessage
-            defaultMessage='rank'
-            description='sheet card subtitle'
+            defaultMessage='Leaderboard Ranking'
+            description='Leaderboard card heading text'
           />
         </Text>
       </View>
-    </>
-    }
-    { !leaderBoardUserData && <>
-        <Skeleton width='20%' height={48} style={{ borderRadius: 8, alignSelf: 'center', marginVertical: 8 }} />
-      </> }
-    <View style={style.sheetCardBodyContent}>
-      { leaderboardData
-      && leaderboardData.slice(0, 3).map((item, index) => (
-        <View style={style.sheetCardBodyRow} key={index}>
-          <View style={style.sheetCardBodyRow1}>
+      {
+        leaderBoardUserData && <>
+          <View style={style.sheetCardHeroContent}>
             <Text
-              style={[
-                style.sheetCardBodyText, style.sheetCardRowIndex,
-              ]}
-            >#{item.rank}</Text>
-            <Text style={style.sheetCardBodyText}>{item.name}</Text>
+              style={[style.sheetCardTextColor, style.sheetCardHeroTitle]}
+            >#{leaderBoardUserData.rank}</Text>
+            <Text style={style.sheetCardBodyText}>
+              <FormattedMessage
+                defaultMessage='rank'
+                description='sheet card subtitle'
+              />
+            </Text>
           </View>
-          <Text style={style.sheetCardBodyText}>{item.points}</Text>
-        </View>)) }
+        </>
+      }
+      {!leaderBoardUserData && <>
+        <Skeleton width='20%' height={48} style={{ borderRadius: 8, alignSelf: 'center', marginVertical: 8 }} />
+      </>}
+      <View style={style.sheetCardBodyContent}>
+        {leaderboardData
+          && leaderboardData.slice(0, 3).map((item, index) => (
+            <View style={style.sheetCardBodyRow} key={index}>
+              <View style={style.sheetCardBodyRow1}>
+                <Text
+                  style={[
+                    style.sheetCardBodyText, style.sheetCardRowIndex,
+                  ]}
+                >#{item.rank}</Text>
+                <Text style={style.sheetCardBodyText}>{item.name}</Text>
+              </View>
+              <Text style={style.sheetCardBodyText}>{item.points}</Text>
+            </View>))}
         {
           !leaderboardData
           && [1, 2, 3].map((item, index) => (
@@ -468,42 +470,44 @@ const LeaderBoardCard = ({
             </View>
           ))
         }
-    </View>
-    <TouchableOpacity
+      </View>
+      <TouchableOpacity
         onPress={() => {
           bottomSheetRef.current.close();
           navigation.navigate('Leaderboard');
         }}
-      style={[style.sheetCardButton, style.sheetLeaderboardBtn]}
-    >
-      <Text style={style.sheetCardButtonText}>
-        <FormattedMessage
-          defaultMessage='Show Leaderboard'
-          description='Leaderboard show button'
-        />
-      </Text>
-    </TouchableOpacity>
-  </View>
+        style={[style.sheetCardButton, style.sheetLeaderboardBtn]}
+      >
+        <Text style={style.sheetCardButtonText}>
+          <FormattedMessage
+            defaultMessage='Show Leaderboard'
+            description='Leaderboard show button'
+          />
+        </Text>
+      </TouchableOpacity>
+    </View>
   </>;
 
 const IndividualGameSummaryCard = ({
-  style, contentContainerStyles = {}, gameTitle, gameCoverImage, currentLevelNumber, totalLevels,
-  totalEarnedCoins,
+  style, contentContainerStyles = {}, gameTitle, gameCoverImage, validSubmissionCount, totalLevels,
+  totalEarnedCoins, onPress,
 }) => (
-    <View style={[style.gameSummaryCard, contentContainerStyles]}>
-      <View style={style.gameSummaryCoverImageAndTitle}>
-      <Image style={style.gameSummaryGameCoverImage} source={gameCoverImage} resizeMode={'stretch'} />
-        <View style={style.gameSummaryGameTitleAndLevelProgress}>
+  <View style={[style.gameSummaryCard, contentContainerStyles]}>
+    <View style={style.gameSummaryCoverImageAndTitle}>
+      <TouchableOpacity style={{ flex: 1, height: 60 }} onPress={onPress} activeOpacity={0.7}>
+        <Image source={gameCoverImage} style={style.gameSummaryGameCoverImage} resizeMode={'stretch'} />
+      </TouchableOpacity>
+      <View style={style.gameSummaryGameTitleAndLevelProgress}>
         <Text style={style.gameSummaryGameTitleText}>
           <FormattedMessage defaultMessage={'{gameTitle}'} description={'game title'} values={{ gameTitle }} />
         </Text>
         <View style={style.levelProgressIndicator}>
           <LevelIcon />
           <Text style={style.gameStatText}>
-            <FormattedMessage defaultMessage={'{levelText}'} description='level text' values={{ levelText: `${currentLevelNumber}/${totalLevels}` }}/>
+            <FormattedMessage defaultMessage={'{levelText}'} description='level text' values={{ levelText: `${validSubmissionCount}/${totalLevels}` }} />
           </Text>
         </View>
-        </View>
+      </View>
     </View>
     <View style={style.gameSummaryOtherStatsAndProgressBar}>
       <OtherStats
@@ -512,9 +516,10 @@ const IndividualGameSummaryCard = ({
         contentContainerSyle={{ marginBottom: 10 }} />
       <LinearProgressBar
         style={style}
-        step={currentLevelNumber} steps={totalLevels} />
+        step={validSubmissionCount}
+        steps={totalLevels} />
     </View>
-    </View>
+  </View>
 );
 
 // in page re-usable components
@@ -531,15 +536,15 @@ const OtherStats = ({
 </View>);
 
 const LinearProgressBar = ({ style, step, steps }) => (
-    <View style={style.levelProgressBar}>
-        <LinearGradient
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
-          colors={style.levelProgressGradient}
-          style={[style.levelProgress, {
-            width: `${(step / steps) * 100}%`,
-          }]} />
-    </View>
+  <View style={style.levelProgressBar}>
+    <LinearGradient
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      colors={style.levelProgressGradient}
+      style={[style.levelProgress, {
+        width: `${(step / steps) * 100}%`,
+      }]} />
+  </View>
 );
 
 // game card component
@@ -568,23 +573,23 @@ const GameCard = ({
   }, [state.showGameStats]);
 
   const GameStats = ({
-    currentLevelNumber, totalLevels, totalEarnedCoins,
+    validSubmissionCount, totalLevels, totalEarnedCoins,
   }) => (
     <Animated.View
       style={[style.gameStatsContainer, { transform: [{ translateY: state.translateValue }] }]}>
       <View style={style.levelProgressIndicator}>
         <LevelIcon />
         <Text style={style.gameStatText}>
-          <FormattedMessage defaultMessage={'{levelText}'} description='level text' values={{ levelText: `${currentLevelNumber}/${totalLevels}` }}/>
+          <FormattedMessage defaultMessage={'{levelText}'} description='level text' values={{ levelText: `${validSubmissionCount}/${totalLevels}` }} />
         </Text>
       </View>
       <View style={style.gameStatsOtherStatsWithProgress}>
         <OtherStats style={style} totalEarnedCoins={totalEarnedCoins} contentContainerSyle={{
           backgroundColor: 'transparent',
           marginBottom: 12,
-        }}/>
+        }} />
         <LinearProgressBar
-          step={currentLevelNumber}
+          step={validSubmissionCount}
           steps={totalLevels}
           style={style} />
       </View>
@@ -593,13 +598,13 @@ const GameCard = ({
 
   return (
     <TouchableOpacity onPress={onPress}>
-    <View style={gameCardVariant === 0 ? style.gameCard.variant0 : style.gameCard.variant1}>
-      <View style={style.imageWithLevelIndicator}>
-        <Image
-          style={style.gameBg}
-          source={gameDetails.gameCoverImage}
-          resizeMode='stretch' />
-        {
+      <View style={gameCardVariant === 0 ? style.gameCard.variant0 : style.gameCard.variant1}>
+        <View style={style.imageWithLevelIndicator}>
+          <Image
+            style={style.gameBg}
+            source={gameDetails.gameCoverImage}
+            resizeMode='stretch' />
+          {
             gameCardVariant === 0
               ? <TouchableOpacity
                 style={style.levelIndicatorBtn}
@@ -607,17 +612,17 @@ const GameCard = ({
                   ...prev,
                   showGameStats: !prev.showGameStats,
                 }))}>
-            <LevelIcon />
-            <Text style={style.levelNumberText}>
-              <FormattedMessage defaultMessage={'Level {currentLevelNumber}'} values={{ currentLevelNumber: gameDetails.currentLevelNumber }} />
-            </Text>
-          </TouchableOpacity> : null
-        }
-      </View>
-      <View style={gameCardVariant === 0 ? [style.cardBody, { position: 'relative' }] : style.cardBody}>
-        <Text style={gameCardVariant === 0 ? style.gameTitleText.variant0 : style.gameTitleText.variant1} numberOfLines={1} ellipsizeMode={'middle'}>
-          <FormattedMessage defaultMessage={'{gameTitle}'} description={'game title'} values={{ gameTitle: gameDetails.gameTitle }} />
-        </Text>
+                <LevelIcon />
+                <Text style={style.levelNumberText}>
+                  <FormattedMessage defaultMessage={'Level {currentLevelNumber}'} values={{ currentLevelNumber: gameDetails.currentLevelNumber }} />
+                </Text>
+              </TouchableOpacity> : null
+          }
+        </View>
+        <View style={gameCardVariant === 0 ? [style.cardBody, { position: 'relative' }] : style.cardBody}>
+          <Text style={gameCardVariant === 0 ? style.gameTitleText.variant0 : style.gameTitleText.variant1} numberOfLines={1} ellipsizeMode={'middle'}>
+            <FormattedMessage defaultMessage={'{gameTitle}'} description={'game title'} values={{ gameTitle: gameDetails.gameTitle }} />
+          </Text>
           <TouchableOpacity
             style={gameCardVariant === 0 ? style.playGameBtn.variant0 : style.playGameBtn.variant1}
             onPress={onPress}>
@@ -625,20 +630,20 @@ const GameCard = ({
             {
               gameCardVariant === 0
               && <Text style={style.playBtnText}>
-                    <FormattedMessage defaultMessage={'PLAY'} description={'play text'} />
-                  </Text>
+                <FormattedMessage defaultMessage={'PLAY'} description={'play text'} />
+              </Text>
             }
-        </TouchableOpacity>
+          </TouchableOpacity>
         </View>
-      {
-        gameCardVariant === 0
-        && <GameStats
-        currentLevelNumber={gameDetails.currentLevelNumber}
-        totalLevels={gameDetails.totalLevels}
-        totalEarnedCoins={ gameDetails.totalEarnedCoins } />
-      }
+        {
+          gameCardVariant === 0
+          && <GameStats
+            validSubmissionCount={gameDetails.validSubmissionCount}
+            totalLevels={gameDetails.totalLevels}
+            totalEarnedCoins={gameDetails.totalEarnedCoins} />
+        }
       </View>
-  </TouchableOpacity>
+    </TouchableOpacity>
   );
 };
 
@@ -665,6 +670,7 @@ const ContinuePlayingSection = ({ style, gameCardsData }) => (
               currentLevelNumber: data.currentLevelNumber,
               totalLevels: data.totalLevels,
               totalEarnedCoins: data.totalEarnedCoins,
+              validSubmissionCount: data.validSubmissionCount,
             }} />}
           keyExtractor={(data, index) => index.toString()}
           horizontal={true}
@@ -702,17 +708,18 @@ const RecommendedGamesSection = ({ style, gameCardsData }) => (
       gameCardsData && <>
         <FlatList
           data={gameCardsData}
-            renderItem={({ item: data }) => <GameCard
-              style={style}
-              onPress={data.onPress}
-              gameCardVariant={0}
-              gameDetails={{
-                gameTitle: data.gameTitle,
-                gameCoverImage: data.gameCoverImage,
-                currentLevelNumber: data.currentLevelNumber,
-                totalLevels: data.totalLevels,
-                totalEarnedCoins: data.totalEarnedCoins,
-              }} />}
+          renderItem={({ item: data }) => <GameCard
+            style={style}
+            onPress={data.onPress}
+            gameCardVariant={0}
+            gameDetails={{
+              gameTitle: data.gameTitle,
+              gameCoverImage: data.gameCoverImage,
+              currentLevelNumber: data.currentLevelNumber,
+              totalLevels: data.totalLevels,
+              totalEarnedCoins: data.totalEarnedCoins,
+              validSubmissionCount: data.validSubmissionCount,
+            }} />}
           keyExtractor={(item, index) => index.toString()}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
@@ -744,36 +751,36 @@ const AllGamesSection = ({ style, gameCardsData }) => (
         defaultMessage="All Games"
         description="All games heading"
       />
-  </Text>
-  <View style={style.allGameSection}>
-    {
-      gameCardsData && <>
+    </Text>
+    <View style={style.allGameSection}>
       {
-          gameCardsData.map((data, index) => <GameCard
-          key={index.toString()}
-          style={style}
-          onPress={data.onPress}
-          gameCardVariant={1}
-          gameDetails={{
-            gameTitle: data.gameTitle,
-            gameCoverImage: data.gameCoverImage,
-            currentLevelNumber: data.currentLevelNumber,
-            totalLevels: data.totalLevels,
-            totalEarnedCoins: data.totalEarnedCoins,
-          }}/>)
+        gameCardsData && <>
+          {
+            gameCardsData.map((data, index) => <GameCard
+              key={index.toString()}
+              style={style}
+              onPress={data.onPress}
+              gameCardVariant={1}
+              gameDetails={{
+                gameTitle: data.gameTitle,
+                gameCoverImage: data.gameCoverImage,
+                currentLevelNumber: data.currentLevelNumber,
+                totalLevels: data.totalLevels,
+                totalEarnedCoins: data.totalEarnedCoins,
+              }} />)
+          }
+        </>
       }
-    </>
-    }
-    {
-      !gameCardsData && <>
-        {
-          [1, 2, 3, 4, 5].map((val) => <Skeleton
-            key={val}
-            style={style.skeleton.variant1}></Skeleton>)
-        }
-      </>
-    }
-  </View>
+      {
+        !gameCardsData && <>
+          {
+            [1, 2, 3, 4, 5].map((val) => <Skeleton
+              key={val}
+              style={style.skeleton.variant1}></Skeleton>)
+          }
+        </>
+      }
+    </View>
   </>
 );
 
@@ -819,46 +826,57 @@ const Games = ({ navigation }) => {
     gameCoverImage: turtleGameCover,
     currentLevelNumber: dashBoardData?.turtle?.currentQuestionDetails
       ? dashBoardData.turtle.currentQuestionDetails.virtualId : 0,
+    validSubmissionCount: dashBoardData?.turtle?.validSubmissionCount,
     totalLevels: dashBoardData?.turtle?.overAllQuestionCount,
     totalEarnedCoins: dashBoardData?.turtle?.totalPointsEarned,
     onPress: () => { navigation.navigate('TurtleHome'); },
   },
-  // {
-  //   gameTitle: 'Zombieland',
-  //   gameCoverImage: zombieLandGameCover,
-  //   currentLevelNumber: dashBoardData?.zombieLand?.currentQuestionDetails
-  //     ? dashBoardData.zombieLand.currentQuestionDetails.virtualId : 0,
-  //   totalLevels: dashBoardData?.zombieLand?.overAllQuestionCount,
-  //   totalEarnedCoins: dashBoardData?.zombieLand?.totalPointsEarned,
-  //   onPress: () => { },
-  // },
-  // {
-  //   gameTitle: 'Webkata-HTML',
-  //   gameCoverImage: webkataHtmlGameCover,
-  //   currentLevelNumber: dashBoardData?.webkataHtml?.currentQuestionDetails
-  //     ? dashBoardData.webkataHtml.currentQuestionDetails.virtualId : 0,
-  //   totalLevels: dashBoardData?.webkataHtml?.overAllQuestionCount,
-  //   totalEarnedCoins: dashBoardData?.webkataHtml?.totalPointsEarned,
-  //   onPress: () => { },
-  // },
-  // {
-  //   gameTitle: 'Webkata-CSS',
-  //   gameCoverImage: webkataCssGameCover,
-  //   currentLevelNumber: dashBoardData?.webkataCss?.currentQuestionDetails
-  //     ? dashBoardData?.webkataCss?.currentQuestionDetails?.virtualId : 0,
-  //   totalLevels: dashBoardData?.webkataCss?.overAllQuestionCount,
-  //   totalEarnedCoins: dashBoardData?.webkataCss?.totalPointsEarned,
-  //   onPress: () => { },
-  // },
-  // {
-  //   gameTitle: 'Webkata-JS',
-  //   gameCoverImage: webkataJsGameCover,
-  //   currentLevelNumber: dashBoardData?.webkataJs?.currentQuestionDetails
-  //     ? dashBoardData?.webkataJs?.currentQuestionDetails?.virtualId : 0,
-  //   totalLevels: dashBoardData?.webkataJs?.overAllQuestionCount,
-  //   totalEarnedCoins: dashBoardData?.webkataJs?.totalPointsEarned,
-  //   onPress: () => { },
-  //   }
+  {
+    gameTitle: 'Zombieland',
+    gameCoverImage: zombieLandGameCover,
+    currentLevelNumber: dashBoardData?.zombieLand?.currentQuestionDetails
+      ? dashBoardData.zombieLand.currentQuestionDetails.virtualId : 0,
+    validSubmissionCount: dashBoardData?.zombieLand?.validSubmissionCount,
+    totalLevels: dashBoardData?.zombieLand?.overAllQuestionCount,
+    totalEarnedCoins: dashBoardData?.zombieLand?.totalPointsEarned,
+    onPress: () => { },
+  },
+  {
+    gameTitle: 'Webkata-HTML',
+    gameCoverImage: webkataHtmlGameCover,
+    currentLevelNumber: dashBoardData?.webkataHtml?.currentQuestionDetails
+      ? dashBoardData.webkataHtml.currentQuestionDetails.virtualId : 0,
+    totalLevels: dashBoardData?.webkataHtml?.overAllQuestionCount,
+    validSubmissionCount: dashBoardData?.webkataHtml?.validSubmissionCount,
+    totalEarnedCoins: dashBoardData?.webkataHtml?.totalPointsEarned,
+    onPress: () => navigation.navigate('WebkataHome', {
+      conceptId: 'HTML',
+    }),
+  },
+  {
+    gameTitle: 'Webkata-CSS',
+    gameCoverImage: webkataCssGameCover,
+    currentLevelNumber: dashBoardData?.webkataCss?.currentQuestionDetails
+      ? dashBoardData?.webkataCss?.currentQuestionDetails?.virtualId : 0,
+    totalLevels: dashBoardData?.webkataCss?.overAllQuestionCount,
+    validSubmissionCount: dashBoardData?.webkataCss?.validSubmissionCount,
+    totalEarnedCoins: dashBoardData?.webkataCss?.totalPointsEarned,
+    onPress: () => navigation.navigate('WebkataHome', {
+      conceptId: 'CSS',
+    }),
+  },
+  {
+    gameTitle: 'Webkata-JS',
+    gameCoverImage: webkataJsGameCover,
+    currentLevelNumber: dashBoardData?.webkataJs?.currentQuestionDetails
+      ? dashBoardData?.webkataJs?.currentQuestionDetails?.virtualId : 0,
+    totalLevels: dashBoardData?.webkataJs?.overAllQuestionCount,
+    validSubmissionCount: dashBoardData?.webkataJs?.validSubmissionCount,
+    totalEarnedCoins: dashBoardData?.webkataJs?.totalPointsEarned,
+    onPress: () => navigation.navigate('WebkataHome', {
+      conceptId: 'JS',
+    }),
+  },
   ];
 
   if (authContext.appData.isReferesh) {
@@ -926,28 +944,28 @@ const Games = ({ navigation }) => {
 
   return (
     <>
-    <ScrollView
-      style={style.container}
+      <ScrollView
+        style={style.container}
         refreshControl={<RefreshControl
           refreshing={authContext?.gamesPageAppData?.refreshing} onRefresh={onRefresh} />}>
-      <View style={style.pageHeadingWithMoreInfoBtn}>
-        <Text style={style.pageHeading}>
-          <FormattedMessage defaultMessage={'Games'} description = {'games page heading'} />
-        </Text>
-          <TouchableOpacity style={style.moreInfoBtn} onPress={() => bottomSheetRef.current.open()}>
-          <Text style={style.moreInfoBtnText}>
-            <FormattedMessage defaultMessage={'More Info'} description={'More info button'} />
+        <View style={style.pageHeadingWithMoreInfoBtn}>
+          <Text style={style.pageHeading}>
+            <FormattedMessage defaultMessage={'Games'} description={'games page heading'} />
           </Text>
-        </TouchableOpacity>
-      </View>
-      {
-        gameData && <OtherStats
-        style={style}
-        contentContainerSyle={style.totalStats} totalEarnedCoins={gameData.totalPointsEarned} />
-      }
-      {
-        !gameData && <Skeleton width={'100%'} height={50} style={{ borderRadius: 8 }} />
-      }
+          <TouchableOpacity style={style.moreInfoBtn} onPress={() => bottomSheetRef.current.open()}>
+            <Text style={style.moreInfoBtnText}>
+              <FormattedMessage defaultMessage={'More Info'} description={'More info button'} />
+            </Text>
+          </TouchableOpacity>
+        </View>
+        {
+          gameData && <OtherStats
+            style={style}
+            contentContainerSyle={style.totalStats} totalEarnedCoins={gameData.totalPointsEarned} />
+        }
+        {
+          !gameData && <Skeleton width={'100%'} height={50} style={{ borderRadius: 8 }} />
+        }
         <ContinuePlayingSection
           gameCardsData={gameCardsDataArr}
           style={style} />
@@ -957,14 +975,14 @@ const Games = ({ navigation }) => {
         <AllGamesSection
           gameCardsData={gameCardsDataArr}
           style={style} />
-    </ScrollView>
+      </ScrollView>
       {/* bottom sheet */}
-    <BottomSheet
+      <BottomSheet
         ref={bottomSheetRef}
         customStyles={bottomSheetStyles}
         contentPanEnabled={true}
         onOpen={onBottomSheetOpen}
-        onClose = {onBottomSheetClose}
+        onClose={onBottomSheetClose}
       >
         <ScrollView
           showsVerticalScrollIndicator={false}
@@ -976,12 +994,12 @@ const Games = ({ navigation }) => {
               flexDirection: 'row',
               borderRadius: 15,
             }}>
-            <View style={style.gameCardProgressBlock}>
-              <CircleGradientProgressBar
-                gradientColors={[[style.svgGradient.color[0], '10%'], [style.svgGradient.color[1], '90%']]}
-                progressValue={gameData ? gameData.progress : 0}
-                totalValue={ gameData ? gameData.totalGames : 100}
-                startAnim={Boolean(gameData)}
+              <View style={style.gameCardProgressBlock}>
+                <CircleGradientProgressBar
+                  gradientColors={[[style.svgGradient.color[0], '10%'], [style.svgGradient.color[1], '90%']]}
+                  progressValue={gameData ? gameData.progress : 0}
+                  totalValue={gameData ? gameData.totalGames : 100}
+                  startAnim={Boolean(gameData)}
                 >
                   <View style={style.bodyCardContentTitle}>
                     <AnimatedTextInput
@@ -991,7 +1009,7 @@ const Games = ({ navigation }) => {
                       value={'0'}
                       editable={false}
                     />
-                    <Text style={style.gameCardTextLight}>/{gameData ? gameData.totalGames : '--' }</Text>
+                    <Text style={style.gameCardTextLight}>/{gameData ? gameData.totalGames : '--'}</Text>
                   </View>
                   <Text style={style.gameCardSvgCaption}>
                     <FormattedMessage
@@ -999,52 +1017,52 @@ const Games = ({ navigation }) => {
                       description="Game Progress card caption"
                     />
                   </Text>
-              </CircleGradientProgressBar>
-          </View>
-          <View style={style.gameCardProgressBlock}>
-            <View style={[style.bodyCardContentTitle, style.gameCardContent]}>
-              <Image
-                style={[style.bodyCardContentTitleImage, style.gameCardIcons]}
-                source={hkcoin}
-              />
-              <View>
-                <Text style={style.gameCardSubtitle}>
-                  <FormattedMessage
-                    defaultMessage={'Coins Earned:'}
-                    description='Coins Earned'
-                  />
-                </Text>
-                <Text style={style.gameCardText}>{gameData ? gameData.totalPointsEarned : '--' }</Text>
+                </CircleGradientProgressBar>
               </View>
-            </View>
-          </View>
+              <View style={style.gameCardProgressBlock}>
+                <View style={[style.bodyCardContentTitle, style.gameCardContent]}>
+                  <Image
+                    style={[style.bodyCardContentTitleImage, style.gameCardIcons]}
+                    source={hkcoin}
+                  />
+                  <View>
+                    <Text style={style.gameCardSubtitle}>
+                      <FormattedMessage
+                        defaultMessage={'Coins Earned:'}
+                        description='Coins Earned'
+                      />
+                    </Text>
+                    <Text style={style.gameCardText}>{gameData ? gameData.totalPointsEarned : '--'}</Text>
+                  </View>
+                </View>
+              </View>
             </View>
           }
           {
             gameCardsDataArr
             && <>
-                {
+              {
                 gameCardsDataArr.map((data, index) => <IndividualGameSummaryCard
                   key={index}
                   style={style}
                   contentContainerStyles={{ marginTop: 5 }}
                   {...data}
                 />)
-                }
+              }
             </>
           }
           {
             leaderboardData
             && <LeaderBoardCard
-            leaderboardData={leaderboardData}
-            leaderBoardUserData={leaderBoardUserData}
-            bottomSheetRef={bottomSheetRef}
-            navigation={navigation}
-            style={style} />
+              leaderboardData={leaderboardData}
+              leaderBoardUserData={leaderBoardUserData}
+              bottomSheetRef={bottomSheetRef}
+              navigation={navigation}
+              style={style} />
           }
         </ScrollView>
-    </BottomSheet>
-      </>
+      </BottomSheet>
+    </>
   );
 };
 
