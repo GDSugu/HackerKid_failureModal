@@ -10,9 +10,15 @@ const Img = ({
   src = 'resized/default_user-1000w.webp',
   style = null,
   useSource = true,
+  type = 'image',
 }) => {
   let imgSource = `${imgPath + fallback}`;
+  let imgType = type;
   if (src) {
+    const extension = src.split('.').pop();
+    if (extension === 'svg') {
+      imgType = extension;
+    }
     imgSource = src;
   }
   const [imgSrc, setImgSrc] = React.useState(imgSource);
@@ -26,7 +32,7 @@ const Img = ({
   }
 
   React.useEffect(() => {
-    if (!local) {
+    if (!local && imgType === 'image') {
       if (src) {
         fetch(src)
           .then((res) => {
@@ -41,12 +47,15 @@ const Img = ({
   }, []);
 
   return <>
-  {local && <picture style={style} className={className}>
-    <source media='(max-width: 500px)' srcSet={`${imgPath}/resized/${fileName}-1000w.webp`} type="image/webp" />
-    { !useSource && <source media="(min-width: 1200px)" srcSet={`${imgPath + src}`} type="image/png" />}
-    <source srcSet={`${imgPath}/webps/${fileName}.webp`} type="image/webp"></source>
-    <img srcSet={`${imgPath}/resized/${fileName}-1000w.${fileExtension} 1000w`} src={`${imgPath + src}`} alt={alt} />
-  </picture>}
+    {
+      local && imgType === 'image' && <picture style={style} className={className}>
+      <source media='(max-width: 500px)' srcSet={`${imgPath}/resized/${fileName}-1000w.webp`} type="image/webp" />
+        { !useSource && <source media="(min-width: 1200px)" srcSet={`${imgPath + src}`} type="image/png" />}
+        <source srcSet={`${imgPath}/webps/${fileName}.webp`} type="image/webp"></source>
+        <img srcSet={`${imgPath}/resized/${fileName}-1000w.${fileExtension} 1000w`} src={`${imgPath + src}`} alt={alt} loading='lazy' />
+      </picture>
+    }
+    {imgType === 'svg' && <img src={`${imgPath + src}`} style={style} className={className} alt={alt} />}
     {!local && <img src={imgSrc} style={style} className={className} alt={alt} />}
   </>;
 };

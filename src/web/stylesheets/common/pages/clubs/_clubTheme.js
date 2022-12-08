@@ -1,3 +1,4 @@
+const { Yellow, Red } = require('../../../../../colors/_colors');
 const {
   Theme,
 } = require('../../../../javascripts/common/_theme');
@@ -20,6 +21,13 @@ const thememaplight = {
   'club-hero-card-box-shadow-color': '#F9A82625',
   'club-hero-shadow': '0 4px 16px #f9a82625',
   'club-leaderboard-shadow': '0 16px 48px #f9a82625',
+  'club-progress-bar-bg': Yellow.color300,
+  'club-underline-color': Yellow.color100,
+  'club-admin-warning-bg': Red.color50,
+  'club-admin-warning-info-bg': Red.color500,
+  'club-make-admin-bg': Yellow.color900,
+  'club-danger-bg': Red.color900,
+  'club-advanced-options-color': Red.color700,
 };
 // just copied the light theme colors to the dark for now
   // TODO: make this a real dark theme with appropriate colors
@@ -38,6 +46,13 @@ const thememapdark = {
   'club-hero-card-box-shadow-color': '#F9A82625',
   'club-hero-shadow': '0 4px 16px #f9a82625',
   'club-leaderboard-shadow': '0 16px 48px #f9a82625',
+  'club-progress-bar-bg': Yellow.color300,
+  'club-underline-color': Yellow.color100,
+  'club-admin-warning-bg': Red.color50,
+  'club-admin-warning-info-bg': Red.color500,
+  'club-make-admin-bg': Yellow.color900,
+  'club-danger-bg': Red.color900,
+  'club-advanced-options-color': Red.color700,
 };
 
 const cssvars = {
@@ -55,6 +70,13 @@ const cssvars = {
   'club-hero-card-box-shadow-color': '--club-hero-card-box-shadow-color',
   'club-hero-shadow': '--club-hero-shadow',
   'club-leaderboard-shadow': '--club-leaderboard-shadow',
+  'club-progress-bar-bg': '--club-progress-bar-bg',
+  'club-underline-color': '--club-underline-color',
+  'club-admin-warning-bg': '--club-admin-warning-bg',
+  'club-admin-warning-info-bg': '--club-admin-warning-info-bg',
+  'club-make-admin-bg': '--club-make-admin-bg',
+  'club-danger-bg': '--club-danger-bg',
+  'club-advanced-options-color': '--club-advanced-options-color',
 };
 
 module.exports = {

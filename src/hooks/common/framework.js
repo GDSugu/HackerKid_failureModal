@@ -125,11 +125,13 @@ const setUserSession = ({
   pointsEarned,
   profileImg,
   profileLink,
+  unique_url: uniqueUrl,
 }) => {
   const authtokenPromise = setSession('authtoken', auth);
   const namePromise = setSession('name', name);
   const rankPromise = setSession('rank', rank);
   const pointsEarnedPromise = setSession('pointsEarned', pointsEarned);
+  const uniqueURLPromise = setSession('unique_url', uniqueUrl);
   let profileImgPromise;
   let profileLinkPromise;
   if (profileImg !== undefined || profileImg !== false || profileImg !== 'false' || profileImg !== '') {
@@ -147,6 +149,7 @@ const setUserSession = ({
     pointsEarnedPromise,
     profileImgPromise,
     profileLinkPromise,
+    uniqueURLPromise,
   ]);
 };
 
