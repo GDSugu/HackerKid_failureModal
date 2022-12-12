@@ -696,52 +696,52 @@ const ContinuePlayingSection = ({ style, gameCardsData }) => (
 );
 
 // recommended games section
-const RecommendedGamesSection = ({ style, gameCardsData }) => (
-  <View style={style.recommendedGamesSection}>
-    <Text style={style.sectionHeading}>
-      <FormattedMessage
-        defaultMessage="Recommended"
-        description="Recommended games heading"
-      />
-    </Text>
-    {
-      gameCardsData && <>
-        <FlatList
-          data={gameCardsData}
-          renderItem={({ item: data }) => <GameCard
-            style={style}
-            onPress={data.onPress}
-            gameCardVariant={0}
-            gameDetails={{
-              gameTitle: data.gameTitle,
-              gameCoverImage: data.gameCoverImage,
-              currentLevelNumber: data.currentLevelNumber,
-              totalLevels: data.totalLevels,
-              totalEarnedCoins: data.totalEarnedCoins,
-              validSubmissionCount: data.validSubmissionCount,
-            }} />}
-          keyExtractor={(item, index) => index.toString()}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          fadingEdgeLength={50}
-          initialNumToRender={2}
-          snapToInterval={300}
-          decelerationRate={0.001}
-          snapToAlignment={'start'}
-          contentInset={{ left: 20 }}
-          automaticallyAdjustContentInsets={false}
-        />
-      </>
-    }
-    {
-      !gameCardsData && <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        {
-          [1, 2, 3, 4].map((val) => <Skeleton key={val} style={style.skeleton.variant0} />)
-        }
-      </ScrollView>
-    }
-  </View>
-);
+// const RecommendedGamesSection = ({ style, gameCardsData }) => (
+//   <View style={style.recommendedGamesSection}>
+//     <Text style={style.sectionHeading}>
+//       <FormattedMessage
+//         defaultMessage="Recommended"
+//         description="Recommended games heading"
+//       />
+//     </Text>
+//     {
+//       gameCardsData && <>
+//         <FlatList
+//           data={gameCardsData}
+//           renderItem={({ item: data }) => <GameCard
+//             style={style}
+//             onPress={data.onPress}
+//             gameCardVariant={0}
+//             gameDetails={{
+//               gameTitle: data.gameTitle,
+//               gameCoverImage: data.gameCoverImage,
+//               currentLevelNumber: data.currentLevelNumber,
+//               totalLevels: data.totalLevels,
+//               totalEarnedCoins: data.totalEarnedCoins,
+//               validSubmissionCount: data.validSubmissionCount,
+//             }} />}
+//           keyExtractor={(item, index) => index.toString()}
+//           horizontal={true}
+//           showsHorizontalScrollIndicator={false}
+//           fadingEdgeLength={50}
+//           initialNumToRender={2}
+//           snapToInterval={300}
+//           decelerationRate={0.001}
+//           snapToAlignment={'start'}
+//           contentInset={{ left: 20 }}
+//           automaticallyAdjustContentInsets={false}
+//         />
+//       </>
+//     }
+//     {
+//       !gameCardsData && <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+//         {
+//           [1, 2, 3, 4].map((val) => <Skeleton key={val} style={style.skeleton.variant0} />)
+//         }
+//       </ScrollView>
+//     }
+//   </View>
+// );
 
 // all games section
 const AllGamesSection = ({ style, gameCardsData }) => (
