@@ -969,9 +969,9 @@ const Games = ({ navigation }) => {
         <ContinuePlayingSection
           gameCardsData={gameCardsDataArr}
           style={style} />
-        <RecommendedGamesSection
+        {/* <RecommendedGamesSection
           gameCardsData={gameCardsDataArr}
-          style={style} />
+          style={style} /> */}
         <AllGamesSection
           gameCardsData={gameCardsDataArr}
           style={style} />

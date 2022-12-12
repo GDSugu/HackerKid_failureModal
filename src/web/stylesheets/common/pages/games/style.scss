@@ -10,7 +10,7 @@
 $universal-border-radius: 1rem;
 $hero-component-cards-min-height: 200px;
 $more-info-btn-text-color: gt.theme-var(game-more-info-btn-text-color, null, $thememaplight, $cssvars);
-$game-cards-height: 10.1rem;
+$game-cards-height: 12.1rem;
 $game-variant0-card-width-after-xs: 93%;
 $game-varint0-card-width-after-sm: 48%;
 $game-variant0-card-width-after-ml: 40%;
@@ -180,7 +180,7 @@ $level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, nu
 .all-games-section,
 .recommended-games-section,
 .continue-playing-games-section {
-  margin-top: 1.7rem;
+  margin-top: 2rem;
 }
 
 .all-game-cards,
@@ -450,6 +450,10 @@ $level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, nu
 
     @include gm.media-breakpoint-up(lg) {
       width: $game-variant0-card-width-after-lg;
+    }
+
+    @include gm.media-breakpoint-up(xxl) {
+      width: $game-variant0-card-width-after-xxl;
     }
   }
 }
