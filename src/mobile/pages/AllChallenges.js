@@ -231,7 +231,7 @@ const AllChallenges = ({ navigation }) => {
 
   const onRefresh = () => {
     setRefreshing(true);
-    getChallenges({ cached: false }).then((res) => {
+    getChallenges({ cached: false }).then(() => {
       setReloadComponent(reloadComponent + 1);
       setRefreshing(false);
     })

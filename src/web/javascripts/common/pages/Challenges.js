@@ -99,7 +99,13 @@ const ChallengeSwiperSlide = ({ data, showChallengeAuthorName }) => <>
   <Link className='challenge-item' to={data.actionUrl}>
     <div className="challenge-block">
       <div className="challenge-img">
-        <img src={data.imgPath} alt={data.challengeName} />
+        <Img
+          alt={data.challengeName}
+          useSource={true}
+          local={false}
+          src={data.imgPath}
+        />
+        {/* <img src={data.imgPath} alt={data.challengeName} /> */}
       </div>
       <div className="challenge-title">
         <p>{data.challengeName || '--'}</p>

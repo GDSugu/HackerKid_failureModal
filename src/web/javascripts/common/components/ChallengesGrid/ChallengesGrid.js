@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
+import Img from '../Img';
 
 const ChallengesGrid = ({
   heading,
@@ -15,7 +16,7 @@ const ChallengesGrid = ({
   showCreateChallengeButtonInEmptyState = true,
   numberOfSkeletonCards = 6,
   challengeCardType = 'clickable',
-  onChallengeCardClick = () => {},
+  onChallengeCardClick = () => { },
 }) => (
   <section className={`grid-container ${contentContainerClassName}`}>
     {
@@ -51,38 +52,50 @@ const ChallengesGrid = ({
               {
                 challengeCardType === 'clickable'
                 && <div tabIndex={0} className='challenge-item' onClick={() => onChallengeCardClick(challenge)} style={{ cursor: 'pointer' }}>
-                <div className="challenge-block">
-                  <div className="challenge-img">
-                    <img src={challenge.imgPath} alt={challenge.challengeName} />
-                  </div>
-                  <div className="challenge-title">
-                    <p>{challenge.challengeName || '--'}</p>
-                  </div>
-                  {
-                    showChallengeAuthorName && <div className="challenge-author">
-                      <p>{`by ${challenge.creatorName || '--'}`}</p>
+                  <div className="challenge-block">
+                    <div className="challenge-img">
+                      <Img
+                        alt={challenge.challengeName}
+                        useSource={true}
+                        local={false}
+                        src={challenge.imgPath}
+                      />
+                      {/* <img src={challenge.imgPath} alt={challenge.challengeName} /> */}
                     </div>
-                  }
+                    <div className="challenge-title">
+                      <p>{challenge.challengeName || '--'}</p>
+                    </div>
+                    {
+                      showChallengeAuthorName && <div className="challenge-author">
+                        <p>{`by ${challenge.creatorName || '--'}`}</p>
+                      </div>
+                    }
+                  </div>
                 </div>
-              </div>
               }
               {
                 challengeCardType === 'link'
                 && <Link className='challenge-item' to={challenge.actionUrl} >
-                <div className="challenge-block">
-                  <div className="challenge-img">
-                    <img src={challenge.imgPath} alt={challenge.challengeName} />
-                  </div>
-                  <div className="challenge-title">
-                    <p>{challenge.challengeName || '--'}</p>
-                  </div>
-                  {
-                    showChallengeAuthorName && <div className="challenge-author">
-                      <p>{`by ${challenge.creatorName || '--'}`}</p>
+                  <div className="challenge-block">
+                    <div className="challenge-img">
+                      <Img
+                        alt={challenge.challengeName}
+                        useSource={true}
+                        local={false}
+                        src={challenge.imgPath}
+                      />
+                      {/* <img src={challenge.imgPath} alt={challenge.challengeName} /> */}
                     </div>
-                  }
-                </div>
-              </Link>
+                    <div className="challenge-title">
+                      <p>{challenge.challengeName || '--'}</p>
+                    </div>
+                    {
+                      showChallengeAuthorName && <div className="challenge-author">
+                        <p>{`by ${challenge.creatorName || '--'}`}</p>
+                      </div>
+                    }
+                  </div>
+                </Link>
               }
             </div>
           ))
@@ -91,7 +104,12 @@ const ChallengesGrid = ({
     }
     {
       showEmptyState && challenges && challenges.length === 0 && <div className='challenges-empty'>
-        <img src='../../../../images/challenges/my-challenges-empty.png' alt='no-challenges' />
+        <Img
+          src='challenges/my-challenges-empty.png'
+          alt='no-challenges'
+        />
+        {/* <img
+        src='../../../../images/challenges/my-challenges-empty.png' alt='no-challenges' /> */}
         <h6 className='subtitle1'>
           <FormattedMessage defaultMessage={'{emptyStateText}'} description={'no challenges'} values={{ emptyStateText }} />
         </h6>
