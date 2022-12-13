@@ -461,10 +461,12 @@ const Ide = ({ navigation, route }) => {
   const onRunCodePress = (innerTabNavigation) => {
     const code = ideState.writtenCode;
 
-    setIdeState((prev) => ({
-      ...prev,
-      output: ['Compiling your code...'],
-    }));
+    if (isPageMounted.current) {
+      setIdeState((prev) => ({
+        ...prev,
+        output: ['Compiling your code...'],
+      }));
+    }
 
     setSession('previousLanguageValue', ideState.selectedLanguageValue);
     setSession('previousSourceCode', code);
@@ -482,10 +484,12 @@ const Ide = ({ navigation, route }) => {
         const { compilationDetails } = parsedData;
 
         if (parsedData.status === 'success') {
-          setIdeState((prev) => ({
-            ...prev,
-            output: [...prev.output, (compilationDetails.output ? compilationDetails.output.trim() : 'Nil')],
-          }));
+          if (isPageMounted.current) {
+            setIdeState((prev) => ({
+              ...prev,
+              output: [...prev.output, (compilationDetails.output ? compilationDetails.output.trim() : 'Nil')],
+            }));
+          }
         } else if (parsedData.status === 'error') {
           const err = new Error(parsedData.message);
           err.cause = 'postData';

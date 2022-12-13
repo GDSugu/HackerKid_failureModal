@@ -291,7 +291,9 @@ const Ide = () => {
   const runCodeBtnClickHandler = (e) => {
     $(e.target).attr('disabled', 'true');
 
-    setState((prev) => ({ ...prev, output: ['Compiling your code...'] }));
+    if (isPageMounted.current) {
+      setState((prev) => ({ ...prev, output: ['Compiling your code...'] }));
+    }
 
     const { input } = state;
     const sourceCode = state.writtenCode;
@@ -306,10 +308,12 @@ const Ide = () => {
 
       $(e.target).removeAttr('disabled');
       if (parsedData.status === 'success') {
-        setState((prev) => ({
-          ...prev,
-          output: [...prev.output, parsedData.compilationDetails.output.trim()],
-        }));
+        if (isPageMounted.current) {
+          setState((prev) => ({
+            ...prev,
+            output: [...prev.output, parsedData.compilationDetails.output.trim()],
+          }));
+        }
       } else if (parsedData.status === 'error') {
         const err = new Error(parsedData.message);
         err.cause = 'postData';
