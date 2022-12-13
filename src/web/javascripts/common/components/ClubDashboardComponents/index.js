@@ -10,57 +10,18 @@ import Modal from '../Modal';
 const clubDashboardManager = {
   validatedResult: {},
   isFieldValidated: false,
+  isPagePopped: false,
 };
 
-const clubFeedData = [{
-  memberName: 'Member 1',
-  memberImage: '../../../../images/clubs/club.png',
-  activityType: 'award',
-  activityImage: '../../../../images/clubs/club.png',
-  activityMessage: 'New Award: Most Active Member',
-}, {
-  memberName: 'Member 2',
-  memberImage: '../../../../images/clubs/club.png',
-  activityType: 'badge',
-  activityImage: '../../../../images/clubs/club.png',
-  activityMessage: 'New Badge: Most Active Member',
-}, {
-  memberName: 'Member 3',
-  memberImage: '../../../../images/profile/default_user.png',
-  activityType: 'xp',
-  activityImage: '../../../../images/profile/default_user.png',
-  activityMessage: 'New XP: Most Active Member',
-}, {
-  memberName: 'Member 4',
-  memberImage: '../../../../images/common/profile.png',
-  activityType: 'points',
-  activityImage: '../../../../images/clubs/club.png',
-  activityMessage: 'New XP: Most Active Member',
-}, {
-  memberName: 'Member 5',
-  memberImage: '../../../../images/clubs/club.png',
-  activityType: 'xp',
-  activityImage: '../../../../images/clubs/club.png',
-  activityMessage: 'New XP: Most Active Member',
-}, {
-  memberName: 'Member 6',
-  memberImage: '../../../../images/clubs/club.png',
-  activityType: 'left',
-  activityImage: '../../../../images/clubs/club.png',
-  activityMessage: 'New XP: Most Active Member',
-}, {
-  memberName: 'Member 7',
-  memberImage: '../../../../images/clubs/club.png',
-  activityType: 'joined',
-  activityImage: '../../../../images/clubs/club.png',
-  activityMessage: 'New XP: Most Active Member',
-}, {
-  memberName: 'Member 8',
-  memberImage: '../../../../images/clubs/club.png',
-  activityType: 'kicked-out',
-  activityImage: '../../../../images/clubs/club.png',
-  activityMessage: 'New XP: Most Active Member',
-}];
+// const feedAwardImageMap = {
+//   award: '../../../../images/clubs/feed-achievement-icon.svg',
+//   badge: '../../../../images/clubs/star.svg',
+//   xp: '../../../../images/clubs/xp.png',
+//   points: '../../../../images/common/hkcoins.png',
+//   left: '../../../../images/clubs/no-club.png',
+//   joined: '../../../../images/clubs/members.svg',
+//   'kicked-out': '../../../../images/clubs/no-club.svg',
+// };
 
 const ClubHeroContainer = ({
   clubDashboardStatus,
@@ -164,7 +125,7 @@ const ClubHeroContainer = ({
   const handleJoinClub = () => {
     const confirm = window.confirm('Are you sure you want to join this club?');
     if (confirm) {
-      joinClub({ clubName: clubData?.clubName })
+      joinClub({ clubId: clubData?.clubId })
         .then((resp) => {
           if (resp !== 'access_denied' && resp?.status === 'success') {
             getUserAction('pending');
@@ -189,15 +150,15 @@ const ClubHeroContainer = ({
     if (toggleStatus === 'hide') {
       elem.modal(toggleStatus);
     } else if (toggleStatus === 'show') {
+      elem.data('bs.modal', null);
       elem.modal({
-        keyboard: false,
         backdrop: 'static',
+        keyboard: false,
       });
     }
   };
 
-  const clubAction = (e) => {
-    console.log('clubAction', e.target);
+  const clubAction = () => {
     checkMemberStatus();
     switch (clubHeroAction) {
       case 'member-action':
@@ -222,7 +183,7 @@ const ClubHeroContainer = ({
   return <>
     <div className="hero-card club-hero-card"
       style={{
-        background: `${isDesktop ? `url(${profileImg}) no-repeat center left / contain, url(../../../../images/dashboard/dashboard-hero-bg-right.png) no-repeat center right / contain, var(--bg-1)` : `linear-gradient(270deg, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%), url(${profileImg}) no-repeat center left / contain, var(--bg-1)`}`,
+        background: `${isDesktop ? `url(${profileImg}?updatedAt=${Date.now()}) no-repeat center left / contain, url(../../../../images/dashboard/dashboard-hero-bg-right.png) no-repeat center right / contain, var(--bg-1)` : `linear-gradient(270deg, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%), url(${profileImg}?updatedAt=${Date.now()}) no-repeat center left / contain, var(--bg-1)`}`,
       }} >
       {/* <div className="hero-card-data col-6 col-sm-4"> */}
         {/* <div className="hero-card-data-content">
@@ -404,21 +365,167 @@ const ClubHeroContainer = ({
   </>;
 };
 
-const ClubAdminWarningBannerComponent = () => <>
+const ClubAdminWarningBannerComponent = ({
+  message = 'Only admins can accept invites',
+}) => <>
   <div className="club-admin-warning-banner">
     <div className="d-flex align-items-center">
       <span className="info-circle">i</span>
       <p className="mb-0">
         <FormattedMessage
-          defaultMessage={'Only admins can accept invites'}
+          defaultMessage={'{message}'}
           description={'Admin warning'}
+          values={{ message }}
         />
       </p>
     </div>
   </div>
 </>;
 
-const ClubFeedContainerMob = ({ clubName, feedData }) => {
+const ClubLeaderBoardComponent = ({
+  clubLeaderBoardData, userData = {}, showMemberInfo = () => {},
+}) => <>
+  <div className="club-leaderboard-container">
+    <div className="club-leaderboard-header">
+      <p className="mb-0">
+        <FormattedMessage
+          defaultMessage={'Club Leaderboard'}
+          description={'Club Leaderboard Title'}
+        />
+      </p>
+      <button className="btn sort-btn">
+        <p className='mb-0'>
+          <FormattedMessage
+            defaultMessage={'Sort by: '}
+            description={'Sort by:'}
+          /> <span>
+            <FormattedMessage
+              defaultMessage={'Points'}
+              description={'sort by option'}
+            />
+          </span>
+        </p>
+      </button>
+    </div>
+    <div className="club-leaderboard-data">
+      {
+        clubLeaderBoardData?.map((item, index) => <ClubMemberComponent
+          key={index}
+          member={{
+            ...item,
+            rank: index + 1,
+          }}
+          isLeaderBoard={true}
+          isCurrentUser={item?.unique_url === userData?.unique_url}
+          showMemberInfo={showMemberInfo}
+          />)
+      }
+    </div>
+  </div>
+</>;
+
+const ClubFeedCardComponent = ({ clubFeed, clubData = {} }) => {
+  const feedData = {
+    type: 'user',
+    image: 'profile/default_user.png',
+    name: 'Anonymous',
+    uniquUrl: '',
+    message: '',
+  };
+
+  const {
+    // category,
+    feedInfo: { message, data },
+    postedBy,
+  } = clubFeed || {};
+
+  let msg = message;
+
+  if (postedBy?.type === 'user') {
+    feedData.image = postedBy.image;
+    feedData.name = postedBy.name;
+    feedData.uniquUrl = postedBy.unique_url;
+  } else if (postedBy?.type === 'club') {
+    feedData.image = clubData?.clubImage;
+    feedData.name = clubData?.clubName;
+    feedData.uniquUrl = clubData?.clubId;
+  }
+
+  const feedDataKeyArry = [...message?.matchAll(/\{.*?\}/g)];
+  const keyArry = feedDataKeyArry.map((item) => item[0].replace(/(\{|\})/g, ''));
+  keyArry.forEach((key) => {
+    msg = msg.replace(`{${key}}`, `<b>${data[key]}</b>`);
+  });
+  feedData.message = msg;
+
+  const clubMsgKeys = ['clubName', 'clubId', 'clubPoints', 'xp', 'rank'];
+  clubMsgKeys.forEach((key) => {
+    msg = msg.replace(`{${key}}`, `<b>${clubData[key]}</b>`);
+  });
+  feedData.message = msg;
+
+  return <>
+    <div className="feed-card">
+      <div className="feed-title">
+        <div className="d-flex align-items-center">
+          <Img
+            className='club-member-img'
+            src={feedData.image}
+            fallback={'profile/default_user.png'}
+            alt='Member profile image'
+            local={false}
+          />
+          <p className='mb-0'>
+            <FormattedMessage
+              defaultMessage={'{name}'}
+              description={'member name'}
+              values={{ name: feedData.name || '--' }}
+            />
+          </p>
+        </div>
+      </div>
+      <div className="feed-content">
+        <div className="d-flex align-items-center">
+          <picture className='feed-icon'>
+            <img src='../../../../images/clubs/feed-achievement-icon.svg' />
+          </picture>
+          <FormattedMessage
+            defaultMessage={'{message}'}
+            description={'feed message'}
+            values={{ message: feedData.message || '--' }}
+          >
+            {(feedMsg) => <p className='mb-0' dangerouslySetInnerHTML={{ __html: feedMsg }}></p>}
+          </FormattedMessage>
+        </div>
+      </div>
+    </div>
+  </>;
+};
+
+const ClubFeedListContainer = ({ clubFeedList, clubData }) => <>
+  <div className="club-feed-list">
+    {
+      clubFeedList?.length
+      && clubFeedList.map((feed, idx) => <ClubFeedCardComponent
+        key={idx}
+        clubFeed={feed}
+        clubData={clubData} />)
+    }
+    {
+      !clubFeedList?.length
+      && <div className="club-feed-list-empty">
+        <p className="mb-0">
+          <FormattedMessage
+            defaultMessage={'No feed to show'}
+            description={'No feed to show'}
+          />
+        </p>
+      </div>
+    }
+  </div>
+</>;
+
+const ClubFeedContainerMob = ({ clubName, feedData, getMemberInfo = () => {} }) => {
   const isPageMounted = React.useRef(true);
   const { state: rootPageState } = useRootPageState({ isPageMounted });
   const clubContext = React.useContext(ClubContext);
@@ -430,7 +537,7 @@ const ClubFeedContainerMob = ({ clubName, feedData }) => {
     clubStatic: {
       acceptClubInvite, addMemberToClub, autoCompleteUser, changeRole, clearMembersList,
       deleteClub, editFields, getClubInfo, getClubDashboardData,
-      kickOutMember, leaveClub, rejectClubInvite, sendInvite, setClubImage,
+      kickOutMember, leaveClub, rejectClubInvite, sendInvite, setClubImage, updateClubInfo,
     },
     locationState,
     locationStatic: { fetchLocation },
@@ -438,14 +545,54 @@ const ClubFeedContainerMob = ({ clubName, feedData }) => {
 
   const {
     status: clubInfoStatus,
-    adminList,
-    applicantList,
-    clubData,
-    memberList,
-    userData,
+    adminList = [],
+    applicantList = [],
+    clubData = {},
+    memberList = [],
+    userData = {},
   } = clubInfoResponse;
 
-  const { country } = clubData;
+  const rankedMemberList = React.useMemo(() => {
+    if (!memberList || !adminList || !applicantList) return [];
+    const rlist = [...memberList, ...adminList];
+    rlist.sort((a, b) => b.points - a.points);
+    return rlist;
+  }, [memberList, adminList, applicantList]);
+
+  const handleFooterBtnClick = () => {
+    updateClubInfo()
+      .then((res) => {
+        if (res !== 'access_denied' && (res.status === 'success' || res.ok)) {
+          getClubDashboardData({});
+        }
+      });
+  };
+
+  const handleMemberClick = (username) => {
+    // toggleModalContent('memberInfo');
+    // getMemberInfo({ username });
+    window.history.pushState({}, '', window.location.pathname);
+    getMemberInfo('show', username);
+  };
+
+  const onBackButtonEvent = (e) => {
+    const modalData = $('.member-mob-profile-modal').data('bs.modal');
+    clubDashboardManager.isPagePopped = true;
+    // eslint-disable-next-line no-underscore-dangle
+    if (modalData?._isShown) {
+      e.preventDefault();
+      e.stopPropagation();
+      $('.member-mob-profile-modal').modal('hide');
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('popstate', onBackButtonEvent);
+
+    return () => {
+      window.removeEventListener('popstate', onBackButtonEvent);
+    };
+  }, [rootPageState.device]);
 
   React.useEffect(() => {
     getClubInfo();
@@ -453,10 +600,16 @@ const ClubFeedContainerMob = ({ clubName, feedData }) => {
   }, []);
 
   React.useEffect(() => {
-    if (country) {
-      fetchLocation({ locationType: 'state', country });
+    if (clubData?.country) {
+      fetchLocation({ locationType: 'state', country: clubData?.country });
     }
-  }, [clubData]);
+  }, [clubData?.country]);
+
+  React.useEffect(() => {
+    if (clubInfoStatus === 'error') {
+      $('.member-mob-profile-modal').modal('hide');
+    }
+  }, [clubInfoStatus]);
 
   return <>
     <div className="club-feed-mob-container">
@@ -479,160 +632,187 @@ const ClubFeedContainerMob = ({ clubName, feedData }) => {
               />
             </a>
           </li>
-          <li className="nav-item">
-            <a className="nav-link" data-toggle="tab" href="#members-tab">
-              <FormattedMessage
-                defaultMessage={'Members'}
-                description={'Members'}
-              />
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" data-toggle="tab" href="#more-tab">
-              <FormattedMessage
-                defaultMessage={'More'}
-                description={'More'}
-              />
-            </a>
-          </li>
+          {
+            clubInfoStatus
+            && clubInfoStatus !== 'error'
+            && rankedMemberList
+            && <>
+              <li className="nav-item">
+                <a className="nav-link" data-toggle="tab" href="#members-tab">
+                  <FormattedMessage
+                    defaultMessage={'Members'}
+                    description={'Members'}
+                  />
+                </a>
+              </li>
+            </>
+          }
+          {
+            clubInfoStatus
+            && clubInfoStatus !== 'error'
+            && ((applicantList?.length === 0)
+              || (applicantList?.length > 0
+                && userData
+                && (applicantList
+                  .find((item) => item.unique_url === userData?.unique_url) === undefined)))
+                  && <>
+                    <li className="nav-item">
+                      <a className="nav-link" data-toggle="tab" href="#more-tab">
+                        <FormattedMessage
+                          defaultMessage={'More'}
+                          description={'More'}
+                        />
+                      </a>
+                    </li>
+                  </>
+          }
         </ul>
         <div className="tab-content" id='clubTabsContent'>
           <div className="tab-pane fade show active" id="feed-tab">
-            {
-              feedData.length
-              && feedData.map((feed, index) => <div key={index} className="feed-card">
-                <div className="feed-title">
-                  <div className="d-flex align-items-center">
-                    <Img
-                      className='club-member-img'
-                      src={feed?.memberImage}
-                      fallback={'profile/default_user.png'}
-                      alt='Member profile image'
-                      local={false}
+            <ClubFeedListContainer
+              clubFeedList={feedData}
+              clubData={clubDashboardResponse?.clubData} />
+          </div>
+          {
+            clubInfoStatus
+            && clubInfoStatus !== 'error'
+            && rankedMemberList
+            && <>
+              <div className="tab-pane fade" id="members-tab">
+                {
+                  rankedMemberList?.length
+                  && <>
+                    <ClubLeaderBoardComponent
+                      clubLeaderBoardData={rankedMemberList}
+                      userData={userData}
+                      showMemberInfo={handleMemberClick}
                     />
-                    <p className='mb-0'>
-                      <FormattedMessage
-                        defaultMessage={'{name}'}
-                        description={'member name'}
-                        values={{ name: feed?.memberName || '--' }}
-                      />
-                    </p>
-                  </div>
-                </div>
-                <div className="feed-content">
-                  <div className="d-flex align-items-center">
-                    <picture className='feed-icon'>
-                      <img src='../../../../images/clubs/feed-achievement-icon.svg' />
-                    </picture>
-                    <p className='mb-0'>
-                      <FormattedMessage
-                        defaultMessage={'{message}'}
-                        description={'feed message'}
-                        values={{ message: feed?.activityMessage || '--' }}
-                      />
-                    </p>
-                  </div>
-                </div>
-              </div>)
-            }
-          </div>
-          <div className="tab-pane fade" id="members-tab">
-            members tab
-          </div>
-          <div className="tab-pane fade" id="more-tab">
-            {/* <div className="form-group">
-              <label htmlFor="clubName">
-                <FormattedMessage
-                  defaultMessage={'Club Name'}
-                  description={'Club Name'}
-                />
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                name="clubName"
-                id="clubName"
-                aria-describedby="helpId"
-                placeholder="Club name" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="country">
-                <FormattedMessage
-                  defaultMessage={'Country'}
-                  description={'Country'}
-                />
-              </label>
-              <select className="form-control" name="country" id="country">
-                <option selected>
-                  <FormattedMessage
-                    defaultMessage={'{country}'}
-                    description={'country'}
-                    values={{ country: 'India' }}
-                  />
-                </option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="state">
-                <FormattedMessage
-                  defaultMessage={'State'}
-                  description={'State'}
-                />
-              </label>
-              <select className="form-control" name="state" id="state">
-                <option selected>
-                  <FormattedMessage
-                    defaultMessage={'{state}'}
-                    description={'state'}
-                    values={{ state: 'Tamil Nadu' }}
-                  />
-                </option>
-              </select>
-            </div> */}
-            {
-              clubInfoStatus === 'success'
+                  </>
+                }
+              </div>
+            </>
+          }
+          {
+            ((applicantList.length === 0)
+            || (applicantList.length > 0
+              && userData
+              && (applicantList
+                .find((item) => item.unique_url === userData?.unique_url) === undefined)))
               && <>
-                <ClubBasicInfoComponent
-                  clubData={clubData}
-                  isAdmin={userData?.role === 'admin'}
-                  locationState={locationState}
-                  isDesktop={rootPageState.device === 'desktop'}
-                  editFields={editFields}
-                  setClubImage={setClubImage}
-                />
-                <ClubMembersInfoComponent
-                  adminList={adminList}
-                  memberList={memberList}
-                  isAdmin={userData?.role === 'admin'}
-                  applicationList={applicantList}
-                  addMemberToClub={addMemberToClub}
-                  autoCompleteResponse={autoCompleteResponse}
-                  autoCompleteUser={autoCompleteUser}
-                  clearMembersList={clearMembersList}
-                  sendInvite={sendInvite}
-                  inviteLink={inviteLink}
-                  changeRole={changeRole}
-                  kickOutMember={kickOutMember}
-                  acceptInvite={acceptClubInvite}
-                  rejectClubInvite={rejectClubInvite}
-                  userData={userData} />
-                <ClubAdvancedComponent
-                  clubDashboardData={clubDashboardResponse}
-                  getClubDashboardData={getClubDashboardData}
-                  leaveClub={leaveClub}
-                  deleteClub={deleteClub}
-                  isAdmin={userData?.role === 'admin'} />
+                <div className="tab-pane fade" id="more-tab">
+                  {
+                    userData.role !== 'admin'
+                    && rootPageState.device === 'mobile'
+                    && <>
+                      <ClubAdminWarningBannerComponent
+                        message='Only admins can edit club'
+                      />
+                    </>
+                  }
+                  {/* <div className="form-group">
+                    <label htmlFor="clubName">
+                      <FormattedMessage
+                        defaultMessage={'Club Name'}
+                        description={'Club Name'}
+                      />
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="clubName"
+                      id="clubName"
+                      aria-describedby="helpId"
+                      placeholder="Club name" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="country">
+                      <FormattedMessage
+                        defaultMessage={'Country'}
+                        description={'Country'}
+                      />
+                    </label>
+                    <select className="form-control" name="country" id="country">
+                      <option selected>
+                        <FormattedMessage
+                          defaultMessage={'{country}'}
+                          description={'country'}
+                          values={{ country: 'India' }}
+                        />
+                      </option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="state">
+                      <FormattedMessage
+                        defaultMessage={'State'}
+                        description={'State'}
+                      />
+                    </label>
+                    <select className="form-control" name="state" id="state">
+                      <option selected>
+                        <FormattedMessage
+                          defaultMessage={'{state}'}
+                          description={'state'}
+                          values={{ state: 'Tamil Nadu' }}
+                        />
+                      </option>
+                    </select>
+                  </div> */}
+                  {
+                    clubInfoStatus === 'success'
+                    && <>
+                      <ClubBasicInfoComponent
+                        clubData={clubData}
+                        isAdmin={userData?.role === 'admin'}
+                        locationState={locationState}
+                        isDesktop={rootPageState.device === 'desktop'}
+                        editFields={editFields}
+                        setClubImage={setClubImage}
+                      />
+                      <ClubMembersInfoComponent
+                        adminList={adminList}
+                        memberList={memberList}
+                        isAdmin={userData?.role === 'admin'}
+                        applicationList={applicantList}
+                        addMemberToClub={addMemberToClub}
+                        autoCompleteResponse={autoCompleteResponse}
+                        autoCompleteUser={autoCompleteUser}
+                        clearMembersList={clearMembersList}
+                        sendInvite={sendInvite}
+                        inviteLink={inviteLink}
+                        changeRole={changeRole}
+                        kickOutMember={kickOutMember}
+                        acceptInvite={acceptClubInvite}
+                        rejectClubInvite={rejectClubInvite}
+                        userData={userData}
+                        toggleModalContent={handleMemberClick} />
+                      <ClubAdvancedComponent
+                        clubDashboardData={clubDashboardResponse}
+                        getClubDashboardData={getClubDashboardData}
+                        leaveClub={leaveClub}
+                        deleteClub={deleteClub}
+                        isAdmin={userData?.role === 'admin'} />
+                      <button className="btn btn-primary btn-block club-mob-footer-btn" onClick={handleFooterBtnClick}>
+                        <FormattedMessage
+                          defaultMessage={'Save'}
+                          description={'save button'}
+                        />
+                      </button>
+                    </>
+                  }
+                </div>
               </>
-            }
-          </div>
+          }
         </div>
       </div>
     </div>
   </>;
 };
 
-const ClubFeedContainer = ({ feedData = [], topMembers = [] }) => {
-  const handleMemberClick = (memberUrl) => { console.log(memberUrl); };
+const ClubFeedContainer = ({
+  feedData = [], clubData = {}, topMembers = [], getMemberInfo = () => {},
+}) => {
+  const handleMemberClick = (memberUrl) => { getMemberInfo('show', memberUrl); };
 
   return <>
     <div className="club-dashboard-container">
@@ -646,7 +826,7 @@ const ClubFeedContainer = ({ feedData = [], topMembers = [] }) => {
           </p>
         </div>
         <div className="feed-container">
-          {
+          {/* {
             feedData.length
             && feedData.map((feed, index) => <div key={index} className="feed-card">
               <div className="feed-title">
@@ -682,7 +862,8 @@ const ClubFeedContainer = ({ feedData = [], topMembers = [] }) => {
                 </div>
               </div>
             </div>)
-          }
+          } */}
+          <ClubFeedListContainer clubFeedList={feedData} clubData={clubData} />
         </div>
       </div>
       <div className="club-members-container">
@@ -712,7 +893,7 @@ const ClubFeedContainer = ({ feedData = [], topMembers = [] }) => {
           </div>
           <div className="top-members-container">
             {
-              topMembers.length
+              topMembers.length > 0
               && topMembers.map((member, index) => <div key={index} className='top-members-row' onClick={() => handleMemberClick(member.unique_url) }>
                 <div className="top-members-rank">
                   <p className='mb-0'>
@@ -752,6 +933,17 @@ const ClubFeedContainer = ({ feedData = [], topMembers = [] }) => {
                 </div>
               </div>)
             }
+            {
+              topMembers.length === 0
+              && <div className="no-members-row">
+                <p className='mb-0'>
+                  <FormattedMessage
+                    defaultMessage={'No members found'}
+                    description={'No members found'}
+                  />
+                </p>
+              </div>
+            }
           </div>
         </div>
       </div>
@@ -767,13 +959,27 @@ const ClubMemberComponent = ({
   handleKick = () => {},
   handleAcceptInvite = () => {},
   handleRejectInvite = () => {},
+  showMemberInfo = () => {},
   isCurrentUser = false,
+  isLeaderBoard = false,
 }) => <>
   {
     member
     && <>
-      <div className="club-member-row">
+      <div className={`club-member-row ${isCurrentUser ? 'current-user' : ''}`} onClick={() => showMemberInfo(member.unique_url)}>
         <div className="d-flex align-items-center">
+          {
+            isLeaderBoard
+            && <>
+              <p className="mb-0 font-weight-bold">
+                <FormattedMessage
+                  defaultMessage={'#{rank}'}
+                  description={'rank'}
+                  values={{ rank: member.rank }}
+                />
+              </p>
+            </>
+          }
           <div className="club-member-img-container">
             <Img
               className='club-member-img'
@@ -797,15 +1003,24 @@ const ClubMemberComponent = ({
           <>
           {
             isAdmin
+            && !isLeaderBoard
             && <>
               <div className="club-member-actions">
                 {
                   !isApplicant
                   && <>
-                    <button className={`btn btn-transparent member-remove-btn ${isCurrentUser ? 'hidden' : ''}`} onClick={() => handleKick(member)}>
+                    <button className={`btn btn-transparent member-remove-btn ${isCurrentUser ? 'hidden' : ''}`} onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleKick(member);
+                    }}>
                       <span>&times;</span>
                     </button>
-                    <button className={`btn btn-transparent member-role-btn ${isCurrentUser ? 'hidden' : ''}`} onClick={() => handleRole(member)}>
+                    <button className={`btn btn-transparent member-role-btn ${isCurrentUser ? 'hidden' : ''}`} onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleRole(member);
+                    }}>
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M6.19363 1.10215C6.26796 0.951591 6.38294 0.824828 6.52555 0.736193C6.66816 0.647558 6.83272 0.600586 7.00063 0.600586C7.16854 0.600586 7.3331 0.647558 7.47571 0.736193C7.61832 0.824828 7.73329 0.951591 7.80763 1.10215L9.32863 4.18415L12.7296 4.67815C12.8959 4.70213 13.0521 4.77216 13.1807 4.88033C13.3092 4.98849 13.4049 5.13046 13.4569 5.29019C13.5089 5.44991 13.5152 5.62101 13.475 5.78412C13.4349 5.94723 13.3499 6.09585 13.2296 6.21315L10.7676 8.61315L11.3486 12.0002C11.3769 12.1656 11.3583 12.3357 11.2949 12.4912C11.2316 12.6466 11.126 12.7813 10.9901 12.8799C10.8543 12.9785 10.6936 13.0372 10.5261 13.0492C10.3587 13.0613 10.1912 13.0263 10.0426 12.9482L7.00063 11.3502L3.95863 12.9501C3.80988 13.0284 3.64217 13.0635 3.47452 13.0514C3.30686 13.0393 3.14594 12.9804 3.01001 12.8816C2.87407 12.7827 2.76854 12.6477 2.70538 12.4919C2.64221 12.3361 2.62394 12.1658 2.65263 12.0002L3.23263 8.61315L0.772628 6.21415C0.652405 6.09691 0.56738 5.94838 0.527165 5.78534C0.486951 5.6223 0.493152 5.45126 0.545066 5.29157C0.596981 5.13187 0.692539 4.98988 0.820936 4.88165C0.949333 4.77343 1.10545 4.70328 1.27163 4.67915L4.67163 4.18515L6.19363 1.10315V1.10215Z"
@@ -817,10 +1032,18 @@ const ClubMemberComponent = ({
                 {
                   isApplicant
                   && <>
-                    <button className={`btn btn-transparent member-remove-btn ${isCurrentUser ? 'hidden' : ''}`} onClick={() => handleRejectInvite(member)}>
+                    <button className={`btn btn-transparent member-remove-btn ${isCurrentUser ? 'hidden' : ''}`} onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleRejectInvite(member);
+                    }}>
                       <span>&times;</span>
                     </button>
-                    <button className={`btn btn-transparent member-role-btn ${isCurrentUser ? 'hidden' : ''}`} onClick={() => handleAcceptInvite(member)}>
+                    <button className={`btn btn-transparent member-role-btn ${isCurrentUser ? 'hidden' : ''}`} onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleAcceptInvite(member);
+                    }}>
                       <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M11.0198 0.27302C11.2125 0.455165 11.3249 0.706372 11.3324 0.971405C11.3399 1.23644 11.2419 1.4936 11.0598 1.68635L5.39313 7.68635C5.30129 7.78342 5.19092 7.8611 5.06856 7.91479C4.94619 7.96849 4.8143 7.99712 4.68068 7.99898C4.54707 8.00084 4.41443 7.97591 4.29061 7.92565C4.1668 7.87539 4.05431 7.80082 3.95979 7.70635L0.959795 4.70635C0.783155 4.51679 0.686991 4.26606 0.691562 4.00699C0.696133 3.74792 0.801082 3.50074 0.9843 3.31752C1.16752 3.13431 1.4147 3.02936 1.67377 3.02479C1.93283 3.02022 2.18356 3.11638 2.37313 3.29302L4.64646 5.56502L9.60646 0.31302C9.78861 0.120349 10.0398 0.00790167 10.3048 0.000400724C10.5699 -0.00710022 10.827 0.0909596 11.0198 0.27302Z"
@@ -830,6 +1053,19 @@ const ClubMemberComponent = ({
                   </>
                 }
               </div>
+            </>
+          }
+          {
+            isLeaderBoard && <>
+              <p className='mb-0'>
+                <FormattedMessage
+                  defaultMessage={'{points}'}
+                  description={'Club member points'}
+                  values={{
+                    points: member.points,
+                  }}
+                />
+              </p>
             </>
           }
           </>
@@ -844,7 +1080,9 @@ const ClubBasicInfoComponent = ({
   editFields = () => {}, toggleFooterBtn = () => {}, setClubImage = () => {},
 }) => {
   const {
-    clubName, clubId, clubImage,
+    clubName,
+    // clubId,
+    clubImage,
     country, state,
   } = clubData;
 
@@ -936,18 +1174,23 @@ const ClubBasicInfoComponent = ({
                     backgroundPosition: 'center',
                   }}
                 ></div>
-                <div className="image-edit-btn">
-                  <label htmlFor="upload-btn">
-                    <Img
-                      src='profile/profile-edit.png'
-                      alt='image edit icon'
-                      local={true}
-                      useSource={true}
-                      className={'image-edit-icon'}
-                    />
-                    <input type="file" accept='image/*' name="upload-btn" id="upload-btn" onChange={handleSetImage} />
-                  </label>
-                </div>
+                {
+                  isAdmin
+                  && <>
+                    <div className="image-edit-btn">
+                      <label htmlFor="upload-btn">
+                        <Img
+                          src='profile/profile-edit.png'
+                          alt='image edit icon'
+                          local={true}
+                          useSource={true}
+                          className={'image-edit-icon'}
+                        />
+                        <input type="file" accept='image/*' name="upload-btn" id="upload-btn" onChange={handleSetImage} />
+                      </label>
+                    </div>
+                  </>
+                }
               </div>
               <small className='form-text text-danger mt-2'></small>
             </div>
@@ -1051,11 +1294,13 @@ const ClubMembersInfoComponent = ({
   kickOutMember = () => {},
   acceptInvite = () => {},
   rejectClubInvite = () => {},
+  toggleModalContent = () => {},
   isAdmin = false,
   inviteLink = '',
   userData = {},
 }) => {
   const membersAutoCompleteRef = React.useRef(null);
+  const { state: rootPageState } = useRootPageState();
 
   const handleInput = (value) => {
     membersAutoCompleteRef.current.setLoadingState(true);
@@ -1158,7 +1403,6 @@ const ClubMembersInfoComponent = ({
           return resp;
         });
     } catch (error) {
-      console.log('suggestion error', error);
       suggestionResult = error;
     }
     return suggestionResult;
@@ -1172,6 +1416,7 @@ const ClubMembersInfoComponent = ({
     <div className="club-members-info-container">
       {
         !isAdmin
+        && rootPageState.device === 'desktop'
         && <>
           <ClubAdminWarningBannerComponent />
         </>
@@ -1223,6 +1468,7 @@ const ClubMembersInfoComponent = ({
               handleKick={handleKick}
               isAdmin={isAdmin}
               isCurrentUser={member?.unique_url === userData?.unique_url}
+              showMemberInfo={toggleModalContent}
             />)
         }
         {
@@ -1234,6 +1480,7 @@ const ClubMembersInfoComponent = ({
               handleRole={handleRole}
               isAdmin={isAdmin}
               isCurrentUser={member?.unique_url === userData?.unique_url}
+              showMemberInfo={toggleModalContent}
             />)
         }
         {
@@ -1260,6 +1507,7 @@ const ClubMembersInfoComponent = ({
               isApplicant={true}
               isAdmin={isAdmin}
               isCurrentUser={member?.unique_url === userData?.unique_url}
+              showMemberInfo={toggleModalContent}
             />)
             }
           </>
@@ -1308,10 +1556,12 @@ const ClubMembersInfoComponent = ({
 const ClubAdvancedComponent = ({
   isAdmin = false,
   clubDashboardData = {},
-  getClubDashboardData = () => {},
+  // getClubDashboardData = () => {},
   leaveClub = () => {},
   deleteClub = () => {},
 }) => {
+  const { state: rootPageState } = useRootPageState();
+
   const handleLeaveClub = () => {
     const confirm = window.confirm('Are you sure you want to leave this club?');
     if (confirm) {
@@ -1319,7 +1569,7 @@ const ClubAdvancedComponent = ({
         .then((res) => {
           if (res !== 'access_denied') {
             if (res?.status === 'success') {
-              getClubDashboardData({ });
+              window.location.reload();
             } else if (res?.status === 'error') {
               window.alert(res?.message);
             }
@@ -1331,7 +1581,12 @@ const ClubAdvancedComponent = ({
   const handleDeleteClub = () => {
     const confirm = window.confirm('Are you sure you want to delete this club?');
     if (confirm) {
-      deleteClub();
+      deleteClub()
+        .then((res) => {
+          if (res !== 'access_denied' && res.status !== 'error') {
+            window.location.reload();
+          }
+        });
     }
   };
 
@@ -1345,8 +1600,11 @@ const ClubAdvancedComponent = ({
     <div className="club-advanced-container">
       {
         !isAdmin
+        && rootPageState.device === 'desktop'
         && <>
-          <ClubAdminWarningBannerComponent />
+          <ClubAdminWarningBannerComponent
+            message='Only admins can edit club'
+          />
         </>
       }
       <div className="form-group">
@@ -1396,19 +1654,21 @@ const ClubAdvancedComponent = ({
 };
 
 const ClubInfoModalComponent = () => {
-  const isPageMounted = React.useRef(true);
-  const { state: rootPageState } = useRootPageState({ isPageMounted });
+  const { state: rootPageState } = useRootPageState();
   const clubContext = React.useContext(ClubContext);
   const clubFooterBtnRef = React.useRef(null);
+  const clubInfoRef = React.useRef(null);
+  const memberInfoRef = React.useRef(null);
 
   const {
     clubState: {
-      inviteLink, clubDashboardResponse, clubInfoResponse, autoCompleteResponse,
+      autoCompleteResponse, clubDashboardResponse,
+      clubInfoResponse, inviteLink, memberInfoResponse,
     },
     clubStatic: {
-      acceptClubInvite, addMemberToClub, autoCompleteUser, clearMembersList,
-      changeRole, deleteClub, editFields, getClubInfo, getClubDashboardData,
-      kickOutMember, leaveClub, rejectClubInvite, sendInvite, setClubImage,
+      acceptClubInvite, addMemberToClub, autoCompleteUser, clearMembersList, changeRole,
+      deleteClub, editFields, getClubInfo, getClubDashboardData, getMemberInfo, kickOutMember,
+      leaveClub, rejectClubInvite, sendInvite, setClubImage, updateClubInfo,
     },
     locationState,
     locationStatic: { fetchLocation },
@@ -1429,143 +1689,385 @@ const ClubInfoModalComponent = () => {
     }
   };
 
-  const handleFooterBtnClick = () => {};
+  const toggleClubInfoModal = (toggleStatus) => {
+    const elem = $('.club-info-modal');
+    if (toggleStatus === 'hide') {
+      elem.modal(toggleStatus);
+    } else if (toggleStatus === 'show') {
+      elem.data('bs.modal', null);
+      elem.modal({
+        backdrop: 'static',
+        keyboard: false,
+      });
+    }
+  };
+
+  const toggleClubInfo = (contentStatus) => {
+    const elemStyle = clubInfoRef.current
+      // .querySelector('.club-info-modal-body')
+      .style;
+    if (contentStatus === 'show') {
+      elemStyle.transform = 'scale(1)';
+      elemStyle.width = '100%';
+      elemStyle.height = '100%';
+    } else if (contentStatus === 'hide') {
+      elemStyle.transform = 'scale(0)';
+      elemStyle.width = '0';
+      elemStyle.height = '0';
+    }
+  };
+
+  const toggleMemberInfo = (contentStatus) => {
+    const elemStyle = memberInfoRef.current
+      // .querySelector('.club-member-info-body')
+      .style;
+    if (contentStatus === 'show') {
+      elemStyle.transform = 'scale(1)';
+      elemStyle.width = '100%';
+      elemStyle.height = '100%';
+    } else if (contentStatus === 'hide') {
+      elemStyle.transform = 'scale(0)';
+      elemStyle.width = '0';
+      elemStyle.height = '0';
+    }
+  };
+
+  const toggleModalContent = (modalContent = 'clubInfo') => {
+    if (modalContent === 'clubInfo') {
+      toggleMemberInfo('hide');
+      toggleClubInfo('show');
+    } else if (modalContent === 'memberInfo') {
+      toggleClubInfo('hide');
+      toggleMemberInfo('show');
+    }
+  };
+
+  const handleMemberClick = (username) => {
+    toggleModalContent('memberInfo');
+    getMemberInfo({ username });
+  };
+
+  const handleFooterBtnClick = (role) => {
+    updateClubInfo()
+      .then((res) => {
+        if (res !== 'access_denied' && (res.status === 'success' || res.ok)) {
+          toggleClubInfoModal('hide');
+          if (role === 'admin') {
+            getClubDashboardData({});
+          }
+        }
+        toggleClubInfoModal('hide');
+      });
+  };
 
   React.useEffect(() => {
-    getClubInfo();
-    fetchLocation({ locationType: 'country' });
+    toggleModalContent('clubInfo');
+    $('.club-info-modal').on('shown.bs.modal', () => {
+      getClubInfo();
+      fetchLocation({ locationType: 'country' });
+      $('.club-info-modal').off('shown.bs.modal');
+    });
+
+    $('.club-info-modal').on('hidden.bs.modal', () => {
+      toggleModalContent('clubInfo');
+    });
   }, []);
 
   React.useEffect(() => {
     if (status === 'success' && clubData?.country) {
       fetchLocation({ locationType: 'state', country: clubData?.country });
     }
-  }, [clubData]);
+  }, [clubData?.country]);
+
+  React.useEffect(() => {
+    if (status === 'error') {
+      $('.member-mob-profile-modal').modal('hide');
+    }
+  }, [status]);
 
   return <>
-    <div className="club-info-modal-body">
-      <ul className="nav nav-tabs" id="club-tabs">
-        <li className="nav-item">
-          <a className="nav-link active" data-toggle="tab" href="#club-info-tab">
-            <FormattedMessage
-              defaultMessage={'Basic Info'}
-              description={'Basic Info tab title'}
-            />
-          </a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" data-toggle="tab" href="#club-members-tab">
-            <FormattedMessage
-              defaultMessage={'Members'}
-              description={'Members'}
-            />
-          </a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" data-toggle="tab" href="#club-advanced-tab">
-            <FormattedMessage
-              defaultMessage={'Advanced Options'}
-              description={'Advanced Options tab title'}
-            />
-          </a>
-        </li>
-      </ul>
-      <div className="tab-content" id='clubTabsContent'>
-        <div className="tab-pane fade show active" id="club-info-tab">
-          {
-            status === 'success'
-            && <>
-              <ClubBasicInfoComponent
-                clubData={clubData}
-                isAdmin={userData?.role === 'admin'}
-                locationState={locationState}
-                isDesktop={rootPageState.device === 'desktop'}
-                editFields={editFields}
-                toggleFooterBtn={toggleFooterBtn}
-                setClubImage={setClubImage} />
-            </>
-          }
+    <div className="modal-content-container">
+      <div ref={clubInfoRef} className="modal-content-children">
+        <div className="club-info-modal-body">
+          <ul className="nav nav-tabs" id="club-tabs">
+            <li className="nav-item">
+              <a className="nav-link active" data-toggle="tab" href="#club-info-tab">
+                <FormattedMessage
+                  defaultMessage={'Basic Info'}
+                  description={'Basic Info tab title'}
+                />
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" data-toggle="tab" href="#club-members-tab">
+                <FormattedMessage
+                  defaultMessage={'Members'}
+                  description={'Members'}
+                />
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" data-toggle="tab" href="#club-advanced-tab">
+                <FormattedMessage
+                  defaultMessage={'Advanced Options'}
+                  description={'Advanced Options tab title'}
+                />
+              </a>
+            </li>
+          </ul>
+          <div className="tab-content" id='clubTabsContent'>
+            <div className="tab-pane fade show active" id="club-info-tab">
+              {
+                status === 'success'
+                && <>
+                  <ClubBasicInfoComponent
+                    clubData={clubData}
+                    isAdmin={userData?.role === 'admin'}
+                    locationState={locationState}
+                    isDesktop={rootPageState.device === 'desktop'}
+                    editFields={editFields}
+                    toggleFooterBtn={toggleFooterBtn}
+                    setClubImage={setClubImage} />
+                </>
+              }
+            </div>
+            <div className="tab-pane fade" id="club-members-tab">
+              {
+                status === 'success'
+                && <>
+                <ClubMembersInfoComponent
+                  adminList={adminList}
+                  memberList={memberList}
+                  isAdmin={userData?.role === 'admin'}
+                  applicationList={applicantList}
+                  addMemberToClub={addMemberToClub}
+                  autoCompleteResponse={autoCompleteResponse}
+                  autoCompleteUser={autoCompleteUser}
+                  clearMembersList={clearMembersList}
+                  sendInvite={sendInvite}
+                  inviteLink={inviteLink}
+                  changeRole={changeRole}
+                  kickOutMember={kickOutMember}
+                  acceptInvite={acceptClubInvite}
+                  rejectClubInvite={rejectClubInvite}
+                  userData={userData}
+                  toggleModalContent={handleMemberClick}
+                  toggleFooterBtn={toggleFooterBtn} />
+                </>
+              }
+            </div>
+            <div className="tab-pane fade" id="club-advanced-tab">
+              {
+                status === 'success'
+                && <>
+                  <ClubAdvancedComponent
+                    clubDashboardData={clubDashboardResponse}
+                    getClubDashboardData={getClubDashboardData}
+                    leaveClub={leaveClub}
+                    deleteClub={deleteClub}
+                    isAdmin={userData?.role === 'admin'} />
+                </>
+              }
+            </div>
+          </div>
         </div>
-        <div className="tab-pane fade" id="club-members-tab">
-          {
-            status === 'success'
-            && <>
-             <ClubMembersInfoComponent
-              adminList={adminList}
-              memberList={memberList}
-              isAdmin={userData?.role === 'admin'}
-              applicationList={applicantList}
-              addMemberToClub={addMemberToClub}
-              autoCompleteResponse={autoCompleteResponse}
-              autoCompleteUser={autoCompleteUser}
-              clearMembersList={clearMembersList}
-              sendInvite={sendInvite}
-              inviteLink={inviteLink}
-              changeRole={changeRole}
-              kickOutMember={kickOutMember}
-              acceptInvite={acceptClubInvite}
-              rejectClubInvite={rejectClubInvite}
-              userData={userData}
-              toggleFooterBtn={toggleFooterBtn} />
-            </>
-          }
-        </div>
-        <div className="tab-pane fade" id="club-advanced-tab">
-          {
-            status === 'success'
-            && <>
-              <ClubAdvancedComponent
-                clubDashboardData={clubDashboardResponse}
-                getClubDashboardData={getClubDashboardData}
-                leaveClub={leaveClub}
-                deleteClub={deleteClub}
-                isAdmin={userData?.role === 'admin'} />
-            </>
-          }
-        </div>
+        <button className="btn btn-primary btn-block club-info-footer-btn" ref={clubFooterBtnRef} onClick={() => handleFooterBtnClick(userData?.role === 'admin')}>
+          <FormattedMessage
+            defaultMessage={'{btnMessage}'}
+            description={'save button'}
+            values={{
+              btnMessage: userData?.role === 'admin' ? 'Save & Exit' : 'Close',
+            }}
+          />
+        </button>
+      </div>
+      <div ref={memberInfoRef} className="modal-content-children">
+        {
+          memberInfoResponse.status && memberInfoResponse.status === 'success'
+          && <>
+            <ClubMemberProfileComponent memberData={memberInfoResponse.userData} />
+          </>
+        }
       </div>
     </div>
-    <button className="btn btn-primary btn-block club-info-footer-btn" ref={clubFooterBtnRef} onClick={handleFooterBtnClick}>
-      <FormattedMessage
-        defaultMessage={'Save & Exit'}
-        description={'save button'}
-      />
-    </button>
   </>;
 };
 
-const ClubInfoContainer = () => {
-  console.log('clubInfoContainer ');
+const ClubInfoContainer = () => <>
+  <Modal
+    modalClass='club-info-modal'
+    customClass='curved'
+    modalTitle='Club Info'
+    options={{
+      backdrop: 'static',
+      keyboard: false,
+    }}
+    header = {
+      <div>
+        <h5 className="modal-title">
+          <FormattedMessage
+            defaultMessage={'Club Info'}
+            description={'Club Info modal title'}
+          />
+          </h5>
+      </div>
+    }
+  >
+    <ClubInfoModalComponent />
+  </Modal>
+</>;
+
+const ClubMemberProfileContainer = ({ memberData }) => <>
+  <div className="club-member-info-body">
+    <div className="member-info-card">
+      <div className="d-flex align-items-center">
+        <Img
+          src={memberData?.profileImage}
+          alt='member profile Image'
+          className='member-profile-img'
+          fallback='profile/default_user.png'
+          local={false}
+        />
+        <p className="mb-0">
+          <FormattedMessage
+            defaultMessage={'{name}'}
+            description={'name'}
+            values={{
+              name: memberData?.name || 'Anonymous',
+            }}
+          />
+        </p>
+      </div>
+      <p className="member-bio">
+        <FormattedMessage
+          defaultMessage={'{bio}'}
+          description={'bio'}
+          values={{
+            bio: memberData?.about || 'No bio available',
+          }}
+        />
+      </p>
+    </div>
+    <div className="member-points-card">
+      <div className="d-flex align-items-center">
+        <Img
+          src='common/hkcoin.png'
+          alt='hkcoin'
+          className='hkcoin-img member-points-img'
+        />
+        <p className="mb-0">
+          <FormattedMessage
+            defaultMessage={'{points} coins'}
+            description={'points'}
+            values={{
+              points: memberData?.points || 0,
+            }}
+          />
+        </p>
+      </div>
+      {/* <div className="d-flex align-items-center">
+        <Img
+          src='common/xp.png'
+          alt='hk xp'
+          className='hkxp-img member-points-img'
+        />
+        <p className="mb-0">
+          <FormattedMessage
+            defaultMessage={'{xp} xp'}
+            description={'xp'}
+            values={{
+              xp: memberData?.xp || 0,
+            }}
+          />
+        </p>
+      </div> */}
+      <div className="d-flex align-items-center">
+        <Img
+          src='clubs/rank-upwards.svg'
+          alt='rank'
+          className='hkrank-img member-points-img'
+        />
+        <p className="mb-0">
+          <FormattedMessage
+            defaultMessage={'#{rank}'}
+            description={'rank'}
+            values={{
+              rank: memberData?.rank || 'N/A',
+            }}
+          />
+        </p>
+      </div>
+    </div>
+    {/* <div className="member-achievement-container">
+      <p className="mb-0">
+        <FormattedMessage
+          defaultMessage={'Recent Achievements'}
+          description={'Recent Achievements title'}
+        />
+      </p>
+      {
+        clubFeedData.map((feed, idx) => <div key={idx} className="achievement-card">
+          <Img
+            src={feedAwardImageMap[feed.activityType]}
+            alt={feed.activityType}
+            className="achievement-card-img"
+          />
+          <p className="mb-0">
+            <FormattedMessage
+              defaultMessage={'{achievement}'}
+              description={'achievement'}
+              values={{
+                achievement: feed.activityMessage,
+              }}
+            />
+          </p>
+        </div>)
+      }
+    </div> */}
+  </div>
+  {/* <button className="btn btn-primary btn-block member-info-footer-btn">
+    <FormattedMessage
+      defaultMessage={'Ask for help'}
+      description={'ask for help button'}
+    />
+  </button> */}
+</>;
+
+const ClubMemberProfileModalComponent = ({ memberData, isDesktop }) => {
+  const onHidden = () => {
+    const isMobile = $('#modal.member-profile-modal').hasClass('member-mob-profile-modal');
+    if (isMobile) {
+      if (!clubDashboardManager.isPagePopped) {
+        window.history.back();
+        clubDashboardManager.isPagePopped = false;
+      }
+    }
+  };
 
   return <>
     <Modal
-      modalClass='club-info-modal'
+      modalClass={`member-profile-modal ${!isDesktop ? 'member-mob-profile-modal' : ''}`}
       customClass='curved'
-      modalTitle='Club Info'
+      modalTitle='Profile'
+      onHidden={onHidden}
       options={{
-        keyboard: false,
         backdrop: 'static',
+        keyboard: false,
       }}
       header = {
         <div>
           <h5 className="modal-title">
             <FormattedMessage
-              defaultMessage={'Club Info'}
-              description={'Club Info modal title'}
+              defaultMessage={'Profile'}
+              description={'member Profile modal title'}
             />
             </h5>
         </div>
       }
     >
-      <ClubInfoModalComponent />
+      <ClubMemberProfileComponent memberData={memberData} />
     </Modal>
   </>;
-};
-
-const ClubMemberProfileContainer = ({ memberData }) => {
-  console.log('clubMemberProfileContainer ', memberData);
-
-  return <></>;
 };
 
 const ClubHeroComponent = memo(ClubHeroContainer);
@@ -1578,13 +2080,16 @@ const ClubDashboardComponent = () => {
   const isPageMounted = React.useRef(true);
   const { state: rootPageState } = useRootPageState();
   const {
-    clubState: { clubDashboardResponse: clubDashboardData },
-    clubStatic: { getClubDashboardData, joinClub, leaveClub },
+    clubState: { clubDashboardResponse: clubDashboardData, memberInfoResponse },
+    clubStatic: {
+      getClubDashboardData, getMemberInfo, joinClub, leaveClub,
+    },
   } = React.useContext(ClubContext);
   const {
     status: clubDashboardStatus,
     // hasClub,
     clubData,
+    clubFeed,
     topMembers,
     isVisitor,
     isApplied,
@@ -1598,12 +2103,21 @@ const ClubDashboardComponent = () => {
   //   }
   // }
 
-  React.useEffect(() => {
-    console.log();
+  const toggleClubMemberProfileModal = (memberModalStatus, memberUrl) => {
+    if (memberModalStatus === 'show') {
+      getMemberInfo({ username: memberUrl });
+      $('.member-profile-modal').data('bs.modal', null);
+      $('.member-profile-modal').modal({
+        backdrop: 'static',
+        keyboard: false,
+      });
+    } else if (memberModalStatus === 'hide') {
+      $('.member-profile-modal').modal('hide');
+    }
+  };
 
-    return () => {
-      isPageMounted.current = false;
-    };
+  React.useEffect(() => () => {
+    isPageMounted.current = false;
   }, []);
 
   return <>
@@ -1627,7 +2141,8 @@ const ClubDashboardComponent = () => {
           && <>
             <ClubFeedMobComponent
               clubName={clubData?.clubName}
-              feedData={clubFeedData}
+              feedData={clubFeed}
+              getMemberInfo={toggleClubMemberProfileModal}
             />
           </>
         }
@@ -1635,20 +2150,21 @@ const ClubDashboardComponent = () => {
           rootPageState.device === 'desktop'
           && <>
             <ClubFeedComponent
-              feedData={clubFeedData}
+              feedData={clubFeed}
+              clubData={clubData}
               topMembers={topMembers?.slice(0, 5)}
+              getMemberInfo={toggleClubMemberProfileModal}
             />
           </>
         }
+        <ClubMemberProfileModalComponent
+          memberData={memberInfoResponse?.userData}
+          isDesktop={rootPageState.device === 'desktop'}
+          />
         <ClubInfoComponent />
-        <ClubMemberProfileComponent />
       </>
     }
   </>;
 };
 
-export default null;
-
-export {
-  ClubDashboardComponent,
-};
+export default ClubDashboardComponent;

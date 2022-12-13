@@ -35,12 +35,6 @@
       "value": "Save & Exit"
     }
   ],
-  "/+d/C7": [
-    {
-      "type": 0,
-      "value": "XP"
-    }
-  ],
   "/Gy7qZ": [
     {
       "type": 0,
@@ -645,6 +639,12 @@
       "value": "Join this Club"
     }
   ],
+  "GKTVn2": [
+    {
+      "type": 1,
+      "value": "bio"
+    }
+  ],
   "GQwBTI": [
     {
       "type": 0,
@@ -867,6 +867,12 @@
       "value": "Class"
     }
   ],
+  "OvtvUr": [
+    {
+      "type": 0,
+      "value": "Profile"
+    }
+  ],
   "Ow+Yo9": [
     {
       "type": 0,
@@ -913,6 +919,16 @@
     {
       "type": 0,
       "value": "Are you sure you want to logout?"
+    }
+  ],
+  "QsXf1d": [
+    {
+      "type": 1,
+      "value": "points"
+    },
+    {
+      "type": 0,
+      "value": " coins"
     }
   ],
   "Qvy78L": [
@@ -1761,6 +1777,12 @@
     {
       "type": 0,
       "value": "Turtle"
+    }
+  ],
+  "wXtv00": [
+    {
+      "type": 0,
+      "value": "Points"
     }
   ],
   "wdqhVV": [

@@ -23,10 +23,6 @@
     "defaultMessage": "Save & Exit",
     "description": "save button"
   },
-  "/+d/C7": {
-    "defaultMessage": "XP",
-    "description": "xp"
-  },
   "/Gy7qZ": {
     "defaultMessage": "Level {levelNumber}",
     "description": "Level indicator"
@@ -401,6 +397,10 @@
     "defaultMessage": "Join this Club",
     "description": "Join Club"
   },
+  "GKTVn2": {
+    "defaultMessage": "{bio}",
+    "description": "bio"
+  },
   "GQwBTI": {
     "defaultMessage": "Verify OTP and proceed",
     "description": "verify otp button"
@@ -547,6 +547,10 @@
     "defaultMessage": "Class",
     "description": "class nav text"
   },
+  "OvtvUr": {
+    "defaultMessage": "Profile",
+    "description": "member Profile modal title"
+  },
   "Ow+Yo9": {
     "defaultMessage": "Or share this link to invite someone",
     "description": "Invite link input label"
@@ -578,6 +582,10 @@
   "Qb0n8J": {
     "defaultMessage": "Are you sure you want to logout?",
     "description": "Logout prompt message"
+  },
+  "QsXf1d": {
+    "defaultMessage": "{points} coins",
+    "description": "points"
   },
   "Qvy78L": {
     "defaultMessage": "Profile",
@@ -1126,6 +1134,10 @@
   "viQX0N": {
     "defaultMessage": "Turtle",
     "description": "Game Title"
+  },
+  "wXtv00": {
+    "defaultMessage": "Points",
+    "description": "sort by option"
   },
   "wdqhVV": {
     "defaultMessage": "Create club",

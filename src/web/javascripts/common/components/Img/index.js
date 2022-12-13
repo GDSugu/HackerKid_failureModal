@@ -20,6 +20,9 @@ const Img = ({
       imgType = extension;
     }
     imgSource = src;
+    if (!local) {
+      imgSource = `${imgSource}?updatedAt=${Date.now()}`;
+    }
   }
   const [imgSrc, setImgSrc] = React.useState(imgSource);
   let filePath;

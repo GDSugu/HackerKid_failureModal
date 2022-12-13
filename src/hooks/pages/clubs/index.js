@@ -1,5 +1,5 @@
 import React from 'react';
-import post, { validateField } from '../../common/framework';
+import post, { getSession, s3Upload, validateField } from '../../common/framework';
 import API from '../../../../env';
 import useRootPageState from '../root';
 
@@ -28,7 +28,7 @@ const useClubs = ({ isPageMounted }) => {
       state: false,
       s3Prefix: API.S3PREFIX,
       clubImageName: false,
-      members: false,
+      members: [],
     },
     clubInfoResponse: {
       status: false,
@@ -44,6 +44,7 @@ const useClubs = ({ isPageMounted }) => {
       signedURL: false,
     },
     deleteClubResponse: { status: false },
+    denyClubInviteResponse: { status: false },
     joinClubResponse: { status: false, clubId: false },
     kickOutMemberResponse: { status: false },
     leaveClubResponse: { status: false },
@@ -148,6 +149,7 @@ const useClubs = ({ isPageMounted }) => {
       newState.clubInfoResponse = {
         ...clubDataState.clubInfoResponse,
         clubData: {
+          ...clubDataState.clubInfoResponse.clubData,
           clubImage,
           clubImageName: `${clubDataState.clubInfoResponse.clubData.clubId}.${ext}`,
         },
@@ -179,6 +181,10 @@ const useClubs = ({ isPageMounted }) => {
               acceptClubInviteResponse: {
                 status: 'access_denied',
               },
+              appData: {
+                ...prevData.appData,
+                clubInfoEdited: false,
+              },
             }));
           } else {
             const parsedResponse = JSON.parse(response);
@@ -203,6 +209,10 @@ const useClubs = ({ isPageMounted }) => {
             setClubDataState((prevData) => ({
               ...prevData,
               ...newState,
+              appData: {
+                ...prevData.appData,
+                clubInfoEdited: true,
+              },
             }));
           }
         }
@@ -378,15 +388,32 @@ const useClubs = ({ isPageMounted }) => {
     const payload = {
       type: 'createClub',
       platform: device,
+      s3Prefix: API.S3PREFIX,
       ...clubDataState.clubData,
+      members: clubDataState.clubData.members || [],
+      state: clubDataState.clubData.state || '',
     };
 
     if (device === 'desktop') {
       payload.page = page;
     }
 
+    const { clubData: { clubImageName, clubImage } } = clubDataState;
+
+    if (clubImageName) {
+      payload.fileName = clubImageName;
+    }
+
+    let uniqueUrl = false;
+    if (device === 'desktop' && page === 2) {
+      uniqueUrl = await getSession('unique_url');
+    }
+
+    console.log('payload', payload);
+
     return post(payload, 'clubs/')
       .then((response) => {
+        let result = false;
         if (isPageMounted.current) {
           if (response === 'access_denied') {
             setClubDataState((prevData) => ({
@@ -395,27 +422,62 @@ const useClubs = ({ isPageMounted }) => {
                 status: 'access_denied',
               },
             }));
+            result = 'access_denied';
           } else {
             const parsedResponse = JSON.parse(response);
-            setClubDataState((prevData) => ({
-              ...prevData,
+            const newState = {
               createClubResponse: {
                 ...parsedResponse,
               },
+            };
+            if (parsedResponse.status === 'success') {
+              if (device === 'desktop' && page === 2) {
+                const link = `${window.location.origin}/clubs/${parsedResponse.clubId}/?action=join&invitedBy=${uniqueUrl}/`;
+                newState.inviteLink = link;
+              }
+            }
+            setClubDataState((prevData) => ({
+              ...prevData,
+              // createClubResponse: {
+              //   ...parsedResponse,
+              // },
+              ...newState,
             }));
+            result = parsedResponse;
           }
         }
+        return result;
+      })
+      .then((signedResponse) => {
+        let uploadReq = false;
+        if (((device === 'desktop' && page === 2)
+          || device === 'mobile')
+          && isPageMounted.current) {
+          if (signedResponse.status === 'success' && signedResponse.signedURL) {
+            uploadReq = s3Upload(clubImage, signedResponse.signedURL, clubImage.type);
+          }
+        }
+        let res = signedResponse;
+        if (uploadReq) {
+          res = uploadReq;
+        }
+        return res;
+      })
+      .catch((err) => {
+        console.log('err', err);
       });
   };
 
   const deleteClub = async () => {
     const payload = {
       type: 'deleteClub',
-      clubName: clubDataState.clubData.clubName,
+      clubName: clubDataState.clubInfoResponse.clubData.clubName,
+      s3Prefix: API.S3PREFIX,
     };
 
     return post(payload, 'clubs/')
       .then((response) => {
+        let result = false;
         if (isPageMounted.current) {
           if (response === 'access_denied') {
             setClubDataState((prevData) => ({
@@ -424,6 +486,7 @@ const useClubs = ({ isPageMounted }) => {
                 status: 'access_denied',
               },
             }));
+            result = 'access_denied';
           } else {
             const parsedResponse = JSON.parse(response);
             setClubDataState((prevData) => ({
@@ -432,8 +495,55 @@ const useClubs = ({ isPageMounted }) => {
                 ...parsedResponse,
               },
             }));
+            result = parsedResponse;
           }
         }
+        return result;
+      });
+  };
+
+  const denyClubInvite = async ({ clubId }) => {
+    const payload = {
+      type: 'denyClubInvitation',
+      clubId,
+    };
+
+    return post(payload, 'clubs/')
+      .then((response) => {
+        let result = false;
+        if (isPageMounted.current) {
+          if (response === 'access_denied') {
+            setClubDataState((prevData) => ({
+              ...prevData,
+              denyClubInviteResponse: {
+                status: 'access_denied',
+              },
+            }));
+            result = 'access_denied';
+          } else {
+            const parsedResponse = JSON.parse(response);
+            const newState = {
+              denyClubInviteResponse: {
+                ...parsedResponse,
+              },
+              ...clubDataState.clubInviteResponse,
+            };
+            if (parsedResponse.status === 'success') {
+              const inviteList = clubDataState.clubInviteResponse.clubInvites
+                .filter((invite) => invite.clubId !== clubId);
+              newState.clubInviteResponse = {
+                ...clubDataState.clubInviteResponse,
+                clubInvites: inviteList,
+              };
+            }
+            setClubDataState((prevData) => ({
+              ...prevData,
+              ...newState,
+            }));
+            result = parsedResponse;
+          }
+        }
+        return result;
       });
   };
 
@@ -469,6 +579,7 @@ const useClubs = ({ isPageMounted }) => {
   const getClubInvites = async () => {
     const payload = {
       type: 'getClubInvites',
+      s3Prefix: API.S3PREFIX,
     };
 
     return post(payload, 'clubs/')
@@ -497,10 +608,12 @@ const useClubs = ({ isPageMounted }) => {
   const getClubInfo = async () => {
     const payload = {
       type: 'getClubInfo',
+      s3Prefix: API.S3PREFIX,
     };
 
     return post(payload, 'clubs/')
-      .then((response) => {
+      .then(async (response) => {
+        let result = false;
         if (isPageMounted.current) {
           if (response === 'access_denied') {
             setClubDataState((prevData) => ({
@@ -509,22 +622,40 @@ const useClubs = ({ isPageMounted }) => {
                 status: 'access_denied',
               },
             }));
+            result = 'access_denied';
           } else {
             const parsedResponse = JSON.parse(response);
-            setClubDataState((prevData) => ({
-              ...prevData,
+            const newState = {
               clubInfoResponse: {
                 ...parsedResponse,
               },
+            };
+            if (parsedResponse.status === 'success') {
+              const { clubId } = parsedResponse.clubData;
+              const uniqueUrl = await getSession('unique_url');
+              const link = `${window.location.origin}/clubs/${clubId}/?action=join&invitedBy=${uniqueUrl}/`;
+              newState.inviteLink = link;
+              setClubDataState((prevData) => ({
+                ...prevData,
+                ...newState,
+              }));
+              return parsedResponse;
+            }
+            setClubDataState((prevData) => ({
+              ...prevData,
+              ...newState,
             }));
+            result = parsedResponse;
           }
         }
+        return result;
       });
   };
 
   const getClubDashboardData = async ({ isVisiting = false, clubId = '' }) => {
     const payload = {
       type: 'getClubDashboardData',
+      s3Prefix: API.S3PREFIX,
     };
 
     if (isVisiting) {
@@ -544,21 +675,79 @@ const useClubs = ({ isPageMounted }) => {
             }));
           } else {
             const parsedResponse = JSON.parse(response);
-            setClubDataState((prevData) => ({
-              ...prevData,
-              clubDashboardResponse: {
-                ...parsedResponse,
-              },
-            }));
+            if (parsedResponse.status === 'success') {
+              if (!parsedResponse.hasClub && parsedResponse.isDrafted) {
+                const newDashboardResponse = JSON.parse(JSON.stringify(parsedResponse));
+                delete newDashboardResponse.clubDraftData;
+                setClubDataState((prevData) => ({
+                  ...prevData,
+                  clubData: {
+                    ...parsedResponse.clubDraftData,
+                  },
+                  clubDashboardResponse: {
+                    ...newDashboardResponse,
+                    clubData: {
+                      ...parsedResponse.clubData,
+                    },
+                  },
+                }));
+              } else {
+                setClubDataState((prevData) => ({
+                  ...prevData,
+                  clubDashboardResponse: {
+                    ...parsedResponse,
+                    clubData: {
+                      ...parsedResponse.clubData,
+                    },
+                  },
+                }));
+              }
+            } else {
+              setClubDataState((prevData) => ({
+                ...prevData,
+                clubDashboardResponse: {
+                  ...parsedResponse,
+                },
+              }));
+            }
           }
         }
       });
   };
 
-  const getMemberInfo = async () => {
+  const getClubDraft = async () => {
+    const payload = {
+      type: 'getClubDraft',
+      s3Prefix: API.S3PREFIX,
+    };
+
+    return post(payload, 'clubs/')
+      .then((response) => {
+        let result = false;
+        if (isPageMounted.current) {
+          if (response !== 'access_denied') {
+            const parsedResponse = JSON.parse(response);
+            if (
+              parsedResponse.status === 'success'
+              && parsedResponse.isDrafted
+              && parsedResponse.clubData) {
+              setClubDataState((prevData) => ({
+                ...prevData,
+                ...parsedResponse,
+              }));
+              result = parsedResponse;
+            }
+          }
+        }
+        return result;
+      });
+  };
+
+  const getMemberInfo = async ({ username }) => {
     const payload = {
       type: 'getMemberInfo',
-      clubName: clubDataState.clubData.clubName,
+      // clubName: clubDataState.clubData.clubName,
+      username,
     };
 
     return post(payload, 'clubs/')
@@ -613,12 +802,18 @@ const useClubs = ({ isPageMounted }) => {
       });
   };
 
-  const joinClub = async ({ invitedBy, userEmail }) => {
+  const joinClub = async ({ invitedBy = false, userEmail = false, clubId = false }) => {
     const payload = {
       type: 'joinClub',
-      clubName: clubDataState.clubDashboardResponse.clubData.clubName,
-      // dsd
     };
+
+    if (clubId) {
+      payload.clubId = clubId;
+      payload.linkType = 'clubId';
+    } else {
+      payload.clubName = clubDataState.clubDashboardResponse.clubData.clubName;
+      payload.linkType = 'clubName';
+    }
 
     if (invitedBy) {
       payload.invitedBy = invitedBy;
@@ -830,6 +1025,12 @@ const useClubs = ({ isPageMounted }) => {
   };
 
   const updateClubInfo = async () => {
+    if (!clubDataState.appData.clubInfoEdited) {
+      return Promise.resolve({ status: 'not_updated' });
+    }
+
+    const { clubInfoResponse: { clubData: { clubImage, clubImageName } } } = clubDataState;
+
     const payload = {
       type: 'updateClubInfo',
       clubName: clubDataState.clubInfoResponse.clubData.clubName,
@@ -837,8 +1038,14 @@ const useClubs = ({ isPageMounted }) => {
       state: clubDataState.clubInfoResponse.clubData.state,
     };
 
+    if (clubImageName) {
+      payload.fileName = clubImageName;
+      payload.s3Prefix = API.S3PREFIX;
+    }
+
     return post(payload, 'clubs/')
       .then((response) => {
+        let result = false;
         if (isPageMounted.current) {
           if (response === 'access_denied') {
             setClubDataState((prevData) => ({
@@ -846,7 +1053,12 @@ const useClubs = ({ isPageMounted }) => {
               updateClubInfoResponse: {
                 status: 'access_denied',
               },
+              appData: {
+                ...prevData.appData,
+                clubInfoEdited: false,
+              },
             }));
+            result = 'access_denied';
           } else {
             const parsedResponse = JSON.parse(response);
             setClubDataState((prevData) => ({
@@ -854,9 +1066,35 @@ const useClubs = ({ isPageMounted }) => {
               updateClubInfoResponse: {
                 ...parsedResponse,
               },
+              appData: {
+                ...prevData.appData,
+                clubInfoEdited: false,
+              },
             }));
+            result = parsedResponse;
           }
         }
+        return result;
+      }).then((signedResponse) => {
+        let uploadReq = false;
+        if (isPageMounted.current) {
+          if (signedResponse.status === 'success' && signedResponse.signedURL) {
+            uploadReq = s3Upload(clubImage, signedResponse.signedURL, clubImage.type);
+            // setProfileInfo((prevState) => ({
+            //   ...prevState,
+            //   status: 'success',
+            // }));
+          }
+        }
+        // getProfileInfo({ cached: false });
+        let res = signedResponse;
+        if (uploadReq) {
+          res = uploadReq;
+        }
+        return res;
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -871,11 +1109,13 @@ const useClubs = ({ isPageMounted }) => {
       changeRole,
       createClub,
       deleteClub,
+      denyClubInvite,
       editFields,
       fetchClubList,
       getClubDashboardData,
       getClubInfo,
       getClubInvites,
+      getClubDraft,
       getMemberInfo,
       getMembersList,
       joinClub,

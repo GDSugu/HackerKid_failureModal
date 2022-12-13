@@ -94,7 +94,7 @@ const setSession = (key, value) => {
   return mobStoreSession(key, value);
 };
 
-const getSession = (key) => {
+const getSession = async (key) => {
   const platform = getPlatform();
   if (platform === 'web') {
     return webGetSession(key);
@@ -102,7 +102,7 @@ const getSession = (key) => {
   return mobGetSession(key);
 };
 
-const clearSession = (key) => {
+const clearSession = async (key) => {
   const platform = getPlatform();
   if (platform === 'web') {
     return webClearSession(key);
