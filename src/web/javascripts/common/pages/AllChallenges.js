@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useGetChallenges } from '../../../../hooks/pages/challenges';
-import { useAllChallenges } from '../../../../hooks/pages/challenges/allChallenges';
 import '../../../stylesheets/common/pages/all-challenges/style.scss';
 import ChallengesGrid from '../components/ChallengesGrid/ChallengesGrid';
 import ChallengesNavBar from '../components/ChallengesNavBar';
@@ -180,16 +179,13 @@ const AllChallenges = () => {
   pageInit('all-challenges-container', 'All Challenges');
   const isPageMounted = useRef(true);
 
-  // const [localState, setLocalState] = useState({
-  //   sort: 'popularity',
-  //   search: '',
-  //   page: 1,
-  //   searchPage: 1,
-  // });
-  const {
-    state: localState,
-    setState: setLocalState,
-  } = useAllChallenges();
+  const [localState, setLocalState] = useState({
+    sort: 'popularity',
+    search: '',
+    page: 1,
+    searchPage: 1,
+  });
+
   const [isDesktop, setIsDesktop] = useState(window.matchMedia('(min-width: 576px)').matches);
 
   const {

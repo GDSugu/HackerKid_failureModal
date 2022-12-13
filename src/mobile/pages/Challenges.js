@@ -79,11 +79,16 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   },
   challengeCardItem: {
     margin: 4,
+    width: 200,
+    height: 120,
+    borderRadius: 12,
+    backgroundColor: theme.bg1,
   },
   challengeCardImage: {
     borderRadius: 12,
-    width: 200,
-    height: 120,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
   },
   challengeCardList: {
     marginTop: 10,
@@ -112,7 +117,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
 });
 
 const HeroComponent = ({ style, totalEarnedCoins }) => (
-    <View style={style.heroCard}>
+  <View style={style.heroCard}>
     <View style={style.stat}>
       <Image source={hkcoin} style={style.heroCardIcon} />
       <Text style={style.statText}>
@@ -143,7 +148,7 @@ const HeroComponent = ({ style, totalEarnedCoins }) => (
         />
       </Text>
       </View> */}
-    </View>
+  </View>
 );
 
 const ChallengesSwiper = ({
@@ -163,36 +168,36 @@ const ChallengesSwiper = ({
           navigation.navigate(item.navigateTo);
         }}
       >
-      <View style={[style.challengeCardItem, style.challengeCardImage, style.navigationalCard]}>
-        <Text style={style.navigationalCardText}>
-          <FormattedMessage defaultMessage={'{navigationText}'} description='navigational text' values={{ navigationText: item.navigationText }}/>
-        </Text>
-      </View>
+        <View style={[style.challengeCardItem, style.navigationalCard]}>
+          <Text style={style.navigationalCardText}>
+            <FormattedMessage defaultMessage={'{navigationText}'} description='navigational text' values={{ navigationText: item.navigationText }} />
+          </Text>
+        </View>
       </TouchableOpacity>
     }
     {
-    item.type !== 'navigationalCard' && <TouchableOpacity
-      onPress={() => {
-        navigation.navigate('Challenges', {
-          challengeId: item.challengeId,
-          challengeVirtualName: item.actionUrl.split('/').pop(),
-        });
-      }}
-      activeOpacity={0.5}
-    >
-      <View style={style.challengeCardItem}>
-        <Image
-          source={{
-            uri: item.imgPath,
-          }}
-          style={style.challengeCardImage}
-        />
-        <Text style={style.challengeCardTitle}>{item.challengeName}</Text>
-        {
-          showChallengeAuthorName && <Text style={style.challengeCardAuthor}>{`by ${item.creatorName}`}</Text>
-        }
-      </View>
-    </TouchableOpacity>
+      item.type !== 'navigationalCard' && <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Challenges', {
+            challengeId: item.challengeId,
+            challengeVirtualName: item.actionUrl.split('/').pop(),
+          });
+        }}
+        activeOpacity={0.5}
+      >
+        <View style={style.challengeCardItem}>
+          <Image
+            source={{
+              uri: item.imgPath,
+            }}
+            style={style.challengeCardImage}
+          />
+          <Text style={style.challengeCardTitle}>{item.challengeName}</Text>
+          {
+            showChallengeAuthorName && <Text style={style.challengeCardAuthor}>{`by ${item.creatorName}`}</Text>
+          }
+        </View>
+      </TouchableOpacity>
     }
   </>;
 
@@ -201,51 +206,51 @@ const ChallengesSwiper = ({
       challenges
       && challenges.length > 0
       && <View style={style.challengesSwiper}>
-      <Text style={style.swiperHeading}>
-        <FormattedMessage
-          defaultMessage="{swiperHeading}"
-          description="Challenges card heading"
-          values={{ swiperHeading }}
-        />
-      </Text>
-      <View>
-        {
-          challenges && <>
-            <FlatList
-              data={showNavigationalCard
-                ? [...challenges.slice(0, numberOfSlidesToShow), navigationCardData]
-                : challenges.slice(0, numberOfSlidesToShow)
-              }
-              renderItem={challengeCardItem}
-              keyExtractor={(item, index) => index.toString()}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              fadingEdgeLength={50}
-              initialNumToRender={3}
-              snapToInterval={200}
-              decelerationRate={0.001}
-              snapToAlignment={'start'}
-              contentInset={{ left: 20 }}
-              automaticallyAdjustContentInsets={false}
-              style={style.challengeCardList}
-            />
-          </>
-        }
+        <Text style={style.swiperHeading}>
+          <FormattedMessage
+            defaultMessage="{swiperHeading}"
+            description="Challenges card heading"
+            values={{ swiperHeading }}
+          />
+        </Text>
+        <View>
+          {
+            challenges && <>
+              <FlatList
+                data={showNavigationalCard
+                  ? [...challenges.slice(0, numberOfSlidesToShow), navigationCardData]
+                  : challenges.slice(0, numberOfSlidesToShow)
+                }
+                renderItem={challengeCardItem}
+                keyExtractor={(item, index) => index.toString()}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                fadingEdgeLength={50}
+                initialNumToRender={3}
+                snapToInterval={200}
+                decelerationRate={0.001}
+                snapToAlignment={'start'}
+                contentInset={{ left: 20 }}
+                automaticallyAdjustContentInsets={false}
+                style={style.challengeCardList}
+              />
+            </>
+          }
+        </View>
       </View>
-    </View>
     }
     {
       !challenges && <View>
-      <Text style={style.swiperHeading}>
-        <FormattedMessage
-          defaultMessage="{swiperHeading}"
-          description="Challenges card heading"
-          values={{ swiperHeading }}
-        />
-      </Text>
+        <Text style={style.swiperHeading}>
+          <FormattedMessage
+            defaultMessage="{swiperHeading}"
+            description="Challenges card heading"
+            values={{ swiperHeading }}
+          />
+        </Text>
         {
           !challenges && <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            { [1, 2, 3, 4].map((item) => (
+            {[1, 2, 3, 4].map((item) => (
               <View style={[style.challengeCardItem, { width: 200 }]} key={item}>
                 <Skeleton width='100%' height={100} style={{ borderRadius: 10, margin: 4 }} />
                 <Skeleton width='25%' height={24} style={{ borderRadius: 10, margin: 4 }} />
@@ -253,7 +258,7 @@ const ChallengesSwiper = ({
                   showChallengeAuthorName && <Skeleton width='75%' height={16} style={{ borderRadius: 8, margin: 4 }} />
                 }
               </View>
-            )) }
+            ))}
           </ScrollView>
         }
       </View>
