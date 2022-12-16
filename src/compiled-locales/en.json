@@ -17,18 +17,6 @@
       "value": "Logout"
     }
   ],
-  "+lsuwj": [
-    {
-      "type": 0,
-      "value": "Try now"
-    }
-  ],
-  "/EsQT0": [
-    {
-      "type": 0,
-      "value": "This is games page"
-    }
-  ],
   "/Gy7qZ": [
     {
       "type": 0,
@@ -37,6 +25,18 @@
     {
       "type": 1,
       "value": "levelNumber"
+    }
+  ],
+  "/Id/lz": [
+    {
+      "type": 0,
+      "value": "Yes"
+    }
+  ],
+  "/O26Yc": [
+    {
+      "type": 1,
+      "value": "line"
     }
   ],
   "/dnxym": [
@@ -189,6 +189,12 @@
       "value": "label"
     }
   ],
+  "4+tKRC": [
+    {
+      "type": 0,
+      "value": "Yes"
+    }
+  ],
   "4Ve1r3": [
     {
       "type": 0,
@@ -265,10 +271,40 @@
       "value": "Login into existing account"
     }
   ],
+  "7PlDmO": [
+    {
+      "type": 0,
+      "value": "Play"
+    }
+  ],
+  "7mn7eO": [
+    {
+      "type": 0,
+      "value": "Output will appear here"
+    }
+  ],
+  "8R6f04": [
+    {
+      "type": 0,
+      "value": "Coming Soon..."
+    }
+  ],
+  "9+2Mm0": [
+    {
+      "type": 0,
+      "value": "IDE"
+    }
+  ],
   "9BVOVU": [
     {
       "type": 0,
       "value": "Please verify to continue"
+    }
+  ],
+  "9NID4X": [
+    {
+      "type": 0,
+      "value": "OK"
     }
   ],
   "9YoD+Y": [
@@ -293,6 +329,12 @@
     {
       "type": 0,
       "value": "Student's Name"
+    }
+  ],
+  "A4oydH": [
+    {
+      "type": 0,
+      "value": "Keep the code changes?"
     }
   ],
   "A5tWte": [
@@ -369,6 +411,12 @@
       "value": "Coins Earned:"
     }
   ],
+  "CfsqV9": [
+    {
+      "type": 0,
+      "value": "All Games"
+    }
+  ],
   "Ciol6I": [
     {
       "type": 0,
@@ -443,10 +491,26 @@
       "value": " ?"
     }
   ],
+  "Fl1ECE": [
+    {
+      "type": 0,
+      "value": "Level "
+    },
+    {
+      "type": 1,
+      "value": "level"
+    }
+  ],
   "FoTGQE": [
     {
       "type": 0,
       "value": "Go to Login"
+    }
+  ],
+  "Fr6aaO": [
+    {
+      "type": 0,
+      "value": "No"
     }
   ],
   "G0AqB8": [
@@ -527,6 +591,12 @@
       "value": "OTP"
     }
   ],
+  "K+HWzs": [
+    {
+      "type": 0,
+      "value": "Console"
+    }
+  ],
   "KD6lRu": [
     {
       "type": 0,
@@ -591,6 +661,12 @@
     {
       "type": 0,
       "value": "Go to login"
+    }
+  ],
+  "NsygW3": [
+    {
+      "type": 0,
+      "value": "Run"
     }
   ],
   "O1sXEv": [
@@ -729,6 +805,12 @@
       "value": "studentName"
     }
   ],
+  "TmNnc7": [
+    {
+      "type": 0,
+      "value": "Keep the code changes?"
+    }
+  ],
   "TmcPug": [
     {
       "type": 0,
@@ -847,6 +929,12 @@
     {
       "type": 0,
       "value": "Please login again"
+    }
+  ],
+  "XVQ4du": [
+    {
+      "type": 0,
+      "value": "No"
     }
   ],
   "Y+dh5z": [
@@ -969,6 +1057,18 @@
       "value": "Yes"
     }
   ],
+  "dreQIo": [
+    {
+      "type": 0,
+      "value": "Inputs"
+    }
+  ],
+  "dtriXn": [
+    {
+      "type": 0,
+      "value": "Try Now"
+    }
+  ],
   "e5Eaen": [
     {
       "type": 0,
@@ -993,16 +1093,10 @@
       "value": "Set a Password"
     }
   ],
-  "fT7uau": [
-    {
-      "type": 0,
-      "value": "completed"
-    }
-  ],
-  "fr893W": [
+  "fcrHSq": [
     {
       "type": 1,
-      "value": "validSubmissions"
+      "value": "languageDisplayName"
     }
   ],
   "g0zp7w": [
@@ -1113,6 +1207,12 @@
       "value": "OTP"
     }
   ],
+  "mMH50/": [
+    {
+      "type": 0,
+      "value": "Code"
+    }
+  ],
   "mTY3Hn": [
     {
       "type": 0,
@@ -1161,16 +1261,40 @@
       "value": "text"
     }
   ],
+  "nTxUJZ": [
+    {
+      "type": 0,
+      "value": "Try IDE Now"
+    }
+  ],
   "nlYt8p": [
     {
       "type": 0,
       "value": "View more"
     }
   ],
+  "nnfaF3": [
+    {
+      "type": 1,
+      "value": "selectedLanguageDisplayName"
+    }
+  ],
+  "nsIAsY": [
+    {
+      "type": 0,
+      "value": "Run"
+    }
+  ],
   "o2jxWd": [
     {
       "type": 0,
       "value": "Account Settings"
+    }
+  ],
+  "oDenEU": [
+    {
+      "type": 0,
+      "value": "Turtle"
     }
   ],
   "oOZkkL": [
@@ -1197,13 +1321,7 @@
       "value": "Game Progress"
     }
   ],
-  "q86PwV": [
-    {
-      "type": 0,
-      "value": "Go to Home"
-    }
-  ],
-  "qTQ8nP": [
+  "qUU2pp": [
     {
       "type": 1,
       "value": "coinsEarned"
@@ -1233,6 +1351,12 @@
       "value": "Copy Link"
     }
   ],
+  "sC1GR3": [
+    {
+      "type": 0,
+      "value": "Yes"
+    }
+  ],
   "sNqwYF": [
     {
       "type": 0,
@@ -1249,6 +1373,12 @@
     {
       "type": 0,
       "value": "Go to Home"
+    }
+  ],
+  "t5hBAx": [
+    {
+      "type": 0,
+      "value": "Output will be shown here"
     }
   ],
   "tbPLF3": [
@@ -1269,10 +1399,22 @@
       "value": "message"
     }
   ],
+  "uPz4GT": [
+    {
+      "type": 0,
+      "value": "Run"
+    }
+  ],
   "uhayi4": [
     {
       "type": 1,
       "value": "errorMessage"
+    }
+  ],
+  "uipkRi": [
+    {
+      "type": 0,
+      "value": "Inputs"
     }
   ],
   "vChW6P": [

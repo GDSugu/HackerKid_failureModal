@@ -171,6 +171,18 @@ const themes = {
       ...Theme.light.screenLightBlue,
       ...fragmentIconDisposal,
     },
+    screenIde: {
+      ...Theme.light.screenYellow,
+      ...screenWithHeader,
+    },
+    screenCode: {
+      ...Theme.light.screenYellow,
+      ...screenWithHeader,
+    },
+    screenConsole: {
+      ...Theme.light.screenYellow,
+      ...screenWithHeader,
+    },
     screenLogin: {
       ...Theme.light.screenYellow,
       showHeader: false,
