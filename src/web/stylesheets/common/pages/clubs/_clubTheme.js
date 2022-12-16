@@ -28,6 +28,7 @@ const thememaplight = {
   'club-make-admin-bg': Yellow.color900,
   'club-danger-bg': Red.color900,
   'club-advanced-options-color': Red.color700,
+  'club-current-user-active-bg': Yellow.color200,
 };
 // just copied the light theme colors to the dark for now
   // TODO: make this a real dark theme with appropriate colors
@@ -53,6 +54,7 @@ const thememapdark = {
   'club-make-admin-bg': Yellow.color900,
   'club-danger-bg': Red.color900,
   'club-advanced-options-color': Red.color700,
+  'club-current-user-active-bg': Yellow.color200,
 };
 
 const cssvars = {
@@ -77,6 +79,7 @@ const cssvars = {
   'club-make-admin-bg': '--club-make-admin-bg',
   'club-danger-bg': '--club-danger-bg',
   'club-advanced-options-color': '--club-advanced-options-color',
+  'club-current-user-active-bg': '--club-current-user-active-bg',
 };
 
 module.exports = {

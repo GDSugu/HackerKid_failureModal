@@ -1,5 +1,5 @@
 import React from 'react';
-import post from '../../../web/javascripts/common/framework';
+import post from '../framework';
 
 const useCountryStateCity = ({ isPageMounted }) => {
   const [locationState, setLocationState] = React.useState({

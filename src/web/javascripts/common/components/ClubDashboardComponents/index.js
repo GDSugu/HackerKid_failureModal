@@ -400,8 +400,11 @@ const ClubLeaderBoardComponent = ({
             description={'Sort by:'}
           /> <span>
             <FormattedMessage
-              defaultMessage={'Points'}
+              defaultMessage={'{sortBy}'}
               description={'sort by option'}
+              values={{
+                sortBy: 'Points',
+              }}
             />
           </span>
         </p>
@@ -954,7 +957,7 @@ const ClubFeedContainer = ({
 const ClubMemberComponent = ({
   isAdmin = false,
   isApplicant = false,
-  member,
+  member = {},
   handleRole = () => {},
   handleKick = () => {},
   handleAcceptInvite = () => {},
@@ -964,7 +967,7 @@ const ClubMemberComponent = ({
   isLeaderBoard = false,
 }) => <>
   {
-    member
+    Object.keys(member).length > 0
     && <>
       <div className={`club-member-row ${isCurrentUser ? 'current-user' : ''}`} onClick={() => showMemberInfo(member.unique_url)}>
         <div className="d-flex align-items-center">
@@ -1062,7 +1065,7 @@ const ClubMemberComponent = ({
                   defaultMessage={'{points}'}
                   description={'Club member points'}
                   values={{
-                    points: member.points,
+                    points: member?.points || 0,
                   }}
                 />
               </p>
@@ -1750,6 +1753,7 @@ const ClubInfoModalComponent = () => {
   const handleFooterBtnClick = (role) => {
     updateClubInfo()
       .then((res) => {
+        console.log('signed req', res);
         if (res !== 'access_denied' && (res.status === 'success' || res.ok)) {
           toggleClubInfoModal('hide');
           if (role === 'admin') {
@@ -1871,7 +1875,7 @@ const ClubInfoModalComponent = () => {
             </div>
           </div>
         </div>
-        <button className="btn btn-primary btn-block club-info-footer-btn" ref={clubFooterBtnRef} onClick={() => handleFooterBtnClick(userData?.role === 'admin')}>
+        <button className="btn btn-primary btn-block club-info-footer-btn" ref={clubFooterBtnRef} onClick={() => handleFooterBtnClick(userData?.role)}>
           <FormattedMessage
             defaultMessage={'{btnMessage}'}
             description={'save button'}
@@ -2070,11 +2074,28 @@ const ClubMemberProfileModalComponent = ({ memberData, isDesktop }) => {
   </>;
 };
 
-const ClubHeroComponent = memo(ClubHeroContainer);
-const ClubFeedComponent = memo(ClubFeedContainer);
-const ClubFeedMobComponent = memo(ClubFeedContainerMob);
-const ClubInfoComponent = memo(ClubInfoContainer);
-const ClubMemberProfileComponent = memo(ClubMemberProfileContainer);
+const compareProps = (prev, next) => {
+  let isEqual = true;
+  Object.keys(prev).forEach((key) => {
+    if (key === 'avatar' || key === 'navigation' || key === 'style') {
+      isEqual = isEqual && true;
+    } else if (typeof prev[key] === 'function') {
+      // use memoized function for passing as props
+      isEqual = isEqual && true;
+    } else if (key.toLowerCase().includes('ref')) {
+      isEqual = true;
+    } else {
+      isEqual = isEqual && JSON.stringify(prev[key]) === JSON.stringify(next[key]);
+    }
+  });
+  return isEqual;
+};
+
+const ClubHeroComponent = memo(ClubHeroContainer, compareProps);
+const ClubFeedComponent = memo(ClubFeedContainer, compareProps);
+const ClubFeedMobComponent = memo(ClubFeedContainerMob, compareProps);
+const ClubInfoComponent = memo(ClubInfoContainer, compareProps);
+const ClubMemberProfileComponent = memo(ClubMemberProfileContainer, compareProps);
 
 const ClubDashboardComponent = () => {
   const isPageMounted = React.useRef(true);

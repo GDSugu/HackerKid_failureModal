@@ -2,6 +2,7 @@ import React from 'react';
 import post, { getSession, s3Upload, validateField } from '../../common/framework';
 import API from '../../../../env';
 import useRootPageState from '../root';
+import getPlatform from '../../common/utlis';
 
 const useClubs = ({ isPageMounted }) => {
   const [clubDataState, setClubDataState] = React.useState({
@@ -94,14 +95,14 @@ const useClubs = ({ isPageMounted }) => {
         validatedResult = validateField('name', value, { min: 4, max: 60 });
         break;
       case 'country':
-        if (value !== 'false') {
+        if (value && value !== 'false') {
           validatedResult = validateField('word', value, { min: 3, max: 60 });
         } else {
           validatedResult = false;
         }
         break;
       case 'state':
-        if (value !== 'false') {
+        if (value && value !== 'false') {
           validatedResult = validateField('word', value, { min: 3, max: 60 });
         } else {
           validatedResult = false;
@@ -409,8 +410,6 @@ const useClubs = ({ isPageMounted }) => {
       uniqueUrl = await getSession('unique_url');
     }
 
-    console.log('payload', payload);
-
     return post(payload, 'clubs/')
       .then((response) => {
         let result = false;
@@ -611,6 +610,8 @@ const useClubs = ({ isPageMounted }) => {
       s3Prefix: API.S3PREFIX,
     };
 
+    const platform = getPlatform();
+
     return post(payload, 'clubs/')
       .then(async (response) => {
         let result = false;
@@ -633,7 +634,11 @@ const useClubs = ({ isPageMounted }) => {
             if (parsedResponse.status === 'success') {
               const { clubId } = parsedResponse.clubData;
               const uniqueUrl = await getSession('unique_url');
-              const link = `${window.location.origin}/clubs/${clubId}/?action=join&invitedBy=${uniqueUrl}/`;
+              let linkOrigin = 'https://www.hackerkid.org';
+              if (platform === 'web') {
+                linkOrigin = window.location.origin;
+              }
+              const link = `${linkOrigin}/clubs/${clubId}/?action=join&invitedBy=${uniqueUrl}/`;
               newState.inviteLink = link;
               setClubDataState((prevData) => ({
                 ...prevData,
@@ -652,10 +657,11 @@ const useClubs = ({ isPageMounted }) => {
       });
   };
 
-  const getClubDashboardData = async ({ isVisiting = false, clubId = '' }) => {
+  const getClubDashboardData = async ({ isVisiting = false, clubId = '', fetchFeed = true }) => {
     const payload = {
       type: 'getClubDashboardData',
       s3Prefix: API.S3PREFIX,
+      fetchFeed,
     };
 
     if (isVisiting) {
@@ -777,6 +783,7 @@ const useClubs = ({ isPageMounted }) => {
     const payload = {
       type: 'getMembersList',
       clubName: clubDataState.clubData.clubName,
+      s3Prefix: API.S3PREFIX,
     };
 
     return post(payload, 'clubs/')

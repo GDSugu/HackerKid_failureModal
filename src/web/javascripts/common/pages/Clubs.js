@@ -10,37 +10,6 @@ import {
   $, pageInit,
 } from '../framework';
 
-// const clubLeaderBoard = [{
-//   clubName: 'Club 1',
-//   rank: 1,
-//   membersCount: 10,
-//   clubImage: '../../../../images/clubs/club.png',
-//   clubId: 'club-1',
-//   clubPoints: 1234,
-// }, {
-//   clubName: 'Club 2',
-//   rank: 2,
-//   membersCount: 9,
-//   clubImage: '../../../../images/clubs/club.png',
-//   clubId: 'club-2',
-//   clubPoints: 456,
-// }, {
-//   clubName: 'Club 3',
-//   rank: 3,
-//   membersCount: 1003,
-//   clubImage: '../../../../images/clubs/club.png',
-//   clubId: 'club-3',
-//   clubPoints: 23,
-// }];
-
-// const clubList = JSON.parse(JSON.stringify(clubLeaderBoard));
-// clubLeaderBoard.forEach((club, index) => {
-//   clubList.push({
-//     ...club,
-//     rank: index + 4,
-//   });
-// });
-
 const MemoizedClubDashboardComponent = React.memo(ClubDashboardComponent);
 const MemoizedClubHomeComponent = React.memo(ClubHomeComponent);
 
@@ -106,22 +75,8 @@ const Clubs = () => {
     };
   }, []);
 
-  // React.useEffect(() => {
-  //   if (sessionState) {
-  //     // const link =
-  //     // `${window.location.origin}/clubs/?action=join&invitedBy=${sessionState?.unique_url}/`;
-  //     // setInviteLink({ link });
-  //   }
-  // }, [sessionState]);
-
   React.useEffect(() => {
     if (clubDashboardStatus) {
-      // if (hasClub || clubDashboardResponse?.isVisitor) {
-      //   setAppData('showClub', true);
-      // }
-      // if (!clubDashboardResponse?.isVisitor) {
-      //   setAppData('showClub', false);
-      // }
       if (clubDashboardStatus === 'error') {
         setAppData('showClub', false);
         window.location.href = '/clubs/';

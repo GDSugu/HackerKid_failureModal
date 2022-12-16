@@ -31,6 +31,7 @@ import RouteHelp from './Help';
 import RouteTurtleHome from './TurtleHome';
 import RouteTurtleMain from './TurtleMain';
 import RouteTurtleLeaderBoard from './TurtleLeaderBoard';
+import RouteClub from './Clubs';
 
 import IconGame from '../../images/navbar/iconGame.svg';
 import IconHome from '../../images/navbar/iconHome.svg';
@@ -272,6 +273,7 @@ const App = () => {
                       <Stack.Screen name='TurtleMain' component={RouteTurtleMain} />
                     </Stack.Group>
                     <Stack.Screen name='TurtleLeaderBoard' component={RouteTurtleLeaderBoard} options={{ presentation: 'transparentModal' }} />
+                    <Stack.Screen name='Club' component={RouteClub}></Stack.Screen>
                     </>
                     : <>
                       <Stack.Screen name='Login' component={RouteLogin} />

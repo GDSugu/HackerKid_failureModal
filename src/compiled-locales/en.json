@@ -29,12 +29,6 @@
       "value": "Try now"
     }
   ],
-  "+nn/tN": [
-    {
-      "type": 0,
-      "value": "Save & Exit"
-    }
-  ],
   "/Gy7qZ": [
     {
       "type": 0,
@@ -49,6 +43,12 @@
     {
       "type": 0,
       "value": "Yes"
+    }
+  ],
+  "/X/jU2": [
+    {
+      "type": 1,
+      "value": "message"
     }
   ],
   "/dnxym": [
@@ -159,6 +159,12 @@
       "value": "Profile Settings"
     }
   ],
+  "1XDKxO": [
+    {
+      "type": 0,
+      "value": "Accept"
+    }
+  ],
   "1x4WPP": [
     {
       "type": 0,
@@ -235,6 +241,12 @@
       "value": "rank"
     }
   ],
+  "3Tij96": [
+    {
+      "type": 0,
+      "value": "Remove"
+    }
+  ],
   "3Wcqsy": [
     {
       "type": 0,
@@ -309,6 +321,12 @@
       "value": "Student Name"
     }
   ],
+  "5Gdv0g": [
+    {
+      "type": 1,
+      "value": "btnMessage"
+    }
+  ],
   "5L6FVQ": [
     {
       "type": 0,
@@ -361,10 +379,22 @@
       "value": "name"
     }
   ],
+  "6ywK83": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
   "74UjvK": [
     {
       "type": 0,
       "value": "Login to existing Account"
+    }
+  ],
+  "76oyi0": [
+    {
+      "type": 1,
+      "value": "clubName"
     }
   ],
   "7L3+7M": [
@@ -379,10 +409,26 @@
       "value": "Play"
     }
   ],
+  "7dyAWL": [
+    {
+      "type": 0,
+      "value": "No invites"
+    }
+  ],
   "8R6f04": [
     {
       "type": 0,
       "value": "Coming Soon..."
+    }
+  ],
+  "8ga5/p": [
+    {
+      "type": 0,
+      "value": "#"
+    },
+    {
+      "type": 1,
+      "value": "rank"
     }
   ],
   "9BVOVU": [
@@ -437,6 +483,12 @@
     {
       "type": 0,
       "value": "Expected output"
+    }
+  ],
+  "AZoPre": [
+    {
+      "type": 0,
+      "value": "Club Name"
     }
   ],
   "Aevhvw": [
@@ -495,6 +547,12 @@
     {
       "type": 0,
       "value": "Previous"
+    }
+  ],
+  "CT79Lc": [
+    {
+      "type": 0,
+      "value": "Club Leaderboard"
     }
   ],
   "CabaPs": [
@@ -657,6 +715,12 @@
       "value": "Login with Email"
     }
   ],
+  "GskR3C": [
+    {
+      "type": 1,
+      "value": "points"
+    }
+  ],
   "H2rvzb": [
     {
       "type": 0,
@@ -717,6 +781,12 @@
       "value": "errorMessage"
     }
   ],
+  "JW9Qqp": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
   "JnwRMJ": [
     {
       "type": 0,
@@ -745,6 +815,18 @@
     {
       "type": 0,
       "value": "Save & Proceed"
+    }
+  ],
+  "KwJUpE": [
+    {
+      "type": 1,
+      "value": "title"
+    }
+  ],
+  "LAxUIh": [
+    {
+      "type": 1,
+      "value": "studentName"
     }
   ],
   "LCt8qV": [
@@ -781,12 +863,6 @@
     {
       "type": 1,
       "value": "hint"
-    }
-  ],
-  "N3+S9p": [
-    {
-      "type": 0,
-      "value": "Members"
     }
   ],
   "N930gg": [
@@ -843,6 +919,12 @@
       "value": "Collections"
     }
   ],
+  "OEPiPP": [
+    {
+      "type": 0,
+      "value": "More friends = More fun"
+    }
+  ],
   "OJUwxk": [
     {
       "type": 0,
@@ -853,6 +935,12 @@
     {
       "type": 0,
       "value": "Register"
+    }
+  ],
+  "OXM3Ji": [
+    {
+      "type": 0,
+      "value": "View Club"
     }
   ],
   "OdODwS": [
@@ -949,10 +1037,22 @@
       "value": "Grade"
     }
   ],
+  "REPA3X": [
+    {
+      "type": 0,
+      "value": "Join your friends in the club"
+    }
+  ],
   "RHM1lo": [
     {
       "type": 0,
       "value": "Re-type Password"
+    }
+  ],
+  "RdkFSF": [
+    {
+      "type": 0,
+      "value": "Sort by:"
     }
   ],
   "Rf84nl": [
@@ -1011,6 +1111,12 @@
     {
       "type": 0,
       "value": "Edit Profile"
+    }
+  ],
+  "Tv+MUS": [
+    {
+      "type": 0,
+      "value": "Invited by"
     }
   ],
   "Tw0cSl": [
@@ -1175,10 +1281,20 @@
       "value": "username"
     }
   ],
-  "YqYdcI": [
+  "Ykg8tn": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
+  "YvQFe7": [
+    {
+      "type": 1,
+      "value": "points"
+    },
     {
       "type": 0,
-      "value": "Only admins can accept invites"
+      "value": " coins"
     }
   ],
   "YxMMzC": [
@@ -1319,6 +1435,12 @@
       "value": "Profile updated successfully"
     }
   ],
+  "ed9QEz": [
+    {
+      "type": 0,
+      "value": "No members found"
+    }
+  ],
   "esK7Em": [
     {
       "type": 0,
@@ -1439,6 +1561,12 @@
       "value": "Visit Club"
     }
   ],
+  "iebFqD": [
+    {
+      "type": 1,
+      "value": "clubName"
+    }
+  ],
   "jACivV": [
     {
       "type": 1,
@@ -1479,6 +1607,12 @@
     {
       "type": 1,
       "value": "question"
+    }
+  ],
+  "lVWtDb": [
+    {
+      "type": 1,
+      "value": "sortBy"
     }
   ],
   "loHqWK": [
@@ -1581,6 +1715,12 @@
       "value": "View more"
     }
   ],
+  "nn7wTW": [
+    {
+      "type": 0,
+      "value": "Most active members"
+    }
+  ],
   "o2jxWd": [
     {
       "type": 0,
@@ -1629,6 +1769,18 @@
       "value": "Game Progress"
     }
   ],
+  "q+pH3V": [
+    {
+      "type": 0,
+      "value": "Save"
+    }
+  ],
+  "qPy2h6": [
+    {
+      "type": 0,
+      "value": "Club Leaderboard"
+    }
+  ],
   "qTQ8nP": [
     {
       "type": 1,
@@ -1639,6 +1791,12 @@
     {
       "type": 0,
       "value": "All Games"
+    }
+  ],
+  "qWi4Zr": [
+    {
+      "type": 1,
+      "value": "message"
     }
   ],
   "qXTiEd": [
@@ -1849,6 +2007,24 @@
     {
       "type": 1,
       "value": "hintMessage"
+    }
+  ],
+  "ySOrrv": [
+    {
+      "type": 0,
+      "value": "No feed to show"
+    }
+  ],
+  "ybULra": [
+    {
+      "type": 0,
+      "value": "Country"
+    }
+  ],
+  "yjWbPf": [
+    {
+      "type": 0,
+      "value": "Visit Club"
     }
   ],
   "yujxGL": [
