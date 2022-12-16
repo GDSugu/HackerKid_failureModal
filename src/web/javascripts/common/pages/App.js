@@ -13,6 +13,7 @@ import AuthNav from '../components/AuthNav/AuthNav';
 import '../../../stylesheets/common/sass/importers/_bootstrap.scss';
 import '../../../stylesheets/common/sass/importers/_fontawesome.scss';
 import Loader from '../components/Loader';
+import { loginCheck } from '../framework';
 
 // const Loading = () => <div>Loading...</div>;
 const Loading = () => <Loader />;
@@ -39,7 +40,10 @@ const RouteTurtle = loadable(() => import('./Turtle'), { fallback: <Loading /> }
 // const RouteSubscription = loadable(() => import('./Subscription'), { fallback: <Loading /> });
 const RouteIde = loadable(() => import('./Ide'), { fallback: <Loading /> });
 
-const App = () => (
+const App = () => {
+  loginCheck();
+
+  return (
   <BrowserRouter>
     <Routes>
       <Route index path='/' caseSensitive={true} element={<RouteIndex />} />
@@ -96,7 +100,7 @@ const App = () => (
       <Route path='/about' caseSensitive={true} element={<RouteAbout />} />
       <Route path='*' element={ <Navigate to='/' />} />
     </Routes>
-  </BrowserRouter>
-);
+  </BrowserRouter>);
+};
 
 export default App;

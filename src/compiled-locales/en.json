@@ -69,6 +69,12 @@
       "value": "Login with Phone"
     }
   ],
+  "/yRdu/": [
+    {
+      "type": 0,
+      "value": "Start Playing"
+    }
+  ],
   "01Q2N+": [
     {
       "type": 0,
@@ -201,10 +207,26 @@
       "value": "Please connect to the internet."
     }
   ],
+  "52hsYP": [
+    {
+      "type": 0,
+      "value": "#"
+    },
+    {
+      "type": 1,
+      "value": "rank"
+    }
+  ],
   "53f59E": [
     {
       "type": 0,
       "value": "Rank"
+    }
+  ],
+  "5EmC6p": [
+    {
+      "type": 0,
+      "value": "Student Name"
     }
   ],
   "5L6FVQ": [
@@ -343,6 +365,16 @@
     {
       "type": 0,
       "value": "Login with Email"
+    }
+  ],
+  "Atd3d5": [
+    {
+      "type": 0,
+      "value": "/"
+    },
+    {
+      "type": 1,
+      "value": "totalSubmissions"
     }
   ],
   "B7znij": [
@@ -619,6 +651,12 @@
       "value": "Are you sure you want to logout?"
     }
   ],
+  "NgQ5Hl": [
+    {
+      "type": 0,
+      "value": "Continue Playing"
+    }
+  ],
   "Nn5oAD": [
     {
       "type": 0,
@@ -635,6 +673,12 @@
     {
       "type": 0,
       "value": "Collections"
+    }
+  ],
+  "OJUwxk": [
+    {
+      "type": 0,
+      "value": "Continue Playing"
     }
   ],
   "OWSL0r": [
@@ -679,6 +723,12 @@
       "value": "Playground"
     }
   ],
+  "Px7S/2": [
+    {
+      "type": 0,
+      "value": "Close"
+    }
+  ],
   "Qb0n8J": [
     {
       "type": 0,
@@ -719,12 +769,6 @@
     {
       "type": 0,
       "value": "Password"
-    }
-  ],
-  "SjoZlV": [
-    {
-      "type": 0,
-      "value": "Play Now"
     }
   ],
   "SpftNg": [
@@ -899,6 +943,12 @@
       "value": "Edit Profile"
     }
   ],
+  "YRA/RQ": [
+    {
+      "type": 1,
+      "value": "username"
+    }
+  ],
   "YxMMzC": [
     {
       "type": 0,
@@ -935,10 +985,22 @@
       "value": "Create a New Account"
     }
   ],
+  "a8vHtW": [
+    {
+      "type": 1,
+      "value": "studentNamt"
+    }
+  ],
   "aWjMjy": [
     {
       "type": 0,
       "value": "Register"
+    }
+  ],
+  "apr16P": [
+    {
+      "type": 0,
+      "value": "Leaderboard"
     }
   ],
   "b2J6mh": [
@@ -1013,6 +1075,12 @@
       "value": "Profile updated successfully"
     }
   ],
+  "esK7Em": [
+    {
+      "type": 0,
+      "value": "Earned Awards"
+    }
+  ],
   "f1vl6A": [
     {
       "type": 0,
@@ -1041,6 +1109,12 @@
     {
       "type": 0,
       "value": "Login Into Existing Account"
+    }
+  ],
+  "g8RtbX": [
+    {
+      "type": 0,
+      "value": "Coins"
     }
   ],
   "gOkIvb": [
@@ -1145,6 +1219,12 @@
       "value": "Session expired"
     }
   ],
+  "mb5De+": [
+    {
+      "type": 0,
+      "value": "Rank"
+    }
+  ],
   "mm9QaY": [
     {
       "type": 0,
@@ -1167,6 +1247,12 @@
     {
       "type": 0,
       "value": "Get the rare collectibles with your coins now"
+    }
+  ],
+  "nGT7h4": [
+    {
+      "type": 0,
+      "value": "Scoreboard"
     }
   ],
   "nT6Ql7": [
@@ -1237,8 +1323,8 @@
   ],
   "qUU2pp": [
     {
-      "type": 0,
-      "value": "All Games"
+      "type": 1,
+      "value": "coinsEarned"
     }
   ],
   "qXTiEd": [
@@ -1275,6 +1361,12 @@
     {
       "type": 0,
       "value": "Logout"
+    }
+  ],
+  "sXlZLv": [
+    {
+      "type": 0,
+      "value": "Levels"
     }
   ],
   "swkU6w": [
@@ -1349,6 +1441,12 @@
       "value": "Help"
     }
   ],
+  "x13dma": [
+    {
+      "type": 1,
+      "value": "level"
+    }
+  ],
   "x1EHNZ": [
     {
       "type": 0,
@@ -1371,6 +1469,12 @@
     {
       "type": 0,
       "value": "Videos"
+    }
+  ],
+  "xXEsL7": [
+    {
+      "type": 1,
+      "value": "level"
     }
   ],
   "xlvJ5U": [

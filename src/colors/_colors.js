@@ -89,7 +89,7 @@ const utilColors = {
   dark: '#212527',
   dark1: '#171818',
   red: '#F7393D',
-  darkTransparent50: '#21252750',
+  darkTransparent50: '#21252780',
   grey: '#5B5B5B',
   dimGrey: '#C4C4C4',
   lightGrey: '#A9ABAC',
@@ -101,8 +101,8 @@ const utilColors = {
   shadowColor1: '#F9A826',
   shadowColor2: '#FFE8B6',
   black: '#000000',
-  transparent: '#00000050',
-  overlay1: '#17181875',
+  transparent: '#00000080',
+  overlay1: '#171818bf',
 };
 
 module.exports = {

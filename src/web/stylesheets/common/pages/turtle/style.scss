@@ -50,6 +50,12 @@
 
       .leaderboard-btn {
         background-color: gt.theme-var(game-leaderboard-btn-bg, null, $thememaplight, $cssvars);
+        font-weight: bold;
+
+        &.active {
+          background-color: gt.theme-var(bg-1);
+          color: gt.theme-var(game-leaderboard-btn-bg, null, $thememaplight, $cssvars);
+        }
       }
 
       // .profileImg {
@@ -62,50 +68,58 @@
     // background: url(../../../../../images/turtle/turtleBgWeb.svg) no-repeat 100% / cover;
     overflow: auto;
 
-    .turtle-card {
+    .turtle-card-container {
       position: relative;
-      left: 45%;
-      width: 50%;
+      left: 50%;
+      width: 45%;
+      transform: translateX(-50%);
       display: inline-block;
-      border-radius: 12px;
-      background-color: gt.theme-var(game-dark-transparent, null, $thememaplight, $cssvars);
-      // backdrop-filter: blur(24px) saturate(200%);
-      // -webkit-backdrop-filter: blur(24px) saturate(200%);
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      padding: 4rem;
-      margin-top: 4rem;
-      color: gt.theme-var(text-color-2);
 
       @include gm.media-breakpoint-down(md) {
         display: none;
       }
 
-      .card-container {
-        text-align: center;
+      .turtle-card {
+        width: 100%;
+        border-radius: 12px;
+        background-color: gt.theme-var(game-dark-transparent, null, $thememaplight, $cssvars);
+        // backdrop-filter: blur(24px) saturate(200%);
+        // -webkit-backdrop-filter: blur(24px) saturate(200%);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 2rem;
+        margin-top: 2.5rem;
+        color: gt.theme-var(text-color-2);
 
-        .gameTitle {
-          font-size: 4rem;
-          margin: 0;
-        }
+        .card-container {
+          text-align: center;
 
-        .gameDesc {
-          font-size: 1.25rem;
-          line-height: 1.5;
-          margin: 1rem 0 2rem 0;
-        }
-
-        .gameBtn {
-          border-radius: 1rem;
-          background-color: gt.theme-var(text-color-2);
-
-          .gameBtnDesc {
-            font-weight: bold;
-            color: gt.theme-var(game-btn-text-color, null, $thememaplight, $cssvars);
-            margin-bottom: 0;
-            margin-left: 0.5rem;
+          .gameTitle {
+            font-size: 4rem;
+            margin: 0;
           }
+
+          .gameDesc {
+            font-size: 1.25rem;
+            line-height: 1.5;
+            margin: 1rem 0;
+          }
+        }
+      }
+
+      .gameBtn {
+        border-radius: 0.75rem;
+        background-color: gt.theme-var(text-color-2);
+        padding: 0.65rem 0;
+        margin: 0.5rem 0;
+
+        .gameBtnDesc {
+          font-weight: bold;
+          font-size: 1.5rem;
+          // color: gt.theme-var(game-btn-text-color, null, $thememaplight, $cssvars);
+          margin-bottom: 0;
+          margin-left: 0.5rem;
         }
       }
     }
@@ -174,7 +188,21 @@
       position: relative;
 
       .turtle-editor-container {
+        overflow: visible;
+
         #tabsContent {
+          #turtleBlock {
+            .injectionDiv {
+              overflow: visible;
+
+              // .blocklyToolboxDiv,
+              // .blocklyFlyout,
+              // .blocklyFlyoutScrollbar {
+              //   left: -56% !important;
+              // }
+            }
+          }
+
           #turtleOutput {
             #outputSection {
               position: relative;
@@ -314,7 +342,7 @@
 
       .turtle-blockly-container {
         background-color: gt.theme-var(bg-4);
-        padding: 0.75rem;
+        padding: 0.6rem;
 
         .turtle-blockly-title {
           color: gt.theme-var(text-color-2);
@@ -330,16 +358,18 @@
 
       .turtle-editor-title {
         background-color: gt.theme-var(bg-4);
-        padding-top: 0.5rem;
+        padding-top: 0.25rem;
         display: flex;
         justify-content: space-between;
+        border-radius: 0.75rem 0.75rem 0 0;
 
         .nav-tabs {
           .nav-item {
             .nav-link {
               color: gt.theme-var(text-color-2);
-              border: none;
+              border: unset;
               font-weight: bold;
+              padding-bottom: 0.75rem;
 
               &.active {
                 color: gt.theme-var(text-color-2);
@@ -350,7 +380,7 @@
               }
 
               &:hover {
-                border: none;
+                border: unset;
               }
             }
           }
@@ -372,8 +402,8 @@
 
     .turtle-skeleton-body {
       height: 100%;
-      animation: refresh 2.5s ease-out infinite;
-      background-image: linear-gradient(90deg, gt.theme-var(text-color-5), gt.theme-var(bg-2) 50%, gt.theme-var(skeleton-bg) 50%);
+      // animation: refresh 2.5s ease-out infinite;
+      // background-image: linear-gradient(90deg, gt.theme-var(text-color-5), gt.theme-var(bg-2) 50%, gt.theme-var(skeleton-bg) 50%);
       background-size: 200%;
     }
   }
@@ -398,7 +428,7 @@
               padding: 0 1rem;
               height: 100%;
               display: grid;
-              grid-template-rows: 50% 50%;
+              grid-template-rows: 43% 43% 14%;
 
               .turtle-mob-question-block {
                 height: 100%;
@@ -441,6 +471,7 @@
                   width: 100%;
                   padding: 1rem;
                   transition: all 0.3s ease-in-out;
+                  outline: none;
 
                   &[aria-expanded=true] {
                     border-radius: unset;
@@ -478,6 +509,26 @@
                       height: 100%;
                       width: 100%;
                     }
+                  }
+                }
+              }
+
+              .turtle-mob-hero-btn-block {
+                display: flex;
+                align-items: center;
+
+                button {
+                  background-color: gt.theme-var(game-btn-bg, null, $thememaplight, $cssvars);
+                  border-radius: 0.75rem;
+                  width: 100%;
+                  margin: 0 auto;
+                  padding: 0.75rem;
+
+                  p {
+                    color: gt.theme-var(text-color-2);
+                    font-weight: bold;
+                    font-size: 1.125rem;
+                    margin-bottom: 0;
                   }
                 }
               }
@@ -546,13 +597,14 @@
 
                 button {
                   background-color: gt.theme-var(game-btn-bg, null, $thememaplight, $cssvars);
-                  border-radius: 0.5rem;
-                  width: 100%;
+                  border-radius: 0.75rem;
+                  width: 97%;
+                  margin: auto;
                   color: gt.theme-var(text-color-2);
                   display: flex;
                   justify-content: space-between;
                   align-items: center;
-                  padding: 0.5rem;
+                  padding: 1rem;
 
                   p {
                     font-weight: bold;
@@ -596,6 +648,10 @@
 
             p {
               color: gt.theme-var(text-color-2);
+            }
+
+            &:hover {
+              border: none;
             }
           }
         }
@@ -787,6 +843,7 @@
 
 .turtle-home-container {
   background: url(../../../../../images/turtle/turtleBgWeb.svg) no-repeat 100% / cover;
+  background-position: left center;
 
   @include gm.media-breakpoint-down(md) {
     background-image: url(../../../../../images/turtle/turtleBg.png);
@@ -795,8 +852,17 @@
 
 .turtle-main-container {
   background: url(../../../../../images/turtle/turtleMainBgWeb.svg) no-repeat 100% / cover;
+  background-position: right center;
   max-width: 100vw;
   width: unset;
+
+  .game-level-component {
+    .game-level-container {
+      .close-btn-mob {
+        background-color: gt.theme-var(game-btn-bg, null, $thememaplight, $cssvars);
+      }
+    }
+  }
 
   @include gm.media-breakpoint-down(md) {
     background-image: url(../../../../../images/turtle/turtleMainBg.png);

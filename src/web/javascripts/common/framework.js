@@ -17,7 +17,9 @@ const pageInit = (className, title = null) => {
 
 const pathNavigator = (path) => {
   const { origin } = window.location;
-  window.location.href = `${origin}/${path}`;
+  if (!window.location.href.includes(path)) {
+    window.location.href = `${origin}/${path}`;
+  }
 };
 
 authorize.setSession = (key, value) => {
