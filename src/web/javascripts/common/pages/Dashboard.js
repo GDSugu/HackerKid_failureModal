@@ -307,9 +307,19 @@ const GameContainer = ({
                     <Img src='dashboard/dashboard-turtle.png' />
                   </Link>
                 </div>
-                {/* <div className="col-3">
+                <div className="col-3">
                   <Link className="game-item" to='/zombieland'>
                     <Img src='dashboard/dashboard-zombieLand.png' />
+                  </Link>
+                </div>
+                <div className="col-3">
+                  <Link className="game-item" to='/webkata/html'>
+                    <Img src='dashboard/dashboard-webkata-html.png' />
+                  </Link>
+                </div>
+                {/* <div className="col-3">
+                  <Link className="game-item" to='/webkata/css'>
+                    <Img src='dashboard/dashboard-webkata-css.png' />
                   </Link>
                 </div> */}
               </div>

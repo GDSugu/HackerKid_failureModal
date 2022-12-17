@@ -64,6 +64,17 @@
     }
   }
 
+  .game-navbar {
+    @include gm.media-breakpoint-down(md) {
+      .profileImg {
+        img {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+      }
+    }
+  }
+
   .turtle-frame {
     // background: url(../../../../../images/turtle/turtleBgWeb.svg) no-repeat 100% / cover;
     overflow: auto;

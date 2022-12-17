@@ -317,7 +317,7 @@ $level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, nu
     bottom: 0;
     width: 100%;
     border-radius: $universal-border-radius;
-    background-color: gt.theme-var(bg-6);
+    background-color: gt.theme-var(bg-8);
     transform: translateY(100%);
     transition: transform 0.3s ease-in-out;
     z-index: 10;

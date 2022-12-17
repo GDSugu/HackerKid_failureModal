@@ -129,6 +129,30 @@ const themes = {
       ...Theme.light.screenLightBlue,
       ...screenWithHeader,
     },
+    screenWebkataHome: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenWebkataMain: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenHTMLTab: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenCSSTab: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenJSTab: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenLivePreviewTab: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
     screenHome: {
       ...Theme.light.screenYellow,
       ...screenWithHeader,
@@ -232,6 +256,30 @@ const themes = {
     gradients: Theme.light.gradients,
   },
   dark: {
+    screenWebkataHome: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenWebkataMain: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenHTMLTab: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenCSSTab: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenJSTab: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenLivePreviewTab: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
     screenAchievements: {
       ...Theme.light.screenYellow,
       ...fragmentIconDisposal,

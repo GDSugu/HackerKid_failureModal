@@ -631,6 +631,12 @@
       "value": "Save"
     }
   ],
+  "HZrPcB": [
+    {
+      "type": 0,
+      "value": "Validated Result"
+    }
+  ],
   "Hjj2+R": [
     {
       "type": 0,
@@ -703,6 +709,12 @@
       "value": "Move to Drafts"
     }
   ],
+  "LoAPT7": [
+    {
+      "type": 0,
+      "value": "Live Preview"
+    }
+  ],
   "MB8h2I": [
     {
       "type": 0,
@@ -725,6 +737,12 @@
     {
       "type": 0,
       "value": "Share"
+    }
+  ],
+  "NYGsGb": [
+    {
+      "type": 1,
+      "value": "level"
     }
   ],
   "NZqKYF": [
@@ -811,6 +829,12 @@
       "value": "coins"
     }
   ],
+  "PSqen2": [
+    {
+      "type": 1,
+      "value": "level"
+    }
+  ],
   "PSx95N": [
     {
       "type": 0,
@@ -887,6 +911,12 @@
       "value": "Recommended"
     }
   ],
+  "SI6+pb": [
+    {
+      "type": 0,
+      "value": "Problem Statement"
+    }
+  ],
   "SL6O2c": [
     {
       "type": 0,
@@ -921,6 +951,12 @@
     {
       "type": 0,
       "value": "Create Account"
+    }
+  ],
+  "TXXReR": [
+    {
+      "type": 0,
+      "value": "Validated Result"
     }
   ],
   "TbteVJ": [
@@ -1025,6 +1061,12 @@
       "value": "coins"
     }
   ],
+  "W04w16": [
+    {
+      "type": 0,
+      "value": "Click \"Run\" to validate"
+    }
+  ],
   "W5zEev": [
     {
       "type": 0,
@@ -1041,6 +1083,12 @@
     {
       "type": 0,
       "value": "Play"
+    }
+  ],
+  "WsWDuq": [
+    {
+      "type": 0,
+      "value": "Click \"Run\" to validate your code"
     }
   ],
   "X1rCRf": [
@@ -1143,10 +1191,34 @@
       "value": "Register"
     }
   ],
+  "aZ9udC": [
+    {
+      "type": 0,
+      "value": "Private test case "
+    },
+    {
+      "type": 1,
+      "value": "testCaseNumber"
+    },
+    {
+      "type": 0,
+      "value": " - "
+    },
+    {
+      "type": 1,
+      "value": "result"
+    }
+  ],
   "apr16P": [
     {
       "type": 0,
       "value": "Leaderboard"
+    }
+  ],
+  "at+N1s": [
+    {
+      "type": 0,
+      "value": "Run"
     }
   ],
   "b2J6mh": [
@@ -1191,6 +1263,16 @@
       "value": "name"
     }
   ],
+  "d9u+8x": [
+    {
+      "type": 0,
+      "value": "Webkata - "
+    },
+    {
+      "type": 1,
+      "value": "concept"
+    }
+  ],
   "dNWhFj": [
     {
       "type": 0,
@@ -1231,6 +1313,12 @@
     {
       "type": 0,
       "value": "Show Leaderboard"
+    }
+  ],
+  "fAOneF": [
+    {
+      "type": 0,
+      "value": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?"
     }
   ],
   "fOZCSk": [
@@ -1529,6 +1617,12 @@
     {
       "type": 0,
       "value": "Grade"
+    }
+  ],
+  "qs67OI": [
+    {
+      "type": 0,
+      "value": "Problem Statement:"
     }
   ],
   "quRCCv": [

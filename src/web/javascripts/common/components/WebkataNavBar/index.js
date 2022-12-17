@@ -5,12 +5,10 @@ import useRootPageState from '../../../../../hooks/pages/root';
 import '../../../../stylesheets/common/sass/components/_turtle_navBar.scss';
 import Img from '../Img';
 
-const TurtleNavBar = ({
+const WebkataNavBar = ({
   questionState = {},
-  handleHint = () => {},
   levelBtnHandler = () => {},
   leaderboardHandler = () => {},
-  isTurtleMainPage = false,
 }) => {
   const { state: { device } } = useRootPageState();
 
@@ -95,7 +93,7 @@ const TurtleNavBar = ({
       {
         device === 'mobile'
         && <>
-          <div className="align-items-center no-gutters mob-nav-header">
+          <div className="align-items-center mob-nav-header">
             <Link to='/dashboard' className='homeNavIcon'>
               <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -104,7 +102,30 @@ const TurtleNavBar = ({
                 />
               </svg>
             </Link>
-            <div></div>
+            <div className='flex-center'>
+              <button className='btn btn-transparent level-btn' onClick={levelBtnHandler}>
+                <div className="d-flex align-items-center">
+                  <Img
+                    src='../../../../../images/games/levelStar.png'
+                    className='levelIcon'
+                    alt='Level icon' />
+                    {
+                      status === 'success'
+                      && <>
+                        <p className='font-weight-bold ml-2 mb-0'>
+                          <FormattedMessage
+                            defaultMessage={'{level}'}
+                            description={'Level navigation link'}
+                            values={{
+                              level: questionObject.virtualId,
+                            }}
+                          />
+                        </p>
+                      </>
+                    }
+                </div>
+              </button>
+            </div>
             <div className="d-flex align-items-center">
               <button className='btn leaderBoardIcon' onClick={leaderboardHandler}>
                 <svg width="42" height="42" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -118,52 +139,6 @@ const TurtleNavBar = ({
               </div>
             </div>
           </div>
-        {
-          isTurtleMainPage && <>
-            <div className="row justify-content-between align-items-center no-gutters level-navbar p-2">
-              <div>
-                <button className='btn btn-transparent level-btn' onClick={levelBtnHandler}>
-                  <div className="d-flex align-items-center">
-                    <Img
-                      src='../../../../../images/games/levelStar.png'
-                      className='levelIcon'
-                      alt='Level icon' />
-                    {
-                      status === 'success'
-                      && <>
-                        <p className='font-weight-bold ml-2 mb-0'>
-                          <FormattedMessage
-                            defaultMessage={'Level {level}'}
-                            description={'Level 1 navigation link'}
-                            values={{
-                              level: questionObject.virtualId,
-                            }}
-                          />
-                        </p>
-                      </>
-                    }
-                  </div>
-                </button>
-              </div>
-              <div className='d-flex align-items-center'>
-                <button className="hintBtn btn btn-transparent" onClick={handleHint}>
-                  <svg width="20" height="27" viewBox="0 0 20 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M14.384 22.664L13.9973 24.3427C13.853 24.9647 13.514 25.5245 13.0296 25.9405C12.5452 26.3566 11.9407 26.6072 11.304 26.656L11.0733 26.6653H8.25867C7.6198 26.6653 6.99761 26.4614 6.48271 26.0832C5.96781 25.705 5.58709 25.1723 5.396 24.5627L5.33467 24.34L4.948 22.664H14.384ZM9.66667 0C12.2304 0 14.6892 1.01845 16.502 2.8313C18.3149 4.64415 19.3333 7.10291 19.3333 9.66667C19.3333 12.5147 18.0853 15.124 15.6467 17.4533C15.5995 17.4984 15.5666 17.5564 15.552 17.62L14.848 20.664H4.48533L3.784 17.62C3.7692 17.5569 3.7363 17.4994 3.68933 17.4547C1.24933 15.124 0 12.5147 0 9.66533C0.00035359 7.1018 1.01896 4.64339 2.83177 2.83083C4.64459 1.01827 7.10314 -2.43855e-08 9.66667 0Z"
-                      fill="#ffffff"/>
-                  </svg>
-                </button>
-                {/* <button type='button' className='btn btn-transparent' onClick={() => {}}>
-                  <Img
-                    src='../../../../../images/games/gameMenu.png'
-                    className='moreIcon'
-                    alt='game menu'
-                  />
-                </button> */}
-              </div>
-            </div>
-          </>
-        }
         </>
       }
     </nav>
@@ -171,4 +146,4 @@ const TurtleNavBar = ({
   </>;
 };
 
-export default TurtleNavBar;
+export default WebkataNavBar;

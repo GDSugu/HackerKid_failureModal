@@ -1,0 +1,623 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+@use '../../sass/components/gameNavBar';
+@use '../../sass/components/loading';
+
+@import '_webkataTheme.js';
+@import '../../loading.css';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+.webkata-home-container,
+.webkata-main-container {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(0deg, gt.theme-var(webkata-background-img-gradient-color-1, null, $thememaplight, $cssvars) 0%, gt.theme-var(webkata-background-img-gradient-color-2, null, $thememaplight, $cssvars) 100%), url(../../../../../images/webkata/webkataHtmlBgWeb.png) no-repeat 100% / cover;
+  background-blend-mode: multiply, normal;
+
+  &.webkata-html-bg {
+    background: linear-gradient(0deg, gt.theme-var(webkata-background-img-gradient-color-1, null, $thememaplight, $cssvars) 0%, gt.theme-var(webkata-background-img-gradient-color-2, null, $thememaplight, $cssvars) 100%), url(../../../../../images/webkata/webkataHtmlBgWeb.png) no-repeat 100% / cover;
+    background-position-x: left;
+  }
+
+  &.webkata-css-bg {
+    background: linear-gradient(0deg, gt.theme-var(webkata-background-img-gradient-color-1, null, $thememaplight, $cssvars) 0%, gt.theme-var(webkata-background-img-gradient-color-2, null, $thememaplight, $cssvars) 100%), url(../../../../../images/webkata/webkataCssBgWeb.png) no-repeat 100% / cover;
+    background-position-x: left;
+  }
+
+  &.webkata-js-bg {
+    background: linear-gradient(0deg, gt.theme-var(webkata-background-img-gradient-color-1, null, $thememaplight, $cssvars) 0%, gt.theme-var(webkata-background-img-gradient-color-2, null, $thememaplight, $cssvars) 100%), url(../../../../../images/webkata/webkataJsBgWeb.png) no-repeat 100% / cover;
+    background-position-x: left;
+  }
+
+  // @include gm.media-breakpoint-down(md) {
+  //   background-image: url(../../../../../images/webkata/webkataBg.png);
+  //   background-position: left center;
+  // }
+
+  nav {
+    background-color: gt.theme-var(game-nav-bg, null, $thememaplight, $cssvars);
+
+    .navigation-container {
+      .navigation-item {
+        &.active {
+          background-color: gt.theme-var(game-nav-active-bg, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+  }
+
+  .game-navbar {
+    background-color: transparent;
+
+    .leaderboard-btn {
+      background-color: gt.theme-var(game-leaderboard-btn-bg, null, $thememaplight, $cssvars);
+      font-weight: bold;
+
+      &.active {
+        background-color: gt.theme-var(bg-1);
+        color: gt.theme-var(game-leaderboard-btn-bg, null, $thememaplight, $cssvars);
+      }
+    }
+
+    @include gm.media-breakpoint-down(md) {
+      .profileImg {
+        img {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+      }
+    }
+  }
+
+  .game-level-component {
+    @include gm.media-breakpoint-down(md) {
+      height: calc(100% - 72px);
+      top: 72px;
+    }
+
+    .game-level-container {
+      .close-btn-mob {
+        color: gt.theme-var(text-color-2);
+        background-color: gt.theme-var(webkata-run-btn-bg, null, $thememaplight, $cssvars);
+        padding: 0.5rem 0.75rem;
+      }
+    }
+
+    // @include gm.media-breakpoint-down(lg) {
+    //   height: calc(100% - 72px);
+    // }
+  }
+
+  // webkata home styles
+  .webkata-frame {
+    overflow: auto;
+
+    .webkata-card-container {
+      position: relative;
+      left: 50%;
+      width: 45%;
+      transform: translateX(-50%);
+      display: inline-block;
+
+      @include gm.media-breakpoint-down(sm) {
+        display: none;
+      }
+
+      @include gm.media-breakpoint-down(lg) {
+        width: 65%;
+      }
+
+      .webkata-card {
+        width: 100%;
+        border-radius: 12px;
+        background-color: gt.theme-var(game-dark-transparent, null, $thememaplight, $cssvars);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 2rem;
+        margin-top: 2.5rem;
+        color: gt.theme-var(text-color-2);
+
+        .card-container {
+          text-align: center;
+
+          .game-title {
+            font-size: 4rem;
+            margin: 0;
+          }
+
+          .game-description {
+            font-size: 1.25rem;
+            line-height: 1.5;
+            margin: 1rem 0;
+          }
+        }
+      }
+
+      .game-btn {
+        border-radius: 0.75rem;
+        background-color: gt.theme-var(text-color-2);
+        padding: 0.65rem 0;
+        margin: 0.5rem 0;
+
+        .gameBtnDesc {
+          font-weight: bold;
+          font-size: 1.5rem;
+          // color: gt.theme-var(game-btn-text-color, null, $thememaplight, $cssvars);
+          margin-bottom: 0;
+          margin-left: 0.5rem;
+        }
+      }
+    }
+
+    .webkata-mob-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+
+      @include gm.media-breakpoint-up(md) {
+        display: none;
+      }
+
+      .webkata-title,
+      .webkata-actions {
+        display: grid;
+        place-content: center;
+      }
+
+      .webkata-title {
+        flex: 4;
+
+        .game-title {
+          color: gt.theme-var(text-color-2);
+          margin-bottom: 0;
+        }
+      }
+
+      .webkata-actions {
+        flex: 1;
+
+        img {
+          width: 2.5rem;
+          // height: 2.5rem;
+        }
+
+        .webkata-play-btn {
+          .play-btn-container {
+            background-color: gt.theme-var(bg-1);
+            border-radius: 50%;
+            box-shadow: gt.theme-var(game-btn-shadow, null, $thememaplight, $cssvars);
+            padding: 1rem 1.25rem;
+
+            p {
+              color: gt.theme-var(game-btn-text-color, null, $thememaplight, $cssvars);
+              margin-bottom: 0;
+              margin-top: 0.125rem;
+              font-size: 0.85rem;
+              letter-spacing: 2.25px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // webkata game styles
+  .webkata-game-container {
+    padding: 1rem;
+
+    .question {
+      border-radius: 12px;
+      padding: 1.5rem;
+      background-color: white;
+      display: flex;
+      align-items: center;
+
+      .problem-statement-label,
+      .problem-statement {
+        margin: 0;
+      }
+
+      .problem-statement-label {
+        margin-right: 0.65rem;
+        color: gt.theme-var(game-label-color, null, $thememaplight, $cssvars);
+        white-space: nowrap;
+      }
+
+      .problem-statement {
+        line-height: 30px;
+      }
+    }
+
+    .mobile-question-container {
+      position: relative;
+
+      .mobile-question-revealer {
+        border: none;
+        border-radius: 12px;
+        padding: 1rem;
+        background-color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &.question-open {
+          border-bottom-left-radius: unset;
+          border-bottom-right-radius: unset;
+        }
+
+        i {
+          transition: transform 0.5s ease;
+
+          &.rotate180 {
+            transform: rotate(180deg);
+          }
+        }
+      }
+
+      .problem-statement-container {
+        position: absolute;
+        width: 100%;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        padding: 0 1.5rem 1.65rem 1.5rem;
+        background-color: white;
+        transform: translateY(-100%);
+        opacity: 0;
+        z-index: -1;
+
+        &.show {
+          animation: slidedown 0.5s ease;
+          animation-fill-mode: forwards;
+        }
+
+        &.hide {
+          animation: slideup 0.5s ease;
+          animation-fill-mode: forwards;
+        }
+
+        .problem-statement {
+          line-height: 30px;
+        }
+      }
+    }
+
+    .editor-with-live-preview {
+      padding-top: 1rem;
+      height: calc(100vh - 77px - 90px);
+      display: flex;
+      gap: 1rem;
+
+      .tabs-container {
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        background-color: gt.theme-var(webkata-bg-1, null, $thememaplight, $cssvars);
+        color: gt.theme-var(webkata-text-color-2, null, $thememaplight, $cssvars);
+        display: flex;
+        align-items: center;
+
+        .nav-link {
+          position: relative;
+          border: none;
+          padding: 0.8rem;
+          background: none;
+          color: inherit;
+          display: flex;
+          flex-direction: column;
+
+          &.active {
+            color: gt.theme-var(webkata-text-color-1, null, $thememaplight, $cssvars);
+
+            .active-indicator {
+              position: absolute;
+              left: 0;
+              bottom: 0;
+              width: 100%;
+              height: 2px;
+              background-color: gt.theme-var(webkata-text-color-1, null, $thememaplight, $cssvars);
+              display: inline-block;
+            }
+          }
+        }
+      }
+
+      .editor-with-header,
+      .live-preview-with-validated-result {
+        border-radius: 12px;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .tab-content {
+          width: 100%;
+          height: 100%;
+
+          .tab-pane {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        .run-btn {
+          border-radius: 0.5rem;
+          border-color: gt.theme-var(webkata-run-btn-bg, null, $thememaplight, $cssvars);
+          min-width: 77px;
+          background-color: gt.theme-var(webkata-run-btn-bg, null, $thememaplight, $cssvars);
+          color: gt.theme-var(webkata-text-color-1, null, $thememaplight, $cssvars);
+          display: flex;
+          align-items: center;
+          gap: 0.65rem;
+        }
+      }
+
+      .editor-with-header {
+        position: relative;
+        background-color: gt.theme-var(webkata-code-editor-transparent-bg, null, $thememaplight, $cssvars);
+
+        .test-editor {
+          border-bottom-left-radius: 12px;
+          border-bottom-right-radius: 12px;
+          width: 100%;
+          height: 100%;
+          background: transparent;
+          backdrop-filter: blur(70px);
+        }
+
+        .ace-monokai {
+          .ace_gutter {
+            background-color: gt.theme-var(webkata-bg-1, null, $thememaplight, $cssvars);
+            color: gt.theme-var(webkata-text-color-1, null, $thememaplight, $cssvars);
+          }
+        }
+
+        .run-btn {
+          position: absolute;
+          right: 30px;
+          bottom: 30px;
+        }
+      }
+
+      .live-preview-with-validated-result {
+        // height: 99.5%;
+
+        .tabs-container-with-tab-content {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+
+        #live-preview,
+        .validated-result {
+          border: 0;
+          border-bottom-left-radius: 12px;
+          border-bottom-right-radius: 12px;
+          background-color: gt.theme-var(webkata-bg-2, null, $thememaplight, $cssvars);
+          width: 100%;
+          height: 100%;
+        }
+
+        .validated-result {
+          .not-validated {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 1rem;
+          }
+
+          .validated {
+            height: 100%;
+
+            .test-cases-list {
+              margin: 0;
+              height: 100%;
+              list-style: none;
+              padding: 1rem;
+
+              .test-case {
+                margin-bottom: 1rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+
+                .test-case-pass-fail-icon {
+                  width: 25px;
+                  height: 25px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .webkata-game-mob-container {
+    padding: 0;
+    overflow-x: hidden;
+
+    .mobile-question-container {
+      .mobile-question-revealer {
+        border-radius: 0;
+      }
+    }
+
+    .editor-with-live-preview {
+      padding: 0;
+      gap: 0;
+      position: relative;
+
+      .editor-with-header {
+        border-radius: 0;
+        width: 100%;
+
+        .run-btn {
+          left: 50%;
+          bottom: 10px;
+          width: 90%;
+          transform: translateX(-50%);
+          padding: 0.5rem;
+
+          i {
+            display: inline-block;
+            margin-left: auto;
+          }
+
+          #loader-partial:after {
+            left: 50%;
+          }
+        }
+
+        .tabs-container {
+          border-radius: 0;
+        }
+
+        .test-editor {
+          border-radius: 0;
+        }
+      }
+
+      .live-preview-with-validated-result {
+        position: absolute;
+        right: 0;
+        width: calc(100% - 46px);
+        transform: translateX(100%);
+        flex-direction: row;
+        transition: transform 0.5s ease;
+
+        &.open {
+          z-index: 100;
+          transform: none;
+        }
+
+        #live-preview {
+          border-radius: 0;
+        }
+
+        .collapse-live-preview-btn-container {
+          position: absolute;
+          left: -46px;
+          height: 100%;
+          display: flex;
+
+          &.open {
+            z-index: 100;
+            backdrop-filter: blur(10px);
+          }
+
+          .collapse-live-preview-btn {
+            padding: 2rem 1rem;
+            border: 2px solid gt.theme-var(webkata-bg-3, null, $thememaplight, $cssvars);
+            border-radius: 12px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            background-color: gt.theme-var(webkata-bg-3, null, $thememaplight, $cssvars);
+            color: gt.theme-var(webkata-text-color-1, null, $thememaplight, $cssvars);
+            align-self: center;
+          }
+        }
+
+        .tabs-container-with-tab-content {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    }
+  }
+
+  .success-modal {
+    button.close {
+      color: gt.theme-var(text-color-2);
+      font-size: 2rem;
+      background: red;
+      padding: 0.125rem 0.6rem 0.45rem;
+      line-height: 0.75;
+      opacity: 1;
+    }
+
+    .success-modal-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .main-message,
+      .congrajulations-message {
+        text-align: center;
+      }
+
+      .main-message {
+        margin-bottom: 1rem;
+      }
+
+      .congrajulations-message {
+        margin-bottom: 1.5rem;
+      }
+
+      .play-next-btn {
+        color: gt.theme-var(webkata-text-color-1, null, $thememaplight, $cssvars);
+
+        i {
+          margin-left: 2.5rem;
+        }
+      }
+    }
+  }
+
+  #loader-partial {
+    background: transparent;
+
+    &:after {
+      transform: translateX(-48%);
+      width: 20px;
+      height: 20px;
+      border-color: gt.theme-var(webkata-text-color-1, null, $thememaplight, $cssvars);
+      border-top-color: transparent;
+      left: 30%;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: gt.theme-var(skeleton-bg);
+    border-radius: 0.5rem;
+  }
+
+  @keyframes slidedown {
+    0% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+
+    100% {
+      opacity: 1;
+      transform: none;
+      z-index: 999;
+    }
+  }
+
+  @keyframes slideup {
+    0% {
+      opacity: 1;
+      transform: none;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+  }
+}

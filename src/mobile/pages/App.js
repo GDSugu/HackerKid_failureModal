@@ -28,6 +28,9 @@ import RouteLogin from './Login';
 import RouteRegister from './Register';
 import RouteForgotPassword from './ForgotPassword';
 import RouteLeaderboard from './Leaderboard';
+import RouteWebkataHome from './WebkataHome';
+import RouteWebkataMain from './WebkataMain';
+
 import RouteIde from './Ide';
 import BottomSheet from '../components/BottomSheet';
 import YourChallengesActions from '../components/YourChallengesActions';
@@ -159,26 +162,26 @@ const TabBar = (props) => {
               borderTopRightRadius: 12,
             }}
           >
-              <Animatable.View
-                duration={500}
-                animation={isFocused ? 'bounceIn' : 'pulse'}
-                useNativeDriver={true}
-                style={{
-                  height: 68,
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  width: '70%',
-                }}
-              >
-                <View></View>
-                <Icon color={isFocused ? '#ffffff' : '#212527'}/>
-                <View style={{
-                  height: 4,
-                  width: '100%',
-                  backgroundColor: isFocused ? utilColors.white : 'transparent',
-                  borderRadius: 10,
-                }}></View>
-              </Animatable.View>
+            <Animatable.View
+              duration={500}
+              animation={isFocused ? 'bounceIn' : 'pulse'}
+              useNativeDriver={true}
+              style={{
+                height: 68,
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                width: '70%',
+              }}
+            >
+              <View></View>
+              <Icon color={isFocused ? '#ffffff' : '#212527'} />
+              <View style={{
+                height: 4,
+                width: '100%',
+                backgroundColor: isFocused ? utilColors.white : 'transparent',
+                borderRadius: 10,
+              }}></View>
+            </Animatable.View>
           </TouchableOpacity>
         );
       })}
@@ -207,7 +210,7 @@ const TabNavigators = (prop) => {
       }
       screenOptions={{
         lazy: true,
-        lazyPlaceholder: () => <Loader route={routeName}/>,
+        lazyPlaceholder: () => <Loader route={routeName} />,
         // swipeEnabled: routeName !== 'Home',
         swipeEnabled: false,
       }}
@@ -234,27 +237,27 @@ const App = () => {
 
   return (
     <SafeAreaProvider>
-        <StatusBar
-          backgroundColor={screenTheme.notificationBg}
-        />
-        <View style={style.container}>
-          <Header route={routeName} navigation={navigationRef}/>
-          <CheckNetwork route={routeName} />
-          <NavigationContainer
-            ref={navigationRef}
-            onReady={() => { setRoutName(navigationRef.getCurrentRoute().name); }}
-            onStateChange={() => { setRoutName(navigationRef.getCurrentRoute().name); }}
-          >
-            <Stack.Navigator
-              screenOptions={{
-                headerShown: false,
-                animation: 'slide_from_bottom',
-              }} initialRouteName={'Login'}>
-              <Stack.Group>
-                {
-                  authContext.isLoggedIn
-                    ? <>
-                      <Stack.Screen name='Start'>
+      <StatusBar
+        backgroundColor={screenTheme.notificationBg}
+      />
+      <View style={style.container}>
+        <Header route={routeName} navigation={navigationRef} />
+        <CheckNetwork route={routeName} />
+        <NavigationContainer
+          ref={navigationRef}
+          onReady={() => { setRoutName(navigationRef.getCurrentRoute().name); }}
+          onStateChange={() => { setRoutName(navigationRef.getCurrentRoute().name); }}
+        >
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+              animation: 'slide_from_bottom',
+            }} initialRouteName={'Login'}>
+            <Stack.Group>
+              {
+                authContext.isLoggedIn
+                  ? <>
+                    <Stack.Screen name='Start'>
                       {() => TabNavigators({
                         routeName,
                         screenTheme,
@@ -265,12 +268,14 @@ const App = () => {
                     <Stack.Screen name='Class' component={RouteClass} />
                     <Stack.Screen name='EditProfile' component={RouteProfile} />
                     <Stack.Screen name='Leaderboard' component={RouteLeaderboard} />
+                    <Stack.Screen name='WebkataHome' component={RouteWebkataHome} />
+                    <Stack.Screen name='WebkataMain' component={RouteWebkataMain} />
                     <Stack.Screen name='AllChallenges' component={RouteAllChallenges} />
                     <Stack.Screen name='YourChallenges' component={RouteYourChallenges} />
                     <Stack.Screen name='YourDraftChallenges' component={RouteDraftChallenges} />
                     <Stack.Screen name='Ide' component={RouteIde} />
                     <Stack.Screen name='TurtleHome'>
-                      {(props) => <RouteTurtleHome {...props} routeName={routeName} /> }
+                      {(props) => <RouteTurtleHome {...props} routeName={routeName} />}
                     </Stack.Screen>
                     <Stack.Group
                       screenOptions={{
@@ -281,7 +286,7 @@ const App = () => {
                     </Stack.Group>
                     <Stack.Screen name='TurtleLeaderBoard' component={RouteTurtleLeaderBoard} options={{ presentation: 'transparentModal' }} />
                     </>
-                    : <>
+                  : <>
                       <Stack.Screen name='Login' component={RouteLogin} />
                       <Stack.Screen name='Register' component={RouteRegister} />
                       <Stack.Screen name='ForgotPassword' component={RouteForgotPassword} />

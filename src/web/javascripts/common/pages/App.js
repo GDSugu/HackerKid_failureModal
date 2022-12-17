@@ -41,6 +41,7 @@ const RouteCertificates = loadable(() => import('./Certificates'), { fallback: <
 // const RouteCollectibles = loadable(() => import('./Collectibles'), { fallback: <Loading /> });
 const RouteTurtle = loadable(() => import('./Turtle'), { fallback: <Loading /> });
 // const RouteSubscription = loadable(() => import('./Subscription'), { fallback: <Loading /> });
+const RouteWebkata = loadable(() => import('./Webkata'), { fallback: <Loading /> });
 const RouteIde = loadable(() => import('./Ide'), { fallback: <Loading /> });
 
 const App = () => {
@@ -93,8 +94,11 @@ const App = () => {
           {/* <Route path='subscription' caseSensitive={true} element={<RouteSubscription />} /> */}
         </Route>
         <Route path='turtle' caseSensitive={true} element={<RouteTurtle />} />
-          <Route path='turtle/:id' element={<RouteTurtle />} />
-            <Route path='turtle/:id/:uniqueString' element={<RouteTurtle />} />
+        <Route path='turtle/:id' element={<RouteTurtle />} />
+        <Route path='turtle/:id/:uniqueString' element={<RouteTurtle />} />
+        <Route path='webkata/:conceptId' element={<RouteWebkata />} />
+        <Route path='webkata/:conceptId/:id' element={<RouteWebkata />} />
+        <Route path='webkata/:conceptId/:id/:uniqueString' element={<RouteWebkata />} />
           {/* </Route> */}
         {/* </Route> */}
       </Route>
