@@ -88,6 +88,7 @@ const gradients = {
 const utilColors = {
   white: '#FFFFFF',
   dark: '#212527',
+  dark1: '#171818',
   red: '#F7393D',
   darkTransparent50: '#21252780',
   grey: '#5B5B5B',

@@ -51,7 +51,7 @@ const Header = ({ route, navigation }) => {
   const style = getStyles(screenTheme, theme.utilColors);
 
   const classNavRoutes = ['Home', 'Games', 'Video', 'Challenges', 'More'];
-  const homeNavRoutes = ['Class', 'Games', 'Video', 'Challenges', 'More'];
+  const homeNavRoutes = ['Class', 'Games', 'Video', 'Challenges', 'More', 'Ide', 'Code', 'Console'];
 
   return <>
     {
