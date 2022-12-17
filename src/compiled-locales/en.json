@@ -305,6 +305,16 @@
       "value": "Please verify to continue"
     }
   ],
+  "9GHKZe": [
+    {
+      "type": 0,
+      "value": "/"
+    },
+    {
+      "type": 1,
+      "value": "totalQns"
+    }
+  ],
   "9NID4X": [
     {
       "type": 0,
@@ -397,6 +407,12 @@
     {
       "type": 0,
       "value": "No"
+    }
+  ],
+  "Bt/Kkf": [
+    {
+      "type": 0,
+      "value": "completed"
     }
   ],
   "CabaPs": [
@@ -619,16 +635,16 @@
       "value": "Continue"
     }
   ],
-  "KmuT+3": [
-    {
-      "type": 0,
-      "value": "Loading..."
-    }
-  ],
   "LCt8qV": [
     {
       "type": 0,
       "value": "Share"
+    }
+  ],
+  "LuPT86": [
+    {
+      "type": 0,
+      "value": "Coins"
     }
   ],
   "MB8h2I": [
@@ -1097,6 +1113,12 @@
       "value": "name"
     }
   ],
+  "d/zBnH": [
+    {
+      "type": 0,
+      "value": "..."
+    }
+  ],
   "dNWhFj": [
     {
       "type": 0,
@@ -1423,12 +1445,6 @@
     {
       "type": 0,
       "value": "completed"
-    }
-  ],
-  "rWdMcQ": [
-    {
-      "type": 0,
-      "value": "XP"
     }
   ],
   "rZKLPy": [

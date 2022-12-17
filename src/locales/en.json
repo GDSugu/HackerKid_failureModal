@@ -194,6 +194,10 @@
     "defaultMessage": "Please verify to continue",
     "description": "Recaptcha Modal heading"
   },
+  "9GHKZe": {
+    "defaultMessage": "/{totalQns}",
+    "description": "Game Leader Board: Total Questions"
+  },
   "9NID4X": {
     "defaultMessage": "OK",
     "description": "OK"
@@ -253,6 +257,10 @@
   "BNGdt+": {
     "defaultMessage": "No",
     "description": "cancel logout"
+  },
+  "Bt/Kkf": {
+    "defaultMessage": "completed",
+    "description": "Game progress"
   },
   "CabaPs": {
     "defaultMessage": "Level {level}",
@@ -388,13 +396,13 @@
     "defaultMessage": "Continue",
     "description": "Continue button"
   },
-  "KmuT+3": {
-    "defaultMessage": "Loading...",
-    "description": "Loading"
-  },
   "LCt8qV": {
     "defaultMessage": "Share",
     "description": "Share Button"
+  },
+  "LuPT86": {
+    "defaultMessage": "Coins",
+    "description": "LeaderBoard Points"
   },
   "MB8h2I": {
     "defaultMessage": "Leaderboard Ranking",
@@ -703,6 +711,10 @@
     "defaultMessage": "{name}",
     "description": "name"
   },
+  "d/zBnH": {
+    "defaultMessage": "...",
+    "description": "Page"
+  },
   "dNWhFj": {
     "defaultMessage": "No",
     "description": "logout no btn"
@@ -916,10 +928,6 @@
   "rECW1h": {
     "defaultMessage": "completed",
     "description": "Game Progress card caption"
-  },
-  "rWdMcQ": {
-    "defaultMessage": "XP",
-    "description": "LeaderBoard Points"
   },
   "rZKLPy": {
     "defaultMessage": "Copy Link",
