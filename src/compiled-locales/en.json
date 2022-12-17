@@ -87,10 +87,22 @@
       "value": "Code"
     }
   ],
+  "0Q9/tV": [
+    {
+      "type": 1,
+      "value": "heading"
+    }
+  ],
   "0Sgdtj": [
     {
       "type": 0,
       "value": "Game Progress"
+    }
+  ],
+  "0lGE5l": [
+    {
+      "type": 1,
+      "value": "navigationText"
     }
   ],
   "0mcQbk": [
@@ -133,6 +145,18 @@
     {
       "type": 0,
       "value": "Create a New Account"
+    }
+  ],
+  "2E6QpA": [
+    {
+      "type": 0,
+      "value": "Challenges"
+    }
+  ],
+  "2ERxYL": [
+    {
+      "type": 0,
+      "value": "Oldest to Newest"
     }
   ],
   "2RBdEr": [
@@ -223,6 +247,12 @@
       "value": "Please connect to the internet."
     }
   ],
+  "4wgAGs": [
+    {
+      "type": 0,
+      "value": "Date"
+    }
+  ],
   "52hsYP": [
     {
       "type": 0,
@@ -249,6 +279,18 @@
     {
       "type": 0,
       "value": "Password"
+    }
+  ],
+  "5Ls4nU": [
+    {
+      "type": 0,
+      "value": "Publish"
+    }
+  ],
+  "5Vj22e": [
+    {
+      "type": 1,
+      "value": "swiperHeading"
     }
   ],
   "634LIC": [
@@ -393,10 +435,22 @@
       "value": "Try again"
     }
   ],
+  "BI7XwF": [
+    {
+      "type": 0,
+      "value": "Edit Challenge"
+    }
+  ],
   "BNGdt+": [
     {
       "type": 0,
       "value": "No"
+    }
+  ],
+  "BwliRZ": [
+    {
+      "type": 0,
+      "value": "Newest to Oldest"
     }
   ],
   "CabaPs": [
@@ -457,6 +511,12 @@
       "value": "Email"
     }
   ],
+  "EQupmg": [
+    {
+      "type": 0,
+      "value": "Alphabetical"
+    }
+  ],
   "EhuHU0": [
     {
       "type": 1,
@@ -479,6 +539,12 @@
     {
       "type": 0,
       "value": "Home"
+    }
+  ],
+  "FhNWty": [
+    {
+      "type": 0,
+      "value": "Publish"
     }
   ],
   "FhTUgw": [
@@ -533,6 +599,12 @@
     {
       "type": 0,
       "value": "Verify OTP and proceed"
+    }
+  ],
+  "Gmgyiq": [
+    {
+      "type": 0,
+      "value": "Move to drafts"
     }
   ],
   "Gon8SN": [
@@ -595,6 +667,12 @@
       "value": "Previous"
     }
   ],
+  "IloyRB": [
+    {
+      "type": 1,
+      "value": "heading"
+    }
+  ],
   "In3suu": [
     {
       "type": 1,
@@ -617,6 +695,12 @@
     {
       "type": 1,
       "value": "gameTitle"
+    }
+  ],
+  "LbCDj2": [
+    {
+      "type": 0,
+      "value": "Move to Drafts"
     }
   ],
   "MB8h2I": [
@@ -703,6 +787,18 @@
       "value": "Class"
     }
   ],
+  "P+VjyT": [
+    {
+      "type": 0,
+      "value": "Challenges"
+    }
+  ],
+  "P3S8Yh": [
+    {
+      "type": 0,
+      "value": "Create a Challenge"
+    }
+  ],
   "PKwyq8": [
     {
       "type": 0,
@@ -719,6 +815,12 @@
     {
       "type": 0,
       "value": "Home"
+    }
+  ],
+  "PaprdD": [
+    {
+      "type": 0,
+      "value": "No challenges published yet !"
     }
   ],
   "PcqGYQ": [
@@ -789,6 +891,12 @@
     {
       "type": 0,
       "value": "Password"
+    }
+  ],
+  "STCi24": [
+    {
+      "type": 0,
+      "value": "Delete Challenge"
     }
   ],
   "SpftNg": [
@@ -959,6 +1067,12 @@
       "value": "Edit Profile"
     }
   ],
+  "YCPu3A": [
+    {
+      "type": 0,
+      "value": "Newly Trending"
+    }
+  ],
   "YRA/RQ": [
     {
       "type": 1,
@@ -1015,6 +1129,12 @@
     {
       "type": 1,
       "value": "studentNamt"
+    }
+  ],
+  "aNoleS": [
+    {
+      "type": 0,
+      "value": "Dismiss"
     }
   ],
   "aWjMjy": [
@@ -1191,10 +1311,22 @@
       "value": "Continue"
     }
   ],
+  "iaEqzE": [
+    {
+      "type": 1,
+      "value": "navigationText"
+    }
+  ],
   "jDzDCp": [
     {
       "type": 0,
       "value": "Leaderboard"
+    }
+  ],
+  "jMKyRW": [
+    {
+      "type": 0,
+      "value": "Create a Challenge"
     }
   ],
   "jZhy7I": [
@@ -1229,6 +1361,12 @@
     {
       "type": 0,
       "value": "Change Password"
+    }
+  ],
+  "m+YcJ4": [
+    {
+      "type": 0,
+      "value": "View your challenges"
     }
   ],
   "m19v5I": [
@@ -1363,6 +1501,12 @@
       "value": "Continue Playing"
     }
   ],
+  "pgAgVI": [
+    {
+      "type": 1,
+      "value": "emptyStateText"
+    }
+  ],
   "pwy4hs": [
     {
       "type": 0,
@@ -1373,6 +1517,12 @@
     {
       "type": 1,
       "value": "coinsEarned"
+    }
+  ],
+  "qUU2pp": [
+    {
+      "type": 0,
+      "value": "All Games"
     }
   ],
   "qXTiEd": [
@@ -1483,6 +1633,12 @@
       "value": "Help"
     }
   ],
+  "x+wTwj": [
+    {
+      "type": 1,
+      "value": "navLinkText"
+    }
+  ],
   "x13dma": [
     {
       "type": 1,
@@ -1501,6 +1657,12 @@
       "value": "Resend"
     }
   ],
+  "xHkGSg": [
+    {
+      "type": 1,
+      "value": "swiperHeading"
+    }
+  ],
   "xT1NKB": [
     {
       "type": 0,
@@ -1511,6 +1673,12 @@
     {
       "type": 0,
       "value": "Videos"
+    }
+  ],
+  "ya4qNs": [
+    {
+      "type": 1,
+      "value": "totalEarnedCoins"
     }
   ],
   "ya4qNs": [

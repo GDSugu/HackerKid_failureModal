@@ -16,6 +16,9 @@ const Theme = {
       navBg: Blue.color500,
       navActiveBg: Blue.color600,
       btnBg: Blue.color700,
+      btnDarkBg: Blue.color900,
+      transparentBlue: '#004BDD26',
+      modalHeaderBg: Blue.color200,
     },
     screenGreen: {
       bodyBg: Green.color50,
@@ -63,6 +66,9 @@ const Theme = {
       navBg: Blue.color500,
       navActiveBg: Blue.color600,
       btnBg: Blue.color700,
+      btnDarkBg: Blue.color900,
+      transparentBlue: '#004BDD26',
+      modalHeaderBg: Blue.color200,
     },
     screenGreen: {
       bodyBg: Green.color50,

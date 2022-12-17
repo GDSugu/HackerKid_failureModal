@@ -19,6 +19,9 @@ import RouteGames from './Games';
 import RouteHome from './Home';
 import RouteVideo from './Video';
 import RouteChallenges from './Challenges';
+import RouteAllChallenges from './AllChallenges';
+import RouteYourChallenges from './YourChallenges';
+import RouteDraftChallenges from './YourDraftChallenges';
 import RouteMore from './More';
 import RouteProfile from './EditProfile';
 import RouteLogin from './Login';
@@ -27,6 +30,7 @@ import RouteForgotPassword from './ForgotPassword';
 import RouteLeaderboard from './Leaderboard';
 import RouteIde from './Ide';
 import BottomSheet from '../components/BottomSheet';
+import YourChallengesActions from '../components/YourChallengesActions';
 import RouteHelp from './Help';
 import RouteTurtleHome from './TurtleHome';
 import RouteTurtleMain from './TurtleMain';
@@ -261,6 +265,9 @@ const App = () => {
                     <Stack.Screen name='Class' component={RouteClass} />
                     <Stack.Screen name='EditProfile' component={RouteProfile} />
                     <Stack.Screen name='Leaderboard' component={RouteLeaderboard} />
+                    <Stack.Screen name='AllChallenges' component={RouteAllChallenges} />
+                    <Stack.Screen name='YourChallenges' component={RouteYourChallenges} />
+                    <Stack.Screen name='YourDraftChallenges' component={RouteDraftChallenges} />
                     <Stack.Screen name='Ide' component={RouteIde} />
                     <Stack.Screen name='TurtleHome'>
                       {(props) => <RouteTurtleHome {...props} routeName={routeName} /> }
@@ -284,6 +291,7 @@ const App = () => {
               <Stack.Screen name='Help' component={RouteHelp} />
               <Stack.Group screenOptions={{ presentation: 'modal' }}>
                 <Stack.Screen name='BottomSheet' component={BottomSheet} />
+                <Stack.Screen name='YourChallengesActions' component={YourChallengesActions} />
               </Stack.Group>
             </Stack.Navigator>
           </NavigationContainer>

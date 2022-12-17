@@ -28,7 +28,10 @@ const RouteForgotPassword = loadable(() => import('./ForgotPassword'), { fallbac
 const RouteDashboard = loadable(() => import('./Dashboard'), { fallback: <Loading /> });
 const RouteGames = loadable(() => import('./Games'), { fallback: <Loading /> });
 const RouteCourses = loadable(() => import('./Courses'), { fallback: <Loading /> });
+const RouteAllChallenges = loadable(() => import('./AllChallenges'), { fallback: <Loading /> });
 const RouteChallenges = loadable(() => import('./Challenges'), { fallback: <Loading /> });
+const RouteYourChallenges = loadable(() => import('./YourChallenges'), { fallback: <Loading /> });
+const RouteYourDraftChallenges = loadable(() => import('./YourDraftChallenges'), { fallback: <Loading /> });
 const RouteMore = loadable(() => import('./More'), { fallback: <Loading /> });
 const RouteProfileEdit = loadable(() => import('./ProfileEdit'), { fallback: <Loading /> });
 // const RouteSubscription = loadable(() => import('./Subscription'), { fallback: <Loading /> });
@@ -53,6 +56,9 @@ const App = () => {
         <Route path='ide' caseSensitive={true} element={<RouteIde/>} />
         <Route path='courses' caseSensitive={true} element={<RouteCourses />} />
         <Route path='challenges' caseSensitive={true} element={<RouteChallenges />} />
+        <Route path='all-challenges' caseSensitive={true} element={<RouteAllChallenges />} />
+        <Route path='your-challenges' caseSensitive={true} element={<RouteYourChallenges />} />
+        <Route path='your-challenges/drafts' caseSensitive={true} element={<RouteYourDraftChallenges />}/>
         {/* <Route path='more' caseSensitive={true} element={<RouteMore />} /> */}
         <Route path='more' caseSensitive={true} element={<RouteMore />} />
         <Route path='leaderboard' caseSensitive={true} element={<RouteLeaderBoard />} />
@@ -63,7 +69,7 @@ const App = () => {
         <Route
           path='profile'
           caseSensitive={true}
-          element={
+            element={
             <AccountNavBar backNavigationUrl='/dashboard' NavItems={(screen) => <>
               <div className={`account-nav-item ${screen === 'edit' ? 'active' : ''}`}>
                 <Link to='edit'>
