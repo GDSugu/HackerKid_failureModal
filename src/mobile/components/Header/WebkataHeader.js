@@ -27,6 +27,16 @@ const getStyles = (utilColors) => StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  flexWidth: {
+    flex: 1,
+  },
+  flexEnd: {
+    justifyContent: 'flex-end',
+  },
+  alignCenter: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   profileImg: {
     width: 38,
     height: 38,
@@ -60,6 +70,7 @@ const WebkataHeader = ({
     <View style={style.webkataHeader}>
       <Animatable.View
         animation='fadeInLeft'
+        style={style.flexWidth}
       >
         <TouchableOpacity
           onPress={() => navigation.navigate('Home')}
@@ -69,7 +80,7 @@ const WebkataHeader = ({
       </Animatable.View>
       {
         showLevelIndicator
-        && <Animatable.View animation={'fadeInDown'}>
+        && <Animatable.View style={[style.flexWidth, style.alignCenter]} animation={'fadeInDown'}>
           <TouchableOpacity
             style={style.levelIndicator}
             onPress={() => setShowLevels((prev) => ({ ...prev, showLevels: !prev.showLevels }))}>
@@ -89,7 +100,7 @@ const WebkataHeader = ({
       }
       <Animatable.View
         animation='fadeInRight'
-        style={style.flexHorizontal}
+        style={[style.flexWidth, style.flexHorizontal, style.flexEnd]}
       >
         <TouchableOpacity onPress={() => { }}>
           <IconLeaderboard />
