@@ -2,6 +2,7 @@ import React, {
   useContext, useEffect, useRef, useState,
 } from 'react';
 import {
+  BackHandler,
   Text,
   StyleSheet,
   TouchableOpacity,
@@ -120,9 +121,10 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   },
   runBtn: {
     position: 'absolute',
-    paddingVertical: 8,
+    paddingVertical: 16,
     paddingHorizontal: 10,
-    top: Dimensions.get('window').height - 60,
+    // top: Dimensions.get('window').height - 60,
+    bottom: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -153,7 +155,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     marginTop: 10,
   },
   notValidatedRunBtnText: {
-    marginRight: 5,
+    marginRight: 16,
   },
   testCaseResults: {
     padding: 18,
@@ -931,6 +933,16 @@ const WebkataMain = ({ route }) => {
     if (localState.showLevels) {
       setLocalState((prev) => ({ ...prev, livePreviewOpen: false, problemStatementOpen: false }));
     }
+
+    const closeLevelPage = () => {
+      closeLevels();
+      return localState.showLevels;
+    };
+
+    BackHandler.addEventListener('hardwareBackPress', closeLevelPage);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', closeLevelPage);
+    };
   }, [localState.showLevels]);
 
   return <>

@@ -13,7 +13,7 @@ import Icon from '../../common/Icons';
 const getStyle = (font, theme, utilColors) => StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFill,
-    height: Dimensions.get('window').height - 70,
+    height: Dimensions.get('window').height - 68 - 30,
     marginTop: 68,
     backgroundColor: 'transparent',
   },
@@ -59,7 +59,7 @@ const getStyle = (font, theme, utilColors) => StyleSheet.create({
   },
   continuePlayingBtn: {
     position: 'absolute',
-    paddingVertical: 8,
+    paddingVertical: 16,
     paddingHorizontal: 10,
     bottom: 20,
     flexDirection: 'row',
