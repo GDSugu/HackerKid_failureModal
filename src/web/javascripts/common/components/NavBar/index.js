@@ -38,7 +38,7 @@ const NavBar = () => {
           <path d="M9 5L10 7H14L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>,
       route: '/games',
-      active: screen === 'games',
+      active: ['games', 'turtle'].indexOf(screen) !== -1,
     },
     {
       icon: <svg width="24" height="24" viewBox="24 24 24 24" fill="none" stroke="#212527" xmlns="http://www.w3.org/2000/svg">
@@ -64,6 +64,7 @@ const NavBar = () => {
   ];
 
   const profileImg = profileLink || '../../../../../images/common/profile.png';
+  const local = typeof profileLink === 'string' && profileLink.length > 0;
 
   React.useEffect(() => () => {
     isPageMounted.current = false;
@@ -86,7 +87,7 @@ const NavBar = () => {
         </div>
         <div className="profileImg">
           <Link to='/profile'>
-            <Img src={profileImg} alt="Hackerkid User"/>
+            <Img src={profileImg} local={!local} alt="Hackerkid User"/>
           </Link>
         </div>
       </div>

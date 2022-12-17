@@ -82,12 +82,14 @@ const gradients = {
   // eslint-disable-next-line comma-spacing
   blue: ['#00BAFF','#0051FF'],
   purple: ['#3E16A1', '#7538C4'],
+  darkTransparent1: ['#17181875', '#17181825'],
 };
 
 const utilColors = {
   white: '#FFFFFF',
   dark: '#212527',
   red: '#F7393D',
+  darkTransparent50: '#21252780',
   grey: '#5B5B5B',
   dimGrey: '#C4C4C4',
   lightGrey: '#A9ABAC',
@@ -98,6 +100,9 @@ const utilColors = {
   danger: Red.color700,
   shadowColor1: '#F9A826',
   shadowColor2: '#FFE8B6',
+  black: '#000000',
+  transparent: '#00000080',
+  overlay1: '#171818bf',
 };
 
 module.exports = {

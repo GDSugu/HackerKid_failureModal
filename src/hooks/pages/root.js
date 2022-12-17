@@ -4,15 +4,20 @@ import {
   getLocale,
   loadLocaleData,
 } from '../common/intl';
+import getPlatform, { getDevice } from '../common/utlis';
 
 const useRootPageState = () => {
   const [state, setState] = useState({
     currentLocaleMessages: false,
     currentLocale: false,
     currentTheme: 'light',
+    platform: 'web',
+    device: 'desktop',
   });
 
   const currentLocale = getLocale();
+  const platform = getPlatform();
+  const device = getDevice();
 
   useEffect(() => {
     loadLocaleData(currentLocale)
@@ -21,6 +26,8 @@ const useRootPageState = () => {
           ...prevState,
           currentLocaleMessages,
           currentLocale,
+          platform,
+          device,
         }));
       });
   }, []);

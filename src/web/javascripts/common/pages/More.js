@@ -197,15 +197,47 @@ const MoreMenu = ({ logoutHandler = () => {} }) => <>
   </div>
 </>;
 
+const LogoutModalComponent = ({ logoutAction, closeModal }) => <>
+  <div className='logoutContainer'>
+    <h5>
+      <FormattedMessage
+        defaultMessage='Are you sure you want to logout?'
+        description='logout prompt message'
+      />
+    </h5>
+    <div className="d-flex align-items-center justify-content-center">
+      <button className='btn btn-primary' onClick={logoutAction}>
+        <FormattedMessage
+          defaultMessage='Yes'
+          description='logout yes btn'
+        />
+      </button>
+      <button className='btn btn-outline-primary' onClick={closeModal} >
+        <FormattedMessage
+          defaultMessage='No'
+          description='logout no btn'
+        />
+      </button>
+    </div>
+  </div>
+</>;
+
 const More = () => {
-  pageInit('more-container', 'More');
+  if (window.location.href.includes('more')) {
+    pageInit('more-container', 'More');
+  }
 
   const isPageMounted = React.useRef(true);
   const [isDesktop, setIsDesktop] = React.useState(window.matchMedia('(min-width: 576px)').matches);
-  const [collectionModalVisibile, setCollectionModalVisibile] = React.useState(false);
   const { session } = useGetSession({ sessionAttr: ['name', 'pointsEarned', 'profileLink'], isPageMounted });
+  const collectionRef = React.useRef();
+  const logoutModalRef = React.useRef();
 
-  const toggleModal = () => setCollectionModalVisibile(!collectionModalVisibile);
+  // const toggleModal = () => setCollectionModalVisibile(!collectionModalVisibile);
+  const toggleModal = () => collectionRef.current.show();
+
+  const showLogoutModal = () => logoutModalRef.current.show();
+  const closeLogoutModal = () => logoutModalRef.current.hide();
 
   const logoutHandler = () => {
     authorize.logout();
@@ -218,7 +250,6 @@ const More = () => {
     });
 
     return () => {
-      setCollectionModalVisibile(false);
       isPageMounted.current = false;
     };
   }, []);
@@ -231,18 +262,29 @@ const More = () => {
         <MoreCards />
       </div>
       <div className="col-12 col-md-4">
-        <MoreMenu logoutHandler={logoutHandler} />
+        <MoreMenu logoutHandler={showLogoutModal} />
       </div>
     </div>
   </div>
   <Modal
-    customClass={'collectibles-modal curved'}
-    options={{
-      keyboard: false,
-      backdrop: 'static',
-    }}
-    modalVisible={collectionModalVisibile}
-    onHidden={toggleModal}
+    modalClass='logoutModal'
+    customClass={'curved'}
+    ref={logoutModalRef}
+    options={'hide'}
+    header={<div></div>}>
+      <LogoutModalComponent closeModal={closeLogoutModal} logoutAction={logoutHandler} />
+  </Modal>
+  <Modal
+    ref={collectionRef}
+    modalClass='collectibles-modal'
+    customClass={'curved'}
+    // options={{
+    //   keyboard: false,
+    //   backdrop: 'static',
+    // }}
+    options={'hide'}
+    // modalVisible={collectionModalVisibile}
+    // onHidden={toggleModal}
     header = {
       <div>
         <h5 className="modal-title">

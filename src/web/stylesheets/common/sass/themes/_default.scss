@@ -10,6 +10,8 @@ $thememaplight : (
   text-color-9:#ffeab2,
   text-color-10:#b66d00,
   text-color-11:#ffdd81,
+  text-color-12: #00c5ff,
+  text-color-13: #505659,
   nav-bg-blue: #0051ff,
   nav-bg-green: #24aa70,
   nav-bg-lightblue: #00baff,
@@ -26,9 +28,13 @@ $thememaplight : (
   bg-4: #e5e5e5,
   bg-5: #fafafa,
   bg-6: #f5f5f5,
+  bg-7: #adebfdbf,
   modal-close-btn-bg: #ff5a79,
-  skeleton-bg: #13224125,
+  skeleton-bg: #13224140,
   tc-font-color: #000,
+  overlay1: #171818bf,
+  blue-gradient-1: #00baff,
+  blue-gradient-2: #0051ff,
 );
 // just copied the light theme colors to the dark for now
 // TODO: make this a real dark theme with appropriate colors
@@ -44,6 +50,8 @@ $thememapdark : (
   text-color-9:#ffeab2,
   text-color-10:#b66d00,
   text-color-11:#ffdd81,
+  text-color-12: #00c5ff,
+  text-color-13: #505659,
   nav-bg-blue: #0051ff,
   nav-bg-green: #24aa70,
   nav-bg-lightblue: #00baff,
@@ -60,9 +68,13 @@ $thememapdark : (
   bg-4: #e5e5e5,
   bg-5: #fafafa,
   bg-6: #f5f5f5,
+  bg-7: #adebfdbf,
   modal-close-btn-bg: #ff5a79,
-  skeleton-bg: #13224125,
+  skeleton-bg: #13224140,
   tc-font-color: #000,
+  overlay1: #171818bf,
+  blue-gradient-1: #00baff,
+  blue-gradient-2: #0051ff,
 );
 
 $cssvars : (
@@ -77,6 +89,8 @@ $cssvars : (
   text-color-9: --text-color-9,
   text-color-10: --text-color-10,
   text-color-11: --text-color-11,
+  text-color-12: --text-color-12,
+  text-color-13: --text-color-13,
   nav-bg-blue: --nav-bg-blue,
   nav-bg-green: --nav-bg-green,
   nav-bg-lightblue: --nav-bg-lightblue,
@@ -93,9 +107,13 @@ $cssvars : (
   bg-4: --bg-4,
   bg-5: --bg-5,
   bg-6: --bg-6,
+  bg-7: --bg-7,
   modal-close-btn-bg: --modal-close-btn-bg,
   skeleton-bg: --skeleton-bg,
   tc-font-color: --tc-font-color,
+  overlay1: --overlay1,
+  blue-gradient-1: --blue-gradient-1,
+  blue-gradient-2: --blue-gradient-2,
 );
 
 @mixin spread-map($map: (), $cssMap: $cssvars) {

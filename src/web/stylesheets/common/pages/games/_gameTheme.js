@@ -24,6 +24,7 @@ const thememaplight = {
   'game-body-bg': lightTheme.screenLightBlue.bodyBg,
   'game-nav-bg': lightTheme.screenLightBlue.navBg,
   'game-nav-active-bg': lightTheme.screenLightBlue.navActiveBg,
+  'game-dark-transparent': lightTheme.utilColors.darkTransparent50,
 };
 // just copied the light theme colors to the dark for now
   // TODO: make this a real dark theme with appropriate colors
@@ -45,6 +46,7 @@ const thememapdark = {
   'game-body-bg': darkTheme.screenLightBlue.bodyBg,
   'game-nav-bg': darkTheme.screenLightBlue.navBg,
   'game-nav-active-bg': darkTheme.screenLightBlue.navActiveBg,
+  'game-dark-transparent': darkTheme.utilColors.darkTransparent50,
 };
 
 const cssvars = {
@@ -66,6 +68,7 @@ const cssvars = {
   'game-level-progress-gradient-1': '--game-level-progress-gradient-1',
   'game-level-progress-gradient-2': '--game-level-progress-gradient-2',
   'game-level-indicator-btn-bg': '--game-level-indicator-btn-bg',
+  'game-dark-transparent': '--game-dark-transparent',
 };
 
 module.exports = {

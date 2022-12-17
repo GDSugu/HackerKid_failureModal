@@ -12,7 +12,7 @@ import {
   TextInput,
   TouchableOpacity,
   ImageBackground,
-  FlatList,
+  // FlatList,
   RefreshControl,
 } from 'react-native';
 import { FormattedMessage } from 'react-intl';
@@ -29,8 +29,7 @@ import hkcoin from '../../images/common/hkcoin.png';
 // import xpPoints from '../../images/common/xp.png';
 // import timeSpent from '../../images/common/eva_clock-fill.png';
 import turtle from '../../images/dashboard/dashboard-turtle.png';
-import zombieLand from '../../images/dashboard/dashboard-zombieLand.png';
-import marioLand from '../../images/dashboard/dashboard-marioLand.png';
+// import zombieLand from '../../images/dashboard/dashboard-zombieLand.png';
 // import achievementImage from '../../images/dashboard/dashboard-achievements.png';
 import CircleGradientProgressBar from '../components/CircleGradientProgressBar';
 import AuthErrorModal from '../components/Modals/AuthErrorModal';
@@ -597,20 +596,15 @@ const GameBlock = ({ style, navigation, gameData }) => {
       <View style={[style.bodyCardContent, style.gameInnerCard]}>
         <ScrollView horizontal={true} >
           <View style={style.gameCardImageContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate('Games')} >
+            <TouchableOpacity onPress={() => navigation.navigate('TurtleHome')} >
               <Image style={style.gameCardImage} source={turtle} />
             </TouchableOpacity>
           </View>
-          <View style={style.gameCardImageContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('Games')} >
+          {/* <View style={style.gameCardImageContainer}>
+            <TouchableOpacity onPress={() => navigation.navigate('Games')} >
               <Image style={style.gameCardImage} source={zombieLand} />
             </TouchableOpacity>
-          </View>
-          <View style={style.gameCardImageContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('Games')} >
-            <Image style={style.gameCardImage} source={marioLand} />
-          </TouchableOpacity>
-          </View>
+          </View> */}
         </ScrollView>
       </View>
       <View>
@@ -633,99 +627,104 @@ const GameBlock = ({ style, navigation, gameData }) => {
   </>;
 };
 
-const ChallengeBlock = ({ challengeData, navigation, style }) => {
-  const challengeCardItem = ({ item }) => <>
-    <TouchableOpacity
-      onPress={() => { navigation.navigate('Challenges', { challengeId: item.challengeId, challengeVirtualName: item.actionUrl.split('/').pop() }); }}
-      activeOpacity={0.5}
-    >
-      <View style={style.challengeCardItem}>
-        <Image
-          source={{
-            uri: item.imgPath,
-          }}
-          style={style.challengeCardImage}
-        />
-        <Text style={style.challengeCardTitle}>{item.challengeName}</Text>
-        <Text style={style.challengeCardAuthor}>{`by ${item.creatorName}`}</Text>
-      </View>
-    </TouchableOpacity>
-  </>;
+// const ChallengeBlock = ({ challengeData, navigation, style }) => {
+//   const challengeCardItem = ({ item }) => <>
+//     <TouchableOpacity
+//       onPress={() => {
+//          navigation.navigate('Challenges', {
+//            challengeId: item.challengeId,
+//            challengeVirtualName: item.actionUrl.split('/').pop(),
+//           });
+//          }}
+//       activeOpacity={0.5}
+//     >
+//       <View style={style.challengeCardItem}>
+//         <Image
+//           source={{
+//             uri: item.imgPath,
+//           }}
+//           style={style.challengeCardImage}
+//         />
+//         <Text style={style.challengeCardTitle}>{item.challengeName}</Text>
+//         <Text style={style.challengeCardAuthor}>{`by ${item.creatorName}`}</Text>
+//       </View>
+//     </TouchableOpacity>
+//   </>;
 
-  return <>
-    <View>
-      <View style={[style.bodyCardHeading, style.bodyCard]}>
-        <Text style={style.bodyCardHeadingText}>
-          <FormattedMessage
-            defaultMessage="Challenges"
-            description="Challenges card heading"
-          />
-        </Text>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Challenges')}
-        >
-          <Text style={[style.bodyCardHeadingMenu, style.HomeCardHeadingMenu]}>
-            <FormattedMessage
-              defaultMessage="All Challenges"
-              description="Challenges card menu"
-            />
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <View>
-        {
-          challengeData && <>
-            <FlatList
-              data={challengeData}
-              renderItem={challengeCardItem}
-              keyExtractor={(item, index) => index.toString()}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              fadingEdgeLength={50}
-              initialNumToRender={3}
-              snapToInterval={200}
-              decelerationRate={0.001}
-              snapToAlignment={'start'}
-              contentInset={{ left: 20 }}
-              automaticallyAdjustContentInsets={false}
-              style={style.challengeCardList}
-            />
-          </>
-        }
-        {
-          !challengeData && <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            { [1, 2, 3, 4].map((item) => (
-              <View style={[style.challengeCardItem, { width: 200 }]} key={item}>
-                <Skeleton width='100%' height={100} style={{ borderRadius: 10, margin: 4 }} />
-                <Skeleton width='25%' height={24} style={{ borderRadius: 10, margin: 4 }} />
-                <Skeleton width='75%' height={16} style={{ borderRadius: 8, margin: 4 }} />
-              </View>
-            )) }
-          </ScrollView>
-        }
-      </View>
-      <View style={style.bodyCard}>
-        <TouchableOpacity
-          style={[style.bodyCardPrimaryBtn, style.challengeCardPrimaryBtn]}
-          onPress={() => navigation.navigate('Challenges')}
-        >
-          <Text style={style.bodyCardPrimaryBtnText}>
-            <FormattedMessage
-              defaultMessage="Continue Challenge"
-              description="Game Progress card primary button"
-            />
-          </Text>
-          <Icon
-            name="angle-right"
-            size={20}
-            type="FontAwesome5"
-            style={style.bodyCardPrimaryBtnIcon}
-          />
-        </TouchableOpacity>
-      </View>
-    </View>
-  </>;
-};
+//   return <>
+//     <View>
+//       <View style={[style.bodyCardHeading, style.bodyCard]}>
+//         <Text style={style.bodyCardHeadingText}>
+//           <FormattedMessage
+//             defaultMessage="Challenges"
+//             description="Challenges card heading"
+//           />
+//         </Text>
+//         <TouchableOpacity
+//           onPress={() => navigation.navigate('Challenges')}
+//         >
+//           <Text style={[style.bodyCardHeadingMenu, style.HomeCardHeadingMenu]}>
+//             <FormattedMessage
+//               defaultMessage="All Challenges"
+//               description="Challenges card menu"
+//             />
+//           </Text>
+//         </TouchableOpacity>
+//       </View>
+//       <View>
+//         {
+//           challengeData && <>
+//             <FlatList
+//               data={challengeData}
+//               renderItem={challengeCardItem}
+//               keyExtractor={(item, index) => index.toString()}
+//               horizontal={true}
+//               showsHorizontalScrollIndicator={false}
+//               fadingEdgeLength={50}
+//               initialNumToRender={3}
+//               snapToInterval={200}
+//               decelerationRate={0.001}
+//               snapToAlignment={'start'}
+//               contentInset={{ left: 20 }}
+//               automaticallyAdjustContentInsets={false}
+//               style={style.challengeCardList}
+//             />
+//           </>
+//         }
+//         {
+//           !challengeData && <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+//             { [1, 2, 3, 4].map((item) => (
+//               <View style={[style.challengeCardItem, { width: 200 }]} key={item}>
+//                 <Skeleton width='100%' height={100} style={{ borderRadius: 10, margin: 4 }} />
+//                 <Skeleton width='25%' height={24} style={{ borderRadius: 10, margin: 4 }} />
+//                 <Skeleton width='75%' height={16} style={{ borderRadius: 8, margin: 4 }} />
+//               </View>
+//             )) }
+//           </ScrollView>
+//         }
+//       </View>
+//       <View style={style.bodyCard}>
+//         <TouchableOpacity
+//           style={[style.bodyCardPrimaryBtn, style.challengeCardPrimaryBtn]}
+//           onPress={() => navigation.navigate('Challenges')}
+//         >
+//           <Text style={style.bodyCardPrimaryBtnText}>
+//             <FormattedMessage
+//               defaultMessage="Continue Challenge"
+//               description="Game Progress card primary button"
+//             />
+//           </Text>
+//           <Icon
+//             name="angle-right"
+//             size={20}
+//             type="FontAwesome5"
+//             style={style.bodyCardPrimaryBtnIcon}
+//           />
+//         </TouchableOpacity>
+//       </View>
+//     </View>
+//   </>;
+// };
 
 // const AchievementCard = ({ navigation, style }) => <>
 //   <View style={style.sheetAchievementCard}>
@@ -907,7 +906,7 @@ const compareProps = (prev, next) => {
 const DashboardComponent = memo(DashboardBlock, compareProps);
 const HomeComponent = memo(HomeBlock, compareProps);
 const GameComponent = memo(GameBlock, compareProps);
-const ChallengeComponent = memo(ChallengeBlock, compareProps);
+// const ChallengeComponent = memo(ChallengeBlock, compareProps);
 const LeaderBoardComponent = memo(LeaderBoardCard, compareProps);
 // const ClubComponent = memo(ClubCard, compareProps);
 // const AchievementComponent = memo(AchievementCard, compareProps);
@@ -919,6 +918,9 @@ const Index = ({ route, navigation }) => {
 
   const isPageMounted = React.useRef(true);
   const [reloadComponent, setReloadComponent] = React.useState(0);
+  const [refreshing, setRefreshing] = React.useState(false);
+  const authContext = React.useContext(AuthContext);
+  const bottomSheetRef = useRef();
 
   const {
     state: dashboardState,
@@ -929,8 +931,6 @@ const Index = ({ route, navigation }) => {
     state: getChallengesState,
     static: { getChallenges },
   } = useGetChallenges({ isPageMounted });
-
-  const [refreshing, setRefreshing] = React.useState(false);
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -963,10 +963,8 @@ const Index = ({ route, navigation }) => {
 
   const {
     status: challengesStatus,
-    trendingChallenges,
+    // trendingChallenges,
   } = getChallengesState;
-
-  const bottomSheetRef = useRef();
 
   const bottomSheetStyles = {
     draggableIcon: {
@@ -978,15 +976,17 @@ const Index = ({ route, navigation }) => {
     },
   };
 
-  if ([dashboarStatus, leaderboardStatus, challengesStatus].includes('access_denied')) {
-    return <AuthErrorModal navigation={navigation} route={route} />;
-  }
-
-  const authContext = React.useContext(AuthContext);
+  const handleLoginRoute = () => {
+    authContext.setAuthState({
+      isLoggedIn: false,
+    });
+  };
 
   if (authContext.appData.isReferesh) {
     onRefresh();
-    authContext.setAuthState({ isReferesh: false });
+    authContext.setAuthState({
+      isReferesh: false,
+    });
   }
 
   React.useEffect(() => {
@@ -999,64 +999,92 @@ const Index = ({ route, navigation }) => {
 
   return (
     <>
-      <ScrollView
-        style={style.container}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-          />
-        }>
-        <View style={style.container}>
-          <DashboardComponent
-            avatar={defaultUser}
-            bottomSheetRef={bottomSheetRef}
-            dashboardUserData={dashboardUserData}
-            gameData={gameData}
-            style={style}
-            navigation={navigation}
-            reloadComponent={reloadComponent}
-          />
-          <HomeComponent
-            avatar={defaultUser}
-            dashboardUserData={dashboardUserData}
-            navigation={navigation}
-            style={style}
-            reloadComponent={reloadComponent}
-          />
-          <GameComponent
-            gameData={gameData}
-            navigation={navigation}
-            style={style}
-            reloadComponent={reloadComponent}
-          />
-          <ChallengeComponent
-            challengeData={trendingChallenges}
-            navigation={navigation}
-            style={style} />
-        </View>
-      </ScrollView>
-      <BottomSheet
-        ref={bottomSheetRef}
-        customStyles={bottomSheetStyles}
-        contentPanEnabled={true}
-      >
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-        >
-          {/* <AchievementComponent navigation={navigation} style={style} /> */}
-          {/* <ClubComponent navigation={navigation} style={style} /> */}
-          {
-            leaderboardData
-            && <LeaderBoardComponent
-            leaderboardData={leaderboardData}
-            leaderBoardUserData={leaderBoardUserData}
-            bottomSheetRef={bottomSheetRef}
-            navigation={navigation}
-            style={style} />
-          }
-        </ScrollView>
-      </BottomSheet>
+      {
+        [dashboarStatus, leaderboardStatus, challengesStatus].includes('access_denied')
+        && <AuthErrorModal
+          navigation={navigation}
+          route={route}
+          handleLoginRoute={handleLoginRoute}
+        />
+      }
+      {
+        ![dashboarStatus, leaderboardStatus, challengesStatus].includes('access_denied')
+        && <>
+          <ScrollView
+            style={style.container}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+              />
+            }>
+            <View style={style.container}>
+              {
+                dashboardUserData
+                  && <>
+                    <DashboardComponent
+                    avatar={defaultUser}
+                    bottomSheetRef={bottomSheetRef}
+                    dashboardUserData={dashboardUserData}
+                    gameData={gameData}
+                    style={style}
+                    navigation={navigation}
+                    reloadComponent={reloadComponent}
+                  />
+                  <HomeComponent
+                    avatar={defaultUser}
+                    dashboardUserData={dashboardUserData}
+                    navigation={navigation}
+                    style={style}
+                    reloadComponent={reloadComponent}
+                  />
+                </>
+              }
+              {
+                gameData
+                && <>
+                <GameComponent
+                  gameData={gameData}
+                  navigation={navigation}
+                  style={style}
+                  reloadComponent={reloadComponent}
+                />
+                </>
+              }
+              {/* {
+                trendingChallenges
+                && <>
+                  <ChallengeComponent
+                    challengeData={trendingChallenges}
+                    navigation={navigation}
+                    style={style} />
+                </>
+              } */}
+            </View>
+          </ScrollView>
+          <BottomSheet
+            ref={bottomSheetRef}
+            customStyles={bottomSheetStyles}
+            contentPanEnabled={true}
+          >
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+            >
+              {/* <AchievementComponent navigation={navigation} style={style} /> */}
+              {/* <ClubComponent navigation={navigation} style={style} /> */}
+              {
+                leaderboardData
+                && <LeaderBoardComponent
+                leaderboardData={leaderboardData}
+                leaderBoardUserData={leaderBoardUserData}
+                bottomSheetRef={bottomSheetRef}
+                navigation={navigation}
+                style={style} />
+              }
+            </ScrollView>
+          </BottomSheet>
+        </>
+      }
     </>
   );
 };

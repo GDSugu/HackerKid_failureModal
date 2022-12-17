@@ -3,6 +3,7 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
+  StatusBar,
 } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
@@ -27,6 +28,9 @@ import RouteLeaderboard from './Leaderboard';
 
 import BottomSheet from '../components/BottomSheet';
 import RouteHelp from './Help';
+import RouteTurtleHome from './TurtleHome';
+import RouteTurtleMain from './TurtleMain';
+import RouteTurtleLeaderBoard from './TurtleLeaderBoard';
 
 import IconGame from '../../images/navbar/iconGame.svg';
 import IconHome from '../../images/navbar/iconHome.svg';
@@ -34,6 +38,7 @@ import IconMore from '../../images/navbar/iconMore.svg';
 import IconStar from '../../images/navbar/iconStar.svg';
 import IconVideo from '../../images/navbar/iconVideo.svg';
 import { AuthContext } from '../../hooks/pages/root';
+import CheckNetwork from '../components/CheckNetwork';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -225,8 +230,12 @@ const App = () => {
 
   return (
     <SafeAreaProvider>
+        <StatusBar
+          backgroundColor={screenTheme.notificationBg}
+        />
         <View style={style.container}>
           <Header route={routeName} navigation={navigationRef}/>
+          <CheckNetwork route={routeName} />
           <NavigationContainer
             ref={navigationRef}
             onReady={() => { setRoutName(navigationRef.getCurrentRoute().name); }}
@@ -252,6 +261,17 @@ const App = () => {
                     <Stack.Screen name='Class' component={RouteClass} />
                     <Stack.Screen name='EditProfile' component={RouteProfile} />
                     <Stack.Screen name='Leaderboard' component={RouteLeaderboard} />
+                    <Stack.Screen name='TurtleHome'>
+                      {(props) => <RouteTurtleHome {...props} routeName={routeName} /> }
+                    </Stack.Screen>
+                    <Stack.Group
+                      screenOptions={{
+                        animation: 'slide_from_right',
+                      }}
+                    >
+                      <Stack.Screen name='TurtleMain' component={RouteTurtleMain} />
+                    </Stack.Group>
+                    <Stack.Screen name='TurtleLeaderBoard' component={RouteTurtleLeaderBoard} options={{ presentation: 'transparentModal' }} />
                     </>
                     : <>
                       <Stack.Screen name='Login' component={RouteLogin} />

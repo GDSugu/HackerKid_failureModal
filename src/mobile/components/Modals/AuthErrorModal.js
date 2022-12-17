@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
   Dimensions, Modal, StyleSheet, Text, TouchableOpacity, View,
@@ -37,26 +37,32 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   },
 });
 
-const AuthErrorModal = ({ route, navigation }) => {
+const AuthErrorModal = ({ route, handleLoginRoute = () => {} }) => {
   const { font, theme } = React.useContext(ThemeContext);
   const screenTheme = theme[`screen${route.name}`];
   const style = getStyles(screenTheme, theme.utilColors, font);
 
-  const [modalVisibility, setModalVisibility] = useState(true);
   return <>
-    <Modal visible={modalVisibility} transparent animationType='slide' >
+    <Modal visible={true} transparent >
       <View style={style.errorComponent}>
         <View style={style.errorCard}>
           <Text style={style.errorCardMessageText}>
             <FormattedMessage
-              defaultMessage='You are not authorized to access this page.'
+              defaultMessage='Session expired'
+              description='Not authorized message'
+            />
+          </Text>
+          <Text style={style.errorCardMessageText} >
+            <FormattedMessage
+              defaultMessage='Please login again'
               description='Not authorized message'
             />
           </Text>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('Video');
-              setModalVisibility(false);
+              // navigation.navigate('Login');
+              handleLoginRoute();
+              // setModalVisibility(false);
             }} // change to Signup after signup integrated
             style={style.errorCardPrimaryBtn}
           >
