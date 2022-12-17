@@ -42,6 +42,12 @@ const screenTurtleHeader = {
   viewType: 'turtleScreen',
 };
 
+const screenChallengesHeader = {
+  showHeader: false,
+  showNav: false,
+  showBackbtn: true,
+};
+
 const ScreenSheet = {
   showHeader: false,
   showNav: false,
@@ -73,6 +79,18 @@ const themes = {
     screenChallenges: {
       ...Theme.light.screenBlue,
       ...screenWithHeader,
+    },
+    screenAllChallenges: {
+      ...Theme.light.screenBlue,
+      ...screenChallengesHeader,
+    },
+    screenYourChallenges: {
+      ...Theme.light.screenBlue,
+      ...screenChallengesHeader,
+    },
+    screenYourDraftChallenges: {
+      ...Theme.light.screenBlue,
+      ...screenChallengesHeader,
     },
     screenClass: {
       ...Theme.light.screenPurple,
@@ -195,6 +213,18 @@ const themes = {
       ...Theme.light.screenLightBlue,
       ...fragmentIconDisposal,
     },
+    screenIde: {
+      ...Theme.light.screenYellow,
+      ...screenWithHeader,
+    },
+    screenCode: {
+      ...Theme.light.screenYellow,
+      ...screenWithHeader,
+    },
+    screenConsole: {
+      ...Theme.light.screenYellow,
+      ...screenWithHeader,
+    },
     screenLogin: {
       ...Theme.light.screenYellow,
       showHeader: false,
@@ -214,6 +244,12 @@ const themes = {
       viewType: 'screen',
     },
     screenBottomSheet: {
+      ...ScreenSheet,
+    },
+    screenYourChallengesActions: {
+      ...Theme.light.screenBlue,
+      toastBtnBorderColor: Theme.light.screenYellow.fadedBtnTextColor,
+      toastBtnTextColor: Theme.light.screenYellow.fadedBtnTextColor,
       ...ScreenSheet,
     },
     utilColors: Theme.light.utilColors,
@@ -265,6 +301,17 @@ const themes = {
       ...fragmentIconDisposal,
     },
     screenChallenges: {
+      ...Theme.light.screenBlue,
+      ...screenWithHeader,
+    },
+    screenAllChallenges: {
+      ...Theme.light.screenBlue,
+    },
+    screenYourChallenges: {
+      ...Theme.light.screenBlue,
+      ...screenWithHeader,
+    },
+    screenYourDraftChallenges: {
       ...Theme.light.screenBlue,
       ...screenWithHeader,
     },
@@ -371,6 +418,12 @@ const themes = {
       viewType: 'screen',
     },
     screenBottomSheet: {
+      ...ScreenSheet,
+    },
+    screenYourChallengesActions: {
+      ...Theme.light.screenBlue,
+      toastBtnBorderColor: Theme.light.screenYellow.fadedBtnTextColor,
+      toastBtnTextColor: Theme.light.screenYellow.fadedBtnTextColor,
       ...ScreenSheet,
     },
     utilColors: Theme.dark.utilColors,

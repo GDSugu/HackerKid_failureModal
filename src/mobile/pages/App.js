@@ -19,6 +19,9 @@ import RouteGames from './Games';
 import RouteHome from './Home';
 import RouteVideo from './Video';
 import RouteChallenges from './Challenges';
+import RouteAllChallenges from './AllChallenges';
+import RouteYourChallenges from './YourChallenges';
+import RouteDraftChallenges from './YourDraftChallenges';
 import RouteMore from './More';
 import RouteProfile from './EditProfile';
 import RouteLogin from './Login';
@@ -28,7 +31,9 @@ import RouteLeaderboard from './Leaderboard';
 import RouteWebkataHome from './WebkataHome';
 import RouteWebkataMain from './WebkataMain';
 
+import RouteIde from './Ide';
 import BottomSheet from '../components/BottomSheet';
+import YourChallengesActions from '../components/YourChallengesActions';
 import RouteHelp from './Help';
 import RouteTurtleHome from './TurtleHome';
 import RouteTurtleMain from './TurtleMain';
@@ -265,6 +270,10 @@ const App = () => {
                     <Stack.Screen name='Leaderboard' component={RouteLeaderboard} />
                     <Stack.Screen name='WebkataHome' component={RouteWebkataHome} />
                     <Stack.Screen name='WebkataMain' component={RouteWebkataMain} />
+                    <Stack.Screen name='AllChallenges' component={RouteAllChallenges} />
+                    <Stack.Screen name='YourChallenges' component={RouteYourChallenges} />
+                    <Stack.Screen name='YourDraftChallenges' component={RouteDraftChallenges} />
+                    <Stack.Screen name='Ide' component={RouteIde} />
                     <Stack.Screen name='TurtleHome'>
                       {(props) => <RouteTurtleHome {...props} routeName={routeName} />}
                     </Stack.Screen>
@@ -276,21 +285,22 @@ const App = () => {
                       <Stack.Screen name='TurtleMain' component={RouteTurtleMain} />
                     </Stack.Group>
                     <Stack.Screen name='TurtleLeaderBoard' component={RouteTurtleLeaderBoard} options={{ presentation: 'transparentModal' }} />
-                  </>
+                    </>
                   : <>
-                    <Stack.Screen name='Login' component={RouteLogin} />
-                    <Stack.Screen name='Register' component={RouteRegister} />
-                    <Stack.Screen name='ForgotPassword' component={RouteForgotPassword} />
-                  </>
-              }
-            </Stack.Group>
-            <Stack.Screen name='Help' component={RouteHelp} />
-            <Stack.Group screenOptions={{ presentation: 'modal' }}>
-              <Stack.Screen name='BottomSheet' component={BottomSheet} />
-            </Stack.Group>
-          </Stack.Navigator>
-        </NavigationContainer>
-      </View>
+                      <Stack.Screen name='Login' component={RouteLogin} />
+                      <Stack.Screen name='Register' component={RouteRegister} />
+                      <Stack.Screen name='ForgotPassword' component={RouteForgotPassword} />
+                    </>
+                }
+              </Stack.Group>
+              <Stack.Screen name='Help' component={RouteHelp} />
+              <Stack.Group screenOptions={{ presentation: 'modal' }}>
+                <Stack.Screen name='BottomSheet' component={BottomSheet} />
+                <Stack.Screen name='YourChallengesActions' component={YourChallengesActions} />
+              </Stack.Group>
+            </Stack.Navigator>
+          </NavigationContainer>
+        </View>
     </SafeAreaProvider>
   );
 };
