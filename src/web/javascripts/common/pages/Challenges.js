@@ -104,6 +104,7 @@ const ChallengeSwiperSlide = ({ data, showChallengeAuthorName }) => <>
           useSource={true}
           local={false}
           src={data.imgPath}
+          fallback={'../../../../../images/games/code.svg'}
         />
         {/* <img src={data.imgPath} alt={data.challengeName} /> */}
       </div>
@@ -208,7 +209,14 @@ const NewlyTrendingChallenge = ({ challenge }) => (
           <FormattedMessage defaultMessage={'Newly Trending'} description='heading' />
         </h5>
         <div className="challenge-img">
-          <img src={challenge.imgPath} alt={challenge.challengeName} />
+          {/* <img src={challenge.imgPath} alt={challenge.challengeName} /> */}
+          <Img
+            alt={challenge.challengeName}
+            useSource={true}
+            local={false}
+            src={challenge.imgPath}
+            fallback={'../../../../../images/games/code.svg'}
+          />
         </div>
       </Link>
     }

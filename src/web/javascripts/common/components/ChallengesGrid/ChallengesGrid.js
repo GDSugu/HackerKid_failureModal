@@ -59,6 +59,7 @@ const ChallengesGrid = ({
                         useSource={true}
                         local={false}
                         src={challenge.imgPath}
+                        fallback={'../../../../../images/games/code.svg'}
                       />
                       {/* <img src={challenge.imgPath} alt={challenge.challengeName} /> */}
                     </div>
@@ -83,6 +84,7 @@ const ChallengesGrid = ({
                         useSource={true}
                         local={false}
                         src={challenge.imgPath}
+                        fallback={'../../../../../images/games/code.svg'}
                       />
                       {/* <img src={challenge.imgPath} alt={challenge.challengeName} /> */}
                     </div>
