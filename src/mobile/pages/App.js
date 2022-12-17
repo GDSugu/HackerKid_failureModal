@@ -28,7 +28,7 @@ import RouteLogin from './Login';
 import RouteRegister from './Register';
 import RouteForgotPassword from './ForgotPassword';
 import RouteLeaderboard from './Leaderboard';
-
+import RouteIde from './Ide';
 import BottomSheet from '../components/BottomSheet';
 import YourChallengesActions from '../components/YourChallengesActions';
 import RouteHelp from './Help';
@@ -268,6 +268,7 @@ const App = () => {
                     <Stack.Screen name='AllChallenges' component={RouteAllChallenges} />
                     <Stack.Screen name='YourChallenges' component={RouteYourChallenges} />
                     <Stack.Screen name='YourDraftChallenges' component={RouteDraftChallenges} />
+                    <Stack.Screen name='Ide' component={RouteIde} />
                     <Stack.Screen name='TurtleHome'>
                       {(props) => <RouteTurtleHome {...props} routeName={routeName} /> }
                     </Stack.Screen>
