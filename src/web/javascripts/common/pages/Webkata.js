@@ -21,7 +21,7 @@ import {
   updateHistory,
   updateLivePreview,
 } from '../Functions/webkata';
-import showInlineLoadingSpinner from '../loader';
+import { showInlineLoadingSpinner } from '../loader';
 import { debounce1 as debounce } from '../../../../hooks/common/utlis';
 import 'ace-builds/webpack-resolver';
 import 'ace-builds/src-min-noconflict/ext-language_tools';
