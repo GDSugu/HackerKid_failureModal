@@ -59,18 +59,34 @@
         color: gt.theme-var(game-leaderboard-btn-bg, null, $thememaplight, $cssvars);
       }
     }
+
+    @include gm.media-breakpoint-down(md) {
+      .profileImg {
+        img {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+      }
+    }
   }
 
   .game-level-component {
+    @include gm.media-breakpoint-down(md) {
+      height: calc(100% - 72px);
+      top: 72px;
+    }
+
     .game-level-container {
       .close-btn-mob {
         color: gt.theme-var(text-color-2);
+        background-color: gt.theme-var(webkata-run-btn-bg, null, $thememaplight, $cssvars);
+        padding: 0.5rem 0.75rem;
       }
     }
 
-    @include gm.media-breakpoint-down(lg) {
-      height: calc(100% - 72px);
-    }
+    // @include gm.media-breakpoint-down(lg) {
+    //   height: calc(100% - 72px);
+    // }
   }
 
   // webkata home styles
@@ -442,8 +458,9 @@
         .run-btn {
           left: 50%;
           bottom: 10px;
-          width: 95%;
+          width: 90%;
           transform: translateX(-50%);
+          padding: 0.5rem;
 
           i {
             display: inline-block;

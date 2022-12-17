@@ -17,18 +17,25 @@ const useWebkataFetchQuestion = ({
       conceptId: conceptId.toUpperCase(),
       virtualId: Number(virtualId),
     };
-    let result;
+    let result = false;
 
-    if (isPageMounted.current) {
-      result = post(payload, 'webkata/').then((res) => {
-        const data = JSON.parse(res);
+    result = post(payload, 'webkata/')
+      .then((res) => {
+        if (isPageMounted.current) {
+          if (res !== 'access_denied') {
+            const data = JSON.parse(res);
 
-        setState((prev) => ({
-          ...prev,
-          ...data,
-        }));
+            setState((prev) => ({
+              ...prev,
+              ...data,
+            }));
+            result = data;
+          } else {
+            result = 'access_denied';
+          }
+        }
+        return result;
       });
-    }
 
     return result;
   };
@@ -78,18 +85,23 @@ const useWebkataSubmitQuestion = ({ isPageMounted }) => {
       conceptId,
     };
 
-    let result;
+    let result = false;
 
-    if (isPageMounted.current) {
-      result = post(payload, 'webkata/').then((res) => {
-        const data = JSON.parse(res);
-
-        setState((prev) => ({
-          ...prev,
-          ...data,
-        }));
+    result = post(payload, 'webkata/')
+      .then((res) => {
+        if (isPageMounted.current) {
+          if (res !== 'access_denied') {
+            const data = JSON.parse(res);
+            setState((prev) => ({
+              ...prev,
+              ...data,
+            }));
+            result = data;
+          } else {
+            result = 'access_denied';
+          }
+        }
       });
-    }
     return result;
   };
 

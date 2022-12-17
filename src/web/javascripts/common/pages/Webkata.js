@@ -398,8 +398,14 @@ const WebkataGameComponent = () => {
     }
   };
 
-  const toggleCollapseLivePreview = () => {
-    setShowLivePreview((prev) => !prev);
+  const toggleCollapseLivePreview = (toggleStatus) => {
+    if (typeof toggleStatus === 'boolean') {
+      if (showLivePreview !== toggleStatus) {
+        setShowLivePreview(toggleStatus);
+      }
+    } else {
+      setShowLivePreview((prev) => !prev);
+    }
   };
 
   // event handlers
@@ -446,8 +452,22 @@ const WebkataGameComponent = () => {
     submitWebkataQuestion(questionId, testResult, currentQuestionSetup, conceptIdentifier)
       .then(() => {
         hideInLineLoadingSpinner();
-
+        toggleCollapseLivePreview(true);
         $('#pills-validated-result-tab').trigger('click');
+      });
+  };
+
+  const handleSuccess = () => {
+    fetchWebkataQuestion(
+      memorizedWebkataQuestionState.questionObject.conceptId,
+      memorizedWebkataQuestionState.questionObject.virtualId + 1,
+    )
+      .then((res) => {
+        if (res !== 'access_denied') {
+          if (res.status === 'success' && res.questionObject) {
+            toggleCollapseLivePreview(false);
+          }
+        }
       });
   };
 
@@ -611,11 +631,7 @@ const WebkataGameComponent = () => {
         passedAllTestCases={webkataSubmitState.passed}
         message={webkataSubmitState.pointsDetails.submissionStatus}
         userName={webkataSubmitState.profileDetails.name}
-        nextHandler={() => fetchWebkataQuestion(
-          memorizedWebkataQuestionState.questionObject.conceptId,
-          memorizedWebkataQuestionState.questionObject.virtualId + 1,
-        )
-        }
+        nextHandler={handleSuccess}
       />
     </Modal>
     <GameLeaderboardComponent
