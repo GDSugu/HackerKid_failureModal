@@ -34,6 +34,9 @@ const Theme = {
       notificationBg: LightBlue.color700,
       btnBg: LightBlue.color700,
       gameCardBg: LightBlue.color700,
+      levelIndicatorBtnBg: `${utilColors.dark}ad`,
+      levelProgressBarBackgroundColor: LightBlue.color50,
+      levelProgressColor: LightBlue.color900,
       textBold: LightBlue.color900,
     },
     screenPurple: {

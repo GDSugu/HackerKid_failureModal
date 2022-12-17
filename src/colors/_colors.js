@@ -79,7 +79,8 @@ const Purple = {
 const gradients = {
   redYellow: ['#FF423D', '#FFAE00'],
   green: ['#0F5837', '#24AA70'],
-  blue: ['#00BAFF', '#0051FF'],
+  // eslint-disable-next-line comma-spacing
+  blue: ['#00BAFF','#0051FF'],
   purple: ['#3E16A1', '#7538C4'],
   darkTransparent1: ['#17181875', '#17181825'],
 };
