@@ -210,7 +210,9 @@ const GameLevelComponent = ({
                 description='Continue Playing Button'
               />
             </Text>
-            {forCodekata ? <PlayBtn/> : <TryNowSVG />}
+            {forCodekata
+              ? <PlayBtn width={24} height={24} />
+              : <TryNowSVG width={24} height={24} />}
           </View>
         </TouchableOpacity>
       </LinearGradient>

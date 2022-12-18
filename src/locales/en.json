@@ -15,6 +15,9 @@
     "defaultMessage": "Try now",
     "description": "Continue Playing button"
   },
+  "+nON3s": {
+    "defaultMessage": "{output}"
+  },
   "/Gy7qZ": {
     "defaultMessage": "Level {levelNumber}",
     "description": "Level indicator"
@@ -22,6 +25,9 @@
   "/Id/lz": {
     "defaultMessage": "Yes",
     "description": "logout"
+  },
+  "/NIQ0Y": {
+    "defaultMessage": "Sample Output:"
   },
   "/O26Yc": {
     "defaultMessage": "{line}",
@@ -74,6 +80,10 @@
   "0mcQbk": {
     "defaultMessage": "{message}",
     "description": "modal caption"
+  },
+  "0sK7Ti": {
+    "defaultMessage": "Submit Code",
+    "description": "Code Submit button"
   },
   "13ETG6": {
     "defaultMessage": "Help",
@@ -174,10 +184,6 @@
     "defaultMessage": "Next",
     "description": "Next Button"
   },
-  "6kktdG": {
-    "defaultMessage": "Output will be shown here",
-    "description": "placeholder"
-  },
   "6oGVMu": {
     "defaultMessage": "Awesome!",
     "description": "Success message"
@@ -202,9 +208,17 @@
     "defaultMessage": "Output will appear here",
     "description": "output placeholder"
   },
+  "7pvcZr": {
+    "defaultMessage": "Run",
+    "description": "Run Button"
+  },
   "8R6f04": {
     "defaultMessage": "Coming Soon...",
     "description": "Challenges Page"
+  },
+  "8gWjFk": {
+    "defaultMessage": "{description}",
+    "description": "description of problem statement"
   },
   "9+2Mm0": {
     "defaultMessage": "IDE",
@@ -401,9 +415,9 @@
     "defaultMessage": "{errorMessage}",
     "description": "error text"
   },
-  "ItIgUh": {
-    "defaultMessage": "Codekata",
-    "description": "Turtle title"
+  "J9e6MO": {
+    "defaultMessage": "{output}",
+    "description": "Output Field"
   },
   "JnwRMJ": {
     "defaultMessage": "OTP",
@@ -469,6 +483,9 @@
     "defaultMessage": "Run",
     "description": "Run code button"
   },
+  "NvLmc5": {
+    "defaultMessage": "Output Description:"
+  },
   "O1sXEv": {
     "defaultMessage": "Collections",
     "description": "collectibles modal title"
@@ -476,6 +493,9 @@
   "OJUwxk": {
     "defaultMessage": "Continue Playing",
     "description": "Continue Playing Button"
+  },
+  "OUOYZ4": {
+    "defaultMessage": "Sample Input:"
   },
   "OWSL0r": {
     "defaultMessage": "Register",
@@ -489,6 +509,9 @@
     "defaultMessage": "Class",
     "description": "class nav text"
   },
+  "Ovi5Cc": {
+    "defaultMessage": "{input}"
+  },
   "PKwyq8": {
     "defaultMessage": "Move any blocks to get hints",
     "description": "Hint message"
@@ -496,6 +519,10 @@
   "PMX+8G": {
     "defaultMessage": "{coins}",
     "description": "coins"
+  },
+  "PSqen2": {
+    "defaultMessage": "{level}",
+    "description": "Question Level"
   },
   "PSx95N": {
     "defaultMessage": "Home",
@@ -592,6 +619,10 @@
   "UrVWqS": {
     "defaultMessage": "{step}",
     "description": "Steps"
+  },
+  "UswTfO": {
+    "defaultMessage": "Codekata",
+    "description": "Game Title"
   },
   "V365ug": {
     "defaultMessage": "Output",
@@ -697,6 +728,10 @@
     "defaultMessage": "Home",
     "description": "Home navigation link"
   },
+  "b3hzBu": {
+    "defaultMessage": "Try again",
+    "description": "Try again button"
+  },
   "bK9TWX": {
     "defaultMessage": "Leaderboard Rank",
     "description": "leaderboard rank heading"
@@ -711,6 +746,10 @@
   "cI34g1": {
     "defaultMessage": "Play next",
     "description": "Play next button"
+  },
+  "cQyq2R": {
+    "defaultMessage": "Submit",
+    "description": "Submit Button"
   },
   "cZDBd3": {
     "defaultMessage": "Coins",
@@ -755,6 +794,10 @@
   "fT7uau": {
     "defaultMessage": "completed"
   },
+  "fcrHSq": {
+    "defaultMessage": "{languageDisplayName}",
+    "description": "language option"
+  },
   "fio5op": {
     "defaultMessage": "Output"
   },
@@ -770,6 +813,10 @@
     "defaultMessage": "Login Into Existing Account",
     "description": "Login Into existing account button"
   },
+  "g7v9mc": {
+    "defaultMessage": "{output}",
+    "description": "Output"
+  },
   "g8RtbX": {
     "defaultMessage": "Coins",
     "description": "Coins"
@@ -781,6 +828,10 @@
   "gdd3S3": {
     "defaultMessage": "Codekata",
     "description": "Codekata title"
+  },
+  "glY0NW": {
+    "defaultMessage": "Output",
+    "description": "Output Heading"
   },
   "hEqp4d": {
     "defaultMessage": "Coming Soon...",
@@ -813,6 +864,9 @@
   "k6tlKQ": {
     "defaultMessage": "Ok",
     "description": "closing modal button"
+  },
+  "kKheEw": {
+    "defaultMessage": "{question}"
   },
   "lKeCea": {
     "defaultMessage": "Save & Exit",
@@ -881,9 +935,21 @@
     "defaultMessage": "{text}",
     "description": "help type text"
   },
+  "nTxUJZ": {
+    "defaultMessage": "Try IDE Now",
+    "description": "more card button"
+  },
+  "nWr131": {
+    "defaultMessage": "{message}",
+    "description": "Status message"
+  },
   "nlYt8p": {
     "defaultMessage": "View more",
     "description": "View More Bottomsheet Btn"
+  },
+  "nnfaF3": {
+    "defaultMessage": "{selectedLanguageDisplayName}",
+    "description": "selected language display name"
   },
   "nsIAsY": {
     "defaultMessage": "Run",
@@ -901,6 +967,9 @@
     "defaultMessage": "Coming Soon...",
     "description": "Class Page"
   },
+  "onuBbP": {
+    "defaultMessage": "Input Description:"
+  },
   "pEiO08": {
     "defaultMessage": "Account Settings",
     "description": "account settings CTA"
@@ -908,6 +977,10 @@
   "pVIk7O": {
     "defaultMessage": "Turtle",
     "description": "Turtle title"
+  },
+  "pkuBPe": {
+    "defaultMessage": "Click “Run” to generate output for your code",
+    "description": "Output"
   },
   "pwy4hs": {
     "defaultMessage": "Game Progress",
@@ -925,6 +998,9 @@
     "defaultMessage": "{coinsEarned}",
     "description": "Coins Earned"
   },
+  "qTXOtA": {
+    "defaultMessage": "Problem Statement"
+  },
   "qUU2pp": {
     "defaultMessage": "All Games",
     "description": "Section Title"
@@ -935,6 +1011,10 @@
   "quRCCv": {
     "defaultMessage": "Phone",
     "description": "Phone label"
+  },
+  "r1CvRM": {
+    "defaultMessage": "Additional Inputs",
+    "description": "Input tab"
   },
   "rECW1h": {
     "defaultMessage": "completed",
@@ -959,6 +1039,10 @@
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
+  },
+  "t5hBAx": {
+    "defaultMessage": "Output will be shown here",
+    "description": "output box placeholder text"
   },
   "tbPLF3": {
     "defaultMessage": "{step}",
@@ -995,6 +1079,10 @@
   "viQX0N": {
     "defaultMessage": "Turtle",
     "description": "Game Title"
+  },
+  "wn7GwB": {
+    "defaultMessage": "{description}",
+    "description": "description of output"
   },
   "wrdAU0": {
     "defaultMessage": "Help",

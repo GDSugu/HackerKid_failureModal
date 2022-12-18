@@ -222,17 +222,17 @@ const getStyles = (theme, font, utilColors) => StyleSheet.create({
     alignSelf: 'center',
     padding: 16,
     position: 'absolute',
-    bottom: 200,
+    bottom: 185,
     zIndex: 5,
   },
   submitBtn: {
-    width: '90%',
+    width: '95%',
     borderRadius: 12,
     backgroundColor: Yellow.color900,
     alignSelf: 'center',
     padding: 16,
     position: 'absolute',
-    bottom: 24,
+    bottom: 48,
   },
   rowBetween: {
     flexDirection: 'row',
@@ -375,7 +375,7 @@ const OutputContainer = ({
 }) => <View
 style={style.outputCont}>
   <View style={style.collapsedBtnCont}>
-  <TouchableHighlight style={style.slideCloseBnt} onPress={() => setOutputVisible(false)}>
+    <TouchableHighlight style={style.slideCloseBnt} onPress={() => setOutputVisible(false)}>
       <Icon
         name="chevron-right"
         type="FontAwesome"
@@ -383,7 +383,7 @@ style={style.outputCont}>
         style={style.collapseIcon}
         // color={theme.utilColors.white}
         />
-      </TouchableHighlight>
+    </TouchableHighlight>
   </View>
   <View style={style.outputCard}>
   <View style={style.outputHeadCont}>

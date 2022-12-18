@@ -8,6 +8,7 @@ const {
 } = require('../games/_gameTheme');
 
 const thememaplight = {
+  ...gameThemeMapLight,
   'game-btn-text-color': LightBlue.color900,
   'game-btn-shadow': '0 4px 4px 0 rgba(0, 0, 0, 0.25)',
   'game-transparent-bg': 'rgba(255, 255, 255, 0.9)',
@@ -19,12 +20,13 @@ const thememaplight = {
   'game-nav-active-color': LightBlue.color300,
   'game-modal-close-btn-bg': utilColors.disposableIconBg,
   'game-white-gradient-bg': 'linear-gradient(90deg, #fff, #fff)',
-  ...gameThemeMapLight,
+  'game-mob-header-bg': '#ffffffe6',
 };
 
 // just copied the light theme colors to the dark for now
 // TODO: make this a real dark theme with appropriate colors
 const thememapdark = {
+  ...gameThemeMapDark,
   'game-btn-text-color': LightBlue.color900,
   'game-btn-shadow': '0 4px 4px 0 rgba(0, 0, 0, 0.25)',
   'game-transparent-bg': 'rgba(255, 255, 255, 0.9)',
@@ -36,10 +38,11 @@ const thememapdark = {
   'game-nav-active-color': LightBlue.color300,
   'game-modal-close-btn-bg': utilColors.disposableIconBg,
   'game-white-gradient-bg': 'linear-gradient(90deg, #fff, #fff)',
-  ...gameThemeMapDark,
+  'game-mob-header-bg': '#ffffffe6',
 };
 
 const cssvars = {
+  ...gameCssVars,
   'game-btn-text-color': '--game-btn-text-color',
   'game-btn-shadow': '--game-btn-shadow',
   'game-transparent-bg': '--game-transparent-bg',
@@ -51,7 +54,7 @@ const cssvars = {
   'game-nav-active-color': '--game-nav-active-color',
   'game-modal-close-btn-bg': '--game-modal-close-btn-bg',
   'game-white-gradient-bg': '--game-white-gradient-bg',
-  ...gameCssVars,
+  'game-mob-header-bg': '--game-mob-header-bg',
 };
 
 module.exports = {

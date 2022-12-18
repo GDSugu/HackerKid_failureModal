@@ -23,10 +23,10 @@
       "value": "Try now"
     }
   ],
-  "/EsQT0": [
+  "+nON3s": [
     {
-      "type": 0,
-      "value": "This is games page"
+      "type": 1,
+      "value": "output"
     }
   ],
   "/Gy7qZ": [
@@ -43,6 +43,12 @@
     {
       "type": 0,
       "value": "Yes"
+    }
+  ],
+  "/NIQ0Y": [
+    {
+      "type": 0,
+      "value": "Sample Output:"
     }
   ],
   "/O26Yc": [
@@ -93,6 +99,12 @@
       "value": "Coming Soon..."
     }
   ],
+  "0IKGwB": [
+    {
+      "type": 0,
+      "value": "Output Description:"
+    }
+  ],
   "0JV99f": [
     {
       "type": 0,
@@ -115,6 +127,12 @@
     {
       "type": 1,
       "value": "message"
+    }
+  ],
+  "0sK7Ti": [
+    {
+      "type": 0,
+      "value": "Submit Code"
     }
   ],
   "13ETG6": [
@@ -219,6 +237,12 @@
       "value": "Please connect to the internet."
     }
   ],
+  "4bWRh3": [
+    {
+      "type": 1,
+      "value": "item"
+    }
+  ],
   "52hsYP": [
     {
       "type": 0,
@@ -265,12 +289,6 @@
       "value": "Next"
     }
   ],
-  "6kktdG": [
-    {
-      "type": 0,
-      "value": "Output will be shown here"
-    }
-  ],
   "6oGVMu": [
     {
       "type": 0,
@@ -281,6 +299,12 @@
     {
       "type": 0,
       "value": "Login to existing Account"
+    }
+  ],
+  "7F4zGx": [
+    {
+      "type": 1,
+      "value": "item"
     }
   ],
   "7L3+7M": [
@@ -301,10 +325,22 @@
       "value": "Output will appear here"
     }
   ],
+  "7pvcZr": [
+    {
+      "type": 0,
+      "value": "Run"
+    }
+  ],
   "8R6f04": [
     {
       "type": 0,
       "value": "Coming Soon..."
+    }
+  ],
+  "8gWjFk": [
+    {
+      "type": 1,
+      "value": "description"
     }
   ],
   "9+2Mm0": [
@@ -537,6 +573,12 @@
       "value": "Login into Existing Account"
     }
   ],
+  "GBZkYh": [
+    {
+      "type": 0,
+      "value": "Input Description:"
+    }
+  ],
   "GQwBTI": [
     {
       "type": 0,
@@ -547,6 +589,12 @@
     {
       "type": 0,
       "value": "Login with Email"
+    }
+  ],
+  "Gr9306": [
+    {
+      "type": 0,
+      "value": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?"
     }
   ],
   "H2rvzb": [
@@ -565,6 +613,12 @@
     {
       "type": 0,
       "value": "Save"
+    }
+  ],
+  "HXFZww": [
+    {
+      "type": 0,
+      "value": "Sample Input:"
     }
   ],
   "Hjj2+R": [
@@ -601,6 +655,12 @@
     {
       "type": 1,
       "value": "errorMessage"
+    }
+  ],
+  "J9e6MO": [
+    {
+      "type": 1,
+      "value": "output"
     }
   ],
   "JnwRMJ": [
@@ -651,6 +711,12 @@
       "value": "Share"
     }
   ],
+  "NYGsGb": [
+    {
+      "type": 1,
+      "value": "level"
+    }
+  ],
   "NZqKYF": [
     {
       "type": 0,
@@ -675,6 +741,12 @@
       "value": "Continue Playing"
     }
   ],
+  "Nl8Z7P": [
+    {
+      "type": 0,
+      "value": "Sample Output:"
+    }
+  ],
   "Nn5oAD": [
     {
       "type": 0,
@@ -687,6 +759,12 @@
       "value": "Run"
     }
   ],
+  "NvLmc5": [
+    {
+      "type": 0,
+      "value": "Output Description:"
+    }
+  ],
   "O1sXEv": [
     {
       "type": 0,
@@ -697,6 +775,12 @@
     {
       "type": 0,
       "value": "Continue Playing"
+    }
+  ],
+  "OUOYZ4": [
+    {
+      "type": 0,
+      "value": "Sample Input:"
     }
   ],
   "OWSL0r": [
@@ -717,6 +801,12 @@
       "value": "Class"
     }
   ],
+  "Ovi5Cc": [
+    {
+      "type": 1,
+      "value": "input"
+    }
+  ],
   "PKwyq8": [
     {
       "type": 0,
@@ -727,6 +817,12 @@
     {
       "type": 1,
       "value": "coins"
+    }
+  ],
+  "PSqen2": [
+    {
+      "type": 1,
+      "value": "level"
     }
   ],
   "PSx95N": [
@@ -745,6 +841,12 @@
     {
       "type": 0,
       "value": "Close"
+    }
+  ],
+  "QUO1DE": [
+    {
+      "type": 0,
+      "value": "Problem Statement:"
     }
   ],
   "Qb0n8J": [
@@ -869,6 +971,12 @@
     {
       "type": 1,
       "value": "step"
+    }
+  ],
+  "UswTfO": [
+    {
+      "type": 0,
+      "value": "Codekata"
     }
   ],
   "V365ug": [
@@ -1027,6 +1135,12 @@
       "value": "Home"
     }
   ],
+  "b3hzBu": [
+    {
+      "type": 0,
+      "value": "Try again"
+    }
+  ],
   "bK9TWX": [
     {
       "type": 0,
@@ -1049,6 +1163,12 @@
     {
       "type": 0,
       "value": "Play next"
+    }
+  ],
+  "cQyq2R": [
+    {
+      "type": 0,
+      "value": "Submit"
     }
   ],
   "cZDBd3": [
@@ -1117,6 +1237,18 @@
       "value": "completed"
     }
   ],
+  "fcrHSq": [
+    {
+      "type": 1,
+      "value": "languageDisplayName"
+    }
+  ],
+  "fio5op": [
+    {
+      "type": 0,
+      "value": "Output"
+    }
+  ],
   "fr893W": [
     {
       "type": 1,
@@ -1135,6 +1267,12 @@
       "value": "Login Into Existing Account"
     }
   ],
+  "g7v9mc": [
+    {
+      "type": 1,
+      "value": "output"
+    }
+  ],
   "g8RtbX": [
     {
       "type": 0,
@@ -1145,6 +1283,18 @@
     {
       "type": 0,
       "value": "Name"
+    }
+  ],
+  "gdd3S3": [
+    {
+      "type": 0,
+      "value": "Codekata"
+    }
+  ],
+  "glY0NW": [
+    {
+      "type": 0,
+      "value": "Output"
     }
   ],
   "hEqp4d": [
@@ -1195,6 +1345,12 @@
       "value": "Ok"
     }
   ],
+  "kKheEw": [
+    {
+      "type": 1,
+      "value": "question"
+    }
+  ],
   "lKeCea": [
     {
       "type": 0,
@@ -1217,6 +1373,12 @@
     {
       "type": 1,
       "value": "rank"
+    }
+  ],
+  "m2EDxB": [
+    {
+      "type": 0,
+      "value": "Additional Inputs"
     }
   ],
   "mD5V7u": [
@@ -1247,6 +1409,12 @@
     {
       "type": 0,
       "value": "Rank"
+    }
+  ],
+  "mgb+iQ": [
+    {
+      "type": 0,
+      "value": "Run"
     }
   ],
   "mm9QaY": [
@@ -1285,10 +1453,28 @@
       "value": "text"
     }
   ],
+  "nTxUJZ": [
+    {
+      "type": 0,
+      "value": "Try IDE Now"
+    }
+  ],
+  "nWr131": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
   "nlYt8p": [
     {
       "type": 0,
       "value": "View more"
+    }
+  ],
+  "nnfaF3": [
+    {
+      "type": 1,
+      "value": "selectedLanguageDisplayName"
     }
   ],
   "nsIAsY": [
@@ -1315,6 +1501,12 @@
       "value": "Coming Soon..."
     }
   ],
+  "onuBbP": [
+    {
+      "type": 0,
+      "value": "Input Description:"
+    }
+  ],
   "pEiO08": [
     {
       "type": 0,
@@ -1327,22 +1519,46 @@
       "value": "Turtle"
     }
   ],
+  "pkuBPe": [
+    {
+      "type": 0,
+      "value": "Click “Run” to generate output for your code"
+    }
+  ],
   "pwy4hs": [
     {
       "type": 0,
       "value": "Game Progress"
     }
   ],
-  "q86PwV": [
+  "q9L1mf": [
+    {
+      "type": 1,
+      "value": "head"
+    }
+  ],
+  "qAG6DF": [
     {
       "type": 0,
-      "value": "Go to Home"
+      "value": "Click “Run” to generate output for your code"
     }
   ],
   "qTQ8nP": [
     {
       "type": 1,
       "value": "coinsEarned"
+    }
+  ],
+  "qTXOtA": [
+    {
+      "type": 0,
+      "value": "Problem Statement"
+    }
+  ],
+  "qUU2pp": [
+    {
+      "type": 0,
+      "value": "All Games"
     }
   ],
   "qXTiEd": [
@@ -1355,6 +1571,12 @@
     {
       "type": 0,
       "value": "Phone"
+    }
+  ],
+  "r1CvRM": [
+    {
+      "type": 0,
+      "value": "Additional Inputs"
     }
   ],
   "rECW1h": [
@@ -1391,6 +1613,12 @@
     {
       "type": 0,
       "value": "Go to Home"
+    }
+  ],
+  "t5hBAx": [
+    {
+      "type": 0,
+      "value": "Output will be shown here"
     }
   ],
   "tbPLF3": [
@@ -1445,6 +1673,12 @@
     {
       "type": 0,
       "value": "Turtle"
+    }
+  ],
+  "wn7GwB": [
+    {
+      "type": 1,
+      "value": "description"
     }
   ],
   "wrdAU0": [

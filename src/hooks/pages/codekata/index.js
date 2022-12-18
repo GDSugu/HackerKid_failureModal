@@ -223,24 +223,54 @@ const useCodekata = ({ isPageMounted, virtualid }) => {
     questionObject: false,
   });
 
-  const getCodekataQuestions = (virtualId = virtualid) => post({ type: 'fetchQuestion', virtualId }, 'codekata/').then((res) => {
-    const parsedRes = JSON.parse(res);
-    if (parsedRes.status === 'success' && isPageMounted.current) setCodekata(parsedRes);
-  });
+  const getCodekataQuestions = (virtualId = virtualid) => post({ type: 'fetchQuestion', virtualId }, 'codekata/')
+    .then((res) => {
+      let result = false;
+      if (isPageMounted.current) {
+        if (res !== 'access_denied') {
+          const parsedRes = JSON.parse(res);
+          // if (parsedRes.status === 'success') {
+          setCodekata(parsedRes);
+          result = parsedRes;
+          // }
+        } else {
+          result = 'access_denied';
+        }
+      }
+      return result;
+    });
 
   const runCode = ({ lang, code, input }) => post({
     type: 'runCode', compilerId: getCompilerId(lang), code, input,
-  }, 'codekata/').then((res) => {
-    const parsedRes = JSON.parse(res);
-    return parsedRes.compilationDetails;
-  });
+  }, 'codekata/')
+    .then((res) => {
+      let result = false;
+      if (isPageMounted.current) {
+        if (res !== 'access_denied') {
+          const parsedRes = JSON.parse(res);
+          result = parsedRes.compilationDetails;
+        } else {
+          result = 'access_denied';
+        }
+      }
+      return result;
+    });
 
   const submitCode = ({ questionId, code, lang }) => post({
-    type: 'submitQuestion', compilerId: getCompilerId(lang), code, questionId,
-  }, 'codekata/').then((res) => {
-    const parsedRes = JSON.parse(res);
-    return parsedRes;
-  });
+    type: 'submitQuestion', compilerId: getCompilerId(lang), code, questionId, languageUsed: lang,
+  }, 'codekata/')
+    .then((res) => {
+      let result = false;
+      if (isPageMounted.current) {
+        if (res !== 'access_denied') {
+          const parsedRes = JSON.parse(res);
+          result = parsedRes;
+        } else {
+          result = 'access_denied';
+        }
+      }
+      return result;
+    });
 
   const availableLanguages = [
     'BASH',
