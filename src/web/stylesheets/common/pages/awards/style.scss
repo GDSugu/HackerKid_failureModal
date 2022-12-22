@@ -36,7 +36,7 @@
       $box-shadow-color: map-get($thememaplight, awards-box-shadow-color);
 
       border: 1px solid gt.theme-var(awards-controls-border-color, null, $thememaplight, $cssvars);
-      box-shadow: 0px 4px 4px  $box-shadow-color;
+      box-shadow: 0 4 4  $box-shadow-color;
     }
 
     .sort-dropdown {
@@ -53,7 +53,6 @@
 
         .dropdown-item-container {
           .ascending-descending-selectors {
-
             button:active,
             button.active {
               background-color: gt.theme-var(awards-body-bg, null, $thememaplight, $cssvars);
@@ -81,7 +80,7 @@
     // background-color: gt.theme-var(awards-bg-1, null, $thememaplight, $cssvars);
   }
 
-  .award-card:hover+.award-info {
+  .award-card:hover + .award-info {
     display: flex;
   }
 

@@ -130,7 +130,17 @@ const Certificates = () => {
     const finalList = {};
 
     sortedKeys.forEach((timeStamp) => {
-      const dateString = moment.unix(timeStamp).format('DD/MM/YYYY');
+      const timeStampDMY = moment.unix(timeStamp).format('DD/MM/YYYY');
+      const nowDMY = moment().format('DD/MM/YYYY');
+      const yesterdayDMY = moment().subtract(1, 'days').format('DD/MM/YYYY');
+
+      let dateString = moment.unix(timeStamp).format('DD/MM/YYYY');
+
+      if (timeStampDMY === nowDMY) {
+        dateString = 'Today';
+      } else if (timeStampDMY === yesterdayDMY) {
+        dateString = 'Yesterday';
+      }
 
       if (finalList[dateString]) {
         finalList[dateString].push(timeStampToCertificateMap[timeStamp]);
@@ -344,26 +354,28 @@ const Certificates = () => {
     >
       {
         viewModalCertificateCanvas
-        && <div>
-          <img src={viewModalCertificateCanvas.toDataURL('image/jpeg', 1.0)} className='view-modal-certificate-image' alt='certificate-img' />
-          <div className='share-download-btns-container btn-group'>
-              <button
-                type='button'
-                className='share-btn btn btn-primary'
-                data-certificate-id={toViewCertificate.certificateId}
-                onClick={onShareBtnClick}
-              >
+        && <>
+          <div>
+            <img src={viewModalCertificateCanvas.toDataURL('image/jpeg', 1.0)} className='view-modal-certificate-image' alt='certificate-img' />
+          </div>
+          <div className='share-download-btns-container modal-footer'>
+            <button
+              type='button'
+              className='share-btn btn btn-primary'
+              data-certificate-id={toViewCertificate.certificateId}
+              onClick={onShareBtnClick}
+            >
               <FormattedMessage defaultMessage={'Share'} description='share btn' />
             </button>
-              <button
-                type='button'
-                className='download-btn btn btn-outline-primary'
-                onClick={onDownloadBtnClick}
-              >
+            <button
+              type='button'
+              className='download-btn btn btn-outline-primary'
+              onClick={onDownloadBtnClick}
+            >
               <FormattedMessage defaultMessage={'Download'} description='download btn' />
             </button>
           </div>
-        </div>
+        </>
       }
       {
         !viewModalCertificateCanvas

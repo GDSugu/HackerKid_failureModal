@@ -7,6 +7,10 @@
     "defaultMessage": "Email",
     "description": "Email Button Title"
   },
+  "+W9QuT": {
+    "defaultMessage": "{rarity}",
+    "description": "rarity indicator"
+  },
   "+g4yFF": {
     "defaultMessage": "Logout",
     "description": "more menu button"

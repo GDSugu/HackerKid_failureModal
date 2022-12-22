@@ -36,7 +36,7 @@
       $box-shadow-color: map-get($thememaplight, collectibles-box-shadow-color);
 
       border: 1px solid gt.theme-var(collectibles-controls-border-color, null, $thememaplight, $cssvars);
-      box-shadow: 0px 4px 4px $box-shadow-color;
+      box-shadow: 0 4 4 $box-shadow-color;
     }
 
     .sort-dropdown {
@@ -53,7 +53,6 @@
 
         .dropdown-item-container {
           .ascending-descending-selectors {
-
             button:active,
             button.active {
               background-color: gt.theme-var(collectibles-body-bg, null, $thememaplight, $cssvars);

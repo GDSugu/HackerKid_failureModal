@@ -1,6 +1,7 @@
 @use '../themes/_default' as gt;
 @use '../base/_mixins' as gm;
 @use '../base/_variables' as gv;
+
 @import url('https://fonts.googleapis.com/css2?family=Courgette&family=DM+Sans&display=swap');
 
 .imageTemplate {
@@ -18,7 +19,7 @@
   position: fixed;
   top: 0;
 
-  &>div {
+  & > div {
     height: 0;
     width: 0;
     overflow: scroll;

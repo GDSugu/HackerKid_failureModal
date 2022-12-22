@@ -73,7 +73,9 @@ const App = () => {
                     />
                   </Link>
                 </div>
-                {/* <div className={`account-nav-item ${screen === 'subscription' ? 'active' : ''}`}>
+                {/* <div
+                className={`account-nav-item ${screen === 'subscription'
+                 ? 'active' : ''}`}>
                 <Link to='subscription'>
                   <FormattedMessage
                     defaultMessage='Subscription'
@@ -84,7 +86,10 @@ const App = () => {
               </>} />
             }>
             <Route path='edit' caseSensitive={true} element={<RouteProfileEdit />} />
-            {/* <Route path='subscription' caseSensitive={true} element={<RouteSubscription />} /> */}
+            {/* <Route
+            path='subscription'
+            caseSensitive={true}
+            element={<RouteSubscription />} /> */}
           </Route>
           <Route path='turtle' caseSensitive={true} element={<RouteTurtle />} />
           <Route path='turtle/:id' element={<RouteTurtle />} />
