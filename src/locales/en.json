@@ -126,6 +126,10 @@
     "defaultMessage": "{label}",
     "description": "{description}"
   },
+  "3xAjVX": {
+    "defaultMessage": "Oh ho ho.. Requirement not satisfied",
+    "description": "modal title"
+  },
   "4Ve1r3": {
     "defaultMessage": "Ok",
     "description": "confirm btn"
@@ -161,6 +165,9 @@
   "6Cjk2D": {
     "defaultMessage": "Login",
     "description": "Login Button"
+  },
+  "6OkiRc": {
+    "defaultMessage": "Your bio will be shown here"
   },
   "6V6DQY": {
     "defaultMessage": "Next",
@@ -1044,6 +1051,10 @@
   "zXjEvn": {
     "defaultMessage": "sleep",
     "description": "sleep function"
+  },
+  "zeGEYY": {
+    "defaultMessage": "Oh ho ho.. failed",
+    "description": "modal title"
   },
   "zm0wU/": {
     "defaultMessage": "{idx} {step}",

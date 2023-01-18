@@ -42,7 +42,9 @@ const RouteZombieLand = loadable(() => import('./ZombieLand'), { fallback: <Load
 // const RouteSubscription = loadable(() => import('./Subscription'), { fallback: <Loading /> });
 
 const App = () => {
-  loginCheck();
+  React.useEffect(() => {
+    loginCheck();
+  }, []);
 
   return (
   <BrowserRouter>

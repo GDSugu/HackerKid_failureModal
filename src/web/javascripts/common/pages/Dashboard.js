@@ -189,7 +189,23 @@ const ProfileContainer = ({ dashboardUserData, isDesktop, session }) => <>
       && <>
       <div className="profile-content card card-block">
         <p className="profile-content-heading">{session.name ? session.name : dashboardUserData.name || '--'}</p>
-        <p>{ session.about ? session.about : dashboardUserData.about || '--'}</p>
+        {
+          dashboardUserData?.about
+          && <>
+           <p>{dashboardUserData.about}</p>
+          </>
+        }
+        {
+          !dashboardUserData?.about
+          && <>
+            <p className='text-secondary font-italic'>
+              <FormattedMessage
+                defaultMessage={'Your bio will be shown here'}
+              />
+            </p>
+          </>
+        }
+        {/* <p>{ session.about ? session.about : dashboardUserData.about || '--'}</p> */}
       </div>
       </>
     }

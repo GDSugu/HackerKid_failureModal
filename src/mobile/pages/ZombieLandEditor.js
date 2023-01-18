@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import WebView from 'react-native-webview';
+import md5 from 'crypto-js/md5';
 import { useSharedZLWebView } from '../../shared/zombieLand/zlwebview';
 import ThemeContext from '../components/theme';
 import webViewElement from '../components/WebView';
@@ -24,6 +25,11 @@ const ZombieLandEditor = () => {
   const zlContext = React.useContext(ZombieLandContext);
   const webViewRef = React.useRef(null);
   let webViewString = '';
+
+  const {
+    ctxState: zlState,
+    ctxSetState: zlStatic,
+  } = zlContext;
 
   const {
     BodyContent, ScriptContent, styleString, scriptToInject,
@@ -63,6 +69,16 @@ const ZombieLandEditor = () => {
     }
   };
 
+  // const setFailureModalState = (state) => {
+  //   zlStatic((prev) => ({
+  //     ...prev,
+  //     uiData: {
+  //       ...prev.uiData,
+  //       isFailureModalOpen: state,
+  //     },
+  //   }));
+  // };
+
   React.useEffect(() => {
     setTimeout(() => {
       if (webViewRef.current && zlContext.ctxState.status === 'success') {
@@ -70,8 +86,9 @@ const ZombieLandEditor = () => {
           action: 'startGame',
           data: {
             zlState: zlContext.ctxState,
-            endGame: () => {},
-            popupBox: () => {},
+            endGame: (msg) => console.log('endgame, ', msg),
+            // popupBox: showFailureModal.bind(this),
+            popupBox: (msg) => console.log('popub ', msg),
           },
         };
 

@@ -1,6 +1,6 @@
 import { $ } from '../../web/javascripts/common/framework';
 import {
-  initGame, resetGame, getGameStageID, executeCode, setEndGame,
+  initGame, resetGame, getGameStageID, executeCode, setEndGame, setGameStageID,
 } from './gameFunctions';
 
 const zlGameFunctions = (zlObj = {}, jq = $) => {
@@ -25,7 +25,8 @@ const zlGameFunctions = (zlObj = {}, jq = $) => {
     // manager.score = 0;
     GameZlObj.manager.lineCount = 0;
     GameZlObj.manager.questionID = questionObject.qid;
-    // manager.stageDataID = `Scene_${questionObject.stageDataID}`;
+    // GameZlObj.manager.stageDataID = `Scene_${questionObject.stageDataID}`;
+    // setGameStageID(`Scene_${questionObject.qid}`);
     GameZlObj.manager.windowType = device;
     GameZlObj.manager.popupBox = popupBox;
   };
@@ -44,7 +45,7 @@ const zlGameFunctions = (zlObj = {}, jq = $) => {
         else: '<div  class="popup ml-3" draggable="true" data-id="else"><p  class="toolbar condition">else:</p></div>',
         elif: '<div  class="popup ml-3" draggable="true" data-id="elif"><p  class="toolbar condition">elif <select class="blockInput elifExp" aria-placeholder="exp"><option value=1>True</option><option value=\'nearWall()\'>nearWall</option><option value=\'nearObstacles()\'>nearObstacles</option></select>:</p></div>',
       };
-      jq('#playground').html();
+      jq('#playground').empty();
       if (GameZlObj.manager.lineCount < 18) {
         if (zombielandQuestion.questionObject.preBlocks) {
           zombielandQuestion.questionObject.preBlocks.forEach((key) => {
@@ -418,16 +419,16 @@ const zlGameFunctions = (zlObj = {}, jq = $) => {
       i += 1;
     }
     GameZlObj.manager.outIDs = elements;
-    let elstr = '';
-    blockElements.forEach((el) => { elstr += el.outerHTML; });
-    GameZlObj.manager.popupBox({
-      title: 'Save Code',
-      code: GameZlObj.manager.sourceCodeData,
-      classIDs: GameZlObj.manager.classIDs,
-      outIDs: GameZlObj.manager.outIDs,
-      // data_code: GameZlObj.manager.data_code,
-      blkEl: elstr,
-    });
+    // let elstr = '';
+    // blockElements.forEach((el) => { elstr += el.outerHTML; });
+    // GameZlObj.manager.popupBox({
+    //   title: 'Save Code',
+    //   code: GameZlObj.manager.sourceCodeData,
+    //   classIDs: GameZlObj.manager.classIDs,
+    //   outIDs: GameZlObj.manager.outIDs,
+    //   // data_code: GameZlObj.manager.data_code,
+    //   blkEl: elstr,
+    // });
     GameZlObj.parseData();
   };
 
@@ -495,15 +496,15 @@ const zlGameFunctions = (zlObj = {}, jq = $) => {
 
   GameZlObj.startGame = (
     zombieLandState, device, phaser, parentElement, canvasElement,
-    endGame = () => {}, popupBox = () => {},
+    imagePreviewElement, endGame = () => {}, popupBox = () => {},
     isMobile = false, width, height, canvasContext,
   ) => {
     GameZlObj.setGameState(zombieLandState.questionObject, device, popupBox);
     GameZlObj.updateHistory(zombieLandState.questionObject);
     GameZlObj.renderPreBlocks(zombieLandState);
     const gameObj = initGame(
-      phaser, parentElement, canvasElement, zombieLandState, popupBox,
-      isMobile, width, height, canvasContext,
+      phaser, parentElement, canvasElement, imagePreviewElement,
+      zombieLandState, popupBox, isMobile, width, height, canvasContext,
     );
     GameZlObj.attachListeners();
     setEndGame(endGame, GameZlObj.manager);

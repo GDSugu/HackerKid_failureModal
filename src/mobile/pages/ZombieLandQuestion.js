@@ -21,6 +21,10 @@ const getStyles = (theme, font, utilColors) => StyleSheet.create({
     color: utilColors.white,
     marginBottom: 8,
   },
+  btnText: {
+    ...font.subtitle1,
+    color: utilColors.white,
+  },
   card: {
     borderRadius: 12,
     paddingVertical: 16,
@@ -74,7 +78,8 @@ const getStyles = (theme, font, utilColors) => StyleSheet.create({
     // marginLeft: 16,
   },
   tryNowBtn: {
-    width: '100%',
+    width: '90%',
+    alignSelf: 'center',
     borderRadius: 12,
     backgroundColor: theme.btnBg,
     marginTop: 8,
@@ -129,7 +134,7 @@ const ZombieLandQuestion = ({ navigation }) => {
         style={style.tryNowBtn}
       >
         <View style={style.rowBetween}>
-          <Text style={style.titleText}>
+          <Text style={style.btnText}>
             <FormattedMessage
               defaultMessage='Try Now'
               description='Try Now Button'

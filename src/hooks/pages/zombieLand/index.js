@@ -30,6 +30,14 @@ const useZombieLand = ({
     route,
   }));
 
+  const toggleHintComponent = (hintStatus = false) => setZombieLandState((prevState) => ({
+    ...prevState,
+    uiData: {
+      ...prevState.uiData.hintContainerVisible,
+      hintContainerVisible: hintStatus,
+    },
+  }));
+
   const fetchZombieLandQuestion = ({
     virtualId = virtualid,
   }) => {
@@ -49,6 +57,7 @@ const useZombieLand = ({
               setZombieLandState((prevState) => ({
                 status: 'access_denied',
                 ...prevState,
+                snippet: '',
                 response,
               }));
             } else {
@@ -56,11 +65,13 @@ const useZombieLand = ({
               if (parsedResponse.status === 'success') {
                 setZombieLandState((prevState) => ({
                   ...prevState,
+                  snippet: '',
                   ...parsedResponse,
                 }));
               } else {
                 setZombieLandState((prevState) => ({
                   ...prevState,
+                  snippet: '',
                   status: 'error',
                   response: parsedResponse,
                 }));
@@ -137,6 +148,7 @@ const useZombieLand = ({
       changeRoute,
       fetchZombieLandQuestion,
       submitZombieLandQuestion,
+      toggleHintComponent,
     },
   };
 };

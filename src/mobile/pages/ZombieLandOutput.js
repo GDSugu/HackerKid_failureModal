@@ -4,14 +4,13 @@ import {
   StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
 import WebView from 'react-native-webview';
-// import Canvas from 'react-native-canvas';
-// import Phaser from 'phaser';
-// import md5 from 'crypto-js/md5';
+import md5 from 'crypto-js/md5';
 import ThemeContext from '../components/theme';
 import webViewElement from '../components/WebView';
 import { ZombieLandContext } from '../../hooks/pages/zombieLand';
 import { useSharedZLWebView } from '../../shared/zombieLand/zlwebview';
-// import { getGameFunctions } from '../../shared/zombieLand/gameFunctions';
+import Icon from '../common/Icons';
+import Loader, { ScreenLoader } from '../components/Loader';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
@@ -37,7 +36,6 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     borderRadius: 12,
     padding: 16,
     margin: 6,
-    // flex: 1,
     borderColor: theme.btnBg,
     borderWidth: 1,
   },
@@ -59,6 +57,10 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   disabled: {
     opacity: 0.5,
   },
+  loaderBg: {
+    ...StyleSheet.absoluteFill,
+    backgroundColor: utilColors.darkTransparent50,
+  },
 });
 
 const ZombieLandOutput = ({ navigation }) => {
@@ -66,6 +68,9 @@ const ZombieLandOutput = ({ navigation }) => {
   const style = getStyles(screenZombieLandOutput, utilColors, font);
   const webViewRef = React.useRef(null);
   const zlContext = React.useContext(ZombieLandContext);
+  const [showLoader, setShowLoader] = React.useState(false);
+
+  const { ctxState, ctxSetState, submitQuestion } = zlContext;
 
   const { zlOutput } = useSharedZLWebView();
   const {
@@ -78,6 +83,41 @@ const ZombieLandOutput = ({ navigation }) => {
     ScriptComponent: ScriptContent,
     styleString,
   });
+
+  const showStatusModal = () => {
+    ctxSetState((prevState) => ({
+      ...prevState,
+      uiData: {
+        ...prevState.uiData,
+        isSuccessModalOpen: true,
+      },
+    }));
+  };
+
+  const endGame = (validated) => {
+    setShowLoader(true);
+    const sourceCode = ctxState.snippet;
+    const request = {
+      type: 'validateZombieQuestion',
+      sourceCode,
+      questionId: parseInt(ctxState.questionObject.qid, 10),
+      xmlWorkSpace: '',
+      validated,
+    };
+
+    let reqString = '';
+    Object.keys(request).forEach((index) => {
+      reqString += request[index];
+    });
+    const reqHash = md5(reqString + md5(reqString).toString()).toString();
+    request.requestHash = reqHash;
+
+    submitQuestion(request)
+      .then(() => {
+        setShowLoader(false);
+        showStatusModal();
+      });
+  };
 
   const runCode = () => {
     if (webViewRef.current && zlContext.ctxState.snippet) {
@@ -115,13 +155,22 @@ const ZombieLandOutput = ({ navigation }) => {
 
       switch (action) {
         case 'popupBox':
-          console.warn('case popupBox: ', data);
+          if (typeof data.message === 'object') {
+            const { type } = data.message;
+            if (type === 'runCode') {
+              endGame(data.message.validated);
+            } else if (type === 'message') {
+              console.log('popup message', data.message.message);
+            } else if (type === 'error') {
+              console.log('zloutput error (in game)', data.message.error);
+            }
+          }
           break;
         case 'log':
           console.log('zloutput case log: ', data);
           break;
         case 'error':
-          console.error('zloutput case error: ', data);
+          console.error('zloutput case error(in game): ', data);
           break;
         default: break;
       }
@@ -130,9 +179,11 @@ const ZombieLandOutput = ({ navigation }) => {
     }
   };
 
-  if (navigation.getState().index === 2) {
-    runCode();
-  }
+  React.useEffect(() => {
+    if (navigation.getState().index === 2) {
+      runCode();
+    }
+  }, [navigation.getState().index]);
 
   React.useEffect(() => {
     const timeout = 1000;
@@ -144,6 +195,7 @@ const ZombieLandOutput = ({ navigation }) => {
             parentElement: 'outputContainer',
             canvasElement: 'userCanvas',
             qnObj: zlContext.ctxState,
+            end: endGame.toString(),
           },
         };
 
@@ -176,27 +228,6 @@ const ZombieLandOutput = ({ navigation }) => {
     }, timeout);
   }, [zlContext.ctxState.questionObject]);
 
-  // const popupBox = (msg) => {
-  //   console.warn('popupBox: ', msg);
-  // };
-
-  // React.useEffect(() => {
-  //   setTimeout(() => {
-  //     if (webViewRef.current && zlContext.ctxState.status === 'success') {
-  //       const { GameObj } = getGameFunctions({});
-  //       try {
-  //         console.log(zlContext.ctxState.questionObject.qid);
-  //         GameObj.initGame(
-  //           Phaser, false, false, zlContext.ctxState,
-  //           popupBox, true, 760, 360, webViewRef.current.getContext('2d'),
-  //         );
-  //       } catch (err) {
-  //         console.error('error in rn initGame: ', err);
-  //       }
-  //     }
-  //   }, 1000);
-  // }, [zlContext.ctxState.questionObject]);
-
   return <>
     <View style={style.container}>
         <WebView
@@ -216,10 +247,7 @@ const ZombieLandOutput = ({ navigation }) => {
           style={[
             style.outputBtn,
             style.playBtn,
-
-            !zlContext.ctxState.snippet && style.disabled,
           ]}
-          disabled={!zlContext.ctxState.snippet}
           onPress={runCode}
         >
           <Text
@@ -234,17 +262,23 @@ const ZombieLandOutput = ({ navigation }) => {
                 />
             }
           </Text>
-          {/* <View>
+          <View>
             <Icon
                 name='play'
                 type='FontAwesome5'
                 size={18}
                 color={utilColors.white}
               />
-          </View> */}
+          </View>
         </TouchableOpacity>
       </View>
     </View>
+    {
+      showLoader
+      && <>
+        <ScreenLoader route={'ZombieLandOutput'} />
+      </>
+    }
   </>;
 };
 

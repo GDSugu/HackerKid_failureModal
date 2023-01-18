@@ -57,6 +57,9 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => Styl
   bodyCard: {
     margin: 16,
   },
+  textSecondary: {
+    color: utilColors.grey,
+  },
   bodyCardHeading: {
     display: 'flex',
     flexDirection: 'row',
@@ -468,24 +471,46 @@ const HomeBlock = ({
               uri: dashboardUserData.profileImage.toString().replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`),
             } : avatar }
           />
-          {
-            dashboardUserData
-            && <Text style={style.bodyCardContentTitleText}>{dashboardUserData.name}</Text>
-          }
-          {
-            !dashboardUserData
-            && <Skeleton width='50%' height={20} style={{ borderRadius: 4, marginLeft: 8 }} />
-          }
+          <>
+            {
+              !dashboardUserData
+              && <Skeleton width='50%' height={20} style={{ borderRadius: 4, marginLeft: 8 }} />
+            }
+            {
+              dashboardUserData?.name
+              && <Text style={style.bodyCardContentTitleText}>{dashboardUserData.name}</Text>
+            }
+            {
+              !dashboardUserData?.name
+              && <Text style={[style.bodyCardContentTitleText, style.textSecondary]}>
+                <FormattedMessage
+                  defaultMessage={'Your name will be shown here'}
+                  description={'name fallback message'}
+                />
+              </Text>
+            }
+          </>
         </View>
         <View style={style.bodyCardContentContainer}>
-          {
-            dashboardUserData
-            && <Text style={style.bodyCardContentText}>{dashboardUserData.about}</Text>
-          }
-          {
-            !dashboardUserData
-            && <Skeleton width='50%' height={16} style={{ borderRadius: 4 }} />
-          }
+          <>
+            {
+              !dashboardUserData
+              && <Skeleton width='50%' height={16} style={{ borderRadius: 4 }} />
+            }
+            {
+              dashboardUserData?.about
+              && <Text style={style.bodyCardContentText}>{dashboardUserData.about}</Text>
+            }
+            {
+              !dashboardUserData?.about
+              && <Text style={[style.bodyCardContentTitleText, style.textSecondary]}>
+                <FormattedMessage
+                  defaultMessage={'Your bio will be shown here'}
+                  description={'about fallback message'}
+                />
+              </Text>
+            }
+          </>
         </View>
       </View>
     </View>

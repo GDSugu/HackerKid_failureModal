@@ -1,13 +1,22 @@
 import React from 'react';
 import {
-  Image,
-  ImageBackground, Modal, StyleSheet, Text, TouchableOpacity, View,
+  // Image,
+  ImageBackground,
+  // Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import { FormattedMessage } from 'react-intl';
 import * as Animatable from 'react-native-animatable';
-import { Red, Yellow } from '../../colors/_colors';
+import {
+  Red,
+  // Red,
+  Yellow,
+} from '../../colors/_colors';
 import ThemeContext from '../components/theme';
-import ZombieLandBg from '../../images/zombieLand/zombieLand-home-mob-bg.png'
+import ZombieLandBg from '../../images/zombieLand/zombieLand-home-mob-bg.png';
 import GameQuestion from '../../images/games/question.svg';
 import GameCode from '../../images/games/code.svg';
 import GameOutput from '../../images/games/output.svg';
@@ -17,6 +26,7 @@ import ZombieLandOutput from './ZombieLandOutput';
 import GameNavigator from '../components/GameNavigator';
 import { useZombieLand, ZombieLandContext } from '../../hooks/pages/zombieLand';
 import Icon from '../common/Icons';
+import ZombieLandStatusModal from '../components/Modals/ZombieLandStatusModal';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -67,6 +77,10 @@ const getStyles = (theme, font, utilColors) => StyleSheet.create({
     color: utilColors.dark,
     ...font.subtitle1,
   },
+  hintTitle: {
+    color: utilColors.dark,
+    ...font.heading6,
+  },
   navigationBtn: {
     borderRadius: 100,
     borderWidth: 2,
@@ -88,6 +102,8 @@ const HintComponent = ({
 
   const closeHintContainer = () => handleHintVisibility(false);
 
+  // console.log(hintDetails);
+
   React.useEffect(() => {
     if (hintVisible) {
       handleHint();
@@ -104,13 +120,15 @@ const HintComponent = ({
       duration={500}
       >
         {
-          hintDetails?.status === 'access_denied'
+          hintDetails && Object.keys(hintDetails).length > 0
           && <>
-            <View style={style.flexBetween}>
-              <Text style={style.hintText}>
+            {/* <View style={style.flexBetween}>
+              <Text
+                style={style.hintTitle}
+              >
                 <FormattedMessage
-                  defaultMessage={'Register to Get help from Turtle'}
-                  description={'Hint message'}
+                  defaultMessage={'Hint:'}
+                  description={'Hint title'}
                 />
               </Text>
               <TouchableOpacity
@@ -122,57 +140,22 @@ const HintComponent = ({
                   size={28}
                 />
               </TouchableOpacity>
-            </View>
-            <View style={{
-              ...style.flexBetween,
-              ...style.mt16,
-            }}>
-              <TouchableOpacity
-                onPress={closeHintContainer}
-                style={style.laterBtn}>
-                  <Text style={style.laterBtnText}>
-                    <FormattedMessage
-                      defaultMessage={'Later'}
-                      description={'Later'}
-                    />
-                  </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {}}
-                style={style.registerBtn}>
-                <Text style={style.registerBtnText}>
-                  <FormattedMessage
-                    defaultMessage={'Register'}
-                    description={'Register'}
-                  />
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </>
-        }
-        {
-          hintDetails?.status === 'success'
-          && <>
-            <View style={style.flexBetween}>
-              <Text style={style.hintText}>
-                <FormattedMessage
-                  defaultMessage={'{hint}'}
+            </View> */}
+            {/* { console.log(hintDetails[0].hints) } */}
+            {
+              hintDetails[0].hints.map((hint, idx) => <Text key={idx} style={style.hintText}>
+                { console.log('hinting   .....', hint) }
+                {/* <FormattedMessage
+                  defaultMessage={'hint'}
                   description={'Hint'}
-                  values={{
-                    hint: hintDetails.hint,
-                  }}
-                />
-              </Text>
-              <TouchableOpacity
-                onPress={closeHintContainer}>
-                <Icon
-                  name='close'
-                  color={Red.color500}
-                  type='FontAwesome'
-                  size={28}
-                />
-              </TouchableOpacity>
-            </View>
+                  // values={{
+                  //   hint: 'hint 1',
+                  // }}
+                /> */}
+                {/* {hint} */}
+                
+              </Text>)
+            }
             <View style={{
               ...style.flexBetween,
               ...style.mt16,
@@ -197,44 +180,6 @@ const HintComponent = ({
                     type='FontAwesome5'
                     color={Yellow.color700}
                     size={24}
-                  />
-              </TouchableOpacity>
-            </View>
-          </>
-        }
-        {
-          hintDetails?.status === 'error'
-          && <>
-            <View style={style.flexBetween}>
-              <Text style={style.hintText}>
-                <FormattedMessage
-                  defaultMessage={'{hintMessage}'}
-                  description={'Hint'}
-                  values={{
-                    hintMessage: hintDetails.message,
-                  }}
-                />
-              </Text>
-              <TouchableOpacity
-                onPress={closeHintContainer}>
-                <Icon
-                  name='close'
-                  color={Red.color500}
-                  type='FontAwesome'
-                  size={28}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={{
-              ...style.flexCenter,
-              ...style.mt16,
-            }}>
-              <TouchableOpacity
-                onPress={closeHintContainer}
-                style={style.navigationBtn}>
-                  <FormattedMessage
-                    defaultMessage={'OK'}
-                    description={'OK'}
                   />
               </TouchableOpacity>
             </View>
@@ -299,6 +244,7 @@ const ZombieLandMain = () => {
     static: {
       fetchZombieLandQuestion,
       submitZombieLandQuestion,
+      toggleHintComponent,
     },
   } = useZombieLand({
     isPageMounted,
@@ -319,11 +265,25 @@ const ZombieLandMain = () => {
     },
   }));
 
-  const handleHintVisibility = () => {};
+  const hideStatusModal = () => {
+    zlSetState((prevState) => ({
+      ...prevState,
+      uiData: {
+        ...prevState.uiData,
+        isSuccessModalOpen: false,
+      },
+    }));
+  };
+
+  const handleHintVisibility = (visibility) => {
+    toggleHintComponent(visibility);
+  };
 
   const handleHint = (action = false) => {};
 
   const getNextQuestion = () => {};
+
+  console.log('state , ', zlState.questionObject.hints);
 
   return <>
     <View style={style.container}>
@@ -352,13 +312,17 @@ const ZombieLandMain = () => {
               ScreenArray={ZLScreenArray}
               themeKey='screenZombieLandQuestion'
             />
-            {/* <HintComponent
+            <HintComponent
               handleHint={handleHint}
-              hintDetails={hintDetails}
+              hintDetails={zlState.questionObject.hints}
               hintVisible={hintContainerVisible}
               handleHintVisibility={handleHintVisibility}
               style={style}
-            /> */}
+            />
+            <ZombieLandStatusModal
+              visible={zlState.uiData.isSuccessModalOpen}
+              handleCloseBtn={hideStatusModal}
+            />
 
           </ZombieLandContext.Provider>
         </View>

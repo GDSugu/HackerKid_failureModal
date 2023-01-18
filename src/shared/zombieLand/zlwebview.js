@@ -101,7 +101,7 @@ const useSharedZLWebView = () => {
     </div>
     <div className="w-100 dustbin-mob d-flex justify-content-end pr-2 pb-2">
       <img
-        src="https://raw.githubusercontent.com/ABIBV/rn-assets/main/assets/delete-24px.svg"
+        src="https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/delete-24px.svg"
         className='dustbin'
         alt="Dustbin"
         width='80px'
@@ -277,7 +277,7 @@ const useSharedZLWebView = () => {
       try {
         const { data } = payload;
         const {
-          zlState, endGame = () => {},
+          zlState,
         } = data;
         GameZlObj.setGameState(zlState.questionObject, 'mobile', popupBox);
         GameZlObj.renderPreBlocks(zlState);
@@ -325,6 +325,16 @@ const useSharedZLWebView = () => {
       let gameEngineState = false;
       let winType = false;
 
+      const mgr = {
+        clearState: 0,
+        playerBounds: () => {},
+        stageDataID: () => {},
+        gameEngineState: false,
+        data_code: false,
+        sourceCodeData: false,
+        winType: false,
+      };
+
       const postMsg = ({ action, data }) => {
         const msg = {
           action,
@@ -362,7 +372,10 @@ const useSharedZLWebView = () => {
           const {
             parentElement, canvasElement, qnObj,
           } = data;
-
+          popupBox({
+            type: 'message',
+            message: 'before init game zlout',
+          });
           GameObj.initGame(Phaser, parentElement, canvasElement, qnObj, popupBox);
         } catch (err) {
           postMsg({
@@ -453,6 +466,11 @@ const useSharedZLWebView = () => {
 
   const zlEditorStyle = `
     <style>
+      html {
+        background-color: black;
+        height: 100vh;
+      }
+
       .toolboxCollapse {
         width: 100%;
         color: white;

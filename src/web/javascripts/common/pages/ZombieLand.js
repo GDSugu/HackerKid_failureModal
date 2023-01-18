@@ -161,6 +161,7 @@ const ZombieLandQuestionComponent = ({ status, questionObject }) => <>
                 }
               </ol>
             </div>
+            <div id="zombieLand-image-preview" className="zombieLand-image-preview"></div>
           </div>
         </>
       }
@@ -578,53 +579,76 @@ const SuccessModalComponent = ({
 };
 
 const FailureModalComponent = ({
-  message = false, handleModalClose = () => {},
-}) => <>
-  <div className='failure-modal-content'>
-    <div className='recognition-content'>
-      <Img
-        src={'../../../../images/games/turtle-success.png'}
-        className={'failure-img'}
-      />
-      <div className='col-10 mx-auto'>
-        <h5>
-          <FormattedMessage
-            defaultMessage={'Oh ho ho.. failed'}
-            description={'Failure message'}
-          />
-        </h5>
+  message = '', handleModalClose = () => {},
+}) => {
+  React.useEffect(() => {
+    console.log('dsds sdsd');
+  }, []);
+
+  return <>
+    <div className='failure-modal-content'>
+      <div className='recognition-content'>
+        <Img
+          src={'../../../../images/games/turtle-success.png'}
+          className={'failure-img'}
+        />
+        <div className='col-10 mx-auto'>
           {
-            message
-            && <>
-              <p>
-                <FormattedMessage
-              // defaultMessage={'Congratulations {username}, you have cleared {level}'}
-                  defaultMessage={'{message}'}
-                  description={'Failure message'}
-                  values={{
-                    // username: 'John',
-                    // level: 'level - 1',
-                    // message: message.replace('{{name}}', userName),
-                    message,
-                  }}
-                />
-              </p>
-              <div className='d-flex align-items-center justify-content-center'>
-                <button className='btn btn-primary' onClick={handleModalClose}>
-                  <div className="d-flex justify-content-between align-items-center">
-                    <FormattedMessage
-                      defaultMessage={'Try again'}
-                      description={'Try again button'}
-                    />
-                  </div>
-                </button>
-              </div>
-            </>
+            (!message || message === '')
+              ? <>
+                <h5>
+                  <FormattedMessage
+                    defaultMessage={'Oh ho ho.. failed'}
+                    description={'Failure message'}
+                  />
+                </h5>
+                <div className='d-flex align-items-center justify-content-center'>
+                  <button className='btn btn-primary' onClick={handleModalClose}>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <FormattedMessage
+                        defaultMessage={'Try again'}
+                        description={'Try again button'}
+                      />
+                    </div>
+                  </button>
+                </div>
+              </>
+              : <>
+                <p>
+                  <FormattedMessage
+                // defaultMessage={'Congratulations {username}, you have cleared {level}'}
+                    defaultMessage={'{message}'}
+                    description={'Failure message'}
+                    values={{
+                      // username: 'John',
+                      // level: 'level - 1',
+                      // message: message.replace('{{name}}', userName),
+                      message,
+                    }}
+                  />
+                </p>
+                <div className='d-flex align-items-center justify-content-center'>
+                  <button className='btn btn-primary' onClick={handleModalClose}>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <FormattedMessage
+                        defaultMessage={'Try again'}
+                        description={'Try again button'}
+                      />
+                    </div>
+                  </button>
+                </div>
+              </>
           }
+            {/* {
+              message
+              && <>
+              </>
+            } */}
+        </div>
       </div>
     </div>
-  </div>
-</>;
+  </>;
+};
 
 const HintContent = ({ hint: hintItem }) => <>
   {
@@ -735,6 +759,13 @@ const HintComponent = ({ hints }) => {
   </>;
 };
 
+const compareProps = (prev, next) => {
+  let isEqual = false;
+  Object.keys(prev).forEach((key) => {
+    isEqual = isEqual && JSON.stringify(prev[key]) === JSON.stringify(next[key]);
+  });
+};
+
 const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
   pageInit('zombieLand-main-container', 'ZombieLand');
 
@@ -792,11 +823,12 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
         uiData: {
           ...prevState.uiData,
           zlErrorMsg: msg,
+          isFailureModalOpen: true,
         },
       }));
       GameObj?.gameData?.scene?.pause();
       failureModalRef.current.showWithRestriction();
-      setFailureModalState(true);
+      // setFailureModalState(true);
     }
   };
 
@@ -805,7 +837,6 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
   // };
 
   const haneleRunCode = () => {
-    // console.log('run code');
     $('#zombieLandOutput-tab').tab('show');
     runcodeAction();
   };
@@ -843,6 +874,8 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
 
   const handleFetchQuestion = (questionId) => {
     $('#loader').show();
+    console.log('gmobj rmnsm', GameObj);
+    // GameObj?.gameData?.gameObject?.destroy(true);
     zlStatic.fetchZombieLandQuestion({
       virtualId: Number(questionId),
     })
@@ -901,8 +934,9 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
     // } else if (zlState.responseObject.status === 'success' && zlState.responseObject.passed) {
     //   successModalRef.current.show();
     // }
-    if (zlState.responseObject.status === 'success'
-    || zlState.responseObject.status === 'access_denied') {
+    if (zlState.responseObject.status === 'access_denied') {
+      showFailureModal();
+    } else if (zlState.responseObject.status === 'success') {
       if (zlState.responseObject.passed) {
         successModalRef.current.show();
       } else {
@@ -912,11 +946,26 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
   }, [zlState.responseObject]);
 
   React.useEffect(() => {
+    console.log('startgm');
     if (status === 'success') {
-      GameObj = startGame(memoizedZlQnState, device, Phaser, 'zombieLandBlock', 'userCanvas', endGame, showFailureModal.bind(this));
+      setTimeout(() => {
+        console.log('game startiing', GameObj);
+        GameObj = startGame(memoizedZlQnState, device, Phaser, 'zombieLandBlock', 'userCanvas', 'zombieLand-image-preview', endGame, showFailureModal.bind(this));
+        console.log('game started', GameObj);
+      }, 300);
     }
   }, [memoizedZlQnState.questionObject]);
 
+  // React.useEffect(() => {
+  //   hideDefaultNavBar(device, 'game');
+  //   zlStatic.fetchZombieLandQuestion({
+  //     virtualId: Number(id) || null,
+  //   });
+
+  //   return () => {
+  //     document.querySelector('nav:first-child').style.display = 'block';
+  //   };
+  // }, [memoizedZlQnState.status]);
   React.useEffect(() => {
     hideDefaultNavBar(device, 'game');
     zlStatic.fetchZombieLandQuestion({
@@ -926,7 +975,7 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
     return () => {
       document.querySelector('nav:first-child').style.display = 'block';
     };
-  }, [memoizedZlQnState.status]);
+  }, []);
 
   return <>
     <GameNavBar
@@ -1190,11 +1239,12 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
       modalClass={'errorZLModal'}
       customClass={'curved'}
       header={<div></div>}
-      onHidden={() => {}}
+      onHidden={() => {
+        setFailureModalState(false);
+      }}
       >
         <FailureModalComponent
-          // message={'Sorry, you have not completed this problem... Try checking hints!'}
-          message={zlState?.uiData?.zlErrorMsg}
+          message={zlState.uiData.zlErrorMsg}
           handleModalClose={() => {
             failureModalRef.current?.hide();
           }}
