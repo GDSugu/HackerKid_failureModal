@@ -9,6 +9,7 @@ import '../../../stylesheets/common/pages/courses/style.scss';
 import useVideos from '../../../../hooks/pages/videos';
 import CourseCard, { CustomSwiperComponent } from '../components/courseCard';
 import PageNator from '../components/Paginator';
+import SuccessModalComponent from '../modal/VideoAwardModal';
 
 const WatchNextComponent = ({ items, isDesktop }) => (
   <>
@@ -60,7 +61,7 @@ const StarRating = ({ rating }) => {
 
 const RatingAndWatchedComponent = ({ prop }) => (
   <div className="video-discription-container">
-    <div className="d-flex flex-column flex-md-row">
+    <div className="d-flex flex-column flex-md-row justify-content-between">
       <div>
         <h4>{prop.title}</h4>
         <p>{prop.discription}</p>
@@ -270,13 +271,14 @@ const videoPlayerProcess = ({
   ref,
   timeActivity,
   setRatingModal,
+  setEarned,
 }) => {
   let currentTime = 0;
   let playBackTime = 0;
   let seekedTime = 0;
   let completeUpdated = false;
   let timeAdded = false;
-  const source = `https://d11kzy43d5zaui.cloudfront.net${currentQuestion.videoLink}`;
+  const source = `${currentQuestion.videoLink}`;
   useEffect(() => {
     const player = ref.current.plyr;
     const { media } = player;
@@ -307,7 +309,15 @@ const videoPlayerProcess = ({
           completed: true,
         };
         completeUpdated = true;
-        timeActivity({ videoData });
+        timeActivity({ videoData }).then((res) => {
+          if (res.addedPoints) {
+            setEarned({
+              show: true,
+              coins: res.addedPoints,
+              xp: res.addedXp,
+            });
+          }
+        });
       }
     });
 
@@ -364,15 +374,20 @@ const Videos = () => {
   );
 
   const [showRatingModal, setRatingModal] = useState(false);
-
   const { currentQuestion, watchNext } = videoData;
   const ref = useRef();
+  const [earnedInfo, setEarned] = useState({
+    show: false,
+    coins: 0,
+    xp: 0,
+  });
   if (urlData.number) {
     videoPlayerProcess({
       currentQuestion,
       ref,
       timeActivity,
       setRatingModal,
+      setEarned,
     });
   }
   const { moduleData } = invidualModuleData;
@@ -385,7 +400,6 @@ const Videos = () => {
     const result = searcher.search(keyword);
     setFilterData(result);
   };
-
   const isDesktop = window.matchMedia('(min-width: 576px)').matches;
 
   return !urlData.number ? (
@@ -463,14 +477,36 @@ const Videos = () => {
         submitRating={submitRating}
         showModal={showRatingModal}
         afterSubmit={
-          watchNext && watchNext.length > 0
+          watchNext.videos && watchNext.videos.length > 0
             ? () => {
               pathNavigator(
                 `videos/${watchNext[0].moduleId}/${watchNext[0].number}`,
               );
             }
-            : () => {}
+            : () => {
+              pathNavigator(
+                `videos/${watchNext.videos[0].moduleId}/1`,
+              );
+            }
         }
+      />
+      <SuccessModalComponent
+      showModal={earnedInfo.show}
+      xpEarned = {earnedInfo.xp}
+      coinsEarned = {earnedInfo.coins}
+      playNext = {
+        watchNext.videos && watchNext.videos.length > 0
+          ? () => {
+            pathNavigator(
+              `videos/${watchNext.videos[0].moduleId}/${watchNext.videos[0].number}`,
+            );
+          }
+          : () => {
+            pathNavigator(
+              `videos/${watchNext.videos[0].moduleId}/1`,
+            );
+          }
+      }
       />
       {(watchNext && watchNext.videos.length > 0) && <WatchNextComponent
         isDesktop={isDesktop}

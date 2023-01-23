@@ -358,12 +358,12 @@ const Courses = () => {
   if (overallProgress) {
     animateTotalCount('#yourScore', overallProgress.completedCount, (overallProgress.completedCount / overallProgress.totalVideos) * 100);
   }
-  if (progress) {
+  if (progress && progress.length > 0) {
     animateModuleProgress((progress[0].watched / progress[0].totalVideos) * 100);
   }
   return (
     <>
-      {isDesktop && overallProgress && (
+      {isDesktop && overallProgress && progress.length > 0 && (
         <CourseDetailsCard
           overallProgress={overallProgress}
           progress={progress[0]}
@@ -377,7 +377,7 @@ const Courses = () => {
           pressMoreInfo={onPressMoreInfo}
         />
       )}
-      {continueWatching && (
+      {continueWatching && continueWatching.length > 0 && (
         <div className="w-100 mt-4">
           <div className="course-card-container">
             <h5>
@@ -418,7 +418,7 @@ const Courses = () => {
               isDesktop={isDesktop}
             />
           ))}
-          {!isDesktop && <BottomSheet
+          {!isDesktop && progress.length > 0 && overallProgress && <BottomSheet
           id={'course-progress-modal'}>
             <CourseDetailsCardMobile
       progress={progress}
