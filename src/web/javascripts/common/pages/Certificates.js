@@ -292,7 +292,8 @@ const Certificates = () => {
       }
       <div className='certificates-main-container'>
         {
-          (currentList && (currentList.length === 0 || Object.keys(currentList).length === 0))
+          (!currentList
+            || (currentList && (currentList.length === 0 || Object.keys(currentList).length === 0)))
           && <h4 className='no-certificates text-center mt-4'>
             <FormattedMessage
               defaultMessage={'No Certificates Found'}

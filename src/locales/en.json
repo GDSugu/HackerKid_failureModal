@@ -11,6 +11,10 @@
     "defaultMessage": "{rarity}",
     "description": "rarity indicator"
   },
+  "+f2V2I": {
+    "defaultMessage": "{currentProgress} {unit}",
+    "description": "current progress"
+  },
   "+g4yFF": {
     "defaultMessage": "Logout",
     "description": "more menu button"
@@ -26,6 +30,10 @@
   "/Id/lz": {
     "defaultMessage": "Yes",
     "description": "logout"
+  },
+  "/NL8rk": {
+    "defaultMessage": "{nextAwardIn} {unit}",
+    "description": "next award in"
   },
   "/dnxym": {
     "defaultMessage": "Create a New Account",
@@ -157,6 +165,10 @@
   "4Yb5Wa": {
     "defaultMessage": "Please connect to the internet.",
     "description": "offline message"
+  },
+  "4r4Vnm": {
+    "defaultMessage": "See All Awards",
+    "description": "see more card text"
   },
   "4wgAGs": {
     "defaultMessage": "Date",
@@ -330,6 +342,10 @@
     "defaultMessage": "hackerkid logo",
     "description": "logo"
   },
+  "Dahcx9": {
+    "defaultMessage": "{title} {awardCount}",
+    "description": "award title"
+  },
   "DuPnGd": {
     "defaultMessage": "Email",
     "description": "Email label"
@@ -425,6 +441,10 @@
     "defaultMessage": "{errorMessage}",
     "description": "error text"
   },
+  "JBgFgq": {
+    "defaultMessage": "Next Achievement: {nextAchievementIn} {unit}",
+    "description": "award subtitle"
+  },
   "JGS8Gf": {
     "defaultMessage": "Awards",
     "description": "Awards heading"
@@ -465,9 +485,17 @@
     "defaultMessage": "Next award:",
     "description": "next award label"
   },
+  "M6iTxq": {
+    "defaultMessage": "Awards",
+    "description": "awards page link"
+  },
   "MB8h2I": {
     "defaultMessage": "Leaderboard Ranking",
     "description": "Leaderboard card heading text"
+  },
+  "MFRlyM": {
+    "defaultMessage": "{sortName}",
+    "description": "sort dropdown button text"
   },
   "MS/biV": {
     "defaultMessage": "Go to Index",
@@ -684,6 +712,10 @@
   "WR+Too": {
     "defaultMessage": "No Certificates Found"
   },
+  "WRD14Z": {
+    "defaultMessage": "Collectibles",
+    "description": "collectibles page link"
+  },
   "WSWTC5": {
     "defaultMessage": "Play",
     "description": "Play button"
@@ -739,10 +771,6 @@
   "aWjMjy": {
     "defaultMessage": "Register",
     "description": "Register button"
-  },
-  "agfAla": {
-    "defaultMessage": "{subtitle}",
-    "description": "award subtitle"
   },
   "apr16P": {
     "defaultMessage": "Leaderboard",
@@ -818,6 +846,10 @@
     "defaultMessage": "{validSubmissions}",
     "description": "Valid Submissions"
   },
+  "fzlKxE": {
+    "defaultMessage": "See Less Awards",
+    "description": "see more card text"
+  },
   "g0zp7w": {
     "defaultMessage": "Continue Playing",
     "description": "Game Progress card primary button"
@@ -890,6 +922,14 @@
     "defaultMessage": "Change Password",
     "description": "Change password button text"
   },
+  "lzSOoE": {
+    "defaultMessage": "{progress}{progressSuffix} {unit}",
+    "description": "progress textual representation"
+  },
+  "m+RlPE": {
+    "defaultMessage": "{awardDescription}",
+    "description": "award subtitle"
+  },
   "m19v5I": {
     "defaultMessage": "{rank}",
     "description": "rank"
@@ -909,6 +949,10 @@
   "mTY3Hn": {
     "defaultMessage": "Session expired",
     "description": "Not authorized message"
+  },
+  "ma6GHl": {
+    "defaultMessage": "See Less Awards",
+    "description": "see all awards btn text"
   },
   "mb5De+": {
     "defaultMessage": "Rank",
@@ -957,10 +1001,6 @@
   "oOZkkL": {
     "defaultMessage": "Coming Soon...",
     "description": "Class Page"
-  },
-  "oWqUok": {
-    "defaultMessage": "{title}",
-    "description": "award title"
   },
   "pEiO08": {
     "defaultMessage": "Account Settings",

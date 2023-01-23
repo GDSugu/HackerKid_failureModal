@@ -35,7 +35,7 @@ const RouteProfileEdit = loadable(() => import('./ProfileEdit'), { fallback: <Lo
 const RouteLeaderBoard = loadable(() => import('./Leaderboard'), { fallback: <Loading /> });
 const RouteCertificates = loadable(() => import('./Certificates'), { fallback: <Loading /> });
 const RouteAwards = loadable(() => import('./Awards'), { fallback: <Loading /> });
-const RouteCollectibles = loadable(() => import('./Collectibles'), { fallback: <Loading /> });
+// const RouteCollectibles = loadable(() => import('./Collectibles'), { fallback: <Loading /> });
 const RouteTurtle = loadable(() => import('./Turtle'), { fallback: <Loading /> });
 const RouteViewCertificate = loadable(() => import('./ViewCertificate'), { fallback: <Loading /> });
 // const RouteSubscription = loadable(() => import('./Subscription'), { fallback: <Loading /> });
@@ -59,7 +59,7 @@ const App = () => {
           <Route path='certificates' caseSensitive={true} element={<RouteCertificates />} />
           <Route path='certificate/view/:id' caseSensitive={true} element={<RouteViewCertificate />} />
           <Route path='awards' caseSensitive={true} element={<RouteAwards />} />
-          <Route path='collectibles' caseSensitive={true} element={<RouteCollectibles />} />
+          {/* <Route path='collectibles' caseSensitive={true} element={<RouteCollectibles />} /> */}
           <Route
             path='profile'
             caseSensitive={true}

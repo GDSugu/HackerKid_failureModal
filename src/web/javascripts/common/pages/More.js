@@ -11,8 +11,9 @@ import Modal from '../components/Modal';
 import HelpModal from '../components/HelpModal';
 import { useProfileInfo } from '../../../../hooks/pages/profile';
 import AwardCard from '../components/AwardsCard';
-import CollectibleCard from '../components/CollectibleCard';
+// import CollectibleCard from '../components/CollectibleCard';
 import { loginCheck } from '../../../../hooks/common/framework';
+import { useAwards } from '../../../../hooks/pages/awards';
 
 const Certificates = ({ gameDetails }) => {
   const certificateDataObj = gameDetails?.[0].certificateData;
@@ -43,39 +44,49 @@ const Certificates = ({ gameDetails }) => {
   </ul>;
 };
 
-const Awards = () => <div className='row'>
-  <div className='col-3'>
-    <AwardCard />
-  </div>
-  <div className='col-3'>
-    <AwardCard />
-  </div>
-  <div className='col-3'>
-    <AwardCard />
-  </div>
-  <div className='col-3'>
-    <Link to='/awards' className='achievement-card award-card navigation-link'>
-      <FormattedMessage defaultMessage={'See more'} description='see more card text' />
-    </Link>
-  </div>
-</div>;
+const Awards = ({
+  awards,
+  showSeeMoreCard = true,
+  isDesktop,
+}) => <div className='row'>
+    {
+      awards && awards.map((award, idx) => <div className='col-4 col-lg-3 px-2 py-2' key={idx}>
+        <AwardCard
+          awardImage={award.awardImage}
+          interactable={true}
+        />
+      </div>)
+    }
+    {
+      awards && isDesktop && showSeeMoreCard && <div className='col-4 col-lg-3 px-2 py-2'>
+        <Link to='/awards' className='achievement-card award-card navigation-link'>
+          <FormattedMessage defaultMessage={'See more'} description='see more card text' />
+        </Link>
+      </div>
+    }
+    {
+      !awards && [1, 2, 3, 4].map((_, idx) => <div key={idx} className='skeleton-container col-4 col-lg-3 px-2 py-2'>
+        <div className='award-card skeleton'></div>
+      </div>)
+    }
+  </div>;
 
-const Collectibles = () => <div className='row'>
-  <div className='col-6 col-sm-4 col-lg-3 px-2 py-2 px-md-2 py-md-2'>
-    <CollectibleCard rarity={'Common'} />
-  </div>
-  <div className='col-6 col-sm-4 col-lg-3 px-2 py-2 px-md-2 py-md-2'>
-    <CollectibleCard rarity={'Rare'} />
-  </div>
-  <div className='col-6 col-sm-4 col-lg-3 px-2 py-2 px-md-2 py-md-2'>
-    <CollectibleCard rarity={'Rare'} />
-  </div>
-  <div className='col-6 col-sm-4 col-lg-3 px-2 py-2 px-md-2 py-md-2'>
-    <Link to='/collectibles' className='achievement-card collectible-card navigation-link'>
-      <FormattedMessage defaultMessage={'See more'} description='see more card text' />
-    </Link>
-  </div>
-</div>;
+// const Collectibles = () => <div className='row'>
+//   <div className='col-6 col-sm-4 col-lg-3 px-2 py-2 px-md-2 py-md-2'>
+//     <CollectibleCard rarity={'Common'} />
+//   </div>
+//   <div className='col-6 col-sm-4 col-lg-3 px-2 py-2 px-md-2 py-md-2'>
+//     <CollectibleCard rarity={'Rare'} />
+//   </div>
+//   <div className='col-6 col-sm-4 col-lg-3 px-2 py-2 px-md-2 py-md-2'>
+//     <CollectibleCard rarity={'Rare'} />
+//   </div>
+//   <div className='col-6 col-sm-4 col-lg-3 px-2 py-2 px-md-2 py-md-2'>
+//     <Link to='/collectibles' className='achievement-card collectible-card navigation-link'>
+//       <FormattedMessage defaultMessage={'See more'} description='see more card text' />
+//     </Link>
+//   </div>
+// </div>;
 
 const MoreHero = ({ isDesktop, session, toggleModal }) => <>
   <div className="more-hero-container">
@@ -293,7 +304,7 @@ const LogoutModalComponent = ({ logoutAction, closeModal }) => <>
 const CollectionsModalComponent = ({
   toggleModal,
   gameDetails,
-  // awards,
+  awards,
   // collectibles,
   isDesktop,
   session,
@@ -356,7 +367,10 @@ const CollectionsModalComponent = ({
           </h5>
         </div>
         <div className="collection-content">
-          <Awards />
+          <Awards
+            awards={awards}
+            isDesktop={isDesktop}
+          />
           {
             !isDesktop
             && <Link to='/awards' className='btn btn-primary btn-block body-bold view-more-btn mt-2'>
@@ -369,7 +383,9 @@ const CollectionsModalComponent = ({
           }
         </div>
       </div>
-      <div className={`collectibles-block collection-block ${!isDesktop ? 'mob-collectibles-block' : ''}`}>
+      {/* <div
+      className={`collectibles-block collection-block ${!isDesktop
+        ? 'mob-collectibles-block' : ''}`}>
         <div className="collection-header">
           <h5>
             <FormattedMessage
@@ -381,7 +397,7 @@ const CollectionsModalComponent = ({
         <div className="collection-content">
           <Collectibles />
         </div>
-      </div>
+      </div> */}
     </div>
     {
       isDesktop
@@ -420,6 +436,13 @@ const More = () => {
     getProfileData,
   } = useProfileInfo({ isPageMounted, action: 'getProfileData', uniqueurl: uniqueUrl });
 
+  const {
+    awardsState,
+    getAwards,
+  } = useAwards({ isPageMounted, initializeData: false });
+
+  const { awards } = awardsState;
+
   const collectionRef = React.useRef();
   const logoutModalRef = React.useRef();
 
@@ -450,6 +473,10 @@ const More = () => {
       getProfileData({ cached: false });
     }
   }, [uniqueUrl]);
+
+  React.useEffect(() => {
+    getAwards({ cached: false, limit: 3, sort: 'posted' });
+  }, []);
 
   return <>
     <div className='col-12 col-md-11 col-xl-10 mx-auto'>
@@ -497,7 +524,7 @@ const More = () => {
         session={session}
         toggleModal={toggleModal}
         gameDetails={gameDetails}
-        awards={[]}
+        awards={awards}
         collectibles={[]}
         isDesktop={isDesktop}
       />

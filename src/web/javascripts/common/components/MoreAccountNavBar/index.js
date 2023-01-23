@@ -17,11 +17,12 @@ const MoreAccountNavBar = () => (<>
           link: '/awards',
           label: 'Awards',
           description: 'Navigation to Awards',
-        }, {
-          link: '/collectibles',
-          label: 'Collectibles',
-          description: 'Navigation to Collectibles',
         },
+        // {
+        //   link: '/collectibles',
+        //   label: 'Collectibles',
+        //   description: 'Navigation to Collectibles',
+        // },
         ].map(({ label, link, description }, idx) => <div key={idx} className={`account-nav-item ${link.replace(/\//g, '') === screen ? 'active' : ''}`}>
           <Link to={link}>
             <FormattedMessage

@@ -29,6 +29,38 @@
         }
       }
     }
+
+    @include gm.media-breakpoint-down(sm) {
+      display: none;
+    }
+  }
+
+  .mobile-awards-nav-bar {
+    @include gm.media-breakpoint-up(md) {
+      display: none;
+    }
+
+    display: flex;
+    background: transparent;
+
+    .nav-item {
+      padding: 1rem;
+      display: flex;
+      color: gt.theme-var(awards-text-color-1, null, $thememaplight, $cssvars);
+      flex-direction: column;
+      border-bottom: 2px solid gt.theme-var(awards-bg-2, null, $thememaplight, $cssvars);
+      text-decoration: none;
+
+      &:hover {
+        color: inherit;
+      }
+
+      &.active {
+        color: gt.theme-var(awards-btn-text-color, null, $thememaplight, $cssvars);
+        border-bottom-color: gt.theme-var(awards-btn-text-color, null, $thememaplight, $cssvars);
+        background-color: gt.theme-var(awards-body-bg, null, $thememaplight, $cssvars);
+      }
+    }
   }
 
   .controls {
@@ -36,7 +68,7 @@
       $box-shadow-color: map-get($thememaplight, awards-box-shadow-color);
 
       border: 1px solid gt.theme-var(awards-controls-border-color, null, $thememaplight, $cssvars);
-      box-shadow: 0 4 4  $box-shadow-color;
+      box-shadow: 0 4 4 $box-shadow-color;
     }
 
     .sort-dropdown {
@@ -46,9 +78,15 @@
       }
 
       .dropdown-menu {
+        min-width: 180px;
+
         .dropdown-item {
           background: none;
           color: gt.theme-var(awards-text-color-1, null, $thememaplight, $cssvars);
+
+          &.active {
+            color: gt.theme-var(awards-btn-text-color, null, $thememaplight, $cssvars);
+          }
         }
 
         .dropdown-item-container {
@@ -80,8 +118,48 @@
     // background-color: gt.theme-var(awards-bg-1, null, $thememaplight, $cssvars);
   }
 
-  .award-card:hover + .award-info {
+  .award-card-icon {
+    width: 95px;
+    height: 80px;
+  }
+
+  .mobile-award-cards-container {
+    margin-top: 1rem;
+
+    .award-info-container {
+      cursor: pointer;
+      visibility: visible;
+      margin-bottom: 1rem;
+      min-width: 300px;
+      z-index: unset;
+      position: unset;
+    }
+
+    .see-more-less-btn {
+      border: 1px solid gt.theme-var(awards-bg-3, null, $thememaplight, $cssvars);
+      border-radius: 12px;
+      color: gt.theme-var(awards-text-color-1, null, $thememaplight, $cssvars);
+      background: none;
+      padding: 0.75rem 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .award-info-container {
+    visibility: hidden;
     display: flex;
+    flex-direction: column;
+    min-width: 350px;
+    border-radius: 12px;
+    background-color: white;
+    position: absolute;
+    z-index: 9999;
+  }
+
+  .award-card:hover + .award-info-container {
+    visibility: visible;
   }
 
   .pointer-cursor {
@@ -89,14 +167,9 @@
   }
 
   .award-info {
-    display: none;
+    display: flex;
     align-items: center;
     gap: 1rem;
-    position: absolute;
-    z-index: 1;
-    min-width: 350px;
-    background-color: white;
-    border-radius: 12px;
     padding: 1rem;
 
     img {
@@ -105,6 +178,11 @@
 
     .award-title {
       margin: 0;
+    }
+
+    .award-subtitle {
+      color: gt.theme-var(awards-text-color-2, null, $thememaplight, $cssvars);
+      margin-top: 0.2rem;
     }
 
     .award-details {
@@ -116,17 +194,120 @@
         border-radius: 20px;
         width: 100%;
         height: 0.4rem;
-        margin-top: 1rem;
+        margin-top: 1.35rem;
         background-color: gt.theme-var(awards-body-bg, null, $thememaplight, $cssvars);
+        overflow: unset;
 
         .progress {
+          position: relative;
+          overflow: unset;
           $color1 : gt.theme-var(awards-gradient-color-1, null, $thememaplight, $cssvars);
           $color2 : gt.theme-var(awards-gradient-color-2, null, $thememaplight, $cssvars);
 
-          width: 50%;
           background: linear-gradient(270deg, $color1, $color2);
+
+          .progress-textual-indicator {
+            position: absolute;
+            color: black;
+            right: 0;
+            bottom: 5px;
+            display: flex;
+            flex-direction: column;
+
+            .progress-as-text {
+              position: absolute;
+              right: 50%;
+              transform: translateX(50%);
+            }
+
+            .arrow {
+              margin-top: 3px;
+            }
+          }
         }
       }
     }
+  }
+
+  #mobile-detailed-awards-info {
+    padding: 0 !important;
+
+    .modal-body {
+      padding: 0;
+    }
+
+    .sheet-content {
+      background-color: gt.theme-var(bg-1);
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+
+      .sheet-close-handle-bar {
+        background-color: gt.theme-var(awards-bg-3, null, $thememaplight, $cssvars);
+      }
+    }
+
+    .award-info {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-left: 2.2rem;
+      padding-right: 2.2rem;
+
+      img {
+        width: 72px;
+        height: 64px;
+        align-self: center;
+      }
+
+      .award-details {
+        width: 100%;
+
+        .next-award-label {
+          color: gt.theme-var(awards-text-color-2, null, $thememaplight, $cssvars);
+        }
+
+        .progress-details {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 0.5rem;
+
+          .next-award-in-with-unit,
+          .current-progress {
+            color: gt.theme-var(awards-btn-text-color, null, $thememaplight, $cssvars);
+          }
+
+          .current-progress {
+            margin-top: 1.5rem;
+            margin-bottom: 1.2rem;
+            padding: 0.25rem 0.5rem;
+            background-color: gt.theme-var(awards-body-bg, null, $thememaplight, $cssvars);
+            border-radius: 5px;
+          }
+
+          .next-award {
+            margin-top: 1.5rem;
+            margin-bottom: 1.2rem;
+          }
+        }
+      }
+    }
+
+    .award-info.repeating-award {
+      padding: 0;
+      width: 100%;
+    }
+  }
+
+  .see-more-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: gt.theme-var(awards-btn-text-color, null, $thememaplight, $cssvars);
+    outline: none;
+    border: none;
   }
 }

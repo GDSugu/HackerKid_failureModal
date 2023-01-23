@@ -17,6 +17,20 @@
       "value": "rarity"
     }
   ],
+  "+f2V2I": [
+    {
+      "type": 1,
+      "value": "currentProgress"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "unit"
+    }
+  ],
   "+g4yFF": [
     {
       "type": 0,
@@ -43,6 +57,20 @@
     {
       "type": 0,
       "value": "Yes"
+    }
+  ],
+  "/NL8rk": [
+    {
+      "type": 1,
+      "value": "nextAwardIn"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "unit"
     }
   ],
   "/dnxym": [
@@ -241,6 +269,12 @@
     {
       "type": 0,
       "value": "Please connect to the internet."
+    }
+  ],
+  "4r4Vnm": [
+    {
+      "type": 0,
+      "value": "See All Awards"
     }
   ],
   "4wgAGs": [
@@ -517,6 +551,20 @@
       "value": "hackerkid logo"
     }
   ],
+  "Dahcx9": [
+    {
+      "type": 1,
+      "value": "title"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "awardCount"
+    }
+  ],
   "DuPnGd": [
     {
       "type": 0,
@@ -673,6 +721,24 @@
       "value": "errorMessage"
     }
   ],
+  "JBgFgq": [
+    {
+      "type": 0,
+      "value": "Next Achievement: "
+    },
+    {
+      "type": 1,
+      "value": "nextAchievementIn"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "unit"
+    }
+  ],
   "JGS8Gf": [
     {
       "type": 0,
@@ -733,10 +799,22 @@
       "value": "Next award:"
     }
   ],
+  "M6iTxq": [
+    {
+      "type": 0,
+      "value": "Awards"
+    }
+  ],
   "MB8h2I": [
     {
       "type": 0,
       "value": "Leaderboard Ranking"
+    }
+  ],
+  "MFRlyM": [
+    {
+      "type": 1,
+      "value": "sortName"
     }
   ],
   "MS/biV": [
@@ -1071,6 +1149,12 @@
       "value": "No Certificates Found"
     }
   ],
+  "WRD14Z": [
+    {
+      "type": 0,
+      "value": "Collectibles"
+    }
+  ],
   "WSWTC5": [
     {
       "type": 0,
@@ -1153,12 +1237,6 @@
     {
       "type": 0,
       "value": "Register"
-    }
-  ],
-  "agfAla": [
-    {
-      "type": 1,
-      "value": "subtitle"
     }
   ],
   "apr16P": [
@@ -1279,6 +1357,12 @@
       "value": "validSubmissions"
     }
   ],
+  "fzlKxE": [
+    {
+      "type": 0,
+      "value": "See Less Awards"
+    }
+  ],
   "g0zp7w": [
     {
       "type": 0,
@@ -1387,6 +1471,30 @@
       "value": "Change Password"
     }
   ],
+  "lzSOoE": [
+    {
+      "type": 1,
+      "value": "progress"
+    },
+    {
+      "type": 1,
+      "value": "progressSuffix"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "unit"
+    }
+  ],
+  "m+RlPE": [
+    {
+      "type": 1,
+      "value": "awardDescription"
+    }
+  ],
   "m19v5I": [
     {
       "type": 1,
@@ -1415,6 +1523,12 @@
     {
       "type": 0,
       "value": "Session expired"
+    }
+  ],
+  "ma6GHl": [
+    {
+      "type": 0,
+      "value": "See Less Awards"
     }
   ],
   "mb5De+": [
@@ -1487,12 +1601,6 @@
     {
       "type": 0,
       "value": "Coming Soon..."
-    }
-  ],
-  "oWqUok": [
-    {
-      "type": 1,
-      "value": "title"
     }
   ],
   "pEiO08": [

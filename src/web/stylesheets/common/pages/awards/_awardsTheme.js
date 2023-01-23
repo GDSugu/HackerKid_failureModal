@@ -8,8 +8,11 @@ const darkTheme = Theme.dark;
 
 const thememaplight = {
   'awards-text-color-1': lightTheme.utilColors.dark,
+  'awards-text-color-2': lightTheme.utilColors.lightGrey,
   'awards-btn-bg': lightTheme.screenYellow.btnBg,
   'awards-btn-text-color': Yellow.color900,
+  'awards-bg-2': Yellow.color100,
+  'awards-bg-3': Yellow.color200,
   'awards-body-bg': lightTheme.screenYellow.bodyBg,
   'awards-nav-bg': lightTheme.screenYellow.navBg,
   'awards-nav-active-bg': lightTheme.screenYellow.navActiveBg,
@@ -24,8 +27,11 @@ const thememaplight = {
 // TODO: make this a real dark theme with appropriate colors
 const thememapdark = {
   'awards-text-color-1': darkTheme.utilColors.dark,
+  'awards-text-color-2': lightTheme.utilColors.lightGrey,
   'awards-btn-bg': darkTheme.screenYellow.btnBg,
   'awards-btn-text-color': Yellow.color900,
+  'awards-bg-2': Yellow.color100,
+  'awards-bg-3': Yellow.color200,
   'awards-body-bg': darkTheme.screenYellow.bodyBg,
   'awards-nav-bg': darkTheme.screenYellow.navBg,
   'awards-nav-active-bg': darkTheme.screenYellow.navActiveBg,
@@ -41,8 +47,11 @@ const thememapdark = {
 
 const cssvars = {
   'awards-text-color-1': '--awards-text-color-1',
+  'awards-text-color-2': '--awards-text-color-2',
   'awards-btn-bg': '--awards-btn-bg',
   'awards-btn-text-color': '--awards-btn-text-color',
+  'awards-bg-2': '--awards-bg-2',
+  'awards-bg-3': '--awards-bg-3',
   'awards-body-bg': '--awards-body-bg',
   'awards-nav-bg': '--awards-nav-bg',
   'awards-nav-active-bg': '--awards-nav-active-bg',
