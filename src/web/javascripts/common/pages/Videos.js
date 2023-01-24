@@ -64,7 +64,7 @@ const RatingAndWatchedComponent = ({ prop }) => (
     <div className="d-flex flex-column flex-md-row justify-content-between">
       <div>
         <h4>{prop.title}</h4>
-        <p>{prop.discription}</p>
+        <p>{prop.description}</p>
       </div>
       <div className="rating-tags-container">
         <div className="rating-container">

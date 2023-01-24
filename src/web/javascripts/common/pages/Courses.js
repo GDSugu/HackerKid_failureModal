@@ -121,7 +121,7 @@ const animateTotalCount = (selectorPrefix, score, percentage) => {
   }
 };
 
-const secToMin = (time) => (time > 50 ? `${Math.floor(time / 60)} mins` : `${time} sec`);
+const secToMin = (time) => (time > 60 ? `${Math.floor(time / 60)} mins` : `${time} sec`);
 
 const CourseDetailsCard = ({ overallProgress, progress }) => (
   <div>
@@ -160,7 +160,7 @@ const CourseDetailsCard = ({ overallProgress, progress }) => (
   </div>
   {progress && <div className='module-progress-container'>
     <div className='module-card-cont'>
-      <img className='module-img' src='https://s3.ap-south-1.amazonaws.com/guvi-2.0/course-thumbnail/javascript.png'/>
+      <img className='module-img' src={progress.thumbnail}/>
       <div>
         <p className='mb-0'><FormattedMessage
       defaultMessage={'{name}'}
@@ -183,7 +183,7 @@ const CourseDetailsCard = ({ overallProgress, progress }) => (
         <div className='d-flex'>
           <Img
             className='module-icons'
-            src='../../../../images/courses/timer.svg' />
+            src='../../../../images/courses/timer.png' />
           <p className='ml-1'><FormattedMessage
       defaultMessage={'{time}'}
       values={{ time: secToMin(progress.watchTime) }}/></p>
