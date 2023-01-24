@@ -418,7 +418,7 @@ const Courses = () => {
               isDesktop={isDesktop}
             />
           ))}
-          {!isDesktop && progress.length > 0 && overallProgress && <BottomSheet
+          {!isDesktop && overallProgress && <BottomSheet
           id={'course-progress-modal'}>
             <CourseDetailsCardMobile
       progress={progress}
