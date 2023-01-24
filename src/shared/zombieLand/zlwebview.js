@@ -101,7 +101,7 @@ const useSharedZLWebView = () => {
     </div>
     <div className="w-100 dustbin-mob d-flex justify-content-end pr-2 pb-2">
       <img
-        src="https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/delete-24px.svg"
+        src="https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/delete-24px.svg"
         className='dustbin'
         alt="Dustbin"
         width='80px'
@@ -183,18 +183,21 @@ const useSharedZLWebView = () => {
         helper: 'clone',
         containment: 'document',
         revert: 'invalid',
+        cancel: 'input',
       });
   
       $('#playground .popup').draggable({
         helper: 'clone',
         containment: 'document',
         revert: 'invalid',
+        cancel: 'input',
       });
   
       $('.nest').draggable({
         helper: 'clone',
         containment: 'document',
         revert: 'invalid',
+        cancel: 'input',
       });
   
       $('#playground .nest').droppable({
@@ -227,6 +230,14 @@ const useSharedZLWebView = () => {
           $(ui.draggable).removeClass('insidePopup');
           setTimeout(GameZlObj.fetchData, 300);
         },
+      });
+
+      $('#playground input').on('touchstart', function (e) {
+        e.stopPropagation();
+      });
+
+      $('#playground input').on('keyup', function (e) {
+        setTimeout(GameZlObj.fetchData, 300);
       });
   
       $('.dustbin').droppable({
@@ -372,10 +383,6 @@ const useSharedZLWebView = () => {
           const {
             parentElement, canvasElement, qnObj,
           } = data;
-          popupBox({
-            type: 'message',
-            message: 'before init game zlout',
-          });
           GameObj.initGame(Phaser, parentElement, canvasElement, qnObj, popupBox);
         } catch (err) {
           postMsg({
@@ -633,6 +640,12 @@ const useSharedZLWebView = () => {
       .dustbin-mob .dustbin.ui-droppable-hover {
         border-radius: 100%;
         background-color: indianred;
+      }
+
+      input {
+        position: relative;
+        z-index: 10;
+        width: 50px;
       }
     </style>
   `;

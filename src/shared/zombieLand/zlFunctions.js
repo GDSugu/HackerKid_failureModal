@@ -1,6 +1,7 @@
 import { $ } from '../../web/javascripts/common/framework';
 import {
-  initGame, resetGame, getGameStageID, executeCode, setEndGame, setGameStageID,
+  initGame, resetGame, getGameStageID, executeCode, setEndGame,
+  // setGameStageID,
 } from './gameFunctions';
 
 const zlGameFunctions = (zlObj = {}, jq = $) => {
@@ -39,7 +40,7 @@ const zlGameFunctions = (zlObj = {}, jq = $) => {
         'moveRight()': '<div  class="object ml-3 move" draggable="true"  data-id="moveRight()"><p><span class="expression functions">moveRight</span>()</p></div>',
         'moveUp()': '<div  class="object ml-3 move" draggable="true"  data-id="moveUp()"><p><span class="expression functions">moveUp</span>()</p></div>',
         'sleep()': '<div  class="object ml-3 move" draggable="true"  data-id="sleep()"><p><span class="expression functions">sleep</span>()</p></div>',
-        for_loop: '<div  class="popup ml-3" draggable="true" data-id="for_loop"><p  class="toolbar loop"><span class="tokens">for</span> <span class="expression">i</span> <span class="tokens">in</span> <span class="expression">range</span>(<input class="blockInput" placeholder="int" value="">):</p></div>',
+        for_loop: '<div  class="popup ml-3" draggable="true" data-id="for_loop"><p  class="toolbar loop"><span class="tokens">for</span> <span class="expression">i</span> <span class="tokens">in</span> <span class="expression">range</span>(<input class="blockInput" placeholder="int" id="for_loop" value="">):</p></div>',
         while: '<div  class="popup ml-3" draggable="true" data-id="while"><p  class="toolbar loop">while <input class="blockInput" placeholder="expression"> :</p></div>',
         if: '<div  class="popup ml-3" draggable="true" data-id="if"><p  class="toolbar condition">if <select class="blockInput whileExp" aria-placeholder="exp"><option value=1>True</option><option value=\'nearWall()\'>nearWall</option><option value=\'nearObstacles()\'>nearObstacles</option></select>:</p></div>',
         else: '<div  class="popup ml-3" draggable="true" data-id="else"><p  class="toolbar condition">else:</p></div>',
@@ -394,7 +395,6 @@ const zlGameFunctions = (zlObj = {}, jq = $) => {
       }
       count += 1;
     });
-
     GameZlObj.manager.data_code = data;
     GameZlObj.convertCode(data);
   };

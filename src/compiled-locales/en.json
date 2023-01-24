@@ -217,6 +217,12 @@
       "value": "Please connect to the internet."
     }
   ],
+  "4o5Hlu": [
+    {
+      "type": 0,
+      "value": "Your name will be shown here"
+    }
+  ],
   "52hsYP": [
     {
       "type": 0,
@@ -287,6 +293,12 @@
       "value": "Login to existing Account"
     }
   ],
+  "7AMmxp": [
+    {
+      "type": 0,
+      "value": "Your bio will be shown here"
+    }
+  ],
   "7L3+7M": [
     {
       "type": 0,
@@ -325,6 +337,20 @@
     {
       "type": 1,
       "value": "totalQns"
+    }
+  ],
+  "9K8jZr": [
+    {
+      "type": 1,
+      "value": "idx"
+    },
+    {
+      "type": 0,
+      "value": ". "
+    },
+    {
+      "type": 1,
+      "value": "hint"
     }
   ],
   "9NID4X": [
@@ -427,6 +453,12 @@
       "value": "completed"
     }
   ],
+  "CLW1pi": [
+    {
+      "type": 0,
+      "value": "Close"
+    }
+  ],
   "CabaPs": [
     {
       "type": 0,
@@ -495,6 +527,12 @@
     {
       "type": 0,
       "value": "Later"
+    }
+  ],
+  "EyxxGO": [
+    {
+      "type": 0,
+      "value": "Hint:"
     }
   ],
   "F/vOH1": [

@@ -173,7 +173,10 @@ const getGameFunctions = ({ gameObj = {} }) => {
     GameObj.playerBounds();
   };
 
-  GameObj.setupGameConfig = (Phaser, parentElement = 'outputContainer', canvasElement = 'userCanvas', imagePreviewElement = 'zombieLand-image-preview') => {
+  GameObj.setupGameConfig = (
+    Phaser, parentElement = 'outputContainer', canvasElement = 'userCanvas',
+    // imagePreviewElement = 'zombieLand-image-preview',
+  ) => {
     const Scene1 = new Phaser.Class({
       Extends: Phaser.Scene,
 
@@ -186,7 +189,7 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -229,7 +232,6 @@ const getGameFunctions = ({ gameObj = {} }) => {
         const camera = this.cameras.main;
         camera?.startFollow(GameObj.gameData.player);
         camera?.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-        console.log('scene 1 this', this);
 
         // setTimeout(() => {
         //   const canvas = document.querySelector(`#${canvasElement} canvas`);
@@ -295,7 +297,7 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -334,7 +336,6 @@ const getGameFunctions = ({ gameObj = {} }) => {
         const camera = this.cameras.main;
         camera.startFollow(GameObj.gameData.player);
         camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-        console.log('scene 2 this', this);
 
         // setTimeout(() => {
         //   const canvas = document.querySelector(`#${canvasElement} canvas`);
@@ -407,7 +408,7 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -452,7 +453,6 @@ const getGameFunctions = ({ gameObj = {} }) => {
         const camera = this.cameras.main;
         camera.startFollow(GameObj.gameData.player);
         camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-        console.log('scene 3 this', this);
 
         // setTimeout(() => {
         //   const canvas = document.querySelector(`#${canvasElement} canvas`);
@@ -530,7 +530,7 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -569,7 +569,6 @@ const getGameFunctions = ({ gameObj = {} }) => {
         camera.startFollow(GameObj.gameData.player);
         camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         GameObj.gameData.key = 0;
-        console.log('scene 4 this', this);
 
         // setTimeout(() => {
         //   const canvas = document.querySelector(`#${canvasElement} canvas`);
@@ -647,7 +646,7 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -692,7 +691,6 @@ const getGameFunctions = ({ gameObj = {} }) => {
         const camera = this.cameras.main;
         camera.startFollow(GameObj.gameData.player);
         camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-        console.log('scene 5 this', this);
         // setTimeout(() => {
         //   const canvas = document.querySelector(`#${canvasElement} canvas`);
         //   const imagePreviewEl = document.getElementById(imagePreviewElement);
@@ -793,7 +791,7 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -828,7 +826,6 @@ const getGameFunctions = ({ gameObj = {} }) => {
         const camera = this.cameras.main;
         camera.startFollow(GameObj.gameData.player);
         camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-        console.log('scene 6 this', this);
 
         // setTimeout(() => {
         //   const canvas = document.querySelector(`#${canvasElement} canvas`);
@@ -895,7 +892,7 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -934,7 +931,6 @@ const getGameFunctions = ({ gameObj = {} }) => {
         const camera = this.cameras.main;
         camera.startFollow(GameObj.gameData.player);
         camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-        console.log('scene 7 this', this);
 
         // setTimeout(() => {
         //   const canvas = document.querySelector(`#${canvasElement} canvas`);
@@ -1008,7 +1004,7 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -1052,7 +1048,6 @@ const getGameFunctions = ({ gameObj = {} }) => {
         const camera = this.cameras.main;
         camera.startFollow(GameObj.gameData.player);
         camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-        console.log('scene 8 this', this);
 
         // setTimeout(() => {
         //   const canvas = document.querySelector(`#${canvasElement} canvas`);
@@ -1130,7 +1125,7 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -1168,7 +1163,6 @@ const getGameFunctions = ({ gameObj = {} }) => {
         const camera = this.cameras.main;
         camera.startFollow(GameObj.gameData.player);
         camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-        console.log('scene 9 this', this);
 
         // setTimeout(() => {
         //   const canvas = document.querySelector(`#${canvasElement} canvas`);
@@ -1245,7 +1239,7 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -1290,7 +1284,6 @@ const getGameFunctions = ({ gameObj = {} }) => {
         GameObj.gameData.key = 0;
         camera.startFollow(GameObj.gameData.player);
         camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-        console.log('scene 10 this', this);
 
         // setTimeout(() => {
         //   const canvas = document.querySelector(`#${canvasElement} canvas`);
@@ -1420,12 +1413,6 @@ const getGameFunctions = ({ gameObj = {} }) => {
         },
       };
 
-      // if (isMobile) {
-      //   config.context = canvasContext;
-      // } else {
-
-      // }
-
       try {
         const game = new Phaser.Game(config);
         GameObj.gameData.gameObject = game;
@@ -1439,10 +1426,8 @@ const getGameFunctions = ({ gameObj = {} }) => {
 
   GameObj.executeCode = (code) => {
     try {
-      console.log('exe code', code);
       GameObj.gameData.matchRequirements = true;
       GameObj.gameData.scene.restart();
-      console.log('after restart', GameObj);
       eval(`(async () => {${`await gameDelay(500);\n${code}`}})()`); // eslint-disable-line no-eval
     } catch (error) {
       GameObj.gameData.popupBox('Please check your code');
@@ -1660,7 +1645,8 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        // this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
+this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -1751,7 +1737,8 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        // this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
+this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -1845,7 +1832,8 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        // this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
+this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -1949,7 +1937,8 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        // this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
+this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -2051,7 +2040,8 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        // this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
+this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -2183,7 +2173,8 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        // this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
+this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -2267,7 +2258,8 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        // this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
+this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -2362,7 +2354,8 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        // this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
+this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -2466,7 +2459,8 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        // this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
+this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -2566,7 +2560,8 @@ const getGameFunctions = ({ gameObj = {} }) => {
       },
 
       preload() {
-        this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
+        // this.load.path = 'https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/';
+this.load.path = 'https://s3.ap-south-1.amazonaws.com/guvi-2.0/hackerKid/live/zombieLandAssets/assets/';
         this.load.image('img_3500', 'img_3500.jpg');
         this.load.image('playerDown', 'down.png');
         this.load.image('playerUp', 'up.png');
@@ -2769,10 +2764,6 @@ const getGameFunctions = ({ gameObj = {} }) => {
     GameObj.setupGameConfig(
       phaser, parentElement, canvasElement,
     );
-    GameObj.gameData.popupBox({
-      type: 'message',
-      message: 'init game working',
-    });
     return GameObj;
   };
 

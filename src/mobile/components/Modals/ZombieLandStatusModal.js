@@ -1,10 +1,12 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
-  Image, StyleSheet, Text, View,
+  Image, StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
+import { utilColors, Yellow } from '../../../colors/_colors';
 import { ZombieLandContext } from '../../../hooks/pages/zombieLand';
 import SuccessHero from '../../../images/games/turtle-success.png';
+import Icon from '../../common/Icons';
 import { font } from '../config';
 import StatusModal from './StatusModal';
 
@@ -30,6 +32,11 @@ const getStyles = () => StyleSheet.create({
     marginVertical: 4,
     marginHorizontal: 4,
   },
+  distanceBtwn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   failureImage: {
     transform: [
       {
@@ -37,11 +44,28 @@ const getStyles = () => StyleSheet.create({
       },
     ],
   },
+  primaryBtn: {
+    backgroundColor: Yellow.color700,
+    borderRadius: 12,
+    padding: 8,
+    paddingHorizontal: 16,
+    marginTop: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  primaryBtnText: {
+    color: utilColors.white,
+    ...font.subtitleBold,
+  },
+  mr8: {
+    marginRight: 12,
+  },
 });
 
 const ZombieLandStatusModal = ({
   visible,
   handleCloseBtn = () => {},
+  handleCTA = () => {},
   type = 'status',
 }) => {
   const zlContext = React.useContext(ZombieLandContext);
@@ -97,6 +121,22 @@ const ZombieLandStatusModal = ({
                     }}
                   />
                 </Text>
+                <TouchableOpacity onPress={() => handleCTA('passed')} style={style.primaryBtn}>
+                  <View style={style.distanceBtwn}>
+                    <Text style={[style.primaryBtnText, style.mr8]}>
+                      <FormattedMessage
+                        defaultMessage={'Play next'}
+                        description={'Play next'}
+                      />
+                    </Text>
+                    <Icon
+                      name='angle-right'
+                      type='FontAwesome5'
+                      color={utilColors.white}
+                      size={20}
+                    />
+                  </View>
+                </TouchableOpacity>
               </>
             }
             {
@@ -125,6 +165,14 @@ const ZombieLandStatusModal = ({
                     }}
                   />
                 </Text>
+                <TouchableOpacity onPress={() => handleCTA('failed')} style={style.primaryBtn}>
+                  <Text style={style.primaryBtnText}>
+                    <FormattedMessage
+                      defaultMessage={'Close'}
+                      description={'close'}
+                    />
+                  </Text>
+                </TouchableOpacity>
               </>
             }
           </View>
@@ -162,6 +210,14 @@ const ZombieLandStatusModal = ({
                 </Text>
               </>
             }
+            <TouchableOpacity onPress={() => handleCTA('failed')} style={style.primaryBtn}>
+              <Text style={style.primaryBtnText}>
+                <FormattedMessage
+                  defaultMessage={'Close'}
+                  description={'close'}
+                />
+              </Text>
+            </TouchableOpacity>
           </View>
         </>
       }

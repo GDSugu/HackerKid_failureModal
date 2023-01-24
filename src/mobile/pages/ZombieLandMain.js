@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  // Image,
+  Image,
   ImageBackground,
   // Modal,
   StyleSheet,
@@ -54,6 +54,7 @@ const getStyles = (theme, font, utilColors) => StyleSheet.create({
   hintText: {
     ...font.subtitle1,
     width: '90%',
+    marginBottom: 8,
   },
   registerBtn: {
     backgroundColor: Yellow.color700,
@@ -80,6 +81,15 @@ const getStyles = (theme, font, utilColors) => StyleSheet.create({
   hintTitle: {
     color: utilColors.dark,
     ...font.heading6,
+    marginBottom: 12,
+  },
+  hintImage: {
+    aspectRatio: 1,
+    width: 200,
+    marginVertical: 8,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    borderRadius: 12,
   },
   navigationBtn: {
     borderRadius: 100,
@@ -94,27 +104,44 @@ const getStyles = (theme, font, utilColors) => StyleSheet.create({
 });
 
 const HintComponent = ({
-  handleHint, handleHintVisibility, hintDetails, hintVisible, style,
+  handleHintVisibility, hintDetails = {}, hintVisible, style,
 }) => {
+  if (Object.keys(hintDetails).length === 0) {
+    return <></>;
+  }
+  let hintIdx = 0;
+  const [currentHint, setCurrentHint] = React.useState({
+    idx: hintIdx,
+    active: Object.values(hintDetails)[hintIdx],
+    isFirst: true,
+    isLast: false,
+  });
+
+  const changeHint = (state = 'next') => {
+    if (state === 'next' && hintIdx <= Object.keys(hintDetails).length - 1) {
+      hintIdx += 1;
+    } else if (state === 'prev' && hintIdx > 0) {
+      hintIdx -= 1;
+    }
+    setCurrentHint({
+      active: hintDetails[hintIdx],
+      idx: hintIdx,
+      isFirst: hintIdx === 0,
+      isLast: hintIdx === Object.keys(hintDetails).length - 1,
+    });
+  };
+
   const navigateHint = (action) => {
-    handleHint(action);
+    changeHint(action);
   };
 
   const closeHintContainer = () => handleHintVisibility(false);
-
-  // console.log(hintDetails);
-
-  React.useEffect(() => {
-    if (hintVisible) {
-      handleHint();
-    }
-  }, [hintVisible]);
 
   return <>
     <Animatable.View
       style={{
         ...style.hintContainer,
-        bottom: hintVisible ? 84 : -200,
+        bottom: hintVisible ? 84 : -500,
       }}
       animation={ hintVisible ? 'fadeInUp' : 'fadeOutDown' }
       duration={500}
@@ -122,7 +149,7 @@ const HintComponent = ({
         {
           hintDetails && Object.keys(hintDetails).length > 0
           && <>
-            {/* <View style={style.flexBetween}>
+            <View style={style.flexBetween}>
               <Text
                 style={style.hintTitle}
               >
@@ -140,21 +167,28 @@ const HintComponent = ({
                   size={28}
                 />
               </TouchableOpacity>
-            </View> */}
-            {/* { console.log(hintDetails[0].hints) } */}
+            </View>
+            <View>
+              <Image
+                style={style.hintImage}
+                resizeMode={'contain'}
+                source={{
+                  uri: `https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/${currentHint.active.picture.split('/')[3]}`,
+                }}
+              />
+            </View>
             {
-              hintDetails[0].hints.map((hint, idx) => <Text key={idx} style={style.hintText}>
-                { console.log('hinting   .....', hint) }
-                {/* <FormattedMessage
-                  defaultMessage={'hint'}
-                  description={'Hint'}
-                  // values={{
-                  //   hint: 'hint 1',
-                  // }}
-                /> */}
-                {/* {hint} */}
-                
-              </Text>)
+              Object.keys(currentHint.active).length > 0
+              && currentHint.active.hints.map((hint, idx) => <Text key={idx} style={style.hintText}>
+                  <FormattedMessage
+                    defaultMessage={'{idx}. {hint}'}
+                    description={'Hint'}
+                    values={{
+                      hint,
+                      idx: idx + 1,
+                    }}
+                  />
+                </Text>)
             }
             <View style={{
               ...style.flexBetween,
@@ -162,8 +196,8 @@ const HintComponent = ({
             }}>
               <TouchableOpacity
                 onPress={() => { navigateHint('prev'); }}
-                disabled={hintDetails.isFirstHint}
-                style={style.navigationBtn}>
+                disabled={currentHint.isFirst}
+                style={[style.navigationBtn, { opacity: currentHint.isFirst ? 0.5 : 1 }]}>
                   <Icon
                     name='angle-left'
                     type='FontAwesome5'
@@ -173,8 +207,8 @@ const HintComponent = ({
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => { navigateHint('next'); }}
-                disabled={hintDetails.isLastHint}
-                style={style.navigationBtn}>
+                disabled={currentHint.isLast}
+                style={[style.navigationBtn, { opacity: currentHint.isLast ? 0.5 : 1 }]}>
                   <Icon
                     name='angle-right'
                     type='FontAwesome5'
@@ -275,15 +309,29 @@ const ZombieLandMain = () => {
     }));
   };
 
+  const handleStatusCTA = (status) => {
+    if (status === 'passed') {
+      const virtualId = zlState.questionObject.virtualId + 1;
+      if (virtualId < 10) {
+        fetchZombieLandQuestion({ virtualId })
+          .then(hideStatusModal);
+      } else {
+        hideStatusModal();
+      }
+    } else if (status === 'failed') {
+      hideStatusModal();
+    }
+  };
+
   const handleHintVisibility = (visibility) => {
     toggleHintComponent(visibility);
   };
 
-  const handleHint = (action = false) => {};
+  const getNextQuestion = () => {
 
-  const getNextQuestion = () => {};
+  };
 
-  console.log('state , ', zlState.questionObject.hints);
+  // console.log('state , ', zlState.questionObject.hints);
 
   return <>
     <View style={style.container}>
@@ -313,7 +361,6 @@ const ZombieLandMain = () => {
               themeKey='screenZombieLandQuestion'
             />
             <HintComponent
-              handleHint={handleHint}
               hintDetails={zlState.questionObject.hints}
               hintVisible={hintContainerVisible}
               handleHintVisibility={handleHintVisibility}
@@ -322,6 +369,7 @@ const ZombieLandMain = () => {
             <ZombieLandStatusModal
               visible={zlState.uiData.isSuccessModalOpen}
               handleCloseBtn={hideStatusModal}
+              handleCTA={handleStatusCTA}
             />
 
           </ZombieLandContext.Provider>

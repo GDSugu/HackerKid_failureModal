@@ -10,7 +10,7 @@ import webViewElement from '../components/WebView';
 import { ZombieLandContext } from '../../hooks/pages/zombieLand';
 import { useSharedZLWebView } from '../../shared/zombieLand/zlwebview';
 import Icon from '../common/Icons';
-import Loader, { ScreenLoader } from '../components/Loader';
+import { ScreenLoader } from '../components/Loader';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
@@ -236,6 +236,8 @@ const ZombieLandOutput = ({ navigation }) => {
           source={{ html: webViewString }}
           originWhitelist={['*']}
           injectedJavaScript={scriptToInject}
+          allowUniversalAccessFromFileURLs={true}
+          mixedContentMode={'always'}
           scrollEnabled={false}
           scalesPageToFit={false}
           startInLoadingState={true}

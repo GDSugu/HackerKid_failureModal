@@ -488,7 +488,7 @@ const ZombieLandMobComponent = ({
 </>;
 
 const SuccessModalComponent = ({
-  validated, message = false, nextHandler = () => {},
+  validated, message = false, nextHandler = () => {}, qid = 0,
 }) => {
   const handleRegister = () => pathNavigator('register');
 
@@ -526,13 +526,29 @@ const SuccessModalComponent = ({
                     </p>
                     <div className='d-flex align-items-center justify-content-center'>
                       <button className='btn btn-primary' onClick={nextHandler}>
-                        <div className="d-flex justify-content-between align-items-center">
-                          <FormattedMessage
-                            defaultMessage={'Play next'}
-                            description={'Play next button'}
-                          />
-                          <i className="fas fa-angle-right "></i>
-                        </div>
+                        {
+                          qid === 10
+                          && <>
+                            <p className="my-0">
+                              <FormattedMessage
+                                defaultMessage={'Close'}
+                                description={'success modal closed'}
+                              />
+                            </p>
+                          </>
+                        }
+                        {
+                          qid !== 10
+                          && <>
+                            <div className="d-flex justify-content-between align-items-center">
+                              <FormattedMessage
+                                defaultMessage={'Play next'}
+                                description={'Play next button'}
+                              />
+                              <i className="fas fa-angle-right "></i>
+                            </div>
+                          </>
+                        }
                       </button>
                     </div>
                   </>
@@ -580,12 +596,7 @@ const SuccessModalComponent = ({
 
 const FailureModalComponent = ({
   message = '', handleModalClose = () => {},
-}) => {
-  React.useEffect(() => {
-    console.log('dsds sdsd');
-  }, []);
-
-  return <>
+}) => <>
     <div className='failure-modal-content'>
       <div className='recognition-content'>
         <Img
@@ -648,7 +659,6 @@ const FailureModalComponent = ({
       </div>
     </div>
   </>;
-};
 
 const HintContent = ({ hint: hintItem }) => <>
   {
@@ -759,12 +769,12 @@ const HintComponent = ({ hints }) => {
   </>;
 };
 
-const compareProps = (prev, next) => {
-  let isEqual = false;
-  Object.keys(prev).forEach((key) => {
-    isEqual = isEqual && JSON.stringify(prev[key]) === JSON.stringify(next[key]);
-  });
-};
+// const compareProps = (prev, next) => {
+//   let isEqual = false;
+//   Object.keys(prev).forEach((key) => {
+//     isEqual = isEqual && JSON.stringify(prev[key]) === JSON.stringify(next[key]);
+//   });
+// };
 
 const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
   pageInit('zombieLand-main-container', 'ZombieLand');
@@ -874,7 +884,6 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
 
   const handleFetchQuestion = (questionId) => {
     $('#loader').show();
-    console.log('gmobj rmnsm', GameObj);
     // GameObj?.gameData?.gameObject?.destroy(true);
     zlStatic.fetchZombieLandQuestion({
       virtualId: Number(questionId),
@@ -886,11 +895,13 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
   };
 
   const handleNextQuestion = () => {
-    $('#loader').show();
     const currentQuestionId = zlState.questionObject.virtualId;
-    if (currentQuestionId <= 10) {
+    if (currentQuestionId < 10) {
+      $('#loader').show();
       const nextVId = currentQuestionId + 1;
       handleFetchQuestion(nextVId);
+    } else if (currentQuestionId === 10) {
+      successModalRef.current.hide();
     }
   };
 
@@ -946,12 +957,9 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
   }, [zlState.responseObject]);
 
   React.useEffect(() => {
-    console.log('startgm');
     if (status === 'success') {
       setTimeout(() => {
-        console.log('game startiing', GameObj);
         GameObj = startGame(memoizedZlQnState, device, Phaser, 'zombieLandBlock', 'userCanvas', 'zombieLand-image-preview', endGame, showFailureModal.bind(this));
-        console.log('game started', GameObj);
       }, 300);
     }
   }, [memoizedZlQnState.questionObject]);
@@ -1231,6 +1239,7 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
           message={zlState?.responseObject?.successMessage}
           userName={zlState?.responseObject?.pointsDetails?.userName}
           nextHandler={handleNextQuestion}
+          qid={zlState?.questionObject?.virtualId}
         />
     </Modal>
     <Modal

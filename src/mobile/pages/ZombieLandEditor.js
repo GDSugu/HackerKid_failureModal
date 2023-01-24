@@ -127,6 +127,7 @@ const ZombieLandEditor = () => {
         source={{ html: webViewString }}
         originWhitelist={['*']}
         injectedJavaScript={scriptToInject}
+        nestedScrollEnabled={true}
         onMessage={handleMessage}
       />
     </View>
