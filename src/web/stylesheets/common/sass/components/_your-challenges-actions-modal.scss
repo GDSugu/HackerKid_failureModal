@@ -1,0 +1,134 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+
+@import '../../pages/challenges/_challengesTheme.js';
+
+#yourChallengesActionsModal {
+  .modal-content {
+    border-radius: 1rem;
+  }
+
+  .modal-header {
+    background-color: gt.theme-var(challenges-modal-header-bg, null, $thememaplight, $cssvars);
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    align-items: center;
+  }
+
+  .close-btn {
+    color: gt.theme-var(text-color-2);
+    border: none;
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: gt.theme-var(modal-close-btn-bg);
+    padding: 0.1rem 0.35rem 0.3rem;
+    border-radius: 0.5rem;
+    line-height: 0.75;
+    opacity: 1;
+
+    &:hover {
+      opacity: 0.75;
+    }
+
+    &:focus-visible {
+      outline: auto;
+    }
+  }
+
+  .modal-body {
+    background-color: gt.theme-var(challenges-body-bg, null, $thememaplight, $cssvars);
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .challenge-image-preview {
+      width: 80%;
+      height: 11rem;
+      border-radius: 0.5rem;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      margin-top: 2rem;
+
+      .action-btn {
+        $btn-bg: map-get($thememaplight, challenges-btn-bg-1);
+
+        padding: 0.65rem 0;
+        border-radius: 12px;
+        background-color: gt.theme-var(challenges-btn-bg-1, null, $thememaplight, $cssvars);
+        color: gt.theme-var(challenges-text-color-3, null, $thememaplight, $cssvars);
+        border: none;
+        text-align: center;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+          background-color: darken($btn-bg, 3);
+          text-decoration: none;
+        }
+
+        &:focus-visible {
+          outline: auto;
+        }
+
+        &:disabled {
+          background-color: darken($btn-bg, 10);
+        }
+      }
+
+      .delete-challenge-button {
+        padding: 0.65rem 0;
+        border-radius: 12px;
+      }
+    }
+  }
+
+  .modal-toast {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    width: 95%;
+    padding: 1rem 2rem;
+    background-color: gt.theme-var(bg-1);
+    transform: translateX(-50%);
+    transition: transform 0.5s ease;
+
+    &.hide {
+      transform: translate(-50%, -100%);
+    }
+
+    @include gm.media-breakpoint-up(sm) {
+      width: 75%;
+    }
+
+    @include gm.media-breakpoint-up(md) {
+      width: 70%;
+    }
+
+    @include gm.media-breakpoint-up(lg) {
+      width: 65%;
+    }
+
+    @include gm.media-breakpoint-up(xl) {
+      width: 55%;
+    }
+
+    @include gm.media-breakpoint-up(xxl) {
+      width: 35%;
+    }
+
+    .toast-message {
+      margin-top: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+  }
+}

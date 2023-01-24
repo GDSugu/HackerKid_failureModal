@@ -95,7 +95,7 @@ const GameNavBar = ({
       {
         device === 'mobile'
         && <>
-          <div className="row justify-content-between align-items-center no-gutters mob-nav-header p-3">
+          <div className="align-items-center no-gutters mob-nav-header">
             <Link to='/dashboard' className='homeNavIcon'>
               <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -104,13 +104,14 @@ const GameNavBar = ({
                 />
               </svg>
             </Link>
+            <div></div>
             <div className="d-flex align-items-center">
-              <button className='btn' onClick={leaderboardHandler}>
+              <button className='btn leaderBoardIcon' onClick={leaderboardHandler}>
                 <svg width="42" height="42" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M29.333 9.33333H21.777V5.33333C21.777 4.97971 21.6365 4.64057 21.3865 4.39052C21.1364 4.14048 20.7973 4 20.4437 4H11.5557C11.2021 4 10.8629 4.14048 10.6129 4.39052C10.3628 4.64057 10.2223 4.97971 10.2223 5.33333V14.6667H2.66634C2.31272 14.6667 1.97358 14.8071 1.72353 15.0572C1.47348 15.3072 1.33301 15.6464 1.33301 16V26.6667C1.33301 27.0203 1.47348 27.3594 1.72353 27.6095C1.97358 27.8595 2.31272 28 2.66634 28H29.333C29.6866 28 30.0258 27.8595 30.2758 27.6095C30.5259 27.3594 30.6663 27.0203 30.6663 26.6667V10.6667C30.6663 10.313 30.5259 9.97391 30.2758 9.72386C30.0258 9.47381 29.6866 9.33333 29.333 9.33333ZM10.2223 25.3333H3.99967V17.3333H10.2223V25.3333ZM19.1103 25.3333H12.889V6.66667H19.1103V25.3333ZM27.9997 25.3333H21.777V12H27.9997V25.3333Z" fill="white"/>
                 </svg>
               </button>
-              <div className="profileImg ml-3">
+              <div className="profileImg">
                 <Link to='/profile'>
                   <img src={'../../../../../images/common/profile.png'} alt="Hackerkid User"/>
                 </Link>

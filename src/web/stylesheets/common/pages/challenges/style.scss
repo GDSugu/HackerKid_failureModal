@@ -5,6 +5,18 @@
 
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 
+$newly-trending-challenge-container-width: 35%;
+$newly-trending-challenge-container-width-after-xxxl: 25%;
+$newly-trending-challenge-container-width-after-xxxxl: 20%;
+
+$swiper-slide-width: 60%;
+$swiper-slide-width-after-sm: 40%;
+$swiper-slide-width-after-md: 35%;
+$swiper-slide-width-after-lg: 25%;
+
+$challenge-item-image-height: 12rem;
+$challenge-item-image-height-down-md: 8.25rem;
+
 .challenges-container {
   background-color: gt.theme-var(challenges-body-bg, null, $thememaplight, $cssvars);
 
@@ -18,5 +30,658 @@
         }
       }
     }
+  }
+
+  .mobile-hero-card {
+    margin: 1rem 0;
+
+    .page-title {
+      margin-bottom: 1rem;
+    }
+
+    .game-stat-container {
+      padding: 1rem;
+      border-radius: 0.75rem;
+      background-color: gt.theme-var(bg-1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .game-stat {
+        display: flex;
+        align-items: center;
+
+        .game-stat-icon img {
+          width: 25px;
+          height: 25px;
+          margin-right: 0.3rem;
+        }
+      }
+    }
+
+    .create-challenge-btn {
+      margin-top: 0.75rem;
+    }
+  }
+
+  .hero-card {
+    display: flex;
+    align-items: stretch;
+    // box-shadow: gt.theme-var(dashboard-hero-shadow, null, $thememaplight, $cssvars);
+    background:
+      url('../../../../../images/dashboard/dashboard-hero-bg-left.png') no-repeat center left / contain,
+      url('../../../../../images/challenges/challenges-hero-bg-right.png') no-repeat center right/ contain,
+      gt.theme-var(bg-1);
+    margin: 1rem 0;
+    border-radius: 0.875rem;
+    min-height: 12rem;
+
+    @include gm.media-breakpoint-up(xxl) {
+      min-height: 18rem;
+    }
+
+    @include gm.media-breakpoint-down(sm) {
+      background: url('../../../../../images/dashboard/dashboard-hero-bg-mobile.png') no-repeat center left / contain, gt.theme-var(bg-1);
+      min-height: unset;
+      padding: 1rem;
+    }
+
+    .hero-card-data {
+      padding: 2rem 0 0;
+
+      @include gm.media-breakpoint-down(sm) {
+        padding: 0;
+      }
+
+      @include gm.media-breakpoint-up(sm) {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+      }
+
+      .hero-card-img {
+        background: url('../../../../../images/profile/default_user.png') no-repeat center center / cover;
+        border-radius: 50%;
+        position: relative;
+        width: 5rem;
+        height: 5rem;
+        left: 15%;
+        transform: translateX(65%);
+
+        @include gm.media-breakpoint-down(xxxl) {
+          transform: translate(50%);
+        }
+
+        @include gm.media-breakpoint-down(xxl) {
+          transform: translateX(65%);
+        }
+
+        @include gm.media-breakpoint-down(xl) {
+          transform: translateX(60%);
+        }
+
+        @include gm.media-breakpoint-down(lg) {
+          transform: translateX(65%);
+        }
+
+        @include gm.media-breakpoint-down(md) {
+          transform: translateX(75%);
+        }
+
+        @include gm.media-breakpoint-down(sm) {
+          left: 0;
+          transform: translateX(10%);
+        }
+
+        @include gm.media-breakpoint-down(xs) {
+          left: 0;
+          transform: translateX(15%);
+        }
+
+        @include gm.media-breakpoint-up(xxl) {
+          width: 8rem;
+          height: 8rem;
+          // transform: translate(50%);
+        }
+
+        @include gm.media-breakpoint-up (xxxl) {
+          transform: translateX(60%);
+        }
+
+        @include gm.media-breakpoint-up (xxxxl) {
+          transform: translateX(55%);
+          background-color: black;
+        }
+
+        @include gm.media-breakpoint-up(xxxxxl) {
+          transform: translateX(30%);
+          background-color: white;
+        }
+      }
+
+      .hero-card-data-content {
+        display: inline-flex;
+        justify-content: center;
+        width: fit-content;
+        margin-top: 0.5rem;
+        position: relative;
+        left: 15%;
+        transform: translateX(65%);
+
+        // @include gm.media-breakpoint-down(xxxl) {
+        //   left: 0;
+        //   transform: translateX(50%);
+        // }
+
+        // @include gm.media-breakpoint-down(xxl) {
+        //   left: 15%;
+        //   transform: translateX(65%);
+        // }
+
+        // @include gm.media-breakpoint-down(xl) {
+        //   left: 15%;
+        //   transform: translateX(10%);
+        // }
+
+        // @include gm.media-breakpoint-down(lg) {
+        //   left: 15%;
+        //   transform: translateX(25%);
+        // }
+
+        // @include gm.media-breakpoint-down(sm) {
+        //   left: 0;
+        //   // transform: translate(30%, 20%);
+        //   transform: translateX(10%);
+        // }
+
+        // @include gm.media-breakpoint-down(xs) {
+        //   left: 0;
+        //   transform: translateX(15%);
+        // }
+
+        @include gm.media-breakpoint-down(xxxl) {
+          transform: translateX(50%);
+        }
+
+        @include gm.media-breakpoint-down(xxl) {
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        @include gm.media-breakpoint-down(xl) {
+          left: 40%;
+          transform: translateX(-50%);
+        }
+
+        @include gm.media-breakpoint-down(lg) {
+          left: 40%;
+          transform: translateX(-40%);
+        }
+
+        @include gm.media-breakpoint-down(md) {
+          left: 40%;
+          transform: translateX(-35%);
+        }
+
+        @include gm.media-breakpoint-down(sm) {
+          left: 0;
+          transform: translateX(10%);
+        }
+
+        @include gm.media-breakpoint-down(xs) {
+          left: 0;
+          transform: translateX(15%);
+        }
+
+        @include gm.media-breakpoint-up(xxl) {
+          // transform: translate(50%);
+        }
+
+        @include gm.media-breakpoint-up (xxxl) {
+          left: 40%;
+          transform: translateX(-40%);
+        }
+
+        @include gm.media-breakpoint-up (xxxxl) {
+          left: 40%;
+          transform: translateX(-50%);
+        }
+
+        @include gm.media-breakpoint-up(xxxxxl) {
+          left: 30%;
+          transform: translateX(-50%);
+        }
+
+        .hero-data {
+          display: flex;
+          align-items: center;
+          margin: 0 0.5rem;
+
+          p {
+            font-size: 1.125rem;
+            margin-left: 0.5rem;
+          }
+
+          img {
+            width: 2rem;
+            height: 2rem;
+          }
+        }
+      }
+    }
+
+    .hero-card-nav {
+
+      // @include gm.media-breakpoint-down(md) {
+      //   display: flex;
+      //   align-items: center;
+      // }
+
+      .hero-nav-cards-container {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+        .hero-nav-card {
+          border-radius: 0.75rem;
+          padding: 1.1rem;
+          background-color: gt.theme-var(challenges-hero-card-bg, null, $thememaplight, $cssvars);
+        }
+      }
+
+      .hero-data-content {
+        .hero-data {
+          display: flex;
+          align-items: center;
+          margin-bottom: 0.5rem;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          p {
+            margin-left: 1rem;
+            font-size: 0.875rem;
+            font-weight: bold;
+          }
+
+          img {
+            width: 2rem;
+            height: 2rem;
+          }
+        }
+      }
+    }
+  }
+
+  .newly-trending-challenge-container {
+    flex-basis: $newly-trending-challenge-container-width;
+
+    @include gm.media-breakpoint-up(xxxl) {
+      flex-basis: $newly-trending-challenge-container-width-after-xxxl;
+    }
+
+    @include gm.media-breakpoint-up(xxxxl) {
+      flex-basis: $newly-trending-challenge-container-width-after-xxxxl;
+    }
+
+    .title {
+      color: gt.theme-var(challenges-text-color-3, null, $thememaplight, $cssvars);
+      margin-bottom: 0.7rem;
+    }
+
+    .challenge-img {
+      img {
+        width: 100%;
+        height: 7rem;
+        border-radius: 0.75rem;
+
+        @include gm.media-breakpoint-up(xxl) {
+          height: 8rem;
+        }
+      }
+    }
+  }
+
+  .last-challenge-with-create-challenge-btn {
+    flex-basis: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    @include gm.media-breakpoint-up(xxl) {
+      gap: 1rem;
+    }
+
+    @include gm.media-breakpoint-up(xl) {
+      flex-basis: 50%;
+    }
+
+    .challenges-activity {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+
+      .last-challenge {
+        width: 100%;
+        padding-bottom: 1.3rem;
+        border-bottom: 2px solid gt.theme-var(challenges-nav-bg, null, $thememaplight, $cssvars);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+
+        .challenge-name {
+          margin-left: 0.5rem;
+          max-width: 150px;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          overflow: hidden;
+
+          @include gm.media-breakpoint-up(sm) {
+            max-width: 200px;
+          }
+
+          @include gm.media-breakpoint-up(md) {
+            max-width: 280px;
+          }
+
+          @include gm.media-breakpoint-up(xxl) {
+            max-width: 300px;
+          }
+        }
+
+        .icon {
+          width: 25px;
+          height: 20px;
+        }
+
+        .open-challenge-btn {
+          padding: 0;
+          display: inline-block;
+          margin-left: auto;
+        }
+      }
+    }
+
+    .view-your-challenges-text-btn {
+      $color: map-get($thememaplight, challenges-text-color-3);
+
+      text-decoration: none;
+      color: gt.theme-var(challenges-text-color-3, null, $thememaplight, $cssvars);
+
+      &:hover {
+        color: darken($color, 15);
+      }
+    }
+  }
+
+  .create-challenge-btn {
+    $btn-bg: map-get($thememaplight, challenges-btn-bg);
+
+    margin-top: 0;
+    text-align: start;
+    padding: 0.75rem;
+    background-color: gt.theme-var(challenges-btn-bg, null, $thememaplight, $cssvars);
+    color: gt.theme-var(challenges-text-color-4, null, $thememaplight, $cssvars);
+    border: none;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:hover {
+      background-color: darken($btn-bg, 10);
+    }
+
+    @include gm.media-breakpoint-up(xxl) {
+      padding: 1rem;
+    }
+  }
+
+  .challenges-container {
+    margin-top: 2rem;
+
+    .challenges-heading-container {
+      margin-bottom: 1rem;
+    }
+
+    .challenges-block {
+      .trending-challenges-swiper {
+        margin-bottom: 2rem;
+      }
+
+      .challenges-swiper {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+
+        .swiper-button-next,
+        .swiper-button-prev {
+          &:after {
+            font-size: 1.75rem;
+            font-weight: bolder;
+          }
+
+          &.swiper-button-disabled {
+            display: none;
+          }
+
+          top: 0;
+          height: 100%;
+          padding: 0 2rem 0;
+          color: gt.theme-var(challenges-swiper-arrow-color, null, $thememaplight, $cssvars);
+        }
+
+        .swiper-button-next {
+          right: 0;
+          background: linear-gradient(to right, transparent, gt.theme-var(challenges-body-bg, null, $thememaplight, $cssvars));
+        }
+
+        .swiper-button-prev {
+          left: 0;
+          background: linear-gradient(to left, transparent, gt.theme-var(challenges-body-bg, null, $thememaplight, $cssvars));
+        }
+
+        .swiper-slide {
+          width: $swiper-slide-width;
+
+          @include gm.media-breakpoint-up(sm) {
+            width: $swiper-slide-width-after-sm;
+          }
+
+          @include gm.media-breakpoint-up(md) {
+            width: $swiper-slide-width-after-md;
+          }
+
+          @include gm.media-breakpoint-up(lg) {
+            width: $swiper-slide-width-after-lg;
+          }
+
+          .challenge-item {
+            &:hover {
+              text-decoration: none;
+            }
+
+            .challenge-block {
+              .challenge-img {
+                margin-bottom: 0.5rem;
+                width: 100%;
+                height: 12rem;
+                aspect-ratio: 16/9;
+                background: white;
+                border-radius: 0.75rem;
+
+                @include gm.media-breakpoint-down(xl) {
+                  height: 10rem;
+                }
+
+                @include gm.media-breakpoint-down(md) {
+                  height: $challenge-item-image-height-down-md;
+                }
+
+                img {
+                  width: 100%;
+                  height: 100%;
+                  border-radius: 0.75rem;
+                }
+              }
+
+              .challenge-title {
+                p {
+                  font-size: 1.125rem;
+                  color: gt.theme-var(text-color-1);
+                  font-weight: bold;
+                  margin-bottom: 0;
+                }
+              }
+
+              .challenge-author {
+                p {
+                  color: gt.theme-var(challenges-text-color-2, null, $thememaplight, $cssvars);
+                  margin-bottom: 0;
+                }
+              }
+            }
+          }
+        }
+
+        .navigation-slide {
+          $color: map-get($thememaplight, challenges-text-color-3);
+
+          width: 100%;
+          height: 12rem;
+          aspect-ratio: 16/9;
+          border-radius: 0.75rem;
+          color: gt.theme-var(challenges-text-color-3, null, $thememaplight, $cssvars);
+          background-color: gt.theme-var(bg-1);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-decoration: none;
+
+          @include gm.media-breakpoint-down(xl) {
+            height: 10rem;
+          }
+
+          @include gm.media-breakpoint-down(md) {
+            height: $challenge-item-image-height-down-md;
+          }
+          // @include gm.media-breakpoint-down(md) {
+          //   height: $challenge-item-image-height-down-md;
+          // }
+
+          // @include gm.media-breakpoint-up(md) {
+          //   aspect-ratio: 16/9;
+          // }
+
+          &:hover {
+            color: darken($color, 15);
+          }
+        }
+      }
+    }
+  }
+
+  .newly-trending-challenge-skeleton,
+  .challenges-activity-skeleton,
+  .challenge-skeleton-card,
+  .mobile-hero-card-skeleton {
+    border-radius: 1rem;
+    animation: refresh 2.5s ease-out infinite;
+    background-image: linear-gradient(90deg, gt.theme-var(text-color-6), gt.theme-var(bg-3) 30px, gt.theme-var(skeleton-bg) 60px);
+    background-size: 200%;
+  }
+
+  .newly-trending-challenge-skeleton {
+    flex-basis: $newly-trending-challenge-container-width;
+    height: 11rem;
+
+    @include gm.media-breakpoint-up(xxl) {
+      height: 12rem;
+    }
+
+    @include gm.media-breakpoint-up(xxxl) {
+      flex-basis: $newly-trending-challenge-container-width-after-xxxl;
+    }
+
+    @include gm.media-breakpoint-up(xxxxl) {
+      flex-basis: $newly-trending-challenge-container-width-after-xxxxl;
+    }
+  }
+
+  .challenges-activity-skeleton {
+    width: 100%;
+    height: 7rem;
+  }
+
+  .challenge-skeleton-container {
+    width: 100%;
+    padding: 1.5rem 0;
+    overflow-x: auto;
+
+    .challenge-skeleton-card {
+      width: $swiper-slide-width;
+
+      @include gm.media-breakpoint-up(sm) {
+        width: $swiper-slide-width-after-sm;
+      }
+
+      @include gm.media-breakpoint-up(md) {
+        width: $swiper-slide-width-after-md;
+      }
+
+      @include gm.media-breakpoint-up(lg) {
+        width: $swiper-slide-width-after-lg;
+      }
+
+      flex-shrink: 0;
+      aspect-ratio: 16/9;
+      border-radius: 0.75rem;
+      margin: 0 1rem 0 0;
+
+      @include gm.media-breakpoint-down(md) {
+        min-width: 15rem;
+        min-height: $challenge-item-image-height-down-md;
+        border-radius: 0.5rem;
+      }
+    }
+  }
+
+  .mobile-hero-card-skeleton {
+    height: 4rem;
+    border-radius: 0.75rem;
+  }
+
+  .skeleton {
+    width: 100%;
+  }
+
+  @keyframes refresh {
+    0% {
+      background-position: -100%;
+    }
+
+    100% {
+      background-position: 100%;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: gt.theme-var(skeleton-bg);
+    border-radius: 0.5rem;
   }
 }

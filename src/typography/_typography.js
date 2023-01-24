@@ -85,6 +85,10 @@ const mobileTypography = {
     fontFamily: fontAveria.regular,
     fontSize: 10,
   },
+  overlineBold: {
+    fontFamily: fontAveria.bold,
+    fontSize: 10,
+  },
 };
 
 const webTypography = {

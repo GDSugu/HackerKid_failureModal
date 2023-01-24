@@ -6,6 +6,7 @@ const {
   Red,
   utilColors,
   Yellow,
+  gradients,
 } = require('../../../colors/_colors');
 
 const Theme = {
@@ -15,6 +16,9 @@ const Theme = {
       navBg: Blue.color500,
       navActiveBg: Blue.color600,
       btnBg: Blue.color700,
+      btnDarkBg: Blue.color900,
+      transparentBlue: '#004BDD26',
+      modalHeaderBg: Blue.color200,
     },
     screenGreen: {
       bodyBg: Green.color50,
@@ -27,6 +31,7 @@ const Theme = {
       navBg: LightBlue.color500,
       navActiveBg: LightBlue.color600,
       btnBg: LightBlue.color700,
+      textBold: LightBlue.color900,
     },
     screenPurple: {
       bodyBg: Purple.color50,
@@ -61,6 +66,9 @@ const Theme = {
       navBg: Blue.color500,
       navActiveBg: Blue.color600,
       btnBg: Blue.color700,
+      btnDarkBg: Blue.color900,
+      transparentBlue: '#004BDD26',
+      modalHeaderBg: Blue.color200,
     },
     screenGreen: {
       bodyBg: Green.color50,
@@ -73,6 +81,8 @@ const Theme = {
       navBg: LightBlue.color500,
       navActiveBg: LightBlue.color600,
       btnBg: LightBlue.color700,
+      levelProgressGradient: gradients.blue,
+      textBold: LightBlue.color900,
     },
     screenPurple: {
       bodyBg: Purple.color50,
