@@ -97,6 +97,7 @@ const Certificates = () => {
   } = useProfileInfo({ isPageMounted });
   const {
     state: {
+      status,
       gameDetails,
       profileDetails,
     },
@@ -121,7 +122,7 @@ const Certificates = () => {
       if (timeStampToCertificateMap[certificate.createdAt]) {
         timeStampToCertificateMap[certificate.createdAt].push(certificate);
       } else {
-        timeStampToCertificateMap[certificate.createdAt] = certificate;
+        timeStampToCertificateMap[certificate.createdAt] = [certificate];
       }
     });
 
@@ -142,11 +143,7 @@ const Certificates = () => {
         dateString = 'Yesterday';
       }
 
-      if (finalList[dateString]) {
-        finalList[dateString].push(timeStampToCertificateMap[timeStamp]);
-      } else {
-        finalList[dateString] = [timeStampToCertificateMap[timeStamp]];
-      }
+      finalList[dateString] = timeStampToCertificateMap[timeStamp];
     });
 
     setCurrentList(finalList);
@@ -292,8 +289,7 @@ const Certificates = () => {
       }
       <div className='certificates-main-container'>
         {
-          (!currentList
-            || (currentList && (currentList.length === 0 || Object.keys(currentList).length === 0)))
+          (status === 'error' || (currentList && (currentList.length === 0 || Object.keys(currentList).length === 0)))
           && <h4 className='no-certificates text-center mt-4'>
             <FormattedMessage
               defaultMessage={'No Certificates Found'}
