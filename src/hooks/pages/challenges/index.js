@@ -60,7 +60,6 @@ const useGetChallenges = ({ initializeData = true, isPageMounted }) => {
             } else {
               const parsedResponse = JSON.parse(res);
 
-              console.log(parsedResponse);
               if (parsedResponse.status === 'success') {
                 authContext.setAuthState({
                   appData: {
@@ -202,6 +201,15 @@ const useGetMyChallenges = ({ initializeData = true, isPageMounted }) => {
       getMyChallenges,
     },
   };
+};
+
+const useDeleteChallenge = () => (challengeId) => {
+  const payload = {
+    type: 'deleteChallenge',
+    challengeId,
+  };
+
+  return post(payload, 'challenge/');
 };
 
 const useUpdateChallengeStateOnly = () => (challengeId, challengeState) => {
@@ -395,4 +403,5 @@ export {
   useGetMyChallenges,
   useGetAttemptedChallenges,
   useUpdateChallengeStateOnly,
+  useDeleteChallenge,
 };

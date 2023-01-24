@@ -231,8 +231,12 @@ const AllChallenges = ({ navigation }) => {
 
   const onRefresh = () => {
     setRefreshing(true);
-    getChallenges({ cached: false }).then((res) => {
-      console.log(res);
+    const filterObj = {
+      sort,
+      search,
+      page: search ? searchPage : page,
+    };
+    getChallenges({ filterObj, cached: false }).then(() => {
       setReloadComponent(reloadComponent + 1);
       setRefreshing(false);
     })

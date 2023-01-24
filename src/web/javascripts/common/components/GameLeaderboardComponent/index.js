@@ -215,7 +215,7 @@ const GameLeaderboardComponent = ({
   React.useEffect(() => {
     getLeaderBoardData({
       pageNumber: 1,
-      game: 'turtle',
+      game: 'webkata',
     });
 
     return () => {

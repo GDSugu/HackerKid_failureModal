@@ -15,10 +15,6 @@
     margin-bottom: paginator.$pagination-offset-after-lg;
   }
 
-  nav {
-    display: none;
-  }
-
   .challenges-nav {
     display: block;
     background-color: gt.theme-var(challenges-nav-bg, null, $thememaplight, $cssvars);

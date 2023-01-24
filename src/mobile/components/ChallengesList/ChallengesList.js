@@ -47,12 +47,15 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     marginTop: 15,
   },
   challengeCardItem: {
-    marginBottom: 20,
+    height: 170,
+    width: '100%',
   },
   challengeCardImage: {
     borderRadius: 12,
     width: '100%',
-    height: 170,
+    height: '100%',
+    resizeMode: 'cover',
+    backgroundColor: 'white',
   },
   challengeCardTitle: {
     ...font.subtitle1,
@@ -79,8 +82,8 @@ const ChallengesList = ({
 
   return (
     <View style={{ marginTop: 15 }}>
-        <View style={style.header}>
-          <Text style={style.pageTitle}>
+      <View style={style.header}>
+        <Text style={style.pageTitle}>
           <FormattedMessage
             defaultMessage={'{heading}'}
             description='page title'
@@ -90,33 +93,34 @@ const ChallengesList = ({
         {
           navLinkText && navLinkNavigateTo
           && <TouchableOpacity onPress={() => navigation.navigate(navLinkNavigateTo)}>
-          <Text style={style.myChallengesBtnText}>
-          <FormattedMessage
-            defaultMessage={'{navLinkText}'}
-            description='nav link'
-            values={{ navLinkText }}
-          />
-          </Text>
-        </TouchableOpacity>
+            <Text style={style.myChallengesBtnText}>
+              <FormattedMessage
+                defaultMessage={'{navLinkText}'}
+                description='nav link'
+                values={{ navLinkText }}
+              />
+            </Text>
+          </TouchableOpacity>
         }
-        </View>
-        <View style={style.challengeCardList}>
-          {
-            challenges
-            && challenges
-              .map((challenge) => {
-                const onClickFn = () => {
-                  if (challengeCardType === 'link') {
-                    navigation.navigate('Challenges', {
-                      challengeId: challenge.challengeId,
-                      challengeVirtualName: challenge.actionUrl.split('/').pop(),
-                    });
-                  } else {
-                    onChallengeCardClick(challenge);
-                  }
-                };
+      </View>
+      <View style={style.challengeCardList}>
+        {
+          challenges
+          && challenges
+            .map((challenge) => {
+              const onClickFn = () => {
+                if (challengeCardType === 'link') {
+                  navigation.navigate('Challenges', {
+                    challengeId: challenge.challengeId,
+                    challengeVirtualName: challenge.actionUrl.split('/').pop(),
+                  });
+                } else {
+                  onChallengeCardClick(challenge);
+                }
+              };
 
-                return <TouchableOpacity
+              return <TouchableOpacity
+                style={{ marginBottom: 20 }}
                 key={challenge.challengeId}
                 onPress={onClickFn}
                 activeOpacity={0.5}
@@ -128,37 +132,37 @@ const ChallengesList = ({
                     }}
                     style={style.challengeCardImage}
                   />
-                  <Text style={style.challengeCardTitle}>{challenge.challengeName}</Text>
+                </View>
+                <Text style={style.challengeCardTitle}>{challenge.challengeName}</Text>
+                {
+                  showChallengeAuthorName && <Text style={style.challengeCardAuthor}>{`by ${challenge.creatorName}`}</Text>
+                }
+              </TouchableOpacity>;
+            })
+        }
+        {
+          !challenges
+          && <>
+            {
+              new Array(numberOfSkeletonCardsToShow).fill(1).map((item, idx) => (
+                <View style={[style.challengeCardItem, { width: '100%' }]} key={idx}>
+                  <Skeleton width='100%' height={170} style={{ borderRadius: 10, marginBottom: 5 }} />
+                  <Skeleton width='25%' height={24} style={{ borderRadius: 10, marginBottom: 5 }} />
                   {
-                    showChallengeAuthorName && <Text style={style.challengeCardAuthor}>{`by ${challenge.creatorName}`}</Text>
+                    showChallengeAuthorName && <Skeleton width='25%' height={24} style={{ borderRadius: 10, marginBottom: 5 }} />
                   }
                 </View>
-              </TouchableOpacity>;
-              })
-          }
-          {
-            !challenges
-            && <>
-              {
-              new Array(numberOfSkeletonCardsToShow).fill(1).map((item, idx) => (
-              <View style={[style.challengeCardItem, { width: '100%' }]} key={idx}>
-                <Skeleton width='100%' height={170} style={{ borderRadius: 10, marginBottom: 5 }} />
-                <Skeleton width='25%' height={24} style={{ borderRadius: 10, marginBottom: 5 }} />
-                {
-                showChallengeAuthorName && <Skeleton width='25%' height={24} style={{ borderRadius: 10, marginBottom: 5 }} />
-                }
-              </View>
               ))
-              }
-            </>
-          }
-          {
+            }
+          </>
+        }
+        {
           challenges && challenges.length === 0 && <View style={style.emptyStateContainer}>
             <Image
               source={EmptyStateImage}
               style={style.emptyStateImage}
               resizeMode='stretch'
-              />
+            />
             <Text style={style.emptyStateText}>
               <FormattedMessage
                 defaultMessage={'{emptyStateText}'}
@@ -169,9 +173,9 @@ const ChallengesList = ({
               />
             </Text>
           </View>
-          }
-        </View>
+        }
       </View>
+    </View>
   );
 };
 

@@ -49,23 +49,7 @@ $pagination-offset-after-lg: 6vh;
           border: none;
           background-color: inherit;
           box-shadow: none;
-          color: gt.theme-var(text-color-1);
           padding: 0;
-        }
-
-        &.active {
-          .page-link {
-            color: gt.theme-var(text-color-8);
-          }
-        }
-
-        &:first-child,
-        &:last-child {
-          .page-link {
-            svg {
-              fill: gt.theme-var(text-color-8);
-            }
-          }
         }
 
         &:first-child.disabled,

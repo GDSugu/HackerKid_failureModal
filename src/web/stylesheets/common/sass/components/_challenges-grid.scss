@@ -55,16 +55,25 @@ $challenge-item-image-height-down-md: 10.25rem;
   }
 
   .challenge-img {
+    width: 100%;
+    height: 16rem;
     margin-bottom: 0.5rem;
+    border-radius: 0.75rem;
+    aspect-ratio: 16/9;
+    background-color: gt.theme-var(challenges-btn-bg-1, null, $thememaplight, $cssvars);
+
+    @include gm.media-breakpoint-down(xl) {
+      height: 13rem;
+    }
+
+    @include gm.media-breakpoint-down(md) {
+      height: $challenge-item-image-height-down-md;
+    }
 
     img {
-      aspect-ratio: 16/9;
       width: 100%;
+      height: 100%;
       border-radius: 0.75rem;
-
-      @include gm.media-breakpoint-down(md) {
-        height: $challenge-item-image-height-down-md;
-      }
     }
   }
 
