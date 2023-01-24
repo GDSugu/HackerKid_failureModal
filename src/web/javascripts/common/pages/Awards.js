@@ -32,7 +32,7 @@ const BottomSheetBody = ({ awardInfoToView }) => <>
         {
           <div className='progress-details'>
             {
-              !!awardInfoToView.progressDetails.progress
+              awardInfoToView.progressDetails && !!awardInfoToView.progressDetails.progress
               && <div className='current-progress'>
                 <small>
                   <FormattedMessage defaultMessage={'{currentProgress} {unit}'} description='current progress' values={{
@@ -44,7 +44,7 @@ const BottomSheetBody = ({ awardInfoToView }) => <>
               </div>
             }
             {
-              !!awardInfoToView.progressDetails.nextAwardIn
+              awardInfoToView.progressDetails && !!awardInfoToView.progressDetails.nextAwardIn
               && <div className='next-award'>
                 <small>
                   <span className='next-award-label'>

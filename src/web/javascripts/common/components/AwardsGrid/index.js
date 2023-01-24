@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import AwardCard from '../AwardsCard';
@@ -16,7 +17,6 @@ const AwardsGrid = ({
       awards && awards.map((award, idx) => <div className='col-3 px-1 py-1' key={idx}>
         <div className='award-card-with-awards-info'>
           <AwardCard
-            // eslint-disable-next-line no-nested-ternary
             awardImage={defaultStructure
               ? (award.currentAward
                 ? award.currentAward.awardImage
@@ -24,10 +24,18 @@ const AwardsGrid = ({
               : award.awardImage
             }
             interactable={true}
-            className={`pointer-cursor award-card-${defaultStructure ? award.currentAward.awardId : award.awardId}`} />
+            className={`pointer-cursor award-card-${defaultStructure
+              ? (award.currentAward
+                ? award.currentAward.awardId
+                : award.repeatingAwards[0].awardId)
+              : award.awardId}`} />
           <AwardInfo
             isDesktop={isDesktop}
-            className={`award-info-container-${defaultStructure ? award.currentAward.awardId : award.awardId}`}
+            className={`award-info-container-${defaultStructure
+              ? (award.currentAward
+                ? award.currentAward.awardId
+                : award.repeatingAwards[0].awardId)
+              : award.awardId}`}
             currentAwardDetails={defaultStructure ? award.currentAward : award}
             repeatingAwards={award.repeatingAwards ? award.repeatingAwards : false}
           />

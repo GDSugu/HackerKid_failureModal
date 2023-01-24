@@ -12,8 +12,11 @@ const AwardInfo = ({
 }) => {
   useEffect(() => {
     if (isDesktop) {
-      const awardCard = document.querySelector(`.award-card-${currentAwardDetails.awardId}`);
-      const awardInfo = document.querySelector(`.award-info-container-${currentAwardDetails.awardId}`);
+      const awardId = currentAwardDetails
+        ? currentAwardDetails.awardId : repeatingAwards[0].awardId;
+
+      const awardCard = document.querySelector(`.award-card-${awardId}`);
+      const awardInfo = document.querySelector(`.award-info-container-${awardId}`);
 
       createPopper(awardCard, awardInfo, {
         placement: 'bottom-start',
