@@ -93,6 +93,16 @@
       "value": "Coming Soon..."
     }
   ],
+  "0By1LZ": [
+    {
+      "type": 1,
+      "value": "timeInMinutes"
+    },
+    {
+      "type": 0,
+      "value": " Mins"
+    }
+  ],
   "0JV99f": [
     {
       "type": 0,
@@ -219,6 +229,12 @@
       "value": "Login with Phone"
     }
   ],
+  "30ejkF": [
+    {
+      "type": 0,
+      "value": "Close"
+    }
+  ],
   "33dFbN": [
     {
       "type": 0,
@@ -261,6 +277,12 @@
       "value": "label"
     }
   ],
+  "3xAjVX": [
+    {
+      "type": 0,
+      "value": "Oh ho ho.. Requirement not satisfied"
+    }
+  ],
   "4+tKRC": [
     {
       "type": 0,
@@ -283,6 +305,12 @@
     {
       "type": 0,
       "value": "Please connect to the internet."
+    }
+  ],
+  "4o5Hlu": [
+    {
+      "type": 0,
+      "value": "Your name will be shown here"
     }
   ],
   "4wgAGs": [
@@ -331,6 +359,12 @@
       "value": "swiperHeading"
     }
   ],
+  "5jxN1p": [
+    {
+      "type": 1,
+      "value": "points"
+    }
+  ],
   "634LIC": [
     {
       "type": 0,
@@ -341,6 +375,12 @@
     {
       "type": 0,
       "value": "Login"
+    }
+  ],
+  "6OkiRc": [
+    {
+      "type": 0,
+      "value": "Your bio will be shown here"
     }
   ],
   "6V6DQY": [
@@ -365,6 +405,12 @@
     {
       "type": 0,
       "value": "Show Leaderboard"
+    }
+  ],
+  "7AMmxp": [
+    {
+      "type": 0,
+      "value": "Your bio will be shown here"
     }
   ],
   "7L3+7M": [
@@ -397,6 +443,12 @@
       "value": "Output will appear here"
     }
   ],
+  "8cISRy": [
+    {
+      "type": 0,
+      "value": "Time Spent:"
+    }
+  ],
   "9+2Mm0": [
     {
       "type": 0,
@@ -409,10 +461,40 @@
       "value": "Please verify to continue"
     }
   ],
+  "9GHKZe": [
+    {
+      "type": 0,
+      "value": "/"
+    },
+    {
+      "type": 1,
+      "value": "totalQns"
+    }
+  ],
+  "9K8jZr": [
+    {
+      "type": 1,
+      "value": "idx"
+    },
+    {
+      "type": 0,
+      "value": ". "
+    },
+    {
+      "type": 1,
+      "value": "hint"
+    }
+  ],
   "9NID4X": [
     {
       "type": 0,
       "value": "OK"
+    }
+  ],
+  "9QOtTR": [
+    {
+      "type": 1,
+      "value": "step"
     }
   ],
   "9TkiF9": [
@@ -521,10 +603,22 @@
       "value": "No"
     }
   ],
+  "Bt/Kkf": [
+    {
+      "type": 0,
+      "value": "completed"
+    }
+  ],
   "BwliRZ": [
     {
       "type": 0,
       "value": "Newest to Oldest"
+    }
+  ],
+  "CLW1pi": [
+    {
+      "type": 0,
+      "value": "Close"
     }
   ],
   "CabaPs": [
@@ -603,6 +697,12 @@
       "value": "Later"
     }
   ],
+  "EyxxGO": [
+    {
+      "type": 0,
+      "value": "Hint:"
+    }
+  ],
   "F/vOH1": [
     {
       "type": 0,
@@ -613,6 +713,12 @@
     {
       "type": 0,
       "value": "Home"
+    }
+  ],
+  "FKN6N8": [
+    {
+      "type": 0,
+      "value": "Add a block"
     }
   ],
   "Fbud0n": [
@@ -663,6 +769,12 @@
       "value": "No"
     }
   ],
+  "Fy9oMx": [
+    {
+      "type": 0,
+      "value": "for"
+    }
+  ],
   "G0AqB8": [
     {
       "type": 0,
@@ -679,6 +791,12 @@
     {
       "type": 0,
       "value": "Verify OTP and proceed"
+    }
+  ],
+  "Game Title": [
+    {
+      "type": 0,
+      "value": "ZombieLand"
     }
   ],
   "GhmnMb": [
@@ -729,6 +847,12 @@
       "value": "Save"
     }
   ],
+  "HTfYYv": [
+    {
+      "type": 0,
+      "value": "Play next"
+    }
+  ],
   "HZrPcB": [
     {
       "type": 0,
@@ -739,6 +863,12 @@
     {
       "type": 0,
       "value": "Register to Get help from Turtle"
+    }
+  ],
+  "I1oDxa": [
+    {
+      "type": 0,
+      "value": "Loading failed due to some unknown error! Please try again later."
     }
   ],
   "ILnphX": [
@@ -837,6 +967,12 @@
       "value": "Live Preview"
     }
   ],
+  "LuPT86": [
+    {
+      "type": 0,
+      "value": "Coins"
+    }
+  ],
   "MB8h2I": [
     {
       "type": 0,
@@ -865,6 +1001,18 @@
     {
       "type": 0,
       "value": "Trending"
+    }
+  ],
+  "NRDu9u": [
+    {
+      "type": 0,
+      "value": "Add a block"
+    }
+  ],
+  "NVk/jo": [
+    {
+      "type": 1,
+      "value": "page"
     }
   ],
   "NXV57/": [
@@ -913,6 +1061,12 @@
     {
       "type": 0,
       "value": "Run"
+    }
+  ],
+  "NtU1FI": [
+    {
+      "type": 0,
+      "value": "Problem Statement"
     }
   ],
   "O1sXEv": [
@@ -1063,6 +1217,12 @@
       "value": "ok"
     }
   ],
+  "RjBfJa": [
+    {
+      "type": 0,
+      "value": "range"
+    }
+  ],
   "S7XoqJ": [
     {
       "type": 0,
@@ -1149,6 +1309,12 @@
     {
       "type": 0,
       "value": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?"
+    }
+  ],
+  "U11WOi": [
+    {
+      "type": 0,
+      "value": "Coins Earned:"
     }
   ],
   "U3AyDz": [
@@ -1311,6 +1477,12 @@
       "value": "username"
     }
   ],
+  "YdxUNc": [
+    {
+      "type": 0,
+      "value": "moveDown"
+    }
+  ],
   "YxMMzC": [
     {
       "type": 0,
@@ -1417,6 +1589,12 @@
       "value": "Home"
     }
   ],
+  "b3hzBu": [
+    {
+      "type": 0,
+      "value": "Try again"
+    }
+  ],
   "bK9TWX": [
     {
       "type": 0,
@@ -1459,10 +1637,22 @@
       "value": "Coins"
     }
   ],
+  "cmbEDz": [
+    {
+      "type": 0,
+      "value": "Play"
+    }
+  ],
   "croLiZ": [
     {
       "type": 1,
       "value": "name"
+    }
+  ],
+  "d/zBnH": [
+    {
+      "type": 0,
+      "value": "..."
     }
   ],
   "d9u+8x": [
@@ -1479,6 +1669,12 @@
     {
       "type": 0,
       "value": "No"
+    }
+  ],
+  "dWQyF1": [
+    {
+      "type": 0,
+      "value": "Oh ho ho.. failed"
     }
   ],
   "dq9osy": [
@@ -1581,6 +1777,18 @@
     {
       "type": 1,
       "value": "gameTitle"
+    }
+  ],
+  "gTzQSp": [
+    {
+      "type": 0,
+      "value": "moveUp"
+    }
+  ],
+  "gXLFip": [
+    {
+      "type": 0,
+      "value": "in"
     }
   ],
   "hEqp4d": [
@@ -1827,6 +2035,12 @@
       "value": "Account Settings"
     }
   ],
+  "pVCbSK": [
+    {
+      "type": 0,
+      "value": "Instructions"
+    }
+  ],
   "pVIk7O": [
     {
       "type": 0,
@@ -1845,10 +2059,32 @@
       "value": "Continue Playing"
     }
   ],
+  "pmy91K": [
+    {
+      "type": 1,
+      "value": "coins"
+    },
+    {
+      "type": 0,
+      "value": " coins"
+    }
+  ],
   "pwy4hs": [
     {
       "type": 0,
       "value": "Game Progress"
+    }
+  ],
+  "pxPVWB": [
+    {
+      "type": 0,
+      "value": "moveLeft"
+    }
+  ],
+  "q+hyoH": [
+    {
+      "type": 0,
+      "value": "moveRight"
     }
   ],
   "qJ7EK+": [
@@ -1881,6 +2117,12 @@
       "value": "Grade"
     }
   ],
+  "qmXcjW": [
+    {
+      "type": 0,
+      "value": "i"
+    }
+  ],
   "qs67OI": [
     {
       "type": 0,
@@ -1909,6 +2151,12 @@
     {
       "type": 0,
       "value": "Yes"
+    }
+  ],
+  "sI7zqJ": [
+    {
+      "type": 1,
+      "value": "message"
     }
   ],
   "sNqwYF": [
@@ -1999,6 +2247,12 @@
     {
       "type": 0,
       "value": "Turtle"
+    }
+  ],
+  "wEEL+e": [
+    {
+      "type": 1,
+      "value": "studentName"
     }
   ],
   "wrdAU0": [
@@ -2113,6 +2367,44 @@
     {
       "type": 0,
       "value": "Coming soon"
+    }
+  ],
+  "zXjEvn": [
+    {
+      "type": 0,
+      "value": "sleep"
+    }
+  ],
+  "zeGEYY": [
+    {
+      "type": 0,
+      "value": "Oh ho ho.. failed"
+    }
+  ],
+  "zm0wU/": [
+    {
+      "type": 1,
+      "value": "idx"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "step"
+    }
+  ],
+  "zombieLand description": [
+    {
+      "type": 0,
+      "value": "Zombieland is a gamified approach where you will use your mind to code and help the protagonist Zombie reach his destination."
+    }
+  ],
+  "zombieLand title": [
+    {
+      "type": 0,
+      "value": "ZombieLand"
     }
   ]
 }

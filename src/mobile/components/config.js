@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { Theme } from '../common/_theme';
 import { mobileTypography } from '../../typography/_typography';
-import { Yellow } from '../../colors/_colors';
+import { LightBlue, Yellow } from '../../colors/_colors';
 
 // const font = StyleSheet.create({
 //   regular: {
@@ -201,17 +201,38 @@ const themes = {
       ...Theme.light.screenLightBlue,
       ...screenTurtleHeader,
     },
-    screenTurtleLeaderBoard: {
+    screenGameLeaderBoard: {
       ...Theme.light.screenLightBlue,
+      pointsBtnBorderColor: LightBlue.color400,
       ...screenTurtleHeader,
     },
     screenVideo: {
       ...Theme.light.screenGreen,
       ...screenWithHeader,
     },
-    screenZombieLand: {
+    screenZombieLandHome: {
       ...Theme.light.screenLightBlue,
-      ...fragmentIconDisposal,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandMain: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandQuestion: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandEditor: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandOutput: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandLeaderBoard: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
     },
     screenIde: {
       ...Theme.light.screenYellow,
@@ -399,17 +420,38 @@ const themes = {
       ...Theme.light.screenLightBlue,
       ...fragmentIconDisposal,
     },
-    screenTurtleLeaderBoard: {
+    screenGameLeaderBoard: {
       ...Theme.light.screenLightBlue,
-      ...fragmentIconDisposal,
+      pointsBtnBorderColor: LightBlue.color400,
+      ...screenTurtleHeader,
     },
     screenVideo: {
       ...Theme.light.screenGreen,
       ...screenWithHeader,
     },
-    screenZombieLand: {
+    screenZombieLandHome: {
       ...Theme.light.screenLightBlue,
-      ...fragmentIconDisposal,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandMain: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandQuestion: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandEditor: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandOutput: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandLeaderBoard: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
     },
     screenLogin: {
       ...Theme.light.screenYellow,

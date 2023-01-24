@@ -273,10 +273,10 @@ const TurtleMain = () => {
   const pageTheme = theme.screenTurtleHome;
   const style = getStyles(pageTheme, font, theme.utilColors);
 
-  const [gameScreen, setGameScreen] = React.useState({
-    currentGameScreen: 'TurtleQuestion',
-    hintContainerVisible: false,
-  });
+  // const [gameScreen, setGameScreen] = React.useState({
+  //   currentGameScreen: 'TurtleQuestion',
+  //   hintContainerVisible: false,
+  // });
 
   const {
     state: turtleQuestionState,
@@ -291,9 +291,34 @@ const TurtleMain = () => {
     isPageMounted,
   });
 
-  const handleHintVisibility = (visibility) => setGameScreen((prevState) => ({
+  const {
+    uiData: {
+      currentGameScreen,
+      hintContainerVisible,
+    },
+  } = turtleQuestionState;
+
+  const setGameScreen = (screen) => {
+    setTurtleQuestionState((prevState) => ({
+      ...prevState,
+      uiData: {
+        ...prevState.uiData,
+        currentGameScreen: screen,
+      },
+    }));
+  };
+
+  // const handleHintVisibility = (visibility) => setGameScreen((prevState) => ({
+  //   ...prevState,
+  //   hintContainerVisible: visibility,
+  // }));
+
+  const handleHintVisibility = (visibility) => setTurtleQuestionState((prevState) => ({
     ...prevState,
-    hintContainerVisible: visibility,
+    uiData: {
+      ...prevState.uiData,
+      hintContainerVisible: visibility,
+    },
   }));
 
   const { hintDetails } = turtleQuestionState;
@@ -333,23 +358,27 @@ const TurtleMain = () => {
       >
         <View style={style.container}>
           <TurtleContext.Provider value={{
-            tqState: turtleQuestionState,
-            tqSetState: setTurtleQuestionState,
+            ctxState: turtleQuestionState,
+            ctxSetState: setTurtleQuestionState,
             handleHintVisibility,
-            fetchTurtleQuestion,
+            fetchQuestion: fetchTurtleQuestion,
             getNextQuestion,
-            submitTurtle,
+            submitQuestion: submitTurtle,
           }}>
             <GameNavigator
-              ScreenArray={TurtleScreenArray}
               currentScreen={{
-                currentGameScreen: gameScreen.currentGameScreen,
+                currentGameScreen,
                 setCurrentGameScreen: setGameScreen,
-              }}/>
+              }}
+              game='turtle'
+              initialRoute='TurtleQuestion'
+              ScreenArray={TurtleScreenArray}
+              themeKey='screenTurtleQuestion'
+              />
             <HintComponent
               handleHint={handleHint}
               hintDetails={hintDetails}
-              hintVisible={gameScreen.hintContainerVisible}
+              hintVisible={hintContainerVisible}
               handleHintVisibility={handleHintVisibility}
               style={style} />
             <TurtleSuccessModal />

@@ -40,12 +40,15 @@ const RouteCertificates = loadable(() => import('./Certificates'), { fallback: <
 // const RouteAwards = loadable(() => import('./Awards'), { fallback: <Loading /> });
 // const RouteCollectibles = loadable(() => import('./Collectibles'), { fallback: <Loading /> });
 const RouteTurtle = loadable(() => import('./Turtle'), { fallback: <Loading /> });
+const RouteZombieLand = loadable(() => import('./ZombieLand'), { fallback: <Loading /> });
 // const RouteSubscription = loadable(() => import('./Subscription'), { fallback: <Loading /> });
 const RouteWebkata = loadable(() => import('./Webkata'), { fallback: <Loading /> });
 const RouteIde = loadable(() => import('./Ide'), { fallback: <Loading /> });
 
 const App = () => {
-  loginCheck();
+  React.useEffect(() => {
+    loginCheck();
+  }, []);
 
   return (
   <BrowserRouter>
@@ -101,6 +104,9 @@ const App = () => {
         <Route path='webkata/:conceptId/:id/:uniqueString' element={<RouteWebkata />} />
           {/* </Route> */}
         {/* </Route> */}
+        <Route path='zombieland' caseSensitive={true} element={<RouteZombieLand />} />
+        <Route path='zombieland/:id' element={<RouteZombieLand />} />
+        <Route path='zombieland/:id/:uniqueString' element={<RouteZombieLand />} />
       </Route>
       <Route path='/' caseSensitive={true} element={<AuthNav/>}>
         <Route path='login' caseSensitive={true} element={<RouteLogin />} />
