@@ -26,7 +26,7 @@ const AwardsProgressBar = ({
         formattedUnit = unit;
         break;
       }
-      case 'number': {
+      case 'time': {
         formattedUnit = 'time';
         break;
       }
@@ -45,7 +45,7 @@ const AwardsProgressBar = ({
 
   const getProgressSuffix = (progress, unit) => {
     let suffix = '';
-    if (unit === 'day' || unit === 'level' || unit === 'number') {
+    if (unit === 'day' || unit === 'time') {
       suffix = ordinalSuffixOf(progress);
     }
 
