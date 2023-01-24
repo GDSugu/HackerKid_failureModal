@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link, Outlet } from 'react-router-dom';
 import useRootPageState from '../../../../../hooks/pages/root';
-import '../../../../stylesheets/common/sass/components/_turtle_navBar.scss';
+import '../../../../stylesheets/common/sass/components/_game_navBar.scss';
 import Img from '../Img';
 
 const WebkataNavBar = ({

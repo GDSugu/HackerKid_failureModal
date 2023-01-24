@@ -39,6 +39,18 @@
       "value": "Yes"
     }
   ],
+  "/O26Yc": [
+    {
+      "type": 1,
+      "value": "line"
+    }
+  ],
+  "/Urdq7": [
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
   "/dnxym": [
     {
       "type": 0,
@@ -217,6 +229,12 @@
       "value": "Login with Phone"
     }
   ],
+  "30ejkF": [
+    {
+      "type": 0,
+      "value": "Close"
+    }
+  ],
   "33dFbN": [
     {
       "type": 0,
@@ -265,6 +283,18 @@
       "value": "Oh ho ho.. Requirement not satisfied"
     }
   ],
+  "4+tKRC": [
+    {
+      "type": 0,
+      "value": "Yes"
+    }
+  ],
+  "48yQvt": [
+    {
+      "type": 1,
+      "value": "activeSortName"
+    }
+  ],
   "4Ve1r3": [
     {
       "type": 0,
@@ -281,6 +311,12 @@
     {
       "type": 0,
       "value": "Your name will be shown here"
+    }
+  ],
+  "4wgAGs": [
+    {
+      "type": 0,
+      "value": "Date"
     }
   ],
   "52hsYP": [
@@ -309,6 +345,18 @@
     {
       "type": 0,
       "value": "Password"
+    }
+  ],
+  "5Ls4nU": [
+    {
+      "type": 0,
+      "value": "Publish"
+    }
+  ],
+  "5Vj22e": [
+    {
+      "type": 1,
+      "value": "swiperHeading"
     }
   ],
   "5jxN1p": [
@@ -353,6 +401,12 @@
       "value": "Login to existing Account"
     }
   ],
+  "76OIt3": [
+    {
+      "type": 0,
+      "value": "Show Leaderboard"
+    }
+  ],
   "7AMmxp": [
     {
       "type": 0,
@@ -365,22 +419,40 @@
       "value": "Login into existing account"
     }
   ],
+  "7MgXZW": [
+    {
+      "type": 1,
+      "value": "emptyStateText"
+    }
+  ],
   "7PlDmO": [
     {
       "type": 0,
       "value": "Play"
     }
   ],
-  "8R6f04": [
+  "7asVcm": [
     {
       "type": 0,
-      "value": "Coming Soon..."
+      "value": "Games"
+    }
+  ],
+  "7mn7eO": [
+    {
+      "type": 0,
+      "value": "Output will appear here"
     }
   ],
   "8cISRy": [
     {
       "type": 0,
       "value": "Time Spent:"
+    }
+  ],
+  "9+2Mm0": [
+    {
+      "type": 0,
+      "value": "IDE"
     }
   ],
   "9BVOVU": [
@@ -423,6 +495,12 @@
     {
       "type": 1,
       "value": "step"
+    }
+  ],
+  "9TkiF9": [
+    {
+      "type": 1,
+      "value": "languageTabName"
     }
   ],
   "9YoD+Y": [
@@ -531,6 +609,12 @@
       "value": "completed"
     }
   ],
+  "BwliRZ": [
+    {
+      "type": 0,
+      "value": "Newest to Oldest"
+    }
+  ],
   "CLW1pi": [
     {
       "type": 0,
@@ -551,12 +635,6 @@
     {
       "type": 0,
       "value": "Coins Earned:"
-    }
-  ],
-  "CfsqV9": [
-    {
-      "type": 0,
-      "value": "All Games"
     }
   ],
   "Ciol6I": [
@@ -643,6 +721,18 @@
       "value": "Add a block"
     }
   ],
+  "Fbud0n": [
+    {
+      "type": 1,
+      "value": "problemStatement"
+    }
+  ],
+  "FhNWty": [
+    {
+      "type": 0,
+      "value": "Publish"
+    }
+  ],
   "FhTUgw": [
     {
       "type": 0,
@@ -671,6 +761,12 @@
     {
       "type": 0,
       "value": "Go to Login"
+    }
+  ],
+  "Fr6aaO": [
+    {
+      "type": 0,
+      "value": "No"
     }
   ],
   "Fy9oMx": [
@@ -703,6 +799,30 @@
       "value": "ZombieLand"
     }
   ],
+  "GhmnMb": [
+    {
+      "type": 0,
+      "value": "Private Test Case "
+    },
+    {
+      "type": 1,
+      "value": "testCaseNumber"
+    },
+    {
+      "type": 0,
+      "value": " - "
+    },
+    {
+      "type": 1,
+      "value": "result"
+    }
+  ],
+  "Gmgyiq": [
+    {
+      "type": 0,
+      "value": "Move to drafts"
+    }
+  ],
   "Gon8SN": [
     {
       "type": 0,
@@ -725,6 +845,12 @@
     {
       "type": 0,
       "value": "Save"
+    }
+  ],
+  "HTfYYv": [
+    {
+      "type": 0,
+      "value": "Play next"
     }
   ],
   "HZrPcB": [
@@ -823,6 +949,24 @@
       "value": "Share"
     }
   ],
+  "LbCDj2": [
+    {
+      "type": 0,
+      "value": "Move to Drafts"
+    }
+  ],
+  "LdJ4cq": [
+    {
+      "type": 1,
+      "value": "gameTitle"
+    }
+  ],
+  "LoAPT7": [
+    {
+      "type": 0,
+      "value": "Live Preview"
+    }
+  ],
   "LuPT86": [
     {
       "type": 0,
@@ -845,6 +989,18 @@
     {
       "type": 1,
       "value": "hint"
+    }
+  ],
+  "Mh1d7/": [
+    {
+      "type": 0,
+      "value": "Loading..."
+    }
+  ],
+  "Mp8KyV": [
+    {
+      "type": 0,
+      "value": "Trending"
     }
   ],
   "NRDu9u": [
@@ -899,6 +1055,12 @@
     {
       "type": 0,
       "value": "Go to login"
+    }
+  ],
+  "NsygW3": [
+    {
+      "type": 0,
+      "value": "Run"
     }
   ],
   "NtU1FI": [
@@ -1059,6 +1221,18 @@
     {
       "type": 0,
       "value": "range"
+    }
+  ],
+  "S7XoqJ": [
+    {
+      "type": 0,
+      "value": "PLAY"
+    }
+  ],
+  "SI6+pb": [
+    {
+      "type": 0,
+      "value": "Problem Statement"
     }
   ],
   "SL6O2c": [
@@ -1481,6 +1655,16 @@
       "value": "..."
     }
   ],
+  "d9u+8x": [
+    {
+      "type": 0,
+      "value": "Webkata - "
+    },
+    {
+      "type": 1,
+      "value": "concept"
+    }
+  ],
   "dNWhFj": [
     {
       "type": 0,
@@ -1587,6 +1771,12 @@
     {
       "type": 0,
       "value": "Name"
+    }
+  ],
+  "gPWy9r": [
+    {
+      "type": 1,
+      "value": "gameTitle"
     }
   ],
   "gTzQSp": [
@@ -1833,12 +2023,6 @@
       "value": "Account Settings"
     }
   ],
-  "oDenEU": [
-    {
-      "type": 0,
-      "value": "Turtle"
-    }
-  ],
   "oOZkkL": [
     {
       "type": 0,
@@ -1861,6 +2045,18 @@
     {
       "type": 0,
       "value": "Turtle"
+    }
+  ],
+  "pgAgVI": [
+    {
+      "type": 1,
+      "value": "emptyStateText"
+    }
+  ],
+  "pl4ED2": [
+    {
+      "type": 0,
+      "value": "Continue Playing"
     }
   ],
   "pmy91K": [
@@ -1891,10 +2087,22 @@
       "value": "moveRight"
     }
   ],
+  "qJ7EK+": [
+    {
+      "type": 1,
+      "value": "challengeName"
+    }
+  ],
   "qTQ8nP": [
     {
       "type": 1,
       "value": "coinsEarned"
+    }
+  ],
+  "qTebrI": [
+    {
+      "type": 0,
+      "value": "Problem Statement"
     }
   ],
   "qUU2pp": [
@@ -1915,6 +2123,12 @@
       "value": "i"
     }
   ],
+  "qs67OI": [
+    {
+      "type": 0,
+      "value": "Problem Statement:"
+    }
+  ],
   "quRCCv": [
     {
       "type": 0,
@@ -1931,6 +2145,12 @@
     {
       "type": 0,
       "value": "Copy Link"
+    }
+  ],
+  "sC1GR3": [
+    {
+      "type": 0,
+      "value": "Yes"
     }
   ],
   "sI7zqJ": [
