@@ -11,12 +11,6 @@
       "value": "Email"
     }
   ],
-  "+W9QuT": [
-    {
-      "type": 1,
-      "value": "rarity"
-    }
-  ],
   "+f2V2I": [
     {
       "type": 1,
@@ -223,12 +217,6 @@
       "value": "Login with Phone"
     }
   ],
-  "369aS4": [
-    {
-      "type": 1,
-      "value": "collectibleRarity"
-    }
-  ],
   "3M/P3n": [
     {
       "type": 1,
@@ -251,12 +239,6 @@
     {
       "type": 1,
       "value": "activeSortName"
-    }
-  ],
-  "4M3tqk": [
-    {
-      "type": 1,
-      "value": "awardSubtitle"
     }
   ],
   "4Ve1r3": [
@@ -347,6 +329,12 @@
       "value": "Login to existing Account"
     }
   ],
+  "7HqC7J": [
+    {
+      "type": 0,
+      "value": "Previous"
+    }
+  ],
   "7L3+7M": [
     {
       "type": 0,
@@ -377,20 +365,16 @@
       "value": "OK"
     }
   ],
-  "9VZomF": [
-    {
-      "type": 1,
-      "value": "nextStreakCount"
-    },
-    {
-      "type": 0,
-      "value": " days"
-    }
-  ],
   "9YoD+Y": [
     {
       "type": 0,
       "value": "New Password"
+    }
+  ],
+  "9fgz0H": [
+    {
+      "type": 1,
+      "value": "awardName"
     }
   ],
   "9gqH2W": [
@@ -487,12 +471,6 @@
       "value": "Newest to Oldest"
     }
   ],
-  "CJJGyw": [
-    {
-      "type": 0,
-      "value": "Collectibles"
-    }
-  ],
   "CabaPs": [
     {
       "type": 0,
@@ -525,12 +503,6 @@
     {
       "type": 0,
       "value": "This is about page"
-    }
-  ],
-  "D81PjZ": [
-    {
-      "type": 1,
-      "value": "collectibleName"
     }
   ],
   "DBTgpi": [
@@ -583,6 +555,12 @@
       "value": "Alphabetical"
     }
   ],
+  "EfoM5G": [
+    {
+      "type": 0,
+      "value": "No Certificates Found"
+    }
+  ],
   "EhuHU0": [
     {
       "type": 1,
@@ -605,12 +583,6 @@
     {
       "type": 0,
       "value": "Home"
-    }
-  ],
-  "FKWXaq": [
-    {
-      "type": 1,
-      "value": "awardSubtitle"
     }
   ],
   "FhTUgw": [
@@ -745,10 +717,10 @@
       "value": "Awards"
     }
   ],
-  "JL7NkW": [
+  "JbsY5u": [
     {
       "type": 0,
-      "value": "See More"
+      "value": "No Awards Found!"
     }
   ],
   "JnwRMJ": [
@@ -1149,12 +1121,6 @@
       "value": "No Certificates Found"
     }
   ],
-  "WRD14Z": [
-    {
-      "type": 0,
-      "value": "Collectibles"
-    }
-  ],
   "WSWTC5": [
     {
       "type": 0,
@@ -1171,6 +1137,12 @@
     {
       "type": 0,
       "value": "Login into existing account"
+    }
+  ],
+  "XMB1Ot": [
+    {
+      "type": 0,
+      "value": "No Awards Found"
     }
   ],
   "XQ/d5T": [
@@ -1291,16 +1263,6 @@
     {
       "type": 1,
       "value": "name"
-    }
-  ],
-  "d6pc+m": [
-    {
-      "type": 1,
-      "value": "currentStreakCount"
-    },
-    {
-      "type": 0,
-      "value": " days"
     }
   ],
   "dNWhFj": [
@@ -1685,12 +1647,6 @@
       "value": "Go to Home"
     }
   ],
-  "sxkyOB": [
-    {
-      "type": 0,
-      "value": "Collectibles"
-    }
-  ],
   "tbPLF3": [
     {
       "type": 1,
@@ -1709,16 +1665,22 @@
       "value": "Continue Playing"
     }
   ],
+  "uGaPLK": [
+    {
+      "type": 1,
+      "value": "awardDescription"
+    }
+  ],
   "uGb/uS": [
     {
       "type": 1,
       "value": "message"
     }
   ],
-  "uLdABz": [
+  "ueVo+G": [
     {
-      "type": 1,
-      "value": "collectibleType"
+      "type": 0,
+      "value": "Today"
     }
   ],
   "uhayi4": [
@@ -1761,12 +1723,6 @@
     {
       "type": 0,
       "value": "Turtle"
-    }
-  ],
-  "wQ0dFp": [
-    {
-      "type": 0,
-      "value": "See Less Awards"
     }
   ],
   "wrdAU0": [
@@ -1845,6 +1801,12 @@
     {
       "type": 0,
       "value": "Name"
+    }
+  ],
+  "zHOHQO": [
+    {
+      "type": 0,
+      "value": "See Less Awards"
     }
   ],
   "zKBXVr": [

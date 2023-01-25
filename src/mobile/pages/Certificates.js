@@ -12,6 +12,7 @@ import {
   Image,
   Platform,
   PermissionsAndroid,
+  ActivityIndicator,
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import moment from 'moment';
@@ -295,7 +296,7 @@ const Certificates = ({ navigation }) => {
       if (timeStampToCertificateMap[certificate.createdAt]) {
         timeStampToCertificateMap[certificate.createdAt].push(certificate);
       } else {
-        timeStampToCertificateMap[certificate.createdAt] = certificate;
+        timeStampToCertificateMap[certificate.createdAt] = [certificate];
       }
     });
 
@@ -304,13 +305,19 @@ const Certificates = ({ navigation }) => {
     const finalList = {};
 
     sortedKeys.forEach((timeStamp) => {
-      const dateString = moment.unix(timeStamp).format('DD/MM/YYYY');
+      const timeStampDMY = moment.unix(timeStamp).format('DD/MM/YYYY');
+      const nowDMY = moment().format('DD/MM/YYYY');
+      const yesterdayDMY = moment().subtract(1, 'days').format('DD/MM/YYYY');
 
-      if (finalList[dateString]) {
-        finalList[dateString].push(timeStampToCertificateMap[timeStamp]);
-      } else {
-        finalList[dateString] = [timeStampToCertificateMap[timeStamp]];
+      let dateString = moment.unix(timeStamp).format('DD/MM/YYYY');
+
+      if (timeStampDMY === nowDMY) {
+        dateString = 'Today';
+      } else if (timeStampDMY === yesterdayDMY) {
+        dateString = 'Yesterday';
       }
+
+      finalList[dateString] = timeStampToCertificateMap[timeStamp];
     });
 
     setCurrentList(finalList);
@@ -468,6 +475,9 @@ const Certificates = ({ navigation }) => {
   return <>
     <ScrollView
       style={[style.container, style.mainContainer]}>
+      {
+        !currentList && <ActivityIndicator size="large" color={'black'} style={{ marginTop: 40 }} />
+      }
       {
         (originalCertificatesList.length > 0)
         && <View style={style.controls}>

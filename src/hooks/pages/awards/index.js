@@ -141,7 +141,7 @@ const useAwards = ({ isPageMounted, initializeData = true }) => {
   return {
     awardsState,
     setState,
-    setAwards: setAwardsState,
+    setAwardsState,
     getAwards,
   };
 };

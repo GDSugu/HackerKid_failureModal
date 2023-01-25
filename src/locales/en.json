@@ -7,10 +7,6 @@
     "defaultMessage": "Email",
     "description": "Email Button Title"
   },
-  "+W9QuT": {
-    "defaultMessage": "{rarity}",
-    "description": "rarity indicator"
-  },
   "+f2V2I": {
     "defaultMessage": "{currentProgress} {unit}",
     "description": "current progress"
@@ -134,10 +130,6 @@
     "defaultMessage": "Login with Phone",
     "description": "Login with Phone tab"
   },
-  "369aS4": {
-    "defaultMessage": "{collectibleRarity}",
-    "description": "collectible rarity"
-  },
   "3M/P3n": {
     "defaultMessage": "{dateString}",
     "description": "date"
@@ -153,10 +145,6 @@
   "48yQvt": {
     "defaultMessage": "{activeSortName}",
     "description": "sort button text"
-  },
-  "4M3tqk": {
-    "defaultMessage": "{awardSubtitle}",
-    "description": "award subtitle"
   },
   "4Ve1r3": {
     "defaultMessage": "Ok",
@@ -214,6 +202,10 @@
     "defaultMessage": "Login to existing Account",
     "description": "Login to existing account button"
   },
+  "7HqC7J": {
+    "defaultMessage": "Previous",
+    "description": "previous section title"
+  },
   "7L3+7M": {
     "defaultMessage": "Login into existing account",
     "description": "Login into existing account button"
@@ -234,13 +226,13 @@
     "defaultMessage": "OK",
     "description": "OK"
   },
-  "9VZomF": {
-    "defaultMessage": "{nextStreakCount} days",
-    "description": "next streak count"
-  },
   "9YoD+Y": {
     "defaultMessage": "New Password",
     "description": "New Password Label"
+  },
+  "9fgz0H": {
+    "defaultMessage": "{awardName}",
+    "description": "award name"
   },
   "9gqH2W": {
     "defaultMessage": "Login",
@@ -302,10 +294,6 @@
     "defaultMessage": "Newest to Oldest",
     "description": "sort dropdown button text"
   },
-  "CJJGyw": {
-    "defaultMessage": "Collectibles",
-    "description": "collection header"
-  },
   "CabaPs": {
     "defaultMessage": "Level {level}",
     "description": "Level 1 navigation link"
@@ -325,10 +313,6 @@
   "D/2aSY": {
     "defaultMessage": "This is about page",
     "description": "Page description"
-  },
-  "D81PjZ": {
-    "defaultMessage": "{collectibleName}",
-    "description": "collectible name"
   },
   "DBTgpi": {
     "defaultMessage": "completed",
@@ -358,6 +342,10 @@
     "defaultMessage": "Alphabetical",
     "description": "sort dropdown button text"
   },
+  "EfoM5G": {
+    "defaultMessage": "No Certificates Found",
+    "description": "error text"
+  },
   "EhuHU0": {
     "defaultMessage": "{errorMessage}",
     "description": "password form helper"
@@ -373,10 +361,6 @@
   "FIcBXp": {
     "defaultMessage": "Home",
     "description": "home heading"
-  },
-  "FKWXaq": {
-    "defaultMessage": "{awardSubtitle}",
-    "description": "award title"
   },
   "FhTUgw": {
     "defaultMessage": "Not {phone} ?",
@@ -449,9 +433,9 @@
     "defaultMessage": "Awards",
     "description": "Awards heading"
   },
-  "JL7NkW": {
-    "defaultMessage": "See More",
-    "description": "see more text"
+  "JbsY5u": {
+    "defaultMessage": "No Awards Found!",
+    "description": "error message"
   },
   "JnwRMJ": {
     "defaultMessage": "OTP",
@@ -712,10 +696,6 @@
   "WR+Too": {
     "defaultMessage": "No Certificates Found"
   },
-  "WRD14Z": {
-    "defaultMessage": "Collectibles",
-    "description": "collectibles page link"
-  },
   "WSWTC5": {
     "defaultMessage": "Play",
     "description": "Play button"
@@ -727,6 +707,10 @@
   "X1rCRf": {
     "defaultMessage": "Login into existing account",
     "description": "login into existing account button"
+  },
+  "XMB1Ot": {
+    "defaultMessage": "No Awards Found",
+    "description": "error text"
   },
   "XQ/d5T": {
     "defaultMessage": "Please login again",
@@ -806,10 +790,6 @@
   "croLiZ": {
     "defaultMessage": "{name}",
     "description": "name"
-  },
-  "d6pc+m": {
-    "defaultMessage": "{currentStreakCount} days",
-    "description": "current streak"
   },
   "dNWhFj": {
     "defaultMessage": "No",
@@ -1053,10 +1033,6 @@
     "defaultMessage": "Go to Home",
     "description": "Link description"
   },
-  "sxkyOB": {
-    "defaultMessage": "Collectibles",
-    "description": "Awards heading"
-  },
   "tbPLF3": {
     "defaultMessage": "{step}",
     "description": "turtle instruction"
@@ -1069,13 +1045,17 @@
     "defaultMessage": "Continue Playing",
     "description": "continue playing"
   },
+  "uGaPLK": {
+    "defaultMessage": "{awardDescription}",
+    "description": "award description"
+  },
   "uGb/uS": {
     "defaultMessage": "{message}",
     "description": "Success message"
   },
-  "uLdABz": {
-    "defaultMessage": "{collectibleType}",
-    "description": "collectible type"
+  "ueVo+G": {
+    "defaultMessage": "Today",
+    "description": "today section title"
   },
   "uhayi4": {
     "defaultMessage": "{errorMessage}",
@@ -1104,10 +1084,6 @@
   "viQX0N": {
     "defaultMessage": "Turtle",
     "description": "Game Title"
-  },
-  "wQ0dFp": {
-    "defaultMessage": "See Less Awards",
-    "description": "see Less awards btn text"
   },
   "wrdAU0": {
     "defaultMessage": "Help",
@@ -1160,6 +1136,10 @@
   "z9lFwl": {
     "defaultMessage": "Name",
     "description": "Profile name label"
+  },
+  "zHOHQO": {
+    "defaultMessage": "See Less Awards",
+    "description": "see less awards btn text"
   },
   "zKBXVr": {
     "defaultMessage": "Try Now",

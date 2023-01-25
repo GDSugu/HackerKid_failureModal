@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Skeleton } from '@rneui/base';
 import { FormattedMessage } from 'react-intl';
-import LinearGradient from 'react-native-linear-gradient';
+// import LinearGradient from 'react-native-linear-gradient';
 import ThemeContext from '../components/theme';
 import LeaderboardSvg from '../../images/more/leaderboard.svg';
 import GameIcon from '../../images/common/black-joystick.svg';
@@ -17,10 +17,11 @@ import ShareIcon from '../../images/common/black-share-icon.svg';
 import Icon from '../common/Icons';
 import { useGetSession } from '../../hooks/pages/root';
 import { useProfileInfo } from '../../hooks/pages/profile';
-import Award1Icon from '../../images/achievements/award1.png';
+// import Award1Icon from '../../images/achievements/award1.png';
 import hkcoin from '../../images/common/hkcoin.png';
-import collectible1 from '../../images/collectibles/collectible1.png';
+// import collectible1 from '../../images/collectibles/collectible1.png';
 import ShareModal from '../components/Modals/ShareModal';
+import { useAwards } from '../../hooks/pages/awards';
 
 const getStyles = (theme, utilColors, font, gradients) => StyleSheet.create({
   container: {
@@ -221,115 +222,96 @@ const CertificateList = ({ style, certificates, onShareBtnPress }) => {
 
 const AwardsGrid = ({
   style,
-  // awards,
+  awards,
 }) => <View style={style.awardsContainer}>
-    <View style={[style.awardCard, style.awardsCardBg, style.borderRadius12]}>
-      <Image
-        style={style.awardIcon}
-        source={Award1Icon}
-      />
-    </View>
-    <View style={[style.awardCard, style.awardsCardBg, style.borderRadius12]}>
-      <Image
-        style={style.awardIcon}
-        source={Award1Icon}
-      />
-    </View>
-    <View style={[style.awardCard, style.awardsCardBg, style.borderRadius12]}>
-      <Image
-        style={style.awardIcon}
-        source={Award1Icon}
-      />
-    </View>
-    <View style={[style.awardCard, style.awardsCardBg, style.borderRadius12]}>
-      <Image
-        style={style.awardIcon}
-        source={Award1Icon}
-      />
-    </View>
-    <View style={[style.awardCard, style.awardsCardBg, style.borderRadius12]}>
-      <Image
-        style={style.awardIcon}
-        source={Award1Icon}
-      />
-    </View>
-    <View style={[style.awardCard, style.awardsCardBg, style.borderRadius12]}>
-      <Image
-        style={style.awardIcon}
-        source={Award1Icon}
-      />
-    </View>
-    <View style={[style.awardCard, style.awardsCardBg, style.borderRadius12]}>
-      <Image
-        style={style.awardIcon}
-        source={Award1Icon}
-      />
-    </View>
+    {
+      awards && awards.map((award, idx) => <View
+        key={idx}
+        style={[style.awardCard, style.awardsCardBg, style.borderRadius12]}>
+        <Image
+          style={style.awardIcon}
+          source={{ uri: award.awardImage }}
+        />
+      </View>)
+    }
+    {
+      (awards && awards.length === 0) && <Text style={[style.heading, style.textColor1]}>
+        <FormattedMessage defaultMessage={'No Awards Found'} description='error text' />
+      </Text>
+    }
+    {
+      !awards
+      && [1, 2, 3, 4, 5].map((_, idx) => <Skeleton
+        key={idx}
+        style={[style.awardCard, style.borderRadius12]} />)
+    }
   </View>;
 
-const CollectibleCard = ({ style, rarity, contentContainerStyle = {} }) => <View
-  style={[style.collectibleCard, style.borderRadius12, contentContainerStyle]}>
-  <LinearGradient
-    start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
-    colors={style[`${rarity}Gradient`]}
-    style={style.rarityIndicator}
-    useAngle={true}
-    angle={270}
-  >
-    <Text style={[style.textColor2, style.smallestText, { textTransform: 'capitalize' }]}>
-      <FormattedMessage
-        defaultMessage={'{rarity}'}
-        description='rarity indicator'
-        values={{
-          rarity,
-        }}
-      />
-    </Text>
-  </LinearGradient>
-  <Image
-    style={style.collectibleCardImg}
-    source={collectible1} />
-</View>;
+// const CollectibleCard = ({ style, rarity, contentContainerStyle = {} }) => <View
+//   style={[style.collectibleCard, style.borderRadius12, contentContainerStyle]}>
+//   <LinearGradient
+//     start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+//     colors={style[`${rarity}Gradient`]}
+//     style={style.rarityIndicator}
+//     useAngle={true}
+//     angle={270}
+//   >
+//     <Text style={[style.textColor2, style.smallestText, { textTransform: 'capitalize' }]}>
+//       <FormattedMessage
+//         defaultMessage={'{rarity}'}
+//         description='rarity indicator'
+//         values={{
+//           rarity,
+//         }}
+//       />
+//     </Text>
+//   </LinearGradient>
+//   <Image
+//     style={style.collectibleCardImg}
+//     source={collectible1} />
+// </View>;
 
-const CollectiblesGrid = ({
-  style,
-  navigation,
-  // collectibles,
-}) => {
-  // const getCollectibleCardStyle = (index) => {
-  //   if (index % 2 === 0) {
-  //     return [style.collectibleCard, style.borderRadius12];
-  //   }
+// const CollectiblesGrid = ({
+//   style,
+//   navigation,
+//   // collectibles,
+// }) => {
+//   // const getCollectibleCardStyle = (index) => {
+//   //   if (index % 2 === 0) {
+//   //     return [style.collectibleCard, style.borderRadius12];
+//   //   }
 
-  //   return [style.collectibleCard, style.borderRadius12, { marginRight: 5, marginBottom: 5 }];
-  // };
-  const rarity = 'rare';
+//   //   return [style.collectibleCard, style.borderRadius12, { marginRight: 5, marginBottom: 5 }];
+//   // };
+//   const rarity = 'rare';
 
-  return <View style={style.collectibleGrid}>
-    <CollectibleCard
-      style={style}
-      rarity={rarity}
-      contentContainerStyle={{ marginRight: 10, marginBottom: 10 }} />
-    <CollectibleCard
-      style={style}
-      rarity={rarity}
-      contentContainerStyle={{ marginBottom: 10 }}
-    />
-    <CollectibleCard
-      style={style}
-      rarity={rarity}
-      contentContainerStyle={{ marginBottom: 10, marginRight: 10 }}
-    />
-    <TouchableOpacity onPress={() => navigation.navigate('AwardsCollectibles')}>
-      <View style={[style.collectibleCard, style.borderRadius12]}>
-        <Icon type='FontAwesome5' name={'plus'} size={style.btnText.fontSize} color={style.textColor3.color} />
-        <Text style={[style.textColor3, style.btnText, style.seeMoreText]}>
-          <FormattedMessage defaultMessage={'See More'} description='see more text' />
-        </Text>
-      </View>
-    </TouchableOpacity>
-  </View>;
-};
+//   return <View style={style.collectibleGrid}>
+//     <CollectibleCard
+//       style={style}
+//       rarity={rarity}
+//       contentContainerStyle={{ marginRight: 10, marginBottom: 10 }} />
+//     <CollectibleCard
+//       style={style}
+//       rarity={rarity}
+//       contentContainerStyle={{ marginBottom: 10 }}
+//     />
+//     <CollectibleCard
+//       style={style}
+//       rarity={rarity}
+//       contentContainerStyle={{ marginBottom: 10, marginRight: 10 }}
+//     />
+//     <TouchableOpacity onPress={() => navigation.navigate('AwardsCollectibles')}>
+//       <View style={[style.collectibleCard, style.borderRadius12]}>
+//         <Icon
+//          type = 'FontAwesome5'
+//          name = { 'plus'} size = { style.btnText.fontSize } color = { style.textColor3.color } />
+//         <Text style={[style.textColor3, style.btnText, style.seeMoreText]}>
+//           <FormattedMessage defaultMessage={'See More'} description='see more text' />
+//         </Text>
+//       </View>
+//     </TouchableOpacity>
+//   </View>;
+// };
 
 const Button = ({
   style, onPress, text,
@@ -357,12 +339,18 @@ const Achievements = ({ navigation }) => {
   } = useProfileInfo({ isPageMounted });
   const {
     state: {
+      status: gameDetailsStatus,
       gameDetails,
     },
     getProfileData,
   } = useProfileInfo({ isPageMounted, action: 'getProfileData', uniqueurl: uniqueUrl });
 
+  const { awardsState, getAwards } = useAwards({ isPageMounted, initializeData: false });
   const { pointsEarned } = session;
+
+  const {
+    awards,
+  } = awardsState;
 
   // styles
   const { font, theme } = useContext(ThemeContext);
@@ -371,10 +359,19 @@ const Achievements = ({ navigation }) => {
 
   // side effects
   React.useEffect(() => {
+    console.log(uniqueUrl);
     if (uniqueUrl) {
       getProfileData({ cached: false });
     }
   }, [uniqueUrl]);
+
+  React.useEffect(() => {
+    getAwards({ cached: false, limit: 5, sort: 'posted' });
+
+    return () => {
+      isPageMounted.current = false;
+    };
+  }, []);
 
   return (<>
     <ScrollView style={[style.container, style.mainContainer]}>
@@ -407,19 +404,22 @@ const Achievements = ({ navigation }) => {
         <Text style={[style.heading, style.textColor1]}>
           <FormattedMessage defaultMessage={'Certificates'} description='certificate heading' />
         </Text>
-        <CertificateList
-          style={style}
-          certificates={gameDetails
-            ? Object.values(gameDetails[0].certificateData) : undefined}
-          onShareBtnPress={(certificateId) => {
-            setToShareCertificateId(certificateId);
-            setShareModalOpen(true);
-          }}
-        />
+        {
+          (gameDetailsStatus === 'error') ? <Text style={[style.heading, style.textColor1]}>
+            <FormattedMessage defaultMessage={'No Certificates Found'} description='error text' />
+          </Text> : <CertificateList
+            style={style}
+            certificates={gameDetails
+              ? Object.values(gameDetails[0].certificateData) : undefined}
+            onShareBtnPress={(certificateId) => {
+              setToShareCertificateId(certificateId);
+              setShareModalOpen(true);
+            }}
+          />
+        }
         {
           gameDetails
-          && gameDetails[0].certificateData
-          && Boolean(gameDetails[0].length)
+          && !!gameDetails[0]
           && <Button
             text={'View Certificates'}
             style={style}
@@ -427,23 +427,23 @@ const Achievements = ({ navigation }) => {
           />
         }
       </View>
-      <View style={style.section}>
+      <View style={[style.section, { marginBottom: 25 }]}>
         <Text style={[style.heading, style.textColor1]}>
           <FormattedMessage defaultMessage={'Awards'} description='Awards heading' />
         </Text>
-        <AwardsGrid style={style} />
+        <AwardsGrid style={style} awards={awards} />
         <Button
           text={'View Awards'}
           style={style}
           onPress={() => navigation.navigate('AwardsCollectibles')}
         />
       </View>
-      <View style={style.section}>
+      {/* <View style={style.section}>
         <Text style={[style.heading, style.textColor1]}>
           <FormattedMessage defaultMessage={'Collectibles'} description='Awards heading' />
         </Text>
         <CollectiblesGrid style={style} navigation={navigation} />
-      </View>
+      </View> */}
     </ScrollView>
     <ShareModal open={shareModalOpen} setOpen={setShareModalOpen} shareLink={`www.hackerkid.org/certificate/view/${toShareCertificateId}`} />
   </>
