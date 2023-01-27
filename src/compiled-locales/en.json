@@ -177,6 +177,12 @@
       "value": "Continue"
     }
   ],
+  "2RoU+R": [
+    {
+      "type": 1,
+      "value": "countryName"
+    }
+  ],
   "2Tu0HO": [
     {
       "type": 0,
@@ -2013,12 +2019,6 @@
     {
       "type": 0,
       "value": "No feed to show"
-    }
-  ],
-  "ybULra": [
-    {
-      "type": 0,
-      "value": "Country"
     }
   ],
   "yjWbPf": [

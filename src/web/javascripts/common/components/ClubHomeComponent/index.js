@@ -266,91 +266,96 @@ const ClubListContainer = ({ clubList, isDesktop, onClubClick = () => {} }) => <
       </div>
     </>
   }
-  <div className="browse-club-heading">
-    <p>
-      <FormattedMessage
-        defaultMessage={'Browse clubs:'}
-        description={'Browse clubs heading'}
-      />
-    </p>
-    <div className="input-group">
-      <div className="input-group-prepend">
-        <i className="fas fa-search"></i>
-      </div>
-      <input type="text" className="form-control" placeholder="Search" />
-    </div>
-  </div>
-  <div className="club-list">
-    {
-      clubList.map((club, index) => <div key={index}>
-        <div className="club-card" onClick={() => onClubClick(club)}>
-          <div className="club-card-img">
-            <Img
-              src={club.clubImage}
-              fallback={'clubs/club.png'}
-              alt='Club Display Picture'
-              local={false}
-            />
+  {
+    clubList && clubList?.length > 0
+    && <>
+      <div className="browse-club-heading">
+        <p>
+          <FormattedMessage
+            defaultMessage={'Browse clubs:'}
+            description={'Browse clubs heading'}
+          />
+        </p>
+        <div className="input-group">
+          <div className="input-group-prepend">
+            <i className="fas fa-search"></i>
           </div>
-          <div className="club-card-data">
-            <div className="d-flex align-items-start justify-content-between">
-              <div className="club-card-name">
-                <p className='mb-0'>
-                  <FormattedMessage
-                    defaultMessage={'{name}'}
-                    description={'club name'}
-                    values={{ name: club.clubName }}
-                  />
-                </p>
-              </div>
-              <div className="club-card-rank">
-                <p className='mb-0'>
-                  <FormattedMessage
-                    defaultMessage={'#{rank} rank'}
-                    description={'club rank'}
-                    values={{ rank: club.rank }}
-                  />
-                </p>
-              </div>
-            </div>
-            <div className="d-flex align-items-end">
-              <div className="col">
-                <div className="d-flex align-items-center">
-                  <Img
-                    className='club-coin-img'
-                    src={'common/hkcoin.png'}
-                    fallback={'common/hkcoin.png'}
-                    alt='HK Coin'
-                  />
-                  <p className='mb-0'>
-                    <FormattedMessage
-                      defaultMessage={'{coins}'}
-                      description={'club coins'}
-                      values={{ coins: club.clubPoints }}
-                    />
-                  </p>
-                </div>
-              </div>
-              <div className="col">
-                <div className="d-flex align-items-center">
-                  <picture className='club-members-img'>
-                    <img src={'../../../../images/clubs/members.svg'} alt='Club members' />
-                  </picture>
-                  <p className='mb-0'>
-                    <FormattedMessage
-                      defaultMessage={'{membersCount}'}
-                      description={'club members count'}
-                      values={{ membersCount: club.membersCount }}
-                    />
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <input type="text" className="form-control" placeholder="Search" />
         </div>
-      </div>)
-    }
-  </div>
+      </div>
+      <div className="club-list">
+        {
+          clubList.map((club, index) => <div key={index}>
+            <div className="club-card" onClick={() => onClubClick(club)}>
+              <div className="club-card-img">
+                <Img
+                  src={club.clubImage}
+                  fallback={'clubs/club.png'}
+                  alt='Club Display Picture'
+                  local={false}
+                />
+              </div>
+              <div className="club-card-data">
+                <div className="d-flex align-items-start justify-content-between">
+                  <div className="club-card-name">
+                    <p className='mb-0'>
+                      <FormattedMessage
+                        defaultMessage={'{name}'}
+                        description={'club name'}
+                        values={{ name: club.clubName }}
+                      />
+                    </p>
+                  </div>
+                  <div className="club-card-rank">
+                    <p className='mb-0'>
+                      <FormattedMessage
+                        defaultMessage={'#{rank} rank'}
+                        description={'club rank'}
+                        values={{ rank: club.rank }}
+                      />
+                    </p>
+                  </div>
+                </div>
+                <div className="d-flex align-items-end">
+                  <div className="col">
+                    <div className="d-flex align-items-center">
+                      <Img
+                        className='club-coin-img'
+                        src={'common/hkcoin.png'}
+                        fallback={'common/hkcoin.png'}
+                        alt='HK Coin'
+                      />
+                      <p className='mb-0'>
+                        <FormattedMessage
+                          defaultMessage={'{coins}'}
+                          description={'club coins'}
+                          values={{ coins: club.clubPoints }}
+                        />
+                      </p>
+                    </div>
+                  </div>
+                  <div className="col">
+                    <div className="d-flex align-items-center">
+                      <picture className='club-members-img'>
+                        <img src={'../../../../images/clubs/members.svg'} alt='Club members' />
+                      </picture>
+                      <p className='mb-0'>
+                        <FormattedMessage
+                          defaultMessage={'{membersCount}'}
+                          description={'club members count'}
+                          values={{ membersCount: club.membersCount }}
+                        />
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>)
+        }
+      </div>
+    </>
+  }
 </>;
 
 const CreateClubStepContainer = () => {
@@ -1406,7 +1411,7 @@ const JoinClubContent = () => {
               description={'description'}
             />
           </label>
-          <input type="text" className="form-control" name="link" id="link" aria-describedby="clubLink" placeholder="Paste the invite link here" />
+          <input type="text" className="form-control" name="link" id="link" aria-describedby="link" placeholder="Paste the invite link here" />
         </div>
         <button type="button" name="joinBtn" id="joinBtn" className="btn btn-primary btn-lg btn-block" onClick={handleJoinClubBtn}>
           <div className="d-flex align-items-center justify-content-between">
@@ -1535,7 +1540,7 @@ const JoinClubContent = () => {
             ))
           }
           {
-            clubInvites.length === 0
+            (!clubInvites || clubInvites === undefined || clubInvites?.length === 0)
             && <div className="no-invites">
               <p className='mb-0'>
                 <FormattedMessage
