@@ -79,3 +79,22 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin flex-align-center($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+}
+
+@mixin flex-justify-center($direction:row) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+}
+
+@mixin flex-justify-align($direction:row, $justify:normal, $align: normal) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}

@@ -49,11 +49,21 @@ const Img = ({
     }
   }, []);
 
+  React.useEffect(() => {
+    if (!local) {
+      if (src) {
+        setImgSrc(src);
+      } else {
+        setImgSrc(`${imgPath + fallback}`);
+      }
+    }
+  }, [src]);
+
   return <>
     {
       local && imgType === 'image' && <picture style={style} className={className}>
-      <source media='(max-width: 500px)' srcSet={`${imgPath}/resized/${fileName}-1000w.webp`} type="image/webp" />
-        { !useSource && <source media="(min-width: 1200px)" srcSet={`${imgPath + src}`} type="image/png" />}
+        <source media='(max-width: 500px)' srcSet={`${imgPath}/resized/${fileName}-1000w.webp`} type="image/webp" />
+        {!useSource && <source media="(min-width: 1200px)" srcSet={`${imgPath + src}`} type="image/png" />}
         <source srcSet={`${imgPath}/webps/${fileName}.webp`} type="image/webp"></source>
         <img srcSet={`${imgPath}/resized/${fileName}-1000w.${fileExtension} 1000w`} src={`${imgPath + src}`} alt={alt} loading='lazy' />
       </picture>

@@ -105,6 +105,16 @@
       "value": "Coming Soon..."
     }
   ],
+  "0By1LZ": [
+    {
+      "type": 1,
+      "value": "timeInMinutes"
+    },
+    {
+      "type": 0,
+      "value": " Mins"
+    }
+  ],
   "0JV99f": [
     {
       "type": 0,
@@ -127,6 +137,12 @@
     {
       "type": 0,
       "value": "Game Progress"
+    }
+  ],
+  "0lGE5l": [
+    {
+      "type": 1,
+      "value": "navigationText"
     }
   ],
   "0mcQbk": [
@@ -169,6 +185,18 @@
     {
       "type": 0,
       "value": "Create a New Account"
+    }
+  ],
+  "2E6QpA": [
+    {
+      "type": 0,
+      "value": "Challenges"
+    }
+  ],
+  "2ERxYL": [
+    {
+      "type": 0,
+      "value": "Oldest to Newest"
     }
   ],
   "2RBdEr": [
@@ -259,6 +287,12 @@
       "value": "Next"
     }
   ],
+  "3kbAe7": [
+    {
+      "type": 0,
+      "value": "Continue playing"
+    }
+  ],
   "3lLFC/": [
     {
       "type": 1,
@@ -297,6 +331,18 @@
     {
       "type": 0,
       "value": "Please connect to the internet."
+    }
+  ],
+  "4o5Hlu": [
+    {
+      "type": 0,
+      "value": "Your name will be shown here"
+    }
+  ],
+  "4wgAGs": [
+    {
+      "type": 0,
+      "value": "Date"
     }
   ],
   "52hsYP": [
@@ -339,6 +385,24 @@
       "value": "Password"
     }
   ],
+  "5Ls4nU": [
+    {
+      "type": 0,
+      "value": "Publish"
+    }
+  ],
+  "5Vj22e": [
+    {
+      "type": 1,
+      "value": "swiperHeading"
+    }
+  ],
+  "5jxN1p": [
+    {
+      "type": 1,
+      "value": "points"
+    }
+  ],
   "634LIC": [
     {
       "type": 0,
@@ -365,6 +429,12 @@
     {
       "type": 0,
       "value": "Login"
+    }
+  ],
+  "6OkiRc": [
+    {
+      "type": 0,
+      "value": "Your bio will be shown here"
     }
   ],
   "6V6DQY": [
@@ -471,6 +541,18 @@
     {
       "type": 0,
       "value": "Student's Name"
+    }
+  ],
+  "A4/j8s": [
+    {
+      "type": 0,
+      "value": "Create a Challenge"
+    }
+  ],
+  "A4oydH": [
+    {
+      "type": 0,
+      "value": "Keep the code changes?"
     }
   ],
   "A5tWte": [
@@ -643,6 +725,12 @@
       "value": "Later"
     }
   ],
+  "EyxxGO": [
+    {
+      "type": 0,
+      "value": "Hint:"
+    }
+  ],
   "F/vOH1": [
     {
       "type": 0,
@@ -691,6 +779,18 @@
       "value": "Go to Login"
     }
   ],
+  "Fr6aaO": [
+    {
+      "type": 0,
+      "value": "No"
+    }
+  ],
+  "Fy9oMx": [
+    {
+      "type": 0,
+      "value": "for"
+    }
+  ],
   "G0AqB8": [
     {
       "type": 0,
@@ -713,6 +813,36 @@
     {
       "type": 0,
       "value": "Verify OTP and proceed"
+    }
+  ],
+  "Game Title": [
+    {
+      "type": 0,
+      "value": "ZombieLand"
+    }
+  ],
+  "GhmnMb": [
+    {
+      "type": 0,
+      "value": "Private Test Case "
+    },
+    {
+      "type": 1,
+      "value": "testCaseNumber"
+    },
+    {
+      "type": 0,
+      "value": " - "
+    },
+    {
+      "type": 1,
+      "value": "result"
+    }
+  ],
+  "Gmgyiq": [
+    {
+      "type": 0,
+      "value": "Move to drafts"
     }
   ],
   "Gon8SN": [
@@ -757,10 +887,22 @@
       "value": "Register to Get help from Turtle"
     }
   ],
+  "I1oDxa": [
+    {
+      "type": 0,
+      "value": "Loading failed due to some unknown error! Please try again later."
+    }
+  ],
   "ILnphX": [
     {
       "type": 0,
       "value": "Call"
+    }
+  ],
+  "IUTGvr": [
+    {
+      "type": 1,
+      "value": "totalEarnedCoins"
     }
   ],
   "IV0q/o": [
@@ -779,6 +921,12 @@
     {
       "type": 0,
       "value": "Previous"
+    }
+  ],
+  "IloyRB": [
+    {
+      "type": 1,
+      "value": "heading"
     }
   ],
   "In3suu": [
@@ -883,6 +1031,12 @@
       "value": "Share"
     }
   ],
+  "NYGsGb": [
+    {
+      "type": 1,
+      "value": "level"
+    }
+  ],
   "NZqKYF": [
     {
       "type": 0,
@@ -985,10 +1139,22 @@
       "value": "coins"
     }
   ],
+  "PSqen2": [
+    {
+      "type": 1,
+      "value": "level"
+    }
+  ],
   "PSx95N": [
     {
       "type": 0,
       "value": "Home"
+    }
+  ],
+  "PaprdD": [
+    {
+      "type": 0,
+      "value": "No challenges published yet !"
     }
   ],
   "PcqGYQ": [
@@ -1067,10 +1233,34 @@
       "value": "ok"
     }
   ],
+  "RjBfJa": [
+    {
+      "type": 0,
+      "value": "range"
+    }
+  ],
+  "S7XoqJ": [
+    {
+      "type": 0,
+      "value": "PLAY"
+    }
+  ],
+  "SI6+pb": [
+    {
+      "type": 0,
+      "value": "Problem Statement"
+    }
+  ],
   "SL6O2c": [
     {
       "type": 0,
       "value": "Password"
+    }
+  ],
+  "STCi24": [
+    {
+      "type": 0,
+      "value": "Delete Challenge"
     }
   ],
   "SpftNg": [
@@ -1107,10 +1297,22 @@
       "value": "Create Account"
     }
   ],
+  "TXXReR": [
+    {
+      "type": 0,
+      "value": "Validated Result"
+    }
+  ],
   "TbteVJ": [
     {
       "type": 1,
       "value": "studentName"
+    }
+  ],
+  "TmNnc7": [
+    {
+      "type": 0,
+      "value": "Keep the code changes?"
     }
   ],
   "TmcPug": [
@@ -1233,6 +1435,12 @@
       "value": "coins"
     }
   ],
+  "W04w16": [
+    {
+      "type": 0,
+      "value": "Click \"Run\" to validate"
+    }
+  ],
   "W5zEev": [
     {
       "type": 0,
@@ -1279,6 +1487,22 @@
     {
       "type": 0,
       "value": "Edit Profile"
+    }
+  ],
+  "YCPu3A": [
+    {
+      "type": 0,
+      "value": "Newly Trending"
+    }
+  ],
+  "YLRLEA": [
+    {
+      "type": 0,
+      "value": "WebKata - "
+    },
+    {
+      "type": 1,
+      "value": "concept"
     }
   ],
   "YRA/RQ": [
@@ -1351,16 +1575,46 @@
       "value": "studentNamt"
     }
   ],
+  "aNoleS": [
+    {
+      "type": 0,
+      "value": "Dismiss"
+    }
+  ],
   "aWjMjy": [
     {
       "type": 0,
       "value": "Register"
     }
   ],
+  "aZ9udC": [
+    {
+      "type": 0,
+      "value": "Private test case "
+    },
+    {
+      "type": 1,
+      "value": "testCaseNumber"
+    },
+    {
+      "type": 0,
+      "value": " - "
+    },
+    {
+      "type": 1,
+      "value": "result"
+    }
+  ],
   "apr16P": [
     {
       "type": 0,
       "value": "Leaderboard"
+    }
+  ],
+  "at+N1s": [
+    {
+      "type": 0,
+      "value": "Run"
     }
   ],
   "b2J6mh": [
@@ -1379,6 +1633,18 @@
     {
       "type": 0,
       "value": "Leaderboard Rank"
+    }
+  ],
+  "bhtTKn": [
+    {
+      "type": 1,
+      "value": "toastMessage"
+    }
+  ],
+  "bvFe7G": [
+    {
+      "type": 0,
+      "value": "Coins Earned:"
     }
   ],
   "byK6c0": [
@@ -1411,6 +1677,12 @@
       "value": "Coins"
     }
   ],
+  "cmbEDz": [
+    {
+      "type": 0,
+      "value": "Play"
+    }
+  ],
   "croLiZ": [
     {
       "type": 1,
@@ -1429,10 +1701,28 @@
       "value": "No"
     }
   ],
+  "dWQyF1": [
+    {
+      "type": 0,
+      "value": "Oh ho ho.. failed"
+    }
+  ],
   "dq9osy": [
     {
       "type": 0,
       "value": "Yes"
+    }
+  ],
+  "dreQIo": [
+    {
+      "type": 0,
+      "value": "Inputs"
+    }
+  ],
+  "dtriXn": [
+    {
+      "type": 0,
+      "value": "Try Now"
     }
   ],
   "e5Eaen": [
@@ -1457,6 +1747,12 @@
     {
       "type": 0,
       "value": "Show Leaderboard"
+    }
+  ],
+  "fAOneF": [
+    {
+      "type": 0,
+      "value": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?"
     }
   ],
   "fOZCSk": [
@@ -1585,10 +1881,32 @@
       "value": "Leaderboard"
     }
   ],
+  "jMKyRW": [
+    {
+      "type": 0,
+      "value": "Create a Challenge"
+    }
+  ],
   "jZhy7I": [
     {
       "type": 0,
       "value": "Forgot Password"
+    }
+  ],
+  "jmSDeU": [
+    {
+      "type": 0,
+      "value": "Reverse Alphabetical"
+    }
+  ],
+  "jpb70D": [
+    {
+      "type": 0,
+      "value": "#"
+    },
+    {
+      "type": 1,
+      "value": "rankNumber"
     }
   ],
   "k6tlKQ": [
@@ -1633,6 +1951,12 @@
       "value": "Change Password"
     }
   ],
+  "m+YcJ4": [
+    {
+      "type": 0,
+      "value": "View your challenges"
+    }
+  ],
   "m19v5I": [
     {
       "type": 1,
@@ -1649,6 +1973,12 @@
     {
       "type": 0,
       "value": "OTP"
+    }
+  ],
+  "mMH50/": [
+    {
+      "type": 0,
+      "value": "Code"
     }
   ],
   "mTY3Hn": [
@@ -1715,6 +2045,18 @@
       "value": "text"
     }
   ],
+  "nTxUJZ": [
+    {
+      "type": 0,
+      "value": "Try IDE Now"
+    }
+  ],
+  "nhSC1Z": [
+    {
+      "type": 0,
+      "value": "Leaderboard Ranking"
+    }
+  ],
   "nlYt8p": [
     {
       "type": 0,
@@ -1767,6 +2109,28 @@
     {
       "type": 0,
       "value": "Turtle"
+    }
+  ],
+  "pgAgVI": [
+    {
+      "type": 1,
+      "value": "emptyStateText"
+    }
+  ],
+  "pl4ED2": [
+    {
+      "type": 0,
+      "value": "Continue Playing"
+    }
+  ],
+  "pmy91K": [
+    {
+      "type": 1,
+      "value": "coins"
+    },
+    {
+      "type": 0,
+      "value": " coins"
     }
   ],
   "pwy4hs": [
@@ -1855,6 +2219,18 @@
       "value": "Copy Link"
     }
   ],
+  "sC1GR3": [
+    {
+      "type": 0,
+      "value": "Yes"
+    }
+  ],
+  "sI7zqJ": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
   "sNqwYF": [
     {
       "type": 0,
@@ -1881,6 +2257,12 @@
     {
       "type": 0,
       "value": "Go to Home"
+    }
+  ],
+  "t5hBAx": [
+    {
+      "type": 0,
+      "value": "Output will be shown here"
     }
   ],
   "tbPLF3": [
@@ -1911,6 +2293,12 @@
     {
       "type": 1,
       "value": "message"
+    }
+  ],
+  "uPz4GT": [
+    {
+      "type": 0,
+      "value": "Run"
     }
   ],
   "uhayi4": [
@@ -1961,6 +2349,12 @@
       "value": "Help"
     }
   ],
+  "x+wTwj": [
+    {
+      "type": 1,
+      "value": "navLinkText"
+    }
+  ],
   "x13dma": [
     {
       "type": 1,
@@ -1977,6 +2371,12 @@
     {
       "type": 0,
       "value": "Resend"
+    }
+  ],
+  "xHkGSg": [
+    {
+      "type": 1,
+      "value": "swiperHeading"
     }
   ],
   "xT1NKB": [
@@ -2067,6 +2467,44 @@
     {
       "type": 0,
       "value": "Coming soon"
+    }
+  ],
+  "zXjEvn": [
+    {
+      "type": 0,
+      "value": "sleep"
+    }
+  ],
+  "zeGEYY": [
+    {
+      "type": 0,
+      "value": "Oh ho ho.. failed"
+    }
+  ],
+  "zm0wU/": [
+    {
+      "type": 1,
+      "value": "idx"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "step"
+    }
+  ],
+  "zombieLand description": [
+    {
+      "type": 0,
+      "value": "Zombieland is a gamified approach where you will use your mind to code and help the protagonist Zombie reach his destination."
+    }
+  ],
+  "zombieLand title": [
+    {
+      "type": 0,
+      "value": "ZombieLand"
     }
   ]
 }

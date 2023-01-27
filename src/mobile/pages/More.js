@@ -266,17 +266,15 @@ const More = ({ navigation }) => {
                 </View>
                 <View style={style.moreBtnContainer}>
                   <TouchableOpacity
-                    onPress={() => {}}
+                    onPress={() => { navigation.navigate('Ide'); }}
                     style={{
                       ...style.moreCardButton,
                       ...style.moreCardIdeBtn,
-                      opacity: 0.5,
                     }}
-                    disabled={true}
                     >
                     <Text style={style.moreCardButtonText}>
                       <FormattedMessage
-                        defaultMessage="Coming soon"
+                        defaultMessage="Try Now"
                         description="More card button text"
                       />
                     </Text>

@@ -14,7 +14,7 @@ import {
 } from '../commonLoginRegisterFunctions';
 import VerifyOtpFormStep from '../components/VerifyOtpFormStep';
 import useBackBtn from '../../../../hooks/pages/back-btn';
-import showInlineLoadingSpinner from '../loader';
+import { showInlineLoadingSpinner } from '../loader';
 import useOtp from '../../../../hooks/pages/otp';
 import useRecapchav3 from '../../../../hooks/pages/recapchav3';
 

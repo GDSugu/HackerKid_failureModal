@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { Theme } from '../common/_theme';
 import { mobileTypography } from '../../typography/_typography';
-import { Yellow } from '../../colors/_colors';
+import { LightBlue, Yellow } from '../../colors/_colors';
 
 // const font = StyleSheet.create({
 //   regular: {
@@ -42,6 +42,12 @@ const screenTurtleHeader = {
   viewType: 'turtleScreen',
 };
 
+const screenChallengesHeader = {
+  showHeader: false,
+  showNav: false,
+  showBackbtn: true,
+};
+
 const ScreenSheet = {
   showHeader: false,
   showNav: false,
@@ -73,6 +79,18 @@ const themes = {
     screenChallenges: {
       ...Theme.light.screenBlue,
       ...screenWithHeader,
+    },
+    screenAllChallenges: {
+      ...Theme.light.screenBlue,
+      ...screenChallengesHeader,
+    },
+    screenYourChallenges: {
+      ...Theme.light.screenBlue,
+      ...screenChallengesHeader,
+    },
+    screenYourDraftChallenges: {
+      ...Theme.light.screenBlue,
+      ...screenChallengesHeader,
     },
     screenClass: {
       ...Theme.light.screenPurple,
@@ -111,6 +129,30 @@ const themes = {
       ...Theme.light.screenLightBlue,
       ...screenWithHeader,
     },
+    screenWebkataHome: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenWebkataMain: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenHTMLTab: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenCSSTab: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenJSTab: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenLivePreviewTab: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
     screenHome: {
       ...Theme.light.screenYellow,
       ...screenWithHeader,
@@ -159,17 +201,50 @@ const themes = {
       ...Theme.light.screenLightBlue,
       ...screenTurtleHeader,
     },
-    screenTurtleLeaderBoard: {
+    screenGameLeaderBoard: {
       ...Theme.light.screenLightBlue,
+      pointsBtnBorderColor: LightBlue.color400,
       ...screenTurtleHeader,
     },
     screenVideo: {
       ...Theme.light.screenGreen,
       ...screenWithHeader,
     },
-    screenZombieLand: {
+    screenZombieLandHome: {
       ...Theme.light.screenLightBlue,
-      ...fragmentIconDisposal,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandMain: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandQuestion: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandEditor: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandOutput: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandLeaderBoard: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenIde: {
+      ...Theme.light.screenYellow,
+      ...screenWithHeader,
+    },
+    screenCode: {
+      ...Theme.light.screenYellow,
+      ...screenWithHeader,
+    },
+    screenConsole: {
+      ...Theme.light.screenYellow,
+      ...screenWithHeader,
     },
     screenLogin: {
       ...Theme.light.screenYellow,
@@ -192,10 +267,40 @@ const themes = {
     screenBottomSheet: {
       ...ScreenSheet,
     },
+    screenYourChallengesActions: {
+      ...Theme.light.screenBlue,
+      toastBtnBorderColor: Theme.light.screenYellow.fadedBtnTextColor,
+      toastBtnTextColor: Theme.light.screenYellow.fadedBtnTextColor,
+      ...ScreenSheet,
+    },
     utilColors: Theme.light.utilColors,
     gradients: Theme.light.gradients,
   },
   dark: {
+    screenWebkataHome: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenWebkataMain: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenHTMLTab: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenCSSTab: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenJSTab: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenLivePreviewTab: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
     screenAchievements: {
       ...Theme.light.screenYellow,
       ...fragmentIconDisposal,
@@ -217,6 +322,17 @@ const themes = {
       ...fragmentIconDisposal,
     },
     screenChallenges: {
+      ...Theme.light.screenBlue,
+      ...screenWithHeader,
+    },
+    screenAllChallenges: {
+      ...Theme.light.screenBlue,
+    },
+    screenYourChallenges: {
+      ...Theme.light.screenBlue,
+      ...screenWithHeader,
+    },
+    screenYourDraftChallenges: {
       ...Theme.light.screenBlue,
       ...screenWithHeader,
     },
@@ -304,17 +420,38 @@ const themes = {
       ...Theme.light.screenLightBlue,
       ...fragmentIconDisposal,
     },
-    screenTurtleLeaderBoard: {
+    screenGameLeaderBoard: {
       ...Theme.light.screenLightBlue,
-      ...fragmentIconDisposal,
+      pointsBtnBorderColor: LightBlue.color400,
+      ...screenTurtleHeader,
     },
     screenVideo: {
       ...Theme.light.screenGreen,
       ...screenWithHeader,
     },
-    screenZombieLand: {
+    screenZombieLandHome: {
       ...Theme.light.screenLightBlue,
-      ...fragmentIconDisposal,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandMain: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandQuestion: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandEditor: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandOutput: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
+    },
+    screenZombieLandLeaderBoard: {
+      ...Theme.light.screenLightBlue,
+      ...screenTurtleHeader,
     },
     screenLogin: {
       ...Theme.light.screenYellow,
@@ -323,6 +460,12 @@ const themes = {
       viewType: 'screen',
     },
     screenBottomSheet: {
+      ...ScreenSheet,
+    },
+    screenYourChallengesActions: {
+      ...Theme.light.screenBlue,
+      toastBtnBorderColor: Theme.light.screenYellow.fadedBtnTextColor,
+      toastBtnTextColor: Theme.light.screenYellow.fadedBtnTextColor,
       ...ScreenSheet,
     },
     utilColors: Theme.dark.utilColors,

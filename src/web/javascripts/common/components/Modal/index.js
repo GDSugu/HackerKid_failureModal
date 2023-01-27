@@ -22,6 +22,13 @@ const Modal = ({
     show: () => {
       $(`#modal${modalClassSelector}`).modal('show');
     },
+    showWithRestriction: () => {
+      $(`#modal${modalClassSelector}`).modal({
+        backdrop: 'static',
+        keyboard: false,
+      });
+      // $(`#modal${modalClassSelector}`).modal('show');
+    },
     hide: () => {
       $(`#modal${modalClassSelector}`).modal('hide');
     },

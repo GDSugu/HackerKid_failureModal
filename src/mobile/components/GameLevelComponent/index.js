@@ -69,9 +69,10 @@ const getStyle = (font, theme, utilColors) => StyleSheet.create({
 });
 
 const LevelButton = ({
-  currentQuestionId, fetchQuestion, isLast, question, style, virtualId,
+  closeLevel = () => {}, currentQuestionId, fetchQuestion, game, isLast, question, style, virtualId,
 }) => {
   let bgImg = levelNotCompletedImg;
+  let handleLevel = () => {};
 
   if (question) {
     if (currentQuestionId === virtualId) {
@@ -83,11 +84,25 @@ const LevelButton = ({
     }
   }
 
-  const handleLevel = () => {
-    if (question) {
-      fetchQuestion({ type: 'getQuestionById', questionId: question.question_id });
-    }
-  };
+  switch (game) {
+    case 'turtle':
+      if (question) {
+        handleLevel = () => {
+          fetchQuestion({ type: 'getQuestionById', questionId: question.question_id })
+            .then(closeLevel);
+        };
+      }
+      break;
+    case 'zombieLand':
+      if (question) {
+        handleLevel = () => {
+          fetchQuestion({ virtualId })
+            .then(closeLevel);
+        };
+      }
+      break;
+    default: break;
+  }
 
   return <>
     { !isLast && <View style={style.verticalBar} /> }
@@ -118,34 +133,40 @@ const GameLevelComponent = ({
   context, font, game, gradients, theme, themeKey, utilColors,
 }) => {
   const style = getStyle(font, theme[themeKey], utilColors);
-  let screenContext;
-  let questionList;
+  const {
+    ctxState: screenContext,
+    fetchQuestion,
+  } = context;
+  const { questionList } = screenContext;
   let currentQuestionId;
-  let fetchQuestion = () => {};
-  let closeLevel = () => {};
 
-  if (game === 'turtle') {
-    screenContext = context.tqState;
-    questionList = screenContext.questionList;
-    fetchQuestion = context.fetchTurtleQuestion;
-    if (questionList) {
-      currentQuestionId = questionList
-        .findIndex((el) => el.question_id === screenContext.questionObject.question_id) + 1;
+  const closeLevel = () => {
+    if (screenContext?.uiData?.showGameLevel) {
+      context.ctxSetState((prevState) => ({
+        ...prevState,
+        uiData: {
+          ...prevState.uiData,
+          showGameLevel: false,
+        },
+      }));
+      return true;
     }
+    return false;
+  };
 
-    closeLevel = () => {
-      if (screenContext?.uiData?.showGameLevel) {
-        context.tqSetState((prevState) => ({
-          ...prevState,
-          uiData: {
-            ...prevState.uiData,
-            showGameLevel: false,
-          },
-        }));
-        return true;
+  switch (game) {
+    case 'turtle':
+      if (questionList) {
+        currentQuestionId = questionList
+          .findIndex((el) => el.question_id === screenContext.questionObject.question_id) + 1;
       }
-      return false;
-    };
+      break;
+    case 'zombieLand':
+      if (questionList) {
+        currentQuestionId = screenContext.questionObject.virtualId;
+      }
+      break;
+    default: break;
   }
 
   return <>
@@ -181,6 +202,8 @@ const GameLevelComponent = ({
                         style={style}
                         virtualId={index + 1}
                         isLast={index === questionList.length - 1}
+                        game={game}
+                        closeLevel={closeLevel}
                       />
                     </>)}
                   />

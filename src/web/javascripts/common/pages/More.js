@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router-dom';
 import { useGetSession } from '../../../../hooks/pages/root';
 import '../../../stylesheets/common/pages/more/style.scss';
 import {
@@ -147,18 +148,14 @@ const MoreCards = () => <>
               </p>
             </div>
             <div className="more-card-btn-container">
-              <button className="more-card-btn btn" disabled>
+              <Link to={'/ide'} className="more-card-btn btn">
                 <p>
-                  {/* <FormattedMessage
-                    defaultMessage={'Try IDE Now'}
-                    description={'more card button'}
-                  /> */}
                   <FormattedMessage
-                    defaultMessage={'Coming Soon...'}
+                    defaultMessage={'Try IDE Now'}
                     description={'more card button'}
                   />
                 </p>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
