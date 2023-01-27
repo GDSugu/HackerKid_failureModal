@@ -7,6 +7,10 @@
     "defaultMessage": "Email",
     "description": "Email Button Title"
   },
+  "+fv9wl": {
+    "defaultMessage": "State",
+    "description": "State"
+  },
   "+g4yFF": {
     "defaultMessage": "Logout",
     "description": "more menu button"
@@ -23,21 +27,25 @@
     "defaultMessage": "Yes",
     "description": "logout"
   },
-  "/O26Yc": {
-    "defaultMessage": "{line}",
-    "description": "console line"
-  },
-  "/Urdq7": {
-    "defaultMessage": "{name}",
-    "description": "rank holder name"
+  "/X/jU2": {
+    "defaultMessage": "{message}",
+    "description": "member name"
   },
   "/dnxym": {
     "defaultMessage": "Create a New Account",
     "description": "create new account button"
   },
+  "/hlsbq": {
+    "defaultMessage": "Approval Pending",
+    "description": "Approval Pending"
+  },
   "/itreP": {
     "defaultMessage": "{label}",
     "description": "help type label"
+  },
+  "/jLYDx": {
+    "defaultMessage": "Next",
+    "description": "Next btn"
   },
   "/ndV7b": {
     "defaultMessage": "Coins Earned:",
@@ -71,9 +79,9 @@
     "defaultMessage": "Code",
     "description": "Code tab"
   },
-  "0Q9/tV": {
-    "defaultMessage": "{heading}",
-    "description": "section heading"
+  "0NXxp2": {
+    "defaultMessage": "Sort by:",
+    "description": "Sort by:"
   },
   "0Sgdtj": {
     "defaultMessage": "Game Progress",
@@ -103,9 +111,9 @@
     "defaultMessage": "Profile Settings",
     "description": "Navigation link to profile edit page"
   },
-  "1XHwzQ": {
-    "defaultMessage": "{levelNumber}",
-    "description": "Level indicator"
+  "1XDKxO": {
+    "defaultMessage": "Accept",
+    "description": "accept button"
   },
   "1x4WPP": {
     "defaultMessage": "Create a New Account",
@@ -122,6 +130,10 @@
   "2RBdEr": {
     "defaultMessage": "Continue",
     "description": "Output tab"
+  },
+  "2RoU+R": {
+    "defaultMessage": "{countryName}",
+    "description": "country name"
   },
   "2Tu0HO": {
     "defaultMessage": "Next",
@@ -142,20 +154,29 @@
     "defaultMessage": "rank",
     "description": "rank"
   },
+  "2vujhq": {
+    "defaultMessage": "All set!",
+    "description": "club created"
+  },
   "2yf2WH": {
     "defaultMessage": "Login with Phone",
     "description": "Login with Phone tab"
   },
-  "30ejkF": {
-    "defaultMessage": "Close",
-    "description": "close"
+  "36JfZ4": {
+    "defaultMessage": "Club Info",
+    "description": "Club Info modal title"
   },
-  "33dFbN": {
-    "defaultMessage": "Created \"{lastCreatedChallengeName}\" challenge",
-    "description": "last created challenge log"
+  "3Aneol": {
+    "defaultMessage": "State",
+    "description": "state label"
   },
-  "36lS9W": {
-    "defaultMessage": "Level {currentLevelNumber}"
+  "3NDGt2": {
+    "defaultMessage": "#{rank}",
+    "description": "club leaderboard rank"
+  },
+  "3Tij96": {
+    "defaultMessage": "Remove",
+    "description": "remove button"
   },
   "3Wcqsy": {
     "defaultMessage": "Next",
@@ -169,17 +190,17 @@
     "defaultMessage": "{label}",
     "description": "{description}"
   },
-  "3xAjVX": {
-    "defaultMessage": "Oh ho ho.. Requirement not satisfied",
-    "description": "modal title"
+  "44ks1Q": {
+    "defaultMessage": "Delete Club",
+    "description": "Delete club button label"
   },
-  "4+tKRC": {
-    "defaultMessage": "Yes",
-    "description": "Keep Changes button text"
+  "47yCiv": {
+    "defaultMessage": "#{rank}",
+    "description": "club rank"
   },
-  "48yQvt": {
-    "defaultMessage": "{activeSortName}",
-    "description": "sort button text"
+  "4Pt6v5": {
+    "defaultMessage": "Searching...",
+    "description": "Autocomplete searching text"
   },
   "4Ve1r3": {
     "defaultMessage": "Ok",
@@ -205,9 +226,17 @@
     "defaultMessage": "Rank",
     "description": "Rank table cell header"
   },
+  "59GDNx": {
+    "defaultMessage": "Members",
+    "description": "Members"
+  },
   "5EmC6p": {
     "defaultMessage": "Student Name",
     "description": "Student Name"
+  },
+  "5Gdv0g": {
+    "defaultMessage": "{btnMessage}",
+    "description": "save button"
   },
   "5L6FVQ": {
     "defaultMessage": "Password",
@@ -229,6 +258,13 @@
     "defaultMessage": "PLAY",
     "description": "Play button"
   },
+  "64+NBp": {
+    "defaultMessage": "About Club"
+  },
+  "66xp/7": {
+    "defaultMessage": "{coins} coins",
+    "description": "club coins"
+  },
   "6Cjk2D": {
     "defaultMessage": "Login",
     "description": "Login Button"
@@ -244,17 +280,21 @@
     "defaultMessage": "Awesome!",
     "description": "Success message"
   },
+  "6rYo7u": {
+    "defaultMessage": "{name}",
+    "description": "member name"
+  },
+  "6ywK83": {
+    "defaultMessage": "{message}",
+    "description": "error message"
+  },
   "74UjvK": {
     "defaultMessage": "Login to existing Account",
     "description": "Login to existing account button"
   },
-  "76OIt3": {
-    "defaultMessage": "Show Leaderboard",
-    "description": "show leaderboard btn"
-  },
-  "7AMmxp": {
-    "defaultMessage": "Your bio will be shown here",
-    "description": "about fallback message"
+  "76oyi0": {
+    "defaultMessage": "{clubName}",
+    "description": "club name"
   },
   "7L3+7M": {
     "defaultMessage": "Login into existing account",
@@ -268,33 +308,21 @@
     "defaultMessage": "Play",
     "description": "Turtle Play Button"
   },
-  "7asVcm": {
-    "defaultMessage": "Games",
-    "description": "games page heading"
+  "7dyAWL": {
+    "defaultMessage": "No invites",
+    "description": "no invites"
   },
-  "7mn7eO": {
-    "defaultMessage": "Output will appear here",
-    "description": "output placeholder"
+  "8R6f04": {
+    "defaultMessage": "Coming Soon...",
+    "description": "Challenges Page"
   },
-  "8cISRy": {
-    "defaultMessage": "Time Spent:",
-    "description": "Time spent title"
-  },
-  "9+2Mm0": {
-    "defaultMessage": "IDE",
-    "description": "page title"
+  "8ga5/p": {
+    "defaultMessage": "#{rank}",
+    "description": "club xp"
   },
   "9BVOVU": {
     "defaultMessage": "Please verify to continue",
     "description": "Recaptcha Modal heading"
-  },
-  "9GHKZe": {
-    "defaultMessage": "/{totalQns}",
-    "description": "Game Leader Board: Total Questions"
-  },
-  "9K8jZr": {
-    "defaultMessage": "{idx}. {hint}",
-    "description": "Hint"
   },
   "9NID4X": {
     "defaultMessage": "OK",
@@ -344,6 +372,10 @@
     "defaultMessage": "Expected output",
     "description": "Expected output title"
   },
+  "AZoPre": {
+    "defaultMessage": "Club Name",
+    "description": "Club name label"
+  },
   "Aevhvw": {
     "defaultMessage": "Verify OTP and proceed",
     "description": "Verify OTP and proceed Button"
@@ -364,25 +396,25 @@
     "defaultMessage": "Try again",
     "description": "try again btn"
   },
-  "BI7XwF": {
-    "defaultMessage": "Edit Challenge",
-    "description": "edit challenge button"
+  "BC2OuR": {
+    "defaultMessage": "{points}",
+    "description": "member points"
   },
   "BNGdt+": {
     "defaultMessage": "No",
     "description": "cancel logout"
   },
-  "Bt/Kkf": {
-    "defaultMessage": "completed",
-    "description": "Game progress"
+  "C8QChP": {
+    "defaultMessage": "Top Members",
+    "description": "Top Members"
   },
-  "BwliRZ": {
-    "defaultMessage": "Newest to Oldest",
-    "description": "sort dropdown button text"
+  "CPWw9k": {
+    "defaultMessage": "Previous",
+    "description": "Previous btn"
   },
-  "CLW1pi": {
-    "defaultMessage": "Close",
-    "description": "success modal closed"
+  "CT79Lc": {
+    "defaultMessage": "Club Leaderboard",
+    "description": "club leaderboard title"
   },
   "CabaPs": {
     "defaultMessage": "Level {level}",
@@ -391,6 +423,14 @@
   "CcB4fo": {
     "defaultMessage": "Coins Earned:",
     "description": "Coins Earned"
+  },
+  "CddI5u": {
+    "defaultMessage": "Join Club",
+    "description": "join club modal title"
+  },
+  "CfsqV9": {
+    "defaultMessage": "All Games",
+    "description": "Games Page"
   },
   "Ciol6I": {
     "defaultMessage": "Output",
@@ -416,13 +456,9 @@
     "defaultMessage": "Email",
     "description": "Email label"
   },
-  "E4eXSS": {
-    "defaultMessage": "Live Preview",
-    "description": "tab button text"
-  },
-  "EQupmg": {
-    "defaultMessage": "Alphabetical",
-    "description": "sort dropdown button text"
+  "ESmwpN": {
+    "defaultMessage": "{label}",
+    "description": "Autocomplete label"
   },
   "EhuHU0": {
     "defaultMessage": "{errorMessage}",
@@ -444,17 +480,9 @@
     "defaultMessage": "Home",
     "description": "home heading"
   },
-  "FKN6N8": {
-    "defaultMessage": "Add a block",
-    "description": "Add a block title"
-  },
-  "Fbud0n": {
-    "defaultMessage": "{problemStatement}",
-    "description": "problem statement"
-  },
-  "FhNWty": {
-    "defaultMessage": "Publish",
-    "description": "publish challenge button"
+  "FbQ6xD": {
+    "defaultMessage": "You are not a part of any club right now!",
+    "description": "Non club member text"
   },
   "FhTUgw": {
     "defaultMessage": "Not {phone} ?",
@@ -480,9 +508,13 @@
     "defaultMessage": "Login into Existing Account",
     "description": "Login into Exisiting Account button"
   },
-  "G5q8OG": {
-    "defaultMessage": "rank",
-    "description": "rank caption"
+  "G70f+S": {
+    "defaultMessage": "Join this Club",
+    "description": "Join Club"
+  },
+  "GKTVn2": {
+    "defaultMessage": "{bio}",
+    "description": "bio"
   },
   "GQwBTI": {
     "defaultMessage": "Verify OTP and proceed",
@@ -503,6 +535,10 @@
     "defaultMessage": "Login with Email",
     "description": "Login with email tab"
   },
+  "GskR3C": {
+    "defaultMessage": "{points}",
+    "description": "Club member points"
+  },
   "H2rvzb": {
     "defaultMessage": "Password changed successfully",
     "description": "Password changed text"
@@ -514,13 +550,9 @@
     "defaultMessage": "Save",
     "description": "Profile save button"
   },
-  "HTfYYv": {
-    "defaultMessage": "Play next",
-    "description": "Play next"
-  },
-  "HZrPcB": {
-    "defaultMessage": "Validated Result",
-    "description": "tab button text"
+  "HLIDfo": {
+    "defaultMessage": "Join a club",
+    "description": "Join a club button"
   },
   "Hjj2+R": {
     "defaultMessage": "Register to Get help from Turtle",
@@ -558,45 +590,44 @@
     "defaultMessage": "{errorMessage}",
     "description": "error text"
   },
+  "JW9Qqp": {
+    "defaultMessage": "{message}",
+    "description": "Admin warning"
+  },
   "JnwRMJ": {
     "defaultMessage": "OTP",
     "description": "OTP label"
   },
-  "K+HWzs": {
-    "defaultMessage": "Console",
-    "description": "code button text"
-  },
-  "K1GXSf": {
-    "defaultMessage": "{backBtnText}",
-    "description": "back button text"
+  "Jrt9bn": {
+    "defaultMessage": "{countryName}"
   },
   "KD6lRu": {
     "defaultMessage": "Continue",
     "description": "Continue button"
   },
-  "KmxQM/": {
-    "defaultMessage": "All Games",
-    "description": "All games heading"
+  "KoP+2C": {
+    "defaultMessage": "Only admins can delete club",
+    "description": "Only admins can delete club"
+  },
+  "KvJ4NM": {
+    "defaultMessage": "Save & Proceed",
+    "description": "save button"
+  },
+  "KwJUpE": {
+    "defaultMessage": "{title}",
+    "description": "club feed title"
+  },
+  "LAxUIh": {
+    "defaultMessage": "{studentName}",
+    "description": "invitee name"
   },
   "LCt8qV": {
     "defaultMessage": "Share",
     "description": "Share Button"
   },
-  "LbCDj2": {
-    "defaultMessage": "Move to Drafts",
-    "description": "move to drafts button"
-  },
-  "LdJ4cq": {
-    "defaultMessage": "{gameTitle}",
-    "description": "game title"
-  },
-  "LoAPT7": {
-    "defaultMessage": "Live Preview",
-    "description": "Live preview tab"
-  },
-  "LuPT86": {
-    "defaultMessage": "Coins",
-    "description": "LeaderBoard Points"
+  "LkuPrA": {
+    "defaultMessage": "Join your friends in the club",
+    "description": "more card subtitle"
   },
   "MB8h2I": {
     "defaultMessage": "Leaderboard Ranking",
@@ -606,25 +637,17 @@
     "defaultMessage": "Go to Index",
     "description": "Link description"
   },
+  "MceYzq": {
+    "defaultMessage": "{name}",
+    "description": "club leaderboard name"
+  },
   "MfoF60": {
     "defaultMessage": "{hint}",
     "description": "Hint"
   },
-  "Mh1d7/": {
-    "defaultMessage": "Loading...",
-    "description": "more info btn"
-  },
-  "Mp8KyV": {
-    "defaultMessage": "Trending",
-    "description": "sort dropdown button text"
-  },
-  "NRDu9u": {
-    "defaultMessage": "Add a block",
-    "description": "Add a block"
-  },
-  "NVk/jo": {
-    "defaultMessage": "{page}",
-    "description": "Page"
+  "N930gg": {
+    "defaultMessage": "{message}",
+    "description": "feed message"
   },
   "NXV57/": {
     "defaultMessage": "Share",
@@ -654,21 +677,17 @@
     "defaultMessage": "Go to login",
     "description": "Go to login button"
   },
-  "NsygW3": {
-    "defaultMessage": "Run",
-    "description": "Run code button"
-  },
-  "NtU1FI": {
-    "defaultMessage": "Problem Statement",
-    "description": "problem statement title"
+  "NzfjXA": {
+    "defaultMessage": "Country",
+    "description": "country label"
   },
   "O1sXEv": {
     "defaultMessage": "Collections",
     "description": "collectibles modal title"
   },
-  "OCOrF9": {
-    "defaultMessage": "More Info",
-    "description": "More info button"
+  "OEPiPP": {
+    "defaultMessage": "More friends = More fun",
+    "description": "More card Title"
   },
   "OJUwxk": {
     "defaultMessage": "Continue Playing",
@@ -678,6 +697,10 @@
     "defaultMessage": "Register",
     "description": "Register"
   },
+  "OXM3Ji": {
+    "defaultMessage": "View Club",
+    "description": "Club show button"
+  },
   "OdODwS": {
     "defaultMessage": "Create Account",
     "description": "Create Account button"
@@ -686,12 +709,13 @@
     "defaultMessage": "Class",
     "description": "class nav text"
   },
-  "P+VjyT": {
-    "defaultMessage": "Challenges",
-    "description": "page heading"
+  "OvtvUr": {
+    "defaultMessage": "Profile",
+    "description": "member Profile modal title"
   },
-  "P3S8Yh": {
-    "defaultMessage": "Create a Challenge"
+  "Ow+Yo9": {
+    "defaultMessage": "Or share this link to invite someone",
+    "description": "Invite link input label"
   },
   "PKwyq8": {
     "defaultMessage": "Move any blocks to get hints",
@@ -717,6 +741,10 @@
     "defaultMessage": "Playground",
     "description": "Playground tab"
   },
+  "PpUsRs": {
+    "defaultMessage": "Join",
+    "description": "join button"
+  },
   "Px7S/2": {
     "defaultMessage": "Close",
     "description": "Close button"
@@ -724,6 +752,10 @@
   "Qb0n8J": {
     "defaultMessage": "Are you sure you want to logout?",
     "description": "Logout prompt message"
+  },
+  "QsXf1d": {
+    "defaultMessage": "{points} coins",
+    "description": "points"
   },
   "Qvy78L": {
     "defaultMessage": "Profile",
@@ -737,20 +769,17 @@
     "defaultMessage": "Grade",
     "description": "Profile grade label"
   },
+  "REPA3X": {
+    "defaultMessage": "Join your friends in the club",
+    "description": "More card Subtitle"
+  },
   "RHM1lo": {
     "defaultMessage": "Re-type Password",
     "description": "Re-type Password label"
   },
-  "RMQ7RR": {
-    "defaultMessage": "Dismiss",
-    "description": "dismiss btn"
-  },
-  "RRxr7k": {
-    "defaultMessage": "#{rank}",
-    "description": "your rank"
-  },
-  "RSglQH": {
-    "defaultMessage": "View all Challenges"
+  "RdkFSF": {
+    "defaultMessage": "Sort by:",
+    "description": "sort btn title"
   },
   "Rf84nl": {
     "defaultMessage": "ok",
@@ -780,9 +809,9 @@
     "defaultMessage": "{errorMessage}",
     "description": "phoneNumber form helper"
   },
-  "SqEb74": {
-    "defaultMessage": "PLAY",
-    "description": "play text"
+  "SqEWSv": {
+    "defaultMessage": "{name}",
+    "description": "club name"
   },
   "T/sbBG": {
     "defaultMessage": "Level {level}",
@@ -812,13 +841,21 @@
     "defaultMessage": "Edit Profile",
     "description": "edit profile"
   },
+  "Tv+MUS": {
+    "defaultMessage": "Invited by",
+    "description": "invitee name"
+  },
+  "Tw0cSl": {
+    "defaultMessage": "Create Club",
+    "description": "create club button"
+  },
   "TyfKd4": {
     "defaultMessage": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?",
     "description": "Turtle description"
   },
-  "U11WOi": {
-    "defaultMessage": "Coins Earned:",
-    "description": "Coins Earned Title"
+  "U0dXhe": {
+    "defaultMessage": "Invites",
+    "description": "invites tab"
   },
   "U3AyDz": {
     "defaultMessage": "Register to save your progess and compete with others",
@@ -831,6 +868,10 @@
   "UUCx/J": {
     "defaultMessage": "Edit",
     "description": "edit profile"
+  },
+  "UXpv/F": {
+    "defaultMessage": "{membersCount}",
+    "description": "club members count"
   },
   "UkT6PM": {
     "defaultMessage": "You have completed this level !",
@@ -860,6 +901,10 @@
     "defaultMessage": "Practise... or play with the new code editor",
     "description": "More card Subtitle"
   },
+  "VpTQ5s": {
+    "defaultMessage": "{coins}",
+    "description": "club coins"
+  },
   "VsWMVt": {
     "defaultMessage": "Re-type password",
     "description": "Re-type password label"
@@ -888,9 +933,9 @@
     "defaultMessage": "Play",
     "description": "Play button"
   },
-  "WsWDuq": {
-    "defaultMessage": "Click \"Run\" to validate your code",
-    "description": "empty validated result text"
+  "WxUiy6": {
+    "defaultMessage": "State",
+    "description": "State label"
   },
   "X1rCRf": {
     "defaultMessage": "Login into existing account",
@@ -900,13 +945,9 @@
     "defaultMessage": "Please login again",
     "description": "Not authorized message"
   },
-  "XVQ4du": {
-    "defaultMessage": "No",
-    "description": "no button text"
-  },
-  "XeLSF2": {
-    "defaultMessage": "Leaderboard",
-    "description": "leaderboard heading"
+  "XbaAun": {
+    "defaultMessage": "Browse clubs:",
+    "description": "Browse clubs heading"
   },
   "Y+dh5z": {
     "defaultMessage": "Edit Profile",
@@ -924,9 +965,13 @@
     "defaultMessage": "{username}",
     "description": "Username"
   },
-  "YdxUNc": {
-    "defaultMessage": "moveDown",
-    "description": "moveDown function"
+  "Ykg8tn": {
+    "defaultMessage": "{message}",
+    "description": "Admin Warning"
+  },
+  "YvQFe7": {
+    "defaultMessage": "{points} coins",
+    "description": "club points"
   },
   "YxMMzC": {
     "defaultMessage": "All Games",
@@ -936,13 +981,9 @@
     "defaultMessage": "Go to About",
     "description": "Link description"
   },
-  "ZMimja": {
-    "defaultMessage": "Your rank: #{rank}",
-    "description": "your rank"
-  },
-  "ZUKwtW": {
-    "defaultMessage": "{pageNumber}",
-    "description": "page button"
+  "ZG77Sq": {
+    "defaultMessage": "close",
+    "description": "close button"
   },
   "ZXYzUQ": {
     "defaultMessage": "Something went wrong. Please try again",
@@ -988,9 +1029,9 @@
     "defaultMessage": "Home",
     "description": "Home navigation link"
   },
-  "b3hzBu": {
-    "defaultMessage": "Try again",
-    "description": "Try again button"
+  "bCvHuI": {
+    "defaultMessage": "Invites",
+    "description": "Invites"
   },
   "bK9TWX": {
     "defaultMessage": "Leaderboard Rank",
@@ -1015,6 +1056,10 @@
     "defaultMessage": "Play next",
     "description": "Play next button"
   },
+  "cS+r14": {
+    "defaultMessage": "Basic Info",
+    "description": "Basic Info tab title"
+  },
   "cZDBd3": {
     "defaultMessage": "Coins",
     "description": "Coins cell header"
@@ -1027,13 +1072,9 @@
     "defaultMessage": "{name}",
     "description": "name"
   },
-  "d/zBnH": {
-    "defaultMessage": "...",
-    "description": "Page"
-  },
-  "d9u+8x": {
-    "defaultMessage": "Webkata - {concept}",
-    "description": "Game Title"
+  "dBwIzQ": {
+    "defaultMessage": "Country",
+    "description": "Country label"
   },
   "dNWhFj": {
     "defaultMessage": "No",
@@ -1059,6 +1100,10 @@
     "defaultMessage": "Profile updated successfully",
     "description": "success modal"
   },
+  "ed9QEz": {
+    "defaultMessage": "No members found",
+    "description": "No members found"
+  },
   "esK7Em": {
     "defaultMessage": "Earned Awards",
     "description": "Earned Awards"
@@ -1078,13 +1123,13 @@
   "fT7uau": {
     "defaultMessage": "completed"
   },
-  "fcrHSq": {
-    "defaultMessage": "{languageDisplayName}",
-    "description": "language option"
+  "fUu1sR": {
+    "defaultMessage": "Club Rank",
+    "description": "Club Rank"
   },
-  "fkpavG": {
-    "defaultMessage": "Games",
-    "description": "Games page heading"
+  "feq+Va": {
+    "defaultMessage": "More friends = More fun",
+    "description": "more card title"
   },
   "fr893W": {
     "defaultMessage": "{validSubmissions}",
@@ -1102,21 +1147,20 @@
     "defaultMessage": "Coins",
     "description": "Coins"
   },
+  "gCfRUT": {
+    "defaultMessage": "{stateName}"
+  },
   "gOkIvb": {
     "defaultMessage": "Name",
     "description": "Name label"
   },
-  "gPWy9r": {
-    "defaultMessage": "{gameTitle}",
-    "description": "Game Title"
+  "gTCzny": {
+    "defaultMessage": "Profile Picture",
+    "description": "Profile Picture label"
   },
-  "gTzQSp": {
-    "defaultMessage": "moveUp",
-    "description": "moveUp function"
-  },
-  "gXLFip": {
-    "defaultMessage": "in",
-    "description": "in"
+  "gYpthg": {
+    "defaultMessage": "More",
+    "description": "More"
   },
   "hEqp4d": {
     "defaultMessage": "Coming Soon...",
@@ -1138,9 +1182,17 @@
     "defaultMessage": "Continue",
     "description": "Turtle Continue Button"
   },
-  "iaEqzE": {
-    "defaultMessage": "{navigationText}",
-    "description": "navigational text"
+  "iS2zLU": {
+    "defaultMessage": "Visit Club",
+    "description": "more card button"
+  },
+  "iebFqD": {
+    "defaultMessage": "{clubName}",
+    "description": "Club card heading text"
+  },
+  "jACivV": {
+    "defaultMessage": "{name}",
+    "description": "user name"
   },
   "jDzDCp": {
     "defaultMessage": "Leaderboard",
@@ -1166,6 +1218,10 @@
     "defaultMessage": "Ok",
     "description": "closing modal button"
   },
+  "kloO3Z": {
+    "defaultMessage": "Advanced Options",
+    "description": "Advanced Options tab title"
+  },
   "lKeCea": {
     "defaultMessage": "Save & Exit",
     "description": "Profile save button"
@@ -1174,9 +1230,13 @@
     "defaultMessage": "{question}",
     "description": "Question"
   },
-  "lSOrgC": {
-    "defaultMessage": "{coins}",
-    "description": "Coins Earned"
+  "lVWtDb": {
+    "defaultMessage": "{sortBy}",
+    "description": "sort by option"
+  },
+  "loHqWK": {
+    "defaultMessage": "Invite Members with this link (Optional)",
+    "description": "club link input field"
   },
   "lynO1X": {
     "defaultMessage": "Change Password",
@@ -1210,13 +1270,13 @@
     "defaultMessage": "Rank",
     "description": "Rank"
   },
-  "mfMsri": {
-    "defaultMessage": "Recommended Games",
-    "description": "Section Title"
+  "mfZLuH": {
+    "defaultMessage": "#{rank}",
+    "description": "rank"
   },
-  "mhUyfM": {
-    "defaultMessage": "{question}",
-    "description": "problem statement"
+  "mijv0V": {
+    "defaultMessage": "Leave Club",
+    "description": "Leave club button label"
   },
   "mm9QaY": {
     "defaultMessage": "School",
@@ -1254,33 +1314,33 @@
     "defaultMessage": "View more",
     "description": "View More Bottomsheet Btn"
   },
-  "nnfaF3": {
-    "defaultMessage": "{selectedLanguageDisplayName}",
-    "description": "selected language display name"
-  },
-  "nsIAsY": {
-    "defaultMessage": "Run",
-    "description": "run code button text"
-  },
-  "o2Pken": {
-    "defaultMessage": "Run",
-    "description": "run webkata button text"
+  "nn7wTW": {
+    "defaultMessage": "Most active members",
+    "description": "sheet card subtitle"
   },
   "o2jxWd": {
     "defaultMessage": "Account Settings",
     "description": "more menu button"
   },
+  "oDenEU": {
+    "defaultMessage": "Turtle",
+    "description": "Turtle Game Title"
+  },
   "oOZkkL": {
     "defaultMessage": "Coming Soon...",
     "description": "Class Page"
+  },
+  "oQwd5t": {
+    "defaultMessage": "Create Club",
+    "description": "Create club modal title"
   },
   "pEiO08": {
     "defaultMessage": "Account Settings",
     "description": "account settings CTA"
   },
-  "pVCbSK": {
-    "defaultMessage": "Instructions",
-    "description": "Hints"
+  "pHE0Mj": {
+    "defaultMessage": "Join with link",
+    "description": "join tab"
   },
   "pVIk7O": {
     "defaultMessage": "Turtle",
@@ -1302,44 +1362,44 @@
     "defaultMessage": "Game Progress",
     "description": "Game Progress card heading"
   },
-  "pxPVWB": {
-    "defaultMessage": "moveLeft",
-    "description": "moveLeft function"
+  "q+pH3V": {
+    "defaultMessage": "Save",
+    "description": "save button"
   },
-  "q+hyoH": {
-    "defaultMessage": "moveRight",
-    "description": "moveRight function"
-  },
-  "qJ7EK+": {
-    "defaultMessage": "{challengeName}",
-    "description": "modal title"
+  "qPy2h6": {
+    "defaultMessage": "Club Leaderboard",
+    "description": "Club Leaderboard Title"
   },
   "qTQ8nP": {
     "defaultMessage": "{coinsEarned}",
     "description": "Coins Earned"
   },
-  "qTebrI": {
-    "defaultMessage": "Problem Statement",
-    "description": "button text"
-  },
   "qUU2pp": {
     "defaultMessage": "All Games",
     "description": "Section Title"
   },
+  "qWi4Zr": {
+    "defaultMessage": "{message}",
+    "description": "empty message"
+  },
   "qXTiEd": {
     "defaultMessage": "Grade"
   },
-  "qmXcjW": {
-    "defaultMessage": "i",
-    "description": "i"
+  "qYZ5gD": {
+    "defaultMessage": "{memberName}",
+    "description": "member name"
   },
-  "qs67OI": {
-    "defaultMessage": "Problem Statement:",
-    "description": "problem statement label"
+  "qZyJyg": {
+    "defaultMessage": "#{rank} rank",
+    "description": "club rank"
   },
   "quRCCv": {
     "defaultMessage": "Phone",
     "description": "Phone label"
+  },
+  "r3BGOH": {
+    "defaultMessage": "Club Name",
+    "description": "club name label"
   },
   "rECW1h": {
     "defaultMessage": "completed",
@@ -1365,6 +1425,10 @@
     "defaultMessage": "Levels",
     "description": "Game Level"
   },
+  "sd4dwE": {
+    "defaultMessage": "{xp} xp",
+    "description": "club xp"
+  },
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
@@ -1377,17 +1441,17 @@
     "defaultMessage": "{step}",
     "description": "turtle instruction"
   },
+  "tevLEq": {
+    "defaultMessage": "Choose a club display image",
+    "description": "club image label"
+  },
   "tsF0aG": {
     "defaultMessage": "Continue Playing",
     "description": "continue playing"
   },
-  "tvsAww": {
-    "defaultMessage": "{levelText}",
-    "description": "level text"
-  },
-  "u1+78Y": {
-    "defaultMessage": "Continue Playing",
-    "description": "run button text"
+  "uCGdYb": {
+    "defaultMessage": "Club Name",
+    "description": "Club Name"
   },
   "uGb/uS": {
     "defaultMessage": "{message}",
@@ -1401,9 +1465,9 @@
     "defaultMessage": "{errorMessage}",
     "description": "email form helper"
   },
-  "uipkRi": {
-    "defaultMessage": "Inputs",
-    "description": "Input drawer title"
+  "upMbBE": {
+    "defaultMessage": "Feed",
+    "description": "Feed"
   },
   "vChW6P": {
     "defaultMessage": "Show Leaderboard",
@@ -1417,9 +1481,13 @@
     "defaultMessage": "Turtle",
     "description": "Game Title"
   },
-  "wEEL+e": {
-    "defaultMessage": "{studentName}",
-    "description": "Student Name"
+  "wXtv00": {
+    "defaultMessage": "Points",
+    "description": "sort by option"
+  },
+  "wdqhVV": {
+    "defaultMessage": "Create club",
+    "description": "Create a club button"
   },
   "wrdAU0": {
     "defaultMessage": "Help",
@@ -1469,17 +1537,25 @@
     "defaultMessage": "{hintMessage}",
     "description": "Hint message"
   },
-  "ya4qNs": {
-    "defaultMessage": "{totalEarnedCoins}",
-    "description": "total earned coins"
+  "ySOrrv": {
+    "defaultMessage": "No feed to show",
+    "description": "No feed to show"
+  },
+  "yjWbPf": {
+    "defaultMessage": "Visit Club",
+    "description": "More card button text"
   },
   "yujxGL": {
     "defaultMessage": "Your Collections and Perks",
     "description": "more menu button"
   },
-  "z4ekJP": {
-    "defaultMessage": "{earnedCoins}",
-    "description": "earned coins"
+  "z/0c45": {
+    "defaultMessage": "Link",
+    "description": "description"
+  },
+  "z3XXBW": {
+    "defaultMessage": "Country",
+    "description": "Country"
   },
   "z9lFwl": {
     "defaultMessage": "Name",

@@ -37,6 +37,7 @@ import YourChallengesActions from '../components/YourChallengesActions';
 import RouteHelp from './Help';
 import RouteTurtleHome from './TurtleHome';
 import RouteTurtleMain from './TurtleMain';
+import RouteClub from './Clubs';
 import RouteZombieLandHome from './ZombieLandHome';
 import RouteZombieLandMain from './ZombieLandMain';
 import RouteGameLeaderBoard from './GameLeaderBoard';
@@ -286,6 +287,7 @@ const App = () => {
                     >
                       <Stack.Screen name='TurtleMain' component={RouteTurtleMain} />
                     </Stack.Group>
+                    <Stack.Screen name='Club' component={RouteClub}></Stack.Screen>
                     <Stack.Screen name='GameLeaderBoard' component={RouteGameLeaderBoard} options={{ presentation: 'transparentModal' }} />
                     <Stack.Screen name='ZombieLandHome'>
                       {(props) => <RouteZombieLandHome {...props} routeName={routeName} />}

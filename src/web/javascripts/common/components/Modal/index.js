@@ -5,7 +5,7 @@ import '../../../../stylesheets/common/sass/components/_modal.scss';
 
 const Modal = ({
   children,
-  customClass,
+  customClass = '',
   modalClass,
   header = <></>,
   options,

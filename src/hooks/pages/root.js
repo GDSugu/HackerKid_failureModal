@@ -63,14 +63,16 @@ const useGetSession = ({ sessionAttr = [], isPageMounted }) => {
       const rankPr = getSession('rank');
       const pointsEarnedPr = getSession('pointsEarned');
       const profileImagePr = getSession('profileLink');
+      const uniqueURLPr = getSession('unique_url');
       Promise.all([
         authPr,
         namePr,
         rankPr,
         pointsEarnedPr,
         profileImagePr,
+        uniqueURLPr,
       ])
-        .then(([authtoken, name, rank, pointsEarned, profileImage]) => {
+        .then(([authtoken, name, rank, pointsEarned, profileImage, uniqueURL]) => {
           if (isPageMounted.current) {
             setSession({
               authtoken,
@@ -78,6 +80,7 @@ const useGetSession = ({ sessionAttr = [], isPageMounted }) => {
               rank,
               pointsEarned,
               profileImage,
+              unique_url: uniqueURL,
             });
           }
         })
