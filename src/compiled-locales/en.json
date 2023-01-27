@@ -217,6 +217,12 @@
       "value": "Login with Phone"
     }
   ],
+  "369aS4": [
+    {
+      "type": 1,
+      "value": "collectibleRarity"
+    }
+  ],
   "3M/P3n": [
     {
       "type": 1,
@@ -503,6 +509,12 @@
     {
       "type": 0,
       "value": "This is about page"
+    }
+  ],
+  "D81PjZ": [
+    {
+      "type": 1,
+      "value": "collectibleName"
     }
   ],
   "DBTgpi": [
@@ -1675,6 +1687,12 @@
     {
       "type": 1,
       "value": "message"
+    }
+  ],
+  "uLdABz": [
+    {
+      "type": 1,
+      "value": "collectibleType"
     }
   ],
   "ueVo+G": [

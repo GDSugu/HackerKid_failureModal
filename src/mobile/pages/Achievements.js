@@ -359,7 +359,6 @@ const Achievements = ({ navigation }) => {
 
   // side effects
   React.useEffect(() => {
-    console.log(uniqueUrl);
     if (uniqueUrl) {
       getProfileData({ cached: false });
     }

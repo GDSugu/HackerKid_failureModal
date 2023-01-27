@@ -130,6 +130,10 @@
     "defaultMessage": "Login with Phone",
     "description": "Login with Phone tab"
   },
+  "369aS4": {
+    "defaultMessage": "{collectibleRarity}",
+    "description": "collectible rarity"
+  },
   "3M/P3n": {
     "defaultMessage": "{dateString}",
     "description": "date"
@@ -313,6 +317,10 @@
   "D/2aSY": {
     "defaultMessage": "This is about page",
     "description": "Page description"
+  },
+  "D81PjZ": {
+    "defaultMessage": "{collectibleName}",
+    "description": "collectible name"
   },
   "DBTgpi": {
     "defaultMessage": "completed",
@@ -1052,6 +1060,10 @@
   "uGb/uS": {
     "defaultMessage": "{message}",
     "description": "Success message"
+  },
+  "uLdABz": {
+    "defaultMessage": "{collectibleType}",
+    "description": "collectible type"
   },
   "ueVo+G": {
     "defaultMessage": "Today",

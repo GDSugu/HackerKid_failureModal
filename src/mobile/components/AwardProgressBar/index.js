@@ -70,14 +70,11 @@ const AwardProgressBar = ({
       angle={270}
     >
       {
-        progressDetailsObj && !!progressDetailsObj.progress && <View style={[style.progressTextualFormContainer, { position: 'absolute', right: 0, bottom: 2 }]}>
-          <View style={{
-            position: 'absolute', right: '50%', width: 100, transform: [{ translateX: 80 }], bottom: 8,
-          }}>
-            <Text style={[style.smallestText, {
-              color: 'black',
-              flex: 1,
-            }]}>
+        progressDetailsObj
+        && !!progressDetailsObj.progress
+        && <View style={style.progressTextualFormContainer}>
+          <View style={style.progressTextContainer}>
+            <Text style={[style.smallestText, style.textColor1]}>
               <FormattedMessage
                 defaultMessage={'{progress}{progressSuffix} {unit}'}
                 description='progress textual representation'
