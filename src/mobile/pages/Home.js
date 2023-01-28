@@ -30,6 +30,7 @@ import hkcoin from '../../images/common/hkcoin.png';
 // import timeSpent from '../../images/common/eva_clock-fill.png';
 import turtle from '../../images/dashboard/dashboard-turtle.png';
 import zombieLand from '../../images/dashboard/dashboard-zombieLand.png';
+import codekata from '../../images/dashboard/dashboard-codePirate.png';
 // import achievementImage from '../../images/dashboard/dashboard-achievements.png';
 import CircleGradientProgressBar from '../components/CircleGradientProgressBar';
 import AuthErrorModal from '../components/Modals/AuthErrorModal';
@@ -626,15 +627,15 @@ const GameBlock = ({ style, navigation, gameData }) => {
             </TouchableOpacity>
           </View>
           <View style={style.gameCardImageContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate('Codekata')} >
-              <Image style={style.gameCardImage} source={turtle} />
-            </TouchableOpacity>
-          </View>
-          {/* <View style={style.gameCardImageContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate('Games')} >
+            <TouchableOpacity onPress={() => navigation.navigate('ZombieLandHome')} >
               <Image style={style.gameCardImage} source={zombieLand} />
             </TouchableOpacity>
-          </View> */}
+          </View>
+          <View style={style.gameCardImageContainer}>
+            <TouchableOpacity onPress={() => navigation.navigate('Codekata')} >
+              <Image style={style.gameCardImage} source={codekata} />
+            </TouchableOpacity>
+          </View>
         </ScrollView>
       </View>
       <View>

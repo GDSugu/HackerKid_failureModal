@@ -220,6 +220,9 @@ const GameNavBar = ({
       case 'zombieLand':
         level = context?.ctxState?.questionObject?.virtualId;
         break;
+      case 'codekata':
+        level = context?.ctxState?.questionObject?.virtualId;
+        break;
       default: break;
     }
     return level;
@@ -353,7 +356,7 @@ const GameNavigator = ({
       gradients={gradients}
       utilColors={utilColors}
       theme={theme}
-      themeKey={themeKey}
+      themeKey={}
     />
     </>
   );
