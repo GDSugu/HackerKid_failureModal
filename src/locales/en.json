@@ -7,6 +7,10 @@
     "defaultMessage": "Email",
     "description": "Email Button Title"
   },
+  "+f2V2I": {
+    "defaultMessage": "{currentProgress} {unit}",
+    "description": "current progress"
+  },
   "+fv9wl": {
     "defaultMessage": "State",
     "description": "State"
@@ -32,6 +36,10 @@
   },
   "/NIQ0Y": {
     "defaultMessage": "Sample Output:"
+  },
+  "/NL8rk": {
+    "defaultMessage": "{nextAwardIn} {unit}",
+    "description": "next award in"
   },
   "/O26Yc": {
     "defaultMessage": "{line}",
@@ -172,6 +180,10 @@
   "2W0f9h": {
     "defaultMessage": "Bio"
   },
+  "2X3jYB": {
+    "defaultMessage": "is here by awarded the certification of achievement for the successfull completion of",
+    "description": "certificate name pretext"
+  },
   "2bMdhC": {
     "defaultMessage": "Create a New Account",
     "description": "create a new account button"
@@ -200,6 +212,10 @@
     "defaultMessage": "Created \"{lastCreatedChallengeName}\" challenge",
     "description": "last created challenge log"
   },
+  "369aS4": {
+    "defaultMessage": "{collectibleRarity}",
+    "description": "collectible rarity"
+  },
   "36JfZ4": {
     "defaultMessage": "Club Info",
     "description": "Club Info modal title"
@@ -210,6 +226,10 @@
   "3Aneol": {
     "defaultMessage": "State",
     "description": "state label"
+  },
+  "3M/P3n": {
+    "defaultMessage": "{dateString}",
+    "description": "date"
   },
   "3NDGt2": {
     "defaultMessage": "#{rank}",
@@ -271,6 +291,10 @@
     "defaultMessage": "Your name will be shown here",
     "description": "name fallback message"
   },
+  "4r4Vnm": {
+    "defaultMessage": "See All Awards",
+    "description": "see more card text"
+  },
   "4wgAGs": {
     "defaultMessage": "Date",
     "description": "sort dropdown button text"
@@ -294,6 +318,10 @@
   "5Gdv0g": {
     "defaultMessage": "{btnMessage}",
     "description": "save button"
+  },
+  "5HcA72": {
+    "defaultMessage": "Awards",
+    "description": "collection header"
   },
   "5L6FVQ": {
     "defaultMessage": "Password",
@@ -364,6 +392,10 @@
   "7F4zGx": {
     "defaultMessage": "{item}",
     "description": "Sample Output"
+  },
+  "7HqC7J": {
+    "defaultMessage": "Previous",
+    "description": "previous section title"
   },
   "7L3+7M": {
     "defaultMessage": "Login into existing account",
@@ -437,6 +469,10 @@
     "defaultMessage": "New Password",
     "description": "New Password Label"
   },
+  "9fgz0H": {
+    "defaultMessage": "{awardName}",
+    "description": "award name"
+  },
   "9gqH2W": {
     "defaultMessage": "Login",
     "description": "Login button"
@@ -485,6 +521,10 @@
     "defaultMessage": "/{totalSubmissions}",
     "description": "Total Submissions"
   },
+  "B/mNN3": {
+    "defaultMessage": "See All Awards",
+    "description": "see all awards btn text"
+  },
   "B7znij": {
     "defaultMessage": "Create a New Account",
     "description": "Create a New Account button"
@@ -504,6 +544,10 @@
   "BNGdt+": {
     "defaultMessage": "No",
     "description": "cancel logout"
+  },
+  "BVEoZl": {
+    "defaultMessage": "See more",
+    "description": "see more card text"
   },
   "Bt/Kkf": {
     "defaultMessage": "completed",
@@ -549,6 +593,10 @@
     "defaultMessage": "This is about page",
     "description": "Page description"
   },
+  "D81PjZ": {
+    "defaultMessage": "{collectibleName}",
+    "description": "collectible name"
+  },
   "DBTgpi": {
     "defaultMessage": "completed",
     "description": "completed"
@@ -561,6 +609,10 @@
     "defaultMessage": "hackerkid logo",
     "description": "logo"
   },
+  "Dahcx9": {
+    "defaultMessage": "{title} {awardCount}",
+    "description": "award title"
+  },
   "DuPnGd": {
     "defaultMessage": "Email",
     "description": "Email label"
@@ -569,6 +621,10 @@
     "defaultMessage": "Live Preview",
     "description": "tab button text"
   },
+  "EOKZu2": {
+    "defaultMessage": "{text}",
+    "description": "button text"
+  },
   "EQupmg": {
     "defaultMessage": "Alphabetical",
     "description": "sort dropdown button text"
@@ -576,6 +632,10 @@
   "ESmwpN": {
     "defaultMessage": "{label}",
     "description": "Autocomplete label"
+  },
+  "EfoM5G": {
+    "defaultMessage": "No Certificates Found",
+    "description": "error text"
   },
   "EhuHU0": {
     "defaultMessage": "{errorMessage}",
@@ -711,6 +771,10 @@
     "defaultMessage": "Register to Get help from Turtle",
     "description": "Hint message"
   },
+  "I+EuqZ": {
+    "defaultMessage": "{pointsEarned}",
+    "description": "coins"
+  },
   "I1oDxa": {
     "defaultMessage": "Loading failed due to some unknown error! Please try again later.",
     "description": "Error"
@@ -747,9 +811,21 @@
     "defaultMessage": "{output}",
     "description": "Output Field"
   },
+  "JBgFgq": {
+    "defaultMessage": "Next Achievement: {nextAchievementIn} {unit}",
+    "description": "award subtitle"
+  },
+  "JGS8Gf": {
+    "defaultMessage": "Awards",
+    "description": "Awards heading"
+  },
   "JW9Qqp": {
     "defaultMessage": "{message}",
     "description": "Admin warning"
+  },
+  "JbsY5u": {
+    "defaultMessage": "No Awards Found!",
+    "description": "error message"
   },
   "JnwRMJ": {
     "defaultMessage": "OTP",
@@ -758,9 +834,17 @@
   "Jrt9bn": {
     "defaultMessage": "{countryName}"
   },
+  "K+0Pvy": {
+    "defaultMessage": "Certificates",
+    "description": "collection header"
+  },
   "K+HWzs": {
     "defaultMessage": "Console",
     "description": "code button text"
+  },
+  "K19PhT": {
+    "defaultMessage": "{awardTitle}",
+    "description": "award title"
   },
   "K1GXSf": {
     "defaultMessage": "{backBtnText}",
@@ -785,6 +869,10 @@
   "KwJUpE": {
     "defaultMessage": "{title}",
     "description": "club feed title"
+  },
+  "KzGZsa": {
+    "defaultMessage": "No Certificates Found",
+    "description": "no certificates"
   },
   "LAxUIh": {
     "defaultMessage": "{studentName}",
@@ -814,9 +902,25 @@
     "defaultMessage": "Coins",
     "description": "LeaderBoard Points"
   },
+  "LvSOa2": {
+    "defaultMessage": "{rarity}",
+    "description": "rarity descriptor"
+  },
+  "LxWtp6": {
+    "defaultMessage": "Next award:",
+    "description": "next award label"
+  },
+  "M6iTxq": {
+    "defaultMessage": "Awards",
+    "description": "awards page link"
+  },
   "MB8h2I": {
     "defaultMessage": "Leaderboard Ranking",
     "description": "Leaderboard card heading text"
+  },
+  "MFRlyM": {
+    "defaultMessage": "{sortName}",
+    "description": "sort dropdown button text"
   },
   "MS/biV": {
     "defaultMessage": "Go to Index",
@@ -838,6 +942,10 @@
     "defaultMessage": "Trending",
     "description": "sort dropdown button text"
   },
+  "Mso7+b": {
+    "defaultMessage": "See More",
+    "description": "see more certificates link"
+  },
   "N930gg": {
     "defaultMessage": "{message}",
     "description": "feed message"
@@ -849,6 +957,10 @@
   "NVk/jo": {
     "defaultMessage": "{page}",
     "description": "Page"
+  },
+  "NWMgba": {
+    "defaultMessage": "Share",
+    "description": "share btn text"
   },
   "NXV57/": {
     "defaultMessage": "Share",
@@ -1037,6 +1149,10 @@
     "defaultMessage": "range",
     "description": "range"
   },
+  "RlFXhC": {
+    "defaultMessage": "Previous Awards",
+    "description": "section heading"
+  },
   "S7XoqJ": {
     "defaultMessage": "PLAY",
     "description": "play btn text"
@@ -1052,6 +1168,10 @@
   "STCi24": {
     "defaultMessage": "Delete Challenge",
     "description": "delete challenge button"
+  },
+  "SccqZN": {
+    "defaultMessage": "Download",
+    "description": "download btn text"
   },
   "SpftNg": {
     "defaultMessage": "{errorMessage}",
@@ -1105,6 +1225,10 @@
     "defaultMessage": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?",
     "description": "Turtle description"
   },
+  "U+1A/4": {
+    "defaultMessage": "View Awards",
+    "description": "View Awards button"
+  },
   "U0dXhe": {
     "defaultMessage": "Invites",
     "description": "invites tab"
@@ -1129,6 +1253,10 @@
     "defaultMessage": "{membersCount}",
     "description": "club members count"
   },
+  "UYVF80": {
+    "defaultMessage": "Recently Collected",
+    "description": "page title"
+  },
   "UkT6PM": {
     "defaultMessage": "You have completed this level !",
     "description": "Success message"
@@ -1141,6 +1269,10 @@
     "defaultMessage": "Codekata",
     "description": "Game Title"
   },
+  "V+JV6m": {
+    "defaultMessage": "Received {certificateName}",
+    "description": "certificate name"
+  },
   "V365ug": {
     "defaultMessage": "Output",
     "description": "Output tab"
@@ -1152,10 +1284,6 @@
   "V7hpAI": {
     "defaultMessage": "Question",
     "description": "Question tab"
-  },
-  "VdAhqD": {
-    "defaultMessage": "Coming Soon",
-    "description": "collectibles header"
   },
   "VoYGmQ": {
     "defaultMessage": "Practise... or play with the new code editor",
@@ -1189,9 +1317,16 @@
     "defaultMessage": "Awesome!",
     "description": "modal title"
   },
+  "WR+Too": {
+    "defaultMessage": "No Certificates Found"
+  },
   "WSWTC5": {
     "defaultMessage": "Play",
     "description": "Play button"
+  },
+  "WmjFlm": {
+    "defaultMessage": "Download",
+    "description": "download btn"
   },
   "WsWDuq": {
     "defaultMessage": "Click \"Run\" to validate your code",
@@ -1204,6 +1339,10 @@
   "X1rCRf": {
     "defaultMessage": "Login into existing account",
     "description": "login into existing account button"
+  },
+  "XMB1Ot": {
+    "defaultMessage": "No Awards Found",
+    "description": "error text"
   },
   "XQ/d5T": {
     "defaultMessage": "Please login again",
@@ -1356,6 +1495,10 @@
     "defaultMessage": "Coins",
     "description": "Coins cell header"
   },
+  "cergd0": {
+    "defaultMessage": "{studentName}",
+    "description": "certificate student name"
+  },
   "cmbEDz": {
     "defaultMessage": "Play",
     "description": "Play Button"
@@ -1383,6 +1526,10 @@
   "dWQyF1": {
     "defaultMessage": "Oh ho ho.. failed",
     "description": "Failure message"
+  },
+  "dh77ji": {
+    "defaultMessage": "View Certificates",
+    "description": "View certificates button"
   },
   "dq9osy": {
     "defaultMessage": "Yes",
@@ -1445,6 +1592,10 @@
   "fr893W": {
     "defaultMessage": "{validSubmissions}",
     "description": "Valid Submissions"
+  },
+  "fzlKxE": {
+    "defaultMessage": "See Less Awards",
+    "description": "see more card text"
   },
   "g0zp7w": {
     "defaultMessage": "Continue Playing",
@@ -1564,6 +1715,14 @@
     "defaultMessage": "Advanced Options",
     "description": "Advanced Options tab title"
   },
+  "km5SOz": {
+    "defaultMessage": "View all collections",
+    "description": "modal collection button"
+  },
+  "lK2LOr": {
+    "defaultMessage": "{certificateName}",
+    "description": "certificaten name"
+  },
   "lKeCea": {
     "defaultMessage": "Save & Exit",
     "description": "Profile save button"
@@ -1588,6 +1747,14 @@
     "defaultMessage": "Change Password",
     "description": "Change password button text"
   },
+  "lzSOoE": {
+    "defaultMessage": "{progress}{progressSuffix} {unit}",
+    "description": "progress textual representation"
+  },
+  "m+RlPE": {
+    "defaultMessage": "{awardDescription}",
+    "description": "award subtitle"
+  },
   "m+YcJ4": {
     "defaultMessage": "View your challenges",
     "description": "view your challenges button text"
@@ -1607,6 +1774,10 @@
     "defaultMessage": "OTP",
     "description": "OTP Label"
   },
+  "mLzIvk": {
+    "defaultMessage": "{certificateName}",
+    "description": "certificate name"
+  },
   "mMH50/": {
     "defaultMessage": "Code",
     "description": "code button text"
@@ -1614,6 +1785,10 @@
   "mTY3Hn": {
     "defaultMessage": "Session expired",
     "description": "Not authorized message"
+  },
+  "ma6GHl": {
+    "defaultMessage": "See Less Awards",
+    "description": "see all awards btn text"
   },
   "mb5De+": {
     "defaultMessage": "Rank",
@@ -1654,6 +1829,10 @@
   "n6bCYe": {
     "defaultMessage": "Get the rare collectibles with your coins now",
     "description": "more card title"
+  },
+  "n75iGj": {
+    "defaultMessage": "No Certificates Found",
+    "description": "no certificates found text"
   },
   "nGT7h4": {
     "defaultMessage": "Scoreboard",
@@ -1828,6 +2007,10 @@
     "defaultMessage": "completed",
     "description": "Game Progress card caption"
   },
+  "rSMu2Q": {
+    "defaultMessage": "ID: {certificateId}",
+    "description": "certificate id"
+  },
   "rZKLPy": {
     "defaultMessage": "Copy Link",
     "description": "Copy Link button"
@@ -1868,6 +2051,10 @@
     "defaultMessage": "Choose a club display image",
     "description": "club image label"
   },
+  "toPdTf": {
+    "defaultMessage": "Leaderboard",
+    "description": "leaderboard button"
+  },
   "tsF0aG": {
     "defaultMessage": "Continue Playing",
     "description": "continue playing"
@@ -1884,13 +2071,25 @@
     "defaultMessage": "Club Name",
     "description": "Club Name"
   },
+  "uGaPLK": {
+    "defaultMessage": "{awardDescription}",
+    "description": "award description"
+  },
   "uGb/uS": {
     "defaultMessage": "{message}",
     "description": "Success message"
   },
+  "uLdABz": {
+    "defaultMessage": "{collectibleType}",
+    "description": "collectible type"
+  },
   "uPz4GT": {
     "defaultMessage": "Run",
     "description": "name"
+  },
+  "ueVo+G": {
+    "defaultMessage": "Today",
+    "description": "today section title"
   },
   "uhayi4": {
     "defaultMessage": "{errorMessage}",
@@ -1903,6 +2102,18 @@
   "upMbBE": {
     "defaultMessage": "Feed",
     "description": "Feed"
+  },
+  "urqfpL": {
+    "defaultMessage": "Share",
+    "description": "share btn"
+  },
+  "v6AMff": {
+    "defaultMessage": "Certificates",
+    "description": "certificate heading"
+  },
+  "v7hkfc": {
+    "defaultMessage": "Today",
+    "description": "section heading"
   },
   "vChW6P": {
     "defaultMessage": "Show Leaderboard",
@@ -1988,6 +2199,10 @@
     "defaultMessage": "{totalEarnedCoins}",
     "description": "total earned coins"
   },
+  "yeNTz5": {
+    "defaultMessage": "Your Collections and Perks",
+    "description": "Collections and Perks CTA"
+  },
   "yjWbPf": {
     "defaultMessage": "Visit Club",
     "description": "More card button text"
@@ -2011,6 +2226,10 @@
   "z9lFwl": {
     "defaultMessage": "Name",
     "description": "Profile name label"
+  },
+  "zHOHQO": {
+    "defaultMessage": "See Less Awards",
+    "description": "see less awards btn text"
   },
   "zKBXVr": {
     "defaultMessage": "Try Now",

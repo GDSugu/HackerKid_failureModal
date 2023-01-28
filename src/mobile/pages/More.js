@@ -146,12 +146,12 @@ const More = ({ navigation }) => {
     <>
       <View style={style.container}>
         <ScrollView style={style.scrollContainer}>
-          {/* <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={() => navigation.navigate('Achievements')}>
             <View style={{
               ...style.moreMenuBtn,
               ...style.collectionBtn,
             }}
-              >
+            >
               <Text style={{
                 ...style.moreMenuBtnText,
                 ...style.collectionBtnText,
@@ -163,7 +163,7 @@ const More = ({ navigation }) => {
               </Text>
               <Icon type='FontAwesome5' name={'angle-right'} size={32} color={pageTheme.textBold} />
             </View>
-          </TouchableOpacity> */}
+          </TouchableOpacity>
 
           <View style={style.moreCard}>
             <ImageBackground
@@ -172,7 +172,7 @@ const More = ({ navigation }) => {
               resizeMode={'contain'}
               style={style.moreCardBg}
               imageStyle={style.collectibleImgBg}
-              >
+            >
               <View style={style.moreCardContainer}>
                 <Text style={style.moreCardTitle}>
                   <FormattedMessage
@@ -182,13 +182,13 @@ const More = ({ navigation }) => {
                 </Text>
                 <View style={style.moreBtnContainer}>
                   <TouchableOpacity
-                    onPress={() => {}}
+                    onPress={() => { }}
                     style={{
                       ...style.moreCardButton,
                       opacity: 0.5,
                     }}
                     disabled={true}
-                    >
+                  >
                     <Text style={style.moreCardButtonText}>
                       <FormattedMessage
                         defaultMessage="Coming soon"
@@ -271,7 +271,8 @@ const More = ({ navigation }) => {
                       ...style.moreCardButton,
                       ...style.moreCardIdeBtn,
                     }}
-                    >
+                    disabled={true}
+                  >
                     <Text style={style.moreCardButtonText}>
                       <FormattedMessage
                         defaultMessage="Try Now"
@@ -309,7 +310,7 @@ const More = ({ navigation }) => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => navigation.navigate('EditProfile') }>
+          <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
             <View style={style.moreMenuBtn}>
               <Text style={style.moreMenuBtnText}>
                 <FormattedMessage

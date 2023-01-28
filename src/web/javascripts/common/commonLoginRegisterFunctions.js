@@ -29,7 +29,7 @@ const validateInputOnChange = (e, providedType = '', customMessage = '') => {
 
 const togglePasswordVisibility = (e) => {
   const currentTarget = $(e.target);
-  const input = $(currentTarget.attr('toggle'));
+  const input = $(currentTarget.attr('data-toggle'));
   const inputValueLength = input.val().length;
 
   if (inputValueLength) {

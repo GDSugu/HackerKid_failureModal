@@ -11,6 +11,20 @@
       "value": "Email"
     }
   ],
+  "+f2V2I": [
+    {
+      "type": 1,
+      "value": "currentProgress"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "unit"
+    }
+  ],
   "+fv9wl": [
     {
       "type": 0,
@@ -55,6 +69,20 @@
     {
       "type": 0,
       "value": "Sample Output:"
+    }
+  ],
+  "/NL8rk": [
+    {
+      "type": 1,
+      "value": "nextAwardIn"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "unit"
     }
   ],
   "/O26Yc": [
@@ -271,6 +299,12 @@
       "value": "Bio"
     }
   ],
+  "2X3jYB": [
+    {
+      "type": 0,
+      "value": "is here by awarded the certification of achievement for the successfull completion of"
+    }
+  ],
   "2bMdhC": [
     {
       "type": 0,
@@ -321,6 +355,12 @@
       "value": "\" challenge"
     }
   ],
+  "369aS4": [
+    {
+      "type": 1,
+      "value": "collectibleRarity"
+    }
+  ],
   "36JfZ4": [
     {
       "type": 0,
@@ -341,6 +381,12 @@
     {
       "type": 0,
       "value": "State"
+    }
+  ],
+  "3M/P3n": [
+    {
+      "type": 1,
+      "value": "dateString"
     }
   ],
   "3NDGt2": [
@@ -441,6 +487,12 @@
       "value": "Your name will be shown here"
     }
   ],
+  "4r4Vnm": [
+    {
+      "type": 0,
+      "value": "See All Awards"
+    }
+  ],
   "4wgAGs": [
     {
       "type": 0,
@@ -479,6 +531,12 @@
     {
       "type": 1,
       "value": "btnMessage"
+    }
+  ],
+  "5HcA72": [
+    {
+      "type": 0,
+      "value": "Awards"
     }
   ],
   "5L6FVQ": [
@@ -591,6 +649,12 @@
     {
       "type": 1,
       "value": "item"
+    }
+  ],
+  "7HqC7J": [
+    {
+      "type": 0,
+      "value": "Previous"
     }
   ],
   "7L3+7M": [
@@ -717,6 +781,12 @@
       "value": "New Password"
     }
   ],
+  "9fgz0H": [
+    {
+      "type": 1,
+      "value": "awardName"
+    }
+  ],
   "9gqH2W": [
     {
       "type": 0,
@@ -793,6 +863,12 @@
       "value": "totalSubmissions"
     }
   ],
+  "B/mNN3": [
+    {
+      "type": 0,
+      "value": "See All Awards"
+    }
+  ],
   "B7znij": [
     {
       "type": 0,
@@ -821,6 +897,12 @@
     {
       "type": 0,
       "value": "No"
+    }
+  ],
+  "BVEoZl": [
+    {
+      "type": 0,
+      "value": "See more"
     }
   ],
   "Bt/Kkf": [
@@ -893,6 +975,12 @@
       "value": "This is about page"
     }
   ],
+  "D81PjZ": [
+    {
+      "type": 1,
+      "value": "collectibleName"
+    }
+  ],
   "DBTgpi": [
     {
       "type": 0,
@@ -911,6 +999,20 @@
       "value": "hackerkid logo"
     }
   ],
+  "Dahcx9": [
+    {
+      "type": 1,
+      "value": "title"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "awardCount"
+    }
+  ],
   "DuPnGd": [
     {
       "type": 0,
@@ -923,6 +1025,12 @@
       "value": "Live Preview"
     }
   ],
+  "EOKZu2": [
+    {
+      "type": 1,
+      "value": "text"
+    }
+  ],
   "EQupmg": [
     {
       "type": 0,
@@ -933,6 +1041,12 @@
     {
       "type": 1,
       "value": "label"
+    }
+  ],
+  "EfoM5G": [
+    {
+      "type": 0,
+      "value": "No Certificates Found"
     }
   ],
   "EhuHU0": [
@@ -1163,6 +1277,12 @@
       "value": "Register to Get help from Turtle"
     }
   ],
+  "I+EuqZ": [
+    {
+      "type": 1,
+      "value": "pointsEarned"
+    }
+  ],
   "I1oDxa": [
     {
       "type": 0,
@@ -1217,10 +1337,40 @@
       "value": "output"
     }
   ],
+  "JBgFgq": [
+    {
+      "type": 0,
+      "value": "Next Achievement: "
+    },
+    {
+      "type": 1,
+      "value": "nextAchievementIn"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "unit"
+    }
+  ],
+  "JGS8Gf": [
+    {
+      "type": 0,
+      "value": "Awards"
+    }
+  ],
   "JW9Qqp": [
     {
       "type": 1,
       "value": "message"
+    }
+  ],
+  "JbsY5u": [
+    {
+      "type": 0,
+      "value": "No Awards Found!"
     }
   ],
   "JnwRMJ": [
@@ -1235,10 +1385,22 @@
       "value": "countryName"
     }
   ],
+  "K+0Pvy": [
+    {
+      "type": 0,
+      "value": "Certificates"
+    }
+  ],
   "K+HWzs": [
     {
       "type": 0,
       "value": "Console"
+    }
+  ],
+  "K19PhT": [
+    {
+      "type": 1,
+      "value": "awardTitle"
     }
   ],
   "K1GXSf": [
@@ -1275,6 +1437,12 @@
     {
       "type": 1,
       "value": "title"
+    }
+  ],
+  "KzGZsa": [
+    {
+      "type": 0,
+      "value": "No Certificates Found"
     }
   ],
   "LAxUIh": [
@@ -1319,10 +1487,34 @@
       "value": "Coins"
     }
   ],
+  "LvSOa2": [
+    {
+      "type": 1,
+      "value": "rarity"
+    }
+  ],
+  "LxWtp6": [
+    {
+      "type": 0,
+      "value": "Next award:"
+    }
+  ],
+  "M6iTxq": [
+    {
+      "type": 0,
+      "value": "Awards"
+    }
+  ],
   "MB8h2I": [
     {
       "type": 0,
       "value": "Leaderboard Ranking"
+    }
+  ],
+  "MFRlyM": [
+    {
+      "type": 1,
+      "value": "sortName"
     }
   ],
   "MS/biV": [
@@ -1355,6 +1547,12 @@
       "value": "Trending"
     }
   ],
+  "Mso7+b": [
+    {
+      "type": 0,
+      "value": "See More"
+    }
+  ],
   "N930gg": [
     {
       "type": 1,
@@ -1371,6 +1569,12 @@
     {
       "type": 1,
       "value": "page"
+    }
+  ],
+  "NWMgba": [
+    {
+      "type": 0,
+      "value": "Share"
     }
   ],
   "NXV57/": [
@@ -1669,6 +1873,12 @@
       "value": "range"
     }
   ],
+  "RlFXhC": [
+    {
+      "type": 0,
+      "value": "Previous Awards"
+    }
+  ],
   "S7XoqJ": [
     {
       "type": 0,
@@ -1691,6 +1901,12 @@
     {
       "type": 0,
       "value": "Delete Challenge"
+    }
+  ],
+  "SccqZN": [
+    {
+      "type": 0,
+      "value": "Download"
     }
   ],
   "SpftNg": [
@@ -1775,6 +1991,12 @@
       "value": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?"
     }
   ],
+  "U+1A/4": [
+    {
+      "type": 0,
+      "value": "View Awards"
+    }
+  ],
   "U0dXhe": [
     {
       "type": 0,
@@ -1811,6 +2033,12 @@
       "value": "membersCount"
     }
   ],
+  "UYVF80": [
+    {
+      "type": 0,
+      "value": "Recently Collected"
+    }
+  ],
   "UkT6PM": [
     {
       "type": 0,
@@ -1829,6 +2057,16 @@
       "value": "Codekata"
     }
   ],
+  "V+JV6m": [
+    {
+      "type": 0,
+      "value": "Received "
+    },
+    {
+      "type": 1,
+      "value": "certificateName"
+    }
+  ],
   "V365ug": [
     {
       "type": 0,
@@ -1845,12 +2083,6 @@
     {
       "type": 0,
       "value": "Question"
-    }
-  ],
-  "VdAhqD": [
-    {
-      "type": 0,
-      "value": "Coming Soon"
     }
   ],
   "VoYGmQ": [
@@ -1901,10 +2133,22 @@
       "value": "Awesome!"
     }
   ],
+  "WR+Too": [
+    {
+      "type": 0,
+      "value": "No Certificates Found"
+    }
+  ],
   "WSWTC5": [
     {
       "type": 0,
       "value": "Play"
+    }
+  ],
+  "WmjFlm": [
+    {
+      "type": 0,
+      "value": "Download"
     }
   ],
   "WsWDuq": [
@@ -1923,6 +2167,12 @@
     {
       "type": 0,
       "value": "Login into existing account"
+    }
+  ],
+  "XMB1Ot": [
+    {
+      "type": 0,
+      "value": "No Awards Found"
     }
   ],
   "XQ/d5T": [
@@ -2177,6 +2427,12 @@
       "value": "Coins"
     }
   ],
+  "cergd0": [
+    {
+      "type": 1,
+      "value": "studentName"
+    }
+  ],
   "cmbEDz": [
     {
       "type": 0,
@@ -2221,6 +2477,12 @@
     {
       "type": 0,
       "value": "Oh ho ho.. failed"
+    }
+  ],
+  "dh77ji": [
+    {
+      "type": 0,
+      "value": "View Certificates"
     }
   ],
   "dq9osy": [
@@ -2317,6 +2579,12 @@
     {
       "type": 1,
       "value": "validSubmissions"
+    }
+  ],
+  "fzlKxE": [
+    {
+      "type": 0,
+      "value": "See Less Awards"
     }
   ],
   "g0zp7w": [
@@ -2503,6 +2771,18 @@
       "value": "Advanced Options"
     }
   ],
+  "km5SOz": [
+    {
+      "type": 0,
+      "value": "View all collections"
+    }
+  ],
+  "lK2LOr": [
+    {
+      "type": 1,
+      "value": "certificateName"
+    }
+  ],
   "lKeCea": [
     {
       "type": 0,
@@ -2539,6 +2819,30 @@
       "value": "Change Password"
     }
   ],
+  "lzSOoE": [
+    {
+      "type": 1,
+      "value": "progress"
+    },
+    {
+      "type": 1,
+      "value": "progressSuffix"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "unit"
+    }
+  ],
+  "m+RlPE": [
+    {
+      "type": 1,
+      "value": "awardDescription"
+    }
+  ],
   "m+YcJ4": [
     {
       "type": 0,
@@ -2569,6 +2873,12 @@
       "value": "OTP"
     }
   ],
+  "mLzIvk": [
+    {
+      "type": 1,
+      "value": "certificateName"
+    }
+  ],
   "mMH50/": [
     {
       "type": 0,
@@ -2579,6 +2889,12 @@
     {
       "type": 0,
       "value": "Session expired"
+    }
+  ],
+  "ma6GHl": [
+    {
+      "type": 0,
+      "value": "See Less Awards"
     }
   ],
   "mb5De+": [
@@ -2643,6 +2959,12 @@
     {
       "type": 0,
       "value": "Get the rare collectibles with your coins now"
+    }
+  ],
+  "n75iGj": [
+    {
+      "type": 0,
+      "value": "No Certificates Found"
     }
   ],
   "nGT7h4": [
@@ -2921,6 +3243,16 @@
       "value": "completed"
     }
   ],
+  "rSMu2Q": [
+    {
+      "type": 0,
+      "value": "ID: "
+    },
+    {
+      "type": 1,
+      "value": "certificateId"
+    }
+  ],
   "rZKLPy": [
     {
       "type": 0,
@@ -2985,6 +3317,12 @@
       "value": "Choose a club display image"
     }
   ],
+  "toPdTf": [
+    {
+      "type": 0,
+      "value": "Leaderboard"
+    }
+  ],
   "tsF0aG": [
     {
       "type": 0,
@@ -3009,16 +3347,34 @@
       "value": "Club Name"
     }
   ],
+  "uGaPLK": [
+    {
+      "type": 1,
+      "value": "awardDescription"
+    }
+  ],
   "uGb/uS": [
     {
       "type": 1,
       "value": "message"
     }
   ],
+  "uLdABz": [
+    {
+      "type": 1,
+      "value": "collectibleType"
+    }
+  ],
   "uPz4GT": [
     {
       "type": 0,
       "value": "Run"
+    }
+  ],
+  "ueVo+G": [
+    {
+      "type": 0,
+      "value": "Today"
     }
   ],
   "uhayi4": [
@@ -3037,6 +3393,24 @@
     {
       "type": 0,
       "value": "Feed"
+    }
+  ],
+  "urqfpL": [
+    {
+      "type": 0,
+      "value": "Share"
+    }
+  ],
+  "v6AMff": [
+    {
+      "type": 0,
+      "value": "Certificates"
+    }
+  ],
+  "v7hkfc": [
+    {
+      "type": 0,
+      "value": "Today"
     }
   ],
   "vChW6P": [
@@ -3165,6 +3539,12 @@
       "value": "totalEarnedCoins"
     }
   ],
+  "yeNTz5": [
+    {
+      "type": 0,
+      "value": "Your Collections and Perks"
+    }
+  ],
   "yjWbPf": [
     {
       "type": 0,
@@ -3199,6 +3579,12 @@
     {
       "type": 0,
       "value": "Name"
+    }
+  ],
+  "zHOHQO": [
+    {
+      "type": 0,
+      "value": "See Less Awards"
     }
   ],
   "zKBXVr": [

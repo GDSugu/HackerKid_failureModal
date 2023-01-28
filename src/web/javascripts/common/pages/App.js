@@ -37,11 +37,12 @@ const RouteProfileEdit = loadable(() => import('./ProfileEdit'), { fallback: <Lo
 // const RouteSubscription = loadable(() => import('./Subscription'), { fallback: <Loading /> });
 const RouteLeaderBoard = loadable(() => import('./Leaderboard'), { fallback: <Loading /> });
 const RouteCertificates = loadable(() => import('./Certificates'), { fallback: <Loading /> });
-// const RouteAwards = loadable(() => import('./Awards'), { fallback: <Loading /> });
+const RouteAwards = loadable(() => import('./Awards'), { fallback: <Loading /> });
 // const RouteCollectibles = loadable(() => import('./Collectibles'), { fallback: <Loading /> });
 const RouteTurtle = loadable(() => import('./Turtle'), { fallback: <Loading /> });
 const RouteZombieLand = loadable(() => import('./ZombieLand'), { fallback: <Loading /> });
 const RouteCodekata = loadable(() => import('./Codekata'), { fallback: <Loading /> });
+const RouteViewCertificate = loadable(() => import('./ViewCertificate'), { fallback: <Loading /> });
 // const RouteSubscription = loadable(() => import('./Subscription'), { fallback: <Loading /> });
 const RouteClub = loadable(() => import('./Clubs'), { fallback: <Loading /> });
 const RouteWebkata = loadable(() => import('./Webkata'), { fallback: <Loading /> });
@@ -53,39 +54,42 @@ const App = () => {
   }, []);
 
   return (
-  <BrowserRouter>
-    <Routes>
-      <Route index path='/' caseSensitive={true} element={<RouteIndex />} />
-      <Route path='/' caseSensitive={true} element={<NavBar />}>
-        <Route path='dashboard' caseSensitive={true} element={<RouteDashboard />} />
-        <Route path='games' caseSensitive={true} element={<RouteGames />} />
+    <BrowserRouter>
+      <Routes>
+        <Route index path='/' caseSensitive={true} element={<RouteIndex />} />
+        <Route path='/' caseSensitive={true} element={<NavBar />}>
+          <Route path='dashboard' caseSensitive={true} element={<RouteDashboard />} />
+          <Route path='games' caseSensitive={true} element={<RouteGames />} />
         <Route path='ide' caseSensitive={true} element={<RouteIde/>} />
-        <Route path='courses' caseSensitive={true} element={<RouteCourses />} />
-        <Route path='challenges' caseSensitive={true} element={<RouteChallenges />} />
+          <Route path='courses' caseSensitive={true} element={<RouteCourses />} />
+          <Route path='challenges' caseSensitive={true} element={<RouteChallenges />} />
         <Route path='all-challenges' caseSensitive={true} element={<RouteAllChallenges />} />
         <Route path='your-challenges' caseSensitive={true} element={<RouteYourChallenges />} />
         <Route path='your-challenges/drafts' caseSensitive={true} element={<RouteYourDraftChallenges />}/>
-        {/* <Route path='more' caseSensitive={true} element={<RouteMore />} /> */}
-        <Route path='more' caseSensitive={true} element={<RouteMore />} />
-        <Route path='leaderboard' caseSensitive={true} element={<RouteLeaderBoard />} />
-        {/* <Route path='/more/' caseSensitive={true} element={ <AccountNavBar />} /> */}
-        <Route path='certificates' caseSensitive={true} element={<RouteCertificates />} />
-        {/* <Route path='awards' caseSensitive={true} element={<RouteAwards />} />
-        <Route path='collectibles' caseSensitive={true} element={<RouteCollectibles />} /> */}
-        <Route
-          path='profile'
-          caseSensitive={true}
-            element={
-            <AccountNavBar backNavigationUrl='/dashboard' NavItems={(screen) => <>
-              <div className={`account-nav-item ${screen === 'edit' ? 'active' : ''}`}>
-                <Link to='edit'>
-                  <FormattedMessage
-                    defaultMessage='Profile Settings'
-                    description='Navigation link to profile edit page'
-                  />
-                </Link>
-              </div>
-              {/* <div className={`account-nav-item ${screen === 'subscription' ? 'active' : ''}`}>
+          {/* <Route path='more' caseSensitive={true} element={<RouteMore />} /> */}
+          <Route path='more' caseSensitive={true} element={<RouteMore />} />
+          <Route path='leaderboard' caseSensitive={true} element={<RouteLeaderBoard />} />
+          {/* <Route path='/more/' caseSensitive={true} element={ <AccountNavBar />} /> */}
+          <Route path='certificates' caseSensitive={true} element={<RouteCertificates />} />
+          <Route path='certificate/view/:id' caseSensitive={true} element={<RouteViewCertificate />} />
+          <Route path='awards' caseSensitive={true} element={<RouteAwards />} />
+          {/* <Route path='collectibles' caseSensitive={true} element={<RouteCollectibles />} /> */}
+          <Route
+            path='profile'
+            caseSensitive={true}
+              element={
+              <AccountNavBar backNavigationUrl='/dashboard' NavItems={(screen) => <>
+                <div className={`account-nav-item ${screen === 'edit' ? 'active' : ''}`}>
+                  <Link to='edit'>
+                    <FormattedMessage
+                      defaultMessage='Profile Settings'
+                      description='Navigation link to profile edit page'
+                    />
+                  </Link>
+                </div>
+                {/* <div
+                className={`account-nav-item ${screen === 'subscription'
+                 ? 'active' : ''}`}>
                 <Link to='subscription'>
                   <FormattedMessage
                     defaultMessage='Subscription'
