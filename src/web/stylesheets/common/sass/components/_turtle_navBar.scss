@@ -1,0 +1,16 @@
+nav {
+  &.turtle-navbar {
+    .mob-nav-header {
+      background-color: rgba(23, 24, 24, 0.75);
+      backdrop-filter: blur(32px);
+
+      .homeNavIcon {
+        margin-left: 0.5rem;
+
+        svg {
+          transform: scale(1.5);
+        }
+      }
+    }
+  }
+}

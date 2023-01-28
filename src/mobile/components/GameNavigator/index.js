@@ -14,6 +14,7 @@ import levelIcon from '../../../images/games/levelStar.png';
 import hintIcon from '../../../images/games/hint.png';
 // import gameMenuIcon from '../../../images/games/gameMenu.png';
 import GameLevelComponent from '../GameLevelComponent';
+import { CodekataContext } from '../../../hooks/pages/codekata';
 import { TurtleContext } from '../../../hooks/pages/turtle';
 import { ZombieLandContext } from '../../../hooks/pages/zombieLand';
 import { LightBlue, Yellow } from '../../../colors/_colors';
@@ -187,6 +188,8 @@ const GameNavBar = ({
     case 'zombieLand':
       context = useContext(ZombieLandContext);
       break;
+    case 'codekata':
+      context = useContext(CodekataContext);
     default: break;
   }
 
@@ -215,6 +218,9 @@ const GameNavBar = ({
         level = context?.ctxState?.questionObject?.virtualId;
         break;
       case 'zombieLand':
+        level = context?.ctxState?.questionObject?.virtualId;
+        break;
+      case 'codekata':
         level = context?.ctxState?.questionObject?.virtualId;
         break;
       default: break;
@@ -301,60 +307,57 @@ const GameNavigator = ({
 
   return (
     <>
-      <GameNavBar
-        currentScreen={currentScreen.currentGameScreen}
-        font={font}
-        game={game}
-        gradients={gradients}
-        utilColors={utilColors}
-        route={initialRoute}
-      />
-      <BottomTab.Navigator
-        initialRouteName={initialRoute}
-        detachInactiveScreens={false}
-        tabBar={
-          (props) => <GameBottomTabBar
-            {...props}
-            TabArray={ScreenArray}
-            font={font}
-            utilColors={utilColors}
-            setCurrentScreen={currentScreen.setCurrentGameScreen}
-            game={game}
-          />
-        }
-        screenOptions={{
-          animationEnabled: true,
-          swipeEnabled: false,
-          headerShown: false,
-          // lazy: false,
-          // header: (props) => <GameHeader
-          //   {...props}
-          //   currentScreen={currentScreen.currentGameScreen}
-          //   font={font}
-          //   utilColors={utilColors}
-          // />,
-        }}
-        sceneContainerStyle={{
-          backgroundColor: 'transparent',
-        }}
-      >
-        {ScreenArray.map((item, index) => (
-          <BottomTab.Screen
-            key={index}
-            name={item.name}
-            component={item.component}
-          />
-        ))}
-      </BottomTab.Navigator>
-      <GameLevelComponent
-        context={context}
-        game={game}
-        font={font}
-        gradients={gradients}
-        utilColors={utilColors}
-        theme={theme}
-        themeKey={themeKey}
-      />
+    <GameHeader
+          currentScreen={currentScreen.currentGameScreen}
+          font={font}
+          gradients={gradients}
+          utilColors={utilColors}
+        />
+        <BottomTab.Navigator
+      initialRouteName='TurtleQuestion'
+      detachInactiveScreens={false}
+      tabBar={
+        (props) => <GameBottomTabBar
+          {...props}
+          TabArray={ScreenArray}
+          font={font}
+          utilColors={utilColors}
+          setCurrentScreen={currentScreen.setCurrentGameScreen}
+        />
+      }
+      screenOptions={{
+        animationEnabled: true,
+        swipeEnabled: false,
+        headerShown: false,
+        // lazy: false,
+        // header: (props) => <GameHeader
+        //   {...props}
+        //   currentScreen={currentScreen.currentGameScreen}
+        //   font={font}
+        //   utilColors={utilColors}
+        // />,
+      }}
+      sceneContainerStyle={{
+        backgroundColor: 'transparent',
+      }}
+    >
+      {ScreenArray.map((item, index) => (
+        <BottomTab.Screen
+          key={index}
+          name={item.name}
+          component={item.component}
+        />
+      ))}
+    </BottomTab.Navigator>
+    <GameLevelComponent
+      context={context}
+      game={game}
+      font={font}
+      gradients={gradients}
+      utilColors={utilColors}
+      theme={theme}
+      themeKey={}
+    />
     </>
   );
 };

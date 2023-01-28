@@ -338,6 +338,11 @@ const GameContainer = ({
                     <Img src='dashboard/dashboard-webkata-css.png' />
                   </Link>
                 </div> */}
+                <div className="col-3">
+                  <Link className="game-item" to='/codekata'>
+                    <Img src='dashboard/dashboard-codePirate.png' />
+                  </Link>
+                </div>
               </div>
             </div>
             <div className="game-btn-block game-progress-block mt-md-1">

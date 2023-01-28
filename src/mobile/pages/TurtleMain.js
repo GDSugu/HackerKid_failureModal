@@ -362,6 +362,7 @@ const TurtleMain = () => {
             ctxSetState: setTurtleQuestionState,
             handleHintVisibility,
             fetchQuestion: fetchTurtleQuestion,
+            fetchTurtleQuestion,
             getNextQuestion,
             submitQuestion: submitTurtle,
           }}>
