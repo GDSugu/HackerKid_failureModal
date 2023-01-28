@@ -61,6 +61,7 @@ const getStyles = (theme, utils, font) => StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 14,
+    backgroundColor: utils.white,
     ...font.bodyBold,
   },
   inputTextArea: {

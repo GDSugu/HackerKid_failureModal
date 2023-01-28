@@ -28,12 +28,16 @@ import RouteLeaderboard from './Leaderboard';
 import RouteAchievements from './Achievements';
 import RouteAwardsCollectibles from './AwardsCollectibles';
 import RouteCertificates from './Certificates';
-
+import RouteIde from './Ide';
 import BottomSheet from '../components/BottomSheet';
 import RouteHelp from './Help';
 import RouteTurtleHome from './TurtleHome';
 import RouteTurtleMain from './TurtleMain';
 import RouteTurtleLeaderBoard from './TurtleLeaderBoard';
+
+import RouteCodekata from './Codekata';
+import RouteCodekataMain from './CodekataMain';
+import RouteClub from './Clubs';
 
 import IconGame from '../../images/navbar/iconGame.svg';
 import IconHome from '../../images/navbar/iconHome.svg';
@@ -262,12 +266,17 @@ const App = () => {
                       })}
                     </Stack.Screen>
                     <Stack.Screen name='Class' component={RouteClass} />
+                    {/* <Stack.Screen name='Codekata' component={RouteCodekata} /> */}
                     <Stack.Screen name='EditProfile' component={RouteProfile} />
                     <Stack.Screen name='Leaderboard' component={RouteLeaderboard} />
+                    <Stack.Screen name='Ide' component={RouteIde} />
                     <Stack.Screen name='AwardsCollectibles' component={RouteAwardsCollectibles} />
                     <Stack.Screen name='Certificates' component={RouteCertificates} />
                     <Stack.Screen name='TurtleHome'>
                       {(props) => <RouteTurtleHome {...props} routeName={routeName} />}
+                    </Stack.Screen>
+                    <Stack.Screen name='Codekata'>
+                      {(props) => <RouteCodekata {...props} routeName={routeName} /> }
                     </Stack.Screen>
                     <Stack.Group
                       screenOptions={{
@@ -275,6 +284,9 @@ const App = () => {
                       }}
                     >
                       <Stack.Screen name='TurtleMain' component={RouteTurtleMain} />
+                      <Stack.Screen name='Club' component={RouteClub}></Stack.Screen>
+
+                      <Stack.Screen name='CodekataMain' component={RouteCodekataMain} />
                     </Stack.Group>
                     <Stack.Screen name='TurtleLeaderBoard' component={RouteTurtleLeaderBoard} options={{ presentation: 'transparentModal' }} />
                   </>

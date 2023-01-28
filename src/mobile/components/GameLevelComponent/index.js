@@ -9,13 +9,16 @@ import TryNowSVG from '../../../images/games/trynow.svg';
 import levelCurrentImg from '../../../images/games/level_current.png';
 import levelCompletedImg from '../../../images/games/level_completed.png';
 import levelNotCompletedImg from '../../../images/games/level_not_completed.png';
+import PlayBtn from '../../../images/games/playBtn.svg';
+import { Yellow } from '../../../colors/_colors';
 
-const getStyle = (font, theme, utilColors) => StyleSheet.create({
+const getStyle = (font, theme, utilColors, forCodekata = false) => StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFill,
-    height: Dimensions.get('window').height - 83 - 80,
+    height: forCodekata ? Dimensions.get('window').height - 83 : Dimensions.get('window').height - 83 - 80,
     marginTop: 68,
     backgroundColor: 'transparent',
+    zIndex: 5002,
   },
   levelContainer: {
     backgroundColor: utilColors.overlay1,
@@ -30,7 +33,7 @@ const getStyle = (font, theme, utilColors) => StyleSheet.create({
   tryNowBtn: {
     width: '90%',
     borderRadius: 12,
-    backgroundColor: theme.btnBg,
+    backgroundColor: forCodekata ? Yellow.color900 : theme.btnBg,
     alignSelf: 'center',
     padding: 16,
     position: 'absolute',
@@ -69,9 +72,10 @@ const getStyle = (font, theme, utilColors) => StyleSheet.create({
 });
 
 const LevelButton = ({
-  currentQuestionId, fetchQuestion, isLast, question, style, virtualId,
+  closeLevel = () => {}, currentQuestionId, fetchQuestion, game, isLast, question, style, virtualId,
 }) => {
   let bgImg = levelNotCompletedImg;
+  let handleLevel = () => {};
 
   if (question) {
     if (currentQuestionId === virtualId) {
@@ -83,11 +87,33 @@ const LevelButton = ({
     }
   }
 
-  const handleLevel = () => {
-    if (question) {
-      fetchQuestion({ type: 'getQuestionById', questionId: question.question_id });
-    }
-  };
+  switch (game) {
+    case 'turtle':
+      if (question) {
+        handleLevel = () => {
+          fetchQuestion({ type: 'getQuestionById', questionId: question.question_id })
+            .then(closeLevel);
+        };
+      }
+      break;
+    case 'zombieLand':
+      if (question) {
+        handleLevel = () => {
+          fetchQuestion({ virtualId })
+            .then(closeLevel);
+        };
+      }
+      break;
+    case 'codekata':
+      if (question) {
+        handleLevel = () => {
+          fetchQuestion(question.virtualId)
+            .then(closeLevel);
+        };
+      }
+      break;
+    default: break;
+  }
 
   return <>
     { !isLast && <View style={style.verticalBar} /> }
@@ -117,35 +143,48 @@ const LevelButtonComponent = React.memo(LevelButton);
 const GameLevelComponent = ({
   context, font, game, gradients, theme, themeKey, utilColors,
 }) => {
-  const style = getStyle(font, theme[themeKey], utilColors);
-  let screenContext;
-  let questionList;
+  const forCodekata = game === 'codekata';
+  const style = getStyle(font, theme[themeKey], utilColors, forCodekata);
+  const {
+    ctxState: screenContext,
+    fetchQuestion,
+  } = context;
+  const { questionList } = screenContext;
   let currentQuestionId;
-  let fetchQuestion = () => {};
-  let closeLevel = () => {};
 
-  if (game === 'turtle') {
-    screenContext = context.tqState;
-    questionList = screenContext.questionList;
-    fetchQuestion = context.fetchTurtleQuestion;
-    if (questionList) {
-      currentQuestionId = questionList
-        .findIndex((el) => el.question_id === screenContext.questionObject.question_id) + 1;
+  const closeLevel = () => {
+    if (screenContext?.uiData?.showGameLevel) {
+      context.ctxSetState((prevState) => ({
+        ...prevState,
+        uiData: {
+          ...prevState.uiData,
+          showGameLevel: false,
+        },
+      }));
+      return true;
     }
+    return false;
+  };
 
-    closeLevel = () => {
-      if (screenContext?.uiData?.showGameLevel) {
-        context.tqSetState((prevState) => ({
-          ...prevState,
-          uiData: {
-            ...prevState.uiData,
-            showGameLevel: false,
-          },
-        }));
-        return true;
+  switch (game) {
+    case 'turtle':
+      if (questionList) {
+        currentQuestionId = questionList
+          .findIndex((el) => el.question_id === screenContext.questionObject.question_id) + 1;
       }
-      return false;
-    };
+      break;
+    case 'zombieLand':
+      if (questionList) {
+        currentQuestionId = screenContext.questionObject.virtualId;
+      }
+      break;
+    case 'codekata':
+      if (questionList) {
+        currentQuestionId = screenContext.questionList
+          .findIndex((el) => el.questionId === screenContext.questionObject.questionId) + 1;
+      }
+      break;
+    default: break;
   }
 
   return <>
@@ -181,6 +220,8 @@ const GameLevelComponent = ({
                         style={style}
                         virtualId={index + 1}
                         isLast={index === questionList.length - 1}
+                        game={game}
+                        closeLevel={closeLevel}
                       />
                     </>)}
                   />
@@ -195,7 +236,7 @@ const GameLevelComponent = ({
                 description='Continue Playing Button'
               />
             </Text>
-            <TryNowSVG />
+            <PlayBtn width={24} height={24} />
           </View>
         </TouchableOpacity>
       </LinearGradient>

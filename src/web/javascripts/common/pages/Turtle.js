@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import '../../../stylesheets/common/pages/turtle/style.scss';
 import { $, pageInit, pathNavigator } from '../framework';
 import Img from '../components/Img';
-import TurtleNavBar from '../components/TurtleNavBar';
+import GameNavBar from '../components/GameNavBar';
 import Modal from '../components/Modal';
 import { useTurtleFetchQuestion } from '../../../../hooks/pages/turtle';
 import {
@@ -32,9 +32,9 @@ const hideDefaultNavBar = (device, turtleState) => {
   } else if (device === 'mobile') {
     componentContainer = `.turtle-mob-${turtleState}-container`;
   }
-  window.addEventListener('resize', () => resizeHandler('nav.turtle-navbar', componentContainer));
+  window.addEventListener('resize', () => resizeHandler('nav.game-navbar', componentContainer));
   setTimeout(() => {
-    resizeHandler('nav.turtle-navbar', componentContainer);
+    resizeHandler('nav.game-navbar', componentContainer);
   }, 300);
 };
 
@@ -51,10 +51,10 @@ const TurtleHomeComponent = ({ changeRoute }) => {
   }, []);
 
   return <>
-  {/* <TurtleNavBar
+  {/* <GameNavBar
     // questionState={memoizedTurtleQuestionState}
     // handleHint={handleHint}
-    isTurtleMainPage={false}
+    isGameMainPage={false}
   /> */}
     <div className="turtle-frame">
       <div className="turtle-card-container">
@@ -940,11 +940,11 @@ const TurtleGameComponent = () => {
   }, [status]);
 
   return <>
-    <TurtleNavBar
+    <GameNavBar
       questionState={memoizedTurtleQuestionState}
       handleHint={handleHint}
       levelBtnHandler={showLevel}
-      isTurtleMainPage={true}
+      isGameMainPage={true}
       leaderboardHandler={toggleLeaderboard}
     />
     {
@@ -1028,6 +1028,7 @@ const TurtleGameComponent = () => {
       memoizedTurtleQuestionState.status === 'success'
       && <>
         <GameLevelComponent
+          game={'turtle'}
           ref={levelComponentRef}
           handleFetchQuestion={handleFetchQuestion}
           gameData={memoizedTurtleQuestionState} />

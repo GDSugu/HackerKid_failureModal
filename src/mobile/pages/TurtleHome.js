@@ -6,10 +6,10 @@ import { FormattedMessage } from 'react-intl';
 import * as Animatable from 'react-native-animatable';
 import ThemeContext from '../components/theme';
 import turtleBg from '../../images/turtle/turtleBg.png';
-// import toggleAudio from '../../images/games/gameAudio.png';
+import toggleAudio from '../../images/games/gameAudio.png';
 import playBtnImg from '../../images/games/gamePlay.png';
-// import leaderboardImg from '../../images/games/gameLeaderboard.png';
-import TurtleHeader from '../components/Header/TurtleHeader';
+import leaderboardImg from '../../images/games/gameLeaderboard.png';
+import GameHeader from '../components/Header/GameHeader';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -80,7 +80,7 @@ const TurtleHome = ({ navigation, routeName }) => {
           style={style.gameContainer}
         >
           {/* <View></View> */}
-          <TurtleHeader />
+          <GameHeader route={routeName} game={'turtle'}/>
           <View>
             <Text style={style.gameTitle}>
               <FormattedMessage
@@ -90,7 +90,7 @@ const TurtleHome = ({ navigation, routeName }) => {
             </Text>
           </View>
           <View style={style.gameOptionsContainer}>
-            {/* <Animatable.View
+            <Animatable.View
               useNativeDriver={true}
               animation={routeName === 'TurtleHome' ? 'fadeInLeft' : 'fadeOutLeft'}
               delay={500}
@@ -104,7 +104,7 @@ const TurtleHome = ({ navigation, routeName }) => {
                   />
                 </View>
               </TouchableOpacity>
-            </Animatable.View> */}
+            </Animatable.View>
             <Animatable.View
               useNativeDriver={true}
               animation={routeName === 'TurtleHome' ? 'fadeInDown' : 'fadeOutUp'}
@@ -133,7 +133,7 @@ const TurtleHome = ({ navigation, routeName }) => {
                 </View>
               </TouchableOpacity>
             </Animatable.View>
-            {/* <Animatable.View
+            <Animatable.View
               useNativeDriver={true}
               animation={routeName === 'TurtleHome' ? 'fadeInRight' : 'fadeOutRight'}
               delay={500}
@@ -141,7 +141,7 @@ const TurtleHome = ({ navigation, routeName }) => {
             >
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('TurtleLeaderBoard');
+                  navigation.navigate('GameLeaderBoard', { game: 'turtle' });
                 }}
               >
                 <View style={style.gameOptions}>
@@ -151,7 +151,7 @@ const TurtleHome = ({ navigation, routeName }) => {
                   />
                 </View>
               </TouchableOpacity>
-            </Animatable.View> */}
+            </Animatable.View>
           </View>
         </View>
       </ImageBackground>

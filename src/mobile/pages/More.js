@@ -12,7 +12,7 @@ import ThemeContext from '../components/theme';
 import Icon from '../common/Icons';
 import collectionIllustration from '../../images/more/collectibles.png';
 import ideIllustration from '../../images/more/ide.png';
-// import moreFriendsIllustration from '../../images/more/moreFriends.png';
+import moreFriendsIllustration from '../../images/more/moreFriends.png';
 import { LightBlue } from '../../colors/_colors';
 import { useLogout } from '../../hooks/pages/auth';
 import LogoutModal from '../components/Modals/LogoutModal';
@@ -201,7 +201,7 @@ const More = ({ navigation }) => {
             </ImageBackground>
           </View>
 
-          {/* <View style={style.moreCard}>
+          <View style={style.moreCard}>
             <ImageBackground
               source={moreFriendsIllustration}
               resizeMethod={'scale'}
@@ -226,7 +226,7 @@ const More = ({ navigation }) => {
                 </View>
                 <View style={style.moreBtnContainer}>
                   <TouchableOpacity
-                    onPress={() => {}}
+                    onPress={() => navigation.navigate('Club')}
                     style={style.moreCardButton}
                     >
                     <Text style={style.moreCardButtonText}>
@@ -239,7 +239,7 @@ const More = ({ navigation }) => {
                 </View>
               </View>
             </ImageBackground>
-          </View> */}
+          </View>
 
           <View style={style.moreCard}>
             <ImageBackground
@@ -266,17 +266,16 @@ const More = ({ navigation }) => {
                 </View>
                 <View style={style.moreBtnContainer}>
                   <TouchableOpacity
-                    onPress={() => { }}
+                    onPress={() => { navigation.navigate('Ide'); }}
                     style={{
                       ...style.moreCardButton,
                       ...style.moreCardIdeBtn,
-                      opacity: 0.5,
                     }}
                     disabled={true}
                   >
                     <Text style={style.moreCardButtonText}>
                       <FormattedMessage
-                        defaultMessage="Coming soon"
+                        defaultMessage="Try Now"
                         description="More card button text"
                       />
                     </Text>

@@ -16,7 +16,7 @@ import { loginCheck } from '../../../../hooks/common/framework';
 import VerifyOtpFormStep from '../components/VerifyOtpFormStep';
 import useOtp from '../../../../hooks/pages/otp';
 import useBackBtn from '../../../../hooks/pages/back-btn';
-import showInlineLoadingSpinner from '../loader';
+import { showInlineLoadingSpinner } from '../loader';
 import useRecapchav3 from '../../../../hooks/pages/recapchav3';
 
 const manager = {};

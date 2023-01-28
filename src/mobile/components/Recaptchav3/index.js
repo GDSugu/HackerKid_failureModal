@@ -48,6 +48,6 @@ const Recaptchav3 = forwardRef((props, ref) => {
   );
 });
 
-Recaptchav3.displayName = 'Recaptchav2Modal';
+Recaptchav3.displayName = 'Recaptchav3';
 
 export default Recaptchav3;

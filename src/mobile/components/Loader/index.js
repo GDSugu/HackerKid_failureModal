@@ -7,19 +7,25 @@ import {
 } from 'react-native';
 import ThemeContext from '../theme';
 
-const getStyles = () => StyleSheet.create({
+const getStyles = (style, utilColors) => StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     // backgroundColor: theme.bodyBg,
   },
+  fillScreen: {
+    ...StyleSheet.absoluteFill,
+  },
+  screenLoaderBg: {
+    backgroundColor: utilColors.transparent,
+  },
 });
 
 const Loader = ({ text, route }) => {
   const { theme } = React.useContext(ThemeContext);
   const themeName = route ? theme[`screen${route}`] : '';
-  const style = getStyles(themeName);
+  const style = getStyles(themeName, theme.utilColors);
 
   return <>
     <View style={style.container}>
@@ -33,4 +39,30 @@ const Loader = ({ text, route }) => {
   </>;
 };
 
+const ScreenLoader = ({ text, route }) => {
+  const { theme } = React.useContext(ThemeContext);
+  const themeName = route ? theme[`screen${route}`] : '';
+  const style = getStyles(themeName, theme.utilColors);
+
+  return <>
+    <View
+      style={[
+        style.container,
+        style.fillScreen,
+        style.screenLoaderBg,
+      ]}
+    >
+      <ActivityIndicator size="large" color={themeName?.navBg || '#ffffff'}>
+        {
+          text && <Text>{text}</Text>
+        }
+      </ActivityIndicator>
+    </View>
+  </>;
+};
+
 export default Loader;
+
+export {
+  ScreenLoader,
+};

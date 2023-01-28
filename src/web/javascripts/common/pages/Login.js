@@ -14,7 +14,7 @@ import {
 import '../../../stylesheets/common/pages/login/style.scss';
 import useLoginMethod from '../../../../hooks/pages/auth';
 import { loginCheck } from '../../../../hooks/common/framework';
-import showInlineLoadingSpinner from '../loader';
+import { showInlineLoadingSpinner } from '../loader';
 
 const manager = {};
 

@@ -307,26 +307,26 @@
         border-radius: 0.875rem;
 
         &.collectible-card {
-          background: url('../../../../../images/more/collectibles.svg') no-repeat bottom left / 30%, gt.theme-var(bg-1);
+          background: url('../../../../../images/more/collectibles.svg') no-repeat bottom right / 25%, gt.theme-var(bg-1);
 
           @include gm.media-breakpoint-down(md) {
-            background: url('../../../../../images/more/collectibles.svg') no-repeat bottom left / 45%, gt.theme-var(bg-1);
+            background: url('../../../../../images/more/collectibles.svg') no-repeat bottom right / 45%, gt.theme-var(bg-1);
           }
         }
 
         &.club-card {
-          background: url('../../../../../images/more/moreFriends.svg') no-repeat bottom left / 30%, gt.theme-var(bg-1);
+          background: url('../../../../../images/more/moreFriends.svg') no-repeat bottom right / 25%, gt.theme-var(bg-1);
 
           @include gm.media-breakpoint-down(md) {
-            background: url('../../../../../images/more/moreFriends.svg') no-repeat bottom left / 45%, gt.theme-var(bg-1);
+            background: url('../../../../../images/more/moreFriends.svg') no-repeat bottom right / 45%, gt.theme-var(bg-1);
           }
         }
 
         &.ide-card {
-          background: url('../../../../../images/more/ide.svg') no-repeat bottom left / 30%, gt.theme-var(bg-1);
+          background: url('../../../../../images/more/ide.svg') no-repeat bottom right / 25%, gt.theme-var(bg-1);
 
           @include gm.media-breakpoint-down(md) {
-            background: url('../../../../../images/more/ide.svg') no-repeat bottom left / 45%, gt.theme-var(bg-1);
+            background: url('../../../../../images/more/ide.svg') no-repeat bottom right / 45%, gt.theme-var(bg-1);
           }
 
           .more-card-btn {
@@ -355,7 +355,6 @@
 
           .more-card-btn-container {
             display: flex;
-            justify-content: flex-end;
             padding-top: 3rem;
 
             .more-card-btn {
