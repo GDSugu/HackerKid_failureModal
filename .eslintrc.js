@@ -19,6 +19,7 @@ module.exports = {
   ],
   rules: {
     'formatjs/no-offset': 'error',
-    'react/prop-types': 'off'
+    'react/prop-types': 'off',
+    'linebreak-style': ['error', 'windows'],
   }
 };

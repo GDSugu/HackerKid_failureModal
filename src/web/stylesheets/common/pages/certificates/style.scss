@@ -1,5 +1,6 @@
 @use '../../sass/themes/_default' as gt;
 @use '../../sass/base/_mixins' as gm;
+@use '../../sass/components/controls';
 @use '../../sass/components/turtle-certificate';
 
 @import './_certificateTheme.js';
@@ -7,15 +8,28 @@
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 
 .certificates-container {
-  background-color: gt.theme-var(certificate-body-bg, null, $thememaplight, $cssvars);
+  background-color: gt.theme-var(certificates-body-bg, null, $thememaplight, $cssvars);
+
+  &.mob-certificates-container {
+    .controls {
+      .sort-dropdown {
+        .dropdown-menu {
+          .dropdown-item.active {
+            background: none;
+            color: gt.theme-var(text-color-8);
+          }
+        }
+      }
+    }
+  }
 
   nav {
-    background-color: gt.theme-var(certificate-nav-bg, null, $thememaplight, $cssvars);
+    background-color: gt.theme-var(certificates-nav-bg, null, $thememaplight, $cssvars);
 
     .navigation-container {
       .navigation-item {
         &.active {
-          background-color: gt.theme-var(certificate-nav-active-bg, null, $thememaplight, $cssvars);
+          background-color: gt.theme-var(certificates-nav-active-bg, null, $thememaplight, $cssvars);
         }
       }
     }
@@ -35,15 +49,283 @@
     }
   }
 
-  .certificate-container,
-  .more-certificates-container {
-    canvas {
-      height: 9rem !important;
-      width: auto !important;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      margin-right: 0.5rem;
-      margin-left: 0.5rem;
+  .controls {
+    margin-top: 1rem;
+
+    .control {
+      $box-shadow-color: map-get($thememaplight, certificates-box-shadow-color);
+
+      border: 1px solid gt.theme-var(certificates-controls-border-color, null, $thememaplight, $cssvars);
+      box-shadow: 0 4 4 $box-shadow-color;
     }
+
+    .sort-dropdown {
+      .sort-dropdown-toggle {
+        background-color: gt.theme-var(bg-1);
+        color: gt.theme-var(certificates-text-color-1, null, $thememaplight, $cssvars);
+      }
+
+      .dropdown-menu {
+        .dropdown-item {
+          background: none;
+          color: gt.theme-var(certificates-text-color-1, null, $thememaplight, $cssvars);
+        }
+
+        .dropdown-item-container {
+          .ascending-descending-selectors {
+            button:active,
+            button.active {
+              background-color: gt.theme-var(certificates-body-bg, null, $thememaplight, $cssvars);
+            }
+          }
+        }
+      }
+    }
+
+    .search-box-with-icon {
+      .certificates-search-box {
+        color: gt.theme-var(certificates-text-color-1, null, $thememaplight, $cssvars);
+
+        &::placeholder {
+          color: gt.theme-var(certificates-text-color-1, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+  }
+
+  .certificates-main-container {
+    .date-with-certificate-list {
+      margin-top: 1rem;
+    }
+
+    .certificates-list {
+      margin-top: 1rem;
+      background-color: gt.theme-var(certificates-list-bg, null, $thememaplight, $cssvars);
+      border-radius: 12px;
+
+      &.multiple {
+        .certificate {
+          position: relative;
+        }
+
+        .certificate:after {
+          height: 1px;
+          display: block;
+          width: 95%;
+          background: gt.theme-var(certificate-border-bottom-color, null, $thememaplight, $cssvars);
+          content: '';
+          margin: auto;
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .certificate:last-child:after {
+          content: none;
+        }
+      }
+
+      .certificate {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 0;
+        padding: 1rem;
+
+        .certificate-image {
+          width: 145px;
+          height: 103px;
+          border-radius: 12px;
+          filter: blur(0.5px);
+          cursor: pointer;
+        }
+
+        .certificate-image-skeleton {
+          width: 145px;
+          height: 103px;
+          border-radius: 12px;
+          animation: refresh 2.5s ease-out infinite;
+          background-image: linear-gradient(90deg, gt.theme-var(text-color-6), gt.theme-var(bg-3) 30px, gt.theme-var(skeleton-bg) 60px);
+          background-size: 200%;
+        }
+
+        .share-certificate-btn {
+          margin-left: auto;
+          background: none;
+          border: none;
+          outline: none;
+
+          img {
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+          }
+        }
+      }
+    }
+  }
+
+  .certificate-view-modal {
+    $image-width: 752px;
+    $image-height: 535px;
+
+    .modal-content {
+      background: none;
+      border: none;
+    }
+
+    .modal-dialog {
+      @include gm.media-breakpoint-up(md) {
+        max-width: $image-width;
+      }
+    }
+
+    .modal-body {
+      padding: 0;
+    }
+
+    button.close {
+      margin-left: auto;
+      margin-right: 0.3rem;
+      margin-bottom: 1rem;
+      color: gt.theme-var(text-color-2);
+      font-size: 2.5rem;
+      background: gt.theme-var(certificate-modal-close-btn-bg, null, $thememaplight, $cssvars);
+      padding: 0.125rem 0.6rem 0.45rem;
+      line-height: 0.75;
+      opacity: 1;
+    }
+
+    .view-modal-certificate-image {
+      width: 100%;
+      height: $image-height;
+      border-radius: 12px;
+
+      @include gm.media-breakpoint-down(sm) {
+        $mobile-image-height: 324px;
+
+        height: $mobile-image-height;
+      }
+    }
+
+    .view-modal-certificate-image-skeleton {
+      width: 100%;
+      height: $image-height;
+      border-radius: 12px;
+      animation: refresh 2.5s ease-out infinite;
+      background-image: linear-gradient(90deg, gt.theme-var(text-color-6), gt.theme-var(bg-3) 30px, gt.theme-var(skeleton-bg) 60px);
+      background-size: 200%;
+
+      @include gm.media-breakpoint-down(sm) {
+        $mobile-image-height: 324px;
+
+        height: $mobile-image-height;
+      }
+    }
+
+    .share-download-btns-container {
+      margin-top: 1rem;
+      width: 100%;
+      gap: 1rem;
+      border: none;
+      padding: 0;
+      border-radius: 12px;
+
+      .share-btn {
+        color: white;
+        flex: 1;
+      }
+
+      .download-btn {
+        flex: 1;
+        color: gt.theme-var(certificates-btn-text-color, null, $thememaplight, $cssvars);
+        background-color: white;
+      }
+    }
+  }
+
+  .share-certificate-modal {
+    button.close {
+      margin-left: auto;
+      margin-right: 0.3rem;
+      color: gt.theme-var(text-color-2);
+      font-size: 2.5rem;
+      background: gt.theme-var(certificate-modal-close-btn-bg, null, $thememaplight, $cssvars);
+      padding: 0.125rem 0.6rem 0.45rem;
+      line-height: 0.75;
+      opacity: 1;
+    }
+
+    .share-content {
+      display: grid;
+      place-items: center;
+
+      h5,
+      p {
+        text-align: center;
+      }
+
+      .copy-link-btn {
+        margin: 0 0.25rem;
+        border-width: 2px;
+        border-radius: 0.75rem;
+        font-weight: bold;
+
+        &.btn-outline-primary {
+          &:hover {
+            color: gt.theme-var(text-color-2);
+          }
+        }
+      }
+    }
+
+    .btn-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 2rem auto;
+      padding: 0;
+
+      .form-group {
+        margin: 0;
+        padding: 0;
+
+        input {
+          border-radius: 0.5rem;
+          border: 1px solid gt.theme-var(certificates-controls-border-color, null, $thememaplight, $cssvars);
+          background-color: gt.theme-var(bg-1);
+        }
+      }
+    }
+  }
+
+  .userName {
+    color: gt.theme-var(certificate-student-name-color, null, $thememaplight, $cssvars);
+  }
+
+  @keyframes refresh {
+    0% {
+      background-position: -100%;
+    }
+
+    100% {
+      background-position: 100%;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: gt.theme-var(skeleton-bg);
+    border-radius: 0.5rem;
   }
 }

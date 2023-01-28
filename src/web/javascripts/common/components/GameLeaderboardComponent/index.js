@@ -140,7 +140,7 @@ const GameLeaderboardComponent = ({
   };
 
   const handleLeaderboardPage = (page) => {
-    getLeaderBoardData({ pageNumber: page, game: 'turtle' });
+    getLeaderBoardData({ pageNumber: page, game });
   };
 
   const handlePaginationNavigation = (action) => {
@@ -154,7 +154,7 @@ const GameLeaderboardComponent = ({
         if (nextPage !== currPage) {
           getLeaderBoardData({
             pageNumber: nextPage,
-            game: 'turtle',
+            game,
           });
         }
       } else if (action === 'previous') {
@@ -163,7 +163,7 @@ const GameLeaderboardComponent = ({
         if (prevPage !== currPage) {
           getLeaderBoardData({
             pageNumber: prevPage,
-            game: 'turtle',
+            game,
           });
         }
       }
@@ -215,7 +215,7 @@ const GameLeaderboardComponent = ({
   React.useEffect(() => {
     getLeaderBoardData({
       pageNumber: 1,
-      game: 'webkata',
+      game,
     });
 
     return () => {

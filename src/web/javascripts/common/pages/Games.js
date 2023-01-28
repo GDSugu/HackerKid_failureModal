@@ -471,7 +471,7 @@ const Games = () => {
     validSubmissionCount: dashBoardData?.webkataJs?.validSubmissionCount,
     gameCoverURL: 'games/webkata-js-game-cover.png',
     onClick: () => { navigate('/webkata/js'); },
-  },
+  }
   ];
 
   return (
@@ -606,7 +606,7 @@ const Games = () => {
                 }} />
               <GameCard
                 isDesktop={isDesktop}
-                onClick={() => { }}
+                onClick={() => { navigate('/zombieland'); }}
                 gameCardVariant={1}
                 contentContainerCustomClass={'col-6 col-sm-4 col-xl-3 p-1 p-md-2'}
                 gameDetails={{
@@ -618,7 +618,7 @@ const Games = () => {
                 }} />
               <GameCard
                 isDesktop={isDesktop}
-                onClick={() => { }}
+                onClick={() => { navigate('/webkata/css'); }}
                 gameCardVariant={1}
                 contentContainerCustomClass={'col-6 col-sm-4 col-xl-3 p-1 p-md-2'}
                 gameDetails={{
@@ -629,7 +629,7 @@ const Games = () => {
                 }} />
               <GameCard
                 isDesktop={isDesktop}
-                onClick={() => { }}
+                onClick={() => { navigate('/webkata/html'); }}
                 gameCardVariant={1}
                 contentContainerCustomClass={'col-6 col-sm-4 col-xl-3 p-1 p-md-2'}
                 gameDetails={{
@@ -640,7 +640,7 @@ const Games = () => {
                 }} />
               <GameCard
                 isDesktop={isDesktop}
-                onClick={() => { }}
+                onClick={() => { navigate('/webkata/js'); }}
                 gameCardVariant={1}
                 contentContainerCustomClass={'col-6 col-sm-4 col-xl-3 p-1 p-md-2'}
                 gameDetails={{
@@ -648,6 +648,17 @@ const Games = () => {
                   currentLevelNumber: dashBoardData.turtle.currentQuestionDetails.virtualId,
                   totalLevels: dashBoardData.turtle.overAllQuestionCount,
                   gameCoverURL: 'games/webkata-js-game-cover.png',
+                }} />
+              <GameCard
+                isDesktop={isDesktop}
+                onClick={() => { navigate('/codekata'); }}
+                gameCardVariant={1}
+                contentContainerCustomClass={'col-6 col-sm-4 col-xl-3 p-1 p-md-2'}
+                gameDetails={{
+                  gameTitle: 'CodePirate',
+                  currentLevelNumber: dashBoardData.turtle.currentQuestionDetails.virtualId,
+                  totalLevels: dashBoardData.turtle.overAllQuestionCount,
+                  gameCoverURL: 'games/codePirateCover.png',
                 }} />
             </>
           }

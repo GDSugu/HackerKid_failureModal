@@ -189,7 +189,23 @@ const ProfileContainer = ({ dashboardUserData, isDesktop, session }) => <>
       && <>
       <div className="profile-content card card-block">
         <p className="profile-content-heading">{session.name ? session.name : dashboardUserData.name || '--'}</p>
-        <p>{ session.about ? session.about : dashboardUserData.about || '--'}</p>
+        {
+          dashboardUserData?.about
+          && <>
+           <p>{dashboardUserData.about}</p>
+          </>
+        }
+        {
+          !dashboardUserData?.about
+          && <>
+            <p className='text-secondary font-italic'>
+              <FormattedMessage
+                defaultMessage={'Your bio will be shown here'}
+              />
+            </p>
+          </>
+        }
+        {/* <p>{ session.about ? session.about : dashboardUserData.about || '--'}</p> */}
       </div>
       </>
     }
@@ -322,6 +338,11 @@ const GameContainer = ({
                     <Img src='dashboard/dashboard-webkata-css.png' />
                   </Link>
                 </div> */}
+                <div className="col-3">
+                  <Link className="game-item" to='/codekata'>
+                    <Img src='dashboard/dashboard-codePirate.png' />
+                  </Link>
+                </div>
               </div>
             </div>
             <div className="game-btn-block game-progress-block mt-md-1">

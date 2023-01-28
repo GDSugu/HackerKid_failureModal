@@ -1,0 +1,113 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+
+.controls {
+  $universal-border-radius: 0.75rem;
+  $padding: 0.65rem 1.1rem;
+  $icon-width: 20px;
+  $icon-height: 20px;
+
+  position: relative;
+  display: flex;
+  gap: 1rem;
+
+  @include gm.media-breakpoint-down(md) {
+    gap: 0.5rem;
+  }
+
+  .sort-dropdown {
+    position: relative;
+    flex-basis: 20%;
+    max-width: 35%;
+
+    .sort-dropdown-toggle {
+      width: 100%;
+      border-radius: $universal-border-radius;
+      padding: $padding;
+      background-color: gt.theme-var(bg-1);
+      color: gt.theme-var(text-color-1);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+
+      .sort-icon {
+        width: $icon-width;
+        height: $icon-height;
+      }
+
+      .sort-display-name {
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &:after {
+        display: none;
+      }
+    }
+
+    .dropdown-menu {
+      min-width: 100%;
+
+      .dropdown-item {
+        display: flex;
+        gap: 2rem;
+        justify-content: space-between;
+        padding: 0.5rem 0.75rem;
+        cursor: pointer;
+        background: none;
+        color: gt.theme-var(text-color-1);
+      }
+
+      .dropdown-item-container {
+        position: relative;
+
+        .ascending-descending-selectors {
+          position: absolute;
+          display: flex;
+          gap: 0.3rem;
+          top: 50%;
+          right: 10px;
+          transform: translateY(-50%);
+
+          button {
+            border: none;
+            background: transparent;
+            outline: none;
+
+            &:focus-visible {
+              outline: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .search-box-with-icon {
+    position: relative;
+    flex-basis: 80%;
+
+    .search-icon {
+      width: $icon-width;
+      height: $icon-height;
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+    }
+
+    .search-box {
+      width: 100%;
+      border-radius: $universal-border-radius;
+      outline: none;
+      padding: $padding;
+      padding-left: calc($icon-width + 1rem);
+      color: gt.theme-var(text-color-1);
+
+      &::placeholder {
+        color: gt.theme-var(text-color-1);
+      }
+    }
+  }
+}

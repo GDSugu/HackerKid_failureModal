@@ -5,10 +5,14 @@ import '../../../../stylesheets/common/sass/components/_modal.scss';
 
 const Modal = ({
   children,
-  customClass,
+  customClass = '',
   modalClass,
   header = <></>,
   options,
+  modalContainerClass,
+  modalbodyClass,
+  modalCloseBtn = true,
+  backdrop = true,
   // modalTitle = '',
   onHidden = () => {},
   onShown = () => {},
@@ -21,6 +25,13 @@ const Modal = ({
   React.useImperativeHandle(ref, () => ({
     show: () => {
       $(`#modal${modalClassSelector}`).modal('show');
+    },
+    showWithRestriction: () => {
+      $(`#modal${modalClassSelector}`).modal({
+        backdrop: 'static',
+        keyboard: false,
+      });
+      // $(`#modal${modalClassSelector}`).modal('show');
     },
     hide: () => {
       $(`#modal${modalClassSelector}`).modal('hide');
@@ -49,9 +60,8 @@ const Modal = ({
   } else {
     $(`#modal${modalClassSelector}`).modal('hide');
   }
-
   return <>
-    <div ref={modalRef} className={`modal fade ${modalClass} ${customClass}`} id="modal" tabIndex="-1" role="dialog" aria-labelledby="errorModal" aria-hidden="true">
+    <div ref={modalRef} className={`modal fade ${modalClass} ${customClass}`} id="modal" tabIndex="-1" data-backdrop={backdrop} role="dialog" aria-labelledby="errorModal" aria-hidden="true">
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
           {/* <div className='modal-header'>
@@ -66,14 +76,14 @@ const Modal = ({
             </button>
           </div> */}
           <div className="modal-body">
-            <div className="d-flex flex-column justify-content-between">
+            <div className={`d-flex flex-column justify-content-between ${modalbodyClass}`}>
               <div className="d-flex align-items-center justify-content-between modal-custom-header">
                 { header }
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => $(`#modal${modalClassSelector}`).modal('hide')}>
+                {modalCloseBtn && <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => $(`#modal${modalClassSelector}`).modal('hide')}>
                   <span aria-hidden="true">&times;</span>
-                </button>
+                </button>}
               </div>
-              <div className='modal-container'>
+              <div className={`modal-container ${modalContainerClass}`}>
                 { children }
               </div>
             </div>

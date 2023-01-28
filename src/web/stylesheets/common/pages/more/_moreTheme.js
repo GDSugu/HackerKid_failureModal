@@ -1,4 +1,6 @@
-const { Yellow, LightBlue, utilColors } = require('../../../../../colors/_colors');
+const {
+  Yellow, LightBlue, utilColors, Red, Purple,
+} = require('../../../../../colors/_colors');
 const {
   Theme,
 } = require('../../../../javascripts/common/_theme');
@@ -18,9 +20,15 @@ const thememaplight = {
   'more-modal-close-btn-bg': utilColors.disposableIconBg,
   'more-card-box-shadow-color': '#FFE8B6',
   'more-hero-card-box-shadow-color': '#F9A82625',
+  'more-award-card-bg': utilColors.bg2,
+  'more-navigation-card-text-color': Theme.light.screenYellow.fadedBtnTextColor,
+  'more-common-gradient-color-1': Red.color500,
+  'more-common-gradient-color-2': Yellow.color600,
+  'more-rare-gradient-color-1': Purple.color900,
+  'more-rare-gradient-color-2': Purple.color500,
 };
 // just copied the light theme colors to the dark for now
-  // TODO: make this a real dark theme with appropriate colors
+// TODO: make this a real dark theme with appropriate colors
 const thememapdark = {
   'more-text-color-1': darkTheme.utilColors.dark,
   'more-btn-bg': darkTheme.screenYellow.btnBg,
@@ -33,6 +41,12 @@ const thememapdark = {
   'more-modal-close-btn-bg': utilColors.disposableIconBg,
   'more-card-box-shadow-color': '#FFE8B6',
   'more-hero-card-box-shadow-color': '#F9A82625',
+  'more-award-card-bg': utilColors.bg2,
+  'more-navigation-card-text-color': Theme.light.screenYellow.fadedBtnTextColor,
+  'more-common-gradient-color-1': Red.color500,
+  'more-common-gradient-color-2': Yellow.color600,
+  'more-rare-gradient-color-1': Purple.color900,
+  'more-rare-gradient-color-2': Purple.color500,
 };
 
 const cssvars = {
@@ -47,6 +61,12 @@ const cssvars = {
   'more-modal-close-btn-bg': '--more-modal-close-btn-bg',
   'more-card-box-shadow-color': '--more-card-box-shadow-color',
   'more-hero-card-box-shadow-color': '--more-hero-card-box-shadow-color',
+  'more-award-card-bg': '--more-award-card-bg',
+  'more-navigation-card-text-color': '--more-navigation-card-text-color',
+  'more-common-gradient-color-1': '--more-collectible-gradient-color-1',
+  'more-common-gradient-color-2': '--more-collectible-gradient-color-2',
+  'more-rare-gradient-color-1': '--more-rare-gradient-color-1',
+  'more-rare-gradient-color-2': '--more-rare-gradient-color-2',
 };
 
 module.exports = {

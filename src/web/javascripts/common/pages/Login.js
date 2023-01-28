@@ -197,7 +197,7 @@ const Login = () => {
                 closeFormError(e.target);
               }} data-close-form-error-type='ERROR,INCORRECT' data-typename='Password' data-skip-value-check={true} required={ true}/>
               <span className="password-toggle-icon-container">
-                <i className="fa fa-fw fa-eye toggle-password" toggle="#password" onClick={togglePasswordVisibility}></i>
+                <i className="fa fa-fw fa-eye toggle-password" data-toggle="#password" onClick={togglePasswordVisibility}></i>
               </span>
             </div>
           </div>

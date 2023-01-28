@@ -27,25 +27,25 @@ const LoginIntoExistingAccountBtn = () => <Link to='/login' className='login-to-
       description="Login to existing account button"
     />
   </span>
-  </Link>;
+</Link>;
 
 const CreateAccountBtn = () => <Link to='/register' className='create-new-account-btn btn btn-outline-primary btn-block mt-0 mb-2'>
-    <span className='overline-bold'>
-      <FormattedMessage
-        defaultMessage="Create a New Account"
-        description="create new account button"
-      />
-    </span>
+  <span className='overline-bold'>
+    <FormattedMessage
+      defaultMessage="Create a New Account"
+      description="create new account button"
+    />
+  </span>
 </Link>;
 
 const TakeActionButtons = ({ children }) => (
   <div className='take-action-buttons mt-4'>
     {(children) || false}
     <div className='secondary-take-action-buttons'>
-      <LoginIntoExistingAccountBtn/>
+      <LoginIntoExistingAccountBtn />
       <CreateAccountBtn />
     </div>
-</div>
+  </div>
 );
 
 const ForgotPasswordStepOne = ({
@@ -136,35 +136,35 @@ const ForgotPasswordStepOne = ({
 
   return (
     <div className='step-1-fields'>
-    <div className="form-group mb-3">
-      <div className='label-with-helper d-flex justify-content-between'>
-        <label htmlFor="phone" className="form-label overline-bold">
-          <FormattedMessage
-            defaultMessage="Phone"
-            description="Phone label"
-          />
-        </label>
-        <span className='form-helper text-danger overline-bold' id='phone-form-helper'>
-        </span>
-      </div>
+      <div className="form-group mb-3">
+        <div className='label-with-helper d-flex justify-content-between'>
+          <label htmlFor="phone" className="form-label overline-bold">
+            <FormattedMessage
+              defaultMessage="Phone"
+              description="Phone label"
+            />
+          </label>
+          <span className='form-helper text-danger overline-bold' id='phone-form-helper'>
+          </span>
+        </div>
         <input className='form-control' type='tel' name='phone' id='phone' placeholder='Phone' defaultValue={stateObj.phoneNumber} required={true} onChange={(e) => {
           handleStateChange('phoneNumber', e.target.value);
           validateInputOnChange(e);
           closeFormError(e.target);
-        }} data-close-form-error-type='ERROR,ACCOUNT_NOT_EXIST' data-typename='Phone Number'/>
-    </div>
+        }} data-close-form-error-type='ERROR,ACCOUNT_NOT_EXIST' data-typename='Phone Number' />
+      </div>
       <p className='form-error text-danger overline-bold text-center' id='form-error'></p>
       <TakeActionButtons>
         <button type="submit" className='send-otp-btn btn btn-primary btn-block mb-3' onClick={sendOtpClickHandler}>
-        <span className='overline-bold'>
-          <FormattedMessage
-            defaultMessage="Send OTP"
-            description="send otp button"
-          />
-        </span>
-      </button>
+          <span className='overline-bold'>
+            <FormattedMessage
+              defaultMessage="Send OTP"
+              description="send otp button"
+            />
+          </span>
+        </button>
       </TakeActionButtons>
-  </div>
+    </div>
   );
 };
 
@@ -261,14 +261,14 @@ const ForgotPasswordStepThree = ({
   };
 
   return (
-  <div className='step-3-fields'>
-    <div className="form-group mb-3">
+    <div className='step-3-fields'>
+      <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
           <label htmlFor="password" className="form-label overline-bold">
             <FormattedMessage
-            defaultMessage="New Password"
-            description="New Password label"
-              />
+              defaultMessage="New Password"
+              description="New Password label"
+            />
           </label>
           <span className='form-helper text-danger overline-bold' id='password-form-helper'></span>
         </div>
@@ -277,31 +277,31 @@ const ForgotPasswordStepThree = ({
             handleStateChange('password', e.target.value);
             validateInputOnChange(e, 'password', 'Use a stronger password');
             closeFormError(e.target);
-          } } data-close-form-error-type='ERROR,INVALID_PASSWORD' required={ true} data-typename='Password'/>
+          }} data-close-form-error-type='ERROR,INVALID_PASSWORD' required={true} data-typename='Password' />
           <span className="password-toggle-icon-container">
-            <i className="fa fa-fw fa-eye toggle-password" toggle="#password" onClick={togglePasswordVisibility}></i>
+            <i className="fa fa-fw fa-eye toggle-password" data-toggle="#password" onClick={togglePasswordVisibility}></i>
           </span>
         </div>
-    </div>
-    <div className="form-group mb-3">
+      </div>
+      <div className="form-group mb-3">
         <div className='label-with-helper d-flex justify-content-between'>
           <label htmlFor="retyped-password" className="form-label overline-bold">
             <FormattedMessage
-            defaultMessage="Re-type password"
-            description="Re-type password label"
-              />
+              defaultMessage="Re-type password"
+              description="Re-type password label"
+            />
           </label>
           <span className='form-helper text-danger overline-bold' id='retyped-password-form-helper'>
           </span>
         </div>
         <div className='passwordfield-with-toggle-icon'>
-          <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' typename='Re-type Password' onChange={(e) => {
+          <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' onChange={(e) => {
             handleStateChange('password', e.target.value);
             validateInputOnChange(e, 'password', 'Use a stronger Password');
             matchValueTo(e, '#password');
-          }} data-close-form-error-type='ERROR,INVALID_PASSWORD' required={ true} data-typename='Re-type Password'/>
+          }} data-close-form-error-type='ERROR,INVALID_PASSWORD' required={true} data-typename='Re-type Password' />
           <span className="password-toggle-icon-container">
-            <i className="fa fa-fw fa-eye toggle-password" toggle="#retyped-password" onClick={togglePasswordVisibility}></i>
+            <i className="fa fa-fw fa-eye toggle-password" data-toggle="#retyped-password" onClick={togglePasswordVisibility}></i>
           </span>
         </div>
       </div>
@@ -310,10 +310,10 @@ const ForgotPasswordStepThree = ({
         <button type="submit" className='change-password-btn btn btn-primary btn-block' onClick={changePasswordBtnClickHandler}>
           <FormattedMessage
             defaultMessage="Change password"
-            description="Change password Button"/>
+            description="Change password Button" />
         </button>
       </div>
-  </div>
+    </div>
   );
 };
 
@@ -387,42 +387,42 @@ const ForgotPassword = () => {
 
   return (
     <div className='form-container'>
-    <form className='forgot-password-form py-5 px-3 py-sm-3 w-100'>
-    <header className='d-flex'>
-        <i
-          className={`back-btn fa fa-arrow-left ${backBtnDisplay}`}
-          onClick={backBtnStateObj.backFn}></i>
-        <h5 className='subtitle1 text-center flex-grow-1'>
-          <FormattedMessage
-            defaultMessage="Forgot Password"
-            description="Forgot Password heading"/>
-        </h5>
-      </header>
-        <img src={ formSvgPath} className='form-svg' />
+      <form className='forgot-password-form py-5 px-3 py-sm-3 w-100'>
+        <header className='d-flex'>
+          <i
+            className={`back-btn fa fa-arrow-left ${backBtnDisplay}`}
+            onClick={backBtnStateObj.backFn}></i>
+          <h5 className='subtitle1 text-center flex-grow-1'>
+            <FormattedMessage
+              defaultMessage="Forgot Password"
+              description="Forgot Password heading" />
+          </h5>
+        </header>
+        <img src={formSvgPath} className='form-svg' />
         {
           ((stateObj.formStep === 1
             && <ForgotPasswordStepOne {...commonProps} />)
             || (stateObj.formStep === 2
-            && <VerifyOtpFormStep
-            parentStateObj={stateObj}
-            setParentStateObj={setStateObj}
-            setBackBtnStateObj={setBackBtnStateObj}
-            otpRequestType={'send-otp-for-pwd-change'}
-            recapchaExecuteOptions={{ action: 'forgotPassword' }}
-            getRecapchaToken={getRecapchaToken}
-            secondaryActionButtons={[<LoginIntoExistingAccountBtn key={0} />,
-              <CreateAccountBtn key={1} />]} />)
+              && <VerifyOtpFormStep
+                parentStateObj={stateObj}
+                setParentStateObj={setStateObj}
+                setBackBtnStateObj={setBackBtnStateObj}
+                otpRequestType={'send-otp-for-pwd-change'}
+                recapchaExecuteOptions={{ action: 'forgotPassword' }}
+                getRecapchaToken={getRecapchaToken}
+                secondaryActionButtons={[<LoginIntoExistingAccountBtn key={0} />,
+                <CreateAccountBtn key={1} />]} />)
             || (stateObj.formStep === 3
-            && <ForgotPasswordStepThree
+              && <ForgotPasswordStepThree
                 {...commonProps}
-               changePasswordRequest={changePasswordRequest}
-               />)
+                changePasswordRequest={changePasswordRequest}
+              />)
             || (stateObj.formStep === 4
               && <ForgotPasswordStepFour setBackBtnStateObj={setBackBtnStateObj} />)
           )
         }
-    </form>
-  </div>
+      </form>
+    </div>
   );
 };
 

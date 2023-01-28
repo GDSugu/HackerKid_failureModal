@@ -107,7 +107,7 @@ const TurtleQuestion = ({ navigation }) => {
   });
 
   const repositionTurtle = () => {
-    if (webViewRef.current && turtleContext.tqState.status === 'success') {
+    if (webViewRef.current && turtleContext.ctxState.status === 'success') {
       const obj = {
         action: 'repositionTurtle',
       };
@@ -129,11 +129,11 @@ const TurtleQuestion = ({ navigation }) => {
   };
 
   const renderTurtle = () => {
-    if (webViewRef.current && turtleContext.tqState.status === 'success') {
+    if (webViewRef.current && turtleContext.ctxState.status === 'success') {
       const obj = {
         action: 'renderTurtle',
         data: {
-          snippet: turtleContext.tqState.questionObject.snippet,
+          snippet: turtleContext.ctxState.questionObject.snippet,
           canvas: 'answerCanvas',
         },
       };
@@ -156,8 +156,8 @@ const TurtleQuestion = ({ navigation }) => {
 
   React.useEffect(() => {
     const closeLevel = () => {
-      if (turtleContext?.tqState?.uiData?.showGameLevel) {
-        turtleContext.tqSetState((prevState) => ({
+      if (turtleContext?.ctxState?.uiData?.showGameLevel) {
+        turtleContext.ctxSetState((prevState) => ({
           ...prevState,
           uiData: {
             ...prevState.uiData,
@@ -173,7 +173,7 @@ const TurtleQuestion = ({ navigation }) => {
     return () => {
       BackHandler.removeEventListener('hardwareBackPress', closeLevel);
     };
-  }, [turtleContext.tqState]);
+  }, [turtleContext.ctxState]);
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -181,8 +181,8 @@ const TurtleQuestion = ({ navigation }) => {
       repositionTurtle();
     }, 500);
 
-    if (turtleContext?.tqState?.uiData) {
-      turtleContext.tqSetState((prevState) => ({
+    if (turtleContext?.ctxState?.uiData) {
+      turtleContext.ctxSetState((prevState) => ({
         ...prevState,
         uiData: {
           ...prevState.uiData,
@@ -190,7 +190,7 @@ const TurtleQuestion = ({ navigation }) => {
         },
       }));
     }
-  }, [turtleContext.tqState.questionObject]);
+  }, [turtleContext.ctxState.questionObject]);
 
   return <>
     <View style={style.container}>
@@ -199,14 +199,14 @@ const TurtleQuestion = ({ navigation }) => {
           defaultMessage='{question}'
           description='Question'
           values={{
-            question: turtleContext.tqState.questionObject.Question,
+            question: turtleContext.ctxState.questionObject.Question,
           }}
         />
       </Text>
       <View style={[style.card, style.cardProblemBg]}>
         <ScrollView>
-          { turtleContext.tqState.questionObject.steps
-            && turtleContext.tqState.questionObject.steps.map(
+          { turtleContext.ctxState.questionObject.steps
+            && turtleContext.ctxState.questionObject.steps.map(
               (step, index) => <Text key={index} style={style.problemStatement}>
                 <FormattedMessage
                   defaultMessage={'{step}'}

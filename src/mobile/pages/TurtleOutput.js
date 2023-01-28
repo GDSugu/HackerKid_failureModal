@@ -81,11 +81,11 @@ const TurtleOutput = ({ navigation }) => {
   });
 
   const runCode = () => {
-    if (webViewRef.current && turtleContext.tqState.status === 'success') {
+    if (webViewRef.current && turtleContext.ctxState.status === 'success') {
       const obj = {
         action: 'runCode',
         data: {
-          snippet: turtleContext.tqState.snippet,
+          snippet: turtleContext.ctxState.snippet,
           canvas: 'answerCanvas',
         },
       };
@@ -109,7 +109,7 @@ const TurtleOutput = ({ navigation }) => {
   };
 
   const handleDebugger = () => {
-    if (webViewRef.current && turtleContext.tqState.status === 'success') {
+    if (webViewRef.current && turtleContext.ctxState.status === 'success') {
       const obj = {
         action: 'runDebugger',
       };
@@ -130,7 +130,7 @@ const TurtleOutput = ({ navigation }) => {
   };
 
   const repositionTurtle = () => {
-    if (webViewRef.current && turtleContext.tqState.status === 'success') {
+    if (webViewRef.current && turtleContext.ctxState.status === 'success') {
       const obj = {
         action: 'repositionTurtle',
       };
@@ -154,8 +154,8 @@ const TurtleOutput = ({ navigation }) => {
   };
 
   const handlePlayBtn = () => {
-    if (turtleContext.tqState.snippet && turtleContext.tqState.snippet.split('\n').filter((line) => line !== '').length > 1) {
-      if (!turtleContext.tqState.inDebugging) {
+    if (turtleContext.ctxState.snippet && turtleContext.ctxState.snippet.split('\n').filter((line) => line !== '').length > 1) {
+      if (!turtleContext.ctxState.inDebugging) {
         repositionTurtle();
         runCode();
       } else {
@@ -165,7 +165,7 @@ const TurtleOutput = ({ navigation }) => {
   };
 
   // const handleShareBtn = () => {
-  //   turtleContext.tqSetState((prevState) => ({
+  //   turtleContext.ctxSetState((prevState) => ({
   //     ...prevState,
   //     modalType: 'share',
   //     validated: true,
@@ -175,9 +175,9 @@ const TurtleOutput = ({ navigation }) => {
   const submitTurtle = (data) => {
     const request = {
       type: 'validateQuestion',
-      questionId: Number(turtleContext.tqState.questionObject.question_id),
-      sourceCode: turtleContext.tqState.snippet,
-      xmlWorkSpace: turtleContext.tqState.xmlWorkSpace,
+      questionId: Number(turtleContext.ctxState.questionObject.question_id),
+      sourceCode: turtleContext.ctxState.snippet,
+      xmlWorkSpace: turtleContext.ctxState.xmlWorkSpace,
       validated: data.validated,
     };
     let requestString = '';
@@ -186,12 +186,12 @@ const TurtleOutput = ({ navigation }) => {
     });
     const requestHash = md5(requestString + md5(requestString).toString()).toString();
     request.requestHash = requestHash;
-    turtleContext.submitTurtle(request);
+    turtleContext.submitQuestion(request);
   };
 
   const handleDebuggingState = (debuggingState) => {
-    if (turtleContext.tqState.inDebugging !== debuggingState) {
-      turtleContext.tqSetState((prevState) => ({
+    if (turtleContext.ctxState.inDebugging !== debuggingState) {
+      turtleContext.ctxSetState((prevState) => ({
         ...prevState,
         inDebugging: debuggingState,
       }));
@@ -233,20 +233,20 @@ const TurtleOutput = ({ navigation }) => {
     } else {
       manager.isFirstRender = false;
     }
-  }, [turtleContext.tqState.snippet]);
+  }, [turtleContext.ctxState.snippet]);
 
   React.useEffect(() => {
     let timeout = 1000;
-    if (turtleContext.tqState.fetchType === 'getQuestionById' && webViewRef.current) {
+    if (turtleContext.ctxState.fetchType === 'getQuestionById' && webViewRef.current) {
       webViewRef.current.reload();
       timeout = 1300;
     }
     setTimeout(() => {
-      if (webViewRef.current && turtleContext.tqState.status === 'success') {
+      if (webViewRef.current && turtleContext.ctxState.status === 'success') {
         const obj = {
           action: 'renderTurtle',
           data: {
-            snippet: turtleContext.tqState.questionObject.snippet,
+            snippet: turtleContext.ctxState.questionObject.snippet,
           },
         };
 
@@ -264,7 +264,7 @@ const TurtleOutput = ({ navigation }) => {
       }
     }, timeout);
     // console.log(webViewRef.current);
-  }, [turtleContext.tqState.questionObject]);
+  }, [turtleContext.ctxState.questionObject]);
 
   return <>
     <View style={style.container}>
@@ -336,9 +336,9 @@ const TurtleOutput = ({ navigation }) => {
             style.outputBtn,
             style.playBtn,
 
-            !turtleContext.tqState.snippet && style.disabled,
+            !turtleContext.ctxState.snippet && style.disabled,
           ]}
-          disabled={!turtleContext.tqState.snippet}
+          disabled={!turtleContext.ctxState.snippet}
           onPress={handlePlayBtn}
         >
           <Text
@@ -348,7 +348,7 @@ const TurtleOutput = ({ navigation }) => {
             }}
           >
             {
-              turtleContext.tqState.inDebugging
+              turtleContext.ctxState.inDebugging
                 ? <FormattedMessage
                   defaultMessage={'Continue'}
                   description={'Turtle Continue Button'}

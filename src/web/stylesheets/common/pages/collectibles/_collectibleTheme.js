@@ -13,9 +13,11 @@ const thememaplight = {
   'collectibles-body-bg': lightTheme.screenYellow.bodyBg,
   'collectibles-nav-bg': lightTheme.screenYellow.navBg,
   'collectibles-nav-active-bg': lightTheme.screenYellow.navActiveBg,
+  'collectibles-controls-border-color': Yellow.color400,
+  'collectibles-box-shadow-color': lightTheme.utilColors.shadowColor2,
 };
 // just copied the light theme colors to the dark for now
-  // TODO: make this a real dark theme with appropriate colors
+// TODO: make this a real dark theme with appropriate colors
 const thememapdark = {
   'collectibles-text-color-1': darkTheme.utilColors.dark,
   'collectibles-btn-bg': darkTheme.screenYellow.btnBg,
@@ -25,6 +27,8 @@ const thememapdark = {
   'collectibles-nav-active-bg': darkTheme.screenYellow.navActiveBg,
   'collectibles-card-box-shadow-color': '#FFE8B6',
   'collectibles-hero-card-box-shadow-color': '#F9A82625',
+  'collectibles-controls-border-color': Yellow.color400,
+  'collectibles-box-shadow-color': darkTheme.utilColors.shadowColor2,
 };
 
 const cssvars = {
@@ -34,6 +38,8 @@ const cssvars = {
   'collectibles-body-bg': '--collectibles-body-bg',
   'collectibles-nav-bg': '--collectibles-nav-bg',
   'collectibles-nav-active-bg': '--collectibles-nav-active-bg',
+  'collectibles-controls-border-color': '--collectibles-controls-border-color',
+  'collectibles-box-shadow-color': '--colelctibles-box-shadow-color',
 };
 
 module.exports = {

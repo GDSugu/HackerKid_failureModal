@@ -11,6 +11,26 @@
       "value": "Email"
     }
   ],
+  "+f2V2I": [
+    {
+      "type": 1,
+      "value": "currentProgress"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "unit"
+    }
+  ],
+  "+fv9wl": [
+    {
+      "type": 0,
+      "value": "State"
+    }
+  ],
   "+g4yFF": [
     {
       "type": 0,
@@ -21,6 +41,12 @@
     {
       "type": 0,
       "value": "Try now"
+    }
+  ],
+  "+nON3s": [
+    {
+      "type": 1,
+      "value": "output"
     }
   ],
   "/Gy7qZ": [
@@ -39,6 +65,26 @@
       "value": "Yes"
     }
   ],
+  "/NIQ0Y": [
+    {
+      "type": 0,
+      "value": "Sample Output:"
+    }
+  ],
+  "/NL8rk": [
+    {
+      "type": 1,
+      "value": "nextAwardIn"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "unit"
+    }
+  ],
   "/O26Yc": [
     {
       "type": 1,
@@ -51,16 +97,34 @@
       "value": "name"
     }
   ],
+  "/X/jU2": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
   "/dnxym": [
     {
       "type": 0,
       "value": "Create a New Account"
     }
   ],
+  "/hlsbq": [
+    {
+      "type": 0,
+      "value": "Approval Pending"
+    }
+  ],
   "/itreP": [
     {
       "type": 1,
       "value": "label"
+    }
+  ],
+  "/jLYDx": [
+    {
+      "type": 0,
+      "value": "Next"
     }
   ],
   "/ndV7b": [
@@ -93,6 +157,22 @@
       "value": "Coming Soon..."
     }
   ],
+  "0By1LZ": [
+    {
+      "type": 1,
+      "value": "timeInMinutes"
+    },
+    {
+      "type": 0,
+      "value": " Mins"
+    }
+  ],
+  "0IKGwB": [
+    {
+      "type": 0,
+      "value": "Output Description:"
+    }
+  ],
   "0JV99f": [
     {
       "type": 0,
@@ -103,6 +183,12 @@
     {
       "type": 0,
       "value": "Code"
+    }
+  ],
+  "0NXxp2": [
+    {
+      "type": 0,
+      "value": "Sort by:"
     }
   ],
   "0Q9/tV": [
@@ -129,6 +215,12 @@
       "value": "message"
     }
   ],
+  "0sK7Ti": [
+    {
+      "type": 0,
+      "value": "Submit Code"
+    }
+  ],
   "13ETG6": [
     {
       "type": 0,
@@ -151,6 +243,12 @@
     {
       "type": 0,
       "value": "Profile Settings"
+    }
+  ],
+  "1XDKxO": [
+    {
+      "type": 0,
+      "value": "Accept"
     }
   ],
   "1XHwzQ": [
@@ -183,6 +281,12 @@
       "value": "Continue"
     }
   ],
+  "2RoU+R": [
+    {
+      "type": 1,
+      "value": "countryName"
+    }
+  ],
   "2Tu0HO": [
     {
       "type": 0,
@@ -193,6 +297,12 @@
     {
       "type": 0,
       "value": "Bio"
+    }
+  ],
+  "2X3jYB": [
+    {
+      "type": 0,
+      "value": "is here by awarded the certification of achievement for the successfull completion of"
     }
   ],
   "2bMdhC": [
@@ -213,10 +323,22 @@
       "value": "rank"
     }
   ],
+  "2vujhq": [
+    {
+      "type": 0,
+      "value": "All set!"
+    }
+  ],
   "2yf2WH": [
     {
       "type": 0,
       "value": "Login with Phone"
+    }
+  ],
+  "30ejkF": [
+    {
+      "type": 0,
+      "value": "Close"
     }
   ],
   "33dFbN": [
@@ -233,6 +355,18 @@
       "value": "\" challenge"
     }
   ],
+  "369aS4": [
+    {
+      "type": 1,
+      "value": "collectibleRarity"
+    }
+  ],
+  "36JfZ4": [
+    {
+      "type": 0,
+      "value": "Club Info"
+    }
+  ],
   "36lS9W": [
     {
       "type": 0,
@@ -241,6 +375,34 @@
     {
       "type": 1,
       "value": "currentLevelNumber"
+    }
+  ],
+  "3Aneol": [
+    {
+      "type": 0,
+      "value": "State"
+    }
+  ],
+  "3M/P3n": [
+    {
+      "type": 1,
+      "value": "dateString"
+    }
+  ],
+  "3NDGt2": [
+    {
+      "type": 0,
+      "value": "#"
+    },
+    {
+      "type": 1,
+      "value": "rank"
+    }
+  ],
+  "3Tij96": [
+    {
+      "type": 0,
+      "value": "Remove"
     }
   ],
   "3Wcqsy": [
@@ -261,16 +423,44 @@
       "value": "label"
     }
   ],
+  "3xAjVX": [
+    {
+      "type": 0,
+      "value": "Oh ho ho.. Requirement not satisfied"
+    }
+  ],
   "4+tKRC": [
     {
       "type": 0,
       "value": "Yes"
     }
   ],
+  "44ks1Q": [
+    {
+      "type": 0,
+      "value": "Delete Club"
+    }
+  ],
+  "47yCiv": [
+    {
+      "type": 0,
+      "value": "#"
+    },
+    {
+      "type": 1,
+      "value": "rank"
+    }
+  ],
   "48yQvt": [
     {
       "type": 1,
       "value": "activeSortName"
+    }
+  ],
+  "4Pt6v5": [
+    {
+      "type": 0,
+      "value": "Searching..."
     }
   ],
   "4Ve1r3": [
@@ -283,6 +473,24 @@
     {
       "type": 0,
       "value": "Please connect to the internet."
+    }
+  ],
+  "4bWRh3": [
+    {
+      "type": 1,
+      "value": "item"
+    }
+  ],
+  "4o5Hlu": [
+    {
+      "type": 0,
+      "value": "Your name will be shown here"
+    }
+  ],
+  "4r4Vnm": [
+    {
+      "type": 0,
+      "value": "See All Awards"
     }
   ],
   "4wgAGs": [
@@ -307,10 +515,28 @@
       "value": "Rank"
     }
   ],
+  "59GDNx": [
+    {
+      "type": 0,
+      "value": "Members"
+    }
+  ],
   "5EmC6p": [
     {
       "type": 0,
       "value": "Student Name"
+    }
+  ],
+  "5Gdv0g": [
+    {
+      "type": 1,
+      "value": "btnMessage"
+    }
+  ],
+  "5HcA72": [
+    {
+      "type": 0,
+      "value": "Awards"
     }
   ],
   "5L6FVQ": [
@@ -331,16 +557,44 @@
       "value": "swiperHeading"
     }
   ],
+  "5jxN1p": [
+    {
+      "type": 1,
+      "value": "points"
+    }
+  ],
   "634LIC": [
     {
       "type": 0,
       "value": "PLAY"
     }
   ],
+  "64+NBp": [
+    {
+      "type": 0,
+      "value": "About Club"
+    }
+  ],
+  "66xp/7": [
+    {
+      "type": 1,
+      "value": "coins"
+    },
+    {
+      "type": 0,
+      "value": " coins"
+    }
+  ],
   "6Cjk2D": [
     {
       "type": 0,
       "value": "Login"
+    }
+  ],
+  "6OkiRc": [
+    {
+      "type": 0,
+      "value": "Your bio will be shown here"
     }
   ],
   "6V6DQY": [
@@ -355,6 +609,18 @@
       "value": "Awesome!"
     }
   ],
+  "6rYo7u": [
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "6ywK83": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
   "74UjvK": [
     {
       "type": 0,
@@ -365,6 +631,30 @@
     {
       "type": 0,
       "value": "Show Leaderboard"
+    }
+  ],
+  "76oyi0": [
+    {
+      "type": 1,
+      "value": "clubName"
+    }
+  ],
+  "7AMmxp": [
+    {
+      "type": 0,
+      "value": "Your bio will be shown here"
+    }
+  ],
+  "7F4zGx": [
+    {
+      "type": 1,
+      "value": "item"
+    }
+  ],
+  "7HqC7J": [
+    {
+      "type": 0,
+      "value": "Previous"
     }
   ],
   "7L3+7M": [
@@ -397,10 +687,40 @@
       "value": "Please verify to continue"
     }
   ],
+  "9GHKZe": [
+    {
+      "type": 0,
+      "value": "/"
+    },
+    {
+      "type": 1,
+      "value": "totalQns"
+    }
+  ],
+  "9K8jZr": [
+    {
+      "type": 1,
+      "value": "idx"
+    },
+    {
+      "type": 0,
+      "value": ". "
+    },
+    {
+      "type": 1,
+      "value": "hint"
+    }
+  ],
   "9NID4X": [
     {
       "type": 0,
       "value": "OK"
+    }
+  ],
+  "9QOtTR": [
+    {
+      "type": 1,
+      "value": "step"
     }
   ],
   "9TkiF9": [
@@ -413,6 +733,12 @@
     {
       "type": 0,
       "value": "New Password"
+    }
+  ],
+  "9fgz0H": [
+    {
+      "type": 1,
+      "value": "awardName"
     }
   ],
   "9gqH2W": [
@@ -463,6 +789,12 @@
       "value": "Expected output"
     }
   ],
+  "AZoPre": [
+    {
+      "type": 0,
+      "value": "Club Name"
+    }
+  ],
   "Aevhvw": [
     {
       "type": 0,
@@ -485,6 +817,12 @@
       "value": "totalSubmissions"
     }
   ],
+  "B/mNN3": [
+    {
+      "type": 0,
+      "value": "See All Awards"
+    }
+  ],
   "B7znij": [
     {
       "type": 0,
@@ -495,6 +833,12 @@
     {
       "type": 0,
       "value": "Try again"
+    }
+  ],
+  "BC2OuR": [
+    {
+      "type": 1,
+      "value": "points"
     }
   ],
   "BI7XwF": [
@@ -509,10 +853,46 @@
       "value": "No"
     }
   ],
+  "BVEoZl": [
+    {
+      "type": 0,
+      "value": "See more"
+    }
+  ],
+  "Bt/Kkf": [
+    {
+      "type": 0,
+      "value": "completed"
+    }
+  ],
   "BwliRZ": [
     {
       "type": 0,
       "value": "Newest to Oldest"
+    }
+  ],
+  "C8QChP": [
+    {
+      "type": 0,
+      "value": "Top Members"
+    }
+  ],
+  "CLW1pi": [
+    {
+      "type": 0,
+      "value": "Close"
+    }
+  ],
+  "CPWw9k": [
+    {
+      "type": 0,
+      "value": "Previous"
+    }
+  ],
+  "CT79Lc": [
+    {
+      "type": 0,
+      "value": "Club Leaderboard"
     }
   ],
   "CabaPs": [
@@ -531,6 +911,12 @@
       "value": "Coins Earned:"
     }
   ],
+  "CddI5u": [
+    {
+      "type": 0,
+      "value": "Join Club"
+    }
+  ],
   "Ciol6I": [
     {
       "type": 0,
@@ -541,6 +927,12 @@
     {
       "type": 0,
       "value": "This is about page"
+    }
+  ],
+  "D81PjZ": [
+    {
+      "type": 1,
+      "value": "collectibleName"
     }
   ],
   "DBTgpi": [
@@ -561,6 +953,20 @@
       "value": "hackerkid logo"
     }
   ],
+  "Dahcx9": [
+    {
+      "type": 1,
+      "value": "title"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "awardCount"
+    }
+  ],
   "DuPnGd": [
     {
       "type": 0,
@@ -573,10 +979,28 @@
       "value": "Live Preview"
     }
   ],
+  "EOKZu2": [
+    {
+      "type": 1,
+      "value": "text"
+    }
+  ],
   "EQupmg": [
     {
       "type": 0,
       "value": "Alphabetical"
+    }
+  ],
+  "ESmwpN": [
+    {
+      "type": 1,
+      "value": "label"
+    }
+  ],
+  "EfoM5G": [
+    {
+      "type": 0,
+      "value": "No Certificates Found"
     }
   ],
   "EhuHU0": [
@@ -591,6 +1015,12 @@
       "value": "Later"
     }
   ],
+  "EyxxGO": [
+    {
+      "type": 0,
+      "value": "Hint:"
+    }
+  ],
   "F/vOH1": [
     {
       "type": 0,
@@ -601,6 +1031,18 @@
     {
       "type": 0,
       "value": "Home"
+    }
+  ],
+  "FKN6N8": [
+    {
+      "type": 0,
+      "value": "Add a block"
+    }
+  ],
+  "FbQ6xD": [
+    {
+      "type": 0,
+      "value": "You are not a part of any club right now!"
     }
   ],
   "Fbud0n": [
@@ -651,6 +1093,12 @@
       "value": "No"
     }
   ],
+  "Fy9oMx": [
+    {
+      "type": 0,
+      "value": "for"
+    }
+  ],
   "G0AqB8": [
     {
       "type": 0,
@@ -663,10 +1111,34 @@
       "value": "rank"
     }
   ],
+  "G70f+S": [
+    {
+      "type": 0,
+      "value": "Join this Club"
+    }
+  ],
+  "GBZkYh": [
+    {
+      "type": 0,
+      "value": "Input Description:"
+    }
+  ],
+  "GKTVn2": [
+    {
+      "type": 1,
+      "value": "bio"
+    }
+  ],
   "GQwBTI": [
     {
       "type": 0,
       "value": "Verify OTP and proceed"
+    }
+  ],
+  "Game Title": [
+    {
+      "type": 0,
+      "value": "ZombieLand"
     }
   ],
   "GhmnMb": [
@@ -699,6 +1171,18 @@
       "value": "Login with Email"
     }
   ],
+  "Gr9306": [
+    {
+      "type": 0,
+      "value": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?"
+    }
+  ],
+  "GskR3C": [
+    {
+      "type": 1,
+      "value": "points"
+    }
+  ],
   "H2rvzb": [
     {
       "type": 0,
@@ -717,6 +1201,24 @@
       "value": "Save"
     }
   ],
+  "HLIDfo": [
+    {
+      "type": 0,
+      "value": "Join a club"
+    }
+  ],
+  "HTfYYv": [
+    {
+      "type": 0,
+      "value": "Play next"
+    }
+  ],
+  "HXFZww": [
+    {
+      "type": 0,
+      "value": "Sample Input:"
+    }
+  ],
   "HZrPcB": [
     {
       "type": 0,
@@ -727,6 +1229,18 @@
     {
       "type": 0,
       "value": "Register to Get help from Turtle"
+    }
+  ],
+  "I+EuqZ": [
+    {
+      "type": 1,
+      "value": "pointsEarned"
+    }
+  ],
+  "I1oDxa": [
+    {
+      "type": 0,
+      "value": "Loading failed due to some unknown error! Please try again later."
     }
   ],
   "ILnphX": [
@@ -771,16 +1285,76 @@
       "value": "errorMessage"
     }
   ],
+  "J9e6MO": [
+    {
+      "type": 1,
+      "value": "output"
+    }
+  ],
+  "JBgFgq": [
+    {
+      "type": 0,
+      "value": "Next Achievement: "
+    },
+    {
+      "type": 1,
+      "value": "nextAchievementIn"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "unit"
+    }
+  ],
+  "JGS8Gf": [
+    {
+      "type": 0,
+      "value": "Awards"
+    }
+  ],
+  "JW9Qqp": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
+  "JbsY5u": [
+    {
+      "type": 0,
+      "value": "No Awards Found!"
+    }
+  ],
   "JnwRMJ": [
     {
       "type": 0,
       "value": "OTP"
     }
   ],
+  "Jrt9bn": [
+    {
+      "type": 1,
+      "value": "countryName"
+    }
+  ],
+  "K+0Pvy": [
+    {
+      "type": 0,
+      "value": "Certificates"
+    }
+  ],
   "K+HWzs": [
     {
       "type": 0,
       "value": "Console"
+    }
+  ],
+  "K19PhT": [
+    {
+      "type": 1,
+      "value": "awardTitle"
     }
   ],
   "K1GXSf": [
@@ -801,6 +1375,36 @@
       "value": "All Games"
     }
   ],
+  "KoP+2C": [
+    {
+      "type": 0,
+      "value": "Only admins can delete club"
+    }
+  ],
+  "KvJ4NM": [
+    {
+      "type": 0,
+      "value": "Save & Proceed"
+    }
+  ],
+  "KwJUpE": [
+    {
+      "type": 1,
+      "value": "title"
+    }
+  ],
+  "KzGZsa": [
+    {
+      "type": 0,
+      "value": "No Certificates Found"
+    }
+  ],
+  "LAxUIh": [
+    {
+      "type": 1,
+      "value": "studentName"
+    }
+  ],
   "LCt8qV": [
     {
       "type": 0,
@@ -819,10 +1423,40 @@
       "value": "gameTitle"
     }
   ],
+  "LkuPrA": [
+    {
+      "type": 0,
+      "value": "Join your friends in the club"
+    }
+  ],
   "LoAPT7": [
     {
       "type": 0,
       "value": "Live Preview"
+    }
+  ],
+  "LuPT86": [
+    {
+      "type": 0,
+      "value": "Coins"
+    }
+  ],
+  "LvSOa2": [
+    {
+      "type": 1,
+      "value": "rarity"
+    }
+  ],
+  "LxWtp6": [
+    {
+      "type": 0,
+      "value": "Next award:"
+    }
+  ],
+  "M6iTxq": [
+    {
+      "type": 0,
+      "value": "Awards"
     }
   ],
   "MB8h2I": [
@@ -831,10 +1465,22 @@
       "value": "Leaderboard Ranking"
     }
   ],
+  "MFRlyM": [
+    {
+      "type": 1,
+      "value": "sortName"
+    }
+  ],
   "MS/biV": [
     {
       "type": 0,
       "value": "Go to Index"
+    }
+  ],
+  "MceYzq": [
+    {
+      "type": 1,
+      "value": "name"
     }
   ],
   "MfoF60": [
@@ -853,6 +1499,36 @@
     {
       "type": 0,
       "value": "Trending"
+    }
+  ],
+  "Mso7+b": [
+    {
+      "type": 0,
+      "value": "See More"
+    }
+  ],
+  "N930gg": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
+  "NRDu9u": [
+    {
+      "type": 0,
+      "value": "Add a block"
+    }
+  ],
+  "NVk/jo": [
+    {
+      "type": 1,
+      "value": "page"
+    }
+  ],
+  "NWMgba": [
+    {
+      "type": 0,
+      "value": "Share"
     }
   ],
   "NXV57/": [
@@ -891,6 +1567,12 @@
       "value": "Continue Playing"
     }
   ],
+  "Nl8Z7P": [
+    {
+      "type": 0,
+      "value": "Sample Output:"
+    }
+  ],
   "Nn5oAD": [
     {
       "type": 0,
@@ -901,6 +1583,24 @@
     {
       "type": 0,
       "value": "Run"
+    }
+  ],
+  "NtU1FI": [
+    {
+      "type": 0,
+      "value": "Problem Statement"
+    }
+  ],
+  "NvLmc5": [
+    {
+      "type": 0,
+      "value": "Output Description:"
+    }
+  ],
+  "NzfjXA": [
+    {
+      "type": 0,
+      "value": "Country"
     }
   ],
   "O1sXEv": [
@@ -915,16 +1615,34 @@
       "value": "More Info"
     }
   ],
+  "OEPiPP": [
+    {
+      "type": 0,
+      "value": "More friends = More fun"
+    }
+  ],
   "OJUwxk": [
     {
       "type": 0,
       "value": "Continue Playing"
     }
   ],
+  "OUOYZ4": [
+    {
+      "type": 0,
+      "value": "Sample Input:"
+    }
+  ],
   "OWSL0r": [
     {
       "type": 0,
       "value": "Register"
+    }
+  ],
+  "OXM3Ji": [
+    {
+      "type": 0,
+      "value": "View Club"
     }
   ],
   "OdODwS": [
@@ -937,6 +1655,24 @@
     {
       "type": 0,
       "value": "Class"
+    }
+  ],
+  "Ovi5Cc": [
+    {
+      "type": 1,
+      "value": "input"
+    }
+  ],
+  "OvtvUr": [
+    {
+      "type": 0,
+      "value": "Profile"
+    }
+  ],
+  "Ow+Yo9": [
+    {
+      "type": 0,
+      "value": "Or share this link to invite someone"
     }
   ],
   "P+VjyT": [
@@ -987,16 +1723,38 @@
       "value": "Playground"
     }
   ],
+  "PpUsRs": [
+    {
+      "type": 0,
+      "value": "Join"
+    }
+  ],
   "Px7S/2": [
     {
       "type": 0,
       "value": "Close"
     }
   ],
+  "QUO1DE": [
+    {
+      "type": 0,
+      "value": "Problem Statement:"
+    }
+  ],
   "Qb0n8J": [
     {
       "type": 0,
       "value": "Are you sure you want to logout?"
+    }
+  ],
+  "QsXf1d": [
+    {
+      "type": 1,
+      "value": "points"
+    },
+    {
+      "type": 0,
+      "value": " coins"
     }
   ],
   "Qvy78L": [
@@ -1015,6 +1773,12 @@
     {
       "type": 0,
       "value": "Grade"
+    }
+  ],
+  "REPA3X": [
+    {
+      "type": 0,
+      "value": "Join your friends in the club"
     }
   ],
   "RHM1lo": [
@@ -1045,10 +1809,28 @@
       "value": "View all Challenges"
     }
   ],
+  "RdkFSF": [
+    {
+      "type": 0,
+      "value": "Sort by:"
+    }
+  ],
   "Rf84nl": [
     {
       "type": 0,
       "value": "ok"
+    }
+  ],
+  "RjBfJa": [
+    {
+      "type": 0,
+      "value": "range"
+    }
+  ],
+  "RlFXhC": [
+    {
+      "type": 0,
+      "value": "Previous Awards"
     }
   ],
   "S7XoqJ": [
@@ -1075,10 +1857,22 @@
       "value": "Delete Challenge"
     }
   ],
+  "SccqZN": [
+    {
+      "type": 0,
+      "value": "Download"
+    }
+  ],
   "SpftNg": [
     {
       "type": 1,
       "value": "errorMessage"
+    }
+  ],
+  "SqEWSv": [
+    {
+      "type": 1,
+      "value": "name"
     }
   ],
   "SqEb74": [
@@ -1133,10 +1927,40 @@
       "value": "Edit Profile"
     }
   ],
+  "Tv+MUS": [
+    {
+      "type": 0,
+      "value": "Invited by"
+    }
+  ],
+  "Tw0cSl": [
+    {
+      "type": 0,
+      "value": "Create Club"
+    }
+  ],
   "TyfKd4": [
     {
       "type": 0,
       "value": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?"
+    }
+  ],
+  "U+1A/4": [
+    {
+      "type": 0,
+      "value": "View Awards"
+    }
+  ],
+  "U0dXhe": [
+    {
+      "type": 0,
+      "value": "Invites"
+    }
+  ],
+  "U11WOi": [
+    {
+      "type": 0,
+      "value": "Coins Earned:"
     }
   ],
   "U3AyDz": [
@@ -1157,6 +1981,18 @@
       "value": "Edit"
     }
   ],
+  "UXpv/F": [
+    {
+      "type": 1,
+      "value": "membersCount"
+    }
+  ],
+  "UYVF80": [
+    {
+      "type": 0,
+      "value": "Recently Collected"
+    }
+  ],
   "UkT6PM": [
     {
       "type": 0,
@@ -1167,6 +2003,22 @@
     {
       "type": 1,
       "value": "step"
+    }
+  ],
+  "UswTfO": [
+    {
+      "type": 0,
+      "value": "Codekata"
+    }
+  ],
+  "V+JV6m": [
+    {
+      "type": 0,
+      "value": "Received "
+    },
+    {
+      "type": 1,
+      "value": "certificateName"
     }
   ],
   "V365ug": [
@@ -1187,16 +2039,16 @@
       "value": "Question"
     }
   ],
-  "VdAhqD": [
-    {
-      "type": 0,
-      "value": "Coming Soon"
-    }
-  ],
   "VoYGmQ": [
     {
       "type": 0,
       "value": "Practise... or play with the new code editor"
+    }
+  ],
+  "VpTQ5s": [
+    {
+      "type": 1,
+      "value": "coins"
     }
   ],
   "VsWMVt": [
@@ -1235,10 +2087,22 @@
       "value": "Awesome!"
     }
   ],
+  "WR+Too": [
+    {
+      "type": 0,
+      "value": "No Certificates Found"
+    }
+  ],
   "WSWTC5": [
     {
       "type": 0,
       "value": "Play"
+    }
+  ],
+  "WmjFlm": [
+    {
+      "type": 0,
+      "value": "Download"
     }
   ],
   "WsWDuq": [
@@ -1247,10 +2111,22 @@
       "value": "Click \"Run\" to validate your code"
     }
   ],
+  "WxUiy6": [
+    {
+      "type": 0,
+      "value": "State"
+    }
+  ],
   "X1rCRf": [
     {
       "type": 0,
       "value": "Login into existing account"
+    }
+  ],
+  "XMB1Ot": [
+    {
+      "type": 0,
+      "value": "No Awards Found"
     }
   ],
   "XQ/d5T": [
@@ -1263,6 +2139,12 @@
     {
       "type": 0,
       "value": "No"
+    }
+  ],
+  "XbaAun": [
+    {
+      "type": 0,
+      "value": "Browse clubs:"
     }
   ],
   "XeLSF2": [
@@ -1299,6 +2181,28 @@
       "value": "username"
     }
   ],
+  "YdxUNc": [
+    {
+      "type": 0,
+      "value": "moveDown"
+    }
+  ],
+  "Ykg8tn": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
+  "YvQFe7": [
+    {
+      "type": 1,
+      "value": "points"
+    },
+    {
+      "type": 0,
+      "value": " coins"
+    }
+  ],
   "YxMMzC": [
     {
       "type": 0,
@@ -1309,6 +2213,12 @@
     {
       "type": 0,
       "value": "Go to About"
+    }
+  ],
+  "ZG77Sq": [
+    {
+      "type": 0,
+      "value": "close"
     }
   ],
   "ZMimja": [
@@ -1405,6 +2315,18 @@
       "value": "Home"
     }
   ],
+  "b3hzBu": [
+    {
+      "type": 0,
+      "value": "Try again"
+    }
+  ],
+  "bCvHuI": [
+    {
+      "type": 0,
+      "value": "Invites"
+    }
+  ],
   "bK9TWX": [
     {
       "type": 0,
@@ -1441,16 +2363,46 @@
       "value": "Play next"
     }
   ],
+  "cQyq2R": [
+    {
+      "type": 0,
+      "value": "Submit"
+    }
+  ],
+  "cS+r14": [
+    {
+      "type": 0,
+      "value": "Basic Info"
+    }
+  ],
   "cZDBd3": [
     {
       "type": 0,
       "value": "Coins"
     }
   ],
+  "cergd0": [
+    {
+      "type": 1,
+      "value": "studentName"
+    }
+  ],
+  "cmbEDz": [
+    {
+      "type": 0,
+      "value": "Play"
+    }
+  ],
   "croLiZ": [
     {
       "type": 1,
       "value": "name"
+    }
+  ],
+  "d/zBnH": [
+    {
+      "type": 0,
+      "value": "..."
     }
   ],
   "d9u+8x": [
@@ -1463,10 +2415,28 @@
       "value": "concept"
     }
   ],
+  "dBwIzQ": [
+    {
+      "type": 0,
+      "value": "Country"
+    }
+  ],
   "dNWhFj": [
     {
       "type": 0,
       "value": "No"
+    }
+  ],
+  "dWQyF1": [
+    {
+      "type": 0,
+      "value": "Oh ho ho.. failed"
+    }
+  ],
+  "dh77ji": [
+    {
+      "type": 0,
+      "value": "View Certificates"
     }
   ],
   "dq9osy": [
@@ -1491,6 +2461,12 @@
     {
       "type": 0,
       "value": "Profile updated successfully"
+    }
+  ],
+  "ed9QEz": [
+    {
+      "type": 0,
+      "value": "No members found"
     }
   ],
   "esK7Em": [
@@ -1523,10 +2499,28 @@
       "value": "completed"
     }
   ],
+  "fUu1sR": [
+    {
+      "type": 0,
+      "value": "Club Rank"
+    }
+  ],
   "fcrHSq": [
     {
       "type": 1,
       "value": "languageDisplayName"
+    }
+  ],
+  "feq+Va": [
+    {
+      "type": 0,
+      "value": "More friends = More fun"
+    }
+  ],
+  "fio5op": [
+    {
+      "type": 0,
+      "value": "Output"
     }
   ],
   "fkpavG": [
@@ -1541,6 +2535,12 @@
       "value": "validSubmissions"
     }
   ],
+  "fzlKxE": [
+    {
+      "type": 0,
+      "value": "See Less Awards"
+    }
+  ],
   "g0zp7w": [
     {
       "type": 0,
@@ -1553,10 +2553,22 @@
       "value": "Login Into Existing Account"
     }
   ],
+  "g7v9mc": [
+    {
+      "type": 1,
+      "value": "output"
+    }
+  ],
   "g8RtbX": [
     {
       "type": 0,
       "value": "Coins"
+    }
+  ],
+  "gCfRUT": [
+    {
+      "type": 1,
+      "value": "stateName"
     }
   ],
   "gOkIvb": [
@@ -1569,6 +2581,42 @@
     {
       "type": 1,
       "value": "gameTitle"
+    }
+  ],
+  "gTCzny": [
+    {
+      "type": 0,
+      "value": "Profile Picture"
+    }
+  ],
+  "gTzQSp": [
+    {
+      "type": 0,
+      "value": "moveUp"
+    }
+  ],
+  "gXLFip": [
+    {
+      "type": 0,
+      "value": "in"
+    }
+  ],
+  "gYpthg": [
+    {
+      "type": 0,
+      "value": "More"
+    }
+  ],
+  "gdd3S3": [
+    {
+      "type": 0,
+      "value": "Codekata"
+    }
+  ],
+  "glY0NW": [
+    {
+      "type": 0,
+      "value": "Output"
     }
   ],
   "hEqp4d": [
@@ -1601,10 +2649,28 @@
       "value": "Continue"
     }
   ],
+  "iS2zLU": [
+    {
+      "type": 0,
+      "value": "Visit Club"
+    }
+  ],
   "iaEqzE": [
     {
       "type": 1,
       "value": "navigationText"
+    }
+  ],
+  "iebFqD": [
+    {
+      "type": 1,
+      "value": "clubName"
+    }
+  ],
+  "jACivV": [
+    {
+      "type": 1,
+      "value": "name"
     }
   ],
   "jDzDCp": [
@@ -1647,6 +2713,30 @@
       "value": "Ok"
     }
   ],
+  "kKheEw": [
+    {
+      "type": 1,
+      "value": "question"
+    }
+  ],
+  "kloO3Z": [
+    {
+      "type": 0,
+      "value": "Advanced Options"
+    }
+  ],
+  "km5SOz": [
+    {
+      "type": 0,
+      "value": "View all collections"
+    }
+  ],
+  "lK2LOr": [
+    {
+      "type": 1,
+      "value": "certificateName"
+    }
+  ],
   "lKeCea": [
     {
       "type": 0,
@@ -1665,10 +2755,46 @@
       "value": "coins"
     }
   ],
+  "lVWtDb": [
+    {
+      "type": 1,
+      "value": "sortBy"
+    }
+  ],
+  "loHqWK": [
+    {
+      "type": 0,
+      "value": "Invite Members with this link (Optional)"
+    }
+  ],
   "lynO1X": [
     {
       "type": 0,
       "value": "Change Password"
+    }
+  ],
+  "lzSOoE": [
+    {
+      "type": 1,
+      "value": "progress"
+    },
+    {
+      "type": 1,
+      "value": "progressSuffix"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "unit"
+    }
+  ],
+  "m+RlPE": [
+    {
+      "type": 1,
+      "value": "awardDescription"
     }
   ],
   "m+YcJ4": [
@@ -1683,6 +2809,12 @@
       "value": "rank"
     }
   ],
+  "m2EDxB": [
+    {
+      "type": 0,
+      "value": "Additional Inputs"
+    }
+  ],
   "mD5V7u": [
     {
       "type": 1,
@@ -1693,6 +2825,12 @@
     {
       "type": 0,
       "value": "OTP"
+    }
+  ],
+  "mLzIvk": [
+    {
+      "type": 1,
+      "value": "certificateName"
     }
   ],
   "mMH50/": [
@@ -1707,6 +2845,12 @@
       "value": "Session expired"
     }
   ],
+  "ma6GHl": [
+    {
+      "type": 0,
+      "value": "See Less Awards"
+    }
+  ],
   "mb5De+": [
     {
       "type": 0,
@@ -1719,10 +2863,32 @@
       "value": "Recommended Games"
     }
   ],
+  "mfZLuH": [
+    {
+      "type": 0,
+      "value": "#"
+    },
+    {
+      "type": 1,
+      "value": "rank"
+    }
+  ],
+  "mgb+iQ": [
+    {
+      "type": 0,
+      "value": "Run"
+    }
+  ],
   "mhUyfM": [
     {
       "type": 1,
       "value": "question"
+    }
+  ],
+  "mijv0V": [
+    {
+      "type": 0,
+      "value": "Leave Club"
     }
   ],
   "mm9QaY": [
@@ -1749,6 +2915,12 @@
       "value": "Get the rare collectibles with your coins now"
     }
   ],
+  "n75iGj": [
+    {
+      "type": 0,
+      "value": "No Certificates Found"
+    }
+  ],
   "nGT7h4": [
     {
       "type": 0,
@@ -1767,6 +2939,12 @@
       "value": "Try IDE Now"
     }
   ],
+  "nWr131": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
   "nhSC1Z": [
     {
       "type": 0,
@@ -1777,6 +2955,12 @@
     {
       "type": 0,
       "value": "View more"
+    }
+  ],
+  "nn7wTW": [
+    {
+      "type": 0,
+      "value": "Most active members"
     }
   ],
   "nnfaF3": [
@@ -1809,10 +2993,34 @@
       "value": "Coming Soon..."
     }
   ],
+  "oQwd5t": [
+    {
+      "type": 0,
+      "value": "Create Club"
+    }
+  ],
+  "onuBbP": [
+    {
+      "type": 0,
+      "value": "Input Description:"
+    }
+  ],
   "pEiO08": [
     {
       "type": 0,
       "value": "Account Settings"
+    }
+  ],
+  "pHE0Mj": [
+    {
+      "type": 0,
+      "value": "Join with link"
+    }
+  ],
+  "pVCbSK": [
+    {
+      "type": 0,
+      "value": "Instructions"
     }
   ],
   "pVIk7O": [
@@ -1827,10 +3035,26 @@
       "value": "emptyStateText"
     }
   ],
+  "pkuBPe": [
+    {
+      "type": 0,
+      "value": "Click “Run” to generate output for your code"
+    }
+  ],
   "pl4ED2": [
     {
       "type": 0,
       "value": "Continue Playing"
+    }
+  ],
+  "pmy91K": [
+    {
+      "type": 1,
+      "value": "coins"
+    },
+    {
+      "type": 0,
+      "value": " coins"
     }
   ],
   "pwy4hs": [
@@ -1845,10 +3069,42 @@
       "value": "All Games"
     }
   ],
+  "qWi4Zr": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
   "qXTiEd": [
     {
       "type": 0,
       "value": "Grade"
+    }
+  ],
+  "qYZ5gD": [
+    {
+      "type": 1,
+      "value": "memberName"
+    }
+  ],
+  "qZyJyg": [
+    {
+      "type": 0,
+      "value": "#"
+    },
+    {
+      "type": 1,
+      "value": "rank"
+    },
+    {
+      "type": 0,
+      "value": " rank"
+    }
+  ],
+  "qmXcjW": [
+    {
+      "type": 0,
+      "value": "i"
     }
   ],
   "qs67OI": [
@@ -1863,10 +3119,32 @@
       "value": "Phone"
     }
   ],
+  "r1CvRM": [
+    {
+      "type": 0,
+      "value": "Additional Inputs"
+    }
+  ],
+  "r3BGOH": [
+    {
+      "type": 0,
+      "value": "Club Name"
+    }
+  ],
   "rECW1h": [
     {
       "type": 0,
       "value": "completed"
+    }
+  ],
+  "rSMu2Q": [
+    {
+      "type": 0,
+      "value": "ID: "
+    },
+    {
+      "type": 1,
+      "value": "certificateId"
     }
   ],
   "rZKLPy": [
@@ -1881,6 +3159,12 @@
       "value": "Yes"
     }
   ],
+  "sI7zqJ": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
   "sNqwYF": [
     {
       "type": 0,
@@ -1891,6 +3175,16 @@
     {
       "type": 0,
       "value": "Levels"
+    }
+  ],
+  "sd4dwE": [
+    {
+      "type": 1,
+      "value": "xp"
+    },
+    {
+      "type": 0,
+      "value": " xp"
     }
   ],
   "swkU6w": [
@@ -1911,6 +3205,18 @@
       "value": "step"
     }
   ],
+  "tevLEq": [
+    {
+      "type": 0,
+      "value": "Choose a club display image"
+    }
+  ],
+  "toPdTf": [
+    {
+      "type": 0,
+      "value": "Leaderboard"
+    }
+  ],
   "tsF0aG": [
     {
       "type": 0,
@@ -1929,16 +3235,40 @@
       "value": "Continue Playing"
     }
   ],
+  "uCGdYb": [
+    {
+      "type": 0,
+      "value": "Club Name"
+    }
+  ],
+  "uGaPLK": [
+    {
+      "type": 1,
+      "value": "awardDescription"
+    }
+  ],
   "uGb/uS": [
     {
       "type": 1,
       "value": "message"
     }
   ],
+  "uLdABz": [
+    {
+      "type": 1,
+      "value": "collectibleType"
+    }
+  ],
   "uPz4GT": [
     {
       "type": 0,
       "value": "Run"
+    }
+  ],
+  "ueVo+G": [
+    {
+      "type": 0,
+      "value": "Today"
     }
   ],
   "uhayi4": [
@@ -1951,6 +3281,30 @@
     {
       "type": 0,
       "value": "Inputs"
+    }
+  ],
+  "upMbBE": [
+    {
+      "type": 0,
+      "value": "Feed"
+    }
+  ],
+  "urqfpL": [
+    {
+      "type": 0,
+      "value": "Share"
+    }
+  ],
+  "v6AMff": [
+    {
+      "type": 0,
+      "value": "Certificates"
+    }
+  ],
+  "v7hkfc": [
+    {
+      "type": 0,
+      "value": "Today"
     }
   ],
   "vChW6P": [
@@ -1969,6 +3323,30 @@
     {
       "type": 0,
       "value": "Turtle"
+    }
+  ],
+  "wEEL+e": [
+    {
+      "type": 1,
+      "value": "studentName"
+    }
+  ],
+  "wXtv00": [
+    {
+      "type": 0,
+      "value": "Points"
+    }
+  ],
+  "wdqhVV": [
+    {
+      "type": 0,
+      "value": "Create club"
+    }
+  ],
+  "wn7GwB": [
+    {
+      "type": 1,
+      "value": "description"
     }
   ],
   "wrdAU0": [
@@ -2043,16 +3421,46 @@
       "value": "hintMessage"
     }
   ],
+  "ySOrrv": [
+    {
+      "type": 0,
+      "value": "No feed to show"
+    }
+  ],
   "ya4qNs": [
     {
       "type": 1,
       "value": "totalEarnedCoins"
     }
   ],
+  "yeNTz5": [
+    {
+      "type": 0,
+      "value": "Your Collections and Perks"
+    }
+  ],
+  "yjWbPf": [
+    {
+      "type": 0,
+      "value": "Visit Club"
+    }
+  ],
   "yujxGL": [
     {
       "type": 0,
       "value": "Your Collections and Perks"
+    }
+  ],
+  "z/0c45": [
+    {
+      "type": 0,
+      "value": "Link"
+    }
+  ],
+  "z3XXBW": [
+    {
+      "type": 0,
+      "value": "Country"
     }
   ],
   "z4ekJP": [
@@ -2065,6 +3473,12 @@
     {
       "type": 0,
       "value": "Name"
+    }
+  ],
+  "zHOHQO": [
+    {
+      "type": 0,
+      "value": "See Less Awards"
     }
   ],
   "zKBXVr": [
@@ -2083,6 +3497,44 @@
     {
       "type": 0,
       "value": "Coming soon"
+    }
+  ],
+  "zXjEvn": [
+    {
+      "type": 0,
+      "value": "sleep"
+    }
+  ],
+  "zeGEYY": [
+    {
+      "type": 0,
+      "value": "Oh ho ho.. failed"
+    }
+  ],
+  "zm0wU/": [
+    {
+      "type": 1,
+      "value": "idx"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "step"
+    }
+  ],
+  "zombieLand description": [
+    {
+      "type": 0,
+      "value": "Zombieland is a gamified approach where you will use your mind to code and help the protagonist Zombie reach his destination."
+    }
+  ],
+  "zombieLand title": [
+    {
+      "type": 0,
+      "value": "ZombieLand"
     }
   ]
 }
