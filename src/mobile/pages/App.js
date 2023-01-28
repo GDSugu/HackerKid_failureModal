@@ -289,6 +289,7 @@ const App = () => {
                       <Stack.Screen name='CodekataMain' component={RouteCodekataMain} />
                     </Stack.Group>
                     <Stack.Screen name='TurtleLeaderBoard' component={RouteTurtleLeaderBoard} options={{ presentation: 'transparentModal' }} />
+
                   </>
                   : <>
                     <Stack.Screen name='Login' component={RouteLogin} />

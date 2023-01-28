@@ -46,6 +46,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
 const Paginator = ({
   currentPageNumber, totalItems, countPerPage, initialWindow = 5,
   onPageChange, onNextBtnPress, onPrevBtnPress,
+  styleNextBtn = false, stylePrevBtn = false, styleActiveBtn = false,
 }) => {
   const pageNumbersArr = usePagination(totalItems, countPerPage, currentPageNumber, initialWindow);
 
@@ -66,14 +67,14 @@ const Paginator = ({
         disabled={currentPageNumber === initialPageNumber}
       >
         <PrevBtnSvg style={currentPageNumber === initialPageNumber
-          ? [style.prevBtnIcon, style.paginationBtnDisabled]
-          : style.prevBtnIcon} />
+          ? [stylePrevBtn || style.prevBtnIcon, style.paginationBtnDisabled]
+          : stylePrevBtn || style.prevBtnIcon} />
       </TouchableOpacity>
       {
         pageNumbersArr && pageNumbersArr.map((pageNumber, idx) => (pageNumber ? <TouchableOpacity
             key={idx} onPress={() => onPageChange(pageNumber)} style={style.pageBtn}>
             <Text style={currentPageNumber === pageNumber
-              ? [style.pageBtnText, style.pageBtnActiveText]
+              ? [style.pageBtnText, styleActiveBtn || style.pageBtnActiveText]
               : style.pageBtnText}>
                 <FormattedMessage
                   defaultMessage={'{pageNumber}'}
@@ -94,8 +95,8 @@ const Paginator = ({
         disabled={currentPageNumber === maximumPageNumber}
       >
         <NextBtnSvg style={currentPageNumber === maximumPageNumber
-          ? [style.nextBtnIcon, style.paginationBtnDisabled]
-          : style.nextBtnIcon} />
+          ? [styleNextBtn || style.nextBtnIcon, style.paginationBtnDisabled]
+          : styleNextBtn || style.nextBtnIcon} />
       </TouchableOpacity>
     </View>
   </KeyboardAvoidingView>;

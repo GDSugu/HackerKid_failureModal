@@ -445,13 +445,17 @@
     "defaultMessage": "Please verify to continue",
     "description": "Recaptcha Modal heading"
   },
-  "9GHKZe": {
-    "defaultMessage": "/{totalQns}",
-    "description": "Game Leader Board: Total Questions"
+  "9BVOVU": {
+    "defaultMessage": "Please verify to continue",
+    "description": "Recaptcha Modal heading"
   },
-  "9K8jZr": {
-    "defaultMessage": "{idx}. {hint}",
-    "description": "Hint"
+  "9BVOVU": {
+    "defaultMessage": "Please verify to continue",
+    "description": "Recaptcha Modal heading"
+  },
+  "9BVOVU": {
+    "defaultMessage": "Please verify to continue",
+    "description": "Recaptcha Modal heading"
   },
   "9NID4X": {
     "defaultMessage": "OK",
@@ -581,9 +585,9 @@
     "defaultMessage": "Coins Earned:",
     "description": "Coins Earned"
   },
-  "CddI5u": {
-    "defaultMessage": "Join Club",
-    "description": "join club modal title"
+  "CfsqV9": {
+    "defaultMessage": "All Games",
+    "description": "Games Page"
   },
   "Ciol6I": {
     "defaultMessage": "Output",
@@ -1877,6 +1881,10 @@
   "o2jxWd": {
     "defaultMessage": "Account Settings",
     "description": "more menu button"
+  },
+  "oDenEU": {
+    "defaultMessage": "Turtle",
+    "description": "Turtle Game Title"
   },
   "oOZkkL": {
     "defaultMessage": "Coming Soon...",

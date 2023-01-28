@@ -30,6 +30,8 @@ const Theme = {
       notificationBg: Green.color700,
       btnBg: Green.color700,
       textBold: Green.color900,
+      primaryBtn: Yellow.color900,
+      secondaryBtn: Yellow.color700,
     },
     screenLightBlue: {
       bodyBg: LightBlue.color50,

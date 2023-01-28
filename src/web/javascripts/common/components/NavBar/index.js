@@ -19,7 +19,7 @@ const NavItem = (props) => {
 const NavBar = () => {
   const { pathname } = useLocation();
   const routes = pathname.split('/');
-  const screen = routes[routes.length - 1];
+  const screen = routes[1];
   const isPageMounted = React.useRef(true);
   const { session: { profileLink } } = useGetSession({ sessionAttr: ['profileLink'], isPageMounted });
 
@@ -45,7 +45,7 @@ const NavBar = () => {
           <path d="M41 26L36 31L31 26M28 31H44C45.1046 31 46 31.8954 46 33V44C46 45.1046 45.1046 46 44 46H28C26.8954 46 26 45.1046 26 44V33C26 31.8954 26.8954 31 28 31Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>,
       route: '/courses',
-      active: screen === 'courses',
+      active: ['courses', 'videos'].indexOf(screen) !== -1,
     },
     {
       icon: <svg width="24" height="24" viewBox="24 24 24 24" fill="none" stroke="#212527" xmlns="http://www.w3.org/2000/svg">
