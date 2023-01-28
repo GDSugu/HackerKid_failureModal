@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import Ace from 'react-ace';
 import '../../../stylesheets/common/pages/codekata/style.scss';
 import { $, pageInit, pathNavigator } from '../framework';
-import TurtleNavBar from '../components/TurtleNavBar';
+import GameNavBar from '../components/GameNavBar';
 import Img from '../components/Img';
 import useRootPageState from '../../../../hooks/pages/root';
 import useCodekata from '../../../../hooks/pages/codekata';
@@ -950,7 +950,7 @@ const CodekataGameComponent = () => {
   return (
     <>
       <div className="codekata-game-container">
-        <TurtleNavBar
+        <GameNavBar
           forCodekata={true}
           questionState={codekataData}
           levelBtnHandler={showLevel}
