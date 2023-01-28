@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 import { useGetSession } from '../../../../hooks/pages/root';
 import '../../../stylesheets/common/pages/more/style.scss';
 import {
-  $, loginCheck, pageInit, authorize,
+  $, loginCheck, pageInit, authorize, pathNavigator,
 } from '../framework';
 import Img from '../components/Img';
 import Modal from '../components/Modal';
 import HelpModal from '../components/HelpModal';
+
+const handleClubCard = () => pathNavigator('clubs');
 
 const MoreHero = ({ isDesktop, session, toggleModal }) => <>
   <div className="more-hero-container">
@@ -74,7 +76,7 @@ const MoreHero = ({ isDesktop, session, toggleModal }) => <>
 const MoreCards = () => <>
   <div className="more-card-container">
     <div className="row no-gutters align-items-stretch">
-      <div className='more-card-block col-12 col-md-6'>
+      <div className='more-card-block col-12'>
         <div className="more-card-block-cntnr collectible-card">
           <div className="more-card">
             <div className="more-card-contnr">
@@ -98,7 +100,7 @@ const MoreCards = () => <>
           </div>
         </div>
       </div>
-      {/* <div className='more-card-block col-12 col-md-6'>
+      <div className='more-card-block col-12'>
         <div className="more-card-block-cntnr club-card">
           <div className="more-card">
             <div className="more-card-contnr">
@@ -116,10 +118,10 @@ const MoreCards = () => <>
               </p>
             </div>
             <div className="more-card-btn-container">
-              <button className="more-card-btn btn" disabled>
+              <button className="more-card-btn btn" onClick={handleClubCard}>
                 <p>
                   <FormattedMessage
-                    defaultMessage={'Coming Soon...'}
+                    defaultMessage={'Visit Club'}
                     description={'more card button'}
                   />
                 </p>
@@ -127,8 +129,8 @@ const MoreCards = () => <>
             </div>
           </div>
         </div>
-      </div> */}
-      <div className='more-card-block col-12 col-md-6'>
+      </div>
+      <div className='more-card-block col-12'>
         <div className="more-card-block-cntnr ide-card">
           <div className="more-card">
             <div className="more-card-contnr">

@@ -9,12 +9,12 @@ const CodeEditor = ({
   styleStringForDocumentInsideWebView,
   id = 'editor',
   theme = 'monokai',
-  onload,
-  onCodeEditorChanged,
-  onCodeEditorClicked,
-  onCodeEditorUpdateFinish,
+  onload = () => { },
+  onCodeEditorChanged = () => { },
+  onCodeEditorClicked = () => { },
+  onCodeEditorUpdateFinish = () => { },
   showLoader = false,
-  loadingFunction = () => {},
+  loadingFunction = () => { },
 }) => {
   const BodyComponent = () => <div id={id}></div>;
 
@@ -82,7 +82,7 @@ const CodeEditor = ({
         editor.setOption('mode', 'ace/mode/'+mode);
       }
 
-      if(code) {
+      if(code || code === '') {
         editor.setValue(code);
       }
 

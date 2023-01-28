@@ -5,7 +5,7 @@ import '../../../../stylesheets/common/sass/components/_modal.scss';
 
 const Modal = ({
   children,
-  customClass,
+  customClass = '',
   modalClass,
   header = <></>,
   options,
@@ -25,6 +25,13 @@ const Modal = ({
   React.useImperativeHandle(ref, () => ({
     show: () => {
       $(`#modal${modalClassSelector}`).modal('show');
+    },
+    showWithRestriction: () => {
+      $(`#modal${modalClassSelector}`).modal({
+        backdrop: 'static',
+        keyboard: false,
+      });
+      // $(`#modal${modalClassSelector}`).modal('show');
     },
     hide: () => {
       $(`#modal${modalClassSelector}`).modal('hide');

@@ -6,10 +6,10 @@ import {
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import TryNowSVG from '../../../images/games/trynow.svg';
-import PlayBtn from '../../../images/games/playBtn.svg';
 import levelCurrentImg from '../../../images/games/level_current.png';
 import levelCompletedImg from '../../../images/games/level_completed.png';
 import levelNotCompletedImg from '../../../images/games/level_not_completed.png';
+import PlayBtn from '../../../images/games/playBtn.svg';
 import { Yellow } from '../../../colors/_colors';
 
 const getStyle = (font, theme, utilColors, forCodekata = false) => StyleSheet.create({
@@ -72,9 +72,10 @@ const getStyle = (font, theme, utilColors, forCodekata = false) => StyleSheet.cr
 });
 
 const LevelButton = ({
-  currentQuestionId, fetchQuestion, isLast, question, style, virtualId, forCodekata = false,
+  closeLevel = () => {}, currentQuestionId, fetchQuestion, game, isLast, question, style, virtualId,
 }) => {
   let bgImg = levelNotCompletedImg;
+  let handleLevel = () => {};
 
   if (question) {
     if (currentQuestionId === virtualId) {
@@ -86,13 +87,33 @@ const LevelButton = ({
     }
   }
 
-  const handleLevel = () => {
-    if (question && !forCodekata) {
-      fetchQuestion({ type: 'getQuestionById', questionId: question.question_id });
-    } else {
-      fetchQuestion(question.virtualId);
-    }
-  };
+  switch (game) {
+    case 'turtle':
+      if (question) {
+        handleLevel = () => {
+          fetchQuestion({ type: 'getQuestionById', questionId: question.question_id })
+            .then(closeLevel);
+        };
+      }
+      break;
+    case 'zombieLand':
+      if (question) {
+        handleLevel = () => {
+          fetchQuestion({ virtualId })
+            .then(closeLevel);
+        };
+      }
+      break;
+    case 'codekata':
+      if (question) {
+        handleLevel = () => {
+          fetchQuestion(question.virtualId)
+            .then(closeLevel);
+        };
+      }
+      break;
+    default: break;
+  }
 
   return <>
     { !isLast && <View style={style.verticalBar} /> }
@@ -120,46 +141,50 @@ const LevelButton = ({
 const LevelButtonComponent = React.memo(LevelButton);
 
 const GameLevelComponent = ({
-  context, font, game, gradients, theme, themeKey, utilColors, forCodekata = false,
+  context, font, game, gradients, theme, themeKey, utilColors,
 }) => {
+  const forCodekata = game === 'codekata';
   const style = getStyle(font, theme[themeKey], utilColors, forCodekata);
-  let screenContext;
-  let questionList;
+  const {
+    ctxState: screenContext,
+    fetchQuestion,
+  } = context;
+  const { questionList } = screenContext;
   let currentQuestionId;
-  let fetchQuestion = () => {};
-  let closeLevel = () => {};
 
-  if (game === 'turtle') {
-    screenContext = context.tqState;
-    questionList = screenContext.questionList;
-
-    if (forCodekata) {
-      fetchQuestion = context.getCodekataQuestions;
-    } else {
-      fetchQuestion = context.fetchTurtleQuestion;
+  const closeLevel = () => {
+    if (screenContext?.uiData?.showGameLevel) {
+      context.ctxSetState((prevState) => ({
+        ...prevState,
+        uiData: {
+          ...prevState.uiData,
+          showGameLevel: false,
+        },
+      }));
+      return true;
     }
+    return false;
+  };
 
-    if (questionList && !forCodekata) {
-      currentQuestionId = questionList
-        .findIndex((el) => el.question_id === screenContext.questionObject.question_id) + 1;
-    } else if (questionList) {
-      currentQuestionId = questionList
-        .findIndex((el) => el.questionId === screenContext.questionObject.questionId) + 1;
-    }
-
-    closeLevel = () => {
-      if (screenContext?.uiData?.showGameLevel) {
-        context.tqSetState((prevState) => ({
-          ...prevState,
-          uiData: {
-            ...prevState.uiData,
-            showGameLevel: false,
-          },
-        }));
-        return true;
+  switch (game) {
+    case 'turtle':
+      if (questionList) {
+        currentQuestionId = questionList
+          .findIndex((el) => el.question_id === screenContext.questionObject.question_id) + 1;
       }
-      return false;
-    };
+      break;
+    case 'zombieLand':
+      if (questionList) {
+        currentQuestionId = screenContext.questionObject.virtualId;
+      }
+      break;
+    case 'codekata':
+      if (questionList) {
+        currentQuestionId = screenContext.questionList
+          .findIndex((el) => el.questionId === screenContext.questionObject.questionId) + 1;
+      }
+      break;
+    default: break;
   }
 
   return <>
@@ -195,7 +220,8 @@ const GameLevelComponent = ({
                         style={style}
                         virtualId={index + 1}
                         isLast={index === questionList.length - 1}
-                        forCodekata={forCodekata}
+                        game={game}
+                        closeLevel={closeLevel}
                       />
                     </>)}
                   />
@@ -210,9 +236,7 @@ const GameLevelComponent = ({
                 description='Continue Playing Button'
               />
             </Text>
-            {forCodekata
-              ? <PlayBtn width={24} height={24} />
-              : <TryNowSVG width={24} height={24} />}
+            <PlayBtn width={24} height={24} />
           </View>
         </TouchableOpacity>
       </LinearGradient>

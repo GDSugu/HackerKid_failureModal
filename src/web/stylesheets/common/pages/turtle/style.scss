@@ -24,7 +24,7 @@
       }
     }
 
-    &.turtle-navbar {
+    &.game-navbar {
       // background: url(../../../../../images/games/navbg.png) no-repeat 100% / cover;
       background-color: transparent;
 
@@ -61,6 +61,17 @@
       // .profileImg {
       //   margin: 0;
       // }
+    }
+  }
+
+  .game-navbar {
+    @include gm.media-breakpoint-down(md) {
+      .profileImg {
+        img {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+      }
     }
   }
 

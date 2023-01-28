@@ -20,7 +20,7 @@ const LanguageSelector = ({
 
   return (
   <div className={`language-selector-container ${className}`}>
-  <div className='dropdown mr-4'>
+  <div className='dropdown mr-md-4'>
     <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
       <span className='overline' id='selected-language-display'>
         <FormattedMessage

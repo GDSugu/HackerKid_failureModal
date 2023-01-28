@@ -58,7 +58,7 @@ nav {
 }
 
 .language-selector-with-back-btn {
-  padding: 0.75rem;
+  padding: 0.5rem;
   background-color: gt.theme-var(bg-1);
   display: flex;
   justify-content: space-between;
@@ -264,7 +264,7 @@ nav {
   .language-selector-with-back-btn {
     .dropdown-toggle {
       #selected-language-display {
-        min-width: 200px;
+        min-width: 110px;
       }
     }
   }

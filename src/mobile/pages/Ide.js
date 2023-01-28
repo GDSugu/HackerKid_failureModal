@@ -177,32 +177,32 @@ const InputDrawer = ({
   };
 
   return (
-  <View style={[style.inputDrawer, style.bg1]}>
-    <View style={{ position: 'relative' }}>
-      <TouchableOpacity onPress={onInputDrawerPress}>
-        <View style={style.inputDrawBtn}>
-          <Text style={[style.inputDrawerLabel, style.textColor2]}>
-            <FormattedMessage defaultMessage={'Inputs'} description={'Input drawer title'} />
-          </Text>
-          <TouchableOpacity onPress={onInputDrawerPress}>
-            <Icon
-              name={localState.inputDrawerOpen ? 'chevron-down' : 'chevron-up'}
-              type='FontAwesome'
-              size={20}
-              color={style.textColor2.color}
-            />
-          </TouchableOpacity>
-        </View>
-      </TouchableOpacity>
+    <View style={[style.inputDrawer, style.bg1]}>
+      <View style={{ position: 'relative' }}>
+        <TouchableOpacity onPress={onInputDrawerPress}>
+          <View style={style.inputDrawBtn}>
+            <Text style={[style.inputDrawerLabel, style.textColor2]}>
+              <FormattedMessage defaultMessage={'Inputs'} description={'Input drawer title'} />
+            </Text>
+            <TouchableOpacity onPress={onInputDrawerPress}>
+              <Icon
+                name={localState.inputDrawerOpen ? 'chevron-down' : 'chevron-up'}
+                type='FontAwesome'
+                size={20}
+                color={style.textColor2.color}
+              />
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
         <View style={localState.inputDrawerOpen ? [style.inputBoxContainer, style.bg1]
           : [style.inputBoxContainer, style.bg1, style.hideInputBox]}>
-        <TextInput style={[style.inputBox, style.bg2]} multiline={true} textAlignVertical={'top'} placeholder='Enter inputs if any'
-          value={ideState.input} onChangeText={(value) => {
-            setIdeState((prev) => ({ ...prev, input: value }));
-          }} />
+          <TextInput style={[style.inputBox, style.bg2, style.textColor1]} multiline={true} textAlignVertical={'top'} placeholder='Enter inputs if any'
+            value={ideState.input} onChangeText={(value) => {
+              setIdeState((prev) => ({ ...prev, input: value }));
+            }} />
+        </View>
       </View>
     </View>
-  </View>
   );
 };
 
@@ -213,10 +213,10 @@ const Console = ({ style, ideState }) => (
         ideState.output && <>
           {
             ideState.output.map((line, idx) => <View key={idx} style={style.outputBlock}>
-            <ConsoleLineIndicatorArrowIcon />
-            <Text style={[style.outputBoxText, style.textColor2]}>
-              <FormattedMessage defaultMessage={'{line}'} description='console line' values={{ line }}/>
-            </Text>
+              <ConsoleLineIndicatorArrowIcon />
+              <Text style={[style.outputBoxText, style.textColor2]}>
+                <FormattedMessage defaultMessage={'{line}'} description='console line' values={{ line }} />
+              </Text>
             </View>)
           }
         </>
@@ -295,18 +295,18 @@ const TabBar = (props) => {
             onLongPress={onLongPress}
             style={[style.tabBtn, style.bg1]}
           >
-              <Animatable.View
-                duration={500}
-                animation={isFocused ? 'bounceIn' : 'pulse'}
-                useNativeDriver={true}
-                style={{
-                  position: 'relative',
-                  height: 68,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  width: '70%',
-                }}
-              >
+            <Animatable.View
+              duration={500}
+              animation={isFocused ? 'bounceIn' : 'pulse'}
+              useNativeDriver={true}
+              style={{
+                position: 'relative',
+                height: 68,
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '70%',
+              }}
+            >
               <View style={{
                 position: 'absolute',
                 top: 0,
@@ -316,14 +316,14 @@ const TabBar = (props) => {
                 borderRadius: 10,
               }}></View>
               <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                  <TabIcon color={utilColors.white} />
-                  <View style={{ marginTop: 10 }}>
-                    <Text style={{ color: utilColors.white, ...font.bodyBold }}>
-                      <FormattedMessage defaultMessage={'{name}'} description='name' values={{ name: route.name }}/>
-                    </Text>
-                  </View>
+                <TabIcon color={utilColors.white} />
+                <View style={{ marginTop: 10 }}>
+                  <Text style={{ color: utilColors.white, ...font.bodyBold }}>
+                    <FormattedMessage defaultMessage={'{name}'} description='name' values={{ name: route.name }} />
+                  </Text>
                 </View>
-              </Animatable.View>
+              </View>
+            </Animatable.View>
           </TouchableOpacity>
         );
       })}
@@ -340,7 +340,7 @@ const TabBar = (props) => {
           <RunCodeIcon color={utilColors.white} />
           <View style={{ marginTop: 10 }}>
             <Text style={[style.runBtnText, { ...font.bodyBold }]}>
-              <FormattedMessage defaultMessage={'Run'} description='name'/>
+              <FormattedMessage defaultMessage={'Run'} description='name' />
             </Text>
           </View>
         </Animatable.View>
@@ -378,13 +378,14 @@ const updateCodeEditorJSString = (mode, code) => {
 // IDE component
 const Ide = ({ navigation, route }) => {
   // hooks
+  const isPageMounted = useRef(true);
   const codeEditorWebViewRef = useRef(null);
   const recaptchav3Ref = useRef(null);
   const {
     runCodeRequest,
     state: ideState,
     setState: setIdeState,
-  } = useIde();
+  } = useIde({ isPageMounted });
   const [localState, setLocalState] = useState({
     inputDrawerOpen: false,
     languageSelectorOpen: false,
@@ -407,16 +408,16 @@ const Ide = ({ navigation, route }) => {
 
   // methods - event handlers
   const returnCodeEditorLoader = () => (<ActivityIndicator
-      // visibility of Overlay Loading Spinner
-      visible={localState.isLoading}
-      // Text with the Spinner
-      textContent={'Loading...'}
-      // Text style of the Spinner Text
-      textStyle={{ color: 'black' }}
-      size={'large'}
-      color={style.textColor2.color}
-      style={style.loader}
-    />);
+    // visibility of Overlay Loading Spinner
+    visible={localState.isLoading}
+    // Text with the Spinner
+    textContent={'Loading...'}
+    // Text style of the Spinner Text
+    textStyle={{ color: 'black' }}
+    size={'large'}
+    color={style.textColor2.color}
+    style={style.loader}
+  />);
 
   const onCodeEditorLoad = () => {
     const promisesArr = [getSession('previousLanguageValue'), getSession('previousSourceCode')];
@@ -460,10 +461,12 @@ const Ide = ({ navigation, route }) => {
   const onRunCodePress = (innerTabNavigation) => {
     const code = ideState.writtenCode;
 
-    setIdeState((prev) => ({
-      ...prev,
-      output: ['Compiling your code...'],
-    }));
+    if (isPageMounted.current) {
+      setIdeState((prev) => ({
+        ...prev,
+        output: ['Compiling your code...'],
+      }));
+    }
 
     setSession('previousLanguageValue', ideState.selectedLanguageValue);
     setSession('previousSourceCode', code);
@@ -476,29 +479,30 @@ const Ide = ({ navigation, route }) => {
       const { input, selectedLanguageValue } = ideState;
       const compilerId = getCompilerIdFromValue(selectedLanguageValue);
 
-      runCodeRequest(sourceCode, input, compilerId, token, recaptchaVersion)
-        .then((response) => {
-          const parsedData = JSON.parse(response);
-          const { compilationDetails } = parsedData;
+      runCodeRequest(sourceCode, input, compilerId, token, recaptchaVersion).then((response) => {
+        const parsedData = JSON.parse(response);
+        const { compilationDetails } = parsedData;
 
-          if (parsedData.status === 'success') {
+        if (parsedData.status === 'success') {
+          if (isPageMounted.current) {
             setIdeState((prev) => ({
               ...prev,
               output: [...prev.output, (compilationDetails.output ? compilationDetails.output.trim() : 'Nil')],
             }));
-          } else if (parsedData.status === 'error') {
-            const err = new Error(parsedData.message);
-            err.cause = 'postData';
+          }
+        } else if (parsedData.status === 'error') {
+          const err = new Error(parsedData.message);
+          err.cause = 'postData';
 
-            throw err;
-          }
-        }).catch((err) => {
-          if (err.cause === 'postData') {
-            console.log('Something went wrong! Please try again');
-          } else {
-            console.error(err);
-          }
-        });
+          throw err;
+        }
+      }).catch((err) => {
+        if (err.cause === 'postData') {
+          console.log('Something went wrong! Please try again');
+        } else {
+          console.error(err);
+        }
+      });
     });
   };
 
@@ -557,6 +561,7 @@ const Ide = ({ navigation, route }) => {
 
   useEffect(() => () => {
     ideInteracted = undefined;
+    isPageMounted.current = false;
   }, []);
 
   return (
@@ -571,22 +576,22 @@ const Ide = ({ navigation, route }) => {
           style={style}
           utilColors={theme.utilColors}
           onRunCodePress={onRunCodePress}
-          />}>
+        />}>
         <Tab.Screen name='Code'>
           {
             () => <>
-            <View style={style.languageSelectorWithBackBtn}>
-              <View style={style.backBtnWithPageTitle}>
-                <TouchableOpacity style={style.backBtn} onPress={() => navigation.goBack()}>
-                  <Icon
-                    name={'arrow-left'}
-                    type='FontAwesome'
-                    size={15}
-                    color={style.textColor3.color}
-                  />
+              <View style={style.languageSelectorWithBackBtn}>
+                <View style={style.backBtnWithPageTitle}>
+                  <TouchableOpacity style={style.backBtn} onPress={() => navigation.navigate('More')}>
+                    <Icon
+                      name={'arrow-left'}
+                      type='FontAwesome'
+                      size={15}
+                      color={style.textColor3.color}
+                    />
                   </TouchableOpacity>
                   <Text style={[style.pageTitle, style.textColor3]}>
-                    <FormattedMessage defaultMessage={'IDE'} description='page title'/>
+                    <FormattedMessage defaultMessage={'IDE'} description='page title' />
                   </Text>
                 </View>
                 <View style={style.languageSelectorContainer}>
@@ -618,25 +623,25 @@ const Ide = ({ navigation, route }) => {
                     onChangeValue={onLanguageSelectorChange}
                   />
                 </View>
-                </View>
-                <CodeEditor
-                  codeEditorWebViewRef={codeEditorWebViewRef}
-                  style={style}
-                  styleStringForDocumentInsideWebView={styleStringForDocumentInsideWebView}
-                  onload={onCodeEditorLoad}
-                  onCodeEditorChanged={onCodeEditorChanged}
-                  onCodeEditorClicked={onCodeEditorClicked}
-                  onCodeEditorUpdateFinish={onCodeEditorUpdateFinish}
-                  showLoader={true}
-                  loadingFunction={returnCodeEditorLoader}
+              </View>
+              <CodeEditor
+                codeEditorWebViewRef={codeEditorWebViewRef}
+                style={style}
+                styleStringForDocumentInsideWebView={styleStringForDocumentInsideWebView}
+                onload={onCodeEditorLoad}
+                onCodeEditorChanged={onCodeEditorChanged}
+                onCodeEditorClicked={onCodeEditorClicked}
+                onCodeEditorUpdateFinish={onCodeEditorUpdateFinish}
+                showLoader={true}
+                loadingFunction={returnCodeEditorLoader}
               />
               <InputDrawer {...commonProps} />
-              </>
+            </>
           }
         </Tab.Screen>
         <Tab.Screen name='Console'>
           {
-              () => <Console {...commonProps} />
+            () => <Console {...commonProps} />
           }
         </Tab.Screen>
       </Tab.Navigator>
@@ -646,7 +651,7 @@ const Ide = ({ navigation, route }) => {
         route={route}
         keepChangesHandler={onKeepCodeChanges}
         doNotKeepChangesHandler={onDoNotKeepCodeChanges} />
-      </View>
+    </View>
   );
 };
 

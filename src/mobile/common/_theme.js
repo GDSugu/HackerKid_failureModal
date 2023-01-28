@@ -18,6 +18,10 @@ const Theme = {
       notificationBg: Blue.color700,
       btnBg: Blue.color700,
       textBold: Blue.color900,
+      bg1: utilColors.white,
+      textColor1: utilColors.dark,
+      textColor2: utilColors.white,
+      borderColor: utilColors.dimGrey,
     },
     screenGreen: {
       bodyBg: Green.color50,
@@ -34,6 +38,9 @@ const Theme = {
       notificationBg: LightBlue.color700,
       btnBg: LightBlue.color700,
       gameCardBg: LightBlue.color700,
+      levelIndicatorBtnBg: `${utilColors.dark}ad`,
+      levelProgressBarBackgroundColor: LightBlue.color50,
+      levelProgressColor: LightBlue.color900,
       textBold: LightBlue.color900,
     },
     screenPurple: {
@@ -81,6 +88,7 @@ const Theme = {
       notificationBg: Blue.color700,
       btnBg: Blue.color700,
       textBold: Blue.color900,
+      borderColor: utilColors.dimGrey,
     },
     screenGreen: {
       bodyBg: Green.color50,

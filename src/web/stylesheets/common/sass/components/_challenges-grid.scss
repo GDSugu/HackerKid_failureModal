@@ -1,0 +1,172 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+
+@import '../../pages/challenges/_challengesTheme.js';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+$challenge-item-image-height-down-md: 10.25rem;
+
+.grid-container {
+  .grid-header {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .page-title {
+      margin-bottom: 0;
+    }
+  }
+
+  .nav-link {
+    $color: map-get($thememaplight, challenges-text-color-3);
+
+    text-decoration: none;
+    color: gt.theme-var(challenges-text-color-3, null, $thememaplight, $cssvars);
+
+    &:hover {
+      color: darken($color, 15);
+    }
+  }
+
+  .challenge-block {
+    margin-bottom: 1.5rem;
+  }
+
+  .challenge-item {
+    &:hover {
+      text-decoration: none;
+    }
+
+    .challenge-title {
+      p {
+        color: gt.theme-var(challenges-text-color-1, null, $thememaplight, $cssvars);
+        margin-bottom: 0;
+      }
+    }
+
+    .challenge-author {
+      p {
+        color: gt.theme-var(challenges-text-color-2, null, $thememaplight, $cssvars);
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .challenge-img {
+    width: 100%;
+    height: 16rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.75rem;
+    aspect-ratio: 16/9;
+    background-color: gt.theme-var(challenges-btn-bg-1, null, $thememaplight, $cssvars);
+
+    @include gm.media-breakpoint-down(xl) {
+      height: 13rem;
+    }
+
+    @include gm.media-breakpoint-down(md) {
+      height: $challenge-item-image-height-down-md;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 0.75rem;
+    }
+  }
+
+  .create-challenge-btn {
+    $btn-bg: map-get($thememaplight, challenges-btn-bg);
+
+    margin-top: 1rem;
+    text-align: start;
+    padding: 0.75rem;
+    background-color: gt.theme-var(challenges-btn-bg, null, $thememaplight, $cssvars);
+    color: gt.theme-var(challenges-text-color-4, null, $thememaplight, $cssvars);
+    border: none;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+
+    &:hover {
+      color: gt.theme-var(challenges-text-color-4, null, $thememaplight, $cssvars);
+      background-color: darken($btn-bg, 10);
+      text-decoration: none;
+    }
+  }
+
+  .challenges-empty {
+    height: calc(100vh - 300px);
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    @include gm.media-breakpoint-up(lg) {
+      height: calc(100vh - 250px);
+    }
+
+    img {
+      height: 40vh;
+      margin-bottom: 2rem;
+
+      @include gm.media-breakpoint-up(lg) {
+        margin-bottom: 5rem;
+      }
+
+      @include gm.media-breakpoint-up(xxl) {
+        margin-bottom: 10rem;
+      }
+    }
+
+    .create-challenge-btn {
+      i {
+        margin-left: 10rem;
+      }
+    }
+  }
+
+  .challenges-grid {
+    .skeleton {
+      width: 100%;
+      border-radius: 1rem;
+      animation: refresh 2.5s ease-out infinite;
+      background-image: linear-gradient(90deg, gt.theme-var(text-color-6), gt.theme-var(bg-3) 30px, gt.theme-var(skeleton-bg) 60px);
+      background-size: 200%;
+      aspect-ratio: 16/9;
+
+      @include gm.media-breakpoint-down(md) {
+        height: $challenge-item-image-height-down-md;
+      }
+    }
+  }
+
+  @keyframes refresh {
+    0% {
+      background-position: -100%;
+    }
+
+    100% {
+      background-position: 100%;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: gt.theme-var(skeleton-bg);
+    border-radius: 0.5rem;
+  }
+}
