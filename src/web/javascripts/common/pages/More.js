@@ -12,7 +12,6 @@ import HelpModal from '../components/HelpModal';
 import { useProfileInfo } from '../../../../hooks/pages/profile';
 import AwardCard from '../components/AwardsCard';
 // import CollectibleCard from '../components/CollectibleCard';
-import { loginCheck } from '../../../../hooks/common/framework';
 import { useAwards } from '../../../../hooks/pages/awards';
 
 const Certificates = ({ gameDetails }) => {
