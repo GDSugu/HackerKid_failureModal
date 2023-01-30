@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { pageInit } from '../framework';
+import { pageInit, $ } from '../framework';
 import '../../../stylesheets/common/pages/leaderboard/style.scss';
 import { useLeaderBoard } from '../../../../hooks/pages/leaderboard';
 import Img from '../components/Img';
@@ -27,13 +27,21 @@ const Leaderboard = () => {
 
   // methods
   const previousBtnClickHandler = () => {
+    $('#loader').show();
     getLeaderBoardData({ pageNumber: paginationDetails.page - 1 })
-      .then(() => window.scrollTo({ top: 0 }));
+      .then(() => {
+        $('#loader').hide();
+        window.scrollTo({ top: 0 });
+      });
   };
 
   const nextBtnClickHandler = () => {
+    $('#loader').show();
     getLeaderBoardData({ pageNumber: paginationDetails.page + 1 })
-      .then(() => window.scrollTo({ top: 0 }));
+      .then(() => {
+        $('#loader').hide();
+        window.scrollTo({ top: 0 });
+      });
   };
 
   const loggedInUserInCurrentPage = (currentPage, userUniqueUrl) => {
@@ -189,6 +197,7 @@ const Leaderboard = () => {
         </button>
       </Modal>
     }
+    <div id="loader"></div>
     </div>
   );
 };

@@ -13,32 +13,35 @@ import BottomSheet from '../components/BottomSheet';
 
 const CourseModule = ({ items, isDesktop }) => (
   <>
-    <div className="w-100 mt-4">
-      <div className="course-card-container">
-        <h5>
-        <FormattedMessage
-          defaultMessage={'{name} - {type}'}
-          description={'course Heading'}
-          values={{ name: items.moduleName, type: items.type }}/>
-        </h5>
-        <CustomSwiperComponent
-          data={items.videos}
-          SlideComponent={CourseCard}
-          swiperModules={{
-            navigation: true,
-          }}
-          module={items}
-          isDesktop={isDesktop}
-          swiperProps={{
-            spaceBetween: 16,
-            slidesPerView: 'auto',
-            className: 'course-swiper',
-            grabCursor: true,
-            lazy: true,
-            navigation: true,
-          }}
+    <div className="course-card-container">
+      <h5>
+      <FormattedMessage
+        // defaultMessage={'{name} - {type}'}
+        defaultMessage={'{modName}'}
+        description={'course Heading'}
+        // values={{ name: items.moduleName, type: items.type }}
+        values={{
+          modName: `${items.moduleName} ${items?.type ? ` - ${items.type}` : ''}`,
+        }}
         />
-      </div>
+      </h5>
+      <CustomSwiperComponent
+        data={items.videos}
+        SlideComponent={CourseCard}
+        swiperModules={{
+          navigation: true,
+        }}
+        module={items}
+        isDesktop={isDesktop}
+        swiperProps={{
+          spaceBetween: 16,
+          slidesPerView: 'auto',
+          className: 'course-swiper',
+          grabCursor: true,
+          lazy: true,
+          navigation: true,
+        }}
+      />
     </div>
   </>
 );
@@ -363,6 +366,7 @@ const Courses = () => {
   }
   return (
     <>
+    <div className='col-12 col-md-11 col-xl-10 mx-auto'>
       {isDesktop && overallProgress && progress.length > 0 && (
         <CourseDetailsCard
           overallProgress={overallProgress}
@@ -378,28 +382,26 @@ const Courses = () => {
         />
       )}
       {continueWatching && continueWatching.length > 0 && (
-        <div className="w-100 mt-4">
-          <div className="course-card-container">
-            <h5>
-            <FormattedMessage
-      defaultMessage={'Continue Watching'}
-      description={'Continue Watching'}/></h5>
-            <SwiperComponent
-              data={continueWatching}
-              SlideComponent={CourseCard}
-              swiperModules={{
-                navigation: true,
-              }}
-              swiperProps={{
-                spaceBetween: 16,
-                slidesPerView: 'auto',
-                className: 'course-swiper',
-                grabCursor: true,
-                lazy: true,
-                navigation: true,
-              }}
-            />
-          </div>
+        <div className="course-card-container">
+          <h5>
+          <FormattedMessage
+    defaultMessage={'Continue Watching'}
+    description={'Continue Watching'}/></h5>
+          <SwiperComponent
+            data={continueWatching}
+            SlideComponent={CourseCard}
+            swiperModules={{
+              navigation: true,
+            }}
+            swiperProps={{
+              spaceBetween: 16,
+              slidesPerView: 'auto',
+              className: 'course-swiper',
+              grabCursor: true,
+              lazy: true,
+              navigation: true,
+            }}
+          />
         </div>
       )}
       {filteredData
@@ -424,6 +426,7 @@ const Courses = () => {
       progress={progress}
       overallProgress={overallProgress}/>
             </BottomSheet>}
+    </div>
     </>
   );
 };

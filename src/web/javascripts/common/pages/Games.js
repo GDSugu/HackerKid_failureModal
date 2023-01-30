@@ -414,6 +414,10 @@ const Games = () => {
     window.addEventListener('resize', () => {
       setIsDesktop(window.matchMedia('(min-width: 590px)').matches);
     });
+
+    return () => {
+      isPageMounted.current = false;
+    };
   }, []);
 
   // games data
@@ -471,7 +475,7 @@ const Games = () => {
     validSubmissionCount: dashBoardData?.webkataJs?.validSubmissionCount,
     gameCoverURL: 'games/webkata-js-game-cover.png',
     onClick: () => { navigate('/webkata/js'); },
-  }
+  },
   ];
 
   return (

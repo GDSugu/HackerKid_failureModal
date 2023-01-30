@@ -569,14 +569,17 @@ const Dashboard = () => {
 
   populateScore('#yourScore', gameData.gameProgress, parseInt((gameData.gameProgress / gameData.totalGames) * 100, 10));
 
+  const listenDesktop = () => {
+    setIsDesktop(window.matchMedia('(min-width: 576px)').matches);
+  };
+
   useEffect(() => {
-    window.addEventListener('resize', () => {
-      setIsDesktop(window.matchMedia('(min-width: 576px)').matches);
-    });
+    window.addEventListener('resize', listenDesktop);
     populateScore('#yourScore', gameData.gameProgress, parseInt((gameData.gameProgress / gameData.totalGames) * 100, 10));
 
     return () => {
       isPageMounted.current = false;
+      window.removeEventListener('resize', listenDesktop);
     };
   }, []);
 

@@ -11,6 +11,12 @@
       "value": "Email"
     }
   ],
+  "+KKyNc": [
+    {
+      "type": 0,
+      "value": "XP Earned:"
+    }
+  ],
   "+f2V2I": [
     {
       "type": 1,
@@ -151,12 +157,6 @@
       "value": "Start Playing"
     }
   ],
-  "01Q2N+": [
-    {
-      "type": 0,
-      "value": "Coming Soon..."
-    }
-  ],
   "0By1LZ": [
     {
       "type": 1,
@@ -225,6 +225,12 @@
     {
       "type": 0,
       "value": "Help"
+    }
+  ],
+  "1BoFrk": [
+    {
+      "type": 1,
+      "value": "description"
     }
   ],
   "1FjMUC": [
@@ -333,6 +339,12 @@
     {
       "type": 0,
       "value": "Login with Phone"
+    }
+  ],
+  "3/xv4v": [
+    {
+      "type": 0,
+      "value": "Videos"
     }
   ],
   "30ejkF": [
@@ -455,6 +467,16 @@
     {
       "type": 1,
       "value": "activeSortName"
+    }
+  ],
+  "4DNN7D": [
+    {
+      "type": 1,
+      "value": "tag"
+    },
+    {
+      "type": 0,
+      "value": ","
     }
   ],
   "4Pt6v5": [
@@ -603,6 +625,12 @@
       "value": "Next"
     }
   ],
+  "6ZVb4r": [
+    {
+      "type": 1,
+      "value": "rating"
+    }
+  ],
   "6oGVMu": [
     {
       "type": 0,
@@ -675,10 +703,94 @@
       "value": "Play"
     }
   ],
-  "8R6f04": [
+  "7asVcm": [
     {
       "type": 0,
-      "value": "Coming Soon..."
+      "value": "Games"
+    }
+  ],
+  "7dyAWL": [
+    {
+      "type": 0,
+      "value": "No invites"
+    }
+  ],
+  "7mn7eO": [
+    {
+      "type": 0,
+      "value": "Output will appear here"
+    }
+  ],
+  "7pvcZr": [
+    {
+      "type": 0,
+      "value": "Run"
+    }
+  ],
+  "7v4G7a": [
+    {
+      "type": 1,
+      "value": "completed"
+    },
+    {
+      "type": 0,
+      "value": "/"
+    },
+    {
+      "type": 1,
+      "value": "total"
+    },
+    {
+      "type": 0,
+      "value": " watched"
+    }
+  ],
+  "8+Lyt3": [
+    {
+      "type": 1,
+      "value": "type"
+    },
+    {
+      "type": 0,
+      "value": "?"
+    }
+  ],
+  "8cISRy": [
+    {
+      "type": 0,
+      "value": "Time Spent:"
+    }
+  ],
+  "8gWjFk": [
+    {
+      "type": 1,
+      "value": "description"
+    }
+  ],
+  "8ga5/p": [
+    {
+      "type": 0,
+      "value": "#"
+    },
+    {
+      "type": 1,
+      "value": "rank"
+    }
+  ],
+  "9+2Mm0": [
+    {
+      "type": 0,
+      "value": "IDE"
+    }
+  ],
+  "97bB5P": [
+    {
+      "type": 1,
+      "value": "xp"
+    },
+    {
+      "type": 0,
+      "value": " xp"
     }
   ],
   "9BVOVU": [
@@ -795,6 +907,20 @@
       "value": "Club Name"
     }
   ],
+  "Acm/fm": [
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": " - "
+    },
+    {
+      "type": 1,
+      "value": "type"
+    }
+  ],
   "Aevhvw": [
     {
       "type": 0,
@@ -859,6 +985,16 @@
       "value": "See more"
     }
   ],
+  "Bj5WGE": [
+    {
+      "type": 0,
+      "value": "View all "
+    },
+    {
+      "type": 1,
+      "value": "data"
+    }
+  ],
   "Bt/Kkf": [
     {
       "type": 0,
@@ -875,6 +1011,26 @@
     {
       "type": 0,
       "value": "Top Members"
+    }
+  ],
+  "CJH/k4": [
+    {
+      "type": 1,
+      "value": "title"
+    },
+    {
+      "type": 0,
+      "value": " - "
+    },
+    {
+      "type": 1,
+      "value": "type"
+    }
+  ],
+  "CKmvD+": [
+    {
+      "type": 0,
+      "value": "Videos"
     }
   ],
   "CLW1pi": [
@@ -967,6 +1123,12 @@
       "value": "awardCount"
     }
   ],
+  "DtgoWC": [
+    {
+      "type": 1,
+      "value": "time"
+    }
+  ],
   "DuPnGd": [
     {
       "type": 0,
@@ -983,6 +1145,12 @@
     {
       "type": 1,
       "value": "text"
+    }
+  ],
+  "EQ5MZE": [
+    {
+      "type": 0,
+      "value": "Session Videos"
     }
   ],
   "EQupmg": [
@@ -1027,6 +1195,12 @@
       "value": "Forgot Password"
     }
   ],
+  "F3ZmHN": [
+    {
+      "type": 0,
+      "value": "Cancel"
+    }
+  ],
   "FIcBXp": [
     {
       "type": 0,
@@ -1049,6 +1223,12 @@
     {
       "type": 1,
       "value": "problemStatement"
+    }
+  ],
+  "FhAkmH": [
+    {
+      "type": 0,
+      "value": "Coins Earned:"
     }
   ],
   "FhNWty": [
@@ -1105,6 +1285,12 @@
       "value": "Login into Existing Account"
     }
   ],
+  "G3Gw+7": [
+    {
+      "type": 1,
+      "value": "module"
+    }
+  ],
   "G5q8OG": [
     {
       "type": 0,
@@ -1139,6 +1325,16 @@
     {
       "type": 0,
       "value": "ZombieLand"
+    }
+  ],
+  "GbfWVS": [
+    {
+      "type": 0,
+      "value": "View all "
+    },
+    {
+      "type": 1,
+      "value": "title"
     }
   ],
   "GhmnMb": [
@@ -1201,6 +1397,16 @@
       "value": "Save"
     }
   ],
+  "HJ1hPr": [
+    {
+      "type": 1,
+      "value": "coins"
+    },
+    {
+      "type": 0,
+      "value": " coins"
+    }
+  ],
   "HLIDfo": [
     {
       "type": 0,
@@ -1235,6 +1441,12 @@
     {
       "type": 1,
       "value": "pointsEarned"
+    }
+  ],
+  "I0vwZV": [
+    {
+      "type": 0,
+      "value": "Session Videos"
     }
   ],
   "I1oDxa": [
@@ -1369,6 +1581,12 @@
       "value": "Continue"
     }
   ],
+  "KcDrvG": [
+    {
+      "type": 0,
+      "value": "Solution Videos"
+    }
+  ],
   "KmxQM/": [
     {
       "type": 0,
@@ -1477,6 +1695,12 @@
       "value": "Go to Index"
     }
   ],
+  "MWb4u3": [
+    {
+      "type": 1,
+      "value": "title"
+    }
+  ],
   "MceYzq": [
     {
       "type": 1,
@@ -1579,6 +1803,12 @@
       "value": "Go to login"
     }
   ],
+  "Nsl0id": [
+    {
+      "type": 0,
+      "value": "XP Earned:"
+    }
+  ],
   "NsygW3": [
     {
       "type": 0,
@@ -1649,6 +1879,12 @@
     {
       "type": 0,
       "value": "Create Account"
+    }
+  ],
+  "OqwEqv": [
+    {
+      "type": 0,
+      "value": "Filter"
     }
   ],
   "OvWf0W": [
@@ -1723,10 +1959,22 @@
       "value": "Playground"
     }
   ],
+  "PfA2Pv": [
+    {
+      "type": 1,
+      "value": "title"
+    }
+  ],
   "PpUsRs": [
     {
       "type": 0,
       "value": "Join"
+    }
+  ],
+  "Pvrf+y": [
+    {
+      "type": 1,
+      "value": "title"
     }
   ],
   "Px7S/2": [
@@ -1831,6 +2079,28 @@
     {
       "type": 0,
       "value": "Previous Awards"
+    }
+  ],
+  "S3mtIm": [
+    {
+      "type": 0,
+      "value": "Congrats! You have Received "
+    },
+    {
+      "type": 1,
+      "value": "coins"
+    },
+    {
+      "type": 0,
+      "value": " Coins and "
+    },
+    {
+      "type": 1,
+      "value": "xp"
+    },
+    {
+      "type": 0,
+      "value": " XP"
     }
   ],
   "S7XoqJ": [
@@ -1969,6 +2239,12 @@
       "value": "Register to save your progess and compete with others"
     }
   ],
+  "U4efbt": [
+    {
+      "type": 0,
+      "value": "Continue watching"
+    }
+  ],
   "UFvWGM": [
     {
       "type": 0,
@@ -2039,6 +2315,12 @@
       "value": "Question"
     }
   ],
+  "VRP3Sx": [
+    {
+      "type": 1,
+      "value": "time"
+    }
+  ],
   "VoYGmQ": [
     {
       "type": 0,
@@ -2075,6 +2357,12 @@
       "value": "Click \"Run\" to validate"
     }
   ],
+  "W3856B": [
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
   "W5zEev": [
     {
       "type": 0,
@@ -2097,6 +2385,12 @@
     {
       "type": 0,
       "value": "Play"
+    }
+  ],
+  "WSn5XU": [
+    {
+      "type": 1,
+      "value": "type"
     }
   ],
   "WmjFlm": [
@@ -2213,6 +2507,12 @@
     {
       "type": 0,
       "value": "Go to About"
+    }
+  ],
+  "Z0XAX0": [
+    {
+      "type": 0,
+      "value": "Tags:"
     }
   ],
   "ZG77Sq": [
@@ -2337,6 +2637,16 @@
     {
       "type": 1,
       "value": "toastMessage"
+    }
+  ],
+  "bo2dGc": [
+    {
+      "type": 1,
+      "value": "xp"
+    },
+    {
+      "type": 0,
+      "value": " xp"
     }
   ],
   "bvFe7G": [
@@ -2535,6 +2845,24 @@
       "value": "validSubmissions"
     }
   ],
+  "ftgWW7": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "/"
+    },
+    {
+      "type": 1,
+      "value": "totalCount"
+    },
+    {
+      "type": 0,
+      "value": " watched"
+    }
+  ],
   "fzlKxE": [
     {
       "type": 0,
@@ -2613,10 +2941,32 @@
       "value": "Codekata"
     }
   ],
+  "giAApt": [
+    {
+      "type": 0,
+      "value": "Solution Videos"
+    }
+  ],
   "glY0NW": [
     {
       "type": 0,
       "value": "Output"
+    }
+  ],
+  "groRBE": [
+    {
+      "type": 1,
+      "value": "coins"
+    },
+    {
+      "type": 0,
+      "value": " coins"
+    }
+  ],
+  "h/MN82": [
+    {
+      "type": 1,
+      "value": "coins"
     }
   ],
   "hEqp4d": [
@@ -2629,6 +2979,16 @@
     {
       "type": 0,
       "value": "Send OTP"
+    }
+  ],
+  "hZGwA5": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " Xp"
     }
   ],
   "hphOHh": [
@@ -2667,6 +3027,12 @@
       "value": "clubName"
     }
   ],
+  "iohPi0": [
+    {
+      "type": 0,
+      "value": "Continue Watching"
+    }
+  ],
   "jACivV": [
     {
       "type": 1,
@@ -2683,6 +3049,12 @@
     {
       "type": 0,
       "value": "Create a Challenge"
+    }
+  ],
+  "jYtxLL": [
+    {
+      "type": 1,
+      "value": "xp"
     }
   ],
   "jZhy7I": [
@@ -2839,6 +3211,12 @@
       "value": "Code"
     }
   ],
+  "mQwlbf": [
+    {
+      "type": 0,
+      "value": "Not rated yet"
+    }
+  ],
   "mTY3Hn": [
     {
       "type": 0,
@@ -2855,6 +3233,12 @@
     {
       "type": 0,
       "value": "Rank"
+    }
+  ],
+  "meudwh": [
+    {
+      "type": 0,
+      "value": "Coins Earned:"
     }
   ],
   "mfMsri": [
@@ -2975,6 +3359,12 @@
       "value": "Run"
     }
   ],
+  "o+nfLw": [
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
   "o2Pken": [
     {
       "type": 0,
@@ -3015,6 +3405,12 @@
     {
       "type": 0,
       "value": "Join with link"
+    }
+  ],
+  "pQ0m8t": [
+    {
+      "type": 0,
+      "value": "watched this"
     }
   ],
   "pVCbSK": [
@@ -3061,6 +3457,66 @@
     {
       "type": 0,
       "value": "Game Progress"
+    }
+  ],
+  "pxPVWB": [
+    {
+      "type": 0,
+      "value": "moveLeft"
+    }
+  ],
+  "q+hyoH": [
+    {
+      "type": 0,
+      "value": "moveRight"
+    }
+  ],
+  "q+pH3V": [
+    {
+      "type": 0,
+      "value": "Save"
+    }
+  ],
+  "q9L1mf": [
+    {
+      "type": 1,
+      "value": "head"
+    }
+  ],
+  "qAG6DF": [
+    {
+      "type": 0,
+      "value": "Click “Run” to generate output for your code"
+    }
+  ],
+  "qJ7EK+": [
+    {
+      "type": 1,
+      "value": "challengeName"
+    }
+  ],
+  "qPy2h6": [
+    {
+      "type": 0,
+      "value": "Club Leaderboard"
+    }
+  ],
+  "qTQ8nP": [
+    {
+      "type": 1,
+      "value": "coinsEarned"
+    }
+  ],
+  "qTXOtA": [
+    {
+      "type": 0,
+      "value": "Problem Statement"
+    }
+  ],
+  "qTebrI": [
+    {
+      "type": 0,
+      "value": "Problem Statement"
     }
   ],
   "qUU2pp": [
@@ -3117,6 +3573,18 @@
     {
       "type": 0,
       "value": "Phone"
+    }
+  ],
+  "quf4Ng": [
+    {
+      "type": 1,
+      "value": "tag"
+    }
+  ],
+  "qx2FMG": [
+    {
+      "type": 1,
+      "value": "type"
     }
   ],
   "r1CvRM": [
@@ -3191,6 +3659,12 @@
     {
       "type": 0,
       "value": "Go to Home"
+    }
+  ],
+  "t32bf0": [
+    {
+      "type": 1,
+      "value": "type"
     }
   ],
   "t5hBAx": [
@@ -3313,10 +3787,22 @@
       "value": "Show Leaderboard"
     }
   ],
+  "vWe94i": [
+    {
+      "type": 0,
+      "value": "More Info"
+    }
+  ],
   "vY562d": [
     {
       "type": 0,
       "value": "Try the new in-built IDE"
+    }
+  ],
+  "vYViQu": [
+    {
+      "type": 0,
+      "value": "Filter"
     }
   ],
   "viQX0N": [
@@ -3413,6 +3899,12 @@
     {
       "type": 0,
       "value": "Register for free"
+    }
+  ],
+  "y00DRu": [
+    {
+      "type": 1,
+      "value": "count"
     }
   ],
   "yCTEJz": [
@@ -3535,6 +4027,12 @@
     {
       "type": 0,
       "value": "ZombieLand"
+    }
+  ],
+  "zrZhCC": [
+    {
+      "type": 0,
+      "value": "More Info"
     }
   ]
 }

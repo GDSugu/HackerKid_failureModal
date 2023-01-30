@@ -18,7 +18,10 @@ import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
 const resizeHandler = (nav = 'nav', selector) => {
   try {
     const navHeight = document.querySelector(nav).offsetHeight;
-    document.querySelector(selector).style.height = `calc(100vh - ${navHeight}px)`;
+    const element = document.querySelector(selector);
+    if (element) {
+      element.style.height = `calc(100vh - ${navHeight}px)`;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -32,7 +35,13 @@ const hideDefaultNavBar = (device, turtleState) => {
   } else if (device === 'mobile') {
     componentContainer = `.turtle-mob-${turtleState}-container`;
   }
-  window.addEventListener('resize', () => resizeHandler('nav.game-navbar', componentContainer));
+  // eslint-disable-next-line prefer-arrow-callback
+  window.addEventListener('resize', function handler() {
+    if (!window.location.pathname.includes('turtle')) {
+      this.removeEventListener('resize', handler);
+    }
+    resizeHandler('nav.game-navbar', componentContainer);
+  });
   setTimeout(() => {
     resizeHandler('nav.game-navbar', componentContainer);
   }, 300);
@@ -41,13 +50,18 @@ const hideDefaultNavBar = (device, turtleState) => {
 const TurtleHomeComponent = ({ changeRoute }) => {
   pageInit('turtle-home-container', 'Turtle');
 
+  const listenResizeTFrame = () => resizeHandler('nav', '.turtle-frame');
+
   React.useEffect(() => {
-    window.addEventListener('resize', () => resizeHandler('nav', '.turtle-frame'));
+    window.addEventListener('resize', listenResizeTFrame);
     const resizeTimeout = setTimeout(() => {
       resizeHandler('nav', '.turtle-frame');
     }, 300);
 
-    return () => clearTimeout(resizeTimeout);
+    return () => {
+      clearTimeout(resizeTimeout);
+      window.removeEventListener('resize', listenResizeTFrame);
+    };
   }, []);
 
   return <>
@@ -639,7 +653,7 @@ const TurtleMobComponent = ({
             <div id="answerCanvas"></div>
           </div>
           <div className="mob-runBtnContainer">
-            <button id='runCode' className='btn runBtn' onClick={() => { console.log('runcode'); handleRunCode(); }}>
+            <button id='runCode' className='btn runBtn' onClick={() => { handleRunCode(); }}>
               <p className='mb-0'>
                 <FormattedMessage
                   defaultMessage={'Play'}
@@ -917,7 +931,7 @@ const TurtleGameComponent = () => {
 
   React.useEffect(() => {
     isPageMounted.current = true;
-    hideDefaultNavBar('game');
+    hideDefaultNavBar('game', 'main', isPageMounted);
 
     // if (status === 'success') {
     //   $('#loader').hide();
@@ -935,7 +949,7 @@ const TurtleGameComponent = () => {
     return () => {
       document.querySelector('nav:first-child').style.display = 'block';
       isPageMounted.current = false;
-      successModalRef.current.hide();
+      successModalRef?.current?.hide();
     };
   }, [status]);
 

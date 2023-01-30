@@ -7,7 +7,8 @@ import { useWebkataFetchQuestion, useWebkataSubmitQuestion } from '../../../../h
 import '../../../stylesheets/common/pages/webkata/style.scss';
 import Img from '../components/Img';
 import WebkataLevelComponent from '../components/WebkataLevelComponent';
-import WebkataNavBar from '../components/WebkataNavBar';
+// import WebkataNavBar from '../components/WebkataNavBar';
+import GameNavBar from '../components/GameNavBar';
 import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
 import Modal from '../components/Modal';
 import CodeEditor from '../components/CodeEditor';
@@ -471,13 +472,15 @@ const WebkataGameComponent = () => {
       });
   };
 
+  const listenResizeWebkata = () => {
+    resizeEditor();
+    setIsDesktop(window.matchMedia('(min-width: 1024px)').matches);
+  };
+
   // side effects
   useEffect(() => {
     hideDefaultNavBar(device, 'game');
-    window.addEventListener('resize', () => {
-      resizeEditor();
-      setIsDesktop(window.matchMedia('(min-width: 1024px)').matches);
-    });
+    window.addEventListener('resize', listenResizeWebkata);
 
     const timer = setTimeout(() => {
       resizeEditor();
@@ -485,8 +488,9 @@ const WebkataGameComponent = () => {
 
     return () => {
       clearTimeout(timer);
-      successModalRef.current.hide();
+      successModalRef?.current?.hide();
       document.querySelector('nav:first-child').style.display = 'block';
+      window.removeEventListener('resize', listenResizeWebkata);
     };
   }, []);
 
@@ -526,11 +530,18 @@ const WebkataGameComponent = () => {
   }, [webkataSubmitState]);
 
   return <>
-    <WebkataNavBar
+    {/* <WebkataNavBar
       levelBtnHandler={onLevelIndicatorClick}
       leaderboardHandler={onLeaderboardBtnClick}
       questionState={memorizedWebkataQuestionState}
       isWebkataGamePage={true}
+    /> */}
+    <GameNavBar
+      questionState={memorizedWebkataQuestionState}
+      // handleHint={handleHint}
+      levelBtnHandler={onLevelIndicatorClick}
+      isGameMainPage={true}
+      leaderboardHandler={onLeaderboardBtnClick}
     />
     <main className={`webkata-game-container ${(device === 'mobile' || !isDesktop) ? 'webkata-game-mob-container' : ''}`}>
       <ProblemStatement
