@@ -121,18 +121,20 @@ const repositionTurtle = (targetSelector = '#answerCanvas', parentSelector = '.o
     const container = $(parentSelector);
     const content = $(targetSelector);
     const canvasScale = canvas === 'answer' ? manager.canvasScale.outputCanvas : manager.canvasScale.qnCanvas;
-    container.scrollLeft(
-      (
-        (content[0].scrollWidth * canvasScale)
-        - container.width()
-      ) * 0.50,
-    );
-    container.scrollTop(
-      (
-        (content[0].scrollHeight * canvasScale)
-        - container.height()
-      ) * 0.50,
-    );
+    if (content.length && container.length) {
+      container.scrollLeft(
+        (
+          (content[0].scrollWidth * canvasScale)
+          - container.width()
+        ) * 0.50,
+      );
+      container.scrollTop(
+        (
+          (content[0].scrollHeight * canvasScale)
+          - container.height()
+        ) * 0.50,
+      );
+    }
   } catch (error) {
     console.log(error);
   }

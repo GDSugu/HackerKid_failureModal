@@ -143,10 +143,10 @@ const useProfileInfo = ({
       } = profileInfo;
       const payload = {
         type: 'updateProfile',
-        name,
-        about,
-        grade,
-        school,
+        name: name.trim(),
+        about: about.trim(),
+        grade: parseInt(grade, 10),
+        school: school.trim(),
       };
       result = post(payload, 'profile/', false, false)
         .then((res) => {

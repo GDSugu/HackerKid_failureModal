@@ -32,6 +32,10 @@ nav {
     background-color: gt.theme-var(ide-bg-1, null, $thememaplight, $cssvars);
     color: gt.theme-var(ide-text-color-1, null, $thememaplight, $cssvars);
   }
+
+  .ace_mobile-menu {
+    display: none;
+  }
 }
 
 .input-box,

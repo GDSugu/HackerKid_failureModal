@@ -14,10 +14,17 @@ import GameLevelComponent from '../components/GameLevelComponent';
 import Modal from '../components/Modal';
 import { startGame, handleRunCode as runcodeAction } from '../../../../shared/zombieLand';
 
+const zlManager = {
+  initialCode: '\nawait gameDelay(500);\nend();\n',
+};
+
 const resizeHandler = (nav = 'nav', selector) => {
   try {
-    const navHeight = document.querySelector(nav).offsetHeight;
-    document.querySelector(selector).style.height = `calc(100vh - ${navHeight}px)`;
+    const navHeight = document.querySelector(nav)?.offsetHeight;
+    const element = document.querySelector(selector);
+    if (element && navHeight) {
+      element.style.height = `calc(100vh - ${navHeight}px)`;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -33,13 +40,20 @@ const changeMobBg = (transparent = false) => {
   document.querySelector('.zombieLand-main-container #root').style.background = bg;
 };
 
-const hideDefaultNavBar = (device, zombieLandState) => {
+const hideDefaultNavBar = (device, zombieLandState, isPageMounted) => {
   document.querySelector('nav:first-child').style.display = 'none';
   let componentContainer = `.zombieLand-${zombieLandState}-container`;
   if (device === 'mobile') {
     componentContainer = `.zombieLand-mob-${zombieLandState}-container`;
   }
-  window.addEventListener('resize', () => resizeHandler('nav.game-navbar', componentContainer));
+  // eslint-disable-next-line prefer-arrow-callback
+  window.addEventListener('resize', function handler() {
+    resizeHandler('nav.game-navbar', componentContainer);
+
+    if (isPageMounted && !isPageMounted.current) {
+      this.removeEventListener('resize', handler);
+    }
+  });
   setTimeout(() => {
     resizeHandler('nav.game-navbar', componentContainer);
   }, 300);
@@ -48,14 +62,19 @@ const hideDefaultNavBar = (device, zombieLandState) => {
 const ZombieLandHomeComponent = ({ changeRoute = () => {} }) => {
   pageInit('zombieLand-home-container', 'ZombieLand');
 
+  const listerResizeFrame = () => resizeHandler('nav', '.zombieLand-frame');
+
   React.useEffect(() => {
-    window.addEventListener('resize', () => resizeHandler('nav', '.zombieLand-frame'));
+    window.addEventListener('resize', listerResizeFrame);
 
     const resizeTimeout = setTimeout(() => {
       resizeHandler('nav', '.zombieLand-frame');
     }, 300);
 
-    return () => clearTimeout(resizeTimeout);
+    return () => {
+      clearTimeout(resizeTimeout);
+      window.removeEventListener('resize', listerResizeFrame);
+    };
   }, []);
 
   return <>
@@ -846,7 +865,7 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
   //   showFailureModal(msg);
   // };
 
-  const haneleRunCode = () => {
+  const handleRunCode = () => {
     $('#zombieLandOutput-tab').tab('show');
     runcodeAction();
   };
@@ -906,6 +925,9 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
   };
 
   const endGame = (validated, sourceCode) => {
+    if (zlManager?.initialCode === sourceCode) {
+      return;
+    }
     $('#runCode').prop('disabled', false);
     $('#resetBtn').prop('disabled', false);
     const request = {
@@ -982,6 +1004,7 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
 
     return () => {
       document.querySelector('nav:first-child').style.display = 'block';
+      document.querySelector('#root').style.background = 'unset';
     };
   }, []);
 
@@ -1186,7 +1209,7 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
           <div className="game-container-block col-6">
             <ZombieLandPlayGroundComponent
               handleHint={handleHint}
-              handleRunCode={haneleRunCode}
+              handleRunCode={handleRunCode}
             />
             <HintComponent
               hints={memoizedZlQnState.questionObject.hints}
@@ -1202,7 +1225,7 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
           <ZombieLandMobComponent
             status={status}
             questionObject={memoizedZlQnState.questionObject}
-            handleRunCode={haneleRunCode}
+            handleRunCode={handleRunCode}
           />
           <HintComponent
             hints={memoizedZlQnState.questionObject.hints}

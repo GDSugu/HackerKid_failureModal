@@ -1031,7 +1031,7 @@
   .left-cont {
     display: flex;
     flex-direction: column;
-    
+
     .input-container {
       flex: 1;
 
@@ -1040,8 +1040,6 @@
       }
     }
   }
-
-  
 
   .code-container {
     height: 65vh;
@@ -1055,6 +1053,10 @@
       #codeEditor {
         border-bottom-left-radius: 0.75rem;
         border-bottom-right-radius: 0.75rem;
+
+        .ace_mobile-menu {
+          display: none;
+        }
       }
     }
 
@@ -1129,17 +1131,16 @@
       .sample-input,
       .sample-output {
         margin: 1.5rem 0;
-  
+
         p {
           margin-bottom: 0;
-  
+
           &:first-child {
             margin-bottom: 0.125rem;
           }
         }
       }
     }
-
   }
 
   .game-mob-container {
@@ -1159,6 +1160,12 @@
 
     .editor-container-mob {
       flex: 1;
+
+      #codeEditor {
+        .ace_mobile-menu {
+          display: none;
+        }
+      }
     }
   }
 

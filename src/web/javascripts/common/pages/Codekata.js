@@ -18,9 +18,10 @@ import { getSession, setSession } from '../../../../hooks/common/framework';
 const resizeHandler = (nav = 'nav', selector) => {
   try {
     const navHeight = document.querySelector(nav).offsetHeight;
-    document.querySelector(
-      selector,
-    ).style.height = `calc(100vh - ${navHeight}px)`;
+    const element = document.querySelector(selector);
+    if (element) {
+      element.style.height = `calc(100vh - ${navHeight}px)`;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -130,12 +131,17 @@ const CompiledStatusModalRefComponent = React.forwardRef(CompiledStatusModalComp
 const CodekataHomeContainer = ({ changeRoute }) => {
   pageInit('codekata-home-container', 'Codekata');
 
+  const listenResize = () => resizeHandler('nav', '.codekata-frame');
+
   useEffect(() => {
-    window.addEventListener('resize', () => resizeHandler('nav', '.codekata-frame'));
+    window.addEventListener('resize', listenResize);
     const resizeTimeout = setTimeout(() => {
       resizeHandler('nav', '.codekata-frame');
     }, 300);
-    return () => clearTimeout(resizeTimeout);
+    return () => {
+      clearTimeout(resizeTimeout);
+      window.removeEventListener('resize', listenResize);
+    };
   }, []);
 
   return (
@@ -344,6 +350,10 @@ const CodekataDesktopContainer = ({
     $('.outputModal').modal('hide');
   };
 
+  const listenResize = () => {
+    resizeHandler('nav.game-navbar', '.game-mob-container');
+  };
+
   useEffect(() => {
     const totalHeight = $(window).height();
     if (device === 'desktop') {
@@ -362,12 +372,15 @@ const CodekataDesktopContainer = ({
       resizeob.observe(problemCont);
     }
 
-    window.addEventListener('resize', () => resizeHandler('nav.game-navbar', '.game-mob-container'));
+    window.addEventListener('resize', listenResize);
     const resizeTimeout = setTimeout(() => {
       resizeHandler('nav.game-navbar', '.game-mob-container');
     }, 300);
 
-    return () => clearTimeout(resizeTimeout);
+    return () => {
+      clearTimeout(resizeTimeout);
+      window.removeEventListener('resize', listenResize);
+    };
   }, []);
 
   useEffect(() => {

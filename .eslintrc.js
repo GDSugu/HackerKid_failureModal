@@ -12,6 +12,7 @@ module.exports = {
     __webpack_hash__: true,
     gtag: true,
     fbq: true,
+    fetch: true,
   },
   parser: '@babel/eslint-parser',
   plugins: [

@@ -70,3 +70,6 @@ buck-out/
 .env.development
 .env.staging
 .env.dev-live
+
+en.json
+fr.json
