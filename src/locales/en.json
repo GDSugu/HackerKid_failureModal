@@ -116,6 +116,10 @@
     "defaultMessage": "Game Progress",
     "description": "game progress heading"
   },
+  "0aCQ4I": {
+    "defaultMessage": "{coins} coins",
+    "description": "coins"
+  },
   "0lGE5l": {
     "defaultMessage": "{navigationText}",
     "description": "navigation slide text"
@@ -1123,10 +1127,6 @@
     "defaultMessage": "Filter",
     "description": "Filter Button"
   },
-  "OvWf0W": {
-    "defaultMessage": "Class",
-    "description": "class nav text"
-  },
   "Ovi5Cc": {
     "defaultMessage": "{input}"
   },
@@ -1263,6 +1263,10 @@
     "defaultMessage": "Delete Challenge",
     "description": "delete challenge button"
   },
+  "Sbkd3U": {
+    "defaultMessage": "{xp} coins",
+    "description": "xp"
+  },
   "SccqZN": {
     "defaultMessage": "Download",
     "description": "download btn text"
@@ -1338,6 +1342,10 @@
   "U4efbt": {
     "defaultMessage": "Continue watching",
     "description": "Course Name"
+  },
+  "UDQT0n": {
+    "defaultMessage": "Achieved Badge",
+    "description": "Achievement Badge Title"
   },
   "UFvWGM": {
     "defaultMessage": "Play Next",
@@ -1550,9 +1558,17 @@
     "defaultMessage": "Register",
     "description": "Register button"
   },
+  "aYFzg2": {
+    "defaultMessage": "Challenges",
+    "description": "challenges nav text"
+  },
   "aZ9udC": {
     "defaultMessage": "Private test case {testCaseNumber} - {result}",
     "description": "test case text"
+  },
+  "adC22y": {
+    "defaultMessage": "Phone",
+    "description": "Profile phone label"
   },
   "apr16P": {
     "defaultMessage": "Leaderboard",
@@ -1664,6 +1680,10 @@
   "e5Eaen": {
     "defaultMessage": "Profile updated successfully",
     "description": "success modal"
+  },
+  "eF9BRa": {
+    "defaultMessage": "Parent's Email",
+    "description": "Profile email label"
   },
   "ed9QEz": {
     "defaultMessage": "No members found",
@@ -1795,6 +1815,10 @@
   "hphOHh": {
     "defaultMessage": "Help",
     "description": "help button"
+  },
+  "htdtYn": {
+    "defaultMessage": "Achievements",
+    "description": "Achievements card heading"
   },
   "hxLhGK": {
     "defaultMessage": "Set Password",
@@ -2212,6 +2236,10 @@
   "t5hBAx": {
     "defaultMessage": "Output will be shown here",
     "description": "output box placeholder text"
+  },
+  "tI1tX6": {
+    "defaultMessage": "View All Achievements",
+    "description": "show achievements"
   },
   "tbPLF3": {
     "defaultMessage": "{step}",
