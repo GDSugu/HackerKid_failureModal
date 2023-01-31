@@ -1,10 +1,49 @@
 import $ from 'jquery';
+import TimeMe from 'timeme.js';
+import { useEffect } from 'react';
+import postTimeTrack from '../../../hooks/pages/timeTrack';
 import { validateField } from '../../../hooks/common/framework';
 // import navbar from './navbar';
 
 const { API } = process.env;
 
 const authorize = {};
+
+const timeTrack = (pageName) => {
+  const timeData = authorize.getSession('timeTracked');
+  if (timeData) {
+    const { page, timeSpent } = timeData;
+
+    postTimeTrack({
+      page,
+      timeSpent,
+      platform: 'web',
+    });
+    authorize.clearSession('timeTracked');
+  }
+
+  return useEffect(() => {
+    TimeMe.setCurrentPageName(pageName);
+    TimeMe.startTimer(pageName, 0);
+    window.addEventListener('beforeunload', () => {
+      authorize.setSession('timeTracked', JSON.stringify({
+        page: pageName,
+        timeSpent: TimeMe.getTimeOnPageInSeconds(pageName),
+      }));
+    }, true);
+    return () => {
+      if (TimeMe.getTimeOnPageInSeconds(pageName) > 1) {
+        postTimeTrack({
+          page: pageName,
+          timeSpent: TimeMe.getTimeOnPageInSeconds(pageName),
+          platform: 'web',
+        });
+      }
+      TimeMe.stopTimer(pageName);
+      TimeMe.resetRecordedPageTime(pageName);
+    };
+  });
+};
 
 const pageInit = (className, title = null) => {
   if (className) {
@@ -384,4 +423,5 @@ export {
   debounce,
   getShareMarkup,
   loadScriptByURL,
+  timeTrack,
 };

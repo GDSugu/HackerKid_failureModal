@@ -93,6 +93,24 @@ const GameLeaderboardComponent = ({
     }
   };
 
+  const secondsToMins = (s) => {
+    let seconds = parseInt(s, 10);
+    let minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    seconds %= 60;
+    minutes %= 60;
+    if (hours > 0) {
+      return `${hours} Hour${hours > 1 ? 's' : ''} ${minutes} Mins`;
+    }
+    if (hours === 0 && minutes > 0) {
+      return `${minutes} Minute${minutes > 1 ? 's' : ''}`;
+    }
+    if (minutes === 0 && seconds > 0) {
+      return `${seconds} Seconds`;
+    }
+    return '0 Seconds';
+  };
+
   const pageSelector = (page, paginationDetails) => {
     $('.paginate_numbers').removeClass('current');
     const pageShowArray = [0];
@@ -417,7 +435,7 @@ const GameLeaderboardComponent = ({
                       </div>
                     </div>
                   </div>
-                  {/* <div className="col-4 stats-block">
+                  <div className="col-4 stats-block">
                     <div className="stats-block-container">
                       <div className="stats-icon-container">
                         <Img
@@ -439,14 +457,14 @@ const GameLeaderboardComponent = ({
                               defaultMessage={'{timeSpent}'}
                               description={'Time Spent'}
                               values={{
-                                timeSpent: '14 mins' || 0,
+                                timeSpent: secondsToMins(state?.gameProgress?.totalTimeSpent),
                               }}
                             />
                           </span>
                         </p>
                       </div>
                     </div>
-                  </div> */}
+                  </div>
                 </div>
               </div>
               <div className="awards-container">

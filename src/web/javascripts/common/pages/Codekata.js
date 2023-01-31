@@ -3,7 +3,9 @@ import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import Ace from 'react-ace';
 import '../../../stylesheets/common/pages/codekata/style.scss';
-import { $, pageInit, pathNavigator } from '../framework';
+import {
+  $, pageInit, pathNavigator, timeTrack,
+} from '../framework';
 import GameNavBar from '../components/GameNavBar';
 import Img from '../components/Img';
 import useRootPageState from '../../../../hooks/pages/root';
@@ -130,6 +132,8 @@ const CompiledStatusModalRefComponent = React.forwardRef(CompiledStatusModalComp
 
 const CodekataHomeContainer = ({ changeRoute }) => {
   pageInit('codekata-home-container', 'Codekata');
+
+  timeTrack('games/codekata');
 
   const listenResize = () => resizeHandler('nav', '.codekata-frame');
 

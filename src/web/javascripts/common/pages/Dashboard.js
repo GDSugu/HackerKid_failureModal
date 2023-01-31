@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { $, pageInit } from '../framework';
+import { $, pageInit, timeTrack } from '../framework';
 import Img from '../components/Img';
 // import SwiperComponent from '../components/SwiperComponent';
 import { useDashboard } from '../../../../hooks/pages/dashboard';
@@ -642,6 +642,8 @@ const Dashboard = () => {
   if (window.location.href.includes('/dashboard')) {
     pageInit('dashboard-container', 'Dashboard');
   }
+
+  timeTrack('dashboard');
 
   const [isDesktop, setIsDesktop] = useState(window.matchMedia('(min-width: 576px)').matches);
   const isPageMounted = React.useRef(true);

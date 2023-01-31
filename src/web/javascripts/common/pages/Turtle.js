@@ -2,7 +2,9 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import '../../../stylesheets/common/pages/turtle/style.scss';
-import { $, pageInit, pathNavigator } from '../framework';
+import {
+  $, pageInit, pathNavigator, timeTrack,
+} from '../framework';
 import Img from '../components/Img';
 import GameNavBar from '../components/GameNavBar';
 import Modal from '../components/Modal';
@@ -1055,6 +1057,8 @@ const TurtleGameComponent = () => {
 const Turtle = () => {
   const [turtleRoute, setTurtleRoute] = React.useState('turtleHome');
   const changeRoute = (route) => setTurtleRoute(route);
+
+  timeTrack('games/turtle');
 
   React.useEffect(() => {
     const locationArray = window.location.href.split('/').filter((el) => el !== '');
