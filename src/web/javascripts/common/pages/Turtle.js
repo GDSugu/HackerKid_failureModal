@@ -13,7 +13,6 @@ import {
   copyHandler,
   repositionTurtle, runSkulpt, startTurtle, toggleDebugState, toggleDrawingState,
 } from '../Functions/turtle';
-import useRootPageState from '../../../../hooks/pages/root';
 import GameLevelComponent from '../components/GameLevelComponent';
 import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
 
@@ -35,7 +34,7 @@ const hideDefaultNavBar = (device, turtleState) => {
   if (device === 'desktop') {
     componentContainer = `.turtle-${turtleState}-container`;
   } else if (device === 'mobile') {
-    componentContainer = `.turtle-mob-${turtleState}-container`;
+    componentContainer = '.game-mob-container';
   }
   // eslint-disable-next-line prefer-arrow-callback
   window.addEventListener('resize', function handler() {
@@ -753,7 +752,13 @@ const TurtleMobComponent = ({
 const TurtleGameComponent = () => {
   pageInit('turtle-main-container', 'Turtle');
 
-  const { state: { device } } = useRootPageState();
+  // const { state: { device } } = useRootPageState();
+  let device = 'desktop';
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    device = 'mobile';
+  } else {
+    device = 'desktop';
+  }
 
   const isPageMounted = React.useRef(true);
   const successModalRef = React.useRef();
@@ -933,7 +938,7 @@ const TurtleGameComponent = () => {
 
   React.useEffect(() => {
     isPageMounted.current = true;
-    hideDefaultNavBar('game', 'main', isPageMounted);
+    hideDefaultNavBar(device, 'main');
 
     // if (status === 'success') {
     //   $('#loader').hide();
