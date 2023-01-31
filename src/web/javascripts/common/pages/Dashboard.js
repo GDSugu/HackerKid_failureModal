@@ -55,13 +55,13 @@ const HeroContainer = ({ dashboardUserData, isDesktop, session }) => {
               <div className="hero-card-data-content">
                 <div className="hero-data">
                   <Img src='common/hkcoin.png' />
-                  <p className='mb-0'>{`${session.pointsEarned || '--'} coins`}</p>
+                  <p className='mb-0'>{`${session.pointsEarned || 0} coins`}</p>
                 </div>
                 {/* <div className="hero-data">
                   <Img src='common/xp.png' />
                   <p className='mb-0'>
                     <FormattedMessage
-                      defaultMessage={`${12345 || '--'} XP`}
+                      defaultMessage={`${12345 || 0} XP`}
                       description={'hk XP'}
                     />
                   </p>
@@ -166,7 +166,7 @@ const HeroContainer = ({ dashboardUserData, isDesktop, session }) => {
               <Img src='common/xp.png' />
               <p className='mb-0'>
                 <FormattedMessage
-                  defaultMessage={`${12345 || '--'} XP`}
+                  defaultMessage={`${12345 || 0} XP`}
                   description={'hk xp'}
                 />
               </p>
@@ -227,7 +227,7 @@ const ProfileContainer = ({ dashboardUserData, isDesktop, session }) => <>
       dashboardUserData
       && <>
       <div className="profile-content card card-block">
-        <p className="profile-content-heading">{session.name ? session.name : dashboardUserData.name || '--'}</p>
+        <p className="profile-content-heading">{session.name ? session.name : dashboardUserData.name || 0}</p>
         {
           dashboardUserData?.about
           && <>
@@ -319,7 +319,7 @@ const GameContainer = ({
                             description={'coins earned'}
                           />
                         </p>
-                        <p className="progress-data">{totalPointsEarned || '--'}</p>
+                        <p className="progress-data">{totalPointsEarned || 0}</p>
                       </div>
                     </div>
                   </div>
@@ -505,7 +505,7 @@ const LeaderBoardCard = ({ leaderboardData, leaderBoardUserData, className }) =>
             leaderBoardUserData && <>
             <div className="sideboard-content-title">
               <p>
-                <span>{`#${leaderBoardUserData.rank || '--'}`}</span>
+                <span>{`#${leaderBoardUserData.rank || '--'} `}</span>
                 <span>
                   <FormattedMessage
                     defaultMessage={'rank'}
@@ -522,7 +522,7 @@ const LeaderBoardCard = ({ leaderboardData, leaderBoardUserData, className }) =>
                       <p>{item.name || '--'}</p>
                     </div>
                     <div className='sideboard-rank'>
-                      <p>{item.points || '--'}</p>
+                      <p>{item.points || 0}</p>
                     </div>
                   </div>)
               }
@@ -543,7 +543,7 @@ const LeaderBoardCard = ({ leaderboardData, leaderBoardUserData, className }) =>
   </> }
 </>;
 
-const AchievementCard = ({ className, isDesktop, pointsData }) => <>
+const AchievementCard = ({ className, isDesktop, sessionData }) => <>
 { <>
   <div className={`dashboard-achievement-container dashboard-body-block ${className}`}>
     <div className="sideboard-card card">
@@ -572,7 +572,7 @@ const AchievementCard = ({ className, isDesktop, pointsData }) => <>
                     defaultMessage={'{coins} coins'}
                     description={'coins'}
                     values={{
-                      coins: pointsData?.coins || 0,
+                      coins: sessionData?.pointsEarned || 0,
                     }}
                   />
                 </p>
@@ -587,7 +587,7 @@ const AchievementCard = ({ className, isDesktop, pointsData }) => <>
                     defaultMessage={'{xp} coins'}
                     description={'xp'}
                     values={{
-                      xp: pointsData?.xp || 0,
+                      xp: sessionData?.xp || 0,
                     }}
                   />
                 </p>
@@ -631,12 +631,88 @@ const AchievementCard = ({ className, isDesktop, pointsData }) => <>
 </> }
 </>;
 
+const ClubCard = ({ clubData = {}, className }) => <>
+{ <>
+  <div className={`dashboard-club-container dashboard-body-block ${className}`}>
+    <div className="sideboard-card card">
+      <div className="club-card-heading">
+        <p className='sideboard-heading-text'>
+          <FormattedMessage
+            defaultMessage={'{clubName}'}
+            description={'Club name heading'}
+            values={{
+              clubName: clubData.clubName,
+            }}
+          />
+        </p>
+      </div>
+      <div className="club-card-content">
+        {
+          !clubData && <>
+            <div className="skeleton">
+              <div className="sideboard-content-title"></div>
+              <div className="sideboard-content-data">
+                {[1, 2, 3].map((_, index) => <div key={index} className="d-flex align-items-center justify-content-between sideboard-row">
+                  <div className="sideboard-names"></div>
+                </div>)}
+              </div>
+            </div>
+          </>
+        }
+        {
+          clubData && <>
+          <div className="sideboard-content-title">
+            <p>
+              <span>{`#${clubData?.rank || '--'} `}</span>
+              <span>
+                <FormattedMessage
+                  defaultMessage={'rank'}
+                  description={'rank'}
+                />
+              </span>
+            </p>
+          </div>
+          <div className="sideboard-content-data">
+            <p className="club-members-title mb-0">
+              <FormattedMessage
+                defaultMessage={'Most active members:'}
+                description={'active members title'} />
+            </p>
+            {
+              clubData && clubData?.topMembers?.slice(0, 3).map((item, index) => <div key={index} className={'d-flex align-items-center justify-content-between'}>
+                  <div className="sideboard-names d-flex align-items-center">
+                    {/* <p>{`#${item.rank || '--'}`}</p> */}
+                    <p>{item.name || '--'}</p>
+                  </div>
+                  <div className='sideboard-rank'>
+                    <p>{item.points || 0}</p>
+                  </div>
+                </div>)
+            }
+            <div className="sideboard-btn-block">
+              <Link className='btn btn-block club-btn' to={`/clubs/${clubData?.clubId}`}>
+                <FormattedMessage
+                  defaultMessage={'View Club'}
+                  description={'View club button'}
+                />
+              </Link>
+            </div>
+          </div>
+          </>
+        }
+      </div>
+    </div>
+  </div>
+</> }
+</>;
+
 const HeroComponent = memo(HeroContainer, compareProps);
 const ProfileComponent = memo(ProfileContainer, compareProps);
 const GameComponent = memo(GameContainer, compareProps);
 // const ChallengesComponent = memo(ChallengesSwiper);
 const LeaderBoardCardComponent = memo(LeaderBoardCard, compareProps);
 const AchievementCardComponent = memo(AchievementCard, compareProps);
+const ClubCardComponent = memo(ClubCard, compareProps);
 
 const Dashboard = () => {
   if (window.location.href.includes('/dashboard')) {
@@ -655,6 +731,7 @@ const Dashboard = () => {
   const {
     status: dashboarStatus,
     userData: dashboardUserData,
+    clubData,
     sessionData,
     gameData,
   } = dashboardState;
@@ -739,10 +816,14 @@ const Dashboard = () => {
           <div className="col-md-4 dashboard-sideboard">
             <AchievementCardComponent
               isDesktop={isDesktop}
-              pointsData={{
-                coins: sessionData.pointsEarned,
-                xp: 0,
-              }} />
+              sessionData={sessionData} />
+            {
+              clubData
+              && clubData?.hasClub
+              && <>
+                <ClubCardComponent clubData={clubData} />
+              </>
+            }
             <LeaderBoardCardComponent
               leaderboardData={leaderboardData}
               leaderBoardUserData={leaderBoardUserData} />
@@ -761,7 +842,17 @@ const Dashboard = () => {
           <AchievementCardComponent
             className={'sheet-card'}
             isDesktop={isDesktop}
+            sessionData={sessionData}
           />
+          {
+            clubData
+            && clubData?.hasClub
+            && <>
+              <ClubCardComponent
+                clubData={clubData}
+                className={'sheet-card'} />
+            </>
+          }
           <LeaderBoardCardComponent
             leaderboardData={leaderboardData}
             leaderBoardUserData={leaderBoardUserData}
