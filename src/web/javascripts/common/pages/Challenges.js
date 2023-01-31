@@ -11,19 +11,31 @@ import { useGetAttemptedChallenges, useGetChallenges, useGetMyChallenges } from 
 import Modal from '../components/Modal';
 import { useGetSession } from '../../../../hooks/pages/root';
 
+const compareProps = (prev, next) => {
+  let isEqual = true;
+  Object.keys(prev).forEach((key) => {
+    if (key === 'avatar' || key === 'navigation' || key === 'style') {
+      isEqual = isEqual && true;
+    } else if (typeof prev[key] === 'function') {
+      // use memoized function for passing as props
+      isEqual = isEqual && true;
+    } else if (key.toLowerCase().includes('ref')) {
+      isEqual = true;
+    } else {
+      isEqual = isEqual && JSON.stringify(prev[key]) === JSON.stringify(next[key]);
+    }
+  });
+  return isEqual;
+};
+
 const HeroContainer = ({
-  dashboardUserData,
   isDesktop,
   session,
   NewlyTrendingChallengeComponent,
   ChallengesActivityComponent,
 }) => {
-  let profileImg = '../../../../images/profile/default_user.png';
-  if (session && dashboardUserData) {
-    profileImg = (session.profileLink ? session.profileLink : dashboardUserData.profileImage)
-      .toString()
-      .replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`);
-  }
+  let profileImg = session.profileLink ? session.profileLink : '../../../../images/profile/default_user.png';
+  profileImg = profileImg.toString().replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`);
 
   return <>
     {
@@ -265,10 +277,10 @@ const ChallengesActivity = ({ myChallenges }) => <>
   }
 </>;
 
-const HeroComponent = memo(HeroContainer);
-const NewlyTrendingChallengeComponent = memo(NewlyTrendingChallenge);
-const ChallengesActivityComponent = memo(ChallengesActivity);
-const ChallengesSwiperComponent = memo(ChallengesSwiper);
+const HeroComponent = memo(HeroContainer, compareProps);
+const NewlyTrendingChallengeComponent = memo(NewlyTrendingChallenge, compareProps);
+const ChallengesActivityComponent = memo(ChallengesActivity, compareProps);
+const ChallengesSwiperComponent = memo(ChallengesSwiper, compareProps);
 
 const Challenges = () => {
   const isPageMounted = useRef(true);

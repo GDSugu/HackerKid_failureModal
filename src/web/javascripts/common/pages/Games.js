@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../../stylesheets/common/pages/games/style.scss';
 import { FormattedMessage } from 'react-intl';
@@ -8,6 +8,23 @@ import SwiperComponent from '../components/SwiperComponent';
 import Img from '../components/Img';
 import { useLeaderBoard } from '../../../../hooks/pages/leaderboard';
 import BottomSheet from '../components/BottomSheet';
+
+const compareProps = (prev, next) => {
+  let isEqual = true;
+  Object.keys(prev).forEach((key) => {
+    if (key === 'avatar' || key === 'navigation' || key === 'style') {
+      isEqual = isEqual && true;
+    } else if (typeof prev[key] === 'function') {
+      // use memoized function for passing as props
+      isEqual = isEqual && true;
+    } else if (key.toLowerCase().includes('ref')) {
+      isEqual = true;
+    } else {
+      isEqual = isEqual && JSON.stringify(prev[key]) === JSON.stringify(next[key]);
+    }
+  });
+  return isEqual;
+};
 
 const showBottomSheet = () => {
   $('#viewMoreSheet').modal({
@@ -196,6 +213,8 @@ const GameStats = ({
   </div>
 );
 
+const MemoizedGameStats = memo(GameStats, compareProps);
+
 // Game card component
 const GameCard = ({
   gameDetails, gameCardVariant, onClick, isDesktop, contentContainerCustomClass = '',
@@ -259,7 +278,7 @@ const GameCard = ({
             </button>
           }
           {
-            gameCardVariant === 0 && <GameStats
+            gameCardVariant === 0 && <MemoizedGameStats
               validSubmissionCount={Number(gameDetails.validSubmissionCount)}
               totalLevels={Number(gameDetails.totalLevels)}
               totalEarnedCoins={Number(gameDetails.totalEarnedCoins)}
@@ -359,6 +378,68 @@ const HeroComponent = ({
   );
 };
 
+const BottomSheetComponent = ({
+  gameData, dashBoardData, gameCardsDataArr, isDesktop = true,
+  leaderboardData, leaderBoardUserData, navigate = () => {},
+}) => <>
+  <BottomSheet id='viewMoreSheet'>
+    {
+      gameData && <div className='mobile-total-gameprogress-coins'>
+        <CircleProgressBar step={gameData.gameProgress} steps={gameData.totalGames} contentContainerCustomClass='mobile-circle-progress' />
+        <div className='coins-earned-with-average-time'>
+          <div className='coins-earned'>
+            <Img src='common/hkcoin.png' className='hkcoin-icon' />
+            <div>
+              <h6 className='coins-earned-subtitle caption'>
+                <FormattedMessage defaultMessage={'Coins Earned:'} description='Coins Earned subtitle' />
+              </h6>
+              <h5 className='coins-earned body-bold'>
+                <FormattedMessage defaultMessage={'{coins}'} description='Coins Earned' values={{ coins: gameData.totalPointsEarned }} />
+              </h5>
+            </div>
+          </div>
+          {/* <div className='time-spent'>
+          <Img src='common/hkcoin.png' className='hkcoin-icon' />
+            <div>
+              <h6 className='coins-earned-subtitle'>
+                <FormattedMessage
+                defaultMessage={'Time Spent:'}
+                description='Coins Earned subtitle'/>
+              </h6>
+              <h5 className='time-spent'>
+                <FormattedMessage
+                defaultMessage={'{timeSpent}'}
+                description='Time Spent'
+                values={{ coins: gameData.averageTime }}/>
+              </h5>
+            </div>
+        </div> */}
+        </div>
+      </div>
+    }
+    {
+      dashBoardData && <div className='inidividual-game-summary-cards'>
+        {
+          gameCardsDataArr.map((gameDetails, idx) => <IndividualGameSummaryCard
+            key={idx}
+            onClick={() => navigate('/turtle')}
+            gameDetails={gameDetails} />)
+        }
+      </div>
+    }
+    {
+      leaderboardData && leaderBoardUserData && <LeaderBoardCard
+        leaderBoardData={leaderboardData}
+        leaderBoardUserData={leaderBoardUserData}
+        isDesktop={isDesktop} />
+    }
+  </BottomSheet>
+</>;
+
+const MemoizedHeroComponent = memo(HeroComponent, compareProps);
+const MemoizedGameCard = memo(GameCard, compareProps);
+const MemoizedBottomSheetComponent = memo(BottomSheetComponent, compareProps);
+
 // top level component
 const Games = () => {
   pageInit('games-container', 'Games');
@@ -409,14 +490,17 @@ const Games = () => {
 
   populateScore('#yourScore', gameData.gameProgress, parseInt((gameData.gameProgress / gameData.totalGames) * 100, 10));
 
+  const listenResizeGames = () => {
+    setIsDesktop(window.matchMedia('(min-width: 590px)').matches);
+  };
+
   React.useEffect(() => {
     loginCheck();
-    window.addEventListener('resize', () => {
-      setIsDesktop(window.matchMedia('(min-width: 590px)').matches);
-    });
+    window.addEventListener('resize', listenResizeGames);
 
     return () => {
       isPageMounted.current = false;
+      window.removeEventListener('resize', listenResizeGames);
     };
   }, []);
 
@@ -481,7 +565,7 @@ const Games = () => {
   return (
     <div className='col-12 col-md-11 col-xl-10 mx-auto mx-auto'>
       {/* hero section */}
-      <HeroComponent
+      <MemoizedHeroComponent
         dashboardUserData={dashboardUserData}
         isDesktop={isDesktop}
         session={sessionData}
@@ -498,7 +582,7 @@ const Games = () => {
             dashBoardData && <SwiperComponent
               data={gameCardsDataArr}
               SlideComponent={({ data }) => (
-                <GameCard
+                <MemoizedGameCard
                   isDesktop={isDesktop}
                   onClick={data.onClick}
                   gameCardVariant={0}
@@ -548,7 +632,7 @@ const Games = () => {
             dashBoardData && <SwiperComponent
               data={gameCardsDataArr}
               SlideComponent={({ data }) => (
-                <GameCard
+                <MemoizedGameCard
                   isDesktop={isDesktop}
                   onClick={data.onClick}
                   gameCardVariant={0}
@@ -596,7 +680,7 @@ const Games = () => {
         <div className='all-game-cards row no-gutters mx-n2'>
           {
             dashBoardData && <>
-              <GameCard
+              <MemoizedGameCard
                 isDesktop={isDesktop}
                 onClick={() => navigate('/turtle')}
                 gameCardVariant={1}
@@ -608,7 +692,7 @@ const Games = () => {
                   totalLevels: dashBoardData.turtle.overAllQuestionCount,
                   gameCoverURL: 'games/turtle-game-cover.png',
                 }} />
-              <GameCard
+              <MemoizedGameCard
                 isDesktop={isDesktop}
                 onClick={() => { navigate('/zombieland'); }}
                 gameCardVariant={1}
@@ -620,7 +704,7 @@ const Games = () => {
                   totalLevels: dashBoardData.turtle.overAllQuestionCount,
                   gameCoverURL: 'games/zombie-game-cover.png',
                 }} />
-              <GameCard
+              <MemoizedGameCard
                 isDesktop={isDesktop}
                 onClick={() => { navigate('/webkata/css'); }}
                 gameCardVariant={1}
@@ -631,7 +715,7 @@ const Games = () => {
                   totalLevels: dashBoardData.turtle.overAllQuestionCount,
                   gameCoverURL: 'games/webkata-css-game-cover.png',
                 }} />
-              <GameCard
+              <MemoizedGameCard
                 isDesktop={isDesktop}
                 onClick={() => { navigate('/webkata/html'); }}
                 gameCardVariant={1}
@@ -642,7 +726,7 @@ const Games = () => {
                   totalLevels: dashBoardData.turtle.overAllQuestionCount,
                   gameCoverURL: 'games/webkata-html-game-cover.png',
                 }} />
-              <GameCard
+              <MemoizedGameCard
                 isDesktop={isDesktop}
                 onClick={() => { navigate('/webkata/js'); }}
                 gameCardVariant={1}
@@ -653,7 +737,7 @@ const Games = () => {
                   totalLevels: dashBoardData.turtle.overAllQuestionCount,
                   gameCoverURL: 'games/webkata-js-game-cover.png',
                 }} />
-              <GameCard
+              <MemoizedGameCard
                 isDesktop={isDesktop}
                 onClick={() => { navigate('/codekata'); }}
                 gameCardVariant={1}
@@ -683,58 +767,15 @@ const Games = () => {
       {
         !isDesktop
         && <>
-          <BottomSheet id='viewMoreSheet'>
-            {
-              gameData && <div className='mobile-total-gameprogress-coins'>
-                <CircleProgressBar step={gameData.gameProgress} steps={gameData.totalGames} contentContainerCustomClass='mobile-circle-progress' />
-                <div className='coins-earned-with-average-time'>
-                  <div className='coins-earned'>
-                    <Img src='common/hkcoin.png' className='hkcoin-icon' />
-                    <div>
-                      <h6 className='coins-earned-subtitle caption'>
-                        <FormattedMessage defaultMessage={'Coins Earned:'} description='Coins Earned subtitle' />
-                      </h6>
-                      <h5 className='coins-earned body-bold'>
-                        <FormattedMessage defaultMessage={'{coins}'} description='Coins Earned' values={{ coins: gameData.totalPointsEarned }} />
-                      </h5>
-                    </div>
-                  </div>
-                  {/* <div className='time-spent'>
-                  <Img src='common/hkcoin.png' className='hkcoin-icon' />
-                    <div>
-                      <h6 className='coins-earned-subtitle'>
-                        <FormattedMessage
-                        defaultMessage={'Time Spent:'}
-                        description='Coins Earned subtitle'/>
-                      </h6>
-                      <h5 className='time-spent'>
-                        <FormattedMessage
-                        defaultMessage={'{timeSpent}'}
-                        description='Time Spent'
-                        values={{ coins: gameData.averageTime }}/>
-                      </h5>
-                    </div>
-                </div> */}
-                </div>
-              </div>
-            }
-            {
-              dashBoardData && <div className='inidividual-game-summary-cards'>
-                {
-                  gameCardsDataArr.map((gameDetails, idx) => <IndividualGameSummaryCard
-                    key={idx}
-                    onClick={() => navigate('/turtle')}
-                    gameDetails={gameDetails} />)
-                }
-              </div>
-            }
-            {
-              leaderboardData && leaderBoardUserData && <LeaderBoardCard
-                leaderBoardData={leaderboardData}
-                leaderBoardUserData={leaderBoardUserData}
-                isDesktop={isDesktop} />
-            }
-          </BottomSheet>
+          <MemoizedBottomSheetComponent
+            isDesktop={isDesktop}
+            dashBoardData={dashBoardData}
+            gameCardsDataArr={gameCardsDataArr}
+            gameData={gameData}
+            leaderboardData={leaderboardData}
+            leaderBoardUserData={leaderBoardUserData}
+            navigate={navigate}
+          />
         </>
       }
     </div>

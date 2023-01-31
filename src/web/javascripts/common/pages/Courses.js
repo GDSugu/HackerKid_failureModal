@@ -364,6 +364,15 @@ const Courses = () => {
   if (progress && progress.length > 0) {
     animateModuleProgress((progress[0].watched / progress[0].totalVideos) * 100);
   }
+
+  React.useEffect(() => {
+    console.log();
+
+    return () => {
+      isPageMounted.current = false;
+    };
+  }, []);
+
   return (
     <>
     <div className='col-12 col-md-11 col-xl-10 mx-auto'>

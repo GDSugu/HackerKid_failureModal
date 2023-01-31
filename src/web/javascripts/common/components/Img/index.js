@@ -24,6 +24,7 @@ const Img = ({
       imgSource = `${imgSource}?updatedAt=${Date.now()}`;
     }
   }
+
   const [imgSrc, setImgSrc] = React.useState(imgSource);
   let filePath;
   let fileName;

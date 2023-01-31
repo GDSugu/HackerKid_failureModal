@@ -534,10 +534,6 @@
     "defaultMessage": "Club Name",
     "description": "Club name label"
   },
-  "Acm/fm": {
-    "defaultMessage": "{name} - {type}",
-    "description": "course Heading"
-  },
   "Aevhvw": {
     "defaultMessage": "Verify OTP and proceed",
     "description": "Verify OTP and proceed Button"
@@ -645,10 +641,6 @@
   "DZ21OO": {
     "defaultMessage": "Bio",
     "description": "Profile bio label"
-  },
-  "DaO/pd": {
-    "defaultMessage": "hackerkid logo",
-    "description": "logo"
   },
   "Dahcx9": {
     "defaultMessage": "{title} {awardCount}",
@@ -924,6 +916,10 @@
   "KD6lRu": {
     "defaultMessage": "Continue",
     "description": "Continue button"
+  },
+  "KY6DzQ": {
+    "defaultMessage": "{modName}",
+    "description": "course Heading"
   },
   "KcDrvG": {
     "defaultMessage": "Solution Videos",

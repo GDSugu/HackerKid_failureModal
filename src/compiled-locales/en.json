@@ -907,20 +907,6 @@
       "value": "Club Name"
     }
   ],
-  "Acm/fm": [
-    {
-      "type": 1,
-      "value": "name"
-    },
-    {
-      "type": 0,
-      "value": " - "
-    },
-    {
-      "type": 1,
-      "value": "type"
-    }
-  ],
   "Aevhvw": [
     {
       "type": 0,
@@ -1101,12 +1087,6 @@
     {
       "type": 0,
       "value": "Bio"
-    }
-  ],
-  "DaO/pd": [
-    {
-      "type": 0,
-      "value": "hackerkid logo"
     }
   ],
   "Dahcx9": [
@@ -1579,6 +1559,12 @@
     {
       "type": 0,
       "value": "Continue"
+    }
+  ],
+  "KY6DzQ": [
+    {
+      "type": 1,
+      "value": "modName"
     }
   ],
   "KcDrvG": [
