@@ -123,7 +123,8 @@
     "shepherd.js": "^8.1.0",
     "steroid-router": "^1.0.4",
     "swiper": "^8.0.7",
-    "workerpool": "^6.0.3"
+    "workerpool": "^6.0.3",
+    "timeme.js": "^2.1.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",

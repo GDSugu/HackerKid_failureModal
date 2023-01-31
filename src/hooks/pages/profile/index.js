@@ -8,13 +8,15 @@ const useProfileInfo = ({
 }) => {
   const [profileInfo, setProfileInfo] = useState({
     status: true,
-    name: false,
+    name: '',
     profileImage: false,
-    profileImageName: false,
-    uniqueUrl: false,
-    about: false,
-    grade: false,
-    school: false,
+    profileImageName: '',
+    uniqueUrl: '',
+    about: '',
+    grade: '',
+    school: '',
+    parentEmail: '',
+    parentPhone: '',
   });
 
   const authContext = useContext(AuthContext);
@@ -140,13 +142,17 @@ const useProfileInfo = ({
         profileImage,
         profileImageName,
         uniqueUrl,
+        parentEmail,
+        parentPhone,
       } = profileInfo;
       const payload = {
         type: 'updateProfile',
-        name: name.trim(),
-        about: about.trim(),
-        grade: parseInt(grade, 10),
-        school: school.trim(),
+        name: name && name.trim(),
+        about: about && about.trim(),
+        grade: grade && parseInt(grade, 10),
+        school: school && school.trim(),
+        parentEmail: parentEmail && parentEmail.trim(),
+        parentPhone: parentPhone && parentPhone.trim(),
       };
       result = post(payload, 'profile/', false, false)
         .then((res) => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
-import { $, pageInit } from '../framework';
+import { $, pageInit, timeTrack } from '../framework';
 import useRootPageState from '../../../../hooks/pages/root';
 import { useWebkataFetchQuestion, useWebkataSubmitQuestion } from '../../../../hooks/pages/webkata';
 import '../../../stylesheets/common/pages/webkata/style.scss';
@@ -663,6 +663,8 @@ const WebkataGameComponent = () => {
 const Webkata = () => {
   const [webkataRoute, setWebaktaRoute] = React.useState('home');
   const changeRoute = (route) => setWebaktaRoute(route);
+
+  timeTrack('games/webkata');
 
   React.useEffect(() => {
     const locationArray = window.location.href.split('/').filter((el) => el !== '');

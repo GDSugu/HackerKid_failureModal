@@ -2609,6 +2609,12 @@
       "value": "result"
     }
   ],
+  "adC22y": [
+    {
+      "type": 0,
+      "value": "Phone"
+    }
+  ],
   "apr16P": [
     {
       "type": 0,
@@ -2783,6 +2789,12 @@
     {
       "type": 0,
       "value": "Profile updated successfully"
+    }
+  ],
+  "eF9BRa": [
+    {
+      "type": 0,
+      "value": "Parent's Email"
     }
   ],
   "ed9QEz": [

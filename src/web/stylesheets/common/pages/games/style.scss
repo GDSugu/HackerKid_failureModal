@@ -463,6 +463,8 @@ $level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, nu
   place-content: center;
 
   svg {
+    width: 100%;
+
     #gradient {
       .start {
         stop-color: $level-progress-gradient-color2;

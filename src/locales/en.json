@@ -1566,6 +1566,10 @@
     "defaultMessage": "Private test case {testCaseNumber} - {result}",
     "description": "test case text"
   },
+  "adC22y": {
+    "defaultMessage": "Phone",
+    "description": "Profile phone label"
+  },
   "apr16P": {
     "defaultMessage": "Leaderboard",
     "description": "Leaderboard Title"
@@ -1676,6 +1680,10 @@
   "e5Eaen": {
     "defaultMessage": "Profile updated successfully",
     "description": "success modal"
+  },
+  "eF9BRa": {
+    "defaultMessage": "Parent's Email",
+    "description": "Profile email label"
   },
   "ed9QEz": {
     "defaultMessage": "No members found",
