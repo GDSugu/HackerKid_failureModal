@@ -2,7 +2,7 @@ const {
   Theme,
 } = require('../../../../javascripts/common/_theme');
 const {
-  Blue, LightBlue, Purple, utilColors, Yellow,
+  Blue, LightBlue, Purple, utilColors, Yellow, Green,
 } = require('../../../../../colors/_colors');
 
 const lightTheme = Theme.light;
@@ -30,6 +30,8 @@ const thememaplight = {
   'dashboard-leaderboard-btn-color': Blue.color900,
   'dashboard-achievement-title-bg': Yellow.color100,
   'dashboard-achievement-btn-color': Yellow.color900,
+  'dashboard-club-title-bg': lightTheme.screenGreen.bodyBg,
+  'dashboard-club-btn-color': Green.color900,
   'dashboard-challenges-arrow-color': Yellow.color900,
   'dashboard-hero-shadow': '0 4px 16px #f9a82625',
 };
@@ -57,6 +59,8 @@ const thememapdark = {
   'dashboard-leaderboard-btn-color': Blue.color900,
   'dashboard-achievement-title-bg': Yellow.color100,
   'dashboard-achievement-btn-color': Yellow.color900,
+  'dashboard-club-title-bg': lightTheme.screenGreen.bodyBg,
+  'dashboard-club-btn-color': Green.color900,
   'dashboard-challenges-arrow-color': Yellow.color900,
   'dashboard-hero-shadow': '0 4px 16px #f9a82625',
 };
@@ -83,6 +87,8 @@ const cssvars = {
   'dashboard-leaderboard-btn-color': '--dashboard-leaderboard-btn-color',
   'dashboard-achievement-title-bg': '--dashboard-achievement-title-bg',
   'dashboard-achievement-btn-color': '--dashboard-achievement-btn-color',
+  'dashboard-club-title-bg': '--dashboard-club-title-bg',
+  'dashboard-club-btn-color': '--dashboard-club-btn-color',
   'dashboard-challenges-arrow-color': '--dashboard-challenges-arrow-color',
   'dashboard-hero-shadow': '--dashboard-hero-shadow',
 };

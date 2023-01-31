@@ -203,6 +203,16 @@
       "value": "Game Progress"
     }
   ],
+  "0aCQ4I": [
+    {
+      "type": 1,
+      "value": "coins"
+    },
+    {
+      "type": 0,
+      "value": " coins"
+    }
+  ],
   "0lGE5l": [
     {
       "type": 1,
@@ -1873,12 +1883,6 @@
       "value": "Filter"
     }
   ],
-  "OvWf0W": [
-    {
-      "type": 0,
-      "value": "Class"
-    }
-  ],
   "Ovi5Cc": [
     {
       "type": 1,
@@ -2113,6 +2117,16 @@
       "value": "Delete Challenge"
     }
   ],
+  "Sbkd3U": [
+    {
+      "type": 1,
+      "value": "xp"
+    },
+    {
+      "type": 0,
+      "value": " coins"
+    }
+  ],
   "SccqZN": [
     {
       "type": 0,
@@ -2229,6 +2243,12 @@
     {
       "type": 0,
       "value": "Continue watching"
+    }
+  ],
+  "UDQT0n": [
+    {
+      "type": 0,
+      "value": "Achieved Badge"
     }
   ],
   "UFvWGM": [
@@ -2563,6 +2583,12 @@
     {
       "type": 0,
       "value": "Register"
+    }
+  ],
+  "aYFzg2": [
+    {
+      "type": 0,
+      "value": "Challenges"
     }
   ],
   "aZ9udC": [
@@ -2981,6 +3007,12 @@
     {
       "type": 0,
       "value": "Help"
+    }
+  ],
+  "htdtYn": [
+    {
+      "type": 0,
+      "value": "Achievements"
     }
   ],
   "hxLhGK": [
@@ -3657,6 +3689,12 @@
     {
       "type": 0,
       "value": "Output will be shown here"
+    }
+  ],
+  "tI1tX6": [
+    {
+      "type": 0,
+      "value": "View All Achievements"
     }
   ],
   "tbPLF3": [
