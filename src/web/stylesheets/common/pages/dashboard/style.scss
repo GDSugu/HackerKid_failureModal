@@ -310,8 +310,7 @@
             }
 
             p {
-              margin-left: 1rem;
-              font-size: 0.875rem;
+              margin-left: 0.5rem;
               font-weight: bold;
             }
 
@@ -671,6 +670,35 @@
             }
           }
         }
+
+        .dashboard-club-container {
+          .sideboard-card {
+            .club-card-heading {
+              background-color: gt.theme-var(dashboard-club-title-bg, null, $thememaplight, $cssvars);
+              padding: 0.75rem 0;
+            }
+
+            .club-card-content {
+              .sideboard-content-data {
+                .club-members-title {
+                  font-size: 0.875rem;
+                  color: gt.theme-var(dashboard-text-color-4, null, $thememaplight, $cssvars);
+                }
+
+                .club-btn {
+                  border: 1px solid gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
+                  color: gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
+                  background-color: transparent;
+
+                  &:hover {
+                    background-color: gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
+                    color: gt.theme-var(text-color-2);
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -805,6 +833,39 @@
             &:hover {
               border: 1px solid gt.theme-var(dashboard-achievement-btn-color, null, $thememaplight, $cssvars);
               color: gt.theme-var(dashboard-achievement-btn-color, null, $thememaplight, $cssvars);
+              background-color: transparent;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .dashboard-club-container {
+    .sideboard-card {
+      .club-card-heading {
+        padding: 0.75rem 0;
+        background-color: transparent;
+
+        .sideboard-heading-text {
+          color: gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
+        }
+      }
+
+      .club-card-content {
+        .sideboard-content-data {
+          .club-members-title {
+            font-size: 0.875rem;
+            color: gt.theme-var(dashboard-text-color-4, null, $thememaplight, $cssvars);
+          }
+
+          .club-btn {
+            color: gt.theme-var(text-color-2);
+            background-color: gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
+
+            &:hover {
+              border: 1px solid gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
+              color: gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
               background-color: transparent;
             }
           }
