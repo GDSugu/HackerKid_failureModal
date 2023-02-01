@@ -1,7 +1,9 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { $, pageInit, timeTrack } from '../framework';
+import {
+  $, pageInit, secondsToMins, timeTrack,
+} from '../framework';
 import Img from '../components/Img';
 // import SwiperComponent from '../components/SwiperComponent';
 import { useDashboard } from '../../../../hooks/pages/dashboard';
@@ -260,7 +262,7 @@ const ProfileContainer = ({ dashboardUserData, isDesktop, session }) => <>
 </>;
 
 const GameContainer = ({
-  dashboardUserData, overAllQuestionsCount, totalPointsEarned, validSubmissionsCount,
+  dashboardUserData, overAllQuestionsCount, totalPointsEarned, validSubmissionsCount, timeSpent,
 }) => <>
   <div className="dashboard-games-container dashboard-body-block">
     <div className="games-heading-container">
@@ -323,7 +325,7 @@ const GameContainer = ({
                       </div>
                     </div>
                   </div>
-                  {/* <div className="game-data-container game-time-data">
+                  <div className="game-data-container game-time-data">
                     <div className="d-flex align-items-center">
                       <div className="game-progress-icon game-time">
                         <Img src='common/eva_clock-fill.png' />
@@ -335,10 +337,10 @@ const GameContainer = ({
                             description={'time spent heading text'}
                           />
                         </p>
-                        <p className="progress-data">{'14 Mins'}</p>
+                        <p className="progress-data">{secondsToMins(timeSpent)}</p>
                       </div>
                     </div>
-                  </div> */}
+                  </div>
                 </div>
               </div>
             </div>
@@ -738,6 +740,7 @@ const Dashboard = () => {
 
   const {
     leaderboardData,
+    gameProgress,
     status: leaderboardStatus,
     userData: leaderBoardUserData,
   } = leaderBoardState;
@@ -808,7 +811,8 @@ const Dashboard = () => {
             dashboardUserData={dashboardUserData}
             overAllQuestionsCount={gameData.totalGames}
             totalPointsEarned={gameData.totalPointsEarned}
-            validSubmissionsCount={gameData.gameProgress} />
+            validSubmissionsCount={gameData.gameProgress}
+            timeSpent={gameProgress.totalTimeSpent} />
         </div>
         {
           isDesktop

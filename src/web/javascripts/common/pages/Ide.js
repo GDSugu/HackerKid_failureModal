@@ -3,7 +3,7 @@ import '../../../stylesheets/common/pages/ide/style.scss';
 import ace from 'ace-builds';
 import { FormattedMessage } from 'react-intl';
 import { Link, useNavigate } from 'react-router-dom';
-import { $, pageInit } from '../framework';
+import { $, pageInit, timeTrack } from '../framework';
 import { getDevice } from '../../../../hooks/common/utlis';
 import useRecapchav3 from '../../../../hooks/pages/recapchav3';
 import { getSession, loginCheck, setSession } from '../../../../hooks/common/framework';
@@ -163,6 +163,9 @@ const closeLanguageSelector = () => {
 // ide component
 const Ide = () => {
   const isPageMounted = useRef(true);
+
+  timeTrack('ide');
+
   // constants
   const EDITORID = 'editor';
   const device = getDevice();

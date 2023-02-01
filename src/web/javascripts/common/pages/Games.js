@@ -2,7 +2,9 @@ import React, { memo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../../stylesheets/common/pages/games/style.scss';
 import { FormattedMessage } from 'react-intl';
-import { $, loginCheck, pageInit } from '../framework';
+import {
+  $, loginCheck, pageInit, secondsToMins, timeTrack,
+} from '../framework';
 import { useDashboard } from '../../../../hooks/pages/dashboard';
 import SwiperComponent from '../components/SwiperComponent';
 import Img from '../components/Img';
@@ -54,7 +56,8 @@ const IndividualGameSummaryCard = ({ gameDetails, contentContainerCustomClass, o
       </div>
     </div>
     <div className='other-stats-with-progress-bar'>
-      <OtherStats totalEarnedCoins={gameDetails.totalEarnedCoins} />
+      <OtherStats totalEarnedCoins={gameDetails.totalEarnedCoins}
+      timeSpent={gameDetails.timeSpent} />
       <LinearProgressBar
         step={Number(gameDetails.validSubmissionCount)}
         steps={Number(gameDetails.totalLevels)} />
@@ -177,8 +180,8 @@ const LinearProgressBar = ({ step, steps, contentContainerCustomClass = '' }) =>
 );
 
 const OtherStats = ({
-  totalEarnedCoins, contentContainerCustomClass = '',
-  // totalEarnedXp, averageTime
+  totalEarnedCoins, timeSpent, contentContainerCustomClass = '',
+  // totalEarnedXp,
 }) => (
   <div className={`other-stats ${contentContainerCustomClass}`}>
     <div className='game-stat'>
@@ -187,13 +190,19 @@ const OtherStats = ({
         <FormattedMessage defaultMessage={'{totalEarnedCoins}'} description={'total earned coins'} values={{ totalEarnedCoins }} />
       </span>
     </div>
+    <div className='game-stat'>
+      <Img className='game-stat-icon' src='common/eva_clock-fill.png' />
+      <span className='game-stat-text body'>
+        <FormattedMessage defaultMessage={'{timeSpent}'} description={'total time spent'} values={{ timeSpent }} />
+      </span>
+    </div>
   </div>
 );
 
 // helper component for GameCard
 const GameStats = ({
-  validSubmissionCount, totalLevels, totalEarnedCoins, contentContainerCustomClass = '',
-  // totalEarnedXp, averageTime
+  validSubmissionCount, totalLevels, totalEarnedCoins, contentContainerCustomClass = '', timeSpent,
+  // totalEarnedXp
 }) => (
   <div className={`game-stats-container ${contentContainerCustomClass}`} >
     <div className='level-progress-indicator'>
@@ -207,7 +216,7 @@ const GameStats = ({
       </span>
     </div>
     <div className='other-stats-with-level-progress-bar'>
-      <OtherStats totalEarnedCoins={totalEarnedCoins} />
+      <OtherStats totalEarnedCoins={totalEarnedCoins} timeSpent={timeSpent}/>
       <LinearProgressBar step={validSubmissionCount} steps={totalLevels} />
     </div>
   </div>
@@ -282,6 +291,7 @@ const GameCard = ({
               validSubmissionCount={Number(gameDetails.validSubmissionCount)}
               totalLevels={Number(gameDetails.totalLevels)}
               totalEarnedCoins={Number(gameDetails.totalEarnedCoins)}
+              timeSpent={gameDetails.timeSpent}
             />
           }
         </div>
@@ -305,7 +315,8 @@ const GameCard = ({
 
 // Hero card component
 const HeroComponent = ({
-  dashboardUserData, gameData, leaderBoardData, leaderBoardUserData, isDesktop, session,
+  dashboardUserData, gameData, leaderBoardData, leaderBoardUserData,
+  isDesktop, session, gameProgress,
 }) => {
   let profileImg = '../../../../images/profile/default_user.png';
   if (session && dashboardUserData) {
@@ -367,7 +378,8 @@ const HeroComponent = ({
             </button>
           </header>
           {
-            gameData && <OtherStats totalEarnedCoins={gameData.totalPointsEarned} />
+            gameData && <OtherStats totalEarnedCoins={gameData.totalPointsEarned}
+            timeSpent={secondsToMins(gameProgress.totalTimeSpent)}/>
           }
           {
             !gameData && <div className='skeleton-card other-stats-skeleton'></div>
@@ -380,7 +392,7 @@ const HeroComponent = ({
 
 const BottomSheetComponent = ({
   gameData, dashBoardData, gameCardsDataArr, isDesktop = true,
-  leaderboardData, leaderBoardUserData, navigate = () => {},
+  leaderboardData, leaderBoardUserData, navigate = () => {}, gameProgress,
 }) => <>
   <BottomSheet id='viewMoreSheet'>
     {
@@ -398,22 +410,22 @@ const BottomSheetComponent = ({
               </h5>
             </div>
           </div>
-          {/* <div className='time-spent'>
-          <Img src='common/hkcoin.png' className='hkcoin-icon' />
+          <div className='coins-earned'>
+          <Img src='common/eva_clock-fill.png' className='hkcoin-icon' />
             <div>
               <h6 className='coins-earned-subtitle'>
                 <FormattedMessage
                 defaultMessage={'Time Spent:'}
-                description='Coins Earned subtitle'/>
+                description='Time Spent subtitle'/>
               </h6>
               <h5 className='time-spent'>
                 <FormattedMessage
                 defaultMessage={'{timeSpent}'}
                 description='Time Spent'
-                values={{ coins: gameData.averageTime }}/>
+                values={{ timeSpent: secondsToMins(gameProgress.totalTimeSpent) }}/>
               </h5>
             </div>
-        </div> */}
+        </div>
         </div>
       </div>
     }
@@ -444,6 +456,8 @@ const MemoizedBottomSheetComponent = memo(BottomSheetComponent, compareProps);
 const Games = () => {
   pageInit('games-container', 'Games');
 
+  timeTrack('games');
+
   // hooks
   const navigate = useNavigate();
   const isPageMounted = React.useRef(true);
@@ -456,6 +470,7 @@ const Games = () => {
 
   const {
     leaderboardData,
+    gameProgress,
     userData: leaderBoardUserData,
   } = leaderBoardState;
 
@@ -515,6 +530,7 @@ const Games = () => {
     validSubmissionCount: dashBoardData?.turtle?.validSubmissionCount,
     gameCoverURL: 'games/turtle-game-cover.png',
     onClick: () => { navigate('/turtle'); },
+    timeSpent: secondsToMins(dashBoardData?.turtle?.timeSpent),
   },
   {
     gameTitle: 'Zombieland',
@@ -526,6 +542,7 @@ const Games = () => {
     validSubmissionCount: dashBoardData?.zombieLand?.validSubmissionCount,
     gameCoverURL: 'games/zombie-game-cover.png',
     onClick: () => { navigate('/zombieland'); },
+    timeSpent: secondsToMins(dashBoardData?.zombieLand?.timeSpent),
   },
   {
     gameTitle: 'Webkata-CSS',
@@ -537,6 +554,7 @@ const Games = () => {
     validSubmissionCount: dashBoardData?.webkataCss?.validSubmissionCount,
     gameCoverURL: 'games/webkata-css-game-cover.png',
     onClick: () => { navigate('/webkata/css'); },
+    timeSpent: secondsToMins(dashBoardData?.webkataCss?.timeSpent),
   },
   {
     gameTitle: 'Webkata-HTML',
@@ -548,6 +566,7 @@ const Games = () => {
     validSubmissionCount: dashBoardData?.webkataHtml?.validSubmissionCount,
     gameCoverURL: 'games/webkata-html-game-cover.png',
     onClick: () => { navigate('/webkata/html'); },
+    timeSpent: secondsToMins(dashBoardData?.webkataHtml?.timeSpent),
   },
   {
     gameTitle: 'Webkata-JS',
@@ -559,6 +578,7 @@ const Games = () => {
     validSubmissionCount: dashBoardData?.webkataJs?.validSubmissionCount,
     gameCoverURL: 'games/webkata-js-game-cover.png',
     onClick: () => { navigate('/webkata/js'); },
+    timeSpent: secondsToMins(dashBoardData?.webkataJs?.timeSpent),
   },
   ];
 
@@ -571,7 +591,8 @@ const Games = () => {
         session={sessionData}
         gameData={gameData}
         leaderBoardUserData={leaderBoardUserData}
-        leaderBoardData={leaderboardData} />
+        leaderBoardData={leaderboardData}
+        gameProgress={gameProgress} />
       {/* continue playing section */}
       <section className='continue-playing-games-section'>
         <header className='subtitle1 mb-2'>
@@ -593,6 +614,7 @@ const Games = () => {
                     totalLevels: data.totalLevels,
                     totalEarnedCoins: data.totalEarnedCoins,
                     gameCoverURL: data.gameCoverURL,
+                    timeSpent: data.timeSpent,
                   }} />
               )}
               swiperModules={{
@@ -643,6 +665,7 @@ const Games = () => {
                     totalLevels: data.totalLevels,
                     totalEarnedCoins: data.totalEarnedCoins,
                     gameCoverURL: data.gameCoverURL,
+                    timeSpent: data.timeSpent,
                   }} />
               )}
               swiperModules={{
@@ -775,6 +798,7 @@ const Games = () => {
             leaderboardData={leaderboardData}
             leaderBoardUserData={leaderBoardUserData}
             navigate={navigate}
+            gameProgress={gameProgress}
           />
         </>
       }

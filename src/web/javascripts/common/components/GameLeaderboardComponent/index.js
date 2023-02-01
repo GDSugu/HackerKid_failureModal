@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useLeaderBoard } from '../../../../../hooks/pages/leaderboard';
-import { $ } from '../../framework';
+import { $, secondsToMins } from '../../framework';
 import '../../../../stylesheets/common/sass/components/_gameLeaderboardComponent.scss';
 import Img from '../Img';
 import { AuthContext } from '../../../../../hooks/pages/root';
@@ -91,24 +91,6 @@ const GameLeaderboardComponent = ({
     if (percentage) {
       $(`${selectorPrefix}Progress`).attr('stroke-dasharray', `${percentage * 251.2 * 0.01}, 251.2`);
     }
-  };
-
-  const secondsToMins = (s) => {
-    let seconds = parseInt(s, 10);
-    let minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    seconds %= 60;
-    minutes %= 60;
-    if (hours > 0) {
-      return `${hours} Hour${hours > 1 ? 's' : ''} ${minutes} Mins`;
-    }
-    if (hours === 0 && minutes > 0) {
-      return `${minutes} Minute${minutes > 1 ? 's' : ''}`;
-    }
-    if (minutes === 0 && seconds > 0) {
-      return `${seconds} Seconds`;
-    }
-    return '0 Seconds';
   };
 
   const pageSelector = (page, paginationDetails) => {

@@ -4,7 +4,7 @@ import React, {
 import { Link } from 'react-router-dom';
 import '../../../stylesheets/common/pages/challenges/style.scss';
 import { FormattedMessage } from 'react-intl';
-import { loginCheck, pageInit } from '../framework';
+import { loginCheck, pageInit, timeTrack } from '../framework';
 import Img from '../components/Img';
 import SwiperComponent from '../components/SwiperComponent';
 import { useGetAttemptedChallenges, useGetChallenges, useGetMyChallenges } from '../../../../hooks/pages/challenges';
@@ -286,6 +286,8 @@ const Challenges = () => {
   const isPageMounted = useRef(true);
   const numberOfChallengesSlideToShow = 7;
   pageInit('challenges-container', 'Challenges');
+
+  timeTrack('challenges');
 
   const [isDesktop, setIsDesktop] = useState(window.matchMedia('(min-width: 768px)').matches);
 
