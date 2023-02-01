@@ -645,7 +645,7 @@ const Games = () => {
         </div>
       </section>
       {/* recommended games section */}
-      <section className='recommended-games-section'>
+      {/* <section className='recommended-games-section'>
         <header className='subtitle1 mb-2'>
           <FormattedMessage defaultMessage={'Recommended Games'} description={'Section Title'} />
         </header>
@@ -694,7 +694,7 @@ const Games = () => {
             </>
           }
         </div>
-      </section>
+      </section> */}
       {/* all games section */}
       <section className='all-games-section'>
         <header className='subtitle1'>
