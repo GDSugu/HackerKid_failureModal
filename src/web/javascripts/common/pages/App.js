@@ -48,6 +48,7 @@ const RouteViewCertificate = loadable(() => import('./ViewCertificate'), { fallb
 const RouteClub = loadable(() => import('./Clubs'), { fallback: <Loading /> });
 const RouteWebkata = loadable(() => import('./Webkata'), { fallback: <Loading /> });
 const RouteIde = loadable(() => import('./Ide'), { fallback: <Loading /> });
+const RoutePrice = loadable(() => import('./PricingPlans'), { fallback: <Loading /> });
 
 const App = () => {
   React.useEffect(() => {
@@ -128,6 +129,7 @@ const App = () => {
         <Route path='forgot-password' caseSensitive={true} element={<RouteForgotPassword />} />
       </Route>
       <Route path='/about' caseSensitive={true} element={<RouteAbout />} />
+      <Route path='/pricing-plans' caseSensitive={true} element={<RoutePrice />} />
       <Route path='*' element={ <Navigate to='/' />} />
     </Routes>
   </BrowserRouter>);

@@ -11,6 +11,12 @@
       "value": "Email"
     }
   ],
+  "+KKyNc": [
+    {
+      "type": 0,
+      "value": "XP Earned:"
+    }
+  ],
   "+f2V2I": [
     {
       "type": 1,
@@ -35,6 +41,12 @@
     {
       "type": 0,
       "value": "Logout"
+    }
+  ],
+  "+kY4JR": [
+    {
+      "type": 0,
+      "value": "Web Development Video Library"
     }
   ],
   "+lsuwj": [
@@ -151,12 +163,6 @@
       "value": "Start Playing"
     }
   ],
-  "01Q2N+": [
-    {
-      "type": 0,
-      "value": "Coming Soon..."
-    }
-  ],
   "0By1LZ": [
     {
       "type": 1,
@@ -197,10 +203,22 @@
       "value": "heading"
     }
   ],
+  "0Qaax+": [
+    {
+      "type": 0,
+      "value": "Limited (3 Solved)"
+    }
+  ],
   "0Sgdtj": [
     {
       "type": 0,
       "value": "Game Progress"
+    }
+  ],
+  "0hIC1L": [
+    {
+      "type": 0,
+      "value": "₹1000"
     }
   ],
   "0lGE5l": [
@@ -225,6 +243,18 @@
     {
       "type": 0,
       "value": "Help"
+    }
+  ],
+  "1BKJxR": [
+    {
+      "type": 0,
+      "value": "Premium Edition Features"
+    }
+  ],
+  "1BoFrk": [
+    {
+      "type": 1,
+      "value": "description"
     }
   ],
   "1FjMUC": [
@@ -311,6 +341,12 @@
       "value": "Create a New Account"
     }
   ],
+  "2bOyqh": [
+    {
+      "type": 0,
+      "value": "₹1499"
+    }
+  ],
   "2qExk8": [
     {
       "type": 0,
@@ -333,6 +369,12 @@
     {
       "type": 0,
       "value": "Login with Phone"
+    }
+  ],
+  "3/xv4v": [
+    {
+      "type": 0,
+      "value": "Videos"
     }
   ],
   "30ejkF": [
@@ -455,6 +497,22 @@
     {
       "type": 1,
       "value": "activeSortName"
+    }
+  ],
+  "49hSno": [
+    {
+      "type": 0,
+      "value": "Limited (3 Problems)"
+    }
+  ],
+  "4DNN7D": [
+    {
+      "type": 1,
+      "value": "tag"
+    },
+    {
+      "type": 0,
+      "value": ","
     }
   ],
   "4Pt6v5": [
@@ -585,10 +643,22 @@
       "value": " coins"
     }
   ],
+  "67MpKv": [
+    {
+      "type": 0,
+      "value": "Limited (5 Problems)"
+    }
+  ],
   "6Cjk2D": [
     {
       "type": 0,
       "value": "Login"
+    }
+  ],
+  "6L0FJR": [
+    {
+      "type": 0,
+      "value": "Limited (10 Problems)"
     }
   ],
   "6OkiRc": [
@@ -601,6 +671,12 @@
     {
       "type": 0,
       "value": "Next"
+    }
+  ],
+  "6ZVb4r": [
+    {
+      "type": 1,
+      "value": "rating"
     }
   ],
   "6oGVMu": [
@@ -675,10 +751,106 @@
       "value": "Play"
     }
   ],
-  "8R6f04": [
+  "7asVcm": [
     {
       "type": 0,
-      "value": "Coming Soon..."
+      "value": "Games"
+    }
+  ],
+  "7dyAWL": [
+    {
+      "type": 0,
+      "value": "No invites"
+    }
+  ],
+  "7fCq41": [
+    {
+      "type": 0,
+      "value": "Limited (3 Videos)"
+    }
+  ],
+  "7mn7eO": [
+    {
+      "type": 0,
+      "value": "Output will appear here"
+    }
+  ],
+  "7pvcZr": [
+    {
+      "type": 0,
+      "value": "Run"
+    }
+  ],
+  "7v4G7a": [
+    {
+      "type": 1,
+      "value": "completed"
+    },
+    {
+      "type": 0,
+      "value": "/"
+    },
+    {
+      "type": 1,
+      "value": "total"
+    },
+    {
+      "type": 0,
+      "value": " watched"
+    }
+  ],
+  "8+Lyt3": [
+    {
+      "type": 1,
+      "value": "type"
+    },
+    {
+      "type": 0,
+      "value": "?"
+    }
+  ],
+  "8cISRy": [
+    {
+      "type": 0,
+      "value": "Time Spent:"
+    }
+  ],
+  "8gWjFk": [
+    {
+      "type": 1,
+      "value": "description"
+    }
+  ],
+  "8ga5/p": [
+    {
+      "type": 0,
+      "value": "#"
+    },
+    {
+      "type": 1,
+      "value": "rank"
+    }
+  ],
+  "9+2Mm0": [
+    {
+      "type": 0,
+      "value": "IDE"
+    }
+  ],
+  "94ZC8v": [
+    {
+      "type": 0,
+      "value": "Features"
+    }
+  ],
+  "97bB5P": [
+    {
+      "type": 1,
+      "value": "xp"
+    },
+    {
+      "type": 0,
+      "value": " xp"
     }
   ],
   "9BVOVU": [
@@ -715,6 +887,12 @@
     {
       "type": 0,
       "value": "OK"
+    }
+  ],
+  "9Ned5I": [
+    {
+      "type": 0,
+      "value": "Turtle"
     }
   ],
   "9QOtTR": [
@@ -795,6 +973,26 @@
       "value": "Club Name"
     }
   ],
+  "Acm/fm": [
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": " - "
+    },
+    {
+      "type": 1,
+      "value": "type"
+    }
+  ],
+  "AdKVGj": [
+    {
+      "type": 0,
+      "value": "HackerKid Trial Edition"
+    }
+  ],
   "Aevhvw": [
     {
       "type": 0,
@@ -859,6 +1057,16 @@
       "value": "See more"
     }
   ],
+  "Bj5WGE": [
+    {
+      "type": 0,
+      "value": "View all "
+    },
+    {
+      "type": 1,
+      "value": "data"
+    }
+  ],
   "Bt/Kkf": [
     {
       "type": 0,
@@ -875,6 +1083,26 @@
     {
       "type": 0,
       "value": "Top Members"
+    }
+  ],
+  "CJH/k4": [
+    {
+      "type": 1,
+      "value": "title"
+    },
+    {
+      "type": 0,
+      "value": " - "
+    },
+    {
+      "type": 1,
+      "value": "type"
+    }
+  ],
+  "CKmvD+": [
+    {
+      "type": 0,
+      "value": "Videos"
     }
   ],
   "CLW1pi": [
@@ -923,6 +1151,12 @@
       "value": "Output"
     }
   ],
+  "Ck0CVM": [
+    {
+      "type": 0,
+      "value": "Challenges Creation"
+    }
+  ],
   "D/2aSY": [
     {
       "type": 0,
@@ -967,6 +1201,12 @@
       "value": "awardCount"
     }
   ],
+  "DtgoWC": [
+    {
+      "type": 1,
+      "value": "time"
+    }
+  ],
   "DuPnGd": [
     {
       "type": 0,
@@ -983,6 +1223,12 @@
     {
       "type": 1,
       "value": "text"
+    }
+  ],
+  "EQ5MZE": [
+    {
+      "type": 0,
+      "value": "Session Videos"
     }
   ],
   "EQupmg": [
@@ -1027,6 +1273,18 @@
       "value": "Forgot Password"
     }
   ],
+  "F3ZmHN": [
+    {
+      "type": 0,
+      "value": "Cancel"
+    }
+  ],
+  "F6zUmx": [
+    {
+      "type": 0,
+      "value": "Limited (3 Videos)"
+    }
+  ],
   "FIcBXp": [
     {
       "type": 0,
@@ -1049,6 +1307,12 @@
     {
       "type": 1,
       "value": "problemStatement"
+    }
+  ],
+  "FhAkmH": [
+    {
+      "type": 0,
+      "value": "Coins Earned:"
     }
   ],
   "FhNWty": [
@@ -1105,6 +1369,12 @@
       "value": "Login into Existing Account"
     }
   ],
+  "G3Gw+7": [
+    {
+      "type": 1,
+      "value": "module"
+    }
+  ],
   "G5q8OG": [
     {
       "type": 0,
@@ -1135,10 +1405,26 @@
       "value": "Verify OTP and proceed"
     }
   ],
+  "GXef+E": [
+    {
+      "type": 0,
+      "value": "Clubs"
+    }
+  ],
   "Game Title": [
     {
       "type": 0,
       "value": "ZombieLand"
+    }
+  ],
+  "GbfWVS": [
+    {
+      "type": 0,
+      "value": "View all "
+    },
+    {
+      "type": 1,
+      "value": "title"
     }
   ],
   "GhmnMb": [
@@ -1189,6 +1475,12 @@
       "value": "Password changed successfully"
     }
   ],
+  "H9zFQD": [
+    {
+      "type": 0,
+      "value": "Trial Edition Features"
+    }
+  ],
   "HAlOn1": [
     {
       "type": 0,
@@ -1199,6 +1491,16 @@
     {
       "type": 0,
       "value": "Save"
+    }
+  ],
+  "HJ1hPr": [
+    {
+      "type": 1,
+      "value": "coins"
+    },
+    {
+      "type": 0,
+      "value": " coins"
     }
   ],
   "HLIDfo": [
@@ -1237,6 +1539,12 @@
       "value": "pointsEarned"
     }
   ],
+  "I0vwZV": [
+    {
+      "type": 0,
+      "value": "Session Videos"
+    }
+  ],
   "I1oDxa": [
     {
       "type": 0,
@@ -1247,6 +1555,12 @@
     {
       "type": 0,
       "value": "Call"
+    }
+  ],
+  "IOF5GH": [
+    {
+      "type": 0,
+      "value": "₹5000"
     }
   ],
   "IUTGvr": [
@@ -1283,6 +1597,12 @@
     {
       "type": 1,
       "value": "errorMessage"
+    }
+  ],
+  "J2b4h6": [
+    {
+      "type": 0,
+      "value": "Game Progress"
     }
   ],
   "J9e6MO": [
@@ -1369,6 +1689,18 @@
       "value": "Continue"
     }
   ],
+  "KXl+Ih": [
+    {
+      "type": 0,
+      "value": "Games"
+    }
+  ],
+  "KcDrvG": [
+    {
+      "type": 0,
+      "value": "Solution Videos"
+    }
+  ],
   "KmxQM/": [
     {
       "type": 0,
@@ -1397,6 +1729,18 @@
     {
       "type": 0,
       "value": "No Certificates Found"
+    }
+  ],
+  "L5HYii": [
+    {
+      "type": 0,
+      "value": "FREE"
+    }
+  ],
+  "L7Gsfw": [
+    {
+      "type": 0,
+      "value": "Coding Pirate"
     }
   ],
   "LAxUIh": [
@@ -1475,6 +1819,12 @@
     {
       "type": 0,
       "value": "Go to Index"
+    }
+  ],
+  "MWb4u3": [
+    {
+      "type": 1,
+      "value": "title"
     }
   ],
   "MceYzq": [
@@ -1579,6 +1929,12 @@
       "value": "Go to login"
     }
   ],
+  "Nsl0id": [
+    {
+      "type": 0,
+      "value": "XP Earned:"
+    }
+  ],
   "NsygW3": [
     {
       "type": 0,
@@ -1649,6 +2005,18 @@
     {
       "type": 0,
       "value": "Create Account"
+    }
+  ],
+  "OoOyIq": [
+    {
+      "type": 0,
+      "value": "HackerKid Premium"
+    }
+  ],
+  "OqwEqv": [
+    {
+      "type": 0,
+      "value": "Filter"
     }
   ],
   "OvWf0W": [
@@ -1723,10 +2091,22 @@
       "value": "Playground"
     }
   ],
+  "PfA2Pv": [
+    {
+      "type": 1,
+      "value": "title"
+    }
+  ],
   "PpUsRs": [
     {
       "type": 0,
       "value": "Join"
+    }
+  ],
+  "Pvrf+y": [
+    {
+      "type": 1,
+      "value": "title"
     }
   ],
   "Px7S/2": [
@@ -1809,6 +2189,12 @@
       "value": "View all Challenges"
     }
   ],
+  "RbmVo6": [
+    {
+      "type": 0,
+      "value": "FREE"
+    }
+  ],
   "RdkFSF": [
     {
       "type": 0,
@@ -1833,10 +2219,38 @@
       "value": "Previous Awards"
     }
   ],
+  "S3mtIm": [
+    {
+      "type": 0,
+      "value": "Congrats! You have Received "
+    },
+    {
+      "type": 1,
+      "value": "coins"
+    },
+    {
+      "type": 0,
+      "value": " Coins and "
+    },
+    {
+      "type": 1,
+      "value": "xp"
+    },
+    {
+      "type": 0,
+      "value": " XP"
+    }
+  ],
   "S7XoqJ": [
     {
       "type": 0,
       "value": "PLAY"
+    }
+  ],
+  "SCn1l+": [
+    {
+      "type": 0,
+      "value": "Zombieland"
     }
   ],
   "SI6+pb": [
@@ -1855,6 +2269,12 @@
     {
       "type": 0,
       "value": "Delete Challenge"
+    }
+  ],
+  "ScK8GA": [
+    {
+      "type": 0,
+      "value": "Pricing Plans"
     }
   ],
   "SccqZN": [
@@ -1889,6 +2309,12 @@
     {
       "type": 1,
       "value": "level"
+    }
+  ],
+  "T9SzsF": [
+    {
+      "type": 0,
+      "value": "Explore Now"
     }
   ],
   "TS73XZ": [
@@ -1969,10 +2395,28 @@
       "value": "Register to save your progess and compete with others"
     }
   ],
+  "U4efbt": [
+    {
+      "type": 0,
+      "value": "Continue watching"
+    }
+  ],
+  "U9/ROI": [
+    {
+      "type": 0,
+      "value": "Limited(Python)"
+    }
+  ],
   "UFvWGM": [
     {
       "type": 0,
       "value": "Play Next"
+    }
+  ],
+  "UONOaD": [
+    {
+      "type": 0,
+      "value": "Unlimited"
     }
   ],
   "UUCx/J": [
@@ -2039,6 +2483,12 @@
       "value": "Question"
     }
   ],
+  "VRP3Sx": [
+    {
+      "type": 1,
+      "value": "time"
+    }
+  ],
   "VoYGmQ": [
     {
       "type": 0,
@@ -2075,6 +2525,12 @@
       "value": "Click \"Run\" to validate"
     }
   ],
+  "W3856B": [
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
   "W5zEev": [
     {
       "type": 0,
@@ -2099,10 +2555,22 @@
       "value": "Play"
     }
   ],
+  "WSn5XU": [
+    {
+      "type": 1,
+      "value": "type"
+    }
+  ],
   "WmjFlm": [
     {
       "type": 0,
       "value": "Download"
+    }
+  ],
+  "WrsR9y": [
+    {
+      "type": 0,
+      "value": "JavaScript Video Library"
     }
   ],
   "WsWDuq": [
@@ -2121,6 +2589,12 @@
     {
       "type": 0,
       "value": "Login into existing account"
+    }
+  ],
+  "X2sP6k": [
+    {
+      "type": 0,
+      "value": "HackerKid provided the chance for you to explore the world of coding with HackerKid in a gamified environment for a 7 day trial period. Your current trial edition allows you explore the limited version of HackerKid."
     }
   ],
   "XMB1Ot": [
@@ -2145,6 +2619,12 @@
     {
       "type": 0,
       "value": "Browse clubs:"
+    }
+  ],
+  "Xblku1": [
+    {
+      "type": 0,
+      "value": "Webkata HTML"
     }
   ],
   "XeLSF2": [
@@ -2173,6 +2653,12 @@
     {
       "type": 1,
       "value": "concept"
+    }
+  ],
+  "YQ6o6y": [
+    {
+      "type": 0,
+      "value": "Python Video Library"
     }
   ],
   "YRA/RQ": [
@@ -2215,6 +2701,12 @@
       "value": "Go to About"
     }
   ],
+  "Z0XAX0": [
+    {
+      "type": 0,
+      "value": "Tags:"
+    }
+  ],
   "ZG77Sq": [
     {
       "type": 0,
@@ -2241,6 +2733,12 @@
     {
       "type": 0,
       "value": "Something went wrong. Please try again"
+    }
+  ],
+  "ZXoKDk": [
+    {
+      "type": 0,
+      "value": "HackerKid Exclusive Courses"
     }
   ],
   "ZvfR3g": [
@@ -2309,6 +2807,12 @@
       "value": "Run"
     }
   ],
+  "b/XLXY": [
+    {
+      "type": 0,
+      "value": "HackerKid Premium"
+    }
+  ],
   "b2J6mh": [
     {
       "type": 0,
@@ -2337,6 +2841,16 @@
     {
       "type": 1,
       "value": "toastMessage"
+    }
+  ],
+  "bo2dGc": [
+    {
+      "type": 1,
+      "value": "xp"
+    },
+    {
+      "type": 0,
+      "value": " xp"
     }
   ],
   "bvFe7G": [
@@ -2427,6 +2941,12 @@
       "value": "No"
     }
   ],
+  "dNydes": [
+    {
+      "type": 0,
+      "value": "Challenges Attempting"
+    }
+  ],
   "dWQyF1": [
     {
       "type": 0,
@@ -2463,6 +2983,12 @@
       "value": "Profile updated successfully"
     }
   ],
+  "eBPfgO": [
+    {
+      "type": 0,
+      "value": "Webkata CSS"
+    }
+  ],
   "ed9QEz": [
     {
       "type": 0,
@@ -2475,10 +3001,22 @@
       "value": "Earned Awards"
     }
   ],
+  "evb6EO": [
+    {
+      "type": 0,
+      "value": "IDE"
+    }
+  ],
   "f1vl6A": [
     {
       "type": 0,
       "value": "Show Leaderboard"
+    }
+  ],
+  "f27BIo": [
+    {
+      "type": 0,
+      "value": "Limited (5 Problems)"
     }
   ],
   "fAOneF": [
@@ -2535,6 +3073,24 @@
       "value": "validSubmissions"
     }
   ],
+  "ftgWW7": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "/"
+    },
+    {
+      "type": 1,
+      "value": "totalCount"
+    },
+    {
+      "type": 0,
+      "value": " watched"
+    }
+  ],
   "fzlKxE": [
     {
       "type": 0,
@@ -2583,6 +3139,12 @@
       "value": "gameTitle"
     }
   ],
+  "gQIUu/": [
+    {
+      "type": 0,
+      "value": "Limited (3 Published)"
+    }
+  ],
   "gTCzny": [
     {
       "type": 0,
@@ -2613,10 +3175,32 @@
       "value": "Codekata"
     }
   ],
+  "giAApt": [
+    {
+      "type": 0,
+      "value": "Solution Videos"
+    }
+  ],
   "glY0NW": [
     {
       "type": 0,
       "value": "Output"
+    }
+  ],
+  "groRBE": [
+    {
+      "type": 1,
+      "value": "coins"
+    },
+    {
+      "type": 0,
+      "value": " coins"
+    }
+  ],
+  "h/MN82": [
+    {
+      "type": 1,
+      "value": "coins"
     }
   ],
   "hEqp4d": [
@@ -2629,6 +3213,22 @@
     {
       "type": 0,
       "value": "Send OTP"
+    }
+  ],
+  "hLe6Ak": [
+    {
+      "type": 0,
+      "value": "Webkata JS"
+    }
+  ],
+  "hZGwA5": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " Xp"
     }
   ],
   "hphOHh": [
@@ -2667,6 +3267,18 @@
       "value": "clubName"
     }
   ],
+  "iohPi0": [
+    {
+      "type": 0,
+      "value": "Continue Watching"
+    }
+  ],
+  "j+kOS8": [
+    {
+      "type": 0,
+      "value": "Profile Edit"
+    }
+  ],
   "jACivV": [
     {
       "type": 1,
@@ -2683,6 +3295,12 @@
     {
       "type": 0,
       "value": "Create a Challenge"
+    }
+  ],
+  "jYtxLL": [
+    {
+      "type": 1,
+      "value": "xp"
     }
   ],
   "jZhy7I": [
@@ -2767,6 +3385,18 @@
       "value": "Invite Members with this link (Optional)"
     }
   ],
+  "lpBOZ4": [
+    {
+      "type": 0,
+      "value": "Your Current Plan"
+    }
+  ],
+  "lw8qSk": [
+    {
+      "type": 0,
+      "value": "Buy Now"
+    }
+  ],
   "lynO1X": [
     {
       "type": 0,
@@ -2839,6 +3469,12 @@
       "value": "Code"
     }
   ],
+  "mQwlbf": [
+    {
+      "type": 0,
+      "value": "Not rated yet"
+    }
+  ],
   "mTY3Hn": [
     {
       "type": 0,
@@ -2855,6 +3491,12 @@
     {
       "type": 0,
       "value": "Rank"
+    }
+  ],
+  "meudwh": [
+    {
+      "type": 0,
+      "value": "Coins Earned:"
     }
   ],
   "mfMsri": [
@@ -2975,6 +3617,12 @@
       "value": "Run"
     }
   ],
+  "o+nfLw": [
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
   "o2Pken": [
     {
       "type": 0,
@@ -2987,10 +3635,28 @@
       "value": "Account Settings"
     }
   ],
+  "o4jkq9": [
+    {
+      "type": 0,
+      "value": "Help"
+    }
+  ],
+  "o9Qdou": [
+    {
+      "type": 0,
+      "value": "Plans & Features"
+    }
+  ],
   "oOZkkL": [
     {
       "type": 0,
       "value": "Coming Soon..."
+    }
+  ],
+  "oQ892Z": [
+    {
+      "type": 0,
+      "value": "HackerKid Trial Edition"
     }
   ],
   "oQwd5t": [
@@ -3015,6 +3681,12 @@
     {
       "type": 0,
       "value": "Join with link"
+    }
+  ],
+  "pQ0m8t": [
+    {
+      "type": 0,
+      "value": "watched this"
     }
   ],
   "pVCbSK": [
@@ -3061,6 +3733,66 @@
     {
       "type": 0,
       "value": "Game Progress"
+    }
+  ],
+  "pxPVWB": [
+    {
+      "type": 0,
+      "value": "moveLeft"
+    }
+  ],
+  "q+hyoH": [
+    {
+      "type": 0,
+      "value": "moveRight"
+    }
+  ],
+  "q+pH3V": [
+    {
+      "type": 0,
+      "value": "Save"
+    }
+  ],
+  "q9L1mf": [
+    {
+      "type": 1,
+      "value": "head"
+    }
+  ],
+  "qAG6DF": [
+    {
+      "type": 0,
+      "value": "Click “Run” to generate output for your code"
+    }
+  ],
+  "qJ7EK+": [
+    {
+      "type": 1,
+      "value": "challengeName"
+    }
+  ],
+  "qPy2h6": [
+    {
+      "type": 0,
+      "value": "Club Leaderboard"
+    }
+  ],
+  "qTQ8nP": [
+    {
+      "type": 1,
+      "value": "coinsEarned"
+    }
+  ],
+  "qTXOtA": [
+    {
+      "type": 0,
+      "value": "Problem Statement"
+    }
+  ],
+  "qTebrI": [
+    {
+      "type": 0,
+      "value": "Problem Statement"
     }
   ],
   "qUU2pp": [
@@ -3119,6 +3851,18 @@
       "value": "Phone"
     }
   ],
+  "quf4Ng": [
+    {
+      "type": 1,
+      "value": "tag"
+    }
+  ],
+  "qx2FMG": [
+    {
+      "type": 1,
+      "value": "type"
+    }
+  ],
   "r1CvRM": [
     {
       "type": 0,
@@ -3171,6 +3915,12 @@
       "value": "Logout"
     }
   ],
+  "sPyRtG": [
+    {
+      "type": 0,
+      "value": "Awards & Badges"
+    }
+  ],
   "sXlZLv": [
     {
       "type": 0,
@@ -3187,16 +3937,40 @@
       "value": " xp"
     }
   ],
+  "ssTFur": [
+    {
+      "type": 0,
+      "value": "HackerKid also offer exclusive courses on various pedagogies like Web Development, App Development, Game Development & Data Science. We have an elite team of teacher to guide with your learning process. We have team that can answer all your queries before you decide enroll with us. Go on tell your parent right now, What are you waiting for?"
+    }
+  ],
   "swkU6w": [
     {
       "type": 0,
       "value": "Go to Home"
     }
   ],
+  "t32bf0": [
+    {
+      "type": 1,
+      "value": "type"
+    }
+  ],
   "t5hBAx": [
     {
       "type": 0,
       "value": "Output will be shown here"
+    }
+  ],
+  "tAiFjx": [
+    {
+      "type": 0,
+      "value": "Challenges"
+    }
+  ],
+  "tNUcfD": [
+    {
+      "type": 0,
+      "value": "HackerKid Premium gives you full access to the platform features for a 1 year subscription. With exciting coding games, problems, gamified environments you have a lot you explore, play and learn,"
     }
   ],
   "tbPLF3": [
@@ -3313,10 +4087,22 @@
       "value": "Show Leaderboard"
     }
   ],
+  "vWe94i": [
+    {
+      "type": 0,
+      "value": "More Info"
+    }
+  ],
   "vY562d": [
     {
       "type": 0,
       "value": "Try the new in-built IDE"
+    }
+  ],
+  "vYViQu": [
+    {
+      "type": 0,
+      "value": "Filter"
     }
   ],
   "viQX0N": [
@@ -3341,6 +4127,12 @@
     {
       "type": 0,
       "value": "Create club"
+    }
+  ],
+  "wg10ST": [
+    {
+      "type": 0,
+      "value": "Limited"
     }
   ],
   "wn7GwB": [
@@ -3385,6 +4177,12 @@
       "value": "swiperHeading"
     }
   ],
+  "xQMQmR": [
+    {
+      "type": 0,
+      "value": "Webkata JS"
+    }
+  ],
   "xT1NKB": [
     {
       "type": 0,
@@ -3403,6 +4201,12 @@
       "value": "level"
     }
   ],
+  "xaMIfH": [
+    {
+      "type": 0,
+      "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit dolor venenatis eget laoreet ultrices ut tortor proin viverra."
+    }
+  ],
   "xlvJ5U": [
     {
       "type": 0,
@@ -3415,6 +4219,12 @@
       "value": "Register for free"
     }
   ],
+  "y00DRu": [
+    {
+      "type": 1,
+      "value": "count"
+    }
+  ],
   "yCTEJz": [
     {
       "type": 1,
@@ -3425,6 +4235,12 @@
     {
       "type": 0,
       "value": "No feed to show"
+    }
+  ],
+  "yTBe/3": [
+    {
+      "type": 0,
+      "value": "(Early Bird Offer)"
     }
   ],
   "ya4qNs": [
@@ -3467,6 +4283,12 @@
     {
       "type": 1,
       "value": "earnedCoins"
+    }
+  ],
+  "z5PGTz": [
+    {
+      "type": 0,
+      "value": "Videos"
     }
   ],
   "z9lFwl": [
@@ -3535,6 +4357,12 @@
     {
       "type": 0,
       "value": "ZombieLand"
+    }
+  ],
+  "zrZhCC": [
+    {
+      "type": 0,
+      "value": "More Info"
     }
   ]
 }

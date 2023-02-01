@@ -7,6 +7,9 @@
     "defaultMessage": "Email",
     "description": "Email Button Title"
   },
+  "+KKyNc": {
+    "defaultMessage": "XP Earned:"
+  },
   "+f2V2I": {
     "defaultMessage": "{currentProgress} {unit}",
     "description": "current progress"
@@ -18,6 +21,10 @@
   "+g4yFF": {
     "defaultMessage": "Logout",
     "description": "more menu button"
+  },
+  "+kY4JR": {
+    "defaultMessage": "Web Development Video Library",
+    "description": "Web Development Video Library list"
   },
   "+lsuwj": {
     "defaultMessage": "Try now",
@@ -85,10 +92,6 @@
     "defaultMessage": "Start Playing",
     "description": "Play button"
   },
-  "01Q2N+": {
-    "defaultMessage": "Coming Soon...",
-    "description": "More options Page"
-  },
   "0By1LZ": {
     "defaultMessage": "{timeInMinutes} Mins",
     "description": "Time spent"
@@ -113,9 +116,17 @@
     "defaultMessage": "{heading}",
     "description": "section heading"
   },
+  "0Qaax+": {
+    "defaultMessage": "Limited (3 Solved)",
+    "description": "Limited (3 Solved) list"
+  },
   "0Sgdtj": {
     "defaultMessage": "Game Progress",
     "description": "game progress heading"
+  },
+  "0hIC1L": {
+    "defaultMessage": "₹1000",
+    "description": "₹1000 price"
   },
   "0lGE5l": {
     "defaultMessage": "{navigationText}",
@@ -132,6 +143,14 @@
   "13ETG6": {
     "defaultMessage": "Help",
     "description": "more menu button"
+  },
+  "1BKJxR": {
+    "defaultMessage": "Premium Edition Features",
+    "description": "Premium Edition Features"
+  },
+  "1BoFrk": {
+    "defaultMessage": "{description}",
+    "description": "Course Title"
   },
   "1FjMUC": {
     "defaultMessage": "Forgot Password?",
@@ -188,6 +207,10 @@
     "defaultMessage": "Create a New Account",
     "description": "create a new account button"
   },
+  "2bOyqh": {
+    "defaultMessage": "₹1499",
+    "description": "HackerKid Trial Premium Free"
+  },
   "2qExk8": {
     "defaultMessage": "Get the rare collectibles with your coins now",
     "description": "More card Title"
@@ -203,6 +226,10 @@
   "2yf2WH": {
     "defaultMessage": "Login with Phone",
     "description": "Login with Phone tab"
+  },
+  "3/xv4v": {
+    "defaultMessage": "Videos",
+    "description": "course Heading"
   },
   "30ejkF": {
     "defaultMessage": "Close",
@@ -270,6 +297,14 @@
   "48yQvt": {
     "defaultMessage": "{activeSortName}",
     "description": "sort button text"
+  },
+  "49hSno": {
+    "defaultMessage": "Limited (3 Problems)",
+    "description": "Limited (3 Problems) list"
+  },
+  "4DNN7D": {
+    "defaultMessage": "{tag},",
+    "description": "Course Title"
   },
   "4Pt6v5": {
     "defaultMessage": "Searching...",
@@ -350,9 +385,17 @@
     "defaultMessage": "{coins} coins",
     "description": "club coins"
   },
+  "67MpKv": {
+    "defaultMessage": "Limited (5 Problems)",
+    "description": "Limited (10 Problems) list"
+  },
   "6Cjk2D": {
     "defaultMessage": "Login",
     "description": "Login Button"
+  },
+  "6L0FJR": {
+    "defaultMessage": "Limited (10 Problems)",
+    "description": "Limited (10 Problems) list"
   },
   "6OkiRc": {
     "defaultMessage": "Your bio will be shown here"
@@ -360,6 +403,10 @@
   "6V6DQY": {
     "defaultMessage": "Next",
     "description": "Next Button"
+  },
+  "6ZVb4r": {
+    "defaultMessage": "{rating}",
+    "description": "Rating Count"
   },
   "6oGVMu": {
     "defaultMessage": "Awesome!",
@@ -417,6 +464,10 @@
     "defaultMessage": "No invites",
     "description": "no invites"
   },
+  "7fCq41": {
+    "defaultMessage": "Limited (3 Videos)",
+    "description": "Limited (3 Videos) list"
+  },
   "7mn7eO": {
     "defaultMessage": "Output will appear here",
     "description": "output placeholder"
@@ -424,6 +475,13 @@
   "7pvcZr": {
     "defaultMessage": "Run",
     "description": "Run Button"
+  },
+  "7v4G7a": {
+    "defaultMessage": "{completed}/{total} watched"
+  },
+  "8+Lyt3": {
+    "defaultMessage": "{type}?",
+    "description": "Course Type"
   },
   "8cISRy": {
     "defaultMessage": "Time Spent:",
@@ -441,25 +499,32 @@
     "defaultMessage": "IDE",
     "description": "page title"
   },
-  "9BVOVU": {
-    "defaultMessage": "Please verify to continue",
-    "description": "Recaptcha Modal heading"
+  "94ZC8v": {
+    "defaultMessage": "Features",
+    "description": "Features title"
+  },
+  "97bB5P": {
+    "defaultMessage": "{xp} xp"
   },
   "9BVOVU": {
     "defaultMessage": "Please verify to continue",
     "description": "Recaptcha Modal heading"
   },
-  "9BVOVU": {
-    "defaultMessage": "Please verify to continue",
-    "description": "Recaptcha Modal heading"
+  "9GHKZe": {
+    "defaultMessage": "/{totalQns}",
+    "description": "Game Leader Board: Total Questions"
   },
-  "9BVOVU": {
-    "defaultMessage": "Please verify to continue",
-    "description": "Recaptcha Modal heading"
+  "9K8jZr": {
+    "defaultMessage": "{idx}. {hint}",
+    "description": "Hint"
   },
   "9NID4X": {
     "defaultMessage": "OK",
     "description": "OK"
+  },
+  "9Ned5I": {
+    "defaultMessage": "Turtle",
+    "description": "Turtle list"
   },
   "9QOtTR": {
     "defaultMessage": "{step}",
@@ -513,6 +578,14 @@
     "defaultMessage": "Club Name",
     "description": "Club name label"
   },
+  "Acm/fm": {
+    "defaultMessage": "{name} - {type}",
+    "description": "course Heading"
+  },
+  "AdKVGj": {
+    "defaultMessage": "HackerKid Trial Edition",
+    "description": "Pricing Plans card title"
+  },
   "Aevhvw": {
     "defaultMessage": "Verify OTP and proceed",
     "description": "Verify OTP and proceed Button"
@@ -553,6 +626,10 @@
     "defaultMessage": "See more",
     "description": "see more card text"
   },
+  "Bj5WGE": {
+    "defaultMessage": "View all {data}",
+    "description": "Module Name"
+  },
   "Bt/Kkf": {
     "defaultMessage": "completed",
     "description": "Game progress"
@@ -564,6 +641,14 @@
   "C8QChP": {
     "defaultMessage": "Top Members",
     "description": "Top Members"
+  },
+  "CJH/k4": {
+    "defaultMessage": "{title} - {type}",
+    "description": "Course Name"
+  },
+  "CKmvD+": {
+    "defaultMessage": "Videos",
+    "description": "Course Name"
   },
   "CLW1pi": {
     "defaultMessage": "Close",
@@ -585,13 +670,17 @@
     "defaultMessage": "Coins Earned:",
     "description": "Coins Earned"
   },
-  "CfsqV9": {
-    "defaultMessage": "All Games",
-    "description": "Games Page"
+  "CddI5u": {
+    "defaultMessage": "Join Club",
+    "description": "join club modal title"
   },
   "Ciol6I": {
     "defaultMessage": "Output",
     "description": "Output"
+  },
+  "Ck0CVM": {
+    "defaultMessage": "Challenges Creation",
+    "description": "Challenges Creation"
   },
   "D/2aSY": {
     "defaultMessage": "This is about page",
@@ -617,6 +706,9 @@
     "defaultMessage": "{title} {awardCount}",
     "description": "award title"
   },
+  "DtgoWC": {
+    "defaultMessage": "{time}"
+  },
   "DuPnGd": {
     "defaultMessage": "Email",
     "description": "Email label"
@@ -628,6 +720,10 @@
   "EOKZu2": {
     "defaultMessage": "{text}",
     "description": "button text"
+  },
+  "EQ5MZE": {
+    "defaultMessage": "Session Videos",
+    "description": "Session Videos Button"
   },
   "EQupmg": {
     "defaultMessage": "Alphabetical",
@@ -657,6 +753,14 @@
     "defaultMessage": "Forgot Password",
     "description": "Forgot Password heading"
   },
+  "F3ZmHN": {
+    "defaultMessage": "Cancel",
+    "description": "Cancel Button"
+  },
+  "F6zUmx": {
+    "defaultMessage": "Limited (3 Videos)",
+    "description": "Limited (3 Problems) list"
+  },
   "FIcBXp": {
     "defaultMessage": "Home",
     "description": "home heading"
@@ -672,6 +776,9 @@
   "Fbud0n": {
     "defaultMessage": "{problemStatement}",
     "description": "problem statement"
+  },
+  "FhAkmH": {
+    "defaultMessage": "Coins Earned:"
   },
   "FhNWty": {
     "defaultMessage": "Publish",
@@ -701,6 +808,10 @@
     "defaultMessage": "Login into Existing Account",
     "description": "Login into Exisiting Account button"
   },
+  "G3Gw+7": {
+    "defaultMessage": "{module}",
+    "description": "Time Spent card caption"
+  },
   "G5q8OG": {
     "defaultMessage": "rank",
     "description": "rank caption"
@@ -721,8 +832,16 @@
     "defaultMessage": "Verify OTP and proceed",
     "description": "verify otp button"
   },
+  "GXef+E": {
+    "defaultMessage": "Clubs",
+    "description": "Clubs title"
+  },
   "Game Title": {
     "defaultMessage": "ZombieLand"
+  },
+  "GbfWVS": {
+    "defaultMessage": "View all {title}",
+    "description": "Course Title"
   },
   "GhmnMb": {
     "defaultMessage": "Private Test Case {testCaseNumber} - {result}",
@@ -748,12 +867,20 @@
     "defaultMessage": "Password changed successfully",
     "description": "Password changed text"
   },
+  "H9zFQD": {
+    "defaultMessage": "Trial Edition Features",
+    "description": "Trial Edition Features"
+  },
   "HAlOn1": {
     "defaultMessage": "Name"
   },
   "HI8bPV": {
     "defaultMessage": "Save",
     "description": "Profile save button"
+  },
+  "HJ1hPr": {
+    "defaultMessage": "{coins} coins",
+    "description": "coins earned"
   },
   "HLIDfo": {
     "defaultMessage": "Join a club",
@@ -779,6 +906,10 @@
     "defaultMessage": "{pointsEarned}",
     "description": "coins"
   },
+  "I0vwZV": {
+    "defaultMessage": "Session Videos",
+    "description": "Session Videos Filter Option"
+  },
   "I1oDxa": {
     "defaultMessage": "Loading failed due to some unknown error! Please try again later.",
     "description": "Error"
@@ -786,6 +917,10 @@
   "ILnphX": {
     "defaultMessage": "Call",
     "description": "Call Button Title"
+  },
+  "IOF5GH": {
+    "defaultMessage": "₹5000",
+    "description": "₹5000 Free"
   },
   "IUTGvr": {
     "defaultMessage": "{totalEarnedCoins}",
@@ -810,6 +945,10 @@
   "In3suu": {
     "defaultMessage": "{errorMessage}",
     "description": "error text"
+  },
+  "J2b4h6": {
+    "defaultMessage": "Game Progress",
+    "description": "Game Progress list"
   },
   "J9e6MO": {
     "defaultMessage": "{output}",
@@ -858,6 +997,14 @@
     "defaultMessage": "Continue",
     "description": "Continue button"
   },
+  "KXl+Ih": {
+    "defaultMessage": "Games",
+    "description": "Games title"
+  },
+  "KcDrvG": {
+    "defaultMessage": "Solution Videos",
+    "description": "Solution Videos Filter Option"
+  },
   "KmxQM/": {
     "defaultMessage": "All Games",
     "description": "All games heading"
@@ -877,6 +1024,14 @@
   "KzGZsa": {
     "defaultMessage": "No Certificates Found",
     "description": "no certificates"
+  },
+  "L5HYii": {
+    "defaultMessage": "FREE",
+    "description": "FREE price"
+  },
+  "L7Gsfw": {
+    "defaultMessage": "Coding Pirate",
+    "description": "Coding Pirate list"
   },
   "LAxUIh": {
     "defaultMessage": "{studentName}",
@@ -929,6 +1084,10 @@
   "MS/biV": {
     "defaultMessage": "Go to Index",
     "description": "Link description"
+  },
+  "MWb4u3": {
+    "defaultMessage": "{title}",
+    "description": "video title"
   },
   "MceYzq": {
     "defaultMessage": "{name}",
@@ -998,6 +1157,10 @@
     "defaultMessage": "Go to login",
     "description": "Go to login button"
   },
+  "Nsl0id": {
+    "defaultMessage": "XP Earned:",
+    "description": "XP Earned card caption"
+  },
   "NsygW3": {
     "defaultMessage": "Run",
     "description": "Run code button"
@@ -1043,6 +1206,14 @@
   "OdODwS": {
     "defaultMessage": "Create Account",
     "description": "Create Account button"
+  },
+  "OoOyIq": {
+    "defaultMessage": "HackerKid Premium",
+    "description": "Pricing Plans card title"
+  },
+  "OqwEqv": {
+    "defaultMessage": "Filter",
+    "description": "Filter Button"
   },
   "OvWf0W": {
     "defaultMessage": "Class",
@@ -1090,9 +1261,17 @@
     "defaultMessage": "Playground",
     "description": "Playground tab"
   },
+  "PfA2Pv": {
+    "defaultMessage": "{title}",
+    "description": "Video Title"
+  },
   "PpUsRs": {
     "defaultMessage": "Join",
     "description": "join button"
+  },
+  "Pvrf+y": {
+    "defaultMessage": "{title}",
+    "description": "Course Title"
   },
   "Px7S/2": {
     "defaultMessage": "Close",
@@ -1141,6 +1320,10 @@
   "RSglQH": {
     "defaultMessage": "View all Challenges"
   },
+  "RbmVo6": {
+    "defaultMessage": "FREE",
+    "description": "HackerKid Trial Edition Free"
+  },
   "RdkFSF": {
     "defaultMessage": "Sort by:",
     "description": "sort btn title"
@@ -1157,9 +1340,16 @@
     "defaultMessage": "Previous Awards",
     "description": "section heading"
   },
+  "S3mtIm": {
+    "defaultMessage": "Congrats! You have Received {coins} Coins and {xp} XP"
+  },
   "S7XoqJ": {
     "defaultMessage": "PLAY",
     "description": "play btn text"
+  },
+  "SCn1l+": {
+    "defaultMessage": "Zombieland",
+    "description": "Zombieland list"
   },
   "SI6+pb": {
     "defaultMessage": "Problem Statement",
@@ -1172,6 +1362,10 @@
   "STCi24": {
     "defaultMessage": "Delete Challenge",
     "description": "delete challenge button"
+  },
+  "ScK8GA": {
+    "defaultMessage": "Pricing Plans",
+    "description": "Pricing Plans title"
   },
   "SccqZN": {
     "defaultMessage": "Download",
@@ -1192,6 +1386,10 @@
   "T/sbBG": {
     "defaultMessage": "Level {level}",
     "description": "Question Level"
+  },
+  "T9SzsF": {
+    "defaultMessage": "Explore Now",
+    "description": "Explore Now text"
   },
   "TS73XZ": {
     "defaultMessage": "Change password",
@@ -1245,9 +1443,21 @@
     "defaultMessage": "Register to save your progess and compete with others",
     "description": "Success message"
   },
+  "U4efbt": {
+    "defaultMessage": "Continue watching",
+    "description": "Course Name"
+  },
+  "U9/ROI": {
+    "defaultMessage": "Limited(Python)",
+    "description": "Limited(Python)"
+  },
   "UFvWGM": {
     "defaultMessage": "Play Next",
     "description": "Play Next Button"
+  },
+  "UONOaD": {
+    "defaultMessage": "Unlimited",
+    "description": "Unlimited list"
   },
   "UUCx/J": {
     "defaultMessage": "Edit",
@@ -1289,6 +1499,10 @@
     "defaultMessage": "Question",
     "description": "Question tab"
   },
+  "VRP3Sx": {
+    "defaultMessage": "{time}",
+    "description": "Time Spent card caption"
+  },
   "VoYGmQ": {
     "defaultMessage": "Practise... or play with the new code editor",
     "description": "More card Subtitle"
@@ -1313,6 +1527,10 @@
     "defaultMessage": "Click \"Run\" to validate",
     "description": "not validated text"
   },
+  "W3856B": {
+    "defaultMessage": "{name}",
+    "description": "Course Name"
+  },
   "W5zEev": {
     "defaultMessage": "Resend",
     "description": "resend otp button"
@@ -1328,9 +1546,17 @@
     "defaultMessage": "Play",
     "description": "Play button"
   },
+  "WSn5XU": {
+    "defaultMessage": "{type}",
+    "description": "Module type"
+  },
   "WmjFlm": {
     "defaultMessage": "Download",
     "description": "download btn"
+  },
+  "WrsR9y": {
+    "defaultMessage": "JavaScript Video Library",
+    "description": "JavaScript Video Library list"
   },
   "WsWDuq": {
     "defaultMessage": "Click \"Run\" to validate your code",
@@ -1343,6 +1569,10 @@
   "X1rCRf": {
     "defaultMessage": "Login into existing account",
     "description": "login into existing account button"
+  },
+  "X2sP6k": {
+    "defaultMessage": "HackerKid provided the chance for you to explore the world of coding with HackerKid in a gamified environment for a 7 day trial period. Your current trial edition allows you explore the limited version of HackerKid.",
+    "description": "Pricing Plans card discription"
   },
   "XMB1Ot": {
     "defaultMessage": "No Awards Found",
@@ -1360,6 +1590,10 @@
     "defaultMessage": "Browse clubs:",
     "description": "Browse clubs heading"
   },
+  "Xblku1": {
+    "defaultMessage": "Webkata HTML",
+    "description": "Webkata HTML list"
+  },
   "XeLSF2": {
     "defaultMessage": "Leaderboard",
     "description": "leaderboard heading"
@@ -1375,6 +1609,10 @@
   "YLRLEA": {
     "defaultMessage": "WebKata - {concept}",
     "description": "Webkata title"
+  },
+  "YQ6o6y": {
+    "defaultMessage": "Python Video Library",
+    "description": "Python Video Library"
   },
   "YRA/RQ": {
     "defaultMessage": "{username}",
@@ -1400,6 +1638,10 @@
     "defaultMessage": "Go to About",
     "description": "Link description"
   },
+  "Z0XAX0": {
+    "defaultMessage": "Tags:",
+    "description": "Course Title"
+  },
   "ZG77Sq": {
     "defaultMessage": "close",
     "description": "close button"
@@ -1415,6 +1657,10 @@
   "ZXYzUQ": {
     "defaultMessage": "Something went wrong. Please try again",
     "description": "error modal"
+  },
+  "ZXoKDk": {
+    "defaultMessage": "HackerKid Exclusive Courses",
+    "description": "HackerKid Exclusive Courses title"
   },
   "ZvfR3g": {
     "defaultMessage": "Send OTP",
@@ -1452,6 +1698,10 @@
     "defaultMessage": "Run",
     "description": "run button text"
   },
+  "b/XLXY": {
+    "defaultMessage": "HackerKid Premium",
+    "description": "HackerKid Trial Edition title"
+  },
   "b2J6mh": {
     "defaultMessage": "Home",
     "description": "Home navigation link"
@@ -1471,6 +1721,10 @@
   "bhtTKn": {
     "defaultMessage": "{toastMessage}",
     "description": "toast message"
+  },
+  "bo2dGc": {
+    "defaultMessage": "{xp} xp",
+    "description": "XP earned"
   },
   "bvFe7G": {
     "defaultMessage": "Coins Earned:",
@@ -1527,6 +1781,10 @@
     "defaultMessage": "No",
     "description": "logout no btn"
   },
+  "dNydes": {
+    "defaultMessage": "Challenges Attempting",
+    "description": "Challenges Attempting"
+  },
   "dWQyF1": {
     "defaultMessage": "Oh ho ho.. failed",
     "description": "Failure message"
@@ -1551,6 +1809,10 @@
     "defaultMessage": "Profile updated successfully",
     "description": "success modal"
   },
+  "eBPfgO": {
+    "defaultMessage": "Webkata CSS",
+    "description": "Webkata CSS list"
+  },
   "ed9QEz": {
     "defaultMessage": "No members found",
     "description": "No members found"
@@ -1559,9 +1821,17 @@
     "defaultMessage": "Earned Awards",
     "description": "Earned Awards"
   },
+  "evb6EO": {
+    "defaultMessage": "IDE",
+    "description": "IDE"
+  },
   "f1vl6A": {
     "defaultMessage": "Show Leaderboard",
     "description": "show leaderboard"
+  },
+  "f27BIo": {
+    "defaultMessage": "Limited (5 Problems)",
+    "description": "Limited (5 Problems) list"
   },
   "fAOneF": {
     "defaultMessage": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?",
@@ -1597,6 +1867,10 @@
     "defaultMessage": "{validSubmissions}",
     "description": "Valid Submissions"
   },
+  "ftgWW7": {
+    "defaultMessage": "{count}/{totalCount} watched",
+    "description": "Time Spent card caption"
+  },
   "fzlKxE": {
     "defaultMessage": "See Less Awards",
     "description": "see more card text"
@@ -1628,6 +1902,10 @@
     "defaultMessage": "{gameTitle}",
     "description": "Game Title"
   },
+  "gQIUu/": {
+    "defaultMessage": "Limited (3 Published)",
+    "description": "Limited (3 Published) list"
+  },
   "gTCzny": {
     "defaultMessage": "Profile Picture",
     "description": "Profile Picture label"
@@ -1648,9 +1926,19 @@
     "defaultMessage": "Codekata",
     "description": "Codekata title"
   },
+  "giAApt": {
+    "defaultMessage": "Solution Videos",
+    "description": "Solution Videos Button"
+  },
   "glY0NW": {
     "defaultMessage": "Output",
     "description": "Output Heading"
+  },
+  "groRBE": {
+    "defaultMessage": "{coins} coins"
+  },
+  "h/MN82": {
+    "defaultMessage": "{coins}"
   },
   "hEqp4d": {
     "defaultMessage": "Coming Soon...",
@@ -1659,6 +1947,14 @@
   "hJpqIn": {
     "defaultMessage": "Send OTP",
     "description": "send otp button"
+  },
+  "hLe6Ak": {
+    "defaultMessage": "Webkata JS",
+    "description": "Turtle list"
+  },
+  "hZGwA5": {
+    "defaultMessage": "{count} Xp",
+    "description": "Time Spent card caption"
   },
   "hphOHh": {
     "defaultMessage": "Help",
@@ -1684,6 +1980,14 @@
     "defaultMessage": "{clubName}",
     "description": "Club card heading text"
   },
+  "iohPi0": {
+    "defaultMessage": "Continue Watching",
+    "description": "Continue Watching"
+  },
+  "j+kOS8": {
+    "defaultMessage": "Profile Edit",
+    "description": "Profile Edit"
+  },
   "jACivV": {
     "defaultMessage": "{name}",
     "description": "user name"
@@ -1695,6 +1999,9 @@
   "jMKyRW": {
     "defaultMessage": "Create a Challenge",
     "description": "create a challenge button text"
+  },
+  "jYtxLL": {
+    "defaultMessage": "{xp}"
   },
   "jZhy7I": {
     "defaultMessage": "Forgot Password",
@@ -1747,6 +2054,14 @@
     "defaultMessage": "Invite Members with this link (Optional)",
     "description": "club link input field"
   },
+  "lpBOZ4": {
+    "defaultMessage": "Your Current Plan",
+    "description": "Your Current Plan btn"
+  },
+  "lw8qSk": {
+    "defaultMessage": "Buy Now",
+    "description": "Buy Now btn"
+  },
   "lynO1X": {
     "defaultMessage": "Change Password",
     "description": "Change password button text"
@@ -1786,6 +2101,10 @@
     "defaultMessage": "Code",
     "description": "code button text"
   },
+  "mQwlbf": {
+    "defaultMessage": "Not rated yet",
+    "description": "Rating Count"
+  },
   "mTY3Hn": {
     "defaultMessage": "Session expired",
     "description": "Not authorized message"
@@ -1797,6 +2116,10 @@
   "mb5De+": {
     "defaultMessage": "Rank",
     "description": "Rank"
+  },
+  "meudwh": {
+    "defaultMessage": "Coins Earned:",
+    "description": "coins earned card caption"
   },
   "mfMsri": {
     "defaultMessage": "Recommended Games",
@@ -1874,6 +2197,9 @@
     "defaultMessage": "Run",
     "description": "run code button text"
   },
+  "o+nfLw": {
+    "defaultMessage": "{name}"
+  },
   "o2Pken": {
     "defaultMessage": "Run",
     "description": "run webkata button text"
@@ -1882,13 +2208,21 @@
     "defaultMessage": "Account Settings",
     "description": "more menu button"
   },
-  "oDenEU": {
-    "defaultMessage": "Turtle",
-    "description": "Turtle Game Title"
+  "o4jkq9": {
+    "defaultMessage": "Help",
+    "description": "Help"
+  },
+  "o9Qdou": {
+    "defaultMessage": "Plans & Features",
+    "description": "Plans & Features title"
   },
   "oOZkkL": {
     "defaultMessage": "Coming Soon...",
     "description": "Class Page"
+  },
+  "oQ892Z": {
+    "defaultMessage": "HackerKid Trial Edition",
+    "description": "HackerKid Trial Edition title"
   },
   "oQwd5t": {
     "defaultMessage": "Create Club",
@@ -1904,6 +2238,10 @@
   "pHE0Mj": {
     "defaultMessage": "Join with link",
     "description": "join tab"
+  },
+  "pQ0m8t": {
+    "defaultMessage": "watched this",
+    "description": "watched this"
   },
   "pVCbSK": {
     "defaultMessage": "Instructions",
@@ -2003,6 +2341,14 @@
     "defaultMessage": "Phone",
     "description": "Phone label"
   },
+  "quf4Ng": {
+    "defaultMessage": "{tag}",
+    "description": "Course Title"
+  },
+  "qx2FMG": {
+    "defaultMessage": "{type}",
+    "description": "video Type"
+  },
   "r1CvRM": {
     "defaultMessage": "Additional Inputs",
     "description": "Input tab"
@@ -2035,6 +2381,10 @@
     "defaultMessage": "Logout",
     "description": "Logout Button"
   },
+  "sPyRtG": {
+    "defaultMessage": "Awards & Badges",
+    "description": "Awards & Badges"
+  },
   "sXlZLv": {
     "defaultMessage": "Levels",
     "description": "Game Level"
@@ -2043,13 +2393,29 @@
     "defaultMessage": "{xp} xp",
     "description": "club xp"
   },
+  "ssTFur": {
+    "defaultMessage": "HackerKid also offer exclusive courses on various pedagogies like Web Development, App Development, Game Development & Data Science. We have an elite team of teacher to guide with your learning process. We have team that can answer all your queries before you decide enroll with us. Go on tell your parent right now, What are you waiting for?",
+    "description": "HackerKid Exclusive Courses description"
+  },
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
   },
+  "t32bf0": {
+    "defaultMessage": "{type}",
+    "description": "video type"
+  },
   "t5hBAx": {
     "defaultMessage": "Output will be shown here",
     "description": "output box placeholder text"
+  },
+  "tAiFjx": {
+    "defaultMessage": "Challenges",
+    "description": "Games title"
+  },
+  "tNUcfD": {
+    "defaultMessage": "HackerKid Premium gives you full access to the platform features for a 1 year subscription. With exciting coding games, problems, gamified environments you have a lot you explore, play and learn,",
+    "description": "Pricing Plans card discription"
   },
   "tbPLF3": {
     "defaultMessage": "{step}",
@@ -2127,9 +2493,16 @@
     "defaultMessage": "Show Leaderboard",
     "description": "Leaderboard show button"
   },
+  "vWe94i": {
+    "defaultMessage": "More Info"
+  },
   "vY562d": {
     "defaultMessage": "Try the new in-built IDE",
     "description": "more card title"
+  },
+  "vYViQu": {
+    "defaultMessage": "Filter",
+    "description": "Filter"
   },
   "viQX0N": {
     "defaultMessage": "Turtle",
@@ -2146,6 +2519,10 @@
   "wdqhVV": {
     "defaultMessage": "Create club",
     "description": "Create a club button"
+  },
+  "wg10ST": {
+    "defaultMessage": "Limited",
+    "description": "Limited"
   },
   "wn7GwB": {
     "defaultMessage": "{description}",
@@ -2175,6 +2552,10 @@
     "defaultMessage": "{swiperHeading}",
     "description": "Challenges card heading"
   },
+  "xQMQmR": {
+    "defaultMessage": "Webkata JS",
+    "description": "Limited (5 Problems) list"
+  },
   "xT1NKB": {
     "defaultMessage": "Games",
     "description": "games nav text"
@@ -2187,6 +2568,10 @@
     "defaultMessage": "{level}",
     "description": "Level Button"
   },
+  "xaMIfH": {
+    "defaultMessage": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit dolor venenatis eget laoreet ultrices ut tortor proin viverra.",
+    "description": "Pricing Plans discription"
+  },
   "xlvJ5U": {
     "defaultMessage": "You are offline.",
     "description": "offline message"
@@ -2195,6 +2580,10 @@
     "defaultMessage": "Register for free",
     "description": "register button"
   },
+  "y00DRu": {
+    "defaultMessage": "{count}",
+    "description": "Watched Count"
+  },
   "yCTEJz": {
     "defaultMessage": "{hintMessage}",
     "description": "Hint message"
@@ -2202,6 +2591,10 @@
   "ySOrrv": {
     "defaultMessage": "No feed to show",
     "description": "No feed to show"
+  },
+  "yTBe/3": {
+    "defaultMessage": "(Early Bird Offer)",
+    "description": "Early Bird Offer"
   },
   "ya4qNs": {
     "defaultMessage": "{totalEarnedCoins}",
@@ -2230,6 +2623,10 @@
   "z4ekJP": {
     "defaultMessage": "{earnedCoins}",
     "description": "earned coins"
+  },
+  "z5PGTz": {
+    "defaultMessage": "Videos",
+    "description": "Games title"
   },
   "z9lFwl": {
     "defaultMessage": "Name",
@@ -2268,5 +2665,9 @@
   },
   "zombieLand title": {
     "defaultMessage": "ZombieLand"
+  },
+  "zrZhCC": {
+    "defaultMessage": "More Info",
+    "description": "More Info title"
   }
 }

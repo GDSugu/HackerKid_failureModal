@@ -1,9 +1,9 @@
-@use '../../sass/themes/_default' as gt;
-@use '../../sass/base/_mixins' as gm;
-@use '../../sass/components/gameNavBar';
-@use '../../sass/components/loading';
+@use "../../sass/themes/_default" as gt;
+@use "../../sass/base/_mixins" as gm;
+@use "../../sass/components/gameNavBar";
+@use "../../sass/components/loading";
 
-@import '_codekataTheme.js';
+@import "_codekataTheme.js";
 
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 
@@ -1031,7 +1031,7 @@
   .left-cont {
     display: flex;
     flex-direction: column;
-    
+
     .input-container {
       flex: 1;
 
@@ -1040,8 +1040,6 @@
       }
     }
   }
-
-  
 
   .code-container {
     height: 65vh;
@@ -1129,17 +1127,16 @@
       .sample-input,
       .sample-output {
         margin: 1.5rem 0;
-  
+
         p {
           margin-bottom: 0;
-  
+
           &:first-child {
             margin-bottom: 0.125rem;
           }
         }
       }
     }
-
   }
 
   .game-mob-container {
