@@ -16,6 +16,7 @@ import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
 import 'ace-builds/src-noconflict/ext-language_tools';
 import { getSession, setSession } from '../../../../hooks/common/framework';
+import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
 
 const resizeHandler = (nav = 'nav', selector) => {
   try {
@@ -267,7 +268,7 @@ const CodekataDesktopContainer = ({
     setInput(editorCode);
     codeRun(reqData).then((res) => {
       if (device === 'desktop') {
-        $('.collapse').collapse();
+        $('#problem-cont').collapse('hide');
       } else {
         $('.outputModal').modal('show');
         $('#output-tab').tab('show');
@@ -401,7 +402,7 @@ const CodekataDesktopContainer = ({
   return <>
       {
         device === 'desktop' ? (
-        <div className="container-fluid pt-3 px-3 pb-2">
+        <div className="codekata-game-container container-fluid pt-3 px-3 pb-2">
           <div className="row">
             <div className="col-6 px-2 left-cont">
               <div className="code-container">
@@ -467,7 +468,7 @@ const CodekataDesktopContainer = ({
             <div className="col-6 px-2 right-cont">
               <div className="problem-statment-cont">
                 <div
-                  className="d-flex justify-content-between align-items-center"
+                  className="d-flex justify-content-between align-items-center problem-collapse-head"
                   data-toggle="collapse"
                   data-target="#problem-cont"
                   aria-expanded="true"
@@ -927,6 +928,7 @@ const CodekataGameComponent = () => {
     state: { device },
   } = useRootPageState();
   const levelComponentRef = useRef();
+  const leaderboardComponentRef = useRef(null);
   const isPageMounted = useRef(true);
   const { id } = useParams();
   const {
@@ -951,6 +953,31 @@ const CodekataGameComponent = () => {
     });
   };
 
+  const toggleCodeKata = (action = 'show' || 'hide') => {
+    if (action === 'show') {
+      $('.codekata-game-container').slideDown();
+      $('.level-navbar').slideDown({
+        complete: () => {
+          $('.level-navbar').css('display', 'flex');
+        },
+      });
+      $('.game-mob-container').slideDown();
+      $('.leaderboard-btn').removeClass('active');
+    } else if (action === 'hide') {
+      $('.codekata-game-container').slideUp();
+      $('.game-mob-container').slideUp({
+        complete: () => {
+          $('.level-navbar').slideUp();
+        },
+      });
+      $('.leaderboard-btn').addClass('active');
+    }
+  };
+
+  const onLeaderboardBtnClick = () => {
+    leaderboardComponentRef.current.toggle();
+  };
+
   const showLevel = () => levelComponentRef.current.show();
   const { questionList, questionObject } = codekataData;
 
@@ -966,19 +993,21 @@ const CodekataGameComponent = () => {
 
   return (
     <>
-      <div className="codekata-game-container">
+      <div className="codekata-main-container">
         <GameNavBar
           forCodekata={true}
           questionState={codekataData}
           levelBtnHandler={showLevel}
+          isGameMainPage={true}
+          leaderboardHandler={onLeaderboardBtnClick}
         />
         {questionList && questionObject && (
           <GameLevelComponent
-            ref={levelComponentRef}
-            gameData={codekataData}
-            forCodekata={true}
-            handleFetchQuestion={handleFetchQuestion}
-          />
+          game={'codekata'}
+          ref={levelComponentRef}
+          handleFetchQuestion={handleFetchQuestion}
+          gameData={codekataData}
+        />
         )}
         <CodekataDesktopContainer
           languages={availableLanguages}
@@ -992,6 +1021,11 @@ const CodekataGameComponent = () => {
         />
       </div>
       <div id="loader"></div>
+      <GameLeaderboardComponent
+      ref={leaderboardComponentRef}
+      game={'codekata'}
+      beforeShown={() => { toggleCodeKata('hide'); }}
+      beforeHidden={() => { toggleCodeKata('show'); }} />
     </>
   );
 };

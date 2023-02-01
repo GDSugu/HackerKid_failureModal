@@ -108,11 +108,13 @@
           background: url(../../../../../images/games/level_completed.png) no-repeat center / contain;
         }
 
+        &.current,
         &.current-question,
         &.open {
           background: url(../../../../../images/games/level_current.png) no-repeat center / contain;
         }
 
+        &.current,
         &.current-question {
           transform: scale(1.25);
         }
