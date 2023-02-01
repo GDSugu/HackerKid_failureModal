@@ -37,8 +37,15 @@ const AwardInfo = ({
             }} />
           </h6>
           {
+            isDesktop && <small className='award-subtitle overline'>
+              <FormattedMessage defaultMessage={'{awardDescription}'} description='award description' values={{
+                awardDescription: currentAwardDetails.awardDescription,
+              }} />
+            </small>
+          }
+          {
             currentAwardDetails.progressableAward && currentAwardDetails.progressDetails.nextAwardIn
-            && <small className='award-subtitle overline'>
+            && <small className='award-subtitle overline next-achievement-subtitle'>
               <FormattedMessage defaultMessage={'Next Achievement: {nextAchievementIn} {unit}'} description='award subtitle' values={{
                 nextAchievementIn: currentAwardDetails.progressDetails.nextAwardIn,
                 unit: currentAwardDetails.progressDetails.nextAwardIn > 1 ? `${currentAwardDetails.progressDetails.unit}s`
@@ -64,6 +71,13 @@ const AwardInfo = ({
               awardCount: award.awardCount ? `(x${award.awardCount})` : '',
             }} />
           </h6>
+          {
+            isDesktop && <small className='award-subtitle overline'>
+              <FormattedMessage defaultMessage={'{awardDescription}'} description='award description' values={{
+                awardDescription: currentAwardDetails.awardDescription,
+              }} />
+            </small>
+          }
           <AwardsProgressBar progressDetailsObj={award.progressDetails} />
         </div>
       </div>)

@@ -1209,6 +1209,10 @@
     "defaultMessage": "Grade",
     "description": "Profile grade label"
   },
+  "RE7c5M": {
+    "defaultMessage": "{awardName}",
+    "description": "award name label"
+  },
   "REPA3X": {
     "defaultMessage": "Join your friends in the club",
     "description": "More card Subtitle"
@@ -1673,6 +1677,10 @@
     "defaultMessage": "Try Now",
     "description": "More card button text"
   },
+  "dxFMuV": {
+    "defaultMessage": "Most active members:",
+    "description": "active members title"
+  },
   "e5Eaen": {
     "defaultMessage": "Profile updated successfully",
     "description": "success modal"
@@ -1718,6 +1726,10 @@
   "fkpavG": {
     "defaultMessage": "Games",
     "description": "Games page heading"
+  },
+  "fodvBp": {
+    "defaultMessage": "View Club",
+    "description": "View club button"
   },
   "fr893W": {
     "defaultMessage": "{validSubmissions}",
@@ -1869,6 +1881,10 @@
   },
   "kKheEw": {
     "defaultMessage": "{question}"
+  },
+  "keQJEv": {
+    "defaultMessage": "{clubName}",
+    "description": "Club name heading"
   },
   "kloO3Z": {
     "defaultMessage": "Advanced Options",

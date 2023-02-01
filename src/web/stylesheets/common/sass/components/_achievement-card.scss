@@ -15,6 +15,15 @@
 
   &.award-card {
     background-color: gt.theme-var(more-award-card-bg, null, $thememaplight, $cssvars);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+
+    .award-name {
+      text-align: center;
+    }
   }
 
   &.collectible-card {

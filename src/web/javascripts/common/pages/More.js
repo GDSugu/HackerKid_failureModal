@@ -13,8 +13,9 @@ import { useProfileInfo } from '../../../../hooks/pages/profile';
 import AwardCard from '../components/AwardsCard';
 // import CollectibleCard from '../components/CollectibleCard';
 import { useAwards } from '../../../../hooks/pages/awards';
+import { copyHandler } from '../Functions/turtle';
 
-const Certificates = ({ gameDetails }) => {
+const Certificates = ({ gameDetails, onCertificateShareBtnClick = () => { } }) => {
   const certificateDataObj = gameDetails?.[0].certificateData;
   const certificatesArr = certificateDataObj && Object.values(certificateDataObj).slice(0, 3);
 
@@ -35,7 +36,7 @@ const Certificates = ({ gameDetails }) => {
             certificateName: certificate.certificateName,
           }}
         />
-        <button type='button' className='share-btn'>
+        <button type='button' className='share-btn' onClick={() => onCertificateShareBtnClick(certificate.certificateId)}>
           <img src='../../../../images/common/black-share-icon.svg' className='share-icon' alt='list-icon' />
         </button>
       </li>)
@@ -305,6 +306,7 @@ const CollectionsModalComponent = ({
   // collectibles,
   isDesktop,
   session,
+  onCertificateShareBtnClick,
 }) => <>
     <div className='col-12 col-md-10 mx-auto'>
       {
@@ -341,7 +343,7 @@ const CollectionsModalComponent = ({
           }
         </div>
         <div className="collection-content">
-          <Certificates gameDetails={gameDetails} />
+          <Certificates gameDetails={gameDetails} onCertificateShareBtnClick={onCertificateShareBtnClick} />
           {
             !isDesktop && gameDetails && Object.keys(gameDetails[0].certificateData).length > 0
             && <Link to={'/certificates'} type='button' className='btn btn-primary btn-block body-bold view-more-btn'>
@@ -442,6 +444,7 @@ const More = () => {
 
   const collectionRef = React.useRef();
   const logoutModalRef = React.useRef();
+  const shareCertificateModalRef = React.useRef();
 
   // const toggleModal = () => setCollectionModalVisibile(!collectionModalVisibile);
   const toggleModal = () => collectionRef.current.show();
@@ -474,6 +477,12 @@ const More = () => {
   React.useEffect(() => {
     getAwards({ cached: false, limit: 3, sort: 'posted' });
   }, []);
+
+  const onCertificateShareBtnClick = (certificateId) => {
+    collectionRef.current.hide();
+    $('.copy-link-input').val(`${window.location.origin}/certificate/view/${certificateId}`);
+    shareCertificateModalRef.current.show();
+  };
 
   return <>
     <div className='col-12 col-md-11 col-xl-10 mx-auto'>
@@ -524,7 +533,41 @@ const More = () => {
         awards={awards}
         collectibles={[]}
         isDesktop={isDesktop}
+        onCertificateShareBtnClick={onCertificateShareBtnClick}
       />
+    </Modal>
+    <Modal
+      ref={shareCertificateModalRef}
+      modalClass={'share-certificate-modal'}
+      customClass={'curved'}
+      options={'hide'}>
+      <div className='share-content'>
+        <div className='content-header'>
+          <h5>
+            <FormattedMessage
+              defaultMessage={'Share'}
+              description={'Share message'}
+            />
+          </h5>
+        </div>
+        <div className="col-11 col-md-10 btn-container">
+          <div className="form-group col">
+            <input
+              type="text"
+              className="form-control copy-link-input"
+              name="shareLink" id="shareLink"
+              aria-describedby="helpId"
+              placeholder="share link"
+              readOnly />
+          </div>
+          <button className='btn btn-outline-primary' onClick={copyHandler} >
+            <FormattedMessage
+              defaultMessage={'Copy Link'}
+              description={'Copy Link button'}
+            />
+          </button>
+        </div>
+      </div>
     </Modal>
     <HelpModal />
   </>;
