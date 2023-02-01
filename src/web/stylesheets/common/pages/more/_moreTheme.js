@@ -26,6 +26,7 @@ const thememaplight = {
   'more-common-gradient-color-2': Yellow.color600,
   'more-rare-gradient-color-1': Purple.color900,
   'more-rare-gradient-color-2': Purple.color500,
+  'more-controls-border-color': Yellow.color400,
 };
 // just copied the light theme colors to the dark for now
 // TODO: make this a real dark theme with appropriate colors
@@ -47,6 +48,7 @@ const thememapdark = {
   'more-common-gradient-color-2': Yellow.color600,
   'more-rare-gradient-color-1': Purple.color900,
   'more-rare-gradient-color-2': Purple.color500,
+  'more-controls-border-color': Yellow.color400,
 };
 
 const cssvars = {
@@ -67,6 +69,7 @@ const cssvars = {
   'more-common-gradient-color-2': '--more-collectible-gradient-color-2',
   'more-rare-gradient-color-1': '--more-rare-gradient-color-1',
   'more-rare-gradient-color-2': '--more-rare-gradient-color-2',
+  'more-controls-border-color': '--more-controls-border-color',
 };
 
 module.exports = {
