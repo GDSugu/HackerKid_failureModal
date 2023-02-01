@@ -343,7 +343,8 @@ const CollectionsModalComponent = ({
           }
         </div>
         <div className="collection-content">
-          <Certificates gameDetails={gameDetails} onCertificateShareBtnClick={onCertificateShareBtnClick} />
+          <Certificates gameDetails={gameDetails}
+          onCertificateShareBtnClick={onCertificateShareBtnClick} />
           {
             !isDesktop && gameDetails && Object.keys(gameDetails[0].certificateData).length > 0
             && <Link to={'/certificates'} type='button' className='btn btn-primary btn-block body-bold view-more-btn'>

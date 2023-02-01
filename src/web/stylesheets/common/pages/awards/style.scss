@@ -91,7 +91,6 @@
 
         .dropdown-item-container {
           .ascending-descending-selectors {
-
             button:active,
             button.active {
               background-color: gt.theme-var(awards-body-bg, null, $thememaplight, $cssvars);
@@ -161,7 +160,7 @@
     @include gm.box-shadow();
   }
 
-  .award-card:hover+.award-info-container {
+  .award-card:hover + .award-info-container {
     visibility: visible;
   }
 
