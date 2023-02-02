@@ -6,7 +6,7 @@ import MoreAccountNavBar from '../components/MoreAccountNavBar';
 import SortDropdown from '../components/SortDropdown_new';
 import SearchBox from '../components/SearchBox';
 import { useAwards } from '../../../../hooks/pages/awards';
-import MobileAwardsNavBar from '../components/MobileAwardsNavBar';
+// import MobileAwardsNavBar from '../components/MobileAwardsNavBar';
 import BottomSheet from '../components/BottomSheet';
 import AwardsGrid from '../components/AwardsGrid';
 import AwardsMobileList from '../components/AwardsMobileList';
