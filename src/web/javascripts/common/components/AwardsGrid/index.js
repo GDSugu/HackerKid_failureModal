@@ -35,7 +35,6 @@ const AwardsGrid = ({
                 : award.repeatingAwards[0].awardId)
               : award.awardId}`} />
           <AwardInfo
-            isDesktop={isDesktop}
             className={`award-info-container-${defaultStructure
               ? (award.currentAward
                 ? award.currentAward.awardId

@@ -4,7 +4,6 @@ import AwardInfo from '../AwardsInfo';
 
 const AwardsMobileList = ({
   awards,
-  isDesktop,
   onAwardsInfoClick = () => { },
   limit,
   totalAwards,
@@ -15,7 +14,7 @@ const AwardsMobileList = ({
     {
       awards && awards.map((award, idx) => <AwardInfo
         key={idx}
-        isDesktop={isDesktop}
+        showAwardDescription={false}
         currentAwardDetails={defaultStructure ? award.currentAward : award}
         repeatingAwards={award.repeatingAwards ? award.repeatingAwards : false}
         onClick={onAwardsInfoClick}

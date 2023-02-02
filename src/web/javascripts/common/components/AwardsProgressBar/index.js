@@ -56,7 +56,7 @@ const AwardsProgressBar = ({
     <div className='progress' style={{ width: progressDetailsObj ? `${(progressDetailsObj.progress / progressDetailsObj.total) * 100}%` : '100%' }
     }>
       {
-        progressDetailsObj && progressDetailsObj.progress
+        progressDetailsObj && !!progressDetailsObj.progress
         && <div className='progress-textual-indicator'>
           <span className='progress-as-text'>
             <FormattedMessage

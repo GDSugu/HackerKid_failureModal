@@ -354,7 +354,7 @@ const Awards = () => {
 
   return <>
     <MoreAccountNavBar />
-    <MobileAwardsNavBar className='mx-3' />
+    {/* <MobileAwardsNavBar className='mx-3' /> */}
     <main className='col-12 col-sm-10 col-md-8 col-xl-6 mx-auto mt-3'>
       {
         (status === 'success') && <div className='controls'>
