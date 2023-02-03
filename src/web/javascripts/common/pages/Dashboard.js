@@ -51,15 +51,15 @@ const HeroContainer = ({ dashboardUserData, isDesktop, session }) => {
           style={(session.profileLink || dashboardUserData.profileImage)
             ? { backgroundImage: `url(${profileImg})` }
             : {}
-        }></div>
-        { isDesktop
+          }></div>
+        {isDesktop
           && <>
-              <div className="hero-card-data-content">
-                <div className="hero-data">
-                  <Img src='common/hkcoin.png' />
-                  <p className='mb-0'>{`${session.pointsEarned || 0} coins`}</p>
-                </div>
-                {/* <div className="hero-data">
+            <div className="hero-card-data-content">
+              <div className="hero-data">
+                <Img src='common/hkcoin.png' />
+                <p className='mb-0'>{`${session.pointsEarned || 0} coins`}</p>
+              </div>
+              {/* <div className="hero-data">
                   <Img src='common/xp.png' />
                   <p className='mb-0'>
                     <FormattedMessage
@@ -68,57 +68,57 @@ const HeroContainer = ({ dashboardUserData, isDesktop, session }) => {
                     />
                   </p>
                 </div> */}
-              </div>
-            </> }
+            </div>
+          </>}
       </div>
       <div className="hero-card-nav col-6 col-sm-8">
-        { isDesktop
-        && <>
-        <div className="hero-nav-container">
-          <Link to='/games' className='hero-nav-link nav-game-card col' >
-            <div className="hero-nav-card">
-              <div className="hero-nav-card-content">
-                <div className="hero-nav-icon">
-                  <svg width="24" height="24" stroke="white" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9 15L6.032 17.968C5.70167 18.2983 5.28084 18.5232 4.8227 18.6143C4.36457 18.7054 3.88971 18.6586 3.45815 18.4799C3.0266 18.3011 2.65773 17.9984 2.39819 17.6101C2.13864 17.2217 2.00007 16.7651 2 16.298V15L3.357 8.216C3.53824 7.30922 4.02806 6.49325 4.74312 5.90691C5.45817 5.32058 6.35429 5.0001 7.279 5H16.721C17.6457 5.0001 18.5418 5.32058 19.2569 5.90691C19.9719 6.49325 20.4618 7.30922 20.643 8.216L22 15V16.297C21.9999 16.7641 21.8614 17.2207 21.6018 17.6091C21.3423 17.9974 20.9734 18.3001 20.5418 18.4789C20.1103 18.6576 19.6354 18.7044 19.1773 18.6133C18.7192 18.5222 18.2983 18.2973 17.968 17.967L15 15H9Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M9 5L10 7H14L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+        {isDesktop
+          && <>
+            <div className="hero-nav-container">
+              <Link to='/games' className='hero-nav-link nav-game-card col' >
+                <div className="hero-nav-card">
+                  <div className="hero-nav-card-content">
+                    <div className="hero-nav-icon">
+                      <svg width="24" height="24" stroke="white" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 15L6.032 17.968C5.70167 18.2983 5.28084 18.5232 4.8227 18.6143C4.36457 18.7054 3.88971 18.6586 3.45815 18.4799C3.0266 18.3011 2.65773 17.9984 2.39819 17.6101C2.13864 17.2217 2.00007 16.7651 2 16.298V15L3.357 8.216C3.53824 7.30922 4.02806 6.49325 4.74312 5.90691C5.45817 5.32058 6.35429 5.0001 7.279 5H16.721C17.6457 5.0001 18.5418 5.32058 19.2569 5.90691C19.9719 6.49325 20.4618 7.30922 20.643 8.216L22 15V16.297C21.9999 16.7641 21.8614 17.2207 21.6018 17.6091C21.3423 17.9974 20.9734 18.3001 20.5418 18.4789C20.1103 18.6576 19.6354 18.7044 19.1773 18.6133C18.7192 18.5222 18.2983 18.2973 17.968 17.967L15 15H9Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M9 5L10 7H14L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                    <div className="hero-nav-title">
+                      <h3 className='mb-0'>
+                        <FormattedMessage
+                          defaultMessage={'Games'}
+                          description={'games nav text'}
+                        />
+                      </h3>
+                    </div>
+                  </div>
                 </div>
-                <div className="hero-nav-title">
-                  <h3 className='mb-0'>
-                    <FormattedMessage
-                      defaultMessage={'Games'}
-                      description={'games nav text'}
-                    />
-                  </h3>
+              </Link>
+              <Link to='/courses' className='hero-nav-link nav-course-card col' >
+                <div className="hero-nav-card">
+                  <div className="hero-nav-card-content">
+                    <div className="hero-nav-icon">
+                      <svg width="24" height="24" viewBox="24 24 24 24" fill="none" stroke="white" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M41 26L36 31L31 26M28 31H44C45.1046 31 46 31.8954 46 33V44C46 45.1046 45.1046 46 44 46H28C26.8954 46 26 45.1046 26 44V33C26 31.8954 26.8954 31 28 31Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                    <div className="hero-nav-title">
+                      <h3 className='mb-0'>
+                        <FormattedMessage
+                          defaultMessage={'Videos'}
+                          description={'videos nav text'}
+                        />
+                      </h3>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </Link>
-          <Link to='/courses' className='hero-nav-link nav-course-card col' >
-            <div className="hero-nav-card">
-              <div className="hero-nav-card-content">
-                <div className="hero-nav-icon">
-                  <svg width="24" height="24" viewBox="24 24 24 24" fill="none" stroke="white" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M41 26L36 31L31 26M28 31H44C45.1046 31 46 31.8954 46 33V44C46 45.1046 45.1046 46 44 46H28C26.8954 46 26 45.1046 26 44V33C26 31.8954 26.8954 31 28 31Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-                <div className="hero-nav-title">
-                  <h3 className='mb-0'>
-                    <FormattedMessage
-                      defaultMessage={'Videos'}
-                      description={'videos nav text'}
-                    />
-                  </h3>
-                </div>
-              </div>
-            </div>
-          </Link>
-          <Link to='/challenges' className='hero-nav-link nav-challenge-card col' >
-            <div className="hero-nav-card">
-              <div className="hero-nav-card-content">
-                <div className="hero-nav-icon">
-                  {/* <svg width="32" height="40" viewBox="0 0 32 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              </Link>
+              <Link to='/challenges' className='hero-nav-link nav-challenge-card col' >
+                <div className="hero-nav-card">
+                  <div className="hero-nav-card-content">
+                    <div className="hero-nav-icon">
+                      {/* <svg width="32" height="40" viewBox="0 0 32 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M26.5 0C27.2223 0 27.9375 0.142262 28.6048
                       0.418663C29.2721 0.695063 29.8784 1.10019 30.3891
@@ -139,32 +139,32 @@ const HeroContainer = ({ dashboardUserData, isDesktop, session }) => {
                       12.1L17.002 14.048V3H17Z" fill="white" />
                   </svg> */}
 
-                <svg width="24" height="24" viewBox="24 24 24 24" fill="none" stroke="#ffffff" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M36 26L39.09 32.26L46 33.27L41 38.14L42.18 45.02L36 41.77L29.82 45.02L31 38.14L26 33.27L32.91 32.26L36 26Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                      <svg width="24" height="24" viewBox="24 24 24 24" fill="none" stroke="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M36 26L39.09 32.26L46 33.27L41 38.14L42.18 45.02L36 41.77L29.82 45.02L31 38.14L26 33.27L32.91 32.26L36 26Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
 
+                    </div>
+                    <div className="hero-nav-title">
+                      <h3 className='mb-0'>
+                        <FormattedMessage
+                          defaultMessage={'Challenges'}
+                          description={'challenges nav text'}
+                        />
+                      </h3>
+                    </div>
+                  </div>
                 </div>
-                <div className="hero-nav-title">
-                  <h3 className='mb-0'>
-                    <FormattedMessage
-                      defaultMessage={'Challenges'}
-                      description={'challenges nav text'}
-                    />
-                  </h3>
-                </div>
+              </Link>
+            </div>
+          </>}
+        {!isDesktop
+          && <>
+            <div className="hero-data-content">
+              <div className="hero-data">
+                <Img src='common/hkcoin.png' />
+                <p className='mb-0'>{`${session.pointsEarned || '0'} coins`}</p>
               </div>
-            </div>
-          </Link>
-        </div>
-        </> }
-        { !isDesktop
-        && <>
-          <div className="hero-data-content">
-            <div className="hero-data">
-              <Img src='common/hkcoin.png' />
-              <p className='mb-0'>{`${session.pointsEarned || '0'} coins`}</p>
-            </div>
-            {/* <div className="hero-data">
+              {/* <div className="hero-data">
               <Img src='common/xp.png' />
               <p className='mb-0'>
                 <FormattedMessage
@@ -173,11 +173,11 @@ const HeroContainer = ({ dashboardUserData, isDesktop, session }) => {
                 />
               </p>
             </div> */}
-            <div className="dashboard-hero-sheet-btn">
-              <button className='btn btn-block sheet-btn disabled' onClick={showBottomSheet}>Loading...</button>
+              <div className="dashboard-hero-sheet-btn">
+                <button className='btn btn-block sheet-btn disabled' onClick={showBottomSheet}>Loading...</button>
+              </div>
             </div>
-          </div>
-        </> }
+          </>}
       </div>
     </div>
   </>;
@@ -189,65 +189,65 @@ const ProfileContainer = ({ dashboardUserData, isDesktop, session }) => <>
       {
         isDesktop
         && <div className="d-flex align-items-center">
-        <p className="block-heading">
-          <FormattedMessage
-            defaultMessage={'Profile'}
-            description={'profile heading'}
-          />
-        </p>
-        <Link className="profile-heading-menu" to={'/profile/edit'}>
-          <p>
+          <p className="block-heading">
             <FormattedMessage
-              defaultMessage={'Edit'}
-              description={'edit profile'}
+              defaultMessage={'Profile'}
+              description={'profile heading'}
             />
           </p>
-        </Link>
-      </div>
+          <Link className="profile-heading-menu" to={'/profile/edit'}>
+            <p>
+              <FormattedMessage
+                defaultMessage={'Edit'}
+                description={'edit profile'}
+              />
+            </p>
+          </Link>
+        </div>
       }
       {
         !isDesktop
         && <div className="d-flex align-items-center justify-content-between">
-        <p className="block-heading">
-          <FormattedMessage
-            defaultMessage={'Home'}
-            description={'home heading'}
-          />
-        </p>
-        <Link className="profile-heading-menu" to={'/profile/edit'}>
-          <p>
+          <p className="block-heading">
             <FormattedMessage
-              defaultMessage={'Edit Profile'}
-              description={'edit profile'}
+              defaultMessage={'Home'}
+              description={'home heading'}
             />
           </p>
-        </Link>
-      </div>
+          <Link className="profile-heading-menu" to={'/profile/edit'}>
+            <p>
+              <FormattedMessage
+                defaultMessage={'Edit Profile'}
+                description={'edit profile'}
+              />
+            </p>
+          </Link>
+        </div>
       }
     </div>
     {
       dashboardUserData
       && <>
-      <div className="profile-content card card-block">
-        <p className="profile-content-heading">{session.name ? session.name : dashboardUserData.name || 0}</p>
-        {
-          dashboardUserData?.about
-          && <>
-           <p>{dashboardUserData.about}</p>
-          </>
-        }
-        {
-          !dashboardUserData?.about
-          && <>
-            <p className='text-secondary font-italic'>
-              <FormattedMessage
-                defaultMessage={'Your bio will be shown here'}
-              />
-            </p>
-          </>
-        }
-        {/* <p>{ session.about ? session.about : dashboardUserData.about || '--'}</p> */}
-      </div>
+        <div className="profile-content card card-block">
+          <p className="profile-content-heading">{session.name ? session.name : dashboardUserData.name || 0}</p>
+          {
+            dashboardUserData?.about
+            && <>
+              <p>{dashboardUserData.about}</p>
+            </>
+          }
+          {
+            !dashboardUserData?.about
+            && <>
+              <p className='text-secondary font-italic'>
+                <FormattedMessage
+                  defaultMessage={'Your bio will be shown here'}
+                />
+              </p>
+            </>
+          }
+          {/* <p>{ session.about ? session.about : dashboardUserData.about || '--'}</p> */}
+        </div>
       </>
     }
     {
@@ -264,68 +264,68 @@ const ProfileContainer = ({ dashboardUserData, isDesktop, session }) => <>
 const GameContainer = ({
   dashboardUserData, overAllQuestionsCount, totalPointsEarned, validSubmissionsCount,
 }) => <>
-  <div className="dashboard-games-container dashboard-body-block">
-    <div className="games-heading-container">
-      <p className="block-heading">
-        <FormattedMessage
-          defaultMessage={'Game Progress'}
-          description={'game progress heading'}
-        />
-      </p>
-    </div>
-    <div className="games-content card card-block">
-      <div className="row">
-        <div className="col-12 col-md-6 game-progress-block">
-        {
-          dashboardUserData
-          && <>
-            <div className="progress-container card card-block h-100">
-              <div className="col-6 px-0">
-                <div className="circle-progress">
-                  <svg xmlns="http://www.w3.org/2000/svg" id="yourScoreAnimated" viewBox="0 0 100 100">
-                    <linearGradient id="gradient">
-                      <stop offset="0%" className="start" />
-                      <stop offset="90%" className="end" />
-                    </linearGradient>
-                    <path id="yourScoreProgress" strokeLinecap="round" strokeWidth="6" strokeDasharray="140, 251.2" className="progress-bar"
-                        d="M50 10
+    <div className="dashboard-games-container dashboard-body-block">
+      <div className="games-heading-container">
+        <p className="block-heading">
+          <FormattedMessage
+            defaultMessage={'Game Progress'}
+            description={'game progress heading'}
+          />
+        </p>
+      </div>
+      <div className="games-content card card-block">
+        <div className="row">
+          <div className="col-12 col-md-6 game-progress-block">
+            {
+              dashboardUserData
+              && <>
+                <div className="progress-container card card-block h-100">
+                  <div className="col-6 px-0">
+                    <div className="circle-progress">
+                      <svg xmlns="http://www.w3.org/2000/svg" id="yourScoreAnimated" viewBox="0 0 100 100">
+                        <linearGradient id="gradient">
+                          <stop offset="0%" className="start" />
+                          <stop offset="90%" className="end" />
+                        </linearGradient>
+                        <path id="yourScoreProgress" strokeLinecap="round" strokeWidth="6" strokeDasharray="140, 251.2" className="progress-bar"
+                          d="M50 10
                             a 40 40 0 0 1 0 80
                             a 40 40 0 0 1 0 -80">
-                    </path>
-                    <g transform="translate(50,45)">
-                      <text id="yourScoreCount" x="0" y="0" alignmentBaseline="middle" textAnchor="middle" dy="1" fontSize="14">
-                        <tspan>{validSubmissionsCount}</tspan>
-                        <tspan>/{overAllQuestionsCount}</tspan>
-                      </text>
-                      <text id="yourScore" x="0" y="15" alignmentBaseline="middle" textAnchor="middle" dy="1" fontSize="10">
-                        <FormattedMessage
-                          defaultMessage={'completed'}
-                          description={'completed'}
-                        />
-                      </text>
-                    </g>
-                  </svg>
-                </div>
-              </div>
-              <div className="col-6 px-0">
-                <div className="game-progress-data">
-                  <div className="game-data-container game-coins-data">
-                    <div className="d-flex align-items-center">
-                      <div className="game-progress-icon game-coins">
-                        <Img src='common/hkcoin.png' />
-                      </div>
-                      <div className="progress-coins">
-                        <p className="progress-sub-header">
-                          <FormattedMessage
-                            defaultMessage={'Coins Earned:'}
-                            description={'coins earned'}
-                          />
-                        </p>
-                        <p className="progress-data">{totalPointsEarned || 0}</p>
-                      </div>
+                        </path>
+                        <g transform="translate(50,45)">
+                          <text id="yourScoreCount" x="0" y="0" alignmentBaseline="middle" textAnchor="middle" dy="1" fontSize="14">
+                            <tspan>{validSubmissionsCount}</tspan>
+                            <tspan>/{overAllQuestionsCount}</tspan>
+                          </text>
+                          <text id="yourScore" x="0" y="15" alignmentBaseline="middle" textAnchor="middle" dy="1" fontSize="10">
+                            <FormattedMessage
+                              defaultMessage={'completed'}
+                              description={'completed'}
+                            />
+                          </text>
+                        </g>
+                      </svg>
                     </div>
                   </div>
-                  {/* <div className="game-data-container game-time-data">
+                  <div className="col-6 px-0">
+                    <div className="game-progress-data">
+                      <div className="game-data-container game-coins-data">
+                        <div className="d-flex align-items-center">
+                          <div className="game-progress-icon game-coins">
+                            <Img src='common/hkcoin.png' />
+                          </div>
+                          <div className="progress-coins">
+                            <p className="progress-sub-header">
+                              <FormattedMessage
+                                defaultMessage={'Coins Earned:'}
+                                description={'coins earned'}
+                              />
+                            </p>
+                            <p className="progress-data">{totalPointsEarned || 0}</p>
+                          </div>
+                        </div>
+                      </div>
+                      {/* <div className="game-data-container game-time-data">
                     <div className="d-flex align-items-center">
                       <div className="game-progress-icon game-time">
                         <Img src='common/eva_clock-fill.png' />
@@ -341,12 +341,12 @@ const GameContainer = ({
                       </div>
                     </div>
                   </div> */}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </>
-          }
-          {
+              </>
+            }
+            {
               !dashboardUserData
               && <>
                 <div className="skeleton">
@@ -354,57 +354,57 @@ const GameContainer = ({
                 </div>
               </>
             }
-        </div>
-        <div className="col-12 col-md-6">
-          <div className="games-container">
-            <div className="games-block game-progress-block">
-              <div className="games-cards d-flex align-items-center no-gutters">
-                <div className="col-3">
-                  <Link className="game-item" to='/turtle'>
-                    <Img src='dashboard/dashboard-turtle.png' />
-                  </Link>
-                </div>
-                <div className="col-3">
-                  <Link className="game-item" to='/zombieland'>
-                    <Img src='dashboard/dashboard-zombieLand.png' />
-                  </Link>
-                </div>
-                <div className="col-3">
-                  <Link className="game-item" to='/webkata/html'>
-                    <Img src='dashboard/dashboard-webkata-html.png' />
-                  </Link>
-                </div>
-                {/* <div className="col-3">
+          </div>
+          <div className="col-12 col-md-6">
+            <div className="games-container">
+              <div className="games-block game-progress-block">
+                <div className="games-cards d-flex align-items-center no-gutters">
+                  <div className="col-3">
+                    <Link className="game-item" to='/turtle'>
+                      <Img src='dashboard/dashboard-turtle.png' />
+                    </Link>
+                  </div>
+                  <div className="col-3">
+                    <Link className="game-item" to='/zombieland'>
+                      <Img src='dashboard/dashboard-zombieLand.png' />
+                    </Link>
+                  </div>
+                  <div className="col-3">
+                    <Link className="game-item" to='/webkata/html'>
+                      <Img src='dashboard/dashboard-webkata-html.png' />
+                    </Link>
+                  </div>
+                  {/* <div className="col-3">
                   <Link className="game-item" to='/webkata/css'>
                     <Img src='dashboard/dashboard-webkata-css.png' />
                   </Link>
                 </div> */}
-                <div className="col-3">
-                  <Link className="game-item" to='/codekata'>
-                    <Img src='dashboard/dashboard-codePirate.png' />
-                  </Link>
+                  <div className="col-3">
+                    <Link className="game-item" to='/codekata'>
+                      <Img src='dashboard/dashboard-codePirate.png' />
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="game-btn-block game-progress-block mt-md-1">
-              <Link to='/games' className='btn btn-block'>
-                <div className="d-flex align-items-center justify-content-between">
-                  <p>
-                    <FormattedMessage
-                      defaultMessage={'Continue Playing'}
-                      description={'continue playing'}
-                    />
-                  </p>
-                  <i className="fa fa-angle-right" aria-hidden="true"></i>
-                </div>
-              </Link>
+              <div className="game-btn-block game-progress-block mt-md-1">
+                <Link to='/games' className='btn btn-block'>
+                  <div className="d-flex align-items-center justify-content-between">
+                    <p>
+                      <FormattedMessage
+                        defaultMessage={'Continue Playing'}
+                        description={'continue playing'}
+                      />
+                    </p>
+                    <i className="fa fa-angle-right" aria-hidden="true"></i>
+                  </div>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</>;
+  </>;
 
 // const ChallengeSwiperSlide = ({ data }) => <>
 //   <Link className='challenge-item' to={data.actionUrl}>
@@ -479,7 +479,7 @@ const GameContainer = ({
 // </>;
 
 const LeaderBoardCard = ({ leaderboardData, leaderBoardUserData, className }) => <>
-  { <>
+  {<>
     <div className={`dashboard-leaderboard-container dashboard-body-block ${className}`}>
       <div className="sideboard-card card">
         <div className="leaderboard-card-heading">
@@ -505,20 +505,20 @@ const LeaderBoardCard = ({ leaderboardData, leaderBoardUserData, className }) =>
           }
           {
             leaderBoardUserData && <>
-            <div className="sideboard-content-title">
-              <p>
-                <span>{`#${leaderBoardUserData.rank || '--'} `}</span>
-                <span>
-                  <FormattedMessage
-                    defaultMessage={'rank'}
-                    description={'rank'}
-                  />
-                </span>
-              </p>
-            </div>
-            <div className="sideboard-content-data">
-              {
-                leaderboardData && leaderboardData.slice(0, 3).map((item, index) => <div key={index} className={`d-flex align-items-center justify-content-between ${leaderBoardUserData.rank === item.rank ? 'font-weight-bold' : ''}`}>
+              <div className="sideboard-content-title">
+                <p>
+                  <span>{`#${leaderBoardUserData.rank || '--'} `}</span>
+                  <span>
+                    <FormattedMessage
+                      defaultMessage={'rank'}
+                      description={'rank'}
+                    />
+                  </span>
+                </p>
+              </div>
+              <div className="sideboard-content-data">
+                {
+                  leaderboardData && leaderboardData.slice(0, 3).map((item, index) => <div key={index} className={`d-flex align-items-center justify-content-between ${leaderBoardUserData.rank === item.rank ? 'font-weight-bold' : ''}`}>
                     <div className="sideboard-names d-flex align-items-center">
                       <p>{`#${item.rank || '--'}`}</p>
                       <p>{item.name || '--'}</p>
@@ -527,185 +527,185 @@ const LeaderBoardCard = ({ leaderboardData, leaderBoardUserData, className }) =>
                       <p>{item.points || 0}</p>
                     </div>
                   </div>)
-              }
-              <div className="sideboard-btn-block">
-                <Link className='btn btn-block leaderboard-btn' to='/leaderboard'>
-                  <FormattedMessage
-                    defaultMessage={'Show Leaderboard'}
-                    description={'show leaderboard'}
-                  />
-                </Link>
+                }
+                <div className="sideboard-btn-block">
+                  <Link className='btn btn-block leaderboard-btn' to='/leaderboard'>
+                    <FormattedMessage
+                      defaultMessage={'Show Leaderboard'}
+                      description={'show leaderboard'}
+                    />
+                  </Link>
+                </div>
               </div>
-            </div>
             </>
           }
         </div>
       </div>
     </div>
-  </> }
+  </>}
 </>;
 
 const AchievementCard = ({ className, isDesktop, sessionData }) => <>
-{ <>
-  <div className={`dashboard-achievement-container dashboard-body-block ${className}`}>
-    <div className="sideboard-card card">
-      <div className="achievement-card-heading">
-        {
-          isDesktop
-          && <>
-            <p className='sideboard-heading-text'>
-              <FormattedMessage
-                defaultMessage={'Achievements'}
-                description={'Achievements card heading'}
-              />
-            </p>
-          </>
-        }
-        {
-          !isDesktop && <>
-          <div className="col-8 mx-auto">
-            <div className="d-flex align-items-center justify-content-between">
-              <div className="d-flex align-items-center points-data">
-                <Img
-                  src={'common/hkcoin.png'}
-                />
-                <p className="mb-0">
-                  <FormattedMessage
-                    defaultMessage={'{coins} coins'}
-                    description={'coins'}
-                    values={{
-                      coins: sessionData?.pointsEarned || 0,
-                    }}
-                  />
-                </p>
-              </div>
-              <div className="d-flex align-items-center points-data">
-              <div className="d-flex align-items-center points-data">
-                <Img
-                  src={'common/xp.png'}
-                />
-                <p className="mb-0">
-                  <FormattedMessage
-                    defaultMessage={'{xp} coins'}
-                    description={'xp'}
-                    values={{
-                      xp: sessionData?.xp || 0,
-                    }}
-                  />
-                </p>
-              </div>
-              </div>
-            </div>
-          </div>
-          </>
-        }
-      </div>
-      <div className="achievement-card-content">
-        {
-          <div className="sideboard-content-data">
-            <div className="sideboard-content-img">
-              <Img
-                src={'dashboard/dashboard-achievements.png'}
-                local={true}
-              />
-            </div>
-            <div className="sideboard-content-title">
-              <p>
+  {<>
+    <div className={`dashboard-achievement-container dashboard-body-block ${className}`}>
+      <div className="sideboard-card card">
+        <div className="achievement-card-heading">
+          {
+            isDesktop
+            && <>
+              <p className='sideboard-heading-text'>
                 <FormattedMessage
-                  defaultMessage={'Achieved Badge'}
-                  description={'Achievement Badge Title'}
+                  defaultMessage={'Achievements'}
+                  description={'Achievements card heading'}
                 />
               </p>
-            </div>
-            <div className="sideboard-btn-block">
-              <Link className='btn btn-block achievement-btn' to='/awards'>
-                <FormattedMessage
-                  defaultMessage={'View All Achievements'}
-                  description={'show achievements'}
+            </>
+          }
+          {
+            !isDesktop && <>
+              <div className="col-8 mx-auto">
+                <div className="d-flex align-items-center justify-content-between">
+                  <div className="d-flex align-items-center points-data">
+                    <Img
+                      src={'common/hkcoin.png'}
+                    />
+                    <p className="mb-0">
+                      <FormattedMessage
+                        defaultMessage={'{coins} coins'}
+                        description={'coins'}
+                        values={{
+                          coins: sessionData?.pointsEarned || 0,
+                        }}
+                      />
+                    </p>
+                  </div>
+                  <div className="d-flex align-items-center points-data">
+                    <div className="d-flex align-items-center points-data">
+                      <Img
+                        src={'common/xp.png'}
+                      />
+                      <p className="mb-0">
+                        <FormattedMessage
+                          defaultMessage={'{xp} coins'}
+                          description={'xp'}
+                          values={{
+                            xp: sessionData?.xp || 0,
+                          }}
+                        />
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          }
+        </div>
+        <div className="achievement-card-content">
+          {
+            <div className="sideboard-content-data">
+              <div className="sideboard-content-img">
+                <Img
+                  src={'dashboard/dashboard-achievements.png'}
+                  local={true}
                 />
-              </Link>
+              </div>
+              <div className="sideboard-content-title">
+                <p>
+                  <FormattedMessage
+                    defaultMessage={'Achieved Badge'}
+                    description={'Achievement Badge Title'}
+                  />
+                </p>
+              </div>
+              <div className="sideboard-btn-block">
+                <Link className='btn btn-block achievement-btn' to='/awards'>
+                  <FormattedMessage
+                    defaultMessage={'View All Achievements'}
+                    description={'show achievements'}
+                  />
+                </Link>
+              </div>
             </div>
-          </div>
-        }
+          }
+        </div>
       </div>
     </div>
-  </div>
-</> }
+  </>}
 </>;
 
 const ClubCard = ({ clubData = {}, className }) => <>
-{ <>
-  <div className={`dashboard-club-container dashboard-body-block ${className}`}>
-    <div className="sideboard-card card">
-      <div className="club-card-heading">
-        <p className='sideboard-heading-text'>
-          <FormattedMessage
-            defaultMessage={'{clubName}'}
-            description={'Club name heading'}
-            values={{
-              clubName: clubData.clubName,
-            }}
-          />
-        </p>
-      </div>
-      <div className="club-card-content">
-        {
-          !clubData && <>
-            <div className="skeleton">
-              <div className="sideboard-content-title"></div>
-              <div className="sideboard-content-data">
-                {[1, 2, 3].map((_, index) => <div key={index} className="d-flex align-items-center justify-content-between sideboard-row">
-                  <div className="sideboard-names"></div>
-                </div>)}
+  {<>
+    <div className={`dashboard-club-container dashboard-body-block ${className}`}>
+      <div className="sideboard-card card">
+        <div className="club-card-heading">
+          <p className='sideboard-heading-text'>
+            <FormattedMessage
+              defaultMessage={'{clubName}'}
+              description={'Club name heading'}
+              values={{
+                clubName: clubData.clubName,
+              }}
+            />
+          </p>
+        </div>
+        <div className="club-card-content">
+          {
+            !clubData && <>
+              <div className="skeleton">
+                <div className="sideboard-content-title"></div>
+                <div className="sideboard-content-data">
+                  {[1, 2, 3].map((_, index) => <div key={index} className="d-flex align-items-center justify-content-between sideboard-row">
+                    <div className="sideboard-names"></div>
+                  </div>)}
+                </div>
               </div>
-            </div>
-          </>
-        }
-        {
-          clubData && <>
-          <div className="sideboard-content-title">
-            <p>
-              <span>{`#${clubData?.rank || '--'} `}</span>
-              <span>
-                <FormattedMessage
-                  defaultMessage={'rank'}
-                  description={'rank'}
-                />
-              </span>
-            </p>
-          </div>
-          <div className="sideboard-content-data">
-            <p className="club-members-title mb-0">
-              <FormattedMessage
-                defaultMessage={'Most active members:'}
-                description={'active members title'} />
-            </p>
-            {
-              clubData && clubData?.topMembers?.slice(0, 3).map((item, index) => <div key={index} className={'d-flex align-items-center justify-content-between'}>
-                  <div className="sideboard-names d-flex align-items-center">
-                    {/* <p>{`#${item.rank || '--'}`}</p> */}
-                    <p>{item.name || '--'}</p>
-                  </div>
-                  <div className='sideboard-rank'>
-                    <p>{item.points || 0}</p>
-                  </div>
-                </div>)
-            }
-            <div className="sideboard-btn-block">
-              <Link className='btn btn-block club-btn' to={`/clubs/${clubData?.clubId}`}>
-                <FormattedMessage
-                  defaultMessage={'View Club'}
-                  description={'View club button'}
-                />
-              </Link>
-            </div>
-          </div>
-          </>
-        }
+            </>
+          }
+          {
+            clubData && <>
+              <div className="sideboard-content-title">
+                <p>
+                  <span>{`#${clubData?.rank || '--'} `}</span>
+                  <span>
+                    <FormattedMessage
+                      defaultMessage={'rank'}
+                      description={'rank'}
+                    />
+                  </span>
+                </p>
+              </div>
+              <div className="sideboard-content-data">
+                <p className="club-members-title mb-0">
+                  <FormattedMessage
+                    defaultMessage={'Most active members:'}
+                    description={'active members title'} />
+                </p>
+                {
+                  clubData && clubData?.topMembers?.slice(0, 3).map((item, index) => <div key={index} className={'d-flex align-items-center justify-content-between'}>
+                    <div className="sideboard-names d-flex align-items-center">
+                      {/* <p>{`#${item.rank || '--'}`}</p> */}
+                      <p>{item.name || '--'}</p>
+                    </div>
+                    <div className='sideboard-rank'>
+                      <p>{item.points || 0}</p>
+                    </div>
+                  </div>)
+                }
+                <div className="sideboard-btn-block">
+                  <Link className='btn btn-block club-btn' to={`/clubs/${clubData?.clubId}`}>
+                    <FormattedMessage
+                      defaultMessage={'View Club'}
+                      description={'View club button'}
+                    />
+                  </Link>
+                </div>
+              </div>
+            </>
+          }
+        </div>
       </div>
     </div>
-  </div>
-</> }
+  </>}
 </>;
 
 const HeroComponent = memo(HeroContainer, compareProps);
@@ -790,9 +790,11 @@ const Dashboard = () => {
 
     const awardsGiven = getSession('awardsGiven');
 
-    if (awardsGiven || awardsGiven !== 'false') {
-      awardsNotificationCardRef.current.show(JSON.parse(awardsGiven));
-    }
+    awardsGiven.then((val) => {
+      if (val || val !== 'false') {
+        awardsNotificationCardRef.current.show(JSON.parse(val));
+      }
+    });
 
     return () => {
       isPageMounted.current = false;
@@ -823,21 +825,21 @@ const Dashboard = () => {
         {
           isDesktop
           && <>
-          <div className="col-md-4 dashboard-sideboard">
-            <AchievementCardComponent
-              isDesktop={isDesktop}
-              sessionData={sessionData} />
-            {
-              clubData
-              && clubData?.hasClub
-              && <>
-                <ClubCardComponent clubData={clubData} />
-              </>
-            }
-            <LeaderBoardCardComponent
-              leaderboardData={leaderboardData}
-              leaderBoardUserData={leaderBoardUserData} />
-          </div>
+            <div className="col-md-4 dashboard-sideboard">
+              <AchievementCardComponent
+                isDesktop={isDesktop}
+                sessionData={sessionData} />
+              {
+                clubData
+                && clubData?.hasClub
+                && <>
+                  <ClubCardComponent clubData={clubData} />
+                </>
+              }
+              <LeaderBoardCardComponent
+                leaderboardData={leaderboardData}
+                leaderBoardUserData={leaderBoardUserData} />
+            </div>
           </>
         }
         {/* <div className="col-12">

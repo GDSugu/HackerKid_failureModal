@@ -9,16 +9,34 @@
 #awards-notification-card {
   position: fixed;
   top: 0;
-  background: gt.theme-var(awards-bg-1, null, $thememaplight, $cssvars);
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 9999;
+  width: 100vw;
+  height: 100vh;
 
-  @include gm.box-shadow();
+  &.overlay {
+    background-color: gt.theme-var(overlay1);
+  }
 
   .card-dialog {
+    position: fixed;
+    top: 0;
+    background: gt.theme-var(awards-bg-1, null, $thememaplight, $cssvars);
+    left: 50%;
+    transform: translate(-50%, -100%);
     margin-top: 0;
     width: 100vw;
+    transition: all 0.5s ease;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+
+    @include gm.box-shadow();
+
+    &.open {
+      transform: translateX(-50%);
+    }
 
     @include gm.media-breakpoint-up(sm) {
       min-width: 600px;
@@ -33,9 +51,11 @@
   .card-footer {
     display: flex;
     gap: 1rem;
-    padding-top: 0;
+    padding: 0 2rem 1.2rem;
     border-top: none;
     background: gt.theme-var(awards-bg-1, null, $thememaplight, $cssvars);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
 
     .dismiss-awards-notification-modal-btn,
     .view-awards-btn {
@@ -55,18 +75,13 @@
     }
   }
 
-  .card-body,
-  .card-footer {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-
   .awards-carosel {
     display: flex;
     overflow-y: scroll;
 
     .award-card {
       padding: 1rem;
+      background-color: none;
 
       img {
         width: 95px;

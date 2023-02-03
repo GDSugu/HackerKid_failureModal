@@ -34,9 +34,6 @@ const Login = () => {
       if (response !== 'access_denied') {
         const data = JSON.parse(response);
         if (data.status === 'success') {
-          if (data.awardsGiven) {
-            setSession('awardsGiven', JSON.stringify(data.awardsGiven));
-          }
           pathNavigator('dashboard');
         }
       }
@@ -90,6 +87,9 @@ const Login = () => {
         }
 
         if (data.status === 'success') {
+          if (data.awardsGiven) {
+            setSession('awardsGiven', JSON.stringify(data.awardsGiven));
+          }
           pathNavigator('dashboard');
         } else if (data.status === 'not-exists') {
           setFormErrorField('You are not a registered user', { 'data-error-type': 'NOT_REGISTERED' });
@@ -130,7 +130,7 @@ const Login = () => {
                 data-toggle="pill" href="#login-with-phone"
                 role="tab" onClick={(e) => loginMethodTabClickHandler(e, 'loginWithPhone')}
                 data-close-form-error-type='EMAIL_LOGIN_RESTRICTED'>
-                <FormattedMessage defaultMessage='Login with Phone' description='login with phone tab'/>
+                <FormattedMessage defaultMessage='Login with Phone' description='login with phone tab' />
               </a>
             </li>
             <li className="nav-item overline-bold" role="presentation">
@@ -150,7 +150,7 @@ const Login = () => {
                     <FormattedMessage
                       defaultMessage="Phone"
                       description="Phone label"
-                      />
+                    />
                   </label>
                   <span className='form-helper text-danger overline-bold' id='phone-form-helper'>
                   </span>
@@ -159,7 +159,7 @@ const Login = () => {
                   handleStateChange('phoneNumber', e.target.value);
                   validateInputOnChange(e);
                   closeFormError(e.target);
-                }} data-close-form-error-type='ERROR,INCORRECT,NOT_REGISTERED' data-typename='Phone Number' required={ true}/>
+                }} data-close-form-error-type='ERROR,INCORRECT,NOT_REGISTERED' data-typename='Phone Number' required={true} />
               </div>
             </div>
             <div className="tab-pane fade" id="login-with-email" role="tabpanel">
@@ -169,7 +169,7 @@ const Login = () => {
                     <FormattedMessage
                       defaultMessage="Email"
                       description="Email label"
-                      />
+                    />
                   </label>
                   <span className='form-helper text-danger overline-bold' id='email-form-helper'>
                   </span>
@@ -178,7 +178,7 @@ const Login = () => {
                   handleStateChange('email', e.target.value);
                   validateInputOnChange(e);
                   closeFormError(e.target);
-                }} data-close-form-error-type='ERROR,INCORRECT,EMAIL_LOGIN_RESTRICTED' data-typename='Email Address' required={ true}/>
+                }} data-close-form-error-type='ERROR,INCORRECT,EMAIL_LOGIN_RESTRICTED' data-typename='Email Address' required={true} />
               </div>
             </div>
           </div>
@@ -198,7 +198,7 @@ const Login = () => {
                 handleStateChange('password', e.target.value);
                 validateInputOnChange(e);
                 closeFormError(e.target);
-              }} data-close-form-error-type='ERROR,INCORRECT' data-typename='Password' data-skip-value-check={true} required={ true}/>
+              }} data-close-form-error-type='ERROR,INCORRECT' data-typename='Password' data-skip-value-check={true} required={true} />
               <span className="password-toggle-icon-container">
                 <i className="fa fa-fw fa-eye toggle-password" data-toggle="#password" onClick={togglePasswordVisibility}></i>
               </span>
@@ -231,12 +231,12 @@ const Login = () => {
             </button> */}
             <Link to='/register' className='d-block text-decoration-none'>
               <button type='button' className='create-new-account-btn btn btn-outline-primary btn-block'>
-                  <span className='overline-bold'>
-                    <FormattedMessage
+                <span className='overline-bold'>
+                  <FormattedMessage
                     defaultMessage="Create a New Account"
                     description="Create a New Account button"
-                    />
-                  </span>
+                  />
+                </span>
               </button>
             </Link>
           </div>
