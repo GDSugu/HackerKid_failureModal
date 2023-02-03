@@ -10,6 +10,8 @@ import { useGetChallenges } from '../../../../hooks/pages/challenges';
 import Modal from '../components/Modal';
 import BottomSheet from '../components/BottomSheet';
 import '../../../stylesheets/common/pages/dashboard/style.scss';
+import { getSession, setSession } from '../../../../hooks/common/framework';
+import AwardsNotificationCard from '../components/AwardsNotificationCard';
 
 const compareProps = (prev, next) => {
   let isEqual = true;
@@ -728,6 +730,8 @@ const Dashboard = () => {
   const { state: leaderBoardState } = useLeaderBoard({ isPageMounted });
   const { state: getChallengesState } = useGetChallenges({ isPageMounted });
 
+  const awardsNotificationCardRef = React.useRef(true);
+
   const {
     status: dashboarStatus,
     userData: dashboardUserData,
@@ -783,6 +787,12 @@ const Dashboard = () => {
   useEffect(() => {
     window.addEventListener('resize', listenDesktop);
     populateScore('#yourScore', gameData.gameProgress, parseInt((gameData.gameProgress / gameData.totalGames) * 100, 10));
+
+    const awardsGiven = getSession('awardsGiven');
+
+    if (awardsGiven || awardsGiven !== 'false') {
+      awardsNotificationCardRef.current.show(JSON.parse(awardsGiven));
+    }
 
     return () => {
       isPageMounted.current = false;
@@ -889,6 +899,9 @@ const Dashboard = () => {
         </button>
       </Modal>
     }
+    <AwardsNotificationCard ref={awardsNotificationCardRef} onClose={() => {
+      setSession('awardsGiven', 'false');
+    }} />
   </>;
 };
 

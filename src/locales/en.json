@@ -428,6 +428,10 @@
     "defaultMessage": "Play",
     "description": "Turtle Play Button"
   },
+  "7WZECV": {
+    "defaultMessage": "{modalDescription}",
+    "description": "modal description"
+  },
   "7asVcm": {
     "defaultMessage": "Games",
     "description": "games page heading"
@@ -802,6 +806,10 @@
   "H2rvzb": {
     "defaultMessage": "Password changed successfully",
     "description": "Password changed text"
+  },
+  "H9m7jW": {
+    "defaultMessage": "{timeSpent}",
+    "description": "Time Spent"
   },
   "HAlOn1": {
     "defaultMessage": "Name"
@@ -1486,6 +1494,10 @@
     "defaultMessage": "Newly Trending",
     "description": "heading"
   },
+  "YLNbKA": {
+    "defaultMessage": "Dismiss",
+    "description": "dismiss btn text"
+  },
   "YLRLEA": {
     "defaultMessage": "WebKata - {concept}",
     "description": "Webkata title"
@@ -1565,10 +1577,6 @@
   "aZ9udC": {
     "defaultMessage": "Private test case {testCaseNumber} - {result}",
     "description": "test case text"
-  },
-  "adC22y": {
-    "defaultMessage": "Phone",
-    "description": "Profile phone label"
   },
   "apr16P": {
     "defaultMessage": "Leaderboard",
@@ -1677,6 +1685,10 @@
     "defaultMessage": "Try Now",
     "description": "More card button text"
   },
+  "dxFMuV": {
+    "defaultMessage": "Most active members:",
+    "description": "active members title"
+  },
   "e5Eaen": {
     "defaultMessage": "Profile updated successfully",
     "description": "success modal"
@@ -1726,6 +1738,10 @@
   "fkpavG": {
     "defaultMessage": "Games",
     "description": "Games page heading"
+  },
+  "fodvBp": {
+    "defaultMessage": "View Club",
+    "description": "View club button"
   },
   "fr893W": {
     "defaultMessage": "{validSubmissions}",
@@ -1877,6 +1893,10 @@
   },
   "kKheEw": {
     "defaultMessage": "{question}"
+  },
+  "keQJEv": {
+    "defaultMessage": "{clubName}",
+    "description": "Club name heading"
   },
   "kloO3Z": {
     "defaultMessage": "Advanced Options",
@@ -2221,6 +2241,10 @@
     "defaultMessage": "Levels",
     "description": "Game Level"
   },
+  "sZEFnv": {
+    "defaultMessage": "{btnText}",
+    "description": "view awards btn"
+  },
   "sd4dwE": {
     "defaultMessage": "{xp} xp",
     "description": "club xp"
@@ -2240,6 +2264,10 @@
   "tI1tX6": {
     "defaultMessage": "View All Achievements",
     "description": "show achievements"
+  },
+  "tRGm5z": {
+    "defaultMessage": "Time Spent:",
+    "description": "Time Spent"
   },
   "tbPLF3": {
     "defaultMessage": "{step}",
@@ -2399,6 +2427,10 @@
   "yCTEJz": {
     "defaultMessage": "{hintMessage}",
     "description": "Hint message"
+  },
+  "yEJu0Z": {
+    "defaultMessage": "Parent's Phone Number",
+    "description": "Profile phone label"
   },
   "ySOrrv": {
     "defaultMessage": "No feed to show",

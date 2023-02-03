@@ -13,6 +13,7 @@ import { useProfileInfo } from '../../../../hooks/pages/profile';
 import AwardCard from '../components/AwardsCard';
 // import CollectibleCard from '../components/CollectibleCard';
 import { useAwards } from '../../../../hooks/pages/awards';
+import AwardsNotificationModal from '../components/AwardsNotificationCard';
 
 const Certificates = ({ gameDetails }) => {
   const certificateDataObj = gameDetails?.[0].certificateData;
@@ -442,6 +443,7 @@ const More = () => {
 
   const collectionRef = React.useRef();
   const logoutModalRef = React.useRef();
+  const awardsNotificationCardRef = React.useRef();
 
   // const toggleModal = () => setCollectionModalVisibile(!collectionModalVisibile);
   const toggleModal = () => collectionRef.current.show();
@@ -459,6 +461,22 @@ const More = () => {
       setIsDesktop(window.matchMedia('(min-width: 576px)').matches);
     });
 
+    getAwards({ cached: false, limit: 3, sort: 'posted' });
+
+    awardsNotificationCardRef.current.show([
+      {
+        awardImage: 'https://img.freepik.com/free-vector/award-medal-with-red-ribbon_1284-42828.jpg?w=2000',
+      },
+      {
+        awardImage: 'https://img.freepik.com/free-vector/award-medal-with-red-ribbon_1284-42828.jpg?w=2000',
+      },
+      {
+        awardImage: 'https://img.freepik.com/free-vector/award-medal-with-red-ribbon_1284-42828.jpg?w=2000',
+      },
+      {
+        awardImage: 'https://img.freepik.com/free-vector/award-medal-with-red-ribbon_1284-42828.jpg?w=2000',
+      }]);
+
     return () => {
       $('.modal-backdrop').remove();
       isPageMounted.current = false;
@@ -470,10 +488,6 @@ const More = () => {
       getProfileData({ cached: false });
     }
   }, [uniqueUrl]);
-
-  React.useEffect(() => {
-    getAwards({ cached: false, limit: 3, sort: 'posted' });
-  }, []);
 
   return <>
     <div className='col-12 col-md-11 col-xl-10 mx-auto'>
@@ -527,6 +541,7 @@ const More = () => {
       />
     </Modal>
     <HelpModal />
+    <AwardsNotificationModal ref={awardsNotificationCardRef} />
   </>;
 };
 

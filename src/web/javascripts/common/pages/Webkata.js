@@ -26,6 +26,7 @@ import { showInlineLoadingSpinner } from '../loader';
 import { debounce1 as debounce } from '../../../../hooks/common/utlis';
 import 'ace-builds/webpack-resolver';
 import 'ace-builds/src-min-noconflict/ext-language_tools';
+import AwardsNotificationCard from '../components/AwardsNotificationCard';
 
 // inpage components
 const ProblemStatement = ({
@@ -307,11 +308,11 @@ const WebkataHomeComponent = ({ changeRoute }) => {
         <div className="webkata-title">
           <h1 className='game-title'>
             <FormattedMessage
-               defaultMessage={'WebKata - {concept}'}
-               description={'Webkata title'}
-               values={{
-                 concept: conceptId.toUpperCase(),
-               }}
+              defaultMessage={'WebKata - {concept}'}
+              description={'Webkata title'}
+              values={{
+                concept: conceptId.toUpperCase(),
+              }}
             />
           </h1>
         </div>
@@ -346,6 +347,7 @@ const WebkataGameComponent = () => {
   const levelComponentRef = useRef(null);
   const leaderboardComponentRef = useRef(null);
   const successModalRef = useRef(null);
+  const awardsNotificationCardRef = useRef(null);
 
   const { state: { device } } = useRootPageState();
   const { conceptId, id } = useParams();
@@ -467,6 +469,7 @@ const WebkataGameComponent = () => {
         if (res !== 'access_denied') {
           if (res.status === 'success' && res.questionObject) {
             toggleCollapseLivePreview(false);
+            awardsNotificationCardRef.current.hide();
           }
         }
       });
@@ -523,6 +526,7 @@ const WebkataGameComponent = () => {
     if (webkataSubmitState.status === 'success') {
       if (webkataSubmitState.passed) {
         successModalRef.current.show();
+        awardsNotificationCardRef.current.show(webkataSubmitState.awardsGiven);
       } else if (!webkataSubmitState.passed && !showLivePreview) {
         setShowLivePreview(true);
       }
@@ -645,6 +649,7 @@ const WebkataGameComponent = () => {
         nextHandler={handleSuccess}
       />
     </Modal>
+    <AwardsNotificationCard ref={awardsNotificationCardRef} />
     <GameLeaderboardComponent
       ref={leaderboardComponentRef}
       game={'webkata'}

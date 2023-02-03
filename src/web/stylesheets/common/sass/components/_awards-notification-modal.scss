@@ -1,0 +1,82 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+@use '../../sass/components/achievement-card';
+
+@import '../../pages/awards/_awardsTheme.js';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+#awards-notification-card {
+  position: fixed;
+  top: 0;
+  background: gt.theme-var(awards-bg-1, null, $thememaplight, $cssvars);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+
+  @include gm.box-shadow();
+
+  .card-dialog {
+    margin-top: 0;
+    width: 100vw;
+
+    @include gm.media-breakpoint-up(sm) {
+      min-width: 600px;
+      max-width: 650px;
+    }
+  }
+
+  .card-body {
+    padding: 0.5rem 1rem;
+  }
+
+  .card-footer {
+    display: flex;
+    gap: 1rem;
+    padding-top: 0;
+    border-top: none;
+    background: gt.theme-var(awards-bg-1, null, $thememaplight, $cssvars);
+
+    .dismiss-awards-notification-modal-btn,
+    .view-awards-btn {
+      flex: 1;
+      border-radius: 12px;
+      padding: 0.7rem 0;
+    }
+
+    .view-awards-btn {
+      color: gt.theme-var(awards-text-color-3, null, $thememaplight, $cssvars);
+    }
+
+    .dismiss-awards-notification-modal-btn {
+      background: gt.theme-var(awards-bg-1, null, $thememaplight, $cssvars);
+      border-color: gt.theme-var(awards-text-color-4, null, $thememaplight, $cssvars);
+      color: gt.theme-var(awards-text-color-4, null, $thememaplight, $cssvars);
+    }
+  }
+
+  .card-body,
+  .card-footer {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .awards-carosel {
+    display: flex;
+    overflow-y: scroll;
+
+    .award-card {
+      padding: 1rem;
+
+      img {
+        width: 95px;
+        height: 80px;
+      }
+    }
+  }
+
+  .card-description {
+    text-align: center;
+    margin-top: 1rem;
+  }
+}

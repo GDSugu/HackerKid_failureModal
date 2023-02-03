@@ -13,7 +13,7 @@ import {
 } from '../framework';
 import '../../../stylesheets/common/pages/login/style.scss';
 import useLoginMethod from '../../../../hooks/pages/auth';
-import { loginCheck } from '../../../../hooks/common/framework';
+import { loginCheck, setSession } from '../../../../hooks/common/framework';
 import { showInlineLoadingSpinner } from '../loader';
 
 const manager = {};
@@ -34,6 +34,9 @@ const Login = () => {
       if (response !== 'access_denied') {
         const data = JSON.parse(response);
         if (data.status === 'success') {
+          if (data.awardsGiven) {
+            setSession('awardsGiven', JSON.stringify(data.awardsGiven));
+          }
           pathNavigator('dashboard');
         }
       }
