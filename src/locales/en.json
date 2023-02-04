@@ -447,6 +447,10 @@
     "defaultMessage": "Play",
     "description": "Turtle Play Button"
   },
+  "7WZECV": {
+    "defaultMessage": "{modalDescription}",
+    "description": "modal description"
+  },
   "7asVcm": {
     "defaultMessage": "Games",
     "description": "games page heading"
@@ -1549,6 +1553,10 @@
     "defaultMessage": "Newly Trending",
     "description": "heading"
   },
+  "YLNbKA": {
+    "defaultMessage": "Dismiss",
+    "description": "dismiss btn text"
+  },
   "YLRLEA": {
     "defaultMessage": "WebKata - {concept}",
     "description": "Webkata title"
@@ -2319,6 +2327,10 @@
   "sXlZLv": {
     "defaultMessage": "Levels",
     "description": "Game Level"
+  },
+  "sZEFnv": {
+    "defaultMessage": "{btnText}",
+    "description": "view awards btn"
   },
   "sd4dwE": {
     "defaultMessage": "{xp} xp",

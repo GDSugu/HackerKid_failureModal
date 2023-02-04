@@ -17,6 +17,7 @@ import 'ace-builds/src-noconflict/theme-monokai';
 import 'ace-builds/src-noconflict/ext-language_tools';
 import { getSession, setSession } from '../../../../hooks/common/framework';
 import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
+import AwardsNotificationCard from '../components/AwardsNotificationCard';
 
 const resizeHandler = (nav = 'nav', selector) => {
   try {
@@ -245,6 +246,7 @@ const CodekataDesktopContainer = ({
   const inputRef = useRef();
   const statusModalRef = useRef(null);
   const statusModalComponentRef = useRef(null);
+  const awardsNotificationCardRef = useRef(null);
 
   const changeLoag = async (selectedLang) => {
     setInput(templete(selectedLang));
@@ -297,6 +299,7 @@ const CodekataDesktopContainer = ({
         if (res.passedAllTestCase) {
           handleCloseBtn = () => {
             statusModalRef.current.hide();
+            awardsNotificationCardRef.current.hide();
             if (questionList.length > questionObject.virtualId) {
               pathNavigator(`coding-pirate/${Number(questionObject.virtualId) + 1}`);
             }
@@ -317,6 +320,7 @@ const CodekataDesktopContainer = ({
                   handleModalClose: handleCloseBtn,
                 });
                 statusModalRef.current.show();
+                awardsNotificationCardRef.current.show(res.awardsGiven);
               });
           } else {
             const username = res.profileDetails.name;
@@ -917,7 +921,8 @@ const CodekataDesktopContainer = ({
         <CompiledStatusModalRefComponent
           ref={statusModalComponentRef}
         />
-      </Modal>
+    </Modal>
+    <AwardsNotificationCard ref={awardsNotificationCardRef} />
   </>;
 };
 

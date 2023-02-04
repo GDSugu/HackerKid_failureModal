@@ -747,6 +747,12 @@
       "value": "Play"
     }
   ],
+  "7WZECV": [
+    {
+      "type": 1,
+      "value": "modalDescription"
+    }
+  ],
   "7asVcm": [
     {
       "type": 0,
@@ -2565,6 +2571,12 @@
       "value": "Newly Trending"
     }
   ],
+  "YLNbKA": [
+    {
+      "type": 0,
+      "value": "Dismiss"
+    }
+  ],
   "YLRLEA": [
     {
       "type": 0,
@@ -3827,6 +3839,12 @@
     {
       "type": 0,
       "value": "Levels"
+    }
+  ],
+  "sZEFnv": [
+    {
+      "type": 1,
+      "value": "btnText"
     }
   ],
   "sd4dwE": [

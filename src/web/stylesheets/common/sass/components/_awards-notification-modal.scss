@@ -1,0 +1,97 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+@use '../../sass/components/achievement-card';
+
+@import '../../pages/awards/_awardsTheme.js';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+#awards-notification-card {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+
+  &.overlay {
+    background-color: gt.theme-var(overlay1);
+  }
+
+  .card-dialog {
+    position: fixed;
+    top: 0;
+    background: gt.theme-var(awards-bg-1, null, $thememaplight, $cssvars);
+    left: 50%;
+    transform: translate(-50%, -100%);
+    margin-top: 0;
+    width: 100vw;
+    transition: all 0.5s ease;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+
+    @include gm.box-shadow();
+
+    &.open {
+      transform: translateX(-50%);
+    }
+
+    @include gm.media-breakpoint-up(sm) {
+      min-width: 600px;
+      max-width: 650px;
+    }
+  }
+
+  .card-body {
+    padding: 0.5rem 1rem;
+  }
+
+  .card-footer {
+    display: flex;
+    gap: 1rem;
+    padding: 0 2rem 1.2rem;
+    border-top: none;
+    background: gt.theme-var(awards-bg-1, null, $thememaplight, $cssvars);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+
+    .dismiss-awards-notification-modal-btn,
+    .view-awards-btn {
+      flex: 1;
+      border-radius: 12px;
+      padding: 0.7rem 0;
+    }
+
+    .view-awards-btn {
+      color: gt.theme-var(awards-text-color-3, null, $thememaplight, $cssvars);
+    }
+
+    .dismiss-awards-notification-modal-btn {
+      background: gt.theme-var(awards-bg-1, null, $thememaplight, $cssvars);
+      border-color: gt.theme-var(awards-text-color-4, null, $thememaplight, $cssvars);
+      color: gt.theme-var(awards-text-color-4, null, $thememaplight, $cssvars);
+    }
+  }
+
+  .awards-carosel {
+    display: flex;
+    overflow-y: scroll;
+
+    .award-card {
+      padding: 1rem;
+      background-color: none;
+
+      img {
+        width: 95px;
+        height: 80px;
+      }
+    }
+  }
+
+  .card-description {
+    text-align: center;
+    margin-top: 1rem;
+  }
+}
