@@ -2178,6 +2178,10 @@
   "onuBbP": {
     "defaultMessage": "Input Description:"
   },
+  "oz8Vbb": {
+    "defaultMessage": "Skip",
+    "description": "skip button"
+  },
   "pEiO08": {
     "defaultMessage": "Account Settings",
     "description": "account settings CTA"
