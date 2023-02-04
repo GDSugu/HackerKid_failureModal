@@ -13,7 +13,7 @@ import { useProfileInfo } from '../../../../hooks/pages/profile';
 import AwardCard from '../components/AwardsCard';
 // import CollectibleCard from '../components/CollectibleCard';
 import { useAwards } from '../../../../hooks/pages/awards';
-import AwardsNotificationModal from '../components/AwardsNotificationCard';
+// import AwardsNotificationModal from '../components/AwardsNotificationCard';
 import { copyHandler } from '../Functions/turtle';
 import AwardInfo from '../components/AwardsInfo';
 

@@ -46,6 +46,7 @@ const AwardsGrid = ({
         </div>
       </div>)
     }
+    { console.log(isDesktop) }
     {
       awards && showSeeMoreCard && (limit === 15 && totalAwards > limit) && <div className='col-3 px-1 py-1'>
         <button className='achievement-card award-card see-more-card' onClick={() => onSeeMoreCardClick(0)}>
