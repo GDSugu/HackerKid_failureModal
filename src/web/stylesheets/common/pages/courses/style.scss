@@ -572,7 +572,6 @@ html {
 }
 
 @media (max-width: 768px) {
-
   .video-player-container {
     margin-top: 1rem;
   }
@@ -597,7 +596,7 @@ html {
     width: 7rem;
     margin: 0.5rem;
   }
-  
+
   .award-des-head {
     padding: 1.5rem 1rem 0 1rem;
     margin-bottom: 3rem;
@@ -613,17 +612,17 @@ html {
     margin-top: 3rem;
     border-radius: 12px;
     display: flex;
-  
+
     .coin-img-cont {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       margin: 0 1rem;
-  
+
       .coin-icon {
         height: 64px;
-  
+
         img {
           height: 100%;
         }
