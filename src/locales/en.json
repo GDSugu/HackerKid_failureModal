@@ -10,6 +10,18 @@
   "+KKyNc": {
     "defaultMessage": "XP Earned:"
   },
+  "+PoBgu": {
+    "defaultMessage": "{step}",
+    "description": "take challenge instruction"
+  },
+  "+f2V2I": {
+    "defaultMessage": "{currentProgress} {unit}",
+    "description": "current progress"
+  },
+  "+fv9wl": {
+    "defaultMessage": "State",
+    "description": "State"
+  },
   "+g4yFF": {
     "defaultMessage": "Logout",
     "description": "more menu button"
@@ -84,6 +96,14 @@
     "defaultMessage": "Start Playing",
     "description": "Play button"
   },
+  "0By1LZ": {
+    "defaultMessage": "{timeInMinutes} Mins",
+    "description": "Time spent"
+  },
+  "0IKGwB": {
+    "defaultMessage": "Output Description:",
+    "description": "description of output"
+  },
   "0JV99f": {
     "defaultMessage": "This is index page",
     "description": "Page description"
@@ -123,6 +143,10 @@
   "13ETG6": {
     "defaultMessage": "Help",
     "description": "more menu button"
+  },
+  "16yTgM": {
+    "defaultMessage": "Create challenge",
+    "description": "create challenge button"
   },
   "1BoFrk": {
     "defaultMessage": "{description}",
@@ -203,6 +227,10 @@
     "defaultMessage": "Videos",
     "description": "course Heading"
   },
+  "30ejkF": {
+    "defaultMessage": "Close",
+    "description": "close"
+  },
   "33dFbN": {
     "defaultMessage": "Created \"{lastCreatedChallengeName}\" challenge",
     "description": "last created challenge log"
@@ -269,6 +297,10 @@
   "4DNN7D": {
     "defaultMessage": "{tag},",
     "description": "Course Title"
+  },
+  "4Pt6v5": {
+    "defaultMessage": "Searching...",
+    "description": "Autocomplete searching text"
   },
   "4Ve1r3": {
     "defaultMessage": "Ok",
@@ -431,6 +463,10 @@
     "defaultMessage": "Output will appear here",
     "description": "output placeholder"
   },
+  "7pvcZr": {
+    "defaultMessage": "Run",
+    "description": "Run Button"
+  },
   "7v4G7a": {
     "defaultMessage": "{completed}/{total} watched"
   },
@@ -438,12 +474,32 @@
     "defaultMessage": "{type}?",
     "description": "Course Type"
   },
+  "8cISRy": {
+    "defaultMessage": "Time Spent:",
+    "description": "Time spent title"
+  },
+  "8gWjFk": {
+    "defaultMessage": "{description}",
+    "description": "description of problem statement"
+  },
+  "8ga5/p": {
+    "defaultMessage": "#{rank}",
+    "description": "club xp"
+  },
   "9+2Mm0": {
     "defaultMessage": "IDE",
     "description": "page title"
   },
   "97bB5P": {
     "defaultMessage": "{xp} xp"
+  },
+  "9BVOVU": {
+    "defaultMessage": "Please verify to continue",
+    "description": "Recaptcha Modal heading"
+  },
+  "9GHKZe": {
+    "defaultMessage": "/{totalQns}",
+    "description": "Game Leader Board: Total Questions"
   },
   "9K8jZr": {
     "defaultMessage": "{idx}. {hint}",
@@ -501,9 +557,9 @@
     "defaultMessage": "Expected output",
     "description": "Expected output title"
   },
-  "Acm/fm": {
-    "defaultMessage": "{name} - {type}",
-    "description": "course Heading"
+  "AZoPre": {
+    "defaultMessage": "Club Name",
+    "description": "Club name label"
   },
   "Aevhvw": {
     "defaultMessage": "Verify OTP and proceed",
@@ -545,13 +601,33 @@
     "defaultMessage": "No",
     "description": "cancel logout"
   },
+  "BVEoZl": {
+    "defaultMessage": "See more",
+    "description": "see more card text"
+  },
+  "BW0/7P": {
+    "defaultMessage": "Keep in draft",
+    "description": "draft button"
+  },
   "Bj5WGE": {
     "defaultMessage": "View all {data}",
     "description": "Module Name"
   },
+  "Bt/Kkf": {
+    "defaultMessage": "completed",
+    "description": "Game progress"
+  },
   "BwliRZ": {
     "defaultMessage": "Newest to Oldest",
     "description": "sort dropdown button text"
+  },
+  "C1rkSh": {
+    "defaultMessage": "Coding Pirate",
+    "description": "Coding pirate title"
+  },
+  "C8QChP": {
+    "defaultMessage": "Top Members",
+    "description": "Top Members"
   },
   "CJH/k4": {
     "defaultMessage": "{title} - {type}",
@@ -561,6 +637,18 @@
     "defaultMessage": "Videos",
     "description": "Course Name"
   },
+  "CLW1pi": {
+    "defaultMessage": "Close",
+    "description": "success modal closed"
+  },
+  "CPWw9k": {
+    "defaultMessage": "Previous",
+    "description": "Previous btn"
+  },
+  "CT79Lc": {
+    "defaultMessage": "Club Leaderboard",
+    "description": "club leaderboard title"
+  },
   "CabaPs": {
     "defaultMessage": "Level {level}",
     "description": "Level 1 navigation link"
@@ -568,6 +656,10 @@
   "CcB4fo": {
     "defaultMessage": "Coins Earned:",
     "description": "Coins Earned"
+  },
+  "CddI5u": {
+    "defaultMessage": "Join Club",
+    "description": "join club modal title"
   },
   "Ciol6I": {
     "defaultMessage": "Output",
@@ -600,9 +692,6 @@
   "DtgoWC": {
     "defaultMessage": "{time}"
   },
-  "DtgoWC": {
-    "defaultMessage": "{time}"
-  },
   "DuPnGd": {
     "defaultMessage": "Email",
     "description": "Email label"
@@ -610,6 +699,10 @@
   "E4eXSS": {
     "defaultMessage": "Live Preview",
     "description": "tab button text"
+  },
+  "EOKZu2": {
+    "defaultMessage": "{text}",
+    "description": "button text"
   },
   "EQ5MZE": {
     "defaultMessage": "Session Videos",
@@ -718,6 +811,9 @@
     "defaultMessage": "Verify OTP and proceed",
     "description": "verify otp button"
   },
+  "Game Title": {
+    "defaultMessage": "ZombieLand"
+  },
   "GbfWVS": {
     "defaultMessage": "View all {title}",
     "description": "Course Title"
@@ -757,6 +853,18 @@
     "defaultMessage": "{coins} coins",
     "description": "coins earned"
   },
+  "HLIDfo": {
+    "defaultMessage": "Join a club",
+    "description": "Join a club button"
+  },
+  "HTfYYv": {
+    "defaultMessage": "Play next",
+    "description": "Play next"
+  },
+  "HXFZww": {
+    "defaultMessage": "Sample Input:",
+    "description": "Sample Input"
+  },
   "HZrPcB": {
     "defaultMessage": "Validated Result",
     "description": "tab button text"
@@ -769,9 +877,17 @@
     "defaultMessage": "Congratulations!",
     "description": "Award Modal Heading"
   },
+  "I+EuqZ": {
+    "defaultMessage": "{pointsEarned}",
+    "description": "coins"
+  },
   "I0vwZV": {
     "defaultMessage": "Session Videos",
     "description": "Session Videos Filter Option"
+  },
+  "I1oDxa": {
+    "defaultMessage": "Loading failed due to some unknown error! Please try again later.",
+    "description": "Error"
   },
   "ILnphX": {
     "defaultMessage": "Call",
@@ -847,6 +963,10 @@
   "KD6lRu": {
     "defaultMessage": "Continue",
     "description": "Continue button"
+  },
+  "KY6DzQ": {
+    "defaultMessage": "{modName}",
+    "description": "course Heading"
   },
   "KcDrvG": {
     "defaultMessage": "Solution Videos",
@@ -927,6 +1047,18 @@
   "MWb4u3": {
     "defaultMessage": "{title}",
     "description": "video title"
+  },
+  "MZ57OE": {
+    "defaultMessage": "Back to Challenges",
+    "description": "Play next button"
+  },
+  "MceYzq": {
+    "defaultMessage": "{name}",
+    "description": "club leaderboard name"
+  },
+  "Me+V0/": {
+    "defaultMessage": "Challenge Name",
+    "description": "challenge name"
   },
   "MfoF60": {
     "defaultMessage": "{hint}",
@@ -1046,9 +1178,16 @@
     "defaultMessage": "Filter",
     "description": "Filter Button"
   },
-  "OvWf0W": {
-    "defaultMessage": "Class",
-    "description": "class nav text"
+  "Ovi5Cc": {
+    "defaultMessage": "{input}"
+  },
+  "OvtvUr": {
+    "defaultMessage": "Profile",
+    "description": "member Profile modal title"
+  },
+  "Ow+Yo9": {
+    "defaultMessage": "Or share this link to invite someone",
+    "description": "Invite link input label"
   },
   "P+VjyT": {
     "defaultMessage": "Challenges",
@@ -1092,6 +1231,10 @@
   "PfA2Pv": {
     "defaultMessage": "{title}",
     "description": "Video Title"
+  },
+  "PpUsRs": {
+    "defaultMessage": "Join",
+    "description": "join button"
   },
   "Pvrf+y": {
     "defaultMessage": "{title}",
@@ -1159,6 +1302,14 @@
   "Rf84nl": {
     "defaultMessage": "ok",
     "description": "ok button"
+  },
+  "RjBfJa": {
+    "defaultMessage": "range",
+    "description": "range"
+  },
+  "RlFXhC": {
+    "defaultMessage": "Previous Awards",
+    "description": "section heading"
   },
   "S3mtIm": {
     "defaultMessage": "Congrats! You have Received {coins} Coins and {xp} XP"
@@ -1259,6 +1410,10 @@
     "defaultMessage": "Continue watching",
     "description": "Course Name"
   },
+  "UDQT0n": {
+    "defaultMessage": "Achieved Badge",
+    "description": "Achievement Badge Title"
+  },
   "UFvWGM": {
     "defaultMessage": "Play Next",
     "description": "Play Next Button"
@@ -1311,10 +1466,6 @@
     "defaultMessage": "{time}",
     "description": "Time Spent card caption"
   },
-  "VdAhqD": {
-    "defaultMessage": "Coming Soon",
-    "description": "collectibles header"
-  },
   "VoYGmQ": {
     "defaultMessage": "Practise... or play with the new code editor",
     "description": "More card Subtitle"
@@ -1366,6 +1517,10 @@
     "defaultMessage": "{type}",
     "description": "Module type"
   },
+  "WmjFlm": {
+    "defaultMessage": "Download",
+    "description": "download btn"
+  },
   "WsWDuq": {
     "defaultMessage": "Click \"Run\" to validate your code",
     "description": "empty validated result text"
@@ -1381,6 +1536,10 @@
   "X43FUF": {
     "defaultMessage": "Congratulations {user}, you have earned the {award} for your excellent record.",
     "description": "Award Modal Desciption"
+  },
+  "XMB1Ot": {
+    "defaultMessage": "No Awards Found",
+    "description": "error text"
   },
   "XQ/d5T": {
     "defaultMessage": "Please login again",
@@ -1422,6 +1581,18 @@
     "defaultMessage": "Congratulations {user}, you have earned {coins} coins for completing the video.",
     "description": "Award Modal Desciption"
   },
+  "YdxUNc": {
+    "defaultMessage": "moveDown",
+    "description": "moveDown function"
+  },
+  "Ykg8tn": {
+    "defaultMessage": "{message}",
+    "description": "Admin Warning"
+  },
+  "YvQFe7": {
+    "defaultMessage": "{points} coins",
+    "description": "club points"
+  },
   "YxMMzC": {
     "defaultMessage": "All Games",
     "description": "Game Progress card menu"
@@ -1433,6 +1604,10 @@
   "Z0XAX0": {
     "defaultMessage": "Tags:",
     "description": "Course Title"
+  },
+  "ZG77Sq": {
+    "defaultMessage": "close",
+    "description": "close button"
   },
   "ZMimja": {
     "defaultMessage": "Your rank: #{rank}",
@@ -1532,6 +1707,10 @@
   "cQyq2R": {
     "defaultMessage": "Submit",
     "description": "Submit Button"
+  },
+  "cS+r14": {
+    "defaultMessage": "Basic Info",
+    "description": "Basic Info tab title"
   },
   "cZDBd3": {
     "defaultMessage": "Coins",
@@ -1651,6 +1830,10 @@
     "defaultMessage": "{count}/{totalCount} watched",
     "description": "Time Spent card caption"
   },
+  "fzlKxE": {
+    "defaultMessage": "See Less Awards",
+    "description": "see more card text"
+  },
   "g0zp7w": {
     "defaultMessage": "Continue Playing",
     "description": "Game Progress card primary button"
@@ -1678,12 +1861,36 @@
     "defaultMessage": "{gameTitle}",
     "description": "Game Title"
   },
+  "gTCzny": {
+    "defaultMessage": "Profile Picture",
+    "description": "Profile Picture label"
+  },
+  "gTzQSp": {
+    "defaultMessage": "moveUp",
+    "description": "moveUp function"
+  },
+  "gXLFip": {
+    "defaultMessage": "in",
+    "description": "in"
+  },
+  "gYpthg": {
+    "defaultMessage": "More",
+    "description": "More"
+  },
   "giAApt": {
     "defaultMessage": "Solution Videos",
     "description": "Solution Videos Button"
   },
+  "glY0NW": {
+    "defaultMessage": "Output",
+    "description": "Output Heading"
+  },
   "groRBE": {
     "defaultMessage": "{coins} coins"
+  },
+  "gzjgZO": {
+    "defaultMessage": "Try these challenges",
+    "description": "draft challenge title"
   },
   "h/MN82": {
     "defaultMessage": "{coins}"
@@ -1695,6 +1902,10 @@
   "hJpqIn": {
     "defaultMessage": "Send OTP",
     "description": "send otp button"
+  },
+  "hWyGja": {
+    "defaultMessage": "Instructions",
+    "description": "Instructions title"
   },
   "hZGwA5": {
     "defaultMessage": "{count} Xp",
@@ -1724,9 +1935,17 @@
     "defaultMessage": "{navigationText}",
     "description": "navigational text"
   },
+  "iebFqD": {
+    "defaultMessage": "{clubName}",
+    "description": "Club card heading text"
+  },
   "iohPi0": {
     "defaultMessage": "Continue Watching",
     "description": "Continue Watching"
+  },
+  "jACivV": {
+    "defaultMessage": "{name}",
+    "description": "user name"
   },
   "jDzDCp": {
     "defaultMessage": "Leaderboard",
@@ -1865,9 +2084,13 @@
     "defaultMessage": "Coins Earned:",
     "description": "coins earned card caption"
   },
-  "mfMsri": {
-    "defaultMessage": "Recommended Games",
-    "description": "Section Title"
+  "mfZLuH": {
+    "defaultMessage": "#{rank}",
+    "description": "rank"
+  },
+  "mgb+iQ": {
+    "defaultMessage": "Run",
+    "description": "Code Run button"
   },
   "mhUyfM": {
     "defaultMessage": "{question}",
@@ -1959,9 +2182,25 @@
     "defaultMessage": "Account Settings",
     "description": "account settings CTA"
   },
+  "pHE0Mj": {
+    "defaultMessage": "Join with link",
+    "description": "join tab"
+  },
+  "pNZIoS": {
+    "defaultMessage": "{message}",
+    "description": "success message"
+  },
   "pQ0m8t": {
     "defaultMessage": "watched this",
     "description": "watched this"
+  },
+  "pRmIA8": {
+    "defaultMessage": "Go to Challenges",
+    "description": "challenges navigation button"
+  },
+  "pVCbSK": {
+    "defaultMessage": "Instructions",
+    "description": "Hints"
   },
   "pVIk7O": {
     "defaultMessage": "Turtle",
@@ -2064,6 +2303,14 @@
   "qx2FMG": {
     "defaultMessage": "{type}",
     "description": "video Type"
+  },
+  "r1CvRM": {
+    "defaultMessage": "Additional Inputs",
+    "description": "Input tab"
+  },
+  "r3BGOH": {
+    "defaultMessage": "Club Name",
+    "description": "club name label"
   },
   "rECW1h": {
     "defaultMessage": "completed",
@@ -2209,6 +2456,10 @@
     "defaultMessage": "Show Leaderboard",
     "description": "Leaderboard show button"
   },
+  "vKE06c": {
+    "defaultMessage": "Create",
+    "description": "create challenge button"
+  },
   "vWe94i": {
     "defaultMessage": "More Info"
   },
@@ -2219,6 +2470,10 @@
   "vYViQu": {
     "defaultMessage": "Filter",
     "description": "Filter"
+  },
+  "vhHzbl": {
+    "defaultMessage": "Now your friends can view and solve your challenge",
+    "description": "success message"
   },
   "viQX0N": {
     "defaultMessage": "Turtle",
@@ -2292,6 +2547,10 @@
     "defaultMessage": "Register for free",
     "description": "register button"
   },
+  "xyhq1c": {
+    "defaultMessage": "Share in",
+    "description": "share in social media text"
+  },
   "xzorQn": {
     "defaultMessage": "Please share your feedback on how you enjoyed the course!",
     "description": "Award Modal Desciption"
@@ -2363,6 +2622,24 @@
   "zROcjU": {
     "defaultMessage": "Coming soon",
     "description": "More card button text"
+  },
+  "zXjEvn": {
+    "defaultMessage": "sleep",
+    "description": "sleep function"
+  },
+  "zeGEYY": {
+    "defaultMessage": "Oh ho ho.. failed",
+    "description": "modal title"
+  },
+  "zm0wU/": {
+    "defaultMessage": "{idx} {step}",
+    "description": "Steps"
+  },
+  "zombieLand description": {
+    "defaultMessage": "Zombieland is a gamified approach where you will use your mind to code and help the protagonist Zombie reach his destination."
+  },
+  "zombieLand title": {
+    "defaultMessage": "ZombieLand"
   },
   "zrZhCC": {
     "defaultMessage": "More Info",

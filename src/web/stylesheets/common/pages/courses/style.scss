@@ -6,6 +6,8 @@
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 
 .courses-container {
+  --plyr-color-main: var(--course-nav-bg);
+
   background-color: gt.theme-var(course-body-bg, null, $thememaplight, $cssvars);
 
   nav {
@@ -19,11 +21,18 @@
       }
     }
   }
-}
 
-html {
-  --plyr-color-main: var(--course-nav-bg);
-}
+  .video-body-container {
+    @include gm.media-breakpoint-down(md) {
+      padding: 0;
+    }
+  }
+
+  .courses-body-container {
+    @include gm.media-breakpoint-down (md) {
+      padding: 0;
+    }
+  }
 
   .course-card {
     width: 20rem;
@@ -110,9 +119,14 @@ html {
     width: auto !important;
   }
 
-// .course-card-container {
-  // padding: 0 9.5rem;
-// }
+  .course-card-container {
+    // padding: 0 9.5rem;
+    margin: 2rem 0;
+
+    h5 {
+      margin-bottom: 1rem;
+    }
+  }
 
   .circular-progress-container {
     padding: 1.5rem;
@@ -187,6 +201,10 @@ html {
 
   .video-discription-container {
     margin: 1.5rem auto 0;
+
+    .d-flex {
+      gap: 0.5rem;
+    }
   }
 
   .rating-tags-container {
@@ -266,6 +284,17 @@ html {
     justify-content: space-between;
   }
 
+  .rating-modal {
+    .modal-content {
+      border-radius: 0.75rem;
+
+      button {
+        border-radius: 0.75rem;
+        font-weight: bold;
+      }
+    }
+  }
+
 .rating-star-container {
   margin: 2rem 0;
 
@@ -330,6 +359,11 @@ html {
 
     p {
       margin: 0;
+
+      &:first-child {
+        font-weight: bold;
+        font-size: 1.25rem;
+      }
     }
   }
 
@@ -589,14 +623,13 @@ html {
     width: 272px;
     height: 154px;
 
+    p {
+      font-size: 16px;
+    }
+
+    .card-foot {
       p {
         font-size: 16px;
-      }
-
-      .card-foot {
-        p {
-          font-size: 16px;
-        }
       }
     }
   }
@@ -658,6 +691,7 @@ html {
 
       h5 {
         margin-left: 1rem;
+        font-weight: bold;
       }
     }
 
@@ -669,9 +703,9 @@ html {
       margin: 0 0 1rem 0;
     }
 
-    .video-discription-container {
-      padding: 0 1rem;
-    }
+    // .video-discription-container {
+    //   padding: 0 1rem;
+    // }
 
     .rating-tags-container {
       min-width: 200px;
@@ -698,6 +732,7 @@ html {
       margin: 1.5rem 1.25rem;
     }
   }
+
 
   .video-card-cont {
     padding: 0 1rem;
@@ -764,6 +799,21 @@ html {
     background-color: #fff;
     border-radius: 12px;
     margin: 0.5rem 0;
+  }
+
+  .module-progress-container {
+    margin-left: 0;
+    margin: 0.5rem 0;
+    padding: 1.25rem;
+
+    .module-card-cont {
+      margin: 0 0 1rem 0;
+    }
+
+    .module-progress {
+      padding: 1.25rem;
+      margin: 0;
+    }
   }
 }
 

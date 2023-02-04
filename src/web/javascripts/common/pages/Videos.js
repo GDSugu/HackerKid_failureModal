@@ -299,7 +299,10 @@ const RatingModal = ({ submitRating, showModal, afterSubmit }) => {
                     type="button"
                     className="btn mt-3 color-primary"
                     onClick={() => onPressSkip()}>
-                    skip
+                    <FormattedMessage
+                      defaultMessage={'Skip'}
+                      description={'skip button'}
+                    />
                   </button>
                 </div>
               </div>
@@ -525,117 +528,123 @@ const Videos = () => {
   };
   const isDesktop = window.matchMedia('(min-width: 576px)').matches;
 
-  return !urlData.number ? (
-    <>
-      {!isDesktop && (
-        <div>
-          <div className="top-session">
-            <p>Videos</p>
-          </div>
-          <div className="filter-n-search">
-            <div className="form-control search-cont">
-              <img
-                className="search-icon"
-                src="../../../../images/courses/search.svg"
-              />
-              <input
-                onChange={(value) => onSearch(value)}
-                className="search-input"
-                placeholder="Search"
-              />
+  return <>
+    <div className="col-12 col-md-11 col-xl-10 mx-auto video-body-container">
+      {
+        !urlData.number ? (
+          <>
+            {!isDesktop && (
+              <div>
+                <div className="top-session">
+                  <p>Videos</p>
+                </div>
+                <div className="filter-n-search">
+                  <div className="form-control search-cont">
+                    <img
+                      className="search-icon"
+                      src="../../../../images/courses/search.svg"
+                    />
+                    <input
+                      onChange={(value) => onSearch(value)}
+                      className="search-input"
+                      placeholder="Search"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+            <div className="course-videos-container">
+              <h5 className="m-3">
+                {`${moduleData.moduleName} ${moduleData.type ? ` - ${moduleData.type}` : ''}`}
+              </h5>
+              <div className="text-center">
+                {filteredData
+                  ? filteredData.map(
+                    (items, index) => index < page * 10
+                        && index > page * 10 - 10 && (
+                          <div className="mb-2 video-card-cont" key={index}>
+                            <CourseCard data={items} />{' '}
+                          </div>
+                    ),
+                  )
+                  : moduleData
+                    && moduleData.videos.map(
+                      (items, index) => index < page * 10
+                        && index > page * 10 - 11 && (
+                          <div
+                            className="mb-2 video-card-cont"
+                            data-key={index}
+                            key={index}>
+                            <CourseCard data={items} />{' '}
+                          </div>
+                      ),
+                    )}
+              </div>
             </div>
-          </div>
-        </div>
-      )}
-      <div className="course-videos-container">
-        <h5 className="m-3">
-          {moduleData.moduleName} - {moduleData.type}
-        </h5>
-        <div className="text-center">
-          {filteredData
-            ? filteredData.map(
-              (items, index) => index < page * 10
-                  && index > page * 10 - 10 && (
-                    <div className="mb-2 video-card-cont" key={index}>
-                      <CourseCard data={items} />{' '}
-                    </div>
-              ),
-            )
-            : moduleData
-              && moduleData.videos.map(
-                (items, index) => index < page * 10
-                  && index > page * 10 - 11 && (
-                    <div
-                      className="mb-2 video-card-cont"
-                      data-key={index}
-                      key={index}>
-                      <CourseCard data={items} />{' '}
-                    </div>
-                ),
+            <div>
+              {moduleData && moduleData.videos.length > 10 && (
+                <PageNator
+                  totalItems={
+                    filteredData ? filteredData.length : moduleData.videos.length
+                  }
+                  countPerPage={10}
+                  currentPageNumber={page}
+                  onPageChange={(value) => selectPage(value)}
+                  onNextBtnClick={() => selectPage(page + 1)}
+                  onPrevBtnClick={() => selectPage(page - 1)}
+                />
               )}
-        </div>
-      </div>
-      <div>
-        {moduleData && moduleData.videos.length > 10 && (
-          <PageNator
-            totalItems={
-              filteredData ? filteredData.length : moduleData.videos.length
+            </div>
+          </>
+        ) : (
+          <div className="video-page-container">
+            <div className="video-player-container">
+              <Plyr id="video-player" ref={ref}/>
+            </div>
+            {currentQuestion && <RatingAndWatchedComponent prop={currentQuestion} />}
+            <RatingModal
+              submitRating={submitRating}
+              showModal={showRatingModal}
+              afterSubmit={
+                watchNext.videos && watchNext.videos.length > 0
+                  ? () => {
+                    pathNavigator(
+                      `courses/${watchNext.videos[0].moduleId}/${watchNext.videos[0].number}`,
+                    );
+                  }
+                  : () => {
+                    pathNavigator(
+                      `courses/${watchNext.videos[0].moduleId}/1`,
+                    );
+                  }
+              }
+            />
+            <SuccessModalComponent
+            showModal={earnedInfo.show}
+            xpEarned = {earnedInfo.xp}
+            coinsEarned = {earnedInfo.coins}
+            playNext = {
+              watchNext.videos && watchNext.videos.length > 0
+                ? () => {
+                  pathNavigator(
+                    `courses/${watchNext.videos[0].moduleId}/${watchNext.videos[0].number}`,
+                  );
+                }
+                : () => {
+                  pathNavigator(
+                    `courses/${watchNext.videos[0].moduleId}/1`,
+                  );
+                }
             }
-            countPerPage={10}
-            currentPageNumber={page}
-            onPageChange={(value) => selectPage(value)}
-            onNextBtnClick={() => selectPage(page + 1)}
-            onPrevBtnClick={() => selectPage(page - 1)}
-          />
-        )}
-      </div>
-    </>
-  ) : (
-    <div className="video-page-container">
-      <div className="video-player-container">
-        <Plyr id="video-player" ref={ref}/>
-      </div>
-      {currentQuestion && <RatingAndWatchedComponent prop={currentQuestion} />}
-      <RatingModal
-        submitRating={submitRating}
-        showModal={showRatingModal}
-        afterSubmit={
-          watchNext.videos && watchNext.videos.length > 0
-            ? () => {
-              pathNavigator(
-                `courses/${watchNext.videos[0].moduleId}/${watchNext.videos[0].number}`,
-              );
-            }
-            : () => {
-              pathNavigator(
-                `courses/${watchNext.videos[0].moduleId}/1`,
-              );
-            }
-        }
-      />
-      <SuccessModalComponent
-      showModal={earnedInfo.show}
-      xpEarned = {earnedInfo.xp}
-      coinsEarned = {earnedInfo.coins}
-      playNext = {
-        watchNext.videos && watchNext.videos.length > 0
-          ? () => {
-            pathNavigator(
-              `courses/${watchNext.videos[0].moduleId}/${watchNext.videos[0].number}`,
-            );
-          }
-          : () => {
-            pathNavigator(
-              `courses/${watchNext.videos[0].moduleId}/1`,
-            );
-          }
+            />
+            {(watchNext && watchNext.videos.length > 0) && <WatchNextComponent
+              isDesktop={isDesktop}
+              items={watchNext} />}
+          </div>
+        )
       }
-      />
-      {(watchNext && watchNext.videos.length > 0) && <WatchNextComponent
-        isDesktop={isDesktop}
-        items={watchNext} />}
     </div>
-  );
+  </>;
 };
 
 export default Videos;

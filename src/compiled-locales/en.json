@@ -17,6 +17,32 @@
       "value": "XP Earned:"
     }
   ],
+  "+PoBgu": [
+    {
+      "type": 1,
+      "value": "step"
+    }
+  ],
+  "+f2V2I": [
+    {
+      "type": 1,
+      "value": "currentProgress"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "unit"
+    }
+  ],
+  "+fv9wl": [
+    {
+      "type": 0,
+      "value": "State"
+    }
+  ],
   "+g4yFF": [
     {
       "type": 0,
@@ -143,6 +169,22 @@
       "value": "Start Playing"
     }
   ],
+  "0By1LZ": [
+    {
+      "type": 1,
+      "value": "timeInMinutes"
+    },
+    {
+      "type": 0,
+      "value": " Mins"
+    }
+  ],
+  "0IKGwB": [
+    {
+      "type": 0,
+      "value": "Output Description:"
+    }
+  ],
   "0JV99f": [
     {
       "type": 0,
@@ -205,6 +247,12 @@
     {
       "type": 0,
       "value": "Help"
+    }
+  ],
+  "16yTgM": [
+    {
+      "type": 0,
+      "value": "Create challenge"
     }
   ],
   "1BoFrk": [
@@ -331,6 +379,12 @@
       "value": "Videos"
     }
   ],
+  "30ejkF": [
+    {
+      "type": 0,
+      "value": "Close"
+    }
+  ],
   "33dFbN": [
     {
       "type": 0,
@@ -455,6 +509,12 @@
     {
       "type": 0,
       "value": ","
+    }
+  ],
+  "4Pt6v5": [
+    {
+      "type": 0,
+      "value": "Searching..."
     }
   ],
   "4Ve1r3": [
@@ -687,16 +747,34 @@
       "value": "Play"
     }
   ],
+  "7WZECV": [
+    {
+      "type": 1,
+      "value": "modalDescription"
+    }
+  ],
   "7asVcm": [
     {
       "type": 0,
       "value": "Games"
     }
   ],
+  "7dyAWL": [
+    {
+      "type": 0,
+      "value": "No invites"
+    }
+  ],
   "7mn7eO": [
     {
       "type": 0,
       "value": "Output will appear here"
+    }
+  ],
+  "7pvcZr": [
+    {
+      "type": 0,
+      "value": "Run"
     }
   ],
   "7v4G7a": [
@@ -725,6 +803,28 @@
     {
       "type": 0,
       "value": "?"
+    }
+  ],
+  "8cISRy": [
+    {
+      "type": 0,
+      "value": "Time Spent:"
+    }
+  ],
+  "8gWjFk": [
+    {
+      "type": 1,
+      "value": "description"
+    }
+  ],
+  "8ga5/p": [
+    {
+      "type": 0,
+      "value": "#"
+    },
+    {
+      "type": 1,
+      "value": "rank"
     }
   ],
   "9+2Mm0": [
@@ -851,18 +951,10 @@
       "value": "Expected output"
     }
   ],
-  "Acm/fm": [
-    {
-      "type": 1,
-      "value": "name"
-    },
+  "AZoPre": [
     {
       "type": 0,
-      "value": " - "
-    },
-    {
-      "type": 1,
-      "value": "type"
+      "value": "Club Name"
     }
   ],
   "Aevhvw": [
@@ -929,6 +1021,18 @@
       "value": "No"
     }
   ],
+  "BVEoZl": [
+    {
+      "type": 0,
+      "value": "See more"
+    }
+  ],
+  "BW0/7P": [
+    {
+      "type": 0,
+      "value": "Keep in draft"
+    }
+  ],
   "Bj5WGE": [
     {
       "type": 0,
@@ -939,10 +1043,28 @@
       "value": "data"
     }
   ],
+  "Bt/Kkf": [
+    {
+      "type": 0,
+      "value": "completed"
+    }
+  ],
   "BwliRZ": [
     {
       "type": 0,
       "value": "Newest to Oldest"
+    }
+  ],
+  "C1rkSh": [
+    {
+      "type": 0,
+      "value": "Coding Pirate"
+    }
+  ],
+  "C8QChP": [
+    {
+      "type": 0,
+      "value": "Top Members"
     }
   ],
   "CJH/k4": [
@@ -963,6 +1085,24 @@
     {
       "type": 0,
       "value": "Videos"
+    }
+  ],
+  "CLW1pi": [
+    {
+      "type": 0,
+      "value": "Close"
+    }
+  ],
+  "CPWw9k": [
+    {
+      "type": 0,
+      "value": "Previous"
+    }
+  ],
+  "CT79Lc": [
+    {
+      "type": 0,
+      "value": "Club Leaderboard"
     }
   ],
   "CabaPs": [
@@ -1043,12 +1183,6 @@
       "value": "time"
     }
   ],
-  "DtgoWC": [
-    {
-      "type": 1,
-      "value": "time"
-    }
-  ],
   "DuPnGd": [
     {
       "type": 0,
@@ -1059,6 +1193,12 @@
     {
       "type": 0,
       "value": "Live Preview"
+    }
+  ],
+  "EOKZu2": [
+    {
+      "type": 1,
+      "value": "text"
     }
   ],
   "EQ5MZE": [
@@ -1235,6 +1375,12 @@
       "value": "Verify OTP and proceed"
     }
   ],
+  "Game Title": [
+    {
+      "type": 0,
+      "value": "ZombieLand"
+    }
+  ],
   "GbfWVS": [
     {
       "type": 0,
@@ -1315,6 +1461,24 @@
       "value": " coins"
     }
   ],
+  "HLIDfo": [
+    {
+      "type": 0,
+      "value": "Join a club"
+    }
+  ],
+  "HTfYYv": [
+    {
+      "type": 0,
+      "value": "Play next"
+    }
+  ],
+  "HXFZww": [
+    {
+      "type": 0,
+      "value": "Sample Input:"
+    }
+  ],
   "HZrPcB": [
     {
       "type": 0,
@@ -1333,10 +1497,22 @@
       "value": "Congratulations!"
     }
   ],
+  "I+EuqZ": [
+    {
+      "type": 1,
+      "value": "pointsEarned"
+    }
+  ],
   "I0vwZV": [
     {
       "type": 0,
       "value": "Session Videos"
+    }
+  ],
+  "I1oDxa": [
+    {
+      "type": 0,
+      "value": "Loading failed due to some unknown error! Please try again later."
     }
   ],
   "ILnphX": [
@@ -1465,6 +1641,12 @@
       "value": "Continue"
     }
   ],
+  "KY6DzQ": [
+    {
+      "type": 1,
+      "value": "modName"
+    }
+  ],
   "KcDrvG": [
     {
       "type": 0,
@@ -1583,6 +1765,24 @@
     {
       "type": 1,
       "value": "title"
+    }
+  ],
+  "MZ57OE": [
+    {
+      "type": 0,
+      "value": "Back to Challenges"
+    }
+  ],
+  "MceYzq": [
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "Me+V0/": [
+    {
+      "type": 0,
+      "value": "Challenge Name"
     }
   ],
   "MfoF60": [
@@ -1765,12 +1965,6 @@
       "value": "Filter"
     }
   ],
-  "OvWf0W": [
-    {
-      "type": 0,
-      "value": "Filter"
-    }
-  ],
   "Ovi5Cc": [
     {
       "type": 1,
@@ -1853,6 +2047,12 @@
     {
       "type": 1,
       "value": "title"
+    }
+  ],
+  "PpUsRs": [
+    {
+      "type": 0,
+      "value": "Join"
     }
   ],
   "Pvrf+y": [
@@ -1963,6 +2163,18 @@
     {
       "type": 0,
       "value": "ok"
+    }
+  ],
+  "RjBfJa": [
+    {
+      "type": 0,
+      "value": "range"
+    }
+  ],
+  "RlFXhC": [
+    {
+      "type": 0,
+      "value": "Previous Awards"
     }
   ],
   "S3mtIm": [
@@ -2139,6 +2351,12 @@
       "value": "Continue watching"
     }
   ],
+  "UDQT0n": [
+    {
+      "type": 0,
+      "value": "Achieved Badge"
+    }
+  ],
   "UFvWGM": [
     {
       "type": 0,
@@ -2216,12 +2434,6 @@
     }
   ],
   "VRP3Sx": [
-    {
-      "type": 1,
-      "value": "time"
-    }
-  ],
-  "VdAhqD": [
     {
       "type": 1,
       "value": "time"
@@ -2305,6 +2517,12 @@
       "value": "type"
     }
   ],
+  "WmjFlm": [
+    {
+      "type": 0,
+      "value": "Download"
+    }
+  ],
   "WsWDuq": [
     {
       "type": 0,
@@ -2343,6 +2561,12 @@
     {
       "type": 0,
       "value": " for your excellent record."
+    }
+  ],
+  "XMB1Ot": [
+    {
+      "type": 0,
+      "value": "No Awards Found"
     }
   ],
   "XQ/d5T": [
@@ -2425,6 +2649,28 @@
       "value": " coins for completing the video."
     }
   ],
+  "YdxUNc": [
+    {
+      "type": 0,
+      "value": "moveDown"
+    }
+  ],
+  "Ykg8tn": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
+  "YvQFe7": [
+    {
+      "type": 1,
+      "value": "points"
+    },
+    {
+      "type": 0,
+      "value": " coins"
+    }
+  ],
   "YxMMzC": [
     {
       "type": 0,
@@ -2441,6 +2687,12 @@
     {
       "type": 0,
       "value": "Tags:"
+    }
+  ],
+  "ZG77Sq": [
+    {
+      "type": 0,
+      "value": "close"
     }
   ],
   "ZMimja": [
@@ -2611,6 +2863,12 @@
     {
       "type": 0,
       "value": "Submit"
+    }
+  ],
+  "cS+r14": [
+    {
+      "type": 0,
+      "value": "Basic Info"
     }
   ],
   "cZDBd3": [
@@ -2809,6 +3067,12 @@
       "value": " watched"
     }
   ],
+  "fzlKxE": [
+    {
+      "type": 0,
+      "value": "See Less Awards"
+    }
+  ],
   "g0zp7w": [
     {
       "type": 0,
@@ -2851,10 +3115,40 @@
       "value": "gameTitle"
     }
   ],
+  "gTCzny": [
+    {
+      "type": 0,
+      "value": "Profile Picture"
+    }
+  ],
+  "gTzQSp": [
+    {
+      "type": 0,
+      "value": "moveUp"
+    }
+  ],
+  "gXLFip": [
+    {
+      "type": 0,
+      "value": "in"
+    }
+  ],
+  "gYpthg": [
+    {
+      "type": 0,
+      "value": "More"
+    }
+  ],
   "giAApt": [
     {
       "type": 0,
       "value": "Solution Videos"
+    }
+  ],
+  "glY0NW": [
+    {
+      "type": 0,
+      "value": "Output"
     }
   ],
   "groRBE": [
@@ -2865,6 +3159,12 @@
     {
       "type": 0,
       "value": " coins"
+    }
+  ],
+  "gzjgZO": [
+    {
+      "type": 0,
+      "value": "Try these challenges"
     }
   ],
   "h/MN82": [
@@ -2883,6 +3183,12 @@
     {
       "type": 0,
       "value": "Send OTP"
+    }
+  ],
+  "hWyGja": [
+    {
+      "type": 0,
+      "value": "Instructions"
     }
   ],
   "hZGwA5": [
@@ -2931,10 +3237,22 @@
       "value": "navigationText"
     }
   ],
+  "iebFqD": [
+    {
+      "type": 1,
+      "value": "clubName"
+    }
+  ],
   "iohPi0": [
     {
       "type": 0,
       "value": "Continue Watching"
+    }
+  ],
+  "jACivV": [
+    {
+      "type": 1,
+      "value": "name"
     }
   ],
   "jDzDCp": [
@@ -3163,12 +3481,6 @@
       "value": "Coins Earned:"
     }
   ],
-  "mfMsri": [
-    {
-      "type": 0,
-      "value": "Coins Earned:"
-    }
-  ],
   "mfZLuH": [
     {
       "type": 0,
@@ -3323,10 +3635,34 @@
       "value": "Account Settings"
     }
   ],
+  "pHE0Mj": [
+    {
+      "type": 0,
+      "value": "Join with link"
+    }
+  ],
+  "pNZIoS": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
   "pQ0m8t": [
     {
       "type": 0,
       "value": "watched this"
+    }
+  ],
+  "pRmIA8": [
+    {
+      "type": 0,
+      "value": "Go to Challenges"
+    }
+  ],
+  "pVCbSK": [
+    {
+      "type": 0,
+      "value": "Instructions"
     }
   ],
   "pVIk7O": [
@@ -3369,16 +3705,58 @@
       "value": "Game Progress"
     }
   ],
+  "pxPVWB": [
+    {
+      "type": 0,
+      "value": "moveLeft"
+    }
+  ],
+  "q+hyoH": [
+    {
+      "type": 0,
+      "value": "moveRight"
+    }
+  ],
+  "q+pH3V": [
+    {
+      "type": 0,
+      "value": "Save"
+    }
+  ],
+  "q9L1mf": [
+    {
+      "type": 1,
+      "value": "head"
+    }
+  ],
+  "qAG6DF": [
+    {
+      "type": 0,
+      "value": "Click “Run” to generate output for your code"
+    }
+  ],
   "qJ7EK+": [
     {
       "type": 1,
       "value": "challengeName"
     }
   ],
+  "qPy2h6": [
+    {
+      "type": 0,
+      "value": "Club Leaderboard"
+    }
+  ],
   "qTQ8nP": [
     {
       "type": 1,
       "value": "coinsEarned"
+    }
+  ],
+  "qTXOtA": [
+    {
+      "type": 0,
+      "value": "Problem Statement"
     }
   ],
   "qTebrI": [
@@ -3453,6 +3831,18 @@
     {
       "type": 1,
       "value": "type"
+    }
+  ],
+  "r1CvRM": [
+    {
+      "type": 0,
+      "value": "Additional Inputs"
+    }
+  ],
+  "r3BGOH": [
+    {
+      "type": 0,
+      "value": "Club Name"
     }
   ],
   "rECW1h": [
@@ -3679,6 +4069,12 @@
       "value": "Show Leaderboard"
     }
   ],
+  "vKE06c": [
+    {
+      "type": 0,
+      "value": "Create"
+    }
+  ],
   "vWe94i": [
     {
       "type": 0,
@@ -3695,6 +4091,12 @@
     {
       "type": 0,
       "value": "Filter"
+    }
+  ],
+  "vhHzbl": [
+    {
+      "type": 0,
+      "value": "Now your friends can view and solve your challenge"
     }
   ],
   "viQX0N": [
@@ -3813,6 +4215,12 @@
       "value": "Register for free"
     }
   ],
+  "xyhq1c": [
+    {
+      "type": 0,
+      "value": "Share in"
+    }
+  ],
   "xzorQn": [
     {
       "type": 0,
@@ -3919,6 +4327,44 @@
     {
       "type": 0,
       "value": "Coming soon"
+    }
+  ],
+  "zXjEvn": [
+    {
+      "type": 0,
+      "value": "sleep"
+    }
+  ],
+  "zeGEYY": [
+    {
+      "type": 0,
+      "value": "Oh ho ho.. failed"
+    }
+  ],
+  "zm0wU/": [
+    {
+      "type": 1,
+      "value": "idx"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "step"
+    }
+  ],
+  "zombieLand description": [
+    {
+      "type": 0,
+      "value": "Zombieland is a gamified approach where you will use your mind to code and help the protagonist Zombie reach his destination."
+    }
+  ],
+  "zombieLand title": [
+    {
+      "type": 0,
+      "value": "ZombieLand"
     }
   ],
   "zrZhCC": [

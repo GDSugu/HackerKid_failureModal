@@ -392,7 +392,7 @@ const Courses = () => {
 
   return (
     <>
-      <div className="col-12 col-md-11 col-xl-10 mx-auto">
+      <div className="col-12 col-md-11 col-xl-10 mx-auto courses-body-container">
         {isDesktop && overallProgress && progress.length > 0 && (
           <CourseDetailsCard
             overallProgress={overallProgress}
