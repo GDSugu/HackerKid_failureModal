@@ -14,9 +14,9 @@ const AwardCard = ({
   id={'award-card'}
 >
     <img src={awardImage} alt='award-icon' className='award-card-icon' />
-    <label htmlFor='award-card' className='mt-1 caption award-name'>
+    <h5 className='mt-1 caption award-name'>
       <FormattedMessage defaultMessage={'{awardName}'} description='award name label' values={{ awardName }} />
-    </label>
+    </h5>
   </div>;
 
 export default AwardCard;

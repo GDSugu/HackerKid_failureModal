@@ -1,28 +1,22 @@
-import { createPopper } from '@popperjs/core';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import useToolTipPopup from '../../../../../hooks/common/ToolTipPopup';
 import AwardsProgressBar from '../AwardsProgressBar';
 
 const AwardInfo = ({
-  isDesktop,
   currentAwardDetails = false,
   repeatingAwards = false,
   className = '',
   onClick = () => { },
+  showAwardDescription = true,
 }) => {
-  useEffect(() => {
-    if (isDesktop) {
-      const awardId = currentAwardDetails
-        ? currentAwardDetails.awardId : repeatingAwards[0].awardId;
+  const awardId = currentAwardDetails
+    ? currentAwardDetails.awardId : repeatingAwards[0].awardId;
 
-      const awardCard = document.querySelector(`.award-card-${awardId}`);
-      const awardInfo = document.querySelector(`.award-info-container-${awardId}`);
+  const awardCard = document.querySelector(`.award-card-${awardId}`);
+  const awardInfo = document.querySelector(`.award-info-container-${awardId}`);
 
-      createPopper(awardCard, awardInfo, {
-        placement: 'bottom-start',
-      });
-    }
-  }, []);
+  useToolTipPopup(awardCard, awardInfo);
 
   return <div className={`award-info-container ${className}`}>
     {
@@ -37,7 +31,7 @@ const AwardInfo = ({
             }} />
           </h6>
           {
-            isDesktop && <small className='award-subtitle overline'>
+            showAwardDescription && <small className='award-subtitle overline'>
               <FormattedMessage defaultMessage={'{awardDescription}'} description='award description' values={{
                 awardDescription: currentAwardDetails.awardDescription,
               }} />
@@ -72,9 +66,9 @@ const AwardInfo = ({
             }} />
           </h6>
           {
-            isDesktop && <small className='award-subtitle overline'>
+            showAwardDescription && <small className='award-subtitle overline'>
               <FormattedMessage defaultMessage={'{awardDescription}'} description='award description' values={{
-                awardDescription: currentAwardDetails.awardDescription,
+                awardDescription: award.awardDescription,
               }} />
             </small>
           }

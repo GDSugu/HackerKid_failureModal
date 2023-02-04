@@ -14,6 +14,7 @@ import AwardCard from '../components/AwardsCard';
 // import CollectibleCard from '../components/CollectibleCard';
 import { useAwards } from '../../../../hooks/pages/awards';
 import { copyHandler } from '../Functions/turtle';
+import AwardInfo from '../components/AwardsInfo';
 
 const Certificates = ({ gameDetails, onCertificateShareBtnClick = () => { } }) => {
   const certificateDataObj = gameDetails?.[0].certificateData;
@@ -51,10 +52,20 @@ const Awards = ({
 }) => <div className='row'>
     {
       awards && awards.map((award, idx) => <div className='col-4 col-lg-3 px-2 py-2' key={idx}>
-        <AwardCard
-          awardImage={award.awardImage}
-          interactable={true}
-        />
+        <div className='award-card-with-awards-info'>
+          <AwardCard
+            className={`pointer-cursor award-card-${award.awardId}`}
+            awardImage={award.awardImage}
+            awardName={award.awardName}
+            interactable={true}
+          />
+          <AwardInfo
+            isDesktop={isDesktop}
+            className={`award-info-container-${award.awardId}`}
+            currentAwardDetails={award}
+            repeatingAwards={award.repeatingAwards ? award.repeatingAwards : false}
+          />
+        </div>
       </div>)
     }
     {
@@ -343,8 +354,9 @@ const CollectionsModalComponent = ({
           }
         </div>
         <div className="collection-content">
-          <Certificates gameDetails={gameDetails}
-          onCertificateShareBtnClick={onCertificateShareBtnClick} />
+          <Certificates
+            gameDetails={gameDetails}
+            onCertificateShareBtnClick={onCertificateShareBtnClick} />
           {
             !isDesktop && gameDetails && Object.keys(gameDetails[0].certificateData).length > 0
             && <Link to={'/certificates'} type='button' className='btn btn-primary btn-block body-bold view-more-btn'>
@@ -366,7 +378,7 @@ const CollectionsModalComponent = ({
             />
           </h5>
         </div>
-        <div className="collection-content">
+        <div className="awards-content">
           <Awards
             awards={awards}
             isDesktop={isDesktop}
