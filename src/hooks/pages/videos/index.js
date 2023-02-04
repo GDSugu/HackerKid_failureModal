@@ -27,6 +27,7 @@ const timeActivity = ({ videoData }) => post({
   videoId: videoData.videoId,
   completed: videoData.completed ? videoData.completed : false,
   timeTracked: parseInt(videoData.timeTracked, 10),
+  s3Prefix: process.env.S3PREFIX,
 }, 'videos/').then((res) => JSON.parse(res));
 
 const useVideos = ({ isPageMounted, urlData }) => {
@@ -47,18 +48,20 @@ const useVideos = ({ isPageMounted, urlData }) => {
       type: 'submitRating', moduleId, number, rating, videoId,
     }, 'videos/').then((res) => JSON.parse(res));
   };
-  const { moduleId, number } = urlData;
-  useEffect(() => {
-    if (number) {
-      getVideoData({
-        isPageMounted, setVideoData, moduleId, number,
-      });
-    } else {
-      getInvidualModuleData({
-        isPageMounted, setInvidualModuleData, moduleId,
-      });
-    }
-  }, []);
+  if (urlData) {
+    const { moduleId, number } = urlData;
+    useEffect(() => {
+      if (number) {
+        getVideoData({
+          isPageMounted, setVideoData, moduleId, number,
+        });
+      } else {
+        getInvidualModuleData({
+          isPageMounted, setInvidualModuleData, moduleId,
+        });
+      }
+    }, []);
+  }
 
   const result = {
     videoData,

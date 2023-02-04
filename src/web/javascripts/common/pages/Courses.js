@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import FuzzySearch from 'fuzzy-search';
 import { $, pageInit } from '../framework';
@@ -10,6 +10,7 @@ import '../../../stylesheets/common/pages/courses/style.scss';
 import useCourses from '../../../../hooks/pages/courses';
 import Img from '../components/Img';
 import BottomSheet from '../components/BottomSheet';
+import useVideos from '../../../../hooks/pages/videos';
 
 const CourseModule = ({ items, isDesktop }) => (
   <>
@@ -329,6 +330,20 @@ const Courses = () => {
     moduleData, continueWatching, progress, overallProgress,
   } = courseData;
 
+  const { timeActivity } = useVideos(
+    { isPageMounted },
+  );
+
+  useEffect(() => {
+    const previousVideoData = localStorage.getItem('videoData');
+
+    if (previousVideoData) {
+      const videoData = JSON.parse(previousVideoData);
+      timeActivity({ videoData });
+      localStorage.clearItem('videoData');
+    }
+  }, []);
+
   const [filteredData, setFilterData] = useState(false);
 
   const [filter, setFilter] = useState(false);
@@ -354,7 +369,7 @@ const Courses = () => {
     setFilterData(result);
   };
 
-  const isDesktop = window.matchMedia('(min-width: 576px)').matches;
+  const isDesktop = window.matchMedia('(min-width: 726px)').matches;
   if (overallProgress) {
     animateTotalCount('#yourScore', overallProgress.completedCount, (overallProgress.completedCount / overallProgress.totalVideos) * 100);
   }
@@ -418,7 +433,7 @@ const Courses = () => {
               isDesktop={isDesktop}
             />
           ))}
-          {!isDesktop && overallProgress && <BottomSheet
+          {!isDesktop && overallProgress && progress.length > 0 && <BottomSheet
           id={'course-progress-modal'}>
             <CourseDetailsCardMobile
       progress={progress}
