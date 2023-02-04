@@ -4,7 +4,8 @@ import React, {
 import { Link } from 'react-router-dom';
 import '../../../stylesheets/common/pages/challenges/style.scss';
 import { FormattedMessage } from 'react-intl';
-import { loginCheck, pageInit } from '../framework';
+import autocrop from 'autocrop-worker';
+import { loginCheck, pageInit, timeTrack } from '../framework';
 import Img from '../components/Img';
 import SwiperComponent from '../components/SwiperComponent';
 import { useGetAttemptedChallenges, useGetChallenges, useGetMyChallenges } from '../../../../hooks/pages/challenges';
@@ -26,6 +27,11 @@ const compareProps = (prev, next) => {
     }
   });
   return isEqual;
+};
+
+const cropImage = (element) => {
+  // eslint-disable-next-line camelcase
+  autocrop(element, null, { version: __webpack_hash__ });
 };
 
 const HeroContainer = ({
@@ -67,7 +73,7 @@ const HeroContainer = ({
             <NewlyTrendingChallengeComponent />
             <div className='last-challenge-with-create-challenge-btn'>
               <ChallengesActivityComponent />
-              <Link to={'/turtle/challanges/create/new'} className='btn btn-primary btn-block create-challenge-btn'>
+              <Link to={'/turtle/challenges/create/new'} className='btn btn-primary btn-block create-challenge-btn'>
                 <FormattedMessage defaultMessage={'Create a Challenge'} description='create a challenge button text' />
                 <i className='fa fa-chevron-right' />
               </Link>
@@ -98,7 +104,7 @@ const HeroContainer = ({
             </div>
           </div>
         }
-        <Link to={'#'} className='btn btn-primary btn-block create-challenge-btn'>
+        <Link to={'/turtle/challenges/create/new'} className='btn btn-primary btn-block create-challenge-btn'>
           <FormattedMessage defaultMessage={'Create a Challenge'} description='create a challenge button text' />
           <i className='fa fa-chevron-right' />
         </Link>
@@ -107,10 +113,18 @@ const HeroContainer = ({
   </>;
 };
 
-const ChallengeSwiperSlide = ({ data, showChallengeAuthorName }) => <>
+const ChallengeSwiperSlide = ({ data, showChallengeAuthorName }) => {
+  useEffect(() => {
+    if (data) {
+      const element = document.querySelector(`.challenge-swipter-img-${data.challengeId} img`);
+      cropImage(element);
+    }
+  }, [data]);
+
+  return (<>
   <Link className='challenge-item' to={data.actionUrl}>
     <div className="challenge-block">
-      <div className="challenge-img">
+      <div className={`challenge-img challenge-swipter-img-${data.challengeId}`}>
         <Img
           alt={data.challengeName}
           useSource={true}
@@ -130,7 +144,8 @@ const ChallengeSwiperSlide = ({ data, showChallengeAuthorName }) => <>
       }
     </div>
   </Link>
-</>;
+</>);
+};
 
 const NavigationSlide = ({ to, navigationText }) => <>
   <Link to={to} className='navigation-slide'>
@@ -211,7 +226,15 @@ const ChallengesSwiper = ({
   </div>
 );
 
-const NewlyTrendingChallenge = ({ challenge }) => (
+const NewlyTrendingChallenge = ({ challenge }) => {
+  useEffect(() => {
+    if (challenge) {
+      const element = document.querySelector('.newly-trending-challenge-container .challenge-img img');
+      cropImage(element);
+    }
+  }, [challenge]);
+
+  return (
   <>
     {
       challenge && <Link
@@ -235,8 +258,8 @@ const NewlyTrendingChallenge = ({ challenge }) => (
     {
       !challenge && <div className='newly-trending-challenge-skeleton'></div>
     }
-  </>
-);
+  </>);
+};
 
 const ChallengesActivity = ({ myChallenges }) => <>
   {
@@ -286,6 +309,8 @@ const Challenges = () => {
   const isPageMounted = useRef(true);
   const numberOfChallengesSlideToShow = 7;
   pageInit('challenges-container', 'Challenges');
+
+  timeTrack('challenges');
 
   const [isDesktop, setIsDesktop] = useState(window.matchMedia('(min-width: 768px)').matches);
 

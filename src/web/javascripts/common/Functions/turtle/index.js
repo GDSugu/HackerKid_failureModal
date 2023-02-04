@@ -12,6 +12,7 @@ import { throttle } from '../../../../../hooks/common/utlis';
 import {
   upsertDescription, upsertFBMeta, upsertTitle, upsertTwitterMeta,
 } from '../../seo';
+import allBlocksMarkup from './markup';
 
 const manager = {
   windowType: 'desktop',
@@ -80,15 +81,10 @@ const blockColors = (name) => {
   return name in mapper ? mapper[name] : mapper.default;
 };
 
-const initializeBlockly = (response) => {
+const initializeBlockly = (response, page) => {
   try {
-    const xmlBlock = response.questionObject.totalBlocks;
-    const maxBlocks = response.questionObject.blockLen;
-    $('#turtleBlock').html(xmlBlock);
-    $('#turtleBlock xml [name=Turtle]').attr('colour', blockColors('turtle').category);
-    const workspace = Blockly.inject('turtleBlock', {
+    const blocklyConfig = {
       media: '/blockly/media/',
-      toolbox: $('#toolbox')[0],
       scrollbars: true,
       trashcan: true,
       theme: Blockly.Themes.Dark,
@@ -98,16 +94,70 @@ const initializeBlockly = (response) => {
         colour: 'rgba(255, 255, 255, 0.1)',
         snap: true,
       },
-      horizontalLayout: ($(window).width() < 641 && !xmlBlock.includes('category')),
-      maxBlocks,
-    });
-    const xmlDom = Blockly.Xml.textToDom(
-      'submissionDetails' in response
-      && response.submissionDetails.xmlWorkSpace
-      && response.submissionDetails.xmlWorkSpace !== ''
-        ? response.submissionDetails.xmlWorkSpace
-        : '<xml><block type="turtle_import"></block></xml>',
-    );
+    };
+    let xmlWorkspace = '<xml><block type="turtle_import"></block></xml>';
+    switch (page) {
+      case 'turtle': {
+        const xmlBlock = response.questionObject.totalBlocks;
+        const maxBlocks = response.questionObject.blockLen;
+        $('#turtleBlock').html(xmlBlock);
+        $('#turtleBlock xml [name=Turtle]').attr('colour', blockColors('turtle').category);
+
+        blocklyConfig.toolbox = document.querySelector('#toolbox');
+        blocklyConfig.maxBlocks = maxBlocks;
+        blocklyConfig.horizontalLayout = ($(window).width() < 641 && !xmlBlock.includes('category'));
+
+        xmlWorkspace = 'submissionDetails' in response
+          && response.submissionDetails.xmlWorkSpace
+          && response.submissionDetails.xmlWorkSpace !== ''
+          ? response.submissionDetails.xmlWorkSpace
+          : '<xml><block type="turtle_import"></block></xml>';
+        break;
+      }
+      case 'take-challenge': {
+        const { xmlMarkUp } = response.challengeObject;
+        $('#turtleBlock').html(xmlMarkUp);
+        $('#turtleBlock xml [name=Turtle]').attr('colour', blockColors('turtle').category);
+        $('#turtleBlock xml [name=Logic]').attr('colour', blockColors('logic').category);
+        $('#turtleBlock xml [name=Controls]').attr('colour', blockColors('loops').category);
+        $('#turtleBlock xml [name=Loops]').attr('colour', blockColors('loops').category);
+        $('#turtleBlock xml [name=Math]').attr('colour', blockColors('math').category);
+        $('#turtleBlock xml [name=Text]').attr('colour', blockColors('text').category);
+        $('#turtleBlock xml [name=Lists]').attr('colour', blockColors('lists').category);
+        $('#turtleBlock xml [name=Colour]').attr('colour', blockColors('colour').category);
+        $('#turtleBlock xml [name=Variables]').attr('colour', blockColors('variables').category);
+        const maxBlocks = response.challengeObject.totalBlocks;
+
+        blocklyConfig.toolbox = document.querySelector('#toolbox');
+        blocklyConfig.maxBlocks = maxBlocks;
+        blocklyConfig.horizontalLayout = ($(window).width() < 641 && !xmlMarkUp.includes('category'));
+
+        xmlWorkspace = 'submissionDetails' in response
+          && response.submissionDetails.xmlWorkSpace
+          && response.submissionDetails.xmlWorkSpace !== ''
+          ? response.submissionDetails.xmlWorkSpace
+          : '<xml><block type="turtle_import"></block></xml>';
+
+        break;
+      }
+      case 'create-challenge': {
+        $('#turtleBlock').html(allBlocksMarkup);
+        $('#turtleBlock xml [name=Turtle]').attr('colour', blockColors('turtle').category);
+
+        blocklyConfig.toolbox = document.querySelector('#toolbox');
+        blocklyConfig.horizontalLayout = ($(window).width() < 641);
+
+        xmlWorkspace = response
+        && response.challengeDetails.answerState
+        && response.challengeDetails.answerState !== ''
+          ? response.challengeDetails.answerState
+          : '<xml><block type="turtle_import"></block></xml>';
+        break;
+      }
+      default: break;
+    }
+    const workspace = Blockly.inject('turtleBlock', blocklyConfig);
+    const xmlDom = Blockly.Xml.textToDom(xmlWorkspace);
     Blockly.Xml.domToWorkspace(xmlDom, workspace);
     workspace.addChangeListener(handleBlocksChange);
     manager.workspace = workspace;
@@ -118,8 +168,16 @@ const initializeBlockly = (response) => {
 
 const repositionTurtle = (targetSelector = '#answerCanvas', parentSelector = '.outputContainer', canvas = 'output' || 'question') => {
   try {
-    const container = $(parentSelector);
-    const content = $(targetSelector);
+    let target = targetSelector;
+    let parentSel = parentSelector;
+    if (targetSelector.indexOf('#') === -1) {
+      target = `#${targetSelector}`;
+    }
+    if (targetSelector === 'previewCanvas') {
+      parentSel = '.previewOutputContainer';
+    }
+    const container = $(parentSel);
+    const content = $(target);
     const canvasScale = canvas === 'answer' ? manager.canvasScale.outputCanvas : manager.canvasScale.qnCanvas;
     if (content.length && container.length) {
       container.scrollLeft(
@@ -139,7 +197,7 @@ const repositionTurtle = (targetSelector = '#answerCanvas', parentSelector = '.o
     console.log(error);
   }
 };
-
+window.reposturtle = repositionTurtle;
 const updateDebugState = () => {
   try {
     const debugButton = $('#continueDebugger, .continueDebugger');
@@ -156,12 +214,33 @@ const updateDebugState = () => {
   }
 };
 
-const updateSeoTags = (parsedResponse) => {
+const updateSeoTags = (parsedResponse, page) => {
   try {
-    const title = `${parsedResponse.questionObject.Question} - Turtle Level - Hackerkid`;
-    const description = `Follow the instructions: ${parsedResponse.questionObject.steps.join(', ')}`;
-    const url = `${window.location.origin}/turtle/${parsedResponse.questionObject.virtualId}/${parsedResponse.questionObject.uniqueString}`;
-    const image = parsedResponse.questionObject.img_link;
+    let title;
+    let description;
+    let url;
+    let image;
+
+    switch (page) {
+      case 'turtle': {
+        title = `${parsedResponse.questionObject.Question} - Turtle Level - Hackerkid`;
+        description = `Follow the instructions: ${parsedResponse.questionObject.steps.join(', ')}`;
+        url = `${window.location.origin}/turtle/${parsedResponse.questionObject.virtualId}/${parsedResponse.questionObject.uniqueString}`;
+        image = parsedResponse.questionObject.img_link;
+        break;
+      }
+      case 'take-challenge': {
+        title = `${parsedResponse.challengeObject.challengeName} - Turtle Challenge - Hackerkid`;
+        description = `Complete this ${parsedResponse.challengeObject.challengeName} turtle challenge to gain points and climb up the leaderboard`;
+        url = `${window.location.origin}/turtle/challenges/${parsedResponse.challengeObject.challengeId}/${parsedResponse.challengeObject.uniqueString}`;
+        image = parsedResponse.challengeObject.imagePath;
+        break;
+      }
+      case 'create-challenge': {
+        return;
+      }
+      default: break;
+    }
     upsertTitle(title);
     upsertDescription(description);
     upsertFBMeta(title, description, url, image);
@@ -273,9 +352,6 @@ const runCode = (code, target = '#answerCanvas', animate = true, frames = 1, del
   Sk.TurtleGraphics.width = width;
   Sk.TurtleGraphics.height = width;
   Sk.TurtleGraphics.animate = animate;
-  setTimeout(() => {
-    repositionTurtle(target, parentSelector);
-  }, 500);
   // eslint-disable-next-line new-cap
   Sk.builtins.highlightBlock = new Sk.builtin.func((id) => {
     manager.workspace.highlightBlock(id.v);
@@ -285,6 +361,10 @@ const runCode = (code, target = '#answerCanvas', animate = true, frames = 1, del
       Sk.TurtleGraphics.tracer(frames, delay);
     }
   };
+  console.table({
+    target,
+    parentSelector,
+  });
   const attachDebugger = {
     'Sk.promise': (stepData) => {
       if (manager.debuggingEnabled && respectDebugger) {
@@ -306,6 +386,9 @@ const runCode = (code, target = '#answerCanvas', animate = true, frames = 1, del
       return false;
     },
   };
+  setTimeout(() => {
+    repositionTurtle(target, parentSelector);
+  }, 500);
   return Sk.misceval.asyncToPromise(() => Sk.importMainWithBody('<stdin>', false, code, true), attachDebugger);
 };
 
@@ -396,16 +479,38 @@ const postNavigationHandle = () => {
   resetDebugger();
 };
 
-const updateHistory = (response) => {
+const updateHistory = (response, page, addData) => {
   try {
-    const { uniqueString, virtualId } = response.questionObject;
-    window.history.replaceState({}, '', `/turtle/${virtualId}/${uniqueString}`);
+    let history = '';
+    switch (page) {
+      case 'turtle': {
+        const { uniqueString, virtualId } = response.questionObject;
+        history = `/turtle/${virtualId}/${uniqueString}`;
+        break;
+      }
+      case 'take-challenge': {
+        const { challengeId, uniqueString } = response.challengeObject;
+        history = `/turtle/challenges/${challengeId}/${uniqueString}`;
+        break;
+      }
+      case 'create-challenge': {
+        if (addData?.questionId === 'new') {
+          history = '/turtle/challenges/create/new';
+        } else {
+          const { challengeId, uniqueString } = response.challengeDetails;
+          history = `/turtle/challenges/create/${challengeId}/${uniqueString}`;
+        }
+        break;
+      }
+      default: break;
+    }
+    window.history.replaceState({}, '', history);
   } catch (error) {
     console.log(error);
   }
 };
 
-const initiateRunCode = () => {
+const initiateRunCode = (page, preview = false) => {
   // highlight current running block
   Blockly.Python.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
   const code = Blockly.Python.workspaceToCode(manager.workspace);
@@ -420,9 +525,22 @@ const initiateRunCode = () => {
     delay = 0;
   }
   let validated = false;
-  return runCode(code, 'userCanvas', true, frames, delay, true).then(() => {
+  let addDebugger = true;
+  let target = 'userCanvas';
+  let parentselector = '.outputContainer';
+  if (page === 'create-challenge') {
+    manager.debuggingEnabled = false;
+    addDebugger = false;
+  }
+
+  if (preview) {
+    target = 'previewCanvas';
+    parentselector = '.previewOutputContainer';
+  }
+
+  return runCode(code, target, true, frames, delay, addDebugger, parentselector).then(() => {
     manager.workspace.highlightBlock(null);
-    const selector = $('#userCanvas')[0];
+    const selector = $(`#${target}`)[0];
     if (!selector || !selector.turtleInstance) {
       // lets say like no promise in that case but we need to save code -- JPK
       return false;
@@ -433,60 +551,139 @@ const initiateRunCode = () => {
     manager.inDebugging = false;
     updateDebugState();
 
+    if (page === 'create-challenge') {
+      return new Promise((resolve) => resolve(true));
+    }
     const answerImages = getPixelData('#answerCanvas canvas');
     const userImages = getPixelData('#userCanvas canvas');
     return pool.exec(validateCode, [answerImages, userImages]);
   }).then((valid) => {
     validated = valid;
     const request = {
-      type: 'validateQuestion',
-      questionId: Number(manager.initialResponse.questionObject.question_id),
       sourceCode: manager.editor.getValue(),
-      xmlWorkSpace: Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(manager.workspace)),
-      validated,
     };
-    let requestString = '';
-    Object.keys(request).forEach((index) => {
-      requestString += request[index];
-    });
-    const requestHash = md5(requestString + md5(requestString).toString()).toString();
-    request.requestHash = requestHash;
-    resetDebugger();
+    switch (page) {
+      case 'turtle': {
+        request.type = 'validateQuestion';
+        request.questionId = Number(manager.initialResponse.questionObject.question_id);
+        request.xmlWorkSpace = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(manager.workspace));
+        request.validated = validated;
+        break;
+      }
+      case 'take-challenge': {
+        request.type = 'validateChallenge';
+        request.challengeId = Number(manager.initialResponse.challengeObject.challengeId);
+        request.xmlWorkSpace = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(manager.workspace));
+        request.validated = validated;
+
+        break;
+      }
+      case 'create-challenge': {
+        const challengeName = document.querySelector('.create-challenge-question-title').innerHTML.trim();
+        const blockTypesAll = manager.workspace.getAllBlocks();
+        const blockTypes = blockTypesAll.map((value) => value.type);
+        request.type = 'updateChallenge';
+        request.blockTypes = blockTypes;
+        request.answerState = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(manager.workspace));
+        request.challengeId = Number(manager.initialResponse.challengeDetails.challengeId);
+        request.challengeName = challengeName;
+        break;
+      }
+      default: break;
+    }
+
+    if (page !== 'create-challenge') {
+      let requestString = '';
+      Object.keys(request).forEach((index) => {
+        requestString += request[index];
+      });
+      const requestHash = md5(requestString + md5(requestString).toString()).toString();
+      request.requestHash = requestHash;
+      resetDebugger();
+    }
     return new Promise((resolve) => resolve(request));
   });
 };
 
-const initializeTurtle = (questionObject) => {
-  runCode(questionObject.snippet, 'expOutCanvas', true, 3, 0, false, '.turtle-qnout-container')
-    .then(() => {
-      const currentSelector = document.querySelector('#expOutCanvas');
-      if (currentSelector && currentSelector.turtleInstance) {
-        currentSelector.turtleInstance.update();
-      }
-      repositionTurtle('#expOutCanvas', '.turtle-qnout-container');
-    });
-  runCode(questionObject.snippet, 'answerCanvas', true, 3, 0, false, '.turtle-qnout-container')
-    .then(() => {
-      const currentSelector = document.querySelector('#answerCanvas');
-      if (currentSelector && currentSelector.turtleInstance) {
-        currentSelector.turtleInstance.update();
-      }
-      repositionTurtle('#answerCanvas', '.outputContainer');
-    });
+const getCreateChallengeRequest = (challengeState = 'draft') => {
+  const challengeName = document.querySelector('.create-challenge-question-title').innerHTML.trim();
+  const blockTypesAll = manager.workspace.getAllBlocks();
+  const blockTypes = blockTypesAll.map((value) => value.type);
+  const request = {
+    type: 'updateChallenge',
+    challengeId: Number(manager.initialResponse.challengeDetails.challengeId),
+    challengeName,
+    answerState: Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(manager.workspace)),
+    blockTypes,
+    sourceCode: manager.editor.getValue(),
+    challengeState,
+  };
+  let requestString = '';
+  Object.keys(request).forEach((index) => {
+    if (index === 'blockTypes') {
+      requestString += JSON.stringify(request[index]);
+    } else {
+      requestString += request[index];
+    }
+  });
+  const requestHash = md5(requestString + md5(requestString).toString()).toString();
+  request.requestHash = requestHash;
+  return request;
+};
+
+const initializeTurtle = (response, page) => {
+  let sourceCode;
+  switch (page) {
+    case 'turtle': {
+      sourceCode = response.questionObject.snippet;
+      break;
+    }
+    case 'take-challenge': {
+      sourceCode = response.challengeObject.sourceCode;
+      break;
+    }
+    case 'create-challenge': {
+      sourceCode = response.challengeDetails.sourceCode;
+      break;
+    }
+    default: break;
+  }
+  if (page !== 'create-challenge') {
+    runCode(sourceCode, 'expOutCanvas', true, 3, 0, false, '.turtle-qnout-container')
+      .then(() => {
+        const currentSelector = document.querySelector('#expOutCanvas');
+        if (currentSelector && currentSelector.turtleInstance) {
+          currentSelector.turtleInstance.update();
+        }
+        // console.log('exptected output canvas repositioning');
+        // repositionTurtle('#expOutCanvas', '.turtle-qnout-container');
+      });
+    runCode(sourceCode, 'answerCanvas', true, 3, 0, false, '.outputContainer')
+      .then(() => {
+        const currentSelector = document.querySelector('#answerCanvas');
+        if (currentSelector && currentSelector.turtleInstance) {
+          currentSelector.turtleInstance.update();
+        }
+        // console.log('output tab canvas repos');
+        // repositionTurtle('#answerCanvas', '.outputContainer');
+      });
+  }
   // manager.initializeBlockly(turtleQuestionState);
 };
 
-const runSkulpt = () => {
+const runSkulpt = (page = 'turtle', preview = false) => {
   let result = new Promise((resolve) => resolve(false));
   if (manager.editor) {
     if (!manager.drawingVisible) {
       toggleDrawingState();
     }
-    if (!$('#output-tab').hasClass('active')) {
-      $('#output-tab').tab('show');
-      manager.showOutput = true;
+    if (!preview) {
+      if (!$('#output-tab').hasClass('active')) {
+        $('#output-tab').tab('show');
+        manager.showOutput = true;
+      }
     }
-    result = initiateRunCode();
+    result = initiateRunCode(page, preview);
   }
   return result;
 };
@@ -511,21 +708,21 @@ const copyHandler = (e) => {
   }, 1000);
 };
 
-const attachSpeedHandler = () => {
-  try {
-    $(document).on('change', '#speedControl', (event) => {
-      const target = $(event.target);
-      const speed = target.val();
-      const turtleConfig = {
-        frames: Number(speed < 4 ? 1 : speed - 3),
-        delay: Number(speed > 3 ? 0 : (6 - speed) * 10),
-      };
-      manager.turtleConfig = turtleConfig;
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
+// const attachSpeedHandler = () => {
+//   try {
+//     $(document).on('change', '#speedControl', (event) => {
+//       const target = $(event.target);
+//       const speed = target.val();
+//       const turtleConfig = {
+//         frames: Number(speed < 4 ? 1 : speed - 3),
+//         delay: Number(speed > 3 ? 0 : (6 - speed) * 10),
+//       };
+//       manager.turtleConfig = turtleConfig;
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 const attachFullScreenHandler = () => {
   try {
@@ -675,7 +872,7 @@ const attachDragHandler = (selector) => {
   slider.addEventListener('mouseleave', stopDragging, false);
 };
 
-const attachResizeHandler = () => {
+const attachResizeHandler = (page) => {
   $(document).on('shown.bs.tab', '#turtle-tab', () => {
     if (manager.workspace) {
       Blockly.svgResize(manager.workspace);
@@ -689,8 +886,12 @@ const attachResizeHandler = () => {
   });
 
   $(document).on('click', '.repositionDrawing', () => {
-    repositionTurtle('#answerCanvas', '.outputContainer');
-    repositionTurtle('#expOutCanvas', '.turtle-qnout-container');
+    if (page !== 'create-challenge') {
+      repositionTurtle('#answerCanvas', '.outputContainer');
+      repositionTurtle('#expOutCanvas', '.turtle-qnout-container');
+    } else {
+      repositionTurtle('#userCanvas', '.outputContainer');
+    }
   });
 };
 
@@ -706,23 +907,27 @@ const selectDomView = () => {
   }
 };
 
-const startTurtle = ({ response }) => {
+const startTurtle = ({ response, page = 'turtle', addData = {} }) => {
   manager.initialResponse = response;
   selectDomView();
-  updateSeoTags(response);
-  updateHistory(response);
+  updateSeoTags(response, page);
+  updateHistory(response, page, addData);
   postNavigationHandle();
-  initializeTurtle(response.questionObject);
+  initializeTurtle(response, page);
   initializeEditor();
-  initializeBlockly(response);
-  attachSpeedHandler();
+  initializeBlockly(response, page);
+  // attachSpeedHandler();
   attachDragHandler('.outputContainer');
-  attachDragHandler('.turtle-qnout-container');
-  attachResizeHandler();
+  if (page !== 'create-challenge') {
+    attachDragHandler('.turtle-qnout-container');
+  }
+  attachResizeHandler(page);
   attachZoomControls();
   // attachDrawingToggler();
-  attachDebugToggler();
-  attachDebugStepper();
+  if (page !== 'create-challenge') {
+    attachDebugToggler();
+    attachDebugStepper();
+  }
   attachFullScreenHandler();
 };
 
@@ -731,6 +936,7 @@ export default null;
 export {
   attachDragHandler,
   copyHandler,
+  getCreateChallengeRequest,
   toggleDrawingState,
   repositionTurtle,
   runDebugger,

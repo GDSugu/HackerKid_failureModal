@@ -9,6 +9,24 @@ const { API } = process.env;
 
 const authorize = {};
 
+const secondsToMins = (s) => {
+  let seconds = parseInt(s, 10);
+  let minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  seconds %= 60;
+  minutes %= 60;
+  if (hours > 0) {
+    return `${hours} Hour${hours > 1 ? 's' : ''} ${minutes} Mins`;
+  }
+  if (hours === 0 && minutes > 0) {
+    return `${minutes} Minute${minutes > 1 ? 's' : ''}`;
+  }
+  if (minutes === 0 && seconds > 0) {
+    return `${seconds} Seconds`;
+  }
+  return '0 Seconds';
+};
+
 const timeTrack = (pageName) => {
   const timeData = authorize.getSession('timeTracked');
   if (timeData) {
@@ -424,4 +442,5 @@ export {
   getShareMarkup,
   loadScriptByURL,
   timeTrack,
+  secondsToMins,
 };

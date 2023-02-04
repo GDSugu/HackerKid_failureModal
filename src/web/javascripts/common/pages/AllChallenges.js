@@ -5,7 +5,9 @@ import '../../../stylesheets/common/pages/all-challenges/style.scss';
 import ChallengesGrid from '../components/ChallengesGrid/ChallengesGrid';
 import ChallengesNavBar from '../components/ChallengesNavBar';
 import Paginator from '../components/Paginator';
-import { $, loginCheck, pageInit } from '../framework';
+import {
+  $, loginCheck, pageInit, timeTrack,
+} from '../framework';
 
 const debounce = (fn, delay) => {
   let timerId;
@@ -179,6 +181,7 @@ const AllChallenges = () => {
   pageInit('all-challenges-container', 'All Challenges');
   const isPageMounted = useRef(true);
 
+  timeTrack('allchallenges');
   const [localState, setLocalState] = useState({
     sort: 'popularity',
     search: '',

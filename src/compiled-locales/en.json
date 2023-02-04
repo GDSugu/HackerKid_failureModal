@@ -17,6 +17,12 @@
       "value": "XP Earned:"
     }
   ],
+  "+PoBgu": [
+    {
+      "type": 1,
+      "value": "step"
+    }
+  ],
   "+f2V2I": [
     {
       "type": 1,
@@ -253,6 +259,16 @@
     {
       "type": 0,
       "value": "Share"
+    }
+  ],
+  "1Gkn38": [
+    {
+      "type": 0,
+      "value": "Created by "
+    },
+    {
+      "type": 1,
+      "value": "creatorName"
     }
   ],
   "1RUvaS": [
@@ -629,6 +645,12 @@
       "value": "Your bio will be shown here"
     }
   ],
+  "6QQRFR": [
+    {
+      "type": 1,
+      "value": "step"
+    }
+  ],
   "6V6DQY": [
     {
       "type": 0,
@@ -981,6 +1003,12 @@
       "value": "See more"
     }
   ],
+  "BW0/7P": [
+    {
+      "type": 0,
+      "value": "Keep in draft"
+    }
+  ],
   "Bj5WGE": [
     {
       "type": 0,
@@ -1079,6 +1107,12 @@
     {
       "type": 0,
       "value": "This is about page"
+    }
+  ],
+  "D3zPJs": [
+    {
+      "type": 0,
+      "value": "Are you sure you want to create this challenge?"
     }
   ],
   "D81PjZ": [
@@ -1375,6 +1409,12 @@
       "value": "Password changed successfully"
     }
   ],
+  "H9m7jW": [
+    {
+      "type": 1,
+      "value": "timeSpent"
+    }
+  ],
   "HAlOn1": [
     {
       "type": 0,
@@ -1637,6 +1677,12 @@
       "value": "gameTitle"
     }
   ],
+  "LiF7jy": [
+    {
+      "type": 1,
+      "value": "step"
+    }
+  ],
   "LkuPrA": [
     {
       "type": 0,
@@ -1695,6 +1741,12 @@
     {
       "type": 1,
       "value": "title"
+    }
+  ],
+  "MZ57OE": [
+    {
+      "type": 0,
+      "value": "Back to Challenges"
     }
   ],
   "MceYzq": [
@@ -2281,6 +2333,12 @@
       "value": "Recently Collected"
     }
   ],
+  "UZULtM": [
+    {
+      "type": 0,
+      "value": "Create Challenge?"
+    }
+  ],
   "UkT6PM": [
     {
       "type": 0,
@@ -2613,12 +2671,6 @@
     {
       "type": 1,
       "value": "result"
-    }
-  ],
-  "adC22y": [
-    {
-      "type": 0,
-      "value": "Phone"
     }
   ],
   "apr16P": [
@@ -3005,6 +3057,12 @@
       "value": " coins"
     }
   ],
+  "gzjgZO": [
+    {
+      "type": 0,
+      "value": "Try these challenges"
+    }
+  ],
   "h/MN82": [
     {
       "type": 1,
@@ -3021,6 +3079,12 @@
     {
       "type": 0,
       "value": "Send OTP"
+    }
+  ],
+  "hWyGja": [
+    {
+      "type": 0,
+      "value": "Instructions"
     }
   ],
   "hZGwA5": [
@@ -3733,6 +3797,18 @@
       "value": "View All Achievements"
     }
   ],
+  "tRGm5z": [
+    {
+      "type": 0,
+      "value": "Time Spent:"
+    }
+  ],
+  "tTcUHG": [
+    {
+      "type": 0,
+      "value": "Enter the Challenge Name"
+    }
+  ],
   "tbPLF3": [
     {
       "type": 1,
@@ -3847,6 +3923,12 @@
       "value": "Show Leaderboard"
     }
   ],
+  "vKE06c": [
+    {
+      "type": 0,
+      "value": "Create"
+    }
+  ],
   "vWe94i": [
     {
       "type": 0,
@@ -3949,6 +4031,20 @@
       "value": "level"
     }
   ],
+  "xYLs/L": [
+    {
+      "type": 1,
+      "value": "challengeName"
+    },
+    {
+      "type": 0,
+      "value": " #"
+    },
+    {
+      "type": 1,
+      "value": "challengeId"
+    }
+  ],
   "xlvJ5U": [
     {
       "type": 0,
@@ -3973,6 +4069,12 @@
       "value": "hintMessage"
     }
   ],
+  "yEJu0Z": [
+    {
+      "type": 0,
+      "value": "Parent's Phone Number"
+    }
+  ],
   "ySOrrv": [
     {
       "type": 0,
@@ -3989,6 +4091,12 @@
     {
       "type": 0,
       "value": "Your Collections and Perks"
+    }
+  ],
+  "ygjPEa": [
+    {
+      "type": 1,
+      "value": "title"
     }
   ],
   "yjWbPf": [

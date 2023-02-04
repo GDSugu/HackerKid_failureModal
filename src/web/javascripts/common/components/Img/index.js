@@ -43,6 +43,9 @@ const Img = ({
             if (res.status !== 200) {
               setImgSrc(`${imgPath + fallback}`);
             }
+          })
+          .catch((err) => {
+            console.log('fetch image error', err);
           });
       } else {
         setImgSrc(`${imgPath + fallback}`);
