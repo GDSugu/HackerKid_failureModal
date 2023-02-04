@@ -1491,6 +1491,12 @@
       "value": "Register to Get help from Turtle"
     }
   ],
+  "HzaEWN": [
+    {
+      "type": 0,
+      "value": "Congratulations!"
+    }
+  ],
   "I+EuqZ": [
     {
       "type": 1,
@@ -2481,6 +2487,12 @@
       "value": "Resend"
     }
   ],
+  "W95qzm": [
+    {
+      "type": 0,
+      "value": "Awesome! You are Rocking!"
+    }
+  ],
   "WIy+CB": [
     {
       "type": 0,
@@ -2527,6 +2539,28 @@
     {
       "type": 0,
       "value": "Login into existing account"
+    }
+  ],
+  "X43FUF": [
+    {
+      "type": 0,
+      "value": "Congratulations "
+    },
+    {
+      "type": 1,
+      "value": "user"
+    },
+    {
+      "type": 0,
+      "value": ", you have earned the "
+    },
+    {
+      "type": 1,
+      "value": "award"
+    },
+    {
+      "type": 0,
+      "value": " for your excellent record."
     }
   ],
   "XMB1Ot": [
@@ -2591,6 +2625,28 @@
     {
       "type": 1,
       "value": "username"
+    }
+  ],
+  "YcOL8Q": [
+    {
+      "type": 0,
+      "value": "Congratulations "
+    },
+    {
+      "type": 1,
+      "value": "user"
+    },
+    {
+      "type": 0,
+      "value": ", you have earned "
+    },
+    {
+      "type": 1,
+      "value": "coins"
+    },
+    {
+      "type": 0,
+      "value": " coins for completing the video."
     }
   ],
   "YdxUNc": [
@@ -4163,6 +4219,12 @@
     {
       "type": 0,
       "value": "Share in"
+    }
+  ],
+  "xzorQn": [
+    {
+      "type": 0,
+      "value": "Please share your feedback on how you enjoyed the course!"
     }
   ],
   "y00DRu": [

@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import Plyr from 'plyr-react';
 import Hls from 'hls.js';
 import FuzzySearch from 'fuzzy-search';
+import { FormattedMessage } from 'react-intl';
 import {
   pageInit, $, pathNavigator, timeTrack,
 } from '../framework';
@@ -12,6 +13,10 @@ import useVideos from '../../../../hooks/pages/videos';
 import CourseCard, { CustomSwiperComponent } from '../components/courseCard';
 import PageNator from '../components/Paginator';
 import SuccessModalComponent from '../modal/VideoAwardModal';
+import Img from '../components/Img';
+import {
+  upsertDescription, upsertFBMeta, upsertTitle, upsertTwitterMeta,
+} from '../seo';
 
 const WatchNextComponent = ({ items, isDesktop }) => (
   <>
@@ -39,6 +44,34 @@ const WatchNextComponent = ({ items, isDesktop }) => (
     </div>
   </>
 );
+
+const updateSeoTags = (parsedResponse) => {
+  try {
+    if (parsedResponse) {
+      const title = `${parsedResponse.title} - Courses Level - Hackerkid`;
+      const { description } = parsedResponse;
+      const url = `${window.location.origin}/turtle/${parsedResponse.number}/${parsedResponse.uniqueString}`;
+      const image = parsedResponse.thumbnail;
+      upsertTitle(title);
+      upsertDescription(description);
+      upsertFBMeta(title, description, url, image);
+      upsertTwitterMeta(title, description, url, image);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const updateHistory = (response) => {
+  try {
+    if (response) {
+      const { uniqueString, number, moduleId } = response;
+      window.history.replaceState({}, '', `/courses/${moduleId}/${number}/${uniqueString}`);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const StarRating = ({ rating }) => {
   const decimalPoint = rating % 1;
@@ -71,7 +104,7 @@ const RatingAndWatchedComponent = ({ prop }) => (
       <div className="rating-tags-container">
         <div className="rating-container">
           <div>
-            <h4>{prop.viewCount}</h4>
+            <h4>{prop.viewCount || 0}</h4>
             <p className="color-sub">watched this</p>
           </div>
           <div className="pr-5">
@@ -105,17 +138,27 @@ const RatingModal = ({ submitRating, showModal, afterSubmit }) => {
   const parentRef = React.createRef();
   const closeRef = React.createRef();
   const [checkedItem, setCheckedItem] = useState(false);
-  if (showModal) {
+  const [modalState, setModalState] = useState(1);
+  const username = localStorage.getItem('name');
+  if (showModal.showModal === true) {
     $('.rating-modal').modal('show');
   }
 
   const onPressSubmit = () => {
     submitRating(checkedItem).then((res) => {
       if (res.status === 'success') {
-        closeRef.current.click();
-        afterSubmit();
+        setModalState(2);
       }
     });
+  };
+
+  const onPressSkip = () => {
+    setModalState(2);
+  };
+
+  const onPressContinue = () => {
+    afterSubmit();
+    closeRef.current.click();
   };
 
   return (
@@ -126,11 +169,19 @@ const RatingModal = ({ submitRating, showModal, afterSubmit }) => {
       role="dialog"
       aria-labelledby="errorModal"
       aria-hidden="true">
-      <div className="modal-dialog modal-dialog-centered" role="document">
+      {(modalState === 1) && <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
           <div className="modal-body">
-            <div className="d-flex flex-column justify-content-between">
-              <div className="modal-container">
+          <div className="d-flex flex-column justify-content-between">
+               <div className="modal-container">
+                <div className='text-center rating-head'>
+                  <h5> <FormattedMessage
+          defaultMessage={'Awesome! You are Rocking!'}
+          description={'Award Modal Heading'}/></h5>
+                  <p><FormattedMessage
+          defaultMessage={'Please share your feedback on how you enjoyed the course!'}
+          description={'Award Modal Desciption'}/></p>
+                </div>
                 <div className="rating-star-container text-center">
                   <div className="rating-group unchecked" ref={parentRef}>
                     <input
@@ -237,35 +288,81 @@ const RatingModal = ({ submitRating, showModal, afterSubmit }) => {
                     />
                   </div>
                 </div>
-                <div className="rating-modal-footer">
-                  <button
-                    type="button"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                    className="btn btn-outline-primary mr-2"
-                    ref={closeRef}>
-                    Cancel
-                  </button>
+                <div className='d-flex flex-column'>
                   <button
                     type="button"
                     className="btn btn-primary text-white"
                     onClick={() => onPressSubmit()}>
                     Submit
                   </button>
+                  <button
+                    type="button"
+                    className="btn mt-3 color-primary"
+                    onClick={() => onPressSkip()}>
+                    <FormattedMessage
+                      defaultMessage={'Skip'}
+                      description={'skip button'}
+                    />
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </div>}
+      {(modalState === 2) && <div className="modal-dialog custom-modal-rating modal-dialog-centered" role="document">
+        <div className="modal-content">
+          <div className="modal-body">
+          <div className="d-flex flex-column justify-content-between align-items-center">
+           {(showModal.awardsGiven && showModal.awardsGiven.length > 0) && <div className='award-container'>
+            {showModal.awardsGiven.map((award, index) => (<img key={index} className='award-icon' src={award.awardImage}></img>))}
+
+</div>}
+            <div className={(showModal.awardsGiven && showModal.awardsGiven.length > 0) ? 'modal-icon-container' : 'no-award-modal-container'}>
+              <div className='coin-img-cont'>
+              <Img
+        className='coin-icon'
+        src='../../../images/courses/XP-big.png'/>
+        <p className='m-0'>+{showModal.xp} xp</p>
+                </div>
+                <div className='coin-img-cont'>
+                <Img
+        className='coin-icon'
+        src='../../../images/courses/Coins-big.png'/>
+        <p className='m-0'>+{showModal.points} coins</p>
+                </div>
+
+            </div>
+          <div className='text-center award-des-head'>
+                  <h5> <FormattedMessage
+                        defaultMessage={'Congratulations! '}
+                        description={'Award Modal Heading'}/></h5>
+                 {(showModal.awardsGiven && showModal.awardsGiven.length > 0) ? <p><FormattedMessage
+                        defaultMessage={'Congratulations {user}, you have earned the {award} for your excellent record.'}
+                        description={'Award Modal Desciption'}
+                        values={{
+                          award: `${showModal.awardsGiven.length === 1 ? showModal.awardsGiven[0].awardName : showModal.awardsGiven.map((each) => `${each.awardName}`).join(' & ')}`,
+                          user: username,
+                        }}/></p> : <p><FormattedMessage
+                        defaultMessage={'Congratulations {user}, you have earned {coins} coins for completing the video.'}
+                        description={'Award Modal Desciption'}
+                        values={{
+                          coins: showModal.points,
+                          user: username,
+                        }}/></p>}
+                         <button
+                    type="button"
+                    className="btn btn-primary text-white continue-btn"
+                    onClick={() => onPressContinue()}>
+                    Continue
+                  </button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>}
     </div>
   );
-};
-
-const doBeforeClose = (e) => {
-  const message = 'Do you really wanna Close ?';
-  e.returnValue = message;
-  return message;
 };
 
 const videoPlayerProcess = ({
@@ -273,28 +370,42 @@ const videoPlayerProcess = ({
   ref,
   timeActivity,
   setRatingModal,
-  setEarned,
 }) => {
   let currentTime = 0;
   let playBackTime = 0;
   let seekedTime = 0;
   let completeUpdated = false;
   let timeAdded = false;
+  let awardRes = false;
+  // const [ended, setEnded] = useState(false);
   const source = `${currentQuestion.videoLink}`;
   useEffect(() => {
     const player = ref.current.plyr;
     const { media } = player;
     if (!currentQuestion.completed && currentQuestion.timeleftAt) {
       $(media).on('canplay', () => {
+        $('.plyr__control--forward').eq(1).hide();
         if (!timeAdded) {
           player.currentTime = currentQuestion.timeleftAt - 2;
           timeAdded = true;
+        }
+        if (media.paused) {
+          $('.video-player-container').on('click', '.plyr--paused', () => {
+            player.play();
+          });
         }
       });
     }
 
     $(media).on('play', () => {
-      window.addEventListener('beforeunload', doBeforeClose, true);
+      window.addEventListener('beforeunload', () => {
+        const videoData = {
+          moduleId: currentQuestion.moduleId,
+          videoId: currentQuestion.videoId,
+          timeTracked: player.currentTime,
+        };
+        localStorage.setItem('videoData', JSON.stringify(videoData));
+      }, true);
     });
 
     $(media).on('timeupdate', () => {
@@ -312,14 +423,19 @@ const videoPlayerProcess = ({
         };
         completeUpdated = true;
         timeActivity({ videoData }).then((res) => {
-          if (res.addedPoints) {
-            setEarned({
-              show: true,
-              coins: res.addedPoints,
-              xp: res.addedXp,
-            });
+          if (res.awardDetails.points) {
+            awardRes = res.awardDetails;
+            awardRes.showModal = true;
+            // setRatingModal(res.awardDetails);
           }
         });
+      }
+      // console.log((parseInt(currentTime, 10) + 1) === parseInt(media.duration, 10),
+      //   parseInt(currentTime, 10) + 1, parseInt(media.duration, 10));
+      if ((parseInt(currentTime, 10) + 1) === parseInt(media.duration, 10)) {
+        if (awardRes) {
+          setRatingModal(awardRes);
+        }
       }
     });
 
@@ -337,12 +453,17 @@ const videoPlayerProcess = ({
         timeTracked: player.currentTime,
       };
       timeActivity({ videoData });
-      window.removeEventListener('beforeunload', doBeforeClose, true);
+      window.removeEventListener('beforeunload', () => {}, true);
     });
 
     $(media).on('ended', () => {
-      setRatingModal(true);
-      window.removeEventListener('beforeunload', doBeforeClose, true);
+      window.removeEventListener('beforeunload', () => {}, true);
+      // console.log(setEnded(true));
+      // if (showRatingModal.points) {
+      //   const modalData = showRatingModal;
+      //   modalData.showModal = true;
+      //   setRatingModal(modalData);
+      // }
     });
 
     const hls = new Hls();
@@ -354,7 +475,7 @@ const videoPlayerProcess = ({
 const getUrlData = () => {
   const url = window.location.href;
   const urlArray = url.split('/');
-  const index = urlArray.indexOf('videos');
+  const index = urlArray.indexOf('courses');
   const video = {};
   video.number = parseInt(urlArray[index + 2], 10);
   video.moduleId = urlArray[index + 1];
@@ -362,7 +483,7 @@ const getUrlData = () => {
 };
 
 const Videos = () => {
-  if (window.location.href.includes('videos')) {
+  if (window.location.href.includes('courses')) {
     pageInit('courses-container', 'Courses');
   }
 
@@ -376,8 +497,8 @@ const Videos = () => {
   } = useVideos(
     { isPageMounted, urlData },
   );
+  const [showRatingModal, setRatingModal] = useState({ showModal: false });
 
-  const [showRatingModal, setRatingModal] = useState(false);
   const { currentQuestion, watchNext } = videoData;
   const ref = useRef();
   const [earnedInfo, setEarned] = useState({
@@ -393,11 +514,12 @@ const Videos = () => {
       setRatingModal,
       setEarned,
     });
+    updateSeoTags(currentQuestion);
+    updateHistory(currentQuestion);
   }
   const { moduleData } = invidualModuleData;
   const [filteredData, setFilterData] = useState(false);
   const [page, selectPage] = useState(1);
-
   const searcher = new FuzzySearch(moduleData.videos, ['title']);
   const onSearch = (e) => {
     const keyword = e.target.value;
@@ -406,117 +528,123 @@ const Videos = () => {
   };
   const isDesktop = window.matchMedia('(min-width: 576px)').matches;
 
-  return !urlData.number ? (
-    <>
-      {!isDesktop && (
-        <div>
-          <div className="top-session">
-            <p>Videos</p>
-          </div>
-          <div className="filter-n-search">
-            <div className="form-control search-cont">
-              <img
-                className="search-icon"
-                src="../../../../images/courses/search.svg"
-              />
-              <input
-                onChange={(value) => onSearch(value)}
-                className="search-input"
-                placeholder="Search"
-              />
+  return <>
+    <div className="col-12 col-md-11 col-xl-10 mx-auto video-body-container">
+      {
+        !urlData.number ? (
+          <>
+            {!isDesktop && (
+              <div>
+                <div className="top-session">
+                  <p>Videos</p>
+                </div>
+                <div className="filter-n-search">
+                  <div className="form-control search-cont">
+                    <img
+                      className="search-icon"
+                      src="../../../../images/courses/search.svg"
+                    />
+                    <input
+                      onChange={(value) => onSearch(value)}
+                      className="search-input"
+                      placeholder="Search"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+            <div className="course-videos-container">
+              <h5 className="m-3">
+                {`${moduleData.moduleName} ${moduleData.type ? ` - ${moduleData.type}` : ''}`}
+              </h5>
+              <div className="text-center">
+                {filteredData
+                  ? filteredData.map(
+                    (items, index) => index < page * 10
+                        && index > page * 10 - 10 && (
+                          <div className="mb-2 video-card-cont" key={index}>
+                            <CourseCard data={items} />{' '}
+                          </div>
+                    ),
+                  )
+                  : moduleData
+                    && moduleData.videos.map(
+                      (items, index) => index < page * 10
+                        && index > page * 10 - 11 && (
+                          <div
+                            className="mb-2 video-card-cont"
+                            data-key={index}
+                            key={index}>
+                            <CourseCard data={items} />{' '}
+                          </div>
+                      ),
+                    )}
+              </div>
             </div>
-          </div>
-        </div>
-      )}
-      <div className="course-videos-container">
-        <h5 className="m-3">
-          {moduleData.moduleName} - {moduleData.type}
-        </h5>
-        <div className="text-center">
-          {filteredData
-            ? filteredData.map(
-              (items, index) => index < page * 10
-                  && index > page * 10 - 10 && (
-                    <div className="mb-2 video-card-cont" key={index}>
-                      <CourseCard data={items} />{' '}
-                    </div>
-              ),
-            )
-            : moduleData
-              && moduleData.videos.map(
-                (items, index) => index < page * 10
-                  && index > page * 10 - 11 && (
-                    <div
-                      className="mb-2 video-card-cont"
-                      data-key={index}
-                      key={index}>
-                      <CourseCard data={items} />{' '}
-                    </div>
-                ),
+            <div>
+              {moduleData && moduleData.videos.length > 10 && (
+                <PageNator
+                  totalItems={
+                    filteredData ? filteredData.length : moduleData.videos.length
+                  }
+                  countPerPage={10}
+                  currentPageNumber={page}
+                  onPageChange={(value) => selectPage(value)}
+                  onNextBtnClick={() => selectPage(page + 1)}
+                  onPrevBtnClick={() => selectPage(page - 1)}
+                />
               )}
-        </div>
-      </div>
-      <div>
-        {moduleData && moduleData.videos.length > 10 && (
-          <PageNator
-            totalItems={
-              filteredData ? filteredData.length : moduleData.videos.length
+            </div>
+          </>
+        ) : (
+          <div className="video-page-container">
+            <div className="video-player-container">
+              <Plyr id="video-player" ref={ref}/>
+            </div>
+            {currentQuestion && <RatingAndWatchedComponent prop={currentQuestion} />}
+            <RatingModal
+              submitRating={submitRating}
+              showModal={showRatingModal}
+              afterSubmit={
+                watchNext.videos && watchNext.videos.length > 0
+                  ? () => {
+                    pathNavigator(
+                      `courses/${watchNext.videos[0].moduleId}/${watchNext.videos[0].number}`,
+                    );
+                  }
+                  : () => {
+                    pathNavigator(
+                      `courses/${watchNext.videos[0].moduleId}/1`,
+                    );
+                  }
+              }
+            />
+            <SuccessModalComponent
+            showModal={earnedInfo.show}
+            xpEarned = {earnedInfo.xp}
+            coinsEarned = {earnedInfo.coins}
+            playNext = {
+              watchNext.videos && watchNext.videos.length > 0
+                ? () => {
+                  pathNavigator(
+                    `courses/${watchNext.videos[0].moduleId}/${watchNext.videos[0].number}`,
+                  );
+                }
+                : () => {
+                  pathNavigator(
+                    `courses/${watchNext.videos[0].moduleId}/1`,
+                  );
+                }
             }
-            countPerPage={10}
-            currentPageNumber={page}
-            onPageChange={(value) => selectPage(value)}
-            onNextBtnClick={() => selectPage(page + 1)}
-            onPrevBtnClick={() => selectPage(page - 1)}
-          />
-        )}
-      </div>
-    </>
-  ) : (
-    <div className="video-page-container">
-      <div className="video-player-container">
-        <Plyr id="video-player" ref={ref} />
-      </div>
-      {currentQuestion && <RatingAndWatchedComponent prop={currentQuestion} />}
-      <RatingModal
-        submitRating={submitRating}
-        showModal={showRatingModal}
-        afterSubmit={
-          watchNext.videos && watchNext.videos.length > 0
-            ? () => {
-              pathNavigator(
-                `videos/${watchNext[0].moduleId}/${watchNext[0].number}`,
-              );
-            }
-            : () => {
-              pathNavigator(
-                `videos/${watchNext.videos[0].moduleId}/1`,
-              );
-            }
-        }
-      />
-      <SuccessModalComponent
-      showModal={earnedInfo.show}
-      xpEarned = {earnedInfo.xp}
-      coinsEarned = {earnedInfo.coins}
-      playNext = {
-        watchNext.videos && watchNext.videos.length > 0
-          ? () => {
-            pathNavigator(
-              `videos/${watchNext.videos[0].moduleId}/${watchNext.videos[0].number}`,
-            );
-          }
-          : () => {
-            pathNavigator(
-              `videos/${watchNext.videos[0].moduleId}/1`,
-            );
-          }
+            />
+            {(watchNext && watchNext.videos.length > 0) && <WatchNextComponent
+              isDesktop={isDesktop}
+              items={watchNext} />}
+          </div>
+        )
       }
-      />
-      {(watchNext && watchNext.videos.length > 0) && <WatchNextComponent
-        isDesktop={isDesktop}
-        items={watchNext} />}
     </div>
-  );
+  </>;
 };
 
 export default Videos;

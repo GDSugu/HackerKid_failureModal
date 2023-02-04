@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import 'swiper/swiper.scss';
 import 'swiper/modules/navigation/navigation.scss';
-import '../../../../stylesheets/common/pages/courses/style.scss';
 import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
 import Img from '../Img';
+import '../../../../stylesheets/common/pages/courses/style.scss';
 
 const courseCard = ({ data }) => (
-  <a href={`${window.location.origin}/videos/${data.moduleId}/${data.number}`}>
+  <a href={`${window.location.origin}/courses/${data.moduleId}/${data.number}`}>
     <div className='course-card'>
       <p className='video-type'><FormattedMessage
           defaultMessage={'{type}'}
@@ -65,7 +65,7 @@ const SearchAndFilter = ({ searchOnChange, onChangeFilter, filterSet }) => {
 };
 
 const MobileOnlyComponent = ({ data }) => (
-  <a href={`${window.location.origin}/videos/${data.moduleId}`}>
+  <a href={`${window.location.origin}/courses/${data.moduleId}`}>
     <div className="course-card mobile-only-card">
       <div className="text-center mt-4">
         <p className="mb-0"><FormattedMessage

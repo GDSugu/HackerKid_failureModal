@@ -873,6 +873,10 @@
     "defaultMessage": "Register to Get help from Turtle",
     "description": "Hint message"
   },
+  "HzaEWN": {
+    "defaultMessage": "Congratulations!",
+    "description": "Award Modal Heading"
+  },
   "I+EuqZ": {
     "defaultMessage": "{pointsEarned}",
     "description": "coins"
@@ -1494,6 +1498,10 @@
     "defaultMessage": "Resend",
     "description": "resend otp button"
   },
+  "W95qzm": {
+    "defaultMessage": "Awesome! You are Rocking!",
+    "description": "Award Modal Heading"
+  },
   "WIy+CB": {
     "defaultMessage": "Awesome!",
     "description": "modal title"
@@ -1524,6 +1532,10 @@
   "X1rCRf": {
     "defaultMessage": "Login into existing account",
     "description": "login into existing account button"
+  },
+  "X43FUF": {
+    "defaultMessage": "Congratulations {user}, you have earned the {award} for your excellent record.",
+    "description": "Award Modal Desciption"
   },
   "XMB1Ot": {
     "defaultMessage": "No Awards Found",
@@ -1564,6 +1576,10 @@
   "YRA/RQ": {
     "defaultMessage": "{username}",
     "description": "Username"
+  },
+  "YcOL8Q": {
+    "defaultMessage": "Congratulations {user}, you have earned {coins} coins for completing the video.",
+    "description": "Award Modal Desciption"
   },
   "YdxUNc": {
     "defaultMessage": "moveDown",
@@ -2534,6 +2550,10 @@
   "xyhq1c": {
     "defaultMessage": "Share in",
     "description": "share in social media text"
+  },
+  "xzorQn": {
+    "defaultMessage": "Please share your feedback on how you enjoyed the course!",
+    "description": "Award Modal Desciption"
   },
   "y00DRu": {
     "defaultMessage": "{count}",
