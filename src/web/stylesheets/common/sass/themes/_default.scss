@@ -36,6 +36,10 @@ $thememaplight : (
   overlay1: #171818bf,
   blue-gradient-1: #00baff,
   blue-gradient-2: #0051ff,
+  whatsapp-color: #25d366,
+  facebook-color: #4267b2,
+  twitter-color: #1da1f2,
+  telegram-color: #08c,
 );
 // just copied the light theme colors to the dark for now
 // TODO: make this a real dark theme with appropriate colors
@@ -77,6 +81,10 @@ $thememapdark : (
   overlay1: #171818bf,
   blue-gradient-1: #00baff,
   blue-gradient-2: #0051ff,
+  whatsapp-color: #25d366,
+  facebook-color: #4267b2,
+  twitter-color: #1da1f2,
+  telegram-color: #08c,
 );
 
 $cssvars : (
@@ -117,6 +125,10 @@ $cssvars : (
   overlay1: --overlay1,
   blue-gradient-1: --blue-gradient-1,
   blue-gradient-2: --blue-gradient-2,
+  whatsapp-color: --whatsapp-color,
+  facebook-color: --facebook-color,
+  twitter-color: --twitter-color,
+  telegram-color: --telegram-color,
 );
 
 @mixin spread-map($map: (), $cssMap: $cssvars) {

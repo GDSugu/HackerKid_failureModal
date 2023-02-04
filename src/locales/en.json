@@ -10,6 +10,10 @@
   "+KKyNc": {
     "defaultMessage": "XP Earned:"
   },
+  "+PoBgu": {
+    "defaultMessage": "{step}",
+    "description": "take challenge instruction"
+  },
   "+f2V2I": {
     "defaultMessage": "{currentProgress} {unit}",
     "description": "current progress"
@@ -147,6 +151,10 @@
   "1G3215": {
     "defaultMessage": "Share",
     "description": "Share button"
+  },
+  "1Gkn38": {
+    "defaultMessage": "Created by {creatorName}",
+    "description": "challenge creator name"
   },
   "1RUvaS": {
     "defaultMessage": "Profile Settings",
@@ -372,6 +380,10 @@
   "6OkiRc": {
     "defaultMessage": "Your bio will be shown here"
   },
+  "6QQRFR": {
+    "defaultMessage": "{step}",
+    "description": "take challanges instruction"
+  },
   "6V6DQY": {
     "defaultMessage": "Next",
     "description": "Next Button"
@@ -578,6 +590,10 @@
     "defaultMessage": "See more",
     "description": "see more card text"
   },
+  "BW0/7P": {
+    "defaultMessage": "Keep in draft",
+    "description": "draft button"
+  },
   "Bj5WGE": {
     "defaultMessage": "View all {data}",
     "description": "Module Name"
@@ -633,6 +649,10 @@
   "D/2aSY": {
     "defaultMessage": "This is about page",
     "description": "Page description"
+  },
+  "D3zPJs": {
+    "defaultMessage": "Are you sure you want to create this challenge?",
+    "description": "create challenge confirmation message"
   },
   "D81PjZ": {
     "defaultMessage": "{collectibleName}",
@@ -803,6 +823,10 @@
     "defaultMessage": "Password changed successfully",
     "description": "Password changed text"
   },
+  "H9m7jW": {
+    "defaultMessage": "{timeSpent}",
+    "description": "Time Spent"
+  },
   "HAlOn1": {
     "defaultMessage": "Name"
   },
@@ -965,6 +989,10 @@
     "defaultMessage": "{gameTitle}",
     "description": "game title"
   },
+  "LiF7jy": {
+    "defaultMessage": "{step}",
+    "description": "create challenge instruction"
+  },
   "LkuPrA": {
     "defaultMessage": "Join your friends in the club",
     "description": "more card subtitle"
@@ -1004,6 +1032,10 @@
   "MWb4u3": {
     "defaultMessage": "{title}",
     "description": "video title"
+  },
+  "MZ57OE": {
+    "defaultMessage": "Back to Challenges",
+    "description": "Play next button"
   },
   "MceYzq": {
     "defaultMessage": "{name}",
@@ -1363,6 +1395,10 @@
     "defaultMessage": "Recently Collected",
     "description": "page title"
   },
+  "UZULtM": {
+    "defaultMessage": "Create Challenge?",
+    "description": "create challenge confm modal title"
+  },
   "UkT6PM": {
     "defaultMessage": "You have completed this level !",
     "description": "Success message"
@@ -1566,10 +1602,6 @@
     "defaultMessage": "Private test case {testCaseNumber} - {result}",
     "description": "test case text"
   },
-  "adC22y": {
-    "defaultMessage": "Phone",
-    "description": "Profile phone label"
-  },
   "apr16P": {
     "defaultMessage": "Leaderboard",
     "description": "Leaderboard Title"
@@ -1677,6 +1709,10 @@
     "defaultMessage": "Try Now",
     "description": "More card button text"
   },
+  "dxFMuV": {
+    "defaultMessage": "Most active members:",
+    "description": "active members title"
+  },
   "e5Eaen": {
     "defaultMessage": "Profile updated successfully",
     "description": "success modal"
@@ -1726,6 +1762,10 @@
   "fkpavG": {
     "defaultMessage": "Games",
     "description": "Games page heading"
+  },
+  "fodvBp": {
+    "defaultMessage": "View Club",
+    "description": "View club button"
   },
   "fr893W": {
     "defaultMessage": "{validSubmissions}",
@@ -1797,6 +1837,10 @@
   "groRBE": {
     "defaultMessage": "{coins} coins"
   },
+  "gzjgZO": {
+    "defaultMessage": "Try these challenges",
+    "description": "draft challenge title"
+  },
   "h/MN82": {
     "defaultMessage": "{coins}"
   },
@@ -1807,6 +1851,10 @@
   "hJpqIn": {
     "defaultMessage": "Send OTP",
     "description": "send otp button"
+  },
+  "hWyGja": {
+    "defaultMessage": "Instructions",
+    "description": "Instructions title"
   },
   "hZGwA5": {
     "defaultMessage": "{count} Xp",
@@ -1877,6 +1925,14 @@
   },
   "kKheEw": {
     "defaultMessage": "{question}"
+  },
+  "kYun6H": {
+    "defaultMessage": "Challenge Name",
+    "description": "challenge name title"
+  },
+  "keQJEv": {
+    "defaultMessage": "{clubName}",
+    "description": "Club name heading"
   },
   "kloO3Z": {
     "defaultMessage": "Advanced Options",
@@ -2241,6 +2297,14 @@
     "defaultMessage": "View All Achievements",
     "description": "show achievements"
   },
+  "tRGm5z": {
+    "defaultMessage": "Time Spent:",
+    "description": "Time Spent"
+  },
+  "tTcUHG": {
+    "defaultMessage": "Enter the Challenge Name",
+    "description": "challenge title"
+  },
   "tbPLF3": {
     "defaultMessage": "{step}",
     "description": "turtle instruction"
@@ -2317,6 +2381,10 @@
     "defaultMessage": "Show Leaderboard",
     "description": "Leaderboard show button"
   },
+  "vKE06c": {
+    "defaultMessage": "Create",
+    "description": "create challenge button"
+  },
   "vWe94i": {
     "defaultMessage": "More Info"
   },
@@ -2384,6 +2452,10 @@
     "defaultMessage": "{level}",
     "description": "Level Button"
   },
+  "xYLs/L": {
+    "defaultMessage": "{challengeName} #{challengeId}",
+    "description": "challenge name"
+  },
   "xlvJ5U": {
     "defaultMessage": "You are offline.",
     "description": "offline message"
@@ -2400,6 +2472,10 @@
     "defaultMessage": "{hintMessage}",
     "description": "Hint message"
   },
+  "yEJu0Z": {
+    "defaultMessage": "Parent's Phone Number",
+    "description": "Profile phone label"
+  },
   "ySOrrv": {
     "defaultMessage": "No feed to show",
     "description": "No feed to show"
@@ -2411,6 +2487,10 @@
   "yeNTz5": {
     "defaultMessage": "Your Collections and Perks",
     "description": "Collections and Perks CTA"
+  },
+  "ygjPEa": {
+    "defaultMessage": "{title}",
+    "description": "Nav Title text"
   },
   "yjWbPf": {
     "defaultMessage": "Visit Club",
