@@ -173,7 +173,7 @@ const CodekataHomeContainer = ({ changeRoute }) => {
           </div>
           <button
             className="btn btn-block gameBtn"
-            onClick={() => changeRoute('codingPiarateGame')}>
+            onClick={() => changeRoute('codingPirateGame')}>
             <p className="gameBtnDesc">
               <FormattedMessage
                 defaultMessage={'Start Playing'}

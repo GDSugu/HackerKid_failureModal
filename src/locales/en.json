@@ -33,6 +33,10 @@
   "+nON3s": {
     "defaultMessage": "{output}"
   },
+  "+xn0Fg": {
+    "defaultMessage": "Time Spent:",
+    "description": "Time Spent subtitle"
+  },
   "/Gy7qZ": {
     "defaultMessage": "Level {levelNumber}",
     "description": "Level indicator"
@@ -140,6 +144,10 @@
     "defaultMessage": "Help",
     "description": "more menu button"
   },
+  "16yTgM": {
+    "defaultMessage": "Create challenge",
+    "description": "create challenge button"
+  },
   "1BoFrk": {
     "defaultMessage": "{description}",
     "description": "Course Title"
@@ -187,10 +195,6 @@
   "2RoU+R": {
     "defaultMessage": "{countryName}",
     "description": "country name"
-  },
-  "2Tu0HO": {
-    "defaultMessage": "Next",
-    "description": "next page button"
   },
   "2W0f9h": {
     "defaultMessage": "Bio"
@@ -317,6 +321,9 @@
   "4r4Vnm": {
     "defaultMessage": "See All Awards",
     "description": "see more card text"
+  },
+  "4vDnKO": {
+    "defaultMessage": "Ooch!"
   },
   "4wgAGs": {
     "defaultMessage": "Date",
@@ -582,6 +589,10 @@
     "defaultMessage": "Edit Challenge",
     "description": "edit challenge button"
   },
+  "BIWKGG": {
+    "defaultMessage": "Time Spent:",
+    "description": "time spent heading text"
+  },
   "BNGdt+": {
     "defaultMessage": "No",
     "description": "cancel logout"
@@ -605,6 +616,10 @@
   "BwliRZ": {
     "defaultMessage": "Newest to Oldest",
     "description": "sort dropdown button text"
+  },
+  "C1rkSh": {
+    "defaultMessage": "Coding Pirate",
+    "description": "Coding pirate title"
   },
   "C8QChP": {
     "defaultMessage": "Top Members",
@@ -811,10 +826,6 @@
     "defaultMessage": "Login with Email",
     "description": "Login with email tab"
   },
-  "Gr9306": {
-    "defaultMessage": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?",
-    "description": "Codekata description"
-  },
   "GskR3C": {
     "defaultMessage": "{points}",
     "description": "Club member points"
@@ -886,10 +897,6 @@
     "defaultMessage": "9876543221",
     "description": "Call Button Text"
   },
-  "IgwSoy": {
-    "defaultMessage": "Previous",
-    "description": "previous page button"
-  },
   "IloyRB": {
     "defaultMessage": "{heading}",
     "description": "page title"
@@ -897,6 +904,10 @@
   "In3suu": {
     "defaultMessage": "{errorMessage}",
     "description": "error text"
+  },
+  "J4y0bl": {
+    "defaultMessage": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?",
+    "description": "Coding pirate description"
   },
   "J9e6MO": {
     "defaultMessage": "{output}",
@@ -989,10 +1000,6 @@
     "defaultMessage": "{gameTitle}",
     "description": "game title"
   },
-  "LiF7jy": {
-    "defaultMessage": "{step}",
-    "description": "create challenge instruction"
-  },
   "LkuPrA": {
     "defaultMessage": "Join your friends in the club",
     "description": "more card subtitle"
@@ -1040,6 +1047,10 @@
   "MceYzq": {
     "defaultMessage": "{name}",
     "description": "club leaderboard name"
+  },
+  "Me+V0/": {
+    "defaultMessage": "Challenge Name",
+    "description": "challenge name"
   },
   "MfoF60": {
     "defaultMessage": "{hint}",
@@ -1177,9 +1188,17 @@
   "P3S8Yh": {
     "defaultMessage": "Create a Challenge"
   },
+  "PI3fWF": {
+    "defaultMessage": "{message}",
+    "description": "draft message"
+  },
   "PKwyq8": {
     "defaultMessage": "Move any blocks to get hints",
     "description": "Hint message"
+  },
+  "PLXcXw": {
+    "defaultMessage": "Continue Exploring",
+    "description": "continue button"
   },
   "PMX+8G": {
     "defaultMessage": "{coins}",
@@ -1263,6 +1282,10 @@
   },
   "RSglQH": {
     "defaultMessage": "View all Challenges"
+  },
+  "RaCXom": {
+    "defaultMessage": "{challengeName}",
+    "description": "Question"
   },
   "RdkFSF": {
     "defaultMessage": "Sort by:",
@@ -1590,6 +1613,10 @@
     "defaultMessage": "{studentNamt}",
     "description": "Student Name"
   },
+  "aL6pHp": {
+    "defaultMessage": "Go to Challenges",
+    "description": "navigation to challenges"
+  },
   "aNoleS": {
     "defaultMessage": "Dismiss",
     "description": "dismiss modal button"
@@ -1826,10 +1853,6 @@
     "defaultMessage": "More",
     "description": "More"
   },
-  "gdd3S3": {
-    "defaultMessage": "Codekata",
-    "description": "Codekata title"
-  },
   "giAApt": {
     "defaultMessage": "Solution Videos",
     "description": "Solution Videos Button"
@@ -1923,12 +1946,24 @@
     "defaultMessage": "#{rankNumber}",
     "description": "rank"
   },
+  "jqtzC8": {
+    "defaultMessage": "Coding Pirate",
+    "description": "Coding Pirate title"
+  },
+  "jzHe4a": {
+    "defaultMessage": "{timeSpent}",
+    "description": "total time spent"
+  },
   "k6tlKQ": {
     "defaultMessage": "Ok",
     "description": "closing modal button"
   },
   "kKheEw": {
     "defaultMessage": "{question}"
+  },
+  "kYun6H": {
+    "defaultMessage": "Challenge Name",
+    "description": "challenge name title"
   },
   "keQJEv": {
     "defaultMessage": "{clubName}",
@@ -2024,10 +2059,6 @@
   "meudwh": {
     "defaultMessage": "Coins Earned:",
     "description": "coins earned card caption"
-  },
-  "mfMsri": {
-    "defaultMessage": "Recommended Games",
-    "description": "Section Title"
   },
   "mfZLuH": {
     "defaultMessage": "#{rank}",
@@ -2131,9 +2162,17 @@
     "defaultMessage": "Join with link",
     "description": "join tab"
   },
+  "pNZIoS": {
+    "defaultMessage": "{message}",
+    "description": "success message"
+  },
   "pQ0m8t": {
     "defaultMessage": "watched this",
     "description": "watched this"
+  },
+  "pRmIA8": {
+    "defaultMessage": "Go to Challenges",
+    "description": "challenges navigation button"
   },
   "pVCbSK": {
     "defaultMessage": "Instructions",
@@ -2273,6 +2312,10 @@
     "defaultMessage": "Logout",
     "description": "Logout Button"
   },
+  "sS58ht": {
+    "defaultMessage": "Register to Create Challenge, Earn Points and Compete with friends",
+    "description": "access denied compnent"
+  },
   "sXlZLv": {
     "defaultMessage": "Levels",
     "description": "Game Level"
@@ -2365,6 +2408,10 @@
     "defaultMessage": "Feed",
     "description": "Feed"
   },
+  "uqwFHg": {
+    "defaultMessage": "Continue Createing",
+    "description": "continue creating"
+  },
   "urqfpL": {
     "defaultMessage": "Share",
     "description": "share btn"
@@ -2395,6 +2442,10 @@
   "vYViQu": {
     "defaultMessage": "Filter",
     "description": "Filter"
+  },
+  "vhHzbl": {
+    "defaultMessage": "Now your friends can view and solve your challenge",
+    "description": "success message"
   },
   "viQX0N": {
     "defaultMessage": "Turtle",
@@ -2436,6 +2487,10 @@
     "defaultMessage": "Resend",
     "description": "Resend otp button text"
   },
+  "xAu4pJ": {
+    "defaultMessage": "Submit",
+    "description": "Submit tab"
+  },
   "xHkGSg": {
     "defaultMessage": "{swiperHeading}",
     "description": "Challenges card heading"
@@ -2463,6 +2518,10 @@
   "xs8DW+": {
     "defaultMessage": "Register for free",
     "description": "register button"
+  },
+  "xyhq1c": {
+    "defaultMessage": "Share in",
+    "description": "share in social media text"
   },
   "y00DRu": {
     "defaultMessage": "{count}",

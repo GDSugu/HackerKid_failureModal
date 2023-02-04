@@ -380,7 +380,7 @@ const GameContainer = ({
                   </Link>
                 </div> */}
                 <div className="col-3">
-                  <Link className="game-item" to='/codekata'>
+                  <Link className="game-item" to='/coding-pirate'>
                     <Img src='dashboard/dashboard-codePirate.png' />
                   </Link>
                 </div>

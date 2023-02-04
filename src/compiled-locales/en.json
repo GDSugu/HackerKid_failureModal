@@ -61,6 +61,12 @@
       "value": "output"
     }
   ],
+  "+xn0Fg": [
+    {
+      "type": 0,
+      "value": "Time Spent:"
+    }
+  ],
   "/Gy7qZ": [
     {
       "type": 0,
@@ -243,6 +249,12 @@
       "value": "Help"
     }
   ],
+  "16yTgM": [
+    {
+      "type": 0,
+      "value": "Create challenge"
+    }
+  ],
   "1BoFrk": [
     {
       "type": 1,
@@ -317,12 +329,6 @@
     {
       "type": 1,
       "value": "countryName"
-    }
-  ],
-  "2Tu0HO": [
-    {
-      "type": 0,
-      "value": "Next"
     }
   ],
   "2W0f9h": [
@@ -539,6 +545,12 @@
     {
       "type": 0,
       "value": "See All Awards"
+    }
+  ],
+  "4vDnKO": [
+    {
+      "type": 0,
+      "value": "Ooch!"
     }
   ],
   "4wgAGs": [
@@ -991,6 +1003,12 @@
       "value": "Edit Challenge"
     }
   ],
+  "BIWKGG": [
+    {
+      "type": 0,
+      "value": "Time Spent:"
+    }
+  ],
   "BNGdt+": [
     {
       "type": 0,
@@ -1029,6 +1047,12 @@
     {
       "type": 0,
       "value": "Newest to Oldest"
+    }
+  ],
+  "C1rkSh": [
+    {
+      "type": 0,
+      "value": "Coding Pirate"
     }
   ],
   "C8QChP": [
@@ -1391,12 +1415,6 @@
       "value": "Login with Email"
     }
   ],
-  "Gr9306": [
-    {
-      "type": 0,
-      "value": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?"
-    }
-  ],
   "GskR3C": [
     {
       "type": 1,
@@ -1509,12 +1527,6 @@
       "value": "9876543221"
     }
   ],
-  "IgwSoy": [
-    {
-      "type": 0,
-      "value": "Previous"
-    }
-  ],
   "IloyRB": [
     {
       "type": 1,
@@ -1525,6 +1537,12 @@
     {
       "type": 1,
       "value": "errorMessage"
+    }
+  ],
+  "J4y0bl": [
+    {
+      "type": 0,
+      "value": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?"
     }
   ],
   "J9e6MO": [
@@ -1677,12 +1695,6 @@
       "value": "gameTitle"
     }
   ],
-  "LiF7jy": [
-    {
-      "type": 1,
-      "value": "step"
-    }
-  ],
   "LkuPrA": [
     {
       "type": 0,
@@ -1753,6 +1765,12 @@
     {
       "type": 1,
       "value": "name"
+    }
+  ],
+  "Me+V0/": [
+    {
+      "type": 0,
+      "value": "Challenge Name"
     }
   ],
   "MfoF60": [
@@ -1965,10 +1983,22 @@
       "value": "Create a Challenge"
     }
   ],
+  "PI3fWF": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
   "PKwyq8": [
     {
       "type": 0,
       "value": "Move any blocks to get hints"
+    }
+  ],
+  "PLXcXw": [
+    {
+      "type": 0,
+      "value": "Continue Exploring"
     }
   ],
   "PMX+8G": [
@@ -2103,6 +2133,12 @@
     {
       "type": 0,
       "value": "View all Challenges"
+    }
+  ],
+  "RaCXom": [
+    {
+      "type": 1,
+      "value": "challengeName"
     }
   ],
   "RdkFSF": [
@@ -2637,6 +2673,12 @@
       "value": "studentNamt"
     }
   ],
+  "aL6pHp": [
+    {
+      "type": 0,
+      "value": "Go to Challenges"
+    }
+  ],
   "aNoleS": [
     {
       "type": 0,
@@ -3029,12 +3071,6 @@
       "value": "More"
     }
   ],
-  "gdd3S3": [
-    {
-      "type": 0,
-      "value": "Codekata"
-    }
-  ],
   "giAApt": [
     {
       "type": 0,
@@ -3191,6 +3227,18 @@
       "value": "rankNumber"
     }
   ],
+  "jqtzC8": [
+    {
+      "type": 0,
+      "value": "Coding Pirate"
+    }
+  ],
+  "jzHe4a": [
+    {
+      "type": 1,
+      "value": "timeSpent"
+    }
+  ],
   "k6tlKQ": [
     {
       "type": 0,
@@ -3201,6 +3249,12 @@
     {
       "type": 1,
       "value": "question"
+    }
+  ],
+  "kYun6H": [
+    {
+      "type": 0,
+      "value": "Challenge Name"
     }
   ],
   "keQJEv": [
@@ -3357,12 +3411,6 @@
     {
       "type": 0,
       "value": "Coins Earned:"
-    }
-  ],
-  "mfMsri": [
-    {
-      "type": 0,
-      "value": "Recommended Games"
     }
   ],
   "mfZLuH": [
@@ -3525,10 +3573,22 @@
       "value": "Join with link"
     }
   ],
+  "pNZIoS": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
   "pQ0m8t": [
     {
       "type": 0,
       "value": "watched this"
+    }
+  ],
+  "pRmIA8": [
+    {
+      "type": 0,
+      "value": "Go to Challenges"
     }
   ],
   "pVCbSK": [
@@ -3757,6 +3817,12 @@
       "value": "Logout"
     }
   ],
+  "sS58ht": [
+    {
+      "type": 0,
+      "value": "Register to Create Challenge, Earn Points and Compete with friends"
+    }
+  ],
   "sXlZLv": [
     {
       "type": 0,
@@ -3899,6 +3965,12 @@
       "value": "Feed"
     }
   ],
+  "uqwFHg": [
+    {
+      "type": 0,
+      "value": "Continue Createing"
+    }
+  ],
   "urqfpL": [
     {
       "type": 0,
@@ -3945,6 +4017,12 @@
     {
       "type": 0,
       "value": "Filter"
+    }
+  ],
+  "vhHzbl": [
+    {
+      "type": 0,
+      "value": "Now your friends can view and solve your challenge"
     }
   ],
   "viQX0N": [
@@ -4007,6 +4085,12 @@
       "value": "Resend"
     }
   ],
+  "xAu4pJ": [
+    {
+      "type": 0,
+      "value": "Submit"
+    }
+  ],
   "xHkGSg": [
     {
       "type": 1,
@@ -4055,6 +4139,12 @@
     {
       "type": 0,
       "value": "Register for free"
+    }
+  ],
+  "xyhq1c": [
+    {
+      "type": 0,
+      "value": "Share in"
     }
   ],
   "y00DRu": [
