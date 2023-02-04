@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import FuzzySearch from 'fuzzy-search';
-import { $, pageInit } from '../framework';
+import { $, pageInit, timeTrack } from '../framework';
 import CourseCard, { TopContainer, CustomSwiperComponent } from '../components/courseCard';
 import SwiperComponent from '../components/SwiperComponent';
 import 'swiper/swiper.scss';
@@ -324,6 +324,8 @@ const Courses = () => {
   if (window.location.href.includes('courses')) {
     pageInit('courses-container', 'Courses');
   }
+
+  timeTrack('courses');
   const isPageMounted = React.useRef(true);
 
   const { courseData } = useCourses({ isPageMounted });

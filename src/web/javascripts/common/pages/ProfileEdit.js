@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { $, pageInit, validate } from '../framework';
+import {
+  $, pageInit, timeTrack, validate,
+} from '../framework';
 import { useProfileInfo } from '../../../../hooks/pages/profile';
 import '../../../stylesheets/common/pages/profile/style.scss';
 import Modal from '../components/Modal';
@@ -94,6 +96,8 @@ const Profile = () => {
   if (window.location.href.includes('profile')) {
     pageInit('profile-container', 'Profile - Settings');
   }
+
+  timeTrack('profile');
 
   const isPageMounted = React.useRef(true);
   const { state, setState, saveProfile } = useProfileInfo({ isPageMounted });

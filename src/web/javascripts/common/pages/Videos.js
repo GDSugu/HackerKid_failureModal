@@ -2,7 +2,9 @@ import React, { useRef, useEffect, useState } from 'react';
 import Plyr from 'plyr-react';
 import Hls from 'hls.js';
 import FuzzySearch from 'fuzzy-search';
-import { pageInit, $, pathNavigator } from '../framework';
+import {
+  pageInit, $, pathNavigator, timeTrack,
+} from '../framework';
 import '../../../../../node_modules/plyr-react/plyr.css';
 import '../../../stylesheets/common/sass/components/_paginator.scss';
 import '../../../stylesheets/common/pages/courses/style.scss';
@@ -363,6 +365,8 @@ const Videos = () => {
   if (window.location.href.includes('videos')) {
     pageInit('courses-container', 'Courses');
   }
+
+  timeTrack('videos');
 
   const isPageMounted = React.useRef(true);
   const urlData = getUrlData();
