@@ -12,7 +12,7 @@ import useRegister from '../../../../hooks/pages/register';
 import {
   togglePasswordVisibility, validateInputOnChange, closeFormError, setFormErrorField,
 } from '../commonLoginRegisterFunctions';
-import { loginCheck } from '../../../../hooks/common/framework';
+import { loginCheck, setSession } from '../../../../hooks/common/framework';
 import VerifyOtpFormStep from '../components/VerifyOtpFormStep';
 import useOtp from '../../../../hooks/pages/otp';
 import useBackBtn from '../../../../hooks/pages/back-btn';
@@ -284,6 +284,9 @@ const RegisterFormStepThree = ({
         const { status, message } = data;
 
         if (status === 'success') {
+          if (data.awardsGiven) {
+            setSession('awardsGiven', JSON.stringify(data.awardsGiven));
+          }
           pathNavigator('dashboard');
         } else if (status === 'error') {
           const errorCause = 'postData';
@@ -337,7 +340,7 @@ const RegisterFormStepThree = ({
             closeFormError(e.target);
           }} data-close-form-error-type='ERROR,INVALID_PASSWORD' required={ true} data-typename='Password' />
           <span className="password-toggle-icon-container">
-            <i className="fa fa-fw fa-eye toggle-password" toggle="#password" onClick={togglePasswordVisibility}></i>
+            <i className="fa fa-fw fa-eye toggle-password" data-toggle="#password" onClick={togglePasswordVisibility}></i>
           </span>
         </div>
     </div>
@@ -353,14 +356,14 @@ const RegisterFormStepThree = ({
           </span>
         </div>
         <div className='passwordfield-with-toggle-icon'>
-          <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' typename='Re-type Password' onChange={(e) => {
+          <input className='form-control' type='password' name='retyped-password' id='retyped-password' placeholder='Re-type Password' onChange={(e) => {
             handleStateChange('password', e.target.value);
             validateInputOnChange(e, 'password', 'Use a stronger password');
             closeFormError(e.target);
             matchValueTo(e, '#password');
           }} data-close-form-error-type='ERROR,INVALID_PASSWORD' required={true} data-typename='Re-type Password'/>
           <span className="password-toggle-icon-container">
-            <i className="fa fa-fw fa-eye toggle-password" toggle="#retyped-password" onClick={togglePasswordVisibility}></i>
+            <i className="fa fa-fw fa-eye toggle-password" data-toggle="#retyped-password" onClick={togglePasswordVisibility}></i>
           </span>
         </div>
       </div>

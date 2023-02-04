@@ -357,9 +357,9 @@ const hideDefaultNavBar = (device, turtleState) => {
   } else if (device === 'mobile') {
     componentContainer = `.webkata-mob-${turtleState}-container`;
   }
-  window.addEventListener('resize', () => resizeHandler('nav.turtle-navbar', componentContainer));
+  window.addEventListener('resize', () => resizeHandler('nav.game-navbar', componentContainer));
   setTimeout(() => {
-    resizeHandler('nav.turtle-navbar', componentContainer);
+    resizeHandler('nav.game-navbar', componentContainer);
   }, 300);
 };
 

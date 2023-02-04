@@ -1,0 +1,53 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+@use '../../sass/components/controls';
+@use '../../sass/components/turtle-certificate';
+
+@import '../certificates/_certificateTheme.js';
+@import '../../loading.css';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+.view-certificate-container {
+  background-color: gt.theme-var(certificates-body-bg, null, $thememaplight, $cssvars);
+
+  nav {
+    background-color: gt.theme-var(certificates-nav-bg, null, $thememaplight, $cssvars);
+
+    .navigation-container {
+      .navigation-item {
+        &.active {
+          background-color: gt.theme-var(certificates-nav-active-bg, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+  }
+
+  .certificate-canvas-container {
+    height: calc(100vh - 83px);
+    display: grid;
+    place-items: center;
+
+    @include gm.media-breakpoint-down(md) {
+      height: calc(100vh - 146px);
+    }
+
+    canvas {
+      width: 60% !important;
+      aspect-ratio: calc(4 / 3) !important;
+
+      @include gm.media-breakpoint-down(md) {
+        width: 70% !important;
+        height: 500px !important;
+      }
+
+      @include gm.media-breakpoint-down(sm) {
+        width: 95% !important;
+      }
+    }
+  }
+
+  .userName {
+    color: gt.theme-var(certificate-student-name-color, null, $thememaplight, $cssvars);
+  }
+}

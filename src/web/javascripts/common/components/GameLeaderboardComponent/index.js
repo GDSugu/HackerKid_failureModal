@@ -1,9 +1,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useLeaderBoard } from '../../../../../hooks/pages/leaderboard';
-import { $ } from '../../framework';
+import { $, secondsToMins } from '../../framework';
 import '../../../../stylesheets/common/sass/components/_gameLeaderboardComponent.scss';
 import Img from '../Img';
+import { useAwardsByGame } from '../../../../../hooks/pages/awards';
 import { AuthContext } from '../../../../../hooks/pages/root';
 
 const LeaderboardUserComponent = ({ user }) => <>
@@ -75,6 +76,35 @@ const LeaderboardPaginationComponent = ({ handlePagination, paginationDetails })
   </>;
 };
 
+const AwardCollectionComponent = ({ game }) => {
+  const isPageMounted = React.useRef(true);
+
+  const { awardsByGameState, getAwardsByGame } = useAwardsByGame(
+    { initializeData: true, isPageMounted, game },
+  );
+
+  const { awards } = awardsByGameState;
+  console.log('awards', awards);
+  React.useEffect(() => {
+    getAwardsByGame({ cached: false });
+  }, []);
+
+  if (!awards || !awards.length) {
+    return null;
+  }
+
+  return <>
+          {
+            awards?.map((award, index) => <div key={index} className="award-block">
+                <img
+                    src={award?.awardImage}
+                    alt={award?.awardName}
+                  />
+              </div>)
+          }
+  </>;
+};
+
 const GameLeaderboardComponent = ({
   game = 'all', onshown = () => {}, onhidden = () => {},
   beforeShown = () => {}, beforeHidden = () => {},
@@ -140,7 +170,7 @@ const GameLeaderboardComponent = ({
   };
 
   const handleLeaderboardPage = (page) => {
-    getLeaderBoardData({ pageNumber: page, game: 'turtle' });
+    getLeaderBoardData({ pageNumber: page, game });
   };
 
   const handlePaginationNavigation = (action) => {
@@ -154,7 +184,7 @@ const GameLeaderboardComponent = ({
         if (nextPage !== currPage) {
           getLeaderBoardData({
             pageNumber: nextPage,
-            game: 'turtle',
+            game,
           });
         }
       } else if (action === 'previous') {
@@ -163,7 +193,7 @@ const GameLeaderboardComponent = ({
         if (prevPage !== currPage) {
           getLeaderBoardData({
             pageNumber: prevPage,
-            game: 'turtle',
+            game,
           });
         }
       }
@@ -215,7 +245,7 @@ const GameLeaderboardComponent = ({
   React.useEffect(() => {
     getLeaderBoardData({
       pageNumber: 1,
-      game: 'webkata',
+      game,
     });
 
     return () => {
@@ -417,7 +447,7 @@ const GameLeaderboardComponent = ({
                       </div>
                     </div>
                   </div>
-                  {/* <div className="col-4 stats-block">
+                  <div className="col-4 stats-block">
                     <div className="stats-block-container">
                       <div className="stats-icon-container">
                         <Img
@@ -439,14 +469,14 @@ const GameLeaderboardComponent = ({
                               defaultMessage={'{timeSpent}'}
                               description={'Time Spent'}
                               values={{
-                                timeSpent: '14 mins' || 0,
+                                timeSpent: secondsToMins(state?.gameProgress?.totalTimeSpent),
                               }}
                             />
                           </span>
                         </p>
                       </div>
                     </div>
-                  </div> */}
+                  </div>
                 </div>
               </div>
               <div className="awards-container">
@@ -460,27 +490,8 @@ const GameLeaderboardComponent = ({
                 </div>
                 <div className="awards-content-container">
                   <div className="row align-items-center no-gutters">
-                    <div className="award-block">
-                      <Img
-                        src='achievements/award1.png'
-                        useSource={true}
-                        alt={'earned award'}
-                      />
-                    </div>
-                    <div className="award-block">
-                      <Img
-                        src='achievements/award2.png'
-                        useSource={true}
-                        alt={'earned award'}
-                      />
-                    </div>
-                    <div className="award-block">
-                      <Img
-                        src='achievements/award3.png'
-                        useSource={true}
-                        alt={'earned award'}
-                      />
-                    </div>
+                      {/* call AwardCollectionComponent with game */}
+                      <AwardCollectionComponent game={game} />
                   </div>
                 </div>
               </div>

@@ -1,0 +1,2144 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+
+@import './_clubTheme.js';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+.clubs-container {
+  background-color: gt.theme-var(club-body-bg, null, $thememaplight, $cssvars);
+
+  nav {
+    background-color: gt.theme-var(club-nav-bg, null, $thememaplight, $cssvars);
+
+    .navigation-container {
+      .navigation-item {
+        &.active {
+          background-color: gt.theme-var(club-nav-active-bg, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+  }
+
+  .club-block {
+    position: relative;
+
+    .hero-card {
+      display: flex;
+      align-items: stretch;
+      box-shadow: gt.theme-var(club-hero-shadow, null, $thememaplight, $cssvars);
+      background:
+        url('../../../../../images/dashboard/dashboard-hero-bg-left.png') no-repeat center left / contain,
+        url('../../../../../images/dashboard/dashboard-hero-bg-right.png') no-repeat center right,
+        gt.theme-var(bg-1);
+      margin: 1rem 0;
+      border-radius: 0.875rem;
+      min-height: 12rem;
+      position: relative;
+      overflow: hidden;
+
+      &.club-hero-card {
+        // background:
+        // url('../../../../../images/clubs/club.svg') no-repeat center left / contain,
+        // url('../../../../../images/dashboard/dashboard-hero-bg-right.png') no-repeat center right,
+        // gt.theme-var(bg-1);
+
+        .club-card-data {
+          background-color: gt.theme-var(club-hero-name-bg, null, $thememaplight, $cssvars);
+          backdrop-filter: blur(6px);
+          padding: 1rem;
+          position: absolute;
+          bottom: 0;
+          min-width: 20%;
+
+          @include gm.media-breakpoint-down(md) {
+            width: 50%;
+          }
+
+          p {
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin-left: 1rem;
+          }
+        }
+
+        .club-hero-data-container {
+          margin-left: auto;
+          padding: 2rem 0;
+          display: grid;
+          gap: 0.75rem;
+          font-weight: bold;
+          grid-template-columns: 30% 60%;
+          grid-template-rows: auto 3.5rem;
+          grid-template-areas:
+            "club-rank club-points"
+            "club-rank club-action";
+
+          .club-rank-container {
+            grid-area: club-rank;
+            display: grid;
+            text-align: center;
+            border-radius: 0.875rem;
+            background-color: gt.theme-var(club-hero-data-bg, null, $thememaplight, $cssvars);
+            backdrop-filter: blur(2px);
+            padding: 1rem;
+
+            p {
+              color: gt.theme-var(club-btn-bg, null, $thememaplight, $cssvars);
+            }
+          }
+
+          .club-points-container {
+            grid-area: club-points;
+            display: grid;
+            border-radius: 0.875rem;
+            background-color: gt.theme-var(club-hero-data-bg, null, $thememaplight, $cssvars);
+            backdrop-filter: blur(2px);
+
+            img {
+              width: 2rem;
+              height: 2rem;
+              margin-right: 0.5rem;
+            }
+          }
+
+          .club-action-btn {
+            grid-area: club-action;
+            border-radius: 0.875rem;
+            background-color: gt.theme-var(bg-1);
+            border: 1px solid gt.theme-var(club-btn-bg, null, $thememaplight, $cssvars);
+            box-shadow: 0 4px 4px gt.theme-var(club-card-box-shadow-color, null, $thememaplight, $cssvars);
+            color: gt.theme-var(club-btn-bg, null, $thememaplight, $cssvars);
+            font-weight: bold;
+
+            &:not(.pending-action):hover {
+              background-color: gt.theme-var(club-btn-bg, null, $thememaplight, $cssvars);
+              color: gt.theme-var(bg-1);
+            }
+
+            &.pending-action {
+              border-color: gt.theme-var(text-color-5);
+              box-shadow: none;
+              color: gt.theme-var(text-color-5);
+              text-align: left;
+              opacity: 1;
+            }
+
+            i {
+              font-size: 1.5rem;
+            }
+          }
+        }
+
+        .club-hero-data-container-mob {
+          margin-left: auto;
+          width: 50%;
+          display: grid;
+          place-content: center;
+
+          .d-flex {
+            margin: 0.5rem 0;
+
+            p {
+              font-size: 0.875rem;
+            }
+
+            img {
+              width: 1.5rem;
+              height: 1.5rem;
+              margin-right: 0.5rem;
+            }
+          }
+        }
+      }
+
+      @include gm.media-breakpoint-up(xxl) {
+        min-height: 18rem;
+      }
+
+      @include gm.media-breakpoint-down(sm) {
+        background: url('../../../../../images/dashboard/dashboard-hero-bg-mobile.png') no-repeat center left / contain, gt.theme-var(bg-1);
+        min-height: unset;
+        padding: 1rem;
+      }
+
+      .hero-card-data {
+        padding: 2rem 0 0;
+
+        @include gm.media-breakpoint-down(sm) {
+          padding: 0;
+        }
+
+        @include gm.media-breakpoint-up(sm) {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+        }
+
+        .hero-card-img {
+          background: url('../../../../../images/profile/default_user.png') no-repeat center center / cover;
+          border-radius: 50%;
+          position: relative;
+          width: 5rem;
+          height: 5rem;
+          left: 15%;
+          transform: translateX(65%);
+
+          @include gm.media-breakpoint-down(xxxl) {
+            transform: translate(50%);
+          }
+
+          @include gm.media-breakpoint-down(xxl) {
+            transform: translateX(65%);
+          }
+
+          @include gm.media-breakpoint-down(xl) {
+            transform: translateX(60%);
+          }
+
+          @include gm.media-breakpoint-down(lg) {
+            transform: translateX(65%);
+          }
+
+          @include gm.media-breakpoint-down(md) {
+            transform: translateX(75%);
+          }
+
+          @include gm.media-breakpoint-down(sm) {
+            left: 0;
+            transform: translateX(10%);
+          }
+
+          @include gm.media-breakpoint-down(xs) {
+            left: 0;
+            transform: translateX(15%);
+          }
+
+          @include gm.media-breakpoint-up(xxl) {
+            width: 8rem;
+            height: 8rem;
+            // transform: translate(50%);
+          }
+
+          @include gm.media-breakpoint-up (xxxl) {
+            transform: translateX(60%);
+          }
+
+          @include gm.media-breakpoint-up (xxxxl) {
+            transform: translateX(55%);
+            background-color: black;
+          }
+
+          @include gm.media-breakpoint-up(xxxxxl) {
+            transform: translateX(30%);
+            background-color: white;
+          }
+        }
+
+        .hero-card-data-content {
+          display: inline-flex;
+          justify-content: center;
+          width: fit-content;
+          margin-top: 0.5rem;
+          position: relative;
+          left: 15%;
+          transform: translateX(65%);
+
+          @include gm.media-breakpoint-down(xxxl) {
+            transform: translateX(50%);
+          }
+
+          @include gm.media-breakpoint-down(xxl) {
+            left: 50%;
+            transform: translateX(-50%);
+          }
+
+          @include gm.media-breakpoint-down(xl) {
+            left: 40%;
+            transform: translateX(-50%);
+          }
+
+          @include gm.media-breakpoint-down(lg) {
+            left: 40%;
+            transform: translateX(-40%);
+          }
+
+          @include gm.media-breakpoint-down(md) {
+            left: 40%;
+            transform: translateX(-35%);
+          }
+
+          @include gm.media-breakpoint-down(sm) {
+            left: 0;
+            transform: translateX(10%);
+          }
+
+          @include gm.media-breakpoint-down(xs) {
+            left: 0;
+            transform: translateX(15%);
+          }
+
+          @include gm.media-breakpoint-up(xxl) {
+            // transform: translate(50%);
+          }
+
+          @include gm.media-breakpoint-up (xxxl) {
+            left: 40%;
+            transform: translateX(-40%);
+          }
+
+          @include gm.media-breakpoint-up (xxxxl) {
+            left: 40%;
+            transform: translateX(-50%);
+          }
+
+          @include gm.media-breakpoint-up(xxxxxl) {
+            left: 30%;
+            transform: translateX(-50%);
+          }
+
+          .hero-data {
+            display: flex;
+            align-items: center;
+            margin: 0 0.5rem;
+
+            p {
+              font-size: 1.125rem;
+              margin-left: 0.5rem;
+            }
+
+            img {
+              width: 2rem;
+              height: 2rem;
+            }
+          }
+        }
+
+        .club-leaderboard-container {
+          width: 50%;
+          margin-left: auto;
+          margin-right: 3rem;
+
+          .club-leaderboard-content {
+            padding: 1rem;
+            background-color: gt.theme-var(bg-1);
+            border-radius: 0.875rem;
+            box-shadow: gt.theme-var(club-leaderboard-shadow, null, $thememaplight, $cssvars);
+            box-sizing: content-box;
+            overflow: auto;
+
+            .club-leaderboard-row {
+              display: grid;
+              grid-template-columns: 15% 65% 20%;
+              align-items: center;
+              margin: 0.75rem 0;
+
+              &:first-child {
+                margin-top: 0;
+              }
+
+              &:last-child {
+                margin-bottom: 0;
+              }
+
+              .club-lb-rank {
+                flex: 1;
+
+                p {
+                  color: gt.theme-var(text-color-5);
+                  font-weight: bold;
+                }
+              }
+
+              .club-lb-name {
+                a {
+                  color: gt.theme-var(text-color-1);
+
+                  &:hover {
+                    color: gt.theme-var(club-btn-bg, null, $thememaplight, $cssvars);
+                    text-decoration: none;
+                  }
+
+                  img {
+                    width: 2rem;
+                    height: 2rem;
+                    margin-right: 0.5rem;
+                    border-radius: 0.5rem;
+                  }
+
+                  p {
+                    font-weight: bold;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                  }
+                }
+              }
+
+              .club-lb-members {
+                img {
+                  width: 1.5rem;
+                  height: 1.5rem;
+                  margin-right: 0.5rem;
+                }
+              }
+            }
+          }
+
+          .btn-container {
+            margin: 1rem 0;
+
+            button {
+              margin: 0 0.5rem;
+              padding: 0.5rem 0;
+              border-radius: 12px;
+              color: gt.theme-var(text-color-2);
+              font-weight: bold;
+
+              &:first-child {
+                margin-left: 0;
+              }
+
+              &:last-child {
+                margin-right: 0;
+              }
+
+              i {
+                margin-left: 0.5rem;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .hero-no-club-card {
+      width: 100%;
+
+      .hero-no-club-card-data {
+        p {
+          margin: 1rem 0 2rem 0;
+        }
+      }
+
+      .hero-no-club-img {
+        width: 100%;
+        text-align: center;
+        margin: 3rem 0;
+      }
+
+      .btn-container {
+        button {
+          margin: 0 0.5rem;
+          padding: 0.5rem 0;
+          border-radius: 12px;
+          color: gt.theme-var(text-color-2);
+          font-weight: bold;
+
+          i {
+            margin-left: 0.5rem;
+          }
+        }
+      }
+    }
+
+    .no-club-message-card {
+      text-align: center;
+      padding: 3rem;
+      border-radius: 0.875rem;
+      border: 1px dashed gt.theme-var(club-nav-bg, null, $thememaplight, $cssvars);
+
+      p {
+        font-size: 1.25rem;
+      }
+    }
+
+    .browse-club-heading {
+      margin: 2rem 0 1rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      @include gm.media-breakpoint-down(md) {
+        flex-wrap: wrap;
+      }
+
+      .input-group {
+        padding: 0.25rem 1rem;
+        border-radius: 0.875rem;
+        background-color: gt.theme-var(bg-1);
+        width: 30%;
+        border: 1px solid gt.theme-var(club-btn-bg, null, $thememaplight, $cssvars);
+
+        @include gm.media-breakpoint-down(md) {
+          width: 100%;
+        }
+
+        .input-group-prepend {
+          align-items: center;
+          background-color: transparent;
+
+          i {
+            font-size: 1.25rem;
+          }
+        }
+
+        input {
+          border: none;
+          background-color: transparent;
+          padding: 0.5rem 1rem;
+          outline: none;
+          box-shadow: none;
+        }
+      }
+    }
+
+    .club-list {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      margin: 1rem 0;
+
+      .club-card {
+        background-color: gt.theme-var(bg-1);
+        border-radius: 0.875rem;
+        display: grid;
+        grid-template-columns: 25% 75%;
+        padding: 1rem;
+
+        &:hover {
+          cursor: pointer;
+          box-shadow: gt.theme-var(club-hero-shadow, null, $thememaplight, $cssvars);
+          transform: scale(1.025);
+        }
+
+        .club-card-img {
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 1rem;
+          }
+        }
+
+        .club-card-data {
+          display: flex;
+          flex-direction: column;
+          margin: 0 1rem;
+
+          & > .d-flex {
+            height: 50%;
+
+            &:first-child {
+              border-bottom: 1px solid gt.theme-var(club-card-border-color, null, $thememaplight, $cssvars);
+            }
+
+            &:last-child {
+              .col {
+                padding: 0;
+              }
+            }
+          }
+
+          .club-card-name {
+            font-weight: bold;
+          }
+
+          .club-card-rank {
+            p {
+              color: gt.theme-var(text-color-5);
+              font-weight: bold;
+            }
+          }
+
+          .club-coin-img {
+            img {
+              width: 1.5rem;
+              height: 1.5rem;
+              margin-right: 0.5rem;
+            }
+          }
+
+          .club-members-img {
+            img {
+              width: 2.5rem;
+              height: 2.5rem;
+              margin-right: 0.5rem;
+            }
+          }
+        }
+      }
+    }
+
+    .club-feed-mob-container {
+      .club-name {
+        margin: 1rem 0;
+
+        h5 {
+          font-weight: bold;
+        }
+      }
+
+      .feed-container {
+        .nav-tabs {
+          border: 0;
+
+          .nav-link {
+            border: 0;
+            font-weight: bold;
+            padding: 1rem;
+            color: gt.theme-var(text-color-1);
+            border-bottom: 1px solid gt.theme-var(club-tab-border-color, null, $thememaplight, $cssvars);
+
+            &.active {
+              background: linear-gradient(to right, gt.theme-var(club-faded-btn-bg, null, $thememaplight, $cssvars), gt.theme-var(club-faded-btn-bg, null, $thememaplight, $cssvars));
+              background-size: 100% 0.15rem;
+              background-position: bottom 0 left 0, bottom 0.15rem left 0;
+              background-repeat: no-repeat;
+              background-color: transparent;
+              color: gt.theme-var(club-faded-btn-bg, null, $thememaplight, $cssvars);
+            }
+          }
+        }
+
+        .tab-content {
+          .tab-pane {
+            padding: 1rem 0;
+
+            &#feed-tab {
+              .feed-card {
+                overflow: hidden;
+                border-radius: 0.75rem;
+                background-color: gt.theme-var(bg-1);
+                margin-bottom: 1rem;
+
+                .feed-title {
+                  background-color: gt.theme-var(bg-3);
+                  padding: 1rem;
+
+                  img {
+                    width: 2.5rem;
+                    height: 2.5rem;
+                    border-radius: 50%;
+                    margin-right: 0.5rem;
+                  }
+                }
+
+                .feed-content {
+                  padding: 2rem 2.5rem;
+
+                  .feed-icon {
+                    img {
+                      width: 1.5rem;
+                      height: 1.5rem;
+                      margin-right: 1rem;
+                    }
+                  }
+                }
+              }
+            }
+
+            &#members-tab {
+              .club-leaderboard-container {
+                .club-leaderboard-header {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin: 0 0 1rem 0;
+
+                  .sort-btn {
+                    background-color: gt.theme-var(bg-1);
+                    border-radius: 0.5rem;
+                    border: 1px solid gt.theme-var(club-btn-bg, null, $thememaplight, $cssvars);
+
+                    p {
+                      color: gt.theme-var(text-color-5);
+                      font-weight: normal;
+                      font-size: 0.875rem;
+
+                      span {
+                        color: gt.theme-var(text-color-1);
+                      }
+                    }
+                  }
+                }
+
+                .club-leaderboard-data {
+                  .club-member-row {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 0.5rem 1rem;
+                    border-radius: 0.75rem;
+
+                    &:hover {
+                      cursor: pointer;
+                      background-color: gt.theme-var(club-underline-color, null, $thememaplight, $cssvars);
+                    }
+
+                    &.current-user {
+                      background-color: gt.theme-var(club-current-user-active-bg, null, $thememaplight, $cssvars);
+                    }
+
+                    .club-member-img-container {
+                      margin: 0 0.5rem 0 1.5rem;
+
+                      .club-member-img {
+                        width: 2.5rem;
+                        height: 2.5rem;
+                        border-radius: 50%;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            &#more-tab {
+              input[type=text] {
+                &:not([disabled], [readonly]) {
+                  background-color: gt.theme-var(bg-1);
+                }
+
+                padding: 0.5rem 1rem;
+                outline: none;
+                box-shadow: none;
+              }
+
+              input,
+              select {
+                border-color: gt.theme-var(club-progress-bar-bg, null, $thememaplight, $cssvars);
+                border-radius: 0.5rem;
+              }
+
+              .club-image-upload {
+                display: grid;
+                place-content: center;
+
+                .club-image-container {
+                  position: relative;
+                  background-color: gt.theme-var(bg-1);
+                  border-radius: 0.75rem;
+                  border: 1px solid gt.theme-var(club-progress-bar-bg, null, $thememaplight, $cssvars);
+                  height: 40vh;
+                  aspect-ratio: 1/1;
+                  margin: auto;
+
+                  .club-display-picture {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 0.75rem;
+                  }
+
+                  .image-edit-btn {
+                    input[type=file] {
+                      width: 0;
+                      height: 0;
+                    }
+
+                    .image-edit-icon {
+                      position: absolute;
+                      right: 1rem;
+                      bottom: 1rem;
+
+                      &:hover {
+                        cursor: pointer;
+
+                        img {
+                          filter: drop-shadow(2px 4px 6px gt.theme-var(text-color-1));
+                          border-radius: 50%;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
+              .autocomplete-list {
+                // max-height: 150%;
+                box-shadow: 0 2px 0.5rem gt.theme-var(bg-2);
+                border-radius: 0.5rem;
+              }
+
+              .autocomplete-loading-container {
+                box-shadow: 0 2px 0.5rem gt.theme-var(bg-2);
+                border-radius: 0.5rem;
+              }
+
+              .club-members-info-container {
+                .club-members-container {
+                  background-color: gt.theme-var(bg-1);
+                  border-radius: 0.75rem;
+                  padding: 1rem 0;
+                  display: grid;
+                  gap: 0.25rem;
+                  margin-bottom: 1rem;
+
+                  .club-member-row {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 0 1rem;
+
+                    &:hover {
+                      cursor: pointer;
+                      background-color: gt.theme-var(club-underline-color, null, $thememaplight, $cssvars);
+                    }
+
+                    .club-member-img-container {
+                      margin-right: 0.5rem;
+
+                      .club-member-img {
+                        width: 3rem;
+                        height: 3rem;
+                        border-radius: 50%;
+                      }
+                    }
+
+                    .club-member-actions {
+                      display: grid;
+                      grid-template-columns: 1fr 1fr;
+                      align-items: center;
+
+                      button {
+                        &.hidden {
+                          visibility: hidden;
+                        }
+                      }
+
+                      .member-remove-btn {
+                        &:focus {
+                          box-shadow: none;
+                        }
+
+                        &:hover {
+                          span {
+                            color: gt.theme-var(club-danger-bg, null, $thememaplight, $cssvars);
+                          }
+                        }
+
+                        span {
+                          font-size: 2rem;
+                        }
+                      }
+
+                      .member-role-btn {
+                        &:focus {
+                          box-shadow: none;
+                        }
+
+                        &:hover {
+                          svg {
+                            path {
+                              fill: gt.theme-var(club-make-admin-bg, null, $thememaplight, $cssvars);
+                            }
+                          }
+                        }
+
+                        svg {
+                          height: 1.125rem;
+                          width: 1.125rem;
+                        }
+                      }
+                    }
+                  }
+
+                  .divider {
+                    position: relative;
+                    padding: 0 1rem;
+
+                    p {
+                      color: gt.theme-var(text-color-5);
+                      display: flex;
+                      align-items: center;
+
+                      span {
+                        content: "";
+                        flex: 1 1 auto;
+                        border-top: 1px solid gt.theme-var(text-color-6);
+                        margin-left: 0.5rem;
+                        position: relative;
+                        top: 1px;
+                      }
+                    }
+                  }
+                }
+
+                .input-group {
+                  padding: 0.25rem 1rem;
+                  border-radius: 0.875rem;
+                  background-color: gt.theme-var(bg-1);
+                  border: 1px solid gt.theme-var(club-btn-bg, null, $thememaplight, $cssvars);
+
+                  &:hover {
+                    cursor: pointer;
+                  }
+
+                  .input-group-append {
+                    align-items: center;
+                    background-color: transparent;
+                    margin-left: 0.25rem;
+
+                    &:hover {
+                      svg {
+                        fill: gt.theme-var(text-color-1);
+                      }
+                    }
+
+                    i {
+                      font-size: 1.25rem;
+                    }
+                  }
+
+                  input {
+                    border: none;
+                    background-color: transparent;
+                    padding: 0.5rem 0;
+                    outline: none;
+                    box-shadow: none;
+                  }
+                }
+              }
+
+              .club-advanced-container {
+                .form-group {
+                  p {
+                    margin-bottom: 0.5rem;
+                  }
+
+                  button {
+                    background-color: gt.theme-var(bg-1);
+                    border-radius: 0.75rem;
+                    border-color: gt.theme-var(club-advanced-options-color, null, $thememaplight, $cssvars);
+                    color: gt.theme-var(club-advanced-options-color, null, $thememaplight, $cssvars);
+                    padding: 0.75rem 0;
+
+                    &:hover:not([disabled]) {
+                      background-color: gt.theme-var(club-advanced-options-color, null, $thememaplight, $cssvars);
+                      color: gt.theme-var(text-color-2);
+                    }
+
+                    &.disabled {
+                      color: gt.theme-var(text-color-5);
+                      border-color: gt.theme-var(text-color-5);
+                    }
+                  }
+
+                  .admin-delete-msg {
+                    color: gt.theme-var(text-color-5);
+                  }
+                }
+              }
+
+              .club-mob-footer-btn {
+                position: sticky;
+                bottom: 0.5rem;
+                border-radius: 0.75rem;
+                color: gt.theme-var(text-color-2);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .club-dashboard-container {
+      display: grid;
+      grid-template-columns: calc(70% - 2rem) 30%;
+      column-gap: 2rem;
+
+      .dashboard-title {
+        margin: 1rem 0;
+        font-weight: bold;
+        font-size: 1.25rem;
+      }
+
+      .club-feed-container {
+        .feed-container {
+          .feed-card {
+            overflow: hidden;
+            border-radius: 0.75rem;
+            background-color: gt.theme-var(bg-1);
+            margin-bottom: 1rem;
+
+            .feed-title {
+              background-color: gt.theme-var(bg-3);
+              padding: 1rem;
+
+              img {
+                width: 2.5rem;
+                height: 2.5rem;
+                border-radius: 50%;
+                margin-right: 0.5rem;
+              }
+            }
+
+            .feed-content {
+              padding: 2rem 2.5rem;
+
+              .feed-icon {
+                img {
+                  width: 1.5rem;
+                  height: 1.5rem;
+                  margin-right: 1rem;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .club-members-container {
+        .sort-btn {
+          background-color: gt.theme-var(bg-1);
+          border-radius: 0.5rem;
+          border: 1px solid gt.theme-var(club-btn-bg, null, $thememaplight, $cssvars);
+
+          p {
+            color: gt.theme-var(text-color-5);
+            font-weight: normal;
+            font-size: 0.875rem;
+
+            span {
+              color: gt.theme-var(text-color-1);
+            }
+          }
+        }
+
+        .club-top-members-container {
+          position: sticky;
+          top: 2rem;
+
+          .top-members-container {
+            .top-members-row {
+              display: grid;
+              grid-template-columns: 15% 65% 20%;
+              align-items: center;
+              padding: 0.75rem 0.5rem;
+              border-radius: 0.75rem;
+
+              &:hover {
+                cursor: pointer;
+                background-color: gt.theme-var(club-underline-color, null, $thememaplight, $cssvars);
+              }
+
+              .top-members-name {
+                img {
+                  width: 3rem;
+                  height: 3rem;
+                  border-radius: 50%;
+                  margin-right: 0.5rem;
+                }
+              }
+
+              .top-members-points {
+                text-align: right;
+              }
+            }
+
+            .no-members-row {
+              text-align: center;
+              font-size: 1.25rem;
+              color: gt.theme-var(text-color-4);
+              margin: 1rem 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .modal {
+    padding: 0;
+
+    .modal-dialog {
+      @include gm.media-breakpoint-up(md) {
+        max-width: 70%;
+      }
+    }
+
+    .modal-body {
+      padding: 0;
+    }
+
+    .modal-custom-header {
+      background-color: gt.theme-var(text-color-11);
+      padding: 0.75rem;
+
+      .modal-title {
+        font-weight: bold;
+        font-size: 1.125rem;
+      }
+
+      img {
+        &.logo-img {
+          width: 2rem;
+        }
+      }
+
+      button.close {
+        border-radius: 0.5rem;
+        color: gt.theme-var(text-color-2);
+        font-size: 2.5rem;
+        background: gt.theme-var(modal-close-btn-bg);
+        padding: 0.125rem 0.6rem 0.45rem;
+        line-height: 0.75;
+        opacity: 1;
+
+        @include gm.media-breakpoint-down(md) {
+          font-size: 2rem;
+        }
+      }
+    }
+
+    .modal-content {
+      border-radius: 1rem;
+      background-color: gt.theme-var(club-body-bg, null, $thememaplight, $cssvars);
+      max-height: 90vh;
+      overflow: auto;
+
+      .create-club-container {
+        padding: 1.5rem;
+
+        .club-step-container {
+          margin-top: 1.5rem;
+          margin-bottom: 4rem;
+
+          .create-club-step-container {
+            width: 70%;
+            margin: auto;
+
+            &.step-container-2 {
+              .club-image-upload {
+                display: grid;
+                place-content: center;
+
+                .club-image-container {
+                  position: relative;
+                  background-color: gt.theme-var(bg-1);
+                  border-radius: 0.75rem;
+                  border: 1px solid gt.theme-var(club-progress-bar-bg, null, $thememaplight, $cssvars);
+                  height: 40vh;
+                  aspect-ratio: 1/1;
+                  margin: auto;
+
+                  .club-display-picture {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 0.75rem;
+                  }
+
+                  .image-edit-btn {
+                    input[type=file] {
+                      width: 0;
+                      height: 0;
+                    }
+
+                    .image-edit-icon {
+                      position: absolute;
+                      right: 1rem;
+                      bottom: 1rem;
+
+                      &:hover {
+                        cursor: pointer;
+
+                        img {
+                          filter: drop-shadow(2px 4px 6px gt.theme-var(text-color-1));
+                          border-radius: 50%;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            &.step-container-3 {
+              p,
+              img {
+                text-align: center;
+              }
+
+              .club-created-img {
+                height: 35vh;
+                margin: 2rem 0;
+                width: 100%;
+              }
+
+              .input-group {
+                padding: 0.25rem 1rem;
+                border-radius: 0.875rem;
+                background-color: gt.theme-var(bg-1);
+                border: 1px solid gt.theme-var(club-btn-bg, null, $thememaplight, $cssvars);
+
+                &:hover {
+                  cursor: pointer;
+                }
+
+                .input-group-append {
+                  align-items: center;
+                  background-color: transparent;
+                  margin-left: 0.25rem;
+
+                  i {
+                    font-size: 1.25rem;
+                  }
+                }
+
+                input {
+                  border: none;
+                  background-color: transparent;
+                  padding: 0.5rem 0;
+                  outline: none;
+                  box-shadow: none;
+                }
+              }
+            }
+
+            input,
+            select {
+              &:not(:focus, .is-invalid) {
+                border-color: gt.theme-var(club-progress-bar-bg, null, $thememaplight, $cssvars);
+              }
+            }
+
+            .members-container {
+              background-color: gt.theme-var(bg-1);
+              border-radius: 0.75rem;
+              border: 1px solid gt.theme-var(club-progress-bar-bg, null, $thememaplight, $cssvars);
+              padding: 1rem;
+
+              ul {
+                display: grid;
+                gap: 0.5rem;
+
+                .member-card {
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+
+                  .member-profile-image {
+                    width: 2rem;
+                    border-radius: 50%;
+                    margin-right: 0.5rem;
+                  }
+
+                  button {
+                    box-shadow: none;
+
+                    i {
+                      color: gt.theme-var(text-color-5);
+
+                      &:hover {
+                        color: gt.theme-var(nav-bg-red);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .club-step-footer {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .create-club-step-btn {
+            color: gt.theme-var(club-faded-btn-bg, null, $thememaplight, $cssvars);
+            box-shadow: none;
+
+            &:disabled {
+              cursor: not-allowed;
+            }
+          }
+
+          .progress-bar-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 0 2rem;
+
+            .progress-bar {
+              height: 0.25rem;
+              width: 4rem;
+              border-radius: 0.5rem;
+              background-color: gt.theme-var(club-progress-bar-bg, null, $thememaplight, $cssvars);
+
+              &.completed {
+                background-color: gt.theme-var(club-faded-btn-bg, null, $thememaplight, $cssvars);
+              }
+            }
+          }
+        }
+      }
+
+      .club-footer-btn {
+        color: gt.theme-var(text-color-2);
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+        position: sticky;
+        bottom: 0;
+
+        &:disabled {
+          cursor: not-allowed;
+        }
+      }
+    }
+
+    a {
+      color: gt.theme-var(text-color-1);
+    }
+
+    a:hover {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    &.join-club-modal,
+    &.join-club-mob-modal,
+    &.create-club-mob-modal {
+      .modal-dialog {
+        @include gm.media-breakpoint-up(md) {
+          max-width: 50%;
+        }
+      }
+
+      .modal-content {
+        .join-club-modal-body,
+        .join-club-modal-body-mob,
+        .create-club-modal-body-mob {
+          width: 70%;
+          margin: auto;
+          padding: 1rem;
+          margin-bottom: 4rem;
+
+          @include gm.media-breakpoint-down(md) {
+            width: 100%;
+          }
+
+          .nav-tabs {
+            display: inline-flex;
+            border-bottom-color: gt.theme-var(club-underline-color, null, $thememaplight, $cssvars);
+            margin-bottom: 1.25rem;
+
+            .nav-item {
+              .nav-link {
+                color: gt.theme-var(text-color-1);
+                border: unset;
+                font-weight: bold;
+                padding-bottom: 0.75rem;
+
+                &.active {
+                  color: gt.theme-var(club-faded-btn-bg, null, $thememaplight, $cssvars);
+                  background: linear-gradient(to bottom, gt.theme-var(club-faded-btn-bg, null, $thememaplight, $cssvars), gt.theme-var(club-faded-btn-bg, null, $thememaplight, $cssvars));
+                  background-size: 100% 0.125rem;
+                  background-position: bottom 0 left 0, bottom 0.25rem left 0;
+                  background-repeat: no-repeat;
+                  background-color: transparent;
+                  border-radius: 0;
+                  border-bottom-color: gt.theme-var(club-faded-btn-bg, null, $thememaplight, $cssvars);
+                }
+
+                &:hover {
+                  border: unset;
+                }
+              }
+            }
+          }
+
+          .tab-content {
+            #linkBlock {
+              #joinBtn {
+                border-radius: 0.75rem;
+              }
+            }
+
+            #inviteBlock {
+              margin: 1rem 0;
+
+              .invites-list {
+                display: grid;
+                gap: 0.75rem;
+
+                .invite-card {
+                  border-radius: 0.75rem;
+                  background-color: gt.theme-var(club-underline-color, null, $thememaplight, $cssvars);
+
+                  .club-card {
+                    background-color: gt.theme-var(bg-1);
+                    border-radius: 0.875rem;
+                    display: grid;
+                    grid-template-columns: 20% 80%;
+                    padding: 1rem;
+
+                    @include gm.media-breakpoint-down(md) {
+                      grid-template-columns: 25% 75%;
+                    }
+
+                    .club-card-img {
+                      img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 1rem;
+                      }
+                    }
+
+                    .club-card-data {
+                      display: flex;
+                      flex-direction: column;
+                      margin: 0 1rem;
+
+                      & > .d-flex {
+                        height: 50%;
+
+                        &:first-child {
+                          border-bottom: 1px solid gt.theme-var(club-card-border-color, null, $thememaplight, $cssvars);
+                        }
+
+                        &:last-child {
+                          .col {
+                            padding: 0;
+                          }
+                        }
+                      }
+
+                      .club-card-name {
+                        font-weight: bold;
+                      }
+
+                      .club-card-rank {
+                        p {
+                          color: gt.theme-var(text-color-5);
+                          font-weight: bold;
+                        }
+                      }
+
+                      .club-coin-img {
+                        img {
+                          width: 1.5rem;
+                          height: 1.5rem;
+                          margin-right: 0.5rem;
+                        }
+                      }
+
+                      .club-members-img {
+                        img {
+                          width: 1.5rem;
+                          height: 1.5rem;
+                          margin-right: 0.5rem;
+                        }
+                      }
+                    }
+                  }
+
+                  .invitee-details {
+                    margin: 0.75rem;
+
+                    button {
+                      border-radius: 0.75rem;
+
+                      &:hover {
+                        backdrop-filter: contrast(2);
+                      }
+
+                      i {
+                        margin-right: 0.5rem;
+                      }
+                    }
+                  }
+                }
+
+                .no-invites {
+                  font-size: 1.5rem;
+                  text-align: center;
+                  color: gt.theme-var(text-color-4);
+                }
+              }
+            }
+
+            input {
+              border-radius: 0.75rem;
+              border-color: gt.theme-var(club-progress-bar-bg, null, $thememaplight, $cssvars);
+              margin-bottom: 0;
+              padding: 1.5rem 1.125rem;
+            }
+          }
+
+          #joinBtn {
+            color: gt.theme-var(text-color-2);
+
+            p {
+              font-size: 1rem;
+            }
+          }
+
+          .club-image-container {
+            position: relative;
+            background-color: gt.theme-var(bg-1);
+            border-radius: 0.75rem;
+            aspect-ratio: 1/1;
+
+            .club-display-picture {
+              width: 100%;
+              height: 100%;
+              border-radius: 0.75rem;
+            }
+
+            .image-edit-btn {
+              input[type=file] {
+                width: 0;
+                height: 0;
+              }
+
+              .image-edit-icon {
+                position: absolute;
+                right: 1rem;
+                bottom: 1rem;
+
+                &:hover {
+                  cursor: pointer;
+
+                  img {
+                    filter: drop-shadow(2px 4px 6px gt.theme-var(text-color-1));
+                  }
+                }
+              }
+            }
+          }
+
+          input[type=text] {
+            background-color: gt.theme-var(bg-1);
+            padding: 0.5rem 1rem;
+            outline: none;
+            box-shadow: none;
+          }
+
+          input,
+          select {
+            border-color: gt.theme-var(club-progress-bar-bg, null, $thememaplight, $cssvars);
+            border-radius: 0.5rem;
+          }
+        }
+
+        .create-club-mob-btn {
+          position: absolute;
+          bottom: 0;
+          border-radius: 0;
+          border: none;
+          color: gt.theme-var(text-color-2);
+        }
+      }
+    }
+
+    &.join-club-mob-modal,
+    &.create-club-mob-modal {
+      position: absolute;
+      width: 100%;
+      height: 100vh;
+      top: 0;
+
+      &.fade {
+        .modal-dialog {
+          transform: translate(0, 100%);
+        }
+      }
+
+      &.show {
+        .modal-dialog {
+          transform: translate(0, 0);
+        }
+      }
+
+      .modal-dialog {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        align-items: stretch;
+        -webkit-box-align: stretch;
+        transition: all 0.3s ease-in-out;
+
+        .modal-content {
+          max-height: 100vh;
+          overflow: auto;
+          border-radius: 0;
+
+          .modal-body {
+            .modal-custom-header {
+              button {
+                &.close {
+                  border-radius: 0.5rem;
+                }
+              }
+            }
+          }
+
+          // .modal-custom-header {
+          //   display: none;
+          // }
+        }
+      }
+    }
+
+    &.club-info-modal {
+      .modal-content {
+        max-height: 90vh;
+        overflow: auto;
+
+        .modal-content-container {
+          display: flex;
+          overflow-x: clip;
+
+          .modal-content-children {
+            width: 100%;
+            overflow-x: hidden;
+            transition: all ease 0.5s;
+            // position: relative;
+          }
+        }
+
+        .club-info-modal-body {
+          width: 70%;
+          margin: auto;
+          padding: 1rem;
+          margin-bottom: 2rem;
+          position: relative;
+
+          .nav-tabs {
+            border: 0;
+
+            .nav-link {
+              border: 0;
+              font-weight: bold;
+              border-radius: 0;
+              padding: 1rem;
+              color: gt.theme-var(text-color-1);
+              // border-bottom: 2px solid gt.theme-var(club-underline-color, null, $thememaplight, $cssvars);
+              background:
+                linear-gradient(
+                  to right,
+                  gt.theme-var(club-underline-color, null, $thememaplight, $cssvars),
+                  gt.theme-var(club-underline-color, null, $thememaplight, $cssvars)
+                );
+              background-size: 100% 0.15rem;
+              background-position: bottom 0 left 0, bottom 0.15rem left 0;
+              background-repeat: no-repeat;
+              background-color: transparent;
+
+              &.active {
+                background: linear-gradient(to right, gt.theme-var(club-faded-btn-bg, null, $thememaplight, $cssvars), gt.theme-var(club-faded-btn-bg, null, $thememaplight, $cssvars));
+                background-size: 100% 0.15rem;
+                background-position: bottom 0 left 0, bottom 0.15rem left 0;
+                background-repeat: no-repeat;
+                background-color: transparent;
+                color: gt.theme-var(club-faded-btn-bg, null, $thememaplight, $cssvars);
+              }
+            }
+          }
+
+          #clubTabsContent {
+            padding: 1rem;
+
+            input[type=text] {
+              &:not([disabled], [readonly]) {
+                background-color: gt.theme-var(bg-1);
+              }
+
+              padding: 1.25rem 1rem;
+              outline: none;
+              box-shadow: none;
+            }
+
+            input,
+            select {
+              border-color: gt.theme-var(club-progress-bar-bg, null, $thememaplight, $cssvars);
+              border-radius: 0.5rem;
+            }
+
+            .club-image-upload {
+              display: grid;
+              place-content: center;
+
+              .club-image-container {
+                position: relative;
+                background-color: gt.theme-var(bg-1);
+                border-radius: 0.75rem;
+                border: 1px solid gt.theme-var(club-progress-bar-bg, null, $thememaplight, $cssvars);
+                height: 40vh;
+                aspect-ratio: 1/1;
+                margin: auto;
+
+                .club-display-picture {
+                  width: 100%;
+                  height: 100%;
+                  border-radius: 0.75rem;
+                }
+
+                .image-edit-btn {
+                  input[type=file] {
+                    width: 0;
+                    height: 0;
+                  }
+
+                  .image-edit-icon {
+                    position: absolute;
+                    right: 1rem;
+                    bottom: 1rem;
+
+                    &:hover {
+                      cursor: pointer;
+
+                      img {
+                        filter: drop-shadow(2px 4px 6px gt.theme-var(text-color-1));
+                        border-radius: 50%;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            .autocomplete-list {
+              max-height: 150%;
+              box-shadow: 0 2px 0.5rem gt.theme-var(bg-2);
+              border-radius: 0.5rem;
+            }
+
+            .autocomplete-loading-container {
+              box-shadow: 0 2px 0.5rem gt.theme-var(bg-2);
+              border-radius: 0.5rem;
+            }
+
+            .club-members-info-container {
+              .club-members-container {
+                background-color: gt.theme-var(bg-1);
+                border-radius: 0.75rem;
+                padding: 1rem 0;
+                display: grid;
+                margin-bottom: 1rem;
+                gap: 0.5rem;
+
+                .club-member-row {
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  padding: 0 1rem;
+
+                  &:hover {
+                    cursor: pointer;
+                    background-color: gt.theme-var(club-underline-color, null, $thememaplight, $cssvars);
+                  }
+
+                  .club-member-img-container {
+                    margin-right: 0.5rem;
+
+                    .club-member-img {
+                      width: 2.5rem;
+                      height: 2.5rem;
+                      border-radius: 50%;
+                    }
+                  }
+
+                  .club-member-actions {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    align-items: center;
+
+                    button {
+                      &.hidden {
+                        visibility: hidden;
+                      }
+                    }
+
+                    .member-remove-btn {
+                      &:focus {
+                        box-shadow: none;
+                      }
+
+                      &:hover {
+                        span {
+                          color: gt.theme-var(club-danger-bg, null, $thememaplight, $cssvars);
+                        }
+                      }
+
+                      span {
+                        font-size: 2rem;
+                      }
+                    }
+
+                    .member-role-btn {
+                      &:focus {
+                        box-shadow: none;
+                      }
+
+                      &:hover {
+                        svg {
+                          path {
+                            fill: gt.theme-var(club-make-admin-bg, null, $thememaplight, $cssvars);
+                          }
+                        }
+                      }
+
+                      svg {
+                        height: 1.125rem;
+                        width: 1.125rem;
+                      }
+                    }
+                  }
+                }
+
+                .divider {
+                  position: relative;
+                  padding: 0 1rem;
+
+                  p {
+                    color: gt.theme-var(text-color-5);
+                    display: flex;
+                    align-items: center;
+
+                    span {
+                      content: "";
+                      flex: 1 1 auto;
+                      border-top: 1px solid gt.theme-var(text-color-6);
+                      margin-left: 0.5rem;
+                      position: relative;
+                      top: 1px;
+                    }
+                  }
+                }
+              }
+
+              .input-group {
+                padding: 0.25rem 1rem;
+                border-radius: 0.875rem;
+                background-color: gt.theme-var(bg-1);
+                border: 1px solid gt.theme-var(club-btn-bg, null, $thememaplight, $cssvars);
+
+                &:hover {
+                  cursor: pointer;
+                }
+
+                .input-group-append {
+                  align-items: center;
+                  background-color: transparent;
+                  margin-left: 0.25rem;
+
+                  &:hover {
+                    svg {
+                      fill: gt.theme-var(text-color-1);
+                    }
+                  }
+
+                  i {
+                    font-size: 1.25rem;
+                  }
+                }
+
+                input {
+                  border: none;
+                  background-color: transparent;
+                  padding: 0.5rem 0;
+                  outline: none;
+                  box-shadow: none;
+                }
+              }
+            }
+
+            .club-advanced-container {
+              height: 45vh;
+
+              .form-group {
+                p {
+                  margin-bottom: 0.5rem;
+                }
+
+                button {
+                  background-color: gt.theme-var(bg-1);
+                  border-radius: 0.75rem;
+                  border-color: gt.theme-var(club-advanced-options-color, null, $thememaplight, $cssvars);
+                  color: gt.theme-var(club-advanced-options-color, null, $thememaplight, $cssvars);
+                  padding: 0.75rem 0;
+
+                  &:hover:not([disabled]) {
+                    background-color: gt.theme-var(club-advanced-options-color, null, $thememaplight, $cssvars);
+                    color: gt.theme-var(text-color-2);
+                  }
+
+                  &.disabled {
+                    color: gt.theme-var(text-color-5);
+                    border-color: gt.theme-var(text-color-5);
+
+                    &:hover {
+                      cursor: not-allowed;
+                    }
+                  }
+                }
+
+                .admin-delete-msg {
+                  color: gt.theme-var(text-color-5);
+                }
+              }
+            }
+          }
+        }
+
+        .club-member-info-body {
+          width: 70%;
+          margin: auto;
+          padding: 1rem;
+          margin-bottom: 2rem;
+          position: relative;
+
+          .member-info-card {
+            background-color: gt.theme-var(bg-1);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+
+            .member-profile-img {
+              margin-right: 0.75rem;
+              width: 3rem;
+              height: 3rem;
+              border-radius: 100%;
+            }
+
+            .member-bio {
+              margin-top: 1rem;
+            }
+          }
+
+          .member-points-card {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            place-content: center;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            background-color: gt.theme-var(bg-1);
+            border-radius: 0.75rem;
+            margin: 1rem 0;
+
+            .member-points-img {
+              margin-right: 0.5rem;
+
+              img {
+                width: 1.25rem;
+                height: 1.25rem;
+              }
+            }
+          }
+
+          .member-achievement-container {
+            .achievement-card {
+              background-color: gt.theme-var(bg-1);
+              border-radius: 0.75rem;
+              padding: 1rem;
+              margin: 0.75rem 0;
+              text-align: center;
+
+              .achievement-card-img {
+                width: 2rem;
+                margin: 1rem 0 1.5rem 0;
+
+                img {
+                  width: 2rem;
+                  margin: 1rem 0 1.5rem 0;
+                }
+              }
+            }
+          }
+        }
+
+        .club-info-footer-btn,
+        .member-info-footer-btn {
+          color: gt.theme-var(text-color-2);
+          border-top-left-radius: 0 !important;
+          border-top-right-radius: 0 !important;
+          position: sticky;
+          bottom: 0;
+
+          &:disabled {
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+
+    .club-member-info-body {
+      width: 70%;
+      margin: auto;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      position: relative;
+
+      .member-info-card {
+        background-color: gt.theme-var(bg-1);
+        border-radius: 0.75rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+
+        .member-profile-img {
+          margin-right: 0.75rem;
+          width: 3rem;
+          height: 3rem;
+          border-radius: 100%;
+        }
+
+        .member-bio {
+          margin-top: 1rem;
+        }
+      }
+
+      .member-points-card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        place-content: center;
+        gap: 1.5rem;
+        padding: 1rem 0;
+        background-color: gt.theme-var(bg-1);
+        border-radius: 0.75rem;
+        margin: 1rem 0;
+
+        .member-points-img {
+          margin-right: 0.5rem;
+
+          img {
+            width: 1.25rem;
+            height: 1.25rem;
+          }
+        }
+      }
+
+      .member-achievement-container {
+        .achievement-card {
+          background-color: gt.theme-var(bg-1);
+          border-radius: 0.75rem;
+          padding: 1rem;
+          margin: 0.75rem 0;
+          text-align: center;
+
+          .achievement-card-img {
+            width: 2rem;
+            margin: 1rem 0 1.5rem 0;
+
+            img {
+              width: 2rem;
+              margin: 1rem 0 1.5rem 0;
+            }
+          }
+        }
+      }
+    }
+
+    &.member-profile-modal,
+    &.member-mob-profile-modal {
+      .member-info-footer-btn {
+        color: gt.theme-var(text-color-2);
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+        position: sticky;
+        bottom: 0;
+
+        &:disabled {
+          cursor: not-allowed;
+        }
+      }
+    }
+
+    &.member-mob-profile-modal {
+      // position: absolute;
+      // width: 100%;
+      // height: 100vh;
+      // top: 0;
+
+      &.fade {
+        .modal-dialog {
+          transform: translate(0, 100%);
+        }
+      }
+
+      &.show {
+        .modal-dialog {
+          transform: translate(0, 0);
+        }
+      }
+
+      .modal-dialog {
+        margin: 0;
+
+        .modal-content {
+          height: 100vh;
+          max-height: 100vh;
+          margin: 0;
+          border-radius: 0;
+
+          .club-member-info-body {
+            width: 95%;
+          }
+        }
+      }
+    }
+  }
+
+  .autocomplete-list {
+    background-color: gt.theme-var(bg-1);
+
+    li {
+      &.active {
+        background-color: gt.theme-var(club-underline-color, null, $thememaplight, $cssvars);
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: gt.theme-var(club-body-bg, null, $thememaplight, $cssvars);
+      }
+
+      .suggestion-card {
+        padding: 0.5rem;
+
+        &.user-input {
+          p {
+            color: gt.theme-var(text-color-5);
+          }
+        }
+
+        .user-image {
+          img {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  .club-admin-warning-banner {
+    background-color: gt.theme-var(club-admin-warning-bg, null, $thememaplight, $cssvars);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    margin: 0 0 1rem 0;
+
+    .d-flex {
+      @include gm.media-breakpoint-up(md) {
+        justify-content: center;
+      }
+    }
+
+    .info-circle {
+      border-radius: 100%;
+      background-color: gt.theme-var(club-admin-warning-info-bg, null, $thememaplight, $cssvars);
+      color: gt.theme-var(text-color-2);
+      padding: 0.125rem 0.75rem;
+      margin-right: 0.5rem;
+      font-weight: bold;
+    }
+  }
+}

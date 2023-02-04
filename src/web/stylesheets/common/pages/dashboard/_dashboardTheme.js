@@ -2,7 +2,7 @@ const {
   Theme,
 } = require('../../../../javascripts/common/_theme');
 const {
-  Blue, LightBlue, Purple, utilColors, Yellow,
+  Blue, LightBlue, Purple, utilColors, Yellow, Green,
 } = require('../../../../../colors/_colors');
 
 const lightTheme = Theme.light;
@@ -20,6 +20,7 @@ const thememaplight = {
   'dashboard-hero-nav-games-bg': LightBlue.color300,
   'dashboard-hero-nav-course-bg': '#6ec399',
   'dashboard-hero-nav-class-bg': Purple.color300,
+  'dashboard-hero-nav-challenge-bg': Blue.color300,
   'dashboard-game-card-bg': LightBlue.color50,
   'dashboard-game-btn-bg': LightBlue.color700,
   'dashboard-game-progress-gradient-1': Blue.color500,
@@ -27,6 +28,10 @@ const thememaplight = {
   'dashboard-leaderboard-title-bg': Blue.color50,
   'dashboard-leaderboard-title-text': LightBlue.color900,
   'dashboard-leaderboard-btn-color': Blue.color900,
+  'dashboard-achievement-title-bg': Yellow.color100,
+  'dashboard-achievement-btn-color': Yellow.color900,
+  'dashboard-club-title-bg': lightTheme.screenGreen.bodyBg,
+  'dashboard-club-btn-color': Green.color900,
   'dashboard-challenges-arrow-color': Yellow.color900,
   'dashboard-hero-shadow': '0 4px 16px #f9a82625',
 };
@@ -44,6 +49,7 @@ const thememapdark = {
   'dashboard-hero-nav-games-bg': LightBlue.color300,
   'dashboard-hero-nav-course-bg': '#6ec399',
   'dashboard-hero-nav-class-bg': Purple.color300,
+  'dashboard-hero-nav-challenge-bg': Blue.color300,
   'dashboard-game-card-bg': LightBlue.color50,
   'dashboard-game-btn-bg': LightBlue.color700,
   'dashboard-game-progress-gradient-1': Blue.color500,
@@ -51,6 +57,10 @@ const thememapdark = {
   'dashboard-leaderboard-title-bg': Blue.color50,
   'dashboard-leaderboard-title-text': LightBlue.color900,
   'dashboard-leaderboard-btn-color': Blue.color900,
+  'dashboard-achievement-title-bg': Yellow.color100,
+  'dashboard-achievement-btn-color': Yellow.color900,
+  'dashboard-club-title-bg': lightTheme.screenGreen.bodyBg,
+  'dashboard-club-btn-color': Green.color900,
   'dashboard-challenges-arrow-color': Yellow.color900,
   'dashboard-hero-shadow': '0 4px 16px #f9a82625',
 };
@@ -67,6 +77,7 @@ const cssvars = {
   'dashboard-hero-nav-games-bg': '--dashboard-hero-nav-games-bg',
   'dashboard-hero-nav-course-bg': '--dashboard-hero-nav-course-bg',
   'dashboard-hero-nav-class-bg': '--dashboard-hero-nav-class-bg',
+  'dashboard-hero-nav-challenge-bg': '--dashboard-hero-nav-challenge-bg',
   'dashboard-game-card-bg': '--dashboard-game-card-bg',
   'dashboard-game-btn-bg': '--dashboard-game-btn-bg',
   'dashboard-game-progress-gradient-1': '--dashboard-game-progress-gradient-1',
@@ -74,6 +85,10 @@ const cssvars = {
   'dashboard-leaderboard-title-bg': '--dashboard-leaderboard-title-bg',
   'dashboard-leaderboard-title-text': '--dashboard-leaderboard-title-text',
   'dashboard-leaderboard-btn-color': '--dashboard-leaderboard-btn-color',
+  'dashboard-achievement-title-bg': '--dashboard-achievement-title-bg',
+  'dashboard-achievement-btn-color': '--dashboard-achievement-btn-color',
+  'dashboard-club-title-bg': '--dashboard-club-title-bg',
+  'dashboard-club-btn-color': '--dashboard-club-btn-color',
   'dashboard-challenges-arrow-color': '--dashboard-challenges-arrow-color',
   'dashboard-hero-shadow': '--dashboard-hero-shadow',
 };

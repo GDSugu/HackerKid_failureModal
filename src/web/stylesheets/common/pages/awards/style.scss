@@ -1,5 +1,7 @@
 @use '../../sass/themes/_default' as gt;
 @use '../../sass/base/_mixins' as gm;
+@use '../../sass/components/controls';
+@use '../../sass/components/award-info';
 
 @import './_awardsTheme.js';
 
@@ -28,5 +30,209 @@
         }
       }
     }
+
+    @include gm.media-breakpoint-down(sm) {
+      display: none;
+    }
+  }
+
+  .mobile-awards-nav-bar {
+    @include gm.media-breakpoint-up(md) {
+      display: none;
+    }
+
+    display: flex;
+    background: transparent;
+
+    .nav-item {
+      padding: 1rem;
+      display: flex;
+      color: gt.theme-var(awards-text-color-1, null, $thememaplight, $cssvars);
+      flex-direction: column;
+      border-bottom: 2px solid gt.theme-var(awards-bg-2, null, $thememaplight, $cssvars);
+      text-decoration: none;
+
+      &:hover {
+        color: inherit;
+      }
+
+      &.active {
+        color: gt.theme-var(awards-btn-text-color, null, $thememaplight, $cssvars);
+        border-bottom-color: gt.theme-var(awards-btn-text-color, null, $thememaplight, $cssvars);
+        background-color: gt.theme-var(awards-body-bg, null, $thememaplight, $cssvars);
+      }
+    }
+  }
+
+  .controls {
+    .control {
+      $box-shadow-color: map-get($thememaplight, awards-box-shadow-color);
+
+      border: 1px solid gt.theme-var(awards-controls-border-color, null, $thememaplight, $cssvars);
+      box-shadow: 0 4 4 $box-shadow-color;
+    }
+
+    .sort-dropdown {
+      .sort-dropdown-toggle {
+        background-color: gt.theme-var(bg-1);
+        color: gt.theme-var(awards-text-color-1, null, $thememaplight, $cssvars);
+      }
+
+      .dropdown-menu {
+        min-width: 180px;
+
+        .dropdown-item {
+          background: none;
+          color: gt.theme-var(awards-text-color-1, null, $thememaplight, $cssvars);
+
+          &.active {
+            color: gt.theme-var(awards-btn-text-color, null, $thememaplight, $cssvars);
+          }
+        }
+
+        .dropdown-item-container {
+          .ascending-descending-selectors {
+            button:active,
+            button.active {
+              background-color: gt.theme-var(awards-body-bg, null, $thememaplight, $cssvars);
+            }
+          }
+        }
+      }
+    }
+
+    .search-box-with-icon {
+      .awards-search-box {
+        color: gt.theme-var(awards-text-color-1, null, $thememaplight, $cssvars);
+
+        &::placeholder {
+          color: gt.theme-var(awards-text-color-1, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+  }
+
+  .award-cards-container {
+    margin-top: 1rem;
+    background-color: white;
+    border-radius: 12px;
+    // background-color: gt.theme-var(awards-bg-1, null, $thememaplight, $cssvars);
+  }
+
+  .award-card-icon {
+    width: 95px;
+    height: 80px;
+  }
+
+  .mobile-award-cards-container {
+    margin-top: 1rem;
+
+    .award-info-container {
+      cursor: pointer;
+      display: flex;
+      margin-bottom: 1rem;
+      min-width: 300px;
+      z-index: unset;
+      position: unset;
+
+      .award-info {
+        .next-achievement-subtitle {
+          margin-top: 0.2rem;
+        }
+      }
+    }
+
+    .see-more-less-btn {
+      border: 1px solid gt.theme-var(awards-bg-3, null, $thememaplight, $cssvars);
+      border-radius: 12px;
+      color: gt.theme-var(awards-text-color-1, null, $thememaplight, $cssvars);
+      background: none;
+      padding: 0.75rem 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  #mobile-detailed-awards-info {
+    padding: 0 !important;
+
+    .modal-body {
+      padding: 0;
+    }
+
+    .sheet-content {
+      background-color: gt.theme-var(bg-1);
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+
+      .sheet-close-handle-bar {
+        background-color: gt.theme-var(awards-bg-3, null, $thememaplight, $cssvars);
+      }
+    }
+
+    .award-info {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-left: 2.2rem;
+      padding-right: 2.2rem;
+
+      img {
+        width: 72px;
+        height: 64px;
+        align-self: center;
+      }
+
+      .award-details {
+        width: 100%;
+
+        .next-award-label {
+          color: gt.theme-var(awards-text-color-2, null, $thememaplight, $cssvars);
+        }
+
+        .progress-details {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 0.5rem;
+
+          .next-award-in-with-unit,
+          .current-progress {
+            color: gt.theme-var(awards-btn-text-color, null, $thememaplight, $cssvars);
+          }
+
+          .current-progress {
+            margin-top: 1.5rem;
+            margin-bottom: 1.2rem;
+            padding: 0.25rem 0.5rem;
+            background-color: gt.theme-var(awards-body-bg, null, $thememaplight, $cssvars);
+            border-radius: 5px;
+          }
+
+          .next-award {
+            margin-top: 1.5rem;
+            margin-bottom: 1.2rem;
+          }
+        }
+      }
+    }
+
+    .award-info.repeating-award {
+      padding: 0;
+      width: 100%;
+    }
+  }
+
+  .see-more-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: gt.theme-var(awards-btn-text-color, null, $thememaplight, $cssvars);
+    outline: none;
+    border: none;
   }
 }

@@ -265,6 +265,10 @@
               background-color: gt.theme-var(dashboard-hero-nav-class-bg, null, $thememaplight, $cssvars);
             }
 
+            &.nav-challenge-card {
+              background-color: gt.theme-var(dashboard-hero-nav-challenge-bg, null, $thememaplight, $cssvars);
+            }
+
             &:hover {
               box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
             }
@@ -306,8 +310,7 @@
             }
 
             p {
-              margin-left: 1rem;
-              font-size: 0.875rem;
+              margin-left: 0.5rem;
               font-weight: bold;
             }
 
@@ -405,7 +408,11 @@
             }
 
             .circle-progress {
+              width: 100%;
+
               svg {
+                width: 100%;
+
                 #gradient {
                   .start {
                     stop-color: gt.theme-var(dashboard-game-progress-gradient-2, null, $thememaplight, $cssvars);
@@ -439,7 +446,6 @@
                 }
 
                 .game-progress-icon {
-                  width: 25%;
                   margin-right: 0.75rem;
 
                   img {
@@ -640,6 +646,59 @@
             }
           }
         }
+
+        .dashboard-achievement-container {
+          .sideboard-card {
+            .achievement-card-heading {
+              background-color: gt.theme-var(dashboard-achievement-title-bg, null, $thememaplight, $cssvars);
+              padding: 0.75rem 0;
+            }
+
+            .achievement-card-content {
+              .sideboard-content-data {
+                .achievement-btn {
+                  border: 1px solid gt.theme-var(dashboard-achievement-btn-color, null, $thememaplight, $cssvars);
+                  color: gt.theme-var(dashboard-achievement-btn-color, null, $thememaplight, $cssvars);
+                  background-color: transparent;
+
+                  &:hover {
+                    background-color: gt.theme-var(dashboard-achievement-btn-color, null, $thememaplight, $cssvars);
+                    color: gt.theme-var(text-color-2);
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .dashboard-club-container {
+          .sideboard-card {
+            .club-card-heading {
+              background-color: gt.theme-var(dashboard-club-title-bg, null, $thememaplight, $cssvars);
+              padding: 0.75rem 0;
+            }
+
+            .club-card-content {
+              .sideboard-content-data {
+                .club-members-title {
+                  font-size: 0.875rem;
+                  color: gt.theme-var(dashboard-text-color-4, null, $thememaplight, $cssvars);
+                }
+
+                .club-btn {
+                  border: 1px solid gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
+                  color: gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
+                  background-color: transparent;
+
+                  &:hover {
+                    background-color: gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
+                    color: gt.theme-var(text-color-2);
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -647,6 +706,7 @@
   .sideboard-card {
     border-radius: 1rem;
     overflow: hidden;
+    border: 0;
   }
 
   .sideboard-heading-text {
@@ -654,6 +714,14 @@
     font-weight: bold;
     margin-bottom: 0;
     text-align: center;
+  }
+
+  .sideboard-content-img {
+    text-align: center;
+
+    img {
+      aspect-ratio: 1;
+    }
   }
 
   .sideboard-content-title {
@@ -677,6 +745,8 @@
   }
 
   .sideboard-content-data {
+    padding: 0.75rem 1rem;
+
     p {
       margin-bottom: 0.5rem;
       font-size: 1.125rem;
@@ -729,6 +799,73 @@
             &:hover {
               border: 1px solid gt.theme-var(dashboard-leaderboard-btn-color, null, $thememaplight, $cssvars);
               color: gt.theme-var(dashboard-leaderboard-btn-color, null, $thememaplight, $cssvars);
+              background-color: transparent;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .dashboard-achievement-container {
+    &.sheet-card {
+      .achievement-card-heading {
+        padding: 0.75rem 0;
+        background-color: gt.theme-var(dashboard-body-bg, null, $thememaplight, $cssvars);
+
+        .points-data {
+          img {
+            width: 2rem;
+            aspect-ratio: 1;
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
+
+    .sideboard-card {
+      .achievement-card-content {
+        .sideboard-content-data {
+          .achievement-btn {
+            color: gt.theme-var(text-color-2);
+            background-color: gt.theme-var(dashboard-achievement-btn-color, null, $thememaplight, $cssvars);
+
+            &:hover {
+              border: 1px solid gt.theme-var(dashboard-achievement-btn-color, null, $thememaplight, $cssvars);
+              color: gt.theme-var(dashboard-achievement-btn-color, null, $thememaplight, $cssvars);
+              background-color: transparent;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .dashboard-club-container {
+    .sideboard-card {
+      .club-card-heading {
+        padding: 0.75rem 0;
+        background-color: transparent;
+
+        .sideboard-heading-text {
+          color: gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
+        }
+      }
+
+      .club-card-content {
+        .sideboard-content-data {
+          .club-members-title {
+            font-size: 0.875rem;
+            color: gt.theme-var(dashboard-text-color-4, null, $thememaplight, $cssvars);
+          }
+
+          .club-btn {
+            color: gt.theme-var(text-color-2);
+            background-color: gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
+
+            &:hover {
+              border: 1px solid gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
+              color: gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
               background-color: transparent;
             }
           }

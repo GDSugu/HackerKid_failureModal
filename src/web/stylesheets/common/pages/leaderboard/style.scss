@@ -1,5 +1,6 @@
 @use '../../sass/themes/_default' as gt;
 @use '../../sass/base/_mixins' as gm;
+@use '../../sass/components/loading';
 
 @import './_leaderboardTheme.js';
 
@@ -72,6 +73,55 @@
     top: 50%;
     transform: translateY(-50%);
     margin-left: 1rem;
+  }
+}
+
+footer {
+  display: flex;
+  position: sticky;
+  background-color: white;
+  bottom: 0;
+  width: 100vw;
+  margin-left: calc(-1 * (100vw - 100%) / 2);
+  justify-content: center;
+
+  .pagination-container {
+    position: sticky;
+    width: 75%;
+    bottom: 0;
+    padding: 0.75rem 1rem;
+
+    @include gm.media-breakpoint-down(md) {
+      width: 100%;
+    }
+
+    .pagination-block {
+      width: 50%;
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    button {
+      border-radius: 100%;
+
+      &:focus {
+        box-shadow: none;
+      }
+
+      &.pagination-navigation-btn {
+        border: 2px solid gt.theme-var(text-color-3);
+        color: gt.theme-var(text-color-3);
+
+        &.disabled {
+          border: 2px solid gt.theme-var(text-color-13);
+          color: gt.theme-var(text-color-13);
+        }
+      }
+
+      &.current {
+        color: gt.theme-var(text-color-3);
+      }
+    }
   }
 }
 

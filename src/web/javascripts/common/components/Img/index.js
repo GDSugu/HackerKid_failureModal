@@ -24,6 +24,7 @@ const Img = ({
       imgSource = `${imgSource}?updatedAt=${Date.now()}`;
     }
   }
+
   const [imgSrc, setImgSrc] = React.useState(imgSource);
   let filePath;
   let fileName;
@@ -42,6 +43,9 @@ const Img = ({
             if (res.status !== 200) {
               setImgSrc(`${imgPath + fallback}`);
             }
+          })
+          .catch((err) => {
+            console.log('fetch image error', err);
           });
       } else {
         setImgSrc(`${imgPath + fallback}`);

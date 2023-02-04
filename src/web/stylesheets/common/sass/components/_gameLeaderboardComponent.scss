@@ -304,6 +304,8 @@
                     }
 
                     svg {
+                      width: 100%;
+
                       #gradient {
                         .start {
                           stop-color: gt.theme-var(blue-gradient-1);

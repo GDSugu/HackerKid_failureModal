@@ -1,0 +1,66 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+
+@import '../../pages/more/_moreTheme.js';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+.achievement-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 0;
+  height: 100%;
+  border-radius: 0.75rem;
+  min-height: 8rem;
+
+  &.award-card {
+    background-color: gt.theme-var(more-award-card-bg, null, $thememaplight, $cssvars);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+
+    .award-name {
+      text-align: center;
+    }
+  }
+
+  &.collectible-card {
+    position: relative;
+    display: flex;
+    border: 1px solid gt.theme-var(more-modal-header-bg, null, $thememaplight, $cssvars);
+    background-color: gt.theme-var(bg-1);
+
+    .rarity-indicator {
+      border-radius: 13px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      padding: 0.5rem 1.5rem;
+      position: absolute;
+      top: 5px;
+      right: 0;
+      color: gt.theme-var(text-color-2);
+
+      &.rare {
+        $color1: gt.theme-var(more-rare-gradient-color-1, null, $thememaplight, $cssvars);
+        $color2: gt.theme-var(more-rare-gradient-color-2, null, $thememaplight, $cssvars);
+
+        background: linear-gradient(270deg, $color1 0%, $color2 100%);
+      }
+
+      &.common {
+        $color1: gt.theme-var(more-common-gradient-color-1, null, $thememaplight, $cssvars);
+        $color2: gt.theme-var(more-common-gradient-color-2, null, $thememaplight, $cssvars);
+
+        background: linear-gradient(270deg, $color1 0%, $color2 100%);
+      }
+    }
+
+    .collectible-icon {
+      width: 70px;
+      height: 70px;
+    }
+  }
+}

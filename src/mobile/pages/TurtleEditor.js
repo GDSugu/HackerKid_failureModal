@@ -42,7 +42,7 @@ const TurtleEditor = () => {
 
       switch (action) {
         case 'code_changed':
-          turtleContext.tqSetState((prevState) => ({
+          turtleContext.ctxSetState((prevState) => ({
             ...prevState,
             snippet: data.snippet,
             xmlWorkSpace: data.workspace,
@@ -60,21 +60,21 @@ const TurtleEditor = () => {
 
   React.useEffect(() => {
     setTimeout(() => {
-      if (webViewRef.current && turtleContext.tqState.status === 'success') {
+      if (webViewRef.current && turtleContext.ctxState.status === 'success') {
         const initBlockly = `
-          Turtle.initializeBlockly(${JSON.stringify(turtleContext.tqState)});
+          Turtle.initializeBlockly(${JSON.stringify(turtleContext.ctxState)});
         `;
         webViewRef.current.injectJavaScript(initBlockly);
       }
     }, 1000);
-    turtleContext.tqSetState((prevState) => ({
+    turtleContext.ctxSetState((prevState) => ({
       ...prevState,
-      xmlWorkSpace: turtleContext.tqState,
+      xmlWorkSpace: turtleContext.ctxState,
     }));
-  }, [turtleContext.tqState.questionObject]);
+  }, [turtleContext.ctxState.questionObject]);
 
-  // if (turtleContext.tqState.status === 'success') {
-  //   const initBlockly = `Turtle.initializeBlockly(${JSON.stringify(turtleContext.tqState)});`;
+  // if (turtleContext.ctxState.status === 'success') {
+  //   const initBlockly = `Turtle.initializeBlockly(${JSON.stringify(turtleContext.ctxState)});`;
   //   webViewRef.current.injectJavaScript(initBlockly);
   // }
 

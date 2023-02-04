@@ -3,28 +3,13 @@ nav {
     .mob-nav-header {
       background-color: rgba(23, 24, 24, 0.75);
       backdrop-filter: blur(32px);
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      padding: 0.5rem;
 
       .homeNavIcon {
         margin-left: 0.5rem;
 
-        // svg {
-        //   transform: scale(1.5);
-        // }
-      }
-
-      .leaderBoardIcon {
         svg {
-          transform: scale(0.75);
+          transform: scale(1.5);
         }
-      }
-
-      .profileImg {
-        width: 2.5rem;
-        height: 2.5rem;
-        border-radius: 100%;
       }
     }
   }

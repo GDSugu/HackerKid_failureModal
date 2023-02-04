@@ -13,7 +13,7 @@ const courseCard = ({ data }) => (
           defaultMessage={'{type}'}
           description={'video type'}
           values={{ type: data.type }}/></p>
-      <img className='play-btn' src='../../../images/courses/play-btn.png' />
+      <Img className='play-btn' src='/courses/play-btn.png' />
       <img className='w-100 thumbnail-img' src={data.thumbnail} />
       <div className='card-foot'>
         <p><FormattedMessage
@@ -43,13 +43,13 @@ const SearchAndFilter = ({ searchOnChange, onChangeFilter, filterSet }) => {
   return (<div><div className='filter-n-search'>
   <div className='filter-cont'
   onClick={() => setFilterVisibility(!filterVisible)}>
-  <img className='filter-icon' src='../../../images/courses/filter-icon.svg'/>
+  <Img className='filter-icon' src='courses/filter-icon.svg'/>
   <p className='mb-0'><FormattedMessage
           defaultMessage={'Filter'}
           description={'Filter Button'}/></p>
   </div>
   <div className='form-control search-cont'>
-<img className='search-icon' src='../../../images/courses/search.svg'/>
+<Img className='search-icon' src='courses/search.svg'/>
 <input onChange={(value) => searchOnChange(value)} className='search-input' placeholder='Search'/>
 </div></div>
 {filterVisible && <div className='filter-cat-cont'>
@@ -76,9 +76,9 @@ const MobileOnlyComponent = ({ data }) => (
           description={'Module type'}
           values={{ type: data.type }}/>?</p>
       </div>
-      <img
+      <Img
         className="mobile-play-btn"
-        src="../../../images/courses/play-btn.png"
+        src="courses/play-btn.png"
       />
     </div>
   </a>

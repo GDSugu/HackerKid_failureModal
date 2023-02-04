@@ -14,6 +14,10 @@ const useTurtleFetchQuestion = ({
     validated: false,
     validationDetails: false,
     hintDetails: false,
+    uiData: {
+      currentGameScreen: 'TurtleQuestion',
+      hintContainerVisible: false,
+    },
   });
 
   const fetchTurtleQuestion = ({ type = 'initialQuestion' || 'getQuestionById', virtualId = virtualid, questionId = false }) => {
@@ -49,20 +53,33 @@ const useTurtleFetchQuestion = ({
                 status: 'access_denied',
                 ...prevState,
                 response,
+                uiData: {
+                  ...prevState.uiData,
+                  showGameLevel: false,
+                },
               }));
             } else {
               const parsedResponse = JSON.parse(response);
               if (parsedResponse.status === 'success') {
-                setTurtleQuestionInfo({
+                setTurtleQuestionInfo((prevState) => ({
+                  ...prevState,
                   ...parsedResponse,
                   validated: false,
                   fetchType: type,
-                });
+                  uiData: {
+                    ...prevState.uiData,
+                    showGameLevel: false,
+                  },
+                }));
               } else {
                 setTurtleQuestionInfo((prevState) => ({
                   ...prevState,
                   status: 'error',
                   response: parsedResponse,
+                  uiData: {
+                    ...prevState.uiData,
+                    showGameLevel: false,
+                  },
                 }));
               }
             }

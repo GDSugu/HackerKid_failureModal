@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
-import { $, pageInit } from '../framework';
+import { $, pageInit, timeTrack } from '../framework';
 import useRootPageState from '../../../../hooks/pages/root';
 import { useWebkataFetchQuestion, useWebkataSubmitQuestion } from '../../../../hooks/pages/webkata';
 import '../../../stylesheets/common/pages/webkata/style.scss';
 import Img from '../components/Img';
 import WebkataLevelComponent from '../components/WebkataLevelComponent';
-import WebkataNavBar from '../components/WebkataNavBar';
+// import WebkataNavBar from '../components/WebkataNavBar';
+import GameNavBar from '../components/GameNavBar';
 import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
 import Modal from '../components/Modal';
 import CodeEditor from '../components/CodeEditor';
@@ -25,6 +26,7 @@ import { showInlineLoadingSpinner } from '../loader';
 import { debounce1 as debounce } from '../../../../hooks/common/utlis';
 import 'ace-builds/webpack-resolver';
 import 'ace-builds/src-min-noconflict/ext-language_tools';
+import AwardsNotificationCard from '../components/AwardsNotificationCard';
 
 // inpage components
 const ProblemStatement = ({
@@ -306,11 +308,11 @@ const WebkataHomeComponent = ({ changeRoute }) => {
         <div className="webkata-title">
           <h1 className='game-title'>
             <FormattedMessage
-               defaultMessage={'WebKata - {concept}'}
-               description={'Webkata title'}
-               values={{
-                 concept: conceptId.toUpperCase(),
-               }}
+              defaultMessage={'WebKata - {concept}'}
+              description={'Webkata title'}
+              values={{
+                concept: conceptId.toUpperCase(),
+              }}
             />
           </h1>
         </div>
@@ -345,6 +347,7 @@ const WebkataGameComponent = () => {
   const levelComponentRef = useRef(null);
   const leaderboardComponentRef = useRef(null);
   const successModalRef = useRef(null);
+  const awardsNotificationCardRef = useRef(null);
 
   const { state: { device } } = useRootPageState();
   const { conceptId, id } = useParams();
@@ -466,18 +469,21 @@ const WebkataGameComponent = () => {
         if (res !== 'access_denied') {
           if (res.status === 'success' && res.questionObject) {
             toggleCollapseLivePreview(false);
+            awardsNotificationCardRef.current.hide();
           }
         }
       });
   };
 
+  const listenResizeWebkata = () => {
+    resizeEditor();
+    setIsDesktop(window.matchMedia('(min-width: 1024px)').matches);
+  };
+
   // side effects
   useEffect(() => {
     hideDefaultNavBar(device, 'game');
-    window.addEventListener('resize', () => {
-      resizeEditor();
-      setIsDesktop(window.matchMedia('(min-width: 1024px)').matches);
-    });
+    window.addEventListener('resize', listenResizeWebkata);
 
     const timer = setTimeout(() => {
       resizeEditor();
@@ -485,8 +491,9 @@ const WebkataGameComponent = () => {
 
     return () => {
       clearTimeout(timer);
-      successModalRef.current.hide();
+      successModalRef?.current?.hide();
       document.querySelector('nav:first-child').style.display = 'block';
+      window.removeEventListener('resize', listenResizeWebkata);
     };
   }, []);
 
@@ -519,6 +526,7 @@ const WebkataGameComponent = () => {
     if (webkataSubmitState.status === 'success') {
       if (webkataSubmitState.passed) {
         successModalRef.current.show();
+        awardsNotificationCardRef.current.show(webkataSubmitState.awardsGiven);
       } else if (!webkataSubmitState.passed && !showLivePreview) {
         setShowLivePreview(true);
       }
@@ -526,11 +534,18 @@ const WebkataGameComponent = () => {
   }, [webkataSubmitState]);
 
   return <>
-    <WebkataNavBar
+    {/* <WebkataNavBar
       levelBtnHandler={onLevelIndicatorClick}
       leaderboardHandler={onLeaderboardBtnClick}
       questionState={memorizedWebkataQuestionState}
       isWebkataGamePage={true}
+    /> */}
+    <GameNavBar
+      questionState={memorizedWebkataQuestionState}
+      // handleHint={handleHint}
+      levelBtnHandler={onLevelIndicatorClick}
+      isGameMainPage={true}
+      leaderboardHandler={onLeaderboardBtnClick}
     />
     <main className={`webkata-game-container ${(device === 'mobile' || !isDesktop) ? 'webkata-game-mob-container' : ''}`}>
       <ProblemStatement
@@ -634,6 +649,7 @@ const WebkataGameComponent = () => {
         nextHandler={handleSuccess}
       />
     </Modal>
+    <AwardsNotificationCard ref={awardsNotificationCardRef} />
     <GameLeaderboardComponent
       ref={leaderboardComponentRef}
       game={'webkata'}
@@ -652,6 +668,8 @@ const WebkataGameComponent = () => {
 const Webkata = () => {
   const [webkataRoute, setWebaktaRoute] = React.useState('home');
   const changeRoute = (route) => setWebaktaRoute(route);
+
+  timeTrack('games/webkata');
 
   React.useEffect(() => {
     const locationArray = window.location.href.split('/').filter((el) => el !== '');

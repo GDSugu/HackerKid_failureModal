@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import FuzzySearch from 'fuzzy-search';
-import { $, pageInit } from '../framework';
+import { $, pageInit, timeTrack } from '../framework';
 import CourseCard, { TopContainer, CustomSwiperComponent } from '../components/courseCard';
 import SwiperComponent from '../components/SwiperComponent';
 import 'swiper/swiper.scss';
@@ -14,32 +14,35 @@ import useVideos from '../../../../hooks/pages/videos';
 
 const CourseModule = ({ items, isDesktop }) => (
   <>
-    <div className="w-100 mt-4">
-      <div className="course-card-container">
-        <h5>
-        <FormattedMessage
-          defaultMessage={'{name} - {type}'}
-          description={'course Heading'}
-          values={{ name: items.moduleName, type: items.type }}/>
-        </h5>
-        <CustomSwiperComponent
-          data={items.videos}
-          SlideComponent={CourseCard}
-          swiperModules={{
-            navigation: true,
-          }}
-          module={items}
-          isDesktop={isDesktop}
-          swiperProps={{
-            spaceBetween: 16,
-            slidesPerView: 'auto',
-            className: 'course-swiper',
-            grabCursor: true,
-            lazy: true,
-            navigation: true,
-          }}
+    <div className="course-card-container">
+      <h5>
+      <FormattedMessage
+        // defaultMessage={'{name} - {type}'}
+        defaultMessage={'{modName}'}
+        description={'course Heading'}
+        // values={{ name: items.moduleName, type: items.type }}
+        values={{
+          modName: `${items.moduleName} ${items?.type ? ` - ${items.type}` : ''}`,
+        }}
         />
-      </div>
+      </h5>
+      <CustomSwiperComponent
+        data={items.videos}
+        SlideComponent={CourseCard}
+        swiperModules={{
+          navigation: true,
+        }}
+        module={items}
+        isDesktop={isDesktop}
+        swiperProps={{
+          spaceBetween: 16,
+          slidesPerView: 'auto',
+          className: 'course-swiper',
+          grabCursor: true,
+          lazy: true,
+          navigation: true,
+        }}
+      />
     </div>
   </>
 );
@@ -322,6 +325,8 @@ const Courses = () => {
   if (window.location.href.includes('courses')) {
     pageInit('courses-container', 'Courses');
   }
+
+  timeTrack('courses');
   const isPageMounted = React.useRef(true);
 
   const { courseData } = useCourses({ isPageMounted });
@@ -376,6 +381,15 @@ const Courses = () => {
   if (progress && progress.length > 0) {
     animateModuleProgress((progress[0].watched / progress[0].totalVideos) * 100);
   }
+
+  React.useEffect(() => {
+    console.log();
+
+    return () => {
+      isPageMounted.current = false;
+    };
+  }, []);
+
   return (
     <>
       <div className="col-12 col-md-11 col-xl-10 mx-auto">
