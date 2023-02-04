@@ -33,7 +33,7 @@ const resizeHandler = (nav = 'nav', selector) => {
 const updateHistory = (response) => {
   try {
     const { virtualId } = response.questionObject;
-    window.history.replaceState({}, '', `/codekata/${virtualId}`);
+    window.history.replaceState({}, '', `/coding-pirate/${virtualId}`);
   } catch (error) {
     console.log(error);
   }
@@ -157,8 +157,8 @@ const CodekataHomeContainer = ({ changeRoute }) => {
             <div className="card-container">
               <h1 className="gameTitle">
                 <FormattedMessage
-                  defaultMessage={'Codekata'}
-                  description={'Codekata title'}
+                  defaultMessage={'Coding Pirate'}
+                  description={'Coding pirate title'}
                 />
               </h1>
               <p className="gameDesc">
@@ -166,14 +166,14 @@ const CodekataHomeContainer = ({ changeRoute }) => {
                   defaultMessage={
                     'Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?'
                   }
-                  description={'Codekata description'}
+                  description={'Coding pirate description'}
                 />
               </p>
             </div>
           </div>
           <button
             className="btn btn-block gameBtn"
-            onClick={() => changeRoute('codekataGame')}>
+            onClick={() => changeRoute('codingPiarateGame')}>
             <p className="gameBtnDesc">
               <FormattedMessage
                 defaultMessage={'Start Playing'}
@@ -186,8 +186,8 @@ const CodekataHomeContainer = ({ changeRoute }) => {
           <div className="codekata-title">
             <h1 className="gameTitle">
               <FormattedMessage
-                defaultMessage={'Codekata'}
-                description={'Codekata title'}
+                defaultMessage={'Coding Pirate'}
+                description={'Coding Pirate title'}
               />
             </h1>
           </div>
@@ -199,7 +199,7 @@ const CodekataHomeContainer = ({ changeRoute }) => {
             </a> */}
               <button
                 className="btn btn-transparent codekata-action-btn codekata-play-btn"
-                onClick={() => changeRoute('codekataGame')}>
+                onClick={() => changeRoute('codingPirateGame')}>
                 <div className="play-btn-container">
                   <Img
                     src="../../../../images/games/gamePlay.png"
@@ -298,7 +298,7 @@ const CodekataDesktopContainer = ({
           handleCloseBtn = () => {
             statusModalRef.current.hide();
             if (questionList.length > questionObject.virtualId) {
-              pathNavigator(`codekata/${Number(questionObject.virtualId) + 1}`);
+              pathNavigator(`coding-pirate/${Number(questionObject.virtualId) + 1}`);
             }
           };
 
@@ -1039,7 +1039,7 @@ const Codekata = () => {
       .split('/')
       .filter((el) => el !== '');
     if (locationArray.length > 3) {
-      changeRoute('codekataGame');
+      changeRoute('codingPirateGame');
     }
   }, []);
 
@@ -1048,7 +1048,7 @@ const Codekata = () => {
       {codekataRoute === 'codekataHome' && (
         <CodekataHomeContainer changeRoute={changeRoute} />
       )}
-      {codekataRoute === 'codekataGame' && <CodekataGameComponent />}
+      {codekataRoute === 'codingPirateGame' && <CodekataGameComponent />}
     </>
   );
 };
