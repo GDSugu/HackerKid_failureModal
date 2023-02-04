@@ -114,8 +114,8 @@ const App = () => {
         <Route path='webkata/:conceptId' element={<RouteWebkata />} />
         <Route path='webkata/:conceptId/:id' element={<RouteWebkata />} />
         <Route path='webkata/:conceptId/:id/:uniqueString' element={<RouteWebkata />} />
-            <Route path='codekata' caseSensitive={true} element={<RouteCodekata />} />
-          <Route path='codekata/:id' element={<RouteCodekata />} />
+            <Route path='coding-pirate' caseSensitive={true} element={<RouteCodekata />} />
+          <Route path='coding-pirate/:id' element={<RouteCodekata />} />
           {/* </Route> */}
         {/* </Route> */}
         <Route path='zombieland' caseSensitive={true} element={<RouteZombieLand />} />

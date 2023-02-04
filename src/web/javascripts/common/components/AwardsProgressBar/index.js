@@ -63,8 +63,8 @@ const AwardsProgressBar = ({
               defaultMessage={'{progress}{progressSuffix} {unit}'}
               description='progress textual representation'
               values={{
-                progress: progressDetailsObj.progress,
-                progressSuffix: getProgressSuffix(progressDetailsObj.progress,
+                progress: Math.ceil(progressDetailsObj.progress),
+                progressSuffix: getProgressSuffix(Math.ceil(progressDetailsObj.progress),
                   progressDetailsObj.unit),
                 unit: getFormattedUnit(progressDetailsObj.progress, progressDetailsObj.unit),
               }}

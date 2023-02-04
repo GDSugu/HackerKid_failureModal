@@ -156,6 +156,8 @@
     background-color: white;
     position: absolute;
     z-index: 9999;
+
+    @include gm.box-shadow();
   }
 
   .award-card:hover + .award-info-container {
@@ -171,9 +173,11 @@
     align-items: center;
     gap: 1rem;
     padding: 1rem;
+    flex-direction: row-reverse;
 
     img {
       height: 30px;
+      align-self: flex-start;
     }
 
     .award-title {
@@ -183,6 +187,10 @@
     .award-subtitle {
       color: gt.theme-var(awards-text-color-2, null, $thememaplight, $cssvars);
       margin-top: 0.2rem;
+
+      &.next-achievement-subtitle {
+        margin-top: 1rem;
+      }
     }
 
     .award-details {
@@ -194,7 +202,7 @@
         border-radius: 20px;
         width: 100%;
         height: 0.4rem;
-        margin-top: 1.35rem;
+        margin-top: 1.4rem;
         background-color: gt.theme-var(awards-body-bg, null, $thememaplight, $cssvars);
         overflow: unset;
 

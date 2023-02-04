@@ -762,11 +762,11 @@ const Games = () => {
                 }} />
               <MemoizedGameCard
                 isDesktop={isDesktop}
-                onClick={() => { navigate('/codekata'); }}
+                onClick={() => { navigate('/coding-pirate'); }}
                 gameCardVariant={1}
                 contentContainerCustomClass={'col-6 col-sm-4 col-xl-3 p-1 p-md-2'}
                 gameDetails={{
-                  gameTitle: 'CodePirate',
+                  gameTitle: 'Coding Pirate',
                   currentLevelNumber: dashBoardData.turtle.currentQuestionDetails.virtualId,
                   totalLevels: dashBoardData.turtle.overAllQuestionCount,
                   gameCoverURL: 'games/codePirateCover.png',

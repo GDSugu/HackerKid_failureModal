@@ -133,7 +133,7 @@ const useAwards = ({ isPageMounted, initializeData = true }) => {
             const timeStampDMY = moment.unix(repeatingAward.lastAwardedAt).format('DD/MM/YYYY');
             const nowDMY = moment().format('DD/MM/YYYY');
 
-            if (nowDMY === timeStampDMY) {
+            if (nowDMY === timeStampDMY && newObj.current) {
               today.push({ currentAward: newObj.currentAward, repeatingAwards: [] });
 
               newObj.currentAward = false;
