@@ -27,6 +27,7 @@ const Modal = ({
       $(`#modal${modalClassSelector}`).modal('show');
     },
     showWithRestriction: () => {
+      $(`#modal${modalClassSelector}`).data('bs.modal', null);
       $(`#modal${modalClassSelector}`).modal({
         backdrop: 'static',
         keyboard: false,

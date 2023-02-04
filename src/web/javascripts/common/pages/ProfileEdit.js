@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { $, pageInit, validate } from '../framework';
+import {
+  $, pageInit, timeTrack, validate,
+} from '../framework';
 import { useProfileInfo } from '../../../../hooks/pages/profile';
 import '../../../stylesheets/common/pages/profile/style.scss';
 import Modal from '../components/Modal';
@@ -49,6 +51,30 @@ const validateField = (key, target) => {
           }
           break;
         }
+        case 'parentEmail': {
+          const val = validate(target, 'email', 1);
+          if (!val) {
+            $(`#${key}~small`).html('Email is not valid');
+            throw new Error('FIELDS_CHECK_FAILED');
+          }
+          if (value.length > 100) {
+            $(`#${key}~small`).html('Email must be of length less than 100 characters');
+            throw new Error('FIELDS_CHECK_FAILED');
+          }
+          break;
+        }
+        case 'parentPhone': {
+          const val = validate(target, 'tel', 1);
+          if (!val) {
+            $(`#${key}~small`).html('Phone number is not valid');
+            throw new Error('FIELDS_CHECK_FAILED');
+          }
+          if (value.length > 15) {
+            $(`#${key}~small`).html('Phone number must be of length less than 15 characters');
+            throw new Error('FIELDS_CHECK_FAILED');
+          }
+          break;
+        }
         default: break;
       }
     }
@@ -71,6 +97,8 @@ const Profile = () => {
     pageInit('profile-container', 'Profile - Settings');
   }
 
+  timeTrack('profile');
+
   const isPageMounted = React.useRef(true);
   const { state, setState, saveProfile } = useProfileInfo({ isPageMounted });
   const [showUpdatedModal, setShowUpdatedModal] = useState(false);
@@ -83,7 +111,8 @@ const Profile = () => {
     name,
     profileImage,
     school,
-    uniqueUrl,
+    parentEmail,
+    parentPhone,
   } = state;
 
   const handleStateChange = (key, target) => {
@@ -96,7 +125,7 @@ const Profile = () => {
   };
 
   const handleSubmission = () => {
-    const fieldStatus = ['about', 'grade', 'name', 'school'].map((key) => validateField(key, $(`#${key}`)[0]).status);
+    const fieldStatus = ['about', 'grade', 'name', 'school', 'parentEmail', 'parentPhone'].map((key) => validateField(key, $(`#${key}`)[0]).status);
     if (!fieldStatus.includes(false)) {
       saveProfile()
         .then(() => {
@@ -130,11 +159,11 @@ const Profile = () => {
     }
   };
 
-  useEffect(() => {
-    if (uniqueUrl) {
-      window.history.replaceState({}, '', `/profile/edit/${uniqueUrl}`);
-    }
-  }, [uniqueUrl]);
+  // useEffect(() => {
+  //   if (uniqueUrl) {
+  //     window.history.replaceState({}, '', `/profile/edit/${uniqueUrl}`);
+  //   }
+  // }, [uniqueUrl]);
 
   useEffect(() => () => {
     isPageMounted.current = false;
@@ -222,29 +251,29 @@ const Profile = () => {
             <input type="text" className="form-control" name="school" id="school" value={school || ''} aria-describedby="school input Field" placeholder="School name" onChange={(e) => handleStateChange('school', e.target) } />
             <small className="form-text text-danger"></small>
           </div>
-          {/* <div className="form-group">
+          <div className="form-group">
             <label htmlFor="parentEmail">
               <FormattedMessage
                 defaultMessage="Parent's Email"
                 description='Profile email label'
               />
             </label>
-            <input type="email" className="form-control" name="parentEmail" id="parentEmail"
+            <input type="email" className="form-control" name="parentEmail" id="parentEmail" value={parentEmail || ''}
             aria-describedby="Parent email input Field" placeholder="Parent email address"
             onChange={(e) => handleStateChange('parentEmail', e.target)} />
             <small className="form-text text-danger"></small>
-          </div> */}
-          {/* <div className="form-group">
+          </div>
+          <div className="form-group">
             <label htmlFor="parentPhone">
               <FormattedMessage
-                defaultMessage='Phone'
+                defaultMessage="Parent's Phone Number"
                 description='Profile phone label'
               />
             </label>
-            <input type="number" className="form-control" name="parentPhone" id="parentPhone"
-            aria-describedby="parent phone input Field" placeholder="Parent phone number" />
+            <input type="number" className="form-control" name="parentPhone" id="parentPhone" value={parentPhone || ''}
+            aria-describedby="parent phone input Field" placeholder="Parent phone number" onChange={(e) => handleStateChange('parentPhone', e.target) } />
             <small className="form-text text-danger"></small>
-          </div> */}
+          </div>
           {/* <div className="form-group">
             <label htmlFor="password">
               <FormattedMessage

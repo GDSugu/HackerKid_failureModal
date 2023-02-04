@@ -17,6 +17,12 @@
       "value": "XP Earned:"
     }
   ],
+  "+PoBgu": [
+    {
+      "type": 1,
+      "value": "step"
+    }
+  ],
   "+f2V2I": [
     {
       "type": 1,
@@ -53,6 +59,12 @@
     {
       "type": 1,
       "value": "output"
+    }
+  ],
+  "+xn0Fg": [
+    {
+      "type": 0,
+      "value": "Time Spent:"
     }
   ],
   "/Gy7qZ": [
@@ -237,6 +249,12 @@
       "value": "Help"
     }
   ],
+  "16yTgM": [
+    {
+      "type": 0,
+      "value": "Create challenge"
+    }
+  ],
   "1BoFrk": [
     {
       "type": 1,
@@ -253,6 +271,16 @@
     {
       "type": 0,
       "value": "Share"
+    }
+  ],
+  "1Gkn38": [
+    {
+      "type": 0,
+      "value": "Created by "
+    },
+    {
+      "type": 1,
+      "value": "creatorName"
     }
   ],
   "1RUvaS": [
@@ -301,12 +329,6 @@
     {
       "type": 1,
       "value": "countryName"
-    }
-  ],
-  "2Tu0HO": [
-    {
-      "type": 0,
-      "value": "Next"
     }
   ],
   "2W0f9h": [
@@ -525,6 +547,12 @@
       "value": "See All Awards"
     }
   ],
+  "4vDnKO": [
+    {
+      "type": 0,
+      "value": "Ooch!"
+    }
+  ],
   "4wgAGs": [
     {
       "type": 0,
@@ -627,6 +655,12 @@
     {
       "type": 0,
       "value": "Your bio will be shown here"
+    }
+  ],
+  "6QQRFR": [
+    {
+      "type": 1,
+      "value": "step"
     }
   ],
   "6V6DQY": [
@@ -969,6 +1003,12 @@
       "value": "Edit Challenge"
     }
   ],
+  "BIWKGG": [
+    {
+      "type": 0,
+      "value": "Time Spent:"
+    }
+  ],
   "BNGdt+": [
     {
       "type": 0,
@@ -979,6 +1019,12 @@
     {
       "type": 0,
       "value": "See more"
+    }
+  ],
+  "BW0/7P": [
+    {
+      "type": 0,
+      "value": "Keep in draft"
     }
   ],
   "Bj5WGE": [
@@ -1001,6 +1047,12 @@
     {
       "type": 0,
       "value": "Newest to Oldest"
+    }
+  ],
+  "C1rkSh": [
+    {
+      "type": 0,
+      "value": "Coding Pirate"
     }
   ],
   "C8QChP": [
@@ -1079,6 +1131,12 @@
     {
       "type": 0,
       "value": "This is about page"
+    }
+  ],
+  "D3zPJs": [
+    {
+      "type": 0,
+      "value": "Are you sure you want to create this challenge?"
     }
   ],
   "D81PjZ": [
@@ -1357,12 +1415,6 @@
       "value": "Login with Email"
     }
   ],
-  "Gr9306": [
-    {
-      "type": 0,
-      "value": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?"
-    }
-  ],
   "GskR3C": [
     {
       "type": 1,
@@ -1373,6 +1425,12 @@
     {
       "type": 0,
       "value": "Password changed successfully"
+    }
+  ],
+  "H9m7jW": [
+    {
+      "type": 1,
+      "value": "timeSpent"
     }
   ],
   "HAlOn1": [
@@ -1469,12 +1527,6 @@
       "value": "9876543221"
     }
   ],
-  "IgwSoy": [
-    {
-      "type": 0,
-      "value": "Previous"
-    }
-  ],
   "IloyRB": [
     {
       "type": 1,
@@ -1485,6 +1537,12 @@
     {
       "type": 1,
       "value": "errorMessage"
+    }
+  ],
+  "J4y0bl": [
+    {
+      "type": 0,
+      "value": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?"
     }
   ],
   "J9e6MO": [
@@ -1697,10 +1755,22 @@
       "value": "title"
     }
   ],
+  "MZ57OE": [
+    {
+      "type": 0,
+      "value": "Back to Challenges"
+    }
+  ],
   "MceYzq": [
     {
       "type": 1,
       "value": "name"
+    }
+  ],
+  "Me+V0/": [
+    {
+      "type": 0,
+      "value": "Challenge Name"
     }
   ],
   "MfoF60": [
@@ -1913,10 +1983,22 @@
       "value": "Create a Challenge"
     }
   ],
+  "PI3fWF": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
   "PKwyq8": [
     {
       "type": 0,
       "value": "Move any blocks to get hints"
+    }
+  ],
+  "PLXcXw": [
+    {
+      "type": 0,
+      "value": "Continue Exploring"
     }
   ],
   "PMX+8G": [
@@ -2051,6 +2133,12 @@
     {
       "type": 0,
       "value": "View all Challenges"
+    }
+  ],
+  "RaCXom": [
+    {
+      "type": 1,
+      "value": "challengeName"
     }
   ],
   "RdkFSF": [
@@ -2279,6 +2367,12 @@
     {
       "type": 0,
       "value": "Recently Collected"
+    }
+  ],
+  "UZULtM": [
+    {
+      "type": 0,
+      "value": "Create Challenge?"
     }
   ],
   "UkT6PM": [
@@ -2579,6 +2673,12 @@
       "value": "studentNamt"
     }
   ],
+  "aL6pHp": [
+    {
+      "type": 0,
+      "value": "Go to Challenges"
+    }
+  ],
   "aNoleS": [
     {
       "type": 0,
@@ -2797,6 +2897,12 @@
       "value": "Profile updated successfully"
     }
   ],
+  "eF9BRa": [
+    {
+      "type": 0,
+      "value": "Parent's Email"
+    }
+  ],
   "ed9QEz": [
     {
       "type": 0,
@@ -2965,12 +3071,6 @@
       "value": "More"
     }
   ],
-  "gdd3S3": [
-    {
-      "type": 0,
-      "value": "Codekata"
-    }
-  ],
   "giAApt": [
     {
       "type": 0,
@@ -2993,6 +3093,12 @@
       "value": " coins"
     }
   ],
+  "gzjgZO": [
+    {
+      "type": 0,
+      "value": "Try these challenges"
+    }
+  ],
   "h/MN82": [
     {
       "type": 1,
@@ -3009,6 +3115,12 @@
     {
       "type": 0,
       "value": "Send OTP"
+    }
+  ],
+  "hWyGja": [
+    {
+      "type": 0,
+      "value": "Instructions"
     }
   ],
   "hZGwA5": [
@@ -3115,6 +3227,18 @@
       "value": "rankNumber"
     }
   ],
+  "jqtzC8": [
+    {
+      "type": 0,
+      "value": "Coding Pirate"
+    }
+  ],
+  "jzHe4a": [
+    {
+      "type": 1,
+      "value": "timeSpent"
+    }
+  ],
   "k6tlKQ": [
     {
       "type": 0,
@@ -3125,6 +3249,12 @@
     {
       "type": 1,
       "value": "question"
+    }
+  ],
+  "kYun6H": [
+    {
+      "type": 0,
+      "value": "Challenge Name"
     }
   ],
   "keQJEv": [
@@ -3281,12 +3411,6 @@
     {
       "type": 0,
       "value": "Coins Earned:"
-    }
-  ],
-  "mfMsri": [
-    {
-      "type": 0,
-      "value": "Recommended Games"
     }
   ],
   "mfZLuH": [
@@ -3449,10 +3573,22 @@
       "value": "Join with link"
     }
   ],
+  "pNZIoS": [
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
   "pQ0m8t": [
     {
       "type": 0,
       "value": "watched this"
+    }
+  ],
+  "pRmIA8": [
+    {
+      "type": 0,
+      "value": "Go to Challenges"
     }
   ],
   "pVCbSK": [
@@ -3681,6 +3817,12 @@
       "value": "Logout"
     }
   ],
+  "sS58ht": [
+    {
+      "type": 0,
+      "value": "Register to Create Challenge, Earn Points and Compete with friends"
+    }
+  ],
   "sXlZLv": [
     {
       "type": 0,
@@ -3719,6 +3861,18 @@
     {
       "type": 0,
       "value": "View All Achievements"
+    }
+  ],
+  "tRGm5z": [
+    {
+      "type": 0,
+      "value": "Time Spent:"
+    }
+  ],
+  "tTcUHG": [
+    {
+      "type": 0,
+      "value": "Enter the Challenge Name"
     }
   ],
   "tbPLF3": [
@@ -3811,6 +3965,12 @@
       "value": "Feed"
     }
   ],
+  "uqwFHg": [
+    {
+      "type": 0,
+      "value": "Continue Createing"
+    }
+  ],
   "urqfpL": [
     {
       "type": 0,
@@ -3835,6 +3995,12 @@
       "value": "Show Leaderboard"
     }
   ],
+  "vKE06c": [
+    {
+      "type": 0,
+      "value": "Create"
+    }
+  ],
   "vWe94i": [
     {
       "type": 0,
@@ -3851,6 +4017,12 @@
     {
       "type": 0,
       "value": "Filter"
+    }
+  ],
+  "vhHzbl": [
+    {
+      "type": 0,
+      "value": "Now your friends can view and solve your challenge"
     }
   ],
   "viQX0N": [
@@ -3913,6 +4085,12 @@
       "value": "Resend"
     }
   ],
+  "xAu4pJ": [
+    {
+      "type": 0,
+      "value": "Submit"
+    }
+  ],
   "xHkGSg": [
     {
       "type": 1,
@@ -3937,6 +4115,20 @@
       "value": "level"
     }
   ],
+  "xYLs/L": [
+    {
+      "type": 1,
+      "value": "challengeName"
+    },
+    {
+      "type": 0,
+      "value": " #"
+    },
+    {
+      "type": 1,
+      "value": "challengeId"
+    }
+  ],
   "xlvJ5U": [
     {
       "type": 0,
@@ -3949,6 +4141,12 @@
       "value": "Register for free"
     }
   ],
+  "xyhq1c": [
+    {
+      "type": 0,
+      "value": "Share in"
+    }
+  ],
   "y00DRu": [
     {
       "type": 1,
@@ -3959,6 +4157,12 @@
     {
       "type": 1,
       "value": "hintMessage"
+    }
+  ],
+  "yEJu0Z": [
+    {
+      "type": 0,
+      "value": "Parent's Phone Number"
     }
   ],
   "ySOrrv": [
@@ -3977,6 +4181,12 @@
     {
       "type": 0,
       "value": "Your Collections and Perks"
+    }
+  ],
+  "ygjPEa": [
+    {
+      "type": 1,
+      "value": "title"
     }
   ],
   "yjWbPf": [

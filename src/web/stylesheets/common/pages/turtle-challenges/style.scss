@@ -1,0 +1,894 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+@use '../../sass/components/gameNavBar';
+@use '../../sass/components/loading';
+
+@import './_turtleChallengesTheme.js';
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+.create-challenge-container,
+.take-challenge-container {
+  background: url(../../../../../images/turtle/turtleMainBgWeb.svg) no-repeat 100% / cover;
+  background-position: right center;
+  height: 100vh;
+  width: 100vw;
+
+  @include gm.media-breakpoint-down(md) {
+    background-image: url(../../../../../images/turtle/turtleMainBg.png);
+  }
+
+  .leaderboard-btn {
+    background-color: gt.theme-var(game-leaderboard-btn-bg, null, $thememaplight, $cssvars);
+    font-weight: bold;
+  }
+
+  .take-challenge-game-container,
+  .create-challenge-game-container {
+    display: flex;
+    align-items: stretch;
+    height: calc(100vh - 62px);
+    padding: 1rem 0 1rem 0;
+    overflow: hidden;
+    // background: url(../../../../../images/turtle/turtleBgWeb.svg) no-repeat 100% / cover;
+
+    .game-container-block {
+      position: relative;
+
+      .take-challenge-editor-container,
+      .create-challenge-editor-container {
+        overflow: visible;
+
+        #tabsContent {
+          #turtleBlock {
+            .injectionDiv {
+              overflow: visible;
+
+              // .blocklyToolboxDiv,
+              // .blocklyFlyout,
+              // .blocklyFlyoutScrollbar {
+              //   left: -56% !important;
+              // }
+            }
+          }
+
+          #turtleOutput {
+            #outputSection {
+              position: relative;
+              background-color: gt.theme-var(bg-1);
+              height: 100%;
+
+              .drawing-controls {
+                // display: flex;
+                // justify-content: flex-end;
+                // align-items: flex-end;
+                margin-right: 0.25rem;
+                margin-top: 0.25rem;
+                display: flex;
+                position: absolute;
+                right: 0;
+                z-index: 100;
+
+                @include gm.media-breakpoint-down(md) {
+                  flex-direction: column;
+                }
+
+                button {
+                  margin: 0.25rem;
+                  width: 2.5rem;
+                }
+              }
+
+              .sectionContent {
+                height: 100%;
+                overflow: auto;
+                position: relative;
+
+                #userCanvas {
+                  position: absolute;
+                  width: 100%;
+                }
+
+                #answerCanvas {
+                  position: absolute;
+                  width: 100%;
+                  opacity: 0.5;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .take-challenge-question-container,
+    .take-challenge-block-container,
+    .take-challenge-editor-container,
+    .create-challenge-question-container,
+    .create-challenge-block-container,
+    .create-challenge-editor-container {
+      height: 100%;
+      border-radius: 0.75rem;
+      overflow: hidden;
+
+      #tabsContent {
+        height: calc(100% - 49px);
+
+        .hintBtnContainer {
+          position: absolute;
+          right: 0;
+          transform: translateX(-25%);
+          z-index: 100;
+
+          .hintBtn {
+            &:focus {
+              box-shadow: none;
+            }
+
+            &.hintBtn-dark {
+              transform: translateY(48px);
+
+              svg {
+                path {
+                  fill: gt.theme-var(text-color-1);
+                }
+              }
+            }
+          }
+        }
+
+        .tab-pane {
+          height: 100%;
+        }
+      }
+    }
+
+    .take-challenge-question-container,
+    .create-challenge-question-container {
+      display: flex;
+      flex-direction: column;
+
+      .take-challenge-question-block,
+      .take-challenge-exoup-block,
+      .create-challenge-question-block,
+      .create-challenge-exoup-block {
+        flex-basis: 0;
+        flex-grow: 1;
+        height: 50%;
+        background-color: gt.theme-var(game-transparent-bg, null, $thememaplight, $cssvars);
+      }
+
+      .take-challenge-title-block,
+      .create-challenge-title-block {
+        background-color: gt.theme-var(game-question-title-bg, null, $thememaplight, $cssvars);
+        padding: 0.75rem;
+
+        .take-challenge-question-title,
+        .create-challenge-question-title {
+          color: gt.theme-var(text-color-1);
+          font-weight: bold;
+          font-size: 1.125rem;
+          margin-bottom: 0;
+        }
+      }
+
+      .take-challenge-question-content,
+      .create-challenge-question-content {
+        height: calc(100% - 51px);
+        overflow-y: auto;
+        padding: 0.5rem;
+
+        .take-challenge-question,
+        .create-challenge-question {
+          font-weight: bold;
+          margin-bottom: 0;
+        }
+
+        .take-challenge-question-instructions,
+        .create-challenge-question-instructions {
+          .take-challenge-question-instructions-title,
+          .create-challenge-question-instructions-title {
+            font-weight: bold;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    .create-challenge-question-container {
+      .create-challenge-question-block {
+        flex: unset;
+        height: 25%;
+        margin-bottom: 1rem;
+        border-radius: 1rem;
+      }
+
+      .create-challenge-draft-container {
+        flex: 1;
+        overflow: auto;
+        border-radius: 1rem;
+        background-color: gt.theme-var(game-transparent-bg, null, $thememaplight, $cssvars);
+
+        .challenge-box {
+          margin: 0.5rem;
+
+          p {
+            color: gt.theme-var(text-color-1);
+
+            &.creatorName {
+              font-size: 0.85rem;
+            }
+          }
+
+          .challenge-img-container {
+            img {
+              width: 3.5rem;
+              height: 3.5rem;
+              aspect-ratio: 1;
+              margin: 0.5rem;
+              object-fit: contain;
+              border-radius: 1rem;
+              background-color: gt.theme-var(bg-1);
+            }
+          }
+
+          a {
+            &:hover {
+              color: gt.theme-var(text-color-1);
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+
+    .take-challenge-block-container,
+    .create-challenge-block-container {
+      // background-color: gt.theme-var(game-dark-transparent, null, $thememaplight, $cssvars);
+      background-color: gt.theme-var(bg-2);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+
+      .take-challenge-blockly-container,
+      .create-challenge-blockly-container {
+        background-color: gt.theme-var(bg-4);
+        padding: 0.6rem;
+
+        .take-challenge-blockly-title,
+        .create-challenge-blockly-title {
+          color: gt.theme-var(text-color-2);
+          font-weight: bold;
+          font-size: 1.125rem;
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .take-challenge-editor-container,
+    .create-challenge-editor-container {
+      background-color: gt.theme-var(bg-2);
+
+      .take-challenge-editor-title,
+      .create-challenge-editor-title {
+        background-color: gt.theme-var(bg-4);
+        padding-top: 0.25rem;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 0.75rem 0.75rem 0 0;
+
+        .nav-tabs {
+          .nav-item {
+            .nav-link {
+              color: gt.theme-var(text-color-2);
+              border: unset;
+              font-weight: bold;
+              padding-bottom: 0.75rem;
+
+              &.active {
+                color: gt.theme-var(text-color-2);
+                background: gt.theme-var(game-white-gradient-bg, null, $thememaplight, $cssvars);
+                background-size: 100% 0.25rem;
+                background-position: bottom 0 left 0, bottom 0.25rem left 0;
+                background-repeat: no-repeat;
+              }
+
+              &:hover {
+                border: unset;
+              }
+            }
+          }
+        }
+
+        .runBtnContainer {
+          position: relative;
+
+          .runBtn {
+            color: gt.theme-var(text-color-2);
+
+            &:focus {
+              box-shadow: none;
+            }
+          }
+        }
+      }
+    }
+
+    .take-challenge-skeleton-body,
+    .create-challenge-skeleton-body {
+      height: 100%;
+      // animation: refresh 2.5s ease-out infinite;
+      // background-image: linear-gradient(90deg, gt.theme-var(text-color-5), gt.theme-var(bg-2) 50%, gt.theme-var(skeleton-bg) 50%);
+      background-size: 200%;
+    }
+  }
+
+  .game-mob-container {
+    position: relative;
+    height: calc(100vh - 76px);
+    overflow: hidden;
+
+    .take-challenge-mob-game-container,
+    .create-challenge-mob-game-container {
+      display: flex;
+      flex-direction: column;
+
+      #tabsContent {
+        flex: 1;
+
+        .tab-pane {
+          height: calc(100vh - 76px - 81px);
+
+          &#questionBlock,
+          &#turtleSubmit {
+            .take-challenge-mob-question-container,
+            .create-challenge-mob-question-container {
+              padding: 0 1rem;
+              height: 100%;
+              display: grid;
+              grid-template-rows: 43% 43% 14%;
+
+              .take-challenge-mob-question-block,
+              .create-challenge-mob-question-block {
+                height: 100%;
+                overflow: hidden;
+
+                .take-challenge-question-header,
+                .take-challenge-question-title,
+                .take-challenge-question-instructions-title,
+                .create-challenge-question-header,
+                .create-challenge-question-title,
+                .create-challenge-question-instructions-title {
+                  font-weight: bold;
+                  margin-bottom: 0;
+                }
+
+                .take-challenge-question-header,
+                .create-challenge-question-header {
+                  color: gt.theme-var(text-color-2);
+                  margin-bottom: 0;
+                }
+
+                .take-challenge-question-card,
+                .create-challenge-question-card {
+                  background-color: gt.theme-var(game-transparent-bg, null, $thememaplight, $cssvars);
+                  border-radius: 0.75rem;
+                  padding: 1rem;
+                  color: gt.theme-var(text-color-1);
+                  height: calc(100% - 40px);
+                  overflow: auto;
+                }
+
+                .create-challenge-question-card {
+                  height: unset;
+                }
+              }
+
+              .create-challenge-mob-question-block {
+                height: 100%;
+                // margin: 1rem 0 0.5rem;
+                margin-top: 1rem;
+
+                // .outputContainer {
+                //   width: 100%;
+                //   height: ;
+                // }
+              }
+
+              .take-challenge-mob-output-block,
+              .create-challenge-mob-output-block {
+                background-color: transparent;
+                // border: 1px solid gt.theme-var(game-btn-bg, null, $thememaplight, $cssvars);
+                border-radius: 0.75rem;
+                max-height: 100%;
+                flex-grow: 1;
+                flex-basis: 0;
+                overflow: hidden;
+
+                button {
+                  background-color: gt.theme-var(bg-1);
+                  border: unset;
+                  border-radius: 0.75rem;
+                  width: 100%;
+                  padding: 1rem;
+                  transition: all 0.3s ease-in-out;
+                  outline: none;
+
+                  &[aria-expanded=true] {
+                    border-radius: unset;
+
+                    i {
+                      &:before {
+                        content: '\f106';
+                      }
+                    }
+                  }
+
+                  p,
+                  i {
+                    color: gt.theme-var(text-color-1);
+                    font-weight: bold;
+                  }
+
+                  i {
+                    font-size: 1.75rem;
+                  }
+                }
+
+                #expOupCollapse {
+                  height: calc(100%);
+                  background-color: gt.theme-var(bg-1);
+                  transition: all 0.1s ease-in-out;
+
+                  .turtle-qnout-container {
+                    height: 100%;
+                    overflow: auto;
+                    position: relative;
+
+                    #expOutCanvas {
+                      position: absolute;
+                      height: 100%;
+                      width: 100%;
+                    }
+                  }
+                }
+              }
+
+              .take-challenge-mob-hero-btn-block,
+              .create-challenge-mob-hero-btn-block {
+                display: flex;
+                align-items: center;
+
+                button {
+                  background-color: gt.theme-var(game-btn-bg, null, $thememaplight, $cssvars);
+                  border-radius: 0.75rem;
+                  width: 100%;
+                  margin: 0 auto;
+                  padding: 0.75rem;
+
+                  p {
+                    color: gt.theme-var(text-color-2);
+                    font-weight: bold;
+                    font-size: 1.125rem;
+                    margin-bottom: 0;
+                  }
+                }
+              }
+
+              .create-challenge-mob-hero-btn-block {
+                display: unset;
+              }
+            }
+
+            .create-challenge-mob-question-container {
+              // display: block;
+              // grid-template-rows: unset;
+              // height: unset;
+              grid-template-rows: auto 1fr auto;
+              grid-gap: 8px;
+
+              .create-challenge-preview-card {
+                background-color: gt.theme-var(bg-1);
+                border-radius: 0.75rem;
+                overflow: hidden;
+                max-height: 100%;
+
+                .previewOutputContainer {
+                  width: 100%;
+                  height: 100%;
+                  position: relative;
+                  overflow: auto;
+
+                  #previewCanvas {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                  }
+                }
+              }
+            }
+          }
+
+          // &#turtleBlock {
+          //   .blocklyScrollbarVertical {
+          //     left: 2%;
+
+          //     .blocklyScrollbarHandle {
+          //       width: 0.5rem;
+          //     }
+          //   }
+
+          //   .blocklyScrollbarHorizontal {
+          //     top: 2%;
+
+          //     .blocklyScrollbarHandle {
+          //       height: 0.5rem;
+          //     }
+          //   }
+          // }
+
+          &#turtleOutput {
+            background: gt.theme-var(bg-1);
+
+            #outputSection {
+              height: 100%;
+
+              .drawing-controls {
+                margin-right: 0.25rem;
+                margin-top: 0.25rem;
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                right: 0;
+                z-index: 100;
+
+                button {
+                  margin: 0.25rem;
+                  width: 2.5rem;
+                }
+              }
+
+              .outputContainer {
+                height: 100%;
+                position: relative;
+                overflow: auto;
+
+                #answerCanvas,
+                #userCanvas {
+                  width: 100%;
+                  height: 100%;
+                  position: absolute;
+                }
+              }
+
+              .mob-runBtnContainer {
+                position: absolute;
+                width: 95%;
+                margin: auto;
+                left: 50%;
+                transform: translate(-50%, -125%);
+                z-index: 100;
+
+                button {
+                  background-color: gt.theme-var(game-btn-bg, null, $thememaplight, $cssvars);
+                  border-radius: 0.75rem;
+                  width: 97%;
+                  margin: auto;
+                  color: gt.theme-var(text-color-2);
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  padding: 1rem;
+
+                  p {
+                    font-weight: bold;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .nav-tabs {
+        background-color: gt.theme-var(game-dark-transparent, null, $thememaplight, $cssvars);
+        backdrop-filter: blur(4px);
+
+        .nav-item {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+
+          .nav-link,
+          .nav-link-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            &.active {
+              background: unset;
+              border: unset;
+
+              svg,
+              p {
+                color: gt.theme-var(game-nav-active-color, null, $thememaplight, $cssvars);
+              }
+            }
+
+            .continueDebugger {
+              display: none;
+            }
+
+            p {
+              color: gt.theme-var(text-color-2);
+            }
+
+            &:hover {
+              border: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .successModal,
+  .newNameModal,
+  .successCreateChallengeModal,
+  .createConfirmationModal {
+    .modal-custom-header {
+      button.close {
+        color: gt.theme-var(text-color-2);
+        font-size: 2rem;
+        background: gt.theme-var(game-modal-close-btn-bg, null, $thememaplight, $cssvars);
+        padding: 0.125rem 0.6rem 0.45rem;
+        line-height: 0.75;
+        opacity: 1;
+      }
+    }
+
+    .success-modal-content,
+    .new-name-modal-content,
+    .create-challenge-confirmation-modal-component {
+      .recognition-content,
+      .share-content {
+        display: grid;
+        place-items: center;
+
+        h5,
+        p {
+          text-align: center;
+        }
+
+        button {
+          margin: 0 0.25rem;
+          border-width: 2px;
+          border-radius: 0.75rem;
+          font-weight: bold;
+
+          &.btn-outline-primary {
+            &:hover {
+              color: gt.theme-var(text-color-2);
+            }
+          }
+        }
+      }
+
+      .recognition-content {
+        h5 {
+          margin: 1rem 0;
+        }
+
+        p {
+          margin: 1rem 0;
+          line-height: 1.5;
+        }
+
+        i {
+          margin-left: 1.5rem;
+          font-size: 1.25rem;
+        }
+
+        img {
+          width: 12rem;
+        }
+
+        button {
+          &.btn-primary {
+            color: gt.theme-var(text-color-2);
+          }
+        }
+
+        input {
+          border: 1px solid gt.theme-var(game-input-border-color, null, $thememaplight, $cssvars);
+        }
+
+        .recognition-btn-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          @include gm.media-breakpoint-down(md) {
+            flex-wrap: wrap;
+          }
+
+          button {
+            @include gm.media-breakpoint-down(md) {
+              margin: 0.25rem 0;
+              width: 100%;
+            }
+          }
+        }
+      }
+
+      .share-content {
+        .btn-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 2rem auto;
+          padding: 0;
+
+          .form-group {
+            margin: 0;
+            padding: 0;
+
+            input {
+              border-radius: 0.5rem;
+              border: 1px solid gt.theme-var(game-input-border-color, null, $thememaplight, $cssvars);
+              background-color: gt.theme-var(bg-1);
+            }
+          }
+        }
+      }
+    }
+
+    .new-name-modal-content {
+      text-align: center;
+      padding: 1.5rem 0.5rem 0;
+
+      label {
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.25rem;
+      }
+
+      button {
+        color: gt.theme-var(text-color-2);
+        text-align: center;
+      }
+    }
+  }
+
+  .newNameModal {
+    .modal-custom-header {
+      display: none !important;
+    }
+  }
+
+  .createConfirmationModal {
+    .modal-body {
+      padding: 0;
+
+      .modal-custom-header {
+        padding: 1rem;
+        background-color: gt.theme-var(text-color-11);
+      }
+
+      .modal-container {
+        padding: 1rem;
+      }
+
+      .create-challenge-confirmation-modal-component {
+        p {
+          margin-bottom: 2rem;
+        }
+
+        button {
+          margin: 0 0.5rem;
+
+          &.publish-btn {
+            color: gt.theme-var(text-color-2);
+          }
+        }
+      }
+    }
+  }
+
+  .successCreateChallengeModal {
+    .modal-body {
+      max-height: 80vh;
+      overflow: auto;
+
+      .success-modal-content {
+        text-align: center;
+
+        a {
+          &.btn-primary {
+            color: gt.theme-var(text-color-2);
+          }
+        }
+
+        .social-media-share {
+          margin-top: 1.5rem;
+
+          .social-media-icons {
+            .facebook-color {
+              color: gt.theme-var(facebook-color);
+            }
+
+            .whatsapp-color {
+              color: gt.theme-var(whatsapp-color);
+            }
+
+            .twitter-color {
+              color: gt.theme-var(twitter-color);
+            }
+
+            .telegram-color {
+              color: gt.theme-var(telegram-color);
+            }
+          }
+
+          .linkShareContainer {
+            .input-group-append {
+              color: gt.theme-var(text-color-1);
+              background-color: gt.theme-var(text-color-4);
+              border-top-left-radius: 0;
+              border-bottom-left-radius: 0;
+            }
+          }
+        }
+
+        .draft-btn-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          @include gm.media-breakpoint-down(md) {
+            flex-wrap: wrap;
+          }
+
+          .btn {
+            margin: 0 0.5rem;
+
+            @include gm.media-breakpoint-down(md) {
+              margin: 0.25rem 0;
+              width: 100%;
+            }
+
+            &.btn-primary {
+              color: gt.theme-var(text-color-2);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @keyframes refresh {
+    0% {
+      background-position: -100%;
+    }
+
+    100% {
+      background-position: 100%;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    @include gm.media-breakpoint-up(md) {
+      width: 0.25rem;
+      height: 0.25rem;
+    }
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: gt.theme-var(skeleton-bg);
+
+    @include gm.media-breakpoint-up(md) {
+      border-radius: 1rem;
+    }
+  }
+}

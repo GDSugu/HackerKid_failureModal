@@ -121,6 +121,8 @@
     height: 6.5rem;
 
     svg {
+      width: 100%;
+
       #gradient {
         .start {
           stop-color: gt.theme-var(videos-progress-gradient-2, null, $thememaplight, $cssvars);

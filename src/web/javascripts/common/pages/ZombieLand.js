@@ -3,7 +3,9 @@ import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import Phaser from 'phaser';
 import md5 from 'crypto-js/md5';
-import { $, pageInit, pathNavigator } from '../framework';
+import {
+  $, pageInit, pathNavigator, timeTrack,
+} from '../framework';
 import { useZombieLand } from '../../../../hooks/pages/zombieLand';
 import Img from '../components/Img';
 import '../../../stylesheets/common/pages/zombieLand/style.scss';
@@ -1295,7 +1297,7 @@ const ZombieLand = () => {
   } = useZombieLand({ isPageMounted, initialize: false });
 
   const { changeRoute } = zlStatic;
-
+  timeTrack('games/zombieLand');
   React.useEffect(() => {
     const locationArray = window.location.href.split('/').filter((el) => el !== '');
     if (locationArray.length > 3) {

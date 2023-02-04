@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { loginCheck, pageInit, $ } from '../framework';
+import {
+  loginCheck, pageInit, $, timeTrack,
+} from '../framework';
 import '../../../stylesheets/common/pages/awards/style.scss';
 import MoreAccountNavBar from '../components/MoreAccountNavBar';
 import SortDropdown from '../components/SortDropdown_new';
@@ -78,6 +80,8 @@ const Awards = () => {
   const isPageMounted = React.useRef(true);
 
   pageInit('awards-container', 'Awards');
+
+  timeTrack('awards');
 
   const [isDesktop, setIsDesktop] = React.useState(window.matchMedia('(min-width: 576px)').matches);
 

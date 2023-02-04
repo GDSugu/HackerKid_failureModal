@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useGetSession } from '../../../../hooks/pages/root';
 import '../../../stylesheets/common/pages/more/style.scss';
 import {
-  $, loginCheck, pageInit, authorize, pathNavigator,
+  $, loginCheck, pageInit, authorize, pathNavigator, timeTrack,
 } from '../framework';
 import Img from '../components/Img';
 import Modal from '../components/Modal';
@@ -434,6 +434,9 @@ const More = () => {
   }
 
   const isPageMounted = React.useRef(true);
+
+  timeTrack('more');
+
   const [isDesktop, setIsDesktop] = React.useState(window.matchMedia('(min-width: 576px)').matches);
   const { session } = useGetSession({ sessionAttr: ['name', 'pointsEarned', 'profileLink'], isPageMounted });
   const {

@@ -108,14 +108,14 @@ const App = () => {
         </Route>
         <Route path='clubs' caseSensitive={true} element={<RouteClub />} />
         <Route path='clubs/:id' element={<RouteClub />} />
-        <Route path='turtle' caseSensitive={true} element={<RouteTurtle />} />
-        <Route path='turtle/:id' element={<RouteTurtle />} />
-        <Route path='turtle/:id/:uniqueString' element={<RouteTurtle />} />
+        <Route path='turtle/*' caseSensitive={true} element={<RouteTurtle />} />
+        {/* <Route path='turtle/:id' element={<RouteTurtle />} />
+        <Route path='turtle/:id/:uniqueString' element={<RouteTurtle />} /> */}
         <Route path='webkata/:conceptId' element={<RouteWebkata />} />
         <Route path='webkata/:conceptId/:id' element={<RouteWebkata />} />
         <Route path='webkata/:conceptId/:id/:uniqueString' element={<RouteWebkata />} />
-            <Route path='codekata' caseSensitive={true} element={<RouteCodekata />} />
-          <Route path='codekata/:id' element={<RouteCodekata />} />
+            <Route path='coding-pirate' caseSensitive={true} element={<RouteCodekata />} />
+          <Route path='coding-pirate/:id' element={<RouteCodekata />} />
           {/* </Route> */}
         {/* </Route> */}
         <Route path='zombieland' caseSensitive={true} element={<RouteZombieLand />} />

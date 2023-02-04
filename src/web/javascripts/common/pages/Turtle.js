@@ -1,8 +1,11 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
+import loadable from '@loadable/component';
 import '../../../stylesheets/common/pages/turtle/style.scss';
-import { $, pageInit, pathNavigator } from '../framework';
+import {
+  $, pageInit, pathNavigator, timeTrack,
+} from '../framework';
 import Img from '../components/Img';
 import GameNavBar from '../components/GameNavBar';
 import Modal from '../components/Modal';
@@ -11,9 +14,13 @@ import {
   copyHandler,
   repositionTurtle, runSkulpt, startTurtle, toggleDebugState, toggleDrawingState,
 } from '../Functions/turtle';
-import useRootPageState from '../../../../hooks/pages/root';
 import GameLevelComponent from '../components/GameLevelComponent';
 import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
+import Loader from '../components/Loader';
+
+const Loading = () => <Loader />;
+const RouteTakeChallenge = loadable(() => import('./TakeChallenge'), { fallback: <Loading /> });
+const RouteCreateChallenge = loadable(() => import('./CreateChallenge'), { fallback: <Loading /> });
 
 const resizeHandler = (nav = 'nav', selector) => {
   try {
@@ -33,7 +40,7 @@ const hideDefaultNavBar = (device, turtleState) => {
   if (device === 'desktop') {
     componentContainer = `.turtle-${turtleState}-container`;
   } else if (device === 'mobile') {
-    componentContainer = `.turtle-mob-${turtleState}-container`;
+    componentContainer = '.game-mob-container';
   }
   // eslint-disable-next-line prefer-arrow-callback
   window.addEventListener('resize', function handler() {
@@ -751,7 +758,13 @@ const TurtleMobComponent = ({
 const TurtleGameComponent = () => {
   pageInit('turtle-main-container', 'Turtle');
 
-  const { state: { device } } = useRootPageState();
+  // const { state: { device } } = useRootPageState();
+  let device = 'desktop';
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    device = 'mobile';
+  } else {
+    device = 'desktop';
+  }
 
   const isPageMounted = React.useRef(true);
   const successModalRef = React.useRef();
@@ -759,7 +772,16 @@ const TurtleGameComponent = () => {
   const levelComponentRef = React.useRef();
   const leaderboardComponentRef = React.useRef();
 
-  const { id } = useParams();
+  // const { id } = useParams();
+  const turtleParams = useParams();
+  const params = turtleParams;
+  let [id = undefined, uniqueString = undefined] = params['*'].split('/');
+  if (id === '') {
+    id = undefined;
+  }
+  if (uniqueString === '') {
+    uniqueString = undefined;
+  }
 
   const {
     state: turtleQuestionState,
@@ -797,6 +819,14 @@ const TurtleGameComponent = () => {
       });
       $('.leaderboard-btn').addClass('active');
     }
+  };
+
+  const reposQnOutContainer = () => {
+    repositionTurtle('#expOutCanvas', '.turtle-qnout-container', 'question');
+  };
+
+  const reposeOutContainer = () => {
+    repositionTurtle('#answerCanvas', '.outputContainer', 'output');
   };
 
   const handleRunCode = () => {
@@ -896,62 +926,38 @@ const TurtleGameComponent = () => {
     // let cleanUp = () => {};
 
     if (status === 'success') {
-      // if (isFirstLoad) {
-      //   isPageMounted.current = true;
-      //   hideDefaultNavBar('game');
-
-      //   $('#question-tab').on('shown.bs.tab', () => {
-      //     repositionTurtle('#expOutCanvas', '.turtle-qnout-container');
-      //   });
-
-      //   $('#output-tab').on('shown.bs.tab', () => {
-      //     repositionTurtle('#answerCanvas', '.outputContainer');
-      //   });
-
-      //   $('#loader').hide();
-
-      //   $('#question-tab').on('shown.bs.tab', () => {
-      //     repositionTurtle('#expOutCanvas', '.turtle-qnout-container');
-      //   });
-
-      //   $('#output-tab').on('shown.bs.tab', () => {
-      //     repositionTurtle('#answerCanvas', '.outputContainer');
-      //   });
-
-      //   isFirstLoad = false;
-      // }
-
-      setTimeout(() => {
-        repositionTurtle('#answerCanvas', '.outputContainer', 'output');
-        repositionTurtle('#expOutCanvas', '.turtle-qnout-container', 'question');
-      }, 500);
-      startTurtle({ response: turtleQuestionState });
+      // setTimeout(() => {
+      //   repositionTurtle('#answerCanvas', '.outputContainer', 'output');
+      //   repositionTurtle('#expOutCanvas', '.turtle-qnout-container', 'question');
+      // }, 500);
+      if (device === 'desktop') {
+        $('#turtle-tab').tab('show');
+      } else if (device === 'mobile') {
+        $('#question-tab').tab('show');
+      }
+      startTurtle({ response: turtleQuestionState, page: 'turtle' });
     }
   }, [memoizedTurtleQuestionState.questionObject]);
 
   React.useEffect(() => {
     isPageMounted.current = true;
-    hideDefaultNavBar('game', 'main', isPageMounted);
+    hideDefaultNavBar(device, 'main');
 
     // if (status === 'success') {
     //   $('#loader').hide();
     //   startTurtle({ response: turtleQuestionState });
     // }
-
-    $('#question-tab').on('shown.bs.tab', () => {
-      repositionTurtle('#expOutCanvas', '.turtle-qnout-container', 'question');
-    });
-
-    $('#output-tab').on('shown.bs.tab', () => {
-      repositionTurtle('#answerCanvas', '.outputContainer', 'output');
-    });
-
-    return () => {
-      document.querySelector('nav:first-child').style.display = 'block';
-      isPageMounted.current = false;
-      successModalRef?.current?.hide();
-    };
+    $('#question-tab').on('shown.bs.tab', reposQnOutContainer);
+    $('#output-tab').on('shown.bs.tab', reposeOutContainer);
   }, [status]);
+
+  React.useEffect(() => () => {
+    document.querySelector('nav:first-child').style.display = 'block';
+    isPageMounted.current = false;
+    successModalRef?.current?.hide();
+    $('#question-tab').off('shown.bs.tab', reposQnOutContainer);
+    $('#output-tab').off('shown.bs.tab', reposeOutContainer);
+  }, []);
 
   return <>
     <GameNavBar
@@ -1056,10 +1062,35 @@ const Turtle = () => {
   const [turtleRoute, setTurtleRoute] = React.useState('turtleHome');
   const changeRoute = (route) => setTurtleRoute(route);
 
+  timeTrack('games/turtle');
+
+  const turtleParams = useParams();
+  const params = turtleParams;
+  let [id = undefined, uniqueString = undefined] = params['*'].split('/');
+  if (id === '') {
+    id = undefined;
+  }
+  if (uniqueString === '') {
+    uniqueString = undefined;
+  }
+
   React.useEffect(() => {
-    const locationArray = window.location.href.split('/').filter((el) => el !== '');
-    if (locationArray.length > 3) {
-      changeRoute('turtleGame');
+    // const locationArray = window.location.pathname.split('/').filter((el) => el !== '');
+    // if (locationArray.length > 1) {
+    //   changeRoute('turtleGame');
+    // }
+    if (id !== undefined) {
+      if (id === 'challenges') {
+        if (uniqueString === undefined) {
+          window.location.pathname = '/challenges';
+        } else if (uniqueString === 'create') {
+          changeRoute('turtleCreateChallenge');
+        } else {
+          changeRoute('turtleTakeChallenges');
+        }
+      } else {
+        changeRoute('turtleGame');
+      }
     }
   }, []);
 
@@ -1069,6 +1100,12 @@ const Turtle = () => {
     }
     {
       turtleRoute === 'turtleGame' && <TurtleGameComponent />
+    }
+    {
+      turtleRoute === 'turtleTakeChallenges' && <RouteTakeChallenge />
+    }
+    {
+      turtleRoute === 'turtleCreateChallenge' && <RouteCreateChallenge />
     }
   </>;
 };
