@@ -1062,7 +1062,7 @@
     }
 
     .modal-custom-header {
-      background-color: gt.theme-var(club-nav-bg, null, $thememaplight, $cssvars);
+      background-color: gt.theme-var(text-color-11);
       padding: 0.75rem;
 
       .modal-title {

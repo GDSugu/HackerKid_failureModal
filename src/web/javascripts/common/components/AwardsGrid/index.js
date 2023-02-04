@@ -23,6 +23,11 @@ const AwardsGrid = ({
                 : award.repeatingAwards[0].awardImage)
               : award.awardImage
             }
+            awardName={defaultStructure
+              ? (award.currentAward
+                ? award.currentAward.awardName
+                : award.repeatingAwards[0].awardName)
+              : award.awardName}
             interactable={true}
             className={`pointer-cursor award-card-${defaultStructure
               ? (award.currentAward
@@ -30,7 +35,6 @@ const AwardsGrid = ({
                 : award.repeatingAwards[0].awardId)
               : award.awardId}`} />
           <AwardInfo
-            isDesktop={isDesktop}
             className={`award-info-container-${defaultStructure
               ? (award.currentAward
                 ? award.currentAward.awardId

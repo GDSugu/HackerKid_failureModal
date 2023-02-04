@@ -4,6 +4,90 @@ import API from '../../../../env';
 import post from '../../common/framework';
 import { AuthContext } from '../root';
 
+const useAwardsByGame = ({ isPageMounted, initializeData = true, game }) => {
+  const [awardsByGameState, setAwardsByGameState] = useState({
+    awards: false,
+    status: false,
+  });
+  const authContext = useContext(AuthContext);
+
+  const setState = (args) => {
+    setAwardsByGameState((prevState) => ({
+      ...prevState,
+      ...args,
+    }));
+    authContext.setAuthState({
+      appData: {
+        awardsByGameHook: {
+          ...awardsByGameState,
+          ...args,
+        },
+      },
+    });
+  };
+
+  const getAwardsByGame = ({
+    cached = true,
+  }) => {
+    let result;
+    if (cached && authContext.appData.awardsByGame) {
+      const { awardsByGameHook } = authContext.appData;
+      setAwardsByGameState({
+        ...awardsByGameHook,
+        status: 'success',
+      });
+    } else {
+      const payload = {
+        type: 'getAwardsByGame',
+        s3Prefix: API.S3PREFIX,
+        game,
+      };
+      result = post(payload, 'awards/').then((res) => {
+        if (isPageMounted.current) {
+          const parsedResponse = JSON.parse(res);
+          if (parsedResponse.status === 'success') {
+            const { awards: allAwardsByGame } = parsedResponse;
+            const newState = {
+              status: 'success',
+              awards: allAwardsByGame,
+            };
+            setAwardsByGameState(newState);
+            authContext.setAuthState({
+              appData: {
+                awardsByGameHook: {
+                  ...newState,
+                  status: 'success',
+                },
+              },
+            });
+          } else {
+            setAwardsByGameState((prevState) => ({
+              ...prevState,
+              status: 'error',
+              response: parsedResponse,
+            }));
+          }
+        }
+      }).catch((err) => {
+        console.error(err);
+      });
+    }
+    return result;
+  };
+
+  useEffect(() => {
+    if (initializeData) {
+      getAwardsByGame({ cached: false });
+    }
+  }, []);
+  return {
+    awardsByGameState,
+    setState,
+    getAwardsByGame,
+    setAwardsByGameState,
+  };
+};
+
 const useAwards = ({ isPageMounted, initializeData = true }) => {
   const [awardsState, setAwardsState] = useState({
     status: false,
@@ -49,7 +133,7 @@ const useAwards = ({ isPageMounted, initializeData = true }) => {
             const timeStampDMY = moment.unix(repeatingAward.lastAwardedAt).format('DD/MM/YYYY');
             const nowDMY = moment().format('DD/MM/YYYY');
 
-            if (nowDMY === timeStampDMY) {
+            if (nowDMY === timeStampDMY && newObj.current) {
               today.push({ currentAward: newObj.currentAward, repeatingAwards: [] });
 
               newObj.currentAward = false;
@@ -150,4 +234,5 @@ export default null;
 
 export {
   useAwards,
+  useAwardsByGame,
 };

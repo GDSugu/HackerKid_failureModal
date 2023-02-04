@@ -124,7 +124,6 @@ const Collapse = ({
     //   toValue: finalValue,
     //   useNativeDriver: false,
     // }).start();
-    console.log('collapseState.animatedValue bf', collapseState.isExpanded);
     setCollapseState((prevState) => ({
       ...prevState,
       // isExpanded: !prevState.isExpanded,

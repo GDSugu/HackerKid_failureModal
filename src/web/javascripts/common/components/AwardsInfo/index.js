@@ -1,28 +1,22 @@
-import { createPopper } from '@popperjs/core';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import useToolTipPopup from '../../../../../hooks/common/ToolTipPopup';
 import AwardsProgressBar from '../AwardsProgressBar';
 
 const AwardInfo = ({
-  isDesktop,
   currentAwardDetails = false,
   repeatingAwards = false,
   className = '',
   onClick = () => { },
+  showAwardDescription = true,
 }) => {
-  useEffect(() => {
-    if (isDesktop) {
-      const awardId = currentAwardDetails
-        ? currentAwardDetails.awardId : repeatingAwards[0].awardId;
+  const awardId = currentAwardDetails
+    ? currentAwardDetails.awardId : repeatingAwards[0].awardId;
 
-      const awardCard = document.querySelector(`.award-card-${awardId}`);
-      const awardInfo = document.querySelector(`.award-info-container-${awardId}`);
+  const awardCard = document.querySelector(`.award-card-${awardId}`);
+  const awardInfo = document.querySelector(`.award-info-container-${awardId}`);
 
-      createPopper(awardCard, awardInfo, {
-        placement: 'bottom-start',
-      });
-    }
-  }, []);
+  useToolTipPopup(awardCard, awardInfo);
 
   return <div className={`award-info-container ${className}`}>
     {
@@ -37,8 +31,15 @@ const AwardInfo = ({
             }} />
           </h6>
           {
+            showAwardDescription && <small className='award-subtitle overline'>
+              <FormattedMessage defaultMessage={'{awardDescription}'} description='award description' values={{
+                awardDescription: currentAwardDetails.awardDescription,
+              }} />
+            </small>
+          }
+          {
             currentAwardDetails.progressableAward && currentAwardDetails.progressDetails.nextAwardIn
-            && <small className='award-subtitle overline'>
+            && <small className='award-subtitle overline next-achievement-subtitle'>
               <FormattedMessage defaultMessage={'Next Achievement: {nextAchievementIn} {unit}'} description='award subtitle' values={{
                 nextAchievementIn: currentAwardDetails.progressDetails.nextAwardIn,
                 unit: currentAwardDetails.progressDetails.nextAwardIn > 1 ? `${currentAwardDetails.progressDetails.unit}s`
@@ -64,6 +65,13 @@ const AwardInfo = ({
               awardCount: award.awardCount ? `(x${award.awardCount})` : '',
             }} />
           </h6>
+          {
+            showAwardDescription && <small className='award-subtitle overline'>
+              <FormattedMessage defaultMessage={'{awardDescription}'} description='award description' values={{
+                awardDescription: award.awardDescription,
+              }} />
+            </small>
+          }
           <AwardsProgressBar progressDetailsObj={award.progressDetails} />
         </div>
       </div>)

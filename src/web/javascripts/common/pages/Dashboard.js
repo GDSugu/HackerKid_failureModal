@@ -1,7 +1,9 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { $, pageInit, timeTrack } from '../framework';
+import {
+  $, pageInit, secondsToMins, timeTrack,
+} from '../framework';
 import Img from '../components/Img';
 // import SwiperComponent from '../components/SwiperComponent';
 import { useDashboard } from '../../../../hooks/pages/dashboard';
@@ -262,7 +264,7 @@ const ProfileContainer = ({ dashboardUserData, isDesktop, session }) => <>
 </>;
 
 const GameContainer = ({
-  dashboardUserData, overAllQuestionsCount, totalPointsEarned, validSubmissionsCount,
+  dashboardUserData, overAllQuestionsCount, totalPointsEarned, validSubmissionsCount, timeSpent,
 }) => <>
     <div className="dashboard-games-container dashboard-body-block">
       <div className="games-heading-container">
@@ -291,41 +293,41 @@ const GameContainer = ({
                           d="M50 10
                             a 40 40 0 0 1 0 80
                             a 40 40 0 0 1 0 -80">
-                        </path>
-                        <g transform="translate(50,45)">
-                          <text id="yourScoreCount" x="0" y="0" alignmentBaseline="middle" textAnchor="middle" dy="1" fontSize="14">
-                            <tspan>{validSubmissionsCount}</tspan>
-                            <tspan>/{overAllQuestionsCount}</tspan>
-                          </text>
-                          <text id="yourScore" x="0" y="15" alignmentBaseline="middle" textAnchor="middle" dy="1" fontSize="10">
-                            <FormattedMessage
-                              defaultMessage={'completed'}
-                              description={'completed'}
-                            />
-                          </text>
-                        </g>
-                      </svg>
+                    </path>
+                    <g transform="translate(50,45)">
+                      <text id="yourScoreCount" x="0" y="0" alignmentBaseline="middle" textAnchor="middle" dy="1" fontSize="14">
+                        <tspan>{validSubmissionsCount}</tspan>
+                        <tspan>/{overAllQuestionsCount}</tspan>
+                      </text>
+                      <text id="yourScore" x="0" y="15" alignmentBaseline="middle" textAnchor="middle" dy="1" fontSize="10">
+                        <FormattedMessage
+                          defaultMessage={'completed'}
+                          description={'completed'}
+                        />
+                      </text>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+              <div className="col-6 px-0">
+                <div className="game-progress-data">
+                  <div className="game-data-container game-coins-data">
+                    <div className="d-flex align-items-center">
+                      <div className="game-progress-icon game-coins">
+                        <Img src='common/hkcoin.png' />
+                      </div>
+                      <div className="progress-coins">
+                        <p className="progress-sub-header">
+                          <FormattedMessage
+                            defaultMessage={'Coins Earned:'}
+                            description={'coins earned'}
+                          />
+                        </p>
+                        <p className="progress-data">{totalPointsEarned || 0}</p>
+                      </div>
                     </div>
                   </div>
-                  <div className="col-6 px-0">
-                    <div className="game-progress-data">
-                      <div className="game-data-container game-coins-data">
-                        <div className="d-flex align-items-center">
-                          <div className="game-progress-icon game-coins">
-                            <Img src='common/hkcoin.png' />
-                          </div>
-                          <div className="progress-coins">
-                            <p className="progress-sub-header">
-                              <FormattedMessage
-                                defaultMessage={'Coins Earned:'}
-                                description={'coins earned'}
-                              />
-                            </p>
-                            <p className="progress-data">{totalPointsEarned || 0}</p>
-                          </div>
-                        </div>
-                      </div>
-                      {/* <div className="game-data-container game-time-data">
+                  <div className="game-data-container game-time-data">
                     <div className="d-flex align-items-center">
                       <div className="game-progress-icon game-time">
                         <Img src='common/eva_clock-fill.png' />
@@ -337,16 +339,16 @@ const GameContainer = ({
                             description={'time spent heading text'}
                           />
                         </p>
-                        <p className="progress-data">{'14 Mins'}</p>
+                        <p className="progress-data">{secondsToMins(timeSpent)}</p>
                       </div>
-                    </div>
-                  </div> */}
                     </div>
                   </div>
                 </div>
-              </>
-            }
-            {
+              </div>
+            </div>
+          </>
+          }
+          {
               !dashboardUserData
               && <>
                 <div className="skeleton">
@@ -379,32 +381,32 @@ const GameContainer = ({
                     <Img src='dashboard/dashboard-webkata-css.png' />
                   </Link>
                 </div> */}
-                  <div className="col-3">
-                    <Link className="game-item" to='/codekata'>
-                      <Img src='dashboard/dashboard-codePirate.png' />
-                    </Link>
-                  </div>
+                <div className="col-3">
+                  <Link className="game-item" to='/coding-pirate'>
+                    <Img src='dashboard/dashboard-codePirate.png' />
+                  </Link>
                 </div>
               </div>
-              <div className="game-btn-block game-progress-block mt-md-1">
-                <Link to='/games' className='btn btn-block'>
-                  <div className="d-flex align-items-center justify-content-between">
-                    <p>
-                      <FormattedMessage
-                        defaultMessage={'Continue Playing'}
-                        description={'continue playing'}
-                      />
-                    </p>
-                    <i className="fa fa-angle-right" aria-hidden="true"></i>
-                  </div>
-                </Link>
-              </div>
+            </div>
+            <div className="game-btn-block game-progress-block mt-md-1">
+              <Link to='/games' className='btn btn-block'>
+                <div className="d-flex align-items-center justify-content-between">
+                  <p>
+                    <FormattedMessage
+                      defaultMessage={'Continue Playing'}
+                      description={'continue playing'}
+                    />
+                  </p>
+                  <i className="fa fa-angle-right" aria-hidden="true"></i>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </>;
+  </div>
+</>;
 
 // const ChallengeSwiperSlide = ({ data }) => <>
 //   <Link className='challenge-item' to={data.actionUrl}>
@@ -742,6 +744,7 @@ const Dashboard = () => {
 
   const {
     leaderboardData,
+    gameProgress,
     status: leaderboardStatus,
     userData: leaderBoardUserData,
   } = leaderBoardState;
@@ -820,7 +823,8 @@ const Dashboard = () => {
             dashboardUserData={dashboardUserData}
             overAllQuestionsCount={gameData.totalGames}
             totalPointsEarned={gameData.totalPointsEarned}
-            validSubmissionsCount={gameData.gameProgress} />
+            validSubmissionsCount={gameData.gameProgress}
+            timeSpent={gameProgress.totalTimeSpent} />
         </div>
         {
           isDesktop
