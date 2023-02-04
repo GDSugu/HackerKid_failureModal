@@ -104,9 +104,9 @@ html {
   width: auto !important;
 }
 
-.course-card-container {
-  padding: 0 9.5rem;
-}
+// .course-card-container {
+  // padding: 0 9.5rem;
+// }
 
 .circular-progress-container {
   padding: 1.5rem;
@@ -416,7 +416,8 @@ html {
 .progress-card-cont {
   display: flex;
   justify-content: space-between;
-  margin: 1.5rem 9.5rem;
+  // margin: 1.5rem 9.5rem;
+  margin: 1rem 0;
   border-radius: 12px;
   background: linear-gradient(to left, rgba(255, 255, 255, 1), #fafafa);
 }

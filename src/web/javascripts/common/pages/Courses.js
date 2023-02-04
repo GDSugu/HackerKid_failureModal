@@ -340,7 +340,7 @@ const Courses = () => {
     if (previousVideoData) {
       const videoData = JSON.parse(previousVideoData);
       timeActivity({ videoData });
-      localStorage.clearItem('videoData');
+      localStorage.removeItem('videoData');
     }
   }, []);
 
@@ -378,67 +378,69 @@ const Courses = () => {
   }
   return (
     <>
-      {isDesktop && overallProgress && progress.length > 0 && (
-        <CourseDetailsCard
-          overallProgress={overallProgress}
-          progress={progress[0]}
-        />
-      )}
-      {!isDesktop && (
-        <TopContainer
-          onChangeFilter={onChangeFilter}
-          filterSet={filter}
-          searchOnChange={onSearch}
-          pressMoreInfo={onPressMoreInfo}
-        />
-      )}
-      {continueWatching && continueWatching.length > 0 && (
-        <div className="w-100 mt-4">
-          <div className="course-card-container">
-            <h5>
-            <FormattedMessage
-      defaultMessage={'Continue Watching'}
-      description={'Continue Watching'}/></h5>
-            <SwiperComponent
-              data={continueWatching}
-              SlideComponent={CourseCard}
-              swiperModules={{
-                navigation: true,
-              }}
-              swiperProps={{
-                spaceBetween: 16,
-                slidesPerView: 'auto',
-                className: 'course-swiper',
-                grabCursor: true,
-                lazy: true,
-                navigation: true,
-              }}
-            />
+      <div className="col-12 col-md-11 col-xl-10 mx-auto">
+        {isDesktop && overallProgress && progress.length > 0 && (
+          <CourseDetailsCard
+            overallProgress={overallProgress}
+            progress={progress[0]}
+          />
+        )}
+        {!isDesktop && (
+          <TopContainer
+            onChangeFilter={onChangeFilter}
+            filterSet={filter}
+            searchOnChange={onSearch}
+            pressMoreInfo={onPressMoreInfo}
+          />
+        )}
+        {continueWatching && continueWatching.length > 0 && (
+          <div className="w-100 mt-4">
+            <div className="course-card-container">
+              <h5>
+              <FormattedMessage
+        defaultMessage={'Continue Watching'}
+        description={'Continue Watching'}/></h5>
+              <SwiperComponent
+                data={continueWatching}
+                SlideComponent={CourseCard}
+                swiperModules={{
+                  navigation: true,
+                }}
+                swiperProps={{
+                  spaceBetween: 16,
+                  slidesPerView: 'auto',
+                  className: 'course-swiper',
+                  grabCursor: true,
+                  lazy: true,
+                  navigation: true,
+                }}
+              />
+            </div>
           </div>
-        </div>
-      )}
-      {filteredData
-        ? filteredData.map((eachModule, index) => (
-            <CourseModule
-              key={index}
-              items={eachModule}
-              isDesktop={isDesktop}
-            />
-        ))
-        : moduleData
-          && moduleData.map((eachModule, index) => (
-            <CourseModule
-              key={index}
-              items={eachModule}
-              isDesktop={isDesktop}
-            />
-          ))}
-          {!isDesktop && overallProgress && progress.length > 0 && <BottomSheet
-          id={'course-progress-modal'}>
-            <CourseDetailsCardMobile
-      progress={progress}
-      overallProgress={overallProgress}/>
-            </BottomSheet>}
+        )}
+        {filteredData
+          ? filteredData.map((eachModule, index) => (
+              <CourseModule
+                key={index}
+                items={eachModule}
+                isDesktop={isDesktop}
+              />
+          ))
+          : moduleData
+            && moduleData.map((eachModule, index) => (
+              <CourseModule
+                key={index}
+                items={eachModule}
+                isDesktop={isDesktop}
+              />
+            ))}
+            {!isDesktop && overallProgress && progress.length > 0 && <BottomSheet
+            id={'course-progress-modal'}>
+              <CourseDetailsCardMobile
+        progress={progress}
+        overallProgress={overallProgress}/>
+              </BottomSheet>}
+      </div>
     </>
   );
 };
