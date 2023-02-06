@@ -56,15 +56,15 @@ const AwardsProgressBar = ({
     <div className='progress' style={{ width: progressDetailsObj ? `${(progressDetailsObj.progress / progressDetailsObj.total) * 100}%` : '100%' }
     }>
       {
-        progressDetailsObj && progressDetailsObj.progress
+        progressDetailsObj && !!progressDetailsObj.progress
         && <div className='progress-textual-indicator'>
           <span className='progress-as-text'>
             <FormattedMessage
               defaultMessage={'{progress}{progressSuffix} {unit}'}
               description='progress textual representation'
               values={{
-                progress: progressDetailsObj.progress,
-                progressSuffix: getProgressSuffix(progressDetailsObj.progress,
+                progress: Math.ceil(progressDetailsObj.progress),
+                progressSuffix: getProgressSuffix(Math.ceil(progressDetailsObj.progress),
                   progressDetailsObj.unit),
                 unit: getFormattedUnit(progressDetailsObj.progress, progressDetailsObj.unit),
               }}

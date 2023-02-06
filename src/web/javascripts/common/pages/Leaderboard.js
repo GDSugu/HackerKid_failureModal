@@ -1,39 +1,111 @@
 import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { pageInit } from '../framework';
+import { pageInit, $, timeTrack } from '../framework';
 import '../../../stylesheets/common/pages/leaderboard/style.scss';
 import { useLeaderBoard } from '../../../../hooks/pages/leaderboard';
 import Img from '../components/Img';
 import Modal from '../components/Modal';
+
+const pageSelector = (page, paginationDetails) => {
+  $('.paginate_numbers').removeClass('current');
+  const pageShowArray = [0];
+  // eslint-disable-next-line max-len
+  const totalPage = Math.ceil(paginationDetails?.overallCount / paginationDetails?.countPerPage);
+  pageShowArray.push(totalPage - 1);
+  $('.ellipse').remove();
+
+  const alterPagination = (selector) => {
+    $(`${selector} .paginate_numbers`).each((index, elem) => {
+      if (page - 1 === index) {
+        $(elem).html(page);
+        $(elem).addClass('current')
+          .removeClass('d-none');
+      } else if (page - 2 === index) {
+        $(elem).removeClass('d-none');
+        if (pageShowArray.indexOf(index) === -1) {
+          $(elem).before('<span class="ellipse">...</span>');
+        }
+      } else if (page === index) {
+        $(elem).removeClass('d-none');
+        if (pageShowArray.indexOf(index) === -1) {
+          $(elem).after('<span class="ellipse">...</span>');
+        }
+      } else if (pageShowArray.indexOf(index) === -1) {
+        $(elem).addClass('d-none');
+      }
+    });
+
+    if (page === 1) {
+      $(`${selector} .leaderboard-previous`).addClass('disabled');
+    } else {
+      $(`${selector} .leaderboard-previous`).removeClass('disabled');
+    }
+    if (page === totalPage) {
+      $(`${selector} .leaderboard-next`).addClass('disabled');
+    } else {
+      $(`${selector} .leaderboard-next`).removeClass('disabled');
+    }
+  };
+
+  alterPagination('.pagination-container');
+};
 
 const Leaderboard = () => {
   pageInit('leaderboard-container', 'Leaderboard');
 
   const isPageMounted = React.useRef(true);
 
+  timeTrack('leaderboard');
+
   const { state, setLeaderBoardData, getLeaderBoardData } = useLeaderBoard({ isPageMounted });
   const {
-    status, leaderboardData, userData, paginationDetails,
+    leaderboardData, userData, paginationDetails,
   } = state;
-
-  let disablePrevBtn;
-  let disableNextBtn;
-
-  if (status === 'success') {
-    disablePrevBtn = paginationDetails.page <= 1;
-    disableNextBtn = Math.ceil(paginationDetails.overallCount
-      / paginationDetails.countPerPage) === paginationDetails.page;
-  }
-
   // methods
   const previousBtnClickHandler = () => {
+    $('#loader').show();
     getLeaderBoardData({ pageNumber: paginationDetails.page - 1 })
-      .then(() => window.scrollTo({ top: 0 }));
+      .then(() => {
+        $('#loader').hide();
+        window.scrollTo({ top: 0 });
+      });
   };
 
   const nextBtnClickHandler = () => {
+    $('#loader').show();
     getLeaderBoardData({ pageNumber: paginationDetails.page + 1 })
-      .then(() => window.scrollTo({ top: 0 }));
+      .then(() => {
+        $('#loader').hide();
+        window.scrollTo({ top: 0 });
+      });
+  };
+
+  const handleLeaderboardPage = (page) => {
+    getLeaderBoardData({ pageNumber: page });
+  };
+
+  const LeaderboardPaginationComponent = ({ handlePagination }) => {
+    const totalPage = Math.ceil(paginationDetails?.overallCount / paginationDetails?.countPerPage);
+    let paginationFlag = false;
+    if (totalPage > 5) {
+      paginationFlag = true;
+    }
+
+    return <>
+      {
+        Array(totalPage).fill(0).map((_, index) => {
+          const idx = index + 1;
+          if (paginationFlag) {
+            const pageToShow = (paginationDetails?.page === idx
+              || paginationDetails?.page === idx - 1
+              || paginationDetails?.page === idx + 1
+              || idx === totalPage);
+            return <button key={index} className={`btn paginate_button paginate_numbers ${pageToShow ? '' : 'd-none'} ${idx === paginationDetails.page ? 'current' : ''}`} aria-controls={'leaderboard'} tabIndex="0" onClick={() => handlePagination(idx)} >{idx}</button>;
+          }
+          return <button key={index} className={`btn paginate_button paginate_numbers ${idx === paginationDetails.page ? 'current' : ''}`} aria-controls={'leaderboard'} tabIndex="0" onClick={() => handlePagination(idx)} >{idx}</button>;
+        })
+      }
+    </>;
   };
 
   const loggedInUserInCurrentPage = (currentPage, userUniqueUrl) => {
@@ -56,6 +128,7 @@ const Leaderboard = () => {
         leaderboardData: [...leaderboardData],
       }));
     }
+    pageSelector(paginationDetails.page, paginationDetails);
   }, [state]);
 
   return (
@@ -149,19 +222,23 @@ const Leaderboard = () => {
       </tbody>
     </table>
     <footer>
-      <div className='paginator d-flex justify-content-between mb-5'>
-          <button className='previous-page-btn btn btn-primary'
-            disabled={disablePrevBtn}
-            onClick={previousBtnClickHandler}>
-          <FormattedMessage defaultMessage={'Previous'} description='previous page button'/>
-        </button>
-        <button
-          className='next-page-btn btn btn-primary'
-            disabled={disableNextBtn}
-          onClick={nextBtnClickHandler}>
-          <FormattedMessage defaultMessage={'Next'} description='next page button'/>
-        </button>
-      </div>
+      <div className="pagination-container col-xl-5">
+              <div className="d-flex align-items-center justify-content-between">
+                <button className="btn pagination-navigation-btn leaderboard-previous" onClick={() => previousBtnClickHandler('previous')}>
+                  <i className="fas fa-angle-left"></i>
+                </button>
+                <div className="pagination-block">
+                  {
+                    state.status === 'success' && state.paginationDetails
+                    && <LeaderboardPaginationComponent
+                    handlePagination={handleLeaderboardPage}/>
+                  }
+                </div>
+                <button className="btn pagination-navigation-btn leaderboard-next" onClick={() => nextBtnClickHandler('next')}>
+                  <i className="fas fa-angle-right"></i>
+                </button>
+              </div>
+          </div>
     </footer>
     {
       (state.status === 'access_denied' || !state.status) && <Modal
@@ -189,6 +266,7 @@ const Leaderboard = () => {
         </button>
       </Modal>
     }
+    <div id="loader"></div>
     </div>
   );
 };

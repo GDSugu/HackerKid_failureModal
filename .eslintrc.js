@@ -12,6 +12,7 @@ module.exports = {
     __webpack_hash__: true,
     gtag: true,
     fbq: true,
+    fetch: true,
   },
   parser: '@babel/eslint-parser',
   plugins: [
@@ -20,6 +21,6 @@ module.exports = {
   rules: {
     'formatjs/no-offset': 'error',
     'react/prop-types': 'off',
-    'linebreak-style': ['error', 'windows'],
+    // 'linebreak-style': ['error', 'windows'],
   }
 };

@@ -1053,6 +1053,10 @@
       #codeEditor {
         border-bottom-left-radius: 0.75rem;
         border-bottom-right-radius: 0.75rem;
+
+        .ace_mobile-menu {
+          display: none;
+        }
       }
     }
 
@@ -1156,6 +1160,12 @@
 
     .editor-container-mob {
       flex: 1;
+
+      #codeEditor {
+        .ace_mobile-menu {
+          display: none;
+        }
+      }
     }
   }
 

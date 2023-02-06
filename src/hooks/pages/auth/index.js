@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import post, { logout, setUserSession } from '../../common/framework';
 import getPlatform from '../../common/utlis';
 import { AuthContext } from '../root';
+import API from '../../../../env';
 
 const useLoginMethod = () => {
   const [stateObj, setState] = useState({
@@ -39,6 +40,7 @@ const useLoginMethod = () => {
       countryCode,
       email,
       useEmail,
+      s3Prefix: API.S3PREFIX,
     }, 'login/')
       .then((response) => {
         const data = JSON.parse(response);

@@ -14,8 +14,8 @@ const Modal = ({
   modalCloseBtn = true,
   backdrop = true,
   // modalTitle = '',
-  onHidden = () => {},
-  onShown = () => {},
+  onHidden = () => { },
+  onShown = () => { },
   modalVisible,
 }, ref) => {
   const modalRef = React.useRef(null);
@@ -27,6 +27,7 @@ const Modal = ({
       $(`#modal${modalClassSelector}`).modal('show');
     },
     showWithRestriction: () => {
+      $(`#modal${modalClassSelector}`).data('bs.modal', null);
       $(`#modal${modalClassSelector}`).modal({
         backdrop: 'static',
         keyboard: false,
@@ -78,13 +79,13 @@ const Modal = ({
           <div className="modal-body">
             <div className={`d-flex flex-column justify-content-between ${modalbodyClass}`}>
               <div className="d-flex align-items-center justify-content-between modal-custom-header">
-                { header }
+                {header}
                 {modalCloseBtn && <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => $(`#modal${modalClassSelector}`).modal('hide')}>
                   <span aria-hidden="true">&times;</span>
                 </button>}
               </div>
               <div className={`modal-container ${modalContainerClass}`}>
-                { children }
+                {children}
               </div>
             </div>
           </div>

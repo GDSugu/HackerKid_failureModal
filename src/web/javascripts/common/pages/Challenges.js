@@ -4,26 +4,111 @@ import React, {
 import { Link } from 'react-router-dom';
 import '../../../stylesheets/common/pages/challenges/style.scss';
 import { FormattedMessage } from 'react-intl';
-import { loginCheck, pageInit } from '../framework';
+import autocrop from 'autocrop-worker';
+import { loginCheck, pageInit, timeTrack } from '../framework';
 import Img from '../components/Img';
 import SwiperComponent from '../components/SwiperComponent';
 import { useGetAttemptedChallenges, useGetChallenges, useGetMyChallenges } from '../../../../hooks/pages/challenges';
 import Modal from '../components/Modal';
 import { useGetSession } from '../../../../hooks/pages/root';
 
+const compareProps = (prev, next) => {
+  console.log(prev, next);
+  let isEqual = true;
+  Object.keys(prev).forEach((key) => {
+    if (key === 'avatar' || key === 'navigation' || key === 'style') {
+      isEqual = isEqual && true;
+    } else if (typeof prev[key] === 'function') {
+      // use memoized function for passing as props
+      isEqual = isEqual && true;
+    } else if (key.toLowerCase().includes('ref')) {
+      isEqual = true;
+    } else {
+      isEqual = isEqual && JSON.stringify(prev[key]) === JSON.stringify(next[key]);
+    }
+  });
+  return isEqual;
+};
+
+const cropImage = (element) => {
+  // eslint-disable-next-line camelcase
+  autocrop(element, null, { version: __webpack_hash__ });
+};
+
+const NewlyTrendingChallenge = ({ challenge }) => (
+  <>
+    {
+      challenge && <Link
+        to={challenge.actionUrl}
+        className='newly-trending-challenge-container hero-nav-card text-decoration-none'>
+        <h5 className='caption-bold text-center title'>
+          <FormattedMessage defaultMessage={'Newly Trending'} description='heading' />
+        </h5>
+        <div className="challenge-img">
+          {/* <img src={challenge.imgPath} alt={challenge.challengeName} /> */}
+          <Img
+            alt={challenge.challengeName}
+            useSource={true}
+            local={false}
+            src={challenge.imgPath}
+            fallback={'../../../../../images/games/code.svg'}
+          />
+        </div>
+      </Link>
+    }
+    {
+      !challenge && <div className='newly-trending-challenge-skeleton'></div>
+    }
+  </>
+);
+
+const ChallengesActivity = ({ myChallenges }) => <>
+  {
+    myChallenges && <div className='challenges-activity hero-nav-card'>
+      {
+        myChallenges[0] && <div className='last-challenge'>
+          <img className='icon' src='../../../../images/challenges/joystick-icon.svg' alt='joystick-icon' />
+          <span className='challenge-name caption'>
+            <FormattedMessage
+              defaultMessage={'Created "{lastCreatedChallengeName}" challenge'}
+              description='last created challenge log'
+              values={{ lastCreatedChallengeName: myChallenges[0].challengeName }}
+            />
+          </span>
+          <Link to={myChallenges[0].actionUrl} className='open-challenge-btn'>
+            <img className='icon' src='../../../../images/challenges/open-challenge-icon.svg' alt='open-challenge-icon' />
+          </Link>
+        </div>
+      }
+      {
+        !myChallenges[0]
+        && <div className='last-challenge'>
+          <span className='caption'>
+            <FormattedMessage
+              defaultMessage={'No challenges published yet !'}
+              description='last created challenge log' />
+          </span>
+        </div>
+      }
+      <Link to={'/your-challenges'} className='view-your-challenges-text-btn caption-bold'>
+        <FormattedMessage defaultMessage={'View your challenges'} description='view your challenges button text' />
+      </Link>
+    </div>
+  }
+  {
+    !myChallenges && <div className='challenges-activity-skeleton'>
+    </div>
+  }
+</>;
+
 const HeroContainer = ({
-  dashboardUserData,
   isDesktop,
   session,
-  NewlyTrendingChallengeComponent,
-  ChallengesActivityComponent,
+  trendingChallenge,
+  myChallenges,
 }) => {
-  let profileImg = '../../../../images/profile/default_user.png';
-  if (session && dashboardUserData) {
-    profileImg = (session.profileLink ? session.profileLink : dashboardUserData.profileImage)
-      .toString()
-      .replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`);
-  }
+  let profileImg = session.profileLink ? session.profileLink : '../../../../images/profile/default_user.png';
+  profileImg = profileImg.toString().replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`);
 
   return <>
     {
@@ -52,9 +137,9 @@ const HeroContainer = ({
         </div>
         <div className="hero-card-nav col-6 col-sm-8">
           <div className='hero-nav-cards-container'>
-            <NewlyTrendingChallengeComponent />
+            <NewlyTrendingChallenge challenge={trendingChallenge}/>
             <div className='last-challenge-with-create-challenge-btn'>
-              <ChallengesActivityComponent />
+              <ChallengesActivity myChallenges={myChallenges}/>
               <Link to={'/turtle/challanges/create/new'} className='btn btn-primary btn-block create-challenge-btn'>
                 <FormattedMessage defaultMessage={'Create a Challenge'} description='create a challenge button text' />
                 <i className='fa fa-chevron-right' />
@@ -86,7 +171,7 @@ const HeroContainer = ({
             </div>
           </div>
         }
-        <Link to={'#'} className='btn btn-primary btn-block create-challenge-btn'>
+        <Link to={'/turtle/challenges/create/new'} className='btn btn-primary btn-block create-challenge-btn'>
           <FormattedMessage defaultMessage={'Create a Challenge'} description='create a challenge button text' />
           <i className='fa fa-chevron-right' />
         </Link>
@@ -95,10 +180,18 @@ const HeroContainer = ({
   </>;
 };
 
-const ChallengeSwiperSlide = ({ data, showChallengeAuthorName }) => <>
+const ChallengeSwiperSlide = ({ data, showChallengeAuthorName }) => {
+  useEffect(() => {
+    if (data) {
+      const element = document.querySelector(`.challenge-swipter-img-${data.challengeId} img`);
+      cropImage(element);
+    }
+  }, [data]);
+
+  return (<>
   <Link className='challenge-item' to={data.actionUrl}>
     <div className="challenge-block">
-      <div className="challenge-img">
+      <div className={`challenge-img challenge-swipter-img-${data.challengeId}`}>
         <Img
           alt={data.challengeName}
           useSource={true}
@@ -118,7 +211,8 @@ const ChallengeSwiperSlide = ({ data, showChallengeAuthorName }) => <>
       }
     </div>
   </Link>
-</>;
+</>);
+};
 
 const NavigationSlide = ({ to, navigationText }) => <>
   <Link to={to} className='navigation-slide'>
@@ -199,81 +293,15 @@ const ChallengesSwiper = ({
   </div>
 );
 
-const NewlyTrendingChallenge = ({ challenge }) => (
-  <>
-    {
-      challenge && <Link
-        to={challenge.actionUrl}
-        className='newly-trending-challenge-container hero-nav-card text-decoration-none'>
-        <h5 className='caption-bold text-center title'>
-          <FormattedMessage defaultMessage={'Newly Trending'} description='heading' />
-        </h5>
-        <div className="challenge-img">
-          {/* <img src={challenge.imgPath} alt={challenge.challengeName} /> */}
-          <Img
-            alt={challenge.challengeName}
-            useSource={true}
-            local={false}
-            src={challenge.imgPath}
-            fallback={'../../../../../images/games/code.svg'}
-          />
-        </div>
-      </Link>
-    }
-    {
-      !challenge && <div className='newly-trending-challenge-skeleton'></div>
-    }
-  </>
-);
-
-const ChallengesActivity = ({ myChallenges }) => <>
-  {
-    myChallenges && <div className='challenges-activity hero-nav-card'>
-      {
-        myChallenges[0] && <div className='last-challenge'>
-          <img className='icon' src='../../../../images/challenges/joystick-icon.svg' alt='joystick-icon' />
-          <span className='challenge-name caption'>
-            <FormattedMessage
-              defaultMessage={'Created "{lastCreatedChallengeName}" challenge'}
-              description='last created challenge log'
-              values={{ lastCreatedChallengeName: myChallenges[0].challengeName }}
-            />
-          </span>
-          <Link to={myChallenges[0].actionUrl} className='open-challenge-btn'>
-            <img className='icon' src='../../../../images/challenges/open-challenge-icon.svg' alt='open-challenge-icon' />
-          </Link>
-        </div>
-      }
-      {
-        !myChallenges[0]
-        && <div className='last-challenge'>
-          <span className='caption'>
-            <FormattedMessage
-              defaultMessage={'No challenges published yet !'}
-              description='last created challenge log' />
-          </span>
-        </div>
-      }
-      <Link to={'/your-challenges'} className='view-your-challenges-text-btn caption-bold'>
-        <FormattedMessage defaultMessage={'View your challenges'} description='view your challenges button text' />
-      </Link>
-    </div>
-  }
-  {
-    !myChallenges && <div className='challenges-activity-skeleton'>
-    </div>
-  }
-</>;
-
-const HeroComponent = memo(HeroContainer);
-const NewlyTrendingChallengeComponent = memo(NewlyTrendingChallenge);
-const ChallengesActivityComponent = memo(ChallengesActivity);
-const ChallengesSwiperComponent = memo(ChallengesSwiper);
+const HeroComponent = memo(HeroContainer, compareProps);
+const ChallengesSwiperComponent = memo(ChallengesSwiper, compareProps);
 
 const Challenges = () => {
   const isPageMounted = useRef(true);
   const numberOfChallengesSlideToShow = 7;
   pageInit('challenges-container', 'Challenges');
+
+  timeTrack('challenges');
 
   const [isDesktop, setIsDesktop] = useState(window.matchMedia('(min-width: 768px)').matches);
 
@@ -323,12 +351,8 @@ const Challenges = () => {
       <HeroComponent
         isDesktop={isDesktop}
         session={session}
-        NewlyTrendingChallengeComponent={
-          () => <NewlyTrendingChallengeComponent challenge={trendingChallenges[0]} />
-        }
-        ChallengesActivityComponent={
-          () => <ChallengesActivityComponent myChallenges={myChallenges} />
-        }
+        trendingChallenge={trendingChallenges && trendingChallenges[0]}
+        myChallenges={myChallenges}
       />
       <ChallengesSwiperComponent
         showChallengeAuthorName={false}

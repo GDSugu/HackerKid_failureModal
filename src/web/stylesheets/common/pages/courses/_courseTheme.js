@@ -17,9 +17,11 @@ const thememaplight = {
   'course-nav-active-bg': lightTheme.screenGreen.navActiveBg,
   'videos-progress-gradient-1': Green.color900,
   'videos-progress-gradient-2': Green.color500,
+  'basic-color': Yellow.color700,
   'rating-color': Yellow.color500,
   'rating-background': utilColors.dimGrey,
   'color-sub-topic': utilColors.lightGrey,
+  'shadow-color': utilColors.shadowColor1,
 };
 // just copied the light theme colors to the dark for now
   // TODO: make this a real dark theme with appropriate colors
@@ -31,9 +33,11 @@ const thememapdark = {
   'course-nav-active-bg': darkTheme.screenGreen.navActiveBg,
   'videos-progress-gradient-1': Green.color900,
   'videos-progress-gradient-2': Green.color500,
+  'basic-color': Yellow.color700,
   'rating-color': Yellow.color500,
   'rating-background': utilColors.dimGrey,
   'color-sub-topic': utilColors.lightGrey,
+  'shadow-color': utilColors.shadowColor1,
 };
 
 const cssvars = {
@@ -45,8 +49,10 @@ const cssvars = {
   'videos-progress-gradient-1': '--videos-progress-gradient-1',
   'videos-progress-gradient-2': '--videos-progress-gradient-2',
   'rating-color': '--rating-color',
+  'basic-color': '--basic-color',
   'rating-background': '--rating-background',
   'color-sub-topic': '--color-sub-topic',
+  'shadow-color': '--shadow-color',
 };
 
 module.exports = {

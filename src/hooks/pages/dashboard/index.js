@@ -81,10 +81,12 @@ const useDashboard = ({ dateString = new Date().toISOString(), isPageMounted }) 
                 let totalGames = 0;
                 let gameProgress = 0;
                 let totalPointsEarned = 0;
+                let timeSpent = 0;
                 Object.keys(dashBoardData).forEach((key) => {
                   totalGames += dashBoardData[key].overAllQuestionCount;
                   gameProgress += dashBoardData[key].validSubmissionCount;
                   totalPointsEarned += dashBoardData[key].totalPointsEarned;
+                  timeSpent += dashBoardData[key].timeSpent;
                 });
                 setDashboardData((prevState) => ({
                   ...prevState,
@@ -93,6 +95,7 @@ const useDashboard = ({ dateString = new Date().toISOString(), isPageMounted }) 
                     totalGames,
                     gameProgress,
                     totalPointsEarned,
+                    timeSpent,
                   },
                 }));
                 authContext.setAuthState({
@@ -103,6 +106,7 @@ const useDashboard = ({ dateString = new Date().toISOString(), isPageMounted }) 
                         totalGames,
                         gameProgress,
                         totalPointsEarned,
+                        timeSpent,
                       },
                     },
                   },

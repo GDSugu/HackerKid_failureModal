@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { loginCheck, pageInit, $ } from '../framework';
+import {
+  loginCheck, pageInit, $, timeTrack,
+} from '../framework';
 import '../../../stylesheets/common/pages/awards/style.scss';
 import MoreAccountNavBar from '../components/MoreAccountNavBar';
 import SortDropdown from '../components/SortDropdown_new';
 import SearchBox from '../components/SearchBox';
 import { useAwards } from '../../../../hooks/pages/awards';
-import MobileAwardsNavBar from '../components/MobileAwardsNavBar';
+// import MobileAwardsNavBar from '../components/MobileAwardsNavBar';
 import BottomSheet from '../components/BottomSheet';
 import AwardsGrid from '../components/AwardsGrid';
 import AwardsMobileList from '../components/AwardsMobileList';
@@ -78,6 +80,8 @@ const Awards = () => {
   const isPageMounted = React.useRef(true);
 
   pageInit('awards-container', 'Awards');
+
+  timeTrack('awards');
 
   const [isDesktop, setIsDesktop] = React.useState(window.matchMedia('(min-width: 576px)').matches);
 
@@ -354,7 +358,7 @@ const Awards = () => {
 
   return <>
     <MoreAccountNavBar />
-    <MobileAwardsNavBar className='mx-3' />
+    {/* <MobileAwardsNavBar className='mx-3' /> */}
     <main className='col-12 col-sm-10 col-md-8 col-xl-6 mx-auto mt-3'>
       {
         (status === 'success') && <div className='controls'>

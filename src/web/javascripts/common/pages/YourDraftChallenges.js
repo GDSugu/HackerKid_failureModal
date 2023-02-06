@@ -99,13 +99,16 @@ const YourDraftChallenges = () => {
     $('nav:first-child').css('display', 'none');
     loginCheck();
 
-    window.addEventListener('resize', () => {
+    const setDesktop = () => {
       setIsDesktop(window.matchMedia('(min-width: 576px)').matches);
-    });
+    };
+
+    window.addEventListener('resize', setDesktop);
 
     return () => {
       $('nav:first-child').css('display', 'block');
       isPageMounted.current = false;
+      window.removeEventListener('resize', setDesktop);
     };
   }, []);
 

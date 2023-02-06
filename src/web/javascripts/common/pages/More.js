@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useGetSession } from '../../../../hooks/pages/root';
 import '../../../stylesheets/common/pages/more/style.scss';
 import {
-  $, loginCheck, pageInit, authorize, pathNavigator,
+  $, loginCheck, pageInit, authorize, pathNavigator, timeTrack,
 } from '../framework';
 import Img from '../components/Img';
 import Modal from '../components/Modal';
@@ -13,8 +13,11 @@ import { useProfileInfo } from '../../../../hooks/pages/profile';
 import AwardCard from '../components/AwardsCard';
 // import CollectibleCard from '../components/CollectibleCard';
 import { useAwards } from '../../../../hooks/pages/awards';
+// import AwardsNotificationModal from '../components/AwardsNotificationCard';
+import { copyHandler } from '../Functions/turtle';
+import AwardInfo from '../components/AwardsInfo';
 
-const Certificates = ({ gameDetails }) => {
+const Certificates = ({ gameDetails, onCertificateShareBtnClick = () => { } }) => {
   const certificateDataObj = gameDetails?.[0].certificateData;
   const certificatesArr = certificateDataObj && Object.values(certificateDataObj).slice(0, 3);
 
@@ -35,7 +38,7 @@ const Certificates = ({ gameDetails }) => {
             certificateName: certificate.certificateName,
           }}
         />
-        <button type='button' className='share-btn'>
+        <button type='button' className='share-btn' onClick={() => onCertificateShareBtnClick(certificate.certificateId)}>
           <img src='../../../../images/common/black-share-icon.svg' className='share-icon' alt='list-icon' />
         </button>
       </li>)
@@ -50,10 +53,20 @@ const Awards = ({
 }) => <div className='row'>
     {
       awards && awards.map((award, idx) => <div className='col-4 col-lg-3 px-2 py-2' key={idx}>
-        <AwardCard
-          awardImage={award.awardImage}
-          interactable={true}
-        />
+        <div className='award-card-with-awards-info'>
+          <AwardCard
+            className={`pointer-cursor award-card-${award.awardId}`}
+            awardImage={award.awardImage}
+            awardName={award.awardName}
+            interactable={true}
+          />
+          <AwardInfo
+            isDesktop={isDesktop}
+            className={`award-info-container-${award.awardId}`}
+            currentAwardDetails={award}
+            repeatingAwards={award.repeatingAwards ? award.repeatingAwards : false}
+          />
+        </div>
       </div>)
     }
     {
@@ -305,6 +318,7 @@ const CollectionsModalComponent = ({
   // collectibles,
   isDesktop,
   session,
+  onCertificateShareBtnClick,
 }) => <>
     <div className='col-12 col-md-10 mx-auto'>
       {
@@ -341,7 +355,9 @@ const CollectionsModalComponent = ({
           }
         </div>
         <div className="collection-content">
-          <Certificates gameDetails={gameDetails} />
+          <Certificates
+            gameDetails={gameDetails}
+            onCertificateShareBtnClick={onCertificateShareBtnClick} />
           {
             !isDesktop && gameDetails && Object.keys(gameDetails[0].certificateData).length > 0
             && <Link to={'/certificates'} type='button' className='btn btn-primary btn-block body-bold view-more-btn'>
@@ -363,7 +379,7 @@ const CollectionsModalComponent = ({
             />
           </h5>
         </div>
-        <div className="collection-content">
+        <div className="awards-content">
           <Awards
             awards={awards}
             isDesktop={isDesktop}
@@ -419,6 +435,9 @@ const More = () => {
   }
 
   const isPageMounted = React.useRef(true);
+
+  timeTrack('more');
+
   const [isDesktop, setIsDesktop] = React.useState(window.matchMedia('(min-width: 576px)').matches);
   const { session } = useGetSession({ sessionAttr: ['name', 'pointsEarned', 'profileLink'], isPageMounted });
   const {
@@ -442,6 +461,7 @@ const More = () => {
 
   const collectionRef = React.useRef();
   const logoutModalRef = React.useRef();
+  const shareCertificateModalRef = React.useRef();
 
   // const toggleModal = () => setCollectionModalVisibile(!collectionModalVisibile);
   const toggleModal = () => collectionRef.current.show();
@@ -459,6 +479,8 @@ const More = () => {
       setIsDesktop(window.matchMedia('(min-width: 576px)').matches);
     });
 
+    getAwards({ cached: false, limit: 3, sort: 'posted' });
+
     return () => {
       $('.modal-backdrop').remove();
       isPageMounted.current = false;
@@ -474,6 +496,12 @@ const More = () => {
   React.useEffect(() => {
     getAwards({ cached: false, limit: 3, sort: 'posted' });
   }, []);
+
+  const onCertificateShareBtnClick = (certificateId) => {
+    collectionRef.current.hide();
+    $('.copy-link-input').val(`${window.location.origin}/certificate/view/${certificateId}`);
+    shareCertificateModalRef.current.show();
+  };
 
   return <>
     <div className='col-12 col-md-11 col-xl-10 mx-auto'>
@@ -524,7 +552,41 @@ const More = () => {
         awards={awards}
         collectibles={[]}
         isDesktop={isDesktop}
+        onCertificateShareBtnClick={onCertificateShareBtnClick}
       />
+    </Modal>
+    <Modal
+      ref={shareCertificateModalRef}
+      modalClass={'share-certificate-modal'}
+      customClass={'curved'}
+      options={'hide'}>
+      <div className='share-content'>
+        <div className='content-header'>
+          <h5>
+            <FormattedMessage
+              defaultMessage={'Share'}
+              description={'Share message'}
+            />
+          </h5>
+        </div>
+        <div className="col-11 col-md-10 btn-container">
+          <div className="form-group col">
+            <input
+              type="text"
+              className="form-control copy-link-input"
+              name="shareLink" id="shareLink"
+              aria-describedby="helpId"
+              placeholder="share link"
+              readOnly />
+          </div>
+          <button className='btn btn-outline-primary' onClick={copyHandler} >
+            <FormattedMessage
+              defaultMessage={'Copy Link'}
+              description={'Copy Link button'}
+            />
+          </button>
+        </div>
+      </div>
     </Modal>
     <HelpModal />
   </>;

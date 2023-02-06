@@ -24,6 +24,7 @@ const RouteIndex = loadable(() => import('./Index'), { fallback: <Loading /> });
 const RouteAbout = loadable(() => import('./About'), { fallback: <Loading /> });
 const RouteLogin = loadable(() => import('./Login'), { fallback: <Loading /> });
 const RouteRegister = loadable(() => import('./Register'), { fallback: <Loading /> });
+const RoutePricing = loadable(() => import('./PricingPlans'), { fallback: <Loading /> });
 const RouteForgotPassword = loadable(() => import('./ForgotPassword'), { fallback: <Loading /> });
 const RouteDashboard = loadable(() => import('./Dashboard'), { fallback: <Loading /> });
 const RouteGames = loadable(() => import('./Games'), { fallback: <Loading /> });
@@ -48,7 +49,6 @@ const RouteViewCertificate = loadable(() => import('./ViewCertificate'), { fallb
 const RouteClub = loadable(() => import('./Clubs'), { fallback: <Loading /> });
 const RouteWebkata = loadable(() => import('./Webkata'), { fallback: <Loading /> });
 const RouteIde = loadable(() => import('./Ide'), { fallback: <Loading /> });
-const RoutePrice = loadable(() => import('./PricingPlans'), { fallback: <Loading /> });
 
 const App = () => {
   React.useEffect(() => {
@@ -64,9 +64,11 @@ const App = () => {
           <Route path='games' caseSensitive={true} element={<RouteGames />} />
         <Route path='ide' caseSensitive={true} element={<RouteIde/>} />
         <Route path='courses' caseSensitive={true} element={<RouteCourses />} />
-        <Route path='videos' caseSensitive={true} element={<RouteCourses />} />
-        <Route path='videos/:moduleId' element={<RouteVideos />} />
-        <Route path='videos/:moduleId/:id' element={<RouteVideos />} />
+        {/* <Route path='videos' caseSensitive={true} element={<RouteCourses />} /> */}
+        <Route path='courses/:moduleId' element={<RouteVideos />} />
+        <Route path='courses/:moduleId/:id' element={<RouteVideos />} />
+        <Route path='courses/:moduleId/:id/:questionName' element={<RouteVideos />} />
+        <Route path='pricing' element={<RoutePricing />} />
         <Route path='challenges' caseSensitive={true} element={<RouteChallenges />} />
         <Route path='all-challenges' caseSensitive={true} element={<RouteAllChallenges />} />
         <Route path='your-challenges' caseSensitive={true} element={<RouteYourChallenges />} />
@@ -109,14 +111,14 @@ const App = () => {
         </Route>
         <Route path='clubs' caseSensitive={true} element={<RouteClub />} />
         <Route path='clubs/:id' element={<RouteClub />} />
-        <Route path='turtle' caseSensitive={true} element={<RouteTurtle />} />
-        <Route path='turtle/:id' element={<RouteTurtle />} />
-        <Route path='turtle/:id/:uniqueString' element={<RouteTurtle />} />
+        <Route path='turtle/*' caseSensitive={true} element={<RouteTurtle />} />
+        {/* <Route path='turtle/:id' element={<RouteTurtle />} />
+        <Route path='turtle/:id/:uniqueString' element={<RouteTurtle />} /> */}
         <Route path='webkata/:conceptId' element={<RouteWebkata />} />
         <Route path='webkata/:conceptId/:id' element={<RouteWebkata />} />
         <Route path='webkata/:conceptId/:id/:uniqueString' element={<RouteWebkata />} />
-            <Route path='codekata' caseSensitive={true} element={<RouteCodekata />} />
-          <Route path='codekata/:id' element={<RouteCodekata />} />
+            <Route path='coding-pirate' caseSensitive={true} element={<RouteCodekata />} />
+          <Route path='coding-pirate/:id' element={<RouteCodekata />} />
           {/* </Route> */}
         {/* </Route> */}
         <Route path='zombieland' caseSensitive={true} element={<RouteZombieLand />} />
@@ -129,7 +131,6 @@ const App = () => {
         <Route path='forgot-password' caseSensitive={true} element={<RouteForgotPassword />} />
       </Route>
       <Route path='/about' caseSensitive={true} element={<RouteAbout />} />
-      <Route path='/pricing-plans' caseSensitive={true} element={<RoutePrice />} />
       <Route path='*' element={ <Navigate to='/' />} />
     </Routes>
   </BrowserRouter>);

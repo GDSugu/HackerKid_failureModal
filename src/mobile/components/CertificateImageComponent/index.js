@@ -26,7 +26,6 @@ const CertificateImageComponent = ({
   useEffect(() => {
     if (certificateId && certificateName && studentName) {
       viewShotRef.current.capture().then((uri) => {
-        console.log(uri);
         setImageDataUri(uri);
       }).catch((err) => {
         console.error(err);

@@ -3,7 +3,9 @@ import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import Ace from 'react-ace';
 import '../../../stylesheets/common/pages/codekata/style.scss';
-import { $, pageInit, pathNavigator } from '../framework';
+import {
+  $, pageInit, pathNavigator, timeTrack,
+} from '../framework';
 import GameNavBar from '../components/GameNavBar';
 import Img from '../components/Img';
 import useRootPageState from '../../../../hooks/pages/root';
@@ -14,13 +16,16 @@ import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
 import 'ace-builds/src-noconflict/ext-language_tools';
 import { getSession, setSession } from '../../../../hooks/common/framework';
+import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
+import AwardsNotificationCard from '../components/AwardsNotificationCard';
 
 const resizeHandler = (nav = 'nav', selector) => {
   try {
     const navHeight = document.querySelector(nav).offsetHeight;
-    document.querySelector(
-      selector,
-    ).style.height = `calc(100vh - ${navHeight}px)`;
+    const element = document.querySelector(selector);
+    if (element) {
+      element.style.height = `calc(100vh - ${navHeight}px)`;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -29,7 +34,7 @@ const resizeHandler = (nav = 'nav', selector) => {
 const updateHistory = (response) => {
   try {
     const { virtualId } = response.questionObject;
-    window.history.replaceState({}, '', `/codekata/${virtualId}`);
+    window.history.replaceState({}, '', `/coding-pirate/${virtualId}`);
   } catch (error) {
     console.log(error);
   }
@@ -130,12 +135,19 @@ const CompiledStatusModalRefComponent = React.forwardRef(CompiledStatusModalComp
 const CodekataHomeContainer = ({ changeRoute }) => {
   pageInit('codekata-home-container', 'Codekata');
 
+  timeTrack('games/codekata');
+
+  const listenResize = () => resizeHandler('nav', '.codekata-frame');
+
   useEffect(() => {
-    window.addEventListener('resize', () => resizeHandler('nav', '.codekata-frame'));
+    window.addEventListener('resize', listenResize);
     const resizeTimeout = setTimeout(() => {
       resizeHandler('nav', '.codekata-frame');
     }, 300);
-    return () => clearTimeout(resizeTimeout);
+    return () => {
+      clearTimeout(resizeTimeout);
+      window.removeEventListener('resize', listenResize);
+    };
   }, []);
 
   return (
@@ -146,8 +158,8 @@ const CodekataHomeContainer = ({ changeRoute }) => {
             <div className="card-container">
               <h1 className="gameTitle">
                 <FormattedMessage
-                  defaultMessage={'Codekata'}
-                  description={'Codekata title'}
+                  defaultMessage={'Coding Pirate'}
+                  description={'Coding pirate title'}
                 />
               </h1>
               <p className="gameDesc">
@@ -155,14 +167,14 @@ const CodekataHomeContainer = ({ changeRoute }) => {
                   defaultMessage={
                     'Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?'
                   }
-                  description={'Codekata description'}
+                  description={'Coding pirate description'}
                 />
               </p>
             </div>
           </div>
           <button
             className="btn btn-block gameBtn"
-            onClick={() => changeRoute('codekataGame')}>
+            onClick={() => changeRoute('codingPirateGame')}>
             <p className="gameBtnDesc">
               <FormattedMessage
                 defaultMessage={'Start Playing'}
@@ -175,8 +187,8 @@ const CodekataHomeContainer = ({ changeRoute }) => {
           <div className="codekata-title">
             <h1 className="gameTitle">
               <FormattedMessage
-                defaultMessage={'Codekata'}
-                description={'Codekata title'}
+                defaultMessage={'Coding Pirate'}
+                description={'Coding Pirate title'}
               />
             </h1>
           </div>
@@ -188,7 +200,7 @@ const CodekataHomeContainer = ({ changeRoute }) => {
             </a> */}
               <button
                 className="btn btn-transparent codekata-action-btn codekata-play-btn"
-                onClick={() => changeRoute('codekataGame')}>
+                onClick={() => changeRoute('codingPirateGame')}>
                 <div className="play-btn-container">
                   <Img
                     src="../../../../images/games/gamePlay.png"
@@ -234,6 +246,7 @@ const CodekataDesktopContainer = ({
   const inputRef = useRef();
   const statusModalRef = useRef(null);
   const statusModalComponentRef = useRef(null);
+  const awardsNotificationCardRef = useRef(null);
 
   const changeLoag = async (selectedLang) => {
     setInput(templete(selectedLang));
@@ -257,7 +270,7 @@ const CodekataDesktopContainer = ({
     setInput(editorCode);
     codeRun(reqData).then((res) => {
       if (device === 'desktop') {
-        $('.collapse').collapse();
+        $('#problem-cont').collapse('hide');
       } else {
         $('.outputModal').modal('show');
         $('#output-tab').tab('show');
@@ -286,8 +299,9 @@ const CodekataDesktopContainer = ({
         if (res.passedAllTestCase) {
           handleCloseBtn = () => {
             statusModalRef.current.hide();
+            awardsNotificationCardRef.current.hide();
             if (questionList.length > questionObject.virtualId) {
-              pathNavigator(`codekata/${Number(questionObject.virtualId) + 1}`);
+              pathNavigator(`coding-pirate/${Number(questionObject.virtualId) + 1}`);
             }
           };
 
@@ -306,6 +320,7 @@ const CodekataDesktopContainer = ({
                   handleModalClose: handleCloseBtn,
                 });
                 statusModalRef.current.show();
+                awardsNotificationCardRef.current.show(res.awardsGiven);
               });
           } else {
             const username = res.profileDetails.name;
@@ -344,6 +359,10 @@ const CodekataDesktopContainer = ({
     $('.outputModal').modal('hide');
   };
 
+  const listenResize = () => {
+    resizeHandler('nav.game-navbar', '.game-mob-container');
+  };
+
   useEffect(() => {
     const totalHeight = $(window).height();
     if (device === 'desktop') {
@@ -362,12 +381,15 @@ const CodekataDesktopContainer = ({
       resizeob.observe(problemCont);
     }
 
-    window.addEventListener('resize', () => resizeHandler('nav.game-navbar', '.game-mob-container'));
+    window.addEventListener('resize', listenResize);
     const resizeTimeout = setTimeout(() => {
       resizeHandler('nav.game-navbar', '.game-mob-container');
     }, 300);
 
-    return () => clearTimeout(resizeTimeout);
+    return () => {
+      clearTimeout(resizeTimeout);
+      window.removeEventListener('resize', listenResize);
+    };
   }, []);
 
   useEffect(() => {
@@ -384,7 +406,7 @@ const CodekataDesktopContainer = ({
   return <>
       {
         device === 'desktop' ? (
-        <div className="container-fluid pt-3 px-3 pb-2">
+        <div className="codekata-game-container container-fluid pt-3 px-3 pb-2">
           <div className="row">
             <div className="col-6 px-2 left-cont">
               <div className="code-container">
@@ -450,7 +472,7 @@ const CodekataDesktopContainer = ({
             <div className="col-6 px-2 right-cont">
               <div className="problem-statment-cont">
                 <div
-                  className="d-flex justify-content-between align-items-center"
+                  className="d-flex justify-content-between align-items-center problem-collapse-head"
                   data-toggle="collapse"
                   data-target="#problem-cont"
                   aria-expanded="true"
@@ -899,7 +921,8 @@ const CodekataDesktopContainer = ({
         <CompiledStatusModalRefComponent
           ref={statusModalComponentRef}
         />
-      </Modal>
+    </Modal>
+    <AwardsNotificationCard ref={awardsNotificationCardRef} />
   </>;
 };
 
@@ -910,6 +933,7 @@ const CodekataGameComponent = () => {
     state: { device },
   } = useRootPageState();
   const levelComponentRef = useRef();
+  const leaderboardComponentRef = useRef(null);
   const isPageMounted = useRef(true);
   const { id } = useParams();
   const {
@@ -934,6 +958,31 @@ const CodekataGameComponent = () => {
     });
   };
 
+  const toggleCodeKata = (action = 'show' || 'hide') => {
+    if (action === 'show') {
+      $('.codekata-game-container').slideDown();
+      $('.level-navbar').slideDown({
+        complete: () => {
+          $('.level-navbar').css('display', 'flex');
+        },
+      });
+      $('.game-mob-container').slideDown();
+      $('.leaderboard-btn').removeClass('active');
+    } else if (action === 'hide') {
+      $('.codekata-game-container').slideUp();
+      $('.game-mob-container').slideUp({
+        complete: () => {
+          $('.level-navbar').slideUp();
+        },
+      });
+      $('.leaderboard-btn').addClass('active');
+    }
+  };
+
+  const onLeaderboardBtnClick = () => {
+    leaderboardComponentRef.current.toggle();
+  };
+
   const showLevel = () => levelComponentRef.current.show();
   const { questionList, questionObject } = codekataData;
 
@@ -949,19 +998,21 @@ const CodekataGameComponent = () => {
 
   return (
     <>
-      <div className="codekata-game-container">
+      <div className="codekata-main-container">
         <GameNavBar
           forCodekata={true}
           questionState={codekataData}
           levelBtnHandler={showLevel}
+          isGameMainPage={true}
+          leaderboardHandler={onLeaderboardBtnClick}
         />
         {questionList && questionObject && (
           <GameLevelComponent
-            ref={levelComponentRef}
-            gameData={codekataData}
-            forCodekata={true}
-            handleFetchQuestion={handleFetchQuestion}
-          />
+          game={'codekata'}
+          ref={levelComponentRef}
+          handleFetchQuestion={handleFetchQuestion}
+          gameData={codekataData}
+        />
         )}
         <CodekataDesktopContainer
           languages={availableLanguages}
@@ -975,6 +1026,11 @@ const CodekataGameComponent = () => {
         />
       </div>
       <div id="loader"></div>
+      <GameLeaderboardComponent
+      ref={leaderboardComponentRef}
+      game={'codekata'}
+      beforeShown={() => { toggleCodeKata('hide'); }}
+      beforeHidden={() => { toggleCodeKata('show'); }} />
     </>
   );
 };
@@ -988,7 +1044,7 @@ const Codekata = () => {
       .split('/')
       .filter((el) => el !== '');
     if (locationArray.length > 3) {
-      changeRoute('codekataGame');
+      changeRoute('codingPirateGame');
     }
   }, []);
 
@@ -997,7 +1053,7 @@ const Codekata = () => {
       {codekataRoute === 'codekataHome' && (
         <CodekataHomeContainer changeRoute={changeRoute} />
       )}
-      {codekataRoute === 'codekataGame' && <CodekataGameComponent />}
+      {codekataRoute === 'codingPirateGame' && <CodekataGameComponent />}
     </>
   );
 };

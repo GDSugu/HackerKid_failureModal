@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import post from '../../common/framework';
+import post, { getSession, s3Upload, setSession } from '../../common/framework';
 import API from '../../../../env';
 import { AuthContext } from '../root';
 
@@ -314,6 +314,9 @@ const useTakeChallenge = ({ isPageMounted }) => {
     status: true,
     challengeObject: false,
     submissionDetails: false,
+    validated: false,
+    validationDetails: false,
+    questionObject: false,
   });
 
   const authContext = useContext(AuthContext);
@@ -345,13 +348,14 @@ const useTakeChallenge = ({ isPageMounted }) => {
     if (cached && authContext.appData.takeChallengeHook) {
       result = new Promise((resolve) => {
         const { takeChallengeHook } = authContext.appData;
-        setTakeChallenge(() => ({
+        setTakeChallenge((prevState) => ({
+          ...prevState,
           ...takeChallengeHook,
         }));
         resolve(true);
       });
     } else {
-      result = post(payload, 'challenges/')
+      result = post(payload, 'challenge/')
         .then((res) => {
           if (isPageMounted.current) {
             if (res === 'access_denied') {
@@ -362,7 +366,8 @@ const useTakeChallenge = ({ isPageMounted }) => {
             } else {
               const parsedResponse = JSON.parse(res);
               if (parsedResponse.status === 'success') {
-                setTakeChallenge(() => ({
+                setTakeChallenge((prevState) => ({
+                  ...prevState,
                   ...parsedResponse,
                 }));
                 authContext.setAuthState({
@@ -373,7 +378,8 @@ const useTakeChallenge = ({ isPageMounted }) => {
                   },
                 });
               } else {
-                setTakeChallenge(() => ({
+                setTakeChallenge((prevState) => ({
+                  ...prevState,
                   ...parsedResponse,
                   status: false,
                 }));
@@ -386,11 +392,180 @@ const useTakeChallenge = ({ isPageMounted }) => {
     return result;
   };
 
+  const submitChallenge = (request) => post(request, 'challenge/', false)
+    .then((response) => {
+      if (response !== 'access_denied') {
+        const parsedResponse = JSON.parse(response);
+        if (parsedResponse.status === 'success' && parsedResponse.passed) {
+          if (parsedResponse.pointsDetails.addedPoints) {
+            getSession('pointsEarned')
+              .then((pointsEarned) => {
+                const availablePoints = pointsEarned ? Number(pointsEarned) : 0;
+                const newPoints = availablePoints
+                + Number(parsedResponse.pointsDetails.addedPoints);
+                setSession('pointsEarned', newPoints);
+              });
+          }
+          const shareLink = `https://www.hackerkid.org/turtle/challenges/submissions/${parsedResponse.profileDetails.uniqueUrl}/${takeChallenge.challengeObject.challengeId}/${takeChallenge.challengeObject.uniqueString}`;
+          const username = parsedResponse.profileDetails.name;
+          const responseObject = {
+            ...parsedResponse,
+            successMessage: parsedResponse.pointsDetails.submissionStatus.replace('{{name}}', username),
+            shareLink,
+          };
+          setTakeChallenge((prevState) => ({
+            ...prevState,
+            validationDetails: responseObject,
+            modalType: 'success',
+            validated: parsedResponse.passed,
+          }));
+        }
+      } else {
+        setTakeChallenge((prevState) => ({
+          ...prevState,
+          status: 'access_denied',
+        }));
+      }
+      return response;
+    });
+
   return {
     state: takeChallenge,
     setState,
     static: {
       fetchChallenge,
+      submitChallenge,
+    },
+  };
+};
+
+const useCreateChallenge = ({ isPageMounted }) => {
+  const [challengeState, setChallengeState] = useState({
+    status: false,
+    challengeDetails: false,
+    postedChallenges: false,
+    pointDetails: false,
+    requestPayload: false,
+  });
+
+  const loadChallenge = async ({ challengeId }) => {
+    const payload = {
+      type: 'loadChallenge',
+      challengeId,
+      s3Prefix: API.S3PREFIX,
+    };
+
+    return post(payload, 'challenge/', false)
+      .then((response) => {
+        if (isPageMounted.current) {
+          if (response === 'access_denied') {
+            setChallengeState((prevState) => ({
+              ...prevState,
+              status: 'access_denied',
+            }));
+          } else {
+            const parsedResponse = JSON.parse(response);
+            if (parsedResponse.status === 'success') {
+              setChallengeState((prevState) => ({
+                ...prevState,
+                ...parsedResponse,
+              }));
+            }
+          }
+        }
+      });
+  };
+
+  const createChallenge = (request) => post(request, 'challenge/', false)
+    .then((response) => {
+      if (isPageMounted.current) {
+        if (response === 'access_denied') {
+          setChallengeState((prevState) => ({
+            ...prevState,
+            status: 'access_denied',
+          }));
+        } else {
+          const parsedResponse = JSON.parse(response);
+          if (parsedResponse.status === 'success') {
+            setChallengeState((prevState) => ({
+              ...prevState,
+              ...parsedResponse,
+            }));
+          }
+          return parsedResponse;
+        }
+      }
+      return response;
+    });
+
+  const updateChallenge = (request) => post(request, 'challenge/', false)
+    .then((response) => {
+      if (isPageMounted.current) {
+        if (response === 'access_denied') {
+          setChallengeState((prevState) => ({
+            ...prevState,
+            status: 'access_denied',
+          }));
+        } else {
+          const parsedResponse = JSON.parse(response);
+          if (parsedResponse.status === 'success') {
+            const shareLink = `https://www.hackerkid.org/turtle/challenges/${parsedResponse.challengeDetails.challengeId}/${parsedResponse.challengeDetails.uniqueString}`;
+            const responseObject = {
+              ...parsedResponse,
+              successMessage: parsedResponse.pointDetails.submissionStatus,
+              shareLink,
+            };
+            if (parsedResponse?.pointDetails?.pointAdded) {
+              getSession('pointsEarned')
+                .then((pointsEarned) => {
+                  const availablePoints = pointsEarned ? Number(pointsEarned) : 0;
+                  const newPoints = availablePoints
+                  + Number(parsedResponse.pointDetails.pointsAdded);
+                  setSession('pointsEarned', newPoints);
+                });
+            }
+            setChallengeState((prevState) => ({
+              ...prevState,
+              status: parsedResponse.status,
+              validationDetails: responseObject,
+            }));
+            return response;
+          }
+          setChallengeState((prevState) => ({
+            ...prevState,
+            status: parsedResponse.status,
+            validationDetails: parsedResponse,
+          }));
+        }
+      }
+      return response;
+    });
+
+  const getChallengeImageSignedUrl = ({ challengeDetails }) => {
+    const signedRequest = {
+      type: 'getSignedURL',
+      challengeId: challengeDetails.challengeId,
+      s3Prefix: API.S3PREFIX,
+    };
+    return post(signedRequest, 'challenge/', true, false);
+  };
+
+  const uploadImageS3 = (blob, signedURL) => {
+    if (blob && signedURL) {
+      return s3Upload(blob, signedURL);
+    }
+    return false;
+  };
+
+  return {
+    createChallengeState: challengeState,
+    setCreateChallengeState: setChallengeState,
+    static: {
+      createChallenge,
+      getChallengeImageSignedUrl,
+      loadChallenge,
+      updateChallenge,
+      uploadImageS3,
     },
   };
 };
@@ -398,6 +573,7 @@ const useTakeChallenge = ({ isPageMounted }) => {
 export default null;
 
 export {
+  useCreateChallenge,
   useGetChallenges,
   useTakeChallenge,
   useGetMyChallenges,

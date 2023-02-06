@@ -1,10 +1,67 @@
 import $ from 'jquery';
+import TimeMe from 'timeme.js';
+import { useEffect } from 'react';
+import postTimeTrack from '../../../hooks/pages/timeTrack';
 import { validateField } from '../../../hooks/common/framework';
 // import navbar from './navbar';
 
 const { API } = process.env;
 
 const authorize = {};
+
+const secondsToMins = (s) => {
+  let seconds = parseInt(s, 10);
+  let minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  seconds %= 60;
+  minutes %= 60;
+  if (hours > 0) {
+    return `${hours} Hour${hours > 1 ? 's' : ''} ${minutes} Mins`;
+  }
+  if (hours === 0 && minutes > 0) {
+    return `${minutes} Minute${minutes > 1 ? 's' : ''}`;
+  }
+  if (minutes === 0 && seconds > 0) {
+    return `${seconds} Seconds`;
+  }
+  return '0 Seconds';
+};
+
+const timeTrack = (pageName) => {
+  const timeData = authorize.getSession('timeTracked');
+  if (timeData) {
+    const { page, timeSpent } = timeData;
+
+    postTimeTrack({
+      page,
+      timeSpent,
+      platform: 'web',
+    });
+    authorize.clearSession('timeTracked');
+  }
+
+  return useEffect(() => {
+    TimeMe.setCurrentPageName(pageName);
+    TimeMe.startTimer(pageName, 0);
+    window.addEventListener('beforeunload', () => {
+      authorize.setSession('timeTracked', JSON.stringify({
+        page: pageName,
+        timeSpent: TimeMe.getTimeOnPageInSeconds(pageName),
+      }));
+    }, true);
+    return () => {
+      if (TimeMe.getTimeOnPageInSeconds(pageName) > 1) {
+        postTimeTrack({
+          page: pageName,
+          timeSpent: TimeMe.getTimeOnPageInSeconds(pageName),
+          platform: 'web',
+        });
+      }
+      TimeMe.stopTimer(pageName);
+      TimeMe.resetRecordedPageTime(pageName);
+    };
+  });
+};
 
 const pageInit = (className, title = null) => {
   if (className) {
@@ -384,4 +441,6 @@ export {
   debounce,
   getShareMarkup,
   loadScriptByURL,
+  timeTrack,
+  secondsToMins,
 };

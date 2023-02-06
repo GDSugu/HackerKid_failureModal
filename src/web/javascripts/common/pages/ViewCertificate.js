@@ -2,13 +2,15 @@ import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useViewCertificate } from '../../../../hooks/pages/certificate';
 import '../../../stylesheets/common/pages/view-certificate/style.scss';
-import { $, pageInit } from '../framework';
+import { $, pageInit, timeTrack } from '../framework';
 import { getCanvasFromElement, getParsedHtmlStringForCertificate } from '../Functions/certificates';
 
 const ViewCertificate = () => {
   const isPageMounted = React.useRef(true);
 
   pageInit('view-certificate-container', 'View Certificate');
+
+  timeTrack('view-certificate');
 
   const { id } = useParams();
   const navigate = useNavigate();

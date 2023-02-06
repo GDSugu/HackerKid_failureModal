@@ -12,7 +12,7 @@ import useRegister from '../../../../hooks/pages/register';
 import {
   togglePasswordVisibility, validateInputOnChange, closeFormError, setFormErrorField,
 } from '../commonLoginRegisterFunctions';
-import { loginCheck } from '../../../../hooks/common/framework';
+import { loginCheck, setSession } from '../../../../hooks/common/framework';
 import VerifyOtpFormStep from '../components/VerifyOtpFormStep';
 import useOtp from '../../../../hooks/pages/otp';
 import useBackBtn from '../../../../hooks/pages/back-btn';
@@ -284,6 +284,9 @@ const RegisterFormStepThree = ({
         const { status, message } = data;
 
         if (status === 'success') {
+          if (data.awardsGiven) {
+            setSession('awardsGiven', JSON.stringify(data.awardsGiven));
+          }
           pathNavigator('dashboard');
         } else if (status === 'error') {
           const errorCause = 'postData';

@@ -312,67 +312,18 @@ const env = new Dotenv({
 });
 
 const htaccess = `<FilesMatch "^\\.ht">
-    Require all denied
+Require all denied
 </FilesMatch>
 
 Options +FollowSymlinks
 Options -Indexes
 
 #maintain position
+Options -MultiViews
+
 RewriteEngine On
-
-#turtle pages start
-RewriteRule ^turtle/challenges/create/(.*) /turtle-createChallenge.html [NC,L]
-RewriteRule ^turtle/challenges/submissions/(.*) /turtle-shareChallenge.html [NC,L]
-
-RewriteCond %{HTTP_USER_AGENT} googlebot|bingbot|yandex|baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora\\ link\\ preview|showyoubot|outbrain|pinterest\\/0\\.|pinterestbot|slackbot|vkShare|W3C_Validator|whatsapp [NC]
-RewriteRule ^turtle/challenges/(.*) http://localhost:3001/turtle/challenges/$1 [NC,L,P]
-
-RewriteRule ^turtle/challenges/(.*) /turtle-takeChallenge.html [NC,L]
-
-RewriteRule ^turtle/submissions/(.*) /turtle-share.html [NC,L]
-
-RewriteCond %{HTTP_USER_AGENT} googlebot|bingbot|yandex|baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora\\ link\\ preview|showyoubot|outbrain|pinterest\\/0\\.|pinterestbot|slackbot|vkShare|W3C_Validator|whatsapp [NC]
-RewriteRule ^turtle/(.*) http://localhost:3001/turtle/$1 [NC,L,P]
-
-RewriteRule ^turtle/(.*) /turtle.html [NC,L]
-#turtle pages end
-
-#profile pages start
-RewriteRule ^profile/edit/(.*) /profile-edit.html [NC,L]
-RewriteRule ^profile/(.*) /profile.html [NC,L]
-#profile pages end
-
-#certificate pages start
-RewriteRule ^certificate/snap/(.*) /certificate-snap.html [NC,L]
-RewriteRule ^certificate/view/(.*) /certificate-snap-view.html [NC,L]
-#certificate pages end
-
-#zombieland pages start
-RewriteRule ^zombieland/(.*) /zombieland.html [NC,L]
-#zombieland pages end
-
-#merchandise pages start
-RewriteRule ^merchandise/(.*) /merchandise.html [NC,L]
-#merchandise pages end
-
-#webkata pages start
-RewriteRule ^webkata/(.*) /webkata.html [NC,L]
-#webkata pages end
-
-#dont touch below
-#rewrite for index.html
-RewriteBase /
-RewriteCond %{THE_REQUEST} ^GET\\s(.*/)index\\.html [NC]
-RewriteRule . %1 [NE,R=301,L]
-
-#redirect files if comes with .html
-RewriteCond %{THE_REQUEST} /([^.]+)\\.html [NC]
-RewriteRule ^ /%1 [NC,L,R=301]
-
-#serve files without html but only if the html file exists
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^ %{REQUEST_URI}.html [NC,L]`;
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.html [QSA,L]`;
 
 const createHtaccess = new CreateFileWebpack({
   path: './dist',

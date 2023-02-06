@@ -349,9 +349,11 @@ $level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, nu
 }
 
 .other-stats {
-  @include gm.flex-justify-align(null, space-between, center);
+  @include gm.flex-justify-align(null, start, center);
 
   .game-stat {
+    margin-right: 1.5rem;
+
     @include gm.flex-align-center();
   }
 
@@ -463,6 +465,8 @@ $level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, nu
   place-content: center;
 
   svg {
+    width: 100%;
+
     #gradient {
       .start {
         stop-color: $level-progress-gradient-color2;
@@ -609,7 +613,7 @@ $level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, nu
     }
 
     .coins-earned-with-average-time {
-      @include gm.flex-center();
+      @include gm.flex-justify-align(column, space-around, start);
 
       width: 50%;
 

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import FuzzySearch from 'fuzzy-search';
-import { $, pageInit } from '../framework';
+import { $, pageInit, timeTrack } from '../framework';
 import CourseCard, { TopContainer, CustomSwiperComponent } from '../components/courseCard';
 import SwiperComponent from '../components/SwiperComponent';
 import 'swiper/swiper.scss';
@@ -10,35 +10,39 @@ import '../../../stylesheets/common/pages/courses/style.scss';
 import useCourses from '../../../../hooks/pages/courses';
 import Img from '../components/Img';
 import BottomSheet from '../components/BottomSheet';
+import useVideos from '../../../../hooks/pages/videos';
 
 const CourseModule = ({ items, isDesktop }) => (
   <>
-    <div className="w-100 mt-4">
-      <div className="course-card-container">
-        <h5>
-        <FormattedMessage
-          defaultMessage={'{name} - {type}'}
-          description={'course Heading'}
-          values={{ name: items.moduleName, type: items.type }}/>
-        </h5>
-        <CustomSwiperComponent
-          data={items.videos}
-          SlideComponent={CourseCard}
-          swiperModules={{
-            navigation: true,
-          }}
-          module={items}
-          isDesktop={isDesktop}
-          swiperProps={{
-            spaceBetween: 16,
-            slidesPerView: 'auto',
-            className: 'course-swiper',
-            grabCursor: true,
-            lazy: true,
-            navigation: true,
-          }}
+    <div className="course-card-container">
+      <h5>
+      <FormattedMessage
+        // defaultMessage={'{name} - {type}'}
+        defaultMessage={'{modName}'}
+        description={'course Heading'}
+        // values={{ name: items.moduleName, type: items.type }}
+        values={{
+          modName: `${items.moduleName} ${items?.type ? ` - ${items.type}` : ''}`,
+        }}
         />
-      </div>
+      </h5>
+      <CustomSwiperComponent
+        data={items.videos}
+        SlideComponent={CourseCard}
+        swiperModules={{
+          navigation: true,
+        }}
+        module={items}
+        isDesktop={isDesktop}
+        swiperProps={{
+          spaceBetween: 16,
+          slidesPerView: 'auto',
+          className: 'course-swiper',
+          grabCursor: true,
+          lazy: true,
+          navigation: true,
+        }}
+      />
     </div>
   </>
 );
@@ -321,6 +325,8 @@ const Courses = () => {
   if (window.location.href.includes('courses')) {
     pageInit('courses-container', 'Courses');
   }
+
+  timeTrack('courses');
   const isPageMounted = React.useRef(true);
 
   const { courseData } = useCourses({ isPageMounted });
@@ -328,6 +334,20 @@ const Courses = () => {
   const {
     moduleData, continueWatching, progress, overallProgress,
   } = courseData;
+
+  const { timeActivity } = useVideos(
+    { isPageMounted },
+  );
+
+  useEffect(() => {
+    const previousVideoData = localStorage.getItem('videoData');
+
+    if (previousVideoData) {
+      const videoData = JSON.parse(previousVideoData);
+      timeActivity({ videoData });
+      localStorage.removeItem('videoData');
+    }
+  }, []);
 
   const [filteredData, setFilterData] = useState(false);
 
@@ -354,76 +374,87 @@ const Courses = () => {
     setFilterData(result);
   };
 
-  const isDesktop = window.matchMedia('(min-width: 576px)').matches;
+  const isDesktop = window.matchMedia('(min-width: 726px)').matches;
   if (overallProgress) {
     animateTotalCount('#yourScore', overallProgress.completedCount, (overallProgress.completedCount / overallProgress.totalVideos) * 100);
   }
   if (progress && progress.length > 0) {
     animateModuleProgress((progress[0].watched / progress[0].totalVideos) * 100);
   }
+
+  React.useEffect(() => {
+    console.log();
+
+    return () => {
+      isPageMounted.current = false;
+    };
+  }, []);
+
   return (
     <>
-      {isDesktop && overallProgress && progress.length > 0 && (
-        <CourseDetailsCard
-          overallProgress={overallProgress}
-          progress={progress[0]}
-        />
-      )}
-      {!isDesktop && (
-        <TopContainer
-          onChangeFilter={onChangeFilter}
-          filterSet={filter}
-          searchOnChange={onSearch}
-          pressMoreInfo={onPressMoreInfo}
-        />
-      )}
-      {continueWatching && continueWatching.length > 0 && (
-        <div className="w-100 mt-4">
-          <div className="course-card-container">
-            <h5>
-            <FormattedMessage
-      defaultMessage={'Continue Watching'}
-      description={'Continue Watching'}/></h5>
-            <SwiperComponent
-              data={continueWatching}
-              SlideComponent={CourseCard}
-              swiperModules={{
-                navigation: true,
-              }}
-              swiperProps={{
-                spaceBetween: 16,
-                slidesPerView: 'auto',
-                className: 'course-swiper',
-                grabCursor: true,
-                lazy: true,
-                navigation: true,
-              }}
-            />
+      <div className="col-12 col-md-11 col-xl-10 mx-auto courses-body-container">
+        {isDesktop && overallProgress && progress.length > 0 && (
+          <CourseDetailsCard
+            overallProgress={overallProgress}
+            progress={progress[0]}
+          />
+        )}
+        {!isDesktop && (
+          <TopContainer
+            onChangeFilter={onChangeFilter}
+            filterSet={filter}
+            searchOnChange={onSearch}
+            pressMoreInfo={onPressMoreInfo}
+          />
+        )}
+        {continueWatching && continueWatching.length > 0 && (
+          <div className="w-100 mt-4">
+            <div className="course-card-container">
+              <h5>
+              <FormattedMessage
+        defaultMessage={'Continue Watching'}
+        description={'Continue Watching'}/></h5>
+              <SwiperComponent
+                data={continueWatching}
+                SlideComponent={CourseCard}
+                swiperModules={{
+                  navigation: true,
+                }}
+                swiperProps={{
+                  spaceBetween: 16,
+                  slidesPerView: 'auto',
+                  className: 'course-swiper',
+                  grabCursor: true,
+                  lazy: true,
+                  navigation: true,
+                }}
+              />
+            </div>
           </div>
-        </div>
-      )}
-      {filteredData
-        ? filteredData.map((eachModule, index) => (
-            <CourseModule
-              key={index}
-              items={eachModule}
-              isDesktop={isDesktop}
-            />
-        ))
-        : moduleData
-          && moduleData.map((eachModule, index) => (
-            <CourseModule
-              key={index}
-              items={eachModule}
-              isDesktop={isDesktop}
-            />
-          ))}
-          {!isDesktop && overallProgress && <BottomSheet
-          id={'course-progress-modal'}>
-            <CourseDetailsCardMobile
-      progress={progress}
-      overallProgress={overallProgress}/>
-            </BottomSheet>}
+        )}
+        {filteredData
+          ? filteredData.map((eachModule, index) => (
+              <CourseModule
+                key={index}
+                items={eachModule}
+                isDesktop={isDesktop}
+              />
+          ))
+          : moduleData
+            && moduleData.map((eachModule, index) => (
+              <CourseModule
+                key={index}
+                items={eachModule}
+                isDesktop={isDesktop}
+              />
+            ))}
+            {!isDesktop && overallProgress && progress.length > 0 && <BottomSheet
+            id={'course-progress-modal'}>
+              <CourseDetailsCardMobile
+        progress={progress}
+        overallProgress={overallProgress}/>
+              </BottomSheet>}
+      </div>
     </>
   );
 };

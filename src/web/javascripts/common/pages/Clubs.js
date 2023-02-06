@@ -7,7 +7,7 @@ import FragmentNavBar from '../components/FragmentNavBar';
 import ClubDashboardComponent from '../components/ClubDashboardComponents';
 import ClubHomeComponent from '../components/ClubHomeComponent';
 import {
-  $, pageInit,
+  $, pageInit, timeTrack,
 } from '../framework';
 
 const MemoizedClubDashboardComponent = React.memo(ClubDashboardComponent);
@@ -15,6 +15,8 @@ const MemoizedClubHomeComponent = React.memo(ClubHomeComponent);
 
 const Clubs = () => {
   pageInit('clubs-container', 'Clubs');
+
+  timeTrack('clubs');
 
   const isPageMounted = React.useRef(true);
   const {

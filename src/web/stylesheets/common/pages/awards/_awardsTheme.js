@@ -1,4 +1,4 @@
-const { Yellow, Red } = require('../../../../../colors/_colors');
+const { Yellow, Red, LightBlue } = require('../../../../../colors/_colors');
 const {
   Theme,
 } = require('../../../../javascripts/common/_theme');
@@ -9,6 +9,8 @@ const darkTheme = Theme.dark;
 const thememaplight = {
   'awards-text-color-1': lightTheme.utilColors.dark,
   'awards-text-color-2': lightTheme.utilColors.lightGrey,
+  'awards-text-color-3': lightTheme.utilColors.white,
+  'awards-text-color-4': LightBlue.color700,
   'awards-btn-bg': lightTheme.screenYellow.btnBg,
   'awards-btn-text-color': Yellow.color900,
   'awards-bg-2': Yellow.color100,
@@ -28,6 +30,8 @@ const thememaplight = {
 const thememapdark = {
   'awards-text-color-1': darkTheme.utilColors.dark,
   'awards-text-color-2': lightTheme.utilColors.lightGrey,
+  'awards-text-color-3': lightTheme.utilColors.white,
+  'awards-text-color-4': LightBlue.color700,
   'awards-btn-bg': darkTheme.screenYellow.btnBg,
   'awards-btn-text-color': Yellow.color900,
   'awards-bg-2': Yellow.color100,
@@ -48,6 +52,8 @@ const thememapdark = {
 const cssvars = {
   'awards-text-color-1': '--awards-text-color-1',
   'awards-text-color-2': '--awards-text-color-2',
+  'awards-text-color-3': '--awards-text-color-3',
+  'awards-text-color-4': '--awards-text-color-4',
   'awards-btn-bg': '--awards-btn-bg',
   'awards-btn-text-color': '--awards-btn-text-color',
   'awards-bg-2': '--awards-bg-2',

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { saveAs } from 'file-saver';
-import { $, pageInit } from '../framework';
+import { $, pageInit, timeTrack } from '../framework';
 import '../../../stylesheets/common/pages/certificates/style.scss';
 import MoreAccountNavBar from '../components/MoreAccountNavBar';
 import { useProfileInfo } from '../../../../hooks/pages/profile';
@@ -47,6 +47,8 @@ const Certificates = () => {
   const [isDesktop, setIsDesktop] = React.useState(window.matchMedia('(min-width: 576px)').matches);
 
   pageInit(`certificates-container ${!isDesktop ? 'mob-certificates-container' : ''}`, 'Certificates');
+
+  timeTrack('certificates');
 
   const [localState, setLocalState] = useState({
     originalCertificatesList: false,
