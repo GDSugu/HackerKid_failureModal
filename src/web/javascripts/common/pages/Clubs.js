@@ -1,13 +1,13 @@
 import React from 'react';
 import '../../../stylesheets/common/pages/clubs/style.scss';
-import useRootPageState, { useGetSession } from '../../../../hooks/pages/root';
+import useRootPageState, { SubscriptionContext, useGetSession } from '../../../../hooks/pages/root';
 import { ClubContext, useClubs } from '../../../../hooks/pages/clubs';
 import { useCountryStateCity } from '../../../../hooks/common/CountryStateCity';
 import FragmentNavBar from '../components/FragmentNavBar';
 import ClubDashboardComponent from '../components/ClubDashboardComponents';
 import ClubHomeComponent from '../components/ClubHomeComponent';
 import {
-  $, pageInit, timeTrack,
+  $, isFeautureEnabled, pageInit, pathNavigator, timeTrack,
 } from '../framework';
 
 const MemoizedClubDashboardComponent = React.memo(ClubDashboardComponent);
@@ -17,6 +17,17 @@ const Clubs = () => {
   pageInit('clubs-container', 'Clubs');
 
   timeTrack('clubs');
+
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+
+  const isClubEnabled = () => {
+    const clubEnabled = isFeautureEnabled(subscriptionData.planFeatures, 'clubs');
+    return clubEnabled && clubEnabled.enabled;
+  };
+
+  if (!isClubEnabled()) {
+    pathNavigator('pricing');
+  }
 
   const isPageMounted = React.useRef(true);
   const {

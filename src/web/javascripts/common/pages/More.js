@@ -1,10 +1,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
-import { useGetSession } from '../../../../hooks/pages/root';
+import { SubscriptionContext, useGetSession } from '../../../../hooks/pages/root';
 import '../../../stylesheets/common/pages/more/style.scss';
 import {
-  $, loginCheck, pageInit, authorize, pathNavigator, timeTrack,
+  $, loginCheck, pageInit, authorize, pathNavigator, timeTrack, isFeautureEnabled,
 } from '../framework';
 import Img from '../components/Img';
 import Modal from '../components/Modal';
@@ -100,7 +100,13 @@ const Awards = ({
 //   </div>
 // </div>;
 
-const handleClubCard = () => pathNavigator('clubs');
+const handleClubCard = (clubEnabled) => {
+  if (clubEnabled) {
+    pathNavigator('clubs');
+  } else {
+    pathNavigator('pricing');
+  }
+};
 
 const MoreHero = ({ isDesktop, session, toggleModal }) => <>
   <div className="more-hero-container">
@@ -163,11 +169,12 @@ const MoreHero = ({ isDesktop, session, toggleModal }) => <>
   </div>
 </>;
 
-const MoreCards = () => <>
+const MoreCards = ({ clubsEnabled }) => <>
   <div className="more-card-container">
     <div className="row no-gutters align-items-stretch">
       <div className='more-card-block col-12'>
         <div className="more-card-block-cntnr collectible-card">
+          {}
           <div className="more-card">
             <div className="more-card-contnr">
               <h5 className="more-card-title">
@@ -192,7 +199,8 @@ const MoreCards = () => <>
       </div>
       <div className='more-card-block col-12'>
         <div className="more-card-block-cntnr club-card">
-          <div className="more-card">
+          {
+            clubsEnabled ? <div className="more-card">
             <div className="more-card-contnr">
               <h5 className="more-card-title">
                 <FormattedMessage
@@ -208,7 +216,7 @@ const MoreCards = () => <>
               </p>
             </div>
             <div className="more-card-btn-container">
-              <button className="more-card-btn btn" onClick={handleClubCard}>
+              <button className="more-card-btn btn" onClick={() => handleClubCard(clubsEnabled)}>
                 <p>
                   <FormattedMessage
                     defaultMessage={'Visit Club'}
@@ -218,6 +226,31 @@ const MoreCards = () => <>
               </button>
             </div>
           </div>
+              : <div className="more-card">
+          <div className="more-card-contnr">
+            <h5 className="more-card-title">
+              <FormattedMessage
+                defaultMessage={'School Clubs'}
+                description={'more card title'}
+              />
+            </h5>
+            <p className='more-card-subtitle'>
+            Buy premium to use this feature
+            </p>
+          </div>
+          <div className="more-card-btn-container">
+            <button className="more-card-btn btn" onClick={() => handleClubCard(clubsEnabled)}>
+              <p>
+                <FormattedMessage
+                  defaultMessage={'Unlock Now'}
+                  description={'Unlock Now button'}
+                />
+              </p>
+            </button>
+          </div>
+        </div>
+          }
+
         </div>
       </div>
       <div className='more-card-block col-12'>
@@ -437,6 +470,12 @@ const More = () => {
   const isPageMounted = React.useRef(true);
 
   timeTrack('more');
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+
+  const isClubEnabled = () => {
+    const clubEnabled = isFeautureEnabled(subscriptionData.planFeatures, 'clubs');
+    return clubEnabled && clubEnabled.enabled;
+  };
 
   const [isDesktop, setIsDesktop] = React.useState(window.matchMedia('(min-width: 576px)').matches);
   const { session } = useGetSession({ sessionAttr: ['name', 'pointsEarned', 'profileLink'], isPageMounted });
@@ -508,7 +547,7 @@ const More = () => {
       <MoreHero isDesktop={isDesktop} session={session} toggleModal={toggleModal} />
       <div className='row no-gutters'>
         <div className="col-12 col-md-8">
-          <MoreCards />
+          <MoreCards clubsEnabled={isClubEnabled()} />
         </div>
         <div className="col-12 col-md-4">
           <MoreMenu logoutHandler={showLogoutModal} />

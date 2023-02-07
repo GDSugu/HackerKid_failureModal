@@ -679,10 +679,20 @@
             }
 
             .club-card-content {
+              .club-image-div {
+                display: flex;
+                justify-content: center;
+              }
+
               .sideboard-content-data {
                 .club-members-title {
                   font-size: 0.875rem;
                   color: gt.theme-var(dashboard-text-color-4, null, $thememaplight, $cssvars);
+                }
+
+                .club-members-title-buy {
+                  font-size: 0.875rem;
+                  color: gt.theme-var(dashboard-text-color-1, null, $thememaplight, $cssvars);
                 }
 
                 .club-btn {
@@ -693,6 +703,17 @@
                   &:hover {
                     background-color: gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
                     color: gt.theme-var(text-color-2);
+                  }
+                }
+
+                .club-btn-buy {
+                  color: gt.theme-var(text-color-2);
+                  background-color: gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
+
+                  &:hover {
+                    border: 1px solid gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
+                    color: gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
+                    background-color: transparent;
                   }
                 }
               }
@@ -853,13 +874,34 @@
       }
 
       .club-card-content {
+        .club-image-div {
+          display: flex;
+          justify-content: center;
+        }
+
         .sideboard-content-data {
           .club-members-title {
             font-size: 0.875rem;
             color: gt.theme-var(dashboard-text-color-4, null, $thememaplight, $cssvars);
           }
 
+          .club-members-title-buy {
+            font-size: 0.875rem;
+            color: gt.theme-var(dashboard-text-color-1, null, $thememaplight, $cssvars);
+          }
+
           .club-btn {
+            color: gt.theme-var(text-color-2);
+            background-color: gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
+
+            &:hover {
+              border: 1px solid gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
+              color: gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
+              background-color: transparent;
+            }
+          }
+
+          .club-btn-buy {
             color: gt.theme-var(text-color-2);
             background-color: gt.theme-var(dashboard-club-btn-color, null, $thememaplight, $cssvars);
 

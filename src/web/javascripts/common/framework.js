@@ -9,6 +9,28 @@ const { API } = process.env;
 
 const authorize = {};
 
+const isFeautureEnabled = (features, feature, subFeature) => {
+  if (features && features.length > 0) {
+    const featureObj = features.find((f) => f.name === feature);
+    const obj = {};
+    if (featureObj) {
+      obj[feature] = {
+        enabled: featureObj.enabled,
+        isPartial: featureObj.isPartial,
+      };
+      if (featureObj.isPartial && subFeature) {
+        const subFeatureObj = featureObj.allowed.find((f) => f.category === subFeature);
+        if (subFeatureObj) {
+          obj[feature][subFeature] = subFeatureObj.limit;
+        }
+      }
+      return obj[feature];
+    }
+    return false;
+  }
+  return false;
+};
+
 const secondsToMins = (s) => {
   let seconds = parseInt(s, 10);
   let minutes = Math.floor(seconds / 60);
@@ -443,4 +465,5 @@ export {
   loadScriptByURL,
   timeTrack,
   secondsToMins,
+  isFeautureEnabled,
 };

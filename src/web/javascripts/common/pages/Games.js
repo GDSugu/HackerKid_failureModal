@@ -3,13 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../../../stylesheets/common/pages/games/style.scss';
 import { FormattedMessage } from 'react-intl';
 import {
-  $, loginCheck, pageInit, secondsToMins, timeTrack,
+  $, isFeautureEnabled, loginCheck, pageInit, secondsToMins, timeTrack,
 } from '../framework';
 import { useDashboard } from '../../../../hooks/pages/dashboard';
 import SwiperComponent from '../components/SwiperComponent';
 import Img from '../components/Img';
 import { useLeaderBoard } from '../../../../hooks/pages/leaderboard';
 import BottomSheet from '../components/BottomSheet';
+import { SubscriptionContext } from '../../../../hooks/pages/root';
 
 const compareProps = (prev, next) => {
   let isEqual = true;
@@ -454,9 +455,12 @@ const MemoizedBottomSheetComponent = memo(BottomSheetComponent, compareProps);
 
 // top level component
 const Games = () => {
+  const { subscriptionData } = React.useContext(SubscriptionContext);
   pageInit('games-container', 'Games');
 
   timeTrack('games');
+  console.log('subscriptionData', subscriptionData);
+  console.log(isFeautureEnabled(subscriptionData.planFeatures, 'games', 'codingPirate'));
 
   // hooks
   const navigate = useNavigate();

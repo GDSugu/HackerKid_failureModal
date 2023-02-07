@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import {
-  $, pageInit, secondsToMins, timeTrack,
+  $, isFeautureEnabled, pageInit, secondsToMins, timeTrack,
 } from '../framework';
 import Img from '../components/Img';
 // import SwiperComponent from '../components/SwiperComponent';
@@ -14,6 +14,7 @@ import BottomSheet from '../components/BottomSheet';
 import '../../../stylesheets/common/pages/dashboard/style.scss';
 import { getSession, setSession } from '../../../../hooks/common/framework';
 import AwardsNotificationCard from '../components/AwardsNotificationCard';
+import { SubscriptionContext } from '../../../../hooks/pages/root';
 
 const compareProps = (prev, next) => {
   let isEqual = true;
@@ -635,7 +636,7 @@ const AchievementCard = ({ className, isDesktop, sessionData }) => <>
   </>}
 </>;
 
-const ClubCard = ({ clubData = {}, className }) => <>
+const ClubCard = ({ clubData = {}, className, enabled }) => <>
   {<>
     <div className={`dashboard-club-container dashboard-body-block ${className}`}>
       <div className="sideboard-card card">
@@ -645,12 +646,13 @@ const ClubCard = ({ clubData = {}, className }) => <>
               defaultMessage={'{clubName}'}
               description={'Club name heading'}
               values={{
-                clubName: clubData.clubName,
+                clubName: enabled ? clubData.clubName : 'School Clubs',
               }}
             />
           </p>
         </div>
-        <div className="club-card-content">
+        {
+          enabled ? <div className="club-card-content">
           {
             !clubData && <>
               <div className="skeleton">
@@ -705,6 +707,23 @@ const ClubCard = ({ clubData = {}, className }) => <>
             </>
           }
         </div>
+            : <div className="club-card-content">
+          <div className="sideboard-content-title club-image-div">
+          <Img src='common/feature-lock.svg' className='club-lock-image'/>
+              </div>
+              <div className="sideboard-content-data">
+                <p className="club-members-title-buy mb-0">Buy premium to unlock school clubs feature</p>
+                <div className="sideboard-btn-block">
+                  <Link className='btn btn-block club-btn-buy' to={'/pricing'}>
+                    <FormattedMessage
+                      defaultMessage={'Unlock Now'}
+                      description={'Unlock Now button'}
+                    />
+                  </Link>
+                </div>
+              </div>
+        </div>
+        }
       </div>
     </div>
   </>}
@@ -756,6 +775,8 @@ const Dashboard = () => {
 
   const modalVisible = [dashboarStatus, leaderboardStatus, challengesStatus].includes('access_denied');
 
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+
   const populateScore = (selectorPrefix, score, percentage) => {
     if (score) {
       $({ Counter: 0, percent: 0 }).animate({
@@ -785,6 +806,11 @@ const Dashboard = () => {
 
   const listenDesktop = () => {
     setIsDesktop(window.matchMedia('(min-width: 576px)').matches);
+  };
+
+  const isClubEnabled = () => {
+    const clubEnabled = isFeautureEnabled(subscriptionData.planFeatures, 'clubs');
+    return clubEnabled && clubEnabled.enabled;
   };
 
   useEffect(() => {
@@ -837,7 +863,7 @@ const Dashboard = () => {
                 clubData
                 && clubData?.hasClub
                 && <>
-                  <ClubCardComponent clubData={clubData} />
+                  <ClubCardComponent clubData={clubData} enabled={isClubEnabled()} />
                 </>
               }
               <LeaderBoardCardComponent
@@ -866,7 +892,8 @@ const Dashboard = () => {
             && <>
               <ClubCardComponent
                 clubData={clubData}
-                className={'sheet-card'} />
+                className={'sheet-card'}
+                enabled={isClubEnabled()} />
             </>
           }
           <LeaderBoardCardComponent
