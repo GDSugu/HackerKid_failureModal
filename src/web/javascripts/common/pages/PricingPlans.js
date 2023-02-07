@@ -1,9 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
+import RazorpayScript from '../../../partials/razorpay-script-header';
 import '../../../stylesheets/common/pages/pricing-plans/style.scss';
 import {
   pageInit,
 } from '../framework';
+import initSubscriptionPayment from '../../../../hooks/common/payment';
+
+const initPayment = () => {
+  initSubscriptionPayment({ subscriptionType: 'premium' }).then((res) => {
+    const orderRes = JSON.parse(res);
+    if (orderRes.status === 'success') {
+      const order = orderRes.orderDetails;
+      // console.log(order);
+      const options = {
+        key: order.razorKeyId,
+        amount: order.amount,
+        currency: order.currency,
+        name: order.name,
+        notes: order.notes,
+        order_id: order.id,
+        prefill: {
+          name: order.name,
+          email: order.email,
+          contact: order.phone,
+        },
+      };
+      // console.log(options);
+      const razorPayObj = new window.Razorpay(options);
+      razorPayObj.open();
+    }
+  });
+};
 
 const PriceCards = () => <>
   <div className="price-card-container">
@@ -44,7 +72,8 @@ const PriceCards = () => <>
               />
             </span>
 
-            <button className='btn btn-primary text-white w-100'>
+            <button className='btn btn-primary text-white w-100'
+            onClick={initPayment}>
               <FormattedMessage
                 defaultMessage={'Buy Now'}
                 description={'Buy Now btn'}
@@ -192,7 +221,8 @@ const PlansFeatures = () => <>
                   />
                 </s>
               </h2>
-              <button className='btn btn-primary w-100 text-white'>
+              <button className='btn btn-primary w-100 text-white'
+              onClick={initPayment}>
                 <FormattedMessage
                   defaultMessage='Buy Now'
                   description='Buy Now btn'
@@ -506,12 +536,13 @@ const PlansFeatures = () => <>
             description={'FREE price'}
           />
         </h2>
-        <a href='/' className='btn btn-primary text-white w-100'>
+        <button href='/' className='btn btn-primary text-white w-100'
+        onClick={initPayment}>
           <FormattedMessage
             defaultMessage='Buy Now'
             description='Buy Now btn'
           />
-        </a>
+        </button>
       </div>
     </div>
     <div className='plan-mobile-view'>
@@ -990,9 +1021,12 @@ const ExclusiveCourses = () => <>
 </>;
 
 const PricingPlans = () => {
-  if (window.location.href.includes('pricing-plans')) {
+  if (window.location.href.includes('pricing')) {
     pageInit('price-container', 'PricingPlans');
   }
+  useEffect(() => {
+    RazorpayScript();
+  }, []);
   return <>
     <div className='price-plan-section'>
       <div className='container'>
@@ -1015,6 +1049,7 @@ const PricingPlans = () => {
         <ExclusiveCourses />
       </div>
     </div>
+    {/* <RazorpayScript/> */}
   </>;
 };
 
