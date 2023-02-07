@@ -43,6 +43,12 @@
       "value": "Logout"
     }
   ],
+  "+iHEIb": [
+    {
+      "type": 0,
+      "value": "Limited (5 Problems)"
+    }
+  ],
   "+kY4JR": [
     {
       "type": 0,
@@ -209,6 +215,12 @@
       "value": "Limited (3 Solved)"
     }
   ],
+  "0RZrI3": [
+    {
+      "type": 0,
+      "value": "Officially Authorised Partner"
+    }
+  ],
   "0Sgdtj": [
     {
       "type": 0,
@@ -287,10 +299,22 @@
       "value": "levelNumber"
     }
   ],
+  "1ctDzX": [
+    {
+      "type": 0,
+      "value": "Coding Pirate"
+    }
+  ],
   "1x4WPP": [
     {
       "type": 0,
       "value": "Create a New Account"
+    }
+  ],
+  "24TFgF": [
+    {
+      "type": 0,
+      "value": "WebKata Trilogy"
     }
   ],
   "2E6QpA": [
@@ -327,6 +351,12 @@
     {
       "type": 0,
       "value": "Bio"
+    }
+  ],
+  "2WX0SV": [
+    {
+      "type": 0,
+      "value": "Awards & Badges"
     }
   ],
   "2X3jYB": [
@@ -369,6 +399,12 @@
     {
       "type": 0,
       "value": "Login with Phone"
+    }
+  ],
+  "3/7aVe": [
+    {
+      "type": 0,
+      "value": "Interactive Coding Games"
     }
   ],
   "3/xv4v": [
@@ -439,6 +475,12 @@
     {
       "type": 1,
       "value": "rank"
+    }
+  ],
+  "3SfBD1": [
+    {
+      "type": 0,
+      "value": "Limited"
     }
   ],
   "3Tij96": [
@@ -609,6 +651,12 @@
       "value": "Publish"
     }
   ],
+  "5PaAfL": [
+    {
+      "type": 0,
+      "value": "Unlock game-based learning experience for kids"
+    }
+  ],
   "5Vj22e": [
     {
       "type": 1,
@@ -679,6 +727,18 @@
       "value": "rating"
     }
   ],
+  "6fu/Nn": [
+    {
+      "type": 0,
+      "value": "Videos"
+    }
+  ],
+  "6mrv4N": [
+    {
+      "type": 0,
+      "value": "Leaderboard"
+    }
+  ],
   "6oGVMu": [
     {
       "type": 0,
@@ -745,6 +805,12 @@
       "value": "emptyStateText"
     }
   ],
+  "7NdcVF": [
+    {
+      "type": 0,
+      "value": "For Classes 7, 8 & 9"
+    }
+  ],
   "7PlDmO": [
     {
       "type": 0,
@@ -799,6 +865,12 @@
       "value": " watched"
     }
   ],
+  "7zxdrW": [
+    {
+      "type": 0,
+      "value": "Limited (10 Problems)"
+    }
+  ],
   "8+Lyt3": [
     {
       "type": 1,
@@ -807,6 +879,12 @@
     {
       "type": 0,
       "value": "?"
+    }
+  ],
+  "8WVile": [
+    {
+      "type": 0,
+      "value": "For Classes 9 & above"
     }
   ],
   "8cISRy": [
@@ -835,6 +913,12 @@
     {
       "type": 0,
       "value": "IDE"
+    }
+  ],
+  "9+SQQV": [
+    {
+      "type": 0,
+      "value": "The Turtle"
     }
   ],
   "94ZC8v": [
@@ -893,6 +977,12 @@
     {
       "type": 0,
       "value": "Turtle"
+    }
+  ],
+  "9OKjMR": [
+    {
+      "type": 0,
+      "value": "Agash Raj"
     }
   ],
   "9QOtTR": [
@@ -1067,6 +1157,12 @@
       "value": "data"
     }
   ],
+  "Bqm+bJ": [
+    {
+      "type": 0,
+      "value": "Webkata JS"
+    }
+  ],
   "Bt/Kkf": [
     {
       "type": 0,
@@ -1123,6 +1219,18 @@
       "value": "Club Leaderboard"
     }
   ],
+  "CVflbu": [
+    {
+      "type": 0,
+      "value": "Advance in Programming by solving problems in any programming language with an Algorithmic approach."
+    }
+  ],
+  "CZGDRc": [
+    {
+      "type": 0,
+      "value": "Master Coding Skills through Active Gaming"
+    }
+  ],
   "CabaPs": [
     {
       "type": 0,
@@ -1155,6 +1263,18 @@
     {
       "type": 0,
       "value": "Challenges Creation"
+    }
+  ],
+  "Cqz44A": [
+    {
+      "type": 0,
+      "value": "2. How does the HackerKid program Works?"
+    }
+  ],
+  "Czb4m8": [
+    {
+      "type": 0,
+      "value": "Challenges"
     }
   ],
   "D/2aSY": [
@@ -1217,6 +1337,12 @@
     {
       "type": 0,
       "value": "Live Preview"
+    }
+  ],
+  "E7sIXW": [
+    {
+      "type": 0,
+      "value": "India’s"
     }
   ],
   "EOKZu2": [
@@ -1521,6 +1647,12 @@
       "value": "Sample Input:"
     }
   ],
+  "HYjDSN": [
+    {
+      "type": 0,
+      "value": "HackerKid helps kids from 5-12 years age to learn coding and help them become the next Mark Zuckerbery or Bill Gates."
+    }
+  ],
   "HZrPcB": [
     {
       "type": 0,
@@ -1549,6 +1681,12 @@
     {
       "type": 0,
       "value": "Loading failed due to some unknown error! Please try again later."
+    }
+  ],
+  "IGPXXW": [
+    {
+      "type": 0,
+      "value": "JavaScript Video Library"
     }
   ],
   "ILnphX": [
@@ -1599,6 +1737,12 @@
       "value": "errorMessage"
     }
   ],
+  "IvteYj": [
+    {
+      "type": 0,
+      "value": "The Zombieland"
+    }
+  ],
   "J2b4h6": [
     {
       "type": 0,
@@ -1635,6 +1779,12 @@
       "value": "Awards"
     }
   ],
+  "JQb+h8": [
+    {
+      "type": 0,
+      "value": "Why Choose HackerKid 2.0?"
+    }
+  ],
   "JW9Qqp": [
     {
       "type": 1,
@@ -1647,6 +1797,12 @@
       "value": "No Awards Found!"
     }
   ],
+  "JdNNEo": [
+    {
+      "type": 0,
+      "value": "“With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems. With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems.With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems.”"
+    }
+  ],
   "JnwRMJ": [
     {
       "type": 0,
@@ -1657,6 +1813,18 @@
     {
       "type": 1,
       "value": "countryName"
+    }
+  ],
+  "Jti4oM": [
+    {
+      "type": 0,
+      "value": "Introduction to Web Development"
+    }
+  ],
+  "Jwh3jp": [
+    {
+      "type": 0,
+      "value": "IDE"
     }
   ],
   "K+0Pvy": [
@@ -1731,6 +1899,12 @@
       "value": "No Certificates Found"
     }
   ],
+  "L/VOjg": [
+    {
+      "type": 0,
+      "value": "Limited (3 Problems)"
+    }
+  ],
   "L5HYii": [
     {
       "type": 0,
@@ -1753,6 +1927,12 @@
     {
       "type": 0,
       "value": "Share"
+    }
+  ],
+  "LPsIfo": [
+    {
+      "type": 0,
+      "value": "Limited (Python)"
     }
   ],
   "LbCDj2": [
@@ -1797,6 +1977,12 @@
       "value": "Next award:"
     }
   ],
+  "M3JNcL": [
+    {
+      "type": 0,
+      "value": "Challenges Attempting"
+    }
+  ],
   "M6iTxq": [
     {
       "type": 0,
@@ -1813,6 +1999,12 @@
     {
       "type": 1,
       "value": "sortName"
+    }
+  ],
+  "MGe16B": [
+    {
+      "type": 0,
+      "value": "Frequently Asked Questions"
     }
   ],
   "MS/biV": [
@@ -2127,6 +2319,12 @@
       "value": "Are you sure you want to logout?"
     }
   ],
+  "QeXB5+": [
+    {
+      "type": 0,
+      "value": "Webkata HTML"
+    }
+  ],
   "QsXf1d": [
     {
       "type": 1,
@@ -2141,6 +2339,12 @@
     {
       "type": 0,
       "value": "Profile"
+    }
+  ],
+  "R3aEKG": [
+    {
+      "type": 0,
+      "value": "1. How does the HackerKid program Works?"
     }
   ],
   "R5SEEt": [
@@ -2219,6 +2423,12 @@
       "value": "Previous Awards"
     }
   ],
+  "RxWnYF": [
+    {
+      "type": 0,
+      "value": "Happy Learning Starts Here..."
+    }
+  ],
   "S3mtIm": [
     {
       "type": 0,
@@ -2253,6 +2463,12 @@
       "value": "Zombieland"
     }
   ],
+  "SDzovA": [
+    {
+      "type": 0,
+      "value": "Powered by Team"
+    }
+  ],
   "SI6+pb": [
     {
       "type": 0,
@@ -2269,6 +2485,18 @@
     {
       "type": 0,
       "value": "Delete Challenge"
+    }
+  ],
+  "SUyZvl": [
+    {
+      "type": 0,
+      "value": "Help"
+    }
+  ],
+  "SZe2jy": [
+    {
+      "type": 0,
+      "value": "Modern Vidya Ketan"
     }
   ],
   "ScK8GA": [
@@ -2353,6 +2581,12 @@
       "value": "Edit Profile"
     }
   ],
+  "TstQTz": [
+    {
+      "type": 0,
+      "value": "Basics of Python"
+    }
+  ],
   "Tv+MUS": [
     {
       "type": 0,
@@ -2399,6 +2633,12 @@
     {
       "type": 0,
       "value": "Continue watching"
+    }
+  ],
+  "U8S8dq": [
+    {
+      "type": 0,
+      "value": "What makes it more Fun for your kids?"
     }
   ],
   "U9/ROI": [
@@ -2597,6 +2837,12 @@
       "value": "HackerKid provided the chance for you to explore the world of coding with HackerKid in a gamified environment for a 7 day trial period. Your current trial edition allows you explore the limited version of HackerKid."
     }
   ],
+  "XEOksh": [
+    {
+      "type": 0,
+      "value": "Basics of JavaScript"
+    }
+  ],
   "XMB1Ot": [
     {
       "type": 0,
@@ -2765,6 +3011,12 @@
       "value": "studentNamt"
     }
   ],
+  "aHq9L+": [
+    {
+      "type": 0,
+      "value": "We are here to help!"
+    }
+  ],
   "aNoleS": [
     {
       "type": 0,
@@ -2919,6 +3171,12 @@
       "value": "..."
     }
   ],
+  "d3CYds": [
+    {
+      "type": 0,
+      "value": "Aligned with"
+    }
+  ],
   "d9u+8x": [
     {
       "type": 0,
@@ -2965,6 +3223,12 @@
       "value": "Yes"
     }
   ],
+  "dqDDT2": [
+    {
+      "type": 0,
+      "value": "Limited (5 Solved)"
+    }
+  ],
   "dreQIo": [
     {
       "type": 0,
@@ -2987,6 +3251,12 @@
     {
       "type": 0,
       "value": "Webkata CSS"
+    }
+  ],
+  "eBe6vX": [
+    {
+      "type": 0,
+      "value": "Starter Plan"
     }
   ],
   "ed9QEz": [
@@ -3019,10 +3289,22 @@
       "value": "Limited (5 Problems)"
     }
   ],
+  "f7Qqwl": [
+    {
+      "type": 0,
+      "value": "Have Further Questions?"
+    }
+  ],
   "fAOneF": [
     {
       "type": 0,
       "value": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?"
+    }
+  ],
+  "fCkD1l": [
+    {
+      "type": 0,
+      "value": "Learn basic essentials of Web Development through HTML, CSS & JavaScript Game Levels & create super cool websites."
     }
   ],
   "fOZCSk": [
@@ -3119,6 +3401,12 @@
     {
       "type": 0,
       "value": "Coins"
+    }
+  ],
+  "gBduz2": [
+    {
+      "type": 0,
+      "value": "Webkata CSS"
     }
   ],
   "gCfRUT": [
@@ -3309,6 +3597,12 @@
       "value": "Forgot Password"
     }
   ],
+  "jcE9o2": [
+    {
+      "type": 0,
+      "value": "Zombieland"
+    }
+  ],
   "jmSDeU": [
     {
       "type": 0,
@@ -3325,10 +3619,28 @@
       "value": "rankNumber"
     }
   ],
+  "jqtzC8": [
+    {
+      "type": 0,
+      "value": "Coding Pirate"
+    }
+  ],
+  "k0cHwD": [
+    {
+      "type": 0,
+      "value": "Learn syntax-based coding through Zombieland Game Levels"
+    }
+  ],
   "k6tlKQ": [
     {
       "type": 0,
       "value": "Ok"
+    }
+  ],
+  "kGV7W5": [
+    {
+      "type": 0,
+      "value": "Most Popular"
     }
   ],
   "kKheEw": [
@@ -3349,6 +3661,12 @@
       "value": "View all collections"
     }
   ],
+  "l7/Vbd": [
+    {
+      "type": 0,
+      "value": "Profile Edit"
+    }
+  ],
   "lK2LOr": [
     {
       "type": 1,
@@ -3359,6 +3677,12 @@
     {
       "type": 0,
       "value": "Save & Exit"
+    }
+  ],
+  "lOxnmH": [
+    {
+      "type": 0,
+      "value": "Learn Python Programming through Turtle’s Block Coding."
     }
   ],
   "lPt9wn": [
@@ -3481,6 +3805,12 @@
       "value": "Session expired"
     }
   ],
+  "mUI/1P": [
+    {
+      "type": 0,
+      "value": "Awards & Badges"
+    }
+  ],
   "ma6GHl": [
     {
       "type": 0,
@@ -3581,6 +3911,12 @@
       "value": "Try IDE Now"
     }
   ],
+  "nVCuqR": [
+    {
+      "type": 0,
+      "value": "Limited (3 Published)"
+    }
+  ],
   "nWr131": [
     {
       "type": 1,
@@ -3645,6 +3981,12 @@
     {
       "type": 0,
       "value": "Plans & Features"
+    }
+  ],
+  "oLk+st": [
+    {
+      "type": 0,
+      "value": "Python Video Library"
     }
   ],
   "oOZkkL": [
@@ -3727,6 +4069,12 @@
     {
       "type": 0,
       "value": " coins"
+    }
+  ],
+  "pweGuZ": [
+    {
+      "type": 0,
+      "value": "Limited (3 Videos)"
     }
   ],
   "pwy4hs": [
@@ -3897,10 +4245,22 @@
       "value": "Copy Link"
     }
   ],
+  "roTiGY": [
+    {
+      "type": 0,
+      "value": "Learners Community"
+    }
+  ],
   "sC1GR3": [
     {
       "type": 0,
       "value": "Yes"
+    }
+  ],
+  "sEH4lc": [
+    {
+      "type": 0,
+      "value": "Coins & XPs"
     }
   ],
   "sI7zqJ": [
@@ -3947,6 +4307,12 @@
     {
       "type": 0,
       "value": "Go to Home"
+    }
+  ],
+  "t/GLeH": [
+    {
+      "type": 0,
+      "value": "Premium Plan"
     }
   ],
   "t32bf0": [
@@ -4069,6 +4435,12 @@
       "value": "Share"
     }
   ],
+  "uzNekz": [
+    {
+      "type": 0,
+      "value": "Game Progress"
+    }
+  ],
   "v6AMff": [
     {
       "type": 0,
@@ -4087,6 +4459,12 @@
       "value": "Show Leaderboard"
     }
   ],
+  "vRhtHg": [
+    {
+      "type": 0,
+      "value": "Follow us on"
+    }
+  ],
   "vWe94i": [
     {
       "type": 0,
@@ -4103,6 +4481,12 @@
     {
       "type": 0,
       "value": "Filter"
+    }
+  ],
+  "vf8heh": [
+    {
+      "type": 0,
+      "value": "Enriching Tech Videos for You"
     }
   ],
   "viQX0N": [
@@ -4127,6 +4511,12 @@
     {
       "type": 0,
       "value": "Create club"
+    }
+  ],
+  "wfiJET": [
+    {
+      "type": 0,
+      "value": "Web Development Video Library"
     }
   ],
   "wg10ST": [
@@ -4163,6 +4553,18 @@
     {
       "type": 0,
       "value": "Share"
+    }
+  ],
+  "x26Xe0": [
+    {
+      "type": 0,
+      "value": "For Classes 5 & 6"
+    }
+  ],
+  "x4kCc4": [
+    {
+      "type": 0,
+      "value": "Unlimited"
     }
   ],
   "x8lXTv": [
@@ -4207,10 +4609,22 @@
       "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit dolor venenatis eget laoreet ultrices ut tortor proin viverra."
     }
   ],
+  "xd1i3c": [
+    {
+      "type": 0,
+      "value": "Challenges Creation"
+    }
+  ],
   "xlvJ5U": [
     {
       "type": 0,
       "value": "You are offline."
+    }
+  ],
+  "xqT8x9": [
+    {
+      "type": 0,
+      "value": "Recognised by"
     }
   ],
   "xs8DW+": [
@@ -4265,6 +4679,12 @@
     {
       "type": 0,
       "value": "Your Collections and Perks"
+    }
+  ],
+  "yxM+3S": [
+    {
+      "type": 0,
+      "value": "Limited (5 Videos)"
     }
   ],
   "z/0c45": [

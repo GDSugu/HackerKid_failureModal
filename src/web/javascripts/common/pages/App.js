@@ -49,6 +49,7 @@ const RouteClub = loadable(() => import('./Clubs'), { fallback: <Loading /> });
 const RouteWebkata = loadable(() => import('./Webkata'), { fallback: <Loading /> });
 const RouteIde = loadable(() => import('./Ide'), { fallback: <Loading /> });
 const RoutePrice = loadable(() => import('./PricingPlans'), { fallback: <Loading /> });
+const RouteLanding = loadable(() => import('./Landing'), { fallback: <Loading /> });
 
 const App = () => {
   React.useEffect(() => {
@@ -130,6 +131,7 @@ const App = () => {
       </Route>
       <Route path='/about' caseSensitive={true} element={<RouteAbout />} />
       <Route path='/pricing-plans' caseSensitive={true} element={<RoutePrice />} />
+      <Route path='/landing' caseSensitive={true} element={<RouteLanding />} />
       <Route path='*' element={ <Navigate to='/' />} />
     </Routes>
   </BrowserRouter>);

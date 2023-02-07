@@ -12,7 +12,7 @@ import Img from '../components/Img';
 import BottomSheet from '../components/BottomSheet';
 
 const CourseModule = ({ items, isDesktop }) => (
-  <>
+  <> 
     <div className="w-100 mt-4">
       <div className="course-card-container">
         <h5>
