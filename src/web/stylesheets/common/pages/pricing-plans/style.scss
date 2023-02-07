@@ -1,0 +1,421 @@
+@use "../../sass/themes/_default" as gt;
+@use "../../sass/base/_mixins" as gm;
+
+@import "./_priceTheme.js";
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+.price-container {
+  .container {
+    max-width: 1200px;
+  }
+
+  .price-plan-section {
+    background-color: gt.theme-var(price-body-bg, null, $thememaplight, $cssvars);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+
+    .premium {
+      color: gt.theme-var(price-common-gradient-color-2, null, $thememaplight, $cssvars) !important;
+    }
+
+    .edition {
+      color: gt.theme-var(price-ide-btn-bg, null, $thememaplight, $cssvars) !important;
+    }
+
+    .light-icon {
+      color: gt.theme-var(price-current-free, null, $thememaplight, $cssvars) !important;
+    }
+
+    .btn {
+      padding: 0.688rem 0;
+      border-radius: 0.75rem;
+      font-size: 1.125rem;
+    }
+
+    .pricing-plan-title-dcrp {
+      width: 50%;
+      margin: auto;
+      text-align: center;
+
+      @include gm.media-breakpoint-down(sm) {
+        width: 100%;
+        text-align: left;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+
+        @include gm.media-breakpoint-down(sm) {
+          font-size: 2rem;
+        }
+      }
+
+      p {
+        font-size: 1.125rem;
+
+        @include gm.media-breakpoint-down(sm) {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .price-card-container {
+      margin-top: 2.3rem;
+      margin-bottom: 2rem;
+
+      @include gm.media-breakpoint-down(sm) {
+        margin-top: 1.3rem;
+      }
+
+      .row-revise {
+        flex-direction: row-reverse;
+      }
+
+      .yellow-card {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        border: 1px solid gt.theme-var(price-common-gradient-color-2, null, $thememaplight, $cssvars) !important;
+      }
+
+      .card {
+        height: 100%;
+        border: none;
+        border-radius: 0.75rem;
+        position: relative;
+        overflow: hidden;
+
+        .card-body {
+          padding: 1.5rem;
+
+          @include gm.media-breakpoint-down(sm) {
+            padding: 1rem;
+          }
+
+          p {
+            font-size: 1rem;
+            width: 83%;
+
+            @include gm.media-breakpoint-down(sm) {
+              width: 100%;
+            }
+          }
+
+          h2 {
+            s {
+              margin-left: 1rem;
+              font-weight: 300;
+              color: gt.theme-var(price-current-free, null, $thememaplight, $cssvars);
+              font-size: 1.8rem;
+            }
+          }
+
+          .yellow-light-bg {
+            background: gt.theme-var(price-body-bg, null, $thememaplight, $cssvars);
+          }
+
+          .blue-light-bg {
+            background: gt.theme-var(price-bule-light, null, $thememaplight, $cssvars);
+          }
+
+          span {
+            height: 3rem;
+            display: block;
+
+            @include gm.media-breakpoint-down(sm) {
+              height: auto;
+              margin-bottom: 0.5rem;
+            }
+          }
+
+          .plan-list {
+            padding: 1rem;
+            border-radius: 0.75rem;
+
+            h4 {
+              @include gm.media-breakpoint-down(sm) {
+                font-size: 1.3rem;
+              }
+            }
+
+            ul {
+              margin-bottom: 0;
+
+              li {
+                list-style: none;
+                padding-top: 0.5rem;
+              }
+            }
+          }
+        }
+
+        .most-popular {
+          background: gt.theme-var(price-most-popular-tbg, null, $thememaplight, $cssvars);
+          position: absolute;
+          top: 26px;
+          right: -51px;
+          transform: rotate(45.65deg);
+          margin: 0;
+          padding: 1rem 3rem;
+          font-size: 1.2rem;
+
+          @include gm.media-breakpoint-down(sm) {
+            top: 16px;
+            right: -54px;
+            margin: 0;
+            padding: 0.4rem 3rem;
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+
+    .price-plans-features {
+      @include gm.media-breakpoint-down(sm) {
+        display: none;
+      }
+
+      h2 {
+        font-size: 1.25;
+      }
+
+      .price-plan-table {
+        padding: 2rem;
+        border-radius: 0.75rem;
+
+        table {
+          thead {
+            position: sticky;
+            top: 0;
+            border-bottom: 1px solid gt.theme-var(price-light-border, null, $thememaplight, $cssvars);
+
+            tr {
+              td {
+                width: 33.3%;
+                vertical-align: bottom;
+                text-align: center;
+                padding: 2rem;
+
+                h4 {
+                  color: gt.theme-var(price-current-free, null, $thememaplight, $cssvars);
+                  margin-bottom: 0;
+                }
+
+                h2 {
+                  padding-top: 0.7rem;
+                  padding-bottom: 0.7rem;
+                  margin-bottom: 0;
+
+                  s {
+                    margin-left: 1rem;
+                    font-weight: 300;
+                    color: gt.theme-var(price-current-free, null, $thememaplight, $cssvars);
+                    font-size: 1.8rem;
+                  }
+                }
+
+                &:nth-of-type(1) {
+                  text-align: left;
+                  padding-left: 0;
+                  padding-right: 0;
+                }
+
+                &:nth-of-type(3) {
+                  background-color: gt.theme-var(price-body-bg, null, $thememaplight, $cssvars);
+                  border-radius: 0.75rem 0.75rem 0 0;
+                }
+              }
+            }
+          }
+
+          tbody {
+            tr {
+              td {
+                width: 33.3%;
+                text-align: center;
+                font-size: 1.125rem;
+                padding-bottom: 0.9rem;
+                padding-top: 0.9rem;
+                color: gt.theme-var(price-current-pln-btn-color, null, $thememaplight, $cssvars);
+
+                i {
+                  font-size: 1.4rem;
+                }
+
+                h6 {
+                  font-size: 1.2rem;
+                  font-weight: 700;
+                  margin-bottom: 0;
+                  padding-top: 0.5rem;
+                }
+
+                p {
+                  margin-bottom: 0;
+                }
+
+                &:nth-of-type(1) {
+                  text-align: left;
+                }
+
+                &:nth-of-type(3) {
+                  background-color: gt.theme-var(price-body-bg, null, $thememaplight, $cssvars);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .price-course-container {
+      background: gt.theme-var(price-light-green-bg, null, $thememaplight, $cssvars);
+      border-radius: 0.75rem;
+      padding: 2rem;
+      margin-top: 2.5rem;
+
+      @include gm.media-breakpoint-down(sm) {
+        padding: 1rem;
+      }
+
+      .row-revise {
+        flex-direction: row-reverse;
+      }
+
+      h3 {
+        color: gt.theme-var(price-dark-green-color, null, $thememaplight, $cssvars);
+        font-size: 2rem;
+
+        @include gm.media-breakpoint-down(sm) {
+          font-size: 1.7rem;
+          padding-bottom: 1rem;
+        }
+      }
+
+      p {
+        font-size: 1.1rem;
+        width: 95%;
+
+        @include gm.media-breakpoint-down(sm) {
+          font-size: 1rem;
+        }
+      }
+
+      a {
+        display: inline-block;
+        color: gt.theme-var(price-dark-green-color, null, $thememaplight, $cssvars);
+        border: 1px solid gt.theme-var(price-dark-green-color, null, $thememaplight, $cssvars);
+        text-decoration: none;
+        padding: 0.6rem 1rem;
+        border-radius: 0.75rem;
+        font-size: 1.1rem;
+        width: 200px;
+
+        @include gm.media-breakpoint-down(sm) {
+          width: 100%;
+        }
+
+        i {
+          float: right;
+          margin-top: 5px;
+        }
+      }
+
+      picture {
+        img {
+          width: 100%;
+
+          @include gm.media-breakpoint-down(sm) {
+            margin-bottom: 1rem;
+          }
+        }
+      }
+    }
+
+    .plans-features-mobile {
+      margin-left: -0.938rem;
+      margin-right: -0.938rem;
+      display: none;
+
+      @include gm.media-breakpoint-down(sm) {
+        display: block;
+      }
+
+      h2 {
+        padding-left: 1rem;
+        font-size: 1.25rem;
+      }
+
+      .plan-feature-heading {
+        padding: 1rem;
+        position: sticky;
+        top: 0;
+
+        div {
+          width: 50%;
+          padding: 0.5rem;
+
+          &:nth-of-type(2) {
+            background-color: gt.theme-var(price-body-bg, null, $thememaplight, $cssvars);
+            border-radius: 0.75rem;
+            text-align: center;
+          }
+
+          h4 {
+            font-size: 1.2rem;
+          }
+
+          .btn {
+            padding: 0.3rem 0;
+            font-size: 1rem;
+          }
+        }
+      }
+
+      .plan-mobile-view {
+        h3 {
+          color: gt.theme-var(price-current-free, null, $thememaplight, $cssvars);
+          border-bottom: 1px solid gt.theme-var(price-current-free, null, $thememaplight, $cssvars);
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+          font-size: 1.3rem;
+        }
+
+        h4 {
+          font-size: 1rem;
+          font-weight: 600;
+        }
+
+        .problm-list {
+          padding-bottom: 1rem;
+
+          p {
+            color: gt.theme-var(price-current-pln-btn-color, null, $thememaplight, $cssvars);
+            margin-bottom: 0.5rem;
+          }
+
+          ul {
+            margin-bottom: 0;
+            display: flex;
+            padding: 0.5rem;
+
+            li {
+              list-style: none;
+              width: 50%;
+              text-align: center;
+
+              &:nth-of-type(1) {
+                padding-top: 0.5rem;
+              }
+
+              &:nth-of-type(2) {
+                background-color: gt.theme-var(price-body-bg, null, $thememaplight, $cssvars);
+                padding: 0.7rem 0;
+                border-radius: 0.75rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

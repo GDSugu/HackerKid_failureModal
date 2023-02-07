@@ -174,7 +174,6 @@ const MoreCards = ({ clubsEnabled }) => <>
     <div className="row no-gutters align-items-stretch">
       <div className='more-card-block col-12'>
         <div className="more-card-block-cntnr collectible-card">
-          {}
           <div className="more-card">
             <div className="more-card-contnr">
               <h5 className="more-card-title">
