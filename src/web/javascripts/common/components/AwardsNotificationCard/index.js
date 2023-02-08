@@ -78,7 +78,7 @@ const AwardsNotificationCard = ({ onClose = () => { }, onOpen = () => { } }, ref
         >
           <FormattedMessage defaultMessage={'Dismiss'} description='dismiss btn text' />
         </button>
-        <Link className="btn btn-primary view-awards-btn" to={'/awards'}>
+        <Link className="btn btn-primary view-awards-btn" to={'/awards'} onClick={onClose}>
           <FormattedMessage defaultMessage={'{btnText}'} description='view awards btn' values={{
             btnText: awards && awards.length > 1 ? 'View awards' : 'View award',
           }} />

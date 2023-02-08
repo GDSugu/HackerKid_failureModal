@@ -145,7 +145,11 @@ const Certificates = () => {
         dateString = 'Yesterday';
       }
 
-      finalList[dateString] = timeStampToCertificateMap[timeStamp];
+      if (finalList[dateString]) {
+        finalList[dateString] = [...finalList[dateString], ...timeStampToCertificateMap[timeStamp]];
+      } else {
+        finalList[dateString] = timeStampToCertificateMap[timeStamp];
+      }
     });
 
     setCurrentList(finalList);

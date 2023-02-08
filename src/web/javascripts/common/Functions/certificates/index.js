@@ -19,7 +19,7 @@ const getParsedHtmlStringForCertificate = (certificateId, certificateName, stude
     <span class="certificateId">ID: ${certificateId.toUpperCase()}</span>
     <span class="certificateName">is here by awarded the certification of achievement for the successfull completion of <b>${certificateName}</b></span>
     <span class="userName">${getEachWordCapitalized(studentName)}</span>
-    <img class="certificateSign" src="/images/common/authority.png" alt="authority sign">
+    <img class="certificateSign" src="/images/common/authority1.png" alt="authority sign">
   </div>
 </div>
 `;
