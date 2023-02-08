@@ -55,6 +55,7 @@ const AwardsNotificationCard = ({ onClose = () => { }, onOpen = () => { } }, ref
             && awards.map((award, idx) => <AwardCard
               key={idx}
               awardImage={award.awardImage}
+              awardName={award.awardName}
               className={`${(idx !== 0 || idx !== awards.length - 1) ? 'mr-2' : ''}`}
             />)
           }
