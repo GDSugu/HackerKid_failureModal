@@ -99,6 +99,7 @@ const useGetSubscription = ({ isPageMounted }) => {
     isFetching: false,
     status: false,
     planFeatures: {},
+    planType: 'free',
   });
 
   const getSubscriptionData = async () => {
@@ -125,6 +126,7 @@ const useGetSubscription = ({ isPageMounted }) => {
                 isFetching: false,
                 status: true,
                 planFeatures: parsedResponse.planFeatures,
+                planType: parsedResponse.subscriptionType,
               }));
             } else {
               setSubscriptionData((prevState) => ({

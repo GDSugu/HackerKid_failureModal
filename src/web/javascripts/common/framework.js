@@ -10,8 +10,9 @@ const { API } = process.env;
 const authorize = {};
 
 const isFeautureEnabled = (features, feature, subFeature) => {
-  if (features && features.length > 0) {
-    const featureObj = features.find((f) => f.name === feature);
+  const planFeatures = features && features.planFeatures;
+  if (features && planFeatures && planFeatures.length > 0) {
+    const featureObj = planFeatures.find((f) => f.name === feature);
     const obj = {};
     if (featureObj) {
       obj[feature] = {

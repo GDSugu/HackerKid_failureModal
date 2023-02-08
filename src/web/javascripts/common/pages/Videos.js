@@ -4,7 +4,7 @@ import Hls from 'hls.js';
 import FuzzySearch from 'fuzzy-search';
 import { FormattedMessage } from 'react-intl';
 import {
-  pageInit, $, pathNavigator, timeTrack,
+  pageInit, $, pathNavigator, timeTrack, isFeautureEnabled,
 } from '../framework';
 import '../../../../../node_modules/plyr-react/plyr.css';
 import '../../../stylesheets/common/sass/components/_paginator.scss';
@@ -17,6 +17,7 @@ import Img from '../components/Img';
 import {
   upsertDescription, upsertFBMeta, upsertTitle, upsertTwitterMeta,
 } from '../seo';
+import { SubscriptionContext } from '../../../../hooks/pages/root';
 
 const WatchNextComponent = ({ items, isDesktop }) => (
   <>
@@ -506,7 +507,17 @@ const Videos = () => {
     coins: 0,
     xp: 0,
   });
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+
+  const coursesLimit = (category) => {
+    const coursesEnabled = isFeautureEnabled(subscriptionData, 'courses', category);
+    return coursesEnabled.enabled && coursesEnabled[category];
+  };
+
   if (urlData.number) {
+    if (urlData.number > coursesLimit(urlData.moduleId)) {
+      pathNavigator('courses');
+    }
     videoPlayerProcess({
       currentQuestion,
       ref,
@@ -518,15 +529,54 @@ const Videos = () => {
     updateHistory(currentQuestion);
   }
   const { moduleData } = invidualModuleData;
+  const [lockedData, setLockedData] = useState(false);
+  const [lockedWatchNext, setLockedWatchNext] = useState(false);
   const [filteredData, setFilterData] = useState(false);
   const [page, selectPage] = useState(1);
-  const searcher = new FuzzySearch(moduleData.videos, ['title']);
+  const searcher = new FuzzySearch(lockedData.videos, ['title']);
   const onSearch = (e) => {
     const keyword = e.target.value;
     const result = searcher.search(keyword);
     setFilterData(result);
   };
   const isDesktop = window.matchMedia('(min-width: 576px)').matches;
+
+  useEffect(() => {
+    if (moduleData) {
+      const moduleLimit = coursesLimit(moduleData.moduleId);
+      if (moduleLimit) {
+        moduleData.videos.forEach((video, videoIndex) => {
+          if (videoIndex >= moduleLimit) {
+            moduleData.videos[videoIndex].locked = true;
+          }
+        });
+      }
+      setLockedData(moduleData);
+    }
+  }, [moduleData]);
+
+  useEffect(() => {
+    if (watchNext) {
+      const moduleLimit = coursesLimit(watchNext.moduleId);
+      if (moduleLimit) {
+        watchNext.videos.forEach((video, videoIndex) => {
+          if (video.number > moduleLimit) {
+            watchNext.videos[videoIndex].locked = true;
+          }
+        });
+      }
+      setLockedWatchNext(watchNext);
+    }
+  }, [watchNext]);
+
+  useEffect(() => {
+    if (urlData.number) {
+      if (urlData.number > coursesLimit(urlData.moduleId)) {
+        console.log('here');
+        window.location.href = '/courses';
+      }
+    }
+  }, [urlData]);
 
   return <>
     <div className="col-12 col-md-11 col-xl-10 mx-auto video-body-container">
@@ -555,7 +605,7 @@ const Videos = () => {
             )}
             <div className="course-videos-container">
               <h5 className="m-3">
-                {`${moduleData.moduleName} ${moduleData.type ? ` - ${moduleData.type}` : ''}`}
+                {`${lockedData.moduleName} ${lockedData.type ? ` - ${lockedData.type}` : ''}`}
               </h5>
               <div className="text-center">
                 {filteredData
@@ -567,8 +617,8 @@ const Videos = () => {
                           </div>
                     ),
                   )
-                  : moduleData
-                    && moduleData.videos.map(
+                  : lockedData
+                    && lockedData.videos.map(
                       (items, index) => index < page * 10
                         && index > page * 10 - 11 && (
                           <div
@@ -582,10 +632,10 @@ const Videos = () => {
               </div>
             </div>
             <div>
-              {moduleData && moduleData.videos.length > 10 && (
+              {lockedData && lockedData.videos.length > 10 && (
                 <PageNator
                   totalItems={
-                    filteredData ? filteredData.length : moduleData.videos.length
+                    filteredData ? filteredData.length : lockedData.videos.length
                   }
                   countPerPage={10}
                   currentPageNumber={page}
@@ -606,15 +656,15 @@ const Videos = () => {
               submitRating={submitRating}
               showModal={showRatingModal}
               afterSubmit={
-                watchNext.videos && watchNext.videos.length > 0
+                lockedWatchNext.videos && lockedWatchNext.videos.length > 0
                   ? () => {
                     pathNavigator(
-                      `courses/${watchNext.videos[0].moduleId}/${watchNext.videos[0].number}`,
+                      `courses/${lockedWatchNext.videos[0].moduleId}/${lockedWatchNext.videos[0].number}`,
                     );
                   }
                   : () => {
                     pathNavigator(
-                      `courses/${watchNext.videos[0].moduleId}/1`,
+                      `courses/${lockedWatchNext.videos[0].moduleId}/1`,
                     );
                   }
               }
@@ -624,22 +674,22 @@ const Videos = () => {
             xpEarned = {earnedInfo.xp}
             coinsEarned = {earnedInfo.coins}
             playNext = {
-              watchNext.videos && watchNext.videos.length > 0
+              lockedWatchNext.videos && lockedWatchNext.videos.length > 0
                 ? () => {
                   pathNavigator(
-                    `courses/${watchNext.videos[0].moduleId}/${watchNext.videos[0].number}`,
+                    `courses/${lockedWatchNext.videos[0].moduleId}/${lockedWatchNext.videos[0].number}`,
                   );
                 }
                 : () => {
                   pathNavigator(
-                    `courses/${watchNext.videos[0].moduleId}/1`,
+                    `courses/${lockedWatchNext.videos[0].moduleId}/1`,
                   );
                 }
             }
             />
-            {(watchNext && watchNext.videos.length > 0) && <WatchNextComponent
+            {(lockedWatchNext && lockedWatchNext.videos.length > 0) && <WatchNextComponent
               isDesktop={isDesktop}
-              items={watchNext} />}
+              items={lockedWatchNext} />}
           </div>
         )
       }

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import FuzzySearch from 'fuzzy-search';
-import { $, pageInit, timeTrack } from '../framework';
+import {
+  $, isFeautureEnabled, pageInit, timeTrack,
+} from '../framework';
 import CourseCard, { TopContainer, CustomSwiperComponent } from '../components/courseCard';
 import SwiperComponent from '../components/SwiperComponent';
 import 'swiper/swiper.scss';
@@ -11,6 +13,7 @@ import useCourses from '../../../../hooks/pages/courses';
 import Img from '../components/Img';
 import BottomSheet from '../components/BottomSheet';
 import useVideos from '../../../../hooks/pages/videos';
+import { SubscriptionContext } from '../../../../hooks/pages/root';
 
 const CourseModule = ({ items, isDesktop }) => (
   <>
@@ -349,6 +352,31 @@ const Courses = () => {
     }
   }, []);
 
+  const [lockedData, setLockedData] = useState(false);
+
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+
+  const coursesLimit = (category) => {
+    const coursesEnabled = isFeautureEnabled(subscriptionData, 'courses', category);
+    return coursesEnabled.enabled && coursesEnabled[category];
+  };
+
+  useEffect(() => {
+    if (moduleData) {
+      moduleData.forEach((item, index) => {
+        const moduleLimit = coursesLimit(item.moduleId);
+        if (moduleLimit) {
+          item.videos.forEach((video, videoIndex) => {
+            if (videoIndex >= moduleLimit) {
+              moduleData[index].videos[videoIndex].locked = true;
+            }
+          });
+        }
+      });
+      setLockedData(moduleData);
+    }
+  }, [moduleData]);
+
   const [filteredData, setFilterData] = useState(false);
 
   const [filter, setFilter] = useState(false);
@@ -362,12 +390,12 @@ const Courses = () => {
       return prevFilterValue;
     });
     if (prevFilterValue) {
-      setFilterData(moduleData.filter((item) => item.type === prevFilterValue));
+      setFilterData(lockedData.filter((item) => item.type === prevFilterValue));
     } else {
-      setFilterData(moduleData);
+      setFilterData(lockedData);
     }
   };
-  const searcher = new FuzzySearch(moduleData, ['moduleName']);
+  const searcher = new FuzzySearch(lockedData, ['moduleName']);
   const onSearch = (e) => {
     const keyword = e.target.value;
     const result = searcher.search(keyword);
@@ -440,8 +468,8 @@ const Courses = () => {
                 isDesktop={isDesktop}
               />
           ))
-          : moduleData
-            && moduleData.map((eachModule, index) => (
+          : lockedData
+            && lockedData.map((eachModule, index) => (
               <CourseModule
                 key={index}
                 items={eachModule}
