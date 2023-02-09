@@ -23,7 +23,7 @@ const thememaplight = {
   'landing-blue-light-color': '#DFF8FE',
   'landing-blue-color': '#00BAFF',
   'landing-grey-light-color': '#EFEFEF',
-  'landing-grey-light-color': '#FF5A79',
+  'landing-red-light-color': '#FF5A79',
 
 };
 // just copied the light theme colors to the dark for now
@@ -43,7 +43,7 @@ const thememapdark = {
   'landing-blue-light-color': '#DFF8FE',
   'landing-blue-color': '#00BAFF',
   'landing-grey-light-color': '#EFEFEF',
-  'landing-grey-light-color': '#FF5A79',
+  'landing-red-light-color': '#FF5A79',
 };
 
 const cssvars = {
@@ -61,7 +61,7 @@ const cssvars = {
   'landing-blue-light-color': '--landing-blue-light-color',
   'landing-blue-color': '--landing-blue-color',
   'landing-grey-light-color': '--landing-grey-light-color',
-  'landing-grey-light-color': '--landing-grey-light-color',
+  'landing-red-light-color': '--landing-red-light-color',
 };
 
 module.exports = {

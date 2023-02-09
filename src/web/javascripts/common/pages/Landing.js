@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import '../../../stylesheets/common/pages/landing/style.scss';
+import Plyr from 'plyr-react';
+import Hls from 'hls.js';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
+import '../../../../../node_modules/plyr-react/plyr.css';
+import '../../../stylesheets/common/pages/landing/style.scss';
 import 'swiper/swiper.scss';
 import 'swiper/modules/navigation/navigation.scss';
 import 'swiper/modules/pagination/pagination.scss';
 import { Autoplay, Pagination } from 'swiper';
+import Modal from '../components/Modal';
 import {
+  $,
   pageInit,
 } from '../framework';
 
@@ -56,8 +61,8 @@ const LandingHeader = () => <>
   <header>
     <div className='container'>
       <div className='d-flex'>
-        <a href='/' className='menu-icon text-white'><i className='fa fa-bars' aria-hidden="true"></i>
-        </a>
+        <button className='menu-icon text-white' data-toggle='modal' data-target='#myModal2'><i className='fa fa-bars' aria-hidden="true"></i>
+        </button>
         <a href='/' className='logo mr-auto'><img src='../../../../images/landing/hackerkid-logo.webp' alt='hackerkid logo' title='Hackerkid Logo' /></a>
         <div className='d-flex unlimite-login-sign'>
           <a href='/' className='btn unlimited-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
@@ -70,25 +75,78 @@ const LandingHeader = () => <>
 
       </div>
     </div>
+  </header>
+</>;
 
-    <div id='mobile-sidebar' className='mobile-sidebar-left'>
-      <div className='mobile-side-btns bg-white'>
-        <div className='mobile-menu-header'>
+const LandingSidebarModal = () => <>
+  <div className='modal left fade sidebar-modal' id='myModal2' tabIndex='-1' role='dialog' aria-labelledby='myModalLabel'>
+    <div className='modal-dialog' role='document'>
+      <div className='modal-content'>
+        <div className='modal-header'>
           <a href='/' className='logo mr-auto'><img src='../../../../images/landing/black-hackerkit-logo.webp' alt='hackerkid logo' title='Hackerkid Logo' /></a>
-          <a href='/' className='mobile-close-btn'><i className="fa fa-window-close" aria-hidden="true"></i></a>
+          <button type='button' className="close mobile-close-btn" data-dismiss="modal" aria-label="Close"><i className='fa fa-window-close' aria-hidden='true'></i></button>
         </div>
-        <div className='butts'>
-          <a href='/' className='btn unlimited-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
-          </a>
-          <div className='log-sign-btn'>
-          <a href='/' className='btn signup-btn mt-3'>Sign Up</a>
-            <a href='/' className='btn login-btn mt-3'>Login</a>
+        <div className='modal-body'>
+          <div className='butts'>
+            <a href='/' className='btn unlimited-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden='true'></i>
+            </a>
+            <div className='log-sign-btn d-block'>
+              <a href='/' className='btn signup-btn mt-3'>Sign Up</a>
+              <a href='/' className='btn login-btn mt-3'>Login</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </header>
+  </div>
 </>;
+const LandingVideoModal = ({ videoSrc, modalConfig, setModalOpen }) => {
+  const videoRef = useRef(true);
+  const videoModal = useRef(true);
+
+  useEffect(() => {
+    if (videoSrc) {
+      const player = videoRef.current.plyr;
+      const { media } = player;
+      $(media).on('canplay', () => {
+        player.play();
+      });
+      $('.video-modal-close').on('click',() => {
+        videoModal.current.hide();
+        player.stop();
+        setModalOpen({
+          modalOpen: false,
+          videoSrc: false,
+        });
+      });
+      const hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(media);
+      hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+        console.log('video and hls.js are now bound together !');
+      });
+      hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
+        console.log(`manifest loaded, found ${data.levels.length} quality level`);
+      });
+      videoModal.current.show();
+    }
+  }, [videoSrc]);
+
+  return <>
+    <Modal
+      modalClass='video-modal'
+      ref={videoModal}
+      modalVisible={modalConfig.modalOpen}
+      modalCloseBtn={false}>
+      <div>
+        <button type='button' className='video-modal-close'><span aria-hidden="true">&times;</span></button>
+        <Plyr ref={videoRef} />
+
+        {/* <video src={videoSrc}></video> */}
+      </div>
+    </Modal>
+  </>;
+};
 
 const LandingBanner = () => <>
   <figure>
@@ -129,25 +187,40 @@ const LandingBanner = () => <>
   </figure>
 </>;
 
-const LandingVideo = () => <>
-  <section>
-    <div className='container'>
-      <div className='hackerkid-video-sec max-size top-space'>
-        <a href='/'>
-          <picture>
-            <img src='../../../../images/landing/hackerkit-img.webp' className='w-100' />
-          </picture>
-          <div className='play-icon'>
-            <i className="fa fa-play text-white" aria-hidden="true"></i>
-          </div>
-        </a>
+const LandingVideo = () => {
+  const [modalOpen, setModalOpen] = useState({
+    modalOpen: false,
+    videoSrc: false,
+  });
+
+  console.log(modalOpen);
+  return <>
+    <section>
+      <div className='container'>
+        <div className='hackerkid-video-sec max-size top-space'>
+          <a onClick={() => {
+            setModalOpen({
+              modalOpen: true,
+              videoSrc: 'https://d11kzy43d5zaui.cloudfront.net/python-hackerkid/1_Getting_started_with_python/index.m3u8',
+            });
+          }}>
+            <picture>
+              <img src='../../../../images/landing/hackerkit-img.webp' className='w-100' />
+            </picture>
+            <div className='play-icon'>
+              <i className="fa fa-play text-white" aria-hidden="true"></i>
+            </div>
+          </a>
+          {modalOpen && (<LandingVideoModal videoSrc={modalOpen.videoSrc} modalConfig={modalOpen} setModalOpen={setModalOpen} />
+          )}
+        </div>
+        <div className='boat-route-line-2'></div>
       </div>
-      <div className='boat-route-line-2'></div>
-    </div>
-    <div className='cloud-left-2'></div>
-    <div className='cloud-right-2'></div>
-  </section>
-</>;
+      <div className='cloud-left-2'></div>
+      <div className='cloud-right-2'></div>
+    </section>
+  </>;
+};
 
 const LandingCodingGames = () => <>
   <section>
@@ -699,20 +772,20 @@ const LandingHappyLearning = () => <>
                   <div className='d-flex user-detail'>
                     <div className='uesr-img'>
                       <picture>
-                        <img src='../../../../images/landing/review-kit.webp' alt='happy learning' title='Happy Learning' />
+                        <img src='../../../../images/landing/adaikkammai.svg' alt='happy learning' title='Happy Learning' />
                       </picture>
                     </div>
                     <div className='mr-auto'>
                       <h3>
                         <FormattedMessage
-                          defaultMessage={'Agash Raj'}
-                          description={'Happy Learning Starts Here... title'}
+                          defaultMessage={'Adaikkammai'}
+                          description={'Adaikkammai title'}
                         />
                       </h3>
                       <p>
                         <FormattedMessage
-                          defaultMessage={'Modern Vidya Ketan'}
-                          description={'Modern Vidya Ketan title'}
+                          defaultMessage={'T.I Matric. Hr. Sec School'}
+                          description={'title'}
                         />
                       </p>
                     </div>
@@ -723,7 +796,7 @@ const LandingHappyLearning = () => <>
                   </div>
                   <p>
                     <FormattedMessage
-                      defaultMessage={'“With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems. With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems.With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems.”'}
+                      defaultMessage={'“I loved hacker kid very much because it was very easy to learn coding and it was like a game to play and learn coding.”'}
                       description={'happy learning description'}
                     />
                   </p>
@@ -743,19 +816,107 @@ const LandingHappyLearning = () => <>
                   <div className='d-flex user-detail'>
                     <div className='uesr-img'>
                       <picture>
-                        <img src='../../../../images/landing/review-kit.webp' alt='happy learning' title='Happy Learning' />
+                        <img src='../../../../images/landing/aarish-babbar.webp' alt='happy learning' title='Happy Learning' />
                       </picture>
                     </div>
                     <div className='mr-auto'>
                       <h3>
                         <FormattedMessage
-                          defaultMessage={'Agash Raj'}
+                          defaultMessage={"Aarish babbar's Mom"}
+                          description={'title'}
+                        />
+                      </h3>
+                      <p>
+                        <FormattedMessage
+                          defaultMessage={'Modern Vidya Niketan'}
+                          description={'title'}
+                        />
+                      </p>
+                    </div>
+
+                    <picture>
+                      <img src='../../../../images/landing/review-icon.webp' alt='review-icon' title='review-icon' />
+                    </picture>
+                  </div>
+                  <p>
+                    <FormattedMessage
+                      defaultMessage={'“Hi...Hackerkid is one of the best platform to learn python.. My kid learnt python very easily on your platform... He enjoyed each and every question... He always curious about python but I was not able to taught him properly..but now he is doing better in python 🙂”'}
+                      description={' description'}
+                    />
+                  </p>
+
+                  <picture className='rating-icon'>
+                    <img src='../../../../images/landing/start-rating.webp' alt='start rating' title='Start Rating' />
+                  </picture>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+
+          <SwiperSlide>
+            <div className='card'>
+              <div className='card-body'>
+                <div className='learn-heding'>
+                  <div className='d-flex user-detail'>
+                    <div className='uesr-img'>
+                      <picture>
+                        <img src='../../../../images/landing/sriram-aditya.webp' alt='happy learning' title='Happy Learning' />
+                      </picture>
+                    </div>
+                    <div className='mr-auto'>
+                      <h3>
+                        <FormattedMessage
+                          defaultMessage={'Sriram Adithya M'}
+                          description={'title'}
+                        />
+                      </h3>
+                      <p>
+                        <FormattedMessage
+                          defaultMessage={"St. Michael's Academy"}
+                          description={'title'}
+                        />
+                      </p>
+                    </div>
+
+                    <picture>
+                      <img src='../../../../images/landing/review-icon.webp' alt='review-icon' title='review-icon' />
+                    </picture>
+                  </div>
+                  <p>
+                    <FormattedMessage
+                      defaultMessage={"“Hackerkid is a fun way for kids to learn to code as well as play. With this pandemic situation and kids unable to go out to play, this is a great opportunity to keep them occupied in a better way. It let's them understand the basic concepts of coding like looping structures, conditions and flow of the program. My son is glued to it!!! And we are happy to tell our family and friends about.”"}
+                      description={'happy learning description'}
+                    />
+                  </p>
+
+                  <picture className='rating-icon'>
+                    <img src='../../../../images/landing/start-rating.webp' alt='start rating' title='Start Rating' />
+                  </picture>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+
+          <SwiperSlide>
+            <div className='card mt-4'>
+              <div className='card-body'>
+                <div className='learn-heding'>
+                  <div className='d-flex user-detail'>
+                    <div className='uesr-img'>
+                      <picture>
+                        <img src='../../../../images/landing/shrey-daga.webp' alt='happy learning' title='Happy Learning' />
+                      </picture>
+                    </div>
+                    <div className='mr-auto'>
+                      <h3>
+                        <FormattedMessage
+                          defaultMessage={"shrey Daga's Father"}
                           description={'Happy Learning Starts Here... title'}
                         />
                       </h3>
                       <p>
                         <FormattedMessage
-                          defaultMessage={'Modern Vidya Ketan'}
+                          defaultMessage={'Seventh day Adventist HSS'}
                           description={'Modern Vidya Ketan title'}
                         />
                       </p>
@@ -767,7 +928,7 @@ const LandingHappyLearning = () => <>
                   </div>
                   <p>
                     <FormattedMessage
-                      defaultMessage={'“With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems. With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems.With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems.”'}
+                      defaultMessage={'“My son, Shrey is 12 year old and very enthusiastic kid. He came to know about the Hacker kid portal by his elder brother. He is so happy with the portal that he is always eager to do it. He made some games, programs on the portal and always keen to make improvements in it. One to one session with the mentor is also a good initiative taken by Hacker kid. Interactive demonstration of the code helps him visualise the concept behind the code which makes his concept more robust.”'}
                       description={'happy learning description'}
                     />
                   </p>
@@ -787,19 +948,19 @@ const LandingHappyLearning = () => <>
                   <div className='d-flex user-detail'>
                     <div className='uesr-img'>
                       <picture>
-                        <img src='../../../../images/landing/review-kit.webp' alt='happy learning' title='Happy Learning' />
+                        <img src='../../../../images/landing/harshini.webp' alt='happy learning' title='Happy Learning' />
                       </picture>
                     </div>
                     <div className='mr-auto'>
                       <h3>
                         <FormattedMessage
-                          defaultMessage={'Agash Raj'}
+                          defaultMessage={'Harshini'}
                           description={'Happy Learning Starts Here... title'}
                         />
                       </h3>
                       <p>
                         <FormattedMessage
-                          defaultMessage={'Modern Vidya Ketan'}
+                          defaultMessage={'Sri Chaitanya Techno School'}
                           description={'Modern Vidya Ketan title'}
                         />
                       </p>
@@ -811,7 +972,7 @@ const LandingHappyLearning = () => <>
                   </div>
                   <p>
                     <FormattedMessage
-                      defaultMessage={'“With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems. With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems.With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems.”'}
+                      defaultMessage={"“Hi, I'm Harshini PB. I'm a Hacker KID user. I love Hacker KID very much because it is a best, online, coding website. I recommend Hacker KID to kids who want to learn coding. The mentor session was great and the mentors are very good at me. In Hacker KID, I like zombie land very much.”"}
                       description={'happy learning description'}
                     />
                   </p>
@@ -831,19 +992,19 @@ const LandingHappyLearning = () => <>
                   <div className='d-flex user-detail'>
                     <div className='uesr-img'>
                       <picture>
-                        <img src='../../../../images/landing/review-kit.webp' alt='happy learning' title='Happy Learning' />
+                        <img src='../../../../images/landing/aithih.webp' alt='happy learning' title='Happy Learning' />
                       </picture>
                     </div>
                     <div className='mr-auto'>
                       <h3>
                         <FormattedMessage
-                          defaultMessage={'Agash Raj'}
+                          defaultMessage={'Aithih'}
                           description={'Happy Learning Starts Here... title'}
                         />
                       </h3>
                       <p>
                         <FormattedMessage
-                          defaultMessage={'Modern Vidya Ketan'}
+                          defaultMessage={'Indra gandhi public school'}
                           description={'Modern Vidya Ketan title'}
                         />
                       </p>
@@ -855,95 +1016,7 @@ const LandingHappyLearning = () => <>
                   </div>
                   <p>
                     <FormattedMessage
-                      defaultMessage={'“With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems. With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems.With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems.”'}
-                      description={'happy learning description'}
-                    />
-                  </p>
-
-                  <picture className='rating-icon'>
-                    <img src='../../../../images/landing/start-rating.webp' alt='start rating' title='Start Rating' />
-                  </picture>
-                </div>
-              </div>
-            </div>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <div className='card'>
-              <div className='card-body'>
-                <div className='learn-heding'>
-                  <div className='d-flex user-detail'>
-                    <div className='uesr-img'>
-                      <picture>
-                        <img src='../../../../images/landing/review-kit.webp' alt='happy learning' title='Happy Learning' />
-                      </picture>
-                    </div>
-                    <div className='mr-auto'>
-                      <h3>
-                        <FormattedMessage
-                          defaultMessage={'Agash Raj'}
-                          description={'Happy Learning Starts Here... title'}
-                        />
-                      </h3>
-                      <p>
-                        <FormattedMessage
-                          defaultMessage={'Modern Vidya Ketan'}
-                          description={'Modern Vidya Ketan title'}
-                        />
-                      </p>
-                    </div>
-
-                    <picture>
-                      <img src='../../../../images/landing/review-icon.webp' alt='review-icon' title='review-icon' />
-                    </picture>
-                  </div>
-                  <p>
-                    <FormattedMessage
-                      defaultMessage={'“With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems. With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems.With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems.”'}
-                      description={'happy learning description'}
-                    />
-                  </p>
-
-                  <picture className='rating-icon'>
-                    <img src='../../../../images/landing/start-rating.webp' alt='start rating' title='Start Rating' />
-                  </picture>
-                </div>
-              </div>
-            </div>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <div className='card mt-4'>
-              <div className='card-body'>
-                <div className='learn-heding'>
-                  <div className='d-flex user-detail'>
-                    <div className='uesr-img'>
-                      <picture>
-                        <img src='../../../../images/landing/review-kit.webp' alt='happy learning' title='Happy Learning' />
-                      </picture>
-                    </div>
-                    <div className='mr-auto'>
-                      <h3>
-                        <FormattedMessage
-                          defaultMessage={'Agash Raj'}
-                          description={'Happy Learning Starts Here... title'}
-                        />
-                      </h3>
-                      <p>
-                        <FormattedMessage
-                          defaultMessage={'Modern Vidya Ketan'}
-                          description={'Modern Vidya Ketan title'}
-                        />
-                      </p>
-                    </div>
-
-                    <picture>
-                      <img src='../../../../images/landing/review-icon.webp' alt='review-icon' title='review-icon' />
-                    </picture>
-                  </div>
-                  <p>
-                    <FormattedMessage
-                      defaultMessage={'“With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems. With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems.With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems.”'}
+                      defaultMessage={"“Hackerkid was a fun and informative opportunity to learn python. As a beginner I felt it easy to adapt with block coding and mentor session's were helpful.”"}
                       description={'happy learning description'}
                     />
                   </p>
@@ -981,7 +1054,7 @@ const LandingFaq = () => <>
               <div className='card-header' id='faqhead1'>
                 <h3 data-toggle='collapse' data-target='#faq1' aria-expanded='true' aria-controls='faq1'>
                   <FormattedMessage
-                    defaultMessage={'1. How does the HackerKid program Works?'}
+                    defaultMessage={'Are these live or recorded sessions?'}
                     description={'faq title'}
                   />
                 </h3>
@@ -991,7 +1064,7 @@ const LandingFaq = () => <>
                 <div className='card-body'>
                   <p className='mb-0'>
                     <FormattedMessage
-                      defaultMessage={'HackerKid helps kids from 5-12 years age to learn coding and help them become the next Mark Zuckerbery or Bill Gates.'}
+                      defaultMessage={'HackerKID’s self-paced gamified coding & learning platform offers Live Interactive Online sessions. We also provide free access to recorded sessions as a takeaway for our students.'}
                       description={'faq description'}
                     />
                   </p>
@@ -1003,7 +1076,7 @@ const LandingFaq = () => <>
               <div className='card-header' id='faqhead1'>
                 <h3 data-toggle='collapse' data-target='#faq2' aria-expanded='true' aria-controls='faq2'>
                   <FormattedMessage
-                    defaultMessage={'2. How does the HackerKid program Works?'}
+                    defaultMessage={'What are the timings? Are these sessions schedulable?'}
                     description={'faq title'}
                   />
                 </h3>
@@ -1013,7 +1086,7 @@ const LandingFaq = () => <>
                 <div className='card-body'>
                   <p className='mb-0'>
                     <FormattedMessage
-                      defaultMessage={'HackerKid helps kids from 5-12 years age to learn coding and help them become the next Mark Zuckerbery or Bill Gates.'}
+                      defaultMessage={'These sessions are schedulable as per the convenience of students and the availability of mentors.'}
                       description={'faq description'}
                     />
                   </p>
@@ -1023,19 +1096,19 @@ const LandingFaq = () => <>
 
             <div className='card'>
               <div className='card-header' id='faqhead1'>
-                <h3 data-toggle='collapse' data-target='#faq2' aria-expanded='true' aria-controls='faq2'>
+                <h3 data-toggle='collapse' data-target='#faq3' aria-expanded='true' aria-controls='faq3'>
                   <FormattedMessage
-                    defaultMessage={'2. How does the HackerKid program Works?'}
+                    defaultMessage={'How long is the course?'}
                     description={'faq title'}
                   />
                 </h3>
               </div>
 
-              <div id='faq2' className='collapse' aria-labelledby='faqhead1' data-parent='#faq'>
+              <div id='faq3' className='collapse' aria-labelledby='faqhead1' data-parent='#faq'>
                 <div className='card-body'>
                   <p className='mb-0'>
                     <FormattedMessage
-                      defaultMessage={'HackerKid helps kids from 5-12 years age to learn coding and help them become the next Mark Zuckerbery or Bill Gates.'}
+                      defaultMessage={'HackerKID offers multiple streams of courses for kids that include Web Development, Data Science, Python Game Development, & App Development along with Classroom model learning. All these courses are self-paced with 100 sessions each and 2 sessions per week.'}
                       description={'faq description'}
                     />
                   </p>
@@ -1045,19 +1118,113 @@ const LandingFaq = () => <>
 
             <div className='card'>
               <div className='card-header' id='faqhead1'>
-                <h3 data-toggle='collapse' data-target='#faq2' aria-expanded='true' aria-controls='faq2'>
+                <h3 data-toggle='collapse' data-target='#faq4' aria-expanded='true' aria-controls='faq4'>
                   <FormattedMessage
-                    defaultMessage={'2. How does the HackerKid program Works?'}
+                    defaultMessage={'Do we need a laptop?'}
                     description={'faq title'}
                   />
                 </h3>
               </div>
 
-              <div id='faq2' className='collapse' aria-labelledby='faqhead1' data-parent='#faq'>
+              <div id='faq4' className='collapse' aria-labelledby='faqhead1' data-parent='#faq'>
                 <div className='card-body'>
                   <p className='mb-0'>
                     <FormattedMessage
-                      defaultMessage={'HackerKid helps kids from 5-12 years age to learn coding and help them become the next Mark Zuckerbery or Bill Gates.'}
+                      defaultMessage={'Yes! A laptop is mandatory.'}
+                      description={'faq description'}
+                    />
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className='card'>
+              <div className='card-header' id='faqhead1'>
+                <h3 data-toggle='collapse' data-target='#faq5' aria-expanded='true' aria-controls='faq5'>
+                  <FormattedMessage
+                    defaultMessage={'What can my kid do after completing this session, like what is the value addition?'}
+                    description={'faq title'}
+                  />
+                </h3>
+              </div>
+
+              <div id='faq5' className='collapse' aria-labelledby='faqhead1' data-parent='#faq'>
+                <div className='card-body'>
+                  <p className='mb-0'>
+                    <FormattedMessage
+                      defaultMessage={'After completing this session, kids will have a good foundation in the selected course and more. The graded format of our program will help kids form a firm grasp of the fundamentals and they will be ready to transition to model real-life products & solutions.'}
+                      description={'faq description'}
+                    />
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className='card'>
+              <div className='card-header' id='faqhead6'>
+                <h3 data-toggle='collapse' data-target='#faq6' aria-expanded='true' aria-controls='faq6'>
+                  <FormattedMessage
+                    defaultMessage={'Will I get performance feedback?'}
+                    description={'faq title'}
+                  />
+                </h3>
+              </div>
+
+              <div id='faq6' className='collapse' aria-labelledby='faqhead6' data-parent='#faq'>
+                <div className='card-body'>
+                  <p>
+                    <FormattedMessage
+                      defaultMessage={'You will have a customized dashboard all for yourself, where you can track your kid’s progress across various learning segments.'}
+                      description={'faq description'}
+                    />
+                  </p>
+                  <p className='mb-0'>
+                    <FormattedMessage
+                      defaultMessage={"Moreover, we will be sending you personalized newsletters- weekly e-mails, every week; wherein you can track your kid's assessment through various cognitive abilities such as problem-solving, critical thinking, persistence, analytical skills & more."}
+                      description={'faq description'}
+                    />
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className='card'>
+              <div className='card-header' id='faqhead8'>
+                <h3 data-toggle='collapse' data-target='#faq8' aria-expanded='true' aria-controls='faq8'>
+                  <FormattedMessage
+                    defaultMessage={'Will there be any practice worksheets?'}
+                    description={'faq title'}
+                  />
+                </h3>
+              </div>
+
+              <div id='faq8' className='collapse' aria-labelledby='faqhead8' data-parent='#faq'>
+                <div className='card-body'>
+                  <p className='mb-0'>
+                    <FormattedMessage
+                      defaultMessage={'See, this is a gamified platform, wherein your kids can compete, play, and learn. They will learn through games and win through challenges. So, little will they know that they are learning. Too! There are no practice worksheets, it’s a practice platform.'}
+                      description={'faq description'}
+                    />
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className='card'>
+              <div className='card-header' id='faqhead1'>
+                <h3 data-toggle='collapse' data-target='#faq9' aria-expanded='true' aria-controls='faq9'>
+                  <FormattedMessage
+                    defaultMessage={'What platform do you use to teach coding?'}
+                    description={'faq title'}
+                  />
+                </h3>
+              </div>
+
+              <div id='faq9' className='collapse' aria-labelledby='faqhead1' data-parent='#faq'>
+                <div className='card-body'>
+                  <p className='mb-0'>
+                    <FormattedMessage
+                      defaultMessage={'See, this is a gamified platform, wherein your kids can compete, play, and learn. They will learn through games and win through challenges. So, little will they know that they are learning. Too! There are no practice worksheets, it’s a practice platform.'}
                       description={'faq description'}
                     />
                   </p>
@@ -1125,6 +1292,7 @@ const Landing = () => {
   return <>
     <div className='landing-page'>
       <LandingHeader />
+      <LandingSidebarModal />
       <LandingBanner />
       <LandingVideo />
       <LandingCodingGames />

@@ -37,6 +37,10 @@
   "+nON3s": {
     "defaultMessage": "{output}"
   },
+  "/1qRjR": {
+    "defaultMessage": "shrey Daga's Father",
+    "description": "Happy Learning Starts Here... title"
+  },
   "/Gy7qZ": {
     "defaultMessage": "Level {levelNumber}",
     "description": "Level indicator"
@@ -88,6 +92,10 @@
     "defaultMessage": "help@hackerkid.org",
     "description": "Email Button Text"
   },
+  "/sjGeW": {
+    "defaultMessage": "These sessions are schedulable as per the convenience of students and the availability of mentors.",
+    "description": "faq description"
+  },
   "/x0h9E": {
     "defaultMessage": "Login with Phone",
     "description": "login with phone tab"
@@ -95,6 +103,10 @@
   "/yRdu/": {
     "defaultMessage": "Start Playing",
     "description": "Play button"
+  },
+  "094Y2K": {
+    "defaultMessage": "“Hi...Hackerkid is one of the best platform to learn python.. My kid learnt python very easily on your platform... He enjoyed each and every question... He always curious about python but I was not able to taught him properly..but now he is doing better in python 🙂”",
+    "description": " description"
   },
   "0By1LZ": {
     "defaultMessage": "{timeInMinutes} Mins",
@@ -135,6 +147,10 @@
   "0hIC1L": {
     "defaultMessage": "₹1000",
     "description": "₹1000 price"
+  },
+  "0i474G": {
+    "defaultMessage": "How long is the course?",
+    "description": "faq title"
   },
   "0lGE5l": {
     "defaultMessage": "{navigationText}",
@@ -436,6 +452,10 @@
     "defaultMessage": "Next",
     "description": "Next Button"
   },
+  "6XkLMQ": {
+    "defaultMessage": "“I loved hacker kid very much because it was very easy to learn coding and it was like a game to play and learn coding.”",
+    "description": "happy learning description"
+  },
   "6ZVb4r": {
     "defaultMessage": "{rating}",
     "description": "Rating Count"
@@ -582,10 +602,6 @@
     "defaultMessage": "Turtle",
     "description": "Turtle list"
   },
-  "9OKjMR": {
-    "defaultMessage": "Agash Raj",
-    "description": "Happy Learning Starts Here... title"
-  },
   "9QOtTR": {
     "defaultMessage": "{step}",
     "description": "zombieLand instruction"
@@ -629,6 +645,10 @@
   "A5u1Oz": {
     "defaultMessage": "New Password",
     "description": "New Password label"
+  },
+  "AB7bY9": {
+    "defaultMessage": "Harshini",
+    "description": "Happy Learning Starts Here... title"
   },
   "AVSoe3": {
     "defaultMessage": "Expected output",
@@ -689,6 +709,10 @@
   "Bj5WGE": {
     "defaultMessage": "View all {data}",
     "description": "Module Name"
+  },
+  "BoPEfS": {
+    "defaultMessage": "What are the timings? Are these sessions schedulable?",
+    "description": "faq title"
   },
   "Bqm+bJ": {
     "defaultMessage": "Webkata JS",
@@ -754,9 +778,9 @@
     "defaultMessage": "Challenges Creation",
     "description": "Challenges Creation"
   },
-  "Cqz44A": {
-    "defaultMessage": "2. How does the HackerKid program Works?",
-    "description": "faq title"
+  "CvKgI9": {
+    "defaultMessage": "Aithih",
+    "description": "Happy Learning Starts Here... title"
   },
   "Czb4m8": {
     "defaultMessage": "Challenges",
@@ -769,6 +793,10 @@
   "D81PjZ": {
     "defaultMessage": "{collectibleName}",
     "description": "collectible name"
+  },
+  "DBDTAW": {
+    "defaultMessage": "Sriram Adithya M",
+    "description": "title"
   },
   "DBTgpi": {
     "defaultMessage": "completed",
@@ -947,6 +975,10 @@
     "defaultMessage": "{points}",
     "description": "Club member points"
   },
+  "GyjXT8": {
+    "defaultMessage": "You will have a customized dashboard all for yourself, where you can track your kid’s progress across various learning segments.",
+    "description": "faq description"
+  },
   "H2rvzb": {
     "defaultMessage": "Password changed successfully",
     "description": "Password changed text"
@@ -977,10 +1009,6 @@
   "HXFZww": {
     "defaultMessage": "Sample Input:",
     "description": "Sample Input"
-  },
-  "HYjDSN": {
-    "defaultMessage": "HackerKid helps kids from 5-12 years age to learn coding and help them become the next Mark Zuckerbery or Bill Gates.",
-    "description": "faq description"
   },
   "HZrPcB": {
     "defaultMessage": "Validated Result",
@@ -1022,6 +1050,10 @@
     "defaultMessage": "Help",
     "description": "Help modal title"
   },
+  "IaVwjB": {
+    "defaultMessage": "St. Michael's Academy",
+    "description": "title"
+  },
   "Ib1cTy": {
     "defaultMessage": "9876543221",
     "description": "Call Button Text"
@@ -1041,6 +1073,10 @@
   "IvteYj": {
     "defaultMessage": "The Zombieland",
     "description": "The Zombieland title"
+  },
+  "IxxDGT": {
+    "defaultMessage": "Aarish babbar's Mom",
+    "description": "title"
   },
   "J2b4h6": {
     "defaultMessage": "Game Progress",
@@ -1069,10 +1105,6 @@
   "JbsY5u": {
     "defaultMessage": "No Awards Found!",
     "description": "error message"
-  },
-  "JdNNEo": {
-    "defaultMessage": "“With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems. With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems.With Turtle learn Blocking coding in Python With Zombieland learn syntax based code to solve game problems.”",
-    "description": "happy learning description"
   },
   "JnwRMJ": {
     "defaultMessage": "OTP",
@@ -1177,6 +1209,10 @@
     "defaultMessage": "Live Preview",
     "description": "Live preview tab"
   },
+  "LtRk/4": {
+    "defaultMessage": "Will I get performance feedback?",
+    "description": "faq title"
+  },
   "LuPT86": {
     "defaultMessage": "Coins",
     "description": "LeaderBoard Points"
@@ -1229,6 +1265,10 @@
     "defaultMessage": "Loading...",
     "description": "more info btn"
   },
+  "MkiEso": {
+    "defaultMessage": "Adaikkammai",
+    "description": "Adaikkammai title"
+  },
   "Mp8KyV": {
     "defaultMessage": "Trending",
     "description": "sort dropdown button text"
@@ -1272,6 +1312,10 @@
   "NeX/hH": {
     "defaultMessage": "Are you sure you want to logout?",
     "description": "logout prompt message"
+  },
+  "NfaR3c": {
+    "defaultMessage": "HackerKID’s self-paced gamified coding & learning platform offers Live Interactive Online sessions. We also provide free access to recorded sessions as a takeaway for our students.",
+    "description": "faq description"
   },
   "NgQ5Hl": {
     "defaultMessage": "Continue Playing",
@@ -1335,6 +1379,10 @@
     "defaultMessage": "Create Account",
     "description": "Create Account button"
   },
+  "OkoF63": {
+    "defaultMessage": "“Hi, I'm Harshini PB. I'm a Hacker KID user. I love Hacker KID very much because it is a best, online, coding website. I recommend Hacker KID to kids who want to learn coding. The mentor session was great and the mentors are very good at me. In Hacker KID, I like zombie land very much.”",
+    "description": "happy learning description"
+  },
   "OoOyIq": {
     "defaultMessage": "HackerKid Premium",
     "description": "Pricing Plans card title"
@@ -1389,6 +1437,10 @@
     "defaultMessage": "Playground",
     "description": "Playground tab"
   },
+  "PdCFIc": {
+    "defaultMessage": "“Hackerkid was a fun and informative opportunity to learn python. As a beginner I felt it easy to adapt with block coding and mentor session's were helpful.”",
+    "description": "happy learning description"
+  },
   "PfA2Pv": {
     "defaultMessage": "{title}",
     "description": "Video Title"
@@ -1396,6 +1448,10 @@
   "PpUsRs": {
     "defaultMessage": "Join",
     "description": "join button"
+  },
+  "PuWqHr": {
+    "defaultMessage": "Moreover, we will be sending you personalized newsletters- weekly e-mails, every week; wherein you can track your kid's assessment through various cognitive abilities such as problem-solving, critical thinking, persistence, analytical skills & more.",
+    "description": "faq description"
   },
   "Pvrf+y": {
     "defaultMessage": "{title}",
@@ -1424,10 +1480,6 @@
   "Qvy78L": {
     "defaultMessage": "Profile",
     "description": "profile heading"
-  },
-  "R3aEKG": {
-    "defaultMessage": "1. How does the HackerKid program Works?",
-    "description": "faq title"
   },
   "R5SEEt": {
     "defaultMessage": "Close",
@@ -1511,10 +1563,6 @@
     "defaultMessage": "Help",
     "description": "Help title"
   },
-  "SZe2jy": {
-    "defaultMessage": "Modern Vidya Ketan",
-    "description": "Modern Vidya Ketan title"
-  },
   "ScK8GA": {
     "defaultMessage": "Pricing Plans",
     "description": "Pricing Plans title"
@@ -1542,6 +1590,10 @@
   "T9SzsF": {
     "defaultMessage": "Explore Now",
     "description": "Explore Now text"
+  },
+  "TR6s0D": {
+    "defaultMessage": "Seventh day Adventist HSS",
+    "description": "Modern Vidya Ketan title"
   },
   "TS73XZ": {
     "defaultMessage": "Change password",
@@ -1722,6 +1774,10 @@
     "defaultMessage": "Click \"Run\" to validate your code",
     "description": "empty validated result text"
   },
+  "WwkoyV": {
+    "defaultMessage": "See, this is a gamified platform, wherein your kids can compete, play, and learn. They will learn through games and win through challenges. So, little will they know that they are learning. Too! There are no practice worksheets, it’s a practice platform.",
+    "description": "faq description"
+  },
   "WxUiy6": {
     "defaultMessage": "State",
     "description": "State label"
@@ -1782,6 +1838,10 @@
     "defaultMessage": "{username}",
     "description": "Username"
   },
+  "YbFSjX": {
+    "defaultMessage": "Yes! A laptop is mandatory.",
+    "description": "faq description"
+  },
   "YdxUNc": {
     "defaultMessage": "moveDown",
     "description": "moveDown function"
@@ -1813,6 +1873,10 @@
   "ZMimja": {
     "defaultMessage": "Your rank: #{rank}",
     "description": "your rank"
+  },
+  "ZNdJ2n": {
+    "defaultMessage": "“My son, Shrey is 12 year old and very enthusiastic kid. He came to know about the Hacker kid portal by his elder brother. He is so happy with the portal that he is always eager to do it. He made some games, programs on the portal and always keen to make improvements in it. One to one session with the mentor is also a good initiative taken by Hacker kid. Interactive demonstration of the code helps him visualise the concept behind the code which makes his concept more robust.”",
+    "description": "happy learning description"
   },
   "ZUKwtW": {
     "defaultMessage": "{pageNumber}",
@@ -1917,9 +1981,17 @@
     "defaultMessage": "Basic Info",
     "description": "Basic Info tab title"
   },
+  "cWrEjX": {
+    "defaultMessage": "What platform do you use to teach coding?",
+    "description": "faq title"
+  },
   "cZDBd3": {
     "defaultMessage": "Coins",
     "description": "Coins cell header"
+  },
+  "cdCLAc": {
+    "defaultMessage": "Modern Vidya Niketan",
+    "description": "title"
   },
   "cergd0": {
     "defaultMessage": "{studentName}",
@@ -2055,6 +2127,10 @@
     "defaultMessage": "{validSubmissions}",
     "description": "Valid Submissions"
   },
+  "frCCaR": {
+    "defaultMessage": "Will there be any practice worksheets?",
+    "description": "faq title"
+  },
   "ftgWW7": {
     "defaultMessage": "{count}/{totalCount} watched",
     "description": "Time Spent card caption"
@@ -2143,6 +2219,10 @@
   "hLe6Ak": {
     "defaultMessage": "Webkata JS",
     "description": "Turtle list"
+  },
+  "hV4HHg": {
+    "defaultMessage": "“Hackerkid is a fun way for kids to learn to code as well as play. With this pandemic situation and kids unable to go out to play, this is a great opportunity to keep them occupied in a better way. It let's them understand the basic concepts of coding like looping structures, conditions and flow of the program. My son is glued to it!!! And we are happy to tell our family and friends about.”",
+    "description": "happy learning description"
   },
   "hZGwA5": {
     "defaultMessage": "{count} Xp",
@@ -2237,6 +2317,10 @@
   "km5SOz": {
     "defaultMessage": "View all collections",
     "description": "modal collection button"
+  },
+  "kvDM/m": {
+    "defaultMessage": "Do we need a laptop?",
+    "description": "faq title"
   },
   "l7/Vbd": {
     "defaultMessage": "Profile Edit",
@@ -2459,6 +2543,10 @@
   "onuBbP": {
     "defaultMessage": "Input Description:"
   },
+  "oqBSE4": {
+    "defaultMessage": "What can my kid do after completing this session, like what is the value addition?",
+    "description": "faq title"
+  },
   "pEiO08": {
     "defaultMessage": "Account Settings",
     "description": "account settings CTA"
@@ -2466,6 +2554,10 @@
   "pHE0Mj": {
     "defaultMessage": "Join with link",
     "description": "join tab"
+  },
+  "pHRMoJ": {
+    "defaultMessage": "HackerKID offers multiple streams of courses for kids that include Web Development, Data Science, Python Game Development, & App Development along with Classroom model learning. All these courses are self-paced with 100 sessions each and 2 sessions per week.",
+    "description": "faq description"
   },
   "pQ0m8t": {
     "defaultMessage": "watched this",
@@ -2613,9 +2705,17 @@
     "defaultMessage": "Coins & XPs",
     "description": "Coins title"
   },
+  "sENBdM": {
+    "defaultMessage": "Are these live or recorded sessions?",
+    "description": "faq title"
+  },
   "sI7zqJ": {
     "defaultMessage": "{message}",
     "description": "Failure message"
+  },
+  "sMisxF": {
+    "defaultMessage": "Sri Chaitanya Techno School",
+    "description": "Modern Vidya Ketan title"
   },
   "sNqwYF": {
     "defaultMessage": "Logout",
@@ -2632,6 +2732,10 @@
   "sd4dwE": {
     "defaultMessage": "{xp} xp",
     "description": "club xp"
+  },
+  "sqSwj4": {
+    "defaultMessage": "After completing this session, kids will have a good foundation in the selected course and more. The graded format of our program will help kids form a firm grasp of the fundamentals and they will be ready to transition to model real-life products & solutions.",
+    "description": "faq description"
   },
   "ssTFur": {
     "defaultMessage": "HackerKid also offer exclusive courses on various pedagogies like Web Development, App Development, Game Development & Data Science. We have an elite team of teacher to guide with your learning process. We have team that can answer all your queries before you decide enroll with us. Go on tell your parent right now, What are you waiting for?",
@@ -2684,6 +2788,14 @@
   "u1+78Y": {
     "defaultMessage": "Continue Playing",
     "description": "run button text"
+  },
+  "u1vvyz": {
+    "defaultMessage": "T.I Matric. Hr. Sec School",
+    "description": "title"
+  },
+  "u7sb8V": {
+    "defaultMessage": "Indra gandhi public school",
+    "description": "Modern Vidya Ketan title"
   },
   "uCGdYb": {
     "defaultMessage": "Club Name",
