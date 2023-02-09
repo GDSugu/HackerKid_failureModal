@@ -71,6 +71,12 @@
 
   .my-draft-challenges-section {
     margin: 1.6rem 0;
+
+    .challenge-img {
+      img {
+        object-fit: contain;
+      }
+    }
   }
 
   .pagination-footer {

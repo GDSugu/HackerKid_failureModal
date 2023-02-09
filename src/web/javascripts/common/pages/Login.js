@@ -18,6 +18,16 @@ import { showInlineLoadingSpinner } from '../loader';
 
 const manager = {};
 
+const checkUrl = () => {
+  const url = window.sessionStorage.getItem('navigateTo');
+  if (url) {
+    window.location.href = url;
+    window.sessionStorage.removeItem('navigateTo');
+    return true;
+  }
+  return false;
+};
+
 const Login = () => {
   pageInit('auth-container', 'Login');
   // hooks
@@ -90,7 +100,10 @@ const Login = () => {
           if (data.awardsGiven) {
             setSession('awardsGiven', JSON.stringify(data.awardsGiven));
           }
-          pathNavigator('dashboard');
+          const urlPresent = checkUrl();
+          if (!urlPresent) {
+            pathNavigator('dashboard');
+          }
         } else if (data.status === 'not-exists') {
           setFormErrorField('You are not a registered user', { 'data-error-type': 'NOT_REGISTERED' });
           $('#phone').addClass('is-invalid').removeClass('is-valid');

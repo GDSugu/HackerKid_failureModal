@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getSession } from '../common/framework';
+import post, { getSession } from '../common/framework';
 import {
   getLocale,
   loadLocaleData,
@@ -94,7 +94,65 @@ const useGetSession = ({ sessionAttr = [], isPageMounted }) => {
   };
 };
 
+const useGetSubscription = ({ isPageMounted }) => {
+  const [subscriptionData, setSubscriptionData] = useState({
+    isFetching: false,
+    status: false,
+    planFeatures: {},
+    planType: 'free',
+  });
+
+  const getSubscriptionData = async () => {
+    setSubscriptionData((prevState) => ({
+      ...prevState,
+      isFetching: true,
+    }));
+    return post({
+      type: 'getUserSubscription',
+    }, 'subscriptionConfig/')
+      .then((res) => {
+        if (isPageMounted.current) {
+          if (res === 'access_denied') {
+            setSubscriptionData((prevState) => ({
+              ...prevState,
+              isFetching: false,
+              status: false,
+            }));
+          } else {
+            const parsedResponse = JSON.parse(res);
+            if (parsedResponse.status === 'success') {
+              setSubscriptionData((prevState) => ({
+                ...prevState,
+                isFetching: false,
+                status: true,
+                planFeatures: parsedResponse.planFeatures,
+                planType: parsedResponse.subscriptionType,
+              }));
+            } else {
+              setSubscriptionData((prevState) => ({
+                ...prevState,
+                isFetching: false,
+                status: false,
+              }));
+            }
+          }
+        }
+      });
+  };
+  useEffect(() => {
+    getSubscriptionData();
+  }, []);
+
+  return {
+    subscriptionData,
+    setSubscriptionData,
+  };
+};
+
 const AuthContext = React.createContext();
+const SubscriptionContext = React.createContext();
 
 export default useRootPageState;
-export { AuthContext, useGetSession };
+export {
+  AuthContext, SubscriptionContext, useGetSession, useGetSubscription,
+};

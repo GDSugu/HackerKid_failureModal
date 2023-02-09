@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import loadable from '@loadable/component';
 import '../../../stylesheets/common/pages/turtle/style.scss';
 import {
-  $, pageInit, pathNavigator, timeTrack,
+  $, isFeatureEnabled, pageInit, pathNavigator, timeTrack,
 } from '../framework';
 import Img from '../components/Img';
 import GameNavBar from '../components/GameNavBar';
@@ -18,6 +18,7 @@ import GameLevelComponent from '../components/GameLevelComponent';
 import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
 import AwardsNotificationCard from '../components/AwardsNotificationCard';
 import Loader from '../components/Loader';
+import { SubscriptionContext } from '../../../../hooks/pages/root';
 
 const Loading = () => <Loader />;
 const RouteTakeChallenge = loadable(() => import('./TakeChallenge'), { fallback: <Loading /> });
@@ -328,10 +329,26 @@ const TurtlePlayGroundComponent = ({ handleRunCode, handleDrawingState, handleHi
         </ul>
         <div className="runBtnContainer">
           <button id='runCode' className='btn runBtn' onClick={() => { toggleHintBtn(true); handleRunCode(); }}>
-            <i className="fas fa-play"></i>
+            <div className="d-flex align-items-center">
+              <i className="fas fa-play"></i>
+              <p className="mb-0">
+                <FormattedMessage
+                  defaultMessage={'Play'}
+                  description={'play button'}
+                />
+              </p>
+            </div>
           </button>
           <button id='continueDebugger' className='btn runBtn' onClick={() => { toggleHintBtn(true); }}>
-            <i className="fas fa-play"></i>
+            <div className="d-flex align-items-center">
+              <i className="fas fa-play"></i>
+              <p className="mb-0">
+                <FormattedMessage
+                  defaultMessage={'Continue'}
+                  description={'debugger button'}
+                />
+              </p>
+            </div>
           </button>
         </div>
       </div>
@@ -792,6 +809,17 @@ const TurtleGameComponent = () => {
       fetchTurtleQuestion, getNextQuestion, loadHints, submitTurtle,
     },
   } = useTurtleFetchQuestion({ isPageMounted, virtualid: id });
+
+  const isAlreadyCompleted = () => turtleQuestionState.submissionDetails
+                                  && turtleQuestionState.submissionDetails.completed;
+
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+
+  const gamesLimit = (gameName) => {
+    const gamesEnabled = isFeatureEnabled(subscriptionData, 'games', gameName);
+    return gamesEnabled.enabled && gamesEnabled[gameName];
+  };
+
   const {
     status, questionObject, validated, validationDetails,
   } = turtleQuestionState;
@@ -931,6 +959,10 @@ const TurtleGameComponent = () => {
   React.useEffect(() => {
     // let cleanUp = () => {};
 
+    if (id !== undefined && id > gamesLimit('turtle') && !isAlreadyCompleted()) {
+      pathNavigator('pricing');
+    }
+
     if (status === 'success') {
       // setTimeout(() => {
       //   repositionTurtle('#answerCanvas', '.outputContainer', 'output');
@@ -948,6 +980,8 @@ const TurtleGameComponent = () => {
   React.useEffect(() => {
     isPageMounted.current = true;
     hideDefaultNavBar(device, 'main');
+    $('#runCode').hide();
+    $('#continueDebugger').hide();
 
     // if (status === 'success') {
     //   $('#loader').hide();

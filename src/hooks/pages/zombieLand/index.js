@@ -1,5 +1,6 @@
 import React from 'react';
 import post, { getSession, setSession } from '../../common/framework';
+import API from '../../../../env';
 
 const useZombieLand = ({
   initialize = true,
@@ -63,6 +64,8 @@ const useZombieLand = ({
             } else {
               const parsedResponse = JSON.parse(response);
               if (parsedResponse.status === 'success') {
+                const expOutUrl = `https://static.hackerkid.org/hackerKid/${API.S3PREFIX}/zombieLandAssets/gameOutputs/${parsedResponse?.questionObject?.stage}.png`;
+                parsedResponse.questionObject.thumbnail = expOutUrl;
                 setZombieLandState((prevState) => ({
                   ...prevState,
                   snippet: '',

@@ -1,4 +1,6 @@
-import React, { memo } from 'react';
+import React, {
+  memo, useImperativeHandle, useRef, useState,
+} from 'react';
 import { FormattedMessage } from 'react-intl';
 import { ClubContext } from '../../../../../hooks/pages/clubs';
 import useRootPageState from '../../../../../hooks/pages/root';
@@ -32,6 +34,7 @@ const ClubHeroContainer = ({
   getClubDashboardData = () => {},
   joinClub = () => {},
   leaveClub = () => {},
+  confirmationHandler = {},
 }) => {
   const [profileImg, setProfileImg] = React.useState('../../../../images/clubs/club.svg');
   const actionBtnRef = React.useRef(null);
@@ -79,11 +82,18 @@ const ClubHeroContainer = ({
         break;
       default: break;
     }
-    if (elemRef?.current) {
-      if (status === 'show') {
-        elemRef.current.style.display = 'block';
-      } else if (status === 'hide') {
-        elemRef.current.style.display = 'none';
+    if (isDesktop) {
+      if (elemRef?.current) {
+        if (status === 'show') {
+          elemRef.current.style.display = 'block';
+        } else if (status === 'hide') {
+          elemRef.current.style.display = 'none';
+        }
+      }
+    } else {
+      hideElemRefs.push(elemRef);
+      if (actionBtnRef.current) {
+        actionBtnRef.current.style.display = 'none';
       }
     }
     hideElemRefs.forEach((elem) => {
@@ -123,38 +133,64 @@ const ClubHeroContainer = ({
   };
 
   const handleJoinClub = () => {
-    const confirm = window.confirm('Are you sure you want to join this club?');
-    if (confirm) {
-      joinClub({ clubId: clubData?.clubId })
+    if (confirmationHandler.setConfirmation && typeof confirmationHandler.setConfirmation === 'function') {
+      const { search } = window.location;
+      const urlparams = new URLSearchParams(search);
+      const action = urlparams.get('action');
+      const invitedBy = urlparams.get('invitedBy');
+      const joinParams = {
+        clubId: clubData?.clubId,
+      };
+      if (action === 'join' && invitedBy !== undefined && invitedBy !== '') {
+        joinParams.invitedBy = invitedBy;
+      }
+      const acceptFunction = () => joinClub(joinParams)
         .then((resp) => {
           if (resp !== 'access_denied' && resp?.status === 'success') {
             getUserAction('pending');
+            // getUserAction.apply(handleJoinClub, ['pending']);
           }
         });
+      confirmationHandler.setConfirmation({
+        title: 'Join the Club?',
+        message: 'Are you sure you want to join this club?',
+        acceptBtnText: 'Join',
+        declineBtnText: 'Cancel',
+        acceptFunction,
+      });
     }
   };
 
   const handleLeaveClub = () => {
-    const confirm = window.confirm('Are you sure you want to leave this club?');
-    if (confirm) {
-      leaveClub()
+    if (confirmationHandler.setConfirmation && typeof confirmationHandler.setConfirmation === 'function') {
+      const acceptFunction = () => leaveClub()
         .then(() => {
           getUserAction('visitor');
+          // getUserAction.apply(handleLeaveClub, ['visitor']);
           getClubDashboardData({ isVisiting: true, clubId: clubData?.clubId });
         });
+      confirmationHandler.setConfirmation({
+        title: 'Leave the Club?',
+        message: 'Are you sure you want to leave this club?',
+        acceptBtnText: 'Leave',
+        declineBtnText: 'Cancel',
+        acceptFunction,
+      });
     }
   };
 
   const toggleClubInfoModal = (toggleStatus) => {
-    const elem = $('.club-info-modal');
-    if (toggleStatus === 'hide') {
-      elem.modal(toggleStatus);
-    } else if (toggleStatus === 'show') {
-      elem.data('bs.modal', null);
-      elem.modal({
-        backdrop: 'static',
-        keyboard: false,
-      });
+    if (isDesktop) {
+      const elem = $('.club-info-modal');
+      if (toggleStatus === 'hide') {
+        elem.modal(toggleStatus);
+      } else if (toggleStatus === 'show') {
+        elem.data('bs.modal', null);
+        elem.modal({
+          backdrop: 'static',
+          keyboard: false,
+        });
+      }
     }
   };
 
@@ -178,187 +214,252 @@ const ClubHeroContainer = ({
     if (clubDashboardStatus) {
       checkMemberStatus();
     }
-  }, [clubDashboardStatus]);
+  }, [clubDashboardStatus, isDesktop, isVisitor, isApplied]);
 
   return <>
-    <div className="hero-card club-hero-card"
-      style={{
-        background: `${isDesktop ? `url(${profileImg}?updatedAt=${Date.now()}) no-repeat center left / contain, url(../../../../images/dashboard/dashboard-hero-bg-right.png) no-repeat center right / contain, var(--bg-1)` : `linear-gradient(270deg, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%), url(${profileImg}?updatedAt=${Date.now()}) no-repeat center left / contain, var(--bg-1)`}`,
-      }} >
-      {/* <div className="hero-card-data col-6 col-sm-4"> */}
-        {/* <div className="hero-card-data-content">
-          <div className="hero-data">
-            <Img src='common/hkcoin.png' />
-            <p className='mb-0'>{`${clubData?.points || 0} coins`}</p>
-          </div>
-        </div> */}
+    <div className="club-hero-container-card">
+      <div className="hero-card club-hero-card"
+        style={{
+          background: `${isDesktop ? `url(${profileImg}?updatedAt=${Date.now()}) no-repeat center left / contain, url(../../../../images/dashboard/dashboard-hero-bg-right.png) no-repeat center right / contain, var(--bg-1)` : `linear-gradient(270deg, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%), url(${profileImg}?updatedAt=${Date.now()}) no-repeat center left / contain, var(--bg-1)`}`,
+        }} >
+        {/* <div className="hero-card-data col-6 col-sm-4"> */}
+          {/* <div className="hero-card-data-content">
+            <div className="hero-data">
+              <Img src='common/hkcoin.png' />
+              <p className='mb-0'>{`${clubData?.points || 0} coins`}</p>
+            </div>
+          </div> */}
+          {
+            isDesktop
+            && <>
+              <div className="club-card-data col">
+                <p className='mb-0'>
+                  <FormattedMessage
+                    defaultMessage={'{name}'}
+                    description={'club name'}
+                    values={{ name: clubData?.clubName || '--' }}
+                  />
+                </p>
+              </div>
+            </>
+          }
+        {/* </div> */}
         {
           isDesktop
           && <>
-            <div className="club-card-data col">
-              <p className='mb-0'>
-                <FormattedMessage
-                  defaultMessage={'{name}'}
-                  description={'club name'}
-                  values={{ name: clubData?.clubName || '--' }}
-                />
-              </p>
+            <div className='club-hero-data-container col-7'>
+              <div className="club-rank-container">
+                <p className='mb-0'>
+                  <FormattedMessage
+                    defaultMessage={'Club Rank'}
+                    description={'Club Rank'}
+                  />
+                </p>
+                <h2 className="display-4">
+                  <FormattedMessage
+                    defaultMessage={'#{rank}'}
+                    description={'club rank'}
+                    values={{ rank: clubData?.rank || '--' }}
+                  />
+                </h2>
+              </div>
+              <div className="club-points-container">
+                <div className="d-flex align-items-center">
+                  {/* <div className="col d-flex align-items-center justify-content-center">
+                    <Img
+                      className='club-xp-img'
+                      src={'common/xp.png'}
+                      fallback={'common/xp.png'}
+                      alt='XP'
+                    />
+                    <p className='mb-0'>
+                      <FormattedMessage
+                        defaultMessage={'{xp} xp'}
+                        description={'club xp'}
+                        values={{ xp: clubData?.xp || 0 }}
+                      />
+                    </p>
+                  </div> */}
+                  <div className="col d-flex align-items-center justify-content-center">
+                    <Img
+                      className='club-coin-img'
+                      src={'common/hkcoin.png'}
+                      fallback={'common/hkcoin.png'}
+                      alt='HK Coin'
+                    />
+                    <p className='mb-0'>
+                      <FormattedMessage
+                        defaultMessage={'{coins} coins'}
+                        description={'club coins'}
+                        values={{ coins: clubData?.clubPoints || 0 }}
+                      />
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <button
+                ref={actionBtnRef}
+                className={'btn btn-block club-action-btn'}
+                onClick={clubAction}>
+                {
+                  // clubHeroAction === 'member-action'
+                  // && <>
+                  <div ref={memberBtnRef}>
+                    <div className="d-flex align-items-center justify-content-between">
+                      <p className="mb-0">
+                        <FormattedMessage
+                          defaultMessage={'About Club'}
+                        />
+                      </p>
+                      <i className="fas fa-angle-right"></i>
+                    </div>
+                  </div>
+                  // {/* </> */}
+                }
+                {
+                  // clubHeroAction === 'visitor-action'
+                  // && <>
+                  <div ref={visitorBtnRef}>
+                    <div className="d-flex align-items-center justify-content-between">
+                      <p className="mb-0">
+                        <FormattedMessage
+                          defaultMessage={'Join this Club'}
+                          description={'Join Club'}
+                        />
+                      </p>
+                      <i className="fas fa-angle-right"></i>
+                    </div>
+                  </div>
+                  // {/* </> */}
+                }
+                {
+                  // clubHeroAction === 'pending-action'
+                  // && <>
+                    <div ref={pendingBtnRef}>
+                      <p className="mb-0">
+                        <FormattedMessage
+                          defaultMessage={'Approval Pending'}
+                          description={'Approval Pending'}
+                        />
+                      </p>
+                    </div>
+                  // </>
+                }
+              </button>
             </div>
           </>
         }
-      {/* </div> */}
-      {
-        isDesktop
-        && <>
-          <div className='club-hero-data-container col-7'>
-            <div className="club-rank-container">
+        {
+          !isDesktop
+          && <>
+          <div className="club-hero-data-container-mob">
+            <div className="d-flex align-items-center">
+              <Img
+                className='club-coin-img'
+                src={'common/hkcoin.png'}
+                fallback={'common/hkcoin.png'}
+                alt='HK Coin'
+              />
               <p className='mb-0'>
                 <FormattedMessage
-                  defaultMessage={'Club Rank'}
-                  description={'Club Rank'}
+                  defaultMessage={'{coins} coins'}
+                  description={'club coins'}
+                  values={{ coins: clubData?.clubPoints || 0 }}
                 />
               </p>
-              <h2 className="display-4">
+            </div>
+            {/* <div className="d-flex align-items-center">
+              <Img
+                className='club-xp-img'
+                src={'common/xp.png'}
+                fallback={'common/xp.png'}
+                alt='XP'
+              />
+              <p className='mb-0'>
+                <FormattedMessage
+                  defaultMessage={'{xp} xp'}
+                  description={'club xp'}
+                  values={{ xp: clubData?.xp || '0' }}
+                />
+              </p>
+            </div> */}
+            <div className="d-flex align-items-center">
+              <picture className='rank-img' >
+                <img src='../../../../images/clubs/rank-upwards.svg' alt='rank'/>
+              </picture>
+              <p className='mb-0'>
                 <FormattedMessage
                   defaultMessage={'#{rank}'}
                   description={'club rank'}
                   values={{ rank: clubData?.rank || '--' }}
                 />
-              </h2>
+              </p>
             </div>
-            <div className="club-points-container">
-              <div className="d-flex align-items-center">
-                <div className="col d-flex align-items-center justify-content-center">
-                  <Img
-                    className='club-xp-img'
-                    src={'common/xp.png'}
-                    fallback={'common/xp.png'}
-                    alt='XP'
-                  />
-                  <p className='mb-0'>
-                    <FormattedMessage
-                      defaultMessage={'{xp} xp'}
-                      description={'club xp'}
-                      values={{ xp: clubData?.xp || 0 }}
-                    />
-                  </p>
-                </div>
-                <div className="col d-flex align-items-center justify-content-center">
-                  <Img
-                    className='club-coin-img'
-                    src={'common/hkcoin.png'}
-                    fallback={'common/hkcoin.png'}
-                    alt='HK Coin'
-                  />
-                  <p className='mb-0'>
-                    <FormattedMessage
-                      defaultMessage={'{coins} coins'}
-                      description={'club coins'}
-                      values={{ coins: clubData?.clubPoints || 0 }}
-                    />
-                  </p>
-                </div>
-              </div>
-            </div>
-            <button
-              ref={actionBtnRef}
-              className={'btn btn-block club-action-btn'}
-              onClick={clubAction}>
-              {
-                // clubHeroAction === 'member-action'
-                // && <>
-                <div ref={memberBtnRef}>
-                  <div className="d-flex align-items-center justify-content-between">
-                    <p className="mb-0">
-                      <FormattedMessage
-                        defaultMessage={'About Club'}
-                      />
-                    </p>
-                    <i className="fas fa-angle-right"></i>
-                  </div>
-                </div>
-                // {/* </> */}
-              }
-              {
-                // clubHeroAction === 'visitor-action'
-                // && <>
-                <div ref={visitorBtnRef}>
-                  <div className="d-flex align-items-center justify-content-between">
-                    <p className="mb-0">
-                      <FormattedMessage
-                        defaultMessage={'Join this Club'}
-                        description={'Join Club'}
-                      />
-                    </p>
-                    <i className="fas fa-angle-right"></i>
-                  </div>
-                </div>
-                // {/* </> */}
-              }
-              {
-                // clubHeroAction === 'pending-action'
-                // && <>
-                  <div ref={pendingBtnRef}>
-                    <p className="mb-0">
-                      <FormattedMessage
-                        defaultMessage={'Approval Pending'}
-                        description={'Approval Pending'}
-                      />
-                    </p>
-                  </div>
-                // </>
-              }
-            </button>
           </div>
-        </>
-      }
+          </>
+        }
+      </div>
       {
         !isDesktop
         && <>
-         <div className="club-hero-data-container-mob">
-          <div className="d-flex align-items-center">
-            <Img
-              className='club-coin-img'
-              src={'common/hkcoin.png'}
-              fallback={'common/hkcoin.png'}
-              alt='HK Coin'
+        <div className="club-mob-name">
+          <h5>
+            <FormattedMessage
+              defaultMessage={'{name}'}
+              description={'club name'}
+              values={{ name: clubData?.clubName || '--' }}
             />
-            <p className='mb-0'>
-              <FormattedMessage
-                defaultMessage={'{coins} coins'}
-                description={'club coins'}
-                values={{ coins: clubData?.clubPoints || 0 }}
-              />
-            </p>
-          </div>
-          <div className="d-flex align-items-center">
-            <Img
-              className='club-xp-img'
-              src={'common/xp.png'}
-              fallback={'common/xp.png'}
-              alt='XP'
-            />
-            <p className='mb-0'>
-              <FormattedMessage
-                defaultMessage={'{xp} xp'}
-                description={'club xp'}
-                values={{ xp: clubData?.xp || '0' }}
-              />
-            </p>
-          </div>
-          <div className="d-flex align-items-center">
-            <picture className='rank-img' >
-              <img src='../../../../images/clubs/rank-upwards.svg' alt='rank'/>
-            </picture>
-            <p className='mb-0'>
-              <FormattedMessage
-                defaultMessage={'#{rank}'}
-                description={'club rank'}
-                values={{ rank: clubData?.rank || '--' }}
-              />
-            </p>
-          </div>
-         </div>
+          </h5>
+        </div>
+          <button
+            ref={actionBtnRef}
+            className={'btn btn-block club-action-btn'}
+            onClick={clubAction}>
+            {
+              // clubHeroAction === 'member-action'
+              // && <>
+              <div ref={memberBtnRef}>
+                <div className="d-flex align-items-center justify-content-between">
+                  <p className="mb-0">
+                    <FormattedMessage
+                      defaultMessage={'About Club'}
+                    />
+                  </p>
+                  <i className="fas fa-angle-right"></i>
+                </div>
+              </div>
+              // {/* </> */}
+            }
+            {
+              // clubHeroAction === 'visitor-action'
+              // && <>
+              <div ref={visitorBtnRef}>
+                <div className="d-flex align-items-center justify-content-between">
+                  <p className="mb-0">
+                    <FormattedMessage
+                      defaultMessage={'Join this Club'}
+                      description={'Join Club'}
+                    />
+                  </p>
+                  <i className="fas fa-angle-right"></i>
+                </div>
+              </div>
+              // {/* </> */}
+            }
+            {
+              // clubHeroAction === 'pending-action'
+              // && <>
+                <div ref={pendingBtnRef}>
+                  <p className="mb-0">
+                    <FormattedMessage
+                      defaultMessage={'Approval Pending'}
+                      description={'Approval Pending'}
+                    />
+                  </p>
+                </div>
+              // </>
+            }
+          </button>
         </>
       }
     </div>
@@ -528,7 +629,7 @@ const ClubFeedListContainer = ({ clubFeedList, clubData }) => <>
   </div>
 </>;
 
-const ClubFeedContainerMob = ({ clubName, feedData, getMemberInfo = () => {} }) => {
+const ClubFeedContainerMob = ({ feedData, getMemberInfo = () => {} }) => {
   const isPageMounted = React.useRef(true);
   const { state: rootPageState } = useRootPageState({ isPageMounted });
   const clubContext = React.useContext(ClubContext);
@@ -616,7 +717,7 @@ const ClubFeedContainerMob = ({ clubName, feedData, getMemberInfo = () => {} }) 
 
   return <>
     <div className="club-feed-mob-container">
-      <div className="club-name">
+      {/* <div className="club-name">
         <h5 className='mb-0'>
           <FormattedMessage
             defaultMessage={'{name}'}
@@ -624,7 +725,7 @@ const ClubFeedContainerMob = ({ clubName, feedData, getMemberInfo = () => {} }) 
             values={{ name: clubName || '--' }}
           />
         </h5>
-      </div>
+      </div> */}
       <div className="feed-container">
         <ul className="nav nav-tabs" id="club-tabs">
           <li className="nav-item">
@@ -875,8 +976,8 @@ const ClubFeedContainer = ({
             <div className="dashboard-title">
               <p className="mb-0">
                 <FormattedMessage
-                  defaultMessage={'Top Members'}
-                  description={'Top Members'}
+                  defaultMessage={'Members'}
+                  description={'Members List'}
                 />
               </p>
             </div>
@@ -1166,11 +1267,21 @@ const ClubBasicInfoComponent = ({
                 <div
                   className="club-display-picture"
                   style={{
+                    // backgroundImage: (
+                    //   (clubImage
+                    //   && typeof clubImage !== 'string')
+                    //     ? `url(${URL.createObjectURL(clubImage)})`
+                    //     : `url(${clubImage})`
+                    // ),
                     backgroundImage: (
+                      // eslint-disable-next-line no-nested-ternary
                       (clubImage
-                      && typeof clubImage !== 'string')
-                        ? `url(${URL.createObjectURL(clubImage)})`
-                        : `url(${clubImage})`
+                        ? (
+                          typeof clubImage !== 'string'
+                            ? `url(${URL.createObjectURL(clubImage)}`
+                            : `url(${clubImage})`
+                        )
+                        : 'url(../../../../images/clubs/club.svg)')
                     ),
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'contain',
@@ -1298,6 +1409,7 @@ const ClubMembersInfoComponent = ({
   acceptInvite = () => {},
   rejectClubInvite = () => {},
   toggleModalContent = () => {},
+  confirmationHandler = {},
   isAdmin = false,
   inviteLink = '',
   userData = {},
@@ -1317,34 +1429,68 @@ const ClubMembersInfoComponent = ({
   };
 
   const handleAcceptInvite = (member) => {
-    acceptInvite({ username: member.unique_url });
+    if (confirmationHandler && confirmationHandler.setConfirmation) {
+      const acceptFunction = () => acceptInvite({ username: member.unique_url });
+      confirmationHandler.setConfirmation({
+        title: 'Accept Invitation?',
+        message: 'Are you sure you want to add this user into this club?',
+        acceptBtnText: 'Accept',
+        declineBtnText: 'Cancel',
+        acceptFunction,
+      });
+    }
   };
 
   const handleRejectInvite = (member) => {
-    rejectClubInvite({ username: member.unique_url });
+    if (confirmationHandler && confirmationHandler.setConfirmation) {
+      const acceptFunction = () => rejectClubInvite({ username: member.unique_url });
+      confirmationHandler.setConfirmation({
+        title: 'Reject Invitation?',
+        message: 'Are you sure you want to reject this invitation?',
+        acceptBtnText: 'Reject',
+        declineBtnText: 'Cancel',
+        acceptFunction,
+      });
+    }
   };
 
   const handleKick = (member) => {
-    const result = window.confirm('Are you sure you want to kick this member out?');
-    if (result) {
-      kickOutMember({ username: member.unique_url });
+    if (confirmationHandler && confirmationHandler.setConfirmation) {
+      const acceptFunction = () => kickOutMember({ username: member.unique_url });
+      confirmationHandler.setConfirmation({
+        title: 'Kick out member?',
+        message: 'Are you sure you want to kick this member out?',
+        acceptBtnText: 'Kick out',
+        declineBtnText: 'Cancel',
+        acceptFunction,
+      });
     }
   };
 
   const handleRole = (member) => {
+    let title = '';
     let confirmationMsg = '';
+    let acceptBtnText = '';
+    let acceptFunction = () => {};
     if (member?.role === 'admin') {
+      title = 'Make Member?';
       confirmationMsg = 'Are you sure you want to make this admin as a member?';
+      acceptBtnText = 'Make Member';
+      acceptFunction = () => changeRole({ userid: member?.unique_url, role: 'member' });
     } else if (member?.role === 'member') {
+      title = 'Make Admin?';
       confirmationMsg = 'Are you sure you want to make this member as an admin?';
+      acceptBtnText = 'Make Admin';
+      acceptFunction = () => changeRole({ userid: member?.unique_url, role: 'admin' });
     }
-    const result = window.confirm(confirmationMsg);
-    if (result) {
-      if (member?.role === 'admin') {
-        changeRole({ userid: member?.unique_url, role: 'member' });
-      } else if (member?.role === 'member') {
-        changeRole({ userid: member?.unique_url, role: 'admin' });
-      }
+    if (confirmationHandler && confirmationHandler.setConfirmation) {
+      confirmationHandler.setConfirmation({
+        title,
+        message: confirmationMsg,
+        acceptBtnText,
+        declineBtnText: 'Cancel',
+        acceptFunction,
+      });
     }
   };
 
@@ -1562,34 +1708,54 @@ const ClubAdvancedComponent = ({
   // getClubDashboardData = () => {},
   leaveClub = () => {},
   deleteClub = () => {},
+  confirmationHandler = {},
 }) => {
   const { state: rootPageState } = useRootPageState();
 
   const handleLeaveClub = () => {
-    const confirm = window.confirm('Are you sure you want to leave this club?');
-    if (confirm) {
-      leaveClub()
+    if (confirmationHandler && confirmationHandler.setConfirmation) {
+      const acceptFunction = () => leaveClub()
         .then((res) => {
           if (res !== 'access_denied') {
             if (res?.status === 'success') {
               window.location.reload();
             } else if (res?.status === 'error') {
-              window.alert(res?.message);
+              // window.alert(res?.message);
+              confirmationHandler.setConfirmation({
+                title: 'Can\'t leave the club!',
+                message: res?.message,
+                acceptBtnText: 'Dismiss',
+                declineBtnText: 'Cancel',
+                acceptFunction: confirmationHandler.hideConfirmation,
+              });
             }
           }
         });
+      confirmationHandler.setConfirmation({
+        title: 'Leave club?',
+        message: 'Are you sure you want to leave this club?',
+        acceptBtnText: 'Leave',
+        declineBtnText: 'Cancel',
+        acceptFunction,
+      });
     }
   };
 
   const handleDeleteClub = () => {
-    const confirm = window.confirm('Are you sure you want to delete this club?');
-    if (confirm) {
-      deleteClub()
+    if (confirmationHandler && confirmationHandler.setConfirmation) {
+      const acceptFunction = () => deleteClub()
         .then((res) => {
           if (res !== 'access_denied' && res.status !== 'error') {
             window.location.reload();
           }
         });
+      confirmationHandler.setConfirmation({
+        title: 'Delete Club?',
+        message: 'Are you sure you want to delete this club?',
+        acceptBtnText: 'Delete',
+        declineBtnText: 'Cancel',
+        acceptFunction,
+      });
     }
   };
 
@@ -1656,7 +1822,7 @@ const ClubAdvancedComponent = ({
   </>;
 };
 
-const ClubInfoModalComponent = () => {
+const ClubInfoModalComponent = ({ confirmationHandler = {} }) => {
   const { state: rootPageState } = useRootPageState();
   const clubContext = React.useContext(ClubContext);
   const clubFooterBtnRef = React.useRef(null);
@@ -1751,9 +1917,10 @@ const ClubInfoModalComponent = () => {
   };
 
   const handleFooterBtnClick = (role) => {
+    $('#loader').show();
     updateClubInfo()
       .then((res) => {
-        console.log('signed req', res);
+        $('#loader').hide();
         if (res !== 'access_denied' && (res.status === 'success' || res.ok)) {
           toggleClubInfoModal('hide');
           if (role === 'admin') {
@@ -1767,7 +1934,11 @@ const ClubInfoModalComponent = () => {
   React.useEffect(() => {
     toggleModalContent('clubInfo');
     $('.club-info-modal').on('shown.bs.modal', () => {
-      getClubInfo();
+      $('#loader').show();
+      getClubInfo()
+        .then(() => {
+          $('#loader').hide();
+        });
       fetchLocation({ locationType: 'country' });
       $('.club-info-modal').off('shown.bs.modal');
     });
@@ -1856,7 +2027,8 @@ const ClubInfoModalComponent = () => {
                   rejectClubInvite={rejectClubInvite}
                   userData={userData}
                   toggleModalContent={handleMemberClick}
-                  toggleFooterBtn={toggleFooterBtn} />
+                  toggleFooterBtn={toggleFooterBtn}
+                  confirmationHandler={confirmationHandler} />
                 </>
               }
             </div>
@@ -1869,7 +2041,8 @@ const ClubInfoModalComponent = () => {
                     getClubDashboardData={getClubDashboardData}
                     leaveClub={leaveClub}
                     deleteClub={deleteClub}
-                    isAdmin={userData?.role === 'admin'} />
+                    isAdmin={userData?.role === 'admin'}
+                    confirmationHandler={confirmationHandler} />
                 </>
               }
             </div>
@@ -1897,7 +2070,7 @@ const ClubInfoModalComponent = () => {
   </>;
 };
 
-const ClubInfoContainer = () => <>
+const ClubInfoContainer = ({ confirmationHandler = {} }) => <>
   <Modal
     modalClass='club-info-modal'
     customClass='curved'
@@ -1917,7 +2090,7 @@ const ClubInfoContainer = () => <>
       </div>
     }
   >
-    <ClubInfoModalComponent />
+    <ClubInfoModalComponent confirmationHandler={confirmationHandler} />
   </Modal>
 </>;
 
@@ -2074,6 +2247,119 @@ const ClubMemberProfileModalComponent = ({ memberData, isDesktop }) => {
   </>;
 };
 
+const ClubConfirmationModal = (_, ref) => {
+  const [confirmationData, setConfirmationData] = useState({
+    title: false,
+    message: false,
+    acceptBtnText: false,
+    declineBtnText: false,
+    acceptFunction: () => {},
+    declineFunction: () => {},
+  });
+  const confirmationModalRef = useRef(true);
+
+  const showConfirmation = () => confirmationModalRef?.current.showWithRestriction();
+  const hideConfirmation = () => confirmationModalRef?.current.hide();
+
+  const setConfirmation = ({
+    title = 'Are you sure?',
+    message = 'Are you sure you want to do this?',
+    acceptBtnText = 'Yes',
+    declineBtnText = 'Cancel',
+    acceptFunction = hideConfirmation,
+    declineFunction = hideConfirmation,
+  }) => {
+    setConfirmationData({
+      title,
+      message,
+      acceptBtnText,
+      declineBtnText,
+      acceptFunction,
+      declineFunction,
+    });
+    showConfirmation();
+  };
+
+  useImperativeHandle(ref, () => ({
+    showConfirmation,
+    hideConfirmation,
+    setConfirmation,
+  }));
+
+  return <>
+    <Modal
+      ref={confirmationModalRef}
+      modalClass='club-confirmation-modal'
+      customClass='curved'
+      options={{
+        backdrop: 'static',
+        keyboard: false,
+      }}
+      header = {<></>}
+      modalCloseBtn={false}
+    >
+      <div className="club-confirmation-modal-content">
+        <div className="club-confirmation-message-container">
+          <h5 className='club-confirmation-title'>
+            <FormattedMessage
+              defaultMessage={'{title}'}
+              description={'confirmation title'}
+              values={{
+                title: confirmationData.title,
+              }}
+            />
+          </h5>
+          <p className="club-confirmation-message">
+            <FormattedMessage
+              defaultMessage={'{message}'}
+              description={'confirmation message'}
+              values={{
+                message: confirmationData.message,
+              }}
+            />
+          </p>
+        </div>
+        <div className="d-flex align-items-center">
+          <div className="col-6">
+            <button
+              type="button"
+              name="declineBtn"
+              id="declineBtn"
+              className="btn btn-outline-primary btn-block declineBtn"
+              onClick={confirmationData.declineFunction}
+            >
+              <FormattedMessage
+                defaultMessage={'{message}'}
+                description={'confirmation message'}
+                values={{
+                  message: confirmationData.declineBtnText,
+                }}
+              />
+            </button>
+          </div>
+          <div className="col-6">
+            <button
+              type="button"
+              name="acceptBtn"
+              id="acceptBtn"
+              className="btn btn-primary btn-block acceptBtn"
+              onClick={confirmationData.acceptFunction}
+            >
+              <FormattedMessage
+                defaultMessage={'{message}'}
+                description={'confirmation message'}
+                values={{
+                  message: confirmationData.acceptBtnText,
+                }}
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </Modal>
+  </>;
+};
+
 const compareProps = (prev, next) => {
   let isEqual = true;
   Object.keys(prev).forEach((key) => {
@@ -2096,6 +2382,7 @@ const ClubFeedComponent = memo(ClubFeedContainer, compareProps);
 const ClubFeedMobComponent = memo(ClubFeedContainerMob, compareProps);
 const ClubInfoComponent = memo(ClubInfoContainer, compareProps);
 const ClubMemberProfileComponent = memo(ClubMemberProfileContainer, compareProps);
+const ClubConfirmationModalComponent = React.forwardRef(ClubConfirmationModal);
 
 const ClubDashboardComponent = () => {
   const isPageMounted = React.useRef(true);
@@ -2106,6 +2393,7 @@ const ClubDashboardComponent = () => {
       getClubDashboardData, getMemberInfo, joinClub, leaveClub,
     },
   } = React.useContext(ClubContext);
+  const clubConfirmationRef = React.useRef(true);
   const {
     status: clubDashboardStatus,
     // hasClub,
@@ -2141,6 +2429,20 @@ const ClubDashboardComponent = () => {
     isPageMounted.current = false;
   }, []);
 
+  React.useEffect(() => {
+    debounce(() => {
+      if (clubDashboardStatus === 'success') {
+        const { search } = window.location;
+        const urlparams = new URLSearchParams(search);
+        const action = urlparams.get('action');
+        if (action === 'join') {
+          const elem = $('.club-action-btn');
+          elem.trigger('click');
+        }
+      }
+    }, 100);
+  }, [clubDashboardStatus]);
+
   return <>
     {
       clubDashboardStatus === 'success'
@@ -2156,6 +2458,7 @@ const ClubDashboardComponent = () => {
           joinClub={joinClub}
           leaveClub={leaveClub}
           getClubDashboardData={getClubDashboardData}
+          confirmationHandler={clubConfirmationRef.current}
         />
         {
           rootPageState.device === 'mobile'
@@ -2182,7 +2485,9 @@ const ClubDashboardComponent = () => {
           memberData={memberInfoResponse?.userData}
           isDesktop={rootPageState.device === 'desktop'}
           />
-        <ClubInfoComponent />
+        <ClubInfoComponent confirmationHandler={clubConfirmationRef.current} />
+        <ClubConfirmationModalComponent ref={clubConfirmationRef} />
+        <div id="loader"></div>
       </>
     }
   </>;

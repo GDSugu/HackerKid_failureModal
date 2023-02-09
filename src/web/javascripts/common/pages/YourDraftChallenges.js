@@ -109,6 +109,7 @@ const YourDraftChallenges = () => {
       $('nav:first-child').css('display', 'block');
       isPageMounted.current = false;
       window.removeEventListener('resize', setDesktop);
+      $('#yourChallengesActionsModal').modal('hide');
     };
   }, []);
 
