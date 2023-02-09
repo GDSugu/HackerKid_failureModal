@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
-import Plyr from 'plyr-react';
+import Plyr from 'plyr';
 import Hls from 'hls.js';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
 import '../../../../../node_modules/plyr-react/plyr.css';
@@ -9,7 +9,6 @@ import 'swiper/swiper.scss';
 import 'swiper/modules/navigation/navigation.scss';
 import 'swiper/modules/pagination/pagination.scss';
 import { Autoplay, Pagination } from 'swiper';
-import Modal from '../components/Modal';
 import {
   $,
   pageInit,
@@ -140,20 +139,16 @@ const LandingBanner = () => <>
   </figure>
 </>;
 
-const LandingVideo = ({ videoPlaying = true, playvideo }) => <>
+const LandingVideo = () => <>
     <section>
       <div className='container'>
-        <div className='hackerkid-video-sec max-size top-space'>
-          {videoPlaying
-            ? <button onClick={playvideo}><picture>
+        <div className='hackerkid-video-sec max-size top-space' id='hackerkid-video'>
+           <picture>
               <img src='../../../../images/landing/hackerkit-img.webp' className='w-100' />
             </picture>
             <div className='play-icon'>
               <i className="fa fa-play text-white" aria-hidden="true"></i>
-            </div></button>
-            : <iframe className='landing-image w-100' src="https://www.youtube.com/embed/RsorCl8BBaM" frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>}
+            </div>
         </div>
         <div className='boat-route-line-2'></div>
       </div>
@@ -323,8 +318,8 @@ const LandingTechVideos = () => <>
           />
         </h2>
         <div className='row'>
-          <div className='col-lg-8 col-md-8'>
-            <a href='/'>
+          <div className='col-lg-8 col-md-8' id='video-container-python'>
+            <div id='python-container'>
               <picture>
                 <img src='../../../../images/landing/python-video.webp' className='w-100' />
               </picture>
@@ -337,12 +332,12 @@ const LandingTechVideos = () => <>
                     defaultMessage={'Basics of Python'}
                     description={'video title'} />
                 </p></div>
-            </a>
+                </div>
           </div>
           <div className='col-lg-4 col-md-4'>
             <div className='row'>
-              <div className='col-lg-12 col-md-12 mb-3'>
-                <a href='/'>
+              <div className='col-lg-12 col-md-12 mb-3' id='video-container-javascript'>
+              <div id='javascript-container'>
                   <picture>
                     <img src='../../../../images/landing/javascript-video.webp' className='w-100' />
                   </picture>
@@ -356,10 +351,10 @@ const LandingTechVideos = () => <>
                         description={'video title'} />
                     </p>
                   </div>
-                </a>
+                </div>
               </div>
               <div className='col-lg-12 col-md-12'>
-                <a href='/'>
+                <div>
                   <picture>
                     <img src='../../../../images/landing/web-development.webp' className='w-100' />
                   </picture>
@@ -373,8 +368,7 @@ const LandingTechVideos = () => <>
                         description={'video title'} />
                     </p>
                   </div>
-
-                </a>
+                </div>
               </div>
             </div>
           </div>
@@ -1224,23 +1218,141 @@ const LandingFooter = () => <>
   </footer>
 </>;
 
+const goDefaultImage = (course) => {
+  if (course === 'python') {
+    $('#video-container-javascript').html(`<div className="after-image" id='javascript-container'>
+    <picture>
+      <img src='../../../../images/landing/javascript-video.webp' className='w-100' />
+    </picture>
+    <div className='play-icon'>
+      <i className="fa fa-play text-white" aria-hidden="true"></i>
+    </div>
+    <div className='video-title'>
+      <p className='text-white'>
+        <FormattedMessage
+          defaultMessage={'Basics of JavaScript'}
+          description={'video title'} />
+      </p>
+    </div>
+  </div>`);
+    $('#hackerkid-video').html(`
+    <div className="after-image">
+            <picture>
+              <img src='../../../../images/landing/hackerkit-img.webp' className='w-100' />
+            </picture>
+            <div className='play-icon'>
+              <i className="fa fa-play text-white" aria-hidden="true"></i>
+            </div> </div>`);
+  } else if (course === 'javascript') {
+    $('#video-container-python').html(`<div className="after-image" id='python-container'>
+    <picture>
+      <img src='../../../../images/landing/python-video.webp' className='w-100' />
+    </picture>
+    <div className='play-icon'>
+      <i className="fa fa-play text-white" aria-hidden="true"></i>
+    </div>
+    <div className='video-title'>
+      <p className='text-white'>
+        <FormattedMessage
+          defaultMessage={'Basics of Python'}
+          description={'video title'} />
+      </p></div>
+      </div>`);
+    $('#hackerkid-video').html(`
+    <div className="after-image">
+            <picture className="after-image">
+              <img src='../../../../images/landing/hackerkit-img.webp' className='w-100' />
+            </picture>
+            <div className='play-icon'>
+              <i className="fa fa-play text-white" aria-hidden="true"></i>
+            </div></div>`);
+  } else if (course === 'hackerkid') {
+    $('#video-container-javascript').html(`<div className="after-image" id='javascript-container'>
+    <picture>
+      <img src='../../../../images/landing/javascript-video.webp' className='w-100' />
+    </picture>
+    <div className='play-icon'>
+      <i className="fa fa-play text-white" aria-hidden="true"></i>
+    </div>
+    <div className='video-title'>
+      <p className='text-white'>
+        <FormattedMessage
+          defaultMessage={'Basics of JavaScript'}
+          description={'video title'} />
+      </p>
+    </div>
+  </div>`);
+    $('#video-container-python').html(`<div id='python-container'>
+    <picture className="after-image">
+      <img src='../../../../images/landing/python-video.webp' className='w-100' />
+    </picture>
+    <div className='play-icon'>
+      <i className="fa fa-play text-white" aria-hidden="true"></i>
+    </div>
+    <div className='video-title'>
+      <p className='text-white'>
+        <FormattedMessage
+          defaultMessage={'Basics of Python'}
+          description={'video title'} />
+      </p></div>
+      </div>`);
+  }
+};
+
+const playTectVideo = (url, course) => {
+  $(`#video-container-${course}`).html(
+    `<video id="course-video-${course}" controls muted autostart="false"></video>`,
+  );
+  const video = document.querySelector(`#course-video-${course}`);
+  const player = new Plyr(`#course-video-${course}`);
+  player.on('ready', () => {
+    player.play();
+  });
+  const hls = new Hls();
+  hls.attachMedia(video);
+  hls.loadSource(url);
+  goDefaultImage(course);
+};
+
+const playYoutubeVideo = () => {
+  $('#hackerkid-video').html(`<div class="plyr__video-embed" id="youtube-video">
+  <iframe
+    src="https://www.youtube.com/embed/RsorCl8BBaM"
+    allowfullscreen
+    allowtransparency
+    allow="autoplay"
+  ></iframe>
+</div>`);
+  goDefaultImage('hackerkid');
+};
+
+const render = () => {
+  useEffect(() => {
+    $('#video-container-python').on('click', '#python-container', () => {
+      playTectVideo('https://d11kzy43d5zaui.cloudfront.net/python-hackerkid/1_Getting_started_with_python/index.m3u8', 'python');
+    });
+    $('#video-container-javascript').on('click', '#javascript-container', () => {
+      playTectVideo('https://d11kzy43d5zaui.cloudfront.net/javascript-hackerkid/1_Javascript_Introduction/index.m3u8', 'javascript');
+    });
+    $('#hackerkid-video').on('click', () => {
+      playYoutubeVideo();
+    });
+  });
+};
+
 const Landing = () => {
   if (window.location.href.includes('landing')) {
     pageInit('landing-container', 'Landing');
   }
-  const [videoPlaying, setVideoPlaying] = useState(true);
-
+  render();
   return <>
     <div className='landing-page'>
       <LandingHeader />
       <LandingSidebarModal />
       <LandingBanner />
-      <LandingVideo
-      videoPlaying={videoPlaying}
-      playvideo={() => setVideoPlaying(false)}
-      />
+      <LandingVideo/>
       <LandingCodingGames />
-      <LandingTechVideos />
+      <LandingTechVideos/>
       <LandingKidMorFun />
       <LandingHackerKid />
       <LandingHappyLearning />

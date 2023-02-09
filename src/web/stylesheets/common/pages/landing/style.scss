@@ -11,6 +11,36 @@
     position: relative;
   }
 
+  #video-container-python {
+    .plyr {
+      border-radius: 12px;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  #video-container-javascript {
+    .plyr {
+      border-radius: 12px;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  #youtube-video {
+    iframe {
+      border-radius: 12px;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
   .landing-page {
     overflow: hidden;
     background-color: gt.theme-var(home-body-bg, null, $thememaplight, $cssvars);
