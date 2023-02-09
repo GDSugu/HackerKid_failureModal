@@ -1,10 +1,11 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
-import useRootPageState from '../../../../../hooks/pages/root';
+import useRootPageState, { SubscriptionContext } from '../../../../../hooks/pages/root';
 import '../../../../stylesheets/common/sass/components/_gameLevelComponent.scss';
-import { $ } from '../../framework';
+import { $, isFeautureEnabled } from '../../framework';
 import { attachDragHandler } from '../../Functions/turtle';
+import Img from '../Img';
 
 const GameLevelButton = ({
   game = 'all',
@@ -18,6 +19,7 @@ const GameLevelButton = ({
       id={`turtle-${virtualId}`}
       className={`btn game-level-button ${gameState} ${isCurrentQuestion ? 'current-question' : ''}`}
       onClick={() => {
+        if (gameState === 'locked') return;
         if (game === 'turtle') {
           handleFetchQuestion(question.question_id);
         } else if (game === 'zombieLand') {
@@ -27,17 +29,43 @@ const GameLevelButton = ({
         }
       }}>
       <p>
-        <FormattedMessage
+        {
+          gameState === 'locked'
+            ? <Img src="common/feature-lock-white.png"/>
+            : <FormattedMessage
           defaultMessage={'{level}'}
           description={'Level'}
           values={{ level: virtualId }}
         />
+        }
+
       </p>
     </button>
   </>);
 
 const GameLevelComponent = ({ game, gameData, handleFetchQuestion }, ref) => {
   const { state: { device } } = useRootPageState();
+
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+  const gamesLimit = (gameName) => {
+    console.log('subscriptionData', subscriptionData);
+    const gamesEnabled = isFeautureEnabled(subscriptionData, 'games', gameName);
+    return gamesEnabled.enabled && gamesEnabled[gameName];
+  };
+
+  const questionState = (gameName, question, virtualId) => {
+    if (question.state === 'completed') {
+      return 'completed';
+    }
+    const gameLimit = gamesLimit(gameName);
+    if (gameLimit && virtualId > gameLimit) {
+      return 'locked';
+    }
+    if ((question.state === 'current') && (question.id !== gameData?.questionObject?.qid)) {
+      return 'open';
+    }
+    return (question.state || 'open');
+  };
 
   let currentQuestion = '';
   if (game === 'turtle') {
@@ -160,7 +188,7 @@ const GameLevelComponent = ({ game, gameData, handleFetchQuestion }, ref) => {
                   key={index}
                   handleFetchQuestion={fetchQuestion}
                   question={question}
-                  gameState={((question.state === 'current') && (question.id !== gameData?.questionObject?.qid)) ? 'open' : (question.state || 'open')}
+                  gameState={questionState(game, question, index + 1)}
                   virtualId={index + 1}
                   // isCurrentQuestion={currentQuestion === index + 1}
                   isCurrentQuestion={isCurrentQuestion(question, index)}

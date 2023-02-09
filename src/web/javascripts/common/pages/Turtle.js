@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import loadable from '@loadable/component';
 import '../../../stylesheets/common/pages/turtle/style.scss';
 import {
-  $, pageInit, pathNavigator, timeTrack,
+  $, isFeautureEnabled, pageInit, pathNavigator, timeTrack,
 } from '../framework';
 import Img from '../components/Img';
 import GameNavBar from '../components/GameNavBar';
@@ -18,6 +18,7 @@ import GameLevelComponent from '../components/GameLevelComponent';
 import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
 import AwardsNotificationCard from '../components/AwardsNotificationCard';
 import Loader from '../components/Loader';
+import { SubscriptionContext } from '../../../../hooks/pages/root';
 
 const Loading = () => <Loader />;
 const RouteTakeChallenge = loadable(() => import('./TakeChallenge'), { fallback: <Loading /> });
@@ -792,6 +793,17 @@ const TurtleGameComponent = () => {
       fetchTurtleQuestion, getNextQuestion, loadHints, submitTurtle,
     },
   } = useTurtleFetchQuestion({ isPageMounted, virtualid: id });
+
+  const isAlreadyCompleted = () => turtleQuestionState.submissionDetails
+                                  && turtleQuestionState.submissionDetails.completed;
+
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+
+  const gamesLimit = (gameName) => {
+    const gamesEnabled = isFeautureEnabled(subscriptionData, 'games', gameName);
+    return gamesEnabled.enabled && gamesEnabled[gameName];
+  };
+
   const {
     status, questionObject, validated, validationDetails,
   } = turtleQuestionState;
@@ -930,6 +942,10 @@ const TurtleGameComponent = () => {
 
   React.useEffect(() => {
     // let cleanUp = () => {};
+
+    if (id !== undefined && id > gamesLimit('turtle') && !isAlreadyCompleted()) {
+      pathNavigator('pricing');
+    }
 
     if (status === 'success') {
       // setTimeout(() => {

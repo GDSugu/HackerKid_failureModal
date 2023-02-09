@@ -835,7 +835,7 @@ const Dashboard = () => {
   };
 
   const isClubEnabled = () => {
-    const clubEnabled = isFeautureEnabled(subscriptionData.planFeatures, 'clubs');
+    const clubEnabled = isFeautureEnabled(subscriptionData, 'clubs');
     return clubEnabled && clubEnabled.enabled;
   };
 

@@ -4,11 +4,11 @@ import { useParams } from 'react-router-dom';
 import Ace from 'react-ace';
 import '../../../stylesheets/common/pages/codekata/style.scss';
 import {
-  $, pageInit, pathNavigator, timeTrack,
+  $, isFeautureEnabled, pageInit, pathNavigator, timeTrack,
 } from '../framework';
 import GameNavBar from '../components/GameNavBar';
 import Img from '../components/Img';
-import useRootPageState from '../../../../hooks/pages/root';
+import useRootPageState, { SubscriptionContext } from '../../../../hooks/pages/root';
 import useCodekata from '../../../../hooks/pages/codekata';
 import GameLevelComponent from '../components/GameLevelComponent';
 import Modal from '../components/Modal';
@@ -947,7 +947,28 @@ const CodekataGameComponent = () => {
       submitCode,
     },
   } = useCodekata({ isPageMounted, virtualid: id });
+
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+
   useEffect(() => {
+    const isAlreadyCompleted = () => codekataData.questionObject.submissionDetails
+  && codekataData.questionObject.submissionDetails.completed;
+
+    const gamesLimit = (gameName) => {
+      const gamesEnabled = isFeautureEnabled(subscriptionData, 'games', gameName);
+      return gamesEnabled.enabled && gamesEnabled[gameName];
+    };
+    let redirectId = 1;
+    if (id) {
+      redirectId = id;
+    } else {
+      redirectId = codekataData.questionObject.virtualId;
+    }
+    console.log('redirectId', redirectId);
+    if (redirectId > gamesLimit('codekata') && !isAlreadyCompleted()) {
+      pathNavigator(`coding-pirate/${gamesLimit('codekata') || 1}`);
+    }
+
     updateHistory(codekataData);
   });
 

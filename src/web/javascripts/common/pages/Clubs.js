@@ -20,15 +20,6 @@ const Clubs = () => {
 
   const { subscriptionData } = React.useContext(SubscriptionContext);
 
-  const isClubEnabled = () => {
-    const clubEnabled = isFeautureEnabled(subscriptionData.planFeatures, 'clubs');
-    return clubEnabled && clubEnabled.enabled;
-  };
-
-  if (!isClubEnabled()) {
-    pathNavigator('pricing');
-  }
-
   const isPageMounted = React.useRef(true);
   const {
     state: clubState,
@@ -71,6 +62,10 @@ const Clubs = () => {
   };
 
   React.useEffect(() => {
+    const clubEnabled = isFeautureEnabled(subscriptionData, 'clubs');
+    if (clubEnabled && !clubEnabled.enabled) {
+      pathNavigator('pricing');
+    }
     toggleMobNavBar();
     const locationArray = window.location.href.split('/').filter((el) => el !== '');
     if (locationArray.length > 3) {

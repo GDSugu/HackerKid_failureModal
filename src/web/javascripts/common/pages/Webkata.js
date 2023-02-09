@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
-import { $, pageInit, timeTrack } from '../framework';
-import useRootPageState from '../../../../hooks/pages/root';
+import {
+  $, isFeautureEnabled, pageInit, pathNavigator, timeTrack,
+} from '../framework';
+import useRootPageState, { SubscriptionContext } from '../../../../hooks/pages/root';
 import { useWebkataFetchQuestion, useWebkataSubmitQuestion } from '../../../../hooks/pages/webkata';
 import '../../../stylesheets/common/pages/webkata/style.scss';
 import Img from '../components/Img';
@@ -479,7 +481,14 @@ const WebkataGameComponent = () => {
     resizeEditor();
     setIsDesktop(window.matchMedia('(min-width: 1024px)').matches);
   };
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+  const isAlreadyCompleted = () => questionObject.submissionDetails
+  && questionObject.submissionDetails?.completed;
 
+  const gamesLimit = (gameName) => {
+    const gamesEnabled = isFeautureEnabled(subscriptionData, 'games', gameName);
+    return gamesEnabled.enabled && gamesEnabled[gameName];
+  };
   // side effects
   useEffect(() => {
     hideDefaultNavBar(device, 'game');
@@ -501,6 +510,15 @@ const WebkataGameComponent = () => {
     if (status && status === 'success') {
       resizeEditor();
       // choosing setup
+      let redirectId = 1;
+      if (id) {
+        redirectId = id;
+      } else {
+        redirectId = questionObject.virtualId;
+      }
+      if (redirectId > gamesLimit('webkata') && !isAlreadyCompleted()) {
+        pathNavigator(`webkata/${conceptId}/${gamesLimit('webkata') || 1}`);
+      }
       const questionSetup = submissionDetails.isSubmitted
         ? submissionDetails.submissionSetup : questionObject.questionSetup;
 

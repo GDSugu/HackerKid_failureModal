@@ -84,7 +84,6 @@ const AwardCollectionComponent = ({ game }) => {
   );
 
   const { awards } = awardsByGameState;
-  console.log('awards', awards);
   React.useEffect(() => {
     getAwardsByGame({ cached: false });
   }, []);

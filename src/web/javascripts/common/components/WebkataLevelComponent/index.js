@@ -1,24 +1,36 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
-import useRootPageState from '../../../../../hooks/pages/root';
+import useRootPageState, { SubscriptionContext } from '../../../../../hooks/pages/root';
 import '../../../../stylesheets/common/sass/components/_gameLevelComponent.scss';
-import { $ } from '../../framework';
+import { $, isFeautureEnabled } from '../../framework';
 import { attachDragHandler } from '../../Functions/turtle';
+import Img from '../Img';
 
 const GameLevelButton = ({
   handleFetchQuestion,
   question,
   isCurrentQuestion,
   virtualId,
+  gameState,
 }) => (<>
-    <button id={`turtle-${virtualId}`} className={`btn game-level-button ${question.state || 'open'} ${isCurrentQuestion ? 'current-question' : ''}`} onClick={() => { handleFetchQuestion(question.virtualId); }}>
+    <button
+    id={`turtle-${virtualId}`}
+    className={`btn game-level-button ${question.state || 'open'} ${isCurrentQuestion ? 'current-question' : ''}`}
+    onClick={() => {
+      if (gameState === 'locked') return;
+      handleFetchQuestion(question.virtualId);
+    }}>
       <p>
-        <FormattedMessage
+      {
+          gameState === 'locked'
+            ? <Img src="common/feature-lock-white.png"/>
+            : <FormattedMessage
           defaultMessage={'{level}'}
           description={'Level'}
           values={{ level: virtualId }}
         />
+        }
       </p>
     </button>
   </>);
@@ -28,7 +40,26 @@ const WebkataGameLevelComponent = ({ gameData, handleFetchQuestion }, ref) => {
 
   const isCurrentQuestion = gameData.questionList
     .findIndex((el) => el.questionId === gameData.questionObject.questionId) + 1;
+  console.log('isCurrentQuestion', isCurrentQuestion);
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+  const gamesLimit = (gameName) => {
+    const gamesEnabled = isFeautureEnabled(subscriptionData, 'games', gameName);
+    return gamesEnabled.enabled && gamesEnabled[gameName];
+  };
 
+  const questionState = (gameName, question, virtualId) => {
+    if (question.state === 'completed') {
+      return 'completed';
+    }
+    const gameLimit = gamesLimit(gameName);
+    if (gameLimit && virtualId > gameLimit) {
+      return 'locked';
+    }
+    if ((question.state === 'current') && (question.id !== gameData?.questionObject?.qid)) {
+      return 'open';
+    }
+    return (question.state || 'open');
+  };
   const closeLevelComponent = () => {
     $('.game-level-component').slideUp();
   };
@@ -131,6 +162,7 @@ const WebkataGameLevelComponent = ({ gameData, handleFetchQuestion }, ref) => {
                   handleFetchQuestion={fetchQuestion}
                   question={question}
                   virtualId={index + 1}
+                  gameState={questionState('webkata', question, index + 1)}
                   isCurrentQuestion={isCurrentQuestion === index + 1}
                 />)
 
