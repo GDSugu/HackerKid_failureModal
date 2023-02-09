@@ -1,0 +1,1248 @@
+@use "../../sass/themes/_default" as gt;
+@use "../../sass/base/_mixins" as gm;
+
+@import "./_landingTheme.js";
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+.landing-container {
+  .container {
+    max-width: 1200px;
+    position: relative;
+  }
+
+  #video-container-javascript {
+    margin-top: 20px;
+  }
+
+  #video-container-python,
+  #video-container-javascript,
+  #youtube-video {
+    .plyr {
+      border-radius: 12px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .position-relative {
+      overflow: hidden;
+      border-radius: 0.8rem;
+    }
+
+    .after-image {
+      overflow: hidden;
+      position: relative;
+      border-radius: 0.8rem;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .video-title {
+        position: absolute;
+        bottom: 0;
+        background: gt.theme-var(landing-header-bg, null, $thememaplight, $cssvars);
+        width: 100%;
+        padding: 0.3rem 0;
+        opacity: 0.8;
+
+        p {
+          margin-bottom: 0;
+          font-size: 1.1rem;
+          text-align: center;
+        }
+      }
+
+      .play-icon {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 5.625rem;
+        margin: auto;
+        height: 5.625rem;
+        text-align: center;
+        top: 42%;
+        background: rgba(33, 37, 39, 0.7);
+        box-shadow: 0 0.938rem 7.625rem rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(0.48rem);
+        padding: 1.5rem 0;
+        font-size: 1.8rem;
+        border-radius: 3rem;
+        overflow: hidden;
+        z-index: 100;
+
+        @include gm.media-breakpoint-down(sm) {
+          height: 3rem;
+          width: 3rem;
+          top: 37%;
+          padding: 0.7rem 0;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
+  .landing-page {
+    overflow: hidden;
+    background-color: gt.theme-var(home-body-bg, null, $thememaplight, $cssvars);
+    height: 100%;
+
+    .green-btn {
+      background-color: gt.theme-var(landing-green-color, null, $thememaplight, $cssvars);
+      border-radius: 0.75rem;
+      text-decoration: none;
+      width: 270px;
+      display: block;
+      text-align: center;
+      padding: 0.6rem 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 3rem auto 0;
+      z-index: 9;
+      position: relative;
+
+      @include gm.media-breakpoint-down(sm) {
+        width: 100%;
+        margin-top: 1.5rem;
+      }
+    }
+
+    .top-space {
+      padding-top: 7.5rem;
+    }
+
+    p {
+      font-size: 1.3rem;
+      color: gt.theme-var(landing-text-color, null, $thememaplight, $cssvars);
+
+      @include gm.media-breakpoint-down(sm) {
+        font-size: 1.12rem;
+      }
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 900;
+      margin-bottom: 2rem;
+
+      @include gm.media-breakpoint-down(sm) {
+        font-size: 1.7rem;
+      }
+    }
+
+    .max-size {
+      width: 75%;
+      margin: auto;
+      display: table;
+
+      @include gm.media-breakpoint-down(sm) {
+        width: 100% !important;
+      }
+
+      @include gm.media-breakpoint-down(md) {
+        width: 85%;
+      }
+    }
+
+    .swiper-pagination {
+      .swiper-pagination-bullet {
+        background: gt.theme-var(landing-yellow-light-color, null, $thememaplight, $cssvars);
+        width: 0.9rem;
+        height: 0.9rem;
+        border-radius: 4rem;
+        opacity: 1;
+      }
+
+      .swiper-pagination-bullet-active {
+        background: gt.theme-var(landing-yellow-color, null, $thememaplight, $cssvars);
+        height: 1.3rem;
+        margin-top: 0.2rem;
+      }
+    }
+
+    .boat-route-line-1 {
+      position: absolute;
+      background: url("../../../../../images/landing/boat-route-line-1.webp") no-repeat left / contain;
+      width: 33%;
+      height: 85%;
+      bottom: -15.25rem;
+      transform: rotate(-15deg);
+      left: 1.25rem;
+
+      @include gm.media-breakpoint-down(sm) {
+        background: url("../../../../../images/landing/boat-route-line-mobile-1.webp") no-repeat right / contain;
+        width: 65% !important;
+        height: 91% !important;
+        bottom: -17.3rem !important;
+        transform: rotate(0deg) !important;
+        left: auto !important;
+        right: 4px !important;
+      }
+
+      @include gm.media-breakpoint-down(md) {
+        width: 40%;
+        height: 91%;
+        bottom: -15.25rem;
+        transform: rotate(0deg);
+      }
+    }
+
+    .boat-route-line-2 {
+      position: absolute;
+      background: url("../../../../../images/landing/boat-route-line-2.webp") no-repeat left / contain;
+      width: 41%;
+      height: 87%;
+      right: 2.813rem;
+      bottom: -12.5rem;
+
+      @include gm.media-breakpoint-down(sm) {
+        background: url("../../../../../images/landing/boat-route-line-mobile-2.webp") no-repeat left / contain;
+        width: 70% !important;
+        height: 91% !important;
+        bottom: -11.25rem !important;
+        left: auto !important;
+        right: 3px !important;
+      }
+
+      @include gm.media-breakpoint-down(md) {
+        width: 43%;
+        height: 74%;
+        right: 0;
+      }
+    }
+
+    .boat-route-line-3 {
+      position: absolute;
+      background: url("../../../../../images/landing/boat-route-line-3.webp") no-repeat left / contain;
+      width: 50%;
+      height: 71%;
+      left: -2.5rem;
+      bottom: -9.688rem;
+
+      @include gm.media-breakpoint-down(sm) {
+        background: url("../../../../../images/landing/boat-route-line-mobile-3.webp") no-repeat left / contain;
+        width: 60% !important;
+        height: 84% !important;
+        bottom: -17.5rem !important;
+        left: 5px !important;
+      }
+
+      @include gm.media-breakpoint-down(md) {
+        width: 52%;
+        height: 71%;
+        left: 0;
+      }
+    }
+
+    .boat-route-line-4 {
+      position: absolute;
+      background: url("../../../../../images/landing/boat-route-line-4.webp") no-repeat left / contain;
+      width: 50%;
+      height: 78%;
+      right: 1.25rem;
+      bottom: -11.563rem;
+
+      @include gm.media-breakpoint-down(sm) {
+        background: url("../../../../../images/landing/boat-route-line-mobile-4.webp") no-repeat left / contain;
+        width: 70% !important;
+        height: 91% !important;
+        bottom: -28.5rem !important;
+        left: auto !important;
+        right: 4px !important;
+      }
+
+      @include gm.media-breakpoint-down(md) {
+        height: 71%;
+        right: 0;
+        bottom: -12.563rem;
+      }
+    }
+
+    .cloud-left-1 {
+      background: url("../../../../../images/landing/cloud-4.webp") no-repeat;
+      width: 170px;
+      height: 100px;
+      position: absolute;
+      left: -120px;
+      bottom: -70px;
+      background-size: contain;
+
+      @include gm.media-breakpoint-down(sm) {
+        display: none;
+      }
+    }
+
+    .cloud-left-2,
+    .cloud-left-3,
+    .cloud-left-4,
+    .cloud-left-5,
+    .cloud-left-6,
+    .cloud-left-7,
+    .cloud-left-8,
+    .cloud-left-10 {
+      background: url("../../../../../images/landing/cloud-2.webp") no-repeat;
+      width: 180px;
+      height: 100px;
+      position: absolute;
+      left: -90px;
+      bottom: 14%;
+      background-size: contain;
+
+      @include gm.media-breakpoint-down(sm) {
+        display: none;
+      }
+    }
+
+    .cloud-left-3 {
+      left: -130px;
+      bottom: 35%;
+    }
+
+    .cloud-left-4 {
+      left: -60px;
+      top: 20%;
+      bottom: auto;
+    }
+
+    .cloud-left-5 {
+      left: -20px;
+      top: 20%;
+      bottom: auto;
+      width: 100px;
+    }
+
+    .cloud-left-6 {
+      left: -10px;
+      width: 150px;
+    }
+
+    .cloud-left-7 {
+      width: 50px;
+      top: 45%;
+      left: 36%;
+    }
+
+    .cloud-left-8 {
+      bottom: 25%;
+      width: 70px;
+      left: 48%;
+    }
+
+    .cloud-left-10 {
+      bottom: -18%;
+      left: -30px;
+      width: 160px;
+
+      @include gm.media-breakpoint-down(sm) {
+        display: block !important;
+        bottom: -32%;
+      }
+    }
+
+    .cloud-left-9 {
+      background: url("../../../../../images/landing/boat-telescope.webp") no-repeat;
+      width: 130px;
+      height: 210px;
+      position: absolute;
+      left: -15px;
+      top: 0;
+      background-size: 100% 100%;
+
+      @include gm.media-breakpoint-down(sm) {
+        top: -40px;
+        width: 110px;
+        height: 160px;
+      }
+    }
+
+    .cloud-left-11 {
+      background: url("../../../../../images/landing/boat-safety-kit.webp") no-repeat;
+      width: 140px;
+      height: 146px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-size: 100% 100%;
+
+      @include gm.media-breakpoint-down(sm) {
+        top: -50px;
+      }
+    }
+
+    .cloud-right-1,
+    .cloud-right-5,
+    .cloud-right-9 {
+      background: url("../../../../../images/landing/cloud-5.webp") no-repeat;
+      width: 180px;
+      height: 80px;
+      position: absolute;
+      right: -30px;
+      bottom: -20%;
+      background-size: contain;
+
+      @include gm.media-breakpoint-down(sm) {
+        display: none;
+      }
+    }
+
+    .cloud-right-2,
+    .cloud-right-3,
+    .cloud-right-4,
+    .cloud-right-6,
+    .cloud-right-7 {
+      background: url("../../../../../images/landing/cloud-4.webp") no-repeat;
+      width: 180px;
+      height: 80px;
+      position: absolute;
+      right: -50px;
+      bottom: 30%;
+      background-size: contain;
+
+      @include gm.media-breakpoint-down(sm) {
+        display: none;
+      }
+    }
+
+    .cloud-right-8 {
+      background: url("../../../../../images/landing/boat-gold.webp") no-repeat;
+      width: 150px;
+      height: 200px;
+      position: absolute;
+      right: -20px;
+      bottom: -20%;
+      background-size: 100% 100%;
+
+      @include gm.media-breakpoint-down(sm) {
+        bottom: -37%;
+        width: 120px;
+        height: 160px;
+      }
+    }
+
+    .cloud-right-3 {
+      right: -110px;
+    }
+
+    .cloud-right-4 {
+      right: -90px;
+      bottom: auto;
+      top: 12%;
+    }
+
+    .cloud-right-5 {
+      top: 25%;
+      right: -80px;
+      bottom: auto;
+    }
+
+    .cloud-right-6 {
+      right: -110px;
+      bottom: 40%;
+    }
+
+    .cloud-right-7 {
+      right: 0;
+      bottom: 0;
+    }
+
+    .cloud-right-9 {
+      bottom: auto;
+      top: 10%;
+      right: -20px;
+
+      @include gm.media-breakpoint-down(sm) {
+        display: block;
+        top: -1%;
+        right: -80px;
+      }
+    }
+
+    .cloud-right-10 {
+      background: url("../../../../../images/landing/jack-sparrow.webp") no-repeat;
+      width: 160px;
+      height: 210px;
+      position: absolute;
+      right: 0;
+      bottom: -5%;
+      background-size: 100% 100%;
+
+      @include gm.media-breakpoint-down(sm) {
+        bottom: -17%;
+        width: 100px;
+        height: 150px;
+      }
+    }
+
+    header {
+      background-color: gt.theme-var(landing-header-bg, null, $thememaplight, $cssvars);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+
+      .menu-icon {
+        display: none;
+
+        @include gm.media-breakpoint-down(sm) {
+          display: block;
+          margin-top: 0.1rem;
+          margin-right: 1rem;
+          font-size: 1.4rem;
+          background: none;
+          border: none;
+          padding: 0;
+        }
+      }
+
+      .logo {
+        display: block;
+        width: 10.375rem;
+
+        @include gm.media-breakpoint-down(sm) {
+          width: 6.375rem;
+          margin-top: 0.3rem;
+        }
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    .unlimited-btn {
+      background-color: gt.theme-var(landing-yellow-color, null, $thememaplight, $cssvars);
+      border-radius: 0.5rem;
+      padding: 0.5rem 1.5rem;
+      font-size: 1rem;
+      display: inline-block;
+
+      @include gm.media-breakpoint-down(sm) {
+        padding: 0.5rem 0.688rem;
+        font-size: 0.875rem;
+        display: inline-block;
+        width: 100%;
+      }
+
+      i {
+        margin-left: 0.5rem;
+
+        @include gm.media-breakpoint-down(sm) {
+          margin-left: 0.2rem;
+        }
+      }
+    }
+
+    .log-sign-btn {
+      padding-left: 0.8rem;
+      border-left: 1px solid gt.theme-var(landing-border-color, null, $thememaplight, $cssvars);
+      margin-left: 2rem;
+
+      @include gm.media-breakpoint-down(sm) {
+        display: none;
+        border-left: none;
+        margin-left: 0 !important;
+      }
+
+      @include gm.media-breakpoint-down(sm) {
+        margin-left: 1rem;
+        padding-left: 0;
+      }
+
+      .login-btn,
+      .signup-btn {
+        color: gt.theme-var(landing-yellow-color, null, $thememaplight, $cssvars);
+        padding: 0.5rem 1.25rem;
+        font-size: 1rem;
+        display: inline-block;
+
+        @include gm.media-breakpoint-down(sm) {
+          width: 100%;
+        }
+
+        &:hover {
+          background-color: gt.theme-var(landing-yellow-color, null, $thememaplight, $cssvars);
+          color: gt.theme-var(landing-white-color, null, $thememaplight, $cssvars);
+        }
+      }
+
+      .signup-btn {
+        border: 1px solid gt.theme-var(landing-yellow-color, null, $thememaplight, $cssvars);
+        border-radius: 0.5rem;
+        margin-left: 0.9rem;
+
+        @include gm.media-breakpoint-down(sm) {
+          margin-left: 0;
+        }
+      }
+    }
+
+    .sidebar-modal {
+      .mobile-close-btn {
+        color: gt.theme-var(landing-red-light-color, null, $thememaplight, $cssvars);
+        opacity: 1;
+      }
+
+      .modal-content {
+        border-radius: 0;
+        border: none;
+      }
+    }
+
+    figure {
+      margin: 0;
+      padding-top: 3rem;
+      position: relative;
+
+      h1 {
+        font-size: 2.6rem;
+        font-weight: 900;
+        margin-top: 7rem;
+
+        @include gm.media-breakpoint-down(sm) {
+          margin-top: 0;
+          font-size: 1.75rem;
+        }
+      }
+
+      .green-btn {
+        margin: 0;
+      }
+    }
+
+    section {
+      position: relative;
+
+      .hackerkid-video-sec {
+        position: relative;
+
+        @include gm.media-breakpoint-down(sm) {
+          width: 100%;
+        }
+
+        a {
+          display: block;
+          position: relative;
+
+          picture {
+            img {
+              width: 100%;
+            }
+          }
+        }
+      }
+
+      .play-icon {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 5.625rem;
+        margin: auto;
+        height: 5.625rem;
+        text-align: center;
+        top: 42%;
+        background: rgba(33, 37, 39, 0.7);
+        box-shadow: 0 0.938rem 7.625rem rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(0.48rem);
+        padding: 1.5rem 0;
+        font-size: 1.8rem;
+        border-radius: 3rem;
+        overflow: hidden;
+        z-index: 100;
+
+        @include gm.media-breakpoint-down(sm) {
+          height: 3rem;
+          width: 3rem;
+          top: 37%;
+          padding: 0.7rem 0;
+          font-size: 1rem;
+        }
+      }
+
+      .video-title {
+        position: absolute;
+        bottom: 0;
+        background: gt.theme-var(landing-header-bg, null, $thememaplight, $cssvars);
+        width: 100%;
+        padding: 0.3rem 0;
+        opacity: 0.8;
+
+        p {
+          margin-bottom: 0;
+          font-size: 1.1rem;
+          text-align: center;
+        }
+      }
+
+      .tech-video-sec {
+        a {
+          height: 100%;
+          border-radius: 0.7rem;
+          overflow: hidden;
+
+          picture {
+            img {
+              height: 100%;
+            }
+          }
+
+          @include gm.media-breakpoint-down(sm) {
+            margin-bottom: 1rem;
+            height: auto;
+          }
+        }
+
+        .play-icon {
+          top: 31% !important;
+          width: 3.625rem !important;
+          height: 3.625rem !important;
+          padding: 0.7rem 0 !important;
+          font-size: 1.5rem !important;
+        }
+      }
+
+      .interactive-coding-games {
+        .swiper-wrapper {
+          h3 {
+            font-size: 1.3rem;
+            text-align: center;
+            color: gt.theme-var(landing-text-color, null, $thememaplight, $cssvars);
+            font-weight: 600;
+            margin-bottom: 3.625rem;
+            position: relative;
+
+            &:before {
+              position: absolute;
+              content: "";
+              width: 32%;
+              height: 0.188rem;
+              background: gt.theme-var(landing-border-color, null, $thememaplight, $cssvars);
+              left: 0;
+              bottom: -1rem;
+              margin: auto;
+              right: 0;
+              border-radius: 1rem;
+            }
+
+            &:after {
+              position: absolute;
+              content: "";
+              width: 0;
+              height: 2.625rem;
+              border-left: 3px dashed gt.theme-var(landing-border-color, null, $thememaplight, $cssvars);
+              left: 0;
+              bottom: -3.75rem;
+              margin: auto;
+              right: 0;
+            }
+
+            @include gm.media-breakpoint-down(sm) {
+              display: none;
+            }
+
+            @include gm.media-breakpoint-down(md) {
+              font-size: 1rem;
+            }
+          }
+
+          .card {
+            background-color: gt.theme-var(landing-blue-light-color, null, $thememaplight, $cssvars);
+            border: none;
+            padding: 0.5rem;
+            border-radius: 0.625rem;
+
+            .card-body {
+              padding: 0.5rem;
+              border: 2px solid gt.theme-var(landing-blue-color, null, $thememaplight, $cssvars);
+              border-radius: 0.625rem;
+
+              div {
+                position: relative;
+                overflow: hidden;
+                border-radius: 0 0 0.75rem 0.75rem;
+
+                picture {
+                  img {
+                    width: 100%;
+                  }
+                }
+
+                h3 {
+                  margin-bottom: 0.4rem;
+                  font-size: 1.2rem !important;
+                  display: block;
+
+                  &:before,
+                  &:after {
+                    display: none;
+                  }
+                }
+
+                .coding-game-list {
+                  position: absolute;
+                  bottom: 0;
+                  left: 0;
+                  width: 100%;
+                  text-align: center;
+                  background: linear-gradient(180deg, rgba(33, 37, 39, 0) 0%, #212527 67.5%);
+                  padding: 0.5rem;
+
+                  i {
+                    font-size: 1.5rem;
+                  }
+
+                  h3 {
+                    font-size: 1.4rem;
+                  }
+
+                  p {
+                    font-size: 1rem;
+                    margin-bottom: 0;
+                  }
+                }
+
+                .coding-game-sec-1 {
+                  bottom: -3.5rem;
+                }
+
+                .coding-game-sec-2 {
+                  bottom: -5rem;
+
+                  @include gm.media-breakpoint-down(sm) {
+                    bottom: -3.2rem;
+                  }
+                }
+
+                .coding-game-sec-3 {
+                  bottom: -6.3rem;
+                }
+
+                .coding-game-sec-4 {
+                  bottom: -6.5rem;
+
+                  @include gm.media-breakpoint-down(sm) {
+                    bottom: -4.8rem;
+                  }
+                }
+              }
+            }
+
+            &:hover {
+              .coding-game-list {
+                bottom: 0 !important;
+                transition: 0.3s ease;
+
+                i {
+                  transform: rotate(180deg);
+                }
+              }
+            }
+          }
+
+          .coding-space {
+            margin-top: 5.188rem;
+            position: relative;
+
+            @include gm.media-breakpoint-down(sm) {
+              margin-top: 0;
+            }
+          }
+
+          .line-conding {
+            position: relative;
+
+            &:before {
+              width: 100%;
+              position: absolute;
+              top: -1.25rem;
+              content: "";
+              border-top: 2px dashed gt.theme-var(landing-border-color, null, $thememaplight, $cssvars);
+              border-left: 2px dashed gt.theme-var(landing-border-color, null, $thememaplight, $cssvars);
+              border-right: 2px dashed gt.theme-var(landing-border-color, null, $thememaplight, $cssvars);
+              left: 53%;
+              height: 1.125rem;
+
+              @include gm.media-breakpoint-down(sm) {
+                display: none;
+              }
+            }
+          }
+
+          .coding-common-head {
+            position: absolute;
+            width: 100%;
+            left: 53%;
+
+            &:after {
+              bottom: -2.1rem;
+              height: 1rem;
+            }
+          }
+        }
+      }
+
+      .more-fun-kid {
+        position: relative;
+
+        .more-kids-list {
+          justify-content: center;
+
+          @include gm.media-breakpoint-down(sm) {
+            flex-direction: column;
+          }
+
+          div {
+            width: 33.3%;
+
+            @include gm.media-breakpoint-down(sm) {
+              width: 100%;
+              position: relative;
+              margin-top: 2rem;
+
+              &:nth-of-type(1) {
+                margin-top: 0;
+              }
+            }
+
+            picture {
+              display: block;
+              text-align: center;
+
+              @include gm.media-breakpoint-down(sm) {
+                text-align: initial;
+              }
+
+              img {
+                width: auto;
+              }
+            }
+
+            p {
+              color: gt.theme-var(landing-black-color, null, $thememaplight, $cssvars);
+              background: gt.theme-var(landing-yellow-light-color, null, $thememaplight, $cssvars);
+              text-align: center;
+              font-weight: 700;
+              display: table;
+              margin: auto;
+              padding: 0.3rem 0.7rem;
+              font-size: 1.1rem;
+              border-radius: 0.8rem;
+              margin-top: 2rem;
+
+              @include gm.media-breakpoint-down(sm) {
+                font-size: 1rem;
+                padding: 0.3rem 0.5rem;
+              }
+            }
+
+            .right-text-mobile {
+              @include gm.media-breakpoint-down(sm) {
+                position: absolute;
+                top: 5rem;
+                right: 0;
+                margin: 0;
+                width: 50%;
+
+                &:before {
+                  font-family: "Font Awesome 5 Free";
+                  content: "\f0d9";
+                  position: absolute;
+                  left: -11px;
+                  font-size: 3rem;
+                  top: -18px;
+                  color: gt.theme-var(landing-yellow-light-color, null, $thememaplight, $cssvars);
+                }
+              }
+            }
+
+            .left-text-mobile {
+              @include gm.media-breakpoint-down(sm) {
+                position: absolute;
+                top: 5rem;
+                margin: 0;
+                width: 50%;
+
+                &:before {
+                  font-family: "Font Awesome 5 Free";
+                  content: "\f0da";
+                  position: absolute;
+                  right: -12px;
+                  font-size: 3rem;
+                  top: -18px;
+                  color: gt.theme-var(landing-yellow-light-color, null, $thememaplight, $cssvars);
+                }
+              }
+            }
+          }
+
+          .right-sec {
+            picture {
+              @include gm.media-breakpoint-down(sm) {
+                text-align: right;
+              }
+            }
+          }
+        }
+
+        .kids-list {
+          padding-top: 4rem;
+
+          @include gm.media-breakpoint-down(sm) {
+            padding-top: 0;
+          }
+        }
+
+        .center-size {
+          margin: auto;
+        }
+      }
+
+      .hackerkit2-sec {
+        @include gm.media-breakpoint-down(sm) {
+          margin-top: 4rem;
+          margin-bottom: 4rem;
+        }
+
+        .hackerkit-desk-sec {
+          .card {
+            margin-bottom: 1.5rem;
+            border: none;
+            border-radius: 0.8rem;
+            overflow: hidden;
+
+            @include gm.media-breakpoint-down(sm) {
+              margin-bottom: 0;
+            }
+
+            .card-header {
+              border: none;
+              background: gt.theme-var(landing-yellow-light-color, null, $thememaplight, $cssvars);
+              padding: 0.5rem 0;
+              text-align: center;
+              font-size: 1rem;
+              font-weight: 600;
+              color: gt.theme-var(landing-text-color, null, $thememaplight, $cssvars);
+            }
+
+            .card-body {
+              picture {
+                img {
+                  margin: auto;
+                  width: auto;
+                  display: table;
+                }
+              }
+            }
+          }
+        }
+
+        .hack-desk-sec {
+          @include gm.media-breakpoint-down(sm) {
+            display: none;
+          }
+        }
+
+        .hack-mobile-sec {
+          display: none;
+
+          @include gm.media-breakpoint-down(sm) {
+            display: block;
+          }
+        }
+      }
+
+      .swiper {
+        @include gm.media-breakpoint-down(sm) {
+          padding-bottom: 3rem;
+        }
+      }
+
+      .happy-learning {
+        .swiper {
+          padding-bottom: 4rem;
+
+          .swiper-slide {
+            height: auto;
+          }
+        }
+
+        .card {
+          border-radius: 0.8rem;
+          border: none;
+          height: 100%;
+
+          .card-body {
+            padding: 1rem;
+            height: 100%;
+
+            .learn-heding {
+              .user-detail {
+                margin-bottom: 1rem;
+                padding-bottom: 1rem;
+                border-bottom: 1px solid gt.theme-var(landing-yellow-light-color, null, $thememaplight, $cssvars);
+
+                .uesr-img {
+                  picture {
+                    img {
+                      width: 3rem;
+                      height: 3rem;
+                      border-radius: 4rem;
+                      margin-right: 1rem;
+                    }
+                  }
+                }
+
+                h3 {
+                  font-size: 1.1rem;
+                  font-weight: 600;
+                  margin-bottom: 0.2rem;
+                  margin-top: 0.5rem;
+                }
+
+                picture {
+                  img {
+                    width: 3rem;
+                  }
+                }
+              }
+
+              p {
+                font-size: 1rem;
+                margin-bottom: 0;
+              }
+
+              .rating-icon {
+                img {
+                  width: 6rem;
+                  margin-top: 1rem;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .faq {
+        @include gm.media-breakpoint-down(sm) {
+          margin-top: 5rem;
+          margin-bottom: 10rem;
+        }
+
+        .accordion {
+          .card {
+            border-radius: 0.8rem;
+            border: 1px solid gt.theme-var(landing-yellow-color, null, $thememaplight, $cssvars);
+            margin-bottom: 0.6rem;
+
+            .card-header {
+              background: none;
+              border: none;
+              padding: 0;
+
+              h3 {
+                margin: 0;
+                font-size: 1.125rem;
+                font-weight: 600;
+                padding: 1rem;
+                cursor: pointer;
+
+                &:after {
+                  content: "\f106";
+                  font-family: "Font Awesome 5 Free";
+                  font-weight: 900;
+                  float: right;
+                }
+              }
+
+              .collapsed {
+                &:after {
+                  content: "\f107";
+                }
+              }
+            }
+
+            .card-body {
+              padding: 1rem 2rem;
+              border-top: 1px solid gt.theme-var(landing-grey-light-color, null, $thememaplight, $cssvars);
+
+              p {
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    footer {
+      background-color: gt.theme-var(landing-header-bg, null, $thememaplight, $cssvars);
+      margin-top: 5rem;
+      padding: 4rem 0;
+      text-align: center;
+
+      @include gm.media-breakpoint-down(sm) {
+        padding: 3rem 0;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        color: gt.theme-var(landing-yellow-color, null, $thememaplight, $cssvars);
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .call-mail-btn {
+        display: block;
+        padding: 1rem;
+        text-align: left;
+        font-size: 1.25rem;
+        border-radius: 0.8rem;
+        border: 1px solid gt.theme-var(landing-yellow-color, null, $thememaplight, $cssvars);
+        text-decoration: none;
+        color: gt.theme-var(landing-header-bg, null, $thememaplight, $cssvars);
+
+        img {
+          margin-right: 1.1rem;
+          width: 1.75rem;
+        }
+
+        @include gm.media-breakpoint-down(sm) {
+          margin-bottom: 1rem;
+          text-align: center;
+          font-size: 1rem;
+          padding: 0.8rem;
+        }
+      }
+
+      .follow-us {
+        font-size: 1.1rem;
+        margin-top: 1.6rem;
+
+        @include gm.media-breakpoint-down(sm) {
+          margin-top: 0;
+        }
+      }
+
+      .social-media {
+        display: flex;
+        justify-content: center;
+
+        a {
+          display: inline-block;
+          margin-left: 1.2rem;
+
+          &:nth-of-type(1) {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+}
