@@ -11,33 +11,72 @@
     position: relative;
   }
 
-  #video-container-python {
-    .plyr {
-      border-radius: 12px;
-    }
-
-    img {
-      width: 100%;
-    }
-  }
-
-  #video-container-javascript {
-    .plyr {
-      border-radius: 12px;
-    }
-
-    img {
-      width: 100%;
-    }
-  }
-
+  #video-container-python,
+  #video-container-javascript,
   #youtube-video {
-    iframe {
+    .plyr {
       border-radius: 12px;
     }
 
     img {
       width: 100%;
+      height: 100%;
+    }
+
+    .position-relative {
+      overflow: hidden;
+      border-radius: 0.8rem;
+    }
+
+    .after-image {
+      position: relative;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .video-title {
+        position: absolute;
+        bottom: 0;
+        background: gt.theme-var(landing-header-bg, null, $thememaplight, $cssvars);
+        width: 100%;
+        padding: 0.3rem 0;
+        opacity: 0.8;
+
+        p {
+          margin-bottom: 0;
+          font-size: 1.1rem;
+          text-align: center;
+        }
+      }
+
+      .play-icon {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 5.625rem;
+        margin: auto;
+        height: 5.625rem;
+        text-align: center;
+        top: 42%;
+        background: rgba(33, 37, 39, 0.7);
+        box-shadow: 0 0.938rem 7.625rem rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(0.48rem);
+        padding: 1.5rem 0;
+        font-size: 1.8rem;
+        border-radius: 3rem;
+        overflow: hidden;
+        z-index: 100;
+
+        @include gm.media-breakpoint-down(sm) {
+          height: 3rem;
+          width: 3rem;
+          top: 37%;
+          padding: 0.7rem 0;
+          font-size: 1rem;
+        }
+      }
     }
   }
 
@@ -151,7 +190,7 @@
       position: absolute;
       background: url("../../../../../images/landing/boat-route-line-2.webp") no-repeat left / contain;
       width: 41%;
-      height: 70%;
+      height: 87%;
       right: 2.813rem;
       bottom: -12.5rem;
 
@@ -198,7 +237,7 @@
       position: absolute;
       background: url("../../../../../images/landing/boat-route-line-4.webp") no-repeat left / contain;
       width: 50%;
-      height: 65%;
+      height: 78%;
       right: 1.25rem;
       bottom: -11.563rem;
 
@@ -575,11 +614,6 @@
       .hackerkid-video-sec {
         position: relative;
 
-        .landing-image {
-          height: 350px;
-          max-width: 100%;
-        }
-
         @include gm.media-breakpoint-down(sm) {
           width: 100%;
         }
@@ -593,52 +627,52 @@
               width: 100%;
             }
           }
+        }
+      }
 
-          .play-icon {
-            position: absolute;
-            left: 0;
-            right: 0;
-            width: 5.625rem;
-            margin: auto;
-            height: 5.625rem;
-            text-align: center;
-            top: 42%;
-            background: rgba(33, 37, 39, 0.7);
-            box-shadow: 0 0.938rem 7.625rem rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(0.48rem);
-            padding: 1.5rem 0;
-            font-size: 1.8rem;
-            border-radius: 3rem;
-            overflow: hidden;
-            z-index: 100;
+      .play-icon {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 5.625rem;
+        margin: auto;
+        height: 5.625rem;
+        text-align: center;
+        top: 42%;
+        background: rgba(33, 37, 39, 0.7);
+        box-shadow: 0 0.938rem 7.625rem rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(0.48rem);
+        padding: 1.5rem 0;
+        font-size: 1.8rem;
+        border-radius: 3rem;
+        overflow: hidden;
+        z-index: 100;
 
-            @include gm.media-breakpoint-down(sm) {
-              height: 3rem;
-              width: 3rem;
-              top: 37%;
-              padding: 0.7rem 0;
-              font-size: 1rem;
-            }
-          }
+        @include gm.media-breakpoint-down(sm) {
+          height: 3rem;
+          width: 3rem;
+          top: 37%;
+          padding: 0.7rem 0;
+          font-size: 1rem;
+        }
+      }
+
+      .video-title {
+        position: absolute;
+        bottom: 0;
+        background: gt.theme-var(landing-header-bg, null, $thememaplight, $cssvars);
+        width: 100%;
+        padding: 0.3rem 0;
+        opacity: 0.8;
+
+        p {
+          margin-bottom: 0;
+          font-size: 1.1rem;
+          text-align: center;
         }
       }
 
       .tech-video-sec {
-        .video-title {
-          position: absolute;
-          bottom: 0;
-          background: gt.theme-var(landing-header-bg, null, $thememaplight, $cssvars);
-          width: 100%;
-          padding: 0.3rem 0;
-          opacity: 0.8;
-
-          p {
-            margin-bottom: 0;
-            font-size: 1.1rem;
-            text-align: center;
-          }
-        }
-
         a {
           height: 100%;
           border-radius: 0.7rem;

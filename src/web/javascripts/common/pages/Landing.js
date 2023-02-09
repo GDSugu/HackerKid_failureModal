@@ -140,9 +140,9 @@ const LandingBanner = () => <>
 </>;
 
 const LandingVideo = () => <>
-    <section>
+    <section className='top-space'>
       <div className='container'>
-        <div className='hackerkid-video-sec max-size top-space' id='hackerkid-video'>
+        <div className='hackerkid-video-sec max-size' id='hackerkid-video'>
            <picture>
               <img src='../../../../images/landing/hackerkit-img.webp' className='w-100' />
             </picture>
@@ -318,8 +318,8 @@ const LandingTechVideos = () => <>
           />
         </h2>
         <div className='row'>
-          <div className='col-lg-8 col-md-8' id='video-container-python'>
-            <div id='python-container'>
+          <div className='col-lg-6 col-md-6' id='video-container-python'>
+            <div id='python-container' className='position-relative h-100'>
               <picture>
                 <img src='../../../../images/landing/python-video.webp' className='w-100' />
               </picture>
@@ -334,10 +334,9 @@ const LandingTechVideos = () => <>
                 </p></div>
                 </div>
           </div>
-          <div className='col-lg-4 col-md-4'>
-            <div className='row'>
-              <div className='col-lg-12 col-md-12 mb-3' id='video-container-javascript'>
-              <div id='javascript-container'>
+          <div className='col-lg-6 col-md-6'>
+              <div id='video-container-javascript'>
+              <div id='javascript-container' className='position-relative'>
                   <picture>
                     <img src='../../../../images/landing/javascript-video.webp' className='w-100' />
                   </picture>
@@ -352,25 +351,7 @@ const LandingTechVideos = () => <>
                     </p>
                   </div>
                 </div>
-              </div>
-              <div className='col-lg-12 col-md-12'>
-                <div>
-                  <picture>
-                    <img src='../../../../images/landing/web-development.webp' className='w-100' />
-                  </picture>
-                  <div className='play-icon'>
-                    <i className="fa fa-play text-white" aria-hidden="true"></i>
-                  </div>
-                  <div className='video-title'>
-                    <p className='text-white'>
-                      <FormattedMessage
-                        defaultMessage={'Introduction to Web Development'}
-                        description={'video title'} />
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+              </div>           
           </div>
         </div>
 
@@ -1244,7 +1225,7 @@ const goDefaultImage = (course) => {
               <i className="fa fa-play text-white" aria-hidden="true"></i>
             </div> </div>`);
   } else if (course === 'javascript') {
-    $('#video-container-python').html(`<div className="after-image" id='python-container'>
+    $('#video-container-python').html(`<div className="after-image h-100" id='python-container'>
     <picture>
       <img src='../../../../images/landing/python-video.webp' className='w-100' />
     </picture>
@@ -1260,14 +1241,14 @@ const goDefaultImage = (course) => {
       </div>`);
     $('#hackerkid-video').html(`
     <div className="after-image">
-            <picture className="after-image">
+            <picture>
               <img src='../../../../images/landing/hackerkit-img.webp' className='w-100' />
             </picture>
             <div className='play-icon'>
               <i className="fa fa-play text-white" aria-hidden="true"></i>
             </div></div>`);
   } else if (course === 'hackerkid') {
-    $('#video-container-javascript').html(`<div className="after-image" id='javascript-container'>
+    $('#video-container-javascript').html(`<div className="h-100 h-100" id='javascript-container'>
     <picture>
       <img src='../../../../images/landing/javascript-video.webp' className='w-100' />
     </picture>
@@ -1282,8 +1263,8 @@ const goDefaultImage = (course) => {
       </p>
     </div>
   </div>`);
-    $('#video-container-python').html(`<div id='python-container'>
-    <picture className="after-image">
+    $('#video-container-python').html(`<div className="after-image h-100" id='python-container'>
+    <picture>
       <img src='../../../../images/landing/python-video.webp' className='w-100' />
     </picture>
     <div className='play-icon'>
