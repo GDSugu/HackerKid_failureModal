@@ -777,6 +777,19 @@ const checkPaymentModal = () => {
   }
 };
 
+const removeQueryinUrl = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const payment = urlParams.get('payment');
+  if (payment === 'success') {
+    window.history.replaceState({}, document.title, '/dashboard');
+  }
+};
+
+const closePaymentModal = () => {
+  $('.payment-success-modal').modal('hide');
+  removeQueryinUrl();
+};
+
 const PaymentScuccessModal = () => <div
 className="modal fade payment-success-modal"
 id="modal"
@@ -789,7 +802,7 @@ aria-hidden="true">
     <div className="modal-body">
       <div className='text-center payment-modal-container'>
       <p className='payment-modal-text'>Your Payment is Successfully Completed. Enjoy the Premium Features.</p>
-      <button className='btn btn-primary w-100 continue-btn text-white'>Continue</button>
+      <button className='btn btn-primary w-100 continue-btn text-white' aria-label="Close" onClick={closePaymentModal}>Continue</button>
       </div>
     </div>
   </div>

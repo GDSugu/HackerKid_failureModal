@@ -30,7 +30,7 @@ const initPayment = () => {
         handler(paymentResponse) {
           if (paymentResponse.razorpay_payment_id) {
             pathNavigator(
-              'courses/dashboard?payment=success',
+              'dashboard?payment=success',
             );
           }
         },
