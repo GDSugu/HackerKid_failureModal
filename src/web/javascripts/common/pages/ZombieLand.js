@@ -148,42 +148,67 @@ const ZombieLandQuestionComponent = ({ status, questionObject }) => <>
       {
         status === 'success'
         && <>
-          <div className="zombieLand-title-block">
-            <p className="zombieLand-question-title">
-              <FormattedMessage
-                defaultMessage={'Problem Statement'}
-                description={'problem statement title'}
-              />
-            </p>
-          </div>
-          <div className="zombieLand-question-content">
-            <div className="zombieLand-question">
-              <p>
+          <div className="block">
+            <div className="zombieLand-title-block">
+              <p className="zombieLand-question-title">
                 <FormattedMessage
-                  defaultMessage={'{question}'}
-                  description={'Question'}
-                  values={{ question: questionObject.qname }}
+                  defaultMessage={'Problem Statement'}
+                  description={'problem statement title'}
                 />
               </p>
             </div>
-            <div className="zombieLand-question-instructions">
-              <ol>
-                {
-                  questionObject.q_instruction.map((step, index) => <li key={index}>
-                    <p className='zl-instruction'>
-                      <FormattedMessage
-                        defaultMessage={'{step}'}
-                        description={'zombieLand instruction'}
-                        values={{
-                          step: (step[step.length - 1] === '.') ? step.slice(0, -1) : step,
-                        }}
-                      />
-                    </p>
-                  </li>)
-                }
-              </ol>
+            <div className="zombieLand-question-content">
+              <div className="zombieLand-question">
+                <p>
+                  <FormattedMessage
+                    defaultMessage={'{question}'}
+                    description={'Question'}
+                    values={{ question: questionObject.qname }}
+                  />
+                </p>
+              </div>
+              <div className="zombieLand-question-instructions">
+                <ol>
+                  {
+                    questionObject.q_instruction.map((step, index) => <li key={index}>
+                      <p className='zl-instruction'>
+                        <FormattedMessage
+                          defaultMessage={'{step}'}
+                          description={'zombieLand instruction'}
+                          values={{
+                            step: (step[step.length - 1] === '.') ? step.slice(0, -1) : step,
+                          }}
+                        />
+                      </p>
+                    </li>)
+                  }
+                </ol>
+              </div>
             </div>
-            <div id="zombieLand-image-preview" className="zombieLand-image-preview"></div>
+          </div>
+          <div className="block">
+            <div className="zombieLand-title-block">
+              <p className="zombieLand-question-title">
+                <FormattedMessage
+                  defaultMessage={'Expected Output'}
+                  description={'problem statement title'}
+                />
+              </p>
+            </div>
+            <div className="zombieLand-preview-content">
+              <div id="zombieLand-image-preview" className="zombieLand-image-preview">
+                {
+                  (questionObject?.stage !== false)
+                  && (questionObject?.stage !== '')
+                  && <>
+                    <Img
+                      src={questionObject.thumbnail}
+                      local={false}
+                    />
+                  </>
+                }
+              </div>
+            </div>
           </div>
         </>
       }
@@ -259,7 +284,15 @@ const ZombieLandPlayGroundComponent = ({
         </ul>
         <div className="runBtnContainer">
           <button id="runCode" className="btn runBtn" onClick={handleRunCode}>
-            <i className="fas fa-play"></i>
+            <div className="d-flex align-items-center">
+              <i className="fas fa-play"></i>
+              <p className="mb-0">
+                <FormattedMessage
+                  defaultMessage={'Play'}
+                  description={'play button'}
+                />
+              </p>
+            </div>
           </button>
         </div>
       </div>

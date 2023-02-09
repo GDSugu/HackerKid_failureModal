@@ -189,16 +189,36 @@ authorize.loginCheck = () => new Promise((resolve, reject) => {
 // const addSignInButton = () => {
 //   $('.nav-trail').html('<div><a href="/login.html" class="btn btn-primary">Sign in</a></div>');
 // };
+const storeNavigationUrl = () => {
+  const { pathname } = window.location;
+  const authPages = [
+    'login',
+    'register',
+    'forgot-password',
+    'pricing-plans',
+  ];
+  const pages = pathname.split('/');
+  if (pages.length > 1) {
+    const page = pages[1];
+    if (!authPages.includes(page)) {
+      window.sessionStorage.setItem('navigateTo', window.location.href);
+    }
+  }
+};
 
 const loginCheck = () => new Promise((resolve, reject) => {
   const authToken = authorize.getSession('authtoken');
   if (authToken === '' || authToken === null) {
     // addSignInButton();
     resolve(false);
+    storeNavigationUrl();
+    console.log('login check navigate');
     pathNavigator('login');
+    console.log('path navigated');
   } else {
     post({ type: 'checkSession' }, 'login/', true, false).then((response) => {
       if (!response || response === 'access_denied') {
+        storeNavigationUrl();
         pathNavigator('login');
         resolve(false);
       } else {

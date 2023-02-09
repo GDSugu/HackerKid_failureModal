@@ -53,6 +53,10 @@ const cropImage = (element) => {
   autocrop(element, null, { version: __webpack_hash__ });
 };
 
+const tryChallenge = (url) => {
+  window.location.pathname = url;
+};
+
 const CreateChallangesQuestionComponent = ({
   status, challengeDetails,
   trendingChallengeStatus, trendingChallenges = [],
@@ -110,7 +114,10 @@ const CreateChallangesQuestionComponent = ({
               && <>
                 {
                   trendingChallenges.map((challenge, idx) => <div key={idx} className={'challenge-box'}>
-                    <Link to={challenge.actionUrl}>
+                    <div
+                      // to={challenge.actionUrl}
+                      onClick={() => tryChallenge(challenge.actionUrl)}
+                      >
                       <div className="d-flex align-items-center justify-content-between">
                         <div className="d-flex align-items-center">
                           <div className={`challenge-img-container challenge-img-${challenge.challengeId}`}>
@@ -144,7 +151,7 @@ const CreateChallangesQuestionComponent = ({
                           </div>
                         </div>
                       </div>
-                    </Link>
+                    </div>
                   </div>)}
               </>
             }
@@ -252,7 +259,15 @@ const CreateChallangesPlayGroundComponent = ({
         </ul>
         <div className="runBtnContainer">
           <button id='runCode' className='btn runBtn' onClick={() => { handleRunCode(true); }}>
-            <i className="fas fa-play"></i>
+            <div className="d-flex align-items-center">
+              <i className="fas fa-play"></i>
+              <p className="mb-0">
+                <FormattedMessage
+                  defaultMessage={'Play'}
+                  description={'play button'}
+                />
+              </p>
+            </div>
           </button>
         </div>
       </div>

@@ -729,7 +729,6 @@ const useClubs = ({ isPageMounted }) => {
 
     return post(payload, 'clubs/')
       .then((response) => {
-        let result = false;
         if (isPageMounted.current) {
           if (response !== 'access_denied') {
             const parsedResponse = JSON.parse(response);
@@ -741,11 +740,11 @@ const useClubs = ({ isPageMounted }) => {
                 ...prevData,
                 ...parsedResponse,
               }));
-              result = parsedResponse;
             }
+            return parsedResponse;
           }
         }
-        return result;
+        return response;
       });
   };
 

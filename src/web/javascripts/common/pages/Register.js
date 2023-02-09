@@ -21,6 +21,16 @@ import useRecapchav3 from '../../../../hooks/pages/recapchav3';
 
 const manager = {};
 
+const checkUrl = () => {
+  const url = window.sessionStorage.getItem('navigateTo');
+  if (url) {
+    window.location.href = url;
+    window.sessionStorage.removeItem('navigateTo');
+    return true;
+  }
+  return false;
+};
+
 const RegisterFormStepOne = ({
   stateObj, setStateObj, handleStateChange, setBackBtnStateObj, getRecapchaToken,
 }) => {
@@ -287,7 +297,11 @@ const RegisterFormStepThree = ({
           if (data.awardsGiven) {
             setSession('awardsGiven', JSON.stringify(data.awardsGiven));
           }
-          pathNavigator('dashboard');
+          // pathNavigator('dashboard');
+          const urlPresent = checkUrl();
+          if (!urlPresent) {
+            pathNavigator('dashboard');
+          }
         } else if (status === 'error') {
           const errorCause = 'postData';
           switch (message) {

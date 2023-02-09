@@ -1,5 +1,6 @@
 @use '../../sass/themes/_default' as gt;
 @use '../../sass/base/_mixins' as gm;
+@use '../../sass/components/loading';
 
 @import './_clubTheme.js';
 
@@ -447,6 +448,44 @@
           i {
             margin-left: 0.5rem;
           }
+        }
+      }
+    }
+
+    .club-hero-container-card {
+      .club-mob-name {
+        h5 {
+          font-size: 1.5rem;
+          font-weight: bold;
+          margin: 0.75rem 0;
+        }
+      }
+
+      .club-action-btn {
+        grid-area: club-action;
+        border-radius: 0.875rem;
+        background-color: gt.theme-var(bg-1);
+        border: 1px solid gt.theme-var(club-btn-bg, null, $thememaplight, $cssvars);
+        box-shadow: 0 4px 4px gt.theme-var(club-card-box-shadow-color, null, $thememaplight, $cssvars);
+        color: gt.theme-var(club-btn-bg, null, $thememaplight, $cssvars);
+        font-weight: bold;
+        padding: 1rem;
+
+        &:not(.pending-action):hover {
+          background-color: gt.theme-var(club-btn-bg, null, $thememaplight, $cssvars);
+          color: gt.theme-var(bg-1);
+        }
+
+        &.pending-action {
+          border-color: gt.theme-var(text-color-5);
+          box-shadow: none;
+          color: gt.theme-var(text-color-5);
+          text-align: left;
+          opacity: 1;
+        }
+
+        i {
+          font-size: 1.5rem;
         }
       }
     }
@@ -2089,6 +2128,57 @@
 
           .club-member-info-body {
             width: 95%;
+          }
+        }
+      }
+    }
+
+    &.club-confirmation-modal {
+      .modal-dialog {
+        @include gm.media-breakpoint-up(md) {
+          max-width: 50%;
+        }
+
+        .modal-custom-header {
+          background-color: gt.theme-var(bg-1);
+        }
+
+        .modal-content {
+          background-color: gt.theme-var(bg-1);
+
+          .club-confirmation-modal-content {
+            padding: 2rem;
+            text-align: center;
+
+            .club-confirmation-message-container {
+              padding-bottom: 1rem;
+            }
+
+            .club-confirmation-title {
+              font-weight: bold;
+            }
+
+            .club-confirmation-message {
+              font-size: 0.875rem;
+              color: gt.theme-var(text-color-13);
+            }
+
+            .col-6 {
+              padding-left: 0.25rem;
+              padding-right: 0.25rem;
+
+              .btn {
+                &.btn-primary {
+                  color: gt.theme-var(text-color-2);
+                }
+
+                // &:not(.btn-primary) {
+                //   &:hover {
+                //     color: gt.theme-var(text-color-2);
+                //   }
+                // }
+              }
+            }
           }
         }
       }

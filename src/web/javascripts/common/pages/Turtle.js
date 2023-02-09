@@ -329,10 +329,26 @@ const TurtlePlayGroundComponent = ({ handleRunCode, handleDrawingState, handleHi
         </ul>
         <div className="runBtnContainer">
           <button id='runCode' className='btn runBtn' onClick={() => { toggleHintBtn(true); handleRunCode(); }}>
-            <i className="fas fa-play"></i>
+            <div className="d-flex align-items-center">
+              <i className="fas fa-play"></i>
+              <p className="mb-0">
+                <FormattedMessage
+                  defaultMessage={'Play'}
+                  description={'play button'}
+                />
+              </p>
+            </div>
           </button>
           <button id='continueDebugger' className='btn runBtn' onClick={() => { toggleHintBtn(true); }}>
-            <i className="fas fa-play"></i>
+            <div className="d-flex align-items-center">
+              <i className="fas fa-play"></i>
+              <p className="mb-0">
+                <FormattedMessage
+                  defaultMessage={'Continue'}
+                  description={'debugger button'}
+                />
+              </p>
+            </div>
           </button>
         </div>
       </div>
@@ -964,6 +980,8 @@ const TurtleGameComponent = () => {
   React.useEffect(() => {
     isPageMounted.current = true;
     hideDefaultNavBar(device, 'main');
+    $('#runCode').hide();
+    $('#continueDebugger').hide();
 
     // if (status === 'success') {
     //   $('#loader').hide();
