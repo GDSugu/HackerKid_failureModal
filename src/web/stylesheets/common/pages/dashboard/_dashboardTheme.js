@@ -36,6 +36,8 @@ const thememaplight = {
   'dashboard-club-btn-color': Green.color900,
   'dashboard-challenges-arrow-color': Yellow.color900,
   'dashboard-hero-shadow': '0 4px 16px #f9a82625',
+  'price-light-green-bg': '#E5F4ED',
+  'price-dark-green-color': '#178958',
 };
 // just copied the light theme colors to the dark for now
   // TODO: make this a real dark theme with appropriate colors
@@ -67,6 +69,8 @@ const thememapdark = {
   'dashboard-club-btn-color': Green.color900,
   'dashboard-challenges-arrow-color': Yellow.color900,
   'dashboard-hero-shadow': '0 4px 16px #f9a82625',
+  'price-light-green-bg': '#E5F4ED',
+  'price-dark-green-color': '#178958',
 };
 
 const cssvars = {
@@ -97,6 +101,8 @@ const cssvars = {
   'dashboard-club-btn-color': '--dashboard-club-btn-color',
   'dashboard-challenges-arrow-color': '--dashboard-challenges-arrow-color',
   'dashboard-hero-shadow': '--dashboard-hero-shadow',
+  'price-light-green-bg': '--price-light-green-bg',
+  'price-dark-green-color': '--price-dark-green-color',
 };
 
 module.exports = {

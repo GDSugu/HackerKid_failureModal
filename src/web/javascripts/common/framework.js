@@ -20,6 +20,10 @@ const isFeatureEnabled = (features, feature, subFeature) => {
         isPartial: featureObj.isPartial,
       };
       if (featureObj.isPartial && subFeature) {
+        if (subFeature === 'languages') {
+          obj[feature][subFeature] = featureObj.allowed;
+          return obj[feature];
+        }
         const subFeatureObj = featureObj.allowed.find((f) => f.category === subFeature);
         if (subFeatureObj) {
           obj[feature][subFeature] = subFeatureObj.limit;

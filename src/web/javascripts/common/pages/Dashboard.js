@@ -270,6 +270,38 @@ const ProfileContainer = ({ dashboardUserData, isDesktop, session }) => <>
   </div>
 </>;
 
+const ExclusiveCourses = () => <>
+  <div className="price-course-container">
+    <h3>
+      <FormattedMessage
+        defaultMessage={'HackerKid Exclusive Courses'}
+        description={'HackerKid Exclusive Courses title'}
+      />
+    </h3>
+    <div className='row row-revise'>
+      <div className='col-lg-4 col-md-2 col-xs-12'>
+        <picture>
+          <img src='../../../../../images/pricing/hackerkid-exclusive-courses.webp' className='share-icon' alt='list-icon' />
+        </picture>
+      </div>
+
+      <div className='col-lg-8 col-md-10 col-xs-12'>
+        <p>
+          <FormattedMessage
+            defaultMessage={'HackerKid also offer exclusive courses on various pedagogies like Web Development, App Development, Game Development & Data Science. We have an elite team of teacher to guide with your learning process. We have team that can answer all your queries before you decide enroll with us. Go on tell your parent right now, What are you waiting for?'}
+            description={'HackerKid Exclusive Courses description'}
+          />
+        </p>
+        <a href='https://static.hackerkid.org/hackerkid/hackerkid_brochure.pdf' download className='explore-now-btn'>
+          <FormattedMessage defaultMessage={'Explore Now'} description='Explore Now text' />
+          <i className="fa fa-chevron-right" aria-hidden="true"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</>;
+
 const GameContainer = ({
   dashboardUserData, overAllQuestionsCount, totalPointsEarned, validSubmissionsCount, timeSpent,
 }) => <>
@@ -403,50 +435,6 @@ const GameContainer = ({
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</>;
-
-const ExclusiveUserContainer = () => <>
-  <div className="dashboard-exclusive-user-container dashboard-body-block">
-    <div className="exclusive-user-content">
-      <div className="row no-gutters align-items-stretch">
-        <div className="col-12 col-md-8 order-2 order-md-1">
-          <div className="exclusive-user-data-content">
-            <h2>
-              <FormattedMessage
-                defaultMessage={'HackerKid Exclusive Courses'}
-                description={'exclusive user feature title'}
-              />
-            </h2>
-            <p>
-              <FormattedMessage
-                defaultMessage={'HackerKid also offer exclusive courses on various pedagogies like Web Development, App Development, Game Development & Data Science. We have an elite team of teacher to guide with your learning process. We have team that can answer all your queries before you decide enroll with us. Go on tell your parent right now, What are you waiting for?'}
-                description={'exclusive user feature content'}
-              />
-            </p>
-            <a name="exclusiveUserBtn" id="exclusive_user_btn" className="btn" href="/pricing-plans" role="button">
-              <div className="d-flex align-items-center justify-content-between">
-                <p className="mb-0">
-                  <FormattedMessage
-                    defaultMessage={'Explore Now'}
-                  />
-                </p>
-                <i className="fa fa-angle-right" aria-hidden="true"></i>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div className="col-12 col-md-4 order-1 order-md-2">
-          <div className="exclusive-user-illustration">
-            <Img
-              src={'dashboard/exclusive-iIlustration.png'}
-              alt={'exclusive user'}
-            />
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 </>;
@@ -942,7 +930,7 @@ const Dashboard = () => {
             totalPointsEarned={gameData.totalPointsEarned}
             validSubmissionsCount={gameData.gameProgress}
             timeSpent={gameProgress.totalTimeSpent} />
-          <ExclusiveUserContainer />
+            <ExclusiveCourses />
         </div>
         {
           isDesktop

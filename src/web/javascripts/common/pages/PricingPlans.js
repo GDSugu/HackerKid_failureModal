@@ -1036,7 +1036,7 @@ const ExclusiveCourses = () => <>
             description={'HackerKid Exclusive Courses description'}
           />
         </p>
-        <a href='/collectibles' className='explore-now-btn'>
+        <a href='https://static.hackerkid.org/hackerkid/hackerkid_brochure.pdf' download className='explore-now-btn'>
           <FormattedMessage defaultMessage={'Explore Now'} description='Explore Now text' />
           <i className="fa fa-chevron-right" aria-hidden="true"></i>
         </a>
