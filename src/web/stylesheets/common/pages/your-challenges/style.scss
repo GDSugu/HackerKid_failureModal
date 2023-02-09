@@ -75,6 +75,12 @@
     @include gm.media-breakpoint-down(sm) {
       margin: 1rem 0;
     }
+
+    .challenge-img {
+      img {
+        object-fit: contain;
+      }
+    }
   }
 
   .pagination-footer {

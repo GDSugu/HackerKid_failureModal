@@ -55,6 +55,7 @@ const AwardsNotificationCard = ({ onClose = () => { }, onOpen = () => { } }, ref
             && awards.map((award, idx) => <AwardCard
               key={idx}
               awardImage={award.awardImage}
+              awardName={award.awardName}
               className={`${(idx !== 0 || idx !== awards.length - 1) ? 'mr-2' : ''}`}
             />)
           }
@@ -78,7 +79,7 @@ const AwardsNotificationCard = ({ onClose = () => { }, onOpen = () => { } }, ref
         >
           <FormattedMessage defaultMessage={'Dismiss'} description='dismiss btn text' />
         </button>
-        <Link className="btn btn-primary view-awards-btn" to={'/awards'}>
+        <Link className="btn btn-primary view-awards-btn" to={'/awards'} onClick={onClose}>
           <FormattedMessage defaultMessage={'{btnText}'} description='view awards btn' values={{
             btnText: awards && awards.length > 1 ? 'View awards' : 'View award',
           }} />

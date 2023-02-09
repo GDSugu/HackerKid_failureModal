@@ -1,11 +1,12 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import autocrop from 'autocrop-worker';
 import {
-  $, pageInit, secondsToMins, timeTrack,
+  $, isFeatureEnabled, pageInit, secondsToMins, timeTrack,
 } from '../framework';
 import Img from '../components/Img';
-// import SwiperComponent from '../components/SwiperComponent';
+import SwiperComponent from '../components/SwiperComponent';
 import { useDashboard } from '../../../../hooks/pages/dashboard';
 import { useLeaderBoard } from '../../../../hooks/pages/leaderboard';
 import { useGetChallenges } from '../../../../hooks/pages/challenges';
@@ -14,6 +15,7 @@ import BottomSheet from '../components/BottomSheet';
 import '../../../stylesheets/common/pages/dashboard/style.scss';
 import { getSession, setSession } from '../../../../hooks/common/framework';
 import AwardsNotificationCard from '../components/AwardsNotificationCard';
+import { SubscriptionContext } from '../../../../hooks/pages/root';
 
 const compareProps = (prev, next) => {
   let isEqual = true;
@@ -30,6 +32,11 @@ const compareProps = (prev, next) => {
     }
   });
   return isEqual;
+};
+
+const cropImage = (element) => {
+  // eslint-disable-next-line camelcase
+  autocrop(element, null, { version: __webpack_hash__ });
 };
 
 const showBottomSheet = () => {
@@ -361,31 +368,23 @@ const GameContainer = ({
             <div className="games-container">
               <div className="games-block game-progress-block">
                 <div className="games-cards d-flex align-items-center no-gutters">
-                  <div className="col-3">
                     <Link className="game-item" to='/turtle'>
                       <Img src='dashboard/dashboard-turtle.png' />
                     </Link>
-                  </div>
-                  <div className="col-3">
                     <Link className="game-item" to='/zombieland'>
                       <Img src='dashboard/dashboard-zombieLand.png' />
                     </Link>
-                  </div>
-                  <div className="col-3">
                     <Link className="game-item" to='/webkata/html'>
                       <Img src='dashboard/dashboard-webkata-html.png' />
                     </Link>
-                  </div>
                   {/* <div className="col-3">
                   <Link className="game-item" to='/webkata/css'>
                     <Img src='dashboard/dashboard-webkata-css.png' />
                   </Link>
                 </div> */}
-                <div className="col-3">
                   <Link className="game-item" to='/coding-pirate'>
                     <Img src='dashboard/dashboard-codePirate.png' />
                   </Link>
-                </div>
               </div>
             </div>
             <div className="game-btn-block game-progress-block mt-md-1">
@@ -408,77 +407,130 @@ const GameContainer = ({
   </div>
 </>;
 
-// const ChallengeSwiperSlide = ({ data }) => <>
-//   <Link className='challenge-item' to={data.actionUrl}>
-//     <div className="challenge-block">
-//       <div className="challenge-img">
-//         <Img src={data.imgPath} local={false} alt={data.challengeName} />
-//       </div>
-//       <div className="challenge-title">
-//         <p>{data.challengeName || '--'}</p>
-//       </div>
-//       <div className="challenge-author">
-//         <p>{`by ${data.creatorName || '--'}`}</p>
-//       </div>
-//     </div>
-//   </Link>
-//   </>;
+const ExclusiveUserContainer = () => <>
+  <div className="dashboard-exclusive-user-container dashboard-body-block">
+    <div className="exclusive-user-content">
+      <div className="row no-gutters align-items-stretch">
+        <div className="col-12 col-md-8 order-2 order-md-1">
+          <div className="exclusive-user-data-content">
+            <h2>
+              <FormattedMessage
+                defaultMessage={'HackerKid Exclusive Courses'}
+                description={'exclusive user feature title'}
+              />
+            </h2>
+            <p>
+              <FormattedMessage
+                defaultMessage={'HackerKid also offer exclusive courses on various pedagogies like Web Development, App Development, Game Development & Data Science. We have an elite team of teacher to guide with your learning process. We have team that can answer all your queries before you decide enroll with us. Go on tell your parent right now, What are you waiting for?'}
+                description={'exclusive user feature content'}
+              />
+            </p>
+            <a name="exclusiveUserBtn" id="exclusive_user_btn" className="btn" href="/pricing-plans" role="button">
+              <div className="d-flex align-items-center justify-content-between">
+                <p className="mb-0">
+                  <FormattedMessage
+                    defaultMessage={'Explore Now'}
+                  />
+                </p>
+                <i className="fa fa-angle-right" aria-hidden="true"></i>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div className="col-12 col-md-4 order-1 order-md-2">
+          <div className="exclusive-user-illustration">
+            <Img
+              src={'dashboard/exclusive-iIlustration.png'}
+              alt={'exclusive user'}
+            />
+          </div>
+        </div>
+      </div>
 
-// const ChallengesSwiper = ({ trendingChallenges }) => <>
-//   <div className="dashboard-challenges-container dashboard-body-block">
-//     <div className="challenges-heading-container d-flex align-items-end justify-content-between">
-//       <p className="block-heading">
-//         <FormattedMessage
-//           defaultMessage={'Challenges'}
-//           description={'challenges heading'}
-//         />
-//       </p>
-//       <Link className='challenges-nav' to='/challenges'>
-//         <p>
-//           <FormattedMessage
-//             defaultMessage={'All Challenges'}
-//             description={'all challenges'}
-//           />
-//         </p>
-//       </Link>
-//     </div>
-//     <div className="challenges-block">
-//       <div className="row no-gutters">
-//         {
-//           trendingChallenges && trendingChallenges.length > 0
-//           && <>
-//             <SwiperComponent
-//               data={trendingChallenges}
-//               SlideComponent={ChallengeSwiperSlide}
-//               swiperModules={{
-//                 navigation: true,
-//               }}
-//               swiperProps={{
-//                 spaceBetween: 10,
-//                 slidesPerView: 'auto',
-//                 className: 'trending-challenges-swiper',
-//                 grabCursor: true,
-//                 lazy: true,
-//                 navigation: true,
-//               }} />
-//           </>
-//         }
-//         {
-//           !trendingChallenges
-//           && <>
-//             <div className="skeleton">
-//               <div className="d-flex align-items-center skeleton-challenge-container">
-//                 { [1, 2, 3, 4, 5, 6].map((item, index) => (
-//                   <div key={index} className='skeleton-challenge-card'></div>
-//                 )) }
-//               </div>
-//             </div>
-//           </>
-//         }
-//       </div>
-//     </div>
-//   </div>
-// </>;
+    </div>
+  </div>
+</>;
+
+const ChallengeSwiperSlide = ({ data }) => {
+  useEffect(() => {
+    if (data) {
+      const element = document.querySelector(`.challenge-swiper-img-${data.challengeId} img`);
+      cropImage(element);
+    }
+  }, [data]);
+
+  return <>
+    <Link className='challenge-item' to={data.actionUrl}>
+      <div className="challenge-block">
+        <div className={`challenge-img challenge-swiper-img-${data.challengeId}`}>
+          <Img src={data.imgPath} local={false} alt={data.challengeName} />
+        </div>
+        <div className="challenge-title">
+          <p>{data.challengeName || '--'}</p>
+        </div>
+        <div className="challenge-author">
+          <p>{`by ${data.creatorName || '--'}`}</p>
+        </div>
+      </div>
+    </Link>
+    </>;
+};
+
+const ChallengesSwiper = ({ trendingChallenges }) => <>
+  <div className="dashboard-challenges-container dashboard-body-block">
+    <div className="challenges-heading-container d-flex align-items-end justify-content-between">
+      <p className="block-heading">
+        <FormattedMessage
+          defaultMessage={'Challenges'}
+          description={'challenges heading'}
+        />
+      </p>
+      <Link className='challenges-nav' to='/challenges'>
+        <p>
+          <FormattedMessage
+            defaultMessage={'All Challenges'}
+            description={'all challenges'}
+          />
+        </p>
+      </Link>
+    </div>
+    <div className="challenges-block">
+      <div className="row no-gutters">
+        {
+          trendingChallenges && trendingChallenges.length > 0
+          && <>
+            <SwiperComponent
+              data={trendingChallenges}
+              SlideComponent={ChallengeSwiperSlide}
+              swiperModules={{
+                navigation: true,
+              }}
+              swiperProps={{
+                spaceBetween: 10,
+                slidesPerView: 'auto',
+                className: 'trending-challenges-swiper',
+                grabCursor: true,
+                lazy: true,
+                navigation: true,
+              }} />
+          </>
+        }
+        {
+          !trendingChallenges
+          && <>
+            <div className="skeleton">
+              <div className="d-flex align-items-center skeleton-challenge-container">
+                { [1, 2, 3, 4, 5, 6].map((item, index) => (
+                  <div key={index} className='skeleton-challenge-card'></div>
+                )) }
+              </div>
+            </div>
+          </>
+        }
+      </div>
+    </div>
+  </div>
+</>;
 
 const LeaderBoardCard = ({ leaderboardData, leaderBoardUserData, className }) => <>
   {<>
@@ -635,7 +687,7 @@ const AchievementCard = ({ className, isDesktop, sessionData }) => <>
   </>}
 </>;
 
-const ClubCard = ({ clubData = {}, className }) => <>
+const ClubCard = ({ clubData = {}, className, enabled }) => <>
   {<>
     <div className={`dashboard-club-container dashboard-body-block ${className}`}>
       <div className="sideboard-card card">
@@ -645,12 +697,13 @@ const ClubCard = ({ clubData = {}, className }) => <>
               defaultMessage={'{clubName}'}
               description={'Club name heading'}
               values={{
-                clubName: clubData.clubName,
+                clubName: enabled ? clubData.clubName : 'School Clubs',
               }}
             />
           </p>
         </div>
-        <div className="club-card-content">
+        {
+          enabled ? <div className="club-card-content">
           {
             !clubData && <>
               <div className="skeleton">
@@ -705,6 +758,23 @@ const ClubCard = ({ clubData = {}, className }) => <>
             </>
           }
         </div>
+            : <div className="club-card-content">
+          <div className="sideboard-content-title club-image-div">
+          <Img src='common/feature-lock.svg' className='club-lock-image'/>
+              </div>
+              <div className="sideboard-content-data">
+                <p className="club-members-title-buy mb-0">Buy premium to unlock school clubs feature</p>
+                <div className="sideboard-btn-block">
+                  <Link className='btn btn-block club-btn-buy' to={'/pricing'}>
+                    <FormattedMessage
+                      defaultMessage={'Unlock Now'}
+                      description={'Unlock Now button'}
+                    />
+                  </Link>
+                </div>
+              </div>
+        </div>
+        }
       </div>
     </div>
   </>}
@@ -713,10 +783,50 @@ const ClubCard = ({ clubData = {}, className }) => <>
 const HeroComponent = memo(HeroContainer, compareProps);
 const ProfileComponent = memo(ProfileContainer, compareProps);
 const GameComponent = memo(GameContainer, compareProps);
-// const ChallengesComponent = memo(ChallengesSwiper);
+const ChallengesComponent = memo(ChallengesSwiper);
 const LeaderBoardCardComponent = memo(LeaderBoardCard, compareProps);
 const AchievementCardComponent = memo(AchievementCard, compareProps);
 const ClubCardComponent = memo(ClubCard, compareProps);
+
+const checkPaymentModal = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const payment = urlParams.get('payment');
+  if (payment === 'success') {
+    $('.payment-success-modal').modal('show');
+  }
+};
+
+const removeQueryinUrl = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const payment = urlParams.get('payment');
+  if (payment === 'success') {
+    window.history.replaceState({}, document.title, '/dashboard');
+  }
+};
+
+const closePaymentModal = () => {
+  $('.payment-success-modal').modal('hide');
+  removeQueryinUrl();
+};
+
+const PaymentScuccessModal = () => <div
+className="modal fade payment-success-modal"
+id="modal"
+tabIndex="-1"
+role="dialog"
+aria-labelledby="errorModal"
+aria-hidden="true">
+<div className="modal-dialog modal-dialog-centered" role="document">
+  <div className="modal-content payment-modal-content">
+    <div className="modal-body">
+      <div className='text-center payment-modal-container'>
+      <p className='payment-modal-text'>Your Payment is Successfully Completed. Enjoy the Premium Features.</p>
+      <button className='btn btn-primary w-100 continue-btn text-white' aria-label="Close" onClick={closePaymentModal}>Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>;
 
 const Dashboard = () => {
   if (window.location.href.includes('/dashboard')) {
@@ -733,7 +843,6 @@ const Dashboard = () => {
   const { state: getChallengesState } = useGetChallenges({ isPageMounted });
 
   const awardsNotificationCardRef = React.useRef(true);
-
   const {
     status: dashboarStatus,
     userData: dashboardUserData,
@@ -751,10 +860,12 @@ const Dashboard = () => {
 
   const {
     status: challengesStatus,
-    // trendingChallenges,
+    trendingChallenges,
   } = getChallengesState;
 
   const modalVisible = [dashboarStatus, leaderboardStatus, challengesStatus].includes('access_denied');
+
+  const { subscriptionData } = React.useContext(SubscriptionContext);
 
   const populateScore = (selectorPrefix, score, percentage) => {
     if (score) {
@@ -787,11 +898,17 @@ const Dashboard = () => {
     setIsDesktop(window.matchMedia('(min-width: 576px)').matches);
   };
 
+  const isClubEnabled = () => {
+    const clubEnabled = isFeatureEnabled(subscriptionData, 'clubs');
+    return clubEnabled && clubEnabled.enabled;
+  };
+
   useEffect(() => {
     window.addEventListener('resize', listenDesktop);
     populateScore('#yourScore', gameData.gameProgress, parseInt((gameData.gameProgress / gameData.totalGames) * 100, 10));
 
     const awardsGiven = getSession('awardsGiven');
+    checkPaymentModal();
 
     awardsGiven.then((val) => {
       if (val || val !== 'false') {
@@ -825,6 +942,7 @@ const Dashboard = () => {
             totalPointsEarned={gameData.totalPointsEarned}
             validSubmissionsCount={gameData.gameProgress}
             timeSpent={gameProgress.totalTimeSpent} />
+          <ExclusiveUserContainer />
         </div>
         {
           isDesktop
@@ -837,7 +955,7 @@ const Dashboard = () => {
                 clubData
                 && clubData?.hasClub
                 && <>
-                  <ClubCardComponent clubData={clubData} />
+                  <ClubCardComponent clubData={clubData} enabled={isClubEnabled()} />
                 </>
               }
               <LeaderBoardCardComponent
@@ -846,9 +964,9 @@ const Dashboard = () => {
             </div>
           </>
         }
-        {/* <div className="col-12">
+        <div className="col-12">
           <ChallengesComponent trendingChallenges={trendingChallenges} />
-        </div> */}
+        </div>
       </div>
     </div>
     {
@@ -866,7 +984,8 @@ const Dashboard = () => {
             && <>
               <ClubCardComponent
                 clubData={clubData}
-                className={'sheet-card'} />
+                className={'sheet-card'}
+                enabled={isClubEnabled()} />
             </>
           }
           <LeaderBoardCardComponent
@@ -905,6 +1024,7 @@ const Dashboard = () => {
         </button>
       </Modal>
     }
+    <PaymentScuccessModal/>
     <AwardsNotificationCard ref={awardsNotificationCardRef} onClose={() => {
       setSession('awardsGiven', 'false');
     }} />

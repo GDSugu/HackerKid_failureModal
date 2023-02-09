@@ -6,24 +6,58 @@ import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
 import Img from '../Img';
 import '../../../../stylesheets/common/pages/courses/style.scss';
+import { pathNavigator } from '../../framework';
+
+const handlePricing = () => {
+  pathNavigator('pricing');
+};
 
 const courseCard = ({ data }) => (
-  <a href={`${window.location.origin}/courses/${data.moduleId}/${data.number}`}>
-    <div className='course-card'>
-      <p className='video-type'><FormattedMessage
-          defaultMessage={'{type}'}
-          description={'video type'}
-          values={{ type: data.type }}/></p>
-      <Img className='play-btn' src='/courses/play-btn.png' />
-      <img className='w-100 thumbnail-img' src={data.thumbnail} />
-      <div className='card-foot'>
-        <p><FormattedMessage
-          defaultMessage={'{title}'}
-          description={'video title'}
-          values={{ title: data.title }}/></p>
-      </div>
+  data.locked ? (
+      <div className='course-card locked'>
+          <p className='video-type'><FormattedMessage
+              defaultMessage={'Locked'}
+              description={'video type'}
+              values={{ type: data.type }}/></p>
+          <img className='w-100 thumbnail-img' src={data.thumbnail} />
+          <div className='card-foot'>
+            <p><FormattedMessage
+              defaultMessage={'{title}'}
+              description={'video title'}
+              values={{ title: data.title }}/></p>
+        </div>
+        <div className='locked-overlay'>
+            <Img className='locked-icon' src='/common/feature-lock-white.png' />
+            <p className='locked-text'><FormattedMessage
+              defaultMessage={'Upgrade to Premium to unlock this Video'}
+              description={'unlock text'}
+              /></p>
+              <button className='btn locked-btn'
+              onClick={handlePricing}><FormattedMessage
+              defaultMessage={'Unlock Now'}
+              description={'Unlock Now text'}
+              /></button>
+          </div>
     </div>
-  </a>
+  )
+    : (
+      <a href={`${window.location.origin}/courses/${data.moduleId}/${data.number}`}>
+        <div className='course-card'>
+          <p className='video-type'><FormattedMessage
+              defaultMessage={'{type}'}
+              description={'video type'}
+              values={{ type: data.type }}/></p>
+          <Img className='play-btn' src='/courses/play-btn.png' />
+          <img className='w-100 thumbnail-img' src={data.thumbnail} />
+          <div className='card-foot'>
+            <p><FormattedMessage
+              defaultMessage={'{title}'}
+              description={'video title'}
+              values={{ title: data.title }}/></p>
+          </div>
+        </div>
+      </a>
+    )
 );
 
 const TopContainer = ({

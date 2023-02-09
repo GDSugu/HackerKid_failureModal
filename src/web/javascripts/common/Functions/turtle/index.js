@@ -26,8 +26,6 @@ const manager = {
   suspension: false,
 };
 
-window.manager = manager;
-
 const pool = workerpool.pool();
 
 const initializeEditor = () => {
@@ -197,7 +195,6 @@ const repositionTurtle = (targetSelector = '#answerCanvas', parentSelector = '.o
     console.log(error);
   }
 };
-window.reposturtle = repositionTurtle;
 const updateDebugState = () => {
   try {
     const debugButton = $('#continueDebugger, .continueDebugger');

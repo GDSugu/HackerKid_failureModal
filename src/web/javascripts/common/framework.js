@@ -9,6 +9,29 @@ const { API } = process.env;
 
 const authorize = {};
 
+const isFeatureEnabled = (features, feature, subFeature) => {
+  const planFeatures = features && features.planFeatures;
+  if (features && planFeatures && planFeatures.length > 0) {
+    const featureObj = planFeatures.find((f) => f.name === feature);
+    const obj = {};
+    if (featureObj) {
+      obj[feature] = {
+        enabled: featureObj.enabled,
+        isPartial: featureObj.isPartial,
+      };
+      if (featureObj.isPartial && subFeature) {
+        const subFeatureObj = featureObj.allowed.find((f) => f.category === subFeature);
+        if (subFeatureObj) {
+          obj[feature][subFeature] = subFeatureObj.limit;
+        }
+      }
+      return obj[feature];
+    }
+    return false;
+  }
+  return false;
+};
+
 const secondsToMins = (s) => {
   let seconds = parseInt(s, 10);
   let minutes = Math.floor(seconds / 60);
@@ -166,16 +189,36 @@ authorize.loginCheck = () => new Promise((resolve, reject) => {
 // const addSignInButton = () => {
 //   $('.nav-trail').html('<div><a href="/login.html" class="btn btn-primary">Sign in</a></div>');
 // };
+const storeNavigationUrl = () => {
+  const { pathname } = window.location;
+  const authPages = [
+    'login',
+    'register',
+    'forgot-password',
+    'pricing-plans',
+  ];
+  const pages = pathname.split('/');
+  if (pages.length > 1) {
+    const page = pages[1];
+    if (!authPages.includes(page)) {
+      window.sessionStorage.setItem('navigateTo', window.location.href);
+    }
+  }
+};
 
 const loginCheck = () => new Promise((resolve, reject) => {
   const authToken = authorize.getSession('authtoken');
   if (authToken === '' || authToken === null) {
     // addSignInButton();
     resolve(false);
+    storeNavigationUrl();
+    console.log('login check navigate');
     pathNavigator('login');
+    console.log('path navigated');
   } else {
     post({ type: 'checkSession' }, 'login/', true, false).then((response) => {
       if (!response || response === 'access_denied') {
+        storeNavigationUrl();
         pathNavigator('login');
         resolve(false);
       } else {
@@ -443,4 +486,5 @@ export {
   loadScriptByURL,
   timeTrack,
   secondsToMins,
+  isFeatureEnabled,
 };

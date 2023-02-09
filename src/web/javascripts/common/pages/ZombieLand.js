@@ -4,12 +4,12 @@ import { FormattedMessage } from 'react-intl';
 import Phaser from 'phaser';
 import md5 from 'crypto-js/md5';
 import {
-  $, pageInit, pathNavigator, timeTrack,
+  $, isFeatureEnabled, pageInit, pathNavigator, timeTrack,
 } from '../framework';
 import { useZombieLand } from '../../../../hooks/pages/zombieLand';
 import Img from '../components/Img';
 import '../../../stylesheets/common/pages/zombieLand/style.scss';
-import useRootPageState from '../../../../hooks/pages/root';
+import useRootPageState, { SubscriptionContext } from '../../../../hooks/pages/root';
 import GameNavBar from '../components/GameNavBar';
 import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
 import GameLevelComponent from '../components/GameLevelComponent';
@@ -148,42 +148,67 @@ const ZombieLandQuestionComponent = ({ status, questionObject }) => <>
       {
         status === 'success'
         && <>
-          <div className="zombieLand-title-block">
-            <p className="zombieLand-question-title">
-              <FormattedMessage
-                defaultMessage={'Problem Statement'}
-                description={'problem statement title'}
-              />
-            </p>
-          </div>
-          <div className="zombieLand-question-content">
-            <div className="zombieLand-question">
-              <p>
+          <div className="block">
+            <div className="zombieLand-title-block">
+              <p className="zombieLand-question-title">
                 <FormattedMessage
-                  defaultMessage={'{question}'}
-                  description={'Question'}
-                  values={{ question: questionObject.qname }}
+                  defaultMessage={'Problem Statement'}
+                  description={'problem statement title'}
                 />
               </p>
             </div>
-            <div className="zombieLand-question-instructions">
-              <ol>
-                {
-                  questionObject.q_instruction.map((step, index) => <li key={index}>
-                    <p className='zl-instruction'>
-                      <FormattedMessage
-                        defaultMessage={'{step}'}
-                        description={'zombieLand instruction'}
-                        values={{
-                          step: (step[step.length - 1] === '.') ? step.slice(0, -1) : step,
-                        }}
-                      />
-                    </p>
-                  </li>)
-                }
-              </ol>
+            <div className="zombieLand-question-content">
+              <div className="zombieLand-question">
+                <p>
+                  <FormattedMessage
+                    defaultMessage={'{question}'}
+                    description={'Question'}
+                    values={{ question: questionObject.qname }}
+                  />
+                </p>
+              </div>
+              <div className="zombieLand-question-instructions">
+                <ol>
+                  {
+                    questionObject.q_instruction.map((step, index) => <li key={index}>
+                      <p className='zl-instruction'>
+                        <FormattedMessage
+                          defaultMessage={'{step}'}
+                          description={'zombieLand instruction'}
+                          values={{
+                            step: (step[step.length - 1] === '.') ? step.slice(0, -1) : step,
+                          }}
+                        />
+                      </p>
+                    </li>)
+                  }
+                </ol>
+              </div>
             </div>
-            <div id="zombieLand-image-preview" className="zombieLand-image-preview"></div>
+          </div>
+          <div className="block">
+            <div className="zombieLand-title-block">
+              <p className="zombieLand-question-title">
+                <FormattedMessage
+                  defaultMessage={'Expected Output'}
+                  description={'problem statement title'}
+                />
+              </p>
+            </div>
+            <div className="zombieLand-preview-content">
+              <div id="zombieLand-image-preview" className="zombieLand-image-preview">
+                {
+                  (questionObject?.stage !== false)
+                  && (questionObject?.stage !== '')
+                  && <>
+                    <Img
+                      src={questionObject.thumbnail}
+                      local={false}
+                    />
+                  </>
+                }
+              </div>
+            </div>
           </div>
         </>
       }
@@ -259,7 +284,15 @@ const ZombieLandPlayGroundComponent = ({
         </ul>
         <div className="runBtnContainer">
           <button id="runCode" className="btn runBtn" onClick={handleRunCode}>
-            <i className="fas fa-play"></i>
+            <div className="d-flex align-items-center">
+              <i className="fas fa-play"></i>
+              <p className="mb-0">
+                <FormattedMessage
+                  defaultMessage={'Play'}
+                  description={'play button'}
+                />
+              </p>
+            </div>
           </button>
         </div>
       </div>
@@ -964,6 +997,14 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
         //   }
       });
   };
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+
+  const gamesLimit = (gameName) => {
+    const gamesEnabled = isFeatureEnabled(subscriptionData, 'games', gameName);
+    return gamesEnabled.enabled && gamesEnabled[gameName];
+  };
+
+  const isAlreadyCompleted = () => zlState?.currentQuestionSubmission?.completed;
 
   React.useEffect(() => {
     // if (zlState.responseObject.status === 'access_denied') {
@@ -991,6 +1032,10 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
         GameObj = startGame(memoizedZlQnState, device, Phaser, 'zombieLandBlock', 'userCanvas', 'zombieLand-image-preview', endGame, showFailureModal.bind(this));
       }, 300);
     }
+    // FIXME: This is a frontend hack to prevent users from accessing the game which is locked
+    if (memoizedZlQnState?.questionObject?.virtualId > gamesLimit('zombieLand') && !isAlreadyCompleted()) {
+      pathNavigator(`zombieland/${gamesLimit('zombieLand') || 1}`);
+    }
   }, [memoizedZlQnState.questionObject]);
 
   // React.useEffect(() => {
@@ -1004,6 +1049,9 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
   //   };
   // }, [memoizedZlQnState.status]);
   React.useEffect(() => {
+    if (id !== undefined && Number(id) > gamesLimit('zombieLand') && !isAlreadyCompleted()) {
+      pathNavigator('zombieland/1');
+    }
     hideDefaultNavBar(device, 'game');
     zlStatic.fetchZombieLandQuestion({
       virtualId: Number(id) || null,
@@ -1304,6 +1352,7 @@ const ZombieLand = () => {
 
   const { changeRoute } = zlStatic;
   timeTrack('games/zombieLand');
+
   React.useEffect(() => {
     const locationArray = window.location.href.split('/').filter((el) => el !== '');
     if (locationArray.length > 3) {
