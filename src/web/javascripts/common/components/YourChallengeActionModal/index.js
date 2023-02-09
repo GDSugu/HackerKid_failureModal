@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Link } from 'react-router-dom';
 import { $ } from '../../framework';
 import '../../../../stylesheets/common/sass/components/_your-challenges-actions-modal.scss';
 import { useDeleteChallenge, useUpdateChallengeStateOnly } from '../../../../../hooks/pages/challenges';
@@ -28,6 +27,10 @@ const YourChallengeActionsModal = ({
       onActionsModalHide();
       $('.action-btn').removeAttr('disabled');
     });
+
+    return () => {
+      $('#yourChallengesActionsModal').modal('hide');
+    };
   }, []);
 
   const onTakeActionButtonClick = (e, challengeId, challengeState) => {
@@ -80,6 +83,11 @@ const YourChallengeActionsModal = ({
     });
   };
 
+  const onEditChallengeClicked = (challengeData) => {
+    const pathname = `/turtle/challenges/create/${challengeData.challengeId}/${challengeData.challengeName}`;
+    window.location.pathname = pathname;
+  };
+
   return (
     <div className="modal fade" id="yourChallengesActionsModal" tabIndex="-1" aria-labelledby="yourChallengesActionsModal" aria-hidden="true">
       <div className="modal-dialog modal-dialog-centered">
@@ -118,9 +126,9 @@ const YourChallengeActionsModal = ({
                     <FormattedMessage defaultMessage={'Publish'} description='publish challenge button' />
                   </button>
                 }
-                <Link to={`/turtle/challenges/create/${challenge.challengeId}/${challenge.challengeName}`} className='btn-block action-btn caption-bold'>
+                <button onClick={() => onEditChallengeClicked(challenge)} className='btn-block action-btn caption-bold'>
                   <FormattedMessage defaultMessage={'Edit Challenge'} description='edit challenge button' />
-                </Link>
+                </button>
                 <button
                   type='button'
                   className='btn btn-block btn-danger delete-challenge-button caption-bold'

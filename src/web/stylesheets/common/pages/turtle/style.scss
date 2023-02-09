@@ -399,9 +399,27 @@
 
         .runBtnContainer {
           position: relative;
+          display: inline-flex;
+          align-items: center;
+          padding: 0 0.5rem;
 
           .runBtn {
             color: gt.theme-var(text-color-2);
+            background-color: gt.theme-var(game-hint-btn-bg, null, $thememaplight, $cssvars);
+            border-radius: 0.75rem;
+            padding: 0.25rem 0.75rem;
+
+            i {
+              margin-right: 0.25rem;
+            }
+
+            p {
+              margin-left: 0.25rem;
+            }
+
+            &#continueDebugger {
+              background-color: gt.theme-var(game-btn-bg, null, $thememaplight, $cssvars);
+            }
 
             &:focus {
               box-shadow: none;

@@ -80,6 +80,10 @@
     "defaultMessage": "Next",
     "description": "Next btn"
   },
+  "/kzIGG": {
+    "defaultMessage": "{message}",
+    "description": "confirmation message"
+  },
   "/ndV7b": {
     "defaultMessage": "Coins Earned:",
     "description": "coins earned"
@@ -369,6 +373,10 @@
     "defaultMessage": "{points}",
     "description": "user points"
   },
+  "6+MZGf": {
+    "defaultMessage": "Challenges",
+    "description": "challenges heading"
+  },
   "634LIC": {
     "defaultMessage": "PLAY",
     "description": "Play button"
@@ -473,6 +481,10 @@
   "8+Lyt3": {
     "defaultMessage": "{type}?",
     "description": "Course Type"
+  },
+  "86ZKhZ": {
+    "defaultMessage": "{title}",
+    "description": "confirmation title"
   },
   "8cISRy": {
     "defaultMessage": "Time Spent:",
@@ -624,10 +636,6 @@
   "C1rkSh": {
     "defaultMessage": "Coding Pirate",
     "description": "Coding pirate title"
-  },
-  "C8QChP": {
-    "defaultMessage": "Top Members",
-    "description": "Top Members"
   },
   "CJH/k4": {
     "defaultMessage": "{title} - {type}",
@@ -869,6 +877,10 @@
     "defaultMessage": "Validated Result",
     "description": "tab button text"
   },
+  "HbJPsh": {
+    "defaultMessage": "All Challenges",
+    "description": "all challenges"
+  },
   "Hjj2+R": {
     "defaultMessage": "Register to Get help from Turtle",
     "description": "Hint message"
@@ -1067,6 +1079,10 @@
   "Mh1d7/": {
     "defaultMessage": "Loading...",
     "description": "more info btn"
+  },
+  "MjR/TL": {
+    "defaultMessage": "Members",
+    "description": "Members List"
   },
   "Mp8KyV": {
     "defaultMessage": "Trending",
@@ -1974,6 +1990,10 @@
     "defaultMessage": "Coding Pirate",
     "description": "Coding Pirate title"
   },
+  "jx1ZEv": {
+    "defaultMessage": "HackerKid Exclusive Courses",
+    "description": "exclusive user feature title"
+  },
   "jzHe4a": {
     "defaultMessage": "{timeSpent}",
     "description": "total time spent"
@@ -2159,6 +2179,10 @@
   "o+nfLw": {
     "defaultMessage": "{name}"
   },
+  "o1Urus": {
+    "defaultMessage": "Play",
+    "description": "play button"
+  },
   "o2Pken": {
     "defaultMessage": "Run",
     "description": "run webkata button text"
@@ -2209,6 +2233,9 @@
   "pVIk7O": {
     "defaultMessage": "Turtle",
     "description": "Turtle title"
+  },
+  "pZeXBt": {
+    "defaultMessage": "Explore Now"
   },
   "pgAgVI": {
     "defaultMessage": "{emptyStateText}",
@@ -2448,6 +2475,10 @@
     "defaultMessage": "Share",
     "description": "share btn"
   },
+  "uyz151": {
+    "defaultMessage": "Continue",
+    "description": "debugger button"
+  },
   "v6AMff": {
     "defaultMessage": "Certificates",
     "description": "certificate heading"
@@ -2534,6 +2565,10 @@
   "xW6DFp": {
     "defaultMessage": "Videos",
     "description": "videos nav text"
+  },
+  "xX7+L+": {
+    "defaultMessage": "HackerKid also offer exclusive courses on various pedagogies like Web Development, App Development, Game Development & Data Science. We have an elite team of teacher to guide with your learning process. We have team that can answer all your queries before you decide enroll with us. Go on tell your parent right now, What are you waiting for?",
+    "description": "exclusive user feature content"
   },
   "xXEsL7": {
     "defaultMessage": "{level}",

@@ -261,7 +261,15 @@ const TakeChallangesPlayGroundComponent = ({ handleRunCode }) => <>
         </ul>
         <div className="runBtnContainer">
           <button id='runCode' className='btn runBtn' onClick={() => { handleRunCode(); }}>
-            <i className="fas fa-play"></i>
+            <div className="d-flex align-items-center">
+              <i className="fas fa-play"></i>
+              <p className="mb-0">
+                <FormattedMessage
+                  defaultMessage={'Play'}
+                  description={'play button'}
+                />
+              </p>
+            </div>
           </button>
         </div>
       </div>

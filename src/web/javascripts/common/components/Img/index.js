@@ -12,6 +12,7 @@ const Img = ({
   useSource = true,
   type = 'image',
 }) => {
+  const isPageMounted = React.useRef(true);
   let imgSource = `${imgPath + fallback}`;
   let imgType = type;
   if (src) {
@@ -40,8 +41,10 @@ const Img = ({
       if (src) {
         fetch(src)
           .then((res) => {
-            if (res.status !== 200) {
-              setImgSrc(`${imgPath + fallback}`);
+            if (isPageMounted.current) {
+              if (res.status !== 200) {
+                setImgSrc(`${imgPath + fallback}`);
+              }
             }
           })
           .catch((err) => {
@@ -61,6 +64,10 @@ const Img = ({
         setImgSrc(`${imgPath + fallback}`);
       }
     }
+
+    return () => {
+      isPageMounted.current = false;
+    };
   }, [src]);
 
   return <>
