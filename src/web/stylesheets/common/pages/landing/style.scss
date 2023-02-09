@@ -545,6 +545,11 @@
       .hackerkid-video-sec {
         position: relative;
 
+        .landing-image {
+          height: 350px;
+          max-width: 100%;
+        }
+
         @include gm.media-breakpoint-down(sm) {
           width: 100%;
         }
@@ -575,6 +580,7 @@
             font-size: 1.8rem;
             border-radius: 3rem;
             overflow: hidden;
+            z-index: 100;
 
             @include gm.media-breakpoint-down(sm) {
               height: 3rem;

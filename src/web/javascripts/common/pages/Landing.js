@@ -100,53 +100,6 @@ const LandingSidebarModal = () => <>
     </div>
   </div>
 </>;
-const LandingVideoModal = ({ videoSrc, modalConfig, setModalOpen }) => {
-  const videoRef = useRef(true);
-  const videoModal = useRef(true);
-
-  useEffect(() => {
-    if (videoSrc) {
-      const player = videoRef.current.plyr;
-      const { media } = player;
-      $(media).on('canplay', () => {
-        player.play();
-      });
-      $('.video-modal-close').on('click',() => {
-        videoModal.current.hide();
-        player.stop();
-        setModalOpen({
-          modalOpen: false,
-          videoSrc: false,
-        });
-      });
-      const hls = new Hls();
-      hls.loadSource(videoSrc);
-      hls.attachMedia(media);
-      hls.on(Hls.Events.MEDIA_ATTACHED, () => {
-        console.log('video and hls.js are now bound together !');
-      });
-      hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
-        console.log(`manifest loaded, found ${data.levels.length} quality level`);
-      });
-      videoModal.current.show();
-    }
-  }, [videoSrc]);
-
-  return <>
-    <Modal
-      modalClass='video-modal'
-      ref={videoModal}
-      modalVisible={modalConfig.modalOpen}
-      modalCloseBtn={false}>
-      <div>
-        <button type='button' className='video-modal-close'><span aria-hidden="true">&times;</span></button>
-        <Plyr ref={videoRef} />
-
-        {/* <video src={videoSrc}></video> */}
-      </div>
-    </Modal>
-  </>;
-};
 
 const LandingBanner = () => <>
   <figure>
@@ -187,32 +140,20 @@ const LandingBanner = () => <>
   </figure>
 </>;
 
-const LandingVideo = () => {
-  const [modalOpen, setModalOpen] = useState({
-    modalOpen: false,
-    videoSrc: false,
-  });
-
-  console.log(modalOpen);
-  return <>
+const LandingVideo = ({ videoPlaying = true, playvideo }) => <>
     <section>
       <div className='container'>
         <div className='hackerkid-video-sec max-size top-space'>
-          <a onClick={() => {
-            setModalOpen({
-              modalOpen: true,
-              videoSrc: 'https://d11kzy43d5zaui.cloudfront.net/python-hackerkid/1_Getting_started_with_python/index.m3u8',
-            });
-          }}>
-            <picture>
+          {videoPlaying
+            ? <button onClick={playvideo}><picture>
               <img src='../../../../images/landing/hackerkit-img.webp' className='w-100' />
             </picture>
             <div className='play-icon'>
               <i className="fa fa-play text-white" aria-hidden="true"></i>
-            </div>
-          </a>
-          {modalOpen && (<LandingVideoModal videoSrc={modalOpen.videoSrc} modalConfig={modalOpen} setModalOpen={setModalOpen} />
-          )}
+            </div></button>
+            : <iframe className='landing-image w-100' src="https://www.youtube.com/embed/RsorCl8BBaM" frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>}
         </div>
         <div className='boat-route-line-2'></div>
       </div>
@@ -220,7 +161,6 @@ const LandingVideo = () => {
       <div className='cloud-right-2'></div>
     </section>
   </>;
-};
 
 const LandingCodingGames = () => <>
   <section>
@@ -1288,13 +1228,17 @@ const Landing = () => {
   if (window.location.href.includes('landing')) {
     pageInit('landing-container', 'Landing');
   }
+  const [videoPlaying, setVideoPlaying] = useState(true);
 
   return <>
     <div className='landing-page'>
       <LandingHeader />
       <LandingSidebarModal />
       <LandingBanner />
-      <LandingVideo />
+      <LandingVideo
+      videoPlaying={videoPlaying}
+      playvideo={() => setVideoPlaying(false)}
+      />
       <LandingCodingGames />
       <LandingTechVideos />
       <LandingKidMorFun />
