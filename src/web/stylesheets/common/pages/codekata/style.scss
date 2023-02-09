@@ -1,9 +1,9 @@
-@use '../../sass/themes/_default' as gt;
-@use '../../sass/base/_mixins' as gm;
-@use '../../sass/components/gameNavBar';
-@use '../../sass/components/loading';
+@use "../../sass/themes/_default" as gt;
+@use "../../sass/base/_mixins" as gm;
+@use "../../sass/components/gameNavBar";
+@use "../../sass/components/loading";
 
-@import '_codekataTheme.js';
+@import "_codekataTheme.js";
 
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 

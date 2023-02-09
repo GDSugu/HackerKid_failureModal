@@ -1,13 +1,13 @@
 import React from 'react';
 import '../../../stylesheets/common/pages/clubs/style.scss';
-import useRootPageState, { useGetSession } from '../../../../hooks/pages/root';
+import useRootPageState, { SubscriptionContext, useGetSession } from '../../../../hooks/pages/root';
 import { ClubContext, useClubs } from '../../../../hooks/pages/clubs';
 import { useCountryStateCity } from '../../../../hooks/common/CountryStateCity';
 import FragmentNavBar from '../components/FragmentNavBar';
 import ClubDashboardComponent from '../components/ClubDashboardComponents';
 import ClubHomeComponent from '../components/ClubHomeComponent';
 import {
-  $, pageInit, timeTrack,
+  $, isFeatureEnabled, pageInit, pathNavigator, timeTrack,
 } from '../framework';
 
 const MemoizedClubDashboardComponent = React.memo(ClubDashboardComponent);
@@ -17,6 +17,8 @@ const Clubs = () => {
   pageInit('clubs-container', 'Clubs');
 
   timeTrack('clubs');
+
+  const { subscriptionData } = React.useContext(SubscriptionContext);
 
   const isPageMounted = React.useRef(true);
   const {
@@ -60,6 +62,10 @@ const Clubs = () => {
   };
 
   React.useEffect(() => {
+    const clubEnabled = isFeatureEnabled(subscriptionData, 'clubs');
+    if (clubEnabled && !clubEnabled.enabled) {
+      pathNavigator('pricing');
+    }
     toggleMobNavBar();
     const locationArray = window.location.href.split('/').filter((el) => el !== '');
     if (locationArray.length > 3) {

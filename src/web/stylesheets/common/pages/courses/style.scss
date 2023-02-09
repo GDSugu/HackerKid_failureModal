@@ -40,6 +40,55 @@
     position: relative;
     display: inline-block;
 
+    .locked-overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #000000cf;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+
+      .locked-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 50%;
+        }
+      }
+
+      .locked-text {
+        text-align: center;
+        color: #fff;
+        font-size: 18px;
+        margin: 0 1.5rem 0.5rem 1.5rem;
+      }
+
+      .locked-btn {
+        background-color: gt.theme-var(course-nav-bg, null, $thememaplight, $cssvars);
+        color: #fff;
+        border-radius: 12px;
+        padding: 0.5rem 1rem;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .locked-btn:active,
+      .locked-btn:hover,
+      .locked-btn:focus {
+        background-color: gt.theme-var(course-nav-active-bg, null, $thememaplight, $cssvars);
+        box-shadow: none;
+      }
+    }
+
     img {
       border-radius: 12px 12px 0 0;
     }

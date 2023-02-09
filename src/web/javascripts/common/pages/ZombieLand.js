@@ -4,12 +4,12 @@ import { FormattedMessage } from 'react-intl';
 import Phaser from 'phaser';
 import md5 from 'crypto-js/md5';
 import {
-  $, pageInit, pathNavigator, timeTrack,
+  $, isFeatureEnabled, pageInit, pathNavigator, timeTrack,
 } from '../framework';
 import { useZombieLand } from '../../../../hooks/pages/zombieLand';
 import Img from '../components/Img';
 import '../../../stylesheets/common/pages/zombieLand/style.scss';
-import useRootPageState from '../../../../hooks/pages/root';
+import useRootPageState, { SubscriptionContext } from '../../../../hooks/pages/root';
 import GameNavBar from '../components/GameNavBar';
 import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
 import GameLevelComponent from '../components/GameLevelComponent';
@@ -997,6 +997,14 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
         //   }
       });
   };
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+
+  const gamesLimit = (gameName) => {
+    const gamesEnabled = isFeatureEnabled(subscriptionData, 'games', gameName);
+    return gamesEnabled.enabled && gamesEnabled[gameName];
+  };
+
+  const isAlreadyCompleted = () => zlState?.currentQuestionSubmission?.completed;
 
   React.useEffect(() => {
     // if (zlState.responseObject.status === 'access_denied') {
@@ -1024,6 +1032,10 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
         GameObj = startGame(memoizedZlQnState, device, Phaser, 'zombieLandBlock', 'userCanvas', 'zombieLand-image-preview', endGame, showFailureModal.bind(this));
       }, 300);
     }
+    // FIXME: This is a frontend hack to prevent users from accessing the game which is locked
+    if (memoizedZlQnState?.questionObject?.virtualId > gamesLimit('zombieLand') && !isAlreadyCompleted()) {
+      pathNavigator(`zombieland/${gamesLimit('zombieLand') || 1}`);
+    }
   }, [memoizedZlQnState.questionObject]);
 
   // React.useEffect(() => {
@@ -1037,6 +1049,9 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
   //   };
   // }, [memoizedZlQnState.status]);
   React.useEffect(() => {
+    if (id !== undefined && Number(id) > gamesLimit('zombieLand') && !isAlreadyCompleted()) {
+      pathNavigator('zombieland/1');
+    }
     hideDefaultNavBar(device, 'game');
     zlStatic.fetchZombieLandQuestion({
       virtualId: Number(id) || null,
@@ -1337,6 +1352,7 @@ const ZombieLand = () => {
 
   const { changeRoute } = zlStatic;
   timeTrack('games/zombieLand');
+
   React.useEffect(() => {
     const locationArray = window.location.href.split('/').filter((el) => el !== '');
     if (locationArray.length > 3) {
