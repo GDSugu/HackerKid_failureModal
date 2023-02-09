@@ -26,6 +26,7 @@ const thememaplight = {
   'price-common-gradient-color-2': Yellow.color600,
   'price-rare-gradient-color-1': Purple.color900,
   'price-rare-gradient-color-2': Purple.color500,
+  'nav-color': Yellow.color500,
   'price-bule-light': '#DFF8FE',
   'price-current-pln-btn' : '#F5F5F5',
   'price-current-pln-btn-color' : '#505659',
@@ -55,6 +56,7 @@ const thememapdark = {
   'price-common-gradient-color-2': Yellow.color600,
   'price-rare-gradient-color-1': Purple.color900,
   'price-rare-gradient-color-2': Purple.color500,
+  'nav-color': Yellow.color500,
   'price-current-pln-btn' : '#F5F5F5',
   'price-current-pln-btn-color' : '#505659',
   'price-current-free' : '#A9ABAC',
@@ -66,6 +68,7 @@ const thememapdark = {
 };
 
 const cssvars = {
+  'nav-color': '--nav-color',
   'price-text-color-1': '--price-text-color-1',
   'price-btn-bg': '--price-btn-bg',
   'price-btn-text-color': '--price-btn-text-color',

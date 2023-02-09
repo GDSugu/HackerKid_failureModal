@@ -737,6 +737,33 @@ const LeaderBoardCardComponent = memo(LeaderBoardCard, compareProps);
 const AchievementCardComponent = memo(AchievementCard, compareProps);
 const ClubCardComponent = memo(ClubCard, compareProps);
 
+const checkPaymentModal = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const payment = urlParams.get('payment');
+  if (payment === 'success') {
+    $('.payment-success-modal').modal('show');
+  }
+};
+
+const PaymentScuccessModal = () => <div
+className="modal fade payment-success-modal"
+id="modal"
+tabIndex="-1"
+role="dialog"
+aria-labelledby="errorModal"
+aria-hidden="true">
+<div className="modal-dialog modal-dialog-centered" role="document">
+  <div className="modal-content payment-modal-content">
+    <div className="modal-body">
+      <div className='text-center payment-modal-container'>
+      <p className='payment-modal-text'>Your Payment is Successfully Completed. Enjoy the Premium Features.</p>
+      <button className='btn btn-primary w-100 continue-btn text-white'>Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>;
+
 const Dashboard = () => {
   if (window.location.href.includes('/dashboard')) {
     pageInit('dashboard-container', 'Dashboard');
@@ -752,7 +779,6 @@ const Dashboard = () => {
   const { state: getChallengesState } = useGetChallenges({ isPageMounted });
 
   const awardsNotificationCardRef = React.useRef(true);
-
   const {
     status: dashboarStatus,
     userData: dashboardUserData,
@@ -818,6 +844,7 @@ const Dashboard = () => {
     populateScore('#yourScore', gameData.gameProgress, parseInt((gameData.gameProgress / gameData.totalGames) * 100, 10));
 
     const awardsGiven = getSession('awardsGiven');
+    checkPaymentModal();
 
     awardsGiven.then((val) => {
       if (val || val !== 'false') {
@@ -932,6 +959,7 @@ const Dashboard = () => {
         </button>
       </Modal>
     }
+    <PaymentScuccessModal/>
     <AwardsNotificationCard ref={awardsNotificationCardRef} onClose={() => {
       setSession('awardsGiven', 'false');
     }} />

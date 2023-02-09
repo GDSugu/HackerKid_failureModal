@@ -3,9 +3,11 @@ import { FormattedMessage } from 'react-intl';
 import RazorpayScript from '../../../partials/razorpay-script-header';
 import '../../../stylesheets/common/pages/pricing-plans/style.scss';
 import {
-  pageInit,
+  pageInit, pathNavigator,
 } from '../framework';
 import initSubscriptionPayment from '../../../../hooks/common/payment';
+import { SubscriptionContext } from '../../../../hooks/pages/root';
+import usePricing from '../../../../hooks/pages/pricing';
 
 const initPayment = () => {
   initSubscriptionPayment({ subscriptionType: 'premium' }).then((res) => {
@@ -25,6 +27,13 @@ const initPayment = () => {
           email: order.email,
           contact: order.phone,
         },
+        handler(paymentResponse) {
+          if (paymentResponse.razorpay_payment_id) {
+            pathNavigator(
+              'courses/dashboard?payment=success',
+            );
+          }
+        },
       };
       // console.log(options);
       const razorPayObj = new window.Razorpay(options);
@@ -33,7 +42,7 @@ const initPayment = () => {
   });
 };
 
-const PriceCards = () => <>
+const PriceCards = ({ planType = 'free', data }) => <>
   <div className="price-card-container">
     <div className='row row-revise'>
       <div className='col-lg-6 col-md-6 col-xs-12 mb-3'>
@@ -53,10 +62,11 @@ const PriceCards = () => <>
               />
             </p>
             <h2>
-              <FormattedMessage
-                defaultMessage={'₹1499'}
+              {data.premium && <FormattedMessage
+                defaultMessage={'₹{price}'}
                 description={'HackerKid Trial Premium Free'}
-              />
+                values={{ price: data.premium.priceDetails.INR.price }}
+              />}
 
               <s>
                 <FormattedMessage
@@ -65,20 +75,25 @@ const PriceCards = () => <>
                 />
               </s>
             </h2>
-            <span className='premium'>
+            <p className='light-icon excluding-gst'>
               <FormattedMessage
-                defaultMessage={'(Early Bird Offer)'}
-                description={'Early Bird Offer'}
+                defaultMessage={'(*Excluding GST)'}
+                description={'Excluding GST'}
               />
-            </span>
+            </p>
 
-            <button className='btn btn-primary text-white w-100'
+            {planType === 'free' ? <button className='btn btn-primary text-white w-100'
             onClick={initPayment}>
               <FormattedMessage
                 defaultMessage={'Buy Now'}
                 description={'Buy Now btn'}
               />
-            </button>
+            </button> : <button className='btn btn-light w-100 free-plan-pointer'>
+              <FormattedMessage
+                defaultMessage='Your Current Plan'
+                description='Your Current Plan btn'
+              />
+            </button>}
             <hr></hr>
             <div className='plan-list yellow-light-bg'>
               <h4>
@@ -132,12 +147,12 @@ const PriceCards = () => <>
 
             <span></span>
 
-            <button className='btn btn-light w-100'>
+            {planType === 'free' ? <button className='btn btn-light w-100 free-plan-pointer'>
               <FormattedMessage
                 defaultMessage='Your Current Plan'
                 description='Your Current Plan btn'
               />
-            </button>
+            </button> : <span></span>}
             <hr></hr>
             <div className='plan-list blue-light-bg'>
               <h4>
@@ -160,7 +175,7 @@ const PriceCards = () => <>
   </div>
 </>;
 
-const PlansFeatures = () => <>
+const PlansFeatures = ({ planType = 'free', data }) => <>
   <div className="price-plans-features">
     <h2>
       <FormattedMessage
@@ -193,12 +208,12 @@ const PlansFeatures = () => <>
                   description={'FREE price'}
                 />
               </h2>
-              <button className='btn btn-light w-100'>
-                <FormattedMessage
-                  defaultMessage='Your Current Plan'
-                  description='Your Current Plan btn'
-                />
-              </button>
+              {planType === 'free' ? <button className='btn btn-light w-100 free-plan-pointer'>
+              <FormattedMessage
+                defaultMessage='Your Current Plan'
+                description='Your Current Plan btn'
+              />
+            </button> : <div className='free-plan-space'></div>}
             </td>
 
             <td>
@@ -209,10 +224,11 @@ const PlansFeatures = () => <>
                 />
               </h4>
               <h2>
-                <FormattedMessage
-                  defaultMessage={'₹1000'}
-                  description={'₹1000 price'}
-                />
+               { data.premium && <FormattedMessage
+                  defaultMessage={'₹{price}'}
+                  description={'price for premium plan'}
+                  values={{ price: data.premium.priceDetails.INR.price }}
+                />}
 
                 <s>
                   <FormattedMessage
@@ -221,13 +237,18 @@ const PlansFeatures = () => <>
                   />
                 </s>
               </h2>
-              <button className='btn btn-primary w-100 text-white'
-              onClick={initPayment}>
-                <FormattedMessage
-                  defaultMessage='Buy Now'
-                  description='Buy Now btn'
-                />
-              </button>
+              {planType === 'free' ? <button className='btn btn-primary text-white w-100'
+            onClick={initPayment}>
+              <FormattedMessage
+                defaultMessage={'Buy Now'}
+                description={'Buy Now btn'}
+              />
+            </button> : <button className='btn btn-light free-plan-pointer w-100 free-plan-pointer'>
+              <FormattedMessage
+                defaultMessage='Your Current Plan'
+                description='Your Current Plan btn'
+              />
+            </button>}
             </td>
           </tr>
         </thead>
@@ -516,12 +537,12 @@ const PlansFeatures = () => <>
             description={'FREE price'}
           />
         </h2>
-        <p className='edition'>
+        {planType === 'free' ? <p className='edition'>
           <FormattedMessage
             defaultMessage='Your Current Plan'
             description='Your Current Plan btn'
           />
-        </p>
+        </p> : <div></div>}
       </div>
       <div>
         <h4 className='premium'>
@@ -531,18 +552,23 @@ const PlansFeatures = () => <>
           />
         </h4>
         <h2>
-          <FormattedMessage
-            defaultMessage={'FREE'}
-            description={'FREE price'}
-          />
+        {data.premium && <FormattedMessage
+                  defaultMessage={'₹{price}'}
+                  description={'price for premium plan'}
+                  values={{ price: data.premium.priceDetails.INR.price }}
+                />}
         </h2>
-        <button href='/' className='btn btn-primary text-white w-100'
+        {planType === 'free' ? <button className='btn btn-primary text-white w-100'
         onClick={initPayment}>
           <FormattedMessage
             defaultMessage='Buy Now'
             description='Buy Now btn'
           />
-        </button>
+        </button> : <p className='premium'>
+          <FormattedMessage
+            defaultMessage='Your Current Plan'
+            description='Your Current Plan btn'
+          /></p>}
       </div>
     </div>
     <div className='plan-mobile-view'>
@@ -1024,6 +1050,14 @@ const PricingPlans = () => {
   if (window.location.href.includes('pricing')) {
     pageInit('price-container', 'PricingPlans');
   }
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+  const isPageMounted = React.useRef(true);
+  const { pricingDetails } = usePricing({ isPageMounted });
+  const { subscriptionDetails } = pricingDetails;
+  const planDetails = {};
+  if (subscriptionDetails) {
+    planDetails.premium = subscriptionDetails.find((item) => item.planType === 'premium');
+  }
   useEffect(() => {
     RazorpayScript();
   }, []);
@@ -1044,8 +1078,12 @@ const PricingPlans = () => {
             />
           </p>
         </div>
-        <PriceCards />
-        <PlansFeatures />
+        <PriceCards
+        planType = {subscriptionData.planType}
+        data = {planDetails}/>
+        <PlansFeatures
+        planType = {subscriptionData.planType}
+        data = {planDetails}/>
         <ExclusiveCourses />
       </div>
     </div>

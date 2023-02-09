@@ -20,6 +20,27 @@
     }
   }
 
+  .payment-modal-content {
+    border-radius: 12px;
+
+    .done-icon {
+      font-size: 5rem;
+    }
+
+    .payment-modal-text {
+      padding: 0 4rem;
+      margin-bottom: 2rem;
+    }
+
+    .payment-modal-container {
+      padding: 1rem 1rem;
+
+      .continue-btn {
+        border-radius: 12px;
+      }
+    }
+  }
+
   .dashboard-block {
     .hero-card {
       display: flex;
