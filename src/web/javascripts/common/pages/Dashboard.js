@@ -264,6 +264,38 @@ const ProfileContainer = ({ dashboardUserData, isDesktop, session }) => <>
   </div>
 </>;
 
+const ExclusiveCourses = () => <>
+  <div className="price-course-container">
+    <h3>
+      <FormattedMessage
+        defaultMessage={'HackerKid Exclusive Courses'}
+        description={'HackerKid Exclusive Courses title'}
+      />
+    </h3>
+    <div className='row row-revise'>
+      <div className='col-lg-4 col-md-2 col-xs-12'>
+        <picture>
+          <img src='../../../../../images/pricing/hackerkid-exclusive-courses.webp' className='share-icon' alt='list-icon' />
+        </picture>
+      </div>
+
+      <div className='col-lg-8 col-md-10 col-xs-12'>
+        <p>
+          <FormattedMessage
+            defaultMessage={'HackerKid also offer exclusive courses on various pedagogies like Web Development, App Development, Game Development & Data Science. We have an elite team of teacher to guide with your learning process. We have team that can answer all your queries before you decide enroll with us. Go on tell your parent right now, What are you waiting for?'}
+            description={'HackerKid Exclusive Courses description'}
+          />
+        </p>
+        <a href='/collectibles' className='explore-now-btn'>
+          <FormattedMessage defaultMessage={'Explore Now'} description='Explore Now text' />
+          <i className="fa fa-chevron-right" aria-hidden="true"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</>;
+
 const GameContainer = ({
   dashboardUserData, overAllQuestionsCount, totalPointsEarned, validSubmissionsCount, timeSpent,
 }) => <>
@@ -878,6 +910,7 @@ const Dashboard = () => {
             totalPointsEarned={gameData.totalPointsEarned}
             validSubmissionsCount={gameData.gameProgress}
             timeSpent={gameProgress.totalTimeSpent} />
+            <ExclusiveCourses />
         </div>
         {
           isDesktop

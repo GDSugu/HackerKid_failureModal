@@ -108,6 +108,10 @@ const handleClubCard = (clubEnabled) => {
   }
 };
 
+const handleAwardsCard = () => {
+  pathNavigator('awards');
+};
+
 const MoreHero = ({ isDesktop, session, toggleModal }) => <>
   <div className="more-hero-container">
     <div className="hero-card">
@@ -178,16 +182,17 @@ const MoreCards = ({ clubsEnabled }) => <>
             <div className="more-card-contnr">
               <h5 className="more-card-title">
                 <FormattedMessage
-                  defaultMessage={'Get the rare collectibles with your coins now'}
+                  defaultMessage={'Check your award collections and certificates'}
                   description={'more card title'}
                 />
               </h5>
             </div>
             <div className="more-card-btn-container">
-              <button className="more-card-btn btn" disabled>
+              <button className="more-card-btn btn" onClick={handleAwardsCard}
+>
                 <p>
                   <FormattedMessage
-                    defaultMessage={'Coming Soon...'}
+                    defaultMessage={'View'}
                     description={'more card button'}
                   />
                 </p>

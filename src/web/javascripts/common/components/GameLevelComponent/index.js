@@ -48,7 +48,6 @@ const GameLevelComponent = ({ game, gameData, handleFetchQuestion }, ref) => {
 
   const { subscriptionData } = React.useContext(SubscriptionContext);
   const gamesLimit = (gameName) => {
-    console.log('subscriptionData', subscriptionData);
     const gamesEnabled = isFeatureEnabled(subscriptionData, 'games', gameName);
     return gamesEnabled.enabled && gamesEnabled[gameName];
   };

@@ -60,12 +60,14 @@ const Clubs = () => {
       $('nav.fragment-nav-bar').css('display', 'none');
     }
   };
-
+  const clubEnabled = isFeatureEnabled(subscriptionData, 'clubs');
   React.useEffect(() => {
-    const clubEnabled = isFeatureEnabled(subscriptionData, 'clubs');
     if (clubEnabled && !clubEnabled.enabled) {
       pathNavigator('pricing');
     }
+  }, [clubEnabled]);
+
+  React.useEffect(() => {
     toggleMobNavBar();
     const locationArray = window.location.href.split('/').filter((el) => el !== '');
     if (locationArray.length > 3) {
