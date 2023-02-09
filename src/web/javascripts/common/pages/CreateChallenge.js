@@ -9,7 +9,7 @@ import TurtleChallengeNavBar from '../components/TurtleChallengesNavBar';
 import { $, pageInit, pathNavigator } from '../framework';
 import '../../../stylesheets/common/pages/turtle-challenges/style.scss';
 import {
-  copyHandler, getCreateChallengeRequest, runSkulpt, startTurtle,
+  getCreateChallengeRequest, runSkulpt, startTurtle,
 } from '../Functions/turtle';
 import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
 import { useCreateChallenge, useGetChallenges } from '../../../../hooks/pages/challenges';
@@ -516,7 +516,7 @@ const SuccessCreateChallengeModalComponent = ({
 }) => {
   const {
     // awardsGiven,
-    pointDetails, shareLink = '',
+    pointDetails,
     challengeDetails = {},
   } = challengeState;
 
@@ -567,14 +567,15 @@ const SuccessCreateChallengeModalComponent = ({
                         />
                       </Link>
                     </div>
-                    <div className="social-media-share">
+                    {/* <div className="social-media-share">
                       <h4>
                         <FormattedMessage
                           defaultMessage={'Share in'}
                           description={'share in social media text'}
                         />
                       </h4>
-                      <div className="d-flex flex-wrap align-items-center justify-content-center social-media-icons">
+                      <div className="d-flex flex-wrap align-items-center
+                      justify-content-center social-media-icons">
                         <Link to={`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`} className="fa-stack" target="_blank">
                           <i className="fas fa-square fa-stack-2x facebook-color"></i>
                           <i className="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
@@ -593,12 +594,14 @@ const SuccessCreateChallengeModalComponent = ({
                         </Link>
                       </div>
                       <div className="d-flex linkShareContainer py-3">
-                        <input type="text" id='shareLink' className="link-share form-control" value={shareLink} readOnly />
-                        <a href="#" className="input-group-append px-2" id="linkCopy" onClick={copyHandler}>
+                        <input type="text" id='shareLink' className="link-share form-control"
+                        value={shareLink} readOnly />
+                        <a href="#" className="input-group-append px-2" id="linkCopy"
+                        onClick={copyHandler}>
                           <i className="far fa-copy icon-size-regular align-self-center"></i>
                         </a>
                       </div>
-                    </div>
+                    </div> */}
                   </>
                 }
                 {
