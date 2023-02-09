@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import loadable from '@loadable/component';
 import '../../../stylesheets/common/pages/turtle/style.scss';
 import {
-  $, isFeautureEnabled, pageInit, pathNavigator, timeTrack,
+  $, isFeatureEnabled, pageInit, pathNavigator, timeTrack,
 } from '../framework';
 import Img from '../components/Img';
 import GameNavBar from '../components/GameNavBar';
@@ -800,7 +800,7 @@ const TurtleGameComponent = () => {
   const { subscriptionData } = React.useContext(SubscriptionContext);
 
   const gamesLimit = (gameName) => {
-    const gamesEnabled = isFeautureEnabled(subscriptionData, 'games', gameName);
+    const gamesEnabled = isFeatureEnabled(subscriptionData, 'games', gameName);
     return gamesEnabled.enabled && gamesEnabled[gameName];
   };
 

@@ -7,7 +7,7 @@ import FragmentNavBar from '../components/FragmentNavBar';
 import ClubDashboardComponent from '../components/ClubDashboardComponents';
 import ClubHomeComponent from '../components/ClubHomeComponent';
 import {
-  $, isFeautureEnabled, pageInit, pathNavigator, timeTrack,
+  $, isFeatureEnabled, pageInit, pathNavigator, timeTrack,
 } from '../framework';
 
 const MemoizedClubDashboardComponent = React.memo(ClubDashboardComponent);
@@ -62,7 +62,7 @@ const Clubs = () => {
   };
 
   React.useEffect(() => {
-    const clubEnabled = isFeautureEnabled(subscriptionData, 'clubs');
+    const clubEnabled = isFeatureEnabled(subscriptionData, 'clubs');
     if (clubEnabled && !clubEnabled.enabled) {
       pathNavigator('pricing');
     }

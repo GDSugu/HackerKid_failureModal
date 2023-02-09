@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { SubscriptionContext, useGetSession } from '../../../../hooks/pages/root';
 import '../../../stylesheets/common/pages/more/style.scss';
 import {
-  $, loginCheck, pageInit, authorize, pathNavigator, timeTrack, isFeautureEnabled,
+  $, loginCheck, pageInit, authorize, pathNavigator, timeTrack, isFeatureEnabled,
 } from '../framework';
 import Img from '../components/Img';
 import Modal from '../components/Modal';
@@ -472,7 +472,7 @@ const More = () => {
   const { subscriptionData } = React.useContext(SubscriptionContext);
 
   const isClubEnabled = () => {
-    const clubEnabled = isFeautureEnabled(subscriptionData, 'clubs');
+    const clubEnabled = isFeatureEnabled(subscriptionData, 'clubs');
     return clubEnabled && clubEnabled.enabled;
   };
 

@@ -4,7 +4,7 @@ import Hls from 'hls.js';
 import FuzzySearch from 'fuzzy-search';
 import { FormattedMessage } from 'react-intl';
 import {
-  pageInit, $, pathNavigator, timeTrack, isFeautureEnabled,
+  pageInit, $, pathNavigator, timeTrack, isFeatureEnabled,
 } from '../framework';
 import '../../../../../node_modules/plyr-react/plyr.css';
 import '../../../stylesheets/common/sass/components/_paginator.scss';
@@ -510,7 +510,7 @@ const Videos = () => {
   const { subscriptionData } = React.useContext(SubscriptionContext);
 
   const coursesLimit = (category) => {
-    const coursesEnabled = isFeautureEnabled(subscriptionData, 'courses', category);
+    const coursesEnabled = isFeatureEnabled(subscriptionData, 'courses', category);
     return coursesEnabled.enabled && coursesEnabled[category];
   };
 

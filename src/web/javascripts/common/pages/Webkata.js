@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import {
-  $, isFeautureEnabled, pageInit, pathNavigator, timeTrack,
+  $, isFeatureEnabled, pageInit, pathNavigator, timeTrack,
 } from '../framework';
 import useRootPageState, { SubscriptionContext } from '../../../../hooks/pages/root';
 import { useWebkataFetchQuestion, useWebkataSubmitQuestion } from '../../../../hooks/pages/webkata';
@@ -486,7 +486,7 @@ const WebkataGameComponent = () => {
   && questionObject.submissionDetails?.completed;
 
   const gamesLimit = (gameName) => {
-    const gamesEnabled = isFeautureEnabled(subscriptionData, 'games', gameName);
+    const gamesEnabled = isFeatureEnabled(subscriptionData, 'games', gameName);
     return gamesEnabled.enabled && gamesEnabled[gameName];
   };
   // side effects
