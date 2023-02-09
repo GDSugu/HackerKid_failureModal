@@ -5,7 +5,6 @@ import 'swiper/modules/navigation/navigation.scss';
 import '../../../../stylesheets/common/pages/courses/style.scss';
 import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
-import Img from '../Img';
 
 const courseCard = ({ data }) => (
   <a href={`${window.location.origin}/videos/${data.moduleId}/${data.number}`}>

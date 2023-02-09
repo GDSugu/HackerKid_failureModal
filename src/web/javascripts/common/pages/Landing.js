@@ -351,7 +351,7 @@ const LandingTechVideos = () => <>
                     </p>
                   </div>
                 </div>
-              </div>           
+              </div>
           </div>
         </div>
 
@@ -1201,80 +1201,72 @@ const LandingFooter = () => <>
 
 const goDefaultImage = (course) => {
   if (course === 'python') {
-    $('#video-container-javascript').html(`<div className="after-image" id='javascript-container'>
+    $('#video-container-javascript').html(`<div class="after-image" id='javascript-container'>
     <picture>
-      <img src='../../../../images/landing/javascript-video.webp' className='w-100' />
+      <img src='../../../../images/landing/javascript-video.webp' class='w-100' />
     </picture>
-    <div className='play-icon'>
-      <i className="fa fa-play text-white" aria-hidden="true"></i>
+    <div class='play-icon'>
+      <i class="fa fa-play text-white" aria-hidden="true"></i>
     </div>
-    <div className='video-title'>
-      <p className='text-white'>
-        <FormattedMessage
-          defaultMessage={'Basics of JavaScript'}
-          description={'video title'} />
+    <div class='video-title'>
+      <p class='text-white'>
+      Basics of JavaScript
       </p>
     </div>
   </div>`);
     $('#hackerkid-video').html(`
-    <div className="after-image">
+    <div class="after-image">
             <picture>
-              <img src='../../../../images/landing/hackerkit-img.webp' className='w-100' />
+              <img src='../../../../images/landing/hackerkit-img.webp' class='w-100' />
             </picture>
-            <div className='play-icon'>
-              <i className="fa fa-play text-white" aria-hidden="true"></i>
+            <div class='play-icon'>
+              <i class="fa fa-play text-white" aria-hidden="true"></i>
             </div> </div>`);
   } else if (course === 'javascript') {
-    $('#video-container-python').html(`<div className="after-image h-100" id='python-container'>
+    $('#video-container-python').html(`<div class="after-image h-100" id='python-container'>
     <picture>
-      <img src='../../../../images/landing/python-video.webp' className='w-100' />
+      <img src='../../../../images/landing/python-video.webp' class='w-100' />
     </picture>
-    <div className='play-icon'>
-      <i className="fa fa-play text-white" aria-hidden="true"></i>
+    <div class='play-icon'>
+      <i class="fa fa-play text-white" aria-hidden="true"></i>
     </div>
-    <div className='video-title'>
-      <p className='text-white'>
-        <FormattedMessage
-          defaultMessage={'Basics of Python'}
-          description={'video title'} />
+    <div class='video-title'>
+      <p class='text-white'>
+      Basics of Python
       </p></div>
       </div>`);
     $('#hackerkid-video').html(`
-    <div className="after-image">
+    <div class="after-image">
             <picture>
-              <img src='../../../../images/landing/hackerkit-img.webp' className='w-100' />
+              <img src='../../../../images/landing/hackerkit-img.webp' class='w-100' />
             </picture>
-            <div className='play-icon'>
-              <i className="fa fa-play text-white" aria-hidden="true"></i>
+            <div class='play-icon'>
+              <i class="fa fa-play text-white" aria-hidden="true"></i>
             </div></div>`);
   } else if (course === 'hackerkid') {
-    $('#video-container-javascript').html(`<div className="h-100 h-100" id='javascript-container'>
+    $('#video-container-javascript').html(`<div class="after-image" id='javascript-container'>
     <picture>
-      <img src='../../../../images/landing/javascript-video.webp' className='w-100' />
+      <img src='../../../../images/landing/javascript-video.webp' class='w-100' />
     </picture>
-    <div className='play-icon'>
-      <i className="fa fa-play text-white" aria-hidden="true"></i>
+    <div class='play-icon'>
+      <i class="fa fa-play text-white" aria-hidden="true"></i>
     </div>
-    <div className='video-title'>
-      <p className='text-white'>
-        <FormattedMessage
-          defaultMessage={'Basics of JavaScript'}
-          description={'video title'} />
+    <div class='video-title'>
+      <p class='text-white'>
+      Basics of JavaScript
       </p>
     </div>
   </div>`);
-    $('#video-container-python').html(`<div className="after-image h-100" id='python-container'>
+    $('#video-container-python').html(`<div class="after-image h-100" id='python-container'>
     <picture>
-      <img src='../../../../images/landing/python-video.webp' className='w-100' />
+      <img src='../../../../images/landing/python-video.webp' class='w-100' />
     </picture>
-    <div className='play-icon'>
-      <i className="fa fa-play text-white" aria-hidden="true"></i>
+    <div class='play-icon'>
+      <i class="fa fa-play text-white" aria-hidden="true"></i>
     </div>
-    <div className='video-title'>
-      <p className='text-white'>
-        <FormattedMessage
-          defaultMessage={'Basics of Python'}
-          description={'video title'} />
+    <div class='video-title'>
+      <p class='text-white'>
+      Basics of Python
       </p></div>
       </div>`);
   }

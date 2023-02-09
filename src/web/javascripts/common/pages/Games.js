@@ -471,7 +471,7 @@ const Games = () => {
     validSubmissionCount: dashBoardData?.webkataJs?.validSubmissionCount,
     gameCoverURL: 'games/webkata-js-game-cover.png',
     onClick: () => { navigate('/webkata/js'); },
-  }
+  },
   ];
 
   return (

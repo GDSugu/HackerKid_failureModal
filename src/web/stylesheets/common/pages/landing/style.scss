@@ -11,6 +11,10 @@
     position: relative;
   }
 
+  #video-container-javascript {
+    margin-top: 20px;
+  }
+
   #video-container-python,
   #video-container-javascript,
   #youtube-video {
@@ -29,7 +33,9 @@
     }
 
     .after-image {
+      overflow: hidden;
       position: relative;
+      border-radius: 0.8rem;
 
       img {
         width: 100%;
@@ -482,7 +488,7 @@
       .menu-icon {
         display: none;
 
-        @include gm.media-breakpoint-down(xs) {
+        @include gm.media-breakpoint-down(sm) {
           display: block;
           margin-top: 0.1rem;
           margin-right: 1rem;
@@ -497,7 +503,7 @@
         display: block;
         width: 10.375rem;
 
-        @include gm.media-breakpoint-down(xs) {
+        @include gm.media-breakpoint-down(sm) {
           width: 6.375rem;
           margin-top: 0.3rem;
         }
@@ -515,7 +521,7 @@
       font-size: 1rem;
       display: inline-block;
 
-      @include gm.media-breakpoint-down(xs) {
+      @include gm.media-breakpoint-down(sm) {
         padding: 0.5rem 0.688rem;
         font-size: 0.875rem;
         display: inline-block;
@@ -525,7 +531,7 @@
       i {
         margin-left: 0.5rem;
 
-        @include gm.media-breakpoint-down(xs) {
+        @include gm.media-breakpoint-down(sm) {
           margin-left: 0.2rem;
         }
       }
@@ -536,7 +542,7 @@
       border-left: 1px solid gt.theme-var(landing-border-color, null, $thememaplight, $cssvars);
       margin-left: 2rem;
 
-      @include gm.media-breakpoint-down(xs) {
+      @include gm.media-breakpoint-down(sm) {
         display: none;
         border-left: none;
         margin-left: 0 !important;
@@ -554,7 +560,7 @@
         font-size: 1rem;
         display: inline-block;
 
-        @include gm.media-breakpoint-down(xs) {
+        @include gm.media-breakpoint-down(sm) {
           width: 100%;
         }
 
