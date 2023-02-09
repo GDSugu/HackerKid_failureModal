@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import {
-  $, pageInit, secondsToMins, timeTrack,
+  $, isFeatureEnabled, pageInit, secondsToMins, timeTrack,
 } from '../framework';
 import Img from '../components/Img';
 // import SwiperComponent from '../components/SwiperComponent';
@@ -14,6 +14,7 @@ import BottomSheet from '../components/BottomSheet';
 import '../../../stylesheets/common/pages/dashboard/style.scss';
 import { getSession, setSession } from '../../../../hooks/common/framework';
 import AwardsNotificationCard from '../components/AwardsNotificationCard';
+import { SubscriptionContext } from '../../../../hooks/pages/root';
 
 const compareProps = (prev, next) => {
   let isEqual = true;
@@ -635,7 +636,7 @@ const AchievementCard = ({ className, isDesktop, sessionData }) => <>
   </>}
 </>;
 
-const ClubCard = ({ clubData = {}, className }) => <>
+const ClubCard = ({ clubData = {}, className, enabled }) => <>
   {<>
     <div className={`dashboard-club-container dashboard-body-block ${className}`}>
       <div className="sideboard-card card">
@@ -645,12 +646,13 @@ const ClubCard = ({ clubData = {}, className }) => <>
               defaultMessage={'{clubName}'}
               description={'Club name heading'}
               values={{
-                clubName: clubData.clubName,
+                clubName: enabled ? clubData.clubName : 'School Clubs',
               }}
             />
           </p>
         </div>
-        <div className="club-card-content">
+        {
+          enabled ? <div className="club-card-content">
           {
             !clubData && <>
               <div className="skeleton">
@@ -705,6 +707,23 @@ const ClubCard = ({ clubData = {}, className }) => <>
             </>
           }
         </div>
+            : <div className="club-card-content">
+          <div className="sideboard-content-title club-image-div">
+          <Img src='common/feature-lock.svg' className='club-lock-image'/>
+              </div>
+              <div className="sideboard-content-data">
+                <p className="club-members-title-buy mb-0">Buy premium to unlock school clubs feature</p>
+                <div className="sideboard-btn-block">
+                  <Link className='btn btn-block club-btn-buy' to={'/pricing'}>
+                    <FormattedMessage
+                      defaultMessage={'Unlock Now'}
+                      description={'Unlock Now button'}
+                    />
+                  </Link>
+                </div>
+              </div>
+        </div>
+        }
       </div>
     </div>
   </>}
@@ -717,6 +736,46 @@ const GameComponent = memo(GameContainer, compareProps);
 const LeaderBoardCardComponent = memo(LeaderBoardCard, compareProps);
 const AchievementCardComponent = memo(AchievementCard, compareProps);
 const ClubCardComponent = memo(ClubCard, compareProps);
+
+const checkPaymentModal = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const payment = urlParams.get('payment');
+  if (payment === 'success') {
+    $('.payment-success-modal').modal('show');
+  }
+};
+
+const removeQueryinUrl = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const payment = urlParams.get('payment');
+  if (payment === 'success') {
+    window.history.replaceState({}, document.title, '/dashboard');
+  }
+};
+
+const closePaymentModal = () => {
+  $('.payment-success-modal').modal('hide');
+  removeQueryinUrl();
+};
+
+const PaymentScuccessModal = () => <div
+className="modal fade payment-success-modal"
+id="modal"
+tabIndex="-1"
+role="dialog"
+aria-labelledby="errorModal"
+aria-hidden="true">
+<div className="modal-dialog modal-dialog-centered" role="document">
+  <div className="modal-content payment-modal-content">
+    <div className="modal-body">
+      <div className='text-center payment-modal-container'>
+      <p className='payment-modal-text'>Your Payment is Successfully Completed. Enjoy the Premium Features.</p>
+      <button className='btn btn-primary w-100 continue-btn text-white' aria-label="Close" onClick={closePaymentModal}>Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>;
 
 const Dashboard = () => {
   if (window.location.href.includes('/dashboard')) {
@@ -733,7 +792,6 @@ const Dashboard = () => {
   const { state: getChallengesState } = useGetChallenges({ isPageMounted });
 
   const awardsNotificationCardRef = React.useRef(true);
-
   const {
     status: dashboarStatus,
     userData: dashboardUserData,
@@ -755,6 +813,8 @@ const Dashboard = () => {
   } = getChallengesState;
 
   const modalVisible = [dashboarStatus, leaderboardStatus, challengesStatus].includes('access_denied');
+
+  const { subscriptionData } = React.useContext(SubscriptionContext);
 
   const populateScore = (selectorPrefix, score, percentage) => {
     if (score) {
@@ -787,11 +847,17 @@ const Dashboard = () => {
     setIsDesktop(window.matchMedia('(min-width: 576px)').matches);
   };
 
+  const isClubEnabled = () => {
+    const clubEnabled = isFeatureEnabled(subscriptionData, 'clubs');
+    return clubEnabled && clubEnabled.enabled;
+  };
+
   useEffect(() => {
     window.addEventListener('resize', listenDesktop);
     populateScore('#yourScore', gameData.gameProgress, parseInt((gameData.gameProgress / gameData.totalGames) * 100, 10));
 
     const awardsGiven = getSession('awardsGiven');
+    checkPaymentModal();
 
     awardsGiven.then((val) => {
       if (val || val !== 'false') {
@@ -837,7 +903,7 @@ const Dashboard = () => {
                 clubData
                 && clubData?.hasClub
                 && <>
-                  <ClubCardComponent clubData={clubData} />
+                  <ClubCardComponent clubData={clubData} enabled={isClubEnabled()} />
                 </>
               }
               <LeaderBoardCardComponent
@@ -866,7 +932,8 @@ const Dashboard = () => {
             && <>
               <ClubCardComponent
                 clubData={clubData}
-                className={'sheet-card'} />
+                className={'sheet-card'}
+                enabled={isClubEnabled()} />
             </>
           }
           <LeaderBoardCardComponent
@@ -905,6 +972,7 @@ const Dashboard = () => {
         </button>
       </Modal>
     }
+    <PaymentScuccessModal/>
     <AwardsNotificationCard ref={awardsNotificationCardRef} onClose={() => {
       setSession('awardsGiven', 'false');
     }} />

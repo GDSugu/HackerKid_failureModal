@@ -457,7 +457,6 @@ const Games = () => {
   pageInit('games-container', 'Games');
 
   timeTrack('games');
-
   // hooks
   const navigate = useNavigate();
   const isPageMounted = React.useRef(true);

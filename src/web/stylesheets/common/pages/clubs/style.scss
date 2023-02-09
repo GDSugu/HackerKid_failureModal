@@ -88,6 +88,15 @@
             }
           }
 
+          .club-image-div {
+            display: flex;
+            justify-content: center;
+          }
+
+          .club-lock-image {
+            width: 400px;
+          }
+
           .club-points-container {
             grid-area: club-points;
             display: grid;

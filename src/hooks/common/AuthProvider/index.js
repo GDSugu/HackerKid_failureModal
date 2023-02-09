@@ -7,6 +7,7 @@ const AuthProvider = ({ children }) => {
     isLoggedIn: false,
     appData: {},
     sessionData: {},
+    subscriptionData: {},
   });
 
   const setAuth = (arg) => {
@@ -23,6 +24,7 @@ const AuthProvider = ({ children }) => {
       isLoggedIn: false,
       appData: {},
       sessionData: {},
+      subscriptionData: {},
     });
   };
 
