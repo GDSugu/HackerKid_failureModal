@@ -14,7 +14,7 @@ const CertificateComonent = ({ gameDetails, profileDetails }) => {
           <span class="certificateId">ID: ${certificate.certificateId.toUpperCase()}</span>
           <span class="certificateName">${certificate.certificateName}</span>
           <span class="userName">${profileDetails.name}</span>
-          <img class="certificateSign" src="/images/common/authority.png" alt="authority sign">
+          <img class="certificateSign" src="/images/common/authority1.png" alt="authority sign">
         </div>
       </div>
       `);
