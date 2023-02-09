@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import useRootPageState, { SubscriptionContext } from '../../../../../hooks/pages/root';
 import '../../../../stylesheets/common/sass/components/_gameLevelComponent.scss';
-import { $, isFeautureEnabled } from '../../framework';
+import { $, isFeatureEnabled } from '../../framework';
 import { attachDragHandler } from '../../Functions/turtle';
 import Img from '../Img';
 
@@ -49,7 +49,7 @@ const GameLevelComponent = ({ game, gameData, handleFetchQuestion }, ref) => {
   const { subscriptionData } = React.useContext(SubscriptionContext);
   const gamesLimit = (gameName) => {
     console.log('subscriptionData', subscriptionData);
-    const gamesEnabled = isFeautureEnabled(subscriptionData, 'games', gameName);
+    const gamesEnabled = isFeatureEnabled(subscriptionData, 'games', gameName);
     return gamesEnabled.enabled && gamesEnabled[gameName];
   };
 

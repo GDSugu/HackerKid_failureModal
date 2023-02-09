@@ -9,7 +9,7 @@ const { API } = process.env;
 
 const authorize = {};
 
-const isFeautureEnabled = (features, feature, subFeature) => {
+const isFeatureEnabled = (features, feature, subFeature) => {
   const planFeatures = features && features.planFeatures;
   if (features && planFeatures && planFeatures.length > 0) {
     const featureObj = planFeatures.find((f) => f.name === feature);
@@ -466,5 +466,5 @@ export {
   loadScriptByURL,
   timeTrack,
   secondsToMins,
-  isFeautureEnabled,
+  isFeatureEnabled,
 };

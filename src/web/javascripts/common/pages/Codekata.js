@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import Ace from 'react-ace';
 import '../../../stylesheets/common/pages/codekata/style.scss';
 import {
-  $, isFeautureEnabled, pageInit, pathNavigator, timeTrack,
+  $, isFeatureEnabled, pageInit, pathNavigator, timeTrack,
 } from '../framework';
 import GameNavBar from '../components/GameNavBar';
 import Img from '../components/Img';
@@ -955,7 +955,7 @@ const CodekataGameComponent = () => {
   && codekataData.questionObject.submissionDetails.completed;
 
     const gamesLimit = (gameName) => {
-      const gamesEnabled = isFeautureEnabled(subscriptionData, 'games', gameName);
+      const gamesEnabled = isFeatureEnabled(subscriptionData, 'games', gameName);
       return gamesEnabled.enabled && gamesEnabled[gameName];
     };
     let redirectId = 1;

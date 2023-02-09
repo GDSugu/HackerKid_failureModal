@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import {
-  $, isFeautureEnabled, pageInit, secondsToMins, timeTrack,
+  $, isFeatureEnabled, pageInit, secondsToMins, timeTrack,
 } from '../framework';
 import Img from '../components/Img';
 // import SwiperComponent from '../components/SwiperComponent';
@@ -848,7 +848,7 @@ const Dashboard = () => {
   };
 
   const isClubEnabled = () => {
-    const clubEnabled = isFeautureEnabled(subscriptionData, 'clubs');
+    const clubEnabled = isFeatureEnabled(subscriptionData, 'clubs');
     return clubEnabled && clubEnabled.enabled;
   };
 

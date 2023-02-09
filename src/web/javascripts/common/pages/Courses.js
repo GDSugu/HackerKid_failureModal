@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import FuzzySearch from 'fuzzy-search';
 import {
-  $, isFeautureEnabled, pageInit, timeTrack,
+  $, isFeatureEnabled, pageInit, timeTrack,
 } from '../framework';
 import CourseCard, { TopContainer, CustomSwiperComponent } from '../components/courseCard';
 import SwiperComponent from '../components/SwiperComponent';
@@ -357,7 +357,7 @@ const Courses = () => {
   const { subscriptionData } = React.useContext(SubscriptionContext);
 
   const coursesLimit = (category) => {
-    const coursesEnabled = isFeautureEnabled(subscriptionData, 'courses', category);
+    const coursesEnabled = isFeatureEnabled(subscriptionData, 'courses', category);
     return coursesEnabled.enabled && coursesEnabled[category];
   };
 

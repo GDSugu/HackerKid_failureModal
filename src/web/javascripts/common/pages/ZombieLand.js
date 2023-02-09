@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import Phaser from 'phaser';
 import md5 from 'crypto-js/md5';
 import {
-  $, isFeautureEnabled, pageInit, pathNavigator, timeTrack,
+  $, isFeatureEnabled, pageInit, pathNavigator, timeTrack,
 } from '../framework';
 import { useZombieLand } from '../../../../hooks/pages/zombieLand';
 import Img from '../components/Img';
@@ -967,7 +967,7 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
   const { subscriptionData } = React.useContext(SubscriptionContext);
 
   const gamesLimit = (gameName) => {
-    const gamesEnabled = isFeautureEnabled(subscriptionData, 'games', gameName);
+    const gamesEnabled = isFeatureEnabled(subscriptionData, 'games', gameName);
     return gamesEnabled.enabled && gamesEnabled[gameName];
   };
 
