@@ -46,7 +46,7 @@ const Help = () => {
 
   return <>
     <ScrollView style={style.container}>
-      <TouchableOpacity onPress={() => openDialer('+91 9876543221')}>
+      <TouchableOpacity onPress={() => openDialer('+918778517060')}>
         <View style={style.helpMenuBtn}>
           <View>
             <Text style={{
@@ -63,7 +63,7 @@ const Help = () => {
               ...style.helpMenuBtnContent,
             }}>
               <FormattedMessage
-                defaultMessage='9876543221'
+                defaultMessage='+91 8778517060'
                 description="Call Button Text"
               />
             </Text>
@@ -71,7 +71,7 @@ const Help = () => {
           <Icon type='SVGFile' name={CallIcon} size={32} color={theme.utilColors.dark} />
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => openMail('help@hackerkid.org')}>
+      <TouchableOpacity onPress={() => openMail('reach@hackerkid.org')}>
         <View style={style.helpMenuBtn}>
           <View>
             <Text style={{
@@ -88,7 +88,7 @@ const Help = () => {
               ...style.helpMenuBtnContent,
             }}>
               <FormattedMessage
-                defaultMessage='help@hackerkid.org'
+                defaultMessage='reach@hackerkid.org'
                 description="Email Button Text"
               />
             </Text>

@@ -36,11 +36,11 @@ const HelpModal = () => (
         </div>
       }>
         <div className='col-12 col-md-10 mx-auto py-3'>
-          <a href='tel:+919876543221' className='help-type-link'>
-            <HelpType label='Call' text='9876543221' iconPath='../../../../../images/help-modal/call-icon.svg' />
+          <a href='tel:+918778517060' className='help-type-link'>
+            <HelpType label='Call' text='+91 8778517060' iconPath='../../../../../images/help-modal/call-icon.svg' />
           </a>
-          <a href='mailto:help@hackerkid.org' className='help-type-link'>
-            <HelpType label='Email' text='help@hackerkid.org' iconPath='../../../../../images/help-modal/email-icon.svg' />
+          <a href='mailto:reach@hackerkid.org' className='help-type-link'>
+            <HelpType label='Email' text='reach@hackerkid.org' iconPath='../../../../../images/help-modal/email-icon.svg' />
           </a>
           {/* <HelpType text='Open chat now'
           iconPath='../../../../../images/help-modal/chat-icon.svg' /> */}
