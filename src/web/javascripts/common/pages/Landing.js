@@ -1285,9 +1285,14 @@ const playTectVideo = (url, course) => {
   player.on('ready', () => {
     player.play();
   });
-  const hls = new Hls();
-  hls.attachMedia(video);
-  hls.loadSource(url);
+  if (video && video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = url;
+  } else {
+    const hls = new Hls();
+    hls.attachMedia(video);
+    hls.loadSource(url);
+  }
+
   goDefaultImage(course);
 };
 
