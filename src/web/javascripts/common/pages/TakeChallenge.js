@@ -422,7 +422,7 @@ const SuccessModalComponent = ({
   questionObject, validated, uniqueUrl, message = false, userName = 'user', backChallengesHandler = () => {},
 }, ref) => {
   const [screen, setScreen] = React.useState('recognition-screen');
-  const handleScreen = () => setScreen('share-screen');
+  // const handleScreen = () => setScreen('share-screen');
   const shareUrl = `${window.location.origin}/turtle/submissions/${uniqueUrl}/${questionObject.challengeId}/${questionObject.uniqueString}`;
   const handleRegister = () => pathNavigator('register');
 
@@ -464,12 +464,12 @@ const SuccessModalComponent = ({
                             />
                           </p>
                           <div className='recognition-btn-container'>
-                            <button className='btn btn-outline-primary' onClick={handleScreen}>
+                            {/* <button className='btn btn-outline-primary' onClick={handleScreen}>
                               <FormattedMessage
                                 defaultMessage={'Share'}
                                 description={'Share button'}
                               />
-                            </button>
+                            </button> */}
                             <button className='btn btn-primary' onClick={backChallengesHandler}>
                               <div className="d-flex justify-content-between align-items-center">
                                 <FormattedMessage

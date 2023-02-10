@@ -116,6 +116,16 @@
       margin: 0;
     }
 
+    .video-type-javascript {
+      background-color: #178958;
+      color: white;
+    }
+
+    .video-type-python {
+      background-color: #ff9b03;
+      color: white;
+    }
+
     .card-foot {
       background: gt.theme-var(videos-progress-gradient-1, null, $thememaplight, $cssvars);
       position: absolute;

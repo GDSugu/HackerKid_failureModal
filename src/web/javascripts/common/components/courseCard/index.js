@@ -15,11 +15,11 @@ const handlePricing = () => {
 const courseCard = ({ data }) => (
   data.locked ? (
       <div className='course-card locked'>
-          <p className='video-type'><FormattedMessage
-              defaultMessage={'Locked'}
+          <p className={`video-type video-type-${data.moduleId}`}><FormattedMessage
+              defaultMessage={'{type}'}
               description={'video type'}
-              values={{ type: data.type }}/></p>
-          <img className='w-100 thumbnail-img' src={data.thumbnail} />
+              values={{ type: data.moduleName }}/></p>
+          <Img className='w-100 thumbnail-img' src="https://static.hackerkid.org/hackerKid/videos/launch/video-thumbnail.png" local={false} />
           <div className='card-foot'>
             <p><FormattedMessage
               defaultMessage={'{title}'}
@@ -43,12 +43,12 @@ const courseCard = ({ data }) => (
     : (
       <a href={`${window.location.origin}/courses/${data.moduleId}/${data.number}`}>
         <div className='course-card'>
-          <p className='video-type'><FormattedMessage
+          <p className={`video-type video-type-${data.moduleId}`}><FormattedMessage
               defaultMessage={'{type}'}
               description={'video type'}
-              values={{ type: data.type }}/></p>
+              values={{ type: data.moduleName }}/></p>
           <Img className='play-btn' src='/courses/play-btn.png' />
-          <img className='w-100 thumbnail-img' src={data.thumbnail} />
+          <img className='w-100 thumbnail-img' src="https://static.hackerkid.org/hackerKid/videos/launch/video-thumbnail.png" />
           <div className='card-foot'>
             <p><FormattedMessage
               defaultMessage={'{title}'}

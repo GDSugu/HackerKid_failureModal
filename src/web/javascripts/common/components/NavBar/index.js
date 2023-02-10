@@ -70,6 +70,7 @@ const NavBar = () => {
   return <>
     <nav>
       <div className='row justify-content-between align-items-center no-gutters'>
+        <Link to='/dashboard'>
         <div className="logo">
           {/* <FormattedMessage
             defaultMessage = 'hackerkid logo'
@@ -81,6 +82,7 @@ const NavBar = () => {
             </svg>
 
         </div>
+        </Link>
         <div className='navigation-container row align-items-center no-gutters'>
           {
             navItems.map((item, index) => <NavItem {...item} key={index} />)

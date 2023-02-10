@@ -140,7 +140,7 @@ const HeroContainer = ({
             <NewlyTrendingChallenge challenge={trendingChallenge}/>
             <div className='last-challenge-with-create-challenge-btn'>
               <ChallengesActivity myChallenges={myChallenges}/>
-              <Link to={'/turtle/challanges/create/new'} className='btn btn-primary btn-block create-challenge-btn'>
+              <Link to={'/turtle/challenges/create/new'} className='btn btn-primary btn-block create-challenge-btn'>
                 <FormattedMessage defaultMessage={'Create a Challenge'} description='create a challenge button text' />
                 <i className='fa fa-chevron-right' />
               </Link>

@@ -20,7 +20,6 @@ const Loading = () => <Loader />;
 
 const AccountNavBar = loadable(() => import('../components/AccountNavBar'), { fallback: <Loading /> });
 const NavBar = loadable(() => import('../components/NavBar'), { fallback: <Loading /> });
-const RouteIndex = loadable(() => import('./Index'), { fallback: <Loading /> });
 const RouteAbout = loadable(() => import('./About'), { fallback: <Loading /> });
 const RouteLogin = loadable(() => import('./Login'), { fallback: <Loading /> });
 const RouteRegister = loadable(() => import('./Register'), { fallback: <Loading /> });
@@ -49,16 +48,20 @@ const RouteViewCertificate = loadable(() => import('./ViewCertificate'), { fallb
 const RouteClub = loadable(() => import('./Clubs'), { fallback: <Loading /> });
 const RouteWebkata = loadable(() => import('./Webkata'), { fallback: <Loading /> });
 const RouteIde = loadable(() => import('./Ide'), { fallback: <Loading /> });
+const RouteLanding = loadable(() => import('./Landing'), { fallback: <Loading /> });
 
 const App = () => {
   React.useEffect(() => {
-    loginCheck();
+    // except for the landing page, all other pages should be protected
+    if (window.location.pathname !== '/') {
+      loginCheck();
+    }
   }, []);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route index path='/' caseSensitive={true} element={<RouteIndex />} />
+        <Route index path='/' caseSensitive={true} element={<RouteLanding />} />
         <Route path='/' caseSensitive={true} element={<NavBar />}>
           <Route path='dashboard' caseSensitive={true} element={<RouteDashboard />} />
           <Route path='games' caseSensitive={true} element={<RouteGames />} />
