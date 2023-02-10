@@ -52,7 +52,10 @@ const RouteLanding = loadable(() => import('./Landing'), { fallback: <Loading />
 
 const App = () => {
   React.useEffect(() => {
-    loginCheck();
+    // except for the landing page, all other pages should be protected
+    if (window.location.pathname !== '/') {
+      loginCheck();
+    }
   }, []);
 
   return (

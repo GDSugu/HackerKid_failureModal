@@ -100,6 +100,7 @@ const pageInit = (className, title = null) => {
 };
 
 const pathNavigator = (path) => {
+  console.log('pathNavigator login', path);
   const { origin } = window.location;
   if (!window.location.href.includes(path)) {
     window.location.href = `${origin}/${path}`;

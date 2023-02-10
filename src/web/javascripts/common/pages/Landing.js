@@ -87,11 +87,11 @@ const LandingSidebarModal = () => <>
         </div>
         <div className='modal-body'>
           <div className='butts'>
-            <a href='/' className='btn unlimited-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden='true'></i>
+          <a href='/pricing' className='btn unlimited-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden='true'></i>
             </a>
             <div className='log-sign-btn d-block'>
-              <a href='/' className='btn signup-btn mt-3'>Sign Up</a>
-              <a href='/' className='btn login-btn mt-3'>Login</a>
+              <a href='/login' className='btn signup-btn mt-3'>Sign Up</a>
+              <a href='/register' className='btn login-btn mt-3'>Login</a>
             </div>
           </div>
         </div>
@@ -122,7 +122,7 @@ const LandingBanner = () => <>
             <img src='../../../../images/landing/master-coding-skill-banner.webp' className='w-100' />
           </picture>
 
-          <a href='/' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
+          <a href='/pricing' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
           </a>
         </div>
 
@@ -296,7 +296,7 @@ const LandingCodingGames = () => <>
           </SwiperSlide>
         </Swiper>
 
-        <a href='/' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
 
         <div className='boat-route-line-3'></div>
       </div>
@@ -355,7 +355,7 @@ const LandingTechVideos = () => <>
           </div>
         </div>
 
-        <a href='/' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
         </a>
       </div>
 
@@ -441,7 +441,7 @@ const LandingKidMorFun = () => <>
           </div>
         </div>
 
-        <a href='/' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
         </a>
       </div>
     </div>
@@ -658,7 +658,7 @@ const LandingHackerKid = () => <>
           </Swiper>
         </div>
 
-        <a href='/' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
         </a>
       </div>
     </div>
@@ -946,7 +946,7 @@ const LandingHappyLearning = () => <>
 
         </Swiper>
 
-        <a href='/' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
       </div>
     </div>
   </section>
