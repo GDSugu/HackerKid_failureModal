@@ -1319,18 +1319,22 @@ const LandingFooter = () => <>
           </div>
         </div>
 
-        <h3 className='text-white follow-us'>
+        {/* <h3 className='text-white follow-us'>
           <FormattedMessage
             defaultMessage={'Follow us on'}
             description={'title'}
           />
         </h3>
         <div className='social-media'>
-          <a href='/'><img src='../../../../images/landing/twitter.webp' alt='twitter' title='Twitter' /></a>
-          <a href='/'><img src='../../../../images/landing/instagram.webp' alt='instagram' title='Instagram' /></a>
-          <a href='/'><img src='../../../../images/landing/linkedin.webp' alt='linkedin' title='Linkedin' /></a>
-          <a href='/'><img src='../../../../images/landing/facebook.webp' alt='facebook' title='Facebook' /></a>
-        </div>
+          <a href='/'><img src='../../../../images/landing/twitter.webp'
+          alt='twitter' title='Twitter'/></a>
+          <a href='/'><img src='../../../../images/landing/instagram.webp'
+          alt='instagram' title='Instagram' /></a>
+          <a href='/'><img src='../../../../images/landing/linkedin.webp'
+          alt='linkedin' title='Linkedin' /></a>
+          <a href='/'><img src='../../../../images/landing/facebook.webp'
+          alt='facebook' title='Facebook' /></a>
+        </div> */}
 
       </div>
     </div>
@@ -1419,9 +1423,14 @@ const playTectVideo = (url, course) => {
   player.on('ready', () => {
     player.play();
   });
-  const hls = new Hls();
-  hls.attachMedia(video);
-  hls.loadSource(url);
+  if (video && video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = url;
+  } else {
+    const hls = new Hls();
+    hls.attachMedia(video);
+    hls.loadSource(url);
+  }
+
   goDefaultImage(course);
 };
 

@@ -456,7 +456,6 @@ const videoPlayerProcess = ({
       timeActivity({ videoData });
       window.removeEventListener('beforeunload', () => {}, true);
     });
-
     $(media).on('ended', () => {
       window.removeEventListener('beforeunload', () => {}, true);
       // console.log(setEnded(true));
@@ -466,10 +465,17 @@ const videoPlayerProcess = ({
       //   setRatingModal(modalData);
       // }
     });
-
-    const hls = new Hls();
-    hls.loadSource(source);
-    hls.attachMedia(media);
+    $('#video-container-dummy').html(
+      '<video id="course-video-dummy" controls muted autostart="false"></video>',
+    );
+    const video = document.querySelector('#course-video-dummy');
+    if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      $(media).attr('src', source);
+    } else if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(source);
+      hls.attachMedia(media);
+    }
   });
 };
 
@@ -572,7 +578,7 @@ const Videos = () => {
   useEffect(() => {
     if (urlData.number) {
       if (urlData.number > coursesLimit(urlData.moduleId)) {
-        console.log('here');
+        // console.log('here');
         window.location.href = '/courses';
       }
     }
@@ -650,6 +656,7 @@ const Videos = () => {
           <div className="video-page-container">
             <div className="video-player-container">
               <Plyr id="video-player" ref={ref}/>
+              <div id='video-container-dummy' hidden></div>
             </div>
             {currentQuestion && <RatingAndWatchedComponent prop={currentQuestion} />}
             <RatingModal
