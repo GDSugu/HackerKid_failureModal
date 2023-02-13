@@ -26,6 +26,14 @@
     "defaultMessage": "Logout",
     "description": "more menu button"
   },
+  "+iHEIb": {
+    "defaultMessage": "Limited (5 Problems)",
+    "description": "Limited (5 Problems) title"
+  },
+  "+kY4JR": {
+    "defaultMessage": "Web Development Video Library",
+    "description": "Web Development Video Library list"
+  },
   "+lsuwj": {
     "defaultMessage": "Try now",
     "description": "Continue Playing button"
@@ -36,6 +44,10 @@
   "+xn0Fg": {
     "defaultMessage": "Time Spent:",
     "description": "Time Spent subtitle"
+  },
+  "/1qRjR": {
+    "defaultMessage": "shrey Daga's Father",
+    "description": "Happy Learning Starts Here... title"
   },
   "/Gy7qZ": {
     "defaultMessage": "Level {levelNumber}",
@@ -92,6 +104,10 @@
     "defaultMessage": "help@hackerkid.org",
     "description": "Email Button Text"
   },
+  "/sjGeW": {
+    "defaultMessage": "These sessions are schedulable as per the convenience of students and the availability of mentors.",
+    "description": "faq description"
+  },
   "/x0h9E": {
     "defaultMessage": "Login with Phone",
     "description": "login with phone tab"
@@ -99,6 +115,10 @@
   "/yRdu/": {
     "defaultMessage": "Start Playing",
     "description": "Play button"
+  },
+  "094Y2K": {
+    "defaultMessage": "“Hi...Hackerkid is one of the best platform to learn python.. My kid learnt python very easily on your platform... He enjoyed each and every question... He always curious about python but I was not able to taught him properly..but now he is doing better in python 🙂”",
+    "description": " description"
   },
   "0By1LZ": {
     "defaultMessage": "{timeInMinutes} Mins",
@@ -124,6 +144,14 @@
     "defaultMessage": "{heading}",
     "description": "section heading"
   },
+  "0Qaax+": {
+    "defaultMessage": "Limited (3 Solved)",
+    "description": "Limited (3 Solved) list"
+  },
+  "0RZrI3": {
+    "defaultMessage": "Officially Authorised Partner",
+    "description": "Officially Authorised Partner title"
+  },
   "0Sgdtj": {
     "defaultMessage": "Game Progress",
     "description": "game progress heading"
@@ -131,6 +159,10 @@
   "0aCQ4I": {
     "defaultMessage": "{coins} coins",
     "description": "coins"
+  },
+  "0i474G": {
+    "defaultMessage": "How long is the course?",
+    "description": "faq title"
   },
   "0lGE5l": {
     "defaultMessage": "{navigationText}",
@@ -152,6 +184,10 @@
     "defaultMessage": "Create challenge",
     "description": "create challenge button"
   },
+  "1BKJxR": {
+    "defaultMessage": "Premium Edition Features",
+    "description": "Premium Edition Features"
+  },
   "1BoFrk": {
     "defaultMessage": "{description}",
     "description": "Course Title"
@@ -159,10 +195,6 @@
   "1FjMUC": {
     "defaultMessage": "Forgot Password?",
     "description": "forgot password link"
-  },
-  "1G3215": {
-    "defaultMessage": "Share",
-    "description": "Share button"
   },
   "1Gkn38": {
     "defaultMessage": "Created by {creatorName}",
@@ -180,9 +212,17 @@
     "defaultMessage": "{levelNumber}",
     "description": "Level indicator"
   },
+  "1ctDzX": {
+    "defaultMessage": "Coding Pirate",
+    "description": "title"
+  },
   "1x4WPP": {
     "defaultMessage": "Create a New Account",
     "description": "Create a New Account heading"
+  },
+  "24TFgF": {
+    "defaultMessage": "WebKata Trilogy",
+    "description": "title"
   },
   "2E6QpA": {
     "defaultMessage": "Challenges",
@@ -202,6 +242,10 @@
   },
   "2W0f9h": {
     "defaultMessage": "Bio"
+  },
+  "2WX0SV": {
+    "defaultMessage": "Awards & Badges",
+    "description": "Awards and Badges title"
   },
   "2X3jYB": {
     "defaultMessage": "is here by awarded the certification of achievement for the successfull completion of",
@@ -226,6 +270,10 @@
   "2yf2WH": {
     "defaultMessage": "Login with Phone",
     "description": "Login with Phone tab"
+  },
+  "3/7aVe": {
+    "defaultMessage": "Interactive Coding Games",
+    "description": "Interactive Coding Games title"
   },
   "3/xv4v": {
     "defaultMessage": "Videos",
@@ -262,6 +310,10 @@
     "defaultMessage": "#{rank}",
     "description": "club leaderboard rank"
   },
+  "3SfBD1": {
+    "defaultMessage": "Limited",
+    "description": "Limited title"
+  },
   "3Tij96": {
     "defaultMessage": "Remove",
     "description": "remove button"
@@ -297,6 +349,10 @@
   "48yQvt": {
     "defaultMessage": "{activeSortName}",
     "description": "sort button text"
+  },
+  "49hSno": {
+    "defaultMessage": "Limited (3 Problems)",
+    "description": "Limited (3 Problems) list"
   },
   "4DNN7D": {
     "defaultMessage": "{tag},",
@@ -365,6 +421,10 @@
     "defaultMessage": "Publish",
     "description": "publish challenge button text"
   },
+  "5PaAfL": {
+    "defaultMessage": "Unlock game-based learning experience for kids",
+    "description": "learning experience content"
+  },
   "5Vj22e": {
     "defaultMessage": "{swiperHeading}",
     "description": "swiper heading"
@@ -388,9 +448,17 @@
     "defaultMessage": "{coins} coins",
     "description": "club coins"
   },
+  "67MpKv": {
+    "defaultMessage": "Limited (5 Problems)",
+    "description": "Limited (10 Problems) list"
+  },
   "6Cjk2D": {
     "defaultMessage": "Login",
     "description": "Login Button"
+  },
+  "6L0FJR": {
+    "defaultMessage": "Limited (10 Problems)",
+    "description": "Limited (10 Problems) list"
   },
   "6OkiRc": {
     "defaultMessage": "Your bio will be shown here"
@@ -403,9 +471,21 @@
     "defaultMessage": "Next",
     "description": "Next Button"
   },
+  "6XkLMQ": {
+    "defaultMessage": "“I loved hacker kid very much because it was very easy to learn coding and it was like a game to play and learn coding.”",
+    "description": "happy learning description"
+  },
   "6ZVb4r": {
     "defaultMessage": "{rating}",
     "description": "Rating Count"
+  },
+  "6fu/Nn": {
+    "defaultMessage": "Videos",
+    "description": "Videos title"
+  },
+  "6mrv4N": {
+    "defaultMessage": "Leaderboard",
+    "description": "Leaderboard title"
   },
   "6oGVMu": {
     "defaultMessage": "Awesome!",
@@ -451,6 +531,10 @@
     "defaultMessage": "{emptyStateText}",
     "description": "empty state text"
   },
+  "7NdcVF": {
+    "defaultMessage": "For Classes 7, 8 & 9",
+    "description": "For Classes 7, 8 & 9 title"
+  },
   "7PlDmO": {
     "defaultMessage": "Play",
     "description": "Turtle Play Button"
@@ -467,6 +551,10 @@
     "defaultMessage": "No invites",
     "description": "no invites"
   },
+  "7fCq41": {
+    "defaultMessage": "Limited (3 Videos)",
+    "description": "Limited (3 Videos) list"
+  },
   "7mn7eO": {
     "defaultMessage": "Output will appear here",
     "description": "output placeholder"
@@ -478,6 +566,10 @@
   "7v4G7a": {
     "defaultMessage": "{completed}/{total} watched"
   },
+  "7zxdrW": {
+    "defaultMessage": "Limited (10 Problems)",
+    "description": "Limited (10 Problems) title"
+  },
   "8+Lyt3": {
     "defaultMessage": "{type}?",
     "description": "Course Type"
@@ -485,6 +577,10 @@
   "86ZKhZ": {
     "defaultMessage": "{title}",
     "description": "confirmation title"
+  },
+  "8WVile": {
+    "defaultMessage": "For Classes 9 & above",
+    "description": "For Classes 9 & above title"
   },
   "8cISRy": {
     "defaultMessage": "Time Spent:",
@@ -498,9 +594,21 @@
     "defaultMessage": "#{rank}",
     "description": "club xp"
   },
+  "8y/MAm": {
+    "defaultMessage": "Check your award collections and certificates",
+    "description": "more card title"
+  },
   "9+2Mm0": {
     "defaultMessage": "IDE",
     "description": "page title"
+  },
+  "9+SQQV": {
+    "defaultMessage": "The Turtle",
+    "description": "The Turtle title"
+  },
+  "94ZC8v": {
+    "defaultMessage": "Features",
+    "description": "Features title"
   },
   "97bB5P": {
     "defaultMessage": "{xp} xp"
@@ -520,6 +628,10 @@
   "9NID4X": {
     "defaultMessage": "OK",
     "description": "OK"
+  },
+  "9Ned5I": {
+    "defaultMessage": "Turtle",
+    "description": "Turtle list"
   },
   "9QOtTR": {
     "defaultMessage": "{step}",
@@ -565,6 +677,10 @@
     "defaultMessage": "New Password",
     "description": "New Password label"
   },
+  "AB7bY9": {
+    "defaultMessage": "Harshini",
+    "description": "Happy Learning Starts Here... title"
+  },
   "AVSoe3": {
     "defaultMessage": "Expected output",
     "description": "Expected output title"
@@ -572,6 +688,10 @@
   "AZoPre": {
     "defaultMessage": "Club Name",
     "description": "Club name label"
+  },
+  "AdKVGj": {
+    "defaultMessage": "HackerKid Trial Edition",
+    "description": "Pricing Plans card title"
   },
   "Aevhvw": {
     "defaultMessage": "Verify OTP and proceed",
@@ -625,6 +745,14 @@
     "defaultMessage": "View all {data}",
     "description": "Module Name"
   },
+  "BoPEfS": {
+    "defaultMessage": "What are the timings? Are these sessions schedulable?",
+    "description": "faq title"
+  },
+  "Bqm+bJ": {
+    "defaultMessage": "Webkata JS",
+    "description": "Webkata JS title"
+  },
   "Bt/Kkf": {
     "defaultMessage": "completed",
     "description": "Game progress"
@@ -657,6 +785,14 @@
     "defaultMessage": "Club Leaderboard",
     "description": "club leaderboard title"
   },
+  "CVflbu": {
+    "defaultMessage": "Advance in Programming by solving problems in any programming language with an Algorithmic approach.",
+    "description": "description"
+  },
+  "CZGDRc": {
+    "defaultMessage": "Master Coding Skills through Active Gaming",
+    "description": "coding skill title"
+  },
   "CabaPs": {
     "defaultMessage": "Level {level}",
     "description": "Level 1 navigation link"
@@ -673,6 +809,18 @@
     "defaultMessage": "Output",
     "description": "Output"
   },
+  "Ck0CVM": {
+    "defaultMessage": "Challenges Creation",
+    "description": "Challenges Creation"
+  },
+  "CvKgI9": {
+    "defaultMessage": "Aithih",
+    "description": "Happy Learning Starts Here... title"
+  },
+  "Czb4m8": {
+    "defaultMessage": "Challenges",
+    "description": "Challenges title"
+  },
   "D/2aSY": {
     "defaultMessage": "This is about page",
     "description": "Page description"
@@ -684,6 +832,10 @@
   "D81PjZ": {
     "defaultMessage": "{collectibleName}",
     "description": "collectible name"
+  },
+  "DBDTAW": {
+    "defaultMessage": "Sriram Adithya M",
+    "description": "title"
   },
   "DBTgpi": {
     "defaultMessage": "completed",
@@ -707,6 +859,10 @@
   "E4eXSS": {
     "defaultMessage": "Live Preview",
     "description": "tab button text"
+  },
+  "E7sIXW": {
+    "defaultMessage": "India’s",
+    "description": "India’s title"
   },
   "EOKZu2": {
     "defaultMessage": "{text}",
@@ -748,6 +904,10 @@
     "defaultMessage": "Cancel",
     "description": "Cancel Button"
   },
+  "F6zUmx": {
+    "defaultMessage": "Limited (3 Videos)",
+    "description": "Limited (3 Problems) list"
+  },
   "FIcBXp": {
     "defaultMessage": "Home",
     "description": "home heading"
@@ -774,6 +934,10 @@
   "FhTUgw": {
     "defaultMessage": "Not {phone} ?",
     "description": "not button"
+  },
+  "FkVXu+": {
+    "defaultMessage": "(*Excluding GST)",
+    "description": "Excluding GST"
   },
   "Fl1ECE": {
     "defaultMessage": "Level {level}",
@@ -819,6 +983,10 @@
     "defaultMessage": "Verify OTP and proceed",
     "description": "verify otp button"
   },
+  "GXef+E": {
+    "defaultMessage": "Clubs",
+    "description": "Clubs title"
+  },
   "Game Title": {
     "defaultMessage": "ZombieLand"
   },
@@ -842,6 +1010,10 @@
     "defaultMessage": "{points}",
     "description": "Club member points"
   },
+  "GyjXT8": {
+    "defaultMessage": "You will have a customized dashboard all for yourself, where you can track your kid’s progress across various learning segments.",
+    "description": "faq description"
+  },
   "H2rvzb": {
     "defaultMessage": "Password changed successfully",
     "description": "Password changed text"
@@ -849,6 +1021,10 @@
   "H9m7jW": {
     "defaultMessage": "{timeSpent}",
     "description": "Time Spent"
+  },
+  "H9zFQD": {
+    "defaultMessage": "Trial Edition Features",
+    "description": "Trial Edition Features"
   },
   "HAlOn1": {
     "defaultMessage": "Name"
@@ -901,9 +1077,17 @@
     "defaultMessage": "Loading failed due to some unknown error! Please try again later.",
     "description": "Error"
   },
+  "IGPXXW": {
+    "defaultMessage": "JavaScript Video Library",
+    "description": "JavaScript Video Library title"
+  },
   "ILnphX": {
     "defaultMessage": "Call",
     "description": "Call Button Title"
+  },
+  "IOF5GH": {
+    "defaultMessage": "₹5000",
+    "description": "₹5000 Free"
   },
   "IUTGvr": {
     "defaultMessage": "{totalEarnedCoins}",
@@ -912,6 +1096,10 @@
   "IV0q/o": {
     "defaultMessage": "Help",
     "description": "Help modal title"
+  },
+  "IaVwjB": {
+    "defaultMessage": "St. Michael's Academy",
+    "description": "title"
   },
   "Ib1cTy": {
     "defaultMessage": "9876543221",
@@ -924,6 +1112,18 @@
   "In3suu": {
     "defaultMessage": "{errorMessage}",
     "description": "error text"
+  },
+  "IvteYj": {
+    "defaultMessage": "The Zombieland",
+    "description": "The Zombieland title"
+  },
+  "IxxDGT": {
+    "defaultMessage": "Aarish babbar's Mom",
+    "description": "title"
+  },
+  "J2b4h6": {
+    "defaultMessage": "Game Progress",
+    "description": "Game Progress list"
   },
   "J4y0bl": {
     "defaultMessage": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?",
@@ -941,6 +1141,10 @@
     "defaultMessage": "Awards",
     "description": "Awards heading"
   },
+  "JQb+h8": {
+    "defaultMessage": "Why Choose HackerKid 2.0?",
+    "description": "HackerKid title"
+  },
   "JW9Qqp": {
     "defaultMessage": "{message}",
     "description": "Admin warning"
@@ -955,6 +1159,10 @@
   },
   "Jrt9bn": {
     "defaultMessage": "{countryName}"
+  },
+  "Jwh3jp": {
+    "defaultMessage": "IDE",
+    "description": "IDE title"
   },
   "K+0Pvy": {
     "defaultMessage": "Certificates",
@@ -975,6 +1183,10 @@
   "KD6lRu": {
     "defaultMessage": "Continue",
     "description": "Continue button"
+  },
+  "KXl+Ih": {
+    "defaultMessage": "Games",
+    "description": "Games title"
   },
   "KY6DzQ": {
     "defaultMessage": "{modName}",
@@ -1004,6 +1216,18 @@
     "defaultMessage": "No Certificates Found",
     "description": "no certificates"
   },
+  "L/VOjg": {
+    "defaultMessage": "Limited (3 Problems)",
+    "description": "Limited (10 Problems) title"
+  },
+  "L5HYii": {
+    "defaultMessage": "FREE",
+    "description": "FREE price"
+  },
+  "L7Gsfw": {
+    "defaultMessage": "Coding Pirate",
+    "description": "Coding Pirate list"
+  },
   "LAxUIh": {
     "defaultMessage": "{studentName}",
     "description": "invitee name"
@@ -1011,6 +1235,10 @@
   "LCt8qV": {
     "defaultMessage": "Share",
     "description": "Share Button"
+  },
+  "LPsIfo": {
+    "defaultMessage": "Limited (Python)",
+    "description": "Limited title"
   },
   "LbCDj2": {
     "defaultMessage": "Move to Drafts",
@@ -1028,6 +1256,10 @@
     "defaultMessage": "Live Preview",
     "description": "Live preview tab"
   },
+  "LtRk/4": {
+    "defaultMessage": "Will I get performance feedback?",
+    "description": "faq title"
+  },
   "LuPT86": {
     "defaultMessage": "Coins",
     "description": "LeaderBoard Points"
@@ -1040,6 +1272,14 @@
     "defaultMessage": "Next award:",
     "description": "next award label"
   },
+  "LzSZP0": {
+    "defaultMessage": "Unlock Now",
+    "description": "Unlock Now button"
+  },
+  "M3JNcL": {
+    "defaultMessage": "Challenges Attempting",
+    "description": "Challenges Attempting title"
+  },
   "M6iTxq": {
     "defaultMessage": "Awards",
     "description": "awards page link"
@@ -1048,9 +1288,17 @@
     "defaultMessage": "Leaderboard Ranking",
     "description": "Leaderboard card heading text"
   },
+  "MBTgFE": {
+    "defaultMessage": "Expected Output",
+    "description": "problem statement title"
+  },
   "MFRlyM": {
     "defaultMessage": "{sortName}",
     "description": "sort dropdown button text"
+  },
+  "MGe16B": {
+    "defaultMessage": "Frequently Asked Questions",
+    "description": "faq title"
   },
   "MS/biV": {
     "defaultMessage": "Go to Index",
@@ -1083,6 +1331,10 @@
   "MjR/TL": {
     "defaultMessage": "Members",
     "description": "Members List"
+  },
+  "MkiEso": {
+    "defaultMessage": "Adaikkammai",
+    "description": "Adaikkammai title"
   },
   "Mp8KyV": {
     "defaultMessage": "Trending",
@@ -1127,6 +1379,10 @@
   "NeX/hH": {
     "defaultMessage": "Are you sure you want to logout?",
     "description": "logout prompt message"
+  },
+  "NfaR3c": {
+    "defaultMessage": "HackerKID’s self-paced gamified coding & learning platform offers Live Interactive Online sessions. We also provide free access to recorded sessions as a takeaway for our students.",
+    "description": "faq description"
   },
   "NgQ5Hl": {
     "defaultMessage": "Continue Playing",
@@ -1175,6 +1431,10 @@
     "defaultMessage": "Continue Playing",
     "description": "Continue Playing Button"
   },
+  "ORxrpt": {
+    "defaultMessage": "Upgrade to Premium to unlock this Video",
+    "description": "unlock text"
+  },
   "OUOYZ4": {
     "defaultMessage": "Sample Input:"
   },
@@ -1189,6 +1449,14 @@
   "OdODwS": {
     "defaultMessage": "Create Account",
     "description": "Create Account button"
+  },
+  "OkoF63": {
+    "defaultMessage": "“Hi, I'm Harshini PB. I'm a Hacker KID user. I love Hacker KID very much because it is a best, online, coding website. I recommend Hacker KID to kids who want to learn coding. The mentor session was great and the mentors are very good at me. In Hacker KID, I like zombie land very much.”",
+    "description": "happy learning description"
+  },
+  "OoOyIq": {
+    "defaultMessage": "HackerKid Premium",
+    "description": "Pricing Plans card title"
   },
   "OqwEqv": {
     "defaultMessage": "Filter",
@@ -1244,6 +1512,10 @@
     "defaultMessage": "Playground",
     "description": "Playground tab"
   },
+  "PdCFIc": {
+    "defaultMessage": "“Hackerkid was a fun and informative opportunity to learn python. As a beginner I felt it easy to adapt with block coding and mentor session's were helpful.”",
+    "description": "happy learning description"
+  },
   "PfA2Pv": {
     "defaultMessage": "{title}",
     "description": "Video Title"
@@ -1251,6 +1523,10 @@
   "PpUsRs": {
     "defaultMessage": "Join",
     "description": "join button"
+  },
+  "PuWqHr": {
+    "defaultMessage": "Moreover, we will be sending you personalized newsletters- weekly e-mails, every week; wherein you can track your kid's assessment through various cognitive abilities such as problem-solving, critical thinking, persistence, analytical skills & more.",
+    "description": "faq description"
   },
   "Pvrf+y": {
     "defaultMessage": "{title}",
@@ -1268,6 +1544,10 @@
     "defaultMessage": "Are you sure you want to logout?",
     "description": "Logout prompt message"
   },
+  "QeXB5+": {
+    "defaultMessage": "Webkata HTML",
+    "description": "Webkata HTML title"
+  },
   "QsXf1d": {
     "defaultMessage": "{points} coins",
     "description": "points"
@@ -1279,6 +1559,10 @@
   "R5SEEt": {
     "defaultMessage": "Close",
     "description": "close button"
+  },
+  "R6fRXj": {
+    "defaultMessage": "View",
+    "description": "more card button"
   },
   "RCQEmZ": {
     "defaultMessage": "Grade",
@@ -1311,6 +1595,10 @@
     "defaultMessage": "{challengeName}",
     "description": "Question"
   },
+  "RbmVo6": {
+    "defaultMessage": "FREE",
+    "description": "HackerKid Trial Edition Free"
+  },
   "RdkFSF": {
     "defaultMessage": "Sort by:",
     "description": "sort btn title"
@@ -1327,12 +1615,24 @@
     "defaultMessage": "Previous Awards",
     "description": "section heading"
   },
+  "RxWnYF": {
+    "defaultMessage": "Happy Learning Starts Here...",
+    "description": "Happy Learning Starts Here... title"
+  },
   "S3mtIm": {
     "defaultMessage": "Congrats! You have Received {coins} Coins and {xp} XP"
   },
   "S7XoqJ": {
     "defaultMessage": "PLAY",
     "description": "play btn text"
+  },
+  "SCn1l+": {
+    "defaultMessage": "Zombieland",
+    "description": "Zombieland list"
+  },
+  "SDzovA": {
+    "defaultMessage": "Powered by Team",
+    "description": "Powered by Team title"
   },
   "SI6+pb": {
     "defaultMessage": "Problem Statement",
@@ -1346,9 +1646,17 @@
     "defaultMessage": "Delete Challenge",
     "description": "delete challenge button"
   },
+  "SUyZvl": {
+    "defaultMessage": "Help",
+    "description": "Help title"
+  },
   "Sbkd3U": {
     "defaultMessage": "{xp} coins",
     "description": "xp"
+  },
+  "ScK8GA": {
+    "defaultMessage": "Pricing Plans",
+    "description": "Pricing Plans title"
   },
   "SccqZN": {
     "defaultMessage": "Download",
@@ -1369,6 +1677,14 @@
   "T/sbBG": {
     "defaultMessage": "Level {level}",
     "description": "Question Level"
+  },
+  "T9SzsF": {
+    "defaultMessage": "Explore Now",
+    "description": "Explore Now text"
+  },
+  "TR6s0D": {
+    "defaultMessage": "Seventh day Adventist HSS",
+    "description": "Modern Vidya Ketan title"
   },
   "TS73XZ": {
     "defaultMessage": "Change password",
@@ -1393,6 +1709,10 @@
   "TmcPug": {
     "defaultMessage": "Edit Profile",
     "description": "edit profile"
+  },
+  "TstQTz": {
+    "defaultMessage": "Basics of Python",
+    "description": "video title"
   },
   "Tv+MUS": {
     "defaultMessage": "Invited by",
@@ -1426,6 +1746,14 @@
     "defaultMessage": "Continue watching",
     "description": "Course Name"
   },
+  "U8S8dq": {
+    "defaultMessage": "What makes it more Fun for your kids?",
+    "description": "fun kid title"
+  },
+  "U9/ROI": {
+    "defaultMessage": "Limited(Python)",
+    "description": "Limited(Python)"
+  },
   "UDQT0n": {
     "defaultMessage": "Achieved Badge",
     "description": "Achievement Badge Title"
@@ -1433,6 +1761,10 @@
   "UFvWGM": {
     "defaultMessage": "Play Next",
     "description": "Play Next Button"
+  },
+  "UONOaD": {
+    "defaultMessage": "Unlimited",
+    "description": "Unlimited list"
   },
   "UUCx/J": {
     "defaultMessage": "Edit",
@@ -1533,13 +1865,25 @@
     "defaultMessage": "{type}",
     "description": "Module type"
   },
+  "WUdYsb": {
+    "defaultMessage": "₹{price}",
+    "description": "HackerKid Trial Premium Free"
+  },
   "WmjFlm": {
     "defaultMessage": "Download",
     "description": "download btn"
   },
+  "WrsR9y": {
+    "defaultMessage": "JavaScript Video Library",
+    "description": "JavaScript Video Library list"
+  },
   "WsWDuq": {
     "defaultMessage": "Click \"Run\" to validate your code",
     "description": "empty validated result text"
+  },
+  "WwkoyV": {
+    "defaultMessage": "See, this is a gamified platform, wherein your kids can compete, play, and learn. They will learn through games and win through challenges. So, little will they know that they are learning. Too! There are no practice worksheets, it’s a practice platform.",
+    "description": "faq description"
   },
   "WxUiy6": {
     "defaultMessage": "State",
@@ -1549,9 +1893,17 @@
     "defaultMessage": "Login into existing account",
     "description": "login into existing account button"
   },
+  "X2sP6k": {
+    "defaultMessage": "HackerKid provided the chance for you to explore the world of coding with HackerKid in a gamified environment for a 7 day trial period. Your current trial edition allows you explore the limited version of HackerKid.",
+    "description": "Pricing Plans card discription"
+  },
   "X43FUF": {
     "defaultMessage": "Congratulations {user}, you have earned the {award} for your excellent record.",
     "description": "Award Modal Desciption"
+  },
+  "XEOksh": {
+    "defaultMessage": "Basics of JavaScript",
+    "description": "video title"
   },
   "XMB1Ot": {
     "defaultMessage": "No Awards Found",
@@ -1568,6 +1920,10 @@
   "XbaAun": {
     "defaultMessage": "Browse clubs:",
     "description": "Browse clubs heading"
+  },
+  "Xblku1": {
+    "defaultMessage": "Webkata HTML",
+    "description": "Webkata HTML list"
   },
   "XeLSF2": {
     "defaultMessage": "Leaderboard",
@@ -1589,9 +1945,17 @@
     "defaultMessage": "WebKata - {concept}",
     "description": "Webkata title"
   },
+  "YQ6o6y": {
+    "defaultMessage": "Python Video Library",
+    "description": "Python Video Library"
+  },
   "YRA/RQ": {
     "defaultMessage": "{username}",
     "description": "Username"
+  },
+  "YbFSjX": {
+    "defaultMessage": "Yes! A laptop is mandatory.",
+    "description": "faq description"
   },
   "YcOL8Q": {
     "defaultMessage": "Congratulations {user}, you have earned {coins} coins for completing the video.",
@@ -1600,6 +1964,10 @@
   "YdxUNc": {
     "defaultMessage": "moveDown",
     "description": "moveDown function"
+  },
+  "YgBtIC": {
+    "defaultMessage": "₹{price}",
+    "description": "price for premium plan"
   },
   "Ykg8tn": {
     "defaultMessage": "{message}",
@@ -1629,6 +1997,10 @@
     "defaultMessage": "Your rank: #{rank}",
     "description": "your rank"
   },
+  "ZNdJ2n": {
+    "defaultMessage": "“My son, Shrey is 12 year old and very enthusiastic kid. He came to know about the Hacker kid portal by his elder brother. He is so happy with the portal that he is always eager to do it. He made some games, programs on the portal and always keen to make improvements in it. One to one session with the mentor is also a good initiative taken by Hacker kid. Interactive demonstration of the code helps him visualise the concept behind the code which makes his concept more robust.”",
+    "description": "happy learning description"
+  },
   "ZUKwtW": {
     "defaultMessage": "{pageNumber}",
     "description": "page button"
@@ -1636,6 +2008,10 @@
   "ZXYzUQ": {
     "defaultMessage": "Something went wrong. Please try again",
     "description": "error modal"
+  },
+  "ZXoKDk": {
+    "defaultMessage": "HackerKid Exclusive Courses",
+    "description": "HackerKid Exclusive Courses title"
   },
   "ZvfR3g": {
     "defaultMessage": "Send OTP",
@@ -1652,6 +2028,10 @@
   "a8vHtW": {
     "defaultMessage": "{studentNamt}",
     "description": "Student Name"
+  },
+  "aHq9L+": {
+    "defaultMessage": "We are here to help!",
+    "description": "title"
   },
   "aL6pHp": {
     "defaultMessage": "Go to Challenges",
@@ -1680,6 +2060,10 @@
   "at+N1s": {
     "defaultMessage": "Run",
     "description": "run button text"
+  },
+  "b/XLXY": {
+    "defaultMessage": "HackerKid Premium",
+    "description": "HackerKid Trial Edition title"
   },
   "b2J6mh": {
     "defaultMessage": "Home",
@@ -1728,9 +2112,17 @@
     "defaultMessage": "Basic Info",
     "description": "Basic Info tab title"
   },
+  "cWrEjX": {
+    "defaultMessage": "What platform do you use to teach coding?",
+    "description": "faq title"
+  },
   "cZDBd3": {
     "defaultMessage": "Coins",
     "description": "Coins cell header"
+  },
+  "cdCLAc": {
+    "defaultMessage": "Modern Vidya Niketan",
+    "description": "title"
   },
   "cergd0": {
     "defaultMessage": "{studentName}",
@@ -1748,6 +2140,10 @@
     "defaultMessage": "...",
     "description": "Page"
   },
+  "d3CYds": {
+    "defaultMessage": "Aligned with",
+    "description": "Aligned with title"
+  },
   "d9u+8x": {
     "defaultMessage": "Webkata - {concept}",
     "description": "Game Title"
@@ -1760,6 +2156,10 @@
     "defaultMessage": "No",
     "description": "logout no btn"
   },
+  "dNydes": {
+    "defaultMessage": "Challenges Attempting",
+    "description": "Challenges Attempting"
+  },
   "dWQyF1": {
     "defaultMessage": "Oh ho ho.. failed",
     "description": "Failure message"
@@ -1771,6 +2171,10 @@
   "dq9osy": {
     "defaultMessage": "Yes",
     "description": "logout yes btn"
+  },
+  "dqDDT2": {
+    "defaultMessage": "Limited (5 Solved)",
+    "description": "Limited (5 Solved) title"
   },
   "dreQIo": {
     "defaultMessage": "Inputs",
@@ -1788,6 +2192,14 @@
     "defaultMessage": "Profile updated successfully",
     "description": "success modal"
   },
+  "eBPfgO": {
+    "defaultMessage": "Webkata CSS",
+    "description": "Webkata CSS list"
+  },
+  "eBe6vX": {
+    "defaultMessage": "Starter Plan",
+    "description": "Starter Plan title"
+  },
   "eF9BRa": {
     "defaultMessage": "Parent's Email",
     "description": "Profile email label"
@@ -1800,13 +2212,29 @@
     "defaultMessage": "Earned Awards",
     "description": "Earned Awards"
   },
+  "evb6EO": {
+    "defaultMessage": "IDE",
+    "description": "IDE"
+  },
   "f1vl6A": {
     "defaultMessage": "Show Leaderboard",
     "description": "show leaderboard"
   },
+  "f27BIo": {
+    "defaultMessage": "Limited (5 Problems)",
+    "description": "Limited (5 Problems) list"
+  },
+  "f7Qqwl": {
+    "defaultMessage": "Have Further Questions?",
+    "description": "title"
+  },
   "fAOneF": {
     "defaultMessage": "Learn to code while drawing, and code along to see the output right on your screens. Everyone draws to express themselves the best! Why not channelize that to learn?",
     "description": "WebKata description"
+  },
+  "fCkD1l": {
+    "defaultMessage": "Learn basic essentials of Web Development through HTML, CSS & JavaScript Game Levels & create super cool websites.",
+    "description": "description"
   },
   "fOZCSk": {
     "defaultMessage": "Set a Password",
@@ -1818,6 +2246,10 @@
   "fUu1sR": {
     "defaultMessage": "Club Rank",
     "description": "Club Rank"
+  },
+  "fcj1bK": {
+    "defaultMessage": "School Clubs",
+    "description": "more card title"
   },
   "fcrHSq": {
     "defaultMessage": "{languageDisplayName}",
@@ -1841,6 +2273,10 @@
   "fr893W": {
     "defaultMessage": "{validSubmissions}",
     "description": "Valid Submissions"
+  },
+  "frCCaR": {
+    "defaultMessage": "Will there be any practice worksheets?",
+    "description": "faq title"
   },
   "ftgWW7": {
     "defaultMessage": "{count}/{totalCount} watched",
@@ -1866,6 +2302,10 @@
     "defaultMessage": "Coins",
     "description": "Coins"
   },
+  "gBduz2": {
+    "defaultMessage": "Webkata CSS",
+    "description": "Webkata CSS title"
+  },
   "gCfRUT": {
     "defaultMessage": "{stateName}"
   },
@@ -1876,6 +2316,10 @@
   "gPWy9r": {
     "defaultMessage": "{gameTitle}",
     "description": "Game Title"
+  },
+  "gQIUu/": {
+    "defaultMessage": "Limited (3 Published)",
+    "description": "Limited (3 Published) list"
   },
   "gTCzny": {
     "defaultMessage": "Profile Picture",
@@ -1911,13 +2355,17 @@
   "h/MN82": {
     "defaultMessage": "{coins}"
   },
-  "hEqp4d": {
-    "defaultMessage": "Coming Soon...",
-    "description": "more card button"
-  },
   "hJpqIn": {
     "defaultMessage": "Send OTP",
     "description": "send otp button"
+  },
+  "hLe6Ak": {
+    "defaultMessage": "Webkata JS",
+    "description": "Turtle list"
+  },
+  "hV4HHg": {
+    "defaultMessage": "“Hackerkid is a fun way for kids to learn to code as well as play. With this pandemic situation and kids unable to go out to play, this is a great opportunity to keep them occupied in a better way. It let's them understand the basic concepts of coding like looping structures, conditions and flow of the program. My son is glued to it!!! And we are happy to tell our family and friends about.”",
+    "description": "happy learning description"
   },
   "hWyGja": {
     "defaultMessage": "Instructions",
@@ -1959,6 +2407,10 @@
     "defaultMessage": "Continue Watching",
     "description": "Continue Watching"
   },
+  "j+kOS8": {
+    "defaultMessage": "Profile Edit",
+    "description": "Profile Edit"
+  },
   "jACivV": {
     "defaultMessage": "{name}",
     "description": "user name"
@@ -1978,9 +2430,17 @@
     "defaultMessage": "Forgot Password",
     "description": "Forgot Password Heading"
   },
+  "jcE9o2": {
+    "defaultMessage": "Zombieland",
+    "description": "Zombieland title"
+  },
   "jmSDeU": {
     "defaultMessage": "Reverse Alphabetical",
     "description": "sort dropdown button text"
+  },
+  "jnhFkO": {
+    "defaultMessage": "Unlock Now",
+    "description": "Unlock Now text"
   },
   "jpb70D": {
     "defaultMessage": "#{rankNumber}",
@@ -1990,17 +2450,21 @@
     "defaultMessage": "Coding Pirate",
     "description": "Coding Pirate title"
   },
-  "jx1ZEv": {
-    "defaultMessage": "HackerKid Exclusive Courses",
-    "description": "exclusive user feature title"
-  },
   "jzHe4a": {
     "defaultMessage": "{timeSpent}",
     "description": "total time spent"
   },
+  "k0cHwD": {
+    "defaultMessage": "Learn syntax-based coding through Zombieland Game Levels",
+    "description": "description"
+  },
   "k6tlKQ": {
     "defaultMessage": "Ok",
     "description": "closing modal button"
+  },
+  "kGV7W5": {
+    "defaultMessage": "Most Popular",
+    "description": "Most Popular"
   },
   "kKheEw": {
     "defaultMessage": "{question}"
@@ -2021,6 +2485,14 @@
     "defaultMessage": "View all collections",
     "description": "modal collection button"
   },
+  "kvDM/m": {
+    "defaultMessage": "Do we need a laptop?",
+    "description": "faq title"
+  },
+  "l7/Vbd": {
+    "defaultMessage": "Profile Edit",
+    "description": "Profile Edit title"
+  },
   "lK2LOr": {
     "defaultMessage": "{certificateName}",
     "description": "certificaten name"
@@ -2028,6 +2500,10 @@
   "lKeCea": {
     "defaultMessage": "Save & Exit",
     "description": "Profile save button"
+  },
+  "lOxnmH": {
+    "defaultMessage": "Learn Python Programming through Turtle’s Block Coding.",
+    "description": "description"
   },
   "lPt9wn": {
     "defaultMessage": "{question}",
@@ -2044,6 +2520,14 @@
   "loHqWK": {
     "defaultMessage": "Invite Members with this link (Optional)",
     "description": "club link input field"
+  },
+  "lpBOZ4": {
+    "defaultMessage": "Your Current Plan",
+    "description": "Your Current Plan btn"
+  },
+  "lw8qSk": {
+    "defaultMessage": "Buy Now",
+    "description": "Buy Now btn"
   },
   "lynO1X": {
     "defaultMessage": "Change Password",
@@ -2092,6 +2576,10 @@
     "defaultMessage": "Session expired",
     "description": "Not authorized message"
   },
+  "mUI/1P": {
+    "defaultMessage": "Awards & Badges",
+    "description": "Awards & Badges title"
+  },
   "ma6GHl": {
     "defaultMessage": "See Less Awards",
     "description": "see all awards btn text"
@@ -2132,10 +2620,6 @@
     "defaultMessage": "rank",
     "description": "sheet card subtitle"
   },
-  "n6bCYe": {
-    "defaultMessage": "Get the rare collectibles with your coins now",
-    "description": "more card title"
-  },
   "n75iGj": {
     "defaultMessage": "No Certificates Found",
     "description": "no certificates found text"
@@ -2151,6 +2635,10 @@
   "nTxUJZ": {
     "defaultMessage": "Try IDE Now",
     "description": "more card button"
+  },
+  "nVCuqR": {
+    "defaultMessage": "Limited (3 Published)",
+    "description": "Limited (3 Videos) title"
   },
   "nWr131": {
     "defaultMessage": "{message}",
@@ -2191,9 +2679,25 @@
     "defaultMessage": "Account Settings",
     "description": "more menu button"
   },
+  "o4jkq9": {
+    "defaultMessage": "Help",
+    "description": "Help"
+  },
+  "o9Qdou": {
+    "defaultMessage": "Plans & Features",
+    "description": "Plans & Features title"
+  },
+  "oLk+st": {
+    "defaultMessage": "Python Video Library",
+    "description": "Turtle title"
+  },
   "oOZkkL": {
     "defaultMessage": "Coming Soon...",
     "description": "Class Page"
+  },
+  "oQ892Z": {
+    "defaultMessage": "HackerKid Trial Edition",
+    "description": "HackerKid Trial Edition title"
   },
   "oQwd5t": {
     "defaultMessage": "Create Club",
@@ -2201,6 +2705,10 @@
   },
   "onuBbP": {
     "defaultMessage": "Input Description:"
+  },
+  "oqBSE4": {
+    "defaultMessage": "What can my kid do after completing this session, like what is the value addition?",
+    "description": "faq title"
   },
   "oz8Vbb": {
     "defaultMessage": "Skip",
@@ -2213,6 +2721,10 @@
   "pHE0Mj": {
     "defaultMessage": "Join with link",
     "description": "join tab"
+  },
+  "pHRMoJ": {
+    "defaultMessage": "HackerKID offers multiple streams of courses for kids that include Web Development, Data Science, Python Game Development, & App Development along with Classroom model learning. All these courses are self-paced with 100 sessions each and 2 sessions per week.",
+    "description": "faq description"
   },
   "pNZIoS": {
     "defaultMessage": "{message}",
@@ -2234,9 +2746,6 @@
     "defaultMessage": "Turtle",
     "description": "Turtle title"
   },
-  "pZeXBt": {
-    "defaultMessage": "Explore Now"
-  },
   "pgAgVI": {
     "defaultMessage": "{emptyStateText}",
     "description": "no challenges"
@@ -2252,6 +2761,10 @@
   "pmy91K": {
     "defaultMessage": "{coins} coins",
     "description": "Coins"
+  },
+  "pweGuZ": {
+    "defaultMessage": "Limited (3 Videos)",
+    "description": "Limited (3 Videos) title"
   },
   "pwy4hs": {
     "defaultMessage": "Game Progress",
@@ -2355,17 +2868,37 @@
     "defaultMessage": "Copy Link",
     "description": "Copy Link button"
   },
+  "roTiGY": {
+    "defaultMessage": "Learners Community",
+    "description": "Learners Community title"
+  },
   "sC1GR3": {
     "defaultMessage": "Yes",
     "description": "yes button text"
+  },
+  "sEH4lc": {
+    "defaultMessage": "Coins & XPs",
+    "description": "Coins title"
+  },
+  "sENBdM": {
+    "defaultMessage": "Are these live or recorded sessions?",
+    "description": "faq title"
   },
   "sI7zqJ": {
     "defaultMessage": "{message}",
     "description": "Failure message"
   },
+  "sMisxF": {
+    "defaultMessage": "Sri Chaitanya Techno School",
+    "description": "Modern Vidya Ketan title"
+  },
   "sNqwYF": {
     "defaultMessage": "Logout",
     "description": "Logout Button"
+  },
+  "sPyRtG": {
+    "defaultMessage": "Awards & Badges",
+    "description": "Awards & Badges"
   },
   "sS58ht": {
     "defaultMessage": "Register to Create Challenge, Earn Points and Compete with friends",
@@ -2383,9 +2916,21 @@
     "defaultMessage": "{xp} xp",
     "description": "club xp"
   },
+  "sqSwj4": {
+    "defaultMessage": "After completing this session, kids will have a good foundation in the selected course and more. The graded format of our program will help kids form a firm grasp of the fundamentals and they will be ready to transition to model real-life products & solutions.",
+    "description": "faq description"
+  },
+  "ssTFur": {
+    "defaultMessage": "HackerKid also offer exclusive courses on various pedagogies like Web Development, App Development, Game Development & Data Science. We have an elite team of teacher to guide with your learning process. We have team that can answer all your queries before you decide enroll with us. Go on tell your parent right now, What are you waiting for?",
+    "description": "HackerKid Exclusive Courses description"
+  },
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
+  },
+  "t/GLeH": {
+    "defaultMessage": "Premium Plan",
+    "description": "Premium Plan title"
   },
   "t32bf0": {
     "defaultMessage": "{type}",
@@ -2395,9 +2940,17 @@
     "defaultMessage": "Output will be shown here",
     "description": "output box placeholder text"
   },
+  "tAiFjx": {
+    "defaultMessage": "Challenges",
+    "description": "Games title"
+  },
   "tI1tX6": {
     "defaultMessage": "View All Achievements",
     "description": "show achievements"
+  },
+  "tNUcfD": {
+    "defaultMessage": "HackerKid Premium gives you full access to the platform features for a 1 year subscription. With exciting coding games, problems, gamified environments you have a lot you explore, play and learn,",
+    "description": "Pricing Plans card discription"
   },
   "tRGm5z": {
     "defaultMessage": "Time Spent:",
@@ -2430,6 +2983,14 @@
   "u1+78Y": {
     "defaultMessage": "Continue Playing",
     "description": "run button text"
+  },
+  "u1vvyz": {
+    "defaultMessage": "T.I Matric. Hr. Sec School",
+    "description": "title"
+  },
+  "u7sb8V": {
+    "defaultMessage": "Indra gandhi public school",
+    "description": "Modern Vidya Ketan title"
   },
   "uCGdYb": {
     "defaultMessage": "Club Name",
@@ -2479,6 +3040,10 @@
     "defaultMessage": "Continue",
     "description": "debugger button"
   },
+  "uzNekz": {
+    "defaultMessage": "Game Progress",
+    "description": "Game Progress title"
+  },
   "v6AMff": {
     "defaultMessage": "Certificates",
     "description": "certificate heading"
@@ -2495,6 +3060,10 @@
     "defaultMessage": "Create",
     "description": "create challenge button"
   },
+  "vRhtHg": {
+    "defaultMessage": "Follow us on",
+    "description": "title"
+  },
   "vWe94i": {
     "defaultMessage": "More Info"
   },
@@ -2505,6 +3074,10 @@
   "vYViQu": {
     "defaultMessage": "Filter",
     "description": "Filter"
+  },
+  "vf8heh": {
+    "defaultMessage": "Enriching Tech Videos for You",
+    "description": "Tech Videos title"
   },
   "vhHzbl": {
     "defaultMessage": "Now your friends can view and solve your challenge",
@@ -2526,6 +3099,14 @@
     "defaultMessage": "Create club",
     "description": "Create a club button"
   },
+  "wfiJET": {
+    "defaultMessage": "Web Development Video Library",
+    "description": "Web Development Video Library title"
+  },
+  "wg10ST": {
+    "defaultMessage": "Limited",
+    "description": "Limited"
+  },
   "wn7GwB": {
     "defaultMessage": "{description}",
     "description": "description of output"
@@ -2546,6 +3127,14 @@
     "defaultMessage": "Share",
     "description": "Share message"
   },
+  "x26Xe0": {
+    "defaultMessage": "For Classes 5 & 6",
+    "description": "For Classes 5 & 6 title"
+  },
+  "x4kCc4": {
+    "defaultMessage": "Unlimited",
+    "description": "Unlimited title"
+  },
   "x8lXTv": {
     "defaultMessage": "Resend",
     "description": "Resend otp button text"
@@ -2558,6 +3147,10 @@
     "defaultMessage": "{swiperHeading}",
     "description": "Challenges card heading"
   },
+  "xQMQmR": {
+    "defaultMessage": "Webkata JS",
+    "description": "Limited (5 Problems) list"
+  },
   "xT1NKB": {
     "defaultMessage": "Games",
     "description": "games nav text"
@@ -2565,10 +3158,6 @@
   "xW6DFp": {
     "defaultMessage": "Videos",
     "description": "videos nav text"
-  },
-  "xX7+L+": {
-    "defaultMessage": "HackerKid also offer exclusive courses on various pedagogies like Web Development, App Development, Game Development & Data Science. We have an elite team of teacher to guide with your learning process. We have team that can answer all your queries before you decide enroll with us. Go on tell your parent right now, What are you waiting for?",
-    "description": "exclusive user feature content"
   },
   "xXEsL7": {
     "defaultMessage": "{level}",
@@ -2578,9 +3167,21 @@
     "defaultMessage": "{challengeName} #{challengeId}",
     "description": "challenge name"
   },
+  "xaMIfH": {
+    "defaultMessage": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit dolor venenatis eget laoreet ultrices ut tortor proin viverra.",
+    "description": "Pricing Plans discription"
+  },
+  "xd1i3c": {
+    "defaultMessage": "Challenges Creation",
+    "description": "Challenges Creation title"
+  },
   "xlvJ5U": {
     "defaultMessage": "You are offline.",
     "description": "offline message"
+  },
+  "xqT8x9": {
+    "defaultMessage": "Recognised by",
+    "description": "Recognised by title"
   },
   "xs8DW+": {
     "defaultMessage": "Register for free",
@@ -2630,6 +3231,10 @@
     "defaultMessage": "Your Collections and Perks",
     "description": "more menu button"
   },
+  "yxM+3S": {
+    "defaultMessage": "Limited (5 Videos)",
+    "description": "Limited (10 Problems) title"
+  },
   "z/0c45": {
     "defaultMessage": "Link",
     "description": "description"
@@ -2641,6 +3246,10 @@
   "z4ekJP": {
     "defaultMessage": "{earnedCoins}",
     "description": "earned coins"
+  },
+  "z5PGTz": {
+    "defaultMessage": "Videos",
+    "description": "Games title"
   },
   "z9lFwl": {
     "defaultMessage": "Name",

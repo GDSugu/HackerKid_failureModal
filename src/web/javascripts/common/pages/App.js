@@ -56,6 +56,7 @@ const App = () => {
     if (window.location.pathname !== '/') {
       loginCheck();
     }
+    console.log('path name', window.location);
   }, []);
 
   return (

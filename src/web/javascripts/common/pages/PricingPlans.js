@@ -1073,8 +1073,8 @@ const PricingPlans = () => {
           </h1>
           <p>
             <FormattedMessage
-              defaultMessage={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit dolor venenatis eget laoreet ultrices ut tortor proin viverra.'}
-              description={'Pricing Plans discription'}
+              defaultMessage={'Check out our pricing plans and choose the one that suits you the best.'}
+              description={'Pricing Plans description'}
             />
           </p>
         </div>

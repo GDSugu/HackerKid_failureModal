@@ -202,9 +202,9 @@ const storeNavigationUrl = () => {
     'forgot-password',
     'pricing-plans',
   ];
-  const pages = pathname.split('/');
-  if (pages.length > 1) {
-    const page = pages[1];
+  const pages = pathname.split('/').filter((el) => el.trim() !== '');
+  if (pages.length > 0) {
+    const page = pages[0];
     if (!authPages.includes(page)) {
       window.sessionStorage.setItem('navigateTo', window.location.href);
     }
