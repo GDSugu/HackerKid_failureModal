@@ -5,8 +5,10 @@ import autocrop from 'autocrop-worker';
 import Img from '../Img';
 
 const cropImage = (element) => {
-  // eslint-disable-next-line camelcase
-  autocrop(element, null, { version: __webpack_hash__ });
+  setTimeout(() => {
+    // eslint-disable-next-line camelcase
+    autocrop(element, null, { version: __webpack_hash__ });
+  }, 300);
 };
 
 const ChallengesGrid = ({
@@ -23,17 +25,7 @@ const ChallengesGrid = ({
   numberOfSkeletonCards = 6,
   challengeCardType = 'clickable',
   onChallengeCardClick = () => { },
-}) => {
-  React.useEffect(() => {
-    if (challenges && challenges.length) {
-      challenges.forEach((challenge) => {
-        const element = document.querySelector(`.challenge-grid-img-${challenge.challengeId} img`);
-        cropImage(element);
-      });
-    }
-  }, [challenges]);
-
-  return (
+}) => (
     <section className={`grid-container ${contentContainerClassName}`}>
       {
         (showEmptyState
@@ -76,6 +68,14 @@ const ChallengesGrid = ({
                           local={false}
                           src={challenge.imgPath}
                           fallback={'../../../../../images/games/code.svg'}
+                          onLoad={(e) => {
+                            if (e.type === 'load' && e.target.src?.split('/').pop() !== 'code.svg') {
+                              cropImage(e?.target);
+                            }
+                          }}
+                          onError={(e) => {
+                            e.target.src = '../../../../../images/games/code.svg';
+                          }}
                         />
                         {/* <img src={challenge.imgPath} alt={challenge.challengeName} /> */}
                       </div>
@@ -101,6 +101,14 @@ const ChallengesGrid = ({
                           local={false}
                           src={challenge.imgPath}
                           fallback={'../../../../../images/games/code.svg'}
+                          onLoad={(e) => {
+                            if (e.type === 'load' && e.target.src?.split('/').pop() !== 'code.svg') {
+                              cropImage(e?.target);
+                            }
+                          }}
+                          onError={(e) => {
+                            e.target.src = '../../../../../images/games/code.svg';
+                          }}
                         />
                         {/* <img src={challenge.imgPath} alt={challenge.challengeName} /> */}
                       </div>
@@ -149,7 +157,6 @@ const ChallengesGrid = ({
         </div>
       }
     </section>
-  );
-};
+);
 
 export default ChallengesGrid;

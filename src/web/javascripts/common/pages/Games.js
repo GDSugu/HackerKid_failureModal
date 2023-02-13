@@ -544,18 +544,6 @@ const Games = () => {
     timeSpent: secondsToMins(dashBoardData?.zombieLand?.timeSpent),
   },
   {
-    gameTitle: 'Webkata-CSS',
-    currentLevelNumber: dashBoardData?.webkataCss?.currentQuestionDetails
-      ? dashBoardData.webkataCss.currentQuestionDetails.virtualId : 0,
-    totalEarnedCoins: dashBoardData?.webkataCss?.totalPointsEarned
-      ? dashBoardData.webkataCss.totalPointsEarned : 0,
-    totalLevels: dashBoardData?.webkataCss?.overAllQuestionCount,
-    validSubmissionCount: dashBoardData?.webkataCss?.validSubmissionCount,
-    gameCoverURL: 'games/webkata-css-game-cover.png',
-    onClick: () => { navigate('/webkata/css'); },
-    timeSpent: secondsToMins(dashBoardData?.webkataCss?.timeSpent),
-  },
-  {
     gameTitle: 'Webkata-HTML',
     currentLevelNumber: dashBoardData?.webkataHtml?.currentQuestionDetails
       ? dashBoardData.webkataHtml.currentQuestionDetails.virtualId : 0,
@@ -566,6 +554,18 @@ const Games = () => {
     gameCoverURL: 'games/webkata-html-game-cover.png',
     onClick: () => { navigate('/webkata/html'); },
     timeSpent: secondsToMins(dashBoardData?.webkataHtml?.timeSpent),
+  },
+  {
+    gameTitle: 'Webkata-CSS',
+    currentLevelNumber: dashBoardData?.webkataCss?.currentQuestionDetails
+      ? dashBoardData.webkataCss.currentQuestionDetails.virtualId : 0,
+    totalEarnedCoins: dashBoardData?.webkataCss?.totalPointsEarned
+      ? dashBoardData.webkataCss.totalPointsEarned : 0,
+    totalLevels: dashBoardData?.webkataCss?.overAllQuestionCount,
+    validSubmissionCount: dashBoardData?.webkataCss?.validSubmissionCount,
+    gameCoverURL: 'games/webkata-css-game-cover.png',
+    onClick: () => { navigate('/webkata/css'); },
+    timeSpent: secondsToMins(dashBoardData?.webkataCss?.timeSpent),
   },
   {
     gameTitle: 'Webkata-JS',
@@ -728,17 +728,6 @@ const Games = () => {
                 }} />
               <MemoizedGameCard
                 isDesktop={isDesktop}
-                onClick={() => { navigate('/webkata/css'); }}
-                gameCardVariant={1}
-                contentContainerCustomClass={'col-6 col-sm-4 col-xl-3 p-1 p-md-2'}
-                gameDetails={{
-                  gameTitle: 'Webkata-CSS',
-                  currentLevelNumber: dashBoardData.turtle.currentQuestionDetails.virtualId,
-                  totalLevels: dashBoardData.turtle.overAllQuestionCount,
-                  gameCoverURL: 'games/webkata-css-game-cover.png',
-                }} />
-              <MemoizedGameCard
-                isDesktop={isDesktop}
                 onClick={() => { navigate('/webkata/html'); }}
                 gameCardVariant={1}
                 contentContainerCustomClass={'col-6 col-sm-4 col-xl-3 p-1 p-md-2'}
@@ -747,6 +736,17 @@ const Games = () => {
                   currentLevelNumber: dashBoardData.turtle.currentQuestionDetails.virtualId,
                   totalLevels: dashBoardData.turtle.overAllQuestionCount,
                   gameCoverURL: 'games/webkata-html-game-cover.png',
+                }} />
+              <MemoizedGameCard
+                isDesktop={isDesktop}
+                onClick={() => { navigate('/webkata/css'); }}
+                gameCardVariant={1}
+                contentContainerCustomClass={'col-6 col-sm-4 col-xl-3 p-1 p-md-2'}
+                gameDetails={{
+                  gameTitle: 'Webkata-CSS',
+                  currentLevelNumber: dashBoardData.turtle.currentQuestionDetails.virtualId,
+                  totalLevels: dashBoardData.turtle.overAllQuestionCount,
+                  gameCoverURL: 'games/webkata-css-game-cover.png',
                 }} />
               <MemoizedGameCard
                 isDesktop={isDesktop}

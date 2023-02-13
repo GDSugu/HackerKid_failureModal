@@ -100,10 +100,6 @@
     "defaultMessage": "Coins Earned:",
     "description": "coins earned"
   },
-  "/r/CdV": {
-    "defaultMessage": "help@hackerkid.org",
-    "description": "Email Button Text"
-  },
   "/sjGeW": {
     "defaultMessage": "These sessions are schedulable as per the convenience of students and the availability of mentors.",
     "description": "faq description"
@@ -518,6 +514,10 @@
   "7F4zGx": {
     "defaultMessage": "{item}",
     "description": "Sample Output"
+  },
+  "7FwYZm": {
+    "defaultMessage": "+91 8778517060",
+    "description": "Call Button Text"
   },
   "7HqC7J": {
     "defaultMessage": "Previous",
@@ -1100,10 +1100,6 @@
   "IaVwjB": {
     "defaultMessage": "St. Michael's Academy",
     "description": "title"
-  },
-  "Ib1cTy": {
-    "defaultMessage": "9876543221",
-    "description": "Call Button Text"
   },
   "IloyRB": {
     "defaultMessage": "{heading}",
@@ -2449,6 +2445,10 @@
   "jqtzC8": {
     "defaultMessage": "Coding Pirate",
     "description": "Coding Pirate title"
+  },
+  "jromX8": {
+    "defaultMessage": "reach@hackerkid.org",
+    "description": "Email Button Text"
   },
   "jzHe4a": {
     "defaultMessage": "{timeSpent}",
