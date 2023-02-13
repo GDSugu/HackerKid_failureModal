@@ -3,7 +3,7 @@
 
 @import "./_landingTheme.js";
 
-$font-awesome-family: "$font-family";
+$font-awesome-family: "Font Awesome 5 Free";
 
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 
@@ -969,7 +969,7 @@ $font-awesome-family: "$font-family";
                 width: 50%;
 
                 &:before {
-                  font-family: "$font-family";
+                  font-family: $font-awesome-family;
                   content: "\f0da";
                   position: absolute;
                   right: -12px;
@@ -1151,10 +1151,14 @@ $font-awesome-family: "$font-family";
                 font-weight: 600;
                 padding: 1rem;
                 cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.5rem;
 
                 &:after {
                   content: "\f106";
-                  font-family: "$font-family";
+                  font-family: $font-awesome-family;
                   font-weight: 900;
                   float: right;
                 }
