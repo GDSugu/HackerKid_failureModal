@@ -3,6 +3,10 @@
     "defaultMessage": "PLAY",
     "description": "Play Button"
   },
+  "+1Q/2y": {
+    "defaultMessage": "kids from ages 7-17",
+    "description": "faq description"
+  },
   "+AycvP": {
     "defaultMessage": "Email",
     "description": "Email Button Title"
@@ -40,6 +44,10 @@
   },
   "+nON3s": {
     "defaultMessage": "{output}"
+  },
+  "+szRUE": {
+    "defaultMessage": "wherein you can track your kid's assessment recorded during various activities and skill-based performance.",
+    "description": "faq description"
   },
   "+xn0Fg": {
     "defaultMessage": "Time Spent:",
@@ -100,10 +108,6 @@
     "defaultMessage": "Coins Earned:",
     "description": "coins earned"
   },
-  "/sjGeW": {
-    "defaultMessage": "These sessions are schedulable as per the convenience of students and the availability of mentors.",
-    "description": "faq description"
-  },
   "/x0h9E": {
     "defaultMessage": "Login with Phone",
     "description": "login with phone tab"
@@ -156,10 +160,6 @@
     "defaultMessage": "{coins} coins",
     "description": "coins"
   },
-  "0i474G": {
-    "defaultMessage": "How long is the course?",
-    "description": "faq title"
-  },
   "0lGE5l": {
     "defaultMessage": "{navigationText}",
     "description": "navigation slide text"
@@ -171,6 +171,10 @@
   "0sK7Ti": {
     "defaultMessage": "Submit Code",
     "description": "Code Submit button"
+  },
+  "12sHQo": {
+    "defaultMessage": "leaderboard",
+    "description": "faq description"
   },
   "13ETG6": {
     "defaultMessage": "Help",
@@ -278,6 +282,10 @@
   "30ejkF": {
     "defaultMessage": "Close",
     "description": "close"
+  },
+  "31+anm": {
+    "defaultMessage": "Club is a feature where kids can form a group and interact with one another. This club helps them to assess their learning and builds healthy competition among their friends to have an amazing learning experience.",
+    "description": "faq description"
   },
   "33dFbN": {
     "defaultMessage": "Created \"{lastCreatedChallengeName}\" challenge",
@@ -425,6 +433,10 @@
     "defaultMessage": "{swiperHeading}",
     "description": "swiper heading"
   },
+  "5aS8Y2": {
+    "defaultMessage": "Who is HackerKid for?",
+    "description": "faq title"
+  },
   "5jxN1p": {
     "defaultMessage": "{points}",
     "description": "user points"
@@ -478,6 +490,10 @@
   "6fu/Nn": {
     "defaultMessage": "Videos",
     "description": "Videos title"
+  },
+  "6gaugg": {
+    "defaultMessage": "Can my kid learn coding with HackerKID?",
+    "description": "faq title"
   },
   "6mrv4N": {
     "defaultMessage": "Leaderboard",
@@ -577,6 +593,10 @@
   "86ZKhZ": {
     "defaultMessage": "{title}",
     "description": "confirmation title"
+  },
+  "8J/fA4": {
+    "defaultMessage": "along with",
+    "description": "faq description"
   },
   "8WVile": {
     "defaultMessage": "For Classes 9 & above",
@@ -729,6 +749,10 @@
     "defaultMessage": "Time Spent:",
     "description": "time spent heading text"
   },
+  "BK01d3": {
+    "defaultMessage": "What is a club and how does it work?",
+    "description": "faq title"
+  },
   "BNGdt+": {
     "defaultMessage": "No",
     "description": "cancel logout"
@@ -744,10 +768,6 @@
   "Bj5WGE": {
     "defaultMessage": "View all {data}",
     "description": "Module Name"
-  },
-  "BoPEfS": {
-    "defaultMessage": "What are the timings? Are these sessions schedulable?",
-    "description": "faq title"
   },
   "Bqm+bJ": {
     "defaultMessage": "Webkata JS",
@@ -849,6 +869,10 @@
     "defaultMessage": "{title} {awardCount}",
     "description": "award title"
   },
+  "DpAMVM": {
+    "defaultMessage": "Check out our pricing plans and choose the one that suits you the best.",
+    "description": "Pricing Plans description"
+  },
   "DtgoWC": {
     "defaultMessage": "{time}"
   },
@@ -907,6 +931,10 @@
   "F6zUmx": {
     "defaultMessage": "Limited (3 Videos)",
     "description": "Limited (3 Problems) list"
+  },
+  "FDopGf": {
+    "defaultMessage": "HackerKid’s gamified self-paced coding courses allow kids to develop their",
+    "description": "faq description"
   },
   "FIcBXp": {
     "defaultMessage": "Home",
@@ -1010,8 +1038,12 @@
     "defaultMessage": "{points}",
     "description": "Club member points"
   },
-  "GyjXT8": {
-    "defaultMessage": "You will have a customized dashboard all for yourself, where you can track your kid’s progress across various learning segments.",
+  "GwSbXz": {
+    "defaultMessage": "abilities.",
+    "description": "faq description"
+  },
+  "H+Ot74": {
+    "defaultMessage": "The advantages for kids include learning to create websites and build things as they wish. It overall enhances their integration with the tech-oriented world at a young age.",
     "description": "faq description"
   },
   "H2rvzb": {
@@ -1040,6 +1072,14 @@
   "HLIDfo": {
     "defaultMessage": "Join a club",
     "description": "Join a club button"
+  },
+  "HN0g9b": {
+    "defaultMessage": "evaluates your kid’s performance and progress among other HackerKids.",
+    "description": "faq description"
+  },
+  "HTJtrl": {
+    "defaultMessage": "How can I track my kid's progress in the course?",
+    "description": "faq title"
   },
   "HTfYYv": {
     "defaultMessage": "Play next",
@@ -1252,10 +1292,6 @@
     "defaultMessage": "Live Preview",
     "description": "Live preview tab"
   },
-  "LtRk/4": {
-    "defaultMessage": "Will I get performance feedback?",
-    "description": "faq title"
-  },
   "LuPT86": {
     "defaultMessage": "Coins",
     "description": "LeaderBoard Points"
@@ -1271,6 +1307,10 @@
   "LzSZP0": {
     "defaultMessage": "Unlock Now",
     "description": "Unlock Now button"
+  },
+  "M/GkaC": {
+    "defaultMessage": "good problem-solving",
+    "description": "faq description"
   },
   "M3JNcL": {
     "defaultMessage": "Challenges Attempting",
@@ -1295,6 +1335,10 @@
   "MGe16B": {
     "defaultMessage": "Frequently Asked Questions",
     "description": "faq title"
+  },
+  "MRyVtK": {
+    "defaultMessage": "a vast library of Python and JavaScript coding videos",
+    "description": "faq description"
   },
   "MS/biV": {
     "defaultMessage": "Go to Index",
@@ -1340,6 +1384,10 @@
     "defaultMessage": "See More",
     "description": "see more certificates link"
   },
+  "N2y6lv": {
+    "defaultMessage": "HackerKid is a next-generation platform that helps kids learn coding in a gamified environment through games like Turtle and Zombieland. Kids can compete with each other through challenges and create clubs to scale their learning. They would also get awards and certificates for completing challenges, thus keeping learning competitive and encouraging.",
+    "description": "faq description"
+  },
   "N930gg": {
     "defaultMessage": "{message}",
     "description": "feed message"
@@ -1347,6 +1395,10 @@
   "NRDu9u": {
     "defaultMessage": "Add a block",
     "description": "Add a block"
+  },
+  "NVGN2K": {
+    "defaultMessage": "for kids to learn coding in an easy, fun, and comprehensible fashion.",
+    "description": "faq description"
   },
   "NVk/jo": {
     "defaultMessage": "{page}",
@@ -1375,10 +1427,6 @@
   "NeX/hH": {
     "defaultMessage": "Are you sure you want to logout?",
     "description": "logout prompt message"
-  },
-  "NfaR3c": {
-    "defaultMessage": "HackerKID’s self-paced gamified coding & learning platform offers Live Interactive Online sessions. We also provide free access to recorded sessions as a takeaway for our students.",
-    "description": "faq description"
   },
   "NgQ5Hl": {
     "defaultMessage": "Continue Playing",
@@ -1520,10 +1568,6 @@
     "defaultMessage": "Join",
     "description": "join button"
   },
-  "PuWqHr": {
-    "defaultMessage": "Moreover, we will be sending you personalized newsletters- weekly e-mails, every week; wherein you can track your kid's assessment through various cognitive abilities such as problem-solving, critical thinking, persistence, analytical skills & more.",
-    "description": "faq description"
-  },
   "Pvrf+y": {
     "defaultMessage": "{title}",
     "description": "Course Title"
@@ -1543,6 +1587,10 @@
   "QeXB5+": {
     "defaultMessage": "Webkata HTML",
     "description": "Webkata HTML title"
+  },
+  "Qoya8j": {
+    "defaultMessage": "specially dedicated scoreboard",
+    "description": "faq description"
   },
   "QsXf1d": {
     "defaultMessage": "{points} coins",
@@ -1658,6 +1706,10 @@
     "defaultMessage": "Download",
     "description": "download btn text"
   },
+  "Snyaa9": {
+    "defaultMessage": "that shows the points awarded during the game and the total time spent on the platform. An overall",
+    "description": "faq description"
+  },
   "SpftNg": {
     "defaultMessage": "{errorMessage}",
     "description": "phoneNumber form helper"
@@ -1678,6 +1730,10 @@
     "defaultMessage": "Explore Now",
     "description": "Explore Now text"
   },
+  "TKrXi3": {
+    "defaultMessage": "The kids will be",
+    "description": "faq description"
+  },
   "TR6s0D": {
     "defaultMessage": "Seventh day Adventist HSS",
     "description": "Modern Vidya Ketan title"
@@ -1690,6 +1746,10 @@
     "defaultMessage": "Create Account",
     "description": "Create Account Button"
   },
+  "TX1wD+": {
+    "defaultMessage": "After learning from these videos they can practice coding from the IDE inside the platform which helps them to master what they are learning.",
+    "description": "faq description"
+  },
   "TXXReR": {
     "defaultMessage": "Validated Result",
     "description": "validated result"
@@ -1697,6 +1757,10 @@
   "TbteVJ": {
     "defaultMessage": "{studentName}",
     "description": "student name"
+  },
+  "Tdipeg": {
+    "defaultMessage": "What’s the use of learning to code for young kids?",
+    "description": "faq title"
   },
   "TmNnc7": {
     "defaultMessage": "Keep the code changes?",
@@ -1806,6 +1870,10 @@
     "defaultMessage": "Question",
     "description": "Question tab"
   },
+  "VK4GqD": {
+    "defaultMessage": "HackerKid allows",
+    "description": "faq description"
+  },
   "VRP3Sx": {
     "defaultMessage": "{time}",
     "description": "Time Spent card caption"
@@ -1877,8 +1945,8 @@
     "defaultMessage": "Click \"Run\" to validate your code",
     "description": "empty validated result text"
   },
-  "WwkoyV": {
-    "defaultMessage": "See, this is a gamified platform, wherein your kids can compete, play, and learn. They will learn through games and win through challenges. So, little will they know that they are learning. Too! There are no practice worksheets, it’s a practice platform.",
+  "Wwlt6W": {
+    "defaultMessage": "You can use HackerKid to play, learn and solve a certain amount of problems for free. You can get unlimited access and learning by purchasing a premium subscription valid for 1 year.",
     "description": "faq description"
   },
   "WxUiy6": {
@@ -1933,6 +2001,10 @@
     "defaultMessage": "Newly Trending",
     "description": "heading"
   },
+  "YJAGju": {
+    "defaultMessage": "HackerKid provides a",
+    "description": "faq description"
+  },
   "YLNbKA": {
     "defaultMessage": "Dismiss",
     "description": "dismiss btn text"
@@ -1948,10 +2020,6 @@
   "YRA/RQ": {
     "defaultMessage": "{username}",
     "description": "Username"
-  },
-  "YbFSjX": {
-    "defaultMessage": "Yes! A laptop is mandatory.",
-    "description": "faq description"
   },
   "YcOL8Q": {
     "defaultMessage": "Congratulations {user}, you have earned {coins} coins for completing the video.",
@@ -2069,6 +2137,10 @@
     "defaultMessage": "Try again",
     "description": "Try again button"
   },
+  "b6st5O": {
+    "defaultMessage": "Will my kid get any certificates or awards for their performance?",
+    "description": "faq title"
+  },
   "bCvHuI": {
     "defaultMessage": "Invites",
     "description": "Invites"
@@ -2107,10 +2179,6 @@
   "cS+r14": {
     "defaultMessage": "Basic Info",
     "description": "Basic Info tab title"
-  },
-  "cWrEjX": {
-    "defaultMessage": "What platform do you use to teach coding?",
-    "description": "faq title"
   },
   "cZDBd3": {
     "defaultMessage": "Coins",
@@ -2270,10 +2338,6 @@
     "defaultMessage": "{validSubmissions}",
     "description": "Valid Submissions"
   },
-  "frCCaR": {
-    "defaultMessage": "Will there be any practice worksheets?",
-    "description": "faq title"
-  },
   "ftgWW7": {
     "defaultMessage": "{count}/{totalCount} watched",
     "description": "Time Spent card caption"
@@ -2297,6 +2361,10 @@
   "g8RtbX": {
     "defaultMessage": "Coins",
     "description": "Coins"
+  },
+  "g8XtFV": {
+    "defaultMessage": "to further sharpen their understanding of programming, thus learning to code better with the right guidance.",
+    "description": "faq description"
   },
   "gBduz2": {
     "defaultMessage": "Webkata CSS",
@@ -2351,6 +2419,10 @@
   "h/MN82": {
     "defaultMessage": "{coins}"
   },
+  "h33el1": {
+    "defaultMessage": "Yes, definitely. At HackerKID, we provide kids with various awards, badges, and certifications when they complete a designated task, challenge, or level exceptionally well. It helps encourage the kids to keep pushing for excellence and maintain consistency in learning.",
+    "description": "faq description"
+  },
   "hJpqIn": {
     "defaultMessage": "Send OTP",
     "description": "send otp button"
@@ -2390,6 +2462,10 @@
   "iS2zLU": {
     "defaultMessage": "Visit Club",
     "description": "more card button"
+  },
+  "iXguhH": {
+    "defaultMessage": "to learn basic to advance coding skills through fun coding games. The games use defined code blocks to teach syntax and programming logic to develop problem-solving skills in them.",
+    "description": "faq description"
   },
   "iaEqzE": {
     "defaultMessage": "{navigationText}",
@@ -2485,10 +2561,6 @@
     "defaultMessage": "View all collections",
     "description": "modal collection button"
   },
-  "kvDM/m": {
-    "defaultMessage": "Do we need a laptop?",
-    "description": "faq title"
-  },
   "l7/Vbd": {
     "defaultMessage": "Profile Edit",
     "description": "Profile Edit title"
@@ -2551,6 +2623,10 @@
   },
   "m2EDxB": {
     "defaultMessage": "Additional Inputs"
+  },
+  "m5BcT1": {
+    "defaultMessage": "For this premium subscription, you'll get access to Full Game Features Access, Full Video Library, Full Access to Challenges, Gateway to Leaderboard, Additional Awards and Badges, Micro Degree Certificates, and Access to Clubs.",
+    "description": "faq description"
   },
   "mD5V7u": {
     "defaultMessage": "{hintMessage}",
@@ -2616,6 +2692,10 @@
     "defaultMessage": "Parent's Name",
     "description": "Parent's Name label"
   },
+  "mwilly": {
+    "defaultMessage": "playing our interactive games",
+    "description": "faq description"
+  },
   "n45USK": {
     "defaultMessage": "rank",
     "description": "sheet card subtitle"
@@ -2643,6 +2723,10 @@
   "nWr131": {
     "defaultMessage": "{message}",
     "description": "Status message"
+  },
+  "nawIST": {
+    "defaultMessage": "Is HackerKid free?",
+    "description": "faq title"
   },
   "nhSC1Z": {
     "defaultMessage": "Leaderboard Ranking",
@@ -2687,6 +2771,10 @@
     "defaultMessage": "Plans & Features",
     "description": "Plans & Features title"
   },
+  "oGMY4u": {
+    "defaultMessage": "What is HackerKid and how does it work?",
+    "description": "faq title"
+  },
   "oLk+st": {
     "defaultMessage": "Python Video Library",
     "description": "Turtle title"
@@ -2703,12 +2791,12 @@
     "defaultMessage": "Create Club",
     "description": "Create club modal title"
   },
+  "onal0O": {
+    "defaultMessage": "Currently, we have",
+    "description": "faq description"
+  },
   "onuBbP": {
     "defaultMessage": "Input Description:"
-  },
-  "oqBSE4": {
-    "defaultMessage": "What can my kid do after completing this session, like what is the value addition?",
-    "description": "faq title"
   },
   "oz8Vbb": {
     "defaultMessage": "Skip",
@@ -2722,13 +2810,13 @@
     "defaultMessage": "Join with link",
     "description": "join tab"
   },
-  "pHRMoJ": {
-    "defaultMessage": "HackerKID offers multiple streams of courses for kids that include Web Development, Data Science, Python Game Development, & App Development along with Classroom model learning. All these courses are self-paced with 100 sessions each and 2 sessions per week.",
-    "description": "faq description"
-  },
   "pNZIoS": {
     "defaultMessage": "{message}",
     "description": "success message"
+  },
+  "pO0HBw": {
+    "defaultMessage": "Parents can keep an eye on the scorecards and leaderboards to ensure their child remains encouraged and consistent through their learning journey. Moreover, we will send you weekly",
+    "description": "faq description"
   },
   "pQ0m8t": {
     "defaultMessage": "watched this",
@@ -2876,13 +2964,13 @@
     "defaultMessage": "Yes",
     "description": "yes button text"
   },
+  "sDh6CF": {
+    "defaultMessage": "personalized newsletters",
+    "description": "faq description"
+  },
   "sEH4lc": {
     "defaultMessage": "Coins & XPs",
     "description": "Coins title"
-  },
-  "sENBdM": {
-    "defaultMessage": "Are these live or recorded sessions?",
-    "description": "faq title"
   },
   "sI7zqJ": {
     "defaultMessage": "{message}",
@@ -2915,10 +3003,6 @@
   "sd4dwE": {
     "defaultMessage": "{xp} xp",
     "description": "club xp"
-  },
-  "sqSwj4": {
-    "defaultMessage": "After completing this session, kids will have a good foundation in the selected course and more. The graded format of our program will help kids form a firm grasp of the fundamentals and they will be ready to transition to model real-life products & solutions.",
-    "description": "faq description"
   },
   "ssTFur": {
     "defaultMessage": "HackerKid also offer exclusive courses on various pedagogies like Web Development, App Development, Game Development & Data Science. We have an elite team of teacher to guide with your learning process. We have team that can answer all your queries before you decide enroll with us. Go on tell your parent right now, What are you waiting for?",
@@ -2959,6 +3043,10 @@
   "tTcUHG": {
     "defaultMessage": "Enter the Challenge Name",
     "description": "challenge title"
+  },
+  "tUsdU+": {
+    "defaultMessage": "thinking, mathematical and analytical skills",
+    "description": "faq description"
   },
   "tbPLF3": {
     "defaultMessage": "{step}",
@@ -3044,6 +3132,10 @@
     "defaultMessage": "Game Progress",
     "description": "Game Progress title"
   },
+  "v4aaup": {
+    "defaultMessage": "The games are segregated to suit the age and understanding of the kids. As they advance in age, they can level up to other advanced games like HTML, CSS, Javascript, and Coding Pirate.",
+    "description": "faq description"
+  },
   "v6AMff": {
     "defaultMessage": "Certificates",
     "description": "certificate heading"
@@ -3059,10 +3151,6 @@
   "vKE06c": {
     "defaultMessage": "Create",
     "description": "create challenge button"
-  },
-  "vRhtHg": {
-    "defaultMessage": "Follow us on",
-    "description": "title"
   },
   "vWe94i": {
     "defaultMessage": "More Info"
@@ -3166,10 +3254,6 @@
   "xYLs/L": {
     "defaultMessage": "{challengeName} #{challengeId}",
     "description": "challenge name"
-  },
-  "xaMIfH": {
-    "defaultMessage": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit dolor venenatis eget laoreet ultrices ut tortor proin viverra.",
-    "description": "Pricing Plans discription"
   },
   "xd1i3c": {
     "defaultMessage": "Challenges Creation",

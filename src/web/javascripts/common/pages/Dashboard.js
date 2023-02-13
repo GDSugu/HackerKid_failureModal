@@ -35,8 +35,10 @@ const compareProps = (prev, next) => {
 };
 
 const cropImage = (element) => {
-  // eslint-disable-next-line camelcase
-  autocrop(element, null, { version: __webpack_hash__ });
+  setTimeout(() => {
+    // eslint-disable-next-line camelcase
+    autocrop(element, null, { version: __webpack_hash__ });
+  }, 300);
 };
 
 const showBottomSheet = () => {
@@ -439,19 +441,24 @@ const GameContainer = ({
   </div>
 </>;
 
-const ChallengeSwiperSlide = ({ data }) => {
-  useEffect(() => {
-    if (data) {
-      const element = document.querySelector(`.challenge-swiper-img-${data.challengeId} img`);
-      cropImage(element);
-    }
-  }, [data]);
-
-  return <>
+const ChallengeSwiperSlide = ({ data }) => (
+  <>
     <Link className='challenge-item' to={data.actionUrl}>
       <div className="challenge-block">
         <div className={`challenge-img challenge-swiper-img-${data.challengeId}`}>
-          <Img src={data.imgPath} local={false} alt={data.challengeName} />
+          <Img
+            src={data.imgPath}
+            local={false}
+            alt={data.challengeName}
+            fallback={'../../../../../images/games/code.svg'}
+            onLoad={(e) => {
+              if (e.type === 'load' && e.target.src?.split('/').pop() !== 'code.svg') {
+                cropImage(e?.target);
+              }
+            }}
+            onError={(e) => {
+              e.target.src = '../../../../../images/games/code.svg';
+            }} />
         </div>
         <div className="challenge-title">
           <p>{data.challengeName || '--'}</p>
@@ -461,8 +468,8 @@ const ChallengeSwiperSlide = ({ data }) => {
         </div>
       </div>
     </Link>
-    </>;
-};
+  </>
+);
 
 const ChallengesSwiper = ({ trendingChallenges }) => <>
   <div className="dashboard-challenges-container dashboard-body-block">
