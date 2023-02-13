@@ -338,6 +338,7 @@ $challenge-item-image-height-down-md: 8.25rem;
         height: 7rem;
         border-radius: 0.75rem;
         object-fit: contain;
+        background-color: gt.theme-var(bg-1);
 
         @include gm.media-breakpoint-up(xxl) {
           height: 8rem;

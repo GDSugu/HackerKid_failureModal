@@ -11,6 +11,8 @@ const Img = ({
   style = null,
   useSource = true,
   type = 'image',
+  onLoad = () => {},
+  onError = () => {},
 }) => {
   const isPageMounted = React.useRef(true);
   let imgSource = `${imgPath + fallback}`;
@@ -76,11 +78,32 @@ const Img = ({
         <source media='(max-width: 500px)' srcSet={`${imgPath}/resized/${fileName}-1000w.webp`} type="image/webp" />
         {!useSource && <source media="(min-width: 1200px)" srcSet={`${imgPath + src}`} type="image/png" />}
         <source srcSet={`${imgPath}/webps/${fileName}.webp`} type="image/webp"></source>
-        <img srcSet={`${imgPath}/resized/${fileName}-1000w.${fileExtension} 1000w`} src={`${imgPath + src}`} alt={alt} loading='lazy' />
+        <img srcSet={`${imgPath}/resized/${fileName}-1000w.${fileExtension} 1000w`} src={`${imgPath + src}`} alt={alt} loading='lazy' onLoad={onLoad} onError={onError} />
       </picture>
     }
-    {imgType === 'svg' && <img src={`${imgPath + src}`} style={style} className={className} alt={alt} />}
-    {!local && <img src={imgSrc} style={style} className={className} alt={alt} />}
+    {
+      imgType === 'svg'
+      && <img
+        src={`${imgPath + src}`}
+        style={style}
+        className={className}
+        alt={alt}
+        onLoad={onLoad}
+        onError={onError}
+        loading={'lazy'}
+      />
+    }
+    {
+      !local
+      && <img src={imgSrc}
+        style={style}
+        className={className}
+        alt={alt}
+        onLoad={onLoad}
+        onError={onError}
+        loading={'lazy'}
+      />
+    }
   </>;
 };
 

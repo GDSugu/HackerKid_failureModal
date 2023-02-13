@@ -627,12 +627,10 @@ const TakeChallenge = () => {
   };
 
   const reposQnOutContainer = () => {
-    console.log('repo qn container');
     repositionTurtle('#expOutCanvas', '.turtle-qnout-container', 'question');
   };
 
   const reposeOutContainer = () => {
-    console.log('repos output container');
     repositionTurtle('#answerCanvas', '.outputContainer', 'output');
   };
 

@@ -5,6 +5,8 @@
 
 @import "./_landingTheme.js";
 
+$font-awesome-family: "Font Awesome 5 Free";
+
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 
 .landing-container {
@@ -970,8 +972,8 @@
                 width: 50%;
 
                 &:before {
-                  font-family: "$font-family";
-                  content: gf.unicode("f0da");
+                  font-family: $font-awesome-family;
+                  content: "\f0da";
                   position: absolute;
                   right: -12px;
                   font-size: 3rem;
@@ -1154,9 +1156,14 @@
                 font-weight: 600;
                 padding: 1rem;
                 cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.5rem;
 
                 &:after {
-                  content: gf.unicode("f106");
+                  content: "\f106";
+                  font-family: $font-awesome-family;
                   font-weight: 900;
                   float: right;
                 }
