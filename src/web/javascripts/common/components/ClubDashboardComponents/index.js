@@ -13,6 +13,8 @@ const clubDashboardManager = {
   validatedResult: {},
   isFieldValidated: false,
   isPagePopped: false,
+  feedPage: 1,
+  feedCount: 0,
 };
 
 // const feedAwardImageMap = {
@@ -609,14 +611,14 @@ const ClubFeedCardComponent = ({ clubFeed, clubData = {} }) => {
 const ClubFeedListContainer = ({ clubFeedList, clubData }) => <>
   <div className="club-feed-list">
     {
-      clubFeedList?.length
+      clubFeedList?.length > 0
       && clubFeedList.map((feed, idx) => <ClubFeedCardComponent
         key={idx}
         clubFeed={feed}
         clubData={clubData} />)
     }
     {
-      !clubFeedList?.length
+      clubFeedList?.length === 0
       && <div className="club-feed-list-empty">
         <p className="mb-0">
           <FormattedMessage
@@ -2360,6 +2362,23 @@ const ClubConfirmationModal = (_, ref) => {
   </>;
 };
 
+const ClubFeedLoader = () => <>
+  <div className="club-feed-loader-container">
+    <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+      width="40px" height="40px" viewBox="0 0 50 50">
+    <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+      <animateTransform attributeType="xml"
+        attributeName="transform"
+        type="rotate"
+        from="0 25 25"
+        to="360 25 25"
+        dur="0.6s"
+        repeatCount="indefinite"/>
+      </path>
+    </svg>
+  </div>
+</>;
+
 const compareProps = (prev, next) => {
   let isEqual = true;
   Object.keys(prev).forEach((key) => {
@@ -2388,9 +2407,13 @@ const ClubDashboardComponent = () => {
   const isPageMounted = React.useRef(true);
   const { state: rootPageState } = useRootPageState();
   const {
-    clubState: { clubDashboardResponse: clubDashboardData, memberInfoResponse },
+    clubState: {
+      clubDashboardResponse: clubDashboardData,
+      clubFeedResponse,
+      memberInfoResponse,
+    },
     clubStatic: {
-      getClubDashboardData, getMemberInfo, joinClub, leaveClub,
+      getClubDashboardData, getClubFeed, getMemberInfo, joinClub, leaveClub,
     },
   } = React.useContext(ClubContext);
   const clubConfirmationRef = React.useRef(true);
@@ -2398,11 +2421,11 @@ const ClubDashboardComponent = () => {
     status: clubDashboardStatus,
     // hasClub,
     clubData,
-    clubFeed,
     topMembers,
     isVisitor,
     isApplied,
   } = clubDashboardData;
+  const { clubFeed } = clubFeedResponse;
 
   // let userStatus = 'member';
   // if (clubDashboardStatus && clubDashboardData?.isVisitor) {
@@ -2411,6 +2434,20 @@ const ClubDashboardComponent = () => {
   //     userStatus = 'pending';
   //   }
   // }
+
+  const onScrollEnd = () => {
+    const elem = document.querySelector('html');
+    if (
+      (elem.scrollTop + elem.clientHeight)
+      >= (elem.scrollHeight - (elem.scrollHeight / 12))
+    ) {
+      $('.club-feed-loader-container').show();
+      getClubFeed({ page: clubDashboardManager.feedPage + 1 });
+      clubDashboardManager.feedPage += 1;
+    }
+  };
+
+  const debouncedOnScrollEnd = () => debounce(onScrollEnd, 300);
 
   const toggleClubMemberProfileModal = (memberModalStatus, memberUrl) => {
     if (memberModalStatus === 'show') {
@@ -2425,9 +2462,24 @@ const ClubDashboardComponent = () => {
     }
   };
 
-  React.useEffect(() => () => {
-    isPageMounted.current = false;
+  React.useEffect(() => {
+    $('.club-feed-loader-container').hide();
+    window.addEventListener('scroll', debouncedOnScrollEnd);
+
+    return () => {
+      isPageMounted.current = false;
+      window.removeEventListener('scroll', debouncedOnScrollEnd);
+    };
   }, []);
+
+  React.useEffect(() => {
+    if (clubFeed.length) {
+      if (clubFeed.length !== clubDashboardManager.feedCount) {
+        clubDashboardManager.feedCount = clubFeed.length;
+        $('.club-feed-loader-container').hide();
+      }
+    }
+  }, [clubFeed]);
 
   React.useEffect(() => {
     debounce(() => {
@@ -2481,6 +2533,7 @@ const ClubDashboardComponent = () => {
             />
           </>
         }
+        <ClubFeedLoader />
         <ClubMemberProfileModalComponent
           memberData={memberInfoResponse?.userData}
           isDesktop={rootPageState.device === 'desktop'}
