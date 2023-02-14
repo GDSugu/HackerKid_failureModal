@@ -165,16 +165,16 @@ const CourseDetailsCard = ({ overallProgress, progress }) => (
       value={overallProgress.completedCount}
       totalValue={overallProgress.totalVideos} />
   </div>
-  {progress && <div className='module-progress-container'>
+  {(progress && progress.length > 0) && <div className='module-progress-container'>
     <div className='module-card-cont'>
-      <img className='module-img' src={progress.thumbnail}/>
+      <img className='module-img' src={progress[0].thumbnail}/>
       <div>
         <p className='mb-0'><FormattedMessage
       defaultMessage={'{name}'}
-      values={{ name: progress.moduleName }}/></p>
+      values={{ name: progress[0].moduleName }}/></p>
         <p className='watched-count'><FormattedMessage
       defaultMessage={'{completed}/{total} watched'}
-      values={{ completed: progress.watched, total: progress.totalVideos }}/></p>
+      values={{ completed: progress[0].watched, total: progress[0].totalVideos }}/></p>
       </div>
     </div>
     <div className='module-progress'>
@@ -185,7 +185,7 @@ const CourseDetailsCard = ({ overallProgress, progress }) => (
             src='../../../../images/common/xp.png' />
           <p className='ml-1'><FormattedMessage
       defaultMessage={'{xp} xp'}
-      values={{ xp: progress.xpEarned }}/></p>
+      values={{ xp: progress[0].xpEarned }}/></p>
         </div>
         <div className='d-flex'>
           <Img
@@ -193,11 +193,11 @@ const CourseDetailsCard = ({ overallProgress, progress }) => (
             src='../../../../images/courses/timer.png' />
           <p className='ml-1'><FormattedMessage
       defaultMessage={'{time}'}
-      values={{ time: secToMin(progress.watchTime) }}/></p>
+      values={{ time: secToMin(progress[0].watchTime) }}/></p>
         </div>
       </div>
       <div>
-        <div className='linear-progress-bar'><div className='progress-done' style={{ width: `${(progress.watched / progress.totalVideos) * 100}%` }}></div></div>
+        <div className='linear-progress-bar'><div className='progress-done' style={{ width: `${(progress[0].watched / progress[0].totalVideos) * 100}%` }}></div></div>
       </div>
     </div>
   </div>}
@@ -260,7 +260,7 @@ const CourseDetailsCardMobile = ({ progress, overallProgress }) => (
         </div>
       </div>
     </div>}
-    {progress && progress.map((item, index) => <div
+    {(progress && progress.length > 0) && progress.map((item, index) => <div
     key={index}
     className="module-progress-container">
       <div className="module-card-cont">
@@ -421,10 +421,10 @@ const Courses = () => {
   return (
     <>
       <div className="col-12 col-md-11 col-xl-10 mx-auto courses-body-container">
-        {isDesktop && overallProgress && progress.length > 0 && (
+        {isDesktop && overallProgress && (
           <CourseDetailsCard
             overallProgress={overallProgress}
-            progress={progress[0]}
+            progress={progress}
           />
         )}
         {!isDesktop && (
