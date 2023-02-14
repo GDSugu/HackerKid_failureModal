@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import FuzzySearch from 'fuzzy-search';
 import {
-  $, isFeatureEnabled, pageInit, timeTrack,
+  $, isFeatureEnabled, loginCheck, pageInit, timeTrack,
 } from '../framework';
 import CourseCard, { TopContainer, CustomSwiperComponent } from '../components/courseCard';
 import SwiperComponent from '../components/SwiperComponent';
@@ -343,6 +343,7 @@ const Courses = () => {
   );
 
   useEffect(() => {
+    loginCheck();
     const previousVideoData = localStorage.getItem('videoData');
 
     if (previousVideoData) {
