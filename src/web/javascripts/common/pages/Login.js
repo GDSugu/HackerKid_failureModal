@@ -21,7 +21,7 @@ const manager = {};
 const checkUrl = () => {
   const url = window.sessionStorage.getItem('navigateTo');
   if (url) {
-    window.location.href = url;
+    window.location.href = `${url}?src=backtrack`;
     window.sessionStorage.removeItem('navigateTo');
     return true;
   }
