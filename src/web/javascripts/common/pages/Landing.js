@@ -64,7 +64,7 @@ const LandingHeader = () => <>
         </button>
         <a href='/' className='logo mr-auto'><img src='../../../../images/landing/hackerkid-logo.webp' alt='hackerkid logo' title='Hackerkid Logo' /></a>
         <div className='d-flex unlimite-login-sign'>
-          <a href='/pricing' className='btn unlimited-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
+          <a href='/pricing' className='btn unlimited-btn text-white'>Get Unlimited Access<i className='fa fa-chevron-right' aria-hidden="true"></i>
           </a>
           <div className='log-sign-btn'>
             <a href='/login' className='btn login-btn'>Login</a>
@@ -87,7 +87,7 @@ const LandingSidebarModal = () => <>
         </div>
         <div className='modal-body'>
           <div className='butts'>
-          <a href='/pricing' className='btn unlimited-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden='true'></i>
+          <a href='/pricing' className='btn unlimited-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden='true'></i>
             </a>
             <div className='log-sign-btn d-block'>
               <a href='/login' className='btn signup-btn mt-3'>Sign Up</a>
@@ -122,7 +122,7 @@ const LandingBanner = () => <>
             <img src='../../../../images/landing/master-coding-skill-banner.webp' className='w-100' />
           </picture>
 
-          <a href='/pricing' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
+          <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
           </a>
         </div>
 
@@ -296,7 +296,7 @@ const LandingCodingGames = () => <>
           </SwiperSlide>
         </Swiper>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
 
         <div className='boat-route-line-3'></div>
       </div>
@@ -355,7 +355,7 @@ const LandingTechVideos = () => <>
           </div>
         </div>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
         </a>
       </div>
 
@@ -441,7 +441,7 @@ const LandingKidMorFun = () => <>
           </div>
         </div>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
         </a>
       </div>
     </div>
@@ -658,7 +658,7 @@ const LandingHackerKid = () => <>
           </Swiper>
         </div>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
         </a>
       </div>
     </div>
@@ -946,7 +946,7 @@ const LandingHappyLearning = () => <>
 
         </Swiper>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
       </div>
     </div>
   </section>
@@ -1001,7 +1001,7 @@ const LandingFaq = () => <>
                 <div className='card-body'>
                   <p>
                     <FormattedMessage
-                      defaultMessage={'You can use HackerKid to play, learn and solve a certain amount of problems for free. You can get unlimited access and learning by purchasing a premium subscription valid for 1 year.'}
+                      defaultMessage={'You can use HackerKid to play, learn and solve a certain amount of problems for free. You can Get Unlimited Access @ ₹1499 and learning by purchasing a premium subscription valid for 1 year.'}
                       description={'faq description'}
                     />
                   </p>
