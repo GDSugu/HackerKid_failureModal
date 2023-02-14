@@ -9,6 +9,13 @@ const { API } = process.env;
 
 const authorize = {};
 
+const authPages = [
+  'login',
+  'register',
+  'forgot-password',
+  'pricing',
+];
+
 const isFeatureEnabled = (features, feature, subFeature) => {
   const planFeatures = features && features.planFeatures;
   if (features && planFeatures && planFeatures.length > 0) {
@@ -100,7 +107,6 @@ const pageInit = (className, title = null) => {
 };
 
 const pathNavigator = (path) => {
-  console.log('pathNavigator login', path);
   const { origin } = window.location;
   if (!window.location.href.includes(path)) {
     window.location.href = `${origin}/${path}`;
@@ -196,19 +202,15 @@ authorize.loginCheck = () => new Promise((resolve, reject) => {
 // };
 const storeNavigationUrl = () => {
   const { pathname } = window.location;
-  const authPages = [
-    'login',
-    'register',
-    'forgot-password',
-    'pricing-plans',
-  ];
   const pages = pathname.split('/').filter((el) => el.trim() !== '');
   if (pages.length > 0) {
     const page = pages[0];
     if (!authPages.includes(page)) {
       window.sessionStorage.setItem('navigateTo', window.location.href);
+      return false;
     }
   }
+  return true;
 };
 
 const loginCheck = () => new Promise((resolve, reject) => {
@@ -216,15 +218,17 @@ const loginCheck = () => new Promise((resolve, reject) => {
   if (authToken === '' || authToken === null) {
     // addSignInButton();
     resolve(false);
-    storeNavigationUrl();
-    console.log('login check navigate');
-    pathNavigator('login');
-    console.log('path navigated');
+    const isAuthPage = storeNavigationUrl();
+    if (!isAuthPage) {
+      pathNavigator('login');
+    }
   } else {
     post({ type: 'checkSession' }, 'login/', true, false).then((response) => {
       if (!response || response === 'access_denied') {
-        storeNavigationUrl();
-        pathNavigator('login');
+        const isAuthPage = storeNavigationUrl();
+        if (!isAuthPage) {
+          pathNavigator('login');
+        }
         resolve(false);
       } else {
         $('.username').text(authorize.getSession('name'));
