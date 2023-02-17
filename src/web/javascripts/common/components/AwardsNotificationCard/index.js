@@ -47,7 +47,7 @@ const AwardsNotificationCard = ({ onClose = () => { }, onOpen = () => { } }, ref
     id="awards-notification-card" tabIndex="-1">
     <div className={`card-dialog ${visible && 'open'}`}>
       <div className="card-body">
-        <div className={`awards-carosel ${awards.length < 3 ? 'justify-content-center' : ''}`}
+        <div className={`awards-carosel ${awards.length < 5 ? 'justify-content-center' : ''}`}
         // onWheel={onWheel}
         >
           {
