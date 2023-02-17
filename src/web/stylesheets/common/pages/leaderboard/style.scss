@@ -1,6 +1,7 @@
 @use '../../sass/themes/_default' as gt;
 @use '../../sass/base/_mixins' as gm;
 @use '../../sass/components/loading';
+@use '../../sass/components/_paginator.scss' as paginator;
 
 @import './_leaderboardTheme.js';
 
@@ -12,6 +13,11 @@
 
 .leaderboard-container {
   background-color: gt.theme-var(leaderboard-body-bg, null, $thememaplight, $cssvars);
+  margin-bottom: paginator.$pagination-offset;
+
+  @include gm.media-breakpoint-up(lg) {
+    margin-bottom: paginator.$pagination-offset-after-lg;
+  }
 
   nav {
     background-color: gt.theme-var(leaderboard-nav-bg, null, $thememaplight, $cssvars);
@@ -76,50 +82,34 @@
   }
 }
 
-footer {
-  display: flex;
-  position: sticky;
-  background-color: white;
-  bottom: 0;
+.pagination-footer {
   width: 100vw;
-  margin-left: calc(-1 * (100vw - 100%) / 2);
-  justify-content: center;
 
-  .pagination-container {
-    position: sticky;
-    width: 75%;
-    bottom: 0;
-    padding: 0.75rem 1rem;
-
-    @include gm.media-breakpoint-down(md) {
-      width: 100%;
-    }
-
-    .pagination-block {
-      width: 50%;
-      display: flex;
-      justify-content: space-evenly;
-    }
-
-    button {
-      border-radius: 100%;
-
-      &:focus {
-        box-shadow: none;
-      }
-
-      &.pagination-navigation-btn {
-        border: 2px solid gt.theme-var(text-color-3);
-        color: gt.theme-var(text-color-3);
-
-        &.disabled {
-          border: 2px solid gt.theme-var(text-color-13);
-          color: gt.theme-var(text-color-13);
+  .pagination {
+    .page-item {
+      &:first-child,
+      &:last-child {
+        .page-link {
+          svg {
+            fill: gt.theme-var(text-color-3);
+          }
         }
       }
 
-      &.current {
-        color: gt.theme-var(text-color-3);
+      .page-link {
+        color: gt.theme-var(text-color-1);
+      }
+
+      &.active {
+        .page-link {
+          color: gt.theme-var(text-color-3);
+        }
+      }
+
+      &.disabled {
+        .page-link {
+          color: gt.theme-var(text-color-13);
+        }
       }
     }
   }
