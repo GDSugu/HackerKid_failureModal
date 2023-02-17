@@ -13,7 +13,6 @@ import Modal from '../components/Modal';
 import { useGetSession } from '../../../../hooks/pages/root';
 
 const compareProps = (prev, next) => {
-  console.log(prev, next);
   let isEqual = true;
   Object.keys(prev).forEach((key) => {
     if (key === 'avatar' || key === 'navigation' || key === 'style') {
@@ -31,8 +30,10 @@ const compareProps = (prev, next) => {
 };
 
 const cropImage = (element) => {
-  // eslint-disable-next-line camelcase
-  autocrop(element, null, { version: __webpack_hash__ });
+  setTimeout(() => {
+    // eslint-disable-next-line camelcase
+    autocrop(element, null, { version: __webpack_hash__ });
+  }, 300);
 };
 
 const NewlyTrendingChallenge = ({ challenge }) => (
@@ -44,14 +45,21 @@ const NewlyTrendingChallenge = ({ challenge }) => (
         <h5 className='caption-bold text-center title'>
           <FormattedMessage defaultMessage={'Newly Trending'} description='heading' />
         </h5>
-        <div className="challenge-img">
+        <div className="challenge-img trending-challenge-img">
           {/* <img src={challenge.imgPath} alt={challenge.challengeName} /> */}
           <Img
             alt={challenge.challengeName}
             useSource={true}
             local={false}
             src={challenge.imgPath}
-            fallback={'../../../../../images/games/code.svg'}
+            onLoad={(e) => {
+              if (e.type === 'load' && e.target.src?.split('/').pop() !== 'code.svg') {
+                cropImage(e?.target);
+              }
+            }}
+            onError={(e) => {
+              e.target.src = '../../../../../images/games/code.svg';
+            }}
           />
         </div>
       </Link>
@@ -180,15 +188,7 @@ const HeroContainer = ({
   </>;
 };
 
-const ChallengeSwiperSlide = ({ data, showChallengeAuthorName }) => {
-  useEffect(() => {
-    if (data) {
-      const element = document.querySelector(`.challenge-swipter-img-${data.challengeId} img`);
-      cropImage(element);
-    }
-  }, [data]);
-
-  return (<>
+const ChallengeSwiperSlide = ({ data, showChallengeAuthorName }) => (<>
   <Link className='challenge-item' to={data.actionUrl}>
     <div className="challenge-block">
       <div className={`challenge-img challenge-swipter-img-${data.challengeId}`}>
@@ -198,6 +198,14 @@ const ChallengeSwiperSlide = ({ data, showChallengeAuthorName }) => {
           local={false}
           src={data.imgPath}
           fallback={'../../../../../images/games/code.svg'}
+          onLoad={(e) => {
+            if (e.type === 'load' && e.target.src?.split('/').pop() !== 'code.svg') {
+              cropImage(e?.target);
+            }
+          }}
+          onError={(e) => {
+            e.target.src = '../../../../../images/games/code.svg';
+          }}
         />
         {/* <img src={data.imgPath} alt={data.challengeName} /> */}
       </div>
@@ -211,8 +219,8 @@ const ChallengeSwiperSlide = ({ data, showChallengeAuthorName }) => {
       }
     </div>
   </Link>
-</>);
-};
+</>
+);
 
 const NavigationSlide = ({ to, navigationText }) => <>
   <Link to={to} className='navigation-slide'>

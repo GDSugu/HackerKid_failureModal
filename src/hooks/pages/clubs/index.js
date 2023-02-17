@@ -21,6 +21,7 @@ const useClubs = ({ isPageMounted }) => {
       clubData: false,
       topMembers: false,
     },
+    clubFeedResponse: { status: false },
     clubInviteResponse: { status: false, clubInvites: false },
     clubListResponse: { status: false, clubList: false },
     clubData: {
@@ -170,6 +171,7 @@ const useClubs = ({ isPageMounted }) => {
     const payload = {
       type: 'acceptClubInvite',
       clubName: clubDataState.clubInfoResponse.clubData?.clubName,
+      clubId: clubDataState.clubInfoResponse.clubData?.clubId,
       username,
     };
 
@@ -312,6 +314,7 @@ const useClubs = ({ isPageMounted }) => {
     const payload = {
       type: 'changeRole',
       clubName: clubDataState.clubDashboardResponse.clubData.clubName,
+      clubId: clubDataState.clubDashboardResponse.clubData.clubId,
       userid,
       role,
     };
@@ -471,6 +474,7 @@ const useClubs = ({ isPageMounted }) => {
     const payload = {
       type: 'deleteClub',
       clubName: clubDataState.clubInfoResponse.clubData.clubName,
+      clubId: clubDataState.clubInfoResponse.clubData.clubId,
       s3Prefix: API.S3PREFIX,
     };
 
@@ -657,6 +661,39 @@ const useClubs = ({ isPageMounted }) => {
       });
   };
 
+  const getClubFeed = async ({ page = 2, clubId = '' }) => {
+    const payload = {
+      type: 'getClubFeed',
+      s3Prefix: API.S3PREFIX,
+      clubId,
+      page,
+    };
+
+    return post(payload, 'clubs/')
+      .then((response) => {
+        if (isPageMounted.current) {
+          if (response === 'access_denied') {
+            setClubDataState((prevData) => ({
+              ...prevData,
+              clubFeedResponse: {
+                status: 'access_denied',
+              },
+            }));
+          } else {
+            const parsedResponse = JSON.parse(response);
+            // if (parsedResponse.status === 'success') {
+            setClubDataState((prevData) => ({
+              ...prevData,
+              clubFeedResponse: {
+                ...parsedResponse,
+              },
+            }));
+            // }
+          }
+        }
+      });
+  };
+
   const getClubDashboardData = async ({ isVisiting = false, clubId = '', fetchFeed = true }) => {
     const payload = {
       type: 'getClubDashboardData',
@@ -782,6 +819,7 @@ const useClubs = ({ isPageMounted }) => {
     const payload = {
       type: 'getMembersList',
       clubName: clubDataState.clubData.clubName,
+      clubId: clubDataState.clubData.clubId,
       s3Prefix: API.S3PREFIX,
     };
 
@@ -860,6 +898,7 @@ const useClubs = ({ isPageMounted }) => {
     const payload = {
       type: 'kickOutMember',
       clubName: clubDataState.clubInfoResponse.clubData.clubName,
+      clubId: clubDataState.clubInfoResponse.clubData.clubId,
       username,
     };
 
@@ -906,6 +945,7 @@ const useClubs = ({ isPageMounted }) => {
     const payload = {
       type: 'leaveClub',
       clubName: clubDataState.clubDashboardResponse.clubData.clubName,
+      clubId: clubDataState.clubDashboardResponse.clubData.clubId,
     };
 
     return post(payload, 'clubs/')
@@ -939,6 +979,7 @@ const useClubs = ({ isPageMounted }) => {
     const payload = {
       type: 'rejectClubInvite',
       clubName: clubDataState.clubInfoResponse.clubData.clubName,
+      clubId: clubDataState.clubInfoResponse.clubData.clubId,
       username,
     };
 
@@ -1000,6 +1041,7 @@ const useClubs = ({ isPageMounted }) => {
     const payload = {
       type: 'sendInvite',
       clubName: clubDataState.clubDashboardResponse.clubData.clubName,
+      clubId: clubDataState.clubInfoResponse.clubData.clubId,
       members: clubDataState.clubData.members,
     };
 
@@ -1040,6 +1082,7 @@ const useClubs = ({ isPageMounted }) => {
     const payload = {
       type: 'updateClubInfo',
       clubName: clubDataState.clubInfoResponse.clubData.clubName,
+      clubId: clubDataState.clubInfoResponse.clubData.clubId,
       country: clubDataState.clubInfoResponse.clubData.country,
       state: clubDataState.clubInfoResponse.clubData.state,
     };
@@ -1119,6 +1162,7 @@ const useClubs = ({ isPageMounted }) => {
       editFields,
       fetchClubList,
       getClubDashboardData,
+      getClubFeed,
       getClubInfo,
       getClubInvites,
       getClubDraft,

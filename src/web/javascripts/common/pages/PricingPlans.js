@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import RazorpayScript from '../../../partials/razorpay-script-header';
 import '../../../stylesheets/common/pages/pricing-plans/style.scss';
 import {
+  $,
   pageInit, pathNavigator,
 } from '../framework';
 import initSubscriptionPayment from '../../../../hooks/common/payment';
@@ -10,7 +11,9 @@ import { SubscriptionContext } from '../../../../hooks/pages/root';
 import usePricing from '../../../../hooks/pages/pricing';
 
 const initPayment = () => {
+  $('#loader').show();
   initSubscriptionPayment({ subscriptionType: 'premium' }).then((res) => {
+    $('#loader').hide();
     const orderRes = JSON.parse(res);
     if (orderRes.status === 'success') {
       const order = orderRes.orderDetails;
@@ -38,6 +41,9 @@ const initPayment = () => {
       // console.log(options);
       const razorPayObj = new window.Razorpay(options);
       razorPayObj.open();
+    } else if (orderRes.status === 'error' && orderRes.message === 'Access Denied') {
+      window.sessionStorage.setItem('navigateTo', window.location.href);
+      pathNavigator('register');
     }
   });
 };
@@ -45,7 +51,7 @@ const initPayment = () => {
 const PriceCards = ({ planType = 'free', data }) => <>
   <div className="price-card-container">
     <div className='row row-revise'>
-      <div className='col-lg-6 col-md-6 col-xs-12 mb-3'>
+      <div className='col-lg-6 col-md-6 col-xs-12 mb-3 mb-md-0'>
         <div className='card yellow-card'>
           <div className='card-body'>
 
@@ -1060,6 +1066,13 @@ const PricingPlans = () => {
   }
   useEffect(() => {
     RazorpayScript();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const src = urlParams.get('src');
+    if (src && src === 'backtrack') {
+      initPayment();
+      window.history.replaceState({}, '', '/pricing');
+    }
   }, []);
   return <>
     <div className='price-plan-section'>
@@ -1073,8 +1086,8 @@ const PricingPlans = () => {
           </h1>
           <p>
             <FormattedMessage
-              defaultMessage={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit dolor venenatis eget laoreet ultrices ut tortor proin viverra.'}
-              description={'Pricing Plans discription'}
+              defaultMessage={'Check out our pricing plans and choose the one that suits you the best.'}
+              description={'Pricing Plans description'}
             />
           </p>
         </div>
@@ -1087,6 +1100,7 @@ const PricingPlans = () => {
         <ExclusiveCourses />
       </div>
     </div>
+    <div id="loader"></div>
     {/* <RazorpayScript/> */}
   </>;
 };

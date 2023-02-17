@@ -16,6 +16,23 @@ import { useCreateChallenge, useGetChallenges } from '../../../../hooks/pages/ch
 import Modal from '../components/Modal';
 import Img from '../components/Img';
 
+const compareProps = (prev, next) => {
+  let isEqual = true;
+  Object.keys(prev).forEach((key) => {
+    if (key === 'avatar' || key === 'navigation' || key === 'style') {
+      isEqual = isEqual && true;
+    } else if (typeof prev[key] === 'function') {
+      // use memoized function for passing as props
+      isEqual = isEqual && true;
+    } else if (key.toLowerCase().includes('ref')) {
+      isEqual = true;
+    } else {
+      isEqual = isEqual && JSON.stringify(prev[key]) === JSON.stringify(next[key]);
+    }
+  });
+  return isEqual;
+};
+
 const checkIsCreateChallenge = () => {
   const createChallengeRegex = /turtle\/challenges\/create(\/\w*)?/g;
   return createChallengeRegex.test(window.location.pathname);
@@ -49,8 +66,10 @@ const hideDefaultNavBar = () => {
 };
 
 const cropImage = (element) => {
-  // eslint-disable-next-line camelcase
-  autocrop(element, null, { version: __webpack_hash__ });
+  setTimeout(() => {
+    // eslint-disable-next-line camelcase
+    autocrop(element, null, { version: __webpack_hash__ });
+  }, 300);
 };
 
 const tryChallenge = (url) => {
@@ -60,107 +79,105 @@ const tryChallenge = (url) => {
 const CreateChallangesQuestionComponent = ({
   status, challengeDetails,
   trendingChallengeStatus, trendingChallenges = [],
-}) => {
-  React.useEffect(() => {
-    if (trendingChallengeStatus === 'success') {
-      trendingChallenges.forEach((challenge) => {
-        cropImage(document.querySelector(`.create-challenge-draft-container .challenge-img-container.challenge-img-${challenge.challengeId} img`));
-      });
-    }
-  }, [trendingChallengeStatus]);
-
-  return <>
-    <div className="create-challenge-question-container">
-      <div className="create-challenge-question-block">
-        {
-          status === 'success'
-          && <>
-            <div className="create-challenge-title-block">
-              <p className='create-challenge-question mb-0'>
+}) => <>
+  <div className="create-challenge-question-container">
+    <div className="create-challenge-question-block">
+      {
+        status === 'success'
+        && <>
+          <div className="create-challenge-title-block">
+            <p className='create-challenge-question mb-0'>
+              <FormattedMessage
+                defaultMessage={'Challenge Name'}
+                description={'challenge name title'}
+              />
+            </p>
+          </div>
+          <div className="create-challenge-question-content">
+            <div className="create-challenge-question-instructions">
+              <p className="create-challenge-question-title" contentEditable suppressContentEditableWarning={true}>
                 <FormattedMessage
-                  defaultMessage={'Challenge Name'}
-                  description={'challenge name title'}
+                  defaultMessage={'{question}'}
+                  description={'Question'}
+                  values={{ question: challengeDetails.challengeName }}
                 />
               </p>
             </div>
-            <div className="create-challenge-question-content">
-              <div className="create-challenge-question-instructions">
-                <p className="create-challenge-question-title" contentEditable suppressContentEditableWarning={true}>
-                  <FormattedMessage
-                    defaultMessage={'{question}'}
-                    description={'Question'}
-                    values={{ question: challengeDetails.challengeName }}
-                  />
-                </p>
-              </div>
-            </div>
-          </>
-        }
+          </div>
+        </>
+      }
+    </div>
+    <div className="create-challenge-draft-container">
+      <div className="create-challenge-title-block">
+        <p className='create-challenge-question-title mb-0'>
+          <FormattedMessage
+            defaultMessage={'Try these challenges'}
+            description={'draft challenge title'}
+            />
+        </p>
       </div>
-      <div className="create-challenge-draft-container">
-        <div className="create-challenge-title-block">
-          <p className='create-challenge-question-title mb-0'>
-            <FormattedMessage
-              defaultMessage={'Try these challenges'}
-              description={'draft challenge title'}
-              />
-          </p>
-        </div>
-        {
-          trendingChallengeStatus === 'success'
-          && <>
-            {
-              trendingChallenges.length > 0
-              && <>
-                {
-                  trendingChallenges.map((challenge, idx) => <div key={idx} className={'challenge-box'}>
-                    <div
-                      // to={challenge.actionUrl}
-                      onClick={() => tryChallenge(challenge.actionUrl)}
-                      >
-                      <div className="d-flex align-items-center justify-content-between">
-                        <div className="d-flex align-items-center">
-                          <div className={`challenge-img-container challenge-img-${challenge.challengeId}`}>
-                            <Img
-                              local={false}
-                              src={challenge.imgPath}
-                              alt={challenge.challengeName}
-                              className={'challenge-name'}
+      {
+        trendingChallengeStatus === 'success'
+        && <>
+          {
+            trendingChallenges.length > 0
+            && <>
+              {
+                trendingChallenges.map((challenge, idx) => <div key={idx} className={'challenge-box'}>
+                  <div
+                    // to={challenge.actionUrl}
+                    onClick={() => tryChallenge(challenge.actionUrl)}
+                    >
+                    <div className="d-flex align-items-center justify-content-between">
+                      <div className="d-flex align-items-center">
+                        <div className={`challenge-img-container challenge-img-${challenge.challengeId}`}>
+                          <Img
+                            local={false}
+                            src={challenge.imgPath}
+                            alt={challenge.challengeName}
+                            className={'challenge-name'}
+                            onLoad={(e) => {
+                              if (e.type === 'load' && e.target.src?.split('/').pop() !== 'code.svg') {
+                                cropImage(e?.target);
+                              }
+                            }}
+                            onError={(e) => {
+                              e.target.src = '../../../../../images/games/code.svg';
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <p className='challengeName mb-0'>
+                            <FormattedMessage
+                              defaultMessage={'{challengeName} #{challengeId}'}
+                              description={'challenge name'}
+                              values={{
+                                challengeName: challenge.challengeName,
+                                challengeId: challenge.challengeId,
+                              }}
                             />
-                          </div>
-                          <div>
-                            <p className='challengeName mb-0'>
-                              <FormattedMessage
-                                defaultMessage={'{challengeName} #{challengeId}'}
-                                description={'challenge name'}
-                                values={{
-                                  challengeName: challenge.challengeName,
-                                  challengeId: challenge.challengeId,
-                                }}
-                              />
-                            </p>
-                            <p className='creatorName mb-0'>
-                              <FormattedMessage
-                                defaultMessage={'Created by {creatorName}'}
-                                description={'challenge creator name'}
-                                values={{
-                                  creatorName: challenge.creatorName,
-                                }}
-                              />
-                            </p>
-                          </div>
+                          </p>
+                          <p className='creatorName mb-0'>
+                            <FormattedMessage
+                              defaultMessage={'Created by {creatorName}'}
+                              description={'challenge creator name'}
+                              values={{
+                                creatorName: challenge.creatorName,
+                              }}
+                            />
+                          </p>
                         </div>
                       </div>
                     </div>
-                  </div>)}
-              </>
-            }
-          </>
-        }
-      </div>
+                  </div>
+                </div>)}
+            </>
+          }
+        </>
+      }
     </div>
-  </>;
-};
+  </div>
+</>;
 
 const CreateChallangesMobQuestionComponent = ({
   status, challengeDetails, handleRunCode = () => {},
@@ -395,7 +412,11 @@ const CreateChallangesMobComponent = ({
 const NewNameModalComponent = ({ handleCreateNewChallenge = () => {} }) => {
   const handleCreateChallenge = () => {
     const challengeName = document.querySelector('.new-name-modal-content #challengeName').value;
-    handleCreateNewChallenge(challengeName);
+    if (challengeName && challengeName !== '') {
+      handleCreateNewChallenge(challengeName);
+    } else {
+      $('.new-name-modal-content #challengeName').addClass('is-invalid');
+    }
   };
 
   return <>
@@ -639,6 +660,22 @@ const SuccessCreateChallengeModalComponent = ({
   </>;
 };
 
+const CreateNewChallengeModal = ({ newNameModalRef, newChallengeRequest = () => {} }) => <>
+  <Modal
+    ref={newNameModalRef}
+    options={'hide'}
+    modalClass={'newNameModal'}
+    customClass={'curved'}
+    header={<div></div>}
+    >
+      <NewNameModalComponent
+        handleCreateNewChallenge={newChallengeRequest}
+      />
+  </Modal>
+</>;
+
+const MemoizedCreateNewChallengeModal = React.memo(CreateNewChallengeModal, compareProps);
+
 const CreateChallenge = () => {
   if (checkIsCreateChallenge()) {
     pageInit('create-challenge-container', 'Create Challenge');
@@ -704,6 +741,11 @@ const CreateChallenge = () => {
     status, challengeDetails, requestPayload,
   } = memoizedCreateChallengeState;
 
+  const closeConfirmationModal = () => createConfirmModalRef?.current?.hide();
+  const closeAccessDeniedModal = () => accessDeniedModalRef?.current?.hide();
+  const closeSuccessModal = () => successModalRef?.current?.hide();
+  const closeNewNameModal = () => newNameModalRef?.current?.hide();
+
   const newChallengeRequest = (challengeName) => {
     const payload = {
       type: 'createChallenge',
@@ -728,6 +770,7 @@ const CreateChallenge = () => {
     createChallenge(payload)
       .then((resp) => {
         $('#loader').hide();
+        closeNewNameModal();
         const history = `/turtle/challenges/create/${resp.challengeDetails.challengeId}/${resp.challengeDetails.uniqueString}`;
         window.history.replaceState({}, '', history);
       });
@@ -775,11 +818,6 @@ const CreateChallenge = () => {
         }
       });
   };
-
-  const closeConfirmationModal = () => createConfirmModalRef?.current?.hide();
-  const closeAccessDeniedModal = () => accessDeniedModalRef?.current?.hide();
-  const closeSuccessModal = () => successModalRef?.current?.hide();
-  const closeNewNameModal = () => newNameModalRef?.current?.hide();
 
   const handleUpdateResponse = (resp) => {
     if (resp === 'access_denied') {
@@ -916,21 +954,21 @@ const CreateChallenge = () => {
           </div>
         </>
       }
-      <GameLeaderboardComponent
-        ref={leaderboardComponentRef}
-        game={'turtle'}
-        beforeShown={() => { toggleChallenges('hide'); }}
-        beforeHidden={() => { toggleChallenges('show'); }} />
-    <Modal
+      <MemoizedCreateNewChallengeModal
+        newNameModalRef={newNameModalRef}
+        newChallengeRequest={newChallengeRequest}
+      />
+    {/* <Modal
       ref={newNameModalRef}
       options={'hide'}
       modalClass={'newNameModal'}
       customClass={'curved'}
-      header={<div></div>}>
+      header={<div></div>}
+      >
         <NewNameModalComponent
           handleCreateNewChallenge={newChallengeRequest}
         />
-    </Modal>
+    </Modal> */}
     <Modal
       ref={createConfirmModalRef}
       options={'hide'}
@@ -981,6 +1019,11 @@ const CreateChallenge = () => {
         handleModalClose={closeSuccessModal}
       />
     </Modal>
+    <GameLeaderboardComponent
+        ref={leaderboardComponentRef}
+        game={'turtle'}
+        beforeShown={() => { toggleChallenges('hide'); }}
+        beforeHidden={() => { toggleChallenges('show'); }} />
     <div id="loader"></div>
   </>;
 };

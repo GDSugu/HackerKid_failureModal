@@ -19,6 +19,7 @@ import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
 import AwardsNotificationCard from '../components/AwardsNotificationCard';
 import Loader from '../components/Loader';
 import { SubscriptionContext } from '../../../../hooks/pages/root';
+import { setSession } from '../../../../hooks/common/framework';
 
 const Loading = () => <Loader />;
 const RouteTakeChallenge = loadable(() => import('./TakeChallenge'), { fallback: <Loading /> });
@@ -917,7 +918,7 @@ const TurtleGameComponent = () => {
       });
   };
 
-  const handleHint = (action = false) => {
+  const handleHint = async (action = false) => {
     const blocks = window.manager?.workspace?.getAllBlocks();
     const blockTypes = blocks.map((value) => value.type);
     $('#loader').show();
@@ -979,7 +980,7 @@ const TurtleGameComponent = () => {
   React.useEffect(() => {
     isPageMounted.current = true;
     hideDefaultNavBar(device, 'main');
-    $('#runCode').hide();
+    // $('#runCode').hide();
     $('#continueDebugger').hide();
 
     // if (status === 'success') {
@@ -1078,7 +1079,9 @@ const TurtleGameComponent = () => {
         nextHandler={handleNextQuestion}
       />
     </Modal>
-    <AwardsNotificationCard ref={awardsNotificationCardRef} />
+    <AwardsNotificationCard ref={awardsNotificationCardRef} onClose={() => {
+      setSession('awardsGiven', 'false');
+    }}/>
     <GameLeaderboardComponent
       ref={leaderboardComponentRef}
       game={'turtle'}

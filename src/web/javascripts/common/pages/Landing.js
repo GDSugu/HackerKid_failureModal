@@ -64,7 +64,7 @@ const LandingHeader = () => <>
         </button>
         <a href='/' className='logo mr-auto'><img src='../../../../images/landing/hackerkid-logo.webp' alt='hackerkid logo' title='Hackerkid Logo' /></a>
         <div className='d-flex unlimite-login-sign'>
-          <a href='/pricing' className='btn unlimited-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
+          <a href='/pricing' className='btn unlimited-btn text-white'>Get Unlimited Access<i className='fa fa-chevron-right' aria-hidden="true"></i>
           </a>
           <div className='log-sign-btn'>
             <a href='/login' className='btn login-btn'>Login</a>
@@ -87,7 +87,7 @@ const LandingSidebarModal = () => <>
         </div>
         <div className='modal-body'>
           <div className='butts'>
-          <a href='/pricing' className='btn unlimited-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden='true'></i>
+          <a href='/pricing' className='btn unlimited-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden='true'></i>
             </a>
             <div className='log-sign-btn d-block'>
               <a href='/login' className='btn signup-btn mt-3'>Sign Up</a>
@@ -122,7 +122,7 @@ const LandingBanner = () => <>
             <img src='../../../../images/landing/master-coding-skill-banner.webp' className='w-100' />
           </picture>
 
-          <a href='/pricing' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
+          <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
           </a>
         </div>
 
@@ -296,7 +296,7 @@ const LandingCodingGames = () => <>
           </SwiperSlide>
         </Swiper>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
 
         <div className='boat-route-line-3'></div>
       </div>
@@ -355,7 +355,7 @@ const LandingTechVideos = () => <>
           </div>
         </div>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
         </a>
       </div>
 
@@ -441,7 +441,7 @@ const LandingKidMorFun = () => <>
           </div>
         </div>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
         </a>
       </div>
     </div>
@@ -658,7 +658,7 @@ const LandingHackerKid = () => <>
           </Swiper>
         </div>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
         </a>
       </div>
     </div>
@@ -946,7 +946,7 @@ const LandingHappyLearning = () => <>
 
         </Swiper>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
       </div>
     </div>
   </section>
@@ -969,7 +969,7 @@ const LandingFaq = () => <>
               <div className='card-header' id='faqhead1'>
                 <h3 data-toggle='collapse' data-target='#faq1' aria-expanded='true' aria-controls='faq1'>
                   <FormattedMessage
-                    defaultMessage={'Are these live or recorded sessions?'}
+                    defaultMessage={'What is HackerKid and how does it work?'}
                     description={'faq title'}
                   />
                 </h3>
@@ -979,7 +979,7 @@ const LandingFaq = () => <>
                 <div className='card-body'>
                   <p className='mb-0'>
                     <FormattedMessage
-                      defaultMessage={'HackerKID’s self-paced gamified coding & learning platform offers Live Interactive Online sessions. We also provide free access to recorded sessions as a takeaway for our students.'}
+                      defaultMessage={'HackerKid is a next-generation platform that helps kids learn coding in a gamified environment through games like Turtle and Zombieland. Kids can compete with each other through challenges and create clubs to scale their learning. They would also get awards and certificates for completing challenges, thus keeping learning competitive and encouraging.'}
                       description={'faq description'}
                     />
                   </p>
@@ -988,10 +988,10 @@ const LandingFaq = () => <>
             </div>
 
             <div className='card'>
-              <div className='card-header' id='faqhead1'>
+              <div className='card-header' id='faqhead2'>
                 <h3 data-toggle='collapse' data-target='#faq2' aria-expanded='true' aria-controls='faq2'>
                   <FormattedMessage
-                    defaultMessage={'What are the timings? Are these sessions schedulable?'}
+                    defaultMessage={'Is HackerKid free?'}
                     description={'faq title'}
                   />
                 </h3>
@@ -999,9 +999,15 @@ const LandingFaq = () => <>
 
               <div id='faq2' className='collapse' aria-labelledby='faqhead1' data-parent='#faq'>
                 <div className='card-body'>
-                  <p className='mb-0'>
+                  <p>
                     <FormattedMessage
-                      defaultMessage={'These sessions are schedulable as per the convenience of students and the availability of mentors.'}
+                      defaultMessage={'You can use HackerKid to play, learn and solve a certain amount of problems for free. You can Get Unlimited Access @ ₹1499 and learning by purchasing a premium subscription valid for 1 year.'}
+                      description={'faq description'}
+                    />
+                  </p>
+                  <p className="mb-0">
+                    <FormattedMessage
+                      defaultMessage={'For this premium subscription, you\'ll get access to Full Game Features Access, Full Video Library, Full Access to Challenges, Gateway to Leaderboard, Additional Awards and Badges, Micro Degree Certificates, and Access to Clubs.'}
                       description={'faq description'}
                     />
                   </p>
@@ -1010,10 +1016,10 @@ const LandingFaq = () => <>
             </div>
 
             <div className='card'>
-              <div className='card-header' id='faqhead1'>
+              <div className='card-header' id='faqhead3'>
                 <h3 data-toggle='collapse' data-target='#faq3' aria-expanded='true' aria-controls='faq3'>
                   <FormattedMessage
-                    defaultMessage={'How long is the course?'}
+                    defaultMessage={'Who is HackerKid for?'}
                     description={'faq title'}
                   />
                 </h3>
@@ -1021,9 +1027,29 @@ const LandingFaq = () => <>
 
               <div id='faq3' className='collapse' aria-labelledby='faqhead1' data-parent='#faq'>
                 <div className='card-body'>
-                  <p className='mb-0'>
+                  <p>
+                    <span>
+                      <FormattedMessage
+                        defaultMessage={'HackerKid allows'}
+                        description={'faq description'}
+                      />
+                    </span> <span>
+                      <b>
+                        <FormattedMessage
+                          defaultMessage={'kids from ages 7-17'}
+                          description={'faq description'}
+                        />
+                      </b>
+                    </span> <span>
+                      <FormattedMessage
+                        defaultMessage={' to learn basic to advance coding skills through fun coding games. The games use defined code blocks to teach syntax and programming logic to develop problem-solving skills in them.'}
+                        description={'faq description'}
+                      />
+                    </span>
+                  </p>
+                  <p className="mb-0">
                     <FormattedMessage
-                      defaultMessage={'HackerKID offers multiple streams of courses for kids that include Web Development, Data Science, Python Game Development, & App Development along with Classroom model learning. All these courses are self-paced with 100 sessions each and 2 sessions per week.'}
+                      defaultMessage={'The games are segregated to suit the age and understanding of the kids. As they advance in age, they can level up to other advanced games like HTML, CSS, Javascript, and Coding Pirate.'}
                       description={'faq description'}
                     />
                   </p>
@@ -1032,10 +1058,10 @@ const LandingFaq = () => <>
             </div>
 
             <div className='card'>
-              <div className='card-header' id='faqhead1'>
+              <div className='card-header' id='faqhead4'>
                 <h3 data-toggle='collapse' data-target='#faq4' aria-expanded='true' aria-controls='faq4'>
                   <FormattedMessage
-                    defaultMessage={'Do we need a laptop?'}
+                    defaultMessage={'Can my kid learn coding with HackerKID?'}
                     description={'faq title'}
                   />
                 </h3>
@@ -1043,21 +1069,61 @@ const LandingFaq = () => <>
 
               <div id='faq4' className='collapse' aria-labelledby='faqhead1' data-parent='#faq'>
                 <div className='card-body'>
-                  <p className='mb-0'>
+                  <p>
+                    <span>
+                      <FormattedMessage
+                        defaultMessage={'Currently, we have '}
+                        description={'faq description'}
+                      />
+                    </span> <span>
+                      <b>
+                        <FormattedMessage
+                          defaultMessage={'a vast library of Python and JavaScript coding videos'}
+                          description={'faq description'}
+                        />
+                      </b>
+                    </span> <span>
+                      <FormattedMessage
+                        defaultMessage={'for kids to learn coding in an easy, fun, and comprehensible fashion.'}
+                        description={'faq description'}
+                      />
+                    </span>
+                  </p>
+                  <p>
                     <FormattedMessage
-                      defaultMessage={'Yes! A laptop is mandatory.'}
+                      defaultMessage={'After learning from these videos they can practice coding from the IDE inside the platform which helps them to master what they are learning.'}
                       description={'faq description'}
                     />
+                  </p>
+                  <p className='mb-0'>
+                    <span>
+                      <FormattedMessage
+                        defaultMessage={'The kids will be'}
+                        description={'faq description'}
+                      />
+                    </span> <span>
+                      <b>
+                        <FormattedMessage
+                          defaultMessage={'playing our interactive games'}
+                          description={'faq description'}
+                        />
+                      </b>
+                    </span> <span>
+                      <FormattedMessage
+                        defaultMessage={'to further sharpen their understanding of programming, thus learning to code better with the right guidance.'}
+                        description={'faq description'}
+                      />
+                    </span>
                   </p>
                 </div>
               </div>
             </div>
 
             <div className='card'>
-              <div className='card-header' id='faqhead1'>
+              <div className='card-header' id='faqhead5'>
                 <h3 data-toggle='collapse' data-target='#faq5' aria-expanded='true' aria-controls='faq5'>
                   <FormattedMessage
-                    defaultMessage={'What can my kid do after completing this session, like what is the value addition?'}
+                    defaultMessage={'What’s the use of learning to code for young kids?'}
                     description={'faq title'}
                   />
                 </h3>
@@ -1065,9 +1131,41 @@ const LandingFaq = () => <>
 
               <div id='faq5' className='collapse' aria-labelledby='faqhead1' data-parent='#faq'>
                 <div className='card-body'>
+                  <p>
+                    <span>
+                      <FormattedMessage
+                        defaultMessage={'HackerKid’s gamified self-paced coding courses allow kids to develop their'}
+                        description={'faq description'}
+                      />
+                    </span> <span>
+                      <b>
+                        <FormattedMessage
+                          defaultMessage={'thinking, mathematical and analytical skills'}
+                          description={'faq description'}
+                        />
+                      </b>
+                    </span> <span>
+                      <FormattedMessage
+                        defaultMessage={'along with'}
+                        description={'faq description'}
+                      />
+                    </span> <span>
+                      <b>
+                        <FormattedMessage
+                          defaultMessage={'good problem-solving'}
+                          description={'faq description'}
+                        />
+                      </b>
+                    </span> <span>
+                      <FormattedMessage
+                        defaultMessage={'abilities.'}
+                        description={'faq description'}
+                      />
+                    </span>
+                  </p>
                   <p className='mb-0'>
                     <FormattedMessage
-                      defaultMessage={'After completing this session, kids will have a good foundation in the selected course and more. The graded format of our program will help kids form a firm grasp of the fundamentals and they will be ready to transition to model real-life products & solutions.'}
+                      defaultMessage={'The advantages for kids include learning to create websites and build things as they wish. It overall enhances their integration with the tech-oriented world at a young age.'}
                       description={'faq description'}
                     />
                   </p>
@@ -1079,7 +1177,7 @@ const LandingFaq = () => <>
               <div className='card-header' id='faqhead6'>
                 <h3 data-toggle='collapse' data-target='#faq6' aria-expanded='true' aria-controls='faq6'>
                   <FormattedMessage
-                    defaultMessage={'Will I get performance feedback?'}
+                    defaultMessage={'How can I track my kid\'s progress in the course?'}
                     description={'faq title'}
                   />
                 </h3>
@@ -1088,14 +1186,75 @@ const LandingFaq = () => <>
               <div id='faq6' className='collapse' aria-labelledby='faqhead6' data-parent='#faq'>
                 <div className='card-body'>
                   <p>
-                    <FormattedMessage
-                      defaultMessage={'You will have a customized dashboard all for yourself, where you can track your kid’s progress across various learning segments.'}
-                      description={'faq description'}
-                    />
+                    <span>
+                      <FormattedMessage
+                        defaultMessage={'HackerKid provides a'}
+                        description={'faq description'}
+                      />
+                    </span> <span>
+                      <b>
+                      <FormattedMessage
+                        defaultMessage={'specially dedicated scoreboard'}
+                        description={'faq description'}
+                      />
+                      </b>
+                    </span> <span>
+                      <FormattedMessage
+                        defaultMessage={'that shows the points awarded during the game and the total time spent on the platform. An overall'}
+                        description={'faq description'}
+                      />
+                    </span> <span>
+                      <b>
+                        <FormattedMessage
+                          defaultMessage={'leaderboard'}
+                          description={'faq description'}
+                        />
+                      </b>
+                    </span> <span>
+                      <FormattedMessage
+                        defaultMessage={'evaluates your kid’s performance and progress among other HackerKids.'}
+                        description={'faq description'}
+                      />
+                    </span>
                   </p>
                   <p className='mb-0'>
+                    <span>
+                      <FormattedMessage
+                        defaultMessage={'Parents can keep an eye on the scorecards and leaderboards to ensure their child remains encouraged and consistent through their learning journey. Moreover, we will send you weekly'}
+                        description={'faq description'}
+                      />
+                    </span> <span><b>
+                        <FormattedMessage
+                          defaultMessage={'personalized newsletters'}
+                          description={'faq description'}
+                        />
+                      </b>
+                    </span> <span>
+                      <FormattedMessage
+                        defaultMessage={'wherein you can track your kid\'s assessment recorded during various activities and skill-based performance.'}
+                        description={'faq description'}
+                      />
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className='card'>
+              <div className='card-header' id='faqhead7'>
+                <h3 data-toggle='collapse' data-target='#faq7' aria-expanded='true' aria-controls='faq7'>
+                  <FormattedMessage
+                    defaultMessage={'Will my kid get any certificates or awards for their performance?'}
+                    description={'faq title'}
+                  />
+                </h3>
+              </div>
+
+              <div id='faq7' className='collapse' aria-labelledby='faqhead7' data-parent='#faq'>
+                <div className='card-body'>
+                  <p className='mb-0'>
                     <FormattedMessage
-                      defaultMessage={"Moreover, we will be sending you personalized newsletters- weekly e-mails, every week; wherein you can track your kid's assessment through various cognitive abilities such as problem-solving, critical thinking, persistence, analytical skills & more."}
+                      defaultMessage={'Yes, definitely. At HackerKID, we provide kids with various awards, badges, and certifications when they complete a designated task, challenge, or level exceptionally well. It helps encourage the kids to keep pushing for excellence and maintain consistency in learning.'}
                       description={'faq description'}
                     />
                   </p>
@@ -1107,7 +1266,7 @@ const LandingFaq = () => <>
               <div className='card-header' id='faqhead8'>
                 <h3 data-toggle='collapse' data-target='#faq8' aria-expanded='true' aria-controls='faq8'>
                   <FormattedMessage
-                    defaultMessage={'Will there be any practice worksheets?'}
+                    defaultMessage={'What is a club and how does it work?'}
                     description={'faq title'}
                   />
                 </h3>
@@ -1117,29 +1276,7 @@ const LandingFaq = () => <>
                 <div className='card-body'>
                   <p className='mb-0'>
                     <FormattedMessage
-                      defaultMessage={'See, this is a gamified platform, wherein your kids can compete, play, and learn. They will learn through games and win through challenges. So, little will they know that they are learning. Too! There are no practice worksheets, it’s a practice platform.'}
-                      description={'faq description'}
-                    />
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className='card'>
-              <div className='card-header' id='faqhead1'>
-                <h3 data-toggle='collapse' data-target='#faq9' aria-expanded='true' aria-controls='faq9'>
-                  <FormattedMessage
-                    defaultMessage={'What platform do you use to teach coding?'}
-                    description={'faq title'}
-                  />
-                </h3>
-              </div>
-
-              <div id='faq9' className='collapse' aria-labelledby='faqhead1' data-parent='#faq'>
-                <div className='card-body'>
-                  <p className='mb-0'>
-                    <FormattedMessage
-                      defaultMessage={'See, this is a gamified platform, wherein your kids can compete, play, and learn. They will learn through games and win through challenges. So, little will they know that they are learning. Too! There are no practice worksheets, it’s a practice platform.'}
+                      defaultMessage={'Club is a feature where kids can form a group and interact with one another. This club helps them to assess their learning and builds healthy competition among their friends to have an amazing learning experience.'}
                       description={'faq description'}
                     />
                   </p>
@@ -1147,6 +1284,7 @@ const LandingFaq = () => <>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>

@@ -26,6 +26,9 @@ const manager = {
   suspension: false,
 };
 
+// used in other pages
+window.manager = manager;
+
 const pool = workerpool.pool();
 
 const initializeEditor = () => {
@@ -358,10 +361,7 @@ const runCode = (code, target = '#answerCanvas', animate = true, frames = 1, del
       Sk.TurtleGraphics.tracer(frames, delay);
     }
   };
-  console.table({
-    target,
-    parentSelector,
-  });
+
   const attachDebugger = {
     'Sk.promise': (stepData) => {
       if (manager.debuggingEnabled && respectDebugger) {

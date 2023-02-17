@@ -1,9 +1,11 @@
+@use "../../sass/base/functions" as gf;
 @use "../../sass/themes/_default" as gt;
 @use "../../sass/base/_mixins" as gm;
+@use "../../sass/base/_placeholders";
 
 @import "./_landingTheme.js";
 
-$font-awesome-family: "$font-family";
+$font-awesome-family: "Font Awesome 5 Free";
 
 @include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
 
@@ -942,6 +944,8 @@ $font-awesome-family: "$font-family";
             }
 
             .right-text-mobile {
+              @extend %font-far;
+
               @include gm.media-breakpoint-down(sm) {
                 position: absolute;
                 top: 5rem;
@@ -950,8 +954,7 @@ $font-awesome-family: "$font-family";
                 width: 50%;
 
                 &:before {
-                  font-family: $font-awesome-family;
-                  content: "\f0d9";
+                  content: gf.unicode("f0d9");
                   position: absolute;
                   left: -11px;
                   font-size: 3rem;
@@ -969,7 +972,7 @@ $font-awesome-family: "$font-family";
                 width: 50%;
 
                 &:before {
-                  font-family: "$font-family";
+                  font-family: $font-awesome-family;
                   content: "\f0da";
                   position: absolute;
                   right: -12px;
@@ -1146,15 +1149,21 @@ $font-awesome-family: "$font-family";
               padding: 0;
 
               h3 {
+                @extend %font-far;
+
                 margin: 0;
                 font-size: 1.125rem;
                 font-weight: 600;
                 padding: 1rem;
                 cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.5rem;
 
                 &:after {
                   content: "\f106";
-                  font-family: "$font-family";
+                  font-family: $font-awesome-family;
                   font-weight: 900;
                   float: right;
                 }
@@ -1162,7 +1171,7 @@ $font-awesome-family: "$font-family";
 
               .collapsed {
                 &:after {
-                  content: "\f107";
+                  content: gf.unicode("f107");
                 }
               }
             }
