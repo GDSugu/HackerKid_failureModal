@@ -1,5 +1,7 @@
 @use '../../sass/themes/_default' as gt;
 @use '../../sass/base/_mixins' as gm;
+@use '../../sass/components/controls';
+@use '../../sass/components/award-info';
 
 .game-leaderboard-component {
   position: absolute;
@@ -485,5 +487,33 @@
 
   ::-webkit-scrollbar-thumb {
     width: 0 !important;
+  }
+
+  .award-contianer {
+    margin: 0 0.5rem 0.5rem 0;
+
+    .achievement-card.award-card {
+      // background-color: var(--more-award-card-bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .achievement-card {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 0;
+      height: 100%;
+      border-radius: 0.75rem;
+      min-height: 8rem;
+    }
+
+    .award-card-icon {
+      width: 95px;
+      height: 80px;
+    }
   }
 }
