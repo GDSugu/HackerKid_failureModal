@@ -6,6 +6,8 @@ import '../../../../stylesheets/common/sass/components/_gameLeaderboardComponent
 import Img from '../Img';
 import { useAwardsByGame } from '../../../../../hooks/pages/awards';
 import { AuthContext } from '../../../../../hooks/pages/root';
+import AwardsCard from '../AwardsCard';
+import AwardsInfo from '../AwardsInfo';
 
 const LeaderboardUserComponent = ({ user }) => <>
   <tr>
@@ -76,30 +78,26 @@ const LeaderboardPaginationComponent = ({ handlePagination, paginationDetails })
   </>;
 };
 
-const AwardCollectionComponent = ({ game }) => {
-  const isPageMounted = React.useRef(true);
-
-  const { awardsByGameState, getAwardsByGame } = useAwardsByGame(
-    { initializeData: true, isPageMounted, game },
-  );
-
-  const { awards } = awardsByGameState;
-  React.useEffect(() => {
-    getAwardsByGame({ cached: false });
-  }, []);
-
+const AwardCollectionComponent = ({ awards }) => {
+  // React.useEffect(() => {
+  //   getAwardsByGame({ cached: false });
+  // }, []);
+  console.log(awards);
   if (!awards || !awards.length) {
     return null;
   }
 
   return <>
           {
-            awards?.map((award, index) => <div key={index} className="award-block">
-                <img
-                    src={award?.awardImage}
-                    alt={award?.awardName}
-                  />
-              </div>)
+            awards?.map((award, index) => <div className='award-contianer'><AwardsCard
+              awardImage={award.awardImage}
+              awardName={award.awardName}
+              interactable={true}
+              className={`pointer-cursor award-card-${award.awardId}`} /><AwardsInfo
+                className={`award-info-container-${award.awardId}`}
+                currentAwardDetails={award}
+                showProgress={false}
+                /></div>)
           }
   </>;
 };
@@ -240,6 +238,16 @@ const GameLeaderboardComponent = ({
     hide: closeLeaderboard,
     toggle: toggleLeaderboard,
   }));
+
+  // const isPageMounted = React.useRef(true);
+
+  const { awardsByGameState } = useAwardsByGame(
+    { initializeData: true, isPageMounted, game },
+  );
+
+  const { awards } = awardsByGameState;
+  const isDesktop = window.matchMedia('(min-width: 726px)').matches;
+  // console.log(awards);
 
   React.useEffect(() => {
     getLeaderBoardData({
@@ -480,17 +488,21 @@ const GameLeaderboardComponent = ({
               </div>
               <div className="awards-container">
                 <div className="awards-title-container">
-                  <p>
+                  {(awards && awards.length > 0) && <p>
                     <FormattedMessage
                       defaultMessage={'Earned Awards'}
                       description={'Earned Awards'}
                     />
-                  </p>
+                  </p>}
                 </div>
-                <div className="awards-content-container">
+                <div className="awards-content-container mt-3">
                   <div className="row align-items-center no-gutters">
                       {/* call AwardCollectionComponent with game */}
-                      <AwardCollectionComponent game={game} />
+                      <AwardCollectionComponent game={game} awards={awards}/>
+                      {/* {(awards && awards.length > 0) && <AwardsGrid
+                      awards={awards}
+                      isDesktop={isDesktop}
+                      />} */}
                   </div>
                 </div>
               </div>

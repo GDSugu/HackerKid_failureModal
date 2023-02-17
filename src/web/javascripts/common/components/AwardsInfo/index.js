@@ -9,6 +9,7 @@ const AwardInfo = ({
   className = '',
   onClick = () => { },
   showAwardDescription = true,
+  showProgress = true
 }) => {
   const awardId = currentAwardDetails
     ? currentAwardDetails.awardId : repeatingAwards[0].awardId;
@@ -37,8 +38,9 @@ const AwardInfo = ({
               }} />
             </small>
           }
-          {
-            currentAwardDetails.progressableAward && currentAwardDetails.progressDetails.nextAwardIn
+          {showProgress && 
+            <>
+            {currentAwardDetails.progressableAward && currentAwardDetails.progressDetails.nextAwardIn
             && <small className='award-subtitle overline next-achievement-subtitle'>
               <FormattedMessage defaultMessage={'Next Achievement: {nextAchievementIn} {unit}'} description='award subtitle' values={{
                 nextAchievementIn: currentAwardDetails.progressDetails.nextAwardIn,
@@ -51,7 +53,8 @@ const AwardInfo = ({
             progressDetailsObj={currentAwardDetails.progressableAward
               ? currentAwardDetails.progressDetails
               : false}
-          />
+          /></>
+          }
         </div>
       </div>
     }
