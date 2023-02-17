@@ -39,7 +39,6 @@ const Leaderboard = () => {
         leaderboardData: [...leaderboardData],
       }));
     }
-    pageSelector(paginationDetails.page, paginationDetails);
   }, [state]);
 
   return (
