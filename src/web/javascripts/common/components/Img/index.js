@@ -17,6 +17,19 @@ const Img = ({
   const isPageMounted = React.useRef(true);
   let imgSource = `${imgPath + fallback}`;
   let imgType = type;
+
+  const checkUpdatedQueryParam = (url) => {
+    const isQueryPresent = url.indexOf('?');
+    if (isQueryPresent !== -1) {
+      const urlParts = url.split('?');
+      const queryString = `?${urlParts[urlParts.length - 1]}`;
+      const queryParams = new URLSearchParams(queryString);
+      const isUpdatedAtPresent = queryParams.has('updatedAt');
+      return isUpdatedAtPresent;
+    }
+    return false;
+  };
+
   if (src) {
     const extension = src.split('.').pop();
     if (extension === 'svg') {
@@ -24,7 +37,10 @@ const Img = ({
     }
     imgSource = src;
     if (!local) {
-      imgSource = `${imgSource}?updatedAt=${Date.now()}`;
+      const hasUpdatedAt = checkUpdatedQueryParam(imgSource);
+      if (!hasUpdatedAt) {
+        imgSource = `${imgSource}?updatedAt=${Date.now()}`;
+      }
     }
   }
 
@@ -32,6 +48,7 @@ const Img = ({
   let filePath;
   let fileName;
   let fileExtension;
+
   if (local) {
     filePath = src.split('/').pop();
     [fileName] = filePath.split('.');
@@ -40,8 +57,8 @@ const Img = ({
 
   React.useEffect(() => {
     if (!local && imgType === 'image') {
-      if (src) {
-        fetch(src)
+      if (imgSource) {
+        fetch(imgSource)
           .then((res) => {
             if (isPageMounted.current) {
               if (res.status !== 200) {
@@ -60,8 +77,8 @@ const Img = ({
 
   React.useEffect(() => {
     if (!local) {
-      if (src) {
-        setImgSrc(src);
+      if (imgSource) {
+        setImgSrc(imgSource);
       } else {
         setImgSrc(`${imgPath + fallback}`);
       }
@@ -84,7 +101,7 @@ const Img = ({
     {
       imgType === 'svg'
       && <img
-        src={`${imgPath + src}`}
+        src={`${imgPath + imgSource}`}
         style={style}
         className={className}
         alt={alt}

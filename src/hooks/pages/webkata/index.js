@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import post from '../../common/framework';
+import post, { getSession, setSession } from '../../common/framework';
 
 const useWebkataFetchQuestion = ({
   isPageMounted, initializeData = true, conceptid, virtualid,
@@ -92,6 +92,15 @@ const useWebkataSubmitQuestion = ({ isPageMounted }) => {
         if (isPageMounted.current) {
           if (res !== 'access_denied') {
             const data = JSON.parse(res);
+            if (res.pointsDetails.addedPoints) {
+              getSession('pointsEarned')
+                .then((pointsEarned) => {
+                  const availablePoints = pointsEarned ? Number(pointsEarned) : 0;
+                  const newPoints = availablePoints
+                    + Number(res.pointsDetails.addedPoints);
+                  setSession('pointsEarned', newPoints);
+                });
+            }
             setState((prev) => ({
               ...prev,
               ...data,

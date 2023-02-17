@@ -14,6 +14,7 @@ const authPages = [
   'register',
   'forgot-password',
   'pricing',
+  'certificate',
 ];
 
 const isFeatureEnabled = (features, feature, subFeature) => {
