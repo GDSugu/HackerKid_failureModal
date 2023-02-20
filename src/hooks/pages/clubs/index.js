@@ -196,13 +196,13 @@ const useClubs = ({ isPageMounted }) => {
                 status: parsedResponse.status,
               },
             };
-            const member = clubDataState.clubInfoResponse.applicantList
-              .find((user) => user.unique_url === username);
-            const applicantArry = clubDataState.clubInfoResponse.applicantList
-              .filter((user) => user.unique_url !== username);
-            const memberArry = clubDataState.clubInfoResponse.memberList;
-            memberArry.push(member);
             if (parsedResponse.status === 'success') {
+              const member = clubDataState.clubInfoResponse.applicantList
+                .find((user) => user.unique_url === username);
+              const applicantArry = clubDataState.clubInfoResponse.applicantList
+                .filter((user) => user.unique_url !== username);
+              const memberArry = clubDataState.clubInfoResponse.memberList;
+              memberArry.push(member);
               newState.clubInfoResponse = {
                 ...clubDataState.clubInfoResponse,
                 applicantList: applicantArry,

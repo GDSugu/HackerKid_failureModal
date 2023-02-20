@@ -338,7 +338,7 @@ const HeroComponent = ({
             <div className="hero-card-data-content">
               <div className="hero-data">
                 <Img src='common/hkcoin.png' />
-                <p className='mb-0'>{`${gameData.totalPointsEarned || '--'} coins`}</p>
+                <p className='mb-0'>{`${gameData.totalPointsEarned || 0} coins`}</p>
               </div>
             </div>
           </div>

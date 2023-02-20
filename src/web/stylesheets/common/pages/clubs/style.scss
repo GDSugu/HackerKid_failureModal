@@ -1126,6 +1126,23 @@
   .modal {
     padding: 0;
 
+    &.errorModal {
+      .modal-custom-header {
+        button {
+          &.close {
+            margin-left: auto;
+          }
+        }
+      }
+
+      .modal-container {
+        button {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
+      }
+    }
+
     .modal-dialog {
       @include gm.media-breakpoint-up(md) {
         max-width: 70%;

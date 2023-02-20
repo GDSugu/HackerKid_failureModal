@@ -1343,7 +1343,10 @@ const JoinClubContent = () => {
         if (action === 'join') {
           joinClub({ invitedBy, clubId })
             .then((res) => {
-              if (res !== 'access_denied' && res.status === 'success') {
+              if (
+                (res !== 'access_denied' && res.status === 'success')
+                && (res.clubId && res.clubId !== '')
+              ) {
                 window.location.href = `/clubs/${res.clubId}`;
               }
             });
@@ -1360,7 +1363,10 @@ const JoinClubContent = () => {
       clubId: inviteData.clubId,
     })
       .then((res) => {
-        if (res !== 'access_denied' && res.status === 'success') {
+        if (
+          (res !== 'access_denied' && res.status === 'success')
+          && (res.clubId && res.clubId !== '')
+        ) {
           window.location.href = `/clubs/${res.clubId}`;
         }
       });
@@ -1661,6 +1667,8 @@ const ClubHomeComponent = (
   const handleClubAction = (club) => {
     pathNavigator(`clubs/${club.clubId}/`);
   };
+
+  console.log('club home page');
 
   React.useEffect(() => () => {
     isPageMounted.current = false;

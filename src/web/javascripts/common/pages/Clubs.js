@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { useParams } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 import '../../../stylesheets/common/pages/clubs/style.scss';
 import useRootPageState, { SubscriptionContext, useGetSession } from '../../../../hooks/pages/root';
 import { ClubContext, useClubs } from '../../../../hooks/pages/clubs';
@@ -9,6 +11,7 @@ import ClubHomeComponent from '../components/ClubHomeComponent';
 import {
   $, isFeatureEnabled, pageInit, pathNavigator, timeTrack,
 } from '../framework';
+import Modal from '../components/Modal';
 
 const MemoizedClubDashboardComponent = React.memo(ClubDashboardComponent);
 const MemoizedClubHomeComponent = React.memo(ClubHomeComponent);
@@ -31,6 +34,10 @@ const Clubs = () => {
   } = useCountryStateCity({ isPageMounted });
   const { state: rootPageState } = useRootPageState();
   const { session: sessionState } = useGetSession({ isPageMounted });
+  const tryAgainModalRef = useRef(true);
+  const clubUrlParams = useParams();
+  const { id: clubId } = clubUrlParams;
+
   const params = new URLSearchParams(window.location.search);
 
   const { appData, clubDashboardResponse: clubDashboardData } = clubState;
@@ -45,7 +52,6 @@ const Clubs = () => {
     status: clubDashboardStatus,
   } = clubDashboardData;
 
-  let clubId = '';
   const urlData = {
     clubId: false,
     action: params.get('action'),
@@ -60,7 +66,16 @@ const Clubs = () => {
       $('nav.fragment-nav-bar').css('display', 'none');
     }
   };
+
+  const tryAgainAction = () => {
+    window.location.href = '/clubs/';
+  };
+
+  const showTryAgainModal = () => tryAgainModalRef?.current?.showWithRestriction();
+  const hideTryAgainModal = () => tryAgainModalRef?.current?.hide();
+
   const clubEnabled = isFeatureEnabled(subscriptionData, 'clubs');
+
   React.useEffect(() => {
     if (clubEnabled && !clubEnabled.enabled) {
       pathNavigator('pricing');
@@ -69,45 +84,51 @@ const Clubs = () => {
 
   React.useEffect(() => {
     toggleMobNavBar();
-    const locationArray = window.location.href.split('/').filter((el) => el !== '');
-    if (locationArray.length > 3) {
-      [, , , clubId] = locationArray;
 
-      // setHasClub(true);
+    $('#loader').show();
+    if (clubId && clubId !== '') {
       urlData.clubId = clubId;
       getClubDashboardData({ clubId, isVisiting: true });
       setAppData('showClub', true);
     } else {
       getClubDashboardData({});
     }
+
     return () => {
       isPageMounted.current = false;
+      hideTryAgainModal();
+      $('#loader').hide();
     };
   }, []);
 
   React.useEffect(() => {
     if (clubDashboardStatus) {
+      $('#loader').hide();
+      const urlRegex = /(\/clubs)(\/)?/g;
       if (clubDashboardStatus === 'error') {
         setAppData('showClub', false);
-        window.location.href = '/clubs/';
+        showTryAgainModal();
       }
       if (clubData) {
         setAppData('showClub', true);
-        if (window.location.pathname === '/clubs/' || window.location.pathname === '/clubs') {
+        if (urlRegex.test(window.location.pathname)) {
           window.history.replaceState({}, '', `/clubs/${clubData?.clubId}/`);
         }
 
         if (urlData.action === 'join' && urlData.invitedByUserName && urlData.userEmail) {
+          $('#loader').show();
           joinClub({
             invitedBy: urlData.invitedByUserName,
             userEmail: urlData.userEmail,
           })
             .then((resp) => {
+              $('#loader').show();
               if (resp !== 'access_denied') {
                 if (resp.status === 'error') {
-                  alert(resp.message);
+                  console.log(resp.message);
                 } else if (resp.status === 'success') {
                   getClubDashboardData({});
+                  $('#loader').show();
                 }
               }
               window.history.replaceState({}, '', `/clubs/${clubData?.clubId}/`);
@@ -142,23 +163,41 @@ const Clubs = () => {
             { !showClub
               && <>
               <MemoizedClubHomeComponent
-                // clubList={clubList}
               />
             </>}
             { showClub
               && <>
               <MemoizedClubDashboardComponent
-                // clubDashboardData={clubDashboardResponse}
-                // getClubDashboardData={getClubDashboardData}
-                // joinClub={joinClub}
-                // leaveClub={leaveClub}
                 />
             </> }
           </>
         }
         </>
       }
+    <div id="loader"></div>
     </div>
+    <Modal
+      modalClass='errorModal'
+      customClass={'curved'}
+      options={'hide'}
+      ref={tryAgainModalRef} >
+      <div className="container">
+        <p className='text-center my-5'>
+          <FormattedMessage
+            defaultMessage='Something went wrong. Please try again'
+            description='error modal'
+          />
+        </p>
+      </div>
+      <button
+        className='btn btn-block btn-primary'
+        onClick={tryAgainAction} >
+        <FormattedMessage
+          defaultMessage='Try again'
+          description='try again btn'
+        />
+      </button>
+    </Modal>
   </ClubContext.Provider>
   </>;
 };

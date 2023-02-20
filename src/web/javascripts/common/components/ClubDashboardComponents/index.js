@@ -1,5 +1,5 @@
 import React, {
-  memo, useImperativeHandle, useRef, useState,
+  memo, useImperativeHandle, useMemo, useRef, useState,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { ClubContext } from '../../../../../hooks/pages/clubs';
@@ -165,12 +165,16 @@ const ClubHeroContainer = ({
 
   const handleLeaveClub = () => {
     if (confirmationHandler.setConfirmation && typeof confirmationHandler.setConfirmation === 'function') {
-      const acceptFunction = () => leaveClub()
-        .then(() => {
-          getUserAction('visitor');
-          // getUserAction.apply(handleLeaveClub, ['visitor']);
-          getClubDashboardData({ isVisiting: true, clubId: clubData?.clubId });
-        });
+      const acceptFunction = () => {
+        $('#loader').show();
+        leaveClub()
+          .then(() => {
+            $('#loader').hide();
+            getUserAction('visitor');
+            // getUserAction.apply(handleLeaveClub, ['visitor']);
+            getClubDashboardData({ isVisiting: true, clubId: clubData?.clubId });
+          });
+      };
       confirmationHandler.setConfirmation({
         title: 'Leave the Club?',
         message: 'Are you sure you want to leave this club?',
@@ -641,7 +645,9 @@ const ClubFeedContainerMob = ({ feedData, getMemberInfo = () => {} }) => {
       inviteLink, clubDashboardResponse, clubInfoResponse, autoCompleteResponse,
     },
     clubStatic: {
-      acceptClubInvite, addMemberToClub, autoCompleteUser, changeRole, clearMembersList,
+      acceptClubInvite,
+      // addMemberToClub,
+      autoCompleteUser, changeRole, clearMembersList,
       deleteClub, editFields, getClubInfo, getClubDashboardData,
       kickOutMember, leaveClub, rejectClubInvite, sendInvite, setClubImage, updateClubInfo,
     },
@@ -666,8 +672,10 @@ const ClubFeedContainerMob = ({ feedData, getMemberInfo = () => {} }) => {
   }, [memberList, adminList, applicantList]);
 
   const handleFooterBtnClick = () => {
+    $('#loader').show();
     updateClubInfo()
       .then((res) => {
+        $('#loader').hide();
         if (res !== 'access_denied' && (res.status === 'success' || res.ok)) {
           getClubDashboardData({});
         }
@@ -880,7 +888,7 @@ const ClubFeedContainerMob = ({ feedData, getMemberInfo = () => {} }) => {
                         memberList={memberList}
                         isAdmin={userData?.role === 'admin'}
                         applicationList={applicantList}
-                        addMemberToClub={addMemberToClub}
+                        // addMemberToClub={addMemberToClub}
                         autoCompleteResponse={autoCompleteResponse}
                         autoCompleteUser={autoCompleteUser}
                         clearMembersList={clearMembersList}
@@ -1398,17 +1406,17 @@ const ClubBasicInfoComponent = ({
 };
 
 const ClubMembersInfoComponent = ({
+  acceptInvite = () => {},
   adminList = [],
   applicationList = [],
   memberList = [],
   autoCompleteResponse = {},
-  autoCompleteUser = () => {},
-  addMemberToClub = () => {},
+  // autoCompleteUser = () => {},
+  // addMemberToClub = () => {},
   clearMembersList = () => {},
-  sendInvite = () => {},
+  // sendInvite = () => {},
   changeRole = () => {},
   kickOutMember = () => {},
-  acceptInvite = () => {},
   rejectClubInvite = () => {},
   toggleModalContent = () => {},
   confirmationHandler = {},
@@ -1419,20 +1427,50 @@ const ClubMembersInfoComponent = ({
   const membersAutoCompleteRef = React.useRef(null);
   const { state: rootPageState } = useRootPageState();
 
+  // autocomplete username
+  // const handleInput = (value) => {
+  //   membersAutoCompleteRef.current.setLoadingState(true);
+  //   debounce(() => {
+  //     if (value?.length) {
+  //       autoCompleteUser({ userName: value });
+  //     } else {
+  //       membersAutoCompleteRef.current.setLoadingState(false);
+  //     }
+  //   }, 1000);
+  // };
+
   const handleInput = (value) => {
-    membersAutoCompleteRef.current.setLoadingState(true);
-    debounce(() => {
-      if (value?.length) {
-        autoCompleteUser({ userName: value });
-      } else {
-        membersAutoCompleteRef.current.setLoadingState(false);
+    const clubMemberRows = $('.club-member-row');
+    if (value && value.trim() !== '') {
+      if (clubMemberRows.length > 0) {
+        clubMemberRows.each(function () {
+          const searchResult = $(this).find('.club-member-name p').text()
+            .toLocaleLowerCase()
+            .search(value.toLocaleLowerCase());
+          if (searchResult === -1) {
+            // memberElement.style.display = 'none';
+            $(this).hide();
+          } else {
+            $(this).show();
+          }
+        });
       }
-    }, 1000);
+    }
+    if (value === '') {
+      $('.club-member-row').show();
+    }
   };
 
   const handleAcceptInvite = (member) => {
     if (confirmationHandler && confirmationHandler.setConfirmation) {
-      const acceptFunction = () => acceptInvite({ username: member.unique_url });
+      const acceptFunction = () => {
+        $('#loader').show();
+        acceptInvite({ username: member.unique_url })
+          .then(() => {
+            $('#loader').hide();
+          });
+      };
+
       confirmationHandler.setConfirmation({
         title: 'Accept Invitation?',
         message: 'Are you sure you want to add this user into this club?',
@@ -1445,7 +1483,14 @@ const ClubMembersInfoComponent = ({
 
   const handleRejectInvite = (member) => {
     if (confirmationHandler && confirmationHandler.setConfirmation) {
-      const acceptFunction = () => rejectClubInvite({ username: member.unique_url });
+      const acceptFunction = () => {
+        $('#loader').show();
+        rejectClubInvite({ username: member.unique_url })
+          .then(() => {
+            $('#loader').hide();
+          });
+      };
+
       confirmationHandler.setConfirmation({
         title: 'Reject Invitation?',
         message: 'Are you sure you want to reject this invitation?',
@@ -1458,7 +1503,13 @@ const ClubMembersInfoComponent = ({
 
   const handleKick = (member) => {
     if (confirmationHandler && confirmationHandler.setConfirmation) {
-      const acceptFunction = () => kickOutMember({ username: member.unique_url });
+      const acceptFunction = () => {
+        $('#loader').show();
+        kickOutMember({ username: member.unique_url })
+          .then(() => {
+            $('#loader').hide();
+          });
+      };
       confirmationHandler.setConfirmation({
         title: 'Kick out member?',
         message: 'Are you sure you want to kick this member out?',
@@ -1478,12 +1529,24 @@ const ClubMembersInfoComponent = ({
       title = 'Make Member?';
       confirmationMsg = 'Are you sure you want to make this admin as a member?';
       acceptBtnText = 'Make Member';
-      acceptFunction = () => changeRole({ userid: member?.unique_url, role: 'member' });
+      acceptFunction = () => {
+        $('#loader').show();
+        changeRole({ userid: member?.unique_url, role: 'member' })
+          .then(() => {
+            $('#loader').hide();
+          });
+      };
     } else if (member?.role === 'member') {
       title = 'Make Admin?';
       confirmationMsg = 'Are you sure you want to make this member as an admin?';
       acceptBtnText = 'Make Admin';
-      acceptFunction = () => changeRole({ userid: member?.unique_url, role: 'admin' });
+      acceptFunction = () => {
+        $('#loader').show();
+        changeRole({ userid: member?.unique_url, role: 'admin' })
+          .then(() => {
+            $('#loader').hide();
+          });
+      };
     }
     if (confirmationHandler && confirmationHandler.setConfirmation) {
       confirmationHandler.setConfirmation({
@@ -1496,16 +1559,16 @@ const ClubMembersInfoComponent = ({
     }
   };
 
-  const notifyInviteSent = (value) => {
-    const memberInputField = $('.club-members-info-container #members');
-    memberInputField.popover({
-      content: `Invitation link sent to ${value}`,
-    });
-    memberInputField.popover('show');
-    setTimeout(() => {
-      memberInputField.popover('dispose');
-    }, 1000);
-  };
+  // const notifyInviteSent = (value) => {
+  //   const memberInputField = $('.club-members-info-container #members');
+  //   memberInputField.popover({
+  //     content: `Invitation link sent to ${value}`,
+  //   });
+  //   memberInputField.popover('show');
+  //   setTimeout(() => {
+  //     memberInputField.popover('dispose');
+  //   }, 1000);
+  // };
 
   const handleCopyLink = (e) => {
     const copyField = $('#clubLink');
@@ -1521,43 +1584,43 @@ const ClubMembersInfoComponent = ({
     }, 1000);
   };
 
-  const handleSuggestionClick = async (item) => {
-    let suggestionResult = false;
-    try {
-      membersAutoCompleteRef.current.toggleDisbledState(true);
-      suggestionResult = addMemberToClub({
-        userName: item.userName, isNotHKUser: item?.isNotHKUser,
-      })
-        .then((res) => {
-          let result = false;
-          if (res.status === 'error') {
-            membersAutoCompleteRef.current.toggleErrorMsg('show', res.message);
-            membersAutoCompleteRef.current.toggleDisbledState(false);
-          } else {
-            membersAutoCompleteRef.current.toggleErrorMsg('hide');
-            // membersAutoCompleteRef.current.clearInput();
-            // send invite
-            result = sendInvite();
-          }
-          return result;
-        })
-        .then((resp) => {
-          if (resp !== 'access_denied') {
-            if (resp.status === 'success') {
-              notifyInviteSent(item.userName);
-            } else if (resp.status === 'error') {
-              membersAutoCompleteRef.current.toggleErrorMsg('show', resp.message);
-            }
-          }
-          membersAutoCompleteRef.current.toggleDisbledState(false);
-          clearMembersList();
-          return resp;
-        });
-    } catch (error) {
-      suggestionResult = error;
-    }
-    return suggestionResult;
-  };
+  // const handleSuggestionClick = async (item) => {
+  //   let suggestionResult = false;
+  //   try {
+  //     membersAutoCompleteRef.current.toggleDisbledState(true);
+  //     suggestionResult = addMemberToClub({
+  //       userName: item.userName, isNotHKUser: item?.isNotHKUser,
+  //     })
+  //       .then((res) => {
+  //         let result = false;
+  //         if (res.status === 'error') {
+  //           membersAutoCompleteRef.current.toggleErrorMsg('show', res.message);
+  //           membersAutoCompleteRef.current.toggleDisbledState(false);
+  //         } else {
+  //           membersAutoCompleteRef.current.toggleErrorMsg('hide');
+  //           // membersAutoCompleteRef.current.clearInput();
+  //           // send invite
+  //           result = sendInvite();
+  //         }
+  //         return result;
+  //       })
+  //       .then((resp) => {
+  //         if (resp !== 'access_denied') {
+  //           if (resp.status === 'success') {
+  //             notifyInviteSent(item.userName);
+  //           } else if (resp.status === 'error') {
+  //             membersAutoCompleteRef.current.toggleErrorMsg('show', resp.message);
+  //           }
+  //         }
+  //         membersAutoCompleteRef.current.toggleDisbledState(false);
+  //         clearMembersList();
+  //         return resp;
+  //       });
+  //   } catch (error) {
+  //     suggestionResult = error;
+  //   }
+  //   return suggestionResult;
+  // };
 
   React.useEffect(() => {
     clearMembersList();
@@ -1577,37 +1640,41 @@ const ClubMembersInfoComponent = ({
         name="members"
         id="members"
         label={'Members'}
-        placeholder={'Search members using their name, username or email'}
+        placeholder={'Search members using their name'}
         list={autoCompleteResponse?.users}
         onInputChange={(e) => { handleInput(e.target.value); }}
-        onSuggestionClick={handleSuggestionClick}
-        SuggesstionItem={({ item }) => <>
-          <div className={`d-flex align-items-center suggestion-card ${item?.isNotHKUser ? 'user-input' : ''}`} data-username={item?.userName?.toString()}>
-            {
-              !(item?.isNotHKUser)
-              && <div className="user-image">
-                <Img
-                  src={item?.profileImage?.toString()}
-                  alt={`${item?.name?.toString()} profile image`}
-                  className="autocomplete-profileImage"
-                  fallback='/profile/default_user.png'
-                  local={false}
-                />
-              </div>
-            }
-            <div className="user-name">
-              <p className="mb-0">
-                <FormattedMessage
-                  defaultMessage={'{name}'}
-                  description={'user name'}
-                  values={{
-                    name: item?.name?.toString(),
-                  }}
-                />
-              </p>
-            </div>
-          </div>
-        </>}
+        // onSuggestionClick={handleSuggestionClick}
+        onSuggestionClick={() => {}}
+        // SuggesstionItem={({ item }) => <>
+        //   <div
+// className={`d-flex align-items-center suggestion-card ${item?.isNotHKUser ? 'user-input' : ''}`}
+        // data-username={item?.userName?.toString()}>
+        //     {
+        //       !(item?.isNotHKUser)
+        //       && <div className="user-image">
+        //         <Img
+        //           src={item?.profileImage?.toString()}
+        //           alt={`${item?.name?.toString()} profile image`}
+        //           className="autocomplete-profileImage"
+        //           fallback='/profile/default_user.png'
+        //           local={false}
+        //         />
+        //       </div>
+        //     }
+        //     <div className="user-name">
+        //       <p className="mb-0">
+        //         <FormattedMessage
+        //           defaultMessage={'{name}'}
+        //           description={'user name'}
+        //           values={{
+        //             name: item?.name?.toString(),
+        //           }}
+        //         />
+        //       </p>
+        //     </div>
+        //   </div>
+        // </>}
+        SuggesstionItem={() => <></>}
       />
       <div className="club-members-container">
         {
@@ -1716,23 +1783,27 @@ const ClubAdvancedComponent = ({
 
   const handleLeaveClub = () => {
     if (confirmationHandler && confirmationHandler.setConfirmation) {
-      const acceptFunction = () => leaveClub()
-        .then((res) => {
-          if (res !== 'access_denied') {
-            if (res?.status === 'success') {
-              window.location.reload();
-            } else if (res?.status === 'error') {
-              // window.alert(res?.message);
-              confirmationHandler.setConfirmation({
-                title: 'Can\'t leave the club!',
-                message: res?.message,
-                acceptBtnText: 'Dismiss',
-                declineBtnText: 'Cancel',
-                acceptFunction: confirmationHandler.hideConfirmation,
-              });
+      const acceptFunction = () => {
+        $('#loader').show();
+        leaveClub()
+          .then((res) => {
+            $('#loader').hide();
+            if (res !== 'access_denied') {
+              if (res?.status === 'success') {
+                window.location.reload();
+              } else if (res?.status === 'error') {
+                // window.alert(res?.message);
+                confirmationHandler.setConfirmation({
+                  title: 'Can\'t leave the club!',
+                  message: res?.message,
+                  acceptBtnText: 'Dismiss',
+                  declineBtnText: 'Cancel',
+                  acceptFunction: confirmationHandler.hideConfirmation,
+                });
+              }
             }
-          }
-        });
+          });
+      };
       confirmationHandler.setConfirmation({
         title: 'Leave club?',
         message: 'Are you sure you want to leave this club?',
@@ -1745,12 +1816,16 @@ const ClubAdvancedComponent = ({
 
   const handleDeleteClub = () => {
     if (confirmationHandler && confirmationHandler.setConfirmation) {
-      const acceptFunction = () => deleteClub()
-        .then((res) => {
-          if (res !== 'access_denied' && res.status !== 'error') {
-            window.location.reload();
-          }
-        });
+      const acceptFunction = () => {
+        $('#loader').show();
+        deleteClub()
+          .then((res) => {
+            $('#loader').hide();
+            if (res !== 'access_denied' && res.status !== 'error') {
+              window.location.reload();
+            }
+          });
+      };
       confirmationHandler.setConfirmation({
         title: 'Delete Club?',
         message: 'Are you sure you want to delete this club?',
@@ -1837,9 +1912,15 @@ const ClubInfoModalComponent = ({ confirmationHandler = {} }) => {
       clubInfoResponse, inviteLink, memberInfoResponse,
     },
     clubStatic: {
-      acceptClubInvite, addMemberToClub, autoCompleteUser, clearMembersList, changeRole,
+      acceptClubInvite,
+      // addMemberToClub,
+      // autoCompleteUser,
+      clearMembersList,
+      changeRole,
       deleteClub, editFields, getClubInfo, getClubDashboardData, getMemberInfo, kickOutMember,
-      leaveClub, rejectClubInvite, sendInvite, setClubImage, updateClubInfo,
+      leaveClub, rejectClubInvite,
+      // sendInvite,
+      setClubImage, updateClubInfo,
     },
     locationState,
     locationStatic: { fetchLocation },
@@ -2013,24 +2094,25 @@ const ClubInfoModalComponent = ({ confirmationHandler = {} }) => {
                 status === 'success'
                 && <>
                 <ClubMembersInfoComponent
-                  adminList={adminList}
-                  memberList={memberList}
-                  isAdmin={userData?.role === 'admin'}
-                  applicationList={applicantList}
-                  addMemberToClub={addMemberToClub}
-                  autoCompleteResponse={autoCompleteResponse}
-                  autoCompleteUser={autoCompleteUser}
-                  clearMembersList={clearMembersList}
-                  sendInvite={sendInvite}
-                  inviteLink={inviteLink}
-                  changeRole={changeRole}
-                  kickOutMember={kickOutMember}
                   acceptInvite={acceptClubInvite}
+                  // addMemberToClub={addMemberToClub}
+                  adminList={adminList}
+                  applicationList={applicantList}
+                  autoCompleteResponse={autoCompleteResponse}
+                  // autoCompleteUser={autoCompleteUser}
+                  changeRole={changeRole}
+                  clearMembersList={clearMembersList}
+                  confirmationHandler={confirmationHandler}
+                  memberList={memberList}
+                  inviteLink={inviteLink}
+                  isAdmin={userData?.role === 'admin'}
+                  kickOutMember={kickOutMember}
                   rejectClubInvite={rejectClubInvite}
-                  userData={userData}
-                  toggleModalContent={handleMemberClick}
+                  // sendInvite={sendInvite}
                   toggleFooterBtn={toggleFooterBtn}
-                  confirmationHandler={confirmationHandler} />
+                  toggleModalContent={handleMemberClick}
+                  userData={userData}
+                  />
                 </>
               }
             </div>
@@ -2417,6 +2499,7 @@ const ClubDashboardComponent = () => {
     },
   } = React.useContext(ClubContext);
   const clubConfirmationRef = React.useRef(true);
+  const memoizedClubFeedResponse = React.useMemo(() => clubFeedResponse, [clubFeedResponse]);
   const {
     status: clubDashboardStatus,
     // hasClub,
@@ -2425,7 +2508,8 @@ const ClubDashboardComponent = () => {
     isVisitor,
     isApplied,
   } = clubDashboardData;
-  const { clubFeed } = clubFeedResponse;
+  const { clubFeed } = memoizedClubFeedResponse;
+  const memoizedClubFeed = useMemo(() => clubFeed, [clubFeed]);
 
   // let userStatus = 'member';
   // if (clubDashboardStatus && clubDashboardData?.isVisitor) {
@@ -2464,6 +2548,8 @@ const ClubDashboardComponent = () => {
 
   React.useEffect(() => {
     $('.club-feed-loader-container').hide();
+    clubDashboardManager.feedCount = 0;
+    clubDashboardManager.feedPage = 1;
     window.addEventListener('scroll', debouncedOnScrollEnd);
 
     return () => {
@@ -2473,13 +2559,13 @@ const ClubDashboardComponent = () => {
   }, []);
 
   React.useEffect(() => {
-    if (clubFeed.length) {
+    if (clubFeed?.length) {
       if (clubFeed.length !== clubDashboardManager.feedCount) {
-        clubDashboardManager.feedCount = clubFeed.length;
+        clubDashboardManager.feedCount = memoizedClubFeed.length;
         $('.club-feed-loader-container').hide();
       }
     }
-  }, [clubFeed]);
+  }, [memoizedClubFeed]);
 
   React.useEffect(() => {
     debounce(() => {
@@ -2540,7 +2626,7 @@ const ClubDashboardComponent = () => {
           />
         <ClubInfoComponent confirmationHandler={clubConfirmationRef.current} />
         <ClubConfirmationModalComponent ref={clubConfirmationRef} />
-        <div id="loader"></div>
+        {/* <div id="loader"></div> */}
       </>
     }
   </>;
