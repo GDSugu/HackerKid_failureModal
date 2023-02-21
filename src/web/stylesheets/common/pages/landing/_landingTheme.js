@@ -1,3 +1,4 @@
+const { Yellow } = require('../../../../../colors/_colors');
 const {
   Theme,
 } = require('../../../../javascripts/common/_theme');
@@ -19,8 +20,9 @@ const thememaplight = {
   'landing-blue-light-color': lightTheme.screenLightBlue.bodyBg,
   'landing-blue-color': lightTheme.screenLightBlue.navBg,
   'landing-grey-light-color': '#EFEFEF',
-  'landing-red-light-color': '#FF5A79',
-
+  'landing-red-light-color': lightTheme.utilColors.disposableIconBg,
+  'landing-input-border-color': Yellow.color300,
+  'landing-modal-title-color': lightTheme.screenYellow.fadedBtnTextColor,
 };
 // just copied the light theme colors to the dark for now
 // TODO: make this a real dark theme with appropriate colors
@@ -38,7 +40,9 @@ const thememapdark = {
   'landing-blue-light-color': darkTheme.screenLightBlue.bodyBg,
   'landing-blue-color': darkTheme.screenLightBlue.navBg,
   'landing-grey-light-color': '#EFEFEF',
-  'landing-red-light-color': '#FF5A79',
+  'landing-red-light-color': darkTheme.utilColors.disposableIconBg,
+  'landing-input-border-color': Yellow.color300,
+  'landing-modal-title-color': darkTheme.screenYellow.fadedBtnTextColor,
 };
 
 const cssvars = {
@@ -56,6 +60,8 @@ const cssvars = {
   'landing-blue-color': '--landing-blue-color',
   'landing-grey-light-color': '--landing-grey-light-color',
   'landing-red-light-color': '--landing-red-light-color',
+  'landing-input-border-color': '--landing-input-border-color',
+  'landing-modal-title-color': '--landing-modal-title-color',
 };
 
 module.exports = {
