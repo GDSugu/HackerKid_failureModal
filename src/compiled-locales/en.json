@@ -807,6 +807,12 @@
       "value": "rating"
     }
   ],
+  "6di4VM": [
+    {
+      "type": 0,
+      "value": "Name*"
+    }
+  ],
   "6fu/Nn": [
     {
       "type": 0,
@@ -1165,6 +1171,12 @@
     {
       "type": 0,
       "value": "Harshini"
+    }
+  ],
+  "AMy8PQ": [
+    {
+      "type": 0,
+      "value": "Email ID*"
     }
   ],
   "AVSoe3": [
@@ -1963,6 +1975,12 @@
     {
       "type": 0,
       "value": "Awards"
+    }
+  ],
+  "JJIsRn": [
+    {
+      "type": 0,
+      "value": "Thank you for filling the form. Our Expert Team will be in touch with you soon to explain more about HackerKid and its exciting features"
     }
   ],
   "JQb+h8": [
@@ -3227,6 +3245,12 @@
       "value": "No Awards Found"
     }
   ],
+  "XNOegz": [
+    {
+      "type": 0,
+      "value": "Get in Touch with Us"
+    }
+  ],
   "XQ/d5T": [
     {
       "type": 0,
@@ -3401,6 +3425,12 @@
     {
       "type": 1,
       "value": "pageNumber"
+    }
+  ],
+  "ZUYHeY": [
+    {
+      "type": 0,
+      "value": "Thank You!"
     }
   ],
   "ZXYzUQ": [
@@ -3781,6 +3811,12 @@
     {
       "type": 0,
       "value": "completed"
+    }
+  ],
+  "fTqvaW": [
+    {
+      "type": 0,
+      "value": "Know more about HackerKid!"
     }
   ],
   "fUu1sR": [
@@ -4915,6 +4951,12 @@
     {
       "type": 0,
       "value": "Go to Home"
+    }
+  ],
+  "t+xmsQ": [
+    {
+      "type": 0,
+      "value": "Close"
     }
   ],
   "t/GLeH": [
