@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FormattedMessage } from 'react-intl';
 import Plyr from 'plyr';
 import Hls from 'hls.js';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
+import intlTelInput from 'intl-tel-input';
+import 'intl-tel-input/build/css/intlTelInput.css';
 import '../../../../../node_modules/plyr-react/plyr.css';
 import '../../../stylesheets/common/pages/landing/style.scss';
 import 'swiper/swiper.scss';
@@ -11,14 +13,22 @@ import 'swiper/modules/pagination/pagination.scss';
 import { Autoplay, Pagination } from 'swiper';
 import {
   $,
+  debounce,
   pageInit,
 } from '../framework';
+import Modal from '../components/Modal';
+import { validateField } from '../../../../hooks/common/framework';
+import useLanding from '../../../../hooks/pages/landing';
 
 // import Img from '../components/Img';
 
 const isDesktop = window.matchMedia('(min-width: 640px)').matches;
 
 let codingGamesProps = {};
+const landingManager = {
+  isModalShown: false,
+  pageScrollTop: 0,
+};
 
 if (isDesktop) {
   codingGamesProps = {
@@ -1460,10 +1470,261 @@ const render = () => {
   });
 };
 
+const LandingDMModalComponent = ({ handleSubmit = () => {}, handleClose = () => {} }) => {
+  // validate inputs
+  let telInput = false;
+  const formRef = useRef(true);
+  const responseRef = useRef(true);
+
+  const toggleModalContent = (ref, contentStatus) => {
+    const elemStyle = ref.current
+      .style;
+    if (contentStatus === 'show') {
+      elemStyle.transform = 'scale(1)';
+      elemStyle.width = '100%';
+      elemStyle.height = '100%';
+    } else if (contentStatus === 'hide') {
+      elemStyle.transform = 'scale(0)';
+      elemStyle.width = '0';
+      elemStyle.height = '0';
+    }
+  };
+
+  const showResponse = () => {
+    toggleModalContent(formRef, 'hide');
+    toggleModalContent(responseRef, 'show');
+  };
+
+  const hideResponse = () => {
+    toggleModalContent(responseRef, 'hide');
+    toggleModalContent(formRef, 'show');
+  };
+
+  const submitAction = () => {
+    const nameLengthObj = {
+      min: 3,
+    };
+    const name = validateField('name', $('#name').val().trim(), nameLengthObj);
+    if (!name.status) {
+      $('#name').addClass('is-invalid');
+    } else {
+      $('#name').removeClass('is-invalid');
+    }
+
+    const email = validateField('email', $('#emailId').val().trim());
+    if (!email.status) {
+      $('#emailId').addClass('is-invalid');
+    } else {
+      $('#emailId').removeClass('is-invalid');
+    }
+    const countryCode = telInput.getSelectedCountryData().dialCode;
+    const phone = validateField('tel', $('#phone').val().trim());
+    if (!phone.status) {
+      $('#phone').addClass('is-invalid');
+    } else {
+      $('#phone').removeClass('is-invalid');
+    }
+    if (
+      name.status
+      && email.status
+      && phone.status
+    ) {
+      const formData = {
+        name: name.value,
+        phone: phone.value,
+        email: email.value,
+        countryCode,
+        url: window.location.href,
+      };
+      $('#loader').show();
+      handleSubmit(formData)
+        .then((resp) => {
+          $('#loader').hide();
+          if (resp !== 'access_denied') {
+            const parsedResponse = JSON.parse(resp);
+            if (parsedResponse.status === 'success') {
+              showResponse();
+            } else {
+              handleClose();
+            }
+          }
+        });
+    }
+  };
+
+  useEffect(() => {
+    hideResponse();
+    const flaginput = document.querySelector('#phone');
+    telInput = intlTelInput(flaginput, {
+      allowDropdown: true,
+      initialCountry: 'in',
+      separateDialCode: true,
+      utilsScript: intlTelInput.utilsScript,
+    });
+  });
+
+  return <>
+    <div className="col-12 col-md-10 mx-auto px-0">
+      <div
+        ref={formRef}
+        className="modal-content-children form-content"
+      >
+        <h1>
+          <FormattedMessage
+            defaultMessage={'Know more about HackerKid!'}
+            description={'modal title'}
+          />
+        </h1>
+        <div className="form-group">
+          <label htmlFor={'name'}>
+            <FormattedMessage
+              defaultMessage={'Name*'}
+              description={'name field'}
+            />
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            name="name"
+            id="name"
+            aria-describedby="name"
+            placeholder="Name"/>
+        </div>
+        <div className="form-group">
+          <label htmlFor={'emailId'}>
+            <FormattedMessage
+              defaultMessage={'Email ID*'}
+              description={'Email ID'}
+            />
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            name="emailId"
+            id="emailId"
+            aria-describedby="emailId"
+            placeholder="Email ID"/>
+        </div>
+        <div className="mb-3 form-group">
+          <div className='label-with-helper d-flex justify-content-between'>
+            <label htmlFor="phone" className="form-label overline-bold">
+              <FormattedMessage
+                defaultMessage="Phone"
+                description="Phone label"
+              />
+            </label>
+            <span className='form-helper text-danger overline-bold' id='phone-form-helper'>
+            </span>
+          </div>
+          <input
+            className='form-control'
+            type='tel'
+            name='phone'
+            id='phone'
+            placeholder='Phone'
+            data-close-form-error-type='ERROR,INCORRECT,NOT_REGISTERED'
+            data-typename='Phone Number'
+            required={true} />
+        </div>
+        <div className="col-12 col-md-8 mx-auto btn-container px-0">
+          <button
+            type="button"
+            id="submitBtn"
+            className="btn btn-primary btn-block"
+            onClick={submitAction}
+          >
+            <FormattedMessage
+              defaultMessage={'Get in Touch with Us'}
+              description={'modal CTA'}
+            />
+          </button>
+        </div>
+      </div>
+      <div
+        ref={responseRef}
+        className="modal-content-children response-content"
+      >
+        <div className="img-container">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M60 120C93.1371 120 120 93.1371 120 60C120 26.8629 93.1371 0 60 0C26.8629 0 0 26.8629 0 60C0 93.1371 26.8629 120 60 120Z" fill="#F9A826"/>
+            <path d="M54.0538 82.8882C52.704 82.8905 51.39 82.4538 50.31 81.644L50.2431 81.5938L36.1423 70.8071C35.4892 70.3064 34.9411 69.682 34.5294 68.9696C34.1176 68.2571 33.8502 67.4705 33.7424 66.6547C33.6347 65.8388 33.6887 65.0098 33.9013 64.2148C34.114 63.4199 34.4811 62.6746 34.9818 62.0215C35.4824 61.3685 36.1068 60.8204 36.8193 60.4086C37.5318 59.9969 38.3184 59.7295 39.1342 59.6217C39.95 59.514 40.7791 59.568 41.5741 59.7806C42.369 59.9933 43.1143 60.3604 43.7673 60.8611L52.9007 67.865L74.4834 39.708C74.9839 39.0552 75.608 38.5074 76.3202 38.0958C77.0324 37.6842 77.8187 37.4169 78.6341 37.3092C79.4496 37.2015 80.2783 37.2555 81.0729 37.468C81.8675 37.6806 82.6125 38.0476 83.2653 38.548L83.2672 38.5494L83.1332 38.7354L83.2707 38.5494C84.5877 39.5616 85.4494 41.0549 85.6666 42.7016C85.8838 44.3484 85.4389 46.014 84.4294 47.3331L59.0435 80.437C58.4562 81.1997 57.7011 81.8169 56.8367 82.2407C55.9724 82.6645 55.0219 82.8835 54.0593 82.8807L54.0538 82.8882Z" fill="white"/>
+          </svg>
+        </div>
+        <div className="thank-you-container">
+          <h1>
+            <FormattedMessage
+              defaultMessage={'Thank You!'}
+              description={'Thank you title'}
+            />
+          </h1>
+          <p>
+            <FormattedMessage
+              defaultMessage={'Thank you for filling the form. Our Expert Team will be in touch with you soon to explain more about HackerKid and its exciting features'}
+              description={'thank you content'}
+            />
+          </p>
+        </div>
+        <div className="col-12 col-md-8 mx-auto btn-container px-0">
+          <button className='btn btn-primary btn-block' onClick={handleClose}>
+            <FormattedMessage
+              defaultMessage={'Close'}
+              description={'close button text'}
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </>;
+};
+
 const Landing = () => {
   pageInit('landing-container', 'Landing');
+  const dmModalRef = useRef(true);
+  const {
+    static: {
+      storeData,
+    },
+  } = useLanding();
 
   render();
+
+  window.modalref = dmModalRef;
+
+  const setInitialScrollTop = () => {
+    landingManager.pageScrollTop = window.scrollY;
+  };
+
+  const showDMModal = () => {
+    setTimeout(() => {
+      if (!landingManager.isModalShown) {
+        dmModalRef.current.showWithRestriction();
+        landingManager.isModalShown = true;
+      }
+    }, 300);
+  };
+
+  const debouncedShowModal = () => {
+    if (landingManager.isModalShown) {
+      window.removeEventListener('wheel', debouncedShowModal);
+    }
+    debounce(showDMModal, 500);
+  };
+
+  const hideModal = () => dmModalRef.current.hide();
+
+  const handleSubmit = (formData) => storeData(formData);
+
+  useEffect(() => {
+    setInitialScrollTop();
+    // const wheelTrigger = (e) => {
+    //   debouncedShowModal();
+    // };
+    window.addEventListener('wheel', debouncedShowModal);
+
+    return () => {
+      window.removeEventListener('wheel', debouncedShowModal);
+    };
+  }, []);
   return <>
     <div className='landing-page'>
       <LandingHeader />
@@ -1477,7 +1738,21 @@ const Landing = () => {
       <LandingHappyLearning />
       <LandingFaq />
       <LandingFooter />
+      <Modal
+        ref={dmModalRef}
+        options={'hide'}
+        modalClass={'landing-dm-modal'}
+        customClass={'curved'}
+        header={<></>}
+        modalCloseBtn={false}
+      >
+        <LandingDMModalComponent
+          handleSubmit={handleSubmit}
+          handleClose={hideModal}
+        />
+      </Modal>
     </div>
+    <div id="loader"></div>
   </>;
 };
 

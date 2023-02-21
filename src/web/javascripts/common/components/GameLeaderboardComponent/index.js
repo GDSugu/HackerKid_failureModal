@@ -88,17 +88,17 @@ const AwardCollectionComponent = ({ awards }) => {
   }
 
   return <>
-          {
-            awards?.map((award, index) => <div className='award-contianer'><AwardsCard
-              awardImage={award.awardImage}
-              awardName={award.awardName}
-              interactable={true}
-              className={`pointer-cursor award-card-${award.awardId}`} /><AwardsInfo
-                className={`award-info-container-${award.awardId}`}
-                currentAwardDetails={award}
-                showProgress={false}
-                /></div>)
-          }
+    {
+      awards?.map((award, index) => <div className='award-contianer' key={index}><AwardsCard
+        awardImage={award.awardImage}
+        awardName={award.awardName}
+        interactable={true}
+        className={`pointer-cursor award-card-${award.awardId}`} /><AwardsInfo
+          className={`award-info-container-${award.awardId}`}
+          currentAwardDetails={award}
+          showProgress={false}
+          /></div>)
+    }
   </>;
 };
 
@@ -246,7 +246,7 @@ const GameLeaderboardComponent = ({
   );
 
   const { awards } = awardsByGameState;
-  const isDesktop = window.matchMedia('(min-width: 726px)').matches;
+  // const isDesktop = window.matchMedia('(min-width: 726px)').matches;
   // console.log(awards);
 
   React.useEffect(() => {
