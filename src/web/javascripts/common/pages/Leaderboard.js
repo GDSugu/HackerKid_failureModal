@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { pageInit, $, timeTrack } from '../framework';
+import { pageInit, timeTrack } from '../framework';
 import '../../../stylesheets/common/pages/leaderboard/style.scss';
 import { useLeaderBoard } from '../../../../hooks/pages/leaderboard';
 import Img from '../components/Img';

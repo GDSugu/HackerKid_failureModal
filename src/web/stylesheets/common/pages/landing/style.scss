@@ -2,6 +2,7 @@
 @use "../../sass/themes/_default" as gt;
 @use "../../sass/base/_mixins" as gm;
 @use "../../sass/base/_placeholders";
+@use '../../sass/components/loading';
 
 @import "./_landingTheme.js";
 
@@ -1251,6 +1252,75 @@ $font-awesome-family: "Font Awesome 5 Free";
 
           &:nth-of-type(1) {
             margin-left: 0;
+          }
+        }
+      }
+    }
+
+    .landing-dm-modal {
+      .modal-dialog {
+        width: 50%;
+        max-width: unset;
+        margin: auto;
+
+        @include gm.media-breakpoint-down(md) {
+          width: 100%;
+        }
+
+        .modal-content {
+          margin: 2rem 1rem;
+          background-color: gt.theme-var(home-body-bg, null, $thememaplight, $cssvars);
+
+          .modal-container {
+            margin: 2rem 0;
+
+            .modal-content-children {
+              transition: all ease 0.3s;
+            }
+
+            h1 {
+              text-align: center;
+              font-weight: bold;
+              color: gt.theme-var(landing-modal-title-color, null, $thememaplight, $cssvars);
+              margin-bottom: 1.5rem;
+
+              @include gm.media-breakpoint-down(md) {
+                font-size: 2rem;
+              }
+            }
+
+            .iti {
+              width: 100%;
+            }
+
+            input {
+              border-color: gt.theme-var(landing-input-border-color, null, $thememaplight, $cssvars);
+              border-radius: 0.5rem;
+
+              &.is-invalid {
+                border-color: gt.theme-var(landing-red-light-color, null, $thememaplight, $cssvars);
+              }
+            }
+
+            .btn-container {
+              margin: 2rem 0;
+
+              button {
+                color: gt.theme-var(text-color-2);
+              }
+            }
+
+            .response-content {
+              .img-container {
+                text-align: center;
+                margin: 2rem 0;
+                transform: scale(0.75);
+              }
+
+              p {
+                text-align: center;
+              }
+            }
           }
         }
       }
