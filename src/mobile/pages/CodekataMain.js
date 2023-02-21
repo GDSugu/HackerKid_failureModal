@@ -15,7 +15,7 @@ import { FormattedMessage } from 'react-intl';
 import Icon from '../common/Icons';
 import ThemeContext from '../components/theme';
 import codekataBg from '../../images/codekata/codekatabg-mob.png';
-import TurtleHeader from '../components/Header/TurtleHeader';
+import GameHeader from '../components/Header/GameHeader';
 import { Yellow } from '../../colors/_colors';
 import GameLevelComponent from '../components/GameLevelComponent';
 import CodeEditor from '../components/CodeEditor';
@@ -262,7 +262,7 @@ const CodekataHeader = () => {
   };
   return (
     <>
-      <TurtleHeader
+      <GameHeader
         forCodekata={true}
         level={codekataContext.tqState.questionObject.virtualId}
         onpressLevel={onpressLevel}

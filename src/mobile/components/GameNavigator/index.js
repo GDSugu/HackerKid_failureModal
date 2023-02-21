@@ -190,6 +190,7 @@ const GameNavBar = ({
       break;
     case 'codekata':
       context = useContext(CodekataContext);
+      break;
     default: break;
   }
 
@@ -307,16 +308,17 @@ const GameNavigator = ({
 
   return (
     <>
-    <GameHeader
-          currentScreen={currentScreen.currentGameScreen}
-          font={font}
-          gradients={gradients}
-          utilColors={utilColors}
-        />
-        <BottomTab.Navigator
-      initialRouteName='TurtleQuestion'
-      detachInactiveScreens={false}
-      tabBar={
+      <GameNavBar
+        font={font}
+        game={game}
+        gradients={gradients}
+        route={initialRoute}
+        utilColors={utilColors}
+      />
+      <BottomTab.Navigator
+        initialRouteName='TurtleQuestion'
+        detachInactiveScreens={false}
+        tabBar={
         (props) => <GameBottomTabBar
           {...props}
           TabArray={ScreenArray}
@@ -356,7 +358,7 @@ const GameNavigator = ({
       gradients={gradients}
       utilColors={utilColors}
       theme={theme}
-      themeKey={}
+      themeKey={themeKey}
     />
     </>
   );
