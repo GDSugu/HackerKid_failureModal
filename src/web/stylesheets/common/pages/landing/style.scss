@@ -945,7 +945,7 @@ $font-awesome-family: "Font Awesome 5 Free";
             }
 
             .right-text-mobile {
-              @extend %font-far;
+              font-weight: bold;
 
               @include gm.media-breakpoint-down(sm) {
                 position: absolute;
@@ -955,6 +955,7 @@ $font-awesome-family: "Font Awesome 5 Free";
                 width: 50%;
 
                 &:before {
+                  font-family: $font-awesome-family;
                   content: gf.unicode("f0d9");
                   position: absolute;
                   left: -11px;

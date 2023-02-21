@@ -97,7 +97,7 @@ const LandingSidebarModal = () => <>
         </div>
         <div className='modal-body'>
           <div className='butts'>
-          <a href='/pricing' className='btn unlimited-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden='true'></i>
+          <a href='/pricing' className='btn unlimited-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden='true'></i>
             </a>
             <div className='log-sign-btn d-block'>
               <a href='/login' className='btn signup-btn mt-3'>Sign Up</a>
@@ -132,7 +132,7 @@ const LandingBanner = () => <>
             <img src='../../../../images/landing/master-coding-skill-banner.webp' className='w-100' />
           </picture>
 
-          <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
+          <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden="true"></i>
           </a>
         </div>
 
@@ -306,7 +306,7 @@ const LandingCodingGames = () => <>
           </SwiperSlide>
         </Swiper>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
 
         <div className='boat-route-line-3'></div>
       </div>
@@ -365,7 +365,7 @@ const LandingTechVideos = () => <>
           </div>
         </div>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden="true"></i>
         </a>
       </div>
 
@@ -451,7 +451,7 @@ const LandingKidMorFun = () => <>
           </div>
         </div>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden="true"></i>
         </a>
       </div>
     </div>
@@ -668,7 +668,7 @@ const LandingHackerKid = () => <>
           </Swiper>
         </div>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden="true"></i>
         </a>
       </div>
     </div>
@@ -956,7 +956,7 @@ const LandingHappyLearning = () => <>
 
         </Swiper>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
       </div>
     </div>
   </section>
@@ -1011,7 +1011,7 @@ const LandingFaq = () => <>
                 <div className='card-body'>
                   <p>
                     <FormattedMessage
-                      defaultMessage={'You can use HackerKid to play, learn and solve a certain amount of problems for free. You can Get Unlimited Access @ ₹1499 and learning by purchasing a premium subscription valid for 1 year.'}
+                      defaultMessage={'You can use HackerKid to play, learn and solve a certain amount of problems for free. You can Get Unlimited Access @ ₹999 and learning by purchasing a premium subscription valid for 1 year.'}
                       description={'faq description'}
                     />
                   </p>
@@ -1695,19 +1695,17 @@ const Landing = () => {
   };
 
   const showDMModal = () => {
-    setTimeout(() => {
-      if (!landingManager.isModalShown) {
-        dmModalRef.current.showWithRestriction();
-        landingManager.isModalShown = true;
-      }
-    }, 300);
+    if (!landingManager.isModalShown) {
+      dmModalRef.current.showWithRestriction();
+      landingManager.isModalShown = true;
+    }
   };
 
   const debouncedShowModal = () => {
     if (landingManager.isModalShown) {
       window.removeEventListener('wheel', debouncedShowModal);
     }
-    debounce(showDMModal, 500);
+    debounce(showDMModal, 100);
   };
 
   const hideModal = () => dmModalRef.current.hide();
@@ -1715,6 +1713,9 @@ const Landing = () => {
   const handleSubmit = (formData) => storeData(formData);
 
   useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 100);
     setInitialScrollTop();
     // const wheelTrigger = (e) => {
     //   debouncedShowModal();

@@ -487,6 +487,10 @@
     "defaultMessage": "{rating}",
     "description": "Rating Count"
   },
+  "6di4VM": {
+    "defaultMessage": "Name*",
+    "description": "name field"
+  },
   "6fu/Nn": {
     "defaultMessage": "Videos",
     "description": "Videos title"
@@ -700,6 +704,10 @@
   "AB7bY9": {
     "defaultMessage": "Harshini",
     "description": "Happy Learning Starts Here... title"
+  },
+  "AMy8PQ": {
+    "defaultMessage": "Email ID*",
+    "description": "Email ID"
   },
   "AVSoe3": {
     "defaultMessage": "Expected output",
@@ -1180,6 +1188,10 @@
   "JGS8Gf": {
     "defaultMessage": "Awards",
     "description": "Awards heading"
+  },
+  "JJIsRn": {
+    "defaultMessage": "Thank you for filling the form. Our Expert Team will be in touch with you soon to explain more about HackerKid and its exciting features",
+    "description": "thank you content"
   },
   "JQb+h8": {
     "defaultMessage": "Why Choose HackerKid 2.0?",
@@ -1977,6 +1989,10 @@
     "defaultMessage": "No Awards Found",
     "description": "error text"
   },
+  "XNOegz": {
+    "defaultMessage": "Get in Touch with Us",
+    "description": "modal CTA"
+  },
   "XQ/d5T": {
     "defaultMessage": "Please login again",
     "description": "Not authorized message"
@@ -2072,6 +2088,10 @@
   "ZUKwtW": {
     "defaultMessage": "{pageNumber}",
     "description": "page button"
+  },
+  "ZUYHeY": {
+    "defaultMessage": "Thank You!",
+    "description": "Thank you title"
   },
   "ZXYzUQ": {
     "defaultMessage": "Something went wrong. Please try again",
@@ -2310,6 +2330,10 @@
   },
   "fT7uau": {
     "defaultMessage": "completed"
+  },
+  "fTqvaW": {
+    "defaultMessage": "Know more about HackerKid!",
+    "description": "modal title"
   },
   "fUu1sR": {
     "defaultMessage": "Club Rank",
@@ -3015,6 +3039,10 @@
   "swkU6w": {
     "defaultMessage": "Go to Home",
     "description": "Link description"
+  },
+  "t+xmsQ": {
+    "defaultMessage": "Close",
+    "description": "close button text"
   },
   "t/GLeH": {
     "defaultMessage": "Premium Plan",
