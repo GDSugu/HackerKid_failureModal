@@ -44,7 +44,7 @@ $level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, nu
   background: url('../../../../../images/dashboard/dashboard-hero-bg-left.png') no-repeat center left / contain, url('../../../../../images/games/hero-bg-right.png') no-repeat center right/ contain, gt.theme-var(bg-1);
   margin: 1rem 0;
   border-radius: 0.875rem;
-  min-height: 14rem;
+  min-height: 12rem;
 
   @include gm.media-breakpoint-up(xxl) {
     min-height: 18rem;
@@ -69,6 +69,37 @@ $level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, nu
       justify-content: space-around;
     }
 
+    // .hero-card-img {
+    //   background: url('../../../../../images/profile/default_user.png') no-repeat center center / cover;
+    //   border-radius: 50%;
+    //   position: relative;
+    //   width: 5rem;
+    //   height: 5rem;
+    //   left: 15%;
+    //   transform: translateX(50%);
+
+    //   @include gm.media-breakpoint-up(xxl) {
+    //     width: 8rem;
+    //     height: 8rem;
+    //   }
+
+    //   @include gm.media-breakpoint-up(md) {
+    //     left: 30%;
+    //   }
+
+    //   @include gm.media-breakpoint-up(lg) {
+    //     left: 25%;
+    //   }
+
+    //   @include gm.media-breakpoint-up(xl) {
+    //     left: 15%;
+    //   }
+
+    //   @include gm.media-breakpoint-down(sm) {
+    //     transform: translate(30%, 20%);
+    //   }
+    // }
+
     .hero-card-img {
       background: url('../../../../../images/profile/default_user.png') no-repeat center center / cover;
       border-radius: 50%;
@@ -76,48 +107,186 @@ $level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, nu
       width: 5rem;
       height: 5rem;
       left: 15%;
-      transform: translateX(50%);
+      transform: translateX(65%);
+
+      @include gm.media-breakpoint-down(xxxl) {
+        transform: translate(50%);
+      }
+
+      @include gm.media-breakpoint-down(xxl) {
+        transform: translateX(65%);
+      }
+
+      @include gm.media-breakpoint-down(xl) {
+        transform: translateX(60%);
+      }
+
+      @include gm.media-breakpoint-down(lg) {
+        transform: translateX(65%);
+      }
+
+      @include gm.media-breakpoint-down(md) {
+        transform: translateX(75%);
+      }
+
+      @include gm.media-breakpoint-down(sm) {
+        left: 0;
+        transform: translateX(10%);
+      }
+
+      @include gm.media-breakpoint-down(xs) {
+        left: 0;
+        transform: translateX(15%);
+      }
 
       @include gm.media-breakpoint-up(xxl) {
         width: 8rem;
         height: 8rem;
+        // transform: translate(50%);
       }
 
-      @include gm.media-breakpoint-up(md) {
-        left: 30%;
+      @include gm.media-breakpoint-up (xxxl) {
+        transform: translateX(60%);
       }
 
-      @include gm.media-breakpoint-up(lg) {
-        left: 25%;
+      @include gm.media-breakpoint-up (xxxxl) {
+        transform: translateX(55%);
+        background-color: black;
       }
 
-      @include gm.media-breakpoint-up(xl) {
-        left: 15%;
-      }
-
-      @include gm.media-breakpoint-down(sm) {
-        transform: translate(30%, 20%);
+      @include gm.media-breakpoint-up(xxxxxl) {
+        transform: translateX(30%);
+        background-color: white;
       }
     }
 
-    .hero-card-data-content {
-      display: flex;
-      justify-content: center;
-      width: 70%;
-      margin-top: 0.5rem;
+    // .hero-card-data-content {
+    //   display: flex;
+    //   justify-content: center;
+    //   width: 70%;
+    //   margin-top: 0.5rem;
 
-      @include gm.media-breakpoint-up(md) {
-        width: 100%;
+    //   @include gm.media-breakpoint-up(md) {
+    //     width: 100%;
+    //   }
+
+    //   @include gm.media-breakpoint-up(xl) {
+    //     width: 70%;
+    //   }
+
+    //   .hero-data {
+    //     display: flex;
+    //     align-items: center;
+    //     margin-left: 0.75rem;
+
+    //     p {
+    //       font-size: 1.125rem;
+    //       margin-left: 0.5rem;
+    //     }
+
+    //     img {
+    //       width: 2rem;
+    //       height: 2rem;
+    //     }
+    //   }
+    // }
+    .hero-card-data-content {
+      display: inline-flex;
+      justify-content: center;
+      width: fit-content;
+      margin-top: 0.5rem;
+      position: relative;
+      left: 15%;
+      transform: translateX(65%);
+
+      // @include gm.media-breakpoint-down(xxxl) {
+      //   left: 0;
+      //   transform: translateX(50%);
+      // }
+
+      // @include gm.media-breakpoint-down(xxl) {
+      //   left: 15%;
+      //   transform: translateX(65%);
+      // }
+
+      // @include gm.media-breakpoint-down(xl) {
+      //   left: 15%;
+      //   transform: translateX(10%);
+      // }
+
+      // @include gm.media-breakpoint-down(lg) {
+      //   left: 15%;
+      //   transform: translateX(25%);
+      // }
+
+      // @include gm.media-breakpoint-down(sm) {
+      //   left: 0;
+      //   // transform: translate(30%, 20%);
+      //   transform: translateX(10%);
+      // }
+
+      // @include gm.media-breakpoint-down(xs) {
+      //   left: 0;
+      //   transform: translateX(15%);
+      // }
+
+      @include gm.media-breakpoint-down(xxxl) {
+        transform: translateX(50%);
       }
 
-      @include gm.media-breakpoint-up(xl) {
-        width: 70%;
+      @include gm.media-breakpoint-down(xxl) {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      @include gm.media-breakpoint-down(xl) {
+        left: 40%;
+        transform: translateX(-50%);
+      }
+
+      @include gm.media-breakpoint-down(lg) {
+        left: 40%;
+        transform: translateX(-40%);
+      }
+
+      @include gm.media-breakpoint-down(md) {
+        left: 40%;
+        transform: translateX(-35%);
+      }
+
+      @include gm.media-breakpoint-down(sm) {
+        left: 0;
+        transform: translateX(10%);
+      }
+
+      @include gm.media-breakpoint-down(xs) {
+        left: 0;
+        transform: translateX(15%);
+      }
+
+      @include gm.media-breakpoint-up(xxl) {
+        // transform: translate(50%);
+      }
+
+      @include gm.media-breakpoint-up (xxxl) {
+        left: 40%;
+        transform: translateX(-40%);
+      }
+
+      @include gm.media-breakpoint-up (xxxxl) {
+        left: 40%;
+        transform: translateX(-50%);
+      }
+
+      @include gm.media-breakpoint-up(xxxxxl) {
+        left: 30%;
+        transform: translateX(-50%);
       }
 
       .hero-data {
         display: flex;
         align-items: center;
-        margin-left: 0.75rem;
+        margin: 0 0.5rem;
 
         p {
           font-size: 1.125rem;
@@ -140,6 +309,7 @@ $level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, nu
       background-color: gt.theme-var(game-hero-card-bg, null, $thememaplight, $cssvars);
       border-radius: $universal-border-radius;
       backdrop-filter: blur(4px);
+      margin: 0.5rem 0;
 
       svg {
         width: 100%;
@@ -151,6 +321,7 @@ $level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, nu
       height: $hero-component-cards-min-height;
       background-color: gt.theme-var(game-hero-card-bg, null, $thememaplight, $cssvars);
       backdrop-filter: blur(4px);
+      margin: 0.5rem 0;
 
       $leaderboard-card-vertical-padding: 1rem;
       $leaderboard-card-horizontal-padding:1.25rem;

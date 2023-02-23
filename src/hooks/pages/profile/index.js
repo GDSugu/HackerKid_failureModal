@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import post, { s3Upload } from '../../common/framework';
+import post, { s3Upload, setSession } from '../../common/framework';
 import API from '../../../../env';
 import { AuthContext } from '../root';
 
@@ -194,6 +194,12 @@ const useProfileInfo = ({
                 ...prevState,
                 status: 'success',
               }));
+              if (
+                parsedResponse?.profileImage
+                && parsedResponse?.profileImage !== ''
+              ) {
+                setSession('profileLink', parsedResponse.profileImage);
+              }
             }
           }
           getProfileInfo({ cached: false });

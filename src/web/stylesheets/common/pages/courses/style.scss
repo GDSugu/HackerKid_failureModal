@@ -191,13 +191,12 @@
     padding: 1.5rem;
     border-radius: 12px;
     background-color: gt.theme-var(course-body-bg, null, $thememaplight, $cssvars);
-    display: flex;
-    align-items: center;
+    display: inline-block;
   }
 
   .circle-progress {
-    width: 7.5rem;
-    height: 7.5rem;
+    width: 6.5rem;
+    height: 6.5rem;
 
     svg {
       width: 100%;
@@ -218,10 +217,6 @@
           stroke: url(#gradient);
         }
       }
-    }
-
-    tspan {
-      font-size: 1rem;
     }
   }
 
@@ -525,30 +520,96 @@
     // margin: 1.5rem 9.5rem;
     margin: 1rem 0;
     border-radius: 12px;
-    background: linear-gradient(to left, rgba(255, 255, 255, 1), #fafafa);
+    // background: linear-gradient(to left, rgba(255, 255, 255, 1), #fafafa);
+    box-shadow: gt.theme-var(course-hero-shadow, null, $thememaplight, $cssvars);
+    background:
+      url('../../../../../images/dashboard/dashboard-hero-bg-left.png') no-repeat center left / contain,
+      url('../../../../../images/dashboard/dashboard-hero-bg-right.png') no-repeat center right,
+      gt.theme-var(bg-1);
+    min-height: 12rem;
   }
 
   .xp-coins-cont {
     display: flex;
     justify-content: space-between;
     padding: 1.25rem 2.75rem;
-    background: linear-gradient(to right, rgba(255, 255, 255, 1), #fafafa);
+    // background: linear-gradient(to right, rgba(255, 255, 255, 1), #fafafa);
     border-bottom-left-radius: 12px;
   }
 
   .kids-img-cont {
-    background: url('../../../../../images/courses/confetti.png') no-repeat;
+    // background: url('../../../../../images/courses/confetti.png') no-repeat;
     padding-top: 2.75rem;
     padding-bottom: 1.25rem;
     text-align: center;
     border-top-left-radius: 12px;
+
+    .hero-card-img {
+      background: url('../../../../../images/profile/default_user.png') no-repeat center center / cover;
+      border-radius: 50%;
+      position: relative;
+      width: 5rem;
+      height: 5rem;
+      left: 15%;
+      transform: translateX(65%);
+
+      @include gm.media-breakpoint-down(xxxl) {
+        transform: translate(50%);
+      }
+
+      @include gm.media-breakpoint-down(xxl) {
+        transform: translateX(65%);
+      }
+
+      @include gm.media-breakpoint-down(xl) {
+        transform: translateX(60%);
+      }
+
+      @include gm.media-breakpoint-down(lg) {
+        transform: translateX(65%);
+      }
+
+      @include gm.media-breakpoint-down(md) {
+        transform: translateX(75%);
+      }
+
+      @include gm.media-breakpoint-down(sm) {
+        left: 0;
+        transform: translateX(10%);
+      }
+
+      @include gm.media-breakpoint-down(xs) {
+        left: 0;
+        transform: translateX(15%);
+      }
+
+      @include gm.media-breakpoint-up(xxl) {
+        width: 8rem;
+        height: 8rem;
+        // transform: translate(50%);
+      }
+
+      @include gm.media-breakpoint-up (xxxl) {
+        transform: translateX(60%);
+      }
+
+      @include gm.media-breakpoint-up (xxxxl) {
+        transform: translateX(55%);
+        background-color: black;
+      }
+
+      @include gm.media-breakpoint-up(xxxxxl) {
+        transform: translateX(30%);
+        background-color: white;
+      }
+    }
   }
 
   .progress-cont {
     width: 50rem;
     display: flex;
     padding: 2.5rem 6rem;
-    background: url('../../../../../images/courses/backGround.png') no-repeat;
+    // background: url('../../../../../images/courses/backGround.png') no-repeat;
   }
 
   .module-card-cont {

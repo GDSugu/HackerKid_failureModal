@@ -21,6 +21,7 @@ const thememaplight = {
   'game-modal-close-btn-bg': utilColors.disposableIconBg,
   'game-white-gradient-bg': 'linear-gradient(90deg, #fff, #fff)',
   'game-mob-header-bg': '#ffffffe6',
+  'game-language-selector-border-color': '#505659',
 };
 
 // just copied the light theme colors to the dark for now
@@ -39,6 +40,7 @@ const thememapdark = {
   'game-modal-close-btn-bg': utilColors.disposableIconBg,
   'game-white-gradient-bg': 'linear-gradient(90deg, #fff, #fff)',
   'game-mob-header-bg': '#ffffffe6',
+  'game-language-selector-border-color': '#505659',
 };
 
 const cssvars = {
@@ -55,6 +57,7 @@ const cssvars = {
   'game-modal-close-btn-bg': '--game-modal-close-btn-bg',
   'game-white-gradient-bg': '--game-white-gradient-bg',
   'game-mob-header-bg': '--game-mob-header-bg',
+  'game-language-selector-border-color': '--game-language-selector-border-color',
 };
 
 module.exports = {

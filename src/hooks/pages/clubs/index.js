@@ -196,13 +196,13 @@ const useClubs = ({ isPageMounted }) => {
                 status: parsedResponse.status,
               },
             };
-            const member = clubDataState.clubInfoResponse.applicantList
-              .find((user) => user.unique_url === username);
-            const applicantArry = clubDataState.clubInfoResponse.applicantList
-              .filter((user) => user.unique_url !== username);
-            const memberArry = clubDataState.clubInfoResponse.memberList;
-            memberArry.push(member);
             if (parsedResponse.status === 'success') {
+              const member = clubDataState.clubInfoResponse.applicantList
+                .find((user) => user.unique_url === username);
+              const applicantArry = clubDataState.clubInfoResponse.applicantList
+                .filter((user) => user.unique_url !== username);
+              const memberArry = clubDataState.clubInfoResponse.memberList;
+              memberArry.push(member);
               newState.clubInfoResponse = {
                 ...clubDataState.clubInfoResponse,
                 applicantList: applicantArry,
@@ -661,11 +661,11 @@ const useClubs = ({ isPageMounted }) => {
       });
   };
 
-  const getClubFeed = async ({ page = 2, clubId = '' }) => {
+  const getClubFeed = async ({ page = 2 }) => {
     const payload = {
       type: 'getClubFeed',
       s3Prefix: API.S3PREFIX,
-      clubId,
+      clubId: clubDataState.clubDashboardResponse.clubData.clubId,
       page,
     };
 
@@ -681,14 +681,18 @@ const useClubs = ({ isPageMounted }) => {
             }));
           } else {
             const parsedResponse = JSON.parse(response);
-            // if (parsedResponse.status === 'success') {
-            setClubDataState((prevData) => ({
-              ...prevData,
-              clubFeedResponse: {
-                ...parsedResponse,
-              },
-            }));
-            // }
+            if (parsedResponse.status === 'success') {
+              setClubDataState((prevData) => ({
+                ...prevData,
+                clubFeedResponse: {
+                  status: parsedResponse.status,
+                  clubFeed: [
+                    ...prevData.clubFeedResponse?.clubFeed,
+                    ...parsedResponse.clubFeed,
+                  ],
+                },
+              }));
+            }
           }
         }
       });
@@ -733,6 +737,10 @@ const useClubs = ({ isPageMounted }) => {
                       ...parsedResponse.clubData,
                     },
                   },
+                  clubFeedResponse: {
+                    status: 'success',
+                    clubFeed: parsedResponse.clubFeed,
+                  },
                 }));
               } else {
                 setClubDataState((prevData) => ({
@@ -742,6 +750,10 @@ const useClubs = ({ isPageMounted }) => {
                     clubData: {
                       ...parsedResponse.clubData,
                     },
+                  },
+                  clubFeedResponse: {
+                    status: 'success',
+                    clubFeed: parsedResponse.clubFeed,
                   },
                 }));
               }

@@ -1,6 +1,6 @@
-@use "../../sass/base/functions" as gf;
 @use "../../sass/themes/_default" as gt;
 @use "../../sass/base/_mixins" as gm;
+@use "../../sass/base/functions" as gf;
 @use "../../sass/base/_placeholders";
 @use '../../sass/components/loading';
 
@@ -967,6 +967,10 @@ $font-awesome-family: "Font Awesome 5 Free";
             }
 
             .left-text-mobile {
+              &:before {
+                @extend %font-far;
+              }
+
               @include gm.media-breakpoint-down(sm) {
                 position: absolute;
                 top: 5rem;
@@ -974,7 +978,6 @@ $font-awesome-family: "Font Awesome 5 Free";
                 width: 50%;
 
                 &:before {
-                  font-family: $font-awesome-family;
                   content: "\f0da";
                   position: absolute;
                   right: -12px;
@@ -1151,8 +1154,6 @@ $font-awesome-family: "Font Awesome 5 Free";
               padding: 0;
 
               h3 {
-                @extend %font-far;
-
                 margin: 0;
                 font-size: 1.125rem;
                 font-weight: 600;
@@ -1164,8 +1165,9 @@ $font-awesome-family: "Font Awesome 5 Free";
                 gap: 0.5rem;
 
                 &:after {
+                  @extend %font-far;
+
                   content: "\f106";
-                  font-family: $font-awesome-family;
                   font-weight: 900;
                   float: right;
                 }

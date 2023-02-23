@@ -321,8 +321,7 @@ const HeroComponent = ({
   let profileImg = '../../../../images/profile/default_user.png';
   if (session && dashboardUserData) {
     profileImg = (session.profileLink ? session.profileLink : dashboardUserData.profileImage)
-      .toString()
-      .replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`);
+      .toString();
   }
 
   return (
@@ -338,7 +337,7 @@ const HeroComponent = ({
             <div className="hero-card-data-content">
               <div className="hero-data">
                 <Img src='common/hkcoin.png' />
-                <p className='mb-0'>{`${gameData.totalPointsEarned || '--'} coins`}</p>
+                <p className='mb-0'>{`${gameData.totalPointsEarned || 0} coins`}</p>
               </div>
             </div>
           </div>

@@ -76,13 +76,13 @@ filterSet={filterSet}/></div>;
 const SearchAndFilter = ({ searchOnChange, onChangeFilter, filterSet }) => {
   const [filterVisible, setFilterVisibility] = useState(false);
   return (<div><div className='filter-n-search'>
-  {/* <div className='filter-cont'
+  <div className='filter-cont'
   onClick={() => setFilterVisibility(!filterVisible)}>
   <Img className='filter-icon' src='courses/filter-icon.svg'/>
   <p className='mb-0'><FormattedMessage
           defaultMessage={'Filter'}
           description={'Filter Button'}/></p>
-  </div> */}
+  </div>
   <div className='form-control search-cont'>
 <Img className='search-icon' src='courses/search.svg'/>
 <input onChange={(value) => searchOnChange(value)} className='search-input' placeholder='Search'/>

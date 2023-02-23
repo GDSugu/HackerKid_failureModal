@@ -178,47 +178,49 @@ const CourseDetailsCard = ({ overallProgress, progress, moduleData }) => {
   dummyData.xpEarned = 0;
   dummyData.watchTime = 0;
 
+  const profileLink = window.localStorage.getItem('profileLink');
+
   return (
     <div>
-    <div className='progress-card-cont'>
-    <div className='overall-progress-cont'>
-    <div className='kids-img-cont'>
-      <Img
-      src='courses/kids.png'/>
-    </div>
-    <div className='xp-coins-cont'>
-      {/* <div className='d-flex align-items-center mr-3'>
-      <Img
-      src='courses/xp.png'/>
-      <h5 className='xp-text'>
-        <FormattedMessage
-        defaultMessage={'{xp} xp'}
-        values={{ xp: overallProgress.xpEarned }}/>
-      </h5>
-      </div> */}
-      <div className='d-flex align-items-center ml-3'>
-      <Img
-      src='courses/Coins.png'/>
-      <h5 className='xp-text'>
-        <FormattedMessage
-        defaultMessage={'{coins} coins'}
-        values={{ coins: overallProgress.coinsEarned }}/>
-      </h5>
+      <div className='progress-card-cont'>
+        <div className='overall-progress-cont col-6 col-sm-4'>
+        <div className='kids-img-cont '>
+        <div className="hero-card-img"
+              style={{ backgroundImage: `url(${profileLink})` }}></div>
+        </div>
+        <div className='xp-coins-cont'>
+          {/* <div className='d-flex align-items-center mr-3'>
+          <Img
+          src='courses/xp.png'/>
+          <h5 className='xp-text'>
+            <FormattedMessage
+            defaultMessage={'{xp} xp'}
+            values={{ xp: overallProgress.xpEarned }}/>
+          </h5>
+          </div> */}
+          <div className='d-flex align-items-center ml-3'>
+          <Img
+          src='courses/Coins.png'/>
+          <h5 className='xp-text'>
+            <FormattedMessage
+            defaultMessage={'{coins} coins'}
+            values={{ coins: overallProgress.coinsEarned }}/>
+          </h5>
+          </div>
+        </div>
+        </div>
+      <div className='progress-cont col-6 col-sm-8'>
+      <div className='circular-progress-container'>
+        <CircularProgress
+          value={overallProgress.completedCount}
+          totalValue={overallProgress.totalVideos} />
+      </div>
+      {(progress && progress.length > 0) ? <ProgressDesktopCard
+      progress={progress[0]}/> : <ProgressDesktopCard
+      progress={dummyData}/>}
       </div>
     </div>
     </div>
-    <div className='progress-cont'>
-    <div className='circular-progress-container'>
-      <CircularProgress
-        value={overallProgress.completedCount}
-        totalValue={overallProgress.totalVideos} />
-    </div>
-    {(progress && progress.length > 0) ? <ProgressDesktopCard
-    progress={progress[0]}/> : <ProgressDesktopCard
-    progress={dummyData}/>}
-    </div>
-  </div>
-  </div>
   );
 };
 
@@ -250,7 +252,7 @@ const CourseDetailsCardMobile = ({ progress, overallProgress }) => (
       </div>
       <div>
         <div className="d-flex align-items-center mb-3">
-          <Img src="courses/Coins.png" />
+          <Img src="courses/xp.png" />
           <div className="ml-4">
             <p className="xp-title">
               <FormattedMessage defaultMessage={'Coins Earned:'} />
@@ -263,8 +265,8 @@ const CourseDetailsCardMobile = ({ progress, overallProgress }) => (
             </p>
           </div>
         </div>
-        {/* <div className="d-flex align-items-center">
-          <Img src="courses/xp.png" />
+        <div className="d-flex align-items-center">
+          <Img src="courses/Coins.png" />
           <div className="ml-4">
             <p className="xp-title">
               <FormattedMessage defaultMessage={'XP Earned:'} />
@@ -273,7 +275,7 @@ const CourseDetailsCardMobile = ({ progress, overallProgress }) => (
               <FormattedMessage defaultMessage={'{xp}'} values={{ xp: overallProgress.xpEarned }} />
             </p>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>}
     {(progress && progress.length > 0) && progress.map((item, index) => <div
@@ -304,21 +306,21 @@ const CourseDetailsCardMobile = ({ progress, overallProgress }) => (
       </div>
       <div className="module-progress">
         <div className="d-flex justify-content-around">
-          {/* <div className="d-flex mb-1">
+          <div className="d-flex">
             <Img
               className="module-icons"
               src="common/xp.png"
             />
-            <p className="ml-1 mb-0">
+            <p className="ml-1">
               <FormattedMessage defaultMessage={'{xp} xp'} values={{ xp: item.xpEarned }} />
             </p>
-          </div> */}
-          <div className="d-flex mb-2">
+          </div>
+          <div className="d-flex">
             <Img
               className="module-icons"
               src="courses/timer.svg"
             />
-            <p className="ml-1 mb-0">
+            <p className="ml-1">
               <FormattedMessage
                 defaultMessage={'{time}'}
                 values={{ time: secToMin(item.watchTime) }}
@@ -427,26 +429,14 @@ const Courses = () => {
     animateModuleProgress((progress[0].watched / progress[0].totalVideos) * 100);
   }
 
-  React.useEffect(() => {
-    console.log();
-
-    return () => {
-      isPageMounted.current = false;
-    };
+  React.useEffect(() => () => {
+    isPageMounted.current = false;
   }, []);
-
-  if ((progress && progress.length === 0) && moduleData) {
-    const emptyProgress = moduleData[0];
-    emptyProgress.watchTime = 0;
-    console.log(emptyProgress);
-
-    // progress = [emptyProgress];
-  }
 
   return (
     <>
       <div className="col-12 col-md-11 col-xl-10 mx-auto courses-body-container">
-        {isDesktop && overallProgress && moduleData && (
+        {isDesktop && overallProgress && (
           <CourseDetailsCard
             overallProgress={overallProgress}
             progress={progress}
