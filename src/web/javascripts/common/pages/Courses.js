@@ -178,47 +178,49 @@ const CourseDetailsCard = ({ overallProgress, progress, moduleData }) => {
   dummyData.xpEarned = 0;
   dummyData.watchTime = 0;
 
+  const profileLink = window.localStorage.getItem('profileLink');
+
   return (
     <div>
-    <div className='progress-card-cont'>
-    <div className='overall-progress-cont'>
-    <div className='kids-img-cont'>
-      <Img
-      src='courses/kids.png'/>
-    </div>
-    <div className='xp-coins-cont'>
-      {/* <div className='d-flex align-items-center mr-3'>
-      <Img
-      src='courses/xp.png'/>
-      <h5 className='xp-text'>
-        <FormattedMessage
-        defaultMessage={'{xp} xp'}
-        values={{ xp: overallProgress.xpEarned }}/>
-      </h5>
-      </div> */}
-      <div className='d-flex align-items-center ml-3'>
-      <Img
-      src='courses/Coins.png'/>
-      <h5 className='xp-text'>
-        <FormattedMessage
-        defaultMessage={'{coins} coins'}
-        values={{ coins: overallProgress.coinsEarned }}/>
-      </h5>
+      <div className='progress-card-cont'>
+        <div className='overall-progress-cont col-6 col-sm-4'>
+        <div className='kids-img-cont '>
+        <div className="hero-card-img"
+              style={{ backgroundImage: `url(${profileLink})` }}></div>
+        </div>
+        <div className='xp-coins-cont'>
+          {/* <div className='d-flex align-items-center mr-3'>
+          <Img
+          src='courses/xp.png'/>
+          <h5 className='xp-text'>
+            <FormattedMessage
+            defaultMessage={'{xp} xp'}
+            values={{ xp: overallProgress.xpEarned }}/>
+          </h5>
+          </div> */}
+          <div className='d-flex align-items-center ml-3'>
+          <Img
+          src='courses/Coins.png'/>
+          <h5 className='xp-text'>
+            <FormattedMessage
+            defaultMessage={'{coins} coins'}
+            values={{ coins: overallProgress.coinsEarned }}/>
+          </h5>
+          </div>
+        </div>
+        </div>
+      <div className='progress-cont col-6 col-sm-8'>
+      <div className='circular-progress-container'>
+        <CircularProgress
+          value={overallProgress.completedCount}
+          totalValue={overallProgress.totalVideos} />
+      </div>
+      {(progress && progress.length > 0) ? <ProgressDesktopCard
+      progress={progress[0]}/> : <ProgressDesktopCard
+      progress={dummyData}/>}
       </div>
     </div>
     </div>
-    <div className='progress-cont'>
-    <div className='circular-progress-container'>
-      <CircularProgress
-        value={overallProgress.completedCount}
-        totalValue={overallProgress.totalVideos} />
-    </div>
-    {(progress && progress.length > 0) ? <ProgressDesktopCard
-    progress={progress[0]}/> : <ProgressDesktopCard
-    progress={dummyData}/>}
-    </div>
-  </div>
-  </div>
   );
 };
 
@@ -427,12 +429,8 @@ const Courses = () => {
     animateModuleProgress((progress[0].watched / progress[0].totalVideos) * 100);
   }
 
-  React.useEffect(() => {
-    console.log();
-
-    return () => {
-      isPageMounted.current = false;
-    };
+  React.useEffect(() => () => {
+    isPageMounted.current = false;
   }, []);
 
   return (
@@ -442,6 +440,7 @@ const Courses = () => {
           <CourseDetailsCard
             overallProgress={overallProgress}
             progress={progress}
+            moduleData={moduleData}
           />
         )}
         {!isDesktop && (

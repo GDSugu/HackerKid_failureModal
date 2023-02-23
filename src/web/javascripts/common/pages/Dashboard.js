@@ -49,7 +49,6 @@ const showBottomSheet = () => {
 
 const HeroContainer = ({ dashboardUserData, isDesktop, session }) => {
   let profileImg = '../../../../images/profile/default_user.png';
-  console.log('session da', session, dashboardUserData);
   if (session && dashboardUserData) {
     profileImg = (session.profileLink ? session.profileLink : dashboardUserData.profileImage)
       .toString();
