@@ -130,7 +130,7 @@ const animateTotalCount = (selectorPrefix, score, percentage) => {
 
 const secToMin = (time) => (time > 60 ? `${Math.floor(time / 60)} mins` : `${time} sec`);
 
-const ProgressDesktopCard = ({progress}) => <div className='module-progress-container'>
+const ProgressDesktopCard = ({ progress }) => <div className='module-progress-container'>
 <div className='module-card-cont'>
   <img className='module-img' src={progress.thumbnail}/>
   <div>
@@ -170,56 +170,57 @@ const ProgressDesktopCard = ({progress}) => <div className='module-progress-cont
 const CourseDetailsCard = ({ overallProgress, progress, moduleData }) => {
   const dummyData = { ...progress };
   if (moduleData.length > 0) {
-    dummyData.totalVideos = moduleData[0].totalVideos ;
-    dummyData.thumbnail = moduleData[0].thumbnail ;
-    dummyData.moduleName = moduleData[0].moduleName ;
+    dummyData.totalVideos = moduleData[0].totalVideos;
+    dummyData.thumbnail = moduleData[0].thumbnail;
+    dummyData.moduleName = moduleData[0].moduleName;
   }
   dummyData.watched = 0;
   dummyData.xpEarned = 0;
   dummyData.watchTime = 0;
-  
+
   return (
-  <div>
-  <div className='progress-card-cont'>
-  <div className='overall-progress-cont'>
-  <div className='kids-img-cont'>
-    <Img
-    src='courses/kids.png'/>
-  </div>
-  <div className='xp-coins-cont'>
-    {/* <div className='d-flex align-items-center mr-3'>
-    <Img
-    src='courses/xp.png'/>
-    <h5 className='xp-text'>
-      <FormattedMessage
-      defaultMessage={'{xp} xp'}
-      values={{ xp: overallProgress.xpEarned }}/>
-    </h5>
-    </div> */}
-    <div className='d-flex align-items-center ml-3'>
-    <Img
-    src='courses/Coins.png'/>
-    <h5 className='xp-text'>
-      <FormattedMessage
-      defaultMessage={'{coins} coins'}
-      values={{ coins: overallProgress.coinsEarned }}/>
-    </h5>
+    <div>
+    <div className='progress-card-cont'>
+    <div className='overall-progress-cont'>
+    <div className='kids-img-cont'>
+      <Img
+      src='courses/kids.png'/>
+    </div>
+    <div className='xp-coins-cont'>
+      {/* <div className='d-flex align-items-center mr-3'>
+      <Img
+      src='courses/xp.png'/>
+      <h5 className='xp-text'>
+        <FormattedMessage
+        defaultMessage={'{xp} xp'}
+        values={{ xp: overallProgress.xpEarned }}/>
+      </h5>
+      </div> */}
+      <div className='d-flex align-items-center ml-3'>
+      <Img
+      src='courses/Coins.png'/>
+      <h5 className='xp-text'>
+        <FormattedMessage
+        defaultMessage={'{coins} coins'}
+        values={{ coins: overallProgress.coinsEarned }}/>
+      </h5>
+      </div>
+    </div>
+    </div>
+    <div className='progress-cont'>
+    <div className='circular-progress-container'>
+      <CircularProgress
+        value={overallProgress.completedCount}
+        totalValue={overallProgress.totalVideos} />
+    </div>
+    {(progress && progress.length > 0) ? <ProgressDesktopCard
+    progress={progress[0]}/> : <ProgressDesktopCard
+    progress={dummyData}/>}
     </div>
   </div>
   </div>
-  <div className='progress-cont'>
-  <div className='circular-progress-container'>
-    <CircularProgress
-      value={overallProgress.completedCount}
-      totalValue={overallProgress.totalVideos} />
-  </div>
-  {(progress && progress.length > 0) ? <ProgressDesktopCard
-  progress={progress[0]}/> : <ProgressDesktopCard
-  progress={dummyData}/>}
-  </div>
-</div>
-</div>
-)};
+  );
+};
 
 const animateModuleProgress = (percent) => {
   if (percent) {

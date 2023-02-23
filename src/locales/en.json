@@ -11,9 +11,6 @@
     "defaultMessage": "Email",
     "description": "Email Button Title"
   },
-  "+KKyNc": {
-    "defaultMessage": "XP Earned:"
-  },
   "+PoBgu": {
     "defaultMessage": "{step}",
     "description": "take challenge instruction"
@@ -633,9 +630,6 @@
   "94ZC8v": {
     "defaultMessage": "Features",
     "description": "Features title"
-  },
-  "97bB5P": {
-    "defaultMessage": "{xp} xp"
   },
   "9BVOVU": {
     "defaultMessage": "Please verify to continue",
