@@ -22,6 +22,7 @@ const thememaplight = {
   'rating-background': utilColors.dimGrey,
   'color-sub-topic': utilColors.lightGrey,
   'shadow-color': utilColors.shadowColor1,
+  'course-hero-shadow': '0 4px 16px #f9a82625',
 };
 // just copied the light theme colors to the dark for now
   // TODO: make this a real dark theme with appropriate colors
@@ -38,6 +39,7 @@ const thememapdark = {
   'rating-background': utilColors.dimGrey,
   'color-sub-topic': utilColors.lightGrey,
   'shadow-color': utilColors.shadowColor1,
+  'course-hero-shadow': '0 4px 16px #f9a82625',
 };
 
 const cssvars = {
@@ -53,6 +55,7 @@ const cssvars = {
   'rating-background': '--rating-background',
   'color-sub-topic': '--color-sub-topic',
   'shadow-color': '--shadow-color',
+  'course-hero-shadow': '--course-hero-shadow',
 };
 
 module.exports = {

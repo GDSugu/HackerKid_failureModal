@@ -159,6 +159,11 @@ const Profile = () => {
     }
   };
 
+  const onProfileUpdated = () => {
+    $('.profileSuccessModal').modal('hide');
+    window.location.reload();
+  };
+
   // useEffect(() => {
   //   if (uniqueUrl) {
   //     window.history.replaceState({}, '', `/profile/edit/${uniqueUrl}`);
@@ -332,7 +337,7 @@ const Profile = () => {
       </div>
       <button
         className='btn btn-block btn-primary'
-        onClick={() => $('.profileSuccessModal').modal('hide')}
+        onClick={onProfileUpdated}
         >
         <FormattedMessage
           defaultMessage='Ok'

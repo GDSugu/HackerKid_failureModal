@@ -29,8 +29,7 @@ const HeroContainer = ({
 
   if (Object.keys(session).length) {
     const profileImage = (session?.profileImage)
-      ?.toString()
-      ?.replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`);
+      ?.toString();
 
     fetch(profileImage)
       .then((response) => {

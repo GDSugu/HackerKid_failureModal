@@ -203,7 +203,7 @@ const ZombieLandQuestionComponent = ({ status, questionObject }) => <>
                   && (questionObject?.stage !== '')
                   && <>
                     <Img
-                      src={`${questionObject.thumbnail}?updatedAt=${Date.now()}`}
+                      src={`${questionObject.thumbnail}`}
                       local={false}
                     />
                   </>
@@ -722,7 +722,7 @@ const HintContent = ({ hint: hintItem }) => <>
     && <>
       <div className="hint-img-container">
         <img
-          src={`${hintItem.picture.replace(/zombieland/g, 'zombieLand/assets')}?updatedAt=${Date.now()}`}
+          src={`${hintItem.picture.replace(/zombieland/g, 'zombieLand/assets')}`}
           alt="Instruction picture"
           className='instruction-picture'
         />

@@ -4,7 +4,7 @@ import React, {
 import { FormattedMessage } from 'react-intl';
 import { ClubContext } from '../../../../../hooks/pages/clubs';
 import useRootPageState from '../../../../../hooks/pages/root';
-import { $, debounce } from '../../framework';
+import { $, debounce, pathNavigator } from '../../framework';
 import AutoCompleteInputBox from '../AutoCompleteInputBox';
 import Img from '../Img';
 import Modal from '../Modal';
@@ -56,8 +56,7 @@ const ClubHeroContainer = ({
   // if (Object.keys(clubData).length) {
   //   if (clubData?.clubImage) {
   //     const profileImage = (clubData?.clubImage)
-  //       ?.toString()
-  //       ?.replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`);
+  //       ?.toString();
 
   //     fetch(profileImage)
   //       .then((response) => {
@@ -160,11 +159,36 @@ const ClubHeroContainer = ({
         isLoading = true;
         joinClub(joinParams)
           .then((resp) => {
-            // $('#loader').hide();
-            if (resp !== 'access_denied' && resp?.status === 'success') {
-              // getUserAction('pending');
+            // if (resp !== 'access_denied' && resp?.status === 'success') {
+            //   getClubDashboardData({ isVisiting: true, clubId: clubData?.clubId });
+            // } else if (resp?.status === 'error') {
+            //   $('#loader').hide();
+            //   confirmationHandler.setConfirmation({
+            //     title: 'Error',
+            //     message: resp?.message,
+            //     declineBtnText: 'Close',
+            //     acceptBtn: false,
+            //   });
+            // }
+            if (resp === 'access_denied') {
+              $('#loader').hide();
+              confirmationHandler.setConfirmation({
+                title: 'Error',
+                message: 'Access Denied, Try Logging in again',
+                declineBtn: false,
+                acceptBtnText: 'Login',
+                acceptFunction: () => pathNavigator('login'),
+              });
+            } else if (resp?.status === 'success') {
               getClubDashboardData({ isVisiting: true, clubId: clubData?.clubId });
-              // getUserAction.apply(handleJoinClub, ['pending']);
+            } else if (resp?.status === 'error') {
+              $('#loader').hide();
+              confirmationHandler.setConfirmation({
+                title: 'Error',
+                message: resp?.message,
+                declineBtnText: 'Close',
+                acceptBtn: false,
+              });
             }
           });
       };
@@ -184,11 +208,30 @@ const ClubHeroContainer = ({
         $('#loader').show();
         isLoading = true;
         leaveClub()
-          .then(() => {
+          .then((resp) => {
+            if (resp === 'access_denied') {
+              $('#loader').hide();
+              confirmationHandler.setConfirmation({
+                title: 'Error',
+                message: 'Access Denied, Try Logging in again',
+                declineBtn: false,
+                acceptBtnText: 'Login',
+                acceptFunction: () => pathNavigator('login'),
+              });
+            } else if (resp?.status === 'success') {
+              getClubDashboardData({ isVisiting: true, clubId: clubData?.clubId });
+            } else if (resp?.status === 'error') {
+              $('#loader').hide();
+              confirmationHandler.setConfirmation({
+                title: 'Error',
+                message: resp?.message,
+                declineBtnText: 'Close',
+                acceptBtn: false,
+              });
+            }
             // $('#loader').hide();
             // getUserAction('visitor');
             // getUserAction.apply(handleLeaveClub, ['visitor']);
-            getClubDashboardData({ isVisiting: true, clubId: clubData?.clubId });
           });
       };
       confirmationHandler.setConfirmation({
@@ -251,8 +294,7 @@ const ClubHeroContainer = ({
     if (Object.keys(clubData).length) {
       if (clubData?.clubImage) {
         const profileImage = (clubData?.clubImage)
-          ?.toString()
-          ?.replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`);
+          ?.toString();
 
         fetch(profileImage)
           .then((response) => {
@@ -268,7 +310,7 @@ const ClubHeroContainer = ({
     <div className="club-hero-container-card">
       <div className="hero-card club-hero-card"
         style={{
-          background: `${isDesktop ? `url(${profileImg}?updatedAt=${Date.now()}) no-repeat center left / contain, url(../../../../images/dashboard/dashboard-hero-bg-right.png) no-repeat center right / contain, var(--bg-1)` : `linear-gradient(270deg, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%), url(${profileImg}?updatedAt=${Date.now()}) no-repeat center left / contain, var(--bg-1)`}`,
+          background: `${isDesktop ? `url(${profileImg}) no-repeat center left / contain, url(../../../../images/dashboard/dashboard-hero-bg-right.png) no-repeat center right / contain, var(--bg-1)` : `linear-gradient(270deg, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%), url(${profileImg}) no-repeat center left / contain, var(--bg-1)`}`,
         }} >
         {/* <div className="hero-card-data col-6 col-sm-4"> */}
           {/* <div className="hero-card-data-content">
@@ -744,8 +786,10 @@ const ClubFeedContainerMob = ({ feedData, getMemberInfo = () => {} }) => {
     updateClubInfo()
       .then((res) => {
         if (res !== 'access_denied' && (res.status === 'success' || res.ok)) {
+          $('#loader').hide();
+          window.location.reload();
           // getClubDashboardData({});
-          getClubInfo();
+          // getClubInfo();
         } else {
           $('#loader').hide();
           isLoading = false;
@@ -1295,7 +1339,7 @@ const ClubMemberComponent = ({
 </>;
 
 const ClubBasicInfoComponent = ({
-  clubData = {}, isAdmin = false, locationState, isDesktop = true,
+  clubData = {}, isAdmin = false, locationState,
   editFields = () => {}, toggleFooterBtn = () => {}, setClubImage = () => {},
 }) => {
   const {
@@ -1394,7 +1438,7 @@ const ClubBasicInfoComponent = ({
                         ? (
                           typeof clubImage !== 'string'
                             ? `url(${URL.createObjectURL(clubImage)}`
-                            : `url(${clubImage}?updatedAt=${Date.now()})`
+                            : `url(${clubImage})`
                         )
                         : 'url(../../../../images/clubs/club.svg)')
                     ),
@@ -2440,6 +2484,8 @@ const ClubConfirmationModal = (_, ref) => {
   const [confirmationData, setConfirmationData] = useState({
     title: false,
     message: false,
+    acceptBtn: true,
+    declineBtn: true,
     acceptBtnText: false,
     declineBtnText: false,
     acceptFunction: () => {},
@@ -2453,6 +2499,8 @@ const ClubConfirmationModal = (_, ref) => {
   const setConfirmation = ({
     title = 'Are you sure?',
     message = 'Are you sure you want to do this?',
+    acceptBtn = true,
+    declineBtn = true,
     acceptBtnText = 'Yes',
     declineBtnText = 'Cancel',
     acceptFunction = hideConfirmation,
@@ -2461,6 +2509,8 @@ const ClubConfirmationModal = (_, ref) => {
     setConfirmationData({
       title,
       message,
+      acceptBtn,
+      declineBtn,
       acceptBtnText,
       declineBtnText,
       acceptFunction,
@@ -2508,41 +2558,51 @@ const ClubConfirmationModal = (_, ref) => {
             />
           </p>
         </div>
-        <div className="d-flex align-items-center">
-          <div className="col-6">
-            <button
-              type="button"
-              name="declineBtn"
-              id="declineBtn"
-              className="btn btn-outline-primary btn-block declineBtn"
-              onClick={confirmationData.declineFunction}
-            >
-              <FormattedMessage
-                defaultMessage={'{message}'}
-                description={'confirmation message'}
-                values={{
-                  message: confirmationData.declineBtnText,
-                }}
-              />
-            </button>
-          </div>
-          <div className="col-6">
-            <button
-              type="button"
-              name="acceptBtn"
-              id="acceptBtn"
-              className="btn btn-primary btn-block acceptBtn"
-              onClick={confirmationData.acceptFunction}
-            >
-              <FormattedMessage
-                defaultMessage={'{message}'}
-                description={'confirmation message'}
-                values={{
-                  message: confirmationData.acceptBtnText,
-                }}
-              />
-            </button>
-          </div>
+        <div className="d-flex align-items-center justify-content-center">
+          {
+            confirmationData.declineBtn
+            && <>
+              <div className="col-6">
+                <button
+                  type="button"
+                  name="declineBtn"
+                  id="declineBtn"
+                  className="btn btn-outline-primary btn-block declineBtn"
+                  onClick={confirmationData.declineFunction}
+                >
+                  <FormattedMessage
+                    defaultMessage={'{message}'}
+                    description={'confirmation message'}
+                    values={{
+                      message: confirmationData.declineBtnText,
+                    }}
+                  />
+                </button>
+              </div>
+            </>
+          }
+          {
+            confirmationData.acceptBtn
+            && <>
+              <div className="col-6">
+                <button
+                  type="button"
+                  name="acceptBtn"
+                  id="acceptBtn"
+                  className="btn btn-primary btn-block acceptBtn"
+                  onClick={confirmationData.acceptFunction}
+                >
+                  <FormattedMessage
+                    defaultMessage={'{message}'}
+                    description={'confirmation message'}
+                    values={{
+                      message: confirmationData.acceptBtnText,
+                    }}
+                  />
+                </button>
+              </div>
+            </>
+          }
         </div>
       </div>
     </Modal>

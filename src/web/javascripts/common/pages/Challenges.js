@@ -116,7 +116,7 @@ const HeroContainer = ({
   myChallenges,
 }) => {
   let profileImg = session.profileLink ? session.profileLink : '../../../../images/profile/default_user.png';
-  profileImg = profileImg.toString().replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`);
+  profileImg = profileImg.toString();
 
   return <>
     {

@@ -118,7 +118,7 @@ const ChallengesNavBar = ({ isDesktop }) => {
         {
           isDesktop && <div className="profileImg">
           <Link to='/profile'>
-            <Img src={`${profileImg}?updatedAt=${Date.now()}`} local={!local} alt="Hackerkid User"/>
+            <Img src={`${profileImg}`} local={!local} alt="Hackerkid User"/>
           </Link>
         </div>
         }

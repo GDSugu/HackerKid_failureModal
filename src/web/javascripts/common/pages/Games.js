@@ -321,8 +321,7 @@ const HeroComponent = ({
   let profileImg = '../../../../images/profile/default_user.png';
   if (session && dashboardUserData) {
     profileImg = (session.profileLink ? session.profileLink : dashboardUserData.profileImage)
-      .toString()
-      .replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`);
+      .toString();
   }
 
   return (

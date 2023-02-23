@@ -18,17 +18,17 @@ const Img = ({
   let imgSource = `${imgPath + fallback}`;
   let imgType = type;
 
-  const checkUpdatedQueryParam = (url) => {
-    const isQueryPresent = url.indexOf('?');
-    if (isQueryPresent !== -1) {
-      const urlParts = url.split('?');
-      const queryString = `?${urlParts[urlParts.length - 1]}`;
-      const queryParams = new URLSearchParams(queryString);
-      const isUpdatedAtPresent = queryParams.has('updatedAt');
-      return isUpdatedAtPresent;
-    }
-    return false;
-  };
+  // const checkUpdatedQueryParam = (url) => {
+  //   const isQueryPresent = url.indexOf('?');
+  //   if (isQueryPresent !== -1) {
+  //     const urlParts = url.split('?');
+  //     const queryString = `?${urlParts[urlParts.length - 1]}`;
+  //     const queryParams = new URLSearchParams(queryString);
+  //     const isUpdatedAtPresent = queryParams.has('updatedAt');
+  //     return isUpdatedAtPresent;
+  //   }
+  //   return false;
+  // };
 
   if (src) {
     const extension = src.split('.').pop();
@@ -36,12 +36,12 @@ const Img = ({
       imgType = extension;
     }
     imgSource = src;
-    if (!local) {
-      const hasUpdatedAt = checkUpdatedQueryParam(imgSource);
-      if (!hasUpdatedAt) {
-        imgSource = `${imgSource}?updatedAt=${Date.now()}`;
-      }
-    }
+    // if (!local) {
+    //   const hasUpdatedAt = checkUpdatedQueryParam(imgSource);
+    //   if (!hasUpdatedAt) {
+    //     imgSource = `${imgSource}?updatedAt=${Date.now()}`;
+    //   }
+    // }
   }
 
   const [imgSrc, setImgSrc] = React.useState(imgSource);

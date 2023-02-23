@@ -52,8 +52,7 @@ const HeroContainer = ({ dashboardUserData, isDesktop, session }) => {
   console.log('session da', session, dashboardUserData);
   if (session && dashboardUserData) {
     profileImg = (session.profileLink ? session.profileLink : dashboardUserData.profileImage)
-      .toString()
-      .replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now()}`);
+      .toString();
   }
 
   return <>

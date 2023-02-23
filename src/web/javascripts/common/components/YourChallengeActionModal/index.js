@@ -120,7 +120,7 @@ const YourChallengeActionsModal = ({
                 className={'challenge-image-preview'}
                 useSource={true}
                 local={false}
-                src={`${challenge.imgPath}?updatedAt=${Date.now()}`}
+                src={`${challenge.imgPath}`}
                 fallback={'../../../../../images/games/code.svg'}
                 onLoad={(e) => {
                   if (e.type === 'load' && e.target.src?.split('/').pop() !== 'code.svg') {
