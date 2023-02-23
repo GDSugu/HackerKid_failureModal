@@ -6,10 +6,10 @@ import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
 import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/css/intlTelInput.css';
 import '../../../../../node_modules/plyr-react/plyr.css';
-import '../../../stylesheets/common/pages/landing/style.scss';
 import 'swiper/swiper.scss';
 import 'swiper/modules/navigation/navigation.scss';
 import 'swiper/modules/pagination/pagination.scss';
+import '../../../stylesheets/common/pages/landing/style.scss';
 import { Autoplay, Pagination } from 'swiper';
 import {
   $,
@@ -1708,6 +1708,13 @@ const Landing = () => {
     debounce(showDMModal, 100);
   };
 
+  const debouncedMobShowModal = () => {
+    if (landingManager.isModalShown) {
+      window.removeEventListener('wheel', debouncedShowModal);
+    }
+    debounce(showDMModal, 300);
+  };
+
   const hideModal = () => dmModalRef.current.hide();
 
   const handleSubmit = (formData) => storeData(formData);
@@ -1717,13 +1724,17 @@ const Landing = () => {
       window.scrollTo(0, 0);
     }, 100);
     setInitialScrollTop();
+    window.history.scrollRestoration = 'manual';
     // const wheelTrigger = (e) => {
     //   debouncedShowModal();
     // };
     window.addEventListener('wheel', debouncedShowModal);
+    window.addEventListener('touchmove', debouncedMobShowModal);
 
     return () => {
+      window.history.scrollRestoration = 'auto';
       window.removeEventListener('wheel', debouncedShowModal);
+      window.removeEventListener('touchmove', debouncedMobShowModal);
     };
   }, []);
   return <>
@@ -1745,7 +1756,7 @@ const Landing = () => {
         modalClass={'landing-dm-modal'}
         customClass={'curved'}
         header={<></>}
-        modalCloseBtn={false}
+        // modalCloseBtn={false}
       >
         <LandingDMModalComponent
           handleSubmit={handleSubmit}
