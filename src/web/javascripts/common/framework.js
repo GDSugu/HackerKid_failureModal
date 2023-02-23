@@ -17,6 +17,10 @@ const authPages = [
   'certificate',
 ];
 
+const allowedRedirectionPages = [
+  'clubs',
+];
+
 const isFeatureEnabled = (features, feature, subFeature) => {
   const planFeatures = features && features.planFeatures;
   if (features && planFeatures && planFeatures.length > 0) {
@@ -206,10 +210,14 @@ const storeNavigationUrl = () => {
   const pages = pathname.split('/').filter((el) => el.trim() !== '');
   if (pages.length > 0) {
     const page = pages[0];
-    if (!authPages.includes(page)) {
+    if (
+      allowedRedirectionPages.includes(page)
+      && !authPages.includes(page)
+    ) {
       window.sessionStorage.setItem('navigateTo', window.location.href);
       return false;
     }
+    return authPages.includes(page);
   }
   return true;
 };

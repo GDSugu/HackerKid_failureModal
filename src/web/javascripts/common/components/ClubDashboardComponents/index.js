@@ -15,6 +15,7 @@ const clubDashboardManager = {
   isPagePopped: false,
   feedPage: 1,
   feedCount: 0,
+  maxMemberCount: 15,
 };
 
 // const feedAwardImageMap = {
@@ -50,21 +51,22 @@ const ClubHeroContainer = ({
   // } = clubDashboardData;
 
   let clubHeroAction = '';
+  let isLoading = false;
 
-  if (Object.keys(clubData).length) {
-    if (clubData?.clubImage) {
-      const profileImage = (clubData?.clubImage)
-        ?.toString()
-        ?.replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`);
+  // if (Object.keys(clubData).length) {
+  //   if (clubData?.clubImage) {
+  //     const profileImage = (clubData?.clubImage)
+  //       ?.toString()
+  //       ?.replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`);
 
-      fetch(profileImage)
-        .then((response) => {
-          if (response.status === 200) {
-            setProfileImg(profileImage);
-          }
-        });
-    }
-  }
+  //     fetch(profileImage)
+  //       .then((response) => {
+  //         if (response.status === 200) {
+  //           setProfileImg(profileImage);
+  //         }
+  //       });
+  //   }
+  // }
 
   const toggleClubHeroBtnAction = (action, status) => {
     let elemRef = null;
@@ -84,20 +86,27 @@ const ClubHeroContainer = ({
         break;
       default: break;
     }
-    if (isDesktop) {
-      if (elemRef?.current) {
-        if (status === 'show') {
-          elemRef.current.style.display = 'block';
-        } else if (status === 'hide') {
-          elemRef.current.style.display = 'none';
-        }
+    // if (isDesktop) {
+    if (elemRef?.current) {
+      if (status === 'show') {
+        elemRef.current.style.display = 'block';
+        elemRef.current.classList.add('club-active-action');
+      } else if (status === 'hide') {
+        elemRef.current.style.display = 'none';
+        elemRef.current.classList.remove('club-active-action');
       }
-    } else {
-      hideElemRefs.push(elemRef);
-      if (actionBtnRef.current) {
+    }
+    if (!isDesktop) {
+      if (action === 'member-action') {
         actionBtnRef.current.style.display = 'none';
       }
     }
+    // } else {
+    //   hideElemRefs.push(elemRef);
+    //   if (actionBtnRef.current) {
+    //     actionBtnRef.current.style.display = 'none';
+    //   }
+    // }
     hideElemRefs.forEach((elem) => {
       const ref = elem;
       if (ref?.current) {
@@ -146,13 +155,19 @@ const ClubHeroContainer = ({
       if (action === 'join' && invitedBy !== undefined && invitedBy !== '') {
         joinParams.invitedBy = invitedBy;
       }
-      const acceptFunction = () => joinClub(joinParams)
-        .then((resp) => {
-          if (resp !== 'access_denied' && resp?.status === 'success') {
-            getUserAction('pending');
-            // getUserAction.apply(handleJoinClub, ['pending']);
-          }
-        });
+      const acceptFunction = () => {
+        $('#loader').show();
+        isLoading = true;
+        joinClub(joinParams)
+          .then((resp) => {
+            // $('#loader').hide();
+            if (resp !== 'access_denied' && resp?.status === 'success') {
+              // getUserAction('pending');
+              getClubDashboardData({ isVisiting: true, clubId: clubData?.clubId });
+              // getUserAction.apply(handleJoinClub, ['pending']);
+            }
+          });
+      };
       confirmationHandler.setConfirmation({
         title: 'Join the Club?',
         message: 'Are you sure you want to join this club?',
@@ -167,10 +182,11 @@ const ClubHeroContainer = ({
     if (confirmationHandler.setConfirmation && typeof confirmationHandler.setConfirmation === 'function') {
       const acceptFunction = () => {
         $('#loader').show();
+        isLoading = true;
         leaveClub()
           .then(() => {
-            $('#loader').hide();
-            getUserAction('visitor');
+            // $('#loader').hide();
+            // getUserAction('visitor');
             // getUserAction.apply(handleLeaveClub, ['visitor']);
             getClubDashboardData({ isVisiting: true, clubId: clubData?.clubId });
           });
@@ -201,8 +217,12 @@ const ClubHeroContainer = ({
   };
 
   const clubAction = () => {
-    checkMemberStatus();
-    switch (clubHeroAction) {
+    // checkMemberStatus();
+    const usrstatus = $('.club-action-btn .club-action-content.club-active-action').attr('data-action');
+    console.log('usr status', usrstatus, clubHeroAction);
+    const switchStatus = clubHeroAction || usrstatus;
+    switch (switchStatus) {
+    // switch (usrstatus) {
       case 'member-action':
         toggleClubInfoModal('show');
         break;
@@ -220,7 +240,29 @@ const ClubHeroContainer = ({
     if (clubDashboardStatus) {
       checkMemberStatus();
     }
+    if (isLoading) {
+      $('#loader').hide();
+      isLoading = false;
+    }
   }, [clubDashboardStatus, isDesktop, isVisitor, isApplied]);
+
+  React.useEffect(() => {
+    console.log('club data changed', clubData);
+    if (Object.keys(clubData).length) {
+      if (clubData?.clubImage) {
+        const profileImage = (clubData?.clubImage)
+          ?.toString()
+          ?.replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`);
+
+        fetch(profileImage)
+          .then((response) => {
+            if (response.status === 200) {
+              setProfileImg(profileImage);
+            }
+          });
+      }
+    }
+  }, [clubData]);
 
   return <>
     <div className="club-hero-container-card">
@@ -310,7 +352,11 @@ const ClubHeroContainer = ({
                 {
                   // clubHeroAction === 'member-action'
                   // && <>
-                  <div ref={memberBtnRef}>
+                  <div
+                    ref={memberBtnRef}
+                    className={'club-action-content'}
+                    data-status={'member'}
+                    data-act={'member-action'}>
                     <div className="d-flex align-items-center justify-content-between">
                       <p className="mb-0">
                         <FormattedMessage
@@ -325,7 +371,11 @@ const ClubHeroContainer = ({
                 {
                   // clubHeroAction === 'visitor-action'
                   // && <>
-                  <div ref={visitorBtnRef}>
+                  <div
+                    ref={visitorBtnRef}
+                    className={'club-action-content'}
+                    data-status={'visitor'}
+                    data-act={'visitor-action'}>
                     <div className="d-flex align-items-center justify-content-between">
                       <p className="mb-0">
                         <FormattedMessage
@@ -341,7 +391,11 @@ const ClubHeroContainer = ({
                 {
                   // clubHeroAction === 'pending-action'
                   // && <>
-                    <div ref={pendingBtnRef}>
+                    <div
+                      ref={pendingBtnRef}
+                      className={'club-action-content'}
+                      data-status={'pending'}
+                      data-action={'pending-action'}>
                       <p className="mb-0">
                         <FormattedMessage
                           defaultMessage={'Approval Pending'}
@@ -424,7 +478,11 @@ const ClubHeroContainer = ({
             {
               // clubHeroAction === 'member-action'
               // && <>
-              <div ref={memberBtnRef}>
+              <div
+                ref={memberBtnRef}
+                className={'club-action-content'}
+                data-status={'member'}
+                data-action={'member-action'}>
                 <div className="d-flex align-items-center justify-content-between">
                   <p className="mb-0">
                     <FormattedMessage
@@ -439,7 +497,11 @@ const ClubHeroContainer = ({
             {
               // clubHeroAction === 'visitor-action'
               // && <>
-              <div ref={visitorBtnRef}>
+              <div
+                ref={visitorBtnRef}
+                className={'club-action-content'}
+                data-status={'visitor'}
+                data-action={'visitor-action'}>
                 <div className="d-flex align-items-center justify-content-between">
                   <p className="mb-0">
                     <FormattedMessage
@@ -455,7 +517,11 @@ const ClubHeroContainer = ({
             {
               // clubHeroAction === 'pending-action'
               // && <>
-                <div ref={pendingBtnRef}>
+                <div
+                  ref={pendingBtnRef}
+                  className={'club-action-content'}
+                  data-status={'pending'}
+                  data-action={'pending-action'}>
                   <p className="mb-0">
                     <FormattedMessage
                       defaultMessage={'Approval Pending'}
@@ -639,6 +705,7 @@ const ClubFeedContainerMob = ({ feedData, getMemberInfo = () => {} }) => {
   const isPageMounted = React.useRef(true);
   const { state: rootPageState } = useRootPageState({ isPageMounted });
   const clubContext = React.useContext(ClubContext);
+  let isLoading = false;
 
   const {
     clubState: {
@@ -673,11 +740,15 @@ const ClubFeedContainerMob = ({ feedData, getMemberInfo = () => {} }) => {
 
   const handleFooterBtnClick = () => {
     $('#loader').show();
+    isLoading = true;
     updateClubInfo()
       .then((res) => {
-        $('#loader').hide();
         if (res !== 'access_denied' && (res.status === 'success' || res.ok)) {
-          getClubDashboardData({});
+          // getClubDashboardData({});
+          getClubInfo();
+        } else {
+          $('#loader').hide();
+          isLoading = false;
         }
       });
   };
@@ -700,6 +771,13 @@ const ClubFeedContainerMob = ({ feedData, getMemberInfo = () => {} }) => {
     }
   };
 
+  const onTabClick = (e) => {
+    const tabElemText = e.target.innerText.toLowerCase();
+    if (tabElemText !== 'feed') {
+      $('#loader').hide();
+    }
+  };
+
   React.useEffect(() => {
     window.addEventListener('popstate', onBackButtonEvent);
 
@@ -709,9 +787,32 @@ const ClubFeedContainerMob = ({ feedData, getMemberInfo = () => {} }) => {
   }, [rootPageState.device]);
 
   React.useEffect(() => {
-    getClubInfo();
+    $('.club-feed-mob-container #club-tabs').on('shown.bs.tab', '.nav-link[data-toggle="tab"]', onTabClick);
     fetchLocation({ locationType: 'country' });
+
+    return () => {
+      $('.club-feed-mob-container #club-tabs').off('shown.bs.tab', '.nav-link[data-toggle="tab"]', onTabClick);
+    };
   }, []);
+
+  React.useEffect(() => {
+    if (clubInfoResponse.status) {
+      $('#loader').hide();
+    }
+  }, [clubInfoResponse]);
+
+  React.useEffect(() => {
+    if (
+      !clubDashboardResponse?.isVisitor
+      && !clubDashboardResponse?.isApplied
+    ) {
+      getClubInfo();
+    }
+    if (isLoading) {
+      $('#loader').hide();
+      isLoading = false;
+    }
+  }, [clubDashboardResponse]);
 
   React.useEffect(() => {
     if (clubData?.country) {
@@ -747,7 +848,9 @@ const ClubFeedContainerMob = ({ feedData, getMemberInfo = () => {} }) => {
             </a>
           </li>
           {
-            clubInfoStatus
+            clubDashboardResponse?.status === 'success'
+            && !clubDashboardResponse?.isApplied
+            && clubInfoStatus
             && clubInfoStatus !== 'error'
             && rankedMemberList
             && <>
@@ -788,13 +891,15 @@ const ClubFeedContainerMob = ({ feedData, getMemberInfo = () => {} }) => {
               clubData={clubDashboardResponse?.clubData} />
           </div>
           {
-            clubInfoStatus
+            clubDashboardResponse?.status === 'success'
+            && !clubDashboardResponse?.isApplied
+            && clubInfoStatus
             && clubInfoStatus !== 'error'
             && rankedMemberList
             && <>
               <div className="tab-pane fade" id="members-tab">
                 {
-                  rankedMemberList?.length
+                  rankedMemberList?.length > 0
                   && <>
                     <ClubLeaderBoardComponent
                       clubLeaderBoardData={rankedMemberList}
@@ -1263,8 +1368,8 @@ const ClubBasicInfoComponent = ({
   return <>
     <div className="club-basic-info-container">
       {
-        isDesktop
-        && <>
+        // isDesktop
+        <>
           <div className="form-group">
             <label htmlFor="clubPicture">
               <FormattedMessage
@@ -1289,7 +1394,7 @@ const ClubBasicInfoComponent = ({
                         ? (
                           typeof clubImage !== 'string'
                             ? `url(${URL.createObjectURL(clubImage)}`
-                            : `url(${clubImage})`
+                            : `url(${clubImage}?updatedAt=${Date.now()})`
                         )
                         : 'url(../../../../images/clubs/club.svg)')
                     ),
@@ -2510,16 +2615,20 @@ const ClubDashboardComponent = () => {
   } = clubDashboardData;
   const { clubFeed } = memoizedClubFeedResponse;
   const memoizedClubFeed = useMemo(() => clubFeed, [clubFeed]);
-
-  // let userStatus = 'member';
-  // if (clubDashboardStatus && clubDashboardData?.isVisitor) {
-  //   userStatus = 'visitor';
-  //   if (clubDashboardData?.isApplied) {
-  //     userStatus = 'pending';
-  //   }
-  // }
+  let device = 'desktop';
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    device = 'mobile';
+  } else {
+    device = 'desktop';
+  }
 
   const onScrollEnd = () => {
+    if (device === 'mobile') {
+      const activeTabName = $('.club-feed-mob-container #club-tabs .nav-link.active').text().toLowerCase();
+      if (activeTabName !== 'feed') {
+        return false;
+      }
+    }
     const elem = document.querySelector('html');
     if (
       (elem.scrollTop + elem.clientHeight)
@@ -2529,18 +2638,23 @@ const ClubDashboardComponent = () => {
       getClubFeed({ page: clubDashboardManager.feedPage + 1 });
       clubDashboardManager.feedPage += 1;
     }
+    return true;
   };
 
   const debouncedOnScrollEnd = () => debounce(onScrollEnd, 300);
 
   const toggleClubMemberProfileModal = (memberModalStatus, memberUrl) => {
     if (memberModalStatus === 'show') {
-      getMemberInfo({ username: memberUrl });
-      $('.member-profile-modal').data('bs.modal', null);
-      $('.member-profile-modal').modal({
-        backdrop: 'static',
-        keyboard: false,
-      });
+      getMemberInfo({ username: memberUrl })
+        .then(() => {
+          if (memberInfoResponse.status === 'success') {
+            $('.member-profile-modal').data('bs.modal', null);
+            $('.member-profile-modal').modal({
+              backdrop: 'static',
+              keyboard: false,
+            });
+          }
+        });
     } else if (memberModalStatus === 'hide') {
       $('.member-profile-modal').modal('hide');
     }
