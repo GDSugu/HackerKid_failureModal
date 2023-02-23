@@ -250,7 +250,7 @@ const CourseDetailsCardMobile = ({ progress, overallProgress }) => (
       </div>
       <div>
         <div className="d-flex align-items-center mb-3">
-          <Img src="courses/Coins.png" />
+          <Img src="courses/xp.png" />
           <div className="ml-4">
             <p className="xp-title">
               <FormattedMessage defaultMessage={'Coins Earned:'} />
@@ -263,8 +263,8 @@ const CourseDetailsCardMobile = ({ progress, overallProgress }) => (
             </p>
           </div>
         </div>
-        {/* <div className="d-flex align-items-center">
-          <Img src="courses/xp.png" />
+        <div className="d-flex align-items-center">
+          <Img src="courses/Coins.png" />
           <div className="ml-4">
             <p className="xp-title">
               <FormattedMessage defaultMessage={'XP Earned:'} />
@@ -273,7 +273,7 @@ const CourseDetailsCardMobile = ({ progress, overallProgress }) => (
               <FormattedMessage defaultMessage={'{xp}'} values={{ xp: overallProgress.xpEarned }} />
             </p>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>}
     {(progress && progress.length > 0) && progress.map((item, index) => <div
@@ -304,21 +304,21 @@ const CourseDetailsCardMobile = ({ progress, overallProgress }) => (
       </div>
       <div className="module-progress">
         <div className="d-flex justify-content-around">
-          {/* <div className="d-flex mb-1">
+          <div className="d-flex">
             <Img
               className="module-icons"
               src="common/xp.png"
             />
-            <p className="ml-1 mb-0">
+            <p className="ml-1">
               <FormattedMessage defaultMessage={'{xp} xp'} values={{ xp: item.xpEarned }} />
             </p>
-          </div> */}
-          <div className="d-flex mb-2">
+          </div>
+          <div className="d-flex">
             <Img
               className="module-icons"
               src="courses/timer.svg"
             />
-            <p className="ml-1 mb-0">
+            <p className="ml-1">
               <FormattedMessage
                 defaultMessage={'{time}'}
                 values={{ time: secToMin(item.watchTime) }}
@@ -435,22 +435,13 @@ const Courses = () => {
     };
   }, []);
 
-  if ((progress && progress.length === 0) && moduleData) {
-    const emptyProgress = moduleData[0];
-    emptyProgress.watchTime = 0;
-    console.log(emptyProgress);
-
-    // progress = [emptyProgress];
-  }
-
   return (
     <>
       <div className="col-12 col-md-11 col-xl-10 mx-auto courses-body-container">
-        {isDesktop && overallProgress && moduleData && (
+        {isDesktop && overallProgress && (
           <CourseDetailsCard
             overallProgress={overallProgress}
             progress={progress}
-            moduleData={moduleData}
           />
         )}
         {!isDesktop && (

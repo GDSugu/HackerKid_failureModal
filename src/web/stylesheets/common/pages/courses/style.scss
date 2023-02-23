@@ -191,13 +191,12 @@
     padding: 1.5rem;
     border-radius: 12px;
     background-color: gt.theme-var(course-body-bg, null, $thememaplight, $cssvars);
-    display: flex;
-    align-items: center;
+    display: inline-block;
   }
 
   .circle-progress {
-    width: 7.5rem;
-    height: 7.5rem;
+    width: 6.5rem;
+    height: 6.5rem;
 
     svg {
       width: 100%;
@@ -218,10 +217,6 @@
           stroke: url(#gradient);
         }
       }
-    }
-
-    tspan {
-      font-size: 1rem;
     }
   }
 
