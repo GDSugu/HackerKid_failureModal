@@ -1515,6 +1515,12 @@
       "value": "label"
     }
   ],
+  "EebJ7r": [
+    {
+      "type": 0,
+      "value": "You can use HackerKid to play, learn and solve a certain amount of problems for free. You can Get Unlimited Access @ ₹999 and learning by purchasing a premium subscription valid for 1 year."
+    }
+  ],
   "EfoM5G": [
     {
       "type": 0,
@@ -1981,6 +1987,7 @@
   ],
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 1a4dded (linter error fixed)
   "JJIsRn": [
@@ -2000,6 +2007,8 @@
 >>>>>>> b308c4b (clubs fix)
 =======
 >>>>>>> 1a4dded (linter error fixed)
+=======
+>>>>>>> d78a03b (linter error fixed)
   "JW9Qqp": [
     {
       "type": 1,
@@ -3838,12 +3847,6 @@
       "value": "Club Rank"
     }
   ],
-  "fWtF4n": [
-    {
-      "type": 0,
-      "value": "You can use HackerKID to play, learn and solve a certain amount of problems for free. You can Get Unlimited Access @ ₹999 and learning by purchasing a premium subscription valid for 1 year."
-    }
-  ],
   "fcj1bK": [
     {
       "type": 0,
@@ -4084,6 +4087,12 @@
     {
       "type": 0,
       "value": "Set Password"
+    }
+  ],
+  "i8kRAc": [
+    {
+      "type": 0,
+      "value": "You can use HackerKID to play, learn and solve a certain amount of problems for free. You can get unlimited access and learning by purchasing a premium subscription valid for 1 year."
     }
   ],
   "iJptwY": [

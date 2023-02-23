@@ -918,6 +918,10 @@
     "defaultMessage": "{label}",
     "description": "Autocomplete label"
   },
+  "EebJ7r": {
+    "defaultMessage": "You can use HackerKid to play, learn and solve a certain amount of problems for free. You can Get Unlimited Access @ ₹999 and learning by purchasing a premium subscription valid for 1 year.",
+    "description": "faq description"
+  },
   "EfoM5G": {
     "defaultMessage": "No Certificates Found",
     "description": "error text"
@@ -1197,6 +1201,7 @@
   },
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 1a4dded (linter error fixed)
   "JJIsRn": {
@@ -1212,6 +1217,8 @@
 >>>>>>> b308c4b (clubs fix)
 =======
 >>>>>>> 1a4dded (linter error fixed)
+=======
+>>>>>>> d78a03b (linter error fixed)
   "JW9Qqp": {
     "defaultMessage": "{message}",
     "description": "Admin warning"
@@ -2358,10 +2365,6 @@
     "defaultMessage": "Club Rank",
     "description": "Club Rank"
   },
-  "fWtF4n": {
-    "defaultMessage": "You can use HackerKID to play, learn and solve a certain amount of problems for free. You can Get Unlimited Access @ ₹999 and learning by purchasing a premium subscription valid for 1 year.",
-    "description": "faq description"
-  },
   "fcj1bK": {
     "defaultMessage": "School Clubs",
     "description": "more card title"
@@ -2505,6 +2508,10 @@
   "hxLhGK": {
     "defaultMessage": "Set Password",
     "description": "Password Label"
+  },
+  "i8kRAc": {
+    "defaultMessage": "You can use HackerKID to play, learn and solve a certain amount of problems for free. You can get unlimited access and learning by purchasing a premium subscription valid for 1 year.",
+    "description": "faq description"
   },
   "iJptwY": {
     "defaultMessage": "Continue",
