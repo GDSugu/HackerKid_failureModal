@@ -912,6 +912,10 @@
     "defaultMessage": "{label}",
     "description": "Autocomplete label"
   },
+  "EebJ7r": {
+    "defaultMessage": "You can use HackerKid to play, learn and solve a certain amount of problems for free. You can Get Unlimited Access @ ₹999 and learning by purchasing a premium subscription valid for 1 year.",
+    "description": "faq description"
+  },
   "EfoM5G": {
     "defaultMessage": "No Certificates Found",
     "description": "error text"
@@ -1018,10 +1022,6 @@
   "GQwBTI": {
     "defaultMessage": "Verify OTP and proceed",
     "description": "verify otp button"
-  },
-  "GTbLDX": {
-    "defaultMessage": "You can use HackerKid to play, learn and solve a certain amount of problems for free. You can Get Unlimited Access @ ₹1499 and learning by purchasing a premium subscription valid for 1 year.",
-    "description": "faq description"
   },
   "GXef+E": {
     "defaultMessage": "Clubs",

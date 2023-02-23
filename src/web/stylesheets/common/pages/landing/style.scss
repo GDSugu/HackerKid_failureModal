@@ -1272,6 +1272,21 @@ $font-awesome-family: "Font Awesome 5 Free";
           margin: 2rem 1rem;
           background-color: gt.theme-var(home-body-bg, null, $thememaplight, $cssvars);
 
+          button.close {
+            border-radius: 0.5rem;
+            color: gt.theme-var(text-color-2);
+            font-size: 2.5rem;
+            background: gt.theme-var(modal-close-btn-bg);
+            padding: 0.125rem 0.6rem 0.45rem;
+            line-height: 0.75;
+            opacity: 1;
+            margin-left: auto;
+
+            @include gm.media-breakpoint-down(md) {
+              font-size: 2rem;
+            }
+          }
+
           .modal-container {
             margin: 2rem 0;
 
