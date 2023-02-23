@@ -918,10 +918,6 @@
     "defaultMessage": "{label}",
     "description": "Autocomplete label"
   },
-  "EebJ7r": {
-    "defaultMessage": "You can use HackerKid to play, learn and solve a certain amount of problems for free. You can Get Unlimited Access @ ₹999 and learning by purchasing a premium subscription valid for 1 year.",
-    "description": "faq description"
-  },
   "EfoM5G": {
     "defaultMessage": "No Certificates Found",
     "description": "error text"
@@ -1200,16 +1196,22 @@
     "description": "Awards heading"
   },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1a4dded (linter error fixed)
   "JJIsRn": {
     "defaultMessage": "Thank you for filling the form. Our Expert Team will be in touch with you soon to explain more about HackerKid and its exciting features",
     "description": "thank you content"
   },
+<<<<<<< HEAD
   "JQb+h8": {
     "defaultMessage": "Why Choose HackerKid 2.0?",
     "description": "HackerKid title"
   },
 =======
 >>>>>>> b308c4b (clubs fix)
+=======
+>>>>>>> 1a4dded (linter error fixed)
   "JW9Qqp": {
     "defaultMessage": "{message}",
     "description": "Admin warning"
@@ -2356,6 +2358,10 @@
     "defaultMessage": "Club Rank",
     "description": "Club Rank"
   },
+  "fWtF4n": {
+    "defaultMessage": "You can use HackerKID to play, learn and solve a certain amount of problems for free. You can Get Unlimited Access @ ₹999 and learning by purchasing a premium subscription valid for 1 year.",
+    "description": "faq description"
+  },
   "fcj1bK": {
     "defaultMessage": "School Clubs",
     "description": "more card title"
@@ -2499,10 +2505,6 @@
   "hxLhGK": {
     "defaultMessage": "Set Password",
     "description": "Password Label"
-  },
-  "i8kRAc": {
-    "defaultMessage": "You can use HackerKID to play, learn and solve a certain amount of problems for free. You can get unlimited access and learning by purchasing a premium subscription valid for 1 year.",
-    "description": "faq description"
   },
   "iJptwY": {
     "defaultMessage": "Continue",
