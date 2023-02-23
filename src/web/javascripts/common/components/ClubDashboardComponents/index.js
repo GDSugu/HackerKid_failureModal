@@ -262,7 +262,6 @@ const ClubHeroContainer = ({
   const clubAction = () => {
     // checkMemberStatus();
     const usrstatus = $('.club-action-btn .club-action-content.club-active-action').attr('data-action');
-    console.log('usr status', usrstatus, clubHeroAction);
     const switchStatus = clubHeroAction || usrstatus;
     switch (switchStatus) {
     // switch (usrstatus) {
@@ -290,7 +289,6 @@ const ClubHeroContainer = ({
   }, [clubDashboardStatus, isDesktop, isVisitor, isApplied]);
 
   React.useEffect(() => {
-    console.log('club data changed', clubData);
     if (Object.keys(clubData).length) {
       if (clubData?.clubImage) {
         const profileImage = (clubData?.clubImage)
@@ -398,7 +396,7 @@ const ClubHeroContainer = ({
                     ref={memberBtnRef}
                     className={'club-action-content'}
                     data-status={'member'}
-                    data-act={'member-action'}>
+                    data-action={'member-action'}>
                     <div className="d-flex align-items-center justify-content-between">
                       <p className="mb-0">
                         <FormattedMessage
@@ -417,7 +415,7 @@ const ClubHeroContainer = ({
                     ref={visitorBtnRef}
                     className={'club-action-content'}
                     data-status={'visitor'}
-                    data-act={'visitor-action'}>
+                    data-action={'visitor-action'}>
                     <div className="d-flex align-items-center justify-content-between">
                       <p className="mb-0">
                         <FormattedMessage
@@ -2706,8 +2704,8 @@ const ClubDashboardComponent = () => {
   const toggleClubMemberProfileModal = (memberModalStatus, memberUrl) => {
     if (memberModalStatus === 'show') {
       getMemberInfo({ username: memberUrl })
-        .then(() => {
-          if (memberInfoResponse.status === 'success') {
+        .then((resp) => {
+          if (resp !== 'access_denied' && resp.status === 'success') {
             $('.member-profile-modal').data('bs.modal', null);
             $('.member-profile-modal').modal({
               backdrop: 'static',
@@ -2727,6 +2725,7 @@ const ClubDashboardComponent = () => {
     window.addEventListener('scroll', debouncedOnScrollEnd);
 
     return () => {
+      $('.modal-backdrop').remove();
       isPageMounted.current = false;
       window.removeEventListener('scroll', debouncedOnScrollEnd);
     };

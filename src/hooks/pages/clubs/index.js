@@ -806,6 +806,7 @@ const useClubs = ({ isPageMounted }) => {
 
     return post(payload, 'clubs/')
       .then((response) => {
+        let result = false;
         if (isPageMounted.current) {
           if (response === 'access_denied') {
             setClubDataState((prevData) => ({
@@ -814,6 +815,7 @@ const useClubs = ({ isPageMounted }) => {
                 status: 'access_denied',
               },
             }));
+            result = 'access_denied';
           } else {
             const parsedResponse = JSON.parse(response);
             setClubDataState((prevData) => ({
@@ -822,8 +824,10 @@ const useClubs = ({ isPageMounted }) => {
                 ...parsedResponse,
               },
             }));
+            result = parsedResponse;
           }
         }
+        return result;
       });
   };
 
