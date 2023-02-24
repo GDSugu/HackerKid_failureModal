@@ -653,6 +653,11 @@ $level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, nu
         fill: none;
         stroke: url(#gradient);
       }
+
+      &.progress-bar-placeholder {
+        fill: none;
+        stroke: gt.theme-var(bg-7);
+      }
     }
   }
 }

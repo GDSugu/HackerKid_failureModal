@@ -216,6 +216,11 @@
           fill: none;
           stroke: url(#gradient);
         }
+
+        &.progress-bar-placeholder {
+          fill: none;
+          stroke: gt.theme-var(course-progress-placeholder-bg, null, $thememaplight, $cssvars);
+        }
       }
     }
   }

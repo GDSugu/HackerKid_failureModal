@@ -449,6 +449,11 @@
                     fill: none;
                     stroke: url(#gradient);
                   }
+
+                  &.progress-bar-placeholder {
+                    fill: none;
+                    stroke: gt.theme-var(bg-7);
+                  }
                 }
               }
             }

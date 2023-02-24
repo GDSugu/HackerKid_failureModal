@@ -22,6 +22,7 @@ const thememaplight = {
   'rating-background': utilColors.dimGrey,
   'color-sub-topic': utilColors.lightGrey,
   'shadow-color': utilColors.shadowColor1,
+  'course-progress-placeholder-bg': Green.color100,
   'course-hero-shadow': '0 4px 16px #f9a82625',
 };
 // just copied the light theme colors to the dark for now
@@ -39,6 +40,7 @@ const thememapdark = {
   'rating-background': utilColors.dimGrey,
   'color-sub-topic': utilColors.lightGrey,
   'shadow-color': utilColors.shadowColor1,
+  'course-progress-placeholder-bg': Green.color100,
   'course-hero-shadow': '0 4px 16px #f9a82625',
 };
 
@@ -55,6 +57,7 @@ const cssvars = {
   'rating-background': '--rating-background',
   'color-sub-topic': '--color-sub-topic',
   'shadow-color': '--shadow-color',
+  'course-progress-placeholder-bg': '--course-progress-placeholder-bg',
   'course-hero-shadow': '--course-hero-shadow',
 };
 
