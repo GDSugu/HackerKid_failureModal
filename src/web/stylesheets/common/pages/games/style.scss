@@ -345,6 +345,7 @@ $level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, nu
 
   .skeleton-card {
     min-height: $hero-component-cards-min-height;
+    margin: 0.5rem 0;
   }
 }
 
@@ -652,6 +653,11 @@ $level-progress-gradient-color2: gt.theme-var(game-level-progress-gradient-2, nu
       &.progress-bar {
         fill: none;
         stroke: url(#gradient);
+      }
+
+      &.progress-bar-placeholder {
+        fill: none;
+        stroke: gt.theme-var(bg-7);
       }
     }
   }

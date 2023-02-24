@@ -60,11 +60,16 @@ const CircularProgress = ({ value, totalValue }) => (
         <stop offset="0%" className="start" />
         <stop offset="90%" className="end" />
       </linearGradient>
+      <path id="progressPlaceHolder" strokeLinecap="round" strokeWidth="6" strokeDasharray="251.2, 251.2" className="progress-bar-placeholder"
+        d="M50 10
+                a 40 40 0 0 1 0 80
+                a 40 40 0 0 1 0 -80">
+      </path>
       <path
         id="yourScoreProgress"
         strokeLinecap="round"
         strokeWidth="6"
-        strokeDasharray="140, 251.2"
+        strokeDasharray="0, 251.2"
         className="progress-bar"
         d="M50 10
                             a 40 40 0 0 1 0 80
@@ -132,7 +137,10 @@ const secToMin = (time) => (time > 60 ? `${Math.floor(time / 60)} mins` : `${tim
 
 const ProgressDesktopCard = ({ progress }) => <div className='module-progress-container'>
 <div className='module-card-cont'>
-  <img className='module-img' src={progress.thumbnail}/>
+  <img
+    className='module-img'
+    src={progress.thumbnail}
+  />
   <div>
     <p className='mb-0'><FormattedMessage
   defaultMessage={'{name}'}

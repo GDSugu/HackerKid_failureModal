@@ -275,7 +275,7 @@ const Profile = () => {
                 description='Profile phone label'
               />
             </label>
-            <input type="number" className="form-control" name="parentPhone" id="parentPhone" value={parentPhone || ''}
+            <input type="tel" className="form-control" name="parentPhone" id="parentPhone" value={parentPhone || ''}
             aria-describedby="parent phone input Field" placeholder="Parent phone number" onChange={(e) => handleStateChange('parentPhone', e.target) } />
             <small className="form-text text-danger"></small>
           </div>
