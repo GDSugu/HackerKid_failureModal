@@ -137,7 +137,10 @@ const secToMin = (time) => (time > 60 ? `${Math.floor(time / 60)} mins` : `${tim
 
 const ProgressDesktopCard = ({ progress }) => <div className='module-progress-container'>
 <div className='module-card-cont'>
-  <img className='module-img' src={progress.thumbnail}/>
+  <img
+    className='module-img'
+    src={progress.thumbnail}
+  />
   <div>
     <p className='mb-0'><FormattedMessage
   defaultMessage={'{name}'}

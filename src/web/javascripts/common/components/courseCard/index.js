@@ -19,7 +19,11 @@ const courseCard = ({ data }) => (
               defaultMessage={'{type}'}
               description={'video type'}
               values={{ type: data.moduleName }}/></p>
-          <Img className='w-100 thumbnail-img' src="https://static.hackerkid.org/hackerKid/videos/launch/video-thumbnail.png" local={false} />
+          <Img
+            className='w-100 thumbnail-img'
+            src="https://static.hackerkid.org/hackerKid/videos/launch/video-thumbnail.png"
+            // src={data.thumbnail}
+            local={false} />
           <div className='card-foot'>
             <p><FormattedMessage
               defaultMessage={'{title}'}
@@ -48,7 +52,10 @@ const courseCard = ({ data }) => (
               description={'video type'}
               values={{ type: data.moduleName }}/></p>
           <Img className='play-btn' src='/courses/play-btn.png' />
-          <img className='w-100 thumbnail-img' src="https://static.hackerkid.org/hackerKid/videos/launch/video-thumbnail.png" />
+          <img className='w-100 thumbnail-img'
+            src="https://static.hackerkid.org/hackerKid/videos/launch/video-thumbnail.png"
+            // src={data.thumbnail}
+          />
           <div className='card-foot'>
             <p><FormattedMessage
               defaultMessage={'{title}'}

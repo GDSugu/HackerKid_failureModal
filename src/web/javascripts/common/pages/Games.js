@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../../stylesheets/common/pages/games/style.scss';
 import { FormattedMessage } from 'react-intl';
@@ -176,6 +176,9 @@ const CircleProgressBar = ({ step, steps, contentContainerCustomClass = '' }) =>
   </div>
 );
 
+const MemoizedCircleProgressBar = memo(CircleProgressBar, compareProps);
+const MemoizedLeaderBoardCard = memo(LeaderBoardCard, compareProps);
+
 const LinearProgressBar = ({ step, steps, contentContainerCustomClass = '' }) => (
   <div className={`level-progress-bar-container ${contentContainerCustomClass}`}>
     <div className='level-progress-bar'>
@@ -329,44 +332,69 @@ const HeroComponent = ({
       .toString();
   }
 
+  const memoizedDashboardUserData = useMemo(() => dashboardUserData, [dashboardUserData]);
+  const memoizedGameData = useMemo(() => gameData, [gameData]);
+  const memoizedGameProgress = useMemo(() => gameProgress, [gameProgress]);
+  const memoizedLeaderboardData = useMemo(() => leaderBoardData, [leaderBoardData]);
+  const memoizedLeaderboardUserData = useMemo(() => leaderBoardUserData, [leaderBoardUserData]);
+
+  const showContent = memoizedGameData && memoizedLeaderboardData && memoizedLeaderboardUserData;
+
   return (
     <>
       {
         isDesktop && <div className='hero-card row'>
           <div className="hero-card-data col-6 col-sm-4">
             <div className="hero-card-img"
-              style={(session.profileLink || dashboardUserData.profileImage)
+              style={(session.profileLink || memoizedDashboardUserData.profileImage)
                 ? { backgroundImage: `url(${profileImg})` }
                 : {}
               }></div>
             <div className="hero-card-data-content">
               <div className="hero-data">
                 <Img src='common/hkcoin.png' />
-                <p className='mb-0'>{`${gameData.totalPointsEarned || 0} coins`}</p>
+                <p className='mb-0'>{`${memoizedGameData.totalPointsEarned || 0} coins`}</p>
               </div>
             </div>
           </div>
           <div className='leaderboard-with-total-levels-completed col-6 col-sm-8'>
             <div className='col-4 col-lg-3 px-1 px-sm-0'>
               {
-                gameData && <CircleProgressBar
-                  step={gameData.gameProgress}
-                  steps={gameData.totalGames} />
+                showContent
+                && <MemoizedCircleProgressBar
+                step={memoizedGameData.gameProgress}
+                steps={memoizedGameData.totalGames} />
               }
+              {/* {
+                memoizedGameData && <MemoizedCircleProgressBar
+                  step={memoizedGameData.gameProgress}
+                  steps={memoizedGameData.totalGames} />
+              } */}
               {
-                !gameData && <div className='skeleton-card'></div>
+                // !memoizedGameData && <div className='skeleton-card'></div>
+                !showContent && <div className='skeleton-card'></div>
               }
             </div>
             <div className='col-10 col-md-8 col-lg-6 px-1 px-sm-2'>
-              {
-                leaderBoardData && leaderBoardUserData && <LeaderBoardCard
-                  leaderBoardData={leaderBoardData}
-                  leaderBoardUserData={leaderBoardUserData}
+            {
+                showContent && <MemoizedLeaderBoardCard
+                  leaderBoardData={memoizedLeaderboardData}
+                  leaderBoardUserData={memoizedLeaderboardData}
                   isDesktop={isDesktop} />
               }
               {
-                (!leaderBoardData || !leaderBoardUserData) && <div className='skeleton-card'></div>
+                !showContent && <div className='skeleton-card'></div>
               }
+              {/* {
+                memoizedLeaderboardData && memoizedLeaderboardData && <MemoizedLeaderBoardCard
+                  leaderBoardData={memoizedLeaderboardData}
+                  leaderBoardUserData={memoizedLeaderboardData}
+                  isDesktop={isDesktop} />
+              }
+              {
+                (!memoizedLeaderboardData || !memoizedLeaderboardUserData)
+                && <div className='skeleton-card'></div>
+              } */}
             </div>
           </div>
         </div>
@@ -382,11 +410,11 @@ const HeroComponent = ({
             </button>
           </header>
           {
-            gameData && <OtherStats totalEarnedCoins={gameData.totalPointsEarned}
-            timeSpent={secondsToMins(gameProgress.totalTimeSpent)}/>
+            gameData && <OtherStats totalEarnedCoins={memoizedGameData.totalPointsEarned}
+            timeSpent={secondsToMins(memoizedGameProgress.totalTimeSpent)}/>
           }
           {
-            !gameData && <div className='skeleton-card other-stats-skeleton'></div>
+            !memoizedGameData && <div className='skeleton-card other-stats-skeleton'></div>
           }
         </div>
       }
