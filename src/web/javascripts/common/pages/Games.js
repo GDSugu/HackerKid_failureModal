@@ -379,7 +379,7 @@ const HeroComponent = ({
             {
                 showContent && <MemoizedLeaderBoardCard
                   leaderBoardData={memoizedLeaderboardData}
-                  leaderBoardUserData={memoizedLeaderboardData}
+                  leaderBoardUserData={memoizedLeaderboardUserData}
                   isDesktop={isDesktop} />
               }
               {
