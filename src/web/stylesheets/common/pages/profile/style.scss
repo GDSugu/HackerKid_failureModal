@@ -92,6 +92,10 @@
       .profile-data-container {
         margin: 2rem 0 0;
 
+        .iti {
+          width: 100%;
+        }
+
         .form-control {
           border-color: gt.theme-var(profile-input-border-color, null, $thememaplight, $cssvars);
           color: gt.theme-var(text-color-1);
