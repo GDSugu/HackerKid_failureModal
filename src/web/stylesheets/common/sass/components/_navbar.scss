@@ -13,6 +13,14 @@ nav {
     }
   }
 
+  .icon-padding {
+    padding-top: 5rem;
+
+    @include gm.media-breakpoint-down(md) {
+      padding-top: 0;
+    }
+  }
+
   .navigation-container {
     @include gm.media-breakpoint-down(md) {
       order: 3;

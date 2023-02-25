@@ -7,7 +7,7 @@ import {
   pageInit, pathNavigator,
 } from '../framework';
 import initSubscriptionPayment from '../../../../hooks/common/payment';
-import { SubscriptionContext } from '../../../../hooks/pages/root';
+import { SubscriptionContext, AuthContext } from '../../../../hooks/pages/root';
 import usePricing from '../../../../hooks/pages/pricing';
 
 const initPayment = () => {
@@ -48,7 +48,7 @@ const initPayment = () => {
   });
 };
 
-const PriceCards = ({ planType = 'free', data }) => <>
+const PriceCards = ({ planType = 'free', data, isLoggedIn = false }) => <>
   <div className="price-card-container">
     <div className='row row-revise'>
       <div className='col-lg-6 col-md-6 col-xs-12 mb-3 mb-md-0'>
@@ -153,7 +153,7 @@ const PriceCards = ({ planType = 'free', data }) => <>
 
             <span></span>
 
-            {planType === 'free' ? <button className='btn btn-light w-100 free-plan-pointer'>
+            {(isLoggedIn && planType === 'free') ? <button className='btn btn-light w-100 free-plan-pointer'>
               <FormattedMessage
                 defaultMessage='Your Current Plan'
                 description='Your Current Plan btn'
@@ -181,7 +181,7 @@ const PriceCards = ({ planType = 'free', data }) => <>
   </div>
 </>;
 
-const PlansFeatures = ({ planType = 'free', data }) => <>
+const PlansFeatures = ({ planType = 'free', data, isLoggedIn = false }) => <>
   <div className="price-plans-features">
     <h2>
       <FormattedMessage
@@ -214,7 +214,7 @@ const PlansFeatures = ({ planType = 'free', data }) => <>
                   description={'FREE price'}
                 />
               </h2>
-              {planType === 'free' ? <button className='btn btn-light w-100 free-plan-pointer'>
+              {(isLoggedIn && planType === 'free') ? <button className='btn btn-light w-100 free-plan-pointer'>
               <FormattedMessage
                 defaultMessage='Your Current Plan'
                 description='Your Current Plan btn'
@@ -543,7 +543,7 @@ const PlansFeatures = ({ planType = 'free', data }) => <>
             description={'FREE price'}
           />
         </h2>
-        {planType === 'free' ? <p className='edition'>
+        {(isLoggedIn && planType === 'free') ? <p className='edition'>
           <FormattedMessage
             defaultMessage='Your Current Plan'
             description='Your Current Plan btn'
@@ -1054,9 +1054,10 @@ const ExclusiveCourses = () => <>
 
 const PricingPlans = () => {
   if (window.location.href.includes('pricing')) {
-    pageInit('price-container', 'PricingPlans');
+    pageInit('price-container', 'Pricing');
   }
   const { subscriptionData } = React.useContext(SubscriptionContext);
+  const authContext = React.useContext(AuthContext);
   const isPageMounted = React.useRef(true);
   const { pricingDetails } = usePricing({ isPageMounted });
   const { subscriptionDetails } = pricingDetails;
@@ -1093,10 +1094,12 @@ const PricingPlans = () => {
         </div>
         <PriceCards
         planType = {subscriptionData.planType}
-        data = {planDetails}/>
+        data = {planDetails}
+        isLoggedIn={authContext.isLoggedIn}/>
         <PlansFeatures
         planType = {subscriptionData.planType}
-        data = {planDetails}/>
+        data = {planDetails}
+        isLoggedIn={authContext.isLoggedIn}/>
         <ExclusiveCourses />
       </div>
     </div>
