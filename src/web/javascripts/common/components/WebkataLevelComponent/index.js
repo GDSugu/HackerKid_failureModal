@@ -14,33 +14,32 @@ const GameLevelButton = ({
   virtualId,
   gameState,
 }) => (<>
-    <button
+  <button
     id={`turtle-${virtualId}`}
     className={`btn game-level-button ${question.state || 'open'} ${isCurrentQuestion ? 'current-question' : ''}`}
     onClick={() => {
       if (gameState === 'locked') return;
       handleFetchQuestion(question.virtualId);
     }}>
-      <p>
+    <p>
       {
-          gameState === 'locked'
-            ? <Img src="common/feature-lock-white.png"/>
-            : <FormattedMessage
-          defaultMessage={'{level}'}
-          description={'Level'}
-          values={{ level: virtualId }}
-        />
-        }
-      </p>
-    </button>
-  </>);
+        gameState === 'locked'
+          ? <Img src="common/feature-lock-white.png" />
+          : <FormattedMessage
+            defaultMessage={'{level}'}
+            description={'Level'}
+            values={{ level: virtualId }}
+          />
+      }
+    </p>
+  </button>
+</>);
 
 const WebkataGameLevelComponent = ({ gameData, handleFetchQuestion }, ref) => {
   const { state: { device } } = useRootPageState();
 
   const isCurrentQuestion = gameData.questionList
     .findIndex((el) => el.questionId === gameData.questionObject.questionId) + 1;
-  console.log('isCurrentQuestion', isCurrentQuestion);
   const { subscriptionData } = React.useContext(SubscriptionContext);
   const gamesLimit = (gameName) => {
     const gamesEnabled = isFeatureEnabled(subscriptionData, 'games', gameName);
@@ -75,6 +74,48 @@ const WebkataGameLevelComponent = ({ gameData, handleFetchQuestion }, ref) => {
       behavior: 'smooth',
       block: 'center',
       inline: 'center',
+    });
+  };
+
+  const onGameListScroll = () => {
+    const element = $('.game-levels-list')[0];
+    const scrollLeftBtn = $('.game-levels-list .scroll-left-btn')[0];
+    const scrollRightBtn = $('.game-levels-list .scroll-right-btn')[0];
+
+    if (element.offsetWidth + element.scrollLeft >= element.scrollWidth) {
+      $(scrollRightBtn).attr('disabled', true);
+    } else {
+      $(scrollRightBtn).removeAttr('disabled');
+    }
+
+    if (element.scrollLeft === 0) {
+      $(scrollLeftBtn).attr('disabled', true);
+    } else if (element.scrollLeft > 0) {
+      $(scrollLeftBtn).removeAttr('disabled');
+    }
+  };
+
+  const onScrollLeftBtnClick = () => {
+    const scrollList = $('.game-levels-list')[0];
+    const levelBtnWidth = $('.game-level-button')[0].clientWidth;
+
+    const left = -(levelBtnWidth + 100);
+
+    scrollList.scrollBy({
+      left,
+      behavior: 'smooth',
+    });
+  };
+
+  const onScrollRightBtnClick = () => {
+    const scrollList = $('.game-levels-list')[0];
+    const levelBtnWidth = $('.game-level-button')[0].clientWidth;
+
+    const left = (levelBtnWidth + 100);
+
+    scrollList.scrollBy({
+      left,
+      behavior: 'smooth',
     });
   };
 
@@ -144,7 +185,7 @@ const WebkataGameLevelComponent = ({ gameData, handleFetchQuestion }, ref) => {
                   </div> */}
                   <div className="profileImg ml-2">
                     <Link to='/profile'>
-                      <img src={'../../../../../images/common/profile.png'} alt="Hackerkid User"/>
+                      <img src={'../../../../../images/common/profile.png'} alt="Hackerkid User" />
                     </Link>
                   </div>
                 </div>
@@ -155,7 +196,13 @@ const WebkataGameLevelComponent = ({ gameData, handleFetchQuestion }, ref) => {
         {
           gameData?.questionList
           && <>
-            <div className="game-levels-list">
+            <div className="game-levels-list" onScroll={onGameListScroll}>
+              {
+                device === 'desktop'
+                && <button type='button' className='scroll-left-btn' onClick={onScrollLeftBtnClick}>
+                  <i className='fa fa-chevron-left'></i>
+                </button>
+              }
               {
                 gameData.questionList.map((question, index) => <GameLevelButton
                   key={index}
@@ -166,11 +213,17 @@ const WebkataGameLevelComponent = ({ gameData, handleFetchQuestion }, ref) => {
                   isCurrentQuestion={isCurrentQuestion === index + 1}
                 />)
 
-                  // <GameLevelButton
-                  // question={{ state: 'open' }}
-                  // virtualId={1}
-                  // isCurrentQuestion={true}
-                  // />
+                // <GameLevelButton
+                // question={{ state: 'open' }}
+                // virtualId={1}
+                // isCurrentQuestion={true}
+                // />
+              }
+              {
+                device === 'desktop'
+                && <button type='button' className='scroll-right-btn' onClick={onScrollRightBtnClick}>
+                  <i className='fa fa-chevron-right'></i>
+                </button>
               }
             </div>
           </>
@@ -195,11 +248,11 @@ const WebkataGameLevelComponent = ({ gameData, handleFetchQuestion }, ref) => {
             <button
               className="close-btn-mob btn btn-primary btn-block d-flex align-items-center justify-content-between"
               onClick={closeLevelComponent}>
-                <FormattedMessage
-                  defaultMessage={'Continue Playing'}
-                  description={'Continue Playing button'}
-                />
-                <i className="fa fa-play" />
+              <FormattedMessage
+                defaultMessage={'Continue Playing'}
+                description={'Continue Playing button'}
+              />
+              <i className="fa fa-play" />
             </button>
           </>
         }
