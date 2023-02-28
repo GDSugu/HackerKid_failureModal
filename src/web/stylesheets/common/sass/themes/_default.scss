@@ -40,6 +40,8 @@ $thememaplight : (
   facebook-color: #4267b2,
   twitter-color: #1da1f2,
   telegram-color: #08c,
+  red-yellow-gradient-1: #ff423d,
+  red-yellow-gradient-2: #ffae00
 );
 // just copied the light theme colors to the dark for now
 // TODO: make this a real dark theme with appropriate colors
@@ -85,6 +87,8 @@ $thememapdark : (
   facebook-color: #4267b2,
   twitter-color: #1da1f2,
   telegram-color: #08c,
+  red-yellow-gradient-1: #ff423d,
+  red-yellow-gradient-2: #ffae00
 );
 
 $cssvars : (
@@ -129,6 +133,8 @@ $cssvars : (
   facebook-color: --facebook-color,
   twitter-color: --twitter-color,
   telegram-color: --telegram-color,
+  red-yellow-gradient-1: --red-yellow-gradient-1,
+  red-yellow-gradient-2: --red-yellow-gradient-2
 );
 
 @mixin spread-map($map: (), $cssMap: $cssvars) {

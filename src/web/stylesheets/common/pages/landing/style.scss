@@ -624,6 +624,7 @@ $font-awesome-family: "Font Awesome 5 Free";
 
       .hackerkid-video-sec {
         position: relative;
+        z-index: 10;
 
         @include gm.media-breakpoint-down(sm) {
           width: 100%;
