@@ -309,6 +309,7 @@
       .turtle-question-block,
       .turtle-exoup-block {
         flex-basis: 0;
+        -webkit-flex-basis: auto;
         flex-grow: 1;
         height: 50%;
         background-color: gt.theme-var(game-transparent-bg, null, $thememaplight, $cssvars);
