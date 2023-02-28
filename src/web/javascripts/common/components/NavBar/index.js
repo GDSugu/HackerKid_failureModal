@@ -17,7 +17,9 @@ const NavItem = (props) => {
   </>;
 };
 
-const NavBar = () => {
+const NavBar = ({
+  showIcons = true,
+}) => {
   const { pathname } = useLocation();
   const routes = pathname.split('/');
   const screen = routes[1];
@@ -95,9 +97,9 @@ const NavBar = () => {
             </div>
           }
         </div>
-        <div className='navigation-container row align-items-center no-gutters'>
-          {
-            navItems.map((item, index) => <NavItem {...item} key={index} />)
+        <div className={`navigation-container row align-items-center no-gutters ${showIcons ? '' : 'icon-padding'}`}>
+          {showIcons
+          && navItems.map((item, index) => <NavItem {...item} key={index} />)
           }
         </div>
         <div className="profileImg">

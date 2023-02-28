@@ -6,6 +6,7 @@ import '../../../../stylesheets/common/sass/components/_gameLevelComponent.scss'
 import { $, isFeatureEnabled } from '../../framework';
 import { attachDragHandler } from '../../Functions/turtle';
 import Img from '../Img';
+import UnlockMoreModal from '../unlockMoreModal';
 
 const GameLevelButton = ({
   handleFetchQuestion,
@@ -18,7 +19,10 @@ const GameLevelButton = ({
     id={`turtle-${virtualId}`}
     className={`btn game-level-button ${question.state || 'open'} ${isCurrentQuestion ? 'current-question' : ''}`}
     onClick={() => {
-      if (gameState === 'locked') return;
+      if (gameState === 'locked') {
+        $('.unlock-more-modal').modal('show');
+        return;
+      }
       handleFetchQuestion(question.virtualId);
     }}>
     <p>
@@ -258,6 +262,7 @@ const WebkataGameLevelComponent = ({ gameData, handleFetchQuestion }, ref) => {
         }
       </div>
     </div>
+    <UnlockMoreModal />
   </>;
 };
 

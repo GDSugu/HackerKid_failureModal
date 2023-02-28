@@ -6,6 +6,7 @@ import '../../../../stylesheets/common/sass/components/_gameLevelComponent.scss'
 import { $, isFeatureEnabled } from '../../framework';
 import { attachDragHandler } from '../../Functions/turtle';
 import Img from '../Img';
+import UnlockMoreModal from '../unlockMoreModal';
 
 const GameLevelButton = ({
   game = 'all',
@@ -15,29 +16,30 @@ const GameLevelButton = ({
   isCurrentQuestion,
   virtualId,
 }) => (<>
-  <button
-    id={`turtle-${virtualId}`}
-    className={`btn game-level-button ${gameState} ${isCurrentQuestion ? 'current-question' : ''}`}
-    onClick={() => {
-      if (gameState === 'locked') return;
-      if (game === 'turtle') {
-        handleFetchQuestion(question.question_id);
-      } else if (game === 'zombieLand') {
-        handleFetchQuestion(question.virtualId);
-      } else if (game === 'codekata') {
-        handleFetchQuestion(question.virtualId);
-      }
-    }}>
-    <p>
-      {
-        gameState === 'locked'
-          ? <Img src="common/feature-lock-white.png" />
-          : <FormattedMessage
-            defaultMessage={'{level}'}
-            description={'Level'}
-            values={{ level: virtualId }}
-          />
-      }
+    <button
+      id={`turtle-${virtualId}`}
+      className={`btn game-level-button ${gameState} ${isCurrentQuestion ? 'current-question' : ''}`}
+      onClick={() => {
+        if (gameState === 'locked') {
+          $('.unlock-more-modal').modal('show');
+        } else if (game === 'turtle') {
+          handleFetchQuestion(question.question_id);
+        } else if (game === 'zombieLand') {
+          handleFetchQuestion(question.virtualId);
+        } else if (game === 'codekata') {
+          handleFetchQuestion(question.virtualId);
+        }
+      }}>
+      <p>
+        {
+          gameState === 'locked'
+            ? <Img src="common/feature-lock-white.png"/>
+            : <FormattedMessage
+          defaultMessage={'{level}'}
+          description={'Level'}
+          values={{ level: virtualId }}
+        />
+        }
 
     </p>
   </button>
@@ -290,6 +292,7 @@ const GameLevelComponent = ({ game, gameData, handleFetchQuestion }, ref) => {
         }
       </div>
     </div>
+    <UnlockMoreModal/>
   </>;
 };
 
