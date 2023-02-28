@@ -92,6 +92,10 @@
       .profile-data-container {
         margin: 2rem 0 0;
 
+        .iti {
+          width: 100%;
+        }
+
         .form-control {
           border-color: gt.theme-var(profile-input-border-color, null, $thememaplight, $cssvars);
           color: gt.theme-var(text-color-1);
@@ -101,6 +105,27 @@
           margin-top: 1.5rem;
           border-radius: 0.5rem;
           color: gt.theme-var(text-color-2);
+        }
+      }
+    }
+  }
+
+  .profileSuccessModal {
+    .modal-body {
+      button {
+        &.close {
+          border-radius: 0.5rem;
+          color: gt.theme-var(text-color-2);
+          font-size: 2.5rem;
+          background: gt.theme-var(modal-close-btn-bg);
+          padding: 0.125rem 0.6rem 0.45rem;
+          line-height: 0.75;
+          opacity: 1;
+          margin-left: auto;
+
+          @include gm.media-breakpoint-down(md) {
+            font-size: 2rem;
+          }
         }
       }
     }

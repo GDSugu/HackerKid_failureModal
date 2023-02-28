@@ -13,7 +13,7 @@ import { useGetSession } from '../../hooks/pages/root';
 import { font as fonts } from '../components/config';
 import { Red, utilColors as utColors, Yellow } from '../../colors/_colors';
 import Tab from '../components/TabComponent';
-import Icon from '../common/Icons';
+// import Icon from '../common/Icons';
 import ThemeContext from '../components/theme';
 import dashboardHero from '../../images/dashboard/dashboard-hero-bg-mobile.png';
 import hkcoin from '../../images/common/hkcoin.png';
@@ -395,7 +395,7 @@ const ClubHeroBlock = ({
                 source={
                   clubData
                   && clubData.clubImage
-                    ? { uri: clubData.clubImage.toString().replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`) }
+                    ? { uri: clubData.clubImage.toString() }
                     : defaultClubImage
                   }
                 style={style.heroCardImage}
@@ -473,16 +473,20 @@ const ClubTabButtonBlock = ({
 </>;
 
 const ClubBasicInfoComponent = ({
-  appData = {}, clubData = {}, isAdmin = false, locationState,
-  editFields = () => {}, setClubImage = () => {}, setAppData = () => {},
+  appData = {}, clubData = {},
+  // isAdmin = false,
+  locationState,
+  editFields = () => {},
+  // setClubImage = () => {},
+  setAppData = () => {},
   style = {},
 }) => {
-  const {
-    clubName,
-    // clubId,
-    clubImage,
-    country, state,
-  } = clubData;
+  // const {
+  // clubName,
+  // clubId,
+  // clubImage,
+  // country, state,
+  // } = clubData;
 
   const {
     basicInfoErrors,
@@ -490,16 +494,8 @@ const ClubBasicInfoComponent = ({
 
   // const clubImageInputRef = React.useRef(null);
   const clubNameInputRef = React.useRef(null);
-  const clubCountryInputRef = React.useRef(null);
-  const clubStateInputRef = React.useRef(null);
 
   const intl = useIntl();
-
-  const inputRefMap = {
-    clubName: clubNameInputRef,
-    country: clubCountryInputRef,
-    state: clubStateInputRef,
-  };
 
   // const checkFields = () => {
   //   let resStatus = false;

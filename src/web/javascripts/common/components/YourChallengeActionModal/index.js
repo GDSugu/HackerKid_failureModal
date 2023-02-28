@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import autocrop from 'autocrop-worker';
 import { $ } from '../../framework';
 import '../../../../stylesheets/common/sass/components/_your-challenges-actions-modal.scss';
 import { useDeleteChallenge, useUpdateChallengeStateOnly } from '../../../../../hooks/pages/challenges';
+import Img from '../Img';
+
+const cropImage = (element) => {
+  setTimeout(() => {
+    // eslint-disable-next-line camelcase
+    autocrop(element, null, { version: __webpack_hash__ });
+  }, 300);
+};
 
 const YourChallengeActionsModal = ({
   open, setOpen, setActionTaken, challenge, onActionsModalHide,
@@ -104,7 +113,24 @@ const YourChallengeActionsModal = ({
               </button>
             </div>
             <div className="modal-body">
-              <img src={challenge.imgPath} alt='challenge image' className='challenge-image-preview' />
+              {/* <img src={`${challenge.imgPath}?updatedAt=${Date.now()}`}
+                alt='challenge image' className='challenge-image-preview' /> */}
+              <Img
+                alt={challenge.challengeName}
+                className={'challenge-image-preview'}
+                useSource={true}
+                local={false}
+                src={`${challenge.imgPath}`}
+                fallback={'../../../../../images/games/code.svg'}
+                onLoad={(e) => {
+                  if (e.type === 'load' && e.target.src?.split('/').pop() !== 'code.svg') {
+                    cropImage(e?.target);
+                  }
+                }}
+                onError={(e) => {
+                  e.target.src = '../../../../../images/games/code.svg';
+                }}
+              />
               <div className='btn-group'>
                 {
                   challenge.challengeState === 'published' && <button

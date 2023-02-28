@@ -20,7 +20,7 @@ const GameLevelButton = ({
       id={`turtle-${virtualId}`}
       className={`btn game-level-button ${gameState} ${isCurrentQuestion ? 'current-question' : ''}`}
       onClick={() => {
-        if (gameState === 'locked'){
+        if (gameState === 'locked') {
           $('.unlock-more-modal').modal('show');
         } else if (game === 'turtle') {
           handleFetchQuestion(question.question_id);
@@ -41,9 +41,9 @@ const GameLevelButton = ({
         />
         }
 
-      </p>
-    </button>
-  </>);
+    </p>
+  </button>
+</>);
 
 const GameLevelComponent = ({ game, gameData, handleFetchQuestion }, ref) => {
   const { state: { device } } = useRootPageState();
@@ -102,6 +102,48 @@ const GameLevelComponent = ({ game, gameData, handleFetchQuestion }, ref) => {
       behavior: 'smooth',
       block: 'center',
       inline: 'center',
+    });
+  };
+
+  const onGameListScroll = () => {
+    const element = $('.game-levels-list')[0];
+    const scrollLeftBtn = $('.game-levels-list .scroll-left-btn')[0];
+    const scrollRightBtn = $('.game-levels-list .scroll-right-btn')[0];
+
+    if (element.offsetWidth + element.scrollLeft >= element.scrollWidth) {
+      $(scrollRightBtn).attr('disabled', true);
+    } else {
+      $(scrollRightBtn).removeAttr('disabled');
+    }
+
+    if (element.scrollLeft === 0) {
+      $(scrollLeftBtn).attr('disabled', true);
+    } else if (element.scrollLeft > 0) {
+      $(scrollLeftBtn).removeAttr('disabled');
+    }
+  };
+
+  const onScrollLeftBtnClick = () => {
+    const scrollList = $('.game-levels-list')[0];
+    const levelBtnWidth = $('.game-level-button')[0].clientWidth;
+
+    const left = -(levelBtnWidth + 100);
+
+    scrollList.scrollBy({
+      left,
+      behavior: 'smooth',
+    });
+  };
+
+  const onScrollRightBtnClick = () => {
+    const scrollList = $('.game-levels-list')[0];
+    const levelBtnWidth = $('.game-level-button')[0].clientWidth;
+
+    const left = (levelBtnWidth + 100);
+
+    scrollList.scrollBy({
+      left,
+      behavior: 'smooth',
     });
   };
 
@@ -171,7 +213,7 @@ const GameLevelComponent = ({ game, gameData, handleFetchQuestion }, ref) => {
                   </div> */}
                   <div className="profileImg ml-2">
                     <Link to='/profile'>
-                      <img src={'../../../../../images/common/profile.png'} alt="Hackerkid User"/>
+                      <img src={'../../../../../images/common/profile.png'} alt="Hackerkid User" />
                     </Link>
                   </div>
                 </div>
@@ -182,7 +224,13 @@ const GameLevelComponent = ({ game, gameData, handleFetchQuestion }, ref) => {
         {
           gameData?.questionList
           && <>
-            <div className="game-levels-list">
+            <div className="game-levels-list" onScroll={onGameListScroll}>
+              {
+                device === 'desktop'
+                && <button type='button' className='scroll-left-btn' onClick={onScrollLeftBtnClick}>
+                  <i className='fa fa-chevron-left'></i>
+                </button>
+              }
               {
                 gameData.questionList.map((question, index) => <GameLevelButton
                   game={game}
@@ -195,11 +243,17 @@ const GameLevelComponent = ({ game, gameData, handleFetchQuestion }, ref) => {
                   isCurrentQuestion={isCurrentQuestion(question, index)}
                 />)
 
-                  // <GameLevelButton
-                  // question={{ state: 'open' }}
-                  // virtualId={1}
-                  // isCurrentQuestion={true}
-                  // />
+                // <GameLevelButton
+                // question={{ state: 'open' }}
+                // virtualId={1}
+                // isCurrentQuestion={true}
+                // />
+              }
+              {
+                device === 'desktop'
+                && <button type='button' className='scroll-right-btn' onClick={onScrollRightBtnClick}>
+                  <i className='fa fa-chevron-right'></i>
+                </button>
               }
             </div>
           </>
@@ -230,7 +284,7 @@ const GameLevelComponent = ({ game, gameData, handleFetchQuestion }, ref) => {
                   />
                 </p>
                 <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M15 7.76795C16.3333 8.53775 16.3333 10.4623 15 11.2321L3 18.1603C1.66667 18.9301 1.01267e-06 17.9678 1.07997e-06 16.4282L1.68565e-06 2.5718C1.75295e-06 1.0322 1.66667 0.0699456 3 0.839746L15 7.76795Z" fill="white"/>
+                  <path d="M15 7.76795C16.3333 8.53775 16.3333 10.4623 15 11.2321L3 18.1603C1.66667 18.9301 1.01267e-06 17.9678 1.07997e-06 16.4282L1.68565e-06 2.5718C1.75295e-06 1.0322 1.66667 0.0699456 3 0.839746L15 7.76795Z" fill="white" />
                 </svg>
               </div>
             </div>

@@ -44,7 +44,8 @@ const changeMobBg = (transparent = false) => {
 };
 
 const hideDefaultNavBar = (device, zombieLandState, isPageMounted) => {
-  document.querySelector('nav:first-child').style.display = 'none';
+  // document.querySelector('nav:first-child').style.display = 'none';
+  $('nav:first-child').hide();
   let componentContainer = `.zombieLand-${zombieLandState}-container`;
   if (device === 'mobile') {
     componentContainer = `.zombieLand-mob-${zombieLandState}-container`;
@@ -202,7 +203,7 @@ const ZombieLandQuestionComponent = ({ status, questionObject }) => <>
                   && (questionObject?.stage !== '')
                   && <>
                     <Img
-                      src={questionObject.thumbnail}
+                      src={`${questionObject.thumbnail}`}
                       local={false}
                     />
                   </>
@@ -721,7 +722,7 @@ const HintContent = ({ hint: hintItem }) => <>
     && <>
       <div className="hint-img-container">
         <img
-          src={hintItem.picture.replace(/zombieland/g, 'zombieLand/assets')}
+          src={`${hintItem.picture.replace(/zombieland/g, 'zombieLand/assets')}`}
           alt="Instruction picture"
           className='instruction-picture'
         />
@@ -1058,7 +1059,8 @@ const ZombieLandGameComponent = ({ zlState, zlSetState, zlStatic }) => {
     });
 
     return () => {
-      document.querySelector('nav:first-child').style.display = 'block';
+      // document.querySelector('nav:first-child').style.display = 'block';
+      $('nav:first-child').show();
       document.querySelector('#root').style.background = 'unset';
     };
   }, []);

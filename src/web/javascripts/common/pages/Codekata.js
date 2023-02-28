@@ -18,6 +18,7 @@ import 'ace-builds/src-noconflict/ext-language_tools';
 import { getSession, setSession } from '../../../../hooks/common/framework';
 import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
 import AwardsNotificationCard from '../components/AwardsNotificationCard';
+import LanguageSelector from '../components/LanguageSelector';
 
 const resizeHandler = (nav = 'nav', selector) => {
   try {
@@ -33,8 +34,15 @@ const resizeHandler = (nav = 'nav', selector) => {
 
 const updateHistory = (response) => {
   try {
-    const { virtualId } = response.questionObject;
-    window.history.replaceState({}, '', `/coding-pirate/${virtualId}`);
+    let seoUrl = '/coding-pirate/';
+    const { virtualId, uniqueString } = response.questionObject;
+    if (virtualId) {
+      seoUrl += `${virtualId}/`;
+    }
+    if (uniqueString) {
+      seoUrl += `${uniqueString}`;
+    }
+    window.history.replaceState({}, '', seoUrl);
   } catch (error) {
     console.log(error);
   }
@@ -228,17 +236,18 @@ const CodekataHomeContainer = ({ changeRoute }) => {
 };
 
 const CodekataDesktopContainer = ({
-  languages,
+  // languages,
   codekataData,
   templete,
-  getLanguageId,
-  codeRun,
-  codeSubmit,
+  getLanguageId = () => {},
+  getLanguageName = () => {},
+  codeRun = () => {},
+  codeSubmit = () => {},
   device,
   questionList,
 }) => {
   const { questionObject } = codekataData;
-  const [selectedLanguage, setLanguage] = useState('PYTHON 3');
+  const [selectedLanguage, setLanguage] = useState('python3');
   const [inputVal, setInput] = useState(templete('PYTHON 3'));
   const [output, setOutput] = useState('');
 
@@ -249,13 +258,21 @@ const CodekataDesktopContainer = ({
   const awardsNotificationCardRef = useRef(null);
 
   const changeLoag = async (selectedLang) => {
-    setInput(templete(selectedLang));
+    const langName = getLanguageName(selectedLang);
+    setInput(templete(langName));
     return import(
-      `ace-builds/src-noconflict/mode-${getLanguageId(selectedLang)}`
+      `ace-builds/src-noconflict/mode-${getLanguageId(langName)}`
     ).then(() => {
+      console.log('lang change ', langName, selectedLang);
       setLanguage(selectedLang);
       return true;
     });
+  };
+
+  const onLanguageSelect = (e) => {
+    const jtarget = $(e.target);
+    const languageValue = jtarget.attr('data-language-value');
+    changeLoag(languageValue);
   };
 
   const runCode = () => {
@@ -263,7 +280,7 @@ const CodekataDesktopContainer = ({
     const inputValue = inputRef.current.value;
     $('#loader').show();
     const editorCode = editorRef.current.editor.getValue();
-    const reqData = { lang: selectedLanguage, code: editorCode };
+    const reqData = { lang: getLanguageName(selectedLanguage), code: editorCode };
     if (inputValue && inputValue !== '') {
       reqData.input = inputValue;
     }
@@ -289,7 +306,7 @@ const CodekataDesktopContainer = ({
     $('#loader').show();
     codeSubmit({
       code: editorCode,
-      lang: selectedLanguage,
+      lang: getLanguageName(selectedLanguage),
       questionId: questionObject.questionId,
     }).then((res) => {
       let message = '';
@@ -411,7 +428,7 @@ const CodekataDesktopContainer = ({
             <div className="col-6 px-2 left-cont">
               <div className="code-container">
                 <div className="language-cont">
-                  <select
+                  {/* <select
                     className="language-select"
                     onChange={(item) => changeLoag(item.target.value)}
                     value={selectedLanguage}>
@@ -420,13 +437,19 @@ const CodekataDesktopContainer = ({
                         {lang}
                       </option>
                     ))}
-                  </select>
+                  </select> */}
+                  <LanguageSelector
+                    onLoad={() => {}}
+                    onLanguageOptionClick={onLanguageSelect}
+                    selectedLanguageValue={selectedLanguage}
+                    className={'language-select'}
+                  />
                 </div>
 
                 <div className="editor-container">
                   <Ace
                     ref={editorRef}
-                    mode={getLanguageId(selectedLanguage)}
+                    mode={getLanguageId(getLanguageName(selectedLanguage))}
                     theme="monokai"
                     width="100%"
                     height='100%'
@@ -438,6 +461,7 @@ const CodekataDesktopContainer = ({
                       enableLiveAutocompletion: true,
                       enableSnippets: true,
                       scrollPastEnd: true,
+                      fontSize: 16,
                     }}
                   />
                 </div>
@@ -757,7 +781,7 @@ const CodekataDesktopContainer = ({
                 </div>
               </div>
               <div className="language-select-cont-mob">
-                <select
+                {/* <select
                   className="language-select-mob"
                   onChange={(item) => changeLoag(item.target.value)}
                   value={selectedLanguage}>
@@ -766,12 +790,18 @@ const CodekataDesktopContainer = ({
                       {lang}
                     </option>
                   ))}
-                </select>
+                </select> */}
+                <LanguageSelector
+                  onLoad={() => {}}
+                  onLanguageOptionClick={onLanguageSelect}
+                  selectedLanguageValue={selectedLanguage}
+                  className={'language-select'}
+                />
               </div>
               <div className='editor-container-mob'>
                 <Ace
                   ref={editorRef}
-                  mode={getLanguageId(selectedLanguage)}
+                  mode={getLanguageId(getLanguageName(selectedLanguage))}
                   theme="monokai"
                   width="100%"
                   height='100%'
@@ -940,9 +970,10 @@ const CodekataGameComponent = () => {
     state: codekataData,
     static: {
       getCodekataQuestions,
-      availableLanguages,
+      // availableLanguages,
       getTempleteData,
       getLanguageId,
+      getLanguageName,
       runCode,
       submitCode,
     },
@@ -964,7 +995,6 @@ const CodekataGameComponent = () => {
     } else {
       redirectId = codekataData.questionObject.virtualId;
     }
-    console.log('redirectId', redirectId);
     if (redirectId > gamesLimit('codekata') && !isAlreadyCompleted()) {
       pathNavigator(`coding-pirate/${gamesLimit('codekata') || 1}`);
     }
@@ -1036,10 +1066,11 @@ const CodekataGameComponent = () => {
         />
         )}
         <CodekataDesktopContainer
-          languages={availableLanguages}
+          // languages={availableLanguages}
           codekataData={codekataData}
           templete={getTempleteData}
           getLanguageId={getLanguageId}
+          getLanguageName={getLanguageName}
           codeRun={runCode}
           codeSubmit={submitCode}
           device={device}

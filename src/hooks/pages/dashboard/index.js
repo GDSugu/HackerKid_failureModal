@@ -23,7 +23,7 @@ const useDashboard = ({ dateString = new Date().toISOString(), isPageMounted }) 
         sessionData: {
           name: sessionData.name,
           pointsEarned: sessionData.pointsEarned,
-          profileLink: sessionData.profileLink,
+          profileLink: sessionData.profileImage,
           rank: sessionData.rank,
         },
       }));

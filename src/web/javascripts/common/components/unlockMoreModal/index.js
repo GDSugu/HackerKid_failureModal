@@ -1,7 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Modal from '../Modal';
-import Img from '../Img';
 import usePricing from '../../../../../hooks/pages/pricing';
 import '../../../../stylesheets/common/sass/components/_unlockMoreModal.scss';
 import { $, pathNavigator } from '../../framework';
@@ -56,8 +55,8 @@ const UnlockMoreModal = () => {
   if (subscriptionDetails) {
     planDetails.premium = subscriptionDetails.find((item) => item.planType === 'premium');
   }
-  console.log(planDetails);
-return <>
+
+  return <>
      <Modal
       modalClass={'unlock-more-modal'}
       customClass={'curved'}
@@ -140,7 +139,6 @@ return <>
                   />
                   </p>
                   </div>
-                  
                   </div>
                   </div>
                   </div>
@@ -160,19 +158,18 @@ return <>
                     </div>
                     <div className='col-6'>
                     <button onClick={initPayment} className='btn btn-primary w-100'>
-                    <p className='mb-0'>     
+                    <p className='mb-0'>
                       <FormattedMessage
                         defaultMessage={'Upgrade Now'}
                         description={'Unlock more modal upgrade button'}
                       /></p>
                     </button>
                     </div>
-
         </div>
         </div>
         </div>
       </Modal>
-
-</>};
+  </>;
+};
 
 export default UnlockMoreModal;

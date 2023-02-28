@@ -60,11 +60,16 @@ const CircularProgress = ({ value, totalValue }) => (
         <stop offset="0%" className="start" />
         <stop offset="90%" className="end" />
       </linearGradient>
+      <path id="progressPlaceHolder" strokeLinecap="round" strokeWidth="6" strokeDasharray="251.2, 251.2" className="progress-bar-placeholder"
+        d="M50 10
+                a 40 40 0 0 1 0 80
+                a 40 40 0 0 1 0 -80">
+      </path>
       <path
         id="yourScoreProgress"
         strokeLinecap="round"
         strokeWidth="6"
-        strokeDasharray="140, 251.2"
+        strokeDasharray="0, 251.2"
         className="progress-bar"
         d="M50 10
                             a 40 40 0 0 1 0 80
@@ -130,81 +135,102 @@ const animateTotalCount = (selectorPrefix, score, percentage) => {
 
 const secToMin = (time) => (time > 60 ? `${Math.floor(time / 60)} mins` : `${time} sec`);
 
-const CourseDetailsCard = ({ overallProgress, progress }) => (
+const ProgressDesktopCard = ({ progress }) => <div className='module-progress-container'>
+<div className='module-card-cont'>
+  <img
+    className='module-img'
+    src={progress.thumbnail}
+  />
   <div>
-  <div className='progress-card-cont'>
-  <div className='overall-progress-cont'>
-  <div className='kids-img-cont'>
-    <Img
-    src='courses/kids.png'/>
-  </div>
-  <div className='xp-coins-cont'>
-    <div className='d-flex align-items-center mr-3'>
-    <Img
-    src='courses/xp.png'/>
-    <h5 className='xp-text'>
-      <FormattedMessage
-      defaultMessage={'{xp} xp'}
-      values={{ xp: overallProgress.xpEarned }}/>
-    </h5>
-    </div>
-    <div className='d-flex align-items-center ml-3'>
-    <Img
-    src='courses/Coins.png'/>
-    <h5 className='xp-text'>
-      <FormattedMessage
-      defaultMessage={'{coins} coins'}
-      values={{ coins: overallProgress.coinsEarned }}/>
-    </h5>
-    </div>
-  </div>
-  </div>
-  <div className='progress-cont'>
-  <div className='circular-progress-container'>
-    <CircularProgress
-      value={overallProgress.completedCount}
-      totalValue={overallProgress.totalVideos} />
-  </div>
-  {(progress && progress.length > 0) && <div className='module-progress-container'>
-    <div className='module-card-cont'>
-      <img className='module-img' src={progress[0].thumbnail}/>
-      <div>
-        <p className='mb-0'><FormattedMessage
-      defaultMessage={'{name}'}
-      values={{ name: progress[0].moduleName }}/></p>
-        <p className='watched-count'><FormattedMessage
-      defaultMessage={'{completed}/{total} watched'}
-      values={{ completed: progress[0].watched, total: progress[0].totalVideos }}/></p>
-      </div>
-    </div>
-    <div className='module-progress'>
-      <div className='d-flex justify-content-around'>
-        <div className='d-flex'>
-          <Img
-            className='module-icons'
-            src='../../../../images/common/xp.png' />
-          <p className='ml-1'><FormattedMessage
-      defaultMessage={'{xp} xp'}
-      values={{ xp: progress[0].xpEarned }}/></p>
-        </div>
-        <div className='d-flex'>
-          <Img
-            className='module-icons'
-            src='../../../../images/courses/timer.png' />
-          <p className='ml-1'><FormattedMessage
-      defaultMessage={'{time}'}
-      values={{ time: secToMin(progress[0].watchTime) }}/></p>
-        </div>
-      </div>
-      <div>
-        <div className='linear-progress-bar'><div className='progress-done' style={{ width: `${(progress[0].watched / progress[0].totalVideos) * 100}%` }}></div></div>
-      </div>
-    </div>
-  </div>}
+    <p className='mb-0'><FormattedMessage
+  defaultMessage={'{name}'}
+  values={{ name: progress.moduleName }}/></p>
+    <p className='watched-count'><FormattedMessage
+  defaultMessage={'{completed}/{total} watched'}
+  values={{ completed: `${progress.watched ? progress.watched : 0}`, total: progress.totalVideos }}/></p>
   </div>
 </div>
+<div className='module-progress'>
+  <div className='d-flex justify-content-around'>
+    {/* <div className='d-flex'>
+      <Img
+        className='module-icons'
+        src='../../../../images/common/xp.png' />
+      <p className='ml-1'><FormattedMessage
+  defaultMessage={'{xp} xp'}
+  values={{ xp: progress.xpEarned }}/></p>
+    </div> */}
+    <div className='d-flex mb-2'>
+      <Img
+        className='module-icons'
+        src='../../../../images/courses/timer.png' />
+      <p className='ml-1 mb-0'><FormattedMessage
+  defaultMessage={'{time}'}
+  values={{ time: secToMin(progress.watchTime) }}/></p>
+    </div>
+  </div>
+  <div>
+    <div className='linear-progress-bar'><div className='progress-done' style={{ width: `${(progress.watched / progress.totalVideos) * 100}%` }}></div></div>
+  </div>
 </div>
-);
+</div>;
+
+const CourseDetailsCard = ({ overallProgress, progress, moduleData }) => {
+  const dummyData = { ...progress };
+  if (moduleData.length > 0) {
+    dummyData.totalVideos = moduleData[0].totalVideos;
+    dummyData.thumbnail = moduleData[0].thumbnail;
+    dummyData.moduleName = moduleData[0].moduleName;
+  }
+  dummyData.watched = 0;
+  dummyData.xpEarned = 0;
+  dummyData.watchTime = 0;
+
+  const profileLink = window.localStorage.getItem('profileLink');
+
+  return (
+    <div>
+      <div className='progress-card-cont'>
+        <div className='overall-progress-cont col-6 col-sm-4'>
+        <div className='kids-img-cont '>
+        <div className="hero-card-img"
+              style={{ backgroundImage: `url(${profileLink})` }}></div>
+        </div>
+        <div className='xp-coins-cont'>
+          {/* <div className='d-flex align-items-center mr-3'>
+          <Img
+          src='courses/xp.png'/>
+          <h5 className='xp-text'>
+            <FormattedMessage
+            defaultMessage={'{xp} xp'}
+            values={{ xp: overallProgress.xpEarned }}/>
+          </h5>
+          </div> */}
+          <div className='d-flex align-items-center ml-3'>
+          <Img
+          src='courses/Coins.png'/>
+          <h5 className='xp-text'>
+            <FormattedMessage
+            defaultMessage={'{coins} coins'}
+            values={{ coins: overallProgress.coinsEarned }}/>
+          </h5>
+          </div>
+        </div>
+        </div>
+      <div className='progress-cont col-6 col-sm-8'>
+      <div className='circular-progress-container'>
+        <CircularProgress
+          value={overallProgress.completedCount}
+          totalValue={overallProgress.totalVideos} />
+      </div>
+      {(progress && progress.length > 0) ? <ProgressDesktopCard
+      progress={progress[0]}/> : <ProgressDesktopCard
+      progress={dummyData}/>}
+      </div>
+    </div>
+    </div>
+  );
+};
 
 const animateModuleProgress = (percent) => {
   if (percent) {
@@ -411,12 +437,8 @@ const Courses = () => {
     animateModuleProgress((progress[0].watched / progress[0].totalVideos) * 100);
   }
 
-  React.useEffect(() => {
-    console.log();
-
-    return () => {
-      isPageMounted.current = false;
-    };
+  React.useEffect(() => () => {
+    isPageMounted.current = false;
   }, []);
 
   return (
@@ -426,6 +448,7 @@ const Courses = () => {
           <CourseDetailsCard
             overallProgress={overallProgress}
             progress={progress}
+            moduleData={moduleData}
           />
         )}
         {!isDesktop && (
