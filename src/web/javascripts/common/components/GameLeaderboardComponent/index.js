@@ -82,7 +82,6 @@ const AwardCollectionComponent = ({ awards }) => {
   // React.useEffect(() => {
   //   getAwardsByGame({ cached: false });
   // }, []);
-  console.log(awards);
   if (!awards || !awards.length) {
     return null;
   }

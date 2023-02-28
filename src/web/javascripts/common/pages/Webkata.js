@@ -9,8 +9,8 @@ import { useWebkataFetchQuestion, useWebkataSubmitQuestion } from '../../../../h
 import '../../../stylesheets/common/pages/webkata/style.scss';
 import Img from '../components/Img';
 import WebkataLevelComponent from '../components/WebkataLevelComponent';
-// import WebkataNavBar from '../components/WebkataNavBar';
-import GameNavBar from '../components/GameNavBar';
+import WebkataNavBar from '../components/WebkataNavBar';
+// import GameNavBar from '../components/GameNavBar';
 import GameLeaderboardComponent from '../components/GameLeaderboardComponent';
 import Modal from '../components/Modal';
 import CodeEditor from '../components/CodeEditor';
@@ -553,19 +553,19 @@ const WebkataGameComponent = () => {
   }, [webkataSubmitState]);
 
   return <>
-    {/* <WebkataNavBar
+    <WebkataNavBar
       levelBtnHandler={onLevelIndicatorClick}
       leaderboardHandler={onLeaderboardBtnClick}
       questionState={memorizedWebkataQuestionState}
       isWebkataGamePage={true}
-    /> */}
-    <GameNavBar
+    />
+    {/* <GameNavBar
       questionState={memorizedWebkataQuestionState}
       // handleHint={handleHint}
       levelBtnHandler={onLevelIndicatorClick}
       isGameMainPage={true}
       leaderboardHandler={onLeaderboardBtnClick}
-    />
+    /> */}
     <main className={`webkata-game-container ${(device === 'mobile' || !isDesktop) ? 'webkata-game-mob-container' : ''}`}>
       <ProblemStatement
         currentDevice={device}

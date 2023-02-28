@@ -7,14 +7,14 @@ nav {
   .logo {
     margin-left: 1rem;
 
-    @include gm.media-breakpoint-down(md) {
+    @include gm.media-breakpoint-down(ml) {
       order: 1;
       margin-top: 1rem;
     }
   }
 
   .navigation-container {
-    @include gm.media-breakpoint-down(md) {
+    @include gm.media-breakpoint-down(ml) {
       order: 3;
       width: 100%;
       margin-top: 1rem;
@@ -28,7 +28,7 @@ nav {
       display: grid;
       place-items: center;
 
-      @include gm.media-breakpoint-down(md) {
+      @include gm.media-breakpoint-down(ml) {
         padding: 1.5rem 0;
         padding-bottom: 0;
         flex: 1;
@@ -72,8 +72,9 @@ nav {
 
   .profileImg {
     margin-right: 1rem;
+    position: relative;
 
-    @include gm.media-breakpoint-down(md) {
+    @include gm.media-breakpoint-down(ml) {
       order: 2;
       margin-top: 1rem;
     }
@@ -82,6 +83,72 @@ nav {
       border-radius: 50%;
       width: 2.75rem;
       height: 2.75rem;
+    }
+
+    .gradient-box {
+      $gradient-color-1: gt.theme-var(red-yellow-gradient-1);
+      $gradient-color-2: gt.theme-var(red-yellow-gradient-2);
+
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      bottom: -7px;
+      left: -4px;
+      background: linear-gradient(270deg, $gradient-color-1 0%, $gradient-color-2 100%);
+      padding: 1px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+
+      .premium-profile-badge {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: gt.theme-var(bg-1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img.crown {
+          width: 14px;
+          height: 12px;
+        }
+      }
+    }
+  }
+
+  .premium-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background-color: gt.theme-var(bg-1);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    margin-left: 1rem;
+
+    @include gm.media-breakpoint-down(ml) {
+      padding: 0.5rem;
+      margin-left: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .crown {
+      width: 24px;
+      height: 20px;
+
+      @include gm.media-breakpoint-down(ml) {
+        width: 16px;
+        height: 14px;
+      }
+    }
+
+    .premium-text {
+      font-size: 16px;
+
+      @include gm.media-breakpoint-down(ml) {
+        font-size: 12px;
+      }
     }
   }
 }
