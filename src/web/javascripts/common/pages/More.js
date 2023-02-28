@@ -293,7 +293,7 @@ const MoreCards = ({ clubsEnabled }) => <>
 
 const MoreMenu = ({ logoutHandler = () => { } }) => <>
   <div className="more-menu-container">
-    <a href='#' className="more-menu-card btn btn-block" onClick={logoutHandler}>
+    <button className="more-menu-card btn btn-block" onClick={logoutHandler}>
       <p>
         <FormattedMessage
           defaultMessage={'Logout'}
@@ -301,8 +301,8 @@ const MoreMenu = ({ logoutHandler = () => { } }) => <>
         />
       </p>
       <i className="fas fa-angle-right"></i>
-    </a>
-    <a href='/profile/edit' className="more-menu-card btn btn-block">
+    </button>
+    <Link to='/profile/edit' className="more-menu-card btn btn-block">
       <p>
         <FormattedMessage
           defaultMessage={'Account Settings'}
@@ -310,7 +310,16 @@ const MoreMenu = ({ logoutHandler = () => { } }) => <>
         />
       </p>
       <i className="fas fa-angle-right"></i>
-    </a>
+    </Link>
+    <Link to='/pricing' className="more-menu-card btn btn-block">
+      <p>
+        <FormattedMessage
+          defaultMessage={'Subscription'}
+          description={'more menu button'}
+        />
+      </p>
+      <i className="fas fa-angle-right"></i>
+    </Link>
     <button className="more-menu-card btn btn-block" onClick={() => $('.help-modal').modal('show')}>
       <p>
         <FormattedMessage
