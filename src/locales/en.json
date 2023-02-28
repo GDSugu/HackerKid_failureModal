@@ -606,6 +606,10 @@
     "defaultMessage": "Time Spent:",
     "description": "Time spent title"
   },
+  "8dkNOD": {
+    "defaultMessage": "“HackerKID is a fun way for kids to learn to code as well as play. With this pandemic situation and kids unable to go out to play, this is a great opportunity to keep them occupied in a better way. It let's them understand the basic concepts of coding like looping structures, conditions and flow of the program. My son is glued to it!!! And we are happy to tell our family and friends about.”",
+    "description": "happy learning description"
+  },
   "8g9/ii": {
     "defaultMessage": "Premium Edition Features:",
     "description": "Unlock more modal features header"
@@ -788,6 +792,14 @@
   "Bj5WGE": {
     "defaultMessage": "View all {data}",
     "description": "Module Name"
+  },
+  "BmbFFU": {
+    "defaultMessage": "Why Choose HackerKID 2.0?",
+    "description": "HackerKID title"
+  },
+  "BnZj6z": {
+    "defaultMessage": "PREMIUM",
+    "description": "premium text"
   },
   "Bqm+bJ": {
     "defaultMessage": "Webkata JS",

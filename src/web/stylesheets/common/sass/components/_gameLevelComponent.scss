@@ -8,7 +8,6 @@
   width: 100%;
   top: 0;
   z-index: 1000;
-  // background: #17181875;
   background: gt.theme-var(overlay1);
   backdrop-filter: blur(2rem);
 
@@ -103,12 +102,12 @@
 
       .scroll-left-btn {
         left: 0;
-        background: linear-gradient(90deg, #0B0C0C 0%, rgba(15, 16, 16, 0) 100%);
+        background: linear-gradient(90deg, #0b0c0c 0%, rgba(15, 16, 16, 0) 100%);
       }
 
       .scroll-right-btn {
         right: 0;
-        background: linear-gradient(270deg, #0B0C0C 0%, rgba(15, 16, 16, 0) 100%);
+        background: linear-gradient(270deg, #0b0c0c 0%, rgba(15, 16, 16, 0) 100%);
       }
 
       .game-level-button {

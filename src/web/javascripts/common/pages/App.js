@@ -133,8 +133,7 @@ const App = () => {
         <Route path='register' caseSensitive={true} element={<RouteRegister />} />
         <Route path='forgot-password' caseSensitive={true} element={<RouteForgotPassword />} />
       </Route>
-      <Route path='/' caseSensitive={true} element={<NavBar 
-      showIcons={false}/>}>
+      <Route path='/' caseSensitive={true} element={<NavBar showIcons={false}/>}>
         <Route path='pricing' element={<RoutePricing />} />
       </Route>
       <Route path='/about' caseSensitive={true} element={<RouteAbout />} />
