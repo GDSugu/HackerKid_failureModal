@@ -610,6 +610,10 @@
     "defaultMessage": "Time Spent:",
     "description": "Time spent title"
   },
+  "8g9/ii": {
+    "defaultMessage": "Premium Edition Features:",
+    "description": "Unlock more modal features header"
+  },
   "8gWjFk": {
     "defaultMessage": "{description}",
     "description": "description of problem statement"
@@ -761,6 +765,10 @@
     "defaultMessage": "What is a club and how does it work?",
     "description": "faq title"
   },
+  "BMjyfk": {
+    "defaultMessage": "Full Video Library",
+    "description": "Unlock more modal features: Full Video Library"
+  },
   "BNGdt+": {
     "defaultMessage": "No",
     "description": "cancel logout"
@@ -812,6 +820,10 @@
   "CT79Lc": {
     "defaultMessage": "Club Leaderboard",
     "description": "club leaderboard title"
+  },
+  "CUz3EJ": {
+    "defaultMessage": "HackerKid Premium gives you full access to the platform features for a 1 year subscription. With exciting coding games, problems, gamified environments you have a lot you explore, play and learn,",
+    "description": "Unlock more modal description"
   },
   "CVflbu": {
     "defaultMessage": "Advance in Programming by solving problems in any programming language with an Algorithmic approach.",
@@ -876,6 +888,10 @@
   "Dahcx9": {
     "defaultMessage": "{title} {awardCount}",
     "description": "award title"
+  },
+  "Dak4X5": {
+    "defaultMessage": "₹5000",
+    "description": "Unlock more modal from discount price price"
   },
   "DpAMVM": {
     "defaultMessage": "Check out our pricing plans and choose the one that suits you the best.",
@@ -1108,6 +1124,10 @@
   "HbJPsh": {
     "defaultMessage": "All Challenges",
     "description": "all challenges"
+  },
+  "HiIltf": {
+    "defaultMessage": "Full Game Features Access",
+    "description": "Unlock more modal features : Full Game Features Access"
   },
   "Hjj2+R": {
     "defaultMessage": "Register to Get help from Turtle",
@@ -1506,6 +1526,10 @@
     "defaultMessage": "View Club",
     "description": "Club show button"
   },
+  "OYOyLO": {
+    "defaultMessage": "(*Excluding GST)",
+    "description": "Unlock more modal (*Excluding GST)"
+  },
   "OdODwS": {
     "defaultMessage": "Create Account",
     "description": "Create Account button"
@@ -1595,6 +1619,10 @@
   "QUO1DE": {
     "defaultMessage": "Problem Statement:",
     "description": "Heading of problem statement"
+  },
+  "QX7pV0": {
+    "defaultMessage": "Upgrade Now",
+    "description": "Unlock more modal upgrade button"
   },
   "Qb0n8J": {
     "defaultMessage": "Are you sure you want to logout?",
@@ -1697,6 +1725,10 @@
   "SI6+pb": {
     "defaultMessage": "Problem Statement",
     "description": "problem statement label"
+  },
+  "SJg9CJ": {
+    "defaultMessage": "HackerKid Premium",
+    "description": "HackerKid Premium"
   },
   "SL6O2c": {
     "defaultMessage": "Password",
@@ -2165,6 +2197,10 @@
     "defaultMessage": "Will my kid get any certificates or awards for their performance?",
     "description": "faq title"
   },
+  "b9OJzr": {
+    "defaultMessage": "Know More",
+    "description": "Unlock more modal Know button"
+  },
   "bCvHuI": {
     "defaultMessage": "Invites",
     "description": "Invites"
@@ -2327,6 +2363,10 @@
   "fOZCSk": {
     "defaultMessage": "Set a Password",
     "description": "Set password label"
+  },
+  "fRHLVR": {
+    "defaultMessage": "and many more...",
+    "description": "Unlock more modal features : and many more..."
   },
   "fT7uau": {
     "defaultMessage": "completed"
@@ -3088,6 +3128,10 @@
     "defaultMessage": "Choose a club display image",
     "description": "club image label"
   },
+  "tkXfK6": {
+    "defaultMessage": "Micro Degree Certificates",
+    "description": "Unlock more modal features : Micro Degree Certificates"
+  },
   "toPdTf": {
     "defaultMessage": "Leaderboard",
     "description": "leaderboard button"
@@ -3303,6 +3347,10 @@
     "defaultMessage": "Register for free",
     "description": "register button"
   },
+  "xxFTv9": {
+    "defaultMessage": "Upgrade to",
+    "description": "Upgrade to"
+  },
   "xyhq1c": {
     "defaultMessage": "Share in",
     "description": "share in social media text"
@@ -3408,5 +3456,9 @@
   "zrZhCC": {
     "defaultMessage": "More Info",
     "description": "More Info title"
+  },
+  "zt7UyM": {
+    "defaultMessage": "₹{price}",
+    "description": "Unlock more modal price"
   }
 }
