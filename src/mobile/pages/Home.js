@@ -404,7 +404,7 @@ const DashboardBlock = ({
               >
                 <Image
                   source={dashboardUserData && dashboardUserData.profileImage ? {
-                    uri: dashboardUserData.profileImage.toString().replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`),
+                    uri: dashboardUserData.profileImage.toString(),
                   } : avatar }
                   style={style.heroCardImage}
                   defaultSource={avatar}
@@ -469,7 +469,7 @@ const HomeBlock = ({
           <Image
             style={style.bodyCardContentTitleImage}
             source={dashboardUserData ? {
-              uri: dashboardUserData.profileImage.toString().replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`),
+              uri: dashboardUserData.profileImage.toString(),
             } : avatar }
           />
           <>

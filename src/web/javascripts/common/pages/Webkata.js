@@ -501,7 +501,8 @@ const WebkataGameComponent = () => {
     return () => {
       clearTimeout(timer);
       successModalRef?.current?.hide();
-      document.querySelector('nav:first-child').style.display = 'block';
+      // document.querySelector('nav:first-child').style.display = 'block';
+      $('nav:first-child').show();
       window.removeEventListener('resize', listenResizeWebkata);
     };
   }, []);

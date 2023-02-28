@@ -166,6 +166,55 @@ const getLanguageId = (lang) => {
   return modeList[langVal];
 };
 
+const getLanguageName = (langId) => {
+  const valueToLanguageDisplayNameMap = {
+    bash: 'BASH',
+    basic: 'BASIC',
+    c: 'C',
+    clojure: 'CLOJURE',
+    crystal: 'CRYSTAL',
+    cpp: 'C++',
+    csharp: 'C#',
+    elixir: 'ELIXIR',
+    erlang: 'ERLANG',
+    go: 'GO',
+    haskell: 'HASKELL',
+    python2: 'PYTHON 2',
+    python3: 'PYTHON 3',
+    insect: 'INSECT',
+    java: 'JAVA',
+    java8: 'JAVA 8',
+    javascript: 'JAVASCRIPT',
+    ocaml: 'OCAML',
+    octave: 'OCTAVE',
+    pascal: 'PASCAL',
+    ruby: 'RUBY',
+    rust: 'RUST',
+    objectivec: 'OBJECTIVE C',
+    php: 'PHP',
+    scala: 'SCALA',
+    nasm: 'NASM',
+    clangc: 'CLANG C',
+    clangcpp: 'CLANG CPP',
+    cobol: 'COBOL',
+    sbcl: 'SBCL',
+    d: 'D',
+    fsharp: 'F#',
+    fortran: 'FORTRAN',
+    groovy: 'GROOVY',
+    kotlin: 'KOTLIN',
+    lua: 'LUA',
+    prolog: 'PROLOG',
+    r: 'R',
+    sqlite: 'SQLITE',
+    swift: 'SWIFT',
+    typescript: 'TYPESCRIPT',
+    vbnc: 'VBNC',
+  };
+
+  return valueToLanguageDisplayNameMap[langId];
+};
+
 const getTempleteData = (language) => {
   const templateData = {
     BASH: '#A Simple Hello World Program\necho "Hello World"\n\n#Getting input via STDIN\nread userInput\necho "Input provided is: $userInput"',
@@ -329,6 +378,7 @@ const useCodekata = ({ isPageMounted, virtualid }) => {
       availableLanguages,
       getTempleteData,
       getLanguageId,
+      getLanguageName,
       runCode,
       submitCode,
     },

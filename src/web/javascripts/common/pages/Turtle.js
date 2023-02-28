@@ -38,7 +38,8 @@ const resizeHandler = (nav = 'nav', selector) => {
 };
 
 const hideDefaultNavBar = (device, turtleState) => {
-  document.querySelector('nav:first-child').style.display = 'none';
+  // document.querySelector('nav:first-child').style.display = 'none';
+  $('nav:first-child').hide();
   let componentContainer = `.turtle-${turtleState}-container`;
   if (device === 'desktop') {
     componentContainer = `.turtle-${turtleState}-container`;
@@ -298,13 +299,41 @@ const TurtlePlayGroundComponent = ({ handleRunCode, handleDrawingState, handleHi
     }
   };
 
+  const toggleBlocklyInputTag = () => {
+    const elemWidgetDiv = $('.blocklyWidgetDiv');
+    const currentTab = $('#blocklyPythonTab .nav-link.active');
+    if (elemWidgetDiv[0].style.display === 'block' && elemWidgetDiv.hasClass('geras-renderer')) {
+      if (currentTab !== 'blockly') {
+        elemWidgetDiv.hide();
+      } else {
+        elemWidgetDiv.show();
+      }
+    }
+  };
+
+  const toggleTabChange = (tab = 'blockly') => {
+    if (tab === 'output') {
+      toggleHintBtn(true);
+    } else {
+      toggleHintBtn(false);
+    }
+  };
+
+  React.useEffect(() => {
+    $('#blocklyPythonTab .nav-link').on('shown.bs.tab', toggleBlocklyInputTag);
+
+    return () => {
+      $('#blocklyPythonTab .nav-link').on('shown.bs.tab', toggleBlocklyInputTag);
+    };
+  }, []);
+
   return <>
     <div className="turtle-editor-container">
       {/* <div className="turtle-skeleton-body"> */}
       <div className="turtle-editor-title">
         <ul className="nav nav-tabs border-0" id="blocklyPythonTab" role="tablist">
           <li className="nav-item" role="presentation">
-            <a className="nav-link active" id="turtle-tab" onClick={() => toggleHintBtn(false)} data-toggle="tab" href="#turtleBlock" role="tab" aria-controls="turtle" aria-selected="true">
+            <a className="nav-link active" id="turtle-tab" onClick={() => toggleTabChange('blockly')} data-toggle="tab" href="#turtleBlock" role="tab" aria-controls="turtle" aria-selected="true">
               <FormattedMessage
                 defaultMessage={'Playground'}
                 description={'Playground tab'}
@@ -312,7 +341,7 @@ const TurtlePlayGroundComponent = ({ handleRunCode, handleDrawingState, handleHi
             </a>
           </li>
           <li className="nav-item" role="presentation">
-            <a className="nav-link" id="code-tab" onClick={() => toggleHintBtn(false)} data-toggle="tab" href="#codeBlock" role="tab" aria-controls="code" aria-selected="false">
+            <a className="nav-link" id="code-tab" onClick={() => toggleTabChange('code')} data-toggle="tab" href="#codeBlock" role="tab" aria-controls="code" aria-selected="false">
               <FormattedMessage
                 defaultMessage={'Code'}
                 description={'Code tab'}
@@ -320,7 +349,7 @@ const TurtlePlayGroundComponent = ({ handleRunCode, handleDrawingState, handleHi
             </a>
           </li>
           <li className="nav-item" role="presentation">
-            <a className="nav-link" id="output-tab" onClick={() => toggleHintBtn(true)} data-toggle="tab" href="#turtleOutput" role="tab" aria-controls="output" aria-selected="false">
+            <a className="nav-link" id="output-tab" onClick={() => toggleTabChange('output')} data-toggle="tab" href="#turtleOutput" role="tab" aria-controls="output" aria-selected="false">
               <FormattedMessage
                 defaultMessage={'Output'}
                 description={'Output tab'}
@@ -979,7 +1008,7 @@ const TurtleGameComponent = () => {
 
   React.useEffect(() => {
     isPageMounted.current = true;
-    hideDefaultNavBar(device, 'main');
+    hideDefaultNavBar(device, 'game');
     // $('#runCode').hide();
     $('#continueDebugger').hide();
 
@@ -992,7 +1021,8 @@ const TurtleGameComponent = () => {
   }, [status]);
 
   React.useEffect(() => () => {
-    document.querySelector('nav:first-child').style.display = 'block';
+    // document.querySelector('nav:first-child').style.display = 'block';
+    $('nav:first-child').show();
     isPageMounted.current = false;
     successModalRef?.current?.hide();
     $('#question-tab').off('shown.bs.tab', reposQnOutContainer);

@@ -7,7 +7,7 @@ import * as Animatable from 'react-native-animatable';
 import ThemeContext from '../components/theme';
 import codekataBg from '../../images/codekata/codekatabg-mob.png';
 import playBtnImg from '../../images/games/gamePlay.png';
-import CodekataHeader from '../components/Header/TurtleHeader';
+import CodekataHeader from '../components/Header/GameHeader';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
