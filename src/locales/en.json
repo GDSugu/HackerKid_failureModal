@@ -2693,6 +2693,10 @@
     "defaultMessage": "Your Current Plan",
     "description": "Your Current Plan btn"
   },
+  "ls4jLo": {
+    "defaultMessage": "Subscription",
+    "description": "more menu button"
+  },
   "lw8qSk": {
     "defaultMessage": "Buy Now",
     "description": "Buy Now btn"

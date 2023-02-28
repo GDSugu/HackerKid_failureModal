@@ -99,8 +99,8 @@ const LandingSidebarModal = () => <>
           <a href='/pricing' className='btn unlimited-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden='true'></i>
             </a>
             <div className='log-sign-btn d-block'>
-              <a href='/login' className='btn signup-btn mt-3'>Sign Up</a>
-              <a href='/register' className='btn login-btn mt-3'>Login</a>
+              <a href='/register' className='btn signup-btn mt-3'>Sign Up</a>
+              <a href='/login' className='btn login-btn mt-3'>Login</a>
             </div>
           </div>
         </div>
