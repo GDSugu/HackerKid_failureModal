@@ -1,0 +1,100 @@
+@use '../../sass/themes/_default' as gt;
+@use '../../sass/base/_mixins' as gm;
+
+.unlock-more-modal {
+  .modal-dialog {
+    max-width: 750px;
+  }
+
+  .modal-custom-header {
+    justify-content: end !important;
+
+    button {
+      background-color: gt.theme-var(modal-close-btn-bg);
+      color: #fff;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      padding-bottom: 0.2rem;
+      border-radius: 0.2rem !important;
+    }
+  }
+
+  .unlock-more-modal-contianer {
+    text-align: center;
+    padding: 0 3rem;
+
+    .unlock-more-modal-header {
+      span {
+        color: gt.theme-var(text-color-8);
+      }
+    }
+
+    .unlock-more-modal-description {
+      p {
+        color: gt.theme-var(text-color-13);
+      }
+    }
+
+    .unlock-more-modal-pricing {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+
+      h1 {
+        color: gt.theme-var(text-color-8);
+
+        s {
+          color: gt.theme-var(text-color-5);
+          margin-left: 0.5rem;
+        }
+      }
+
+      p {
+        color: gt.theme-var(text-color-5);
+        margin-left: 0.5rem;
+      }
+    }
+
+    .unlock-more-modal-features {
+      background-color: gt.theme-var(body-bg-yellow);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      margin-top: 0.75rem;
+      padding: 1rem;
+    }
+
+    .unlock-more-modal-features-header {
+      p {
+        font-weight: 700;
+        margin-bottom: 0;
+      }
+    }
+
+    .unlock-more-modal-features-container {
+      width: 100%;
+    }
+
+    .unlock-more-modal-features-body {
+      .unlock-more-modal-features-body-item {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        margin: 0.5rem 0;
+
+        i {
+          color: gt.theme-var(text-color-3);
+        }
+      }
+    }
+
+    .unlock-more-modal-footer {
+      margin: 1.5rem 0;
+
+      .fa-angle-right {
+        font-size: 20px;
+      }
+    }
+  }
+}

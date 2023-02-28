@@ -6,6 +6,7 @@ import '../../../../stylesheets/common/sass/components/_gameLevelComponent.scss'
 import { $, isFeatureEnabled } from '../../framework';
 import { attachDragHandler } from '../../Functions/turtle';
 import Img from '../Img';
+import UnlockMoreModal from '../unlockMoreModal';
 
 const GameLevelButton = ({
   game = 'all',
@@ -19,8 +20,9 @@ const GameLevelButton = ({
       id={`turtle-${virtualId}`}
       className={`btn game-level-button ${gameState} ${isCurrentQuestion ? 'current-question' : ''}`}
       onClick={() => {
-        if (gameState === 'locked') return;
-        if (game === 'turtle') {
+        if (gameState === 'locked'){
+          $('.unlock-more-modal').modal('show');
+        } else if (game === 'turtle') {
           handleFetchQuestion(question.question_id);
         } else if (game === 'zombieLand') {
           handleFetchQuestion(question.virtualId);
@@ -236,6 +238,7 @@ const GameLevelComponent = ({ game, gameData, handleFetchQuestion }, ref) => {
         }
       </div>
     </div>
+    <UnlockMoreModal/>
   </>;
 };
 
