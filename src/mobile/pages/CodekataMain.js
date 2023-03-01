@@ -263,13 +263,15 @@ const CodekataHeader = () => {
   return (
     <>
       <GameHeader
+        route={'codekata'}
+        game={'codekata'}
         forCodekata={true}
         level={codekataContext.tqState.questionObject.virtualId}
         onpressLevel={onpressLevel}
       />
       <GameLevelComponent
         context={codekataContext}
-        game={'turtle'}
+        game={'codekata'}
         font={font}
         gradients={gradients}
         utilColors={utilColors}

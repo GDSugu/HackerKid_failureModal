@@ -166,6 +166,9 @@ const GameLevelComponent = ({
     return false;
   };
 
+  console.log('******gm******');
+  console.log(game);
+
   switch (game) {
     case 'turtle':
       if (questionList) {
@@ -179,6 +182,8 @@ const GameLevelComponent = ({
       }
       break;
     case 'codekata':
+      console.log('---------------------------ql-------------');
+      console.log(questionList);
       if (questionList) {
         currentQuestionId = screenContext.questionList
           .findIndex((el) => el.questionId === screenContext.questionObject.questionId) + 1;
