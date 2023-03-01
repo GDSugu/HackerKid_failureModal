@@ -96,7 +96,7 @@ const LandingSidebarModal = () => <>
         </div>
         <div className='modal-body'>
           <div className='butts'>
-          <a href='/pricing' className='btn unlimited-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden='true'></i>
+          <a href='/pricing' className='btn unlimited-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden='true'></i>
             </a>
             <div className='log-sign-btn d-block'>
               <a href='/register' className='btn signup-btn mt-3'>Sign Up</a>
@@ -131,7 +131,7 @@ const LandingBanner = () => <>
             <img src='../../../../images/landing/master-coding-skill-banner.webp' className='w-100' />
           </picture>
 
-          <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden="true"></i>
+          <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
           </a>
         </div>
 
@@ -305,7 +305,7 @@ const LandingCodingGames = () => <>
           </SwiperSlide>
         </Swiper>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
 
         <div className='boat-route-line-3'></div>
       </div>
@@ -364,7 +364,7 @@ const LandingTechVideos = () => <>
           </div>
         </div>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden="true"></i>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
         </a>
       </div>
 
@@ -450,7 +450,7 @@ const LandingKidMorFun = () => <>
           </div>
         </div>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden="true"></i>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
         </a>
       </div>
     </div>
@@ -667,7 +667,7 @@ const LandingHackerKid = () => <>
           </Swiper>
         </div>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden="true"></i>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
         </a>
       </div>
     </div>
@@ -955,7 +955,7 @@ const LandingHappyLearning = () => <>
 
         </Swiper>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
       </div>
     </div>
   </section>

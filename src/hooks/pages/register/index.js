@@ -25,7 +25,7 @@ const useRegister = () => {
       mail: stateObj.email,
       password: stateObj.password,
       token,
-      recaptchaVersion: Number.toString(recaptchaVersion),
+      recaptchaVersion: recaptchaVersion?.toString(),
     };
 
     return post(postData, 'register/').then((response) => {
