@@ -26,7 +26,7 @@ const useOtp = () => {
       countryCode,
       otp: stateObj.enteredOtpArr.join(''),
       token,
-      recaptchaVersion: Number.toString(recaptchaVersion),
+      recaptchaVersion: recaptchaVersion?.toString(),
     };
 
     return post(postData, 'register/');
