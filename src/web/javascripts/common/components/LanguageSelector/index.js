@@ -10,10 +10,28 @@ const valueToLanguageDisplayNameMap = getValueToLanguageDisplayNameMap();
 const LanguageSelector = ({
   className = '', selectedLanguageValue, onLanguageOptionClick, onDropDownOpen = () => {}, onLoad,
 }) => {
+  const scrollToSelectedLanguage = () => {
+    const questionElement = document.querySelector('.language-selector-container .dropdown-item.active');
+    if (questionElement) {
+      setTimeout(() => {
+        questionElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'start',
+        });
+      }, 50);
+    }
+  };
+
+  const onShowDropDown = () => {
+    scrollToSelectedLanguage();
+    onDropDownOpen();
+  };
+
   React.useEffect(() => {
     onLoad();
 
-    $('.dropdown').on('show.bs.dropdown', onDropDownOpen);
+    $('.dropdown').on('show.bs.dropdown', onShowDropDown);
 
     return () => {
       $('.dropdown').off('show.bs.dropdown');

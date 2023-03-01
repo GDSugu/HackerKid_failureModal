@@ -13,7 +13,7 @@ const useOtp = () => {
       phone: phoneNumber,
       countryCode,
       token,
-      recaptchaVersion: Number.toString(recaptchaVersion),
+      recaptchaVersion: recaptchaVersion?.toString(),
     };
 
     return post(postData, 'register/', false, false);

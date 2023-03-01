@@ -159,6 +159,11 @@ const Profile = () => {
     }
   };
 
+  const onProfileUpdated = () => {
+    $('.profileSuccessModal').modal('hide');
+    window.location.reload();
+  };
+
   // useEffect(() => {
   //   if (uniqueUrl) {
   //     window.history.replaceState({}, '', `/profile/edit/${uniqueUrl}`);
@@ -270,7 +275,7 @@ const Profile = () => {
                 description='Profile phone label'
               />
             </label>
-            <input type="number" className="form-control" name="parentPhone" id="parentPhone" value={parentPhone || ''}
+            <input type="tel" className="form-control" name="parentPhone" id="parentPhone" value={parentPhone || ''}
             aria-describedby="parent phone input Field" placeholder="Parent phone number" onChange={(e) => handleStateChange('parentPhone', e.target) } />
             <small className="form-text text-danger"></small>
           </div>
@@ -332,7 +337,7 @@ const Profile = () => {
       </div>
       <button
         className='btn btn-block btn-primary'
-        onClick={() => $('.profileSuccessModal').modal('hide')}
+        onClick={onProfileUpdated}
         >
         <FormattedMessage
           defaultMessage='Ok'

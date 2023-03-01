@@ -6,10 +6,10 @@ import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
 import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/css/intlTelInput.css';
 import '../../../../../node_modules/plyr-react/plyr.css';
-import '../../../stylesheets/common/pages/landing/style.scss';
 import 'swiper/swiper.scss';
 import 'swiper/modules/navigation/navigation.scss';
 import 'swiper/modules/pagination/pagination.scss';
+import '../../../stylesheets/common/pages/landing/style.scss';
 import { Autoplay, Pagination } from 'swiper';
 import {
   $,
@@ -72,7 +72,7 @@ const LandingHeader = () => <>
       <div className='d-flex'>
         <button className='menu-icon text-white' data-toggle='modal' data-target='#myModal2'><i className='fa fa-bars' aria-hidden="true"></i>
         </button>
-        <a href='/' className='logo mr-auto'><img src='../../../../images/landing/hackerkid-logo.webp' alt='hackerkid logo' title='Hackerkid Logo' /></a>
+        <a href='/' className='logo mr-auto'><img src='../../../../images/landing/hackerkid-logo.webp' alt='hackerkid logo' title='HackerKID Logo' /></a>
         <div className='d-flex unlimite-login-sign'>
           <a href='/pricing' className='btn unlimited-btn text-white'>Get Unlimited Access<i className='fa fa-chevron-right' aria-hidden="true"></i>
           </a>
@@ -81,7 +81,6 @@ const LandingHeader = () => <>
             <a href='/register' className='btn signup-btn'>Sign Up</a>
           </div>
         </div>
-
       </div>
     </div>
   </header>
@@ -92,16 +91,16 @@ const LandingSidebarModal = () => <>
     <div className='modal-dialog' role='document'>
       <div className='modal-content'>
         <div className='modal-header'>
-          <a href='/' className='logo mr-auto'><img src='../../../../images/landing/black-hackerkit-logo.webp' alt='hackerkid logo' title='Hackerkid Logo' /></a>
+          <a href='/' className='logo mr-auto'><img src='../../../../images/landing/black-hackerkit-logo.webp' alt='hackerkid logo' title='HackerKID Logo' /></a>
           <button type='button' className="close mobile-close-btn" data-dismiss="modal" aria-label="Close"><i className='fa fa-window-close' aria-hidden='true'></i></button>
         </div>
         <div className='modal-body'>
           <div className='butts'>
-          <a href='/pricing' className='btn unlimited-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden='true'></i>
+          <a href='/pricing' className='btn unlimited-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden='true'></i>
             </a>
             <div className='log-sign-btn d-block'>
-              <a href='/login' className='btn signup-btn mt-3'>Sign Up</a>
-              <a href='/register' className='btn login-btn mt-3'>Login</a>
+              <a href='/register' className='btn signup-btn mt-3'>Sign Up</a>
+              <a href='/login' className='btn login-btn mt-3'>Login</a>
             </div>
           </div>
         </div>
@@ -132,7 +131,7 @@ const LandingBanner = () => <>
             <img src='../../../../images/landing/master-coding-skill-banner.webp' className='w-100' />
           </picture>
 
-          <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
+          <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden="true"></i>
           </a>
         </div>
 
@@ -306,7 +305,7 @@ const LandingCodingGames = () => <>
           </SwiperSlide>
         </Swiper>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
 
         <div className='boat-route-line-3'></div>
       </div>
@@ -365,7 +364,7 @@ const LandingTechVideos = () => <>
           </div>
         </div>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden="true"></i>
         </a>
       </div>
 
@@ -451,7 +450,7 @@ const LandingKidMorFun = () => <>
           </div>
         </div>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden="true"></i>
         </a>
       </div>
     </div>
@@ -471,8 +470,8 @@ const LandingHackerKid = () => <>
       <div className='top-space hackerkit2-sec'>
         <h2>
           <FormattedMessage
-            defaultMessage={'Why Choose HackerKid 2.0?'}
-            description={'HackerKid title'}
+            defaultMessage={'Why Choose HackerKID 2.0?'}
+            description={'HackerKID title'}
           />
         </h2>
 
@@ -668,7 +667,7 @@ const LandingHackerKid = () => <>
           </Swiper>
         </div>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden="true"></i>
         </a>
       </div>
     </div>
@@ -765,7 +764,7 @@ const LandingHappyLearning = () => <>
                   </div>
                   <p>
                     <FormattedMessage
-                      defaultMessage={'“Hi...Hackerkid is one of the best platform to learn python.. My kid learnt python very easily on your platform... He enjoyed each and every question... He always curious about python but I was not able to taught him properly..but now he is doing better in python 🙂”'}
+                      defaultMessage={'“Hi...HackerKID is one of the best platform to learn python.. My kid learnt python very easily on your platform... He enjoyed each and every question... He always curious about python but I was not able to taught him properly..but now he is doing better in python 🙂”'}
                       description={' description'}
                     />
                   </p>
@@ -809,7 +808,7 @@ const LandingHappyLearning = () => <>
                   </div>
                   <p>
                     <FormattedMessage
-                      defaultMessage={"“Hackerkid is a fun way for kids to learn to code as well as play. With this pandemic situation and kids unable to go out to play, this is a great opportunity to keep them occupied in a better way. It let's them understand the basic concepts of coding like looping structures, conditions and flow of the program. My son is glued to it!!! And we are happy to tell our family and friends about.”"}
+                      defaultMessage={"“HackerKID is a fun way for kids to learn to code as well as play. With this pandemic situation and kids unable to go out to play, this is a great opportunity to keep them occupied in a better way. It let's them understand the basic concepts of coding like looping structures, conditions and flow of the program. My son is glued to it!!! And we are happy to tell our family and friends about.”"}
                       description={'happy learning description'}
                     />
                   </p>
@@ -941,7 +940,7 @@ const LandingHappyLearning = () => <>
                   </div>
                   <p>
                     <FormattedMessage
-                      defaultMessage={"“Hackerkid was a fun and informative opportunity to learn python. As a beginner I felt it easy to adapt with block coding and mentor session's were helpful.”"}
+                      defaultMessage={"“HackerKID was a fun and informative opportunity to learn python. As a beginner I felt it easy to adapt with block coding and mentor session's were helpful.”"}
                       description={'happy learning description'}
                     />
                   </p>
@@ -956,7 +955,7 @@ const LandingHappyLearning = () => <>
 
         </Swiper>
 
-        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹1499 <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
+        <a href='/pricing' className='green-btn text-white'>Get Unlimited Access @ ₹999 <i className='fa fa-chevron-right' aria-hidden="true"></i></a>
       </div>
     </div>
   </section>
@@ -979,7 +978,7 @@ const LandingFaq = () => <>
               <div className='card-header' id='faqhead1'>
                 <h3 data-toggle='collapse' data-target='#faq1' aria-expanded='true' aria-controls='faq1'>
                   <FormattedMessage
-                    defaultMessage={'What is HackerKid and how does it work?'}
+                    defaultMessage={'What is HackerKID and how does it work?'}
                     description={'faq title'}
                   />
                 </h3>
@@ -989,7 +988,7 @@ const LandingFaq = () => <>
                 <div className='card-body'>
                   <p className='mb-0'>
                     <FormattedMessage
-                      defaultMessage={'HackerKid is a next-generation platform that helps kids learn coding in a gamified environment through games like Turtle and Zombieland. Kids can compete with each other through challenges and create clubs to scale their learning. They would also get awards and certificates for completing challenges, thus keeping learning competitive and encouraging.'}
+                      defaultMessage={'HackerKID is a next-generation platform that helps kids learn coding in a gamified environment through games like Turtle and Zombieland. Kids can compete with each other through challenges and create clubs to scale their learning. They would also get awards and certificates for completing challenges, thus keeping learning competitive and encouraging.'}
                       description={'faq description'}
                     />
                   </p>
@@ -1001,7 +1000,7 @@ const LandingFaq = () => <>
               <div className='card-header' id='faqhead2'>
                 <h3 data-toggle='collapse' data-target='#faq2' aria-expanded='true' aria-controls='faq2'>
                   <FormattedMessage
-                    defaultMessage={'Is HackerKid free?'}
+                    defaultMessage={'Is HackerKID free?'}
                     description={'faq title'}
                   />
                 </h3>
@@ -1011,7 +1010,7 @@ const LandingFaq = () => <>
                 <div className='card-body'>
                   <p>
                     <FormattedMessage
-                      defaultMessage={'You can use HackerKid to play, learn and solve a certain amount of problems for free. You can Get Unlimited Access @ ₹1499 and learning by purchasing a premium subscription valid for 1 year.'}
+                      defaultMessage={'You can use HackerKID to play, learn and solve a certain amount of problems for free. You can get unlimited access and learning by purchasing a premium subscription valid for 1 year.'}
                       description={'faq description'}
                     />
                   </p>
@@ -1029,7 +1028,7 @@ const LandingFaq = () => <>
               <div className='card-header' id='faqhead3'>
                 <h3 data-toggle='collapse' data-target='#faq3' aria-expanded='true' aria-controls='faq3'>
                   <FormattedMessage
-                    defaultMessage={'Who is HackerKid for?'}
+                    defaultMessage={'Who is HackerKID for?'}
                     description={'faq title'}
                   />
                 </h3>
@@ -1040,7 +1039,7 @@ const LandingFaq = () => <>
                   <p>
                     <span>
                       <FormattedMessage
-                        defaultMessage={'HackerKid allows'}
+                        defaultMessage={'HackerKID allows'}
                         description={'faq description'}
                       />
                     </span> <span>
@@ -1144,7 +1143,7 @@ const LandingFaq = () => <>
                   <p>
                     <span>
                       <FormattedMessage
-                        defaultMessage={'HackerKid’s gamified self-paced coding courses allow kids to develop their'}
+                        defaultMessage={'HackerKID’s gamified self-paced coding courses allow kids to develop their'}
                         description={'faq description'}
                       />
                     </span> <span>
@@ -1198,7 +1197,7 @@ const LandingFaq = () => <>
                   <p>
                     <span>
                       <FormattedMessage
-                        defaultMessage={'HackerKid provides a'}
+                        defaultMessage={'HackerKID provides a'}
                         description={'faq description'}
                       />
                     </span> <span>
@@ -1222,7 +1221,7 @@ const LandingFaq = () => <>
                       </b>
                     </span> <span>
                       <FormattedMessage
-                        defaultMessage={'evaluates your kid’s performance and progress among other HackerKids.'}
+                        defaultMessage={'evaluates your kid’s performance and progress among other HackerKIDs.'}
                         description={'faq description'}
                       />
                     </span>
@@ -1695,19 +1694,24 @@ const Landing = () => {
   };
 
   const showDMModal = () => {
-    setTimeout(() => {
-      if (!landingManager.isModalShown) {
-        dmModalRef.current.showWithRestriction();
-        landingManager.isModalShown = true;
-      }
-    }, 300);
+    if (!landingManager.isModalShown) {
+      dmModalRef.current.showWithRestriction();
+      landingManager.isModalShown = true;
+    }
   };
 
   const debouncedShowModal = () => {
     if (landingManager.isModalShown) {
       window.removeEventListener('wheel', debouncedShowModal);
     }
-    debounce(showDMModal, 500);
+    debounce(showDMModal, 100);
+  };
+
+  const debouncedMobShowModal = () => {
+    if (landingManager.isModalShown) {
+      window.removeEventListener('wheel', debouncedShowModal);
+    }
+    debounce(showDMModal, 300);
   };
 
   const hideModal = () => dmModalRef.current.hide();
@@ -1715,14 +1719,21 @@ const Landing = () => {
   const handleSubmit = (formData) => storeData(formData);
 
   useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 100);
     setInitialScrollTop();
+    window.history.scrollRestoration = 'manual';
     // const wheelTrigger = (e) => {
     //   debouncedShowModal();
     // };
     window.addEventListener('wheel', debouncedShowModal);
+    window.addEventListener('touchmove', debouncedMobShowModal);
 
     return () => {
+      window.history.scrollRestoration = 'auto';
       window.removeEventListener('wheel', debouncedShowModal);
+      window.removeEventListener('touchmove', debouncedMobShowModal);
     };
   }, []);
   return <>
@@ -1744,7 +1755,7 @@ const Landing = () => {
         modalClass={'landing-dm-modal'}
         customClass={'curved'}
         header={<></>}
-        modalCloseBtn={false}
+        // modalCloseBtn={false}
       >
         <LandingDMModalComponent
           handleSubmit={handleSubmit}

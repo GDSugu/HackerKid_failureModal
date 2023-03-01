@@ -1,6 +1,7 @@
 import ace from 'ace-builds';
 import 'ace-builds/webpack-resolver';
 import 'ace-builds/src-min-noconflict/ext-language_tools';
+import { $ } from '../../framework';
 
 // functions without DOM interactions
 const manager = {
@@ -350,7 +351,8 @@ const resizeEditor = () => {
 };
 
 const hideDefaultNavBar = (device, turtleState) => {
-  document.querySelector('nav:first-child').style.display = 'none';
+  // document.querySelector('nav:first-child').style.display = 'none';
+  $('nav:first-child').hide();
   let componentContainer = `.webkata-${turtleState}-container`;
   if (device === 'desktop') {
     componentContainer = `.webkata-${turtleState}-container`;

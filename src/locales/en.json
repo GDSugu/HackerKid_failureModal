@@ -116,10 +116,6 @@
     "defaultMessage": "Start Playing",
     "description": "Play button"
   },
-  "094Y2K": {
-    "defaultMessage": "“Hi...Hackerkid is one of the best platform to learn python.. My kid learnt python very easily on your platform... He enjoyed each and every question... He always curious about python but I was not able to taught him properly..but now he is doing better in python 🙂”",
-    "description": " description"
-  },
   "0By1LZ": {
     "defaultMessage": "{timeInMinutes} Mins",
     "description": "Time spent"
@@ -143,10 +139,6 @@
   "0Q9/tV": {
     "defaultMessage": "{heading}",
     "description": "section heading"
-  },
-  "0Qaax+": {
-    "defaultMessage": "Limited (3 Solved)",
-    "description": "Limited (3 Solved) list"
   },
   "0RZrI3": {
     "defaultMessage": "Officially Authorised Partner",
@@ -460,6 +452,10 @@
     "defaultMessage": "Limited (5 Problems)",
     "description": "Limited (10 Problems) list"
   },
+  "6BX5pA": {
+    "defaultMessage": "HackerKID is a next-generation platform that helps kids learn coding in a gamified environment through games like Turtle and Zombieland. Kids can compete with each other through challenges and create clubs to scale their learning. They would also get awards and certificates for completing challenges, thus keeping learning competitive and encouraging.",
+    "description": "faq description"
+  },
   "6Cjk2D": {
     "defaultMessage": "Login",
     "description": "Login Button"
@@ -610,6 +606,14 @@
     "defaultMessage": "Time Spent:",
     "description": "Time spent title"
   },
+  "8dkNOD": {
+    "defaultMessage": "“HackerKID is a fun way for kids to learn to code as well as play. With this pandemic situation and kids unable to go out to play, this is a great opportunity to keep them occupied in a better way. It let's them understand the basic concepts of coding like looping structures, conditions and flow of the program. My son is glued to it!!! And we are happy to tell our family and friends about.”",
+    "description": "happy learning description"
+  },
+  "8g9/ii": {
+    "defaultMessage": "Premium Edition Features:",
+    "description": "Unlock more modal features header"
+  },
   "8gWjFk": {
     "defaultMessage": "{description}",
     "description": "description of problem statement"
@@ -713,13 +717,13 @@
     "defaultMessage": "Expected output",
     "description": "Expected output title"
   },
+  "AYyHsN": {
+    "defaultMessage": "Limited (3 Problems)",
+    "description": "Limited (3 Solved) list"
+  },
   "AZoPre": {
     "defaultMessage": "Club Name",
     "description": "Club name label"
-  },
-  "AdKVGj": {
-    "defaultMessage": "HackerKid Trial Edition",
-    "description": "Pricing Plans card title"
   },
   "Aevhvw": {
     "defaultMessage": "Verify OTP and proceed",
@@ -728,6 +732,10 @@
   "AhFvSt": {
     "defaultMessage": "Login with Email",
     "description": "Login with Email tab"
+  },
+  "Ap8RnD": {
+    "defaultMessage": "Limited (3 Publish)",
+    "description": "Limited (3 Published) list"
   },
   "Atd3d5": {
     "defaultMessage": "/{totalSubmissions}",
@@ -761,6 +769,10 @@
     "defaultMessage": "What is a club and how does it work?",
     "description": "faq title"
   },
+  "BMjyfk": {
+    "defaultMessage": "Full Video Library",
+    "description": "Unlock more modal features: Full Video Library"
+  },
   "BNGdt+": {
     "defaultMessage": "No",
     "description": "cancel logout"
@@ -773,9 +785,21 @@
     "defaultMessage": "Keep in draft",
     "description": "draft button"
   },
+  "Bfa2Ek": {
+    "defaultMessage": "HackerKID Exclusive Courses",
+    "description": "HackerKID Exclusive Courses title"
+  },
   "Bj5WGE": {
     "defaultMessage": "View all {data}",
     "description": "Module Name"
+  },
+  "BmbFFU": {
+    "defaultMessage": "Why Choose HackerKID 2.0?",
+    "description": "HackerKID title"
+  },
+  "BnZj6z": {
+    "defaultMessage": "PREMIUM",
+    "description": "premium text"
   },
   "Bqm+bJ": {
     "defaultMessage": "Webkata JS",
@@ -812,6 +836,10 @@
   "CT79Lc": {
     "defaultMessage": "Club Leaderboard",
     "description": "club leaderboard title"
+  },
+  "CUz3EJ": {
+    "defaultMessage": "HackerKid Premium gives you full access to the platform features for a 1 year subscription. With exciting coding games, problems, gamified environments you have a lot you explore, play and learn,",
+    "description": "Unlock more modal description"
   },
   "CVflbu": {
     "defaultMessage": "Advance in Programming by solving problems in any programming language with an Algorithmic approach.",
@@ -876,6 +904,10 @@
   "Dahcx9": {
     "defaultMessage": "{title} {awardCount}",
     "description": "award title"
+  },
+  "Dak4X5": {
+    "defaultMessage": "₹5000",
+    "description": "Unlock more modal from discount price price"
   },
   "DpAMVM": {
     "defaultMessage": "Check out our pricing plans and choose the one that suits you the best.",
@@ -1019,10 +1051,6 @@
     "defaultMessage": "Verify OTP and proceed",
     "description": "verify otp button"
   },
-  "GTbLDX": {
-    "defaultMessage": "You can use HackerKid to play, learn and solve a certain amount of problems for free. You can Get Unlimited Access @ ₹1499 and learning by purchasing a premium subscription valid for 1 year.",
-    "description": "faq description"
-  },
   "GXef+E": {
     "defaultMessage": "Clubs",
     "description": "Clubs title"
@@ -1109,9 +1137,17 @@
     "defaultMessage": "All Challenges",
     "description": "all challenges"
   },
+  "HiIltf": {
+    "defaultMessage": "Full Game Features Access",
+    "description": "Unlock more modal features : Full Game Features Access"
+  },
   "Hjj2+R": {
     "defaultMessage": "Register to Get help from Turtle",
     "description": "Hint message"
+  },
+  "HtRRoI": {
+    "defaultMessage": "HackerKID Premium",
+    "description": "HackerKID Trial Edition title"
   },
   "HzaEWN": {
     "defaultMessage": "Congratulations!",
@@ -1200,6 +1236,10 @@
   "JW9Qqp": {
     "defaultMessage": "{message}",
     "description": "Admin warning"
+  },
+  "JYB9yb": {
+    "defaultMessage": "HackerKID provides a",
+    "description": "faq description"
   },
   "JbsY5u": {
     "defaultMessage": "No Awards Found!",
@@ -1487,6 +1527,10 @@
     "defaultMessage": "More friends = More fun",
     "description": "More card Title"
   },
+  "OG2BxR": {
+    "defaultMessage": "FREE",
+    "description": "HackerKID Trial Edition Free"
+  },
   "OJUwxk": {
     "defaultMessage": "Continue Playing",
     "description": "Continue Playing Button"
@@ -1498,6 +1542,10 @@
   "OUOYZ4": {
     "defaultMessage": "Sample Input:"
   },
+  "OVZReR": {
+    "defaultMessage": "Limited (5 Videos)",
+    "description": "Limited (5 Problems) list"
+  },
   "OWSL0r": {
     "defaultMessage": "Register",
     "description": "Register"
@@ -1506,6 +1554,10 @@
     "defaultMessage": "View Club",
     "description": "Club show button"
   },
+  "OYOyLO": {
+    "defaultMessage": "(*Excluding GST)",
+    "description": "Unlock more modal (*Excluding GST)"
+  },
   "OdODwS": {
     "defaultMessage": "Create Account",
     "description": "Create Account button"
@@ -1513,10 +1565,6 @@
   "OkoF63": {
     "defaultMessage": "“Hi, I'm Harshini PB. I'm a Hacker KID user. I love Hacker KID very much because it is a best, online, coding website. I recommend Hacker KID to kids who want to learn coding. The mentor session was great and the mentors are very good at me. In Hacker KID, I like zombie land very much.”",
     "description": "happy learning description"
-  },
-  "OoOyIq": {
-    "defaultMessage": "HackerKid Premium",
-    "description": "Pricing Plans card title"
   },
   "OqwEqv": {
     "defaultMessage": "Filter",
@@ -1572,10 +1620,6 @@
     "defaultMessage": "Playground",
     "description": "Playground tab"
   },
-  "PdCFIc": {
-    "defaultMessage": "“Hackerkid was a fun and informative opportunity to learn python. As a beginner I felt it easy to adapt with block coding and mentor session's were helpful.”",
-    "description": "happy learning description"
-  },
   "PfA2Pv": {
     "defaultMessage": "{title}",
     "description": "Video Title"
@@ -1596,6 +1640,10 @@
     "defaultMessage": "Problem Statement:",
     "description": "Heading of problem statement"
   },
+  "QX7pV0": {
+    "defaultMessage": "Upgrade Now",
+    "description": "Unlock more modal upgrade button"
+  },
   "Qb0n8J": {
     "defaultMessage": "Are you sure you want to logout?",
     "description": "Logout prompt message"
@@ -1611,6 +1659,10 @@
   "QsXf1d": {
     "defaultMessage": "{points} coins",
     "description": "points"
+  },
+  "QtuCMn": {
+    "defaultMessage": "Who is HackerKID for?",
+    "description": "faq title"
   },
   "Qvy78L": {
     "defaultMessage": "Profile",
@@ -1655,10 +1707,6 @@
     "defaultMessage": "{challengeName}",
     "description": "Question"
   },
-  "RbmVo6": {
-    "defaultMessage": "FREE",
-    "description": "HackerKid Trial Edition Free"
-  },
   "RdkFSF": {
     "defaultMessage": "Sort by:",
     "description": "sort btn title"
@@ -1698,6 +1746,10 @@
     "defaultMessage": "Problem Statement",
     "description": "problem statement label"
   },
+  "SJg9CJ": {
+    "defaultMessage": "HackerKid Premium",
+    "description": "HackerKid Premium"
+  },
   "SL6O2c": {
     "defaultMessage": "Password",
     "description": "Password label"
@@ -1721,6 +1773,10 @@
   "SccqZN": {
     "defaultMessage": "Download",
     "description": "download btn text"
+  },
+  "SeU28U": {
+    "defaultMessage": "“Hi...HackerKID is one of the best platform to learn python.. My kid learnt python very easily on your platform... He enjoyed each and every question... He always curious about python but I was not able to taught him properly..but now he is doing better in python 🙂”",
+    "description": " description"
   },
   "Snyaa9": {
     "defaultMessage": "that shows the points awarded during the game and the total time spent on the platform. An overall",
@@ -1826,10 +1882,6 @@
     "defaultMessage": "What makes it more Fun for your kids?",
     "description": "fun kid title"
   },
-  "U9/ROI": {
-    "defaultMessage": "Limited(Python)",
-    "description": "Limited(Python)"
-  },
   "UDQT0n": {
     "defaultMessage": "Achieved Badge",
     "description": "Achievement Badge Title"
@@ -1890,6 +1942,10 @@
     "defaultMessage": "HackerKid allows",
     "description": "faq description"
   },
+  "VNXGA9": {
+    "defaultMessage": "HackerKID allows",
+    "description": "faq description"
+  },
   "VRP3Sx": {
     "defaultMessage": "{time}",
     "description": "Time Spent card caption"
@@ -1945,10 +2001,6 @@
     "defaultMessage": "{type}",
     "description": "Module type"
   },
-  "WUdYsb": {
-    "defaultMessage": "₹{price}",
-    "description": "HackerKid Trial Premium Free"
-  },
   "WmjFlm": {
     "defaultMessage": "Download",
     "description": "download btn"
@@ -1972,10 +2024,6 @@
   "X1rCRf": {
     "defaultMessage": "Login into existing account",
     "description": "login into existing account button"
-  },
-  "X2sP6k": {
-    "defaultMessage": "HackerKid provided the chance for you to explore the world of coding with HackerKid in a gamified environment for a 7 day trial period. Your current trial edition allows you explore the limited version of HackerKid.",
-    "description": "Pricing Plans card discription"
   },
   "X43FUF": {
     "defaultMessage": "Congratulations {user}, you have earned the {award} for your excellent record.",
@@ -2048,6 +2096,10 @@
   "YdxUNc": {
     "defaultMessage": "moveDown",
     "description": "moveDown function"
+  },
+  "Yettyb": {
+    "defaultMessage": "What is HackerKID and how does it work?",
+    "description": "faq title"
   },
   "YgBtIC": {
     "defaultMessage": "₹{price}",
@@ -2149,10 +2201,6 @@
     "defaultMessage": "Run",
     "description": "run button text"
   },
-  "b/XLXY": {
-    "defaultMessage": "HackerKid Premium",
-    "description": "HackerKid Trial Edition title"
-  },
   "b2J6mh": {
     "defaultMessage": "Home",
     "description": "Home navigation link"
@@ -2164,6 +2212,10 @@
   "b6st5O": {
     "defaultMessage": "Will my kid get any certificates or awards for their performance?",
     "description": "faq title"
+  },
+  "b9OJzr": {
+    "defaultMessage": "Know More",
+    "description": "Unlock more modal Know button"
   },
   "bCvHuI": {
     "defaultMessage": "Invites",
@@ -2292,6 +2344,10 @@
     "defaultMessage": "Parent's Email",
     "description": "Profile email label"
   },
+  "eO1zqq": {
+    "defaultMessage": "Is HackerKID free?",
+    "description": "faq title"
+  },
   "ed9QEz": {
     "defaultMessage": "No members found",
     "description": "No members found"
@@ -2327,6 +2383,10 @@
   "fOZCSk": {
     "defaultMessage": "Set a Password",
     "description": "Set password label"
+  },
+  "fRHLVR": {
+    "defaultMessage": "and many more...",
+    "description": "Unlock more modal features : and many more..."
   },
   "fT7uau": {
     "defaultMessage": "completed"
@@ -2409,10 +2469,6 @@
     "defaultMessage": "{gameTitle}",
     "description": "Game Title"
   },
-  "gQIUu/": {
-    "defaultMessage": "Limited (3 Published)",
-    "description": "Limited (3 Published) list"
-  },
   "gTCzny": {
     "defaultMessage": "Profile Picture",
     "description": "Profile Picture label"
@@ -2459,10 +2515,6 @@
     "defaultMessage": "Webkata JS",
     "description": "Turtle list"
   },
-  "hV4HHg": {
-    "defaultMessage": "“Hackerkid is a fun way for kids to learn to code as well as play. With this pandemic situation and kids unable to go out to play, this is a great opportunity to keep them occupied in a better way. It let's them understand the basic concepts of coding like looping structures, conditions and flow of the program. My son is glued to it!!! And we are happy to tell our family and friends about.”",
-    "description": "happy learning description"
-  },
   "hWyGja": {
     "defaultMessage": "Instructions",
     "description": "Instructions title"
@@ -2470,6 +2522,14 @@
   "hZGwA5": {
     "defaultMessage": "{count} Xp",
     "description": "Time Spent card caption"
+  },
+  "hguUgO": {
+    "defaultMessage": "HackerKID Trial Edition",
+    "description": "HackerKID Trial Edition title"
+  },
+  "horDhl": {
+    "defaultMessage": "HackerKID Premium",
+    "description": "Pricing Plans card title"
   },
   "hphOHh": {
     "defaultMessage": "Help",
@@ -2482,6 +2542,10 @@
   "hxLhGK": {
     "defaultMessage": "Set Password",
     "description": "Password Label"
+  },
+  "i8kRAc": {
+    "defaultMessage": "You can use HackerKID to play, learn and solve a certain amount of problems for free. You can get unlimited access and learning by purchasing a premium subscription valid for 1 year.",
+    "description": "faq description"
   },
   "iJptwY": {
     "defaultMessage": "Continue",
@@ -2510,6 +2574,10 @@
   "j+kOS8": {
     "defaultMessage": "Profile Edit",
     "description": "Profile Edit"
+  },
+  "j7Fo1x": {
+    "defaultMessage": "HackerKID also offer exclusive courses on various pedagogies like Web Development, App Development, Game Development & Data Science. We have an elite team of teachers to guide with your learning process. We have team that can answer all your queries before you decide to enroll with us. Go on tell your parent right now, What are you waiting for?",
+    "description": "HackerKID Exclusive Courses description"
   },
   "jACivV": {
     "defaultMessage": "{name}",
@@ -2549,6 +2617,10 @@
   "jqtzC8": {
     "defaultMessage": "Coding Pirate",
     "description": "Coding Pirate title"
+  },
+  "jreJd7": {
+    "defaultMessage": "HackerKID provided the chance for you to explore the world of coding with HackerKID in a gamified environment for a 7 day trial period. Your current trial edition allows you explore the limited version of HackerKID.",
+    "description": "Pricing Plans card discription"
   },
   "jromX8": {
     "defaultMessage": "reach@hackerkid.org",
@@ -2624,6 +2696,10 @@
   "lpBOZ4": {
     "defaultMessage": "Your Current Plan",
     "description": "Your Current Plan btn"
+  },
+  "ls4jLo": {
+    "defaultMessage": "Subscription",
+    "description": "more menu button"
   },
   "lw8qSk": {
     "defaultMessage": "Buy Now",
@@ -2811,13 +2887,13 @@
     "defaultMessage": "Coming Soon...",
     "description": "Class Page"
   },
-  "oQ892Z": {
-    "defaultMessage": "HackerKid Trial Edition",
-    "description": "HackerKid Trial Edition title"
-  },
   "oQwd5t": {
     "defaultMessage": "Create Club",
     "description": "Create club modal title"
+  },
+  "ok+aA/": {
+    "defaultMessage": "Limited(Python & JS)",
+    "description": "Limited(Python & JS)"
   },
   "onal0O": {
     "defaultMessage": "Currently, we have",
@@ -2862,6 +2938,10 @@
     "defaultMessage": "Turtle",
     "description": "Turtle title"
   },
+  "pXrGN6": {
+    "defaultMessage": "HackerKID’s gamified self-paced coding courses allow kids to develop their",
+    "description": "faq description"
+  },
   "pgAgVI": {
     "defaultMessage": "{emptyStateText}",
     "description": "no challenges"
@@ -2897,6 +2977,10 @@
   "q+pH3V": {
     "defaultMessage": "Save",
     "description": "save button"
+  },
+  "q14k7A": {
+    "defaultMessage": "HackerKID Premium gives you full access to the platform features for a 1 year subscription. With exciting coding games, problems, gamified environments you have a lot to explore, play and learn.",
+    "description": "Pricing Plans card discription"
   },
   "q9L1mf": {
     "defaultMessage": "{head}",
@@ -3020,6 +3104,10 @@
     "defaultMessage": "Register to Create Challenge, Earn Points and Compete with friends",
     "description": "access denied compnent"
   },
+  "sVu8LY": {
+    "defaultMessage": "₹{price}",
+    "description": "HackerKID Trial Premium Free"
+  },
   "sXlZLv": {
     "defaultMessage": "Levels",
     "description": "Game Level"
@@ -3064,10 +3152,6 @@
     "defaultMessage": "View All Achievements",
     "description": "show achievements"
   },
-  "tNUcfD": {
-    "defaultMessage": "HackerKid Premium gives you full access to the platform features for a 1 year subscription. With exciting coding games, problems, gamified environments you have a lot you explore, play and learn,",
-    "description": "Pricing Plans card discription"
-  },
   "tRGm5z": {
     "defaultMessage": "Time Spent:",
     "description": "Time Spent"
@@ -3087,6 +3171,10 @@
   "tevLEq": {
     "defaultMessage": "Choose a club display image",
     "description": "club image label"
+  },
+  "tkXfK6": {
+    "defaultMessage": "Micro Degree Certificates",
+    "description": "Unlock more modal features : Micro Degree Certificates"
   },
   "toPdTf": {
     "defaultMessage": "Leaderboard",
@@ -3124,6 +3212,10 @@
     "defaultMessage": "{message}",
     "description": "Success message"
   },
+  "uLY78e": {
+    "defaultMessage": "HackerKID Trial Edition",
+    "description": "Pricing Plans card title"
+  },
   "uLdABz": {
     "defaultMessage": "{collectibleType}",
     "description": "collectible type"
@@ -3143,6 +3235,10 @@
   "uipkRi": {
     "defaultMessage": "Inputs",
     "description": "Input drawer title"
+  },
+  "ujXn9c": {
+    "defaultMessage": "“HackerKID was a fun and informative opportunity to learn python. As a beginner I felt it easy to adapt with block coding and mentor session's were helpful.”",
+    "description": "happy learning description"
   },
   "upMbBE": {
     "defaultMessage": "Feed",
@@ -3231,6 +3327,10 @@
     "defaultMessage": "{description}",
     "description": "description of output"
   },
+  "wrDopk": {
+    "defaultMessage": "evaluates your kid’s performance and progress among other HackerKIDs.",
+    "description": "faq description"
+  },
   "wrdAU0": {
     "defaultMessage": "Help",
     "description": "Help CTA"
@@ -3267,10 +3367,6 @@
     "defaultMessage": "{swiperHeading}",
     "description": "Challenges card heading"
   },
-  "xQMQmR": {
-    "defaultMessage": "Webkata JS",
-    "description": "Limited (5 Problems) list"
-  },
   "xT1NKB": {
     "defaultMessage": "Games",
     "description": "games nav text"
@@ -3302,6 +3398,10 @@
   "xs8DW+": {
     "defaultMessage": "Register for free",
     "description": "register button"
+  },
+  "xxFTv9": {
+    "defaultMessage": "Upgrade to",
+    "description": "Upgrade to"
   },
   "xyhq1c": {
     "defaultMessage": "Share in",
@@ -3408,5 +3508,9 @@
   "zrZhCC": {
     "defaultMessage": "More Info",
     "description": "More Info title"
+  },
+  "zt7UyM": {
+    "defaultMessage": "₹{price}",
+    "description": "Unlock more modal price"
   }
 }

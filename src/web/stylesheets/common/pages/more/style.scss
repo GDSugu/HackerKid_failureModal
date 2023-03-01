@@ -392,6 +392,7 @@
 
     @include gm.media-breakpoint-down(md) {
       margin-top: 1rem;
+      margin-bottom: 2rem;
     }
 
     .more-menu-card {

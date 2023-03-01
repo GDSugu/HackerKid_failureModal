@@ -1003,32 +1003,42 @@
 
       .club-feed-container {
         .feed-container {
-          .feed-card {
-            overflow: hidden;
-            border-radius: 0.75rem;
-            background-color: gt.theme-var(bg-1);
-            margin-bottom: 1rem;
-
-            .feed-title {
-              background-color: gt.theme-var(bg-3);
-              padding: 1rem;
-
-              img {
-                width: 2.5rem;
-                height: 2.5rem;
-                border-radius: 50%;
-                margin-right: 0.5rem;
+          .club-feed-list {
+            .club-feed-list-empty {
+              p {
+                font-size: 1.5rem;
+                text-align: center;
+                margin: 1rem 0;
               }
             }
 
-            .feed-content {
-              padding: 2rem 2.5rem;
+            .feed-card {
+              overflow: hidden;
+              border-radius: 0.75rem;
+              background-color: gt.theme-var(bg-1);
+              margin-bottom: 1rem;
 
-              .feed-icon {
+              .feed-title {
+                background-color: gt.theme-var(bg-3);
+                padding: 1rem;
+
                 img {
-                  width: 1.5rem;
-                  height: 1.5rem;
-                  margin-right: 1rem;
+                  width: 2.5rem;
+                  height: 2.5rem;
+                  border-radius: 50%;
+                  margin-right: 0.5rem;
+                }
+              }
+
+              .feed-content {
+                padding: 2rem 2.5rem;
+
+                .feed-icon {
+                  img {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    margin-right: 1rem;
+                  }
                 }
               }
             }
@@ -1096,12 +1106,54 @@
     }
   }
 
+  .club-feed-loader-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(70% - 2rem);
+
+    @include gm.media-breakpoint-down(md) {
+      width: 100%;
+    }
+
+    svg {
+      path {
+        fill: gt.theme-var(club-nav-bg, null, $thememapdark, $cssvars);
+      }
+    }
+  }
+
   .modal {
     padding: 0;
+
+    &.errorModal {
+      .modal-custom-header {
+        button {
+          &.close {
+            margin-left: auto;
+          }
+        }
+      }
+
+      .modal-container {
+        button {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
+      }
+    }
 
     .modal-dialog {
       @include gm.media-breakpoint-up(md) {
         max-width: 70%;
+      }
+
+      @include gm.media-breakpoint-up (lg) {
+        max-width: 60%;
+      }
+
+      @include gm.media-breakpoint-up(xl) {
+        max-width: 50%;
       }
     }
 

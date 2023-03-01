@@ -7,7 +7,7 @@ import {
   pageInit, pathNavigator,
 } from '../framework';
 import initSubscriptionPayment from '../../../../hooks/common/payment';
-import { SubscriptionContext } from '../../../../hooks/pages/root';
+import { SubscriptionContext, AuthContext } from '../../../../hooks/pages/root';
 import usePricing from '../../../../hooks/pages/pricing';
 
 const initPayment = () => {
@@ -48,7 +48,7 @@ const initPayment = () => {
   });
 };
 
-const PriceCards = ({ planType = 'free', data }) => <>
+const PriceCards = ({ planType = 'free', data, isLoggedIn = false }) => <>
   <div className="price-card-container">
     <div className='row row-revise'>
       <div className='col-lg-6 col-md-6 col-xs-12 mb-3 mb-md-0'>
@@ -57,20 +57,20 @@ const PriceCards = ({ planType = 'free', data }) => <>
 
             <h3 className="premium">
               <FormattedMessage
-                defaultMessage={'HackerKid Premium'}
+                defaultMessage={'HackerKID Premium'}
                 description={'Pricing Plans card title'}
               />
             </h3>
             <p>
               <FormattedMessage
-                defaultMessage={'HackerKid Premium gives you full access to the platform features for a 1 year subscription. With exciting coding games, problems, gamified environments you have a lot you explore, play and learn,'}
+                defaultMessage={'HackerKID Premium gives you full access to the platform features for a 1 year subscription. With exciting coding games, problems, gamified environments you have a lot to explore, play and learn.'}
                 description={'Pricing Plans card discription'}
               />
             </p>
             <h2>
               {data.premium && <FormattedMessage
                 defaultMessage={'₹{price}'}
-                description={'HackerKid Trial Premium Free'}
+                description={'HackerKID Trial Premium Free'}
                 values={{ price: data.premium.priceDetails.INR.price }}
               />}
 
@@ -134,26 +134,26 @@ const PriceCards = ({ planType = 'free', data }) => <>
 
             <h3 className="edition">
               <FormattedMessage
-                defaultMessage={'HackerKid Trial Edition'}
+                defaultMessage={'HackerKID Trial Edition'}
                 description={'Pricing Plans card title'}
               />
             </h3>
             <p>
               <FormattedMessage
-                defaultMessage={'HackerKid provided the chance for you to explore the world of coding with HackerKid in a gamified environment for a 7 day trial period. Your current trial edition allows you explore the limited version of HackerKid.'}
+                defaultMessage={'HackerKID provided the chance for you to explore the world of coding with HackerKID in a gamified environment for a 7 day trial period. Your current trial edition allows you explore the limited version of HackerKID.'}
                 description={'Pricing Plans card discription'}
               />
             </p>
             <h2>
               <FormattedMessage
                 defaultMessage={'FREE'}
-                description={'HackerKid Trial Edition Free'}
+                description={'HackerKID Trial Edition Free'}
               />
             </h2>
 
             <span></span>
 
-            {planType === 'free' ? <button className='btn btn-light w-100 free-plan-pointer'>
+            {(isLoggedIn && planType === 'free') ? <button className='btn btn-light w-100 free-plan-pointer'>
               <FormattedMessage
                 defaultMessage='Your Current Plan'
                 description='Your Current Plan btn'
@@ -181,7 +181,7 @@ const PriceCards = ({ planType = 'free', data }) => <>
   </div>
 </>;
 
-const PlansFeatures = ({ planType = 'free', data }) => <>
+const PlansFeatures = ({ planType = 'free', data, isLoggedIn = false }) => <>
   <div className="price-plans-features">
     <h2>
       <FormattedMessage
@@ -204,8 +204,8 @@ const PlansFeatures = ({ planType = 'free', data }) => <>
             <td>
               <h4 className='edition'>
                 <FormattedMessage
-                  defaultMessage={'HackerKid Trial Edition'}
-                  description={'HackerKid Trial Edition title'}
+                  defaultMessage={'HackerKID Trial Edition'}
+                  description={'HackerKID Trial Edition title'}
                 />
               </h4>
               <h2>
@@ -214,7 +214,7 @@ const PlansFeatures = ({ planType = 'free', data }) => <>
                   description={'FREE price'}
                 />
               </h2>
-              {planType === 'free' ? <button className='btn btn-light w-100 free-plan-pointer'>
+              {(isLoggedIn && planType === 'free') ? <button className='btn btn-light w-100 free-plan-pointer'>
               <FormattedMessage
                 defaultMessage='Your Current Plan'
                 description='Your Current Plan btn'
@@ -225,8 +225,8 @@ const PlansFeatures = ({ planType = 'free', data }) => <>
             <td>
               <h4 className='premium'>
                 <FormattedMessage
-                  defaultMessage={'HackerKid Premium'}
-                  description={'HackerKid Trial Edition title'}
+                  defaultMessage={'HackerKID Premium'}
+                  description={'HackerKID Trial Edition title'}
                 />
               </h4>
               <h2>
@@ -334,7 +334,7 @@ const PlansFeatures = ({ planType = 'free', data }) => <>
               description={'Turtle list'}
             /></p></td>
             <td><p><FormattedMessage
-              defaultMessage={'Webkata JS'}
+              defaultMessage={'Limited (5 Problems)'}
               description={'Limited (5 Problems) list'}
             /></p></td>
             <td><p><FormattedMessage
@@ -412,7 +412,7 @@ const PlansFeatures = ({ planType = 'free', data }) => <>
               description={'Web Development Video Library list'}
             /></p></td>
             <td><p><FormattedMessage
-              defaultMessage={'Limited (5 Problems)'}
+              defaultMessage={'Limited (5 Videos)'}
               description={'Limited (5 Problems) list'}
             /></p></td>
             <td><p><FormattedMessage
@@ -437,7 +437,7 @@ const PlansFeatures = ({ planType = 'free', data }) => <>
               description={'Challenges Creation'}
             /></p></td>
             <td><p><FormattedMessage
-              defaultMessage={'Limited (3 Published)'}
+              defaultMessage={'Limited (3 Publish)'}
               description={'Limited (3 Published) list'}
             /></p></td>
             <td><p><FormattedMessage
@@ -452,7 +452,7 @@ const PlansFeatures = ({ planType = 'free', data }) => <>
               description={'Challenges Attempting'}
             /></p></td>
             <td><p><FormattedMessage
-              defaultMessage={'Limited (3 Solved)'}
+              defaultMessage={'Limited (3 Problems)'}
               description={'Limited (3 Solved) list'}
             /></p></td>
             <td><p><FormattedMessage
@@ -491,8 +491,8 @@ const PlansFeatures = ({ planType = 'free', data }) => <>
               description={'IDE'}
             /></h6></td>
             <td><p><FormattedMessage
-              defaultMessage={'Limited(Python)'}
-              description={'Limited(Python)'}
+              defaultMessage={'Limited(Python & JS)'}
+              description={'Limited(Python & JS)'}
             /></p></td>
             <td><p><FormattedMessage
               defaultMessage={'Unlimited'}
@@ -543,7 +543,7 @@ const PlansFeatures = ({ planType = 'free', data }) => <>
             description={'FREE price'}
           />
         </h2>
-        {planType === 'free' ? <p className='edition'>
+        {(isLoggedIn && planType === 'free') ? <p className='edition'>
           <FormattedMessage
             defaultMessage='Your Current Plan'
             description='Your Current Plan btn'
@@ -1024,8 +1024,8 @@ const ExclusiveCourses = () => <>
   <div className="price-course-container">
     <h3>
       <FormattedMessage
-        defaultMessage={'HackerKid Exclusive Courses'}
-        description={'HackerKid Exclusive Courses title'}
+        defaultMessage={'HackerKID Exclusive Courses'}
+        description={'HackerKID Exclusive Courses title'}
       />
     </h3>
     <div className='row row-revise'>
@@ -1038,8 +1038,8 @@ const ExclusiveCourses = () => <>
       <div className='col-lg-10 col-md-10 col-xs-12'>
         <p>
           <FormattedMessage
-            defaultMessage={'HackerKid also offer exclusive courses on various pedagogies like Web Development, App Development, Game Development & Data Science. We have an elite team of teacher to guide with your learning process. We have team that can answer all your queries before you decide enroll with us. Go on tell your parent right now, What are you waiting for?'}
-            description={'HackerKid Exclusive Courses description'}
+            defaultMessage={'HackerKID also offer exclusive courses on various pedagogies like Web Development, App Development, Game Development & Data Science. We have an elite team of teachers to guide with your learning process. We have team that can answer all your queries before you decide to enroll with us. Go on tell your parent right now, What are you waiting for?'}
+            description={'HackerKID Exclusive Courses description'}
           />
         </p>
         <a href='https://static.hackerkid.org/hackerkid/hackerkid_brochure.pdf' download className='explore-now-btn'>
@@ -1054,9 +1054,10 @@ const ExclusiveCourses = () => <>
 
 const PricingPlans = () => {
   if (window.location.href.includes('pricing')) {
-    pageInit('price-container', 'PricingPlans');
+    pageInit('price-container', 'Pricing');
   }
   const { subscriptionData } = React.useContext(SubscriptionContext);
+  const authContext = React.useContext(AuthContext);
   const isPageMounted = React.useRef(true);
   const { pricingDetails } = usePricing({ isPageMounted });
   const { subscriptionDetails } = pricingDetails;
@@ -1093,10 +1094,12 @@ const PricingPlans = () => {
         </div>
         <PriceCards
         planType = {subscriptionData.planType}
-        data = {planDetails}/>
+        data = {planDetails}
+        isLoggedIn={authContext.isLoggedIn}/>
         <PlansFeatures
         planType = {subscriptionData.planType}
-        data = {planDetails}/>
+        data = {planDetails}
+        isLoggedIn={authContext.isLoggedIn}/>
         <ExclusiveCourses />
       </div>
     </div>

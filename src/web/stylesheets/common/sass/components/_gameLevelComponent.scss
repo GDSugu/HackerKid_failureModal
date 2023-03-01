@@ -8,7 +8,6 @@
   width: 100%;
   top: 0;
   z-index: 1000;
-  // background: #17181875;
   background: gt.theme-var(overlay1);
   backdrop-filter: blur(2rem);
 
@@ -75,10 +74,40 @@
       height: 100%;
       overflow: auto;
       padding-left: 8rem;
+      position: relative;
 
       @include gm.media-breakpoint-down(md) {
         padding-left: 0;
         flex-direction: column;
+      }
+
+      .scroll-left-btn,
+      .scroll-right-btn {
+        position: fixed;
+        height: 44%;
+        font-size: 40px;
+        top: 50%;
+        z-index: 9999;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        transform: translateY(-50%);
+        color: gt.theme-var(text-color-2);
+        border: none;
+      }
+
+      .scroll-left-btn:disabled,
+      .scroll-right-btn:disabled {
+        opacity: 0.5;
+      }
+
+      .scroll-left-btn {
+        left: 0;
+        background: linear-gradient(90deg, #0b0c0c 0%, rgba(15, 16, 16, 0) 100%);
+      }
+
+      .scroll-right-btn {
+        right: 0;
+        background: linear-gradient(270deg, #0b0c0c 0%, rgba(15, 16, 16, 0) 100%);
       }
 
       .game-level-button {

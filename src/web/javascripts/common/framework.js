@@ -14,6 +14,11 @@ const authPages = [
   'register',
   'forgot-password',
   'pricing',
+  'certificate',
+];
+
+const allowedRedirectionPages = [
+  'clubs',
 ];
 
 const isFeatureEnabled = (features, feature, subFeature) => {
@@ -205,10 +210,14 @@ const storeNavigationUrl = () => {
   const pages = pathname.split('/').filter((el) => el.trim() !== '');
   if (pages.length > 0) {
     const page = pages[0];
-    if (!authPages.includes(page)) {
+    if (
+      allowedRedirectionPages.includes(page)
+      && !authPages.includes(page)
+    ) {
       window.sessionStorage.setItem('navigateTo', window.location.href);
       return false;
     }
+    return authPages.includes(page);
   }
   return true;
 };

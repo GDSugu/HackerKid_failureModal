@@ -51,8 +51,7 @@ const HeroContainer = ({ dashboardUserData, isDesktop, session }) => {
   let profileImg = '../../../../images/profile/default_user.png';
   if (session && dashboardUserData) {
     profileImg = (session.profileLink ? session.profileLink : dashboardUserData.profileImage)
-      .toString()
-      .replace(/(updatedAt=(\d+))/g, `updatedAt=${Date.now() / 1000}`);
+      .toString();
   }
 
   return <>
@@ -330,7 +329,12 @@ const GameContainer = ({
                           <stop offset="0%" className="start" />
                           <stop offset="90%" className="end" />
                         </linearGradient>
-                        <path id="yourScoreProgress" strokeLinecap="round" strokeWidth="6" strokeDasharray="140, 251.2" className="progress-bar"
+                        <path id="progressPlaceHolder" strokeLinecap="round" strokeWidth="6" strokeDasharray="251.2, 251.2" className="progress-bar-placeholder"
+                          d="M50 10
+                                  a 40 40 0 0 1 0 80
+                                  a 40 40 0 0 1 0 -80">
+                        </path>
+                        <path id="yourScoreProgress" strokeLinecap="round" strokeWidth="6" strokeDasharray="0, 251.2" className="progress-bar"
                           d="M50 10
                             a 40 40 0 0 1 0 80
                             a 40 40 0 0 1 0 -80">

@@ -82,7 +82,6 @@ const AwardCollectionComponent = ({ awards }) => {
   // React.useEffect(() => {
   //   getAwardsByGame({ cached: false });
   // }, []);
-  console.log(awards);
   if (!awards || !awards.length) {
     return null;
   }
@@ -387,7 +386,12 @@ const GameLeaderboardComponent = ({
                               <stop offset="0%" className="start" />
                               <stop offset="90%" className="end" />
                             </linearGradient>
-                            <path id="yourScoreProgress" strokeLinecap="round" strokeWidth="12" strokeDasharray="140, 251.2" className="progress-bar"
+                            <path id="progressPlaceHolder" strokeLinecap="round" strokeWidth="12" strokeDasharray="251.2, 251.2" className="progress-bar-placeholder"
+                                d="M50 10
+                                    a 40 40 0 0 1 0 80
+                                    a 40 40 0 0 1 0 -80">
+                            </path>
+                            <path id="yourScoreProgress" strokeLinecap="round" strokeWidth="12" strokeDasharray="0, 251.2" className="progress-bar"
                                 d="M50 10
                                     a 40 40 0 0 1 0 80
                                     a 40 40 0 0 1 0 -80">

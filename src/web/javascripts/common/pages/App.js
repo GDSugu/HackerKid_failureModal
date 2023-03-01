@@ -71,7 +71,6 @@ const App = () => {
         <Route path='courses/:moduleId' element={<RouteVideos />} />
         <Route path='courses/:moduleId/:id' element={<RouteVideos />} />
         <Route path='courses/:moduleId/:id/:questionName' element={<RouteVideos />} />
-        <Route path='pricing' element={<RoutePricing />} />
         <Route path='challenges' caseSensitive={true} element={<RouteChallenges />} />
         <Route path='all-challenges' caseSensitive={true} element={<RouteAllChallenges />} />
         <Route path='your-challenges' caseSensitive={true} element={<RouteYourChallenges />} />
@@ -120,8 +119,9 @@ const App = () => {
         <Route path='webkata/:conceptId' element={<RouteWebkata />} />
         <Route path='webkata/:conceptId/:id' element={<RouteWebkata />} />
         <Route path='webkata/:conceptId/:id/:uniqueString' element={<RouteWebkata />} />
-            <Route path='coding-pirate' caseSensitive={true} element={<RouteCodekata />} />
-          <Route path='coding-pirate/:id' element={<RouteCodekata />} />
+        <Route path='coding-pirate' caseSensitive={true} element={<RouteCodekata />} />
+        <Route path='coding-pirate/:id' element={<RouteCodekata />} />
+        <Route path='coding-pirate/:id/:uniqueString' element={<RouteCodekata />} />
           {/* </Route> */}
         {/* </Route> */}
         <Route path='zombieland' caseSensitive={true} element={<RouteZombieLand />} />
@@ -132,6 +132,9 @@ const App = () => {
         <Route path='login' caseSensitive={true} element={<RouteLogin />} />
         <Route path='register' caseSensitive={true} element={<RouteRegister />} />
         <Route path='forgot-password' caseSensitive={true} element={<RouteForgotPassword />} />
+      </Route>
+      <Route path='/' caseSensitive={true} element={<NavBar showIcons={false}/>}>
+        <Route path='pricing' element={<RoutePricing />} />
       </Route>
       <Route path='/about' caseSensitive={true} element={<RouteAbout />} />
       <Route path='*' element={ <Navigate to='/' />} />
