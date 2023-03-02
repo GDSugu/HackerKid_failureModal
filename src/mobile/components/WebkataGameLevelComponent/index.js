@@ -13,7 +13,7 @@ import Icon from '../../common/Icons';
 const getStyle = (font, theme, utilColors) => StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFill,
-    height: Dimensions.get('window').height - 68 - 30,
+    height: Dimensions.get('window').height - 68,
     marginTop: 68,
     backgroundColor: 'transparent',
   },
