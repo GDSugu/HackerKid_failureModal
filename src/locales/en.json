@@ -18,6 +18,10 @@
     "defaultMessage": "{step}",
     "description": "take challenge instruction"
   },
+  "+c+in9": {
+    "defaultMessage": "Activate Subscription",
+    "description": "operation title"
+  },
   "+f2V2I": {
     "defaultMessage": "{currentProgress} {unit}",
     "description": "current progress"
@@ -872,6 +876,10 @@
   "CvKgI9": {
     "defaultMessage": "Aithih",
     "description": "Happy Learning Starts Here... title"
+  },
+  "CyuuLf": {
+    "defaultMessage": "Phone",
+    "description": "phone title"
   },
   "Czb4m8": {
     "defaultMessage": "Challenges",
@@ -3346,6 +3354,10 @@
   "x26Xe0": {
     "defaultMessage": "For Classes 5 & 6",
     "description": "For Classes 5 & 6 title"
+  },
+  "x2v0yK": {
+    "defaultMessage": "Payment Id",
+    "description": "payment id title"
   },
   "x4kCc4": {
     "defaultMessage": "Unlimited",
