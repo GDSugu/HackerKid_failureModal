@@ -1,23 +1,23 @@
 import React, { useContext } from 'react';
 import {
-  Image,
   StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { enableScreens } from 'react-native-screens';
 import * as Animatable from 'react-native-animatable';
-import { FormattedMessage } from 'react-intl';
-import LinearGradient from 'react-native-linear-gradient';
-import GameHeader from '../Header/GameHeader';
+// import { FormattedMessage } from 'react-intl';
+// import LinearGradient from 'react-native-linear-gradient';
+// import GameHeader from '../Header/GameHeader';
 import ThemeContext from '../theme';
-import levelIcon from '../../../images/games/levelStar.png';
-import hintIcon from '../../../images/games/hint.png';
+// import levelIcon from '../../../images/games/levelStar.png';
+// import hintIcon from '../../../images/games/hint.png';
 // import gameMenuIcon from '../../../images/games/gameMenu.png';
 import GameLevelComponent from '../GameLevelComponent';
 import { CodekataContext } from '../../../hooks/pages/codekata';
 import { TurtleContext } from '../../../hooks/pages/turtle';
 import { ZombieLandContext } from '../../../hooks/pages/zombieLand';
 import { LightBlue, Yellow } from '../../../colors/_colors';
+import GameNavBar from '../GameNavBar';
 
 enableScreens();
 
@@ -174,118 +174,119 @@ const GameBottomTabBar = (props) => {
   );
 };
 
-const GameNavBar = ({
-  // currentScreen,
-  font, game, gradients, utilColors, route,
-}) => {
-  const style = getStyle(font, utilColors);
-  let context = false;
+// const GameNavBar = ({
+//   // currentScreen,
+//   font, game, gradients, utilColors, route,
+// }) => {
+//   const style = getStyle(font, utilColors);
+//   let context = false;
 
-  switch (game) {
-    case 'turtle':
-      context = useContext(TurtleContext);
-      break;
-    case 'zombieLand':
-      context = useContext(ZombieLandContext);
-      break;
-    case 'codekata':
-      context = useContext(CodekataContext);
-    default: break;
-  }
+//   switch (game) {
+//     case 'turtle':
+//       context = useContext(TurtleContext);
+//       break;
+//     case 'zombieLand':
+//       context = useContext(ZombieLandContext);
+//       break;
+//     case 'codekata':
+//       context = useContext(CodekataContext);
+//       break;
+//     default: break;
+//   }
 
-  const handleShowLevel = () => {
-    // switch (game) {
-    //   case 'turtle':
+//   const handleShowLevel = () => {
+//     // switch (game) {
+//     //   case 'turtle':
 
-    //     break;
-    //   case 'zombieLand':
-    //     break;
-    //   default: break;
-    // }
-    context.ctxSetState((prevState) => ({
-      ...prevState,
-      uiData: {
-        ...prevState.uiData,
-        showGameLevel: true,
-      },
-    }));
-  };
+//     //     break;
+//     //   case 'zombieLand':
+//     //     break;
+//     //   default: break;
+//     // }
+//     context.ctxSetState((prevState) => ({
+//       ...prevState,
+//       uiData: {
+//         ...prevState.uiData,
+//         showGameLevel: true,
+//       },
+//     }));
+//   };
 
-  const levelId = () => {
-    let level = 0;
-    switch (game) {
-      case 'turtle':
-        level = context?.ctxState?.questionObject?.virtualId;
-        break;
-      case 'zombieLand':
-        level = context?.ctxState?.questionObject?.virtualId;
-        break;
-      case 'codekata':
-        level = context?.ctxState?.questionObject?.virtualId;
-        break;
-      default: break;
-    }
-    return level;
-  };
+//   const levelId = () => {
+//     let level = 0;
+//     switch (game) {
+//       case 'turtle':
+//         level = context?.ctxState?.questionObject?.virtualId;
+//         break;
+//       case 'zombieLand':
+//         level = context?.ctxState?.questionObject?.virtualId;
+//         break;
+//       case 'codekata':
+//         level = context?.ctxState?.questionObject?.virtualId;
+//         break;
+//       default: break;
+//     }
+//     return level;
+//   };
 
-  return <>
-    <GameHeader route={route} game={game} />
-    <LinearGradient colors={gradients.darkTransparent1} style={style.tabHeader}>
-      <TouchableOpacity
-        // onPress={() => context.ctxSetState((prevState) => ({
-        //   ...prevState,
-        //   uiData: {
-        //     ...prevState.uiData,
-        //     showGameLevel: true,
-        //   },
-        // })) }
-        onPress={handleShowLevel}
-      >
-        <View style={style.row}>
-          <Image
-            source={levelIcon}
-            style={style.tabHeaderIcon}
-          />
-          <Text style={[style.tabHeaderLevelText]}>
-            <FormattedMessage
-              defaultMessage={'Level {level}'}
-              description={'Question Level'}
-              // values={{ level: context?.ctxState?.questionObject?.virtualId }}
-              values={{ level: levelId() }}
-            />
-          </Text>
-        </View>
-      </TouchableOpacity>
-      <View style={style.row}>
-        {/* { currentScreen !== 'TurtleOutput' */}
-          <Animatable.View
-              // animation={currentScreen !== 'TurtleOutput' ? 'fadeInUp' : 'fadeOutDown'}
-              // duration={currentScreen !== 'TurtleOutput' ? 500 : 1250}
-              animation='fadeInRight'
-            >
-              <TouchableOpacity
-                style={style.mr12}
-                onPress={() => { context.handleHintVisibility(true); }}
-              >
-                <Image
-                  source={hintIcon}
-                  resizeMode='contain'
-                  style={style.tabHeaderIcon}
-                />
-              </TouchableOpacity>
-            </Animatable.View>
-          {/* : <></> */}
-        {/* <TouchableOpacity style={style.mh4}>
-          <Image
-            source={gameMenuIcon}
-            resizeMode='contain'
-            style={style.tabHeaderIcon}
-          />
-        </TouchableOpacity> */}
-      </View>
-    </LinearGradient>
-  </>;
-};
+//   return <>
+//     <GameHeader route={route} game={game} />
+//     <LinearGradient colors={gradients.darkTransparent1} style={style.tabHeader}>
+//       <TouchableOpacity
+//         // onPress={() => context.ctxSetState((prevState) => ({
+//         //   ...prevState,
+//         //   uiData: {
+//         //     ...prevState.uiData,
+//         //     showGameLevel: true,
+//         //   },
+//         // })) }
+//         onPress={handleShowLevel}
+//       >
+//         <View style={style.row}>
+//           <Image
+//             source={levelIcon}
+//             style={style.tabHeaderIcon}
+//           />
+//           <Text style={[style.tabHeaderLevelText]}>
+//             <FormattedMessage
+//               defaultMessage={'Level {level}'}
+//               description={'Question Level'}
+//               // values={{ level: context?.ctxState?.questionObject?.virtualId }}
+//               values={{ level: levelId() }}
+//             />
+//           </Text>
+//         </View>
+//       </TouchableOpacity>
+//       <View style={style.row}>
+//         {/* { currentScreen !== 'TurtleOutput' */}
+//           <Animatable.View
+//               // animation={currentScreen !== 'TurtleOutput' ? 'fadeInUp' : 'fadeOutDown'}
+//               // duration={currentScreen !== 'TurtleOutput' ? 500 : 1250}
+//               animation='fadeInRight'
+//             >
+//               <TouchableOpacity
+//                 style={style.mr12}
+//                 onPress={() => { context.handleHintVisibility(true); }}
+//               >
+//                 <Image
+//                   source={hintIcon}
+//                   resizeMode='contain'
+//                   style={style.tabHeaderIcon}
+//                 />
+//               </TouchableOpacity>
+//             </Animatable.View>
+//           {/* : <></> */}
+//         {/* <TouchableOpacity style={style.mh4}>
+//           <Image
+//             source={gameMenuIcon}
+//             resizeMode='contain'
+//             style={style.tabHeaderIcon}
+//           />
+//         </TouchableOpacity> */}
+//       </View>
+//     </LinearGradient>
+//   </>;
+// };
 
 const GameNavigator = ({
   currentScreen, game, initialRoute, ScreenArray, themeKey,
@@ -302,25 +303,31 @@ const GameNavigator = ({
     case 'zombieLand':
       context = useContext(ZombieLandContext);
       break;
+    case 'codekata':
+      context = useContext(CodekataContext);
+      break;
     default: break;
   }
 
   return (
     <>
-    <GameHeader
-          currentScreen={currentScreen.currentGameScreen}
-          font={font}
-          gradients={gradients}
-          utilColors={utilColors}
-        />
-        <BottomTab.Navigator
-      initialRouteName='TurtleQuestion'
-      detachInactiveScreens={false}
-      tabBar={
+      <GameNavBar
+        font={font}
+        game={game}
+        gradients={gradients}
+        route={initialRoute}
+        utilColors={utilColors}
+        gameContext={context}
+      />
+      <BottomTab.Navigator
+        initialRouteName='TurtleQuestion'
+        detachInactiveScreens={false}
+        tabBar={
         (props) => <GameBottomTabBar
           {...props}
           TabArray={ScreenArray}
           font={font}
+          game={game}
           utilColors={utilColors}
           setCurrentScreen={currentScreen.setCurrentGameScreen}
         />
@@ -356,7 +363,7 @@ const GameNavigator = ({
       gradients={gradients}
       utilColors={utilColors}
       theme={theme}
-      themeKey={}
+      themeKey={themeKey}
     />
     </>
   );

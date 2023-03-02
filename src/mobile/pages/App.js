@@ -29,15 +29,26 @@ import RouteAchievements from './Achievements';
 import RouteAwardsCollectibles from './AwardsCollectibles';
 import RouteCertificates from './Certificates';
 import RouteIde from './Ide';
-import BottomSheet from '../components/BottomSheet';
 import RouteHelp from './Help';
 import RouteTurtleHome from './TurtleHome';
 import RouteTurtleMain from './TurtleMain';
-import RouteTurtleLeaderBoard from './TurtleLeaderBoard';
+import RouteAllChallenges from './AllChallenges';
+import RouteYourChallenges from './YourChallenges';
+import RouteDraftChallenges from './YourDraftChallenges';
+
+import RouteZombieLandHome from './ZombieLandHome';
+import RouteZombieLandMain from './ZombieLandMain';
+
+import RouteGameLeaderBoard from './GameLeaderBoard';
 
 import RouteCodekata from './Codekata';
 import RouteCodekataMain from './CodekataMain';
+import RouteWebkataHome from './WebkataHome';
+import RouteWebkataMain from './WebkataMain';
 import RouteClub from './Clubs';
+
+import BottomSheet from '../components/BottomSheet';
+import YourChallengesActions from '../components/YourChallengesActions';
 
 import IconGame from '../../images/navbar/iconGame.svg';
 import IconHome from '../../images/navbar/iconHome.svg';
@@ -272,9 +283,33 @@ const App = () => {
                     <Stack.Screen name='Ide' component={RouteIde} />
                     <Stack.Screen name='AwardsCollectibles' component={RouteAwardsCollectibles} />
                     <Stack.Screen name='Certificates' component={RouteCertificates} />
+                    <Stack.Screen name='WebkataHome' component={RouteWebkataHome} />
+                    <Stack.Screen name='WebkataMain' component={RouteWebkataMain} />
+                    <Stack.Screen name='AllChallenges' component={RouteAllChallenges} />
+                    <Stack.Screen name='YourChallenges' component={RouteYourChallenges} />
+                    <Stack.Screen name='YourDraftChallenges' component={RouteDraftChallenges} />
+
                     <Stack.Screen name='TurtleHome'>
                       {(props) => <RouteTurtleHome {...props} routeName={routeName} />}
                     </Stack.Screen>
+                    <Stack.Group
+                      screenOptions={{
+                        animation: 'slide_from_right',
+                      }}
+                    >
+                      <Stack.Screen name='TurtleMain' component={RouteTurtleMain} />
+                    </Stack.Group>
+                    <Stack.Screen name='ZombieLandHome'>
+                      {(props) => <RouteZombieLandHome {...props} routeName={routeName} />}
+                    </Stack.Screen>
+                    <Stack.Group
+                      screenOptions={{
+                        animation: 'slide_from_right',
+                      }}
+                    >
+                      <Stack.Screen name='ZombieLandMain' component={RouteZombieLandMain} />
+                    </Stack.Group>
+
                     <Stack.Screen name='Codekata'>
                       {(props) => <RouteCodekata {...props} routeName={routeName} /> }
                     </Stack.Screen>
@@ -283,12 +318,10 @@ const App = () => {
                         animation: 'slide_from_right',
                       }}
                     >
-                      <Stack.Screen name='TurtleMain' component={RouteTurtleMain} />
-                      <Stack.Screen name='Club' component={RouteClub}></Stack.Screen>
-
                       <Stack.Screen name='CodekataMain' component={RouteCodekataMain} />
                     </Stack.Group>
-                    <Stack.Screen name='TurtleLeaderBoard' component={RouteTurtleLeaderBoard} options={{ presentation: 'transparentModal' }} />
+                    <Stack.Screen name='GameLeaderBoard' component={RouteGameLeaderBoard} options={{ presentation: 'transparentModal' }} />
+                    <Stack.Screen name='Club' component={RouteClub}></Stack.Screen>
 
                   </>
                   : <>
@@ -302,6 +335,7 @@ const App = () => {
             <Stack.Group screenOptions={{ presentation: 'modal' }}>
               <Stack.Screen name='BottomSheet' component={BottomSheet} />
               <Stack.Screen name='Achievements' component={RouteAchievements} />
+              <Stack.Screen name='YourChallengesActions' component={YourChallengesActions} />
             </Stack.Group>
           </Stack.Navigator>
         </NavigationContainer>

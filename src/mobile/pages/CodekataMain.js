@@ -15,7 +15,6 @@ import { FormattedMessage } from 'react-intl';
 import Icon from '../common/Icons';
 import ThemeContext from '../components/theme';
 import codekataBg from '../../images/codekata/codekatabg-mob.png';
-import TurtleHeader from '../components/Header/TurtleHeader';
 import { Yellow } from '../../colors/_colors';
 import GameLevelComponent from '../components/GameLevelComponent';
 import CodeEditor from '../components/CodeEditor';
@@ -27,6 +26,7 @@ import {
   getValueToLanguageDisplayNameMap,
 } from '../../web/javascripts/common/Functions/ide';
 import PlayBtn from '../../images/games/playBtn.svg';
+import GameNavBar from '../components/GameNavBar';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -222,7 +222,7 @@ const getStyles = (theme, font, utilColors) => StyleSheet.create({
     alignSelf: 'center',
     padding: 16,
     position: 'absolute',
-    bottom: 185,
+    bottom: '25%',
     zIndex: 5,
   },
   submitBtn: {
@@ -251,25 +251,21 @@ const CodekataHeader = () => {
   const codekataContext = useContext(CodekataContext);
   const { font, theme } = useContext(ThemeContext);
   const { gradients, utilColors } = theme;
-  const onpressLevel = () => {
-    codekataContext.tqSetState((prevState) => ({
-      ...prevState,
-      uiData: {
-        ...prevState.uiData,
-        showGameLevel: true,
-      },
-    }));
-  };
+
   return (
     <>
-      <TurtleHeader
-        forCodekata={true}
-        level={codekataContext.tqState.questionObject.virtualId}
-        onpressLevel={onpressLevel}
+      <GameNavBar
+        font={font}
+        game={'codekata'}
+        gradients={gradients}
+        route={'codekataMain'}
+        utilColors={utilColors}
+        gameContext={codekataContext}
+        hintVisibility={false}
       />
       <GameLevelComponent
         context={codekataContext}
-        game={'turtle'}
+        game={'codekata'}
         font={font}
         gradients={gradients}
         utilColors={utilColors}
@@ -489,7 +485,7 @@ const CodekataBody = () => {
   const codeSubmit = () => {
     const language = valueToLanguageDisplayNameMap[selectedLang];
     codekataContext.submitCode({
-      questionId: codekataContext.tqState.questionObject.questionId,
+      questionId: codekataContext.ctxState.questionObject.questionId,
       code: codeValue,
       lang: language,
     }).then((res) => {
@@ -502,7 +498,7 @@ const CodekataBody = () => {
     <View>
       <QuestionComponent
         style={style}
-        data={codekataContext.tqState.questionObject}
+        data={codekataContext.ctxState.questionObject}
       />
       <LanguageSelector
       style={style}
@@ -581,9 +577,9 @@ const CodekataMain = () => {
           <View style={style.container}>
             <CodekataContext.Provider
               value={{
-                tqState: codekataData,
-                tqSetState: setCodekata,
-                getCodekataQuestions,
+                ctxState: codekataData,
+                ctxSetState: setCodekata,
+                fetchQuestion: getCodekataQuestions,
                 availableLanguages,
                 getTempleteData,
                 getLanguageId,

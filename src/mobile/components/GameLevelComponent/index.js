@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
-import TryNowSVG from '../../../images/games/trynow.svg';
+// import TryNowSVG from '../../../images/games/trynow.svg';
 import levelCurrentImg from '../../../images/games/level_current.png';
 import levelCompletedImg from '../../../images/games/level_completed.png';
 import levelNotCompletedImg from '../../../images/games/level_not_completed.png';
@@ -15,7 +15,7 @@ import { Yellow } from '../../../colors/_colors';
 const getStyle = (font, theme, utilColors, forCodekata = false) => StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFill,
-    height: forCodekata ? Dimensions.get('window').height - 83 : Dimensions.get('window').height - 83 - 80,
+    height: forCodekata ? Dimensions.get('window').height - 63 : Dimensions.get('window').height - 63 - 80,
     marginTop: 68,
     backgroundColor: 'transparent',
     zIndex: 5002,

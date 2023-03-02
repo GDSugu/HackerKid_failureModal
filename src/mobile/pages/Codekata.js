@@ -77,7 +77,10 @@ const Codekata = ({ navigation, routeName }) => {
         <View
           style={style.gameContainer}
         >
-       <CodekataHeader />
+       <CodekataHeader
+          route={routeName}
+          game={'codekata'}
+       />
           <View>
             <Text style={style.gameTitle}>
               <FormattedMessage
