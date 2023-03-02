@@ -18,6 +18,10 @@
     "defaultMessage": "{step}",
     "description": "take challenge instruction"
   },
+  "+c+in9": {
+    "defaultMessage": "Activate Subscription",
+    "description": "operation title"
+  },
   "+f2V2I": {
     "defaultMessage": "{currentProgress} {unit}",
     "description": "current progress"
@@ -511,6 +515,10 @@
     "defaultMessage": "{message}",
     "description": "error message"
   },
+  "71kplp": {
+    "defaultMessage": "something went wrong",
+    "description": "error message"
+  },
   "74UjvK": {
     "defaultMessage": "Login to existing Account",
     "description": "Login to existing account button"
@@ -872,6 +880,10 @@
   "CvKgI9": {
     "defaultMessage": "Aithih",
     "description": "Happy Learning Starts Here... title"
+  },
+  "CyuuLf": {
+    "defaultMessage": "Phone",
+    "description": "phone title"
   },
   "Czb4m8": {
     "defaultMessage": "Challenges",
@@ -1299,6 +1311,10 @@
   "KwJUpE": {
     "defaultMessage": "{title}",
     "description": "club feed title"
+  },
+  "KwtdsL": {
+    "defaultMessage": "Activate",
+    "description": "activate btn"
   },
   "KzGZsa": {
     "defaultMessage": "No Certificates Found",
@@ -2579,6 +2595,10 @@
     "defaultMessage": "{name}",
     "description": "user name"
   },
+  "jCDRHF": {
+    "defaultMessage": "Try again",
+    "description": "try again button"
+  },
   "jDzDCp": {
     "defaultMessage": "Leaderboard",
     "description": "Leaderboard page title"
@@ -3346,6 +3366,10 @@
   "x26Xe0": {
     "defaultMessage": "For Classes 5 & 6",
     "description": "For Classes 5 & 6 title"
+  },
+  "x2v0yK": {
+    "defaultMessage": "Payment Id",
+    "description": "payment id title"
   },
   "x4kCc4": {
     "defaultMessage": "Unlimited",

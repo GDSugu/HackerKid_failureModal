@@ -29,6 +29,12 @@
       "value": "step"
     }
   ],
+  "+c+in9": [
+    {
+      "type": 0,
+      "value": "Activate Subscription"
+    }
+  ],
   "+f2V2I": [
     {
       "type": 1,
@@ -843,6 +849,12 @@
       "value": "message"
     }
   ],
+  "71kplp": [
+    {
+      "type": 0,
+      "value": "something went wrong"
+    }
+  ],
   "74UjvK": [
     {
       "type": 0,
@@ -1443,6 +1455,12 @@
     {
       "type": 0,
       "value": "Aithih"
+    }
+  ],
+  "CyuuLf": [
+    {
+      "type": 0,
+      "value": "Phone"
     }
   ],
   "Czb4m8": [
@@ -2143,6 +2161,12 @@
     {
       "type": 1,
       "value": "title"
+    }
+  ],
+  "KwtdsL": [
+    {
+      "type": 0,
+      "value": "Activate"
     }
   ],
   "KzGZsa": [
@@ -4207,6 +4231,12 @@
       "value": "name"
     }
   ],
+  "jCDRHF": [
+    {
+      "type": 0,
+      "value": "Try again"
+    }
+  ],
   "jDzDCp": [
     {
       "type": 0,
@@ -5413,6 +5443,12 @@
     {
       "type": 0,
       "value": "For Classes 5 & 6"
+    }
+  ],
+  "x2v0yK": [
+    {
+      "type": 0,
+      "value": "Payment Id"
     }
   ],
   "x4kCc4": [

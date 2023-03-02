@@ -49,6 +49,7 @@ const RouteClub = loadable(() => import('./Clubs'), { fallback: <Loading /> });
 const RouteWebkata = loadable(() => import('./Webkata'), { fallback: <Loading /> });
 const RouteIde = loadable(() => import('./Ide'), { fallback: <Loading /> });
 const RouteLanding = loadable(() => import('./Landing'), { fallback: <Loading /> });
+const RouteAdmin = loadable(() => import('./Admin'), { fallback: <Loading /> });
 
 const App = () => {
   React.useEffect(() => {
@@ -127,6 +128,7 @@ const App = () => {
         <Route path='zombieland' caseSensitive={true} element={<RouteZombieLand />} />
         <Route path='zombieland/:id' element={<RouteZombieLand />} />
         <Route path='zombieland/:id/:uniqueString' element={<RouteZombieLand />} />
+        <Route path='/admin' element={<RouteAdmin />}/>
       </Route>
       <Route path='/' caseSensitive={true} element={<AuthNav/>}>
         <Route path='login' caseSensitive={true} element={<RouteLogin />} />
