@@ -515,6 +515,10 @@
     "defaultMessage": "{message}",
     "description": "error message"
   },
+  "71kplp": {
+    "defaultMessage": "something went wrong",
+    "description": "error message"
+  },
   "74UjvK": {
     "defaultMessage": "Login to existing Account",
     "description": "Login to existing account button"
@@ -1307,6 +1311,10 @@
   "KwJUpE": {
     "defaultMessage": "{title}",
     "description": "club feed title"
+  },
+  "KwtdsL": {
+    "defaultMessage": "Activate",
+    "description": "activate btn"
   },
   "KzGZsa": {
     "defaultMessage": "No Certificates Found",
@@ -2586,6 +2594,10 @@
   "jACivV": {
     "defaultMessage": "{name}",
     "description": "user name"
+  },
+  "jCDRHF": {
+    "defaultMessage": "Try again",
+    "description": "try again button"
   },
   "jDzDCp": {
     "defaultMessage": "Leaderboard",

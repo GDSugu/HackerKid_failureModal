@@ -849,6 +849,12 @@
       "value": "message"
     }
   ],
+  "71kplp": [
+    {
+      "type": 0,
+      "value": "something went wrong"
+    }
+  ],
   "74UjvK": [
     {
       "type": 0,
@@ -2155,6 +2161,12 @@
     {
       "type": 1,
       "value": "title"
+    }
+  ],
+  "KwtdsL": [
+    {
+      "type": 0,
+      "value": "Activate"
     }
   ],
   "KzGZsa": [
@@ -4217,6 +4229,12 @@
     {
       "type": 1,
       "value": "name"
+    }
+  ],
+  "jCDRHF": [
+    {
+      "type": 0,
+      "value": "Try again"
     }
   ],
   "jDzDCp": [

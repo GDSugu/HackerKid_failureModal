@@ -440,20 +440,31 @@ const CreateClubStepContainer = () => {
     let result = false;
     const clubAction = 'create';
     if (type === 'locationInput') {
-      fetchLocation({ locationType: 'state', country: value });
-      result = editFields({ fieldName, value, clubAction });
+      fetchLocation({
+        locationType: 'state',
+        country: value.trim(),
+      });
+      result = editFields({
+        fieldName,
+        value: value.trim(),
+        clubAction,
+      });
     } else if (type === 'memberInput') {
       membersAutoCompleteRef.current.setLoadingState(true);
       debounce(() => {
-        if (value?.length) {
-          autoCompleteUser({ userName: value });
+        if (value?.trim()?.length) {
+          autoCompleteUser({ userName: value.trim() });
         } else {
           membersAutoCompleteRef.current.setLoadingState(false);
         }
       }, 1000);
       result = true;
     } else {
-      result = editFields({ fieldName, value, clubAction });
+      result = editFields({
+        fieldName,
+        value: value.trim(),
+        clubAction,
+      });
     }
     clubManagerData.validatedResult[fieldName] = result;
     checkFields();
@@ -979,24 +990,41 @@ const CreateClubMobContent = () => {
       });
   };
 
-  const handleInput = ({ fieldName, value, type = 'clubInput' }) => {
+  const handleInput = ({
+    fieldName,
+    value,
+    type = 'clubInput',
+  }) => {
     let result = false;
     const clubAction = 'create';
     if (type === 'locationInput') {
-      fetchLocation({ locationType: 'state', country: value });
-      result = editFields({ fieldName, value, clubAction });
+      fetchLocation({
+        locationType: 'state',
+        country: value.trim(),
+      });
+      result = editFields({
+        fieldName,
+        value: value.trim(),
+        clubAction,
+      });
     } else if (type === 'memberInput') {
       membersAutoCompleteRef.current.setLoadingState(true);
       debounce(() => {
         if (value?.length) {
-          autoCompleteUser({ userName: value });
+          autoCompleteUser({
+            userName: value.trim(),
+          });
         } else {
           membersAutoCompleteRef.current.setLoadingState(false);
         }
       }, 1000);
       result = true;
     } else {
-      result = editFields({ fieldName, value, clubAction });
+      result = editFields({
+        fieldName,
+        value: value.trim(),
+        clubAction,
+      });
     }
     clubManagerData.validatedResult[fieldName] = result;
     checkFields();

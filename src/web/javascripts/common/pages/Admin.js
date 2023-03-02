@@ -2,15 +2,53 @@ import React, { useEffect, useRef } from 'react';
 import { FormattedMessage } from 'react-intl';
 import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/css/intlTelInput.css';
+
 import '../../../stylesheets/common/pages/admin/style.scss';
-import { $, pageInit } from '../framework';
+import { $, pageInit, pathNavigator } from '../framework';
 import { validateField } from '../../../../hooks/common/framework';
+import { useAdmin } from '../../../../hooks/pages/admin';
+import Modal from '../components/Modal';
+import { showNotificationAlert } from '../Functions/notification';
+
+// TODO: check admin in frontend for accessing admin page
 
 const adminManager = {};
+
+const ReloadModalContent = () => {
+  const reload = () => window.location.reload();
+
+  return <>
+    <div className="reload-modal-content">
+      <h4 className='reload-modal-title'>
+        <FormattedMessage
+          defaultMessage={'something went wrong'}
+          description={'error message'}
+        />
+      </h4>
+      <button type="button" className="btn btn-primary reload-modal-btn" onClick={reload}>
+        <FormattedMessage
+          defaultMessage={'Try again'}
+          description={'try again button'}
+        />
+      </button>
+    </div>
+  </>;
+};
 
 const Admin = () => {
   pageInit('admin-page-container', 'Admin');
   const isPageMounted = useRef(true);
+  const {
+    static: {
+      activateUser,
+      getUserRole,
+    },
+  } = useAdmin();
+
+  const reloadModalRef = useRef(null);
+
+  const showReloadModal = () => reloadModalRef?.current?.show();
+  const hideReloadModal = () => reloadModalRef?.current?.hide();
 
   const submitAction = () => {
     const phone = validateField('tel', $('#phone').val().trim());
@@ -30,11 +68,29 @@ const Admin = () => {
     const countryCode = adminManager.telInput.getSelectedCountryData().dialCode;
     const obj = {
       phone: phone.value,
-      countryCode,
+      countryCode: `+${countryCode}`,
       paymentId: paymentId.value,
     };
 
-    console.log(obj);
+    $('#loader').show();
+
+    activateUser(obj)
+      .then((resp) => {
+        if (isPageMounted.current) {
+          $('#loader').hide();
+          if (resp === 'access_denied') {
+            showReloadModal();
+          } else {
+            const parsedResponse = JSON.parse(resp);
+            if (parsedResponse.status === 'success') {
+              showNotificationAlert('Activated Successfully', 'success');
+            } else {
+              // eslint-disable-next-line no-new, new-cap
+              showNotificationAlert(parsedResponse.message, 'error');
+            }
+          }
+        }
+      });
   };
 
   useEffect(() => {
@@ -46,8 +102,28 @@ const Admin = () => {
       utilsScript: intlTelInput.utilsScript,
     });
 
+    getUserRole()
+      .then((resp) => {
+        if (isPageMounted.current) {
+          if (resp === 'access_denied') {
+            pathNavigator('login/');
+          } else {
+            const parsedResponse = JSON.parse(resp);
+            if (parsedResponse.status === 'error') {
+              showNotificationAlert(parsedResponse.message, 'error');
+            } else if (parsedResponse.status === 'success') {
+              if (parsedResponse?.userRole?.role !== 'admin') {
+                pathNavigator('dashboard/');
+              }
+            }
+          }
+        }
+      });
+
     return () => {
       isPageMounted.current = false;
+      hideReloadModal();
+      $('.backdrop').remove();
     };
   });
 
@@ -96,7 +172,16 @@ const Admin = () => {
         </div>
       </div>
     </div>
-    <div className="loader"></div>
+    <Modal
+      ref={reloadModalRef}
+      options={'hide'}
+      modalClass={'admin-reload-modal'}
+      customClass={'curved'}
+      header={<></>}
+    >
+      <ReloadModalContent />
+    </Modal>
+    <div id="loader"></div>
   </>;
 };
 
