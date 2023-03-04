@@ -105,38 +105,53 @@ const Clubs = () => {
     if (clubDashboardStatus) {
       $('#loader').hide();
       const urlRegex = /(\/clubs)(\/)?/g;
+      const clubRegex = /(clubs\/undefined)\/?/g;
       if (clubDashboardStatus === 'error') {
         setAppData('showClub', false);
         showTryAgainModal();
+        window.location.pathname = 'clubs';
       }
-      if (clubData) {
-        setAppData('showClub', true);
-        if (urlRegex.test(window.location.pathname)) {
-          window.history.replaceState({}, '', `/clubs/${clubData?.clubId}/`);
-        }
-
-        if (urlData.action === 'join' && urlData.invitedByUserName && urlData.userEmail) {
-          $('#loader').show();
-          joinClub({
-            invitedBy: urlData.invitedByUserName,
-            userEmail: urlData.userEmail,
-          })
-            .then((resp) => {
-              $('#loader').show();
-              if (resp !== 'access_denied') {
-                if (resp.status === 'error') {
-                  console.log(resp.message);
-                } else if (resp.status === 'success') {
-                  getClubDashboardData({});
-                  $('#loader').show();
-                }
-              }
+      if (clubDashboardStatus === 'success') {
+        if (clubData) {
+          setAppData('showClub', true);
+          if (urlRegex.test(window.location.pathname)) {
+            if (clubData?.clubId) {
               window.history.replaceState({}, '', `/clubs/${clubData?.clubId}/`);
-            });
+            } else if (clubRegex.test(window.location.pathname)) {
+              window.location.pathname = 'clubs';
+            }
+          }
+          if (urlData.action === 'join' && urlData.invitedByUserName && urlData.userEmail) {
+            $('#loader').show();
+            joinClub({
+              invitedBy: urlData.invitedByUserName,
+              userEmail: urlData.userEmail,
+            })
+              .then((resp) => {
+                $('#loader').show();
+                if (resp !== 'access_denied') {
+                  if (resp.status === 'error') {
+                    console.log(resp.message);
+                  } else if (resp.status === 'success') {
+                    getClubDashboardData({});
+                    $('#loader').show();
+                  }
+                }
+                if (clubData?.clubId) {
+                  window.history.replaceState({}, '', `/clubs/${clubData?.clubId}/`);
+                } else if (clubRegex.test(window.location.pathname)) {
+                  window.location.pathname = 'clubs';
+                }
+              });
+          }
+        }
+      } else if (clubDashboardStatus === 'error') {
+        if (clubDashboardData.message === 'Club Not Found') {
+          pathNavigator('clubs/');
         }
       }
 
-      if (clubList) {
+      if (clubList && clubList.length) {
         setAppData('showClub', false);
         window.history.replaceState({}, '', '/clubs/');
       }

@@ -93,7 +93,7 @@ const useClubs = ({ isPageMounted }) => {
     }
     switch (fieldName) {
       case 'clubName':
-        validatedResult = validateField('name', value, { min: 3, max: 60 });
+        validatedResult = validateField('name', value, { min: 3, max: 60 }, false);
         break;
       case 'country':
         if (value && value !== 'false') {
