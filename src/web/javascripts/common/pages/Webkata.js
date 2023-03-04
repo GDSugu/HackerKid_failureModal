@@ -484,7 +484,6 @@ const WebkataGameComponent = () => {
   const { subscriptionData } = React.useContext(SubscriptionContext);
   const isAlreadyCompleted = () => questionObject.submissionDetails
   && questionObject.submissionDetails?.completed;
-
   const gamesLimit = (gameName) => {
     const gamesEnabled = isFeatureEnabled(subscriptionData, 'games', gameName);
     return gamesEnabled.enabled && gamesEnabled[gameName];
