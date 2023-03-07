@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import {
-  View, Text, StyleSheet, TouchableOpacity,
+  View, Text, StyleSheet,
   // TextInput,
   ScrollView,
   // KeyboardAvoidingView,
@@ -15,6 +15,7 @@ import defaultUser from '../../images/profile/default_user.png';
 import ThemeContext from '../components/theme';
 import { useLeaderBoard } from '../../hooks/pages/leaderboard';
 import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import Paginator from '../components/Paginator';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   ...getCommonStyles(theme, utilColors, font),
@@ -102,12 +103,21 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 15,
   },
+  activePageBtn: {
+    color: theme.notificationBg,
+  },
+  paginationNextBtn: {
+    color: theme.notificationBg,
+  },
+  paginationPrevBtn: {
+    color: theme.notificationBg,
+  },
 });
 
 const Table = ({ children }) => (
-    <View style={{ flexGrow: 1 }}>
-      {children}
-    </View>
+  <View style={{ flexGrow: 1 }}>
+    {children}
+  </View>
 );
 
 const Row = ({ style, children }) => (
@@ -128,10 +138,6 @@ const Leaderboard = ({ navigation }) => {
   const style = getStyles(screenTheme, theme.utilColors, font);
   const scrollViewRef = useRef(null);
 
-  const disablePrevBtn = paginationDetails.page <= 1;
-  const disableNextBtn = Math.ceil(paginationDetails.overallCount
-    / paginationDetails.countPerPage) === paginationDetails.page;
-
   // methods
   const nextBtnPressHandler = () => {
     getLeaderBoardData({ pageNumber: paginationDetails.page + 1 }).then(() => {
@@ -141,6 +147,12 @@ const Leaderboard = ({ navigation }) => {
 
   const previousBtnPressHandler = () => {
     getLeaderBoardData({ pageNumber: paginationDetails.page - 1 }).then(() => {
+      scrollViewRef.current.scrollTo({ y: 0, animated: true });
+    });
+  };
+
+  const onPageChange = (pageNumber) => {
+    getLeaderBoardData({ pageNumber }).then(() => {
       scrollViewRef.current.scrollTo({ y: 0, animated: true });
     });
   };
@@ -177,14 +189,15 @@ const Leaderboard = ({ navigation }) => {
   }, []);
 
   return (
-    <ScrollView
-      style={{ flex: 1 }}
-      contentContainerStyle={{ paddingHorizontal: 20 }}
-      ref={scrollViewRef}>
-      <Text style={style.heading}>
-        <FormattedMessage defaultMessage={'Leaderboard'} description={'Leaderboard page heading'} />
-      </Text>
-      {/* <KeyboardAvoidingView>
+    <>
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={{ paddingHorizontal: 20 }}
+        ref={scrollViewRef}>
+        <Text style={style.heading}>
+          <FormattedMessage defaultMessage={'Leaderboard'} description={'Leaderboard page heading'} />
+        </Text>
+        {/* <KeyboardAvoidingView>
       <View style={style.controls}>
         <View style={[style.controlWithIconContainer, style.filterBtnWithIcon]}>
           <View style={[style.iconContainer, style.filterBtnIconContainer]}>
@@ -207,87 +220,92 @@ const Leaderboard = ({ navigation }) => {
         </View>
         </View>
         </KeyboardAvoidingView> */}
-      <Table>
-        <Row style={style.tableRow}>
-          <View style={style.rankCell}>
-            <Text style={style.tableHeaderCellText}>Rank</Text>
-          </View>
-          <View style={style.studentNameCell}>
-            <Text style={style.tableHeaderCellText}>Student Name</Text>
-          </View>
-          <View style={style.coinsCell}>
-            <Text style={style.tableHeaderCellText}>Coins</Text>
-          </View>
-        </Row>
-        {
-          !leaderboardData && new Array(10).fill().map((val, index) => <Row
-            style={style.tableRow} key={index}>
-          <View style={style.rankCell}>
-            <Skeleton width='40%' height={20} style={{ borderRadius: 4 }}/>
-          </View>
-          <View style={style.studentNameCell}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Skeleton width={36} height={36} style={{ borderRadius: 36 / 2, marginRight: 5 }}/>
-              <Skeleton width='50%' height={20} style={{ borderRadius: 4 }}/>
+        <Table>
+          <Row style={style.tableRow}>
+            <View style={style.rankCell}>
+              <Text style={style.tableHeaderCellText}>Rank</Text>
             </View>
-          </View>
-          <View style={style.coinsCell}>
-            <Skeleton width='40%' height={20} style={{ borderRadius: 4, margin: 'auto' }}/>
-          </View>
-        </Row>)
-        }
-        {
-          leaderboardData && leaderboardData.map((profileObj, index) => <Row
-            style={(profileObj.uniqueUrl === userData.uniqueUrl)
-              ? [style.tableRow, style.loggedInUserHighlight]
-              : style.tableRow}
-            key={index}>
-          <View style={style.rankCell}>
-            <Text style={style.tableCellText}>
-                <FormattedMessage
-                  defaultMessage={'{rank}'}
-                  description={'rank'}
-                  values={{ rank: !Number.isNaN(Number(profileObj.rank)) ? `#${profileObj.rank}` : '--' }} />
-            </Text>
-          </View>
-          <View style={style.studentNameCell}>
-            <View style={style.studentNameWithPicture}>
-              <Image
-                source={profileObj.profileImage ? {
-                  uri: profileObj.profileImage,
-                } : defaultUser }
-                style={style.profilePicture}
-                />
+            <View style={style.studentNameCell}>
+              <Text style={style.tableHeaderCellText}>Student Name</Text>
+            </View>
+            <View style={style.coinsCell}>
+              <Text style={style.tableHeaderCellText}>Coins</Text>
+            </View>
+          </Row>
+          {
+            !leaderboardData && new Array(10).fill().map((val, index) => <Row
+              style={style.tableRow} key={index}>
+              <View style={style.rankCell}>
+                <Skeleton width='40%' height={20} style={{ borderRadius: 4 }} />
+              </View>
+              <View style={style.studentNameCell}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Skeleton
+                    width={36}
+                    height={36}
+                    style={{ borderRadius: 36 / 2, marginRight: 5 }} />
+                  <Skeleton
+                    width='50%'
+                    height={20}
+                    style={{ borderRadius: 4 }} />
+                </View>
+              </View>
+              <View style={style.coinsCell}>
+                <Skeleton width='40%' height={20} style={{ borderRadius: 4, margin: 'auto' }} />
+              </View>
+            </Row>)
+          }
+          {
+            leaderboardData && leaderboardData.map((profileObj, index) => <Row
+              style={(profileObj.uniqueUrl === userData.uniqueUrl)
+                ? [style.tableRow, style.loggedInUserHighlight]
+                : style.tableRow}
+              key={index}>
+              <View style={style.rankCell}>
                 <Text style={style.tableCellText}>
-                  <FormattedMessage defaultMessage={'{studentName}'} description={'student name'} values={{ studentName: profileObj.name }} />
+                  <FormattedMessage
+                    defaultMessage={'{rank}'}
+                    description={'rank'}
+                    values={{ rank: !Number.isNaN(Number(profileObj.rank)) ? `#${profileObj.rank}` : '--' }} />
                 </Text>
-            </View>
-          </View>
-          <View style={style.coinsCell}>
-            <Text style={style.tableCellText}>
-              <FormattedMessage defaultMessage={'{coins}'} description={'coins'} values={{ coins: profileObj.points || '--' }} />
-            </Text>
-          </View>
-          </Row>)
-        }
-      </Table>
-      <View style={style.paginator}>
-        <TouchableOpacity style={disablePrevBtn
-          ? [style.btnPrimary, style.disabledPrimaryBtn]
-          : style.btnPrimary}
-          disabled={disablePrevBtn}
-          onPress={previousBtnPressHandler}>
-            <Text style={style.btnPrimaryText}>Previous</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={disableNextBtn
-          ? [style.btnPrimary, style.disabledPrimaryBtn]
-          : style.btnPrimary}
-          disabled={disableNextBtn}
-          onPress={nextBtnPressHandler}>
-            <Text style={style.btnPrimaryText}>Next</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+              </View>
+              <View style={style.studentNameCell}>
+                <View style={style.studentNameWithPicture}>
+                  <Image
+                    source={profileObj.profileImage ? {
+                      uri: profileObj.profileImage,
+                    } : defaultUser}
+                    style={style.profilePicture}
+                  />
+                  <Text style={style.tableCellText}>
+                    <FormattedMessage defaultMessage={'{studentName}'} description={'student name'} values={{ studentName: profileObj.name }} />
+                  </Text>
+                </View>
+              </View>
+              <View style={style.coinsCell}>
+                <Text style={style.tableCellText}>
+                  <FormattedMessage defaultMessage={'{coins}'} description={'coins'} values={{ coins: profileObj.points || '--' }} />
+                </Text>
+              </View>
+            </Row>)
+          }
+        </Table>
+      </ScrollView>
+      {
+        leaderboardData && <Paginator
+          currentPageNumber={paginationDetails.page}
+          totalItems={paginationDetails.overallCount}
+          countPerPage={paginationDetails.countPerPage}
+          initialWindow={3}
+          onPageChange={onPageChange}
+          onNextBtnPress={nextBtnPressHandler}
+          onPrevBtnPress={previousBtnPressHandler}
+          styleActiveBtn={style.activePageBtn}
+          styleNextBtn={style.paginationNextBtn}
+          stylePrevBtn={style.paginationPrevBtn}
+        />
+      }
+    </>
   );
 };
 
