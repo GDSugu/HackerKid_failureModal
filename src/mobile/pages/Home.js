@@ -257,6 +257,9 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => Styl
   svgGradient: {
     color: gradients.blue,
   },
+  svgProgressBackground: {
+    color: additionalThemes.screenGames.progressBg,
+  },
   challengeCardList: {
     marginLeft: 8,
   },
@@ -572,7 +575,8 @@ const GameBlock = ({ style, navigation, gameData }) => {
               progressValue={ gameData ? gameData.gameProgress : 0}
               totalValue={ gameData ? gameData.totalGames : 100}
               startAnim={Boolean(gameData)}
-               >
+              progressBg={style.svgProgressBackground.color}
+            >
               <View style={style.bodyCardContentTitle}>
                 <AnimatedTextInput
                   ref={gameDataTextRef}

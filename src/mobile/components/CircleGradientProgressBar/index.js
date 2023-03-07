@@ -24,7 +24,8 @@ const style = StyleSheet.create({
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 const CircleGradientProgressBar = ({
-  children, gradientColors, progressValue = 0, startAnim = false, strokeWidth = 6, totalValue = 100,
+  children, gradientColors, progressValue = 0, progressBg = '',
+  startAnim = false, strokeWidth = 6, totalValue = 100,
 }) => {
   let progressBar = null;
   const progressBarRef = useRef();
@@ -67,6 +68,16 @@ const CircleGradientProgressBar = ({
             }
           </LinearGradient>
         </Defs>
+        <Path
+          id={'yourScoreProgressBackground'}
+          strokeLinecap="round"
+          strokeWidth={`${strokeWidth}`}
+          strokeDasharray={'251.2, 251.2'}
+          strokeDashoffset={2}
+          stroke={progressBg}
+          className="progress-bar"
+          d="M50 10 a 40 40 0 0 1 0 80 a 40 40 0 0 1 0 -80"
+        />
         <AnimatedPath
           ref={progressBarRef}
           id="yourScoreProgress"

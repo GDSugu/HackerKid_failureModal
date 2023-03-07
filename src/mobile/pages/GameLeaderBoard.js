@@ -393,6 +393,7 @@ const GameLeaderBoard = ({ route, navigation }) => {
                   totalValue={memoizedProgress?.totalQuestions || 0}
                   startAnim={Boolean(memoizedProgress)}
                   strokeWidth={16}
+                  progressBg={theme.screenGameLeaderBoard.progressBg}
                 >
                 </CircleGradientProgressBar>
               </View>
