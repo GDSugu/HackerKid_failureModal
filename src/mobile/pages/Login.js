@@ -16,6 +16,7 @@ import ThemeContext from '../components/theme';
 import LoginFormSvg from '../../images/login/login-form-svg.svg';
 import useLoginMethod from '../../hooks/pages/auth';
 import getCommonStyles from '../components/commonStyles';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   ...getCommonStyles(theme, utilColors, font),
@@ -47,6 +48,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
 });
 
 const Login = ({ navigation }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   // hooks
   const phoneInput = useRef(null);
   const { stateObj, setState, loginWithPhone } = useLoginMethod();
@@ -140,6 +142,14 @@ const Login = ({ navigation }) => {
       console.error(e);
     }
   };
+
+  useEffect(() => {
+    startTimeTrack('login');
+
+    return () => {
+      stopTimeTrack('login');
+    };
+  }, []);
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import {
   // FlatList,
@@ -25,6 +25,7 @@ import FeedAchievementSVG from '../../images/clubs/feed-achievement-icon.svg';
 import CrossMarkSVG from '../../images/common/cross-mark.svg';
 import CheckMarkSVG from '../../images/common/check-mark.svg';
 import StarSVG from '../../images/clubs/star.svg';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -1224,16 +1225,25 @@ const compareProps = (prev, next) => {
 const ClubHeroComponent = memo(ClubHeroBlock, compareProps);
 const ClubFeedComponent = memo(ClubFeedBlock, compareProps);
 
-const ClubHomeComponent = () => {
-  console.log();
+const ClubHomeComponent = ({ navigation }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
+
+  useEffect(() => {
+    startTimeTrack('club-home');
+
+    return () => {
+      stopTimeTrack('club-home');
+    };
+  });
 
   return <>
     <Text>home</Text>
   </>;
 };
 
-const ClubDashboardComponent = ({ style }) => {
+const ClubDashboardComponent = ({ style, navigation }) => {
   const clubContext = React.useContext(ClubContext);
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
 
   const {
     clubState: {
@@ -1255,6 +1265,14 @@ const ClubDashboardComponent = ({ style }) => {
     clubData,
     // clubFeed,
   } = clubDashboardResponse || {};
+
+  useEffect(() => {
+    startTimeTrack('club-dashboard');
+
+    return () => {
+      stopTimeTrack('club-dashboard');
+    };
+  }, []);
 
   return <>
     <View style={utilStyles.flex1}>
@@ -1283,7 +1301,8 @@ const ClubDashboardComponent = ({ style }) => {
   </>;
 };
 
-const Club = () => {
+const Club = ({ navigation }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const { theme, font } = React.useContext(ThemeContext);
   const pageTheme = theme.screenClub;
   const style = getStyles(pageTheme, font, theme.utilColors);
@@ -1328,11 +1347,13 @@ const Club = () => {
   }, [clubDashboardStatus]);
 
   React.useEffect(() => {
+    startTimeTrack('clubs');
     getClubDashboardData({});
     getClubInfo({});
     fetchLocation({ locationType: 'country' });
     return () => {
       isPageMounted.current = false;
+      stopTimeTrack('clubs');
     };
   }, []);
 
@@ -1354,11 +1375,14 @@ const Club = () => {
               showClub
               && <ClubDashboardComponent
                 style={style}
+                navigation={navigation}
               />
             }
             {
               !showClub
-              && <ClubHomeComponent />
+              && <ClubHomeComponent
+                navigation={navigation}
+              />
             }
           </>
         }

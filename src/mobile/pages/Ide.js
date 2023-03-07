@@ -23,6 +23,7 @@ import API from '../../../env';
 import KeepCodeChangesModal from '../components/Modals/KeepCodeChangesModal';
 import LanguageSelector from '../components/LanguageSelector';
 import CodeEditor from '../components/CodeEditor';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 // constants
 const defaultLanguageValue = 'python3';
@@ -377,6 +378,7 @@ const updateCodeEditorJSString = (mode, code) => {
 
 // IDE component
 const Ide = ({ navigation, route }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   // hooks
   const isPageMounted = useRef(true);
   const codeEditorWebViewRef = useRef(null);
@@ -559,9 +561,14 @@ const Ide = ({ navigation, route }) => {
     setLocalState,
   };
 
-  useEffect(() => () => {
-    ideInteracted = undefined;
-    isPageMounted.current = false;
+  useEffect(() => {
+    startTimeTrack('ide');
+
+    return () => {
+      ideInteracted = undefined;
+      isPageMounted.current = false;
+      stopTimeTrack('ide');
+    };
   }, []);
 
   return (

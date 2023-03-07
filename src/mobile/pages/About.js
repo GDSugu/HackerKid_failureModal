@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { FormattedMessage, useIntl } from 'react-intl';
 import ThemeContext from '../components/theme';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyles = (theme) => StyleSheet.create({
   container: {
@@ -18,11 +19,19 @@ const getStyles = (theme) => StyleSheet.create({
 });
 
 const About = ({ navigation }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const { theme } = useContext(ThemeContext);
-
   const style = getStyles(theme);
 
   const intl = useIntl();
+
+  useEffect(() => {
+    startTimeTrack('about');
+
+    return () => {
+      stopTimeTrack('about');
+    };
+  }, []);
 
   return (
     <View style = {style.container}>

@@ -1,16 +1,17 @@
 import React, {
-  useContext,
+  useContext, useEffect,
 } from 'react';
 import {
-  Text,
+  // Text,
   StyleSheet,
-  Dimensions,
-  TouchableOpacity,
+  // Dimensions,
+  // TouchableOpacity,
 } from 'react-native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+// import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { View } from 'react-native-animatable';
 import ThemeContext from '../components/theme';
 import Awards from './Awards';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 // import Collectibles from './Collectibles';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
@@ -57,79 +58,88 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   },
 });
 
-const Tab = createMaterialTopTabNavigator();
+// const Tab = createMaterialTopTabNavigator();
 
-function MyTabBar({
-  state, descriptors, navigation, tabBarStyle,
-}) {
-  return (
-    <View style={tabBarStyle}>
-      {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key];
-        const label = options.tabBarLabel;
+// function MyTabBar({
+//   state, descriptors, navigation, tabBarStyle,
+// }) {
+//   return (
+//     <View style={tabBarStyle}>
+//       {state.routes.map((route, index) => {
+//         const { options } = descriptors[route.key];
+//         const label = options.tabBarLabel;
 
-        const isFocused = state.index === index;
+//         const isFocused = state.index === index;
 
-        const onPress = () => {
-          const event = navigation.emit({
-            type: 'tabPress',
-            target: route.key,
-            canPreventDefault: true,
-          });
+//         const onPress = () => {
+//           const event = navigation.emit({
+//             type: 'tabPress',
+//             target: route.key,
+//             canPreventDefault: true,
+//           });
 
-          if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate({ name: route.name, merge: true });
-          }
-        };
+//           if (!isFocused && !event.defaultPrevented) {
+//             navigation.navigate({ name: route.name, merge: true });
+//           }
+//         };
 
-        const onLongPress = () => {
-          navigation.emit({
-            type: 'tabLongPress',
-            target: route.key,
-          });
-        };
+//         const onLongPress = () => {
+//           navigation.emit({
+//             type: 'tabLongPress',
+//             target: route.key,
+//           });
+//         };
 
-        return (
-          <TouchableOpacity
-            key={index}
-            accessibilityRole="button"
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            style={[
-              options.tabBarItemStyle,
-              {
-                backgroundColor: isFocused ? options.tabBarActiveBackgroundColor : 'transparent',
-                borderBottomWidth: 2,
-                borderBottomColor: isFocused ? options.tabBarActiveBorderBottomColor
-                  : options.tabBarInactiveBorderBottomColor,
-              },
-            ]}
-          >
-            <Text style={
-              [options.tabBarLabelStyle, {
-                color: isFocused
-                  ? options.tabBarActiveTintColor : options.tabBarInactiveTintColor,
-              }]}>
-              {label}
-            </Text>
-          </TouchableOpacity>
-        );
-      })}
-    </View>
-  );
-}
+//         return (
+//           <TouchableOpacity
+//             key={index}
+//             accessibilityRole="button"
+//             accessibilityState={isFocused ? { selected: true } : {}}
+//             accessibilityLabel={options.tabBarAccessibilityLabel}
+//             testID={options.tabBarTestID}
+//             onPress={onPress}
+//             onLongPress={onLongPress}
+//             style={[
+//               options.tabBarItemStyle,
+//               {
+//                 backgroundColor: isFocused ? options.tabBarActiveBackgroundColor : 'transparent',
+//                 borderBottomWidth: 2,
+//                 borderBottomColor: isFocused ? options.tabBarActiveBorderBottomColor
+//                   : options.tabBarInactiveBorderBottomColor,
+//               },
+//             ]}
+//           >
+//             <Text style={
+//               [options.tabBarLabelStyle, {
+//                 color: isFocused
+//                   ? options.tabBarActiveTintColor : options.tabBarInactiveTintColor,
+//               }]}>
+//               {label}
+//             </Text>
+//           </TouchableOpacity>
+//         );
+//       })}
+//     </View>
+//   );
+// }
 
 const AwardsCollectibles = ({ navigation }) => {
   // styles
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const { font, theme } = useContext(ThemeContext);
   const screenTheme = theme.screenAwardsCollectibles;
   const style = getStyles(screenTheme, theme.utilColors, font, theme.gradients);
 
+  useEffect(() => {
+    startTimeTrack('awardsCollectibles');
+
+    return () => {
+      stopTimeTrack('awardsCollectibles');
+    };
+  }, []);
+
   return <View style={style.container}>
-    <Tab.Navigator
+    {/* <Tab.Navigator
       initialLayout={{
         width: Dimensions.get('window').width,
       }}
@@ -150,17 +160,18 @@ const AwardsCollectibles = ({ navigation }) => {
           paddingHorizontal: 0,
         },
       }}
-    >
-      <Tab.Screen
+    > */}
+      {/* <Tab.Screen
         name='Awards'
         options={{ tabBarLabel: 'Awards' }}
       >
         {() => <Awards style={style} navigation={navigation} />}
-      </Tab.Screen>
+      </Tab.Screen> */}
       {/* <Tab.Screen name="Collectibles" options={{ tabBarLabel: 'Collectibles' }}>
         {(props) => <Collectibles {...props} style={style} collectibles={collectibles} />}
       </Tab.Screen> */}
-    </Tab.Navigator>
+    {/* </Tab.Navigator> */}
+    <Awards style={style} navigation={navigation} />
   </View>;
 };
 

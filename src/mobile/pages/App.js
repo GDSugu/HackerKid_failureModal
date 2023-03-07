@@ -57,6 +57,7 @@ import IconStar from '../../images/navbar/iconStar.svg';
 import IconVideo from '../../images/navbar/iconVideo.svg';
 import { AuthContext } from '../../hooks/pages/root';
 import CheckNetwork from '../components/CheckNetwork';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -93,26 +94,31 @@ const TabArray = [
     name: 'Home',
     component: RouteHome,
     Icon: IconHome,
+    id: 'dashboard',
   },
   {
     name: 'Games',
     component: RouteGames,
     Icon: IconGame,
+    id: 'games',
   },
   {
     name: 'Video',
     component: RouteVideo,
     Icon: IconVideo,
+    id: 'courses',
   },
   {
     name: 'Challenges',
     component: RouteChallenges,
     Icon: IconStar,
+    id: 'challenges',
   },
   {
     name: 'More',
     component: RouteMore,
     Icon: IconMore,
+    id: 'more',
   },
 ];
 
@@ -206,7 +212,9 @@ const TabNavigators = (prop) => {
     screenTheme,
     style,
     theme,
+    navigation,
   } = prop;
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
 
   return (
     <Tab.Navigator
@@ -231,6 +239,14 @@ const TabNavigators = (prop) => {
           key={index}
           name={item.name}
           component={item.component}
+          listeners={{
+            focus: () => {
+              startTimeTrack(item?.id);
+            },
+            blur: () => {
+              stopTimeTrack(item?.id);
+            },
+          }}
         />
       ))}
     </Tab.Navigator>
@@ -269,11 +285,12 @@ const App = () => {
                 authContext.isLoggedIn
                   ? <>
                     <Stack.Screen name='Start'>
-                      {() => TabNavigators({
+                      {({ navigation }) => TabNavigators({
                         routeName,
                         screenTheme,
                         style,
                         theme,
+                        navigation,
                       })}
                     </Stack.Screen>
                     <Stack.Screen name='Class' component={RouteClass} />

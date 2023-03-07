@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Image,
   ImageBackground,
@@ -27,6 +27,7 @@ import GameNavigator from '../components/GameNavigator';
 import { useZombieLand, ZombieLandContext } from '../../hooks/pages/zombieLand';
 import Icon from '../common/Icons';
 import ZombieLandStatusModal from '../components/Modals/ZombieLandStatusModal';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -245,7 +246,9 @@ const HintComponent = ({
   </>;
 };
 
-const ZombieLandMain = () => {
+const ZombieLandMain = ({ navigation }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
+
   const isPageMounted = React.useRef(true);
   const { font, theme } = React.useContext(ThemeContext);
   const pageTheme = theme.screenZombieLand;
@@ -255,18 +258,21 @@ const ZombieLandMain = () => {
     {
       tabTitle: 'Question',
       name: 'ZombieLandQuestion',
+      id: 'zombieland-question',
       component: ZombieLandQuestion,
       Icon: GameQuestion,
     },
     {
       tabTitle: 'Code',
       name: 'ZombieLandEditor',
+      id: 'zombieland-editor',
       component: ZombieLandEditor,
       Icon: GameCode,
     },
     {
       tabTitle: 'Output',
       name: 'ZombieLandOutput',
+      id: 'zombieland-output',
       component: ZombieLandOutput,
       Icon: GameOutput,
     },
@@ -331,6 +337,13 @@ const ZombieLandMain = () => {
 
   };
 
+  useEffect(() => {
+    startTimeTrack('zombieland-main');
+
+    return () => {
+      stopTimeTrack('zombieland-main');
+    };
+  }, []);
   // console.log('state , ', zlState.questionObject.hints);
 
   return <>
@@ -359,6 +372,7 @@ const ZombieLandMain = () => {
               initialRoute={'ZombieLandQuestion'}
               ScreenArray={ZLScreenArray}
               themeKey='screenZombieLandQuestion'
+              navigation={navigation}
             />
             <HintComponent
               hintDetails={zlState.questionObject.hints}

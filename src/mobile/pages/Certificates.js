@@ -27,6 +27,7 @@ import ShareIcon from '../../images/common/black-share-icon.svg';
 import ShareModal from '../components/Modals/ShareModal';
 import ViewCertificateModal from '../components/Modals/ViewCertificateModal';
 import CertificateBuilder from '../components/CertificateBuilder';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
@@ -192,6 +193,7 @@ const SortDropDown = ({
 const Certificates = ({ navigation }) => {
   const isPageMounted = useRef(true);
   const certificateViewShotRef = useRef(true);
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   // hooks
   const {
     state: {
@@ -420,6 +422,7 @@ const Certificates = ({ navigation }) => {
   }, [uniqueUrl]);
 
   useEffect(() => {
+    startTimeTrack('certificates');
     navigation?.setOptions({
       contentStyle: {
         backgroundColor: screenTheme.bodyBg,
@@ -430,6 +433,7 @@ const Certificates = ({ navigation }) => {
 
     return () => {
       isPageMounted.current = false;
+      stopTimeTrack('certificates');
     };
   }, []);
 

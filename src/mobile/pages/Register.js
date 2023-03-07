@@ -23,6 +23,7 @@ import VerifyOtpFormStep from '../components/VerifyOtpFormStep';
 import getCommonStyles from '../components/commonStyles';
 import Recaptchav3 from '../components/Recaptchav3';
 import Recaptchav2Modal from '../components/Recaptchav2Modal';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   ...getCommonStyles(theme, utilColors, font),
@@ -485,6 +486,7 @@ const RegisterFormStepThree = ({
 };
 
 const Register = ({ navigation }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   // hooks
   const { stateObj, setStateObj, createAccountRequest } = useRegister();
   const { stateObj: backBtnStateObj, setStateObj: setBackBtnStateObj } = useBackBtn();
@@ -577,6 +579,14 @@ const Register = ({ navigation }) => {
     <FormattedMessage defaultMessage='Login into existing account' description='Login into existing account button' />
   </Text>
   </TouchableOpacity>;
+
+  useEffect(() => {
+    startTimeTrack('register');
+
+    return () => {
+      stopTimeTrack('register');
+    };
+  }, []);
 
   return (
     <ScrollView style={{ flex: 1 }}>

@@ -14,6 +14,7 @@ import defaultUser from '../../images/profile/default_user.png';
 // import SearchBoxIcon from '../../images/leaderboard/search-icon-svg.svg';
 import ThemeContext from '../components/theme';
 import { useLeaderBoard } from '../../hooks/pages/leaderboard';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   ...getCommonStyles(theme, utilColors, font),
@@ -115,8 +116,9 @@ const Row = ({ style, children }) => (
   </View>
 );
 
-const Leaderboard = () => {
+const Leaderboard = ({ navigation }) => {
   const isPageMounted = useRef(true);
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   // hooks
   const { state, setLeaderBoardData, getLeaderBoardData } = useLeaderBoard({ isPageMounted });
   const { leaderboardData, userData, paginationDetails } = state;
@@ -164,6 +166,14 @@ const Leaderboard = () => {
       }));
     }
   }, [state]);
+
+  useEffect(() => {
+    startTimeTrack('leaderboard');
+
+    return () => {
+      stopTimeTrack('leaderboard');
+    };
+  }, []);
 
   return (
     <ScrollView

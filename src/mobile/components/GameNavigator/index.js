@@ -5,6 +5,7 @@ import {
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { enableScreens } from 'react-native-screens';
 import * as Animatable from 'react-native-animatable';
+import { useTimeTrack } from '../../../hooks/pages/timeTrack';
 // import { FormattedMessage } from 'react-intl';
 // import LinearGradient from 'react-native-linear-gradient';
 // import GameHeader from '../Header/GameHeader';
@@ -289,8 +290,9 @@ const GameBottomTabBar = (props) => {
 // };
 
 const GameNavigator = ({
-  currentScreen, game, initialRoute, ScreenArray, themeKey,
+  currentScreen, game, initialRoute, ScreenArray, themeKey, navigation = {},
 }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const BottomTab = createBottomTabNavigator();
   const { font, theme } = useContext(ThemeContext);
   const { gradients, utilColors } = theme;
@@ -353,6 +355,18 @@ const GameNavigator = ({
           key={index}
           name={item.name}
           component={item.component}
+          listeners={{
+            blur: (e) => {
+              console.log('blur', item?.id, e);
+              console.log(item?.id, ' - stop - ', Date.now());
+              stopTimeTrack(item?.id);
+            },
+            focus: (e) => {
+              console.log('focus ', item?.id, e);
+              console.log(item?.id, ' - start - ', Date.now());
+              startTimeTrack(item?.id);
+            },
+          }}
         />
       ))}
     </BottomTab.Navigator>

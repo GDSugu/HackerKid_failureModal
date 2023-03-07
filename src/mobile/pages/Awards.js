@@ -14,6 +14,7 @@ import BottomSheet from '../components/BottomSheet';
 import ThemeContext from '../components/theme';
 import SortIconSvg from '../../images/common/sort-icon.svg';
 import SearchIconSvg from '../../images/common/search-icon.svg';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyles = (theme, utilColors, font, gradients) => StyleSheet.create({
   container: {
@@ -254,6 +255,7 @@ const SortDropDown = ({
 const Awards = ({ navigation }) => {
   const isPageMounted = useRef(true);
   const bottomSheetRef = useRef(true);
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const {
     awardsState,
     getAwards,
@@ -333,6 +335,7 @@ const Awards = ({ navigation }) => {
   };
 
   useEffect(() => {
+    startTimeTrack('awards');
     navigation.setOptions({
       contentStyle: {
         backgroundColor: 'white',
@@ -343,6 +346,7 @@ const Awards = ({ navigation }) => {
 
     return () => {
       isPageMounted.current = false;
+      stopTimeTrack('awards');
     };
   }, []);
 

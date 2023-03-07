@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
   ScrollView, StyleSheet, Text, TouchableOpacity, View,
@@ -8,6 +8,7 @@ import ThemeContext from '../components/theme';
 import { openDialer, openMail } from '../common/framework';
 import CallIcon from '../../images/help-modal/call-icon.svg';
 import EmailIcon from '../../images/help-modal/email-icon.svg';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 // import ChatIcon from '../../images/help-modal/chat-icon.svg';
 // import FAQIcon from '../../images/help-modal/faq-icon.svg';
 
@@ -39,10 +40,19 @@ const getStyles = (theme, font, utils) => StyleSheet.create({
   },
 });
 
-const Help = () => {
+const Help = ({ navigation }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const { font, theme } = React.useContext(ThemeContext);
   const pageTheme = theme.screenMore;
   const style = getStyles(pageTheme, font, theme.utilColors);
+
+  useEffect(() => {
+    startTimeTrack('help');
+
+    return () => {
+      stopTimeTrack('help');
+    };
+  }, []);
 
   return <>
     <ScrollView style={style.container}>

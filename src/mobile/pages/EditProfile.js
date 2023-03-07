@@ -17,6 +17,7 @@ import { useProfileInfo } from '../../hooks/pages/profile';
 import defaultUser from '../../images/profile/default_user.png';
 import profileEdit from '../../images/profile/profile-edit.png';
 import { AuthContext } from '../../hooks/pages/root';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyles = (theme, utils, font) => StyleSheet.create({
   container: {
@@ -134,6 +135,7 @@ const ErrorMessage = ({ message, style }) => <>
   </>;
 
 const EditProfile = ({ navigation }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const { font, theme } = useContext(ThemeContext);
   const pageTheme = theme.screenEditProfile;
   const style = getStyles(pageTheme, theme.utilColors, font);
@@ -262,6 +264,15 @@ const EditProfile = ({ navigation }) => {
   };
 
   useEffect(() => {
+    startTimeTrack('profile-edit');
+
+    return () => {
+      isPageMounted.current = false;
+      stopTimeTrack('profile-edit');
+    };
+  }, []);
+
+  useEffect(() => {
     navigation.addListener('beforeRemove', (e) => {
       if (hasEdited.current) {
         e.preventDefault();
@@ -271,10 +282,6 @@ const EditProfile = ({ navigation }) => {
         ]);
       }
     });
-
-    return () => {
-      isPageMounted.current = false;
-    };
   }, [navigation, hasEdited]);
 
   useEffect(() => {
