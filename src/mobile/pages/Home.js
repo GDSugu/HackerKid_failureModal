@@ -765,7 +765,7 @@ const GameBlock = ({ style, navigation, gameData }) => {
 
 const AchievementCard = ({
   achievementHandler = () => {},
-  gameData = {}, style,
+  sessionData = {}, style,
 }) => <>
   <View style={style.sheetAchievementCard}>
     <View style={style.sheetAchievementHeader}>
@@ -776,7 +776,7 @@ const AchievementCard = ({
             defaultMessage={'{coins} coins'}
             description={'user coins'}
             values={{
-              coins: gameData?.totalPointsEarned,
+              coins: sessionData?.pointsEarned || 0,
             }}
           />
         </Text>
@@ -1172,7 +1172,8 @@ const Index = ({ route, navigation }) => {
                 navigation={navigation}
                 style={style}
                 achievementHandler={handleViewAllAwards}
-                gameData={gameData}
+                // gameData={gameData}
+                sessionData={sessionData}
               />
               {/* {
                 clubData
