@@ -172,6 +172,7 @@ const Leaderboard = ({ navigation }) => {
 
     return () => {
       stopTimeTrack('leaderboard');
+      isPageMounted.current = false;
     };
   }, []);
 
