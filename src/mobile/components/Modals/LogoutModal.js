@@ -24,6 +24,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     ...font.heading6,
     textAlign: 'center',
     marginVertical: 8,
+    color: utilColors.dark,
   },
   btnContainer: {
     marginTop: 16,
@@ -63,7 +64,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   },
 });
 
-const LogoutModal = ({ logoutAction = () => {} }) => {
+const LogoutModal = ({ logoutAction = () => { } }) => {
   const { font, theme } = React.useContext(ThemeContext);
   const { utilColors } = theme;
   const style = getStyles(theme.screenMore, utilColors, font);
@@ -76,41 +77,41 @@ const LogoutModal = ({ logoutAction = () => {} }) => {
   });
 
   return <>
-   <Modal
-   visible={authContext.appData.logoutModalVisibility || false}
-   transparent
-   onRequestClose={closeModal}
-  //  animationType='fade'
-   >
-    <View style={style.overlay}>
-      <View style={style.modalCard}>
-        <Text style={style.logoutText}>
-          <FormattedMessage
-            defaultMessage='Are you sure you want to logout?'
-            description='Logout prompt message'
-          />
-        </Text>
-        <View style={style.btnContainer}>
-          <TouchableOpacity onPress={logoutAction} style={style.primaryBtn}>
-            <Text style={style.primaryBtnText}>
-              <FormattedMessage
-                defaultMessage='Yes'
-                description='logout'
-              />
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={closeModal} style={style.secondaryBtn}>
-            <Text style={style.secondaryBtnText}>
-              <FormattedMessage
-                defaultMessage='No'
-                description='cancel logout'
-              />
-            </Text>
-          </TouchableOpacity>
+    <Modal
+      visible={authContext.appData.logoutModalVisibility || false}
+      transparent
+      onRequestClose={closeModal}
+    //  animationType='fade'
+    >
+      <View style={style.overlay}>
+        <View style={style.modalCard}>
+          <Text style={style.logoutText}>
+            <FormattedMessage
+              defaultMessage='Are you sure you want to logout?'
+              description='Logout prompt message'
+            />
+          </Text>
+          <View style={style.btnContainer}>
+            <TouchableOpacity onPress={logoutAction} style={style.primaryBtn}>
+              <Text style={style.primaryBtnText}>
+                <FormattedMessage
+                  defaultMessage='Yes'
+                  description='logout'
+                />
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={closeModal} style={style.secondaryBtn}>
+              <Text style={style.secondaryBtnText}>
+                <FormattedMessage
+                  defaultMessage='No'
+                  description='cancel logout'
+                />
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
-  </Modal>
+    </Modal>
   </>;
 };
 

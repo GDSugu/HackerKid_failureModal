@@ -15,6 +15,7 @@ import ThemeContext from '../theme';
 // import useCourses from '../../hooks/pages/courses';
 import PlayBtnIcon from '../../../images/courses/play-btn.svg';
 import NextBtnIcon from '../../../images/courses/next-btn.svg';
+import lockedImg from '../../../images/common/feature-lock-white.png';
 // import FilterIcon from '../../images/courses/filter-icon.svg';
 // import SearchIcon from '../../images/courses/search.svg';
 
@@ -155,6 +156,33 @@ const getStyles = (theme) => {
     },
     prevBtn: {
       marginLeft: 16,
+      transform: [
+        { rotateY: '180deg' },
+      ],
+    },
+    lockedOverlay: {
+      position: 'absolute',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.8117647059)',
+      zIndex: 9999,
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      borderRadius: 12,
+    },
+    lockedImg: {
+      width: 48,
+      height: 48,
+      marginBottom: 8,
+    },
+    unlockNowBtn: {
+      paddingVertical: 10,
+      paddingHorizontal: 12,
+      marginVertical: 10,
+      borderRadius: 12,
+      backgroundColor: theme.navBg,
     },
   });
 };
@@ -173,10 +201,16 @@ const CourseCard = ({
   const pageTheme = theme.screenVideo;
   const style = getStyles(pageTheme);
 
+  const onPress = (locked) => {
+    // if locked navigate to pricing, for now returing
+    if (locked) return;
+
+    navigateVideoPlayer(item.moduleId, item.number, navigator);
+  };
   return (index < 3 || customVideo) ? (
     <TouchableOpacity
-      onPress={() => navigateVideoPlayer(item.moduleId, item.number, navigator)}
-      >
+      onPress={() => onPress(item.locked)}
+    >
       <View key={index} style={customCardStyle || style.courseCard}>
         <View style={style.typeContainer}>
           <Text
@@ -213,42 +247,71 @@ const CourseCard = ({
             />
           </Text>
         </View>
+        {
+          item.locked && <View style={style.lockedOverlay}>
+            <Image source={lockedImg} style={style.lockedImg} />
+            <Text
+              style={{
+                ...font.subtitle2,
+                color: '#fff',
+              }}>
+              <FormattedMessage
+                defaultMessage={'Upgrade to Premium to unlock this Video'}
+                description={'Upgrade to Premium to unlock this Video'}
+              />
+            </Text>
+            <TouchableOpacity style={style.unlockNowBtn} onPress={() => {
+              // navigate to pricing
+            }}>
+              <Text
+                style={{
+                  ...font.subtitle2,
+                  color: '#fff',
+                }}>
+                <FormattedMessage
+                  defaultMessage={'Unlock Now'}
+                  description={'unlock now button'}
+                />
+              </Text>
+            </TouchableOpacity>
+          </View>
+        }
       </View>
     </TouchableOpacity>
   ) : (
     (index === 3 && !customVideo) && (
       <TouchableOpacity
-      onPress={() => navigateModule(moduleData.moduleId, navigator)}
+        onPress={() => navigateModule(moduleData.moduleId, navigator)}
       >
-      <View style={[style.courseCard, style.moduleCont]}>
-        <View style={style.moduleName}>
-          <Text
-            style={{
-              ...font.subtitle2,
-              color: '#000',
-            }}>
-            <FormattedMessage
-              defaultMessage={'View all {title}'}
-              description={'Course Title'}
-              values={{ title: moduleData.moduleName }}
-            />
-          </Text>
-          <Text
-            style={{
-              ...font.subtitle2,
-              color: '#000',
-            }}>
-            <FormattedMessage
-              defaultMessage={'{type}?'}
-              description={'Course Type'}
-              values={{ type: moduleData.type }}
-            />
-          </Text>
-        </View>
-        <View style={style.playBtnModule}>
-          <PlayBtnIcon />
-        </View>
-      </View></TouchableOpacity>
+        <View style={[style.courseCard, style.moduleCont]}>
+          <View style={style.moduleName}>
+            <Text
+              style={{
+                ...font.subtitle2,
+                color: '#000',
+              }}>
+              <FormattedMessage
+                defaultMessage={'View all {title}'}
+                description={'Course Title'}
+                values={{ title: moduleData.moduleName }}
+              />
+            </Text>
+            <Text
+              style={{
+                ...font.subtitle2,
+                color: '#000',
+              }}>
+              <FormattedMessage
+                defaultMessage={'{type}?'}
+                description={'Course Type'}
+                values={{ type: moduleData.type }}
+              />
+            </Text>
+          </View>
+          <View style={style.playBtnModule}>
+            <PlayBtnIcon />
+          </View>
+        </View></TouchableOpacity>
     )
   );
 };
@@ -315,15 +378,15 @@ const ModuleContainer = ({
       </Text>}
       <View>
         {!(inViewPort === 3 || (videoData.length === 3 && inViewPort > 0)) && videoData.length > 2
-        && (
-          <View style={style.nextBtnCont}>
-            <LinearGradient colors={['rgba(229, 244, 237, 0)', 'rgba(229, 244, 237, 1)']} style={style.btnGradient}>
-              <TouchableOpacity onPress={nextCard}>
-              <NextBtnIcon style={style.nextBtn}/>
-              </TouchableOpacity>
-            </LinearGradient>
-          </View>
-        )}
+          && (
+            <View style={style.nextBtnCont}>
+              <LinearGradient colors={['rgba(229, 244, 237, 0)', 'rgba(229, 244, 237, 1)']} style={style.btnGradient}>
+                <TouchableOpacity onPress={nextCard}>
+                  <NextBtnIcon style={style.nextBtn} />
+                </TouchableOpacity>
+              </LinearGradient>
+            </View>
+          )}
         <FlatList
           horizontal
           ref={faltItemRef}
@@ -332,21 +395,21 @@ const ModuleContainer = ({
           }
           data={videoData}
           renderItem={({ item, index }) => <CourseCard
-              item={item}
-              index={index}
-              font={font}
-              theme={theme}
-              navigator={navigator}
-              moduleData={data}
-              customVideo={continueWatch}
-            />}
+            item={item}
+            index={index}
+            font={font}
+            theme={theme}
+            navigator={navigator}
+            moduleData={data}
+            customVideo={continueWatch}
+          />}
           keyExtractor={(key) => key.videoId}
         />
         {(inViewPort > 0 && videoData.length > 2) && (
           <View style={style.prevBtnCont}>
             <LinearGradient colors={['rgba(229, 244, 237, 1)', 'rgba(229, 244, 237, 0)']} style={style.btnGradientPrev}>
               <TouchableOpacity onPress={prevCard}>
-              <NextBtnIcon style={style.prevBtn}/>
+                <NextBtnIcon style={style.prevBtn} />
               </TouchableOpacity>
             </LinearGradient>
           </View>

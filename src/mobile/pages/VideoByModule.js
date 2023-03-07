@@ -1,4 +1,6 @@
-import React, { useContext, useState, useRef } from 'react';
+import React, {
+  useContext, useState, useRef, useEffect,
+} from 'react';
 import {
   Text,
   StyleSheet,
@@ -14,6 +16,8 @@ import useVideos from '../../hooks/pages/videos';
 import SearchIcon from '../../images/courses/search.svg';
 import { CourseCard } from '../components/CourseComponents';
 import Paginator from '../components/Paginator';
+import { isFeatureEnabled } from '../../web/javascripts/common/framework';
+import { SubscriptionContext } from '../../hooks/pages/root';
 
 const getStyles = (theme, font) => {
   const totalWidth = Dimensions.get('window').width;
@@ -71,7 +75,8 @@ const VideoHome = ({ navigation, route }) => {
   const { moduleData } = invidualModuleData;
   const [page, selectPage] = useState(1);
   const [filteredData, setFilterData] = useState(false);
-  const searcher = new FuzzySearch(moduleData.videos, ['title']);
+  const [lockedData, setLockedData] = useState(false);
+  const searcher = new FuzzySearch(lockedData.videos, ['title']);
   const onSearch = (keyword) => {
     if (keyword === '' || !keyword) {
       setFilterData(false);
@@ -80,6 +85,27 @@ const VideoHome = ({ navigation, route }) => {
       setFilterData(result);
     }
   };
+
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+
+  const coursesLimit = (category) => {
+    const coursesEnabled = isFeatureEnabled(subscriptionData, 'courses', category);
+    return coursesEnabled.enabled && coursesEnabled[category];
+  };
+
+  useEffect(() => {
+    if (moduleData) {
+      const moduleLimit = coursesLimit(moduleData.moduleId);
+      if (moduleLimit) {
+        moduleData.videos.forEach((video, videoIndex) => {
+          if (videoIndex >= moduleLimit) {
+            moduleData.videos[videoIndex].locked = true;
+          }
+        });
+      }
+      setLockedData(moduleData);
+    }
+  }, [moduleData]);
 
   return (
     <View style={style.container}>
@@ -104,7 +130,7 @@ const VideoHome = ({ navigation, route }) => {
         <View>
           {filteredData
             ? filteredData.map((item, index) => index < page * 10
-            && index > page * 10 - 10 && (
+              && index > page * 10 - 10 && (
                 <CourseCard
                   key={index}
                   item={item}
@@ -115,9 +141,9 @@ const VideoHome = ({ navigation, route }) => {
                   customVideo={true}
                   customCardStyle={style.videoCard}
                 />
-            ))
-            : moduleData
-              && moduleData.videos.map((item, index) => index < page * 10
+              ))
+            : lockedData
+            && lockedData.videos.map((item, index) => index < page * 10
               && index > page * 10 - 11 && (
                 <CourseCard
                   key={index}
@@ -132,19 +158,19 @@ const VideoHome = ({ navigation, route }) => {
               ))}
         </View>
       </ScrollView>
-      {moduleData && <Paginator
-      totalItems={
-        filteredData ? filteredData.length : moduleData.videos.length
-      }
-      countPerPage={10}
-      currentPageNumber={page}
-      onPageChange={(value) => selectPage(value)}
-      onNextBtnPress={() => selectPage(page + 1)}
-      onPrevBtnPress={() => selectPage(page - 1)}
-      pageTheme={pageTheme}
-      styleNextBtn={style.pageBtn}
-      stylePrevBtn={style.pageBtn}
-      styleActiveBtn={style.pageBtn}/>}
+      {lockedData && <Paginator
+        totalItems={
+          filteredData ? filteredData.length : lockedData.videos.length
+        }
+        countPerPage={10}
+        currentPageNumber={page}
+        onPageChange={(value) => selectPage(value)}
+        onNextBtnPress={() => selectPage(page + 1)}
+        onPrevBtnPress={() => selectPage(page - 1)}
+        pageTheme={pageTheme}
+        styleNextBtn={style.pageBtn}
+        stylePrevBtn={style.pageBtn}
+        styleActiveBtn={style.pageBtn} />}
     </View>
   );
 };

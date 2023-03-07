@@ -406,22 +406,22 @@ const Courses = () => {
 
   const [filteredData, setFilterData] = useState(false);
 
-  const [filter, setFilter] = useState(false);
+  // const [filter, setFilter] = useState(false);
 
   const onPressMoreInfo = () => $('#course-progress-modal').modal('show');
 
-  const onChangeFilter = (filterValue) => {
-    let prevFilterValue = false;
-    setFilter((prev) => {
-      prevFilterValue = prev === filterValue ? false : filterValue;
-      return prevFilterValue;
-    });
-    if (prevFilterValue) {
-      setFilterData(lockedData.filter((item) => item.type === prevFilterValue));
-    } else {
-      setFilterData(lockedData);
-    }
-  };
+  // const onChangeFilter = (filterValue) => {
+  //   let prevFilterValue = false;
+  //   setFilter((prev) => {
+  //     prevFilterValue = prev === filterValue ? false : filterValue;
+  //     return prevFilterValue;
+  //   });
+  //   if (prevFilterValue) {
+  //     setFilterData(lockedData.filter((item) => item.type === prevFilterValue));
+  //   } else {
+  //     setFilterData(lockedData);
+  //   }
+  // };
   const searcher = new FuzzySearch(lockedData, ['moduleName']);
   const onSearch = (e) => {
     const keyword = e.target.value;
@@ -453,8 +453,8 @@ const Courses = () => {
         )}
         {!isDesktop && (
           <TopContainer
-            onChangeFilter={onChangeFilter}
-            filterSet={filter}
+            // onChangeFilter={onChangeFilter}
+            // filterSet={filter}
             searchOnChange={onSearch}
             pressMoreInfo={onPressMoreInfo}
           />

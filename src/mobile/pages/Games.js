@@ -23,6 +23,7 @@ import zombieLandGameCover from '../../images/games/zombie-game-cover.png';
 import webkataHtmlGameCover from '../../images/games/webkata-html-game-cover.png';
 import webkataCssGameCover from '../../images/games/webkata-css-game-cover.png';
 import webkataJsGameCover from '../../images/games/webkata-js-game-cover.png';
+import codingPirateGameCover from '../../images/games/code-pirate-cover.png';
 import LevelIcon from '../../images/games/level-icon.svg';
 import PlayBtnIcon from '../../images/games/play-game-icon.svg';
 import { useDashboard } from '../../hooks/pages/dashboard';
@@ -839,7 +840,7 @@ const Games = ({ navigation }) => {
     validSubmissionCount: dashBoardData?.zombieLand?.validSubmissionCount,
     totalLevels: dashBoardData?.zombieLand?.overAllQuestionCount,
     totalEarnedCoins: dashBoardData?.zombieLand?.totalPointsEarned,
-    onPress: () => { },
+    onPress: () => { navigation.navigate('ZombieLandHome'); },
   },
   {
     gameTitle: 'Webkata-HTML',
@@ -876,6 +877,16 @@ const Games = ({ navigation }) => {
     onPress: () => navigation.navigate('WebkataHome', {
       conceptId: 'JS',
     }),
+  },
+  {
+    gameTitle: 'Coding Pirate',
+    gameCoverImage: codingPirateGameCover,
+    currentLevelNumber: dashBoardData?.codekata?.currentQuestionDetails
+      ? dashBoardData?.codekata?.currentQuestionDetails?.virtualId : 0,
+    totalLevels: dashBoardData?.codekata?.overAllQuestionCount,
+    validSubmissionCount: dashBoardData?.codekata?.validSubmissionCount,
+    totalEarnedCoins: dashBoardData?.codekata?.totalPointsEarned,
+    onPress: () => navigation.navigate('Codekata'),
   },
   ];
 

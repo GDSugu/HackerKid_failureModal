@@ -325,6 +325,12 @@
       "value": "creatorName"
     }
   ],
+  "1R21Y0": [
+    {
+      "type": 0,
+      "value": "Unlock Now"
+    }
+  ],
   "1RUvaS": [
     {
       "type": 0,
@@ -1917,12 +1923,6 @@
       "value": "pointsEarned"
     }
   ],
-  "I0vwZV": [
-    {
-      "type": 0,
-      "value": "Session Videos"
-    }
-  ],
   "I1oDxa": [
     {
       "type": 0,
@@ -2115,12 +2115,6 @@
       "value": "modName"
     }
   ],
-  "KcDrvG": [
-    {
-      "type": 0,
-      "value": "Solution Videos"
-    }
-  ],
   "KmxQM/": [
     {
       "type": 0,
@@ -2161,6 +2155,12 @@
     {
       "type": 0,
       "value": "FREE"
+    }
+  ],
+  "L6IwvI": [
+    {
+      "type": 0,
+      "value": "Buy premium to unlock school clubs feature"
     }
   ],
   "L7Gsfw": [
@@ -4013,6 +4013,12 @@
       "value": "stateName"
     }
   ],
+  "gE6jN3": [
+    {
+      "type": 0,
+      "value": "School Clubs"
+    }
+  ],
   "gOkIvb": [
     {
       "type": 0,
@@ -4987,6 +4993,12 @@
       "value": "Learners Community"
     }
   ],
+  "rxzyV1": [
+    {
+      "type": 0,
+      "value": "Upgrade to Premium to unlock this Video"
+    }
+  ],
   "sC1GR3": [
     {
       "type": 0,
@@ -5103,6 +5115,12 @@
       "value": "Output will be shown here"
     }
   ],
+  "t7ObEx": [
+    {
+      "type": 0,
+      "value": "Unlock Now"
+    }
+  ],
   "tAiFjx": [
     {
       "type": 0,
@@ -5185,6 +5203,12 @@
     {
       "type": 0,
       "value": "Indra gandhi public school"
+    }
+  ],
+  "uA6ep3": [
+    {
+      "type": 0,
+      "value": "Buy premium to use this feature"
     }
   ],
   "uCGdYb": [
@@ -5317,12 +5341,6 @@
     {
       "type": 0,
       "value": "Try the new in-built IDE"
-    }
-  ],
-  "vYViQu": [
-    {
-      "type": 0,
-      "value": "Filter"
     }
   ],
   "vf8heh": [

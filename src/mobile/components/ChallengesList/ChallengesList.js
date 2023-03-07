@@ -145,7 +145,8 @@ const ChallengesList = ({
           && <>
             {
               new Array(numberOfSkeletonCardsToShow).fill(1).map((item, idx) => (
-                <View style={[style.challengeCardItem, { width: '100%' }]} key={idx}>
+                <View key={idx} style={{ marginBottom: 15 }}>
+                  <View style={{ width: '100%' }}></View>
                   <Skeleton width='100%' height={170} style={{ borderRadius: 10, marginBottom: 5 }} />
                   <Skeleton width='25%' height={24} style={{ borderRadius: 10, marginBottom: 5 }} />
                   {
