@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Image,
   ImageBackground, StyleSheet, Text, TouchableOpacity, View,
@@ -11,6 +11,7 @@ import toggleAudio from '../../images/games/gameAudio.png';
 import leaderboardImg from '../../images/games/gameLeaderboard.png';
 import zlBg from '../../images/zombieLand/zombieLand-home-mob-bg.png';
 import playBtnImg from '../../images/games/gamePlay.png';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -67,9 +68,18 @@ const getStyles = (theme, font, utilColors) => StyleSheet.create({
 });
 
 const ZombieLandHome = ({ navigation, routeName }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const { font, theme } = React.useContext(ThemeContext);
   const pageTheme = theme.screenZombieLandHome;
   const style = getStyles(pageTheme, font, theme.utilColors);
+
+  useEffect(() => {
+    startTimeTrack('zombieland-home');
+
+    return () => {
+      stopTimeTrack('zombieland-home');
+    };
+  }, []);
 
   return <>
     <View style={style.container}>

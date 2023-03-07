@@ -25,6 +25,7 @@ import useForgotPassword from '../../hooks/pages/forgot-password';
 import useBackBtn from '../../hooks/pages/back-btn';
 import Recaptchav2Modal from '../components/Recaptchav2Modal';
 import Recaptchav3 from '../components/Recaptchav3';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   ...getCommonStyles(theme, utilColors, font),
@@ -432,6 +433,7 @@ const ForgotPasswordStepFour = ({ navigation, style, setBackBtnStateObj }) => {
 
 const ForgotPassword = ({ navigation }) => {
   // hooks
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const { stateObj, setStateObj, changePasswordRequest } = useForgotPassword();
 
   const { stateObj: backBtnStateObj, setStateObj: setBackBtnStateObj } = useBackBtn();
@@ -496,6 +498,14 @@ const ForgotPassword = ({ navigation }) => {
     recaptchav2Ref,
     recaptchav3Ref,
   };
+
+  useEffect(() => {
+    startTimeTrack('forgot-password');
+
+    return () => {
+      stopTimeTrack('forgot-password');
+    };
+  }, []);
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>

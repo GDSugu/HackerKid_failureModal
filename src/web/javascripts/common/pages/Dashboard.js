@@ -941,7 +941,7 @@ const Dashboard = () => {
             totalPointsEarned={gameData.totalPointsEarned}
             validSubmissionsCount={gameData.gameProgress}
             timeSpent={gameProgress.totalTimeSpent} />
-            <ExclusiveCourses />
+          <ExclusiveCourses />
         </div>
         {
           isDesktop

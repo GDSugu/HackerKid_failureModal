@@ -29,6 +29,7 @@ import WebkataSuccessModal from '../components/Modals/WebkataSuccessModal';
 import TestCasePassedIcon from '../../images/webkata/test-case-passed-icon.svg';
 import TestCaseFailedIcon from '../../images/webkata/test-case-failed-icon.svg';
 import { debounce1 } from '../../hooks/common/utlis';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 // tab navigators
 const CodeEditorsTab = createMaterialTopTabNavigator();
@@ -708,7 +709,9 @@ const LivePreview = ({
   </View>;
 };
 
-const WebkataMain = ({ route }) => {
+const WebkataMain = ({ route, navigation }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
+
   // refs
   const isPageMounted = useRef(true);
   const codeEditorsRefs = useRef({});
@@ -944,6 +947,14 @@ const WebkataMain = ({ route }) => {
       BackHandler.removeEventListener('hardwareBackPress', closeLevelPage);
     };
   }, [localState.showLevels]);
+
+  useEffect(() => {
+    startTimeTrack('webkata-main');
+
+    return () => {
+      stopTimeTrack('webkata-main');
+    };
+  }, []);
 
   return <>
     <View style={style.container}>

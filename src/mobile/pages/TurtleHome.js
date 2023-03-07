@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
@@ -10,6 +10,7 @@ import toggleAudio from '../../images/games/gameAudio.png';
 import playBtnImg from '../../images/games/gamePlay.png';
 import leaderboardImg from '../../images/games/gameLeaderboard.png';
 import GameHeader from '../components/Header/GameHeader';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -66,9 +67,18 @@ const getStyles = (theme, font, utilColors) => StyleSheet.create({
 });
 
 const TurtleHome = ({ navigation, routeName }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const { font, theme } = useContext(ThemeContext);
   const pageTheme = theme.screenTurtleHome;
   const style = getStyles(pageTheme, font, theme.utilColors);
+
+  useEffect(() => {
+    startTimeTrack('turtle-home');
+
+    return () => {
+      stopTimeTrack('turtle-home');
+    };
+  }, []);
 
   return <>
     <View style={style.container}>

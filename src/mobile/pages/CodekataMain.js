@@ -1,5 +1,5 @@
 import React, {
-  useContext, useState, useRef,
+  useContext, useState, useRef, useEffect,
 } from 'react';
 import {
   ImageBackground,
@@ -27,6 +27,7 @@ import {
 } from '../../web/javascripts/common/Functions/ide';
 import PlayBtn from '../../images/games/playBtn.svg';
 import GameNavBar from '../components/GameNavBar';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -552,7 +553,8 @@ const CodekataBody = () => {
   );
 };
 
-const CodekataMain = () => {
+const CodekataMain = ({ navigation }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const isPageMounted = useRef(true);
   const { font, theme } = useContext(ThemeContext);
   const pageTheme = theme.screenTurtleHome;
@@ -569,6 +571,14 @@ const CodekataMain = () => {
       submitCode,
     },
   } = useCodekata({ isPageMounted });
+
+  useEffect(() => {
+    startTimeTrack('codekata-main');
+
+    return () => {
+      stopTimeTrack('codekata-main');
+    };
+  }, []);
 
   return (
     <>

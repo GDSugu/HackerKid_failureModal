@@ -22,6 +22,7 @@ import hkcoin from '../../images/common/hkcoin.png';
 // import collectible1 from '../../images/collectibles/collectible1.png';
 import ShareModal from '../components/Modals/ShareModal';
 import { useAwards } from '../../hooks/pages/awards';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyles = (theme, utilColors, font, gradients) => StyleSheet.create({
   container: {
@@ -327,6 +328,8 @@ const Button = ({
   </TouchableOpacity>;
 
 const Achievements = ({ navigation }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
+
   const isPageMounted = useRef(true);
   // hooks
   const [shareModalOpen, setShareModalOpen] = useState(false);
@@ -366,9 +369,12 @@ const Achievements = ({ navigation }) => {
 
   React.useEffect(() => {
     getAwards({ cached: false, limit: 5, sort: 'posted' });
+    // timeTrack('achievements');
+    startTimeTrack('achievements');
 
     return () => {
       isPageMounted.current = false;
+      stopTimeTrack('achievements');
     };
   }, []);
 

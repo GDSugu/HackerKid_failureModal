@@ -103,6 +103,12 @@
       "value": "shrey Daga's Father"
     }
   ],
+  "/3gG1X": [
+    {
+      "type": 0,
+      "value": "Achieved Badge"
+    }
+  ],
   "/Gy7qZ": [
     {
       "type": 0,
@@ -1147,12 +1153,6 @@
     {
       "type": 0,
       "value": "Login"
-    }
-  ],
-  "9ppS9d": [
-    {
-      "type": 0,
-      "value": "Go to Class"
     }
   ],
   "A/XB4F": [
@@ -2499,12 +2499,6 @@
       "value": "More Info"
     }
   ],
-  "OEPiPP": [
-    {
-      "type": 0,
-      "value": "More friends = More fun"
-    }
-  ],
   "OG2BxR": [
     {
       "type": 0,
@@ -2539,12 +2533,6 @@
     {
       "type": 0,
       "value": "Register"
-    }
-  ],
-  "OXM3Ji": [
-    {
-      "type": 0,
-      "value": "View Club"
     }
   ],
   "OYOyLO": [
@@ -2635,6 +2623,12 @@
     {
       "type": 0,
       "value": "Home"
+    }
+  ],
+  "PV0XXJ": [
+    {
+      "type": 0,
+      "value": "View All Awards"
     }
   ],
   "PaprdD": [
@@ -2747,12 +2741,6 @@
     {
       "type": 1,
       "value": "awardName"
-    }
-  ],
-  "REPA3X": [
-    {
-      "type": 0,
-      "value": "Join your friends in the club"
     }
   ],
   "RHM1lo": [
@@ -4201,12 +4189,6 @@
       "value": "navigationText"
     }
   ],
-  "iebFqD": [
-    {
-      "type": 1,
-      "value": "clubName"
-    }
-  ],
   "iohPi0": [
     {
       "type": 0,
@@ -4305,6 +4287,12 @@
     {
       "type": 0,
       "value": "reach@hackerkid.org"
+    }
+  ],
+  "jtD1T3": [
+    {
+      "type": 0,
+      "value": "View"
     }
   ],
   "jzHe4a": [
@@ -4645,12 +4633,6 @@
     {
       "type": 0,
       "value": "View more"
-    }
-  ],
-  "nn7wTW": [
-    {
-      "type": 0,
-      "value": "Most active members"
     }
   ],
   "nnfaF3": [
@@ -5337,6 +5319,16 @@
       "value": "Create"
     }
   ],
+  "vVpBl2": [
+    {
+      "type": 1,
+      "value": "coins"
+    },
+    {
+      "type": 0,
+      "value": " coins"
+    }
+  ],
   "vWe94i": [
     {
       "type": 0,
@@ -5591,12 +5583,6 @@
       "value": "title"
     }
   ],
-  "yjWbPf": [
-    {
-      "type": 0,
-      "value": "Visit Club"
-    }
-  ],
   "yujxGL": [
     {
       "type": 0,
@@ -5655,12 +5641,6 @@
     {
       "type": 0,
       "value": "Practise... or play with the new code editor"
-    }
-  ],
-  "zROcjU": [
-    {
-      "type": 0,
-      "value": "Coming soon"
     }
   ],
   "zXjEvn": [

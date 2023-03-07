@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
@@ -8,6 +8,7 @@ import ThemeContext from '../components/theme';
 import codekataBg from '../../images/codekata/codekatabg-mob.png';
 import playBtnImg from '../../images/games/gamePlay.png';
 import CodekataHeader from '../components/Header/GameHeader';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -64,9 +65,18 @@ const getStyles = (theme, font, utilColors) => StyleSheet.create({
 });
 
 const Codekata = ({ navigation, routeName }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const { font, theme } = useContext(ThemeContext);
   const pageTheme = theme.screenTurtleHome;
   const style = getStyles(pageTheme, font, theme.utilColors);
+
+  useEffect(() => {
+    startTimeTrack('codekata-home');
+
+    return () => {
+      stopTimeTrack('codekata-home');
+    };
+  }, []);
 
   return <>
     <View style={style.container}>

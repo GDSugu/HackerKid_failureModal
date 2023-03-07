@@ -17,6 +17,7 @@ import defaultUserImg from '../../images/profile/default_user.png';
 import { useLeaderBoard } from '../../hooks/pages/leaderboard';
 import { LightBlue } from '../../colors/_colors';
 import Loader from '../components/Loader';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyle = (theme, font, utilColors, gradients) => StyleSheet.create({
   container: {
@@ -272,7 +273,8 @@ const PaginationComponent = ({
   </>;
 };
 
-const GameLeaderBoard = ({ route }) => {
+const GameLeaderBoard = ({ route, navigation }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const { params: { game } } = route;
   const { font, theme } = React.useContext(ThemeContext);
   const style = getStyle(theme.screenGameLeaderBoard, font, theme.utilColors, theme.gradients);
@@ -363,10 +365,12 @@ const GameLeaderBoard = ({ route }) => {
   }, [memoizedProgress]);
 
   React.useEffect(() => {
+    startTimeTrack(`${game}-leaderboard`);
     getLeaderBoardData({ pageNumber: 1, game });
 
     return () => {
       isPageMounted.current = false;
+      stopTimeTrack(`${game}-leaderboard`);
     };
   }, []);
 

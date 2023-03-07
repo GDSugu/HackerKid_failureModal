@@ -15,6 +15,7 @@ import { useGetChallenges } from '../../hooks/pages/challenges';
 import ChallengesList from '../components/ChallengesList/ChallengesList';
 import Paginator from '../components/Paginator';
 import { AuthContext } from '../../hooks/pages/root';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const debounce = (fn, delay) => {
   let timerId;
@@ -142,6 +143,7 @@ const SortDropDown = ({
 
 const AllChallenges = ({ navigation }) => {
   const isPageMounted = useRef(true);
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
 
   // hooks
   const [localState, setLocalState] = useState({
@@ -257,6 +259,7 @@ const AllChallenges = ({ navigation }) => {
 
   useEffect(() => {
     loginCheck();
+    startTimeTrack('allchallenges');
     onRefresh();
 
     navigation?.setOptions({
@@ -269,6 +272,7 @@ const AllChallenges = ({ navigation }) => {
 
     return () => {
       isPageMounted.current = false;
+      stopTimeTrack('allchallenges');
     };
   }, []);
 
