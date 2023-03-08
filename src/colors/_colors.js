@@ -103,6 +103,7 @@ const utilColors = {
   shadowColor2: '#FFE8B6',
   black: '#000000',
   transparent: '#00000080',
+  transparent1: '#00000050',
   overlay1: '#171818bf',
 };
 

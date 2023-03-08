@@ -693,6 +693,10 @@
     "defaultMessage": "Login",
     "description": "Login button"
   },
+  "9ppS9d": {
+    "defaultMessage": "Go to Class",
+    "description": "class navigation button"
+  },
   "A/XB4F": {
     "defaultMessage": "Student's Name",
     "description": "Student Name cell header"

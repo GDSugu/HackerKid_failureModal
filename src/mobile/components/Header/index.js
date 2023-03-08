@@ -50,7 +50,7 @@ const Header = ({ route, navigation }) => {
   const screenTheme = theme[`screen${route}`];
   const style = getStyles(screenTheme, theme.utilColors);
 
-  // const classNavRoutes = ['Home', 'Games', 'Video', 'Challenges', 'More'];
+  const classNavRoutes = ['Home', 'Games', 'Video', 'Challenges', 'More'];
   const homeNavRoutes = ['Class', 'Games', 'Video', 'Challenges', 'More', 'Ide', 'Code', 'Console'];
 
   return <>
@@ -63,7 +63,7 @@ const Header = ({ route, navigation }) => {
         style={style.headerLogo}
       />
       <View style={style.flexHorizontal}>
-        {/* {(classNavRoutes.includes(route)) && <TouchableOpacity
+        {(classNavRoutes.includes(route)) && <TouchableOpacity
           style={style.navigationBtn}
           onPress={() => {
             navigation.navigate('Class');
@@ -78,7 +78,7 @@ const Header = ({ route, navigation }) => {
               description='class navigation button'
             />
           </Text>
-        </TouchableOpacity>} */}
+        </TouchableOpacity>}
         {<Animatable.View
           animation={homeNavRoutes.includes(route) ? 'fadeInRight' : 'fadeOutRight'}
           duration={300}

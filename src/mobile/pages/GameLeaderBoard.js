@@ -509,10 +509,10 @@ const GameLeaderBoard = ({ route, navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
-        {
+        {/* {
           state.uiData.loading
           && <Loader />
-        }
+        } */}
         {
           (status === 'success' && !(state.uiData.loading))
           && memoizedLeaderboardData

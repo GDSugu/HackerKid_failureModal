@@ -365,6 +365,7 @@ const VideoHome = ({ navigation }) => {
               progressValue={ overallProgress ? overallProgress.completedCount : 0}
               totalValue={ overallProgress ? overallProgress.totalVideos : 100}
               startAnim={Boolean(overallProgress)}
+              progressBg={theme.screenVideo.progressBg}
               >
               <View style={style.progressInnerText}>
                 <Text style={style.vidoeHead}>{overallProgress ? overallProgress.completedCount : '--' }</Text>
