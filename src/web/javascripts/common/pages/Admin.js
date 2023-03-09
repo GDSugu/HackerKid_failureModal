@@ -114,7 +114,7 @@ const Admin = () => {
             } else if (parsedResponse.status === 'success') {
               if (
                 parsedResponse?.userRole?.role !== 'admin'
-                || parsedResponse?.userRole?.role !== 'sales'
+                && parsedResponse?.userRole?.role !== 'sales'
               ) {
                 pathNavigator('dashboard/');
               }
