@@ -9,9 +9,10 @@ import '@formatjs/intl-datetimeformat/polyfill';
 import '@formatjs/intl-datetimeformat/locale-data/en';
 import '@formatjs/intl-datetimeformat/add-all-tz';
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { IntlProvider } from 'react-intl';
+import SplashScreen from 'react-native-splash-screen';
 import App from './pages/App';
 import useRootPageState from '../hooks/pages/root';
 import ThemeContext from './components/theme';
@@ -28,24 +29,28 @@ const AppWrapper = () => {
     }));
   });
 
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+
   return (
     <AuthProvider>
       {state.currentLocaleMessages
         ? <ThemeContext.Provider
-            value = {{
-              currentTheme: state.currentTheme,
-              theme: themes[state.currentTheme],
-              font,
-              toggleTheme,
-            }}>
-            <IntlProvider
-              locale = {state.currentLocale}
-              defaultLocale = 'en'
-              messages = {state.currentLocaleMessages}
-            >
-              <App/>
-            </IntlProvider>
-          </ThemeContext.Provider>
+          value={{
+            currentTheme: state.currentTheme,
+            theme: themes[state.currentTheme],
+            font,
+            toggleTheme,
+          }}>
+          <IntlProvider
+            locale={state.currentLocale}
+            defaultLocale='en'
+            messages={state.currentLocaleMessages}
+          >
+            <App />
+          </IntlProvider>
+        </ThemeContext.Provider>
         : <View><Text>Loading....</Text></View>}
     </AuthProvider>
   );

@@ -74,6 +74,12 @@
 		85DB686843E84429870F9110 /* DMSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D9716543C7349EABD85DEED /* DMSans-Regular.ttf */; };
 		7C60A8250A8F472C99B2A254 /* Courgette-Regular.woff in Resources */ = {isa = PBXBuildFile; fileRef = DC6220149393461FBDB7B602 /* Courgette-Regular.woff */; };
 		5B128E54085B48BB862321C8 /* Courgette-Regular.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 448C010B1A6944649A413621 /* Courgette-Regular.woff2 */; };
+		B6DD822A79734DD09356D40A /* DMMono-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE3351A5CCB043C1947FA811 /* DMMono-Italic.ttf */; };
+		FA73A0A66D5044809FD6C1DD /* DMMono-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 193D2A06A2DD4AE3A7D106A3 /* DMMono-Light.ttf */; };
+		8BC43A8CF1134A9785CA62B6 /* DMMono-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0968B424102A48A6B94C652A /* DMMono-LightItalic.ttf */; };
+		D2557B9FE5004A28AAF2BCA8 /* DMMono-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B1A3F7702AB43A4B0748D8E /* DMMono-Medium.ttf */; };
+		CC80453E6CAF4552A0D991BC /* DMMono-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C019CD34AC0418FAF27E6F9 /* DMMono-MediumItalic.ttf */; };
+		89CCD2A11101415CBA3A5891 /* DMMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45A193CC2D864F83883AA3F8 /* DMMono-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +170,12 @@
 		6D9716543C7349EABD85DEED /* DMSans-Regular.ttf */ = {isa = PBXFileReference; name = "DMSans-Regular.ttf"; path = "../src/fonts/DMSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		DC6220149393461FBDB7B602 /* Courgette-Regular.woff */ = {isa = PBXFileReference; name = "Courgette-Regular.woff"; path = "../src/fonts/Courgette-Regular.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		448C010B1A6944649A413621 /* Courgette-Regular.woff2 */ = {isa = PBXFileReference; name = "Courgette-Regular.woff2"; path = "../src/fonts/Courgette-Regular.woff2"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BE3351A5CCB043C1947FA811 /* DMMono-Italic.ttf */ = {isa = PBXFileReference; name = "DMMono-Italic.ttf"; path = "../src/fonts/DMMono-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		193D2A06A2DD4AE3A7D106A3 /* DMMono-Light.ttf */ = {isa = PBXFileReference; name = "DMMono-Light.ttf"; path = "../src/fonts/DMMono-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0968B424102A48A6B94C652A /* DMMono-LightItalic.ttf */ = {isa = PBXFileReference; name = "DMMono-LightItalic.ttf"; path = "../src/fonts/DMMono-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7B1A3F7702AB43A4B0748D8E /* DMMono-Medium.ttf */ = {isa = PBXFileReference; name = "DMMono-Medium.ttf"; path = "../src/fonts/DMMono-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4C019CD34AC0418FAF27E6F9 /* DMMono-MediumItalic.ttf */ = {isa = PBXFileReference; name = "DMMono-MediumItalic.ttf"; path = "../src/fonts/DMMono-MediumItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		45A193CC2D864F83883AA3F8 /* DMMono-Regular.ttf */ = {isa = PBXFileReference; name = "DMMono-Regular.ttf"; path = "../src/fonts/DMMono-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,6 +345,12 @@
 				6D9716543C7349EABD85DEED /* DMSans-Regular.ttf */,
 				DC6220149393461FBDB7B602 /* Courgette-Regular.woff */,
 				448C010B1A6944649A413621 /* Courgette-Regular.woff2 */,
+				BE3351A5CCB043C1947FA811 /* DMMono-Italic.ttf */,
+				193D2A06A2DD4AE3A7D106A3 /* DMMono-Light.ttf */,
+				0968B424102A48A6B94C652A /* DMMono-LightItalic.ttf */,
+				7B1A3F7702AB43A4B0748D8E /* DMMono-Medium.ttf */,
+				4C019CD34AC0418FAF27E6F9 /* DMMono-MediumItalic.ttf */,
+				45A193CC2D864F83883AA3F8 /* DMMono-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -494,6 +512,12 @@
 				85DB686843E84429870F9110 /* DMSans-Regular.ttf in Resources */,
 				7C60A8250A8F472C99B2A254 /* Courgette-Regular.woff in Resources */,
 				5B128E54085B48BB862321C8 /* Courgette-Regular.woff2 in Resources */,
+				B6DD822A79734DD09356D40A /* DMMono-Italic.ttf in Resources */,
+				FA73A0A66D5044809FD6C1DD /* DMMono-Light.ttf in Resources */,
+				8BC43A8CF1134A9785CA62B6 /* DMMono-LightItalic.ttf in Resources */,
+				D2557B9FE5004A28AAF2BCA8 /* DMMono-Medium.ttf in Resources */,
+				CC80453E6CAF4552A0D991BC /* DMMono-MediumItalic.ttf in Resources */,
+				89CCD2A11101415CBA3A5891 /* DMMono-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

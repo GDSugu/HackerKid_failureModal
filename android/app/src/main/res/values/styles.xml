@@ -5,5 +5,51 @@
         <!-- Customize your theme here. -->
         <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
     </style>
-
+    <style name="title_and_subtitle_container">
+      <item name="android:layout_width">wrap_content</item>
+      <item name="android:layout_height">wrap_content</item>
+      <item name="android:orientation">vertical</item>
+      <item name="android:layout_centerHorizontal">true</item>
+      <item name="android:layout_marginTop">210px</item>
+    </style>
+    <style name="splash_title">
+      <item name="android:layout_width">wrap_content</item>
+      <item name="android:layout_height">wrap_content</item>
+      <item name="android:layout_gravity">center</item>
+      <item name="android:fontFamily">@font/fredoka_regular</item>
+      <item name="android:text">@string/splash_heading</item>
+      <item name="android:textColor">@color/secondary_dark</item>
+      <item name="android:textSize">55sp</item>
+      <item name="android:layout_marginBottom">20px</item>
+    </style>
+  <style name="separator">
+    <item name="android:layout_width">294dp</item>
+    <item name="android:layout_height">2dp</item>
+    <item name="android:layout_centerHorizontal">true</item>
+    <item name="android:background">@color/primary_grey</item>
+  </style>
+  <style name="subtitle_container">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_gravity">center</item>
+  </style>
+  <style name="subtitle_1">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:fontFamily">@font/avaria_sans_libre_bold</item>
+    <item name="android:gravity">center</item>
+    <item name="android:text">@string/subtitle_1</item>
+    <item name="android:textSize">37sp</item>
+    <item name="android:textColor">@color/primary_dark</item>
+  </style>
+  <style name="subtitle_2">
+    <item name="android:layout_width">120dp</item>
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:layout_marginLeft">5px</item>
+    <item name="android:fontFamily">@font/avaria_sans_libre_bold</item>
+    <item name="android:gravity">center</item>
+    <item name="android:text">@string/subtitle_2</item>
+    <item name="android:textSize">14.5sp</item>
+    <item name="android:textColor">@color/primary_dark</item>
+  </style>
 </resources>
