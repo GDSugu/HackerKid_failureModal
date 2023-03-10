@@ -15,6 +15,7 @@ import ThemeContext from '../components/theme';
 import SortIconSvg from '../../images/common/sort-icon.svg';
 import SearchIconSvg from '../../images/common/search-icon.svg';
 import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import Loader from '../components/Loader';
 
 const getStyles = (theme, utilColors, font, gradients) => StyleSheet.create({
   container: {
@@ -255,6 +256,7 @@ const SortDropDown = ({
 const Awards = ({ navigation }) => {
   const isPageMounted = useRef(true);
   const bottomSheetRef = useRef(true);
+  const loaderRef = useRef(false);
   const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const {
     awardsState,
@@ -294,31 +296,55 @@ const Awards = ({ navigation }) => {
     }));
   };
 
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
   const onSortChange = (selectedSort) => {
+    showLoader();
     getAwards({
       cached: false,
       searchQuery,
       sort: selectedSort,
       limit,
-    });
+    })
+      .then(() => {
+        hideLoader();
+      });
   };
 
   const onSearchBoxChange = (value) => {
+    showLoader();
     getAwards({
       cached: false,
       searchQuery: value,
       sort,
       limit,
-    });
+    })
+      .then(() => {
+        hideLoader();
+      });
   };
 
   const onSeeMoreCardPress = (requestedLimit) => {
+    showLoader();
     getAwards({
       cached: false,
       searchQuery,
       limit: requestedLimit,
       sort,
-    });
+    })
+      .then(() => {
+        hideLoader();
+      });
   };
 
   const onAwardItemPress = (pressedAwardDetails) => {
@@ -335,6 +361,14 @@ const Awards = ({ navigation }) => {
   };
 
   useEffect(() => {
+    if (Object.keys(awards).length) {
+      hideLoader();
+    } else {
+      showLoader();
+    }
+  }, [awards]);
+
+  useEffect(() => {
     startTimeTrack('awards');
     navigation.setOptions({
       contentStyle: {
@@ -347,6 +381,7 @@ const Awards = ({ navigation }) => {
     return () => {
       isPageMounted.current = false;
       stopTimeTrack('awards');
+      hideLoader();
     };
   }, []);
 
@@ -502,6 +537,10 @@ const Awards = ({ navigation }) => {
         />
       </View>
     </BottomSheet>
+    <Loader
+      route={'Awards'}
+      ref={loaderRef}
+    />
   </>;
 };
 

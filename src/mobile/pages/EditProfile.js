@@ -1,4 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {
+  useContext, useEffect, useRef, useState,
+} from 'react';
 import {
   Alert,
   Image,
@@ -18,6 +20,7 @@ import defaultUser from '../../images/profile/default_user.png';
 import profileEdit from '../../images/profile/profile-edit.png';
 import { AuthContext } from '../../hooks/pages/root';
 import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import Loader from '../components/Loader';
 
 const getStyles = (theme, utils, font) => StyleSheet.create({
   container: {
@@ -154,7 +157,7 @@ const EditProfile = ({ navigation }) => {
   });
   const hasEdited = React.useRef(false);
   const isPageMounted = React.useRef(true);
-
+  const loaderRef = useRef(false);
   const authContext = React.useContext(AuthContext);
 
   const { saveProfile, state, setState } = useProfileInfo({ isPageMounted });
@@ -172,6 +175,18 @@ const EditProfile = ({ navigation }) => {
     school,
     // uniqueUrl,
   } = state;
+
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
 
   const handleImage = () => {
     let result;
@@ -247,8 +262,10 @@ const EditProfile = ({ navigation }) => {
     const validated = Object.entries(errorMessage).filter(([key, value]) => key !== 'profileImg' && value !== false).length;
     if (!validated) {
       hasEdited.current = false;
+      showLoader();
       saveProfile()
         .then(() => {
+          hideLoader();
           if (status === 'access_denied') {
             Alert.alert('Error', 'Access denied. Please try again', [{ text: 'Go Back', onPress: () => navigation.goBack() }]);
           } else {
@@ -269,6 +286,7 @@ const EditProfile = ({ navigation }) => {
     return () => {
       isPageMounted.current = false;
       stopTimeTrack('profile-edit');
+      hideLoader();
     };
   }, []);
 
@@ -452,6 +470,10 @@ const EditProfile = ({ navigation }) => {
         </Text>
       </TouchableOpacity>
     </View>
+    <Loader
+      route={'EditProfile'}
+      ref={loaderRef}
+    />
   </>;
 };
 

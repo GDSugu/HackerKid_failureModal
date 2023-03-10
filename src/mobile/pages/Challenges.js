@@ -18,6 +18,7 @@ import hkcoin from '../../images/common/hkcoin.png';
 import { useGetAttemptedChallenges, useGetChallenges, useGetMyChallenges } from '../../hooks/pages/challenges';
 import { loginCheck } from '../../hooks/common/framework';
 import { AuthContext, useGetSession } from '../../hooks/pages/root';
+import Loader from '../components/Loader';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
@@ -268,6 +269,7 @@ const ChallengesSwiper = ({
 
 const Challenges = ({ navigation }) => {
   const isPageMounted = useRef(true);
+  const loaderRef = useRef(null);
   const numberOfChallengesSlideToShow = 7;
 
   const { theme, font } = useContext(ThemeContext);
@@ -311,23 +313,38 @@ const Challenges = ({ navigation }) => {
   } = getMyChallengesState;
 
   const [reloadComponent, setReloadComponent] = React.useState(0);
-  const [refreshing, setRefreshing] = React.useState(false);
+  // const [refreshing, setRefreshing] = React.useState(false);
+
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
 
   const authContext = useContext(AuthContext);
   // methods
   const onRefresh = () => {
-    setRefreshing(true);
+    // setRefreshing(true);
+    showLoader();
     Promise.all([
       getChallenges({ cached: false }),
       getMyChallenges({ cached: false }),
       getAttemptedChallenges({ cached: false }),
     ]).then(() => {
       setReloadComponent(reloadComponent + 1);
-      setRefreshing(false);
+      // setRefreshing(false);
+      hideLoader();
     })
       .catch(() => {
         // show snackbar of error
-        setRefreshing(false);
+        // setRefreshing(false);
+        hideLoader();
       });
   };
 
@@ -348,81 +365,87 @@ const Challenges = ({ navigation }) => {
   }, [authContext.appData.isRefresh]));
 
   return (
-    <ScrollView
-      style={style.container}
-      refreshControl={
-        <RefreshControl
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-        />
-      }>
-      <Text style={style.pageHeading}>
-        <FormattedMessage defaultMessage={'Challenges'} description='page heading' />
-      </Text>
-      <HeroComponent
-        style={style}
-        totalEarnedCoins={session.pointsEarned || 0} />
-      <TouchableOpacity style={style.primaryBtn}>
-        <Text style={style.primaryBtnText}>
-          <FormattedMessage defaultMessage={'Create a Challenge'} />
+    <>
+      <ScrollView
+        style={style.container}
+        refreshControl={
+          <RefreshControl
+            refreshing={false}
+            onRefresh={onRefresh}
+          />
+        }>
+        <Text style={style.pageHeading}>
+          <FormattedMessage defaultMessage={'Challenges'} description='page heading' />
         </Text>
-        <Icon
-          name="angle-right"
-          size={20}
-          type="FontAwesome5"
-          style={style.primaryBtnIcon}
+        <HeroComponent
+          style={style}
+          totalEarnedCoins={session.pointsEarned || 0} />
+        <TouchableOpacity style={style.primaryBtn}>
+          <Text style={style.primaryBtnText}>
+            <FormattedMessage defaultMessage={'Create a Challenge'} />
+          </Text>
+          <Icon
+            name="angle-right"
+            size={20}
+            type="FontAwesome5"
+            style={style.primaryBtnIcon}
+          />
+        </TouchableOpacity>
+        <ChallengesSwiper
+          swiperHeading={'My Challenges'}
+          showChallengeAuthorName={false}
+          challenges={myChallenges && myChallenges.filter((challenge) => challenge.challengeState === 'published')}
+          navigation={navigation}
+          style={style}
+          numberOfSlidesToShow={numberOfChallengesSlideToShow}
+          showNavigationalCard={myChallenges && myChallenges.filter((challenge) => challenge.challengeState === 'published').length > 3}
+          navigationCardData={{
+            type: 'navigationalCard',
+            navigateTo: 'YourChallenges',
+            navigationText: 'View My Challenges',
+          }}
         />
-      </TouchableOpacity>
-      <ChallengesSwiper
-        swiperHeading={'My Challenges'}
-        showChallengeAuthorName={false}
-        challenges={myChallenges && myChallenges.filter((challenge) => challenge.challengeState === 'published')}
-        navigation={navigation}
-        style={style}
-        numberOfSlidesToShow={numberOfChallengesSlideToShow}
-        showNavigationalCard={myChallenges && myChallenges.filter((challenge) => challenge.challengeState === 'published').length > 3}
-        navigationCardData={{
-          type: 'navigationalCard',
-          navigateTo: 'YourChallenges',
-          navigationText: 'View My Challenges',
-        }}
-      />
-      <ChallengesSwiper
-        swiperHeading={'Continue'}
-        challenges={attemptedChallenges}
-        navigation={navigation}
-        style={style}
-        numberOfSlidesToShow={numberOfChallengesSlideToShow}
-        navigationCardData={{
-          type: 'navigationalCard',
-          navigateTo: 'AllChallenges',
-          navigationText: 'View All Challenges',
-        }}
-      />
-      <ChallengesSwiper
-        swiperHeading={'Trending'}
-        challenges={trendingChallenges}
-        navigation={navigation}
-        style={style}
-        numberOfSlidesToShow={numberOfChallengesSlideToShow}
-        navigationCardData={{
-          type: 'navigationalCard',
-          navigateTo: 'AllChallenges',
-          navigationText: 'View All Challenges',
-        }}
-      />
-      <TouchableOpacity style={[style.primaryBtn, style.viewAllChallengesBtn]} onPress={() => navigation.navigate('AllChallenges')}>
-        <Text style={style.primaryBtnText}>
-          <FormattedMessage defaultMessage={'View all Challenges'} />
-        </Text>
-        <Icon
-          name="angle-right"
-          size={20}
-          type="FontAwesome5"
-          style={style.primaryBtnIcon}
+        <ChallengesSwiper
+          swiperHeading={'Continue'}
+          challenges={attemptedChallenges}
+          navigation={navigation}
+          style={style}
+          numberOfSlidesToShow={numberOfChallengesSlideToShow}
+          navigationCardData={{
+            type: 'navigationalCard',
+            navigateTo: 'AllChallenges',
+            navigationText: 'View All Challenges',
+          }}
         />
-      </TouchableOpacity>
-    </ScrollView>
+        <ChallengesSwiper
+          swiperHeading={'Trending'}
+          challenges={trendingChallenges}
+          navigation={navigation}
+          style={style}
+          numberOfSlidesToShow={numberOfChallengesSlideToShow}
+          navigationCardData={{
+            type: 'navigationalCard',
+            navigateTo: 'AllChallenges',
+            navigationText: 'View All Challenges',
+          }}
+        />
+        <TouchableOpacity style={[style.primaryBtn, style.viewAllChallengesBtn]} onPress={() => navigation.navigate('AllChallenges')}>
+          <Text style={style.primaryBtnText}>
+            <FormattedMessage defaultMessage={'View all Challenges'} />
+          </Text>
+          <Icon
+            name="angle-right"
+            size={20}
+            type="FontAwesome5"
+            style={style.primaryBtnIcon}
+          />
+        </TouchableOpacity>
+      </ScrollView>
+      <Loader
+        ref={loaderRef}
+        route={'Challenges'}
+      />
+    </>
   );
 };
 

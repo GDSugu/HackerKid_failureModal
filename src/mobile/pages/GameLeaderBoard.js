@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   Animated, StyleSheet, ScrollView, View, Text, Image, TouchableOpacity, TextInput,
 } from 'react-native';
@@ -294,6 +294,20 @@ const GameLeaderBoard = ({ route, navigation }) => {
   const memoizedLeaderboardData = React.useMemo(() => leaderboardData, [leaderboardData]);
   const memoizedPaginationDetails = React.useMemo(() => paginationDetails, [paginationDetails]);
 
+  const loaderRef = useRef(null);
+
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
   const totalPage = Math.ceil(
     memoizedPaginationDetails.overallCount / memoizedPaginationDetails.countPerPage,
   );
@@ -304,23 +318,33 @@ const GameLeaderBoard = ({ route, navigation }) => {
   const nextBtnPressHandler = () => {
     if (disableNextBtn) return;
     if (memoizedPaginationDetails.page === totalPage) return;
+    showLoader();
     getLeaderBoardData({ pageNumber: memoizedPaginationDetails.page + 1, game })
       .then(() => {
+        hideLoader();
       });
   };
 
   const prevBtnPressHandler = () => {
     if (disablePrevBtn) return;
     if (memoizedPaginationDetails.page === 1) return;
+    showLoader();
     getLeaderBoardData({
       pageNumber: memoizedPaginationDetails.page - 1,
       game,
     })
       .then(() => {
+        hideLoader();
       });
   };
 
-  const handlePagination = (page) => getLeaderBoardData({ pageNumber: page, game });
+  const handlePagination = (page) => {
+    showLoader();
+    getLeaderBoardData({ pageNumber: page, game })
+      .then(() => {
+        hideLoader();
+      });
+  };
 
   const isUserInCurrentPage = (currentPage, userUniqueUrl) => {
     if (currentPage && userUniqueUrl) {
@@ -366,11 +390,16 @@ const GameLeaderBoard = ({ route, navigation }) => {
 
   React.useEffect(() => {
     startTimeTrack(`${game}-leaderboard`);
-    getLeaderBoardData({ pageNumber: 1, game });
+    showLoader();
+    getLeaderBoardData({ pageNumber: 1, game })
+      .then(() => {
+        hideLoader();
+      });
 
     return () => {
       isPageMounted.current = false;
       stopTimeTrack(`${game}-leaderboard`);
+      hideLoader();
     };
   }, []);
 
@@ -670,6 +699,10 @@ const GameLeaderBoard = ({ route, navigation }) => {
         </TouchableOpacity>
       </View>
     </View>
+    <Loader
+      route={'GameLeaderBoard'}
+      ref={loaderRef}
+    />
   </>;
 };
 

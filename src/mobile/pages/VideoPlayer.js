@@ -21,6 +21,7 @@ import starSelectIcon from '../../images/courses/star.png';
 import emptySelectIcon from '../../images/courses/emptyStar.png';
 import HalfStar from '../../images/courses/half-star.svg';
 import { ModuleContainer } from '../components/CourseComponents';
+import Loader from '../components/Loader';
 
 const getStyles = (theme) => {
   const cardWidth = Dimensions.get('window').width;
@@ -171,6 +172,20 @@ const VideoPlayerPage = ({ navigation, route }) => {
     number,
   };
 
+  const loaderRef = useRef(null);
+
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
   const [rating, setRating] = useState(1);
   const [ratingVisible, setModalVisible] = useState(false);
   const { videoData, timeActivity, submitRating } = useVideos({ isPageMounted, urlData });
@@ -179,7 +194,11 @@ const VideoPlayerPage = ({ navigation, route }) => {
   const [isPaused, setIsPaused] = useState(true);
   const [handel, setHandel] = useState(false);
   const onSubmitRating = () => {
-    submitRating(rating);
+    showLoader();
+    submitRating(rating)
+      .then(() => {
+        hideLoader();
+      });
     setModalVisible(false);
   };
 
@@ -483,6 +502,10 @@ const VideoPlayerPage = ({ navigation, route }) => {
       </ScrollView>}
     </View>
       <RatingModal/>
+      <Loader
+        ref={loaderRef}
+        route={'Video'}
+      />
 </>
   );
 };
