@@ -26,6 +26,7 @@ import useBackBtn from '../../hooks/pages/back-btn';
 import Recaptchav2Modal from '../components/Recaptchav2Modal';
 import Recaptchav3 from '../components/Recaptchav3';
 import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import Loader from '../components/Loader';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   ...getCommonStyles(theme, utilColors, font),
@@ -88,7 +89,7 @@ const TakeActionButtons = ({ children, style, navigation }) => (
 const ForgotPasswordStepOne = ({
   style, getStyleArr, font, stateObj, setStateObj, setBackBtnStateObj, handleStateChange,
   errorStateObj, setError, formErrorStateObj, setFormErrorObj, navigation,
-  recaptchav2Ref, recaptchav3Ref,
+  recaptchav2Ref, recaptchav3Ref, showLoader = () => {}, hideLoader = () => {},
 }) => {
   // hooks
   const phoneInput = useRef(null);
@@ -105,9 +106,10 @@ const ForgotPasswordStepOne = ({
   const sendOtpRequestWithToken = (token, recaptchaVersion) => {
     const countryCode = `+${phoneInput.current.getCallingCode()}`;
     const countryAbbrevation = phoneInput.current.getCountryCode();
-
+    showLoader();
     sendOtpRequest(stateObj.phoneNumber, countryCode, 'send-otp-for-pwd-change',
       token, recaptchaVersion).then((response) => {
+      hideLoader();
       const data = JSON.parse(response);
       const { status, message } = data;
 
@@ -465,6 +467,20 @@ const ForgotPassword = ({ navigation }) => {
     return styleArr;
   };
 
+  const loaderRef = useRef(null);
+
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
   // handleState change
   const handleStateChange = (key, value) => {
     try {
@@ -497,6 +513,8 @@ const ForgotPassword = ({ navigation }) => {
     navigation,
     recaptchav2Ref,
     recaptchav3Ref,
+    showLoader,
+    hideLoader,
   };
 
   useEffect(() => {
@@ -508,53 +526,61 @@ const ForgotPassword = ({ navigation }) => {
   }, []);
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-      <View style={style.container}>
-        <View style={style.formHeadingAndBackBtn}>
-          <View style={style.backBtn}>
-            <TouchableOpacity
-              style={backBtnStyle} onPress={backBtnStateObj.backFn}>
-              <Icon name={'arrow-left'} type='FontAwesome' size={font.heading6.fontSize} color={ theme.utilColors.dark }/>
-            </TouchableOpacity>
+    <>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={style.container}>
+          <View style={style.formHeadingAndBackBtn}>
+            <View style={style.backBtn}>
+              <TouchableOpacity
+                style={backBtnStyle} onPress={backBtnStateObj.backFn}>
+                <Icon name={'arrow-left'} type='FontAwesome' size={font.heading6.fontSize} color={ theme.utilColors.dark }/>
+              </TouchableOpacity>
+            </View>
+            <View>
+              <Text style={style.formHeading}>
+                <FormattedMessage defaultMessage={'Forgot Password'} description='Forgot Password Heading'/>
+              </Text>
+            </View>
+            </View>
+            <View style={style.formSvgContainer}>
+              {
+              (stateObj.formStep === 3 && <ForgotPasswordThirdSvg />)
+              || (stateObj.formStep === 4 && <ForgotPasswordFourthSvg />)
+              || <ForgotPasswordFirstSvg/>
+              }
           </View>
-          <View>
-            <Text style={style.formHeading}>
-              <FormattedMessage defaultMessage={'Forgot Password'} description='Forgot Password Heading'/>
-            </Text>
-          </View>
-          </View>
-          <View style={style.formSvgContainer}>
-            {
-            (stateObj.formStep === 3 && <ForgotPasswordThirdSvg />)
-            || (stateObj.formStep === 4 && <ForgotPasswordFourthSvg />)
-            || <ForgotPasswordFirstSvg/>
-            }
+          <Recaptchav2Modal ref={recaptchav2Ref} siteKey={API.RECAPCHAV2SITEKEY} domainURL='https://localhost/'/>
+          <Recaptchav3 ref={recaptchav3Ref} siteKey={API.RECAPCHAV3SITEKEY} domainURL='https://localhost/'/>
+          {
+            ((stateObj.formStep === 1)
+              && <ForgotPasswordStepOne {...commonProps} />)
+            || ((stateObj.formStep === 2)
+              && <VerifyOtpFormStep
+              {...commonProps}
+              parentStateObj={stateObj}
+              setParentStateObj={setStateObj}
+              otpRequestType ={'send-otp-for-pwd-change'}
+              secondaryActionButtons={
+                <TakeActionButtons style={style} navigation={navigation} />
+              } />)
+            || ((stateObj.formStep === 3)
+              && <ForgotPasswordStepThree
+              {...commonProps}
+            changePasswordRequest={changePasswordRequest}
+              />)
+            || ((stateObj.formStep === 4)
+              && <ForgotPasswordStepFour
+              style={style}
+              navigation={navigation}
+              setBackBtnStateObj={setBackBtnStateObj} />)
+          }
         </View>
-        <Recaptchav2Modal ref={recaptchav2Ref} siteKey={API.RECAPCHAV2SITEKEY} domainURL='https://localhost/'/>
-        <Recaptchav3 ref={recaptchav3Ref} siteKey={API.RECAPCHAV3SITEKEY} domainURL='https://localhost/'/>
-        {
-          ((stateObj.formStep === 1)
-            && <ForgotPasswordStepOne {...commonProps} />)
-          || ((stateObj.formStep === 2)
-            && <VerifyOtpFormStep
-            {...commonProps}
-            parentStateObj={stateObj}
-            setParentStateObj={setStateObj}
-            otpRequestType ={'send-otp-for-pwd-change'}
-            secondaryActionButtons={<TakeActionButtons style={style} navigation={navigation} />} />)
-          || ((stateObj.formStep === 3)
-            && <ForgotPasswordStepThree
-            {...commonProps}
-          changePasswordRequest={changePasswordRequest}
-            />)
-          || ((stateObj.formStep === 4)
-            && <ForgotPasswordStepFour
-            style={style}
-            navigation={navigation}
-            setBackBtnStateObj={setBackBtnStateObj} />)
-        }
-      </View>
       </ScrollView>
+      <Loader
+        route={'ForgotPassword'}
+        ref={loaderRef}
+      />
+    </>
   );
 };
 

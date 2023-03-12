@@ -28,6 +28,7 @@ import ShareModal from '../components/Modals/ShareModal';
 import ViewCertificateModal from '../components/Modals/ViewCertificateModal';
 import CertificateBuilder from '../components/CertificateBuilder';
 import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import Loader from '../components/Loader';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
@@ -192,6 +193,7 @@ const SortDropDown = ({
 
 const Certificates = ({ navigation }) => {
   const isPageMounted = useRef(true);
+  const loaderRef = useRef(null);
   const certificateViewShotRef = useRef(true);
   const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   // hooks
@@ -232,6 +234,18 @@ const Certificates = ({ navigation }) => {
     templateCertificateImageUri,
     viewCertificateImageUri,
   } = localState;
+
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
 
   // setters
   const setViewCertificateImageUri = (uri) => {
@@ -418,7 +432,11 @@ const Certificates = ({ navigation }) => {
   }, [gameDetails]);
 
   useEffect(() => {
-    getProfileData({ cached: false });
+    showLoader();
+    getProfileData({ cached: false })
+      .then(() => {
+        hideLoader();
+      });
   }, [uniqueUrl]);
 
   useEffect(() => {
@@ -434,6 +452,7 @@ const Certificates = ({ navigation }) => {
     return () => {
       isPageMounted.current = false;
       stopTimeTrack('certificates');
+      hideLoader();
     };
   }, []);
 
@@ -575,6 +594,10 @@ const Certificates = ({ navigation }) => {
       certificateId={toBuildCertificateObj.certificateId}
       certificateName={toBuildCertificateObj.certificateName}
       studentName={name}
+    />
+    <Loader
+      route={'Certificates'}
+      ref={loaderRef}
     />
   </>;
 };

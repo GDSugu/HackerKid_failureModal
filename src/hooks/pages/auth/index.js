@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import post, { logout, setUserSession } from '../../common/framework';
 import getPlatform from '../../common/utlis';
-import { AuthContext } from '../root';
+import { AuthContext, SubscriptionContext } from '../root';
 import API from '../../../../env';
 
 const useLoginMethod = () => {
@@ -65,6 +65,7 @@ const useLoginMethod = () => {
 
 const useLogout = () => {
   const authContext = React.useContext(AuthContext);
+  const subscriptionContext = React.useContext(SubscriptionContext);
 
   const logoutHandler = () => {
     logout()
@@ -73,6 +74,7 @@ const useLogout = () => {
           const device = getPlatform();
           if (device === 'app') {
             authContext.clearAuthState();
+            subscriptionContext.clearSubscriptionData();
           }
         }
       });

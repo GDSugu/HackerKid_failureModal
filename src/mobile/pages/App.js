@@ -18,7 +18,7 @@ import RouteClass from './Class';
 import RouteGames from './Games';
 import RouteHome from './Home';
 import RouteVideo from './Video';
-import RouteChallenges from './Challenges';
+// import RouteChallenges from './Challenges';
 import RouteMore from './More';
 import RouteProfile from './EditProfile';
 import RouteLogin from './Login';
@@ -53,7 +53,7 @@ import YourChallengesActions from '../components/YourChallengesActions';
 import IconGame from '../../images/navbar/iconGame.svg';
 import IconHome from '../../images/navbar/iconHome.svg';
 import IconMore from '../../images/navbar/iconMore.svg';
-import IconStar from '../../images/navbar/iconStar.svg';
+// import IconStar from '../../images/navbar/iconStar.svg';
 import IconVideo from '../../images/navbar/iconVideo.svg';
 import { AuthContext } from '../../hooks/pages/root';
 import CheckNetwork from '../components/CheckNetwork';
@@ -108,12 +108,12 @@ const TabArray = [
     Icon: IconVideo,
     id: 'courses',
   },
-  {
-    name: 'Challenges',
-    component: RouteChallenges,
-    Icon: IconStar,
-    id: 'challenges',
-  },
+  // {
+  //   name: 'Challenges',
+  //   component: RouteChallenges,
+  //   Icon: IconStar,
+  //   id: 'challenges',
+  // },
   {
     name: 'More',
     component: RouteMore,

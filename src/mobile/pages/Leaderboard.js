@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import {
   View, Text, StyleSheet,
   // TextInput,
@@ -15,6 +15,7 @@ import defaultUser from '../../images/profile/default_user.png';
 import ThemeContext from '../components/theme';
 import { useLeaderBoard } from '../../hooks/pages/leaderboard';
 import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import ScreenLoader from '../components/Loader';
 import Paginator from '../components/Paginator';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
@@ -132,29 +133,52 @@ const Leaderboard = ({ navigation }) => {
   // hooks
   const { state, setLeaderBoardData, getLeaderBoardData } = useLeaderBoard({ isPageMounted });
   const { leaderboardData, userData, paginationDetails } = state;
+  const memoizedLeaderBoardData = useMemo(() => leaderboardData, [leaderboardData]);
   // styles
   const { font, theme } = React.useContext(ThemeContext);
   const screenTheme = theme.screenLeaderboard;
   const style = getStyles(screenTheme, theme.utilColors, font);
   const scrollViewRef = useRef(null);
+  const screenLoaderRef = useRef(null);
 
   // methods
+
+  const showLoader = () => {
+    if (screenLoaderRef.current) {
+      screenLoaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (screenLoaderRef.current) {
+      screenLoaderRef.current.hide();
+    }
+  };
+
   const nextBtnPressHandler = () => {
+    showLoader();
     getLeaderBoardData({ pageNumber: paginationDetails.page + 1 }).then(() => {
+      hideLoader();
       scrollViewRef.current.scrollTo({ y: 0, animated: true });
     });
   };
 
   const previousBtnPressHandler = () => {
+    showLoader();
     getLeaderBoardData({ pageNumber: paginationDetails.page - 1 }).then(() => {
+      hideLoader();
       scrollViewRef.current.scrollTo({ y: 0, animated: true });
     });
   };
 
   const onPageChange = (pageNumber) => {
-    getLeaderBoardData({ pageNumber }).then(() => {
-      scrollViewRef.current.scrollTo({ y: 0, animated: true });
-    });
+    if (paginationDetails.page !== pageNumber) {
+      showLoader();
+      getLeaderBoardData({ pageNumber }).then(() => {
+        hideLoader();
+        scrollViewRef.current.scrollTo({ y: 0, animated: true });
+      });
+    }
   };
 
   const loggedInUserInCurrentPage = (currentPage, userUniqueUrl) => {
@@ -180,11 +204,19 @@ const Leaderboard = ({ navigation }) => {
   }, [state]);
 
   useEffect(() => {
+    showLoader();
+    if (memoizedLeaderBoardData) {
+      hideLoader();
+    }
+  }, [memoizedLeaderBoardData]);
+
+  useEffect(() => {
     startTimeTrack('leaderboard');
 
     return () => {
       stopTimeTrack('leaderboard');
       isPageMounted.current = false;
+      hideLoader();
     };
   }, []);
 
@@ -305,6 +337,10 @@ const Leaderboard = ({ navigation }) => {
           stylePrevBtn={style.paginationPrevBtn}
         />
       }
+      <ScreenLoader
+        route={'Leaderboard'}
+        ref={screenLoaderRef}
+      />
     </>
   );
 };

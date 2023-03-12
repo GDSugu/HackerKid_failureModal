@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
   StyleSheet, Text, TouchableOpacity, View,
@@ -10,7 +10,7 @@ import webViewElement from '../components/WebView';
 import { ZombieLandContext } from '../../hooks/pages/zombieLand';
 import { useSharedZLWebView } from '../../shared/zombieLand/zlwebview';
 import Icon from '../common/Icons';
-import { ScreenLoader } from '../components/Loader';
+import Loader from '../components/Loader';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
@@ -67,8 +67,8 @@ const ZombieLandOutput = ({ navigation }) => {
   const { theme: { utilColors, screenZombieLandOutput }, font } = React.useContext(ThemeContext);
   const style = getStyles(screenZombieLandOutput, utilColors, font);
   const webViewRef = React.useRef(null);
+  const loaderRef = useRef(null);
   const zlContext = React.useContext(ZombieLandContext);
-  const [showLoader, setShowLoader] = React.useState(false);
 
   const { ctxState, ctxSetState, submitQuestion } = zlContext;
 
@@ -84,6 +84,18 @@ const ZombieLandOutput = ({ navigation }) => {
     styleString,
   });
 
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
   const showStatusModal = () => {
     ctxSetState((prevState) => ({
       ...prevState,
@@ -95,7 +107,7 @@ const ZombieLandOutput = ({ navigation }) => {
   };
 
   const endGame = (validated) => {
-    setShowLoader(true);
+    showLoader();
     const sourceCode = ctxState.snippet;
     const request = {
       type: 'validateZombieQuestion',
@@ -114,7 +126,7 @@ const ZombieLandOutput = ({ navigation }) => {
 
     submitQuestion(request)
       .then(() => {
-        setShowLoader(false);
+        hideLoader(false);
         showStatusModal();
       });
   };
@@ -275,12 +287,10 @@ const ZombieLandOutput = ({ navigation }) => {
         </TouchableOpacity>
       </View>
     </View>
-    {
-      showLoader
-      && <>
-        <ScreenLoader route={'ZombieLandOutput'} />
-      </>
-    }
+    <Loader
+      route={'ZombieLandOutput'}
+      ref={loaderRef}
+      />
   </>;
 };
 

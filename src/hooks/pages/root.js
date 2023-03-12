@@ -139,6 +139,16 @@ const useGetSubscription = ({ isPageMounted }) => {
         }
       });
   };
+
+  const clearSubscriptionData = () => {
+    setSubscriptionData({
+      isFetching: false,
+      status: false,
+      planFeatures: {},
+      planType: 'free',
+    });
+  };
+
   useEffect(() => {
     getSubscriptionData();
   }, []);
@@ -146,6 +156,7 @@ const useGetSubscription = ({ isPageMounted }) => {
   return {
     subscriptionData,
     setSubscriptionData,
+    clearSubscriptionData,
   };
 };
 

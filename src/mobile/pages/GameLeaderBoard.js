@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { memo, useRef, useState } from 'react';
 import {
   Animated, StyleSheet, ScrollView, View, Text, Image, TouchableOpacity, TextInput,
 } from 'react-native';
 import { FormattedMessage } from 'react-intl';
+import { SvgUri } from 'react-native-svg';
 import GameHeader from '../components/Header/GameHeader';
 import ThemeContext from '../components/theme';
 import CircleGradientProgressBar from '../components/CircleGradientProgressBar';
@@ -10,14 +11,31 @@ import ImgComponent from '../components/ImgComponent';
 import Icon from '../common/Icons';
 import hkcoin from '../../images/common/hkcoin.png';
 import timeSpent from '../../images/common/eva_clock-fill.png';
-import award1 from '../../images/achievements/award1.png';
-import award2 from '../../images/achievements/award2.png';
-import award3 from '../../images/achievements/award3.png';
 import defaultUserImg from '../../images/profile/default_user.png';
 import { useLeaderBoard } from '../../hooks/pages/leaderboard';
 import { LightBlue } from '../../colors/_colors';
 import Loader from '../components/Loader';
 import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import { useAwardsByGame } from '../../hooks/pages/awards';
+import BottomSheet from '../components/BottomSheet';
+import AwardProgressBar from '../components/AwardProgressBar';
+
+const compareProps = (prev, next) => {
+  let isEqual = true;
+  Object.keys(prev).forEach((key) => {
+    if (key === 'avatar' || key === 'navigation' || key === 'style') {
+      isEqual = isEqual && true;
+    } else if (typeof prev[key] === 'function') {
+      // use memoized function for passing as props
+      isEqual = isEqual && true;
+    } else if (key.toLowerCase().includes('ref')) {
+      isEqual = true;
+    } else {
+      isEqual = isEqual && JSON.stringify(prev[key]) === JSON.stringify(next[key]);
+    }
+  });
+  return isEqual;
+};
 
 const getStyle = (theme, font, utilColors, gradients) => StyleSheet.create({
   container: {
@@ -84,19 +102,24 @@ const getStyle = (theme, font, utilColors, gradients) => StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 10,
+    flexWrap: 'wrap',
   },
   awards: {
-    width: 74,
-    height: 74,
+    width: 86,
+    height: 86,
     borderRadius: 12,
     backgroundColor: utilColors.white,
-    marginHorizontal: 4,
+    margin: 6,
     alignItems: 'center',
     justifyContent: 'center',
   },
   awardImg: {
-    // width: 42,
-    // height: 32,
+    width: 42,
+    height: 32,
+  },
+  awardName: {
+    ...font.captionBold,
+    color: utilColors.dark,
   },
   leaderboardContainer: {
     marginVertical: 4,
@@ -197,6 +220,90 @@ const getStyle = (theme, font, utilColors, gradients) => StyleSheet.create({
   },
 });
 
+const getBottomSheetStyles = (theme, font, utilColors, gradients) => StyleSheet.create({
+  awardProgressBar: {
+    width: '100%',
+    height: 5,
+    marginTop: 25,
+    borderRadius: 30,
+    backgroundColor: theme.loginTabInactiveBorder,
+  },
+  awardGradient: {
+    height: '100%',
+    borderRadius: 30,
+  },
+  awardProgressGradient: gradients.redYellow,
+  bottomSheetAwardImage: {
+    marginTop: 30,
+    alignSelf: 'center',
+    width: 96,
+    height: 96,
+    // resizeMode: 'contain',
+  },
+  bottomSheetBody: {
+    paddingHorizontal: 35,
+    borderRadius: 18,
+    paddingBottom: 16,
+  },
+  bottomSheetAwardSubtitle: {
+    marginTop: 5,
+  },
+  bottomSheetProgressBar: {
+    marginTop: 25,
+  },
+  awardTitleWithSubtitleSection: {
+    marginTop: 24,
+  },
+  currentStreakContainer: {
+    backgroundColor: theme.bodyBg,
+    padding: 10,
+    borderRadius: 8,
+    marginRight: 10,
+    marginTop: 25,
+  },
+  nextAchievementIndicator: {
+    flexDirection: 'row',
+    marginTop: 25,
+  },
+  nextAchievementSection: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  progressTextContainer: {
+    position: 'absolute',
+    right: '50%',
+    width: 100,
+    transform: [
+      { translateX: 80 },
+    ],
+    bottom: 8,
+  },
+  progressTextualFormContainer: {
+    position: 'absolute',
+    right: 0,
+    bottom: 2,
+  },
+  smallText: {
+    ...font.body,
+  },
+  text: {
+    ...font.subtitle2,
+  },
+  textColor1: {
+    color: utilColors.dark,
+  },
+  textColor3: {
+    color: theme.textBold,
+  },
+  textColor4: {
+    color: utilColors.lightGrey,
+  },
+  whiteBg: {
+    backgroundColor: utilColors.white,
+  },
+});
+
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
 const PaginationComponent = ({
@@ -273,14 +380,89 @@ const PaginationComponent = ({
   </>;
 };
 
+const AwardComponent = ({ awardItem, style, onAwardItemPress = () => {} }) => <>
+  {
+    Object.keys(awardItem).length > 0
+    && <>
+      <TouchableOpacity onPress={() => onAwardItemPress(awardItem)}>
+        <View style={style.awards}>
+          {/* <Image
+            resizeMode='center'
+            source={{
+              uri: awardItem.awardImage,
+            }}
+            style={style.awardImg}
+            defaultSource={award3}
+            /> */}
+          <SvgUri
+            uri={awardItem.awardImage}
+            // style={style.awardImg}
+            width={'60%'}
+            height={'60%'}
+          />
+          <Text style={style.awardName} >
+            <FormattedMessage
+              defaultMessage={'{awardName}'}
+              description={'award name'}
+              values={{
+                awardName: awardItem.awardName,
+              }}
+            />
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </>
+  }
+</>;
+
+const AwardsContainerComponent = ({ awards, style, onAwardItemPress = () => {} }) => <>
+  {
+    awards?.length > 0
+    && <>
+      <View style={style.awardsContainer}>
+        <Text style={style.awardsTitleText}>
+          <FormattedMessage
+            defaultMessage={'Earned Awards'}
+            description={'Earned Awards'}
+          />
+        </Text>
+        <View style={style.awardsRow}>
+          {
+            awards.map((award, index) => <AwardComponent
+              awardItem={award}
+              style={style}
+              key={index}
+              onAwardItemPress={onAwardItemPress}
+            />)
+          }
+        </View>
+      </View>
+    </>
+  }
+</>;
+
+const MemoizedAwardsContainer = memo(AwardsContainerComponent, compareProps);
+
 const GameLeaderBoard = ({ route, navigation }) => {
   const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const { params: { game } } = route;
   const { font, theme } = React.useContext(ThemeContext);
   const style = getStyle(theme.screenGameLeaderBoard, font, theme.utilColors, theme.gradients);
+  const bsStyle = getBottomSheetStyles(
+    theme.screenGameLeaderBoard, font, theme.utilColors, theme.gradients,
+  );
   const isPageMounted = React.useRef(true);
   const progressInputRef = React.useRef(null);
+  const bottomSheetRef = React.useRef(null);
   const gameProgressValue = new Animated.Value(0);
+
+  const [localState, setLocalState] = useState({
+    awardInfoToView: false,
+  });
+
+  const {
+    awardInfoToView,
+  } = localState;
 
   const {
     state, getLeaderBoardData,
@@ -289,10 +471,41 @@ const GameLeaderBoard = ({ route, navigation }) => {
     status, gameProgress, leaderboardData, userData, paginationDetails,
   } = state;
 
+  const { awardsByGameState } = useAwardsByGame(
+    { initializeData: true, isPageMounted, game },
+  );
+  const { awards } = awardsByGameState;
+
   const memoizedProgress = React.useMemo(() => gameProgress, [gameProgress]);
   const memoizedUserData = React.useMemo(() => userData, [userData]);
   const memoizedLeaderboardData = React.useMemo(() => leaderboardData, [leaderboardData]);
   const memoizedPaginationDetails = React.useMemo(() => paginationDetails, [paginationDetails]);
+
+  const loaderRef = useRef(null);
+
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
+  const showBottomSheet = () => {
+    if (bottomSheetRef.current) {
+      bottomSheetRef.current.open();
+    }
+  };
+
+  const hideBottomSheet = () => {
+    if (bottomSheetRef.current) {
+      bottomSheetRef.current.close();
+    }
+  };
 
   const totalPage = Math.ceil(
     memoizedPaginationDetails.overallCount / memoizedPaginationDetails.countPerPage,
@@ -304,23 +517,33 @@ const GameLeaderBoard = ({ route, navigation }) => {
   const nextBtnPressHandler = () => {
     if (disableNextBtn) return;
     if (memoizedPaginationDetails.page === totalPage) return;
+    showLoader();
     getLeaderBoardData({ pageNumber: memoizedPaginationDetails.page + 1, game })
       .then(() => {
+        hideLoader();
       });
   };
 
   const prevBtnPressHandler = () => {
     if (disablePrevBtn) return;
     if (memoizedPaginationDetails.page === 1) return;
+    showLoader();
     getLeaderBoardData({
       pageNumber: memoizedPaginationDetails.page - 1,
       game,
     })
       .then(() => {
+        hideLoader();
       });
   };
 
-  const handlePagination = (page) => getLeaderBoardData({ pageNumber: page, game });
+  const handlePagination = (page) => {
+    showLoader();
+    getLeaderBoardData({ pageNumber: page, game })
+      .then(() => {
+        hideLoader();
+      });
+  };
 
   const isUserInCurrentPage = (currentPage, userUniqueUrl) => {
     if (currentPage && userUniqueUrl) {
@@ -330,20 +553,40 @@ const GameLeaderBoard = ({ route, navigation }) => {
     return true;
   };
 
-  const awards = [
-    {
-      img: award1,
-      title: 'Most Coins',
+  const bottomSheetStyles = {
+    draggableIcon: style.bottomSheetDragButton,
+    container: {
+      backgroundColor: '#00000000',
+      // paddingHorizontal: 12,
     },
-    {
-      img: award2,
-      title: 'Most Time Spent',
-    },
-    {
-      img: award3,
-      title: 'Most Levels Completed',
-    },
-  ];
+  };
+
+  const setToViewAward = (awardObj) => {
+    setLocalState((prev) => ({
+      ...prev,
+      awardInfoToView: awardObj,
+    }));
+  };
+
+  const onAwardItemPress = (pressedAwardDetails) => {
+    setToViewAward(pressedAwardDetails);
+    showBottomSheet();
+  };
+
+  // const awards = [
+  //   {
+  //     img: award1,
+  //     title: 'Most Coins',
+  //   },
+  //   {
+  //     img: award2,
+  //     title: 'Most Time Spent',
+  //   },
+  //   {
+  //     img: award3,
+  //     title: 'Most Levels Completed',
+  //   },
+  // ];
 
   React.useEffect(() => {
     if (memoizedProgress) {
@@ -366,11 +609,17 @@ const GameLeaderBoard = ({ route, navigation }) => {
 
   React.useEffect(() => {
     startTimeTrack(`${game}-leaderboard`);
-    getLeaderBoardData({ pageNumber: 1, game });
+    showLoader();
+    getLeaderBoardData({ pageNumber: 1, game })
+      .then(() => {
+        hideLoader();
+      });
 
     return () => {
       isPageMounted.current = false;
       stopTimeTrack(`${game}-leaderboard`);
+      hideLoader();
+      hideBottomSheet();
     };
   }, []);
 
@@ -393,6 +642,7 @@ const GameLeaderBoard = ({ route, navigation }) => {
                   totalValue={memoizedProgress?.totalQuestions || 0}
                   startAnim={Boolean(memoizedProgress)}
                   strokeWidth={16}
+                  progressBg={theme.screenGameLeaderBoard.progressBg}
                 >
                 </CircleGradientProgressBar>
               </View>
@@ -459,8 +709,8 @@ const GameLeaderBoard = ({ route, navigation }) => {
           </Text>
         </View>
       </View>
-      {
-        awards.length
+      {/* {
+        awards?.length > 0
         && <>
           <View style={style.awardsContainer}>
             <Text style={style.awardsTitleText}>
@@ -471,14 +721,22 @@ const GameLeaderBoard = ({ route, navigation }) => {
             </Text>
             <View style={style.awardsRow}>
               {
-                awards.map((award, index) => <View key={index} style={style.awards}>
-                  <Image resizeMode='center' source={award.img} style={style.awardImg} />
-                </View>)
+                awards.map((award, index) => <AwardComponent
+                  awardItem={award}
+                  style={style}
+                  key={index}
+                />)
               }
             </View>
           </View>
         </>
-      }
+      } */}
+      <MemoizedAwardsContainer
+        awards={awards}
+        style={style}
+        onAwardItemPress={onAwardItemPress}
+      />
+
       <View style={style.leaderboardContainer}>
         <View style={style.leaderBoardRow}>
           <View style={style.leaderBoardCellStart}>
@@ -508,10 +766,10 @@ const GameLeaderBoard = ({ route, navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
-        {
+        {/* {
           state.uiData.loading
           && <Loader />
-        }
+        } */}
         {
           (status === 'success' && !(state.uiData.loading))
           && memoizedLeaderboardData
@@ -669,6 +927,80 @@ const GameLeaderBoard = ({ route, navigation }) => {
         </TouchableOpacity>
       </View>
     </View>
+    <BottomSheet
+      ref={bottomSheetRef}
+      customStyles={bottomSheetStyles}
+      contentPanEnabled={true}
+    >
+      <View style={[bsStyle.whiteBg, bsStyle.bottomSheetBody]}>
+        {/* <Image
+          source={{ uri: awardInfoToView.awardImage }}
+          style={style.bottomSheetAwardImage} /> */}
+        <View style={bsStyle.bottomSheetAwardImage}>
+          <SvgUri
+            uri={awardInfoToView.awardImage}
+            width={'100%'}
+            height={'100%'}
+          />
+        </View>
+        <View style={bsStyle.awardTitleWithSubtitleSection}>
+          <Text style={[bsStyle.textColor1, bsStyle.text]}>
+            <FormattedMessage defaultMessage={'{awardName}'} description='award name' values={{
+              awardName: awardInfoToView.awardName,
+            }} />
+          </Text>
+          <Text style={[bsStyle.textColor4, bsStyle.smallText, bsStyle.bottomSheetAwardSubtitle]}>
+            <FormattedMessage defaultMessage={'{awardDescription}'} description='award description' values={{
+              awardDescription: awardInfoToView.awardDescription,
+            }} />
+          </Text>
+        </View>
+        <View style={bsStyle.nextAchievementSection}>
+          {
+            awardInfoToView.progressDetails && !!awardInfoToView.progressDetails.progress
+            && <View style={bsStyle.currentStreakContainer}>
+              <Text style={[bsStyle.textColor3, bsStyle.smallText]}>
+                <FormattedMessage defaultMessage={'{currentProgress} {unit}'} description='current progress' values={{
+                  currentProgress: awardInfoToView.progressDetails.progress,
+                  unit: awardInfoToView.progressDetails.progress > 1 ? `${awardInfoToView.progressDetails.unit}s`
+                    : awardInfoToView.progressDetails.unit,
+                }} />
+              </Text>
+            </View>
+          }
+          {
+            awardInfoToView.progressDetails && !!awardInfoToView.progressDetails.nextAwardIn
+            && <View style={bsStyle.nextAchievementIndicator}>
+              <Text style={[bsStyle.textColor4, bsStyle.smallText]}>
+                <FormattedMessage defaultMessage={'Next award:'} description='next award label' />
+              </Text>
+              <Text style={[bsStyle.textColor3, bsStyle.smallText]}>
+                <FormattedMessage
+                  defaultMessage={'{nextAwardIn} {unit}'}
+                  description='next award in'
+                  values={{
+                    nextAwardIn: ` ${awardInfoToView.progressDetails.nextAwardIn}`,
+                    unit: awardInfoToView.progressDetails.nextAwardIn > 1 ? `${awardInfoToView.progressDetails.unit}s`
+                      : awardInfoToView.progressDetails.unit,
+                  }}
+                />
+              </Text>
+            </View>
+          }
+        </View>
+        <AwardProgressBar
+          style={bsStyle}
+          contentContainerStyle={bsStyle.bottomSheetProgressBar}
+          progressDetailsObj={awardInfoToView.progressableAward
+            ? awardInfoToView.progressDetails
+            : false}
+        />
+      </View>
+    </BottomSheet>
+    <Loader
+      route={'GameLeaderBoard'}
+      ref={loaderRef}
+    />
   </>;
 };
 

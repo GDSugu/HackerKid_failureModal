@@ -23,6 +23,7 @@ import zombieLandGameCover from '../../images/games/zombie-game-cover.png';
 import webkataHtmlGameCover from '../../images/games/webkata-html-game-cover.png';
 import webkataCssGameCover from '../../images/games/webkata-css-game-cover.png';
 import webkataJsGameCover from '../../images/games/webkata-js-game-cover.png';
+import codingPirateGameCover from '../../images/games/code-pirate-cover.png';
 import LevelIcon from '../../images/games/level-icon.svg';
 import PlayBtnIcon from '../../images/games/play-game-icon.svg';
 import { useDashboard } from '../../hooks/pages/dashboard';
@@ -31,6 +32,7 @@ import { AuthContext } from '../../hooks/pages/root';
 import BottomSheet from '../components/BottomSheet';
 import { useLeaderBoard } from '../../hooks/pages/leaderboard';
 import CircleGradientProgressBar from '../components/CircleGradientProgressBar';
+import Loader from '../components/Loader';
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
@@ -793,31 +795,47 @@ const Games = ({ navigation }) => {
   const { dashBoardData, gameData } = dashBoardState;
   const { leaderboardData, userData: leaderBoardUserData } = leaderBoardState;
   const authContext = useContext(AuthContext);
+  const loaderRef = useRef(null);
+
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
 
   // onRefresh
   const onRefresh = () => {
-    authContext.setAuthState({
-      gamesPageAppData: { refreshing: true },
-    });
+    // authContext.setAuthState({
+    //   gamesPageAppData: { refreshing: true },
+    // });
+    showLoader();
 
     Promise.all([
       getDashboardData({ cached: false }),
     ])
       .then(() => {
-        authContext.setAuthState({
-          gamesPageAppData: {
-            reloadComponent: authContext?.gamesPageAppData?.reloadComponent + 1,
-            refreshing: false,
-          },
-        });
+        hideLoader();
+        // authContext.setAuthState({
+        //   gamesPageAppData: {
+        //     reloadComponent: authContext?.gamesPageAppData?.reloadComponent + 1,
+        //     refreshing: false,
+        //   },
+        // });
       })
       .catch(() => {
         // show snackbar of error
-        authContext.setAuthState({
-          gamesPageAppData: {
-            refreshing: false,
-          },
-        });
+        hideLoader();
+        // authContext.setAuthState({
+        //   gamesPageAppData: {
+        //     refreshing: false,
+        //   },
+        // });
       });
   };
 
@@ -839,7 +857,7 @@ const Games = ({ navigation }) => {
     validSubmissionCount: dashBoardData?.zombieLand?.validSubmissionCount,
     totalLevels: dashBoardData?.zombieLand?.overAllQuestionCount,
     totalEarnedCoins: dashBoardData?.zombieLand?.totalPointsEarned,
-    onPress: () => { },
+    onPress: () => { navigation.navigate('ZombieLandHome'); },
   },
   {
     gameTitle: 'Webkata-HTML',
@@ -876,6 +894,16 @@ const Games = ({ navigation }) => {
     onPress: () => navigation.navigate('WebkataHome', {
       conceptId: 'JS',
     }),
+  },
+  {
+    gameTitle: 'Coding Pirate',
+    gameCoverImage: codingPirateGameCover,
+    currentLevelNumber: dashBoardData?.codekata?.currentQuestionDetails
+      ? dashBoardData?.codekata?.currentQuestionDetails?.virtualId : 0,
+    totalLevels: dashBoardData?.codekata?.overAllQuestionCount,
+    validSubmissionCount: dashBoardData?.codekata?.validSubmissionCount,
+    totalEarnedCoins: dashBoardData?.codekata?.totalPointsEarned,
+    onPress: () => navigation.navigate('Codekata'),
   },
   ];
 
@@ -939,6 +967,7 @@ const Games = ({ navigation }) => {
     return () => {
       isPageMounted.current = false;
       gameProgressValue.removeAllListeners();
+      hideLoader();
     };
   }, []);
 
@@ -947,7 +976,9 @@ const Games = ({ navigation }) => {
       <ScrollView
         style={style.container}
         refreshControl={<RefreshControl
-          refreshing={authContext?.gamesPageAppData?.refreshing} onRefresh={onRefresh} />}>
+          // refreshing={authContext?.gamesPageAppData?.refreshing}
+          refreshing={false}
+          onRefresh={onRefresh} />}>
         <View style={style.pageHeadingWithMoreInfoBtn}>
           <Text style={style.pageHeading}>
             <FormattedMessage defaultMessage={'Games'} description={'games page heading'} />
@@ -1062,6 +1093,10 @@ const Games = ({ navigation }) => {
           }
         </ScrollView>
       </BottomSheet>
+      <Loader
+        route={'Games'}
+        ref={loaderRef}
+      />
     </>
   );
 };

@@ -21,6 +21,9 @@ import starSelectIcon from '../../images/courses/star.png';
 import emptySelectIcon from '../../images/courses/emptyStar.png';
 import HalfStar from '../../images/courses/half-star.svg';
 import { ModuleContainer } from '../components/CourseComponents';
+import Loader from '../components/Loader';
+import { isFeatureEnabled } from '../../web/javascripts/common/framework';
+import { SubscriptionContext } from '../../hooks/pages/root';
 
 const getStyles = (theme) => {
   const cardWidth = Dimensions.get('window').width;
@@ -133,15 +136,15 @@ const StarRating = ({ style, rating }) => {
   for (let index = 0; index < 5; index += 1) {
     if (index < integerPart) {
       starData.push(
-        <View>
-          <Image source={starSelectIcon}/>
+        <View key={index}>
+          <Image source={starSelectIcon} />
         </View>,
       );
     } else if (index === integerPart && decimalPoint > 0.2) {
       starData.push(
-        <View>
+        <View key={index}>
           <View>
-            <Image source={emptySelectIcon}/>
+            <Image source={emptySelectIcon} />
           </View>
           <View style={style.halfStar}>
             <HalfStar />
@@ -150,8 +153,8 @@ const StarRating = ({ style, rating }) => {
       );
     } else {
       starData.push(
-        <View>
-          <Image source={emptySelectIcon}/>
+        <View key={index}>
+          <Image source={emptySelectIcon} />
         </View>,
       );
     }
@@ -171,98 +174,118 @@ const VideoPlayerPage = ({ navigation, route }) => {
     number,
   };
 
+  const loaderRef = useRef(null);
+
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
   const [rating, setRating] = useState(1);
   const [ratingVisible, setModalVisible] = useState(false);
   const { videoData, timeActivity, submitRating } = useVideos({ isPageMounted, urlData });
+  const { subscriptionData } = React.useContext(SubscriptionContext);
   const { currentQuestion, watchNext } = videoData;
+  const [lockedWatchNext, setLockedWatchNext] = useState(false);
   const source = `https://d11kzy43d5zaui.cloudfront.net${currentQuestion.videoLink}`;
   const [isPaused, setIsPaused] = useState(true);
   const [handel, setHandel] = useState(false);
   const onSubmitRating = () => {
-    submitRating(rating);
+    showLoader();
+    submitRating(rating)
+      .then(() => {
+        hideLoader();
+      });
     setModalVisible(false);
   };
 
   const RatingModal = () => <Modal
-  visible={ratingVisible}
-  transparent
-  ref={ratingRef}>
+    visible={ratingVisible}
+    transparent
+    ref={ratingRef}>
     <View style={style.ratingModalContent}>
-    <View
-    style={style.selectRating}>
-      <TouchableOpacity
-      onPress={() => setRating(1)}>
-      <View>
-        {rating > 0 ? <Image
-        style={style.starSize}
-        source={starSelectIcon}/> : <Image
-        style={style.starSize}
-        source={emptySelectIcon}/>}
+      <View
+        style={style.selectRating}>
+        <TouchableOpacity
+          onPress={() => setRating(1)}>
+          <View>
+            {rating > 0 ? <Image
+              style={style.starSize}
+              source={starSelectIcon} /> : <Image
+              style={style.starSize}
+              source={emptySelectIcon} />}
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setRating(2)}>
+          <View>
+            {rating > 1 ? <Image
+              style={style.starSize}
+              source={starSelectIcon} /> : <Image
+              style={style.starSize}
+              source={emptySelectIcon} />}
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setRating(3)}>
+          <View>
+            {rating > 2 ? <Image
+              style={style.starSize}
+              source={starSelectIcon} /> : <Image
+              style={style.starSize}
+              source={emptySelectIcon} />}
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setRating(4)}>
+          <View>
+            {rating > 3 ? <Image
+              style={style.starSize}
+              source={starSelectIcon} /> : <Image
+              style={style.starSize}
+              source={emptySelectIcon} />}
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setRating(5)}>
+          <View>
+            {rating > 4 ? <Image
+              style={style.starSize}
+              source={starSelectIcon} /> : <Image
+              style={style.starSize}
+              source={emptySelectIcon} />}
+          </View>
+        </TouchableOpacity>
       </View>
-      </TouchableOpacity>
-      <TouchableOpacity
-      onPress={() => setRating(2)}>
-      <View>
-        {rating > 1 ? <Image
-        style={style.starSize}
-        source={starSelectIcon}/> : <Image
-        style={style.starSize}
-        source={emptySelectIcon}/>}
+      <View style={style.btnCont}>
+        <TouchableOpacity
+          onPress={() => setModalVisible(false)}>
+          <View style={style.cancelBtnCont}>
+            <Text style={style.cancelBtn}>
+              <FormattedMessage
+                defaultMessage={'Cancel'}
+                description={'Cancel Button'} />
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={onSubmitRating}>
+          <View style={style.saveBtnCont}>
+            <Text style={style.saveBtn}>
+              <FormattedMessage
+                defaultMessage={'Submit'}
+                description={'Submit Button'} />
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
-      </TouchableOpacity>
-      <TouchableOpacity
-      onPress={() => setRating(3)}>
-      <View>
-        {rating > 2 ? <Image
-        style={style.starSize}
-        source={starSelectIcon}/> : <Image
-        style={style.starSize}
-        source={emptySelectIcon}/>}
-      </View>
-      </TouchableOpacity>
-      <TouchableOpacity
-      onPress={() => setRating(4)}>
-      <View>
-        {rating > 3 ? <Image
-        style={style.starSize}
-        source={starSelectIcon}/> : <Image
-        style={style.starSize}
-        source={emptySelectIcon}/>}
-      </View>
-      </TouchableOpacity>
-      <TouchableOpacity
-      onPress={() => setRating(5)}>
-      <View>
-        {rating > 4 ? <Image
-        style={style.starSize}
-        source={starSelectIcon}/> : <Image
-        style={style.starSize}
-        source={emptySelectIcon}/>}
-      </View>
-      </TouchableOpacity>
-    </View>
-    <View style={style.btnCont}>
-      <TouchableOpacity
-      onPress={() => setModalVisible(false)}>
-      <View style={style.cancelBtnCont}>
-        <Text style={style.cancelBtn}>
-          <FormattedMessage
-          defaultMessage={'Cancel'}
-          description={'Cancel Button'}/>
-        </Text>
-      </View>
-      </TouchableOpacity>
-      <TouchableOpacity
-      onPress={onSubmitRating}>
-      <View style={style.saveBtnCont}>
-        <Text style={style.saveBtn}>
-          <FormattedMessage
-          defaultMessage={'Submit'}
-          description={'Submit Button'}/>
-        </Text>
-      </View>
-      </TouchableOpacity>
-    </View>
     </View>
   </Modal>;
 
@@ -303,7 +326,7 @@ const VideoPlayerPage = ({ navigation, route }) => {
             'Discard changes?',
             'You have unsaved changes. Are you sure to discard them and leave the screen?',
             [
-              { text: "Don't leave", style: 'cancel', onPress: () => {} },
+              { text: "Don't leave", style: 'cancel', onPress: () => { } },
               {
                 text: 'Discard',
                 style: 'destructive',
@@ -318,6 +341,25 @@ const VideoPlayerPage = ({ navigation, route }) => {
     },
     [navigation, currentQuestion, presentTime, handel],
   );
+
+  const coursesLimit = (category) => {
+    const coursesEnabled = isFeatureEnabled(subscriptionData, 'courses', category);
+    return coursesEnabled.enabled && coursesEnabled[category];
+  };
+
+  useEffect(() => {
+    if (watchNext) {
+      const moduleLimit = coursesLimit(watchNext.moduleId);
+      if (moduleLimit) {
+        watchNext.videos.forEach((video, videoIndex) => {
+          if (video.number > moduleLimit) {
+            watchNext.videos[videoIndex].locked = true;
+          }
+        });
+      }
+      setLockedWatchNext(watchNext);
+    }
+  }, [watchNext]);
 
   const onSeek = (value) => {
     const { seekTime } = value;
@@ -475,15 +517,21 @@ const VideoPlayerPage = ({ navigation, route }) => {
             </View>
           </View>
         </View>
-        <ModuleContainer
-            data={watchNext}
+        {
+          (lockedWatchNext && lockedWatchNext.videos.length > 0) && <ModuleContainer
+            data={lockedWatchNext}
             navigator={navigation}
             customModuleName={'Watch Next'}
           />
+        }
       </ScrollView>}
     </View>
-      <RatingModal/>
-</>
+    <RatingModal />
+      <Loader
+        ref={loaderRef}
+        route={'Video'}
+      />
+  </>
   );
 };
 
