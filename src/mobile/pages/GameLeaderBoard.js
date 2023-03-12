@@ -538,11 +538,13 @@ const GameLeaderBoard = ({ route, navigation }) => {
   };
 
   const handlePagination = (page) => {
-    showLoader();
-    getLeaderBoardData({ pageNumber: page, game })
-      .then(() => {
-        hideLoader();
-      });
+    if (paginationDetails.page !== page) {
+      showLoader();
+      getLeaderBoardData({ pageNumber: page, game })
+        .then(() => {
+          hideLoader();
+        });
+    }
   };
 
   const isUserInCurrentPage = (currentPage, userUniqueUrl) => {
