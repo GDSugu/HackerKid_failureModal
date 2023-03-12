@@ -19,6 +19,7 @@ import Icon from '../common/Icons';
 import { Red, Yellow } from '../../colors/_colors';
 import TurtleSuccessModal from '../components/Modals/TurtleSuccessModal';
 import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import Loader from '../components/Loader';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -300,6 +301,20 @@ const TurtleMain = ({ navigation }) => {
     },
   } = turtleQuestionState;
 
+  const loaderRef = useRef(null);
+
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
   const setGameScreen = (screen) => {
     setTurtleQuestionState((prevState) => ({
       ...prevState,
@@ -360,6 +375,8 @@ const TurtleMain = ({ navigation }) => {
 
     return () => {
       stopTimeTrack('turtle-main');
+      isPageMounted.current = false;
+      hideLoader();
     };
   }, []);
 
@@ -378,6 +395,8 @@ const TurtleMain = ({ navigation }) => {
             fetchTurtleQuestion,
             getNextQuestion,
             submitQuestion: submitTurtle,
+            showLoader,
+            hideLoader,
           }}>
             <GameNavigator
               currentScreen={{
@@ -401,6 +420,10 @@ const TurtleMain = ({ navigation }) => {
         </View>
       </ImageBackground>
     </View>
+    <Loader
+      route={'TurtleHome'}
+      ref={loaderRef}
+    />
   </>;
 };
 

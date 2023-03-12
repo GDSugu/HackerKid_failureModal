@@ -18,6 +18,7 @@ const VerifyOtpFormStep = ({
   parentStateObj, setParentStateObj, setBackBtnStateObj, formErrorStateObj,
   setFormErrorObj, navigation, otpRequestType, recaptchav2Ref, recaptchav3Ref,
   secondaryActionButtons = false, additionalStyles = false,
+  showLoader = () => {}, hideLoader = () => {},
 }) => {
   // hooks
   const {
@@ -126,9 +127,11 @@ const VerifyOtpFormStep = ({
   };
 
   const sendOtpRequestWithToken = (token, recaptchaVersion) => {
+    showLoader();
     sendOtpRequest(parentStateObj.phoneNumber,
       parentStateObj.countryCode,
       otpRequestType, token, recaptchaVersion).then((response) => {
+      hideLoader();
       const data = JSON.parse(response);
 
       if (data.status === 'success') {
@@ -222,8 +225,10 @@ const VerifyOtpFormStep = ({
   };
 
   const verifyOtpRequestWithToken = (token, recaptchaVersion) => {
+    showLoader();
     verifyOtpRequest(parentStateObj.phoneNumber,
       parentStateObj.countryCode, token, recaptchaVersion).then((response) => {
+      hideLoader();
       const data = JSON.parse(response);
       const { status, message } = data;
 

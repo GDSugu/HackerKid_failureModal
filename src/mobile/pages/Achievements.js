@@ -23,6 +23,7 @@ import hkcoin from '../../images/common/hkcoin.png';
 import ShareModal from '../components/Modals/ShareModal';
 import { useAwards } from '../../hooks/pages/awards';
 import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import Loader from '../components/Loader';
 
 const getStyles = (theme, utilColors, font, gradients) => StyleSheet.create({
   container: {
@@ -331,6 +332,7 @@ const Achievements = ({ navigation }) => {
   const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
 
   const isPageMounted = useRef(true);
+  const loaderRef = useRef(null);
   // hooks
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [toShareCertificateId, setToShareCertificateId] = useState(false);
@@ -360,21 +362,42 @@ const Achievements = ({ navigation }) => {
   const screenTheme = theme.screenAchievements;
   const style = getStyles(screenTheme, theme.utilColors, font, theme.gradients);
 
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
   // side effects
   React.useEffect(() => {
     if (uniqueUrl) {
-      getProfileData({ cached: false });
+      showLoader();
+      getProfileData({ cached: false })
+        .then(() => {
+          hideLoader();
+        });
     }
   }, [uniqueUrl]);
 
   React.useEffect(() => {
-    getAwards({ cached: false, limit: 5, sort: 'posted' });
+    showLoader();
+    getAwards({ cached: false, limit: 5, sort: 'posted' })
+      .then(() => {
+        hideLoader();
+      });
     // timeTrack('achievements');
     startTimeTrack('achievements');
 
     return () => {
       isPageMounted.current = false;
       stopTimeTrack('achievements');
+      hideLoader();
     };
   }, []);
 
@@ -451,6 +474,10 @@ const Achievements = ({ navigation }) => {
       </View> */}
     </ScrollView>
     <ShareModal open={shareModalOpen} setOpen={setShareModalOpen} shareLink={`www.hackerkid.org/certificate/view/${toShareCertificateId}`} />
+    <Loader
+      route={'Achievements'}
+      ref={loaderRef}
+    />
   </>
   );
 };

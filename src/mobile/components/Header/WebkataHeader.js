@@ -59,7 +59,7 @@ const getStyles = (utilColors) => StyleSheet.create({
 });
 
 const WebkataHeader = ({
-  showLevelIndicator = true, webkataQuestionState, setShowLevels,
+  closeLeaderBoard = false, game = 'webkata', showLevelIndicator = true, webkataQuestionState, setShowLevels,
 }) => {
   const navigation = useNavigation();
   const { theme: { utilColors } } = React.useContext(ThemeContext);
@@ -102,7 +102,13 @@ const WebkataHeader = ({
         animation='fadeInRight'
         style={[style.flexWidth, style.flexHorizontal, style.flexEnd]}
       >
-        <TouchableOpacity onPress={() => { }}>
+        <TouchableOpacity onPress={() => {
+          if (!closeLeaderBoard) {
+            navigation.navigate('GameLeaderBoard', { game });
+          } else {
+            navigation.goBack();
+          }
+        }}>
           <IconLeaderboard />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>

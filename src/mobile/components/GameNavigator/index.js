@@ -356,14 +356,10 @@ const GameNavigator = ({
           name={item.name}
           component={item.component}
           listeners={{
-            blur: (e) => {
-              console.log('blur', item?.id, e);
-              console.log(item?.id, ' - stop - ', Date.now());
+            blur: () => {
               stopTimeTrack(item?.id);
             },
-            focus: (e) => {
-              console.log('focus ', item?.id, e);
-              console.log(item?.id, ' - start - ', Date.now());
+            focus: () => {
               startTimeTrack(item?.id);
             },
           }}

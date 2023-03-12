@@ -34,6 +34,7 @@ import codekata from '../../images/dashboard/dashboard-codePirate.png';
 import achievementImage from '../../images/dashboard/dashboard-achievements.png';
 import CircleGradientProgressBar from '../components/CircleGradientProgressBar';
 import AuthErrorModal from '../components/Modals/AuthErrorModal';
+import Loader from '../components/Loader';
 import { AuthContext } from '../../hooks/pages/root';
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
@@ -256,6 +257,9 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => Styl
   },
   svgGradient: {
     color: gradients.blue,
+  },
+  svgProgressBackground: {
+    color: additionalThemes.screenGames.progressBg,
   },
   challengeCardList: {
     marginLeft: 8,
@@ -572,7 +576,8 @@ const GameBlock = ({ style, navigation, gameData }) => {
               progressValue={ gameData ? gameData.gameProgress : 0}
               totalValue={ gameData ? gameData.totalGames : 100}
               startAnim={Boolean(gameData)}
-               >
+              progressBg={style.svgProgressBackground.color}
+            >
               <View style={style.bodyCardContentTitle}>
                 <AnimatedTextInput
                   ref={gameDataTextRef}
@@ -1003,9 +1008,9 @@ const Index = ({ route, navigation }) => {
 
   const isPageMounted = React.useRef(true);
   const [reloadComponent, setReloadComponent] = React.useState(0);
-  const [refreshing, setRefreshing] = React.useState(false);
   const authContext = React.useContext(AuthContext);
   const bottomSheetRef = useRef();
+  const loaderRef = useRef(null);
 
   const {
     state: dashboardState,
@@ -1017,8 +1022,21 @@ const Index = ({ route, navigation }) => {
     static: { getChallenges },
   } = useGetChallenges({ isPageMounted });
 
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
   const onRefresh = () => {
-    setRefreshing(true);
+    // setRefreshing(true);
+    showLoader();
     Promise.all([
       getSessionData({ cached: false }),
       getDashboardData({ cached: false }),
@@ -1026,11 +1044,11 @@ const Index = ({ route, navigation }) => {
     ])
       .then(() => {
         setReloadComponent(reloadComponent + 1);
-        setRefreshing(false);
+        hideLoader();
       })
       .catch(() => {
         // show snackbar of error
-        setRefreshing(false);
+        hideLoader();
       });
   };
 
@@ -1091,6 +1109,7 @@ const Index = ({ route, navigation }) => {
 
     return () => {
       isPageMounted.current = false;
+      hideLoader();
     };
   }, []);
 
@@ -1111,7 +1130,8 @@ const Index = ({ route, navigation }) => {
             style={style.container}
             refreshControl={
               <RefreshControl
-                refreshing={refreshing}
+                // refreshing={refreshing}
+                refreshing={false}
                 onRefresh={onRefresh}
               />
             }>
@@ -1198,6 +1218,10 @@ const Index = ({ route, navigation }) => {
           </BottomSheet>
         </>
       }
+      <Loader
+        ref={loaderRef}
+        route={'Home'}
+      />
     </>
   );
 };
