@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import WebView from 'react-native-webview';
-import md5 from 'crypto-js/md5';
 import { useSharedZLWebView } from '../../shared/zombieLand/zlwebview';
 import ThemeContext from '../components/theme';
 import webViewElement from '../components/WebView';
@@ -26,10 +25,10 @@ const ZombieLandEditor = () => {
   const webViewRef = React.useRef(null);
   let webViewString = '';
 
-  const {
-    ctxState: zlState,
-    ctxSetState: zlStatic,
-  } = zlContext;
+  // const {
+  //   ctxState: zlState,
+  //   ctxSetState: zlStatic,
+  // } = zlContext;
 
   const {
     BodyContent, ScriptContent, styleString, scriptToInject,

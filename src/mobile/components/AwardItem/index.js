@@ -1,8 +1,9 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
-  TouchableOpacity, View, Image, Text,
+  TouchableOpacity, View, Text,
 } from 'react-native';
+import { SvgUri } from 'react-native-svg';
 import AwardProgressBar from '../AwardProgressBar';
 
 const AwardItem = ({
@@ -15,10 +16,17 @@ const AwardItem = ({
       currentAwardDetails && <TouchableOpacity onPress={() => onPress(currentAwardDetails)}>
         <View style={style.awardItem}>
           <View style={style.awardImgContainer}>
-            <Image
+            {/* <Image
               source={{ uri: currentAwardDetails.awardImage }}
               style={style.awardImg}
-            />
+            /> */}
+            <View style={style.awardImg}>
+              <SvgUri
+                uri={currentAwardDetails.awardImage}
+                width={'100%'}
+                height={'100%'}
+              />
+            </View>
           </View>
           <View style={style.container}>
             <Text style={[style.textColor1, style.text]}>
@@ -52,9 +60,14 @@ const AwardItem = ({
         key={idx}>
         <View style={style.awardItem}>
           <View style={style.awardImgContainer}>
-            <Image
+            {/* <Image
               source={{ uri: award.awardImage }}
               style={style.awardImg}
+            /> */}
+            <SvgUri
+              uri={award.awardImage}
+              width={'100%'}
+              height={'100%'}
             />
           </View>
           <View style={style.container}>
