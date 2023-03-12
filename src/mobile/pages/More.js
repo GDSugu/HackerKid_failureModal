@@ -12,12 +12,15 @@ import ThemeContext from '../components/theme';
 import Icon from '../common/Icons';
 import collectionIllustration from '../../images/more/collectibles.png';
 import ideIllustration from '../../images/more/ide.png';
-import moreFriendsIllustration from '../../images/more/moreFriends.png';
+// import moreFriendsIllustration from '../../images/more/moreFriends.png';
 import { LightBlue } from '../../colors/_colors';
 import { useLogout } from '../../hooks/pages/auth';
 import LogoutModal from '../components/Modals/LogoutModal';
-import { AuthContext, SubscriptionContext } from '../../hooks/pages/root';
-import { isFeatureEnabled } from '../../web/javascripts/common/framework';
+import {
+  AuthContext,
+  // SubscriptionContext,
+} from '../../hooks/pages/root';
+// import { isFeatureEnabled } from '../../web/javascripts/common/framework';
 
 const getStyles = (theme, font, utils) => StyleSheet.create({
   container: {
@@ -135,12 +138,12 @@ const More = ({ navigation }) => {
   const authContext = useContext(AuthContext);
   const { logout } = useLogout();
 
-  const { subscriptionData } = useContext(SubscriptionContext);
+  // const { subscriptionData } = useContext(SubscriptionContext);
 
-  const isClubEnabled = () => {
-    const clubEnabled = isFeatureEnabled(subscriptionData, 'clubs');
-    return clubEnabled && clubEnabled.enabled;
-  };
+  // const isClubEnabled = () => {
+  //   const clubEnabled = isFeatureEnabled(subscriptionData, 'clubs');
+  //   return clubEnabled && clubEnabled.enabled;
+  // };
 
   const handlelogoutBtn = () => {
     authContext.setAuthState({
@@ -209,7 +212,7 @@ const More = ({ navigation }) => {
             </ImageBackground>
           </View>
 
-          {
+          {/* {
             isClubEnabled() ? <View style={style.moreCard}>
               <ImageBackground
                 source={moreFriendsIllustration}
@@ -289,7 +292,7 @@ const More = ({ navigation }) => {
                   </View>
                 </ImageBackground>
               </View>
-          }
+          } */}
 
           <View style={style.moreCard}>
             <ImageBackground
