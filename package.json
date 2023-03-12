@@ -82,6 +82,7 @@
     "html2canvas": "^1.4.1",
     "intl": "^1.2.5",
     "intl-tel-input": "^17.0.3",
+    "jbox": "^1.3.3",
     "jquery": "^3.5.1",
     "jquery-ui-bundle": "^1.12.1-migrate",
     "jsc-android": "^250230.2.1",

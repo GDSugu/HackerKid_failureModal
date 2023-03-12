@@ -18,6 +18,10 @@
     "defaultMessage": "{step}",
     "description": "take challenge instruction"
   },
+  "+c+in9": {
+    "defaultMessage": "Activate Subscription",
+    "description": "operation title"
+  },
   "+f2V2I": {
     "defaultMessage": "{currentProgress} {unit}",
     "description": "current progress"
@@ -56,6 +60,10 @@
   "/1qRjR": {
     "defaultMessage": "shrey Daga's Father",
     "description": "Happy Learning Starts Here... title"
+  },
+  "/3gG1X": {
+    "defaultMessage": "Achieved Badge",
+    "description": "achieved badge"
   },
   "/Gy7qZ": {
     "defaultMessage": "Level {levelNumber}",
@@ -515,6 +523,10 @@
     "defaultMessage": "{message}",
     "description": "error message"
   },
+  "71kplp": {
+    "defaultMessage": "something went wrong",
+    "description": "error message"
+  },
   "74UjvK": {
     "defaultMessage": "Login to existing Account",
     "description": "Login to existing account button"
@@ -684,10 +696,6 @@
   "9gqH2W": {
     "defaultMessage": "Login",
     "description": "Login button"
-  },
-  "9ppS9d": {
-    "defaultMessage": "Go to Class",
-    "description": "class navigation button"
   },
   "A/XB4F": {
     "defaultMessage": "Student's Name",
@@ -876,6 +884,10 @@
   "CvKgI9": {
     "defaultMessage": "Aithih",
     "description": "Happy Learning Starts Here... title"
+  },
+  "CyuuLf": {
+    "defaultMessage": "Phone",
+    "description": "phone title"
   },
   "Czb4m8": {
     "defaultMessage": "Challenges",
@@ -1296,6 +1308,10 @@
     "defaultMessage": "{title}",
     "description": "club feed title"
   },
+  "KwtdsL": {
+    "defaultMessage": "Activate",
+    "description": "activate btn"
+  },
   "KzGZsa": {
     "defaultMessage": "No Certificates Found",
     "description": "no certificates"
@@ -1307,10 +1323,6 @@
   "L5HYii": {
     "defaultMessage": "FREE",
     "description": "FREE price"
-  },
-  "L6IwvI": {
-    "defaultMessage": "Buy premium to unlock school clubs feature",
-    "description": "sheet card subtitle"
   },
   "L7Gsfw": {
     "defaultMessage": "Coding Pirate",
@@ -1546,10 +1558,6 @@
     "defaultMessage": "Register",
     "description": "Register"
   },
-  "OXM3Ji": {
-    "defaultMessage": "View Club",
-    "description": "Club show button"
-  },
   "OYOyLO": {
     "defaultMessage": "(*Excluding GST)",
     "description": "Unlock more modal (*Excluding GST)"
@@ -1607,6 +1615,10 @@
   "PSx95N": {
     "defaultMessage": "Home",
     "description": "Home card heading"
+  },
+  "PV0XXJ": {
+    "defaultMessage": "View All Awards",
+    "description": "View awards button"
   },
   "PaprdD": {
     "defaultMessage": "No challenges published yet !",
@@ -2563,10 +2575,6 @@
     "defaultMessage": "{navigationText}",
     "description": "navigational text"
   },
-  "iebFqD": {
-    "defaultMessage": "{clubName}",
-    "description": "Club card heading text"
-  },
   "iohPi0": {
     "defaultMessage": "Continue Watching",
     "description": "Continue Watching"
@@ -2582,6 +2590,10 @@
   "jACivV": {
     "defaultMessage": "{name}",
     "description": "user name"
+  },
+  "jCDRHF": {
+    "defaultMessage": "Try again",
+    "description": "try again button"
   },
   "jDzDCp": {
     "defaultMessage": "Leaderboard",
@@ -2625,6 +2637,10 @@
   "jromX8": {
     "defaultMessage": "reach@hackerkid.org",
     "description": "Email Button Text"
+  },
+  "jtD1T3": {
+    "defaultMessage": "View",
+    "description": "More card button text"
   },
   "jzHe4a": {
     "defaultMessage": "{timeSpent}",
@@ -2839,10 +2855,6 @@
   "nlYt8p": {
     "defaultMessage": "View more",
     "description": "View More Bottomsheet Btn"
-  },
-  "nn7wTW": {
-    "defaultMessage": "Most active members",
-    "description": "sheet card subtitle"
   },
   "nnfaF3": {
     "defaultMessage": "{selectedLanguageDisplayName}",
@@ -3292,6 +3304,10 @@
     "defaultMessage": "Create",
     "description": "create challenge button"
   },
+  "vVpBl2": {
+    "defaultMessage": "{coins} coins",
+    "description": "user coins"
+  },
   "vWe94i": {
     "defaultMessage": "More Info"
   },
@@ -3358,6 +3374,10 @@
   "x26Xe0": {
     "defaultMessage": "For Classes 5 & 6",
     "description": "For Classes 5 & 6 title"
+  },
+  "x2v0yK": {
+    "defaultMessage": "Payment Id",
+    "description": "payment id title"
   },
   "x4kCc4": {
     "defaultMessage": "Unlimited",
@@ -3490,10 +3510,6 @@
   "zMmp/q": {
     "defaultMessage": "Practise... or play with the new code editor",
     "description": "more card subtitle"
-  },
-  "zROcjU": {
-    "defaultMessage": "Coming soon",
-    "description": "More card button text"
   },
   "zXjEvn": {
     "defaultMessage": "sleep",

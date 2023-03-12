@@ -23,6 +23,7 @@ import API from '../../../env';
 import KeepCodeChangesModal from '../components/Modals/KeepCodeChangesModal';
 import LanguageSelector from '../components/LanguageSelector';
 import CodeEditor from '../components/CodeEditor';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 // constants
 const defaultLanguageValue = 'python3';
@@ -377,6 +378,7 @@ const updateCodeEditorJSString = (mode, code) => {
 
 // IDE component
 const Ide = ({ navigation, route }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   // hooks
   const isPageMounted = useRef(true);
   const codeEditorWebViewRef = useRef(null);
@@ -559,99 +561,106 @@ const Ide = ({ navigation, route }) => {
     setLocalState,
   };
 
-  useEffect(() => () => {
-    ideInteracted = undefined;
-    isPageMounted.current = false;
+  useEffect(() => {
+    startTimeTrack('ide');
+
+    return () => {
+      ideInteracted = undefined;
+      isPageMounted.current = false;
+      stopTimeTrack('ide');
+    };
   }, []);
 
   return (
-    <View style={style.container}>
-      <Tab.Navigator
-        screenOptions={{ headerShown: false }}
-        backBehavior={'none'}
-        tabBar={(props) => <TabBar
-          {...props}
-          font={font}
-          screenTheme={screenTheme}
-          style={style}
-          utilColors={theme.utilColors}
-          onRunCodePress={onRunCodePress}
-        />}>
-        <Tab.Screen name='Code'>
-          {
-            () => <>
-              <View style={style.languageSelectorWithBackBtn}>
-                <View style={style.backBtnWithPageTitle}>
-                  <TouchableOpacity style={style.backBtn} onPress={() => navigation.navigate('More')}>
-                    <Icon
-                      name={'arrow-left'}
-                      type='FontAwesome'
-                      size={15}
-                      color={style.textColor3.color}
+    <>
+      <View style={style.container}>
+        <Tab.Navigator
+          screenOptions={{ headerShown: false }}
+          backBehavior={'none'}
+          tabBar={(props) => <TabBar
+            {...props}
+            font={font}
+            screenTheme={screenTheme}
+            style={style}
+            utilColors={theme.utilColors}
+            onRunCodePress={onRunCodePress}
+          />}>
+          <Tab.Screen name='Code'>
+            {
+              () => <>
+                <View style={style.languageSelectorWithBackBtn}>
+                  <View style={style.backBtnWithPageTitle}>
+                    <TouchableOpacity style={style.backBtn} onPress={() => navigation.navigate('More')}>
+                      <Icon
+                        name={'arrow-left'}
+                        type='FontAwesome'
+                        size={15}
+                        color={style.textColor3.color}
+                      />
+                    </TouchableOpacity>
+                    <Text style={[style.pageTitle, style.textColor3]}>
+                      <FormattedMessage defaultMessage={'IDE'} description='page title' />
+                    </Text>
+                  </View>
+                  <View style={style.languageSelectorContainer}>
+                    <LanguageSelector
+                      style={style}
+                      value={ideState.selectedLanguageValue}
+                      setValue={(getValueFn) => {
+                        const value = getValueFn();
+                        setIdeState((prev) => ({
+                          ...prev,
+                          selectedLanguageValue: value,
+                        }));
+                      }}
+                      open={localState.languageSelectorOpen}
+                      setOpen={() => {
+                        setLocalState((prev) => (
+                          prev.inputDrawerOpen
+                            ? {
+                              ...prev,
+                              inputDrawerOpen: false,
+                              languageSelectorOpen: !prev.languageSelectorOpen,
+                            }
+                            : {
+                              ...prev,
+                              languageSelectorOpen: !prev.languageSelectorOpen,
+                            }));
+                      }}
+                      onload={onLanguageSelectorLoad}
+                      onChangeValue={onLanguageSelectorChange}
                     />
-                  </TouchableOpacity>
-                  <Text style={[style.pageTitle, style.textColor3]}>
-                    <FormattedMessage defaultMessage={'IDE'} description='page title' />
-                  </Text>
+                  </View>
                 </View>
-                <View style={style.languageSelectorContainer}>
-                  <LanguageSelector
-                    style={style}
-                    value={ideState.selectedLanguageValue}
-                    setValue={(getValueFn) => {
-                      const value = getValueFn();
-                      setIdeState((prev) => ({
-                        ...prev,
-                        selectedLanguageValue: value,
-                      }));
-                    }}
-                    open={localState.languageSelectorOpen}
-                    setOpen={() => {
-                      setLocalState((prev) => (
-                        prev.inputDrawerOpen
-                          ? {
-                            ...prev,
-                            inputDrawerOpen: false,
-                            languageSelectorOpen: !prev.languageSelectorOpen,
-                          }
-                          : {
-                            ...prev,
-                            languageSelectorOpen: !prev.languageSelectorOpen,
-                          }));
-                    }}
-                    onload={onLanguageSelectorLoad}
-                    onChangeValue={onLanguageSelectorChange}
-                  />
-                </View>
-              </View>
-              <CodeEditor
-                codeEditorWebViewRef={codeEditorWebViewRef}
-                style={style}
-                styleStringForDocumentInsideWebView={styleStringForDocumentInsideWebView}
-                onload={onCodeEditorLoad}
-                onCodeEditorChanged={onCodeEditorChanged}
-                onCodeEditorClicked={onCodeEditorClicked}
-                onCodeEditorUpdateFinish={onCodeEditorUpdateFinish}
-                showLoader={true}
-                loadingFunction={returnCodeEditorLoader}
-              />
-              <InputDrawer {...commonProps} />
-            </>
-          }
-        </Tab.Screen>
-        <Tab.Screen name='Console'>
-          {
-            () => <Console {...commonProps} />
-          }
-        </Tab.Screen>
-      </Tab.Navigator>
-      <Recaptchav3 ref={recaptchav3Ref} siteKey={API.RECAPCHAV3SITEKEY} domainURL={'https://localhost/'} />
-      <KeepCodeChangesModal
-        visible={localState.keepCodeChangesModalOpen}
-        route={route}
-        keepChangesHandler={onKeepCodeChanges}
-        doNotKeepChangesHandler={onDoNotKeepCodeChanges} />
-    </View>
+                <CodeEditor
+                  codeEditorWebViewRef={codeEditorWebViewRef}
+                  style={style}
+                  styleStringForDocumentInsideWebView={styleStringForDocumentInsideWebView}
+                  onload={onCodeEditorLoad}
+                  onCodeEditorChanged={onCodeEditorChanged}
+                  onCodeEditorClicked={onCodeEditorClicked}
+                  onCodeEditorUpdateFinish={onCodeEditorUpdateFinish}
+                  showLoader={true}
+                  loadingFunction={returnCodeEditorLoader}
+                />
+                <InputDrawer {...commonProps} />
+              </>
+            }
+          </Tab.Screen>
+          <Tab.Screen name='Console'>
+            {
+              () => <Console {...commonProps} />
+            }
+          </Tab.Screen>
+        </Tab.Navigator>
+        <Recaptchav3 ref={recaptchav3Ref} siteKey={API.RECAPCHAV3SITEKEY} domainURL={'https://localhost/'} />
+        <KeepCodeChangesModal
+          visible={localState.keepCodeChangesModalOpen}
+          route={route}
+          keepChangesHandler={onKeepCodeChanges}
+          doNotKeepChangesHandler={onDoNotKeepCodeChanges} />
+      </View>
+    </>
   );
 };
 

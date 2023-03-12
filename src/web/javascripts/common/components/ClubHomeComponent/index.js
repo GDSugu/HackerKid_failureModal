@@ -404,7 +404,11 @@ const CreateClubStepContainer = () => {
     clubName, country, state, members, clubImage,
   } = clubData;
 
+  const hideHelpMessages = () => $('.help-message').hide();
+  const showHelpMessages = (selector) => $(`${selector}.help-message`).show();
+
   const checkFields = () => {
+    hideHelpMessages();
     let resStatus = false;
     clubManagerData.isFieldValidated = true;
     Object.keys(clubManagerData.validatedResult)
@@ -440,20 +444,31 @@ const CreateClubStepContainer = () => {
     let result = false;
     const clubAction = 'create';
     if (type === 'locationInput') {
-      fetchLocation({ locationType: 'state', country: value });
-      result = editFields({ fieldName, value, clubAction });
+      fetchLocation({
+        locationType: 'state',
+        country: value.trim(),
+      });
+      result = editFields({
+        fieldName,
+        value: value.trim(),
+        clubAction,
+      });
     } else if (type === 'memberInput') {
       membersAutoCompleteRef.current.setLoadingState(true);
       debounce(() => {
-        if (value?.length) {
-          autoCompleteUser({ userName: value });
+        if (value?.trim()?.length) {
+          autoCompleteUser({ userName: value.trim() });
         } else {
           membersAutoCompleteRef.current.setLoadingState(false);
         }
       }, 1000);
       result = true;
     } else {
-      result = editFields({ fieldName, value, clubAction });
+      result = editFields({
+        fieldName,
+        value: value.trim(),
+        clubAction,
+      });
     }
     clubManagerData.validatedResult[fieldName] = result;
     checkFields();
@@ -517,6 +532,11 @@ const CreateClubStepContainer = () => {
             if (clubManagerData.currentStep === 2) {
               nextBtnRef.current.style.visibility = 'hidden';
             }
+          } else if (res.status === 'error') {
+            if (res.message === 'Club name already exists') {
+              $('#clubNameHelpMessage').text(res.message);
+              showHelpMessages('#clubNameHelpMessage');
+            }
           }
         });
     }
@@ -567,6 +587,7 @@ const CreateClubStepContainer = () => {
   React.useEffect(() => {
     hideStep(clubStepRef[1]);
     hideStep(clubStepRef[2]);
+    hideHelpMessages();
     getClubDraft()
       .then((res) => {
         if (res !== 'access_denied' && res.status === 'success') {
@@ -615,6 +636,7 @@ const CreateClubStepContainer = () => {
                   value={clubName || ''}
                   onChange={(e) => { handleInput({ fieldName: 'clubName', value: e.target.value }); }}
                   />
+                <small id="clubNameHelpMessage" className='help-message form-text text-danger'></small>
               </div>
               <div className="form-group">
                 <label htmlFor="country">
@@ -700,7 +722,12 @@ const CreateClubStepContainer = () => {
                       !(item?.isNotHKUser)
                       && <div className="user-image">
                         <Img
-                          src={item?.profileImage?.toString()}
+                          // src={item?.profileImage?.toString()}
+                          src={
+                            item?.profileImage
+                              ? item?.profileImage?.toString()
+                              : '/profile/default_user.png'
+                          }
                           alt={`${item?.name?.toString()} profile image`}
                           className="autocomplete-profileImage"
                           fallback='/profile/default_user.png'
@@ -954,7 +981,11 @@ const CreateClubMobContent = () => {
     clubName, country, state, members, clubImage,
   } = clubData;
 
+  const hideHelpMessages = () => $('.help-message').hide();
+  const showHelpMessages = (selector) => $(`${selector}.help-message`).show();
+
   const checkFields = () => {
+    hideHelpMessages();
     let resStatus = false;
     clubManagerData.isFieldValidated = true;
     Object.keys(clubManagerData.validatedResult)
@@ -979,24 +1010,41 @@ const CreateClubMobContent = () => {
       });
   };
 
-  const handleInput = ({ fieldName, value, type = 'clubInput' }) => {
+  const handleInput = ({
+    fieldName,
+    value,
+    type = 'clubInput',
+  }) => {
     let result = false;
     const clubAction = 'create';
     if (type === 'locationInput') {
-      fetchLocation({ locationType: 'state', country: value });
-      result = editFields({ fieldName, value, clubAction });
+      fetchLocation({
+        locationType: 'state',
+        country: value.trim(),
+      });
+      result = editFields({
+        fieldName,
+        value: value.trim(),
+        clubAction,
+      });
     } else if (type === 'memberInput') {
       membersAutoCompleteRef.current.setLoadingState(true);
       debounce(() => {
         if (value?.length) {
-          autoCompleteUser({ userName: value });
+          autoCompleteUser({
+            userName: value.trim(),
+          });
         } else {
           membersAutoCompleteRef.current.setLoadingState(false);
         }
       }, 1000);
       result = true;
     } else {
-      result = editFields({ fieldName, value, clubAction });
+      result = editFields({
+        fieldName,
+        value: value.trim(),
+        clubAction,
+      });
     }
     clubManagerData.validatedResult[fieldName] = result;
     checkFields();
@@ -1040,14 +1088,24 @@ const CreateClubMobContent = () => {
   const handleCreateClubBtn = () => {
     createClub({})
       .then((res) => {
-        if (res !== 'access_denied' && res.status !== 'error') {
+        // if (res !== 'access_denied' && res.status !== 'error') {
+        //   $('.create-club-mob-modal').modal('hide');
+        //   window.location.reload();
+        // }
+        if (res !== 'access_denied' && res.status === 'success') {
           $('.create-club-mob-modal').modal('hide');
           window.location.reload();
+        } else if (res.status === 'error') {
+          if (res.message === 'Club name already exists') {
+            $('#clubNameHelpMessage').text(res.message);
+            showHelpMessages('#clubNameHelpMessage');
+          }
         }
       });
   };
 
   React.useEffect(() => {
+    hideHelpMessages();
     getClubDraft()
       .then((res) => {
         if (res !== 'access_denied' && res.status === 'success') {
@@ -1123,6 +1181,7 @@ const CreateClubMobContent = () => {
           value={clubName}
           onChange={(e) => { handleInput({ fieldName: 'clubName', value: e.target.value }); }}
           />
+        <small id="clubNameHelpMessage" className='help-message form-text text-danger'></small>
       </div>
       <div className="form-group">
         <label htmlFor="country">
@@ -1664,10 +1723,10 @@ const ClubHomeComponent = (
 
   const { clubList } = clubDashboardResponse;
   const handleClubAction = (club) => {
-    pathNavigator(`clubs/${club.clubId}/`);
+    if (club && club?.clubId) {
+      pathNavigator(`clubs/${club.clubId}/`);
+    }
   };
-
-  console.log('club home page');
 
   React.useEffect(() => () => {
     isPageMounted.current = false;

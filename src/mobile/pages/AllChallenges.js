@@ -15,6 +15,8 @@ import { useGetChallenges } from '../../hooks/pages/challenges';
 import ChallengesList from '../components/ChallengesList/ChallengesList';
 import Paginator from '../components/Paginator';
 import { AuthContext } from '../../hooks/pages/root';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import Loader from '../components/Loader';
 
 const debounce = (fn, delay) => {
   let timerId;
@@ -142,6 +144,7 @@ const SortDropDown = ({
 
 const AllChallenges = ({ navigation }) => {
   const isPageMounted = useRef(true);
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
 
   // hooks
   const [localState, setLocalState] = useState({
@@ -158,6 +161,7 @@ const AllChallenges = ({ navigation }) => {
   } = useGetChallenges({ isPageMounted });
 
   const authContext = useContext(AuthContext);
+  const loaderRef = useRef(null);
 
   const {
     // status: challengesStatus,
@@ -177,12 +181,24 @@ const AllChallenges = ({ navigation }) => {
   } = localState;
 
   const [reloadComponent, setReloadComponent] = React.useState(0);
-  const [refreshing, setRefreshing] = React.useState(false);
+  // const [refreshing, setRefreshing] = React.useState(false);
 
   // styles
   const { theme, font } = useContext(ThemeContext);
   const pageTheme = theme.screenAllChallenges;
   const style = getStyles(pageTheme, theme.utilColors, font);
+
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
 
   // methods
   const onSearchBoxChange = (value) => {
@@ -230,7 +246,8 @@ const AllChallenges = ({ navigation }) => {
   };
 
   const onRefresh = () => {
-    setRefreshing(true);
+    // setRefreshing(true);
+    showLoader();
     const filterObj = {
       sort,
       search,
@@ -238,11 +255,12 @@ const AllChallenges = ({ navigation }) => {
     };
     getChallenges({ filterObj, cached: false }).then(() => {
       setReloadComponent(reloadComponent + 1);
-      setRefreshing(false);
+      // setRefreshing(false);
+      hideLoader();
     })
       .catch(() => {
         // show snackbar of error
-        setRefreshing(false);
+        hideLoader();
       });
   };
 
@@ -252,11 +270,16 @@ const AllChallenges = ({ navigation }) => {
       search,
       page: search ? searchPage : page,
     };
-    getChallenges({ filterObj, cached: false });
+    showLoader();
+    getChallenges({ filterObj, cached: false })
+      .then(() => {
+        hideLoader();
+      });
   }, [sort, search, page, searchPage]);
 
   useEffect(() => {
     loginCheck();
+    startTimeTrack('allchallenges');
     onRefresh();
 
     navigation?.setOptions({
@@ -269,6 +292,8 @@ const AllChallenges = ({ navigation }) => {
 
     return () => {
       isPageMounted.current = false;
+      stopTimeTrack('allchallenges');
+      hideLoader();
     };
   }, []);
 
@@ -286,7 +311,7 @@ const AllChallenges = ({ navigation }) => {
         style={style.container}
         refreshControl={
           <RefreshControl
-            refreshing={refreshing}
+            refreshing={false}
             onRefresh={onRefresh}
           />
         }
@@ -335,6 +360,10 @@ const AllChallenges = ({ navigation }) => {
           onPrevBtnPress={onPrevBtnPress}
       />
       }
+      <Loader
+        route={'AllChallenges'}
+        ref={loaderRef}
+      />
     </>
   );
 };

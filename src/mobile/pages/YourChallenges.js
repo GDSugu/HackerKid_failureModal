@@ -14,6 +14,7 @@ import ChallengesList from '../components/ChallengesList/ChallengesList';
 import Paginator from '../components/Paginator';
 import Icon from '../common/Icons';
 import { AuthContext } from '../../hooks/pages/root';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
@@ -44,6 +45,8 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
 });
 
 const YourChallenges = ({ navigation, route }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
+
   const isPageMounted = useRef(true);
 
   // hooks
@@ -130,11 +133,13 @@ const YourChallenges = ({ navigation, route }) => {
   }, [myChallenges, page]);
 
   useEffect(() => {
+    startTimeTrack('your-challenges');
     loginCheck();
     onRefresh();
 
     return () => {
       isPageMounted.current = false;
+      stopTimeTrack('your-challenges');
     };
   }, []);
 

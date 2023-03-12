@@ -29,6 +29,8 @@ import WebkataSuccessModal from '../components/Modals/WebkataSuccessModal';
 import TestCasePassedIcon from '../../images/webkata/test-case-passed-icon.svg';
 import TestCaseFailedIcon from '../../images/webkata/test-case-failed-icon.svg';
 import { debounce1 } from '../../hooks/common/utlis';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import Loader from '../components/Loader';
 
 // tab navigators
 const CodeEditorsTab = createMaterialTopTabNavigator();
@@ -708,7 +710,9 @@ const LivePreview = ({
   </View>;
 };
 
-const WebkataMain = ({ route }) => {
+const WebkataMain = ({ route, navigation }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
+
   // refs
   const isPageMounted = useRef(true);
   const codeEditorsRefs = useRef({});
@@ -775,6 +779,20 @@ const WebkataMain = ({ route }) => {
   const memorizedWebkataQuestionState = React.useMemo(() => webkataQuestionState,
     [webkataQuestionState]);
 
+  const loaderRef = useRef(null);
+
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
   if (conceptId === 'HTML') {
     gameBg = webkataHtmlBg;
   } else if (conceptId === 'CSS') {
@@ -828,7 +846,11 @@ const WebkataMain = ({ route }) => {
   };
 
   const onLevelBtnPress = (virtualIdPressed) => {
-    fetchWebkataQuestion(conceptId, virtualIdPressed);
+    showLoader();
+    fetchWebkataQuestion(conceptId, virtualIdPressed)
+      .then(() => {
+        hideLoader();
+      });
   };
 
   const onRanUnitTests = (unitTestsResult) => {
@@ -845,10 +867,15 @@ const WebkataMain = ({ route }) => {
       file.code = codeState[name];
     });
 
+    showLoader();
     submitWebkataQuestion(questionId,
       testResult,
       currentQuestionSetup,
-      questionObject.conceptId);
+      questionObject.conceptId)
+      .then((resp) => {
+        console.log('sub ', resp);
+        hideLoader();
+      });
   };
 
   const onMessageFromLivePreviewWebView = (msg) => {
@@ -872,8 +899,15 @@ const WebkataMain = ({ route }) => {
   const onRunBtnPress = () => {
     const { testCases } = questionObject;
     const toInjectScript = invokeRunProccessJSString(testCases);
-
     livePreviewWebViewRef.current.injectJavaScript(toInjectScript);
+  };
+
+  const getNextQuestion = () => {
+    showLoader();
+    fetchWebkataQuestion(conceptId, id + 1)
+      .then(() => {
+        hideLoader();
+      });
   };
 
   // sideEffects
@@ -944,6 +978,16 @@ const WebkataMain = ({ route }) => {
       BackHandler.removeEventListener('hardwareBackPress', closeLevelPage);
     };
   }, [localState.showLevels]);
+
+  useEffect(() => {
+    startTimeTrack('webkata-main');
+
+    return () => {
+      stopTimeTrack('webkata-main');
+      isPageMounted.current = false;
+      hideLoader();
+    };
+  }, []);
 
   return <>
     <View style={style.container}>
@@ -1079,7 +1123,11 @@ const WebkataMain = ({ route }) => {
       visible={localState.successModalOpen}
       closeModal={() => setLocalState((prev) => ({ ...prev, successModalOpen: false }))}
       modalBodyText={pointsDetails?.submissionStatus?.replace('{{name}}', profileDetails.name)}
-      getNextQuestion={() => fetchWebkataQuestion(conceptId, id + 1)}
+      getNextQuestion={getNextQuestion}
+    />
+    <Loader
+      ref={loaderRef}
+      route={'WebkataHome'}
     />
   </>;
 };

@@ -31,12 +31,16 @@ import hkcoin from '../../images/common/hkcoin.png';
 import turtle from '../../images/dashboard/dashboard-turtle.png';
 import zombieLand from '../../images/dashboard/dashboard-zombieLand.png';
 import codekata from '../../images/dashboard/dashboard-codePirate.png';
-// import achievementImage from '../../images/dashboard/dashboard-achievements.png';
+import achievementImage from '../../images/dashboard/dashboard-achievements.png';
 import CircleGradientProgressBar from '../components/CircleGradientProgressBar';
 import AuthErrorModal from '../components/Modals/AuthErrorModal';
-import { AuthContext, SubscriptionContext } from '../../hooks/pages/root';
-import { isFeatureEnabled } from '../../web/javascripts/common/framework';
-import LockSvg from '../../images/common/feature-lock.svg';
+import Loader from '../components/Loader';
+import {
+  AuthContext,
+  // SubscriptionContext,
+} from '../../hooks/pages/root';
+// import { isFeatureEnabled } from '../../web/javascripts/common/framework';
+// import LockSvg from '../../images/common/feature-lock.svg';
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
@@ -259,6 +263,9 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => Styl
   svgGradient: {
     color: gradients.blue,
   },
+  svgProgressBackground: {
+    color: additionalThemes.screenGames.progressBg,
+  },
   challengeCardList: {
     marginLeft: 8,
   },
@@ -392,37 +399,43 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => Styl
 });
 
 const DashboardBlock = ({
-  avatar, bottomSheetRef, dashboardUserData, gameData, style, reloadComponent,
+  avatar, bottomSheetRef, dashboardUserData, sessionData, style, reloadComponent,
 }) => <>
     <View style={style.bodyCard} key={reloadComponent}>
       <View style={style.heroCard}>
-        <View style={style.heroCardContent}>
-          <View style={style.heroCardBlock1}>
-            <ImageBackground
-              style={style.heroCardImageBg}
-              source={dashboardHero}
-              resizeMode='stretch'
-              resizeMethod='scale'
-            >
-              <Image
-                source={dashboardUserData && dashboardUserData.profileImage ? {
-                  uri: dashboardUserData.profileImage.toString(),
-                } : avatar}
-                style={style.heroCardImage}
-                defaultSource={avatar}
-              />
-            </ImageBackground>
-          </View>
-          <View style={style.heroCardBlock2}>
-            <View style={style.heroBlockDataContainer}>
-              <View style={[style.bodyCardContentTitle, style.heroCardDataBlock]}>
-                <Image source={hkcoin} style={style.heroCardDataIcon} />
-                <Text
-                  style={style.heroCardText}>
-                  {gameData ? gameData.totalPointsEarned : 0} coins
-                </Text>
-              </View>
-              {/* <View style={[style.bodyCardContentTitle, style.heroCardDataBlock]}>
+          <View style={style.heroCardContent}>
+            <View style={style.heroCardBlock1}>
+              <ImageBackground
+                style={style.heroCardImageBg}
+                source={dashboardHero}
+                resizeMode='stretch'
+                resizeMethod='scale'
+              >
+                <Image
+                  source={dashboardUserData && dashboardUserData.profileImage ? {
+                    uri: dashboardUserData.profileImage.toString(),
+                  } : avatar }
+                  style={style.heroCardImage}
+                  defaultSource={avatar}
+                />
+              </ImageBackground>
+            </View>
+            <View style={style.heroCardBlock2}>
+              <View style={style.heroBlockDataContainer}>
+                <View style={[style.bodyCardContentTitle, style.heroCardDataBlock]}>
+                  <Image source={hkcoin} style={style.heroCardDataIcon} />
+                  <Text
+                    style={style.heroCardText}>
+                      <FormattedMessage
+                        defaultMessage={'{coins} coins'}
+                        description={'user coins'}
+                        values={{
+                          coins: sessionData?.pointsEarned || 0,
+                        }}
+                      />
+                  </Text>
+                </View>
+                {/* <View style={[style.bodyCardContentTitle, style.heroCardDataBlock]}>
                   <Image source={xpPoints} style={style.heroCardDataIcon} />
                   <Text style={style.heroCardText}>{12345} xp</Text>
                 </View> */}
@@ -568,6 +581,7 @@ const GameBlock = ({ style, navigation, gameData }) => {
               progressValue={gameData ? gameData.gameProgress : 0}
               totalValue={gameData ? gameData.totalGames : 100}
               startAnim={Boolean(gameData)}
+              progressBg={style.svgProgressBackground.color}
             >
               <View style={style.bodyCardContentTitle}>
                 <AnimatedTextInput
@@ -759,147 +773,148 @@ const GameBlock = ({ style, navigation, gameData }) => {
 //   </>;
 // };
 
-// const AchievementCard = ({ navigation, style }) => <>
-//   <View style={style.sheetAchievementCard}>
-//     <View style={style.sheetAchievementHeader}>
-//       <View style={[style.bodyCardContentTitle, style.heroCardDataBlock, style.marginRight24]}>
-//         <Image source={hkcoin} style={style.heroCardDataIcon} />
-//         <Text style={style.heroCardText}>{12345} coins</Text>
-//       </View>
-//       <View style={[style.bodyCardContentTitle, style.heroCardDataBlock]}>
-//         <Image source={xpPoints} style={style.heroCardDataIcon} />
-//         <Text style={style.heroCardText}>{12345} xp</Text>
-//       </View>
-//       <View style={style.sheetCardBodyRow1}></View>
-//     </View>
-//     <View style={style.sheetAchievementCardContent}>
-//       <View style={style.sheetCardHeroContent}>
-//         <View>
-//           <Image
-//             source={achievementImage}
-//             style={style.sheetCardHeroImage}
-//           />
-//           <Text style={style.sheetCardBodyTextBold}>
-//             <FormattedMessage
-//               defaultMessage='Achieved Badge'
-//               description='achieved badge'
-//             />
-//           </Text>
-//         </View>
-//       </View>
-//       <TouchableOpacity
-//         onPress={() => navigation.navigate('Achievement')}
-//         style={[style.sheetCardButton, style.sheetAchievementBtn]}
-//       >
-//         <Text style={style.sheetCardButtonText}>
-//           <FormattedMessage
-//             defaultMessage='View All Awards'
-//             description='View awards button'
-//           />
-//         </Text>
-//       </TouchableOpacity>
-//     </View>
-//   </View>
-// </>;
-
-const ClubCard = ({
-  clubData, navigation, style, bottomSheetRef, enabled,
+const AchievementCard = ({
+  achievementHandler = () => {},
+  sessionData = {}, style,
 }) => <>
-    <View style={style.sheetCard}>
-      <View style={style.sheetCardHeading}>
-        <Text style={[style.sheetCardHeadingText, style.sheetClubHeadingText]}>
+  <View style={style.sheetAchievementCard}>
+    <View style={style.sheetAchievementHeader}>
+      <View style={[style.bodyCardContentTitle, style.heroCardDataBlock, style.marginRight24]}>
+        <Image source={hkcoin} style={style.heroCardDataIcon} />
+        <Text style={style.heroCardText}>
           <FormattedMessage
-            defaultMessage={'{clubName}'}
-            description={'Club card heading text'}
+            defaultMessage={'{coins} coins'}
+            description={'user coins'}
             values={{
-              clubName: clubData?.clubName,
+              coins: sessionData?.pointsEarned || 0,
             }}
           />
         </Text>
       </View>
-      {
-        enabled ? <View>
-          <View style={style.sheetCardHeroContent}>
-            <Text style={[style.sheetCardTextColor, style.sheetCardHeroTitle]}>
-              <FormattedMessage
-                defaultMessage={'#{rank}'}
-                description={'club rank'}
-                values={{
-                  rank: clubData?.rank,
-                }}
-              />
-            </Text>
-            <Text style={style.sheetCardBodyText}>
-              <FormattedMessage
-                defaultMessage={'rank'}
-                description={'sheet card subtitle'}
-              />
-            </Text>
-          </View>
-          <View style={style.sheetCardBodyContent}>
-            <Text style={style.sheetCardSubtitle}>
-              <FormattedMessage
-                defaultMessage={'Most active members'}
-                description={'sheet card subtitle'}
-              />
-            </Text>
-            {clubData?.topMembers?.length > 0
-              && clubData.topMembers.map((item, index) => (
-                <View style={style.sheetCardBodyRow} key={index}>
-                  <Text style={style.sheetCardBodyText}>
-                    <FormattedMessage
-                      defaultMessage={'{name}'}
-                      description={'member name'}
-                      values={{
-                        name: item.name,
-                      }}
-                    />
-                  </Text>
-                  <Text style={style.sheetCardBodyText}>
-                    <FormattedMessage
-                      defaultMessage={'{points}'}
-                      description={'member points'}
-                      values={{
-                        points: item.points,
-                      }}
-                    />
-                  </Text>
-                </View>))}
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              bottomSheetRef.current.close();
-              navigation.navigate('Club');
+      {/* <View style={[style.bodyCardContentTitle, style.heroCardDataBlock]}>
+        <Image source={xpPoints} style={style.heroCardDataIcon} />
+          <FormattedMessage
+            defaultMessage={'{xp} xp'}
+            description={'user xp'}
+            values={{
+              xp: userData?.xp,
             }}
-            style={[style.sheetCardButton, style.sheetClubBtn]}
-          >
-            <Text style={style.sheetCardButtonText}>
-              <FormattedMessage
-                defaultMessage='View Club'
-                description='Club show button'
-              />
-            </Text>
-          </TouchableOpacity>
-        </View>
-          : <View>
-            <View style={{ alignItems: 'center', paddingVertical: 25 }}>
-              <View style={{ marginBottom: 10 }}>
-                <LockSvg />
-              </View>
-              <Text style={style.sheetCardSubtitle}>
-                <FormattedMessage
-                  defaultMessage={'Buy premium to unlock school clubs feature'}
-                  description={'sheet card subtitle'}
-                />
-              </Text>
-            </View>
-          </View>
-      }
+          />
+      </View> */}
+      <View style={style.sheetCardBodyRow1}></View>
     </View>
-  </>;
+    <View style={style.sheetAchievementCardContent}>
+      <View style={style.sheetCardHeroContent}>
+        <View>
+          <Image
+            source={achievementImage}
+            style={style.sheetCardHeroImage}
+          />
+          <Text style={style.sheetCardBodyTextBold}>
+            <FormattedMessage
+              defaultMessage='Achieved Badge'
+              description='achieved badge'
+            />
+          </Text>
+        </View>
+      </View>
+      <TouchableOpacity
+        onPress={achievementHandler}
+        style={[style.sheetCardButton, style.sheetAchievementBtn]}
+      >
+        <Text style={style.sheetCardButtonText}>
+          <FormattedMessage
+            defaultMessage='View All Awards'
+            description='View awards button'
+          />
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+</>;
+
+// const ClubCard = ({
+//   clubData, navigation, style, bottomSheetRef,
+// }) => <>
+//   <View style={style.sheetCard}>
+//     <View style={style.sheetCardHeading}>
+//       <Text style={[style.sheetCardHeadingText, style.sheetClubHeadingText]}>
+//         <FormattedMessage
+//           defaultMessage={'{clubName}'}
+//           description={'Club card heading text'}
+//           values={{
+//             clubName: clubData?.clubName,
+//           }}
+//         />
+//       </Text>
+//     </View>
+//     <View style={style.sheetCardHeroContent}>
+//       <Text style={[style.sheetCardTextColor, style.sheetCardHeroTitle]}>
+//         <FormattedMessage
+//           defaultMessage={'#{rank}'}
+//           description={'club rank'}
+//           values={{
+//             rank: clubData?.rank,
+//           }}
+//         />
+//       </Text>
+//       <Text style={style.sheetCardBodyText}>
+//         <FormattedMessage
+//           defaultMessage={'rank'}
+//           description={'sheet card subtitle'}
+//         />
+//       </Text>
+//     </View>
+//     <View style={style.sheetCardBodyContent}>
+//       <Text style={style.sheetCardSubtitle}>
+//         <FormattedMessage
+//           defaultMessage={'Most active members'}
+//           description={'sheet card subtitle'}
+//         />
+//       </Text>
+//       { clubData?.topMembers?.length > 0
+//         && clubData.topMembers.map((item, index) => (
+//         <View style={style.sheetCardBodyRow} key={index}>
+//           <Text style={style.sheetCardBodyText}>
+//             <FormattedMessage
+//               defaultMessage={'{name}'}
+//               description={'member name'}
+//               values={{
+//                 name: item.name,
+//               }}
+//             />
+//           </Text>
+//           <Text style={style.sheetCardBodyText}>
+//             <FormattedMessage
+//               defaultMessage={'{points}'}
+//               description={'member points'}
+//               values={{
+//                 points: item.points,
+//               }}
+//             />
+//           </Text>
+//         </View>)) }
+//     </View>
+//     <TouchableOpacity
+//       onPress={() => {
+//         bottomSheetRef.current.close();
+//         navigation.navigate('Club');
+//       }}
+//       style={[style.sheetCardButton, style.sheetClubBtn]}
+//     >
+//       <Text style={style.sheetCardButtonText}>
+//         <FormattedMessage
+//           defaultMessage='View Club'
+//           description='Club show button'
+//         />
+//       </Text>
+//     </TouchableOpacity>
+//   </View>
+// </>;
 
 const LeaderBoardCard = ({
-  leaderboardData, leaderBoardUserData, navigation, style, bottomSheetRef,
+  handleShowLeaderBoard = () => {},
+  leaderboardData, leaderBoardUserData, style,
 }) => <>
     <View style={[style.sheetCard]}>
       <View style={style.sheetCardHeading}>
@@ -951,23 +966,20 @@ const LeaderBoardCard = ({
             </View>
           ))
         }
-      </View>
-      <TouchableOpacity
-        onPress={() => {
-          bottomSheetRef.current.close();
-          navigation.navigate('Leaderboard');
-        }}
-        style={[style.sheetCardButton, style.sheetLeaderboardBtn]}
-      >
-        <Text style={style.sheetCardButtonText}>
-          <FormattedMessage
-            defaultMessage='Show Leaderboard'
-            description='Leaderboard show button'
-          />
-        </Text>
-      </TouchableOpacity>
     </View>
-  </>;
+    <TouchableOpacity
+      onPress={handleShowLeaderBoard}
+      style={[style.sheetCardButton, style.sheetLeaderboardBtn]}
+    >
+      <Text style={style.sheetCardButtonText}>
+        <FormattedMessage
+          defaultMessage='Show Leaderboard'
+          description='Leaderboard show button'
+        />
+      </Text>
+    </TouchableOpacity>
+  </View>
+</>;
 
 const compareProps = (prev, next) => {
   let isEqual = true;
@@ -991,8 +1003,8 @@ const HomeComponent = memo(HomeBlock, compareProps);
 const GameComponent = memo(GameBlock, compareProps);
 // const ChallengeComponent = memo(ChallengeBlock, compareProps);
 const LeaderBoardComponent = memo(LeaderBoardCard, compareProps);
-const ClubComponent = memo(ClubCard, compareProps);
-// const AchievementComponent = memo(AchievementCard, compareProps);
+// const ClubComponent = memo(ClubCard, compareProps);
+const AchievementComponent = memo(AchievementCard, compareProps);
 
 const Index = ({ route, navigation }) => {
   const { font, theme } = useContext(ThemeContext);
@@ -1001,10 +1013,10 @@ const Index = ({ route, navigation }) => {
 
   const isPageMounted = React.useRef(true);
   const [reloadComponent, setReloadComponent] = React.useState(0);
-  const [refreshing, setRefreshing] = React.useState(false);
   const authContext = React.useContext(AuthContext);
   const bottomSheetRef = useRef();
-  const { subscriptionData } = useContext(SubscriptionContext);
+  const loaderRef = useRef(null);
+  // const { subscriptionData } = useContext(SubscriptionContext);
 
   const {
     state: dashboardState,
@@ -1016,8 +1028,21 @@ const Index = ({ route, navigation }) => {
     static: { getChallenges },
   } = useGetChallenges({ isPageMounted });
 
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
   const onRefresh = () => {
-    setRefreshing(true);
+    // setRefreshing(true);
+    showLoader();
     Promise.all([
       getSessionData({ cached: false }),
       getDashboardData({ cached: false }),
@@ -1025,18 +1050,19 @@ const Index = ({ route, navigation }) => {
     ])
       .then(() => {
         setReloadComponent(reloadComponent + 1);
-        setRefreshing(false);
+        hideLoader();
       })
       .catch(() => {
         // show snackbar of error
-        setRefreshing(false);
+        hideLoader();
       });
   };
 
   const {
     status: dashboarStatus,
     userData: dashboardUserData,
-    clubData,
+    // clubData,
+    sessionData,
     gameData,
   } = dashboardState;
 
@@ -1074,16 +1100,27 @@ const Index = ({ route, navigation }) => {
     });
   }
 
-  const isClubEnabled = () => {
-    const clubEnabled = isFeatureEnabled(subscriptionData, 'clubs');
-    return clubEnabled && clubEnabled.enabled;
+  const handleViewAllAwards = () => {
+    bottomSheetRef.current.close();
+    navigation.navigate('AwardsCollectibles');
   };
+
+  const handleShowLeaderBoard = () => {
+    bottomSheetRef.current.close();
+    navigation.navigate('Leaderboard');
+  };
+
+  // const isClubEnabled = () => {
+  //   const clubEnabled = isFeatureEnabled(subscriptionData, 'clubs');
+  //   return clubEnabled && clubEnabled.enabled;
+  // };
 
   React.useEffect(() => {
     onRefresh();
 
     return () => {
       isPageMounted.current = false;
+      hideLoader();
     };
   }, []);
 
@@ -1104,7 +1141,8 @@ const Index = ({ route, navigation }) => {
             style={style.container}
             refreshControl={
               <RefreshControl
-                refreshing={refreshing}
+                // refreshing={refreshing}
+                refreshing={false}
                 onRefresh={onRefresh}
               />
             }>
@@ -1116,7 +1154,8 @@ const Index = ({ route, navigation }) => {
                     avatar={defaultUser}
                     bottomSheetRef={bottomSheetRef}
                     dashboardUserData={dashboardUserData}
-                    gameData={gameData}
+                    // gameData={gameData}
+                    sessionData={sessionData}
                     style={style}
                     navigation={navigation}
                     reloadComponent={reloadComponent}
@@ -1160,8 +1199,14 @@ const Index = ({ route, navigation }) => {
             <ScrollView
               showsVerticalScrollIndicator={false}
             >
-              {/* <AchievementComponent navigation={navigation} style={style} /> */}
-              {
+              <AchievementComponent
+                navigation={navigation}
+                style={style}
+                achievementHandler={handleViewAllAwards}
+                // gameData={gameData}
+                sessionData={sessionData}
+              />
+             {/* {
                 clubData
                 && clubData?.hasClub
                 && <ClubComponent
@@ -1171,20 +1216,25 @@ const Index = ({ route, navigation }) => {
                   bottomSheetRef={bottomSheetRef}
                   enabled={isClubEnabled()}
                 />
-              }
+              } */}
               {
                 leaderboardData
                 && <LeaderBoardComponent
-                  leaderboardData={leaderboardData}
-                  leaderBoardUserData={leaderBoardUserData}
-                  bottomSheetRef={bottomSheetRef}
-                  navigation={navigation}
-                  style={style} />
+                leaderboardData={leaderboardData}
+                leaderBoardUserData={leaderBoardUserData}
+                bottomSheetRef={bottomSheetRef}
+                navigation={navigation}
+                style={style}
+                handleShowLeaderBoard={handleShowLeaderBoard} />
               }
             </ScrollView>
           </BottomSheet>
         </>
       }
+      <Loader
+        ref={loaderRef}
+        route={'Home'}
+      />
     </>
   );
 };

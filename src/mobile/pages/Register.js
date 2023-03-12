@@ -23,6 +23,8 @@ import VerifyOtpFormStep from '../components/VerifyOtpFormStep';
 import getCommonStyles from '../components/commonStyles';
 import Recaptchav3 from '../components/Recaptchav3';
 import Recaptchav2Modal from '../components/Recaptchav2Modal';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import Loader from '../components/Loader';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   ...getCommonStyles(theme, utilColors, font),
@@ -39,7 +41,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
 const RegisterFormStepOne = ({
   style, getStyleArr, theme, font, stateObj, setStateObj, setBackBtnStateObj, handleStateChange,
   errorStateObj, setError, formErrorStateObj, setFormErrorObj, navigation,
-  recaptchav2Ref, recaptchav3Ref,
+  recaptchav2Ref, recaptchav3Ref, showLoader = () => {}, hideLoader = () => {},
 }) => {
   // hooks
   const phoneInput = useRef(null);
@@ -57,7 +59,9 @@ const RegisterFormStepOne = ({
     const countryCode = `+${phoneInput.current.getCallingCode()}`;
     const countryAbbrevation = phoneInput.current.getCountryCode();
 
+    showLoader();
     sendOtpRequest(stateObj.phoneNumber, countryCode, 'send-otp', token, recaptchaVersion).then((response) => {
+      hideLoader();
       const data = JSON.parse(response);
       const { status, message } = data;
 
@@ -298,7 +302,7 @@ const RegisterFormStepThree = ({
   style, getStyleArr, font, theme, stateObj, setStateObj,
   handleStateChange, formErrorStateObj, setFormErrorObj, errorStateObj,
   setError, setBackBtnStateObj, createAccountRequest, navigation,
-  recaptchav2Ref, recaptchav3Ref,
+  recaptchav2Ref, recaptchav3Ref, showLoader = () => {}, hideLoader = () => {},
 }) => {
   // hooks
   const [hidePasswordObj, setHidePasswordObj] = useState({
@@ -341,7 +345,9 @@ const RegisterFormStepThree = ({
   };
 
   const createAccountRequestWithToken = (token, recaptchaVersion) => {
+    showLoader();
     createAccountRequest(token, recaptchaVersion).then((response) => {
+      hideLoader();
       const data = JSON.parse(response);
       const { status, message } = data;
 
@@ -485,6 +491,7 @@ const RegisterFormStepThree = ({
 };
 
 const Register = ({ navigation }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   // hooks
   const { stateObj, setStateObj, createAccountRequest } = useRegister();
   const { stateObj: backBtnStateObj, setStateObj: setBackBtnStateObj } = useBackBtn();
@@ -500,6 +507,8 @@ const Register = ({ navigation }) => {
     formError: false,
     formErrorType: false,
   });
+
+  const loaderRef = useRef(null);
 
   useEffect(() => {
     if (formErrorStateObj.formError) {
@@ -522,6 +531,18 @@ const Register = ({ navigation }) => {
       styleArr.push(additionalStyles);
     }
     return styleArr;
+  };
+
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
   };
 
   // handleStateChange
@@ -578,44 +599,66 @@ const Register = ({ navigation }) => {
   </Text>
   </TouchableOpacity>;
 
+  useEffect(() => {
+    startTimeTrack('register');
+
+    return () => {
+      stopTimeTrack('register');
+    };
+  }, []);
+
   return (
-    <ScrollView style={{ flex: 1 }}>
-      <View style={style.container}>
-        <View style={style.formHeadingAndBackBtn}>
-          <View style={style.backBtn}>
-            <TouchableOpacity style={backBtnStyle} onPress={backBtnStateObj.backFn}>
-              <Icon name={'arrow-left'} type='FontAwesome' size={font.heading6.fontSize} color={ theme.utilColors.dark }/>
-            </TouchableOpacity>
-          </View>
-          <View>
-            <Text style={style.formHeading}>
-              <FormattedMessage defaultMessage={'Create a New Account'} description='Create Account Heading'/>
-            </Text>
-          </View>
-          </View>
-          <View style={style.formSvgContainer}>
-            <RegisterFormSvg/>
-          </View>
-        <Recaptchav3 ref={recaptchav3Ref} siteKey={API.RECAPCHAV3SITEKEY} domainURL={'https://localhost/'} />
-        <Recaptchav2Modal ref={recaptchav2Ref} siteKey={API.RECAPCHAV2SITEKEY} domainURL={'https://localhost/'} />
-        {
-          ((stateObj.formStep === 1)
-            && <RegisterFormStepOne {...commonProps} />)
-          || ((stateObj.formStep === 2)
-            && <VerifyOtpFormStep
-            {...commonProps}
-            parentStateObj={stateObj}
-            setParentStateObj={setStateObj}
-            otpRequestType={'send-otp'}
-            secondaryActionButtons={[loginIntoExistingAccBtn]} />)
-          || ((stateObj.formStep === 3)
-          && <RegisterFormStepThree
-          {...commonProps}
-          createAccountRequest={createAccountRequest}
+    <>
+      <ScrollView style={{ flex: 1 }}>
+        <View style={style.container}>
+          <View style={style.formHeadingAndBackBtn}>
+            <View style={style.backBtn}>
+              <TouchableOpacity style={backBtnStyle} onPress={backBtnStateObj.backFn}>
+                <Icon name={'arrow-left'} type='FontAwesome' size={font.heading6.fontSize} color={ theme.utilColors.dark }/>
+              </TouchableOpacity>
+            </View>
+            <View>
+              <Text style={style.formHeading}>
+                <FormattedMessage defaultMessage={'Create a New Account'} description='Create Account Heading'/>
+              </Text>
+            </View>
+            </View>
+            <View style={style.formSvgContainer}>
+              <RegisterFormSvg/>
+            </View>
+          <Recaptchav3 ref={recaptchav3Ref} siteKey={API.RECAPCHAV3SITEKEY} domainURL={'https://localhost/'} />
+          <Recaptchav2Modal ref={recaptchav2Ref} siteKey={API.RECAPCHAV2SITEKEY} domainURL={'https://localhost/'} />
+          {
+            ((stateObj.formStep === 1)
+              && <RegisterFormStepOne
+                  {...commonProps}
+                  showLoader={showLoader}
+                  hideLoader={hideLoader}
+              />)
+            || ((stateObj.formStep === 2)
+              && <VerifyOtpFormStep
+              {...commonProps}
+              parentStateObj={stateObj}
+              setParentStateObj={setStateObj}
+              otpRequestType={'send-otp'}
+              secondaryActionButtons={[loginIntoExistingAccBtn]}
+              showLoader={showLoader}
+              hideLoader={hideLoader} />)
+            || ((stateObj.formStep === 3)
+            && <RegisterFormStepThree
+              {...commonProps}
+              createAccountRequest={createAccountRequest}
+              showLoader={showLoader}
+              hideLoader={hideLoader}
             />)
-        }
+          }
         </View>
       </ScrollView>
+      <Loader
+        route={'Register'}
+        ref={loaderRef}
+      />
+    </>
   );
 };
 

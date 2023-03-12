@@ -10,6 +10,7 @@ import {
 import { Skeleton } from '@rneui/base';
 import { FormattedMessage } from 'react-intl';
 // import LinearGradient from 'react-native-linear-gradient';
+import { SvgUri } from 'react-native-svg';
 import ThemeContext from '../components/theme';
 import LeaderboardSvg from '../../images/more/leaderboard.svg';
 import GameIcon from '../../images/common/black-joystick.svg';
@@ -22,6 +23,8 @@ import hkcoin from '../../images/common/hkcoin.png';
 // import collectible1 from '../../images/collectibles/collectible1.png';
 import ShareModal from '../components/Modals/ShareModal';
 import { useAwards } from '../../hooks/pages/awards';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import Loader from '../components/Loader';
 
 const getStyles = (theme, utilColors, font, gradients) => StyleSheet.create({
   container: {
@@ -112,18 +115,31 @@ const getStyles = (theme, utilColors, font, gradients) => StyleSheet.create({
     flexWrap: 'wrap',
     marginTop: 16,
     marginBottom: 7,
+    alignContent: 'center',
+    // justifyContent: 'center',
+    marginHorizontal: 'auto',
   },
   awardIcon: {
-    width: 42,
-    height: 32,
+    width: 64,
+    height: 64,
   },
   awardCard: {
-    width: 72,
-    height: 72,
-    paddingVertical: 20,
-    paddingHorizontal: 15,
-    marginRight: 7,
-    marginBottom: 7,
+    width: 108,
+    height: 108,
+    // paddingVertical: 20,
+    // paddingHorizontal: 15,
+    padding: 4,
+    marginRight: 6,
+    marginBottom: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  awardNameText: {
+    ...font.captionBold,
+    color: utilColors.dark,
+    alignItems: 'center',
+    textAlign: 'center',
+    marginTop: 8,
   },
   rowFlexCenter: {
     flexDirection: 'row',
@@ -228,10 +244,24 @@ const AwardsGrid = ({
       awards && awards.map((award, idx) => <View
         key={idx}
         style={[style.awardCard, style.awardsCardBg, style.borderRadius12]}>
-        <Image
+        {/* <Image
           style={style.awardIcon}
           source={{ uri: award.awardImage }}
+        /> */}
+        <SvgUri
+          uri={award.awardImage}
+          width={'60%'}
+          height={'60%'}
         />
+        <Text style={style.awardNameText}>
+          <FormattedMessage
+            defaultMessage={'{awardName}'}
+            description={'award name'}
+            values={{
+              awardName: award.awardName,
+            }}
+          />
+        </Text>
       </View>)
     }
     {
@@ -327,7 +357,10 @@ const Button = ({
   </TouchableOpacity>;
 
 const Achievements = ({ navigation }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
+
   const isPageMounted = useRef(true);
+  const loaderRef = useRef(null);
   // hooks
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [toShareCertificateId, setToShareCertificateId] = useState(false);
@@ -357,18 +390,42 @@ const Achievements = ({ navigation }) => {
   const screenTheme = theme.screenAchievements;
   const style = getStyles(screenTheme, theme.utilColors, font, theme.gradients);
 
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
   // side effects
   React.useEffect(() => {
     if (uniqueUrl) {
-      getProfileData({ cached: false });
+      showLoader();
+      getProfileData({ cached: false })
+        .then(() => {
+          hideLoader();
+        });
     }
   }, [uniqueUrl]);
 
   React.useEffect(() => {
-    getAwards({ cached: false, limit: 5, sort: 'posted' });
+    showLoader();
+    getAwards({ cached: false, limit: 5, sort: 'posted' })
+      .then(() => {
+        hideLoader();
+      });
+    // timeTrack('achievements');
+    startTimeTrack('achievements');
 
     return () => {
       isPageMounted.current = false;
+      stopTimeTrack('achievements');
+      hideLoader();
     };
   }, []);
 
@@ -445,6 +502,10 @@ const Achievements = ({ navigation }) => {
       </View> */}
     </ScrollView>
     <ShareModal open={shareModalOpen} setOpen={setShareModalOpen} shareLink={`www.hackerkid.org/certificate/view/${toShareCertificateId}`} />
+    <Loader
+      route={'Achievements'}
+      ref={loaderRef}
+    />
   </>
   );
 };

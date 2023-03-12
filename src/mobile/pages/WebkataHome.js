@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
   Text,
@@ -16,6 +16,7 @@ import webkataCssBg from '../../images/webkata/webkataCssBgWeb.png';
 import webkataJsBg from '../../images/webkata/webkataJsBgWeb.png';
 import ThemeContext from '../components/theme';
 import playBtnImg from '../../images/games/gamePlay.png';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   container: {
@@ -72,6 +73,8 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
 });
 
 const WebkataHome = ({ navigation, route }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
+
   // route params
   const { params, name: routeName } = route;
   const { conceptId } = params;
@@ -89,6 +92,14 @@ const WebkataHome = ({ navigation, route }) => {
   } else if (conceptId === 'JS') {
     gameBg = webkataJsBg;
   }
+
+  useEffect(() => {
+    startTimeTrack('webkata-home');
+
+    return () => {
+      stopTimeTrack('webkata-home');
+    };
+  }, []);
 
   return <>
     <View style={style.container}>

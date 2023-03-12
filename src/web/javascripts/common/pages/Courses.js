@@ -186,7 +186,10 @@ const CourseDetailsCard = ({ overallProgress, progress, moduleData }) => {
   dummyData.xpEarned = 0;
   dummyData.watchTime = 0;
 
-  const profileLink = window.localStorage.getItem('profileLink');
+  let profileLink = window.localStorage.getItem('profileLink');
+  if (!profileLink || profileLink === '') {
+    profileLink = '../../../../images/profile/default_user.png';
+  }
 
   return (
     <div>

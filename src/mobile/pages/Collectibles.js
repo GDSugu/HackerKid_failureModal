@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
   Text, View, Image, StyleSheet,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 import collectible1 from '../../images/collectibles/collectible1.png';
 import ThemeContext from '../components/theme';
 
@@ -128,8 +129,9 @@ const CollectibleItem = ({
     </View>
   </View>;
 
-const Collectibles = () => {
+const Collectibles = ({ navigation }) => {
   // styles
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const { font, theme } = useContext(ThemeContext);
   const screenTheme = theme.screenCollectibles;
   const style = getStyles(screenTheme, theme.utilColors, font, theme.gradients);
@@ -161,6 +163,14 @@ const Collectibles = () => {
       collectibleType: 'Avatar',
     },
   ];
+
+  useEffect(() => {
+    startTimeTrack('collectibles');
+
+    return () => {
+      stopTimeTrack('collectibles');
+    };
+  }, []);
 
   return <View
     style={[style.whiteBg, style.container, style.mainContainer, style.collectiblesList]}>

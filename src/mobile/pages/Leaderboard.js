@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import {
   View, Text, StyleSheet, TouchableOpacity,
   // TextInput,
@@ -14,6 +14,8 @@ import defaultUser from '../../images/profile/default_user.png';
 // import SearchBoxIcon from '../../images/leaderboard/search-icon-svg.svg';
 import ThemeContext from '../components/theme';
 import { useLeaderBoard } from '../../hooks/pages/leaderboard';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import ScreenLoader from '../components/Loader';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   ...getCommonStyles(theme, utilColors, font),
@@ -115,32 +117,53 @@ const Row = ({ style, children }) => (
   </View>
 );
 
-const Leaderboard = () => {
+const Leaderboard = ({ navigation }) => {
   const isPageMounted = useRef(true);
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   // hooks
   const { state, setLeaderBoardData, getLeaderBoardData } = useLeaderBoard({ isPageMounted });
   const { leaderboardData, userData, paginationDetails } = state;
+  const memoizedLeaderBoardData = useMemo(() => leaderboardData, [leaderboardData]);
   // styles
   const { font, theme } = React.useContext(ThemeContext);
   const screenTheme = theme.screenLeaderboard;
   const style = getStyles(screenTheme, theme.utilColors, font);
   const scrollViewRef = useRef(null);
+  const screenLoaderRef = useRef(null);
 
   const disablePrevBtn = paginationDetails.page <= 1;
   const disableNextBtn = Math.ceil(paginationDetails.overallCount
     / paginationDetails.countPerPage) === paginationDetails.page;
 
   // methods
+
+  const showLoader = () => {
+    if (screenLoaderRef.current) {
+      screenLoaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (screenLoaderRef.current) {
+      screenLoaderRef.current.hide();
+    }
+  };
+
   const nextBtnPressHandler = () => {
+    showLoader();
     getLeaderBoardData({ pageNumber: paginationDetails.page + 1 }).then(() => {
+      hideLoader();
       scrollViewRef.current.scrollTo({ y: 0, animated: true });
     });
   };
 
   const previousBtnPressHandler = () => {
-    getLeaderBoardData({ pageNumber: paginationDetails.page - 1 }).then(() => {
-      scrollViewRef.current.scrollTo({ y: 0, animated: true });
-    });
+    showLoader();
+    getLeaderBoardData({ pageNumber: paginationDetails.page - 1 })
+      .then(() => {
+        hideLoader();
+        scrollViewRef.current.scrollTo({ y: 0, animated: true });
+      });
   };
 
   const loggedInUserInCurrentPage = (currentPage, userUniqueUrl) => {
@@ -165,118 +188,141 @@ const Leaderboard = () => {
     }
   }, [state]);
 
+  useEffect(() => {
+    showLoader();
+    if (memoizedLeaderBoardData) {
+      hideLoader();
+    }
+  }, [memoizedLeaderBoardData]);
+
+  useEffect(() => {
+    startTimeTrack('leaderboard');
+
+    return () => {
+      stopTimeTrack('leaderboard');
+      isPageMounted.current = false;
+    };
+  }, []);
+
   return (
-    <ScrollView
-      style={{ flex: 1 }}
-      contentContainerStyle={{ paddingHorizontal: 20 }}
-      ref={scrollViewRef}>
-      <Text style={style.heading}>
-        <FormattedMessage defaultMessage={'Leaderboard'} description={'Leaderboard page heading'} />
-      </Text>
-      {/* <KeyboardAvoidingView>
-      <View style={style.controls}>
-        <View style={[style.controlWithIconContainer, style.filterBtnWithIcon]}>
-          <View style={[style.iconContainer, style.filterBtnIconContainer]}>
-            <FilterBtnIcon />
+    <>
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={{ paddingHorizontal: 20 }}
+        ref={scrollViewRef}>
+        <Text style={style.heading}>
+          <FormattedMessage defaultMessage={'Leaderboard'} description={'Leaderboard page heading'} />
+        </Text>
+        {/* <KeyboardAvoidingView>
+        <View style={style.controls}>
+          <View style={[style.controlWithIconContainer, style.filterBtnWithIcon]}>
+            <View style={[style.iconContainer, style.filterBtnIconContainer]}>
+              <FilterBtnIcon />
+            </View>
+            <TouchableOpacity style={[style.btnOutlinePrimary, style.control]}>
+              <Text style={style.btnOutlinePrimaryText}>
+                Filter
+              </Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity style={[style.btnOutlinePrimary, style.control]}>
-            <Text style={style.btnOutlinePrimaryText}>
-              Filter
-            </Text>
+          <View style={[style.controlWithIconContainer, style.searchBoxWithIcon]}>
+            <View style={style.iconContainer}>
+              <SearchBoxIcon />
+            </View>
+            <TextInput
+              style={[style.inputField, style.control, style.searchBox]}
+              placeholder={'Search'}
+              placeholderTextColor={ theme.utilColors.dark} />
+          </View>
+          </View>
+          </KeyboardAvoidingView> */}
+        <Table>
+          <Row style={style.tableRow}>
+            <View style={style.rankCell}>
+              <Text style={style.tableHeaderCellText}>Rank</Text>
+            </View>
+            <View style={style.studentNameCell}>
+              <Text style={style.tableHeaderCellText}>Student Name</Text>
+            </View>
+            <View style={style.coinsCell}>
+              <Text style={style.tableHeaderCellText}>Coins</Text>
+            </View>
+          </Row>
+          {
+            !leaderboardData && new Array(10).fill().map((val, index) => <Row
+              style={style.tableRow} key={index}>
+            <View style={style.rankCell}>
+              <Skeleton width='40%' height={20} style={{ borderRadius: 4 }}/>
+            </View>
+            <View style={style.studentNameCell}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Skeleton width={36} height={36} style={{ borderRadius: 36 / 2, marginRight: 5 }}/>
+                <Skeleton width='50%' height={20} style={{ borderRadius: 4 }}/>
+              </View>
+            </View>
+            <View style={style.coinsCell}>
+              <Skeleton width='40%' height={20} style={{ borderRadius: 4, margin: 'auto' }}/>
+            </View>
+          </Row>)
+          }
+          {
+            leaderboardData && leaderboardData.map((profileObj, index) => <Row
+              style={(profileObj.uniqueUrl === userData.uniqueUrl)
+                ? [style.tableRow, style.loggedInUserHighlight]
+                : style.tableRow}
+              key={index}>
+            <View style={style.rankCell}>
+              <Text style={style.tableCellText}>
+                  <FormattedMessage
+                    defaultMessage={'{rank}'}
+                    description={'rank'}
+                    values={{ rank: !Number.isNaN(Number(profileObj.rank)) ? `#${profileObj.rank}` : '--' }} />
+              </Text>
+            </View>
+            <View style={style.studentNameCell}>
+              <View style={style.studentNameWithPicture}>
+                <Image
+                  source={profileObj.profileImage ? {
+                    uri: profileObj.profileImage,
+                  } : defaultUser }
+                  style={style.profilePicture}
+                  />
+                  <Text style={style.tableCellText}>
+                    <FormattedMessage defaultMessage={'{studentName}'} description={'student name'} values={{ studentName: profileObj.name }} />
+                  </Text>
+              </View>
+            </View>
+            <View style={style.coinsCell}>
+              <Text style={style.tableCellText}>
+                <FormattedMessage defaultMessage={'{coins}'} description={'coins'} values={{ coins: profileObj.points || '--' }} />
+              </Text>
+            </View>
+            </Row>)
+          }
+        </Table>
+        <View style={style.paginator}>
+          <TouchableOpacity style={disablePrevBtn
+            ? [style.btnPrimary, style.disabledPrimaryBtn]
+            : style.btnPrimary}
+            disabled={disablePrevBtn}
+            onPress={previousBtnPressHandler}>
+              <Text style={style.btnPrimaryText}>Previous</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={disableNextBtn
+            ? [style.btnPrimary, style.disabledPrimaryBtn]
+            : style.btnPrimary}
+            disabled={disableNextBtn}
+            onPress={nextBtnPressHandler}>
+              <Text style={style.btnPrimaryText}>Next</Text>
           </TouchableOpacity>
         </View>
-        <View style={[style.controlWithIconContainer, style.searchBoxWithIcon]}>
-          <View style={style.iconContainer}>
-            <SearchBoxIcon />
-          </View>
-          <TextInput
-            style={[style.inputField, style.control, style.searchBox]}
-            placeholder={'Search'}
-            placeholderTextColor={ theme.utilColors.dark} />
-        </View>
-        </View>
-        </KeyboardAvoidingView> */}
-      <Table>
-        <Row style={style.tableRow}>
-          <View style={style.rankCell}>
-            <Text style={style.tableHeaderCellText}>Rank</Text>
-          </View>
-          <View style={style.studentNameCell}>
-            <Text style={style.tableHeaderCellText}>Student Name</Text>
-          </View>
-          <View style={style.coinsCell}>
-            <Text style={style.tableHeaderCellText}>Coins</Text>
-          </View>
-        </Row>
-        {
-          !leaderboardData && new Array(10).fill().map((val, index) => <Row
-            style={style.tableRow} key={index}>
-          <View style={style.rankCell}>
-            <Skeleton width='40%' height={20} style={{ borderRadius: 4 }}/>
-          </View>
-          <View style={style.studentNameCell}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Skeleton width={36} height={36} style={{ borderRadius: 36 / 2, marginRight: 5 }}/>
-              <Skeleton width='50%' height={20} style={{ borderRadius: 4 }}/>
-            </View>
-          </View>
-          <View style={style.coinsCell}>
-            <Skeleton width='40%' height={20} style={{ borderRadius: 4, margin: 'auto' }}/>
-          </View>
-        </Row>)
-        }
-        {
-          leaderboardData && leaderboardData.map((profileObj, index) => <Row
-            style={(profileObj.uniqueUrl === userData.uniqueUrl)
-              ? [style.tableRow, style.loggedInUserHighlight]
-              : style.tableRow}
-            key={index}>
-          <View style={style.rankCell}>
-            <Text style={style.tableCellText}>
-                <FormattedMessage
-                  defaultMessage={'{rank}'}
-                  description={'rank'}
-                  values={{ rank: !Number.isNaN(Number(profileObj.rank)) ? `#${profileObj.rank}` : '--' }} />
-            </Text>
-          </View>
-          <View style={style.studentNameCell}>
-            <View style={style.studentNameWithPicture}>
-              <Image
-                source={profileObj.profileImage ? {
-                  uri: profileObj.profileImage,
-                } : defaultUser }
-                style={style.profilePicture}
-                />
-                <Text style={style.tableCellText}>
-                  <FormattedMessage defaultMessage={'{studentName}'} description={'student name'} values={{ studentName: profileObj.name }} />
-                </Text>
-            </View>
-          </View>
-          <View style={style.coinsCell}>
-            <Text style={style.tableCellText}>
-              <FormattedMessage defaultMessage={'{coins}'} description={'coins'} values={{ coins: profileObj.points || '--' }} />
-            </Text>
-          </View>
-          </Row>)
-        }
-      </Table>
-      <View style={style.paginator}>
-        <TouchableOpacity style={disablePrevBtn
-          ? [style.btnPrimary, style.disabledPrimaryBtn]
-          : style.btnPrimary}
-          disabled={disablePrevBtn}
-          onPress={previousBtnPressHandler}>
-            <Text style={style.btnPrimaryText}>Previous</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={disableNextBtn
-          ? [style.btnPrimary, style.disabledPrimaryBtn]
-          : style.btnPrimary}
-          disabled={disableNextBtn}
-          onPress={nextBtnPressHandler}>
-            <Text style={style.btnPrimaryText}>Next</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+      </ScrollView>
+      <ScreenLoader
+        route={'Leaderboard'}
+        ref={screenLoaderRef}
+        duration={250}
+      />
+    </>
   );
 };
 

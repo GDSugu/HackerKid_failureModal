@@ -1,5 +1,5 @@
 import React, {
-  useContext, useState, useRef,
+  useContext, useState, useRef, useEffect,
 } from 'react';
 import {
   ImageBackground,
@@ -27,6 +27,8 @@ import {
 } from '../../web/javascripts/common/Functions/ide';
 import PlayBtn from '../../images/games/playBtn.svg';
 import GameNavBar from '../components/GameNavBar';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import Loader from '../components/Loader';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -476,7 +478,9 @@ const CodekataBody = () => {
 
   const codeRun = () => {
     const language = valueToLanguageDisplayNameMap[selectedLang];
+    codekataContext.showLoader();
     codekataContext.runCode({ lang: language, code: codeValue }).then((res) => {
+      codekataContext.hideLoader();
       setOutputField(res.output);
       setOutputVisible(true);
     });
@@ -484,11 +488,13 @@ const CodekataBody = () => {
 
   const codeSubmit = () => {
     const language = valueToLanguageDisplayNameMap[selectedLang];
+    codekataContext.showLoader();
     codekataContext.submitCode({
       questionId: codekataContext.ctxState.questionObject.questionId,
       code: codeValue,
       lang: language,
     }).then((res) => {
+      codekataContext.hideLoader();
       setOutputField(res.evaluationDetails.output);
       setOutputVisible(true);
     });
@@ -552,7 +558,8 @@ const CodekataBody = () => {
   );
 };
 
-const CodekataMain = () => {
+const CodekataMain = ({ navigation }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const isPageMounted = useRef(true);
   const { font, theme } = useContext(ThemeContext);
   const pageTheme = theme.screenTurtleHome;
@@ -570,6 +577,30 @@ const CodekataMain = () => {
     },
   } = useCodekata({ isPageMounted });
 
+  const loaderRef = useRef(null);
+
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
+  useEffect(() => {
+    startTimeTrack('codekata-main');
+
+    return () => {
+      stopTimeTrack('codekata-main');
+      isPageMounted.current = false;
+      hideLoader();
+    };
+  }, []);
+
   return (
     <>
       <View style={style.container}>
@@ -585,6 +616,8 @@ const CodekataMain = () => {
                 getLanguageId,
                 runCode,
                 submitCode,
+                showLoader,
+                hideLoader,
               }}>
               <CodekataHeader />
               <CodekataBody />
@@ -592,6 +625,10 @@ const CodekataMain = () => {
           </View>
         </ImageBackground>
       </View>
+      <Loader
+        ref={loaderRef}
+        route={'CodekataMain'}
+      />
     </>
   );
 };

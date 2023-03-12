@@ -18,6 +18,8 @@ import { useTurtleFetchQuestion, TurtleContext } from '../../hooks/pages/turtle'
 import Icon from '../common/Icons';
 import { Red, Yellow } from '../../colors/_colors';
 import TurtleSuccessModal from '../components/Modals/TurtleSuccessModal';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import Loader from '../components/Loader';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -267,7 +269,8 @@ const HintComponent = ({
   </>;
 };
 
-const TurtleMain = () => {
+const TurtleMain = ({ navigation }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const isPageMounted = useRef(true);
   const { font, theme } = useContext(ThemeContext);
   const pageTheme = theme.screenTurtleHome;
@@ -298,6 +301,20 @@ const TurtleMain = () => {
     },
   } = turtleQuestionState;
 
+  const loaderRef = useRef(null);
+
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
   const setGameScreen = (screen) => {
     setTurtleQuestionState((prevState) => ({
       ...prevState,
@@ -327,18 +344,21 @@ const TurtleMain = () => {
     {
       tabTitle: 'Question',
       name: 'TurtleQuestion',
+      id: 'turtle-question',
       component: TurtleQuestion,
       Icon: GameQuestion,
     },
     {
       tabTitle: 'Code',
       name: 'TurtleEditor',
+      id: 'turtle-editor',
       component: TurtleEditor,
       Icon: GameCode,
     },
     {
       tabTitle: 'Output',
       name: 'TurtleOutput',
+      id: 'turtle-output',
       component: TurtleOutput,
       Icon: GameOutput,
     },
@@ -349,6 +369,16 @@ const TurtleMain = () => {
     // const blockTypes = blocks.map((value) => value.type);
     return loadHints({ blockTypes, action });
   };
+
+  useEffect(() => {
+    startTimeTrack('turtle-main');
+
+    return () => {
+      stopTimeTrack('turtle-main');
+      isPageMounted.current = false;
+      hideLoader();
+    };
+  }, []);
 
   return <>
     <View style={style.container}>
@@ -365,6 +395,8 @@ const TurtleMain = () => {
             fetchTurtleQuestion,
             getNextQuestion,
             submitQuestion: submitTurtle,
+            showLoader,
+            hideLoader,
           }}>
             <GameNavigator
               currentScreen={{
@@ -375,6 +407,7 @@ const TurtleMain = () => {
               initialRoute='TurtleQuestion'
               ScreenArray={TurtleScreenArray}
               themeKey='screenTurtleQuestion'
+              navigation={navigation}
               />
             <HintComponent
               handleHint={handleHint}
@@ -387,6 +420,10 @@ const TurtleMain = () => {
         </View>
       </ImageBackground>
     </View>
+    <Loader
+      route={'TurtleHome'}
+      ref={loaderRef}
+    />
   </>;
 };
 

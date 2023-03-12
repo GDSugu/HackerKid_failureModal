@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Image,
   ImageBackground, StyleSheet, Text, TouchableOpacity, View,
@@ -7,10 +7,11 @@ import { FormattedMessage } from 'react-intl';
 import * as Animatable from 'react-native-animatable';
 import ThemeContext from '../components/theme';
 import GameHeader from '../components/Header/GameHeader';
-import toggleAudio from '../../images/games/gameAudio.png';
-import leaderboardImg from '../../images/games/gameLeaderboard.png';
+// import toggleAudio from '../../images/games/gameAudio.png';
+// import leaderboardImg from '../../images/games/gameLeaderboard.png';
 import zlBg from '../../images/zombieLand/zombieLand-home-mob-bg.png';
 import playBtnImg from '../../images/games/gamePlay.png';
+import { useTimeTrack } from '../../hooks/pages/timeTrack';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -67,9 +68,18 @@ const getStyles = (theme, font, utilColors) => StyleSheet.create({
 });
 
 const ZombieLandHome = ({ navigation, routeName }) => {
+  const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
   const { font, theme } = React.useContext(ThemeContext);
   const pageTheme = theme.screenZombieLandHome;
   const style = getStyles(pageTheme, font, theme.utilColors);
+
+  useEffect(() => {
+    startTimeTrack('zombieland-home');
+
+    return () => {
+      stopTimeTrack('zombieland-home');
+    };
+  }, []);
 
   return <>
     <View style={style.container}>
@@ -88,21 +98,21 @@ const ZombieLandHome = ({ navigation, routeName }) => {
             </Text>
           </View>
           <View style={style.gameOptionsContainer}>
-          <Animatable.View
-              useNativeDriver={true}
-              animation={routeName === 'ZombieLandHome' ? 'fadeInLeft' : 'fadeOutLeft'}
-              delay={500}
-              duration={300}
-            >
-              <TouchableOpacity>
-                <View style={style.gameOptions}>
-                  <Image
-                    source={toggleAudio}
-                    style={style.gameOptionBtnImg}
-                  />
-                </View>
-              </TouchableOpacity>
-            </Animatable.View>
+          {/* <Animatable.View
+            useNativeDriver={true}
+            animation={routeName === 'ZombieLandHome' ? 'fadeInLeft' : 'fadeOutLeft'}
+            delay={500}
+            duration={300}
+          >
+            <TouchableOpacity>
+              <View style={style.gameOptions}>
+                <Image
+                  source={toggleAudio}
+                  style={style.gameOptionBtnImg}
+                />
+              </View>
+            </TouchableOpacity>
+          </Animatable.View> */}
             <Animatable.View
               useNativeDriver={true}
               animation={routeName === 'ZombieLandHome' ? 'fadeInDown' : 'fadeOutUp'}
@@ -131,25 +141,25 @@ const ZombieLandHome = ({ navigation, routeName }) => {
                 </View>
               </TouchableOpacity>
             </Animatable.View>
-            <Animatable.View
-              useNativeDriver={true}
-              animation={routeName === 'ZombieLandHome' ? 'fadeInRight' : 'fadeOutRight'}
-              delay={500}
-              duration={300}
+          {/* <Animatable.View
+            useNativeDriver={true}
+            animation={routeName === 'ZombieLandHome' ? 'fadeInRight' : 'fadeOutRight'}
+            delay={500}
+            duration={300}
+          >
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('GameLeaderBoard', { game: 'zombieLand' });
+              }}
             >
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('GameLeaderBoard', { game: 'zombieLand' });
-                }}
-              >
-                <View style={style.gameOptions}>
-                  <Image
-                    source={leaderboardImg}
-                    style={style.gameOptionBtnImg}
-                  />
-                </View>
-              </TouchableOpacity>
-            </Animatable.View>
+              <View style={style.gameOptions}>
+                <Image
+                  source={leaderboardImg}
+                  style={style.gameOptionBtnImg}
+                />
+              </View>
+            </TouchableOpacity>
+          </Animatable.View> */}
           </View>
         </View>
       </ImageBackground>

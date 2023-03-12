@@ -1,0 +1,38 @@
+@use "../../sass/themes/_default" as gt;
+@use "../../sass/base/_mixins" as gm;
+@use '../../sass/components/loading';
+
+@import "./_adminTheme.js";
+
+@include gt.populate-theme($thememaplight, $thememapdark, $cssvars);
+
+.admin-page-container {
+  background-color: gt.theme-var(admin-body-bg, null, $thememaplight, $cssvars);
+
+  nav {
+    background-color: gt.theme-var(admin-nav-bg, null, $thememaplight, $cssvars);
+
+    .navigation-container {
+      .navigation-item {
+        &.active {
+          background-color: gt.theme-var(admin-nav-active-bg, null, $thememaplight, $cssvars);
+        }
+      }
+    }
+  }
+
+  .admin-container {
+    padding-top: 2rem;
+
+    .operation-content-container {
+      input {
+        width: 16rem;
+      }
+
+      .activateBtn {
+        border-radius: 0.75rem;
+        color: gt.theme-var(text-color-2);
+      }
+    }
+  }
+}

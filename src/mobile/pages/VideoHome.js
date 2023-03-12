@@ -9,6 +9,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  RefreshControl,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { FormattedMessage } from 'react-intl';
@@ -23,6 +24,7 @@ import timerIcon from '../../images/courses/timer.png';
 import { ModuleContainer } from '../components/CourseComponents';
 import BottomSheet from '../components/BottomSheet';
 import CircleGradientProgressBar from '../components/CircleGradientProgressBar';
+import Loader from '../components/Loader';
 import { SubscriptionContext } from '../../hooks/pages/root';
 import { isFeatureEnabled } from '../../web/javascripts/common/framework';
 
@@ -209,7 +211,7 @@ const VideoHome = ({ navigation }) => {
   const pageTheme = theme.screenVideo;
   const style = getStyles(pageTheme, font, theme.gradients, theme.utilColors);
   const isPageMounted = useRef(true);
-  const { courseData } = useCourses({ isPageMounted });
+  const { courseData, static: { getVideosData } } = useCourses({ isPageMounted });
   const { subscriptionData } = React.useContext(SubscriptionContext);
   const {
     moduleData, continueWatching, overallProgress, progress,
@@ -217,6 +219,7 @@ const VideoHome = ({ navigation }) => {
   const [filteredData, setFilterData] = useState(false);
   // const [filterVisible, setFilterVisible] = useState(false);
   // const [filter, setFilter] = useState(false);
+  const loaderRef = useRef();
   const [lockedData, setLockedData] = useState(false);
   const bottomSheetRef = useRef();
   const bottomSheetStyles = {
@@ -228,6 +231,31 @@ const VideoHome = ({ navigation }) => {
       paddingHorizontal: 12,
     },
   };
+
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
+  // const onChangeFilter = (filterValue) => {
+  //   let prevFilterValue = false;
+  //   setFilter((prev) => {
+  //     prevFilterValue = prev === filterValue ? false : filterValue;
+  //     return prevFilterValue;
+  //   });
+  //   if (prevFilterValue) {
+  //     setFilterData(moduleData.filter((item) => item.type === prevFilterValue));
+  //   } else {
+  //     setFilterData(false);
+  //   }
+  // };
 
   const coursesLimit = (category) => {
     const coursesEnabled = isFeatureEnabled(subscriptionData, 'courses', category);
@@ -250,24 +278,11 @@ const VideoHome = ({ navigation }) => {
     }
   }, [moduleData]);
 
-  // const onChangeFilter = (filterValue) => {
-  //   let prevFilterValue = false;
-  //   setFilter((prev) => {
-  //     prevFilterValue = prev === filterValue ? false : filterValue;
-  //     return prevFilterValue;
-  //   });
-  //   if (prevFilterValue) {
-  //     setFilterData(lockedData.filter((item) => item.type === prevFilterValue));
-  //   } else {
-  //     setFilterData(false);
-  //   }
-  // };
   const searchers = {};
 
   if (lockedData) {
     lockedData.forEach((module) => {
       const searcher = new FuzzySearch(module.videos, ['title']);
-
       searchers[module.moduleId] = searcher;
     });
   }
@@ -298,125 +313,163 @@ const VideoHome = ({ navigation }) => {
     }
   };
 
+  const onRefresh = () => {
+    // setRefreshing(true);
+    showLoader();
+    Promise.all([
+      getVideosData(),
+    ])
+      .then(() => {
+        hideLoader();
+      })
+      .catch(() => {
+        // show snackbar of error
+        hideLoader();
+      });
+  };
+
+  useEffect(() => {
+    if (Object.keys(moduleData)?.length) {
+      hideLoader();
+    } else {
+      showLoader();
+    }
+  }, [courseData]);
+
+  useEffect(() => () => {
+    isPageMounted.current = false;
+    hideLoader();
+  }, []);
+
   return (
-    <View style={style.container}>
-      <ScrollView>
-        <View>
-          <View style={style.topHeadCont}>
-            <Text style={style.vidoeHead}>
-              <FormattedMessage
-                defaultMessage={'Videos'}
-                description={'Course Name'}
+    <>
+      <View style={style.container}>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+                refreshing={false}
+                onRefresh={onRefresh}
               />
-            </Text>
-            <TouchableOpacity
+          }
+        >
+          <View>
+            <View style={style.topHeadCont}>
+              <Text style={style.vidoeHead}>
+                <FormattedMessage
+                  defaultMessage={'Videos'}
+                  description={'Course Name'}
+                />
+              </Text>
+              <TouchableOpacity
               onPress={() => bottomSheetRef.current.open()}>
               <Text style={style.moreInfo}>
                 <FormattedMessage defaultMessage={'More Info'} />
               </Text>
-            </TouchableOpacity>
-          </View>
-          <View style={style.filterAndSearch}>
-            {/* <TouchableOpacity onPress={() => setFilterVisible(!filterVisible)}>
-              <View style={style.filterCont}>
-                <FilterIcon />
-                <Text style={style.vidoeHead}>
-                  <FormattedMessage
-                    defaultMessage={'Filter'}
-                    description={'Filter'}
-                  />
-                </Text>
-              </View>
-            </TouchableOpacity> */}
-            <View style={style.searchCont}>
-              <SearchIcon />
-              <TextInput
-                style={style.searchBar}
-                placeholder="Search"
-                placeholderTextColor={'#000'}
-                onChangeText={onSearch}
-              />
+              </TouchableOpacity>
             </View>
-            {/* {filterVisible && (
-              <View style={style.filteroptionCont}>
-                <TouchableOpacity
-                  onPress={() => {
-                    onChangeFilter('Solution Videos');
-                    setFilterVisible(!filterVisible);
-                  }}>
-                  <View style={style.filterOption}>
-                    <View
-                      style={[
-                        style.filterOptionBtn,
-                        filter === 'Solution Videos' && style.selectedfilter,
-                      ]}
+            <View style={style.filterAndSearch}>
+              {/* <TouchableOpacity onPress={() => setFilterVisible(!filterVisible)}>
+                <View style={style.filterCont}>
+                  <FilterIcon />
+                  <Text style={style.vidoeHead}>
+                    <FormattedMessage
+                      defaultMessage={'Filter'}
+                      description={'Filter'}
                     />
-                    <Text style={style.vidoeHead}>
-                      <FormattedMessage
-                        defaultMessage={'Solution Videos'}
-                        description={'Solution Videos Filter Option'}
-                      />
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => {
-                    onChangeFilter('Session Videos');
-                    setFilterVisible(!filterVisible);
-                  }}>
-                  <View style={style.filterOption}>
-                    <View
-                      style={[
-                        style.filterOptionBtn,
-                        filter === 'Session Videos' && style.selectedfilter,
-                      ]}
-                    />
-                    <Text style={style.vidoeHead}>
-                      <FormattedMessage
-                        defaultMessage={'Session Videos'}
-                        description={'Session Videos Filter Option'}
-                      />
-                    </Text>
-                  </View>
-                </TouchableOpacity>
+                  </Text>
+                </View>
+              </TouchableOpacity> */}
+              <View style={style.searchCont}>
+                <SearchIcon />
+                <TextInput
+                  style={style.searchBar}
+                  placeholder="Search"
+                  placeholderTextColor={'#000'}
+                  onChangeText={onSearch}
+                />
               </View>
-            )} */}
+              {/* {filterVisible && (
+                <View style={style.filteroptionCont}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      onChangeFilter('Solution Videos');
+                      setFilterVisible(!filterVisible);
+                    }}>
+                    <View style={style.filterOption}>
+                      <View
+                        style={[
+                          style.filterOptionBtn,
+                          filter === 'Solution Videos' && style.selectedfilter,
+                        ]}
+                      />
+                      <Text style={style.vidoeHead}>
+                        <FormattedMessage
+                          defaultMessage={'Solution Videos'}
+                          description={'Solution Videos Filter Option'}
+                        />
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      onChangeFilter('Session Videos');
+                      setFilterVisible(!filterVisible);
+                    }}>
+                    <View style={style.filterOption}>
+                      <View
+                        style={[
+                          style.filterOptionBtn,
+                          filter === 'Session Videos' && style.selectedfilter,
+                        ]}
+                      />
+                      <Text style={style.vidoeHead}>
+                        <FormattedMessage
+                          defaultMessage={'Session Videos'}
+                          description={'Session Videos Filter Option'}
+                        />
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              )} */}
+            </View>
           </View>
-        </View>
-        {continueWatching && !filteredData && (
-          <ModuleContainer
-            data={continueWatching}
-            navigator={navigation}
-            continueWatch={true}
-          />
-        )}
-        {filteredData
-          ? filteredData.map((item, index) => (
-            <ModuleContainer key={index} data={item} navigator={navigation} />
-          ))
-          : lockedData
-          && lockedData.map((item, index) => (
-            <ModuleContainer key={index} data={item} navigator={navigation} />
-          ))}
-      </ScrollView>
-      <BottomSheet
+
+          {continueWatching && !filteredData && (
+            <ModuleContainer
+              data={continueWatching}
+              navigator={navigation}
+              continueWatch={true}
+            />
+          )}
+          {filteredData
+            ? filteredData.map((item, index) => (
+                <ModuleContainer key={index} data={item} navigator={navigation} />
+            ))
+            : lockedData
+              && lockedData.map((item, index) => (
+                <ModuleContainer key={index} data={item} navigator={navigation} />
+              ))}
+        </ScrollView>
+        <BottomSheet
         ref={bottomSheetRef}
         contentPanEnabled={true}
         customStyles={bottomSheetStyles}
-      >
-        {overallProgress && <ScrollView><View
+        >
+          {overallProgress && <ScrollView><View
           style={style.detailsCont}>
-          <View style={style.progressBarCont}>
+            <View style={style.progressBarCont}>
             <View style={style.progressBar}>
               <CircleGradientProgressBar
                 gradientColors={[[style.svgGradient.color[0], '80%'], [style.svgGradient.color[1], '10%']]}
-                progressValue={overallProgress ? overallProgress.completedCount : 0}
-                totalValue={overallProgress ? overallProgress.totalVideos : 100}
+                progressValue={ overallProgress ? overallProgress.completedCount : 0}
+                totalValue={ overallProgress ? overallProgress.totalVideos : 100}
                 startAnim={Boolean(overallProgress)}
-              >
+                progressBg={theme.screenVideo.progressBg}
+                >
                 <View style={style.progressInnerText}>
-                  <Text style={style.vidoeHead}>{overallProgress ? overallProgress.completedCount : '--'}</Text>
-                  <Text style={style.totalText}>/{overallProgress ? overallProgress.totalVideos : '--'}</Text>
+                  <Text style={style.vidoeHead}>{overallProgress ? overallProgress.completedCount : '--' }</Text>
+                  <Text style={style.totalText}>/{overallProgress ? overallProgress.totalVideos : '--' }</Text>
                 </View>
                 <Text style={style.progressBodyText}>
                   <FormattedMessage
@@ -427,58 +480,58 @@ const VideoHome = ({ navigation }) => {
               </CircleGradientProgressBar>
             </View>
             <View style={style.xpProgressCont}>
-              <View style={[style.xpCont, style.xpHeight]}>
-                <Image
-                  style={style.xpIcon}
-                  source={coinIcon} />
-                <View style={style.xpTextCont}>
-                  <Text style={style.xpEarnedText}>
-                    <FormattedMessage
-                      defaultMessage="Coins Earned:"
-                      description="coins earned card caption"
-                    />
-                  </Text>
-                  <Text style={style.vidoeHead}>
-                    <FormattedMessage
-                      defaultMessage="{coins} coins"
-                      description="coins earned"
-                      values={{ coins: overallProgress.coinsEarned }}
-                    />
-                  </Text>
-                </View>
-              </View>
-              <View style={style.xpCont}>
-                <Image
-                  style={style.xpIcon}
-                  source={xpIcon} />
-                <View style={style.xpTextCont}>
-                  <Text style={style.xpEarnedText}>
-                    <FormattedMessage
-                      defaultMessage="XP Earned:"
-                      description="XP Earned card caption"
-                    />
-                  </Text>
-                  <Text style={style.vidoeHead}>
-                    <FormattedMessage
-                      defaultMessage="{xp} xp"
-                      description="XP earned"
-                      values={{ xp: overallProgress.xpEarned }}
-                    />
-                  </Text>
-                </View>
+            <View style={[style.xpCont, style.xpHeight]}>
+              <Image
+              style={style.xpIcon}
+              source={coinIcon}/>
+              <View style={style.xpTextCont}>
+              <Text style={style.xpEarnedText}>
+                  <FormattedMessage
+                    defaultMessage="Coins Earned:"
+                    description="coins earned card caption"
+                  />
+                </Text>
+                <Text style={style.vidoeHead}>
+                <FormattedMessage
+                    defaultMessage="{coins} coins"
+                    description="coins earned"
+                    values={{ coins: overallProgress.coinsEarned }}
+                  />
+                </Text>
               </View>
             </View>
-          </View>
-        </View>
-          {progress.map((item, index) => <View
-            style={style.moduleCard}
-            key={index}>
-            <View style={style.cardProgressCont}>
+            <View style={style.xpCont}>
               <Image
-                style={style.cardModuleImg}
-                source={{ uri: item.thumbnail }} />
-              <View>
-                <Text style={style.cardHead}>
+              style={style.xpIcon}
+              source={xpIcon}/>
+              <View style={style.xpTextCont}>
+              <Text style={style.xpEarnedText}>
+                  <FormattedMessage
+                    defaultMessage="XP Earned:"
+                    description="XP Earned card caption"
+                  />
+                </Text>
+                <Text style={style.vidoeHead}>
+                <FormattedMessage
+                    defaultMessage="{xp} xp"
+                    description="XP earned"
+                    values={{ xp: overallProgress.xpEarned }}
+                  />
+                </Text>
+              </View>
+            </View>
+            </View>
+            </View>
+          </View>
+          {progress.map((item, index) => <View
+          style={style.moduleCard}
+          key={index}>
+            <View style={style.cardProgressCont}>
+            <Image
+            style={style.cardModuleImg}
+            source={{ uri: item.thumbnail }}/>
+            <View>
+            <Text style={style.cardHead}>
                   <FormattedMessage
                     defaultMessage="{module}"
                     description="Time Spent card caption"
@@ -492,49 +545,54 @@ const VideoHome = ({ navigation }) => {
                     values={{ count: item.watched, totalCount: item.totalVideos }}
                   />
                 </Text>
-              </View>
+            </View>
             </View>
             <View style={style.cardwithProgress}>
-              <View style={style.xpTimerCont}>
-                <View style={style.xpcardCont}>
-                  <Image
-                    style={style.xpcardIcon}
-                    source={xpIcon} />
-                  <View style={style.xpTextCont}>
-                    <Text style={style.xpCardText}>
-                      <FormattedMessage
-                        defaultMessage="{count} Xp"
-                        description="Time Spent card caption"
-                        values={{ count: item.xpEarned }}
-                      />
-                    </Text>
-                  </View>
-                </View>
-                <View style={style.xpcardCont}>
-                  <Image
-                    style={style.xpcardIcon}
-                    source={timerIcon} />
-                  <View style={style.xpTextCont}>
-                    <Text style={style.xpCardText}>
-                      <FormattedMessage
-                        defaultMessage="{time}"
-                        description="Time Spent card caption"
-                        values={{ time: secToMin(item.watchTime) }}
-                      />
-                    </Text>
-                  </View>
-                </View>
-              </View>
-              <View style={style.linearProgressCont}>
-                <LinearGradient style={[style.linearProgress, { width: '20%' }]}
-                  start={{ x: 0, y: 1 }}
-                  end={{ x: 1, y: 1 }}
-                  colors={[style.svgGradient.color[1], style.svgGradient.color[0]]} />
+            <View style={style.xpTimerCont}>
+            <View style={style.xpcardCont}>
+              <Image
+              style={style.xpcardIcon}
+              source={xpIcon}/>
+              <View style={style.xpTextCont}>
+                <Text style={style.xpCardText}>
+                <FormattedMessage
+                    defaultMessage="{count} Xp"
+                    description="Time Spent card caption"
+                    values={{ count: item.xpEarned }}
+                  />
+                </Text>
               </View>
             </View>
-          </View>)}</ScrollView>}
-      </BottomSheet>
-    </View>
+            <View style={style.xpcardCont}>
+              <Image
+              style={style.xpcardIcon}
+              source={timerIcon}/>
+              <View style={style.xpTextCont}>
+                <Text style={style.xpCardText}>
+                <FormattedMessage
+                    defaultMessage="{time}"
+                    description="Time Spent card caption"
+                    values={{ time: secToMin(item.watchTime) }}
+                  />
+                </Text>
+              </View>
+            </View>
+            </View>
+            <View style={style.linearProgressCont}>
+              <LinearGradient style={[style.linearProgress, { width: '20%' }]}
+              start={{ x: 0, y: 1 }}
+              end={{ x: 1, y: 1 }}
+              colors={[style.svgGradient.color[1], style.svgGradient.color[0]]}/>
+            </View>
+            </View>
+            </View>)}</ScrollView>}
+        </BottomSheet>
+      </View>
+      <Loader
+        route={'Video'}
+        ref={loaderRef}
+      />
+    </>
   );
 };
 

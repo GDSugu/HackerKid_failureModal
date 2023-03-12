@@ -141,7 +141,7 @@ const VideoHome = ({ navigation, route }) => {
                   customVideo={true}
                   customCardStyle={style.videoCard}
                 />
-              ))
+            ))
             : lockedData
             && lockedData.videos.map((item, index) => index < page * 10
               && index > page * 10 - 11 && (
@@ -155,7 +155,7 @@ const VideoHome = ({ navigation, route }) => {
                   customVideo={true}
                   customCardStyle={style.videoCard}
                 />
-              ))}
+            ))}
         </View>
       </ScrollView>
       {lockedData && <Paginator

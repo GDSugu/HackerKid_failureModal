@@ -32,6 +32,7 @@ import { AuthContext } from '../../hooks/pages/root';
 import BottomSheet from '../components/BottomSheet';
 import { useLeaderBoard } from '../../hooks/pages/leaderboard';
 import CircleGradientProgressBar from '../components/CircleGradientProgressBar';
+import Loader from '../components/Loader';
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
@@ -794,31 +795,47 @@ const Games = ({ navigation }) => {
   const { dashBoardData, gameData } = dashBoardState;
   const { leaderboardData, userData: leaderBoardUserData } = leaderBoardState;
   const authContext = useContext(AuthContext);
+  const loaderRef = useRef(null);
+
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
 
   // onRefresh
   const onRefresh = () => {
-    authContext.setAuthState({
-      gamesPageAppData: { refreshing: true },
-    });
+    // authContext.setAuthState({
+    //   gamesPageAppData: { refreshing: true },
+    // });
+    showLoader();
 
     Promise.all([
       getDashboardData({ cached: false }),
     ])
       .then(() => {
-        authContext.setAuthState({
-          gamesPageAppData: {
-            reloadComponent: authContext?.gamesPageAppData?.reloadComponent + 1,
-            refreshing: false,
-          },
-        });
+        hideLoader();
+        // authContext.setAuthState({
+        //   gamesPageAppData: {
+        //     reloadComponent: authContext?.gamesPageAppData?.reloadComponent + 1,
+        //     refreshing: false,
+        //   },
+        // });
       })
       .catch(() => {
         // show snackbar of error
-        authContext.setAuthState({
-          gamesPageAppData: {
-            refreshing: false,
-          },
-        });
+        hideLoader();
+        // authContext.setAuthState({
+        //   gamesPageAppData: {
+        //     refreshing: false,
+        //   },
+        // });
       });
   };
 
@@ -950,6 +967,7 @@ const Games = ({ navigation }) => {
     return () => {
       isPageMounted.current = false;
       gameProgressValue.removeAllListeners();
+      hideLoader();
     };
   }, []);
 
@@ -958,7 +976,9 @@ const Games = ({ navigation }) => {
       <ScrollView
         style={style.container}
         refreshControl={<RefreshControl
-          refreshing={authContext?.gamesPageAppData?.refreshing} onRefresh={onRefresh} />}>
+          // refreshing={authContext?.gamesPageAppData?.refreshing}
+          refreshing={false}
+          onRefresh={onRefresh} />}>
         <View style={style.pageHeadingWithMoreInfoBtn}>
           <Text style={style.pageHeading}>
             <FormattedMessage defaultMessage={'Games'} description={'games page heading'} />
@@ -1073,6 +1093,10 @@ const Games = ({ navigation }) => {
           }
         </ScrollView>
       </BottomSheet>
+      <Loader
+        route={'Games'}
+        ref={loaderRef}
+      />
     </>
   );
 };

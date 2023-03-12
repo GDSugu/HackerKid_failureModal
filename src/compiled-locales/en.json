@@ -29,6 +29,12 @@
       "value": "step"
     }
   ],
+  "+c+in9": [
+    {
+      "type": 0,
+      "value": "Activate Subscription"
+    }
+  ],
   "+f2V2I": [
     {
       "type": 1,
@@ -95,6 +101,12 @@
     {
       "type": 0,
       "value": "shrey Daga's Father"
+    }
+  ],
+  "/3gG1X": [
+    {
+      "type": 0,
+      "value": "Achieved Badge"
     }
   ],
   "/Gy7qZ": [
@@ -849,6 +861,12 @@
       "value": "message"
     }
   ],
+  "71kplp": [
+    {
+      "type": 0,
+      "value": "something went wrong"
+    }
+  ],
   "74UjvK": [
     {
       "type": 0,
@@ -1141,12 +1159,6 @@
     {
       "type": 0,
       "value": "Login"
-    }
-  ],
-  "9ppS9d": [
-    {
-      "type": 0,
-      "value": "Go to Class"
     }
   ],
   "A/XB4F": [
@@ -1449,6 +1461,12 @@
     {
       "type": 0,
       "value": "Aithih"
+    }
+  ],
+  "CyuuLf": [
+    {
+      "type": 0,
+      "value": "Phone"
     }
   ],
   "Czb4m8": [
@@ -2139,6 +2157,12 @@
       "value": "title"
     }
   ],
+  "KwtdsL": [
+    {
+      "type": 0,
+      "value": "Activate"
+    }
+  ],
   "KzGZsa": [
     {
       "type": 0,
@@ -2155,12 +2179,6 @@
     {
       "type": 0,
       "value": "FREE"
-    }
-  ],
-  "L6IwvI": [
-    {
-      "type": 0,
-      "value": "Buy premium to unlock school clubs feature"
     }
   ],
   "L7Gsfw": [
@@ -2517,12 +2535,6 @@
       "value": "Register"
     }
   ],
-  "OXM3Ji": [
-    {
-      "type": 0,
-      "value": "View Club"
-    }
-  ],
   "OYOyLO": [
     {
       "type": 0,
@@ -2611,6 +2623,12 @@
     {
       "type": 0,
       "value": "Home"
+    }
+  ],
+  "PV0XXJ": [
+    {
+      "type": 0,
+      "value": "View All Awards"
     }
   ],
   "PaprdD": [
@@ -4183,12 +4201,6 @@
       "value": "navigationText"
     }
   ],
-  "iebFqD": [
-    {
-      "type": 1,
-      "value": "clubName"
-    }
-  ],
   "iohPi0": [
     {
       "type": 0,
@@ -4211,6 +4223,12 @@
     {
       "type": 1,
       "value": "name"
+    }
+  ],
+  "jCDRHF": [
+    {
+      "type": 0,
+      "value": "Try again"
     }
   ],
   "jDzDCp": [
@@ -4281,6 +4299,12 @@
     {
       "type": 0,
       "value": "reach@hackerkid.org"
+    }
+  ],
+  "jtD1T3": [
+    {
+      "type": 0,
+      "value": "View"
     }
   ],
   "jzHe4a": [
@@ -4621,12 +4645,6 @@
     {
       "type": 0,
       "value": "View more"
-    }
-  ],
-  "nn7wTW": [
-    {
-      "type": 0,
-      "value": "Most active members"
     }
   ],
   "nnfaF3": [
@@ -5331,6 +5349,16 @@
       "value": "Create"
     }
   ],
+  "vVpBl2": [
+    {
+      "type": 1,
+      "value": "coins"
+    },
+    {
+      "type": 0,
+      "value": " coins"
+    }
+  ],
   "vWe94i": [
     {
       "type": 0,
@@ -5431,6 +5459,12 @@
     {
       "type": 0,
       "value": "For Classes 5 & 6"
+    }
+  ],
+  "x2v0yK": [
+    {
+      "type": 0,
+      "value": "Payment Id"
     }
   ],
   "x4kCc4": [
@@ -5637,12 +5671,6 @@
     {
       "type": 0,
       "value": "Practise... or play with the new code editor"
-    }
-  ],
-  "zROcjU": [
-    {
-      "type": 0,
-      "value": "Coming soon"
     }
   ],
   "zXjEvn": [

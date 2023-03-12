@@ -31,7 +31,9 @@ const getStyles = (utilColors) => StyleSheet.create({
 });
 
 const GameHeader = ({
-  game, route, closeLeaderBoard = false, animation = true,
+  game,
+  // route,
+  closeLeaderBoard = false, animation = true,
 }) => {
   const navigation = useNavigation();
   const { theme: { utilColors } } = React.useContext(ThemeContext);
@@ -54,8 +56,9 @@ const GameHeader = ({
         style={style.flexHorizontal}
       >
         {
-          !(route.includes('Home'))
-          && <>
+          // !(route.includes('Home'))
+          // && <>
+          <>
             <TouchableOpacity onPress={() => {
               if (!closeLeaderBoard) {
                 navigation.navigate('GameLeaderBoard', { game });

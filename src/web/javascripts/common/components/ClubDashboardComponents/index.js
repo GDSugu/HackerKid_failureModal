@@ -1969,7 +1969,8 @@ const ClubAdvancedComponent = ({
           .then((res) => {
             $('#loader').hide();
             if (res !== 'access_denied' && res.status !== 'error') {
-              window.location.reload();
+              // window.location.reload();
+              window.location.pathname = 'clubs';
             }
           });
       };
