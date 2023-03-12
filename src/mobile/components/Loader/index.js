@@ -209,7 +209,6 @@ const ScreenLoader = ({ route, duration = 250 }, ref) => {
   };
 
   const showLoader = () => {
-    console.log('showing');
     isAnimationRunning.current = true;
     removeListeners();
     setIsLoaderVisible(true);
@@ -218,7 +217,6 @@ const ScreenLoader = ({ route, duration = 250 }, ref) => {
   };
 
   const closeLoader = () => {
-    console.log('closing');
     removeListeners();
     setIsLoaderVisible(false);
   };

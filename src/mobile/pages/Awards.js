@@ -3,9 +3,10 @@ import React, {
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
-  LogBox, ScrollView, Text, View, Image, StyleSheet,
+  LogBox, ScrollView, Text, View, StyleSheet,
   TextInput,
 } from 'react-native';
+import { SvgUri } from 'react-native-svg';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useAwards } from '../../hooks/pages/awards';
 import AwardProgressBar from '../components/AwardProgressBar';
@@ -16,6 +17,7 @@ import SortIconSvg from '../../images/common/sort-icon.svg';
 import SearchIconSvg from '../../images/common/search-icon.svg';
 import { useTimeTrack } from '../../hooks/pages/timeTrack';
 import Loader from '../components/Loader';
+import { debounce1 as debounce } from '../../hooks/common/utlis';
 
 const getStyles = (theme, utilColors, font, gradients) => StyleSheet.create({
   container: {
@@ -27,7 +29,7 @@ const getStyles = (theme, utilColors, font, gradients) => StyleSheet.create({
     paddingHorizontal: 18,
   },
   mainContainer: {
-    paddingHorizontal: 18,
+    paddingHorizontal: 12,
   },
   textColor1: {
     color: utilColors.dark,
@@ -66,8 +68,8 @@ const getStyles = (theme, utilColors, font, gradients) => StyleSheet.create({
     paddingHorizontal: 13,
   },
   awardImgContainer: {
-    width: 43,
-    height: 34,
+    width: 48,
+    height: 48,
     marginRight: 20,
   },
   awardImg: {
@@ -118,9 +120,9 @@ const getStyles = (theme, utilColors, font, gradients) => StyleSheet.create({
   bottomSheetAwardImage: {
     marginTop: 30,
     alignSelf: 'center',
-    width: 72,
-    height: 54,
-    resizeMode: 'contain',
+    width: 96,
+    height: 96,
+    // resizeMode: 'contain',
   },
   awardTitleWithSubtitleSection: {
     marginTop: 24,
@@ -334,6 +336,8 @@ const Awards = ({ navigation }) => {
       });
   };
 
+  const debouncedOnSearchBoxChange = debounce(onSearchBoxChange, 300);
+
   const onSeeMoreCardPress = (requestedLimit) => {
     showLoader();
     getAwards({
@@ -356,7 +360,7 @@ const Awards = ({ navigation }) => {
     draggableIcon: style.bottomSheetDragButton,
     container: {
       backgroundColor: '#00000000',
-      paddingHorizontal: 12,
+      // paddingHorizontal: 12,
     },
   };
 
@@ -408,7 +412,8 @@ const Awards = ({ navigation }) => {
             placeholder={'Search'}
             style={[style.searchBox, style.text, style.textColor1]}
             placeholderTextColor={style.textColor1.color}
-            onChangeText={onSearchBoxChange}
+            // onChangeText={onSearchBoxChange}
+            onChangeText={debouncedOnSearchBoxChange}
           />
           <SearchIconSvg style={style.searchIcon} />
         </View>
@@ -480,9 +485,16 @@ const Awards = ({ navigation }) => {
       contentPanEnabled={true}
     >
       <View style={[style.whiteBg, style.bottomSheetBody]}>
-        <Image
+        {/* <Image
           source={{ uri: awardInfoToView.awardImage }}
-          style={style.bottomSheetAwardImage} />
+          style={style.bottomSheetAwardImage} /> */}
+        <View style={style.bottomSheetAwardImage}>
+          <SvgUri
+            uri={awardInfoToView.awardImage}
+            width={'100%'}
+            height={'100%'}
+          />
+        </View>
         <View style={style.awardTitleWithSubtitleSection}>
           <Text style={[style.textColor1, style.text]}>
             <FormattedMessage defaultMessage={'{awardName}'} description='award name' values={{
