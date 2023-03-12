@@ -92,12 +92,12 @@ const useWebkataSubmitQuestion = ({ isPageMounted }) => {
         if (isPageMounted.current) {
           if (res !== 'access_denied') {
             const data = JSON.parse(res);
-            if (res.pointsDetails.addedPoints) {
+            if (data.pointsDetails.addedPoints) {
               getSession('pointsEarned')
                 .then((pointsEarned) => {
                   const availablePoints = pointsEarned ? Number(pointsEarned) : 0;
                   const newPoints = availablePoints
-                    + Number(res.pointsDetails.addedPoints);
+                    + Number(data.pointsDetails.addedPoints);
                   setSession('pointsEarned', newPoints);
                 });
             }

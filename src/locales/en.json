@@ -1531,10 +1531,6 @@
     "defaultMessage": "More Info",
     "description": "More info button"
   },
-  "OEPiPP": {
-    "defaultMessage": "More friends = More fun",
-    "description": "More card Title"
-  },
   "OG2BxR": {
     "defaultMessage": "FREE",
     "description": "HackerKID Trial Edition Free"
@@ -1691,10 +1687,6 @@
   "RE7c5M": {
     "defaultMessage": "{awardName}",
     "description": "award name label"
-  },
-  "REPA3X": {
-    "defaultMessage": "Join your friends in the club",
-    "description": "More card Subtitle"
   },
   "RHM1lo": {
     "defaultMessage": "Re-type Password",
@@ -2469,10 +2461,6 @@
   "gCfRUT": {
     "defaultMessage": "{stateName}"
   },
-  "gE6jN3": {
-    "defaultMessage": "School Clubs",
-    "description": "More card Title"
-  },
   "gOkIvb": {
     "defaultMessage": "Name",
     "description": "Name label"
@@ -3160,10 +3148,6 @@
     "defaultMessage": "Output will be shown here",
     "description": "output box placeholder text"
   },
-  "t7ObEx": {
-    "defaultMessage": "Unlock Now",
-    "description": "More card button text"
-  },
   "tAiFjx": {
     "defaultMessage": "Challenges",
     "description": "Games title"
@@ -3219,10 +3203,6 @@
   "u7sb8V": {
     "defaultMessage": "Indra gandhi public school",
     "description": "Modern Vidya Ketan title"
-  },
-  "uA6ep3": {
-    "defaultMessage": "Buy premium to use this feature",
-    "description": "More card Subtitle"
   },
   "uCGdYb": {
     "defaultMessage": "Club Name",
@@ -3466,10 +3446,6 @@
   "ygjPEa": {
     "defaultMessage": "{title}",
     "description": "Nav Title text"
-  },
-  "yjWbPf": {
-    "defaultMessage": "Visit Club",
-    "description": "More card button text"
   },
   "yujxGL": {
     "defaultMessage": "Your Collections and Perks",

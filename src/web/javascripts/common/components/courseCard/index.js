@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import 'swiper/swiper.scss';
 import 'swiper/modules/navigation/navigation.scss';
