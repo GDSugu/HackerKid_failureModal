@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
-  Dimensions, FlatList, ImageBackground, StyleSheet, Text, TouchableOpacity, View,
+  Dimensions, FlatList, ImageBackground, StyleSheet, Text, TouchableOpacity, View, Image,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
@@ -9,6 +9,9 @@ import levelCurrentImg from '../../../images/games/level_current.png';
 import levelCompletedImg from '../../../images/games/level_completed.png';
 import levelNotCompletedImg from '../../../images/games/level_not_completed.png';
 import Icon from '../../common/Icons';
+import { SubscriptionContext } from '../../../hooks/pages/root';
+import { isFeatureEnabled } from '../../../web/javascripts/common/framework';
+import lockImg from '../../../images/common/feature-lock-white.png';
 
 const getStyle = (font, theme, utilColors) => StyleSheet.create({
   container: {
@@ -77,22 +80,31 @@ const getStyle = (font, theme, utilColors) => StyleSheet.create({
 });
 
 const LevelButton = ({
-  currentQuestionId, onLevelButtonPress, isLast, question, style, virtualId, closeLevels,
+  currentQuestionId,
+  onLevelButtonPress,
+  isLast,
+  question,
+  style,
+  virtualId,
+  closeLevels,
+  questionState,
 }) => {
   let bgImg = levelNotCompletedImg;
 
   if (question) {
     if (currentQuestionId === virtualId) {
       bgImg = levelCurrentImg;
-    } else if (question.state === 'completed') {
+    } else if (questionState === 'completed') {
       bgImg = levelCompletedImg;
-    } else if (question.state === 'open') {
+    } else if (questionState === 'open' || questionState === 'locked') {
       bgImg = levelNotCompletedImg;
     }
   }
 
-  const handleLevel = () => {
+  const handleLevel = (qnState) => {
     if (question) {
+      if (qnState === 'locked') return;
+
       onLevelButtonPress(virtualId);
       closeLevels();
     }
@@ -100,22 +112,32 @@ const LevelButton = ({
 
   return <>
     {!isLast && <View style={style.verticalBar} />}
-    <TouchableOpacity onPress={handleLevel}>
+    <TouchableOpacity onPress={() => handleLevel(questionState)}>
       <ImageBackground
         source={bgImg}
         style={style.levelBtn}
         resizeMethod='resize'
         resizeMode='cover'
       >
-        <Text style={style.levelText}>
-          <FormattedMessage
-            defaultMessage='{level}'
-            description='Level Button'
-            values={{
-              level: virtualId,
-            }}
-          />
-        </Text>
+        {
+          questionState === 'locked'
+            ? <Image
+              style={{
+                width: 50,
+                height: 40,
+              }}
+              source={lockImg}
+            />
+            : <Text style={style.levelText}>
+              <FormattedMessage
+                defaultMessage='{level}'
+                description='Level Button'
+                values={{
+                  level: virtualId,
+                }}
+              />
+            </Text>
+        }
       </ImageBackground>
     </TouchableOpacity>
   </>;
@@ -134,10 +156,31 @@ const WebkataGameLevelComponent = ({
   themeKey,
   utilColors,
 }) => {
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+
   const style = getStyle(font, theme[themeKey], utilColors);
   let currentQuestionId;
 
-  const { questionList } = webkataState;
+  const { questionList, questionObject } = webkataState;
+
+  const gamesLimit = (gameName) => {
+    const gamesEnabled = isFeatureEnabled(subscriptionData, 'games', gameName);
+    return gamesEnabled.enabled && gamesEnabled[gameName];
+  };
+
+  const questionState = (gameName, question, virtualId) => {
+    if (question.state === 'completed') {
+      return 'completed';
+    }
+    const gameLimit = gamesLimit(gameName);
+    if (gameLimit && virtualId > gameLimit) {
+      return 'locked';
+    }
+    if ((question.state === 'current') && (question.id !== questionObject?.qid)) {
+      return 'open';
+    }
+    return (question.state || 'open');
+  };
 
   if (questionList) {
     currentQuestionId = questionList
@@ -178,6 +221,7 @@ const WebkataGameLevelComponent = ({
                       style={style}
                       virtualId={index + 1}
                       isLast={index === questionList.length - 1}
+                      questionState={questionState('webkata', item, index + 1)}
                     />
                   </>)}
                 />

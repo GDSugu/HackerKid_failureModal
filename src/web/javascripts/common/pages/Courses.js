@@ -19,14 +19,14 @@ const CourseModule = ({ items, isDesktop }) => (
   <>
     <div className="course-card-container">
       <h5>
-      <FormattedMessage
-        // defaultMessage={'{name} - {type}'}
-        defaultMessage={'{modName}'}
-        description={'course Heading'}
-        // values={{ name: items.moduleName, type: items.type }}
-        values={{
-          modName: `${items.moduleName} ${items?.type ? ` - ${items.type}` : ''}`,
-        }}
+        <FormattedMessage
+          // defaultMessage={'{name} - {type}'}
+          defaultMessage={'{modName}'}
+          description={'course Heading'}
+          // values={{ name: items.moduleName, type: items.type }}
+          values={{
+            modName: `${items.moduleName} ${items?.type ? ` - ${items.type}` : ''}`,
+          }}
         />
       </h5>
       <CustomSwiperComponent
@@ -136,23 +136,23 @@ const animateTotalCount = (selectorPrefix, score, percentage) => {
 const secToMin = (time) => (time > 60 ? `${Math.floor(time / 60)} mins` : `${time} sec`);
 
 const ProgressDesktopCard = ({ progress }) => <div className='module-progress-container'>
-<div className='module-card-cont'>
-  <img
-    className='module-img'
-    src={progress.thumbnail}
-  />
-  <div>
-    <p className='mb-0'><FormattedMessage
-  defaultMessage={'{name}'}
-  values={{ name: progress.moduleName }}/></p>
-    <p className='watched-count'><FormattedMessage
-  defaultMessage={'{completed}/{total} watched'}
-  values={{ completed: `${progress.watched ? progress.watched : 0}`, total: progress.totalVideos }}/></p>
+  <div className='module-card-cont'>
+    <img
+      className='module-img'
+      src={progress.thumbnail}
+    />
+    <div>
+      <p className='mb-0'><FormattedMessage
+        defaultMessage={'{name}'}
+        values={{ name: progress.moduleName }} /></p>
+      <p className='watched-count'><FormattedMessage
+        defaultMessage={'{completed}/{total} watched'}
+        values={{ completed: `${progress.watched ? progress.watched : 0}`, total: progress.totalVideos }} /></p>
+    </div>
   </div>
-</div>
-<div className='module-progress'>
-  <div className='d-flex justify-content-around'>
-    {/* <div className='d-flex'>
+  <div className='module-progress'>
+    <div className='d-flex justify-content-around'>
+      {/* <div className='d-flex'>
       <Img
         className='module-icons'
         src='../../../../images/common/xp.png' />
@@ -160,19 +160,19 @@ const ProgressDesktopCard = ({ progress }) => <div className='module-progress-co
   defaultMessage={'{xp} xp'}
   values={{ xp: progress.xpEarned }}/></p>
     </div> */}
-    <div className='d-flex mb-2'>
-      <Img
-        className='module-icons'
-        src='../../../../images/courses/timer.png' />
-      <p className='ml-1 mb-0'><FormattedMessage
-  defaultMessage={'{time}'}
-  values={{ time: secToMin(progress.watchTime) }}/></p>
+      <div className='d-flex mb-2'>
+        <Img
+          className='module-icons'
+          src='../../../../images/courses/timer.png' />
+        <p className='ml-1 mb-0'><FormattedMessage
+          defaultMessage={'{time}'}
+          values={{ time: secToMin(progress.watchTime) }} /></p>
+      </div>
+    </div>
+    <div>
+      <div className='linear-progress-bar'><div className='progress-done' style={{ width: `${(progress.watched / progress.totalVideos) * 100}%` }}></div></div>
     </div>
   </div>
-  <div>
-    <div className='linear-progress-bar'><div className='progress-done' style={{ width: `${(progress.watched / progress.totalVideos) * 100}%` }}></div></div>
-  </div>
-</div>
 </div>;
 
 const CourseDetailsCard = ({ overallProgress, progress, moduleData }) => {
@@ -195,12 +195,12 @@ const CourseDetailsCard = ({ overallProgress, progress, moduleData }) => {
     <div>
       <div className='progress-card-cont'>
         <div className='overall-progress-cont col-6 col-sm-4'>
-        <div className='kids-img-cont '>
-        <div className="hero-card-img"
+          <div className='kids-img-cont '>
+            <div className="hero-card-img"
               style={{ backgroundImage: `url(${profileLink})` }}></div>
-        </div>
-        <div className='xp-coins-cont'>
-          {/* <div className='d-flex align-items-center mr-3'>
+          </div>
+          <div className='xp-coins-cont'>
+            {/* <div className='d-flex align-items-center mr-3'>
           <Img
           src='courses/xp.png'/>
           <h5 className='xp-text'>
@@ -209,28 +209,28 @@ const CourseDetailsCard = ({ overallProgress, progress, moduleData }) => {
             values={{ xp: overallProgress.xpEarned }}/>
           </h5>
           </div> */}
-          <div className='d-flex align-items-center ml-3'>
-          <Img
-          src='courses/Coins.png'/>
-          <h5 className='xp-text'>
-            <FormattedMessage
-            defaultMessage={'{coins} coins'}
-            values={{ coins: overallProgress.coinsEarned }}/>
-          </h5>
+            <div className='d-flex align-items-center ml-3'>
+              <Img
+                src='courses/Coins.png' />
+              <h5 className='xp-text'>
+                <FormattedMessage
+                  defaultMessage={'{coins} coins'}
+                  values={{ coins: overallProgress.coinsEarned }} />
+              </h5>
+            </div>
           </div>
         </div>
+        <div className='progress-cont col-6 col-sm-8'>
+          <div className='circular-progress-container'>
+            <CircularProgress
+              value={overallProgress.completedCount}
+              totalValue={overallProgress.totalVideos} />
+          </div>
+          {(progress && progress.length > 0) ? <ProgressDesktopCard
+            progress={progress[0]} /> : <ProgressDesktopCard
+            progress={dummyData} />}
         </div>
-      <div className='progress-cont col-6 col-sm-8'>
-      <div className='circular-progress-container'>
-        <CircularProgress
-          value={overallProgress.completedCount}
-          totalValue={overallProgress.totalVideos} />
       </div>
-      {(progress && progress.length > 0) ? <ProgressDesktopCard
-      progress={progress[0]}/> : <ProgressDesktopCard
-      progress={dummyData}/>}
-      </div>
-    </div>
     </div>
   );
 };
@@ -259,7 +259,7 @@ const CourseDetailsCardMobile = ({ progress, overallProgress }) => (
     {overallProgress && <div className="overall-mobile-cont">
       <div className="circular-progress-container-mobile">
         <CircularProgress value={overallProgress.completedCount}
-            totalValue={overallProgress.totalVideos} />
+          totalValue={overallProgress.totalVideos} />
       </div>
       <div>
         <div className="d-flex align-items-center mb-3">
@@ -290,8 +290,8 @@ const CourseDetailsCardMobile = ({ progress, overallProgress }) => (
       </div>
     </div>}
     {(progress && progress.length > 0) && progress.map((item, index) => <div
-    key={index}
-    className="module-progress-container">
+      key={index}
+      className="module-progress-container">
       <div className="module-card-cont">
         <img
           className="module-img"
@@ -409,27 +409,58 @@ const Courses = () => {
 
   const [filteredData, setFilterData] = useState(false);
 
-  const [filter, setFilter] = useState(false);
+  // const [filter, setFilter] = useState(false);
 
   const onPressMoreInfo = () => $('#course-progress-modal').modal('show');
 
-  const onChangeFilter = (filterValue) => {
-    let prevFilterValue = false;
-    setFilter((prev) => {
-      prevFilterValue = prev === filterValue ? false : filterValue;
-      return prevFilterValue;
+  // const onChangeFilter = (filterValue) => {
+  //   let prevFilterValue = false;
+  //   setFilter((prev) => {
+  //     prevFilterValue = prev === filterValue ? false : filterValue;
+  //     return prevFilterValue;
+  //   });
+  //   if (prevFilterValue) {
+  //     setFilterData(lockedData.filter((item) => item.type === prevFilterValue));
+  //   } else {
+  //     setFilterData(lockedData);
+  //   }
+  // };
+  const searchers = {};
+
+  if (lockedData) {
+    lockedData.forEach((module) => {
+      const searcher = new FuzzySearch(module.videos, ['title']);
+
+      searchers[module.moduleId] = searcher;
     });
-    if (prevFilterValue) {
-      setFilterData(lockedData.filter((item) => item.type === prevFilterValue));
-    } else {
-      setFilterData(lockedData);
-    }
-  };
-  const searcher = new FuzzySearch(lockedData, ['moduleName']);
+  }
+
   const onSearch = (e) => {
-    const keyword = e.target.value;
-    const result = searcher.search(keyword);
-    setFilterData(result);
+    const { value: keyword } = e.target;
+
+    if (keyword === '' || !keyword) {
+      setFilterData(false);
+    } else if (Object.keys(searchers).length) {
+      const searchResults = {};
+      Object.keys(searchers).forEach((moduleId) => {
+        const searcher = searchers[moduleId];
+        const searchResult = searcher.search(keyword);
+
+        searchResults[moduleId] = searchResult;
+      });
+
+      const newLockedData = lockedData.map((module) => {
+        if (searchResults[module.moduleId] !== undefined) {
+          const newModule = { ...module };
+          newModule.videos = searchResults[module.moduleId];
+
+          return newModule;
+        }
+        return module;
+      });
+
+      setFilterData(newLockedData);
+    }
   };
 
   const isDesktop = window.matchMedia('(min-width: 726px)').matches;
@@ -456,8 +487,8 @@ const Courses = () => {
         )}
         {!isDesktop && (
           <TopContainer
-            onChangeFilter={onChangeFilter}
-            filterSet={filter}
+            // onChangeFilter={onChangeFilter}
+            // filterSet={filter}
             searchOnChange={onSearch}
             pressMoreInfo={onPressMoreInfo}
           />
@@ -466,9 +497,9 @@ const Courses = () => {
           <div className="w-100 mt-4">
             <div className="course-card-container">
               <h5>
-              <FormattedMessage
-        defaultMessage={'Continue Watching'}
-        description={'Continue Watching'}/></h5>
+                <FormattedMessage
+                  defaultMessage={'Continue Watching'}
+                  description={'Continue Watching'} /></h5>
               <SwiperComponent
                 data={continueWatching}
                 SlideComponent={CourseCard}
@@ -489,26 +520,26 @@ const Courses = () => {
         )}
         {filteredData
           ? filteredData.map((eachModule, index) => (
-              <CourseModule
-                key={index}
-                items={eachModule}
-                isDesktop={isDesktop}
-              />
+            <CourseModule
+              key={index}
+              items={eachModule}
+              isDesktop={isDesktop}
+            />
           ))
           : lockedData
-            && lockedData.map((eachModule, index) => (
-              <CourseModule
-                key={index}
-                items={eachModule}
-                isDesktop={isDesktop}
-              />
-            ))}
-            {!isDesktop && overallProgress && progress.length > 0 && <BottomSheet
-            id={'course-progress-modal'}>
-              <CourseDetailsCardMobile
-        progress={progress}
-        overallProgress={overallProgress}/>
-              </BottomSheet>}
+          && lockedData.map((eachModule, index) => (
+            <CourseModule
+              key={index}
+              items={eachModule}
+              isDesktop={isDesktop}
+            />
+          ))}
+        {!isDesktop && overallProgress && progress.length > 0 && <BottomSheet
+          id={'course-progress-modal'}>
+          <CourseDetailsCardMobile
+            progress={progress}
+            overallProgress={overallProgress} />
+        </BottomSheet>}
       </div>
     </>
   );

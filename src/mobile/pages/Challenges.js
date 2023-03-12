@@ -81,14 +81,12 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   challengeCardItem: {
     margin: 4,
     width: 200,
-    height: 120,
     borderRadius: 12,
-    backgroundColor: theme.bg1,
   },
   challengeCardImage: {
     borderRadius: 12,
     width: '100%',
-    height: '100%',
+    height: 110,
     resizeMode: 'cover',
   },
   challengeCardList: {
@@ -110,6 +108,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: theme.bg1,
+    height: 110,
   },
   navigationalCardText: {
     ...font.subtitle1,

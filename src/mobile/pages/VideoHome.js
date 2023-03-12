@@ -5,7 +5,6 @@ import {
   Text,
   StyleSheet,
   View,
-  Dimensions,
   TextInput,
   ScrollView,
   TouchableOpacity,
@@ -17,7 +16,7 @@ import { FormattedMessage } from 'react-intl';
 import FuzzySearch from 'fuzzy-search';
 import ThemeContext from '../components/theme';
 import useCourses from '../../hooks/pages/courses';
-import FilterIcon from '../../images/courses/filter-icon.svg';
+// import FilterIcon from '../../images/courses/filter-icon.svg';
 import SearchIcon from '../../images/courses/search.svg';
 import coinIcon from '../../images/courses/Coins.png';
 import xpIcon from '../../images/courses/XP.png';
@@ -26,201 +25,202 @@ import { ModuleContainer } from '../components/CourseComponents';
 import BottomSheet from '../components/BottomSheet';
 import CircleGradientProgressBar from '../components/CircleGradientProgressBar';
 import Loader from '../components/Loader';
+import { SubscriptionContext } from '../../hooks/pages/root';
+import { isFeatureEnabled } from '../../web/javascripts/common/framework';
 
 const secToMin = (time) => ((time > 50) ? `${Math.floor(time / 60)} min` : `${time} sec`);
 
-const getStyles = (theme, font, gradients, utilColors) => {
-  const totalWidth = Dimensions.get('window').width;
-  const searchBarWidth = totalWidth - 138;
+const getStyles = (theme, font, gradients, utilColors) => StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.bodyBg,
+    justifyContent: 'flex-start',
+  },
+  topHeadCont: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: 18,
+    marginVertical: 15,
+  },
+  filterCont: {
+    width: 90,
+    padding: 16,
+    borderRadius: 12,
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  searchBar: {
+    width: '100%',
+    color: utilColors.dark,
+  },
+  searchCont: {
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 12,
+    // marginLeft: 12,
+    paddingHorizontal: 18,
+    // width: searchBarWidth,
+    flex: 1,
+  },
+  filterAndSearch: {
+    flexDirection: 'row',
+    paddingHorizontal: 18,
+  },
+  filteroptionCont: {
+    position: 'absolute',
+    zIndex: 3,
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    padding: 16,
+    bottom: -100,
+    left: 18,
+  },
+  filterOptionBtn: {
+    borderWidth: 1,
+    borderColor: theme.navBg,
+    borderRadius: 14,
+    width: 14,
+    height: 14,
+    marginRight: 10,
+  },
+  filterOption: {
+    flexDirection: 'row',
+    marginBottom: 8,
+    alignItems: 'center',
+  },
+  selectedfilter: {
+    backgroundColor: theme.navBg,
+  },
+  vidoeHead: {
+    ...font.body,
+    color: '#000',
+  },
+  moreInfo: {
+    ...font.body,
+    color: theme.textBold,
+  },
+  detailsCont: {
+    backgroundColor: '#fff',
+    marginHorizontal: 18,
+    paddingVertical: 40,
+    paddingLeft: 20,
+    paddingRight: 56,
+    borderRadius: 12,
+  },
+  svgGradient: {
+    color: gradients.green,
+  },
+  progressBar: {
+    width: '40%',
+    marginTop: 10,
+  },
+  progressBodyText: {
+    ...font.overline,
+  },
+  progressInnerText: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  xpEarnedText: {
+    ...font.caption,
+  },
+  xpIcon: {
+    width: 30,
+    height: 30,
+  },
+  xpCont: {
+    flexDirection: 'row',
+  },
+  xpTextCont: {
+    marginLeft: 12,
+  },
+  progressBarCont: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  xpProgressCont: {
+    justifyContent: 'space-around',
+  },
+  xpHeight: {
+    marginBottom: 12,
+  },
+  linearProgress: {
+    height: 4,
+    flex: 1,
+    borderRadius: 5,
+  },
+  linearProgressCont: {
+    height: 4,
+    backgroundColor: theme.bodyBg,
+    marginHorizontal: 18,
+    marginVertical: 16,
+  },
+  xpcardCont: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  xpcardIcon: {
+    width: 19,
+    height: 19,
+  },
+  xpCardText: {
+    ...font.caption,
+    color: '#000',
+  },
+  xpcardTextCont: {
 
-  return StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: theme.bodyBg,
-      justifyContent: 'flex-start',
-    },
-    topHeadCont: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      marginHorizontal: 18,
-      marginVertical: 15,
-    },
-    filterCont: {
-      width: 90,
-      padding: 16,
-      borderRadius: 12,
-      backgroundColor: '#fff',
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-    },
-    searchBar: {
-      width: '100%',
-    },
-    searchCont: {
-      backgroundColor: '#fff',
-      flexDirection: 'row',
-      alignItems: 'center',
-      borderRadius: 12,
-      marginLeft: 12,
-      paddingHorizontal: 18,
-      width: searchBarWidth,
-    },
-    filterAndSearch: {
-      flexDirection: 'row',
-      paddingHorizontal: 18,
-    },
-    filteroptionCont: {
-      position: 'absolute',
-      zIndex: 3,
-      backgroundColor: '#fff',
-      borderRadius: 12,
-      padding: 16,
-      bottom: -100,
-      left: 18,
-    },
-    filterOptionBtn: {
-      borderWidth: 1,
-      borderColor: theme.navBg,
-      borderRadius: 14,
-      width: 14,
-      height: 14,
-      marginRight: 10,
-    },
-    filterOption: {
-      flexDirection: 'row',
-      marginBottom: 8,
-      alignItems: 'center',
-    },
-    selectedfilter: {
-      backgroundColor: theme.navBg,
-    },
-    vidoeHead: {
-      ...font.body,
-      color: '#000',
-    },
-    moreInfo: {
-      ...font.body,
-      color: theme.textBold,
-    },
-    detailsCont: {
-      backgroundColor: '#fff',
-      marginHorizontal: 18,
-      paddingVertical: 40,
-      paddingLeft: 20,
-      paddingRight: 56,
-      borderRadius: 12,
-    },
-    svgGradient: {
-      color: gradients.green,
-    },
-    progressBar: {
-      width: '40%',
-      marginTop: 10,
-    },
-    progressBodyText: {
-      ...font.overline,
-    },
-    progressInnerText: {
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-    xpEarnedText: {
-      ...font.caption,
-    },
-    xpIcon: {
-      width: 30,
-      height: 30,
-    },
-    xpCont: {
-      flexDirection: 'row',
-    },
-    xpTextCont: {
-      marginLeft: 12,
-    },
-    progressBarCont: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    },
-    xpProgressCont: {
-      justifyContent: 'space-around',
-    },
-    xpHeight: {
-      marginBottom: 12,
-    },
-    linearProgress: {
-      height: 4,
-      flex: 1,
-      borderRadius: 5,
-    },
-    linearProgressCont: {
-      height: 4,
-      backgroundColor: theme.bodyBg,
-      marginHorizontal: 18,
-      marginVertical: 16,
-    },
-    xpcardCont: {
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-    xpcardIcon: {
-      width: 19,
-      height: 19,
-    },
-    xpCardText: {
-      ...font.caption,
-      color: '#000',
-    },
-    xpcardTextCont: {
-
-    },
-    progressCardText: {
-      ...font.caption,
-    },
-    cardHead: {
-      color: '#000',
-      ...font.captionBold,
-      marginBottom: 5,
-    },
-    cardModuleImg: {
-      width: 80,
-      height: 45,
-      borderRadius: 12,
-      marginRight: 8,
-    },
-    cardProgressCont: {
-      flexDirection: 'row',
-    },
-    xpTimerCont: {
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      marginTop: 8,
-    },
-    cardwithProgress: {
-      backgroundColor: utilColors.bg2,
-      marginTop: 12,
-    },
-    moduleCard: {
-      backgroundColor: '#fff',
-      borderRadius: 12,
-      marginHorizontal: 18,
-      marginTop: 8,
-      padding: 16,
-    },
-  });
-};
+  },
+  progressCardText: {
+    ...font.caption,
+  },
+  cardHead: {
+    color: '#000',
+    ...font.captionBold,
+    marginBottom: 5,
+  },
+  cardModuleImg: {
+    width: 80,
+    height: 45,
+    borderRadius: 12,
+    marginRight: 8,
+  },
+  cardProgressCont: {
+    flexDirection: 'row',
+  },
+  xpTimerCont: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 8,
+  },
+  cardwithProgress: {
+    backgroundColor: utilColors.bg2,
+    marginTop: 12,
+  },
+  moduleCard: {
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    marginHorizontal: 18,
+    marginTop: 8,
+    padding: 16,
+  },
+});
 const VideoHome = ({ navigation }) => {
   const { font, theme } = useContext(ThemeContext);
   const pageTheme = theme.screenVideo;
   const style = getStyles(pageTheme, font, theme.gradients, theme.utilColors);
   const isPageMounted = useRef(true);
   const { courseData, static: { getVideosData } } = useCourses({ isPageMounted });
+  const { subscriptionData } = React.useContext(SubscriptionContext);
   const {
     moduleData, continueWatching, overallProgress, progress,
   } = courseData;
   const [filteredData, setFilterData] = useState(false);
-  const [filterVisible, setFilterVisible] = useState(false);
-  const [filter, setFilter] = useState(false);
+  // const [filterVisible, setFilterVisible] = useState(false);
+  // const [filter, setFilter] = useState(false);
   const loaderRef = useRef();
+  const [lockedData, setLockedData] = useState(false);
   const bottomSheetRef = useRef();
   const bottomSheetStyles = {
     draggableIcon: {
@@ -244,25 +244,72 @@ const VideoHome = ({ navigation }) => {
     }
   };
 
-  const onChangeFilter = (filterValue) => {
-    let prevFilterValue = false;
-    setFilter((prev) => {
-      prevFilterValue = prev === filterValue ? false : filterValue;
-      return prevFilterValue;
-    });
-    if (prevFilterValue) {
-      setFilterData(moduleData.filter((item) => item.type === prevFilterValue));
-    } else {
-      setFilterData(false);
-    }
+  // const onChangeFilter = (filterValue) => {
+  //   let prevFilterValue = false;
+  //   setFilter((prev) => {
+  //     prevFilterValue = prev === filterValue ? false : filterValue;
+  //     return prevFilterValue;
+  //   });
+  //   if (prevFilterValue) {
+  //     setFilterData(moduleData.filter((item) => item.type === prevFilterValue));
+  //   } else {
+  //     setFilterData(false);
+  //   }
+  // };
+
+  const coursesLimit = (category) => {
+    const coursesEnabled = isFeatureEnabled(subscriptionData, 'courses', category);
+    return coursesEnabled.enabled && coursesEnabled[category];
   };
-  const searcher = new FuzzySearch(moduleData, ['moduleName']);
+
+  useEffect(() => {
+    if (moduleData) {
+      moduleData.forEach((item, index) => {
+        const moduleLimit = coursesLimit(item.moduleId);
+        if (moduleLimit) {
+          item.videos.forEach((video, videoIndex) => {
+            if (videoIndex >= moduleLimit) {
+              moduleData[index].videos[videoIndex].locked = true;
+            }
+          });
+        }
+      });
+      setLockedData(moduleData);
+    }
+  }, [moduleData]);
+
+  const searchers = {};
+
+  if (lockedData) {
+    lockedData.forEach((module) => {
+      const searcher = new FuzzySearch(module.videos, ['title']);
+      searchers[module.moduleId] = searcher;
+    });
+  }
+
   const onSearch = (keyword) => {
     if (keyword === '' || !keyword) {
       setFilterData(false);
-    } else {
-      const result = searcher.search(keyword);
-      setFilterData(result);
+    } else if (Object.keys(searchers).length) {
+      const searchResults = {};
+      Object.keys(searchers).forEach((moduleId) => {
+        const searcher = searchers[moduleId];
+        const searchResult = searcher.search(keyword);
+
+        searchResults[moduleId] = searchResult;
+      });
+
+      const newLockedData = lockedData.map((module) => {
+        if (searchResults[module.moduleId] !== undefined) {
+          const newModule = { ...module };
+          newModule.videos = searchResults[module.moduleId];
+
+          return newModule;
+        }
+        return module;
+      });
+
+      setFilterData(newLockedData);
     }
   };
 
@@ -321,7 +368,7 @@ const VideoHome = ({ navigation }) => {
               </TouchableOpacity>
             </View>
             <View style={style.filterAndSearch}>
-              <TouchableOpacity onPress={() => setFilterVisible(!filterVisible)}>
+              {/* <TouchableOpacity onPress={() => setFilterVisible(!filterVisible)}>
                 <View style={style.filterCont}>
                   <FilterIcon />
                   <Text style={style.vidoeHead}>
@@ -331,7 +378,7 @@ const VideoHome = ({ navigation }) => {
                     />
                   </Text>
                 </View>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
               <View style={style.searchCont}>
                 <SearchIcon />
                 <TextInput
@@ -341,7 +388,7 @@ const VideoHome = ({ navigation }) => {
                   onChangeText={onSearch}
                 />
               </View>
-              {filterVisible && (
+              {/* {filterVisible && (
                 <View style={style.filteroptionCont}>
                   <TouchableOpacity
                     onPress={() => {
@@ -384,7 +431,7 @@ const VideoHome = ({ navigation }) => {
                     </View>
                   </TouchableOpacity>
                 </View>
-              )}
+              )} */}
             </View>
           </View>
 
@@ -399,8 +446,8 @@ const VideoHome = ({ navigation }) => {
             ? filteredData.map((item, index) => (
                 <ModuleContainer key={index} data={item} navigator={navigation} />
             ))
-            : moduleData
-              && moduleData.map((item, index) => (
+            : lockedData
+              && lockedData.map((item, index) => (
                 <ModuleContainer key={index} data={item} navigator={navigation} />
               ))}
         </ScrollView>

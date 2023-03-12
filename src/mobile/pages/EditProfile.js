@@ -67,6 +67,7 @@ const getStyles = (theme, utils, font) => StyleSheet.create({
     paddingHorizontal: 14,
     backgroundColor: utils.white,
     ...font.bodyBold,
+    color: utils.dark,
   },
   inputTextArea: {
     textAlignVertical: 'top',
@@ -134,8 +135,8 @@ const validate = (key, value) => {
 };
 
 const ErrorMessage = ({ message, style }) => <>
-    { message && <Text style={style}>{message}</Text>}
-  </>;
+  {message && <Text style={style}>{message}</Text>}
+</>;
 
 const EditProfile = ({ navigation }) => {
   const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
@@ -269,7 +270,7 @@ const EditProfile = ({ navigation }) => {
           if (status === 'access_denied') {
             Alert.alert('Error', 'Access denied. Please try again', [{ text: 'Go Back', onPress: () => navigation.goBack() }]);
           } else {
-            Alert.alert('Success', 'Profile updated successfully', [{ text: 'OK', onPress: () => {} }]);
+            Alert.alert('Success', 'Profile updated successfully', [{ text: 'OK', onPress: () => { } }]);
             authContext.setAuthState({
               appData: {
                 isRefresh: true,
@@ -295,7 +296,7 @@ const EditProfile = ({ navigation }) => {
       if (hasEdited.current) {
         e.preventDefault();
         Alert.alert('Warning', 'You have unsaved changes. Are you sure you want to leave?', [
-          { text: 'Cancel', style: 'cancel', onPress: () => {} },
+          { text: 'Cancel', style: 'cancel', onPress: () => { } },
           { text: 'Leave', style: 'destructive', onPress: () => navigation.dispatch(e.data.action) },
         ]);
       }

@@ -10,6 +10,7 @@ import {
 import { Skeleton } from '@rneui/base';
 import { FormattedMessage } from 'react-intl';
 // import LinearGradient from 'react-native-linear-gradient';
+import { SvgUri } from 'react-native-svg';
 import ThemeContext from '../components/theme';
 import LeaderboardSvg from '../../images/more/leaderboard.svg';
 import GameIcon from '../../images/common/black-joystick.svg';
@@ -114,18 +115,31 @@ const getStyles = (theme, utilColors, font, gradients) => StyleSheet.create({
     flexWrap: 'wrap',
     marginTop: 16,
     marginBottom: 7,
+    alignContent: 'center',
+    // justifyContent: 'center',
+    marginHorizontal: 'auto',
   },
   awardIcon: {
-    width: 42,
-    height: 32,
+    width: 64,
+    height: 64,
   },
   awardCard: {
-    width: 72,
-    height: 72,
-    paddingVertical: 20,
-    paddingHorizontal: 15,
-    marginRight: 7,
-    marginBottom: 7,
+    width: 108,
+    height: 108,
+    // paddingVertical: 20,
+    // paddingHorizontal: 15,
+    padding: 4,
+    marginRight: 6,
+    marginBottom: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  awardNameText: {
+    ...font.captionBold,
+    color: utilColors.dark,
+    alignItems: 'center',
+    textAlign: 'center',
+    marginTop: 8,
   },
   rowFlexCenter: {
     flexDirection: 'row',
@@ -230,10 +244,24 @@ const AwardsGrid = ({
       awards && awards.map((award, idx) => <View
         key={idx}
         style={[style.awardCard, style.awardsCardBg, style.borderRadius12]}>
-        <Image
+        {/* <Image
           style={style.awardIcon}
           source={{ uri: award.awardImage }}
+        /> */}
+        <SvgUri
+          uri={award.awardImage}
+          width={'60%'}
+          height={'60%'}
         />
+        <Text style={style.awardNameText}>
+          <FormattedMessage
+            defaultMessage={'{awardName}'}
+            description={'award name'}
+            values={{
+              awardName: award.awardName,
+            }}
+          />
+        </Text>
       </View>)
     }
     {
