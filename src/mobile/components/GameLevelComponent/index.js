@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
-  Dimensions, FlatList, ImageBackground, StyleSheet, Text, TouchableOpacity, View,
+  Dimensions, FlatList, ImageBackground, StyleSheet, Text, TouchableOpacity, View, Image,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
@@ -9,8 +9,11 @@ import LinearGradient from 'react-native-linear-gradient';
 import levelCurrentImg from '../../../images/games/level_current.png';
 import levelCompletedImg from '../../../images/games/level_completed.png';
 import levelNotCompletedImg from '../../../images/games/level_not_completed.png';
+import lockImg from '../../../images/common/feature-lock-white.png';
 import PlayBtn from '../../../images/games/playBtn.svg';
 import { Yellow } from '../../../colors/_colors';
+import { SubscriptionContext } from '../../../hooks/pages/root';
+import { isFeatureEnabled } from '../../../web/javascripts/common/framework';
 
 const getStyle = (font, theme, utilColors, forCodekata = false) => StyleSheet.create({
   container: {
@@ -72,17 +75,25 @@ const getStyle = (font, theme, utilColors, forCodekata = false) => StyleSheet.cr
 });
 
 const LevelButton = ({
-  closeLevel = () => {}, currentQuestionId, fetchQuestion, game, isLast, question, style, virtualId,
+  closeLevel = () => { },
+  currentQuestionId,
+  fetchQuestion,
+  game,
+  isLast,
+  question,
+  style,
+  virtualId,
+  questionState,
 }) => {
   let bgImg = levelNotCompletedImg;
-  let handleLevel = () => {};
+  let handleLevel = () => { };
 
   if (question) {
     if (currentQuestionId === virtualId) {
       bgImg = levelCurrentImg;
-    } else if (question.state === 'completed') {
+    } else if (questionState === 'completed') {
       bgImg = levelCompletedImg;
-    } else if (question.state === 'open') {
+    } else if (questionState === 'open' || questionState === 'locked') {
       bgImg = levelNotCompletedImg;
     }
   }
@@ -90,7 +101,9 @@ const LevelButton = ({
   switch (game) {
     case 'turtle':
       if (question) {
-        handleLevel = () => {
+        handleLevel = (qnState) => {
+          if (qnState === 'locked') return;
+
           fetchQuestion({ type: 'getQuestionById', questionId: question.question_id })
             .then(closeLevel);
         };
@@ -98,7 +111,9 @@ const LevelButton = ({
       break;
     case 'zombieLand':
       if (question) {
-        handleLevel = () => {
+        handleLevel = (qnState) => {
+          if (qnState === 'locked') return;
+
           fetchQuestion({ virtualId })
             .then(closeLevel);
         };
@@ -106,7 +121,9 @@ const LevelButton = ({
       break;
     case 'codekata':
       if (question) {
-        handleLevel = () => {
+        handleLevel = (qnState) => {
+          if (qnState === 'locked') return;
+
           fetchQuestion(question.virtualId)
             .then(closeLevel);
         };
@@ -116,23 +133,33 @@ const LevelButton = ({
   }
 
   return <>
-    { !isLast && <View style={style.verticalBar} /> }
-    <TouchableOpacity onPress={handleLevel}>
+    {!isLast && <View style={style.verticalBar} />}
+    <TouchableOpacity onPress={() => handleLevel(questionState)}>
       <ImageBackground
         source={bgImg}
         style={style.levelBtn}
         resizeMethod='resize'
         resizeMode='cover'
       >
-        <Text style={style.levelText}>
-          <FormattedMessage
-            defaultMessage='{level}'
-            description='Level Button'
-            values={{
-              level: virtualId,
-            }}
-          />
-        </Text>
+        {
+          questionState === 'locked'
+            ? <Image
+              style={{
+                width: 50,
+                height: 40,
+              }}
+              source={lockImg}
+            />
+            : <Text style={style.levelText}>
+              <FormattedMessage
+                defaultMessage='{level}'
+                description='Level Button'
+                values={{
+                  level: virtualId,
+                }}
+              />
+            </Text>
+        }
       </ImageBackground>
     </TouchableOpacity>
   </>;
@@ -149,7 +176,10 @@ const GameLevelComponent = ({
     ctxState: screenContext,
     fetchQuestion,
   } = context;
-  const { questionList } = screenContext;
+
+  const { questionList, questionObject } = screenContext;
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+
   let currentQuestionId;
 
   const closeLevel = () => {
@@ -164,6 +194,25 @@ const GameLevelComponent = ({
       return true;
     }
     return false;
+  };
+
+  const gamesLimit = (gameName) => {
+    const gamesEnabled = isFeatureEnabled(subscriptionData, 'games', gameName);
+    return gamesEnabled.enabled && gamesEnabled[gameName];
+  };
+
+  const questionState = (gameName, question, virtualId) => {
+    if (question.state === 'completed') {
+      return 'completed';
+    }
+    const gameLimit = gamesLimit(gameName);
+    if (gameLimit && virtualId > gameLimit) {
+      return 'locked';
+    }
+    if ((question.state === 'current') && (question.id !== questionObject?.qid)) {
+      return 'open';
+    }
+    return (question.state || 'open');
   };
 
   switch (game) {
@@ -188,30 +237,33 @@ const GameLevelComponent = ({
   }
 
   return <>
-  {
-    screenContext?.uiData?.showGameLevel
-    && <>
-      <LinearGradient
-        key={screenContext?.uiData?.refreshKey || 0}
-        colors={gradients.darkTransparent1}
-        style={style.container}>
-        <Animatable.View
-          animation={screenContext?.uiData?.showGameLevel ? 'slideInDown' : 'slideOutUp'}
-          duration={300}>
-                {
-                questionList
-                && <>
-                  <FlatList
-                    data={questionList}
-                    initialScrollIndex={currentQuestionId - 1}
-                    style={style.levelContainer}
-                    contentContainerStyle={style.levelContainerContent}
-                    getItemLayout={(data, index) => ({
-                      length: 120,
-                      offset: 120 * index,
-                      index,
-                    })}
-                    renderItem={({ item, index }) => (<>
+    {
+      screenContext?.uiData?.showGameLevel
+      && <>
+        <LinearGradient
+          key={screenContext?.uiData?.refreshKey || 0}
+          colors={gradients.darkTransparent1}
+          style={style.container}>
+          <Animatable.View
+            animation={screenContext?.uiData?.showGameLevel ? 'slideInDown' : 'slideOutUp'}
+            duration={300}>
+            {
+              questionList
+              && <>
+                <FlatList
+                  data={questionList}
+                  initialScrollIndex={currentQuestionId - 1}
+                  style={style.levelContainer}
+                  contentContainerStyle={style.levelContainerContent}
+                  getItemLayout={(data, index) => ({
+                    length: 120,
+                    offset: 120 * index,
+                    index,
+                  })}
+                  renderItem={({ item, index }) => {
+                    const state = questionState(game, item, index + 1);
+
+                    return <>
                       <LevelButtonComponent
                         key={index}
                         currentQuestionId={currentQuestionId}
@@ -222,26 +274,28 @@ const GameLevelComponent = ({
                         isLast={index === questionList.length - 1}
                         game={game}
                         closeLevel={closeLevel}
+                        questionState={state}
                       />
-                    </>)}
-                  />
-                </>
-              }
-        </Animatable.View>
-        <TouchableOpacity onPress={closeLevel} style={style.tryNowBtn}>
-          <View style={style.rowBetween}>
-            <Text style={style.titleText}>
-              <FormattedMessage
-                defaultMessage='Continue Playing'
-                description='Continue Playing Button'
-              />
-            </Text>
-            <PlayBtn width={24} height={24} />
-          </View>
-        </TouchableOpacity>
-      </LinearGradient>
-    </>
-  }
+                    </>;
+                  }}
+                />
+              </>
+            }
+          </Animatable.View>
+          <TouchableOpacity onPress={closeLevel} style={style.tryNowBtn}>
+            <View style={style.rowBetween}>
+              <Text style={style.titleText}>
+                <FormattedMessage
+                  defaultMessage='Continue Playing'
+                  description='Continue Playing Button'
+                />
+              </Text>
+              <PlayBtn width={24} height={24} />
+            </View>
+          </TouchableOpacity>
+        </LinearGradient>
+      </>
+    }
   </>;
 };
 

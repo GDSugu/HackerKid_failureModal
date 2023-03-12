@@ -12,11 +12,12 @@ import ThemeContext from '../components/theme';
 import Icon from '../common/Icons';
 import collectionIllustration from '../../images/more/collectibles.png';
 import ideIllustration from '../../images/more/ide.png';
-// import moreFriendsIllustration from '../../images/more/moreFriends.png';
+import moreFriendsIllustration from '../../images/more/moreFriends.png';
 import { LightBlue } from '../../colors/_colors';
 import { useLogout } from '../../hooks/pages/auth';
 import LogoutModal from '../components/Modals/LogoutModal';
-import { AuthContext } from '../../hooks/pages/root';
+import { AuthContext, SubscriptionContext } from '../../hooks/pages/root';
+import { isFeatureEnabled } from '../../web/javascripts/common/framework';
 
 const getStyles = (theme, font, utils) => StyleSheet.create({
   container: {
@@ -134,6 +135,13 @@ const More = ({ navigation }) => {
   const authContext = useContext(AuthContext);
   const { logout } = useLogout();
 
+  const { subscriptionData } = useContext(SubscriptionContext);
+
+  const isClubEnabled = () => {
+    const clubEnabled = isFeatureEnabled(subscriptionData, 'clubs');
+    return clubEnabled && clubEnabled.enabled;
+  };
+
   const handlelogoutBtn = () => {
     authContext.setAuthState({
       appData: {
@@ -201,45 +209,87 @@ const More = ({ navigation }) => {
             </ImageBackground>
           </View>
 
-          {/* <View style={style.moreCard}>
-            <ImageBackground
-              source={moreFriendsIllustration}
-              resizeMethod={'scale'}
-              resizeMode={'contain'}
-              style={style.moreCardBg}
-              imageStyle={style.moreFriendsImgBg}
-            >
-              <View style={style.moreCardContainer}>
-                <View>
-                  <Text style={style.moreCardTitle}>
-                    <FormattedMessage
-                      defaultMessage="More friends = More fun"
-                      description="More card Title"
-                    />
-                  </Text>
-                  <Text style={style.moreCardSubtitleText}>
-                    <FormattedMessage
-                      defaultMessage="Join your friends in the club"
-                      description="More card Subtitle"
-                    />
-                  </Text>
-                </View>
-                <View style={style.moreBtnContainer}>
-                  <TouchableOpacity
-                    onPress={() => navigation.navigate('Club')}
-                    style={style.moreCardButton}
-                    >
-                    <Text style={style.moreCardButtonText}>
+          {
+            isClubEnabled() ? <View style={style.moreCard}>
+              <ImageBackground
+                source={moreFriendsIllustration}
+                resizeMethod={'scale'}
+                resizeMode={'contain'}
+                style={style.moreCardBg}
+                imageStyle={style.moreFriendsImgBg}
+              >
+                <View style={style.moreCardContainer}>
+                  <View>
+                    <Text style={style.moreCardTitle}>
                       <FormattedMessage
-                        defaultMessage="Visit Club"
-                        description="More card button text"
+                        defaultMessage="More friends = More fun"
+                        description="More card Title"
                       />
                     </Text>
-                  </TouchableOpacity>
+                    <Text style={style.moreCardSubtitleText}>
+                      <FormattedMessage
+                        defaultMessage="Join your friends in the club"
+                        description="More card Subtitle"
+                      />
+                    </Text>
+                  </View>
+                  <View style={style.moreBtnContainer}>
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate('Club')}
+                      style={style.moreCardButton}
+                    >
+                      <Text style={style.moreCardButtonText}>
+                        <FormattedMessage
+                          defaultMessage="Visit Club"
+                          description="More card button text"
+                        />
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
+              </ImageBackground>
+            </View>
+              : <View style={style.moreCard}>
+                <ImageBackground
+                  source={moreFriendsIllustration}
+                  resizeMethod={'scale'}
+                  resizeMode={'contain'}
+                  style={style.moreCardBg}
+                  imageStyle={style.moreFriendsImgBg}
+                >
+                  <View style={style.moreCardContainer}>
+                    <View>
+                      <Text style={style.moreCardTitle}>
+                        <FormattedMessage
+                          defaultMessage="School Clubs"
+                          description="More card Title"
+                        />
+                      </Text>
+                      <Text style={style.moreCardSubtitleText}>
+                        <FormattedMessage
+                          defaultMessage="Buy premium to use this feature"
+                          description="More card Subtitle"
+                        />
+                      </Text>
+                    </View>
+                    <View style={style.moreBtnContainer}>
+                      <TouchableOpacity
+                        onPress={() => { }}
+                        // onPress={() => navigation.navigate('Pricing')}
+                        style={style.moreCardButton}
+                      >
+                        <Text style={style.moreCardButtonText}>
+                          <FormattedMessage
+                            defaultMessage="Unlock Now"
+                            description="More card button text"
+                          />
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </ImageBackground>
               </View>
-            </ImageBackground>
-          </View> */}
+          }
 
           <View style={style.moreCard}>
             <ImageBackground

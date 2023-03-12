@@ -18,6 +18,7 @@ import useRootPageState from '../hooks/pages/root';
 import ThemeContext from './components/theme';
 import { themes, font } from './components/config';
 import AuthProvider from '../hooks/common/AuthProvider';
+import SubscriptionProvider from '../hooks/common/SubscriptionProvider';
 
 const AppWrapper = () => {
   const { state, setState } = useRootPageState();
@@ -34,6 +35,7 @@ const AppWrapper = () => {
   }, []);
 
   return (
+    <SubscriptionProvider>
     <AuthProvider>
       {state.currentLocaleMessages
         ? <ThemeContext.Provider
@@ -53,6 +55,7 @@ const AppWrapper = () => {
         </ThemeContext.Provider>
         : <View><Text>Loading....</Text></View>}
     </AuthProvider>
+    </SubscriptionProvider>
   );
 };
 

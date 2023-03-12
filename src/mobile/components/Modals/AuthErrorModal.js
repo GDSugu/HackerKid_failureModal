@@ -34,10 +34,11 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   errorCardMessageText: {
     ...font.heading6,
     textAlign: 'center',
+    color: utilColors.dark,
   },
 });
 
-const AuthErrorModal = ({ route, handleLoginRoute = () => {} }) => {
+const AuthErrorModal = ({ route, handleLoginRoute = () => { } }) => {
   const { font, theme } = React.useContext(ThemeContext);
   const screenTheme = theme[`screen${route.name}`];
   const style = getStyles(screenTheme, theme.utilColors, font);

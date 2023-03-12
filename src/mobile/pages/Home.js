@@ -34,7 +34,13 @@ import codekata from '../../images/dashboard/dashboard-codePirate.png';
 import achievementImage from '../../images/dashboard/dashboard-achievements.png';
 import CircleGradientProgressBar from '../components/CircleGradientProgressBar';
 import AuthErrorModal from '../components/Modals/AuthErrorModal';
-import { AuthContext } from '../../hooks/pages/root';
+import Loader from '../components/Loader';
+import {
+  AuthContext,
+  // SubscriptionContext,
+} from '../../hooks/pages/root';
+// import { isFeatureEnabled } from '../../web/javascripts/common/framework';
+// import LockSvg from '../../images/common/feature-lock.svg';
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
@@ -257,6 +263,9 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => Styl
   svgGradient: {
     color: gradients.blue,
   },
+  svgProgressBackground: {
+    color: additionalThemes.screenGames.progressBg,
+  },
   challengeCardList: {
     marginLeft: 8,
   },
@@ -430,20 +439,20 @@ const DashboardBlock = ({
                   <Image source={xpPoints} style={style.heroCardDataIcon} />
                   <Text style={style.heroCardText}>{12345} xp</Text>
                 </View> */}
-                <TouchableOpacity
-                  style={style.heroCardPrimaryBtn}
-                  onPress={() => bottomSheetRef.current.open()}
-                >
-                  <Text style={style.heroCardPrimaryBtnText}>
-                    <FormattedMessage
-                      defaultMessage={'View more'}
-                      description={'View More Bottomsheet Btn'}
-                    />
-                  </Text>
-                </TouchableOpacity>
-              </View>
+              <TouchableOpacity
+                style={style.heroCardPrimaryBtn}
+                onPress={() => bottomSheetRef.current.open()}
+              >
+                <Text style={style.heroCardPrimaryBtnText}>
+                  <FormattedMessage
+                    defaultMessage={'View more'}
+                    description={'View More Bottomsheet Btn'}
+                  />
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
+        </View>
       </View>
     </View>
   </>;
@@ -476,7 +485,7 @@ const HomeBlock = ({
             style={style.bodyCardContentTitleImage}
             source={dashboardUserData ? {
               uri: dashboardUserData.profileImage.toString(),
-            } : avatar }
+            } : avatar}
           />
           <>
             {
@@ -545,7 +554,7 @@ const GameBlock = ({ style, navigation, gameData }) => {
   }
 
   return <>
-     <View style={[style.bodyCard, style.gameCard]}>
+    <View style={[style.bodyCard, style.gameCard]}>
       <View style={style.bodyCardHeading}>
         <Text style={style.bodyCardHeadingText}>
           <FormattedMessage
@@ -569,10 +578,11 @@ const GameBlock = ({ style, navigation, gameData }) => {
           <View style={style.gameCardProgressBlock}>
             <CircleGradientProgressBar
               gradientColors={[[style.svgGradient.color[0], '10%'], [style.svgGradient.color[1], '90%']]}
-              progressValue={ gameData ? gameData.gameProgress : 0}
-              totalValue={ gameData ? gameData.totalGames : 100}
+              progressValue={gameData ? gameData.gameProgress : 0}
+              totalValue={gameData ? gameData.totalGames : 100}
               startAnim={Boolean(gameData)}
-               >
+              progressBg={style.svgProgressBackground.color}
+            >
               <View style={style.bodyCardContentTitle}>
                 <AnimatedTextInput
                   ref={gameDataTextRef}
@@ -581,7 +591,7 @@ const GameBlock = ({ style, navigation, gameData }) => {
                   value={'0'}
                   editable={false}
                 />
-                <Text style={style.gameCardTextLight}>/{gameData ? gameData.totalGames : '--' }</Text>
+                <Text style={style.gameCardTextLight}>/{gameData ? gameData.totalGames : '--'}</Text>
               </View>
               <Text style={style.gameCardSvgCaption}>
                 <FormattedMessage
@@ -604,7 +614,7 @@ const GameBlock = ({ style, navigation, gameData }) => {
                     description='Coins Earned'
                   />
                 </Text>
-                <Text style={style.gameCardText}>{gameData ? gameData.totalPointsEarned : '--' }</Text>
+                <Text style={style.gameCardText}>{gameData ? gameData.totalPointsEarned : '--'}</Text>
               </View>
             </View>
             {/* <View style={[style.bodyCardContentTitle, style.gameCardContent]}>
@@ -906,47 +916,47 @@ const LeaderBoardCard = ({
   handleShowLeaderBoard = () => {},
   leaderboardData, leaderBoardUserData, style,
 }) => <>
-  <View style={[style.sheetCard]}>
-    <View style={style.sheetCardHeading}>
-      <Text style={[style.sheetCardHeadingText, style.sheetLeaderboardHeadingText]}>
-        <FormattedMessage
-          defaultMessage='Leaderboard Ranking'
-          description='Leaderboard card heading text'
-        />
-      </Text>
-    </View>
-    {
-      leaderBoardUserData && <>
-      <View style={style.sheetCardHeroContent}>
-        <Text
-          style={[style.sheetCardTextColor, style.sheetCardHeroTitle]}
-          >#{leaderBoardUserData.rank}</Text>
-        <Text style={style.sheetCardBodyText}>
+    <View style={[style.sheetCard]}>
+      <View style={style.sheetCardHeading}>
+        <Text style={[style.sheetCardHeadingText, style.sheetLeaderboardHeadingText]}>
           <FormattedMessage
-            defaultMessage='rank'
-            description='sheet card subtitle'
+            defaultMessage='Leaderboard Ranking'
+            description='Leaderboard card heading text'
           />
         </Text>
       </View>
-    </>
-    }
-    { !leaderBoardUserData && <>
-        <Skeleton width='20%' height={48} style={{ borderRadius: 8, alignSelf: 'center', marginVertical: 8 }} />
-      </> }
-    <View style={style.sheetCardBodyContent}>
-      { leaderboardData
-      && leaderboardData.slice(0, 3).map((item, index) => (
-        <View style={style.sheetCardBodyRow} key={index}>
-          <View style={style.sheetCardBodyRow1}>
+      {
+        leaderBoardUserData && <>
+          <View style={style.sheetCardHeroContent}>
             <Text
-              style={[
-                style.sheetCardBodyText, style.sheetCardRowIndex,
-              ]}
-            >#{item.rank}</Text>
-            <Text style={style.sheetCardBodyText}>{item.name}</Text>
+              style={[style.sheetCardTextColor, style.sheetCardHeroTitle]}
+            >#{leaderBoardUserData.rank}</Text>
+            <Text style={style.sheetCardBodyText}>
+              <FormattedMessage
+                defaultMessage='rank'
+                description='sheet card subtitle'
+              />
+            </Text>
           </View>
-          <Text style={style.sheetCardBodyText}>{item.points}</Text>
-        </View>)) }
+        </>
+      }
+      {!leaderBoardUserData && <>
+        <Skeleton width='20%' height={48} style={{ borderRadius: 8, alignSelf: 'center', marginVertical: 8 }} />
+      </>}
+      <View style={style.sheetCardBodyContent}>
+        {leaderboardData
+          && leaderboardData.slice(0, 3).map((item, index) => (
+            <View style={style.sheetCardBodyRow} key={index}>
+              <View style={style.sheetCardBodyRow1}>
+                <Text
+                  style={[
+                    style.sheetCardBodyText, style.sheetCardRowIndex,
+                  ]}
+                >#{item.rank}</Text>
+                <Text style={style.sheetCardBodyText}>{item.name}</Text>
+              </View>
+              <Text style={style.sheetCardBodyText}>{item.points}</Text>
+            </View>))}
         {
           !leaderboardData
           && [1, 2, 3].map((item, index) => (
@@ -1003,9 +1013,10 @@ const Index = ({ route, navigation }) => {
 
   const isPageMounted = React.useRef(true);
   const [reloadComponent, setReloadComponent] = React.useState(0);
-  const [refreshing, setRefreshing] = React.useState(false);
   const authContext = React.useContext(AuthContext);
   const bottomSheetRef = useRef();
+  const loaderRef = useRef(null);
+  // const { subscriptionData } = useContext(SubscriptionContext);
 
   const {
     state: dashboardState,
@@ -1017,8 +1028,21 @@ const Index = ({ route, navigation }) => {
     static: { getChallenges },
   } = useGetChallenges({ isPageMounted });
 
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
   const onRefresh = () => {
-    setRefreshing(true);
+    // setRefreshing(true);
+    showLoader();
     Promise.all([
       getSessionData({ cached: false }),
       getDashboardData({ cached: false }),
@@ -1026,11 +1050,11 @@ const Index = ({ route, navigation }) => {
     ])
       .then(() => {
         setReloadComponent(reloadComponent + 1);
-        setRefreshing(false);
+        hideLoader();
       })
       .catch(() => {
         // show snackbar of error
-        setRefreshing(false);
+        hideLoader();
       });
   };
 
@@ -1086,11 +1110,17 @@ const Index = ({ route, navigation }) => {
     navigation.navigate('Leaderboard');
   };
 
+  // const isClubEnabled = () => {
+  //   const clubEnabled = isFeatureEnabled(subscriptionData, 'clubs');
+  //   return clubEnabled && clubEnabled.enabled;
+  // };
+
   React.useEffect(() => {
     onRefresh();
 
     return () => {
       isPageMounted.current = false;
+      hideLoader();
     };
   }, []);
 
@@ -1111,15 +1141,16 @@ const Index = ({ route, navigation }) => {
             style={style.container}
             refreshControl={
               <RefreshControl
-                refreshing={refreshing}
+                // refreshing={refreshing}
+                refreshing={false}
                 onRefresh={onRefresh}
               />
             }>
             <View style={style.container}>
               {
                 dashboardUserData
-                  && <>
-                    <DashboardComponent
+                && <>
+                  <DashboardComponent
                     avatar={defaultUser}
                     bottomSheetRef={bottomSheetRef}
                     dashboardUserData={dashboardUserData}
@@ -1141,12 +1172,12 @@ const Index = ({ route, navigation }) => {
               {
                 gameData
                 && <>
-                <GameComponent
-                  gameData={gameData}
-                  navigation={navigation}
-                  style={style}
-                  reloadComponent={reloadComponent}
-                />
+                  <GameComponent
+                    gameData={gameData}
+                    navigation={navigation}
+                    style={style}
+                    reloadComponent={reloadComponent}
+                  />
                 </>
               }
               {/* {
@@ -1175,14 +1206,16 @@ const Index = ({ route, navigation }) => {
                 // gameData={gameData}
                 sessionData={sessionData}
               />
-              {/* {
+             {/* {
                 clubData
                 && clubData?.hasClub
                 && <ClubComponent
-                clubData={clubData}
-                navigation={navigation}
-                style={style}
-                bottomSheetRef={bottomSheetRef} />
+                  clubData={clubData}
+                  navigation={navigation}
+                  style={style}
+                  bottomSheetRef={bottomSheetRef}
+                  enabled={isClubEnabled()}
+                />
               } */}
               {
                 leaderboardData
@@ -1198,6 +1231,10 @@ const Index = ({ route, navigation }) => {
           </BottomSheet>
         </>
       }
+      <Loader
+        ref={loaderRef}
+        route={'Home'}
+      />
     </>
   );
 };

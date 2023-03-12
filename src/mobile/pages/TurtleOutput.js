@@ -173,20 +173,29 @@ const TurtleOutput = ({ navigation }) => {
   // };
 
   const submitTurtle = (data) => {
-    const request = {
-      type: 'validateQuestion',
-      questionId: Number(turtleContext.ctxState.questionObject.question_id),
-      sourceCode: turtleContext.ctxState.snippet,
-      xmlWorkSpace: turtleContext.ctxState.xmlWorkSpace,
-      validated: data.validated,
-    };
-    let requestString = '';
-    Object.keys(request).forEach((index) => {
-      requestString += request[index];
-    });
-    const requestHash = md5(requestString + md5(requestString).toString()).toString();
-    request.requestHash = requestHash;
-    turtleContext.submitQuestion(request);
+    try {
+      turtleContext.showLoader();
+      const request = {
+        type: 'validateQuestion',
+        questionId: Number(turtleContext.ctxState.questionObject.question_id),
+        sourceCode: turtleContext.ctxState.snippet,
+        xmlWorkSpace: turtleContext.ctxState.xmlWorkSpace,
+        validated: data.validated,
+      };
+      let requestString = '';
+      Object.keys(request).forEach((index) => {
+        requestString += request[index];
+      });
+      const requestHash = md5(requestString + md5(requestString).toString()).toString();
+      request.requestHash = requestHash;
+      turtleContext.submitQuestion(request)
+        .then(() => {
+          turtleContext.hideLoader();
+        });
+    } catch (err) {
+      console.error('submit error', err);
+      turtleContext.hideLoader();
+    }
   };
 
   const handleDebuggingState = (debuggingState) => {

@@ -885,6 +885,12 @@
   .pagination-footer {
     .pagination-nav {
       .pagination {
+        .page-item {
+          .page-link {
+            color: gt.theme-var(text-color-1);
+          }
+        }
+
         .page-item.active {
           .page-link {
             color: gt.theme-var(videos-progress-gradient-2, null, $thememaplight, $cssvars);

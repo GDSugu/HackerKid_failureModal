@@ -200,6 +200,10 @@
     "defaultMessage": "Created by {creatorName}",
     "description": "challenge creator name"
   },
+  "1R21Y0": {
+    "defaultMessage": "Unlock Now",
+    "description": "unlock now button"
+  },
   "1RUvaS": {
     "defaultMessage": "Profile Settings",
     "description": "Navigation link to profile edit page"
@@ -1169,10 +1173,6 @@
     "defaultMessage": "{pointsEarned}",
     "description": "coins"
   },
-  "I0vwZV": {
-    "defaultMessage": "Session Videos",
-    "description": "Session Videos Filter Option"
-  },
   "I1oDxa": {
     "defaultMessage": "Loading failed due to some unknown error! Please try again later.",
     "description": "Error"
@@ -1291,10 +1291,6 @@
   "KY6DzQ": {
     "defaultMessage": "{modName}",
     "description": "course Heading"
-  },
-  "KcDrvG": {
-    "defaultMessage": "Solution Videos",
-    "description": "Solution Videos Filter Option"
   },
   "KmxQM/": {
     "defaultMessage": "All Games",
@@ -1535,6 +1531,10 @@
     "defaultMessage": "More Info",
     "description": "More info button"
   },
+  "OEPiPP": {
+    "defaultMessage": "More friends = More fun",
+    "description": "More card Title"
+  },
   "OG2BxR": {
     "defaultMessage": "FREE",
     "description": "HackerKID Trial Edition Free"
@@ -1691,6 +1691,10 @@
   "RE7c5M": {
     "defaultMessage": "{awardName}",
     "description": "award name label"
+  },
+  "REPA3X": {
+    "defaultMessage": "Join your friends in the club",
+    "description": "More card Subtitle"
   },
   "RHM1lo": {
     "defaultMessage": "Re-type Password",
@@ -2465,6 +2469,10 @@
   "gCfRUT": {
     "defaultMessage": "{stateName}"
   },
+  "gE6jN3": {
+    "defaultMessage": "School Clubs",
+    "description": "More card Title"
+  },
   "gOkIvb": {
     "defaultMessage": "Name",
     "description": "Name label"
@@ -3076,6 +3084,10 @@
     "defaultMessage": "Learners Community",
     "description": "Learners Community title"
   },
+  "rxzyV1": {
+    "defaultMessage": "Upgrade to Premium to unlock this Video",
+    "description": "Upgrade to Premium to unlock this Video"
+  },
   "sC1GR3": {
     "defaultMessage": "Yes",
     "description": "yes button text"
@@ -3148,6 +3160,10 @@
     "defaultMessage": "Output will be shown here",
     "description": "output box placeholder text"
   },
+  "t7ObEx": {
+    "defaultMessage": "Unlock Now",
+    "description": "More card button text"
+  },
   "tAiFjx": {
     "defaultMessage": "Challenges",
     "description": "Games title"
@@ -3203,6 +3219,10 @@
   "u7sb8V": {
     "defaultMessage": "Indra gandhi public school",
     "description": "Modern Vidya Ketan title"
+  },
+  "uA6ep3": {
+    "defaultMessage": "Buy premium to use this feature",
+    "description": "More card Subtitle"
   },
   "uCGdYb": {
     "defaultMessage": "Club Name",
@@ -3294,10 +3314,6 @@
   "vY562d": {
     "defaultMessage": "Try the new in-built IDE",
     "description": "more card title"
-  },
-  "vYViQu": {
-    "defaultMessage": "Filter",
-    "description": "Filter"
   },
   "vf8heh": {
     "defaultMessage": "Enriching Tech Videos for You",
@@ -3450,6 +3466,10 @@
   "ygjPEa": {
     "defaultMessage": "{title}",
     "description": "Nav Title text"
+  },
+  "yjWbPf": {
+    "defaultMessage": "Visit Club",
+    "description": "More card button text"
   },
   "yujxGL": {
     "defaultMessage": "Your Collections and Perks",

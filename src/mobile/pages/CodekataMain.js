@@ -28,6 +28,7 @@ import {
 import PlayBtn from '../../images/games/playBtn.svg';
 import GameNavBar from '../components/GameNavBar';
 import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import Loader from '../components/Loader';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -477,7 +478,9 @@ const CodekataBody = () => {
 
   const codeRun = () => {
     const language = valueToLanguageDisplayNameMap[selectedLang];
+    codekataContext.showLoader();
     codekataContext.runCode({ lang: language, code: codeValue }).then((res) => {
+      codekataContext.hideLoader();
       setOutputField(res.output);
       setOutputVisible(true);
     });
@@ -485,11 +488,13 @@ const CodekataBody = () => {
 
   const codeSubmit = () => {
     const language = valueToLanguageDisplayNameMap[selectedLang];
+    codekataContext.showLoader();
     codekataContext.submitCode({
       questionId: codekataContext.ctxState.questionObject.questionId,
       code: codeValue,
       lang: language,
     }).then((res) => {
+      codekataContext.hideLoader();
       setOutputField(res.evaluationDetails.output);
       setOutputVisible(true);
     });
@@ -572,11 +577,27 @@ const CodekataMain = ({ navigation }) => {
     },
   } = useCodekata({ isPageMounted });
 
+  const loaderRef = useRef(null);
+
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
   useEffect(() => {
     startTimeTrack('codekata-main');
 
     return () => {
       stopTimeTrack('codekata-main');
+      isPageMounted.current = false;
+      hideLoader();
     };
   }, []);
 
@@ -595,6 +616,8 @@ const CodekataMain = ({ navigation }) => {
                 getLanguageId,
                 runCode,
                 submitCode,
+                showLoader,
+                hideLoader,
               }}>
               <CodekataHeader />
               <CodekataBody />
@@ -602,6 +625,10 @@ const CodekataMain = ({ navigation }) => {
           </View>
         </ImageBackground>
       </View>
+      <Loader
+        ref={loaderRef}
+        route={'CodekataMain'}
+      />
     </>
   );
 };

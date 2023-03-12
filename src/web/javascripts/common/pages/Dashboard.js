@@ -759,7 +759,7 @@ const ClubCard = ({ clubData = {}, className, enabled }) => <>
         </div>
             : <div className="club-card-content">
           <div className="sideboard-content-title club-image-div">
-          <Img src='common/feature-lock.svg' className='club-lock-image'/>
+              <Img src='common/feature-lock.svg' className='club-lock-image'/>
               </div>
               <div className="sideboard-content-data">
                 <p className="club-members-title-buy mb-0">Buy premium to unlock school clubs feature</p>

@@ -86,6 +86,7 @@ const useProfileInfo = ({
   };
 
   const getProfileData = ({ cached = true }) => {
+    let result = new Promise((res) => res());
     if (uniqueurl) {
       if (cached && authContext.appData.profileDataHook) {
         const { profileDataHook } = authContext.appData;
@@ -93,7 +94,7 @@ const useProfileInfo = ({
           ...profileDataHook,
         });
       } else {
-        post({
+        result = post({
           type: 'getProfileData',
           s3Prefix: API.S3PREFIX,
           uniqueUrl: uniqueurl,
@@ -129,6 +130,7 @@ const useProfileInfo = ({
           });
       }
     }
+    return result;
   };
 
   const saveProfile = () => {

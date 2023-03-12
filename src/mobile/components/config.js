@@ -270,18 +270,6 @@ const themes = {
       ...Theme.light.screenYellow,
       ...screenWithHeader,
     },
-    screenIde: {
-      ...Theme.light.screenYellow,
-      ...screenWithHeader,
-    },
-    screenCode: {
-      ...Theme.light.screenYellow,
-      ...screenWithHeader,
-    },
-    screenConsole: {
-      ...Theme.light.screenYellow,
-      ...screenWithHeader,
-    },
     screenLogin: {
       ...Theme.light.screenYellow,
       showHeader: false,
@@ -361,10 +349,6 @@ const themes = {
       ...Theme.light.screenYellow,
       ...screenWithHeader,
     },
-    screenAwards: {
-      ...Theme.light.screenYellow,
-      ...fragmentIconDisposal,
-    },
     screenCertificates: {
       ...Theme.light.screenYellow,
       ...fragmentIconDisposal,
@@ -397,10 +381,6 @@ const themes = {
       ...fragmentIconDisposal,
     },
     screenClubInfo: {
-      ...Theme.light.screenYellow,
-      ...fragmentIconDisposal,
-    },
-    screenCollectibles: {
       ...Theme.light.screenYellow,
       ...fragmentIconDisposal,
     },

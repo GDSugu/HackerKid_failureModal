@@ -17,6 +17,7 @@ import LoginFormSvg from '../../images/login/login-form-svg.svg';
 import useLoginMethod from '../../hooks/pages/auth';
 import getCommonStyles from '../components/commonStyles';
 import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import Loader from '../components/Loader';
 
 const getStyles = (theme, utilColors, font) => StyleSheet.create({
   ...getCommonStyles(theme, utilColors, font),
@@ -77,6 +78,8 @@ const Login = ({ navigation }) => {
   const loginWithPhoneTabStyle = [style.loginMethodTab];
   const loginWithPhoneTextStyle = [style.loginMethodTabText];
 
+  const loaderRef = useRef(null);
+
   if (stateObj.loginMethod === 'loginWithPhone') {
     loginWithPhoneTabStyle.push(style.loginMethodTabActive);
     loginWithPhoneTextStyle.push(style.loginMethodTabTextActive);
@@ -102,6 +105,18 @@ const Login = ({ navigation }) => {
     return styleArr;
   };
 
+  const showLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.show();
+    }
+  };
+
+  const hideLoader = () => {
+    if (loaderRef.current) {
+      loaderRef.current.hide();
+    }
+  };
+
   // handlers
   const loginBtnPressHandler = () => {
     const primaryFieldKey = stateObj.loginMethod === 'loginWithPhone' ? 'phoneNumber' : 'email';
@@ -114,7 +129,9 @@ const Login = ({ navigation }) => {
 
     if (primaryField && password) {
       const countryCode = stateObj.loginMethod === 'loginWithPhone' ? `+${phoneInput.current.getCallingCode()}` : '';
+      showLoader();
       loginWithPhone(countryCode).then((response) => {
+        hideLoader();
         const data = JSON.parse(response);
         if (data.status === 'not-exists') {
           setFormErrorObj({ formError: 'You are not registered user', formErrorType: 'NOT_REGISTERED' });
@@ -152,166 +169,172 @@ const Login = ({ navigation }) => {
   }, []);
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
-      <View style={style.container}>
-        <KeyboardAvoidingView>
-        <View style={style.formSvgContainer}>
-          <LoginFormSvg/>
-        </View>
-          <View style={ style.loginMethodTabsContainer}>
-            <TouchableOpacity style={loginWithPhoneTabStyle} onPress={() => setState((prevState) => ({ ...prevState, loginMethod: 'loginWithPhone' }))}>
-              <Text style={loginWithPhoneTextStyle}>
-                <FormattedMessage defaultMessage='Login with Phone' description='Login with Phone tab'/>
+    <>
+      <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
+        <View style={style.container}>
+          <KeyboardAvoidingView>
+          <View style={style.formSvgContainer}>
+            <LoginFormSvg/>
+          </View>
+            <View style={ style.loginMethodTabsContainer}>
+              <TouchableOpacity style={loginWithPhoneTabStyle} onPress={() => setState((prevState) => ({ ...prevState, loginMethod: 'loginWithPhone' }))}>
+                <Text style={loginWithPhoneTextStyle}>
+                  <FormattedMessage defaultMessage='Login with Phone' description='Login with Phone tab'/>
+                </Text>
+              </TouchableOpacity>
+            <TouchableOpacity style={loginWithEmailTabStyle} onPress={() => setState((prevState) => ({ ...prevState, loginMethod: 'loginWithEmail' }))}>
+              <Text style={loginWithEmailTextStyle}>
+                <FormattedMessage defaultMessage='Login with Email' description='Login with Email tab' />
               </Text>
             </TouchableOpacity>
-          <TouchableOpacity style={loginWithEmailTabStyle} onPress={() => setState((prevState) => ({ ...prevState, loginMethod: 'loginWithEmail' }))}>
-            <Text style={loginWithEmailTextStyle}>
-              <FormattedMessage defaultMessage='Login with Email' description='Login with Email tab' />
-            </Text>
-          </TouchableOpacity>
-          </View>
-          <View style={style.stepContainer}>
-          {
-            (stateObj.loginMethod === 'loginWithPhone')
-              ? <View style={style.labelAndInputContainer}>
-                <View style={style.labelAndFormHelperContainer}>
-                  <Text style={style.label}>
-                    <FormattedMessage
-                        defaultMessage='Phone'
-                        description='Phone label'
-                    />
-                  </Text>
-                  <Text style={style.errorText}>
-                    <FormattedMessage defaultMessage='{errorMessage}' description='phoneNumber form helper' values={{
-                      errorMessage: errorStateObj.phoneNumber,
-                    }} />
-                  </Text>
+            </View>
+            <View style={style.stepContainer}>
+            {
+              (stateObj.loginMethod === 'loginWithPhone')
+                ? <View style={style.labelAndInputContainer}>
+                  <View style={style.labelAndFormHelperContainer}>
+                    <Text style={style.label}>
+                      <FormattedMessage
+                          defaultMessage='Phone'
+                          description='Phone label'
+                      />
+                    </Text>
+                    <Text style={style.errorText}>
+                      <FormattedMessage defaultMessage='{errorMessage}' description='phoneNumber form helper' values={{
+                        errorMessage: errorStateObj.phoneNumber,
+                      }} />
+                    </Text>
+                  </View>
+                  <PhoneInput
+                    ref={phoneInput}
+                    defaultCode={(stateObj.countryAbbrevation) || 'IN'}
+                    containerStyle={getStyleArr('phoneNumber', { padding: 1.8, backgroundColor: 'transparent', width: '100%' })}
+                    textContainerStyle={{ height: 41, backgroundColor: 'transparent' }}
+                    placeholder=" "
+                    textInputStyle={[font.bodyBold, { height: 41 }]}
+                    layout='second' codeTextStyle={{ ...font.bodyBold }}
+                    flagButtonStyle={{ width: 60 }}
+                    textInputProps={{
+                      multiline: false, disableFullscreenUI: true, keyboardType: 'number-pad', value: stateObj.phoneNumber,
+                    }}
+                    onChangeText={(value) => {
+                      handleStateChange('phoneNumber', value);
+                      validate('tel', value, 'Phone Number', setError, 'phoneNumber');
+                      closeFormError(formErrorStateObj, 'INCORRECT,NOT_REGISTERED,ERROR', setFormErrorObj);
+                    }}
+                  />
                 </View>
-                <PhoneInput
-                  ref={phoneInput}
-                  defaultCode={(stateObj.countryAbbrevation) || 'IN'}
-                  containerStyle={getStyleArr('phoneNumber', { padding: 1.8, backgroundColor: 'transparent', width: '100%' })}
-                  textContainerStyle={{ height: 41, backgroundColor: 'transparent' }}
-                  placeholder=" "
-                  textInputStyle={[font.bodyBold, { height: 41 }]}
-                  layout='second' codeTextStyle={{ ...font.bodyBold }}
-                  flagButtonStyle={{ width: 60 }}
-                  textInputProps={{
-                    multiline: false, disableFullscreenUI: true, keyboardType: 'number-pad', value: stateObj.phoneNumber,
-                  }}
-                  onChangeText={(value) => {
-                    handleStateChange('phoneNumber', value);
-                    validate('tel', value, 'Phone Number', setError, 'phoneNumber');
-                    closeFormError(formErrorStateObj, 'INCORRECT,NOT_REGISTERED,ERROR', setFormErrorObj);
-                  }}
+                : <View style={style.labelAndInputContainer}>
+                  <View style={style.labelAndFormHelperContainer}>
+                    <Text style={style.label}>
+                      <FormattedMessage
+                          defaultMessage='Email'
+                          description='Email label'
+                      />
+                    </Text>
+                    <Text style={style.errorText}>
+                      <FormattedMessage defaultMessage='{errorMessage}' description='email form helper'
+                        values={{ errorMessage: errorStateObj.email }} />
+                    </Text>
+                  </View>
+                <TextInput
+                    style={getStyleArr('email')}
+                    multiline={false}
+                    disableFullscreenUI={true}
+                    onChangeText={(value) => {
+                      handleStateChange('email', value);
+                      validate('email', value, 'Email', setError, 'email');
+                      closeFormError(formErrorStateObj, 'INCORRECT,EMAIL_LOGIN_RESTRICTED,ERROR', setFormErrorObj);
+                    }}
                 />
               </View>
-              : <View style={style.labelAndInputContainer}>
-                <View style={style.labelAndFormHelperContainer}>
-                  <Text style={style.label}>
-                    <FormattedMessage
-                        defaultMessage='Email'
-                        description='Email label'
-                    />
-                  </Text>
-                  <Text style={style.errorText}>
-                    <FormattedMessage defaultMessage='{errorMessage}' description='email form helper'
-                      values={{ errorMessage: errorStateObj.email }} />
-                  </Text>
-                </View>
-              <TextInput
-                  style={getStyleArr('email')}
-                  multiline={false}
+          }
+            <View style={style.labelAndInputContainer}>
+              <View style={style.labelAndFormHelperContainer}>
+                <Text style={style.label}>
+                  <FormattedMessage
+                    defaultMessage='Password'
+                    description='Password label'
+                  />
+                </Text>
+                <Text style={style.errorText}>
+                  <FormattedMessage defaultMessage='{errorMessage}' description='password form helper'
+                  values={{
+                    errorMessage: errorStateObj.password,
+                  }}/>
+                </Text>
+              </View>
+              <View>
+                <TextInput
                   disableFullscreenUI={true}
+                  secureTextEntry={hidePassword}
+                  style={getStyleArr('password')}
+                  multiline={false}
+                  value={stateObj.password}
                   onChangeText={(value) => {
-                    handleStateChange('email', value);
-                    validate('email', value, 'Email', setError, 'email');
-                    closeFormError(formErrorStateObj, 'INCORRECT,EMAIL_LOGIN_RESTRICTED,ERROR', setFormErrorObj);
-                  }}
-              />
-            </View>
-        }
-          <View style={style.labelAndInputContainer}>
-            <View style={style.labelAndFormHelperContainer}>
-              <Text style={style.label}>
-                <FormattedMessage
-                  defaultMessage='Password'
-                  description='Password label'
+                    handleStateChange('password', value);
+                    validate('password', value, 'Password', setError, 'password', null, 1, true);
+                    closeFormError(formErrorStateObj, 'INCORRECT,ERROR', setFormErrorObj);
+                  }} />
+                <TouchableOpacity style={{
+                  position: 'absolute', right: 0, top: 10, marginRight: 10,
+                }} onPress={() => {
+                  setHidePassword((prev) => !prev);
+                }}>
+                <Icon
+                    name={(hidePassword) ? 'eye' : 'eye-slash'}
+                    type='FontAwesome'
+                    size={font.heading5.fontSize}
+                    color={theme.utilColors.lightGrey}
                 />
-              </Text>
-              <Text style={style.errorText}>
-                <FormattedMessage defaultMessage='{errorMessage}' description='password form helper'
-                values={{
-                  errorMessage: errorStateObj.password,
-                }}/>
-              </Text>
+              </TouchableOpacity>
+              </View>
             </View>
-            <View>
-              <TextInput
-                disableFullscreenUI={true}
-                secureTextEntry={hidePassword}
-                style={getStyleArr('password')}
-                multiline={false}
-                value={stateObj.password}
-                onChangeText={(value) => {
-                  handleStateChange('password', value);
-                  validate('password', value, 'Password', setError, 'password', null, 1, true);
-                  closeFormError(formErrorStateObj, 'INCORRECT,ERROR', setFormErrorObj);
-                }} />
-              <TouchableOpacity style={{
-                position: 'absolute', right: 0, top: 10, marginRight: 10,
-              }} onPress={() => {
-                setHidePassword((prev) => !prev);
-              }}>
-              <Icon
-                  name={(hidePassword) ? 'eye' : 'eye-slash'}
-                  type='FontAwesome'
-                  size={font.heading5.fontSize}
-                  color={theme.utilColors.lightGrey}
-              />
+          <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+            <Text style={style.btnAsInteractiveText}>
+              <FormattedMessage defaultMessage='Forgot Password?' description='Forgot password link' />
+            </Text>
+          </TouchableOpacity>
+          {formErrorStateObj.formError
+          && <Text style={[style.errorText, style.formError]}>
+          <FormattedMessage defaultMessage='{formError}' description='form error' values={{
+            formError: formErrorStateObj.formError,
+          }}/>
+        </Text>}
+          <View>
+            <TouchableOpacity
+                style={style.btnPrimary}
+                title="Login"
+              onPress={loginBtnPressHandler}>
+              <Text style={style.btnPrimaryText}>
+                <FormattedMessage defaultMessage='Login' description='Login Button'/>
+              </Text>
+            </TouchableOpacity>
+            {/* <TouchableOpacity style={style.btnOutlinePrimary} title='Login with OTP button'>
+              <Text style={style.btnOutlinePrimaryText}>
+                <FormattedMessage
+                defaultMessage='Login with OTP'
+                description='Login with OTP button' />
+              </Text>
+            </TouchableOpacity> */}
+            <TouchableOpacity
+              style={style.btnOutlinePrimary}
+              title='CreateAccountBtn'
+              onPress={() => navigation.navigate('Register')}>
+              <Text style={style.btnOutlinePrimaryText}>
+                <FormattedMessage defaultMessage='Create a New Account' description='Create Account Button' />
+              </Text>
             </TouchableOpacity>
             </View>
-          </View>
-        <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-          <Text style={style.btnAsInteractiveText}>
-            <FormattedMessage defaultMessage='Forgot Password?' description='Forgot password link' />
-          </Text>
-        </TouchableOpacity>
-        {formErrorStateObj.formError
-        && <Text style={[style.errorText, style.formError]}>
-        <FormattedMessage defaultMessage='{formError}' description='form error' values={{
-          formError: formErrorStateObj.formError,
-        }}/>
-      </Text>}
-        <View>
-          <TouchableOpacity
-              style={style.btnPrimary}
-              title="Login"
-            onPress={loginBtnPressHandler}>
-            <Text style={style.btnPrimaryText}>
-              <FormattedMessage defaultMessage='Login' description='Login Button'/>
-            </Text>
-          </TouchableOpacity>
-          {/* <TouchableOpacity style={style.btnOutlinePrimary} title='Login with OTP button'>
-            <Text style={style.btnOutlinePrimaryText}>
-              <FormattedMessage
-              defaultMessage='Login with OTP'
-              description='Login with OTP button' />
-            </Text>
-          </TouchableOpacity> */}
-          <TouchableOpacity
-            style={style.btnOutlinePrimary}
-            title='CreateAccountBtn'
-            onPress={() => navigation.navigate('Register')}>
-            <Text style={style.btnOutlinePrimaryText}>
-              <FormattedMessage defaultMessage='Create a New Account' description='Create Account Button' />
-            </Text>
-          </TouchableOpacity>
-          </View>
-          </View>
-        </KeyboardAvoidingView>
-      </View>
-    </ScrollView>
+            </View>
+          </KeyboardAvoidingView>
+        </View>
+      </ScrollView>
+      <Loader
+        route={'Login'}
+        ref={loaderRef}
+      />
+    </>
   );
 };
 

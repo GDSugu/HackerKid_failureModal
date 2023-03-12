@@ -112,7 +112,10 @@ const Admin = () => {
             if (parsedResponse.status === 'error') {
               showNotificationAlert(parsedResponse.message, 'error');
             } else if (parsedResponse.status === 'success') {
-              if (parsedResponse?.userRole?.role !== 'admin') {
+              if (
+                parsedResponse?.userRole?.role !== 'admin'
+                && parsedResponse?.userRole?.role !== 'sales'
+              ) {
                 pathNavigator('dashboard/');
               }
             }
