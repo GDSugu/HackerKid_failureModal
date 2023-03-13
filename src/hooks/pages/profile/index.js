@@ -151,7 +151,7 @@ const useProfileInfo = ({
         grade: grade && parseInt(grade, 10),
         school: school && school.trim(),
         parentEmail: parentEmail && parentEmail.trim(),
-        parentPhone: parentPhone && parentPhone.trim(),
+        parentPhone: parentPhone && parentPhone.toString().trim(),
       };
       result = post(payload, 'profile/', false, false)
         .then((res) => {

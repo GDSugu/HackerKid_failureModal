@@ -3,7 +3,9 @@ import React, {
 } from 'react';
 import {
   Alert,
+  Dimensions,
   Image,
+  Modal,
   Platform,
   ScrollView,
   StyleSheet,
@@ -90,6 +92,51 @@ const getStyles = (theme, utils, font) => StyleSheet.create({
   errorDpText: {
     textAlign: 'center',
   },
+  overlay: {
+    backgroundColor: utils.transparent,
+    flex: 1,
+    justifyContent: 'center',
+  },
+  modalCard: {
+    backgroundColor: utils.white,
+    borderRadius: 12,
+    alignItems: 'center',
+    // paddingVertical: 24,
+    // paddingHorizontal: 16,
+    margin: Dimensions.get('window').width * 0.05,
+    overflow: 'hidden',
+  },
+  successHeadingContainer: {
+    backgroundColor: theme.bodyBg,
+    width: '100%',
+    padding: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  successHeadingText: {
+    ...font.heading6,
+    color: utils.dark,
+  },
+  successContentContainer: {
+    padding: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  successContentText: {
+    ...font.subtitle2,
+    color: utils.dark,
+  },
+  successCloseBtn: {
+    backgroundColor: theme.btnBg,
+    borderRadius: 12,
+    padding: 12,
+    paddingHorizontal: 24,
+    marginTop: 24,
+  },
+  successCloseBtnText: {
+    ...font.subtitle2,
+    color: utils.white,
+  },
 });
 
 const validate = (key, value) => {
@@ -120,6 +167,18 @@ const validate = (key, value) => {
         }
         break;
       }
+      case 'parentEmail': {
+        if (!(/^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i.test(value))) {
+          throw new Error('Invalid email');
+        }
+        break;
+      }
+      case 'parentPhone': {
+        if (!(/[0-9 -()+]{8}$/.test(value))) {
+          throw new Error('Invalid phone number');
+        }
+        break;
+      }
       default: break;
     }
     result = {
@@ -135,7 +194,53 @@ const validate = (key, value) => {
 };
 
 const ErrorMessage = ({ message, style }) => <>
-  {message && <Text style={style}>{message}</Text>}
+  {message && <Text style={style}>
+      <FormattedMessage
+        defaultMessage={'{message}'}
+        description={'error message'}
+        values={{
+          message,
+        }}
+
+      />
+    </Text>}
+</>;
+
+const SuccessSaveModal = ({ closeModal = () => {}, modalVisible = false, style }) => <>
+  <Modal
+    visible={modalVisible}
+    transparent
+    onRequestClose={closeModal}
+  >
+    <View style={style.overlay}>
+      <View style={style.modalCard}>
+        <View style={style.successHeadingContainer}>
+          <Text style={style.successHeadingText}>
+            <FormattedMessage
+              defaultMessage={'Save Successful'}
+              description={'successfull message'}
+            />
+          </Text>
+        </View>
+        <View style={style.successContentContainer}>
+          <Text style={style.successContentText}>
+            <FormattedMessage
+              defaultMessage={'Your changes have been saved successfully.'}
+              description={'successfull mussage'}
+            />
+          </Text>
+          <TouchableOpacity onPress={closeModal} style={style.successCloseBtn}>
+            <Text style={style.successCloseBtnText}>
+              <FormattedMessage
+                defaultMessage={'close'}
+                description={'close button text'}
+              />
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  </Modal>
 </>;
 
 const EditProfile = ({ navigation }) => {
@@ -143,8 +248,10 @@ const EditProfile = ({ navigation }) => {
   const { font, theme } = useContext(ThemeContext);
   const pageTheme = theme.screenEditProfile;
   const style = getStyles(pageTheme, theme.utilColors, font);
-  // const intl = useIntl();
   const [avatar, setAvatar] = useState(defaultUser);
+  const [modalVisible, setModalVisibility] = useState({
+    profileSuccessModalVisible: false,
+  });
   const [errorMessage, setErrorMessage] = useState({
     name: false,
     about: false,
@@ -174,6 +281,8 @@ const EditProfile = ({ navigation }) => {
     name,
     profileImage,
     school,
+    parentEmail,
+    parentPhone,
     // uniqueUrl,
   } = state;
 
@@ -187,6 +296,30 @@ const EditProfile = ({ navigation }) => {
     if (loaderRef.current) {
       loaderRef.current.hide();
     }
+  };
+
+  const showSuccessModal = () => {
+    // if (isPageMounted.current) {
+    // }
+    setModalVisibility({
+      profileSuccessModalVisible: true,
+    });
+  };
+
+  const closeSuccessModal = () => {
+    // if (isPageMounted) {
+    //   authContext.setAuthState((prevState) => ({
+    //     ...prevState,
+    //     appData: {
+    //       ...prevState.appData,
+    //       profileSuccessModalVisible: false,
+    //     },
+    //   }));
+    // }
+    setModalVisibility({
+      profileSuccessModalVisible: false,
+    });
+    navigation.goBack();
   };
 
   const handleImage = () => {
@@ -270,7 +403,12 @@ const EditProfile = ({ navigation }) => {
           if (status === 'access_denied') {
             Alert.alert('Error', 'Access denied. Please try again', [{ text: 'Go Back', onPress: () => navigation.goBack() }]);
           } else {
-            Alert.alert('Success', 'Profile updated successfully', [{ text: 'OK', onPress: () => { } }]);
+            // Alert.alert(
+            //   'Success',
+            //   'Profile updated successfully',
+            //   [{ text: 'OK', onPress: () => { } }],
+            // );
+            showSuccessModal();
             authContext.setAuthState((prevState) => ({
               ...prevState,
               appData: {
@@ -313,7 +451,6 @@ const EditProfile = ({ navigation }) => {
       } else {
         setAvatar(profileImage);
       }
-      // console.log(profileImage);
     }
 
     // return () => {
@@ -419,34 +556,6 @@ const EditProfile = ({ navigation }) => {
             />
             <ErrorMessage style={style.errorText} message={errorMessage.grade} />
           </View>
-          {/* <View style={style.formGroup}>
-            <Text style={style.inputLabel}>
-              <FormattedMessage
-                defaultMessage="Parent's Email"
-              />
-            </Text>
-            <TextInput
-              style={style.inputTextBox}
-              multiline={false}
-              keyboardType='email-address'
-              disableFullscreenUI = {true}
-              placeholder="Parent Email address"
-            />
-          </View> */}
-          {/* <View style={style.formGroup}>
-            <Text style={style.inputLabel}>
-              <FormattedMessage
-                defaultMessage="Parent Phone"
-              />
-            </Text>
-            <TextInput
-              style={style.inputTextBox}
-              multiline={false}
-              keyboardType='phone-pad'
-              disableFullscreenUI = {true}
-              placeholder="Parent phone"
-            />
-          </View> */}
           <View style={style.formGroup}>
             <Text style={style.inputLabel}>
               <FormattedMessage
@@ -462,6 +571,40 @@ const EditProfile = ({ navigation }) => {
             />
             <ErrorMessage style={style.errorText} message={errorMessage.school} />
           </View>
+          <View style={style.formGroup}>
+            <Text style={style.inputLabel}>
+              <FormattedMessage
+                defaultMessage="Parent's Email"
+              />
+            </Text>
+            <TextInput
+              style={style.inputTextBox}
+              multiline={false}
+              keyboardType='email-address'
+              disableFullscreenUI = {true}
+              value={parentEmail || ''}
+              placeholder="Parent Email address"
+              onChangeText={(value) => { handleStateChange('parentEmail', value); }}
+            />
+            <ErrorMessage style={style.errorText} message={errorMessage.parentEmail} />
+          </View>
+          <View style={style.formGroup}>
+            <Text style={style.inputLabel}>
+              <FormattedMessage
+                defaultMessage="Parent Phone"
+              />
+            </Text>
+            <TextInput
+              style={style.inputTextBox}
+              multiline={false}
+              keyboardType='phone-pad'
+              disableFullscreenUI = {true}
+              placeholder="Parent phone"
+              value={parentPhone ? parentPhone.toString() : ''}
+              onChangeText={(value) => { handleStateChange('parentPhone', Number(value)); }}
+            />
+            <ErrorMessage style={style.errorText} message={errorMessage.parentPhone} />
+          </View>
         </View>
       </ScrollView>
       <TouchableOpacity
@@ -476,6 +619,11 @@ const EditProfile = ({ navigation }) => {
         </Text>
       </TouchableOpacity>
     </View>
+    <SuccessSaveModal
+      style={style}
+      modalVisible={modalVisible.profileSuccessModalVisible}
+      closeModal={closeSuccessModal}
+    />
     <Loader
       route={'EditProfile'}
       ref={loaderRef}

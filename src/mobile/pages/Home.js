@@ -1139,12 +1139,14 @@ const Index = ({ route, navigation }) => {
     // }
     if (authContext.appData.isRefresh) {
       onRefresh();
-      authContext.setAuthState((prevState) => ({
-        ...prevState,
-        appData: {
-          isRefresh: false,
-        },
-      }));
+      if (isPageMounted.current) {
+        authContext.setAuthState((prevState) => ({
+          ...prevState,
+          appData: {
+            isRefresh: false,
+          },
+        }));
+      }
     }
   };
 
