@@ -872,8 +872,7 @@ const WebkataMain = ({ route, navigation }) => {
       testResult,
       currentQuestionSetup,
       questionObject.conceptId)
-      .then((resp) => {
-        console.log('sub ', resp);
+      .then(() => {
         hideLoader();
       });
   };

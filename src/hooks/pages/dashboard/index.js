@@ -56,8 +56,8 @@ const useDashboard = ({ dateString = new Date().toISOString(), isPageMounted }) 
     const queryDate = new Date(Date.parse(dateString));
     const isoDate = queryDate.toISOString().substring(0, 10);
     let result;
-    if (cached && authContext.appData.dashBoardHook) {
-      const { dashBoardHook } = authContext.appData;
+    if (cached && authContext.dashBoardHook) {
+      const { dashBoardHook } = authContext;
       setDashboardData((prevState) => ({
         ...prevState,
         ...dashBoardHook,
@@ -98,19 +98,18 @@ const useDashboard = ({ dateString = new Date().toISOString(), isPageMounted }) 
                     timeSpent,
                   },
                 }));
-                authContext.setAuthState({
-                  appData: {
-                    dashBoardHook: {
-                      ...parsedResponse,
-                      gameData: {
-                        totalGames,
-                        gameProgress,
-                        totalPointsEarned,
-                        timeSpent,
-                      },
+                authContext.setAuthState((prevState) => ({
+                  ...prevState,
+                  dashBoardHook: {
+                    ...parsedResponse,
+                    gameData: {
+                      totalGames,
+                      gameProgress,
+                      totalPointsEarned,
+                      timeSpent,
                     },
                   },
-                });
+                }));
               } else {
                 setDashboardData((prevState) => ({
                   ...prevState,

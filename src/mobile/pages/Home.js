@@ -1,6 +1,8 @@
 import React, {
   memo,
-  useContext, useRef,
+  useCallback,
+  useContext,
+  useRef,
 } from 'react';
 import {
   Animated,
@@ -16,6 +18,7 @@ import {
   RefreshControl,
 } from 'react-native';
 import { FormattedMessage } from 'react-intl';
+import { useFocusEffect } from '@react-navigation/native';
 import { Skeleton } from '@rneui/base';
 import { useDashboard } from '../../hooks/pages/dashboard';
 import { useLeaderBoard } from '../../hooks/pages/leaderboard';
@@ -43,7 +46,6 @@ import {
 // import LockSvg from '../../images/common/feature-lock.svg';
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
-
 const getStyles = (theme, utilColors, gradients, font, additionalThemes) => StyleSheet.create({
   container: {
     flex: 1,
@@ -400,7 +402,10 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => Styl
 
 const DashboardBlock = ({
   avatar, bottomSheetRef, dashboardUserData, sessionData, style, reloadComponent,
-}) => <>
+}) => {
+  const profileImg = sessionData?.profileLink || dashboardUserData?.profileImage;
+
+  return <>
     <View style={style.bodyCard} key={reloadComponent}>
       <View style={style.heroCard}>
           <View style={style.heroCardContent}>
@@ -412,8 +417,8 @@ const DashboardBlock = ({
                 resizeMethod='scale'
               >
                 <Image
-                  source={dashboardUserData && dashboardUserData.profileImage ? {
-                    uri: dashboardUserData.profileImage.toString(),
+                  source={profileImg ? {
+                    uri: profileImg.toString(),
                   } : avatar }
                   style={style.heroCardImage}
                   defaultSource={avatar}
@@ -456,10 +461,13 @@ const DashboardBlock = ({
       </View>
     </View>
   </>;
+};
 
 const HomeBlock = ({
-  avatar, dashboardUserData, navigation, style, reloadComponent,
-}) => <>
+  avatar, dashboardUserData, sessionData, navigation, style, reloadComponent,
+}) => {
+  const profileImg = sessionData?.profileLink || dashboardUserData?.profileImage;
+  return <>
     <View style={style.bodyCard} key={reloadComponent}>
       <View style={style.bodyCardHeading}>
         <Text style={style.bodyCardHeadingText}>
@@ -483,9 +491,10 @@ const HomeBlock = ({
         <View style={style.bodyCardContentTitle}>
           <Image
             style={style.bodyCardContentTitleImage}
-            source={dashboardUserData ? {
-              uri: dashboardUserData.profileImage.toString(),
+            source={profileImg ? {
+              uri: profileImg.toString(),
             } : avatar}
+            defaultSource={avatar}
           />
           <>
             {
@@ -531,6 +540,7 @@ const HomeBlock = ({
       </View>
     </View>
   </>;
+};
 
 const GameBlock = ({ style, navigation, gameData }) => {
   const gameProgressValue = new Animated.Value(0);
@@ -1062,7 +1072,7 @@ const Index = ({ route, navigation }) => {
     status: dashboarStatus,
     userData: dashboardUserData,
     // clubData,
-    sessionData,
+    // sessionData,
     gameData,
   } = dashboardState;
 
@@ -1071,6 +1081,8 @@ const Index = ({ route, navigation }) => {
     userData: leaderBoardUserData,
     status: leaderboardStatus,
   } = leaderBoardState;
+
+  const { sessionData } = authContext;
 
   const {
     status: challengesStatus,
@@ -1088,16 +1100,20 @@ const Index = ({ route, navigation }) => {
   };
 
   const handleLoginRoute = () => {
-    authContext.setAuthState({
+    authContext.setAuthState((prevState) => ({
+      ...prevState,
       isLoggedIn: false,
-    });
+    }));
   };
 
-  if (authContext.appData.isReferesh) {
+  if (authContext.appData.isRefresh) {
     onRefresh();
-    authContext.setAuthState({
-      isReferesh: false,
-    });
+    authContext.setAuthState((prevState) => ({
+      ...prevState,
+      appData: {
+        isRefresh: false,
+      },
+    }));
   }
 
   const handleViewAllAwards = () => {
@@ -1110,10 +1126,48 @@ const Index = ({ route, navigation }) => {
     navigation.navigate('Leaderboard');
   };
 
+  const onHomeFocused = () => {
+    // console.log('foc ', authContext.appData.isRefresh);
+    // if (authContext.appData.isRefresh) {
+    //   onRefresh();
+    //   authContext.setAuthState((prevState) => ({
+    //     ...prevState,
+    //     appData {
+    //       isRefresh: false,
+    //     },
+    //   }));
+    // }
+    if (authContext.appData.isRefresh) {
+      onRefresh();
+      authContext.setAuthState((prevState) => ({
+        ...prevState,
+        appData: {
+          isRefresh: false,
+        },
+      }));
+    }
+  };
+
+  // const onHomeUnFocused = () => {
+  //   console.log('home unfocused');
+  // };
+
   // const isClubEnabled = () => {
   //   const clubEnabled = isFeatureEnabled(subscriptionData, 'clubs');
   //   return clubEnabled && clubEnabled.enabled;
   // };
+
+  const focusEffect = useCallback(() => {
+    onHomeFocused();
+
+    // return () => {
+    //   onHomeUnFocused();
+    // };
+  }, []);
+
+  useFocusEffect(() => {
+    focusEffect();
+  });
 
   React.useEffect(() => {
     onRefresh();
@@ -1163,6 +1217,7 @@ const Index = ({ route, navigation }) => {
                   <HomeComponent
                     avatar={defaultUser}
                     dashboardUserData={dashboardUserData}
+                    sessionData={sessionData}
                     navigation={navigation}
                     style={style}
                     reloadComponent={reloadComponent}

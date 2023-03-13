@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { SvgUri } from 'react-native-svg';
 import AwardProgressBar from '../AwardProgressBar';
+import AwardInfoIconSvg from '../../../images/achievements/awardInfo.svg';
 
 const AwardItem = ({
   style,
@@ -29,12 +30,15 @@ const AwardItem = ({
             </View>
           </View>
           <View style={style.container}>
-            <Text style={[style.textColor1, style.text]}>
-              <FormattedMessage defaultMessage={'{awardTitle}'} description='award title'
-                values={{
-                  awardTitle: currentAwardDetails.awardName,
-                }} />
-            </Text>
+            <View style={style.rowSpaceBetween}>
+              <Text style={[style.textColor1, style.text]}>
+                <FormattedMessage defaultMessage={'{awardTitle}'} description='award title'
+                  values={{
+                    awardTitle: currentAwardDetails.awardName,
+                  }} />
+              </Text>
+              <AwardInfoIconSvg />
+            </View>
             {
               currentAwardDetails.progressableAward
               && currentAwardDetails.progressDetails.nextAwardIn
@@ -71,12 +75,15 @@ const AwardItem = ({
             />
           </View>
           <View style={style.container}>
-            <Text style={[style.textColor1, style.text]}>
-              <FormattedMessage defaultMessage={'{awardTitle}'} description='award title'
-                values={{
-                  awardTitle: award.awardName,
-                }} />
-            </Text>
+            <View style={style.rowSpaceBetween}>
+              <Text style={[style.textColor1, style.text]}>
+                <FormattedMessage defaultMessage={'{awardTitle}'} description='award title'
+                  values={{
+                    awardTitle: award.awardName,
+                  }} />
+              </Text>
+              <AwardInfoIconSvg />
+            </View>
             <AwardProgressBar
               style={style}
               progressDetailsObj={award.progressDetails}

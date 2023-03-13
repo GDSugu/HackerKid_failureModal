@@ -297,192 +297,196 @@ const themes = {
       toastBtnTextColor: Theme.light.screenYellow.fadedBtnTextColor,
       ...ScreenSheet,
     },
+    screenPremium: {
+      ...Theme.light.screenYellow,
+      ...fragmentIconDisposal,
+    },
     utilColors: Theme.light.utilColors,
     gradients: Theme.light.gradients,
   },
   dark: {
     screenWebkataHome: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       ...screenTurtleHeader,
     },
     screenWebkataMain: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       ...screenTurtleHeader,
     },
     screenHTMLTab: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       ...screenTurtleHeader,
     },
     screenCSSTab: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       ...screenTurtleHeader,
     },
     screenJSTab: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       ...screenTurtleHeader,
     },
     screenLivePreviewTab: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       ...screenTurtleHeader,
     },
     screenAchievements: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...fragmentIconDisposal,
     },
     screenAwardsCollectibles: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...fragmentIconDisposal,
     },
     screenAwards: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...fragmentIconDisposal,
     },
     screenCollectibles: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...fragmentIconDisposal,
     },
     screenAskHelp: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...screenWithHeader,
     },
     screenAssignments: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...screenWithHeader,
     },
     screenCertificates: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...fragmentIconDisposal,
     },
     screenChallenges: {
-      ...Theme.light.screenBlue,
+      ...Theme.dark.screenBlue,
       ...screenWithHeader,
     },
     screenAllChallenges: {
-      ...Theme.light.screenBlue,
+      ...Theme.dark.screenBlue,
     },
     screenYourChallenges: {
-      ...Theme.light.screenBlue,
+      ...Theme.dark.screenBlue,
       ...screenWithHeader,
     },
     screenYourDraftChallenges: {
-      ...Theme.light.screenBlue,
+      ...Theme.dark.screenBlue,
       ...screenWithHeader,
     },
     screenClass: {
-      ...Theme.light.screenPurple,
+      ...Theme.dark.screenPurple,
       ...screenWithHeader,
     },
     screenClub: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...fragmentIconDisposal,
     },
     screenClubFeed: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...fragmentIconDisposal,
     },
     screenClubInfo: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...fragmentIconDisposal,
     },
     screenCreateClub: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...fragmentIconDisposal,
     },
     screenDoubts: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...screenWithHeader,
     },
     screenEditProfile: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...fragmentBtnDisposal,
     },
     screenGames: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       ...screenWithHeader,
     },
     screenHome: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...screenWithHeader,
     },
     screenJoinClub: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...fragmentIconDisposal,
     },
     screenLeaderboard: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...screenWithHeader,
     },
     screenMore: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...screenWithHeader,
     },
     screenHelp: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...fragmentIconDisposal,
     },
     screenStudentProfile: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       ...fragmentIconDisposal,
     },
     screenSupport: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       fragmentIconDisposal,
     },
     screenTurtleHome: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       ...fragmentIconDisposal,
     },
     screenTurtleMain: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       ...fragmentIconDisposal,
     },
     screenTurtleQuestion: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       ...fragmentIconDisposal,
     },
     screenTurtleEditor: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       ...fragmentIconDisposal,
     },
     screenTurtleOutput: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       ...fragmentIconDisposal,
     },
     screenGameLeaderBoard: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       pointsBtnBorderColor: LightBlue.color400,
       ...screenTurtleHeader,
     },
     screenVideo: {
-      ...Theme.light.screenGreen,
+      ...Theme.dark.screenGreen,
       ...screenWithHeader,
     },
     screenZombieLandHome: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       ...screenTurtleHeader,
     },
     screenZombieLandMain: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       ...screenTurtleHeader,
     },
     screenZombieLandQuestion: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       ...screenTurtleHeader,
     },
     screenZombieLandEditor: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       ...screenTurtleHeader,
     },
     screenZombieLandOutput: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       ...screenTurtleHeader,
     },
     screenZombieLandLeaderBoard: {
-      ...Theme.light.screenLightBlue,
+      ...Theme.dark.screenLightBlue,
       ...screenTurtleHeader,
     },
     screenLogin: {
-      ...Theme.light.screenYellow,
+      ...Theme.dark.screenYellow,
       showHeader: false,
       showNav: false,
       viewType: 'screen',
@@ -491,9 +495,13 @@ const themes = {
       ...ScreenSheet,
     },
     screenYourChallengesActions: {
-      ...Theme.light.screenBlue,
-      toastBtnBorderColor: Theme.light.screenYellow.fadedBtnTextColor,
-      toastBtnTextColor: Theme.light.screenYellow.fadedBtnTextColor,
+      ...Theme.dark.screenBlue,
+      toastBtnBorderColor: Theme.dark.screenYellow.fadedBtnTextColor,
+      toastBtnTextColor: Theme.dark.screenYellow.fadedBtnTextColor,
+      ...ScreenSheet,
+    },
+    screenPremium: {
+      ...Theme.dark.screenYellow,
       ...ScreenSheet,
     },
     utilColors: Theme.dark.utilColors,

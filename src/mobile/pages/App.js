@@ -47,6 +47,7 @@ import RouteWebkataHome from './WebkataHome';
 import RouteWebkataMain from './WebkataMain';
 import RouteClub from './Clubs';
 
+import RoutePremium from './Premium';
 import BottomSheet from '../components/BottomSheet';
 import YourChallengesActions from '../components/YourChallengesActions';
 
@@ -335,11 +336,10 @@ const App = () => {
                         animation: 'slide_from_right',
                       }}
                     >
-                      <Stack.Screen name='CodekataMain' component={RouteCodekataMain} />
+                    <Stack.Screen name='CodekataMain' component={RouteCodekataMain} />
                     </Stack.Group>
-                    <Stack.Screen name='GameLeaderBoard' component={RouteGameLeaderBoard} options={{ presentation: 'transparentModal' }} />
+                    <Stack.Screen name='GameLeaderBoard' component={RouteGameLeaderBoard} />
                     <Stack.Screen name='Club' component={RouteClub}></Stack.Screen>
-
                   </>
                   : <>
                     <Stack.Screen name='Login' component={RouteLogin} />
@@ -348,11 +348,12 @@ const App = () => {
                   </>
               }
             </Stack.Group>
+            <Stack.Screen name='Premium' component={RoutePremium} />
             <Stack.Screen name='Help' component={RouteHelp} />
+            <Stack.Screen name='Achievements' component={RouteAchievements} />
+            <Stack.Screen name='YourChallengesActions' component={YourChallengesActions} />
             <Stack.Group screenOptions={{ presentation: 'modal' }}>
               <Stack.Screen name='BottomSheet' component={BottomSheet} />
-              <Stack.Screen name='Achievements' component={RouteAchievements} />
-              <Stack.Screen name='YourChallengesActions' component={YourChallengesActions} />
             </Stack.Group>
           </Stack.Navigator>
         </NavigationContainer>

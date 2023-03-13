@@ -3721,6 +3721,12 @@
       "value": "name"
     }
   ],
+  "cucSNn": [
+    {
+      "type": 0,
+      "value": "Go to hackerkid.org to finish signing up to unlock more features."
+    }
+  ],
   "d/zBnH": [
     {
       "type": 0,
@@ -4401,6 +4407,12 @@
     {
       "type": 0,
       "value": "Subscription"
+    }
+  ],
+  "lurpFa": [
+    {
+      "type": 0,
+      "value": "You're almost there"
     }
   ],
   "lw8qSk": [

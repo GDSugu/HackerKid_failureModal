@@ -215,11 +215,12 @@ const YourChallengesActions = ({ navigation, route }) => {
           toastMessage: changeChallengeStateTo === 'published' ? 'Challenge published successfully' : 'Challenge moved to drafts',
           btnsDisabled: true,
         }));
-        authContext.setAuthState({
+        authContext.setAuthState((prevState) => ({
+          ...prevState,
           appData: {
             isRefresh: true,
           },
-        });
+        }));
       } else if (data.status === 'error') {
         setState((prev) => ({
           ...prev,
@@ -242,11 +243,12 @@ const YourChallengesActions = ({ navigation, route }) => {
           toastMessage: 'Challenge deleted successfully',
           btnsDisabled: true,
         }));
-        authContext.setAuthState({
+        authContext.setAuthState((prevState) => ({
+          ...prevState,
           appData: {
             isRefresh: true,
           },
-        });
+        }));
       } else if (data.status === 'error') {
         setState((prev) => ({
           ...prev,

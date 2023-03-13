@@ -23,7 +23,7 @@ import ThemeContext from '../components/theme';
 import SortIconSvg from '../../images/common/sort-icon.svg';
 import SearchIconSvg from '../../images/common/search-icon.svg';
 import { useProfileInfo } from '../../hooks/pages/profile';
-import ShareIcon from '../../images/common/black-share-icon.svg';
+import ShareIcon from '../../images/common/share.svg';
 import ShareModal from '../components/Modals/ShareModal';
 import ViewCertificateModal from '../components/Modals/ViewCertificateModal';
 import CertificateBuilder from '../components/CertificateBuilder';
@@ -563,7 +563,7 @@ const Certificates = ({ navigation }) => {
       }
       {
         currentList && (Array.isArray(currentList))
-        && <View style={[style.certificateItemContainer, style.borderRadius12]}>
+        && <View style={[style.certificateItemContainer, style.borderRadius12, style.mb20]}>
           {
             currentList.map((certificate, idx) => <CertificateItem
               onImagePress={onCertificateImagePress}

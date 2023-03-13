@@ -16,22 +16,23 @@ const useAwardsByGame = ({ isPageMounted, initializeData = true, game }) => {
       ...prevState,
       ...args,
     }));
-    authContext.setAuthState({
-      appData: {
-        awardsByGameHook: {
-          ...awardsByGameState,
-          ...args,
-        },
+    authContext.setAuthState((prevState) => ({
+      ...prevState,
+      // appData: {
+      awardsByGameHook: {
+        ...awardsByGameState,
+        ...args,
       },
-    });
+      // },
+    }));
   };
 
   const getAwardsByGame = ({
     cached = true,
   }) => {
     let result;
-    if (cached && authContext.appData.awardsByGame) {
-      const { awardsByGameHook } = authContext.appData;
+    if (cached && authContext.awardsByGame) {
+      const { awardsByGameHook } = authContext;
       setAwardsByGameState({
         ...awardsByGameHook,
         status: 'success',
@@ -52,14 +53,15 @@ const useAwardsByGame = ({ isPageMounted, initializeData = true, game }) => {
               awards: allAwardsByGame,
             };
             setAwardsByGameState(newState);
-            authContext.setAuthState({
-              appData: {
-                awardsByGameHook: {
-                  ...newState,
-                  status: 'success',
-                },
+            authContext.setAuthState((prevState) => ({
+              ...prevState,
+              // appData: {
+              awardsByGameHook: {
+                ...newState,
+                status: 'success',
               },
-            });
+              // },
+            }));
           } else {
             setAwardsByGameState((prevState) => ({
               ...prevState,
@@ -104,14 +106,13 @@ const useAwards = ({ isPageMounted, initializeData = true }) => {
       ...prevState,
       ...args,
     }));
-    authContext.setAuthState({
-      appData: {
-        awardsHook: {
-          ...awardsState,
-          ...args,
-        },
+    authContext.setAuthState((prevState) => ({
+      ...prevState,
+      awardsHook: {
+        ...awardsState,
+        ...args,
       },
-    });
+    }));
   };
 
   const separateAwardsToTodayAndPrevious = (toSeparateAwards) => {
@@ -159,8 +160,8 @@ const useAwards = ({ isPageMounted, initializeData = true }) => {
     cached = true, searchQuery = '', sort = 'default', limit = 15,
   }) => {
     let result;
-    if (cached && authContext.appData.awards) {
-      const { awardsHook } = authContext.appData;
+    if (cached && authContext.awards) {
+      const { awardsHook } = authContext;
       setAwardsState({
         ...awardsHook,
         status: 'success',
@@ -193,14 +194,13 @@ const useAwards = ({ isPageMounted, initializeData = true }) => {
             }
 
             setAwardsState(newState);
-            authContext.setAuthState({
-              appData: {
-                awardsHook: {
-                  ...newState,
-                  status: 'success',
-                },
+            authContext.setAuthState((prevState) => ({
+              ...prevState,
+              awardsHook: {
+                ...newState,
+                status: 'success',
               },
-            });
+            }));
           } else {
             setAwardsState((prevState) => ({
               ...prevState,

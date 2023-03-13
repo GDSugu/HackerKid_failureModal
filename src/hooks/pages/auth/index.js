@@ -46,10 +46,11 @@ const useLoginMethod = () => {
         const data = JSON.parse(response);
         if (data.status === 'success') {
           setUserSession(data).then(() => {
-            authContext.setAuthState({
+            authContext.setAuthState((prevState) => ({
+              ...prevState,
               isLoggedIn: true,
               sessionData: data,
-            });
+            }));
           });
         }
         return response;

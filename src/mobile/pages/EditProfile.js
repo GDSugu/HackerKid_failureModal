@@ -271,11 +271,12 @@ const EditProfile = ({ navigation }) => {
             Alert.alert('Error', 'Access denied. Please try again', [{ text: 'Go Back', onPress: () => navigation.goBack() }]);
           } else {
             Alert.alert('Success', 'Profile updated successfully', [{ text: 'OK', onPress: () => { } }]);
-            authContext.setAuthState({
+            authContext.setAuthState((prevState) => ({
+              ...prevState,
               appData: {
                 isRefresh: true,
               },
-            });
+            }));
           }
         });
     }
@@ -305,9 +306,13 @@ const EditProfile = ({ navigation }) => {
 
   useEffect(() => {
     if (profileImage) {
-      setAvatar({
-        uri: profileImage,
-      });
+      if (typeof profileImage === 'string') {
+        setAvatar({
+          uri: profileImage,
+        });
+      } else {
+        setAvatar(profileImage);
+      }
       // console.log(profileImage);
     }
 

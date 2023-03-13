@@ -811,9 +811,10 @@ const Games = ({ navigation }) => {
 
   // onRefresh
   const onRefresh = () => {
-    // authContext.setAuthState({
+    // authContext.setAuthState((prevState) => ({
+    //   ...prevState,
     //   gamesPageAppData: { refreshing: true },
-    // });
+    // }));
     showLoader();
 
     Promise.all([
@@ -821,21 +822,23 @@ const Games = ({ navigation }) => {
     ])
       .then(() => {
         hideLoader();
-        // authContext.setAuthState({
+        // authContext.setAuthState((prevState) => ({
+        //   ...prevState,
         //   gamesPageAppData: {
         //     reloadComponent: authContext?.gamesPageAppData?.reloadComponent + 1,
         //     refreshing: false,
         //   },
-        // });
+        // }));
       })
       .catch(() => {
         // show snackbar of error
         hideLoader();
-        // authContext.setAuthState({
+        // authContext.setAuthState((prevState) => ({
+        //   ...prevState,
         //   gamesPageAppData: {
         //     refreshing: false,
         //   },
-        // });
+        // }));
       });
   };
 
@@ -907,9 +910,14 @@ const Games = ({ navigation }) => {
   },
   ];
 
-  if (authContext.appData.isReferesh) {
+  if (authContext.appData.isRefresh) {
     onRefresh();
-    authContext.setAuthState({ isReferesh: false });
+    authContext.setAuthState((prevState) => ({
+      ...prevState,
+      appData: {
+        isRefresh: false,
+      },
+    }));
   }
 
   // styles
@@ -959,9 +967,10 @@ const Games = ({ navigation }) => {
       gameCardsData: false,
     };
 
-    authContext.setAuthState({
+    authContext.setAuthState((prevState) => ({
+      ...prevState,
       gamesPageAppData: initialState,
-    });
+    }));
 
     onRefresh();
     return () => {

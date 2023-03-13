@@ -26,19 +26,18 @@ const useProfileInfo = ({
       ...prevState,
       ...args,
     }));
-    authContext.setAuthState({
-      appData: {
-        profileInfoHook: {
-          ...profileInfo,
-          ...args,
-        },
+    authContext.setAuthState((prevState) => ({
+      ...prevState,
+      profileInfoHook: {
+        ...profileInfo,
+        ...args,
       },
-    });
+    }));
   };
 
   const getProfileInfo = ({ cached = true }) => {
-    if (cached && authContext.appData.profileInfoHook) {
-      const { profileInfoHook } = authContext.appData;
+    if (cached && authContext.profileInfoHook) {
+      const { profileInfoHook } = authContext;
       setProfileInfo({
         ...profileInfoHook,
         status: 'success',
@@ -64,14 +63,13 @@ const useProfileInfo = ({
                   ...userInfo,
                   status: 'success',
                 }));
-                authContext.setAuthState({
-                  appData: {
-                    profileInfoHook: {
-                      ...userInfo,
-                      status: 'success',
-                    },
+                authContext.setAuthState((prevState) => ({
+                  ...prevState,
+                  profileInfoHook: {
+                    ...userInfo,
+                    status: 'success',
                   },
-                });
+                }));
               } else {
                 setProfileInfo((prevState) => ({
                   ...prevState,
@@ -88,8 +86,8 @@ const useProfileInfo = ({
   const getProfileData = ({ cached = true }) => {
     let result = new Promise((res) => res());
     if (uniqueurl) {
-      if (cached && authContext.appData.profileDataHook) {
-        const { profileDataHook } = authContext.appData;
+      if (cached && authContext.profileDataHook) {
+        const { profileDataHook } = authContext;
         setProfileInfo({
           ...profileDataHook,
         });
@@ -111,13 +109,12 @@ const useProfileInfo = ({
                 const parsedResponse = JSON.parse(response);
                 if (parsedResponse.status === 'success') {
                   setProfileInfo(parsedResponse);
-                  authContext.setAuthState({
-                    appData: {
-                      profileDataHook: {
-                        parsedResponse,
-                      },
+                  authContext.setAuthState((prevState) => ({
+                    ...prevState,
+                    profileDataHook: {
+                      parsedResponse,
                     },
-                  });
+                  }));
                 } else {
                   setProfileInfo((prevState) => ({
                     ...prevState,
