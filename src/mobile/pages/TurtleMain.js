@@ -48,6 +48,7 @@ const getStyles = (theme, font, utilColors) => StyleSheet.create({
   },
   hintText: {
     ...font.subtitle1,
+    color: utilColors.dark,
     width: '90%',
   },
   registerBtn: {
