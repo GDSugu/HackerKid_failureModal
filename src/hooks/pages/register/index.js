@@ -32,10 +32,11 @@ const useRegister = () => {
       const data = JSON.parse(response);
       if (data.status === 'success') {
         setUserSession(data.session).then(() => {
-          authContext.setAuthState({
+          authContext.setAuthState((prevState) => ({
+            ...prevState,
             isLoggedIn: true,
             sessionData: data,
-          });
+          }));
         });
       }
       return response;

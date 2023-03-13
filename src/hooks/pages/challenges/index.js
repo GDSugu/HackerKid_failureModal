@@ -17,14 +17,13 @@ const useGetChallenges = ({ initializeData = true, isPageMounted }) => {
       ...prevState,
       ...args,
     }));
-    authContext.setAuthState({
-      appData: {
-        getChallengesHook: {
-          ...challenges,
-          ...args,
-        },
+    authContext.setAuthState((prevState) => ({
+      ...prevState,
+      getChallengesHook: {
+        ...challenges,
+        ...args,
       },
-    });
+    }));
   };
 
   const getChallenges = ({ filterObj = {}, cached = true }) => {
@@ -40,9 +39,9 @@ const useGetChallenges = ({ initializeData = true, isPageMounted }) => {
 
     let result;
 
-    if (cached && authContext.appData.getChallengesHook) {
+    if (cached && authContext.getChallengesHook) {
       result = new Promise((resolve) => {
-        const { getChallengesHook } = authContext.appData;
+        const { getChallengesHook } = authContext;
         setChallenges(() => ({
           ...getChallengesHook,
         }));
@@ -61,13 +60,12 @@ const useGetChallenges = ({ initializeData = true, isPageMounted }) => {
               const parsedResponse = JSON.parse(res);
 
               if (parsedResponse.status === 'success') {
-                authContext.setAuthState({
-                  appData: {
-                    getChallengesHook: {
-                      ...parsedResponse,
-                    },
+                authContext.setAuthState((prevState) => ({
+                  ...prevState,
+                  getChallengesHook: {
+                    ...parsedResponse,
                   },
-                });
+                }));
 
                 setChallenges(() => ({
                   ...parsedResponse,
@@ -114,14 +112,13 @@ const useGetMyChallenges = ({ initializeData = true, isPageMounted }) => {
       ...prevState,
       ...args,
     }));
-    authContext.setAuthState({
-      appData: {
-        myChallengesHook: {
-          ...myChallenges,
-          ...args,
-        },
+    authContext.setAuthState((prevState) => ({
+      ...prevState,
+      myChallengesHook: {
+        ...myChallenges,
+        ...args,
       },
-    });
+    }));
   };
 
   const getMyChallenges = ({ cached = true }) => {
@@ -132,9 +129,9 @@ const useGetMyChallenges = ({ initializeData = true, isPageMounted }) => {
 
     let result;
 
-    if (cached && authContext.appData.myChallengesHook) {
+    if (cached && authContext.myChallengesHook) {
       result = new Promise((resolve) => {
-        const { myChallengesHook } = authContext.appData;
+        const { myChallengesHook } = authContext;
         setMyChallenges(() => ({
           ...myChallengesHook,
         }));
@@ -167,15 +164,14 @@ const useGetMyChallenges = ({ initializeData = true, isPageMounted }) => {
                   publishedChallengesCount,
                   draftChallengesCount,
                 }));
-                authContext.setAuthState({
-                  appData: {
-                    myChallengesHook: {
-                      ...parsedResponse,
-                      publishedChallengesCount,
-                      draftChallengesCount,
-                    },
+                authContext.setAuthState((prevState) => ({
+                  ...prevState,
+                  myChallengesHook: {
+                    ...parsedResponse,
+                    publishedChallengesCount,
+                    draftChallengesCount,
                   },
-                });
+                }));
               } else {
                 setMyChallenges(() => ({
                   ...parsedResponse,
@@ -234,14 +230,13 @@ const useGetAttemptedChallenges = ({ initializeData = true, isPageMounted }) => 
       ...prevState,
       ...args,
     }));
-    authContext.setAuthState({
-      appData: {
-        attemptedChallengesHook: {
-          ...attemptedChallenges,
-          ...args,
-        },
+    authContext.setAuthState((prevState) => ({
+      ...prevState,
+      attemptedChallengesHook: {
+        ...attemptedChallenges,
+        ...args,
       },
-    });
+    }));
   };
 
   const getAttemptedChallenges = ({ cached = true }) => {
@@ -252,9 +247,9 @@ const useGetAttemptedChallenges = ({ initializeData = true, isPageMounted }) => 
 
     let result;
 
-    if (cached && authContext.appData.attemptedChallengesHook) {
+    if (cached && authContext.attemptedChallengesHook) {
       result = new Promise((resolve) => {
-        const { attemptedChallengesHook } = authContext.appData;
+        const { attemptedChallengesHook } = authContext;
         setAttemptedChallenges(() => ({
           ...attemptedChallengesHook,
         }));
@@ -275,13 +270,12 @@ const useGetAttemptedChallenges = ({ initializeData = true, isPageMounted }) => 
                 setAttemptedChallenges(() => ({
                   ...parsedResponse,
                 }));
-                authContext.setAuthState({
-                  appData: {
-                    attemptedChallengesHook: {
-                      ...parsedResponse,
-                    },
+                authContext.setAuthState((prevState) => ({
+                  ...prevState,
+                  attemptedChallengesHook: {
+                    ...parsedResponse,
                   },
-                });
+                }));
               } else {
                 setAttemptedChallenges(() => ({
                   ...parsedResponse,
@@ -326,14 +320,13 @@ const useTakeChallenge = ({ isPageMounted }) => {
       ...prevState,
       ...args,
     }));
-    authContext.setAuthState({
-      appData: {
-        takeChallengeHook: {
-          ...takeChallenge,
-          ...args,
-        },
+    authContext.setAuthState((prevState) => ({
+      ...prevState,
+      takeChallengeHook: {
+        ...takeChallenge,
+        ...args,
       },
-    });
+    }));
   };
 
   const fetchChallenge = ({ challengeId, cached = true }) => {
@@ -345,9 +338,9 @@ const useTakeChallenge = ({ isPageMounted }) => {
 
     let result;
 
-    if (cached && authContext.appData.takeChallengeHook) {
+    if (cached && authContext.takeChallengeHook) {
       result = new Promise((resolve) => {
-        const { takeChallengeHook } = authContext.appData;
+        const { takeChallengeHook } = authContext;
         setTakeChallenge((prevState) => ({
           ...prevState,
           ...takeChallengeHook,
@@ -370,13 +363,12 @@ const useTakeChallenge = ({ isPageMounted }) => {
                   ...prevState,
                   ...parsedResponse,
                 }));
-                authContext.setAuthState({
-                  appData: {
-                    takeChallengeHook: {
-                      ...parsedResponse,
-                    },
+                authContext.setAuthState((prevState) => ({
+                  ...prevState,
+                  takeChallengeHook: {
+                    ...parsedResponse,
                   },
-                });
+                }));
               } else {
                 setTakeChallenge((prevState) => ({
                   ...prevState,

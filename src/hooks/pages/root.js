@@ -160,10 +160,22 @@ const useGetSubscription = ({ isPageMounted }) => {
   };
 };
 
-const AuthContext = React.createContext();
+const AuthContext = React.createContext({
+  appData: {},
+  sessionData: {},
+  isRefresh: false,
+  subscriptionData: {},
+  setAuthState: () => {},
+});
 const SubscriptionContext = React.createContext();
+const SessionContext = React.createContext();
 
 export default useRootPageState;
+
 export {
-  AuthContext, SubscriptionContext, useGetSession, useGetSubscription,
+  AuthContext,
+  SessionContext,
+  SubscriptionContext,
+  useGetSession,
+  useGetSubscription,
 };

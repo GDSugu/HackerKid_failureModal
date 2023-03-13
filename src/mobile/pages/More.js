@@ -146,11 +146,12 @@ const More = ({ navigation }) => {
   // };
 
   const handlelogoutBtn = () => {
-    authContext.setAuthState({
+    authContext.setAuthState((prevState) => ({
+      ...prevState,
       appData: {
         logoutModalVisibility: true,
       },
-    });
+    }));
   };
 
   return (

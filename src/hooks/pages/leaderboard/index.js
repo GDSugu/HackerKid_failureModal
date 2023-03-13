@@ -47,15 +47,14 @@ const useLeaderBoard = ({ initializeData = true, isPageMounted }) => {
                   loading: false,
                 },
               }));
-              authContext.setAuthState({
-                appData: {
-                  getLeaderBoardHook: {
-                    [pageNumber]: {
-                      ...parsedResponse,
-                    },
+              authContext.setAuthState((prevState) => ({
+                ...prevState,
+                getLeaderBoardHook: {
+                  [pageNumber]: {
+                    ...parsedResponse,
                   },
                 },
-              });
+              }));
             } else {
               setLeaderBoardData(() => ({
                 ...parsedResponse,

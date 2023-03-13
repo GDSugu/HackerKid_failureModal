@@ -2268,6 +2268,9 @@
     "defaultMessage": "{name}",
     "description": "name"
   },
+  "cucSNn": {
+    "defaultMessage": "Go to hackerkid.org to finish signing up to unlock more features."
+  },
   "d/zBnH": {
     "defaultMessage": "...",
     "description": "Page"
@@ -2696,6 +2699,10 @@
   "ls4jLo": {
     "defaultMessage": "Subscription",
     "description": "more menu button"
+  },
+  "lurpFa": {
+    "defaultMessage": "You're almost there",
+    "description": "Premium title tag"
   },
   "lw8qSk": {
     "defaultMessage": "Buy Now",

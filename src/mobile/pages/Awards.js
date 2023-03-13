@@ -66,6 +66,10 @@ const getStyles = (theme, utilColors, font, gradients) => StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 18,
     paddingHorizontal: 13,
+    borderWidth: 2,
+    borderRadius: 12,
+    borderColor: theme.borderLight,
+    marginVertical: 4,
   },
   awardImgContainer: {
     width: 48,
@@ -209,6 +213,11 @@ const getStyles = (theme, utilColors, font, gradients) => StyleSheet.create({
     paddingLeft: 32,
     backgroundColor: utilColors.white,
     marginLeft: 5,
+  },
+  rowSpaceBetween: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });
 

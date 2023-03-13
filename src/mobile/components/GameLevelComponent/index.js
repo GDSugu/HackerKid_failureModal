@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
 // import TryNowSVG from '../../../images/games/trynow.svg';
 import levelCurrentImg from '../../../images/games/level_current.png';
 import levelCompletedImg from '../../../images/games/level_completed.png';
@@ -85,6 +86,7 @@ const LevelButton = ({
   virtualId,
   questionState,
 }) => {
+  const navigation = useNavigation();
   let bgImg = levelNotCompletedImg;
   let handleLevel = () => { };
 
@@ -102,7 +104,12 @@ const LevelButton = ({
     case 'turtle':
       if (question) {
         handleLevel = (qnState) => {
-          if (qnState === 'locked') return;
+          // if (qnState === 'locked') return;
+          if (qnState === 'locked') {
+            closeLevel();
+            navigation.navigate('Premium');
+            return;
+          }
 
           fetchQuestion({ type: 'getQuestionById', questionId: question.question_id })
             .then(closeLevel);
@@ -112,7 +119,11 @@ const LevelButton = ({
     case 'zombieLand':
       if (question) {
         handleLevel = (qnState) => {
-          if (qnState === 'locked') return;
+          if (qnState === 'locked') {
+            closeLevel();
+            navigation.navigate('Premium');
+            return;
+          }
 
           fetchQuestion({ virtualId })
             .then(closeLevel);
@@ -122,7 +133,11 @@ const LevelButton = ({
     case 'codekata':
       if (question) {
         handleLevel = (qnState) => {
-          if (qnState === 'locked') return;
+          if (qnState === 'locked') {
+            closeLevel();
+            navigation.navigate('Premium');
+            return;
+          }
 
           fetchQuestion(question.virtualId)
             .then(closeLevel);
