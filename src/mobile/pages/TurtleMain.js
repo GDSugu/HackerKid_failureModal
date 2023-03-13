@@ -20,6 +20,8 @@ import { Red, Yellow } from '../../colors/_colors';
 import TurtleSuccessModal from '../components/Modals/TurtleSuccessModal';
 import { useTimeTrack } from '../../hooks/pages/timeTrack';
 import Loader from '../components/Loader';
+import { isFeatureEnabled } from '../../web/javascripts/common/framework';
+import { SubscriptionContext } from '../../hooks/pages/root';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -103,168 +105,168 @@ const HintComponent = ({
         ...style.hintContainer,
         bottom: hintVisible ? 84 : -200,
       }}
-      animation={ hintVisible ? 'fadeInUp' : 'fadeOutDown' }
+      animation={hintVisible ? 'fadeInUp' : 'fadeOutDown'}
       duration={500}
-      >
-        {
-          hintDetails?.status === 'access_denied'
-          && <>
-            <View style={style.flexBetween}>
-              <Text style={style.hintText}>
+    >
+      {
+        hintDetails?.status === 'access_denied'
+        && <>
+          <View style={style.flexBetween}>
+            <Text style={style.hintText}>
+              <FormattedMessage
+                defaultMessage={'Register to Get help from Turtle'}
+                description={'Hint message'}
+              />
+            </Text>
+            <TouchableOpacity
+              onPress={closeHintContainer}>
+              <Icon
+                name='close'
+                color={Red.color500}
+                type='FontAwesome'
+                size={28}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={{
+            ...style.flexBetween,
+            ...style.mt16,
+          }}>
+            <TouchableOpacity
+              onPress={closeHintContainer}
+              style={style.laterBtn}>
+              <Text style={style.laterBtnText}>
                 <FormattedMessage
-                  defaultMessage={'Register to Get help from Turtle'}
-                  description={'Hint message'}
+                  defaultMessage={'Later'}
+                  description={'Later'}
                 />
               </Text>
-              <TouchableOpacity
-                onPress={closeHintContainer}>
-                <Icon
-                  name='close'
-                  color={Red.color500}
-                  type='FontAwesome'
-                  size={28}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={{
-              ...style.flexBetween,
-              ...style.mt16,
-            }}>
-              <TouchableOpacity
-                onPress={closeHintContainer}
-                style={style.laterBtn}>
-                  <Text style={style.laterBtnText}>
-                    <FormattedMessage
-                      defaultMessage={'Later'}
-                      description={'Later'}
-                    />
-                  </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {}}
-                style={style.registerBtn}>
-                <Text style={style.registerBtnText}>
-                  <FormattedMessage
-                    defaultMessage={'Register'}
-                    description={'Register'}
-                  />
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </>
-        }
-        {
-          hintDetails?.status === 'success'
-          && <>
-            <View style={style.flexBetween}>
-              <Text style={style.hintText}>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => { }}
+              style={style.registerBtn}>
+              <Text style={style.registerBtnText}>
                 <FormattedMessage
-                  defaultMessage={'{hint}'}
-                  description={'Hint'}
-                  values={{
-                    hint: hintDetails.hint,
-                  }}
+                  defaultMessage={'Register'}
+                  description={'Register'}
                 />
               </Text>
-              <TouchableOpacity
-                onPress={closeHintContainer}>
-                <Icon
-                  name='close'
-                  color={Red.color500}
-                  type='FontAwesome'
-                  size={28}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={{
-              ...style.flexBetween,
-              ...style.mt16,
-            }}>
-              <TouchableOpacity
-                onPress={() => { navigateHint('prev'); }}
-                disabled={hintDetails.isFirstHint}
-                style={style.navigationBtn}>
-                  <Icon
-                    name='angle-left'
-                    type='FontAwesome5'
-                    color={Yellow.color700}
-                    size={24}
-                  />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => { navigateHint('next'); }}
-                disabled={hintDetails.isLastHint}
-                style={style.navigationBtn}>
-                  <Icon
-                    name='angle-right'
-                    type='FontAwesome5'
-                    color={Yellow.color700}
-                    size={24}
-                  />
-              </TouchableOpacity>
-            </View>
-          </>
-        }
-        {
-          hintDetails?.status === 'error'
-          && <>
-            <View style={style.flexBetween}>
-              <Text style={style.hintText}>
-                <FormattedMessage
-                  defaultMessage={'{hintMessage}'}
-                  description={'Hint'}
-                  values={{
-                    hintMessage: hintDetails.message,
-                  }}
-                />
-              </Text>
-              <TouchableOpacity
-                onPress={closeHintContainer}>
-                <Icon
-                  name='close'
-                  color={Red.color500}
-                  type='FontAwesome'
-                  size={28}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={{
-              ...style.flexCenter,
-              ...style.mt16,
-            }}>
-              <TouchableOpacity
-                onPress={closeHintContainer}
-                style={style.navigationBtn}>
-                  <FormattedMessage
-                    defaultMessage={'OK'}
-                    description={'OK'}
-                  />
-              </TouchableOpacity>
-            </View>
-          </>
-        }
-        {
-          !hintDetails
-          && <>
-            <View style={style.flexBetween}>
-              <Text style={style.hintText}>
-                <FormattedMessage
-                  defaultMessage={'Move any blocks to get hints'}
-                  description={'Hint message'}
-                />
-              </Text>
-              <TouchableOpacity
-                onPress={closeHintContainer}>
-                <Icon
-                  name='close'
-                  color={Red.color500}
-                  type='FontAwesome'
-                  size={28}
-                />
-              </TouchableOpacity>
-            </View>
-          </>
-        }
+            </TouchableOpacity>
+          </View>
+        </>
+      }
+      {
+        hintDetails?.status === 'success'
+        && <>
+          <View style={style.flexBetween}>
+            <Text style={style.hintText}>
+              <FormattedMessage
+                defaultMessage={'{hint}'}
+                description={'Hint'}
+                values={{
+                  hint: hintDetails.hint,
+                }}
+              />
+            </Text>
+            <TouchableOpacity
+              onPress={closeHintContainer}>
+              <Icon
+                name='close'
+                color={Red.color500}
+                type='FontAwesome'
+                size={28}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={{
+            ...style.flexBetween,
+            ...style.mt16,
+          }}>
+            <TouchableOpacity
+              onPress={() => { navigateHint('prev'); }}
+              disabled={hintDetails.isFirstHint}
+              style={style.navigationBtn}>
+              <Icon
+                name='angle-left'
+                type='FontAwesome5'
+                color={Yellow.color700}
+                size={24}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => { navigateHint('next'); }}
+              disabled={hintDetails.isLastHint}
+              style={style.navigationBtn}>
+              <Icon
+                name='angle-right'
+                type='FontAwesome5'
+                color={Yellow.color700}
+                size={24}
+              />
+            </TouchableOpacity>
+          </View>
+        </>
+      }
+      {
+        hintDetails?.status === 'error'
+        && <>
+          <View style={style.flexBetween}>
+            <Text style={style.hintText}>
+              <FormattedMessage
+                defaultMessage={'{hintMessage}'}
+                description={'Hint'}
+                values={{
+                  hintMessage: hintDetails.message,
+                }}
+              />
+            </Text>
+            <TouchableOpacity
+              onPress={closeHintContainer}>
+              <Icon
+                name='close'
+                color={Red.color500}
+                type='FontAwesome'
+                size={28}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={{
+            ...style.flexCenter,
+            ...style.mt16,
+          }}>
+            <TouchableOpacity
+              onPress={closeHintContainer}
+              style={style.navigationBtn}>
+              <FormattedMessage
+                defaultMessage={'OK'}
+                description={'OK'}
+              />
+            </TouchableOpacity>
+          </View>
+        </>
+      }
+      {
+        !hintDetails
+        && <>
+          <View style={style.flexBetween}>
+            <Text style={style.hintText}>
+              <FormattedMessage
+                defaultMessage={'Move any blocks to get hints'}
+                description={'Hint message'}
+              />
+            </Text>
+            <TouchableOpacity
+              onPress={closeHintContainer}>
+              <Icon
+                name='close'
+                color={Red.color500}
+                type='FontAwesome'
+                size={28}
+              />
+            </TouchableOpacity>
+          </View>
+        </>
+      }
     </Animatable.View>
   </>;
 };
@@ -370,7 +372,22 @@ const TurtleMain = ({ navigation }) => {
     return loadHints({ blockTypes, action });
   };
 
+  const isAlreadyCompleted = () => turtleQuestionState.submissionDetails
+    && turtleQuestionState.submissionDetails.completed;
+
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+
+  const gamesLimit = (gameName) => {
+    const gamesEnabled = isFeatureEnabled(subscriptionData, 'games', gameName);
+    return gamesEnabled.enabled && gamesEnabled[gameName];
+  };
+
   useEffect(() => {
+    const { virtualId } = turtleQuestionState;
+    if (virtualId > gamesLimit('turtle') && !isAlreadyCompleted()) {
+      // navigate to pricing, for now navigating to home
+      navigation.navigate('Home');
+    }
     startTimeTrack('turtle-main');
 
     return () => {
@@ -408,7 +425,7 @@ const TurtleMain = ({ navigation }) => {
               ScreenArray={TurtleScreenArray}
               themeKey='screenTurtleQuestion'
               navigation={navigation}
-              />
+            />
             <HintComponent
               handleHint={handleHint}
               hintDetails={hintDetails}

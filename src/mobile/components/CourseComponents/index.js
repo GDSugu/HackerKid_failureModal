@@ -350,7 +350,7 @@ const ModuleContainer = ({
     <View style={style.courseCont}>
       {continueWatch ? <Text
         style={{
-          ...font.body,
+          ...font.subtitle1,
           color: '#000',
           marginHorizontal: 18,
           marginBottom: 12,
@@ -361,7 +361,7 @@ const ModuleContainer = ({
         />
       </Text> : <Text
         style={{
-          ...font.body,
+          ...font.subtitle1,
           color: '#000',
           marginHorizontal: 18,
           marginBottom: 12,
@@ -371,9 +371,9 @@ const ModuleContainer = ({
           description={'Course Name'}
           values={{ name: customModuleName }}
         /> : <FormattedMessage
-          defaultMessage={'{title} - {type}'}
+          defaultMessage={'{courseName}'}
           description={'Course Name'}
-          values={{ title: data.moduleName, type: data.type }}
+          values={{ courseName: data.moduleName }}
         />}
       </Text>}
       <View>

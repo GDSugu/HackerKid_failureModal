@@ -19,7 +19,7 @@ import Paginator from '../components/Paginator';
 import { isFeatureEnabled } from '../../web/javascripts/common/framework';
 import { SubscriptionContext } from '../../hooks/pages/root';
 
-const getStyles = (theme, font) => {
+const getStyles = (theme, font, utilColors) => {
   const totalWidth = Dimensions.get('window').width;
   const searchBarWidth = totalWidth - 36;
   const cardWidth = totalWidth - 36;
@@ -38,6 +38,8 @@ const getStyles = (theme, font) => {
     },
     searchBar: {
       width: '100%',
+      color: utilColors.dark,
+      ...font.subtitle2,
     },
     searchCont: {
       backgroundColor: '#fff',
@@ -56,7 +58,7 @@ const getStyles = (theme, font) => {
       marginTop: 8,
     },
     videoHead: {
-      ...font.body,
+      ...font.subtitleBold,
       color: '#000',
     },
     pageBtn: {
@@ -68,8 +70,8 @@ const getStyles = (theme, font) => {
 const VideoHome = ({ navigation, route }) => {
   const { moduleId } = route.params;
   const { font, theme } = useContext(ThemeContext);
-  const pageTheme = theme.screenVideo;
-  const style = getStyles(pageTheme, font);
+  const { screenVideo: pageTheme, utilColors } = theme;
+  const style = getStyles(pageTheme, font, utilColors);
   const isPageMounted = useRef(true);
   const { invidualModuleData } = useVideos({ isPageMounted, urlData: { moduleId } });
   const { moduleData } = invidualModuleData;
@@ -114,7 +116,7 @@ const VideoHome = ({ navigation, route }) => {
           <Text style={style.videoHead}>
             <FormattedMessage
               defaultMessage={'Videos'}
-              description={'Course Name'}
+              description={'Page heading'}
             />
           </Text>
         </View>
@@ -141,7 +143,7 @@ const VideoHome = ({ navigation, route }) => {
                   customVideo={true}
                   customCardStyle={style.videoCard}
                 />
-            ))
+              ))
             : lockedData
             && lockedData.videos.map((item, index) => index < page * 10
               && index > page * 10 - 11 && (
@@ -155,7 +157,7 @@ const VideoHome = ({ navigation, route }) => {
                   customVideo={true}
                   customCardStyle={style.videoCard}
                 />
-            ))}
+              ))}
         </View>
       </ScrollView>
       {lockedData && <Paginator
