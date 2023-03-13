@@ -279,6 +279,12 @@
       "value": "navigationText"
     }
   ],
+  "0lssEq": [
+    {
+      "type": 0,
+      "value": "close"
+    }
+  ],
   "0mcQbk": [
     {
       "type": 1,
@@ -3635,6 +3641,12 @@
       "value": " xp"
     }
   ],
+  "bpZOUP": [
+    {
+      "type": 0,
+      "value": "Your changes have been saved successfully."
+    }
+  ],
   "bvFe7G": [
     {
       "type": 0,
@@ -4151,6 +4163,12 @@
       "value": "Continue"
     }
   ],
+  "iObM7I": [
+    {
+      "type": 0,
+      "value": "Parent Phone"
+    }
+  ],
   "iS2zLU": [
     {
       "type": 0,
@@ -4585,6 +4603,12 @@
       "value": "text"
     }
   ],
+  "nTv3DV": [
+    {
+      "type": 0,
+      "value": "Save Successful"
+    }
+  ],
   "nTxUJZ": [
     {
       "type": 0,
@@ -4919,6 +4943,12 @@
     {
       "type": 0,
       "value": " rank"
+    }
+  ],
+  "qlFSwa": [
+    {
+      "type": 0,
+      "value": "Parent's Email"
     }
   ],
   "qmXcjW": [

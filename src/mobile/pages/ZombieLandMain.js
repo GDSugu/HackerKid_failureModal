@@ -56,6 +56,7 @@ const getStyles = (theme, font, utilColors) => StyleSheet.create({
     ...font.subtitle1,
     width: '90%',
     marginBottom: 8,
+    color: utilColors.dark,
   },
   registerBtn: {
     backgroundColor: Yellow.color700,

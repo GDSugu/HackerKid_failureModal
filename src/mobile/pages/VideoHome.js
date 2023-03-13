@@ -98,6 +98,10 @@ const getStyles = (theme, font, gradients, utilColors) => StyleSheet.create({
     ...font.subtitleBold,
     color: utilColors.dark,
   },
+  totalText: {
+    ...font.subtitleBold,
+    color: utilColors.dark,
+  },
   moreInfo: {
     ...font.bodyBold,
     color: theme.textBold,
@@ -119,13 +123,16 @@ const getStyles = (theme, font, gradients, utilColors) => StyleSheet.create({
   },
   progressBodyText: {
     ...font.overline,
+    color: utilColors.dark,
   },
   progressInnerText: {
     flexDirection: 'row',
     alignItems: 'center',
+    color: utilColors.dark,
   },
   xpEarnedText: {
     ...font.caption,
+    color: utilColors.dark,
   },
   xpIcon: {
     width: 30,
@@ -175,6 +182,7 @@ const getStyles = (theme, font, gradients, utilColors) => StyleSheet.create({
   },
   progressCardText: {
     ...font.caption,
+    color: utilColors.dark,
   },
   cardHead: {
     color: '#000',
@@ -229,7 +237,7 @@ const VideoHome = ({ navigation }) => {
     },
     container: {
       backgroundColor: 'transparent',
-      paddingHorizontal: 12,
+      // paddingHorizontal: 12,
     },
   };
 
@@ -541,7 +549,7 @@ const VideoHome = ({ navigation }) => {
                   </Text>
                   <Text style={style.progressCardText}>
                     <FormattedMessage
-                      defaultMessage="{count}/{totalCount} watched"
+                      defaultMessage={'{count}/{totalCount} watched'}
                       description="Time Spent card caption"
                       values={{ count: item.watched, totalCount: item.totalVideos }}
                     />

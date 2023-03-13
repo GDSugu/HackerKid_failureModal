@@ -164,6 +164,10 @@
     "defaultMessage": "{navigationText}",
     "description": "navigation slide text"
   },
+  "0lssEq": {
+    "defaultMessage": "close",
+    "description": "close button text"
+  },
   "0mcQbk": {
     "defaultMessage": "{message}",
     "description": "modal caption"
@@ -2225,6 +2229,10 @@
     "defaultMessage": "{xp} xp",
     "description": "XP earned"
   },
+  "bpZOUP": {
+    "defaultMessage": "Your changes have been saved successfully.",
+    "description": "successfull mussage"
+  },
   "bvFe7G": {
     "defaultMessage": "Coins Earned:",
     "description": "Coins Earned subtitle"
@@ -2546,6 +2554,9 @@
     "defaultMessage": "Continue",
     "description": "Turtle Continue Button"
   },
+  "iObM7I": {
+    "defaultMessage": "Parent Phone"
+  },
   "iS2zLU": {
     "defaultMessage": "Visit Club",
     "description": "more card button"
@@ -2819,6 +2830,10 @@
     "defaultMessage": "{text}",
     "description": "help type text"
   },
+  "nTv3DV": {
+    "defaultMessage": "Save Successful",
+    "description": "successfull message"
+  },
   "nTxUJZ": {
     "defaultMessage": "Try IDE Now",
     "description": "more card button"
@@ -3030,6 +3045,9 @@
   "qZyJyg": {
     "defaultMessage": "#{rank} rank",
     "description": "club rank"
+  },
+  "qlFSwa": {
+    "defaultMessage": "Parent's Email"
   },
   "qmXcjW": {
     "defaultMessage": "i",
