@@ -1367,26 +1367,6 @@
       "value": "Coding Pirate"
     }
   ],
-  "CJH/k4": [
-    {
-      "type": 1,
-      "value": "title"
-    },
-    {
-      "type": 0,
-      "value": " - "
-    },
-    {
-      "type": 1,
-      "value": "type"
-    }
-  ],
-  "CKmvD+": [
-    {
-      "type": 0,
-      "value": "Videos"
-    }
-  ],
   "CLW1pi": [
     {
       "type": 0,
@@ -4713,6 +4693,12 @@
       "value": "Create Club"
     }
   ],
+  "oX/E9Z": [
+    {
+      "type": 0,
+      "value": "Videos"
+    }
+  ],
   "ok+aA/": [
     {
       "type": 0,
@@ -5653,6 +5639,12 @@
     {
       "type": 0,
       "value": "sleep"
+    }
+  ],
+  "zXlol7": [
+    {
+      "type": 1,
+      "value": "courseName"
     }
   ],
   "zeGEYY": [

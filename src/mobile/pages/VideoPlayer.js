@@ -194,7 +194,7 @@ const VideoPlayerPage = ({ navigation, route }) => {
   const { subscriptionData } = React.useContext(SubscriptionContext);
   const { currentQuestion, watchNext } = videoData;
   const [lockedWatchNext, setLockedWatchNext] = useState(false);
-  const source = `https://d11kzy43d5zaui.cloudfront.net${currentQuestion.videoLink}`;
+  const source = currentQuestion.videoLink;
   const [isPaused, setIsPaused] = useState(true);
   const [handel, setHandel] = useState(false);
   const onSubmitRating = () => {
@@ -527,10 +527,10 @@ const VideoPlayerPage = ({ navigation, route }) => {
       </ScrollView>}
     </View>
     <RatingModal />
-      <Loader
-        ref={loaderRef}
-        route={'Video'}
-      />
+    <Loader
+      ref={loaderRef}
+      route={'Video'}
+    />
   </>
   );
 };

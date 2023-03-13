@@ -19,7 +19,7 @@ import Paginator from '../components/Paginator';
 import { isFeatureEnabled } from '../../web/javascripts/common/framework';
 import { SubscriptionContext } from '../../hooks/pages/root';
 
-const getStyles = (theme, font) => {
+const getStyles = (theme, font, utilColors) => {
   const totalWidth = Dimensions.get('window').width;
   const searchBarWidth = totalWidth - 36;
   const cardWidth = totalWidth - 36;
@@ -38,6 +38,8 @@ const getStyles = (theme, font) => {
     },
     searchBar: {
       width: '100%',
+      color: utilColors.dark,
+      ...font.subtitle2,
     },
     searchCont: {
       backgroundColor: '#fff',
@@ -56,7 +58,7 @@ const getStyles = (theme, font) => {
       marginTop: 8,
     },
     videoHead: {
-      ...font.body,
+      ...font.subtitleBold,
       color: '#000',
     },
     pageBtn: {
@@ -68,23 +70,14 @@ const getStyles = (theme, font) => {
 const VideoHome = ({ navigation, route }) => {
   const { moduleId } = route.params;
   const { font, theme } = useContext(ThemeContext);
-  const pageTheme = theme.screenVideo;
-  const style = getStyles(pageTheme, font);
+  const { screenVideo: pageTheme, utilColors } = theme;
+  const style = getStyles(pageTheme, font, utilColors);
   const isPageMounted = useRef(true);
   const { invidualModuleData } = useVideos({ isPageMounted, urlData: { moduleId } });
   const { moduleData } = invidualModuleData;
   const [page, selectPage] = useState(1);
   const [filteredData, setFilterData] = useState(false);
   const [lockedData, setLockedData] = useState(false);
-  const searcher = new FuzzySearch(lockedData.videos, ['title']);
-  const onSearch = (keyword) => {
-    if (keyword === '' || !keyword) {
-      setFilterData(false);
-    } else {
-      const result = searcher.search(keyword);
-      setFilterData(result);
-    }
-  };
 
   const { subscriptionData } = React.useContext(SubscriptionContext);
 
@@ -107,6 +100,22 @@ const VideoHome = ({ navigation, route }) => {
     }
   }, [moduleData]);
 
+  const searcher = new FuzzySearch(lockedData.videos, ['title']);
+  const onSearch = (keyword) => {
+    if (keyword === '' || !keyword) {
+      setFilterData(false);
+    } else {
+      const result = searcher.search(keyword);
+      setFilterData(result);
+    }
+  };
+
+  const itemsPerPage = 10;
+  const pageStartIndex = (page - 1) * itemsPerPage;
+  const pageEndIndex = page * itemsPerPage;
+
+  console.log(pageStartIndex);
+  console.log(pageEndIndex);
   return (
     <View style={style.container}>
       <ScrollView>
@@ -114,7 +123,7 @@ const VideoHome = ({ navigation, route }) => {
           <Text style={style.videoHead}>
             <FormattedMessage
               defaultMessage={'Videos'}
-              description={'Course Name'}
+              description={'Page heading'}
             />
           </Text>
         </View>
@@ -129,33 +138,27 @@ const VideoHome = ({ navigation, route }) => {
         </View>
         <View>
           {filteredData
-            ? filteredData.map((item, index) => index < page * 10
-              && index > page * 10 - 10 && (
-                <CourseCard
-                  key={index}
-                  item={item}
-                  index={index}
-                  font={font}
-                  theme={theme}
-                  navigator={navigation}
-                  customVideo={true}
-                  customCardStyle={style.videoCard}
-                />
-            ))
-            : lockedData
-            && lockedData.videos.map((item, index) => index < page * 10
-              && index > page * 10 - 11 && (
-                <CourseCard
-                  key={index}
-                  item={item}
-                  index={index}
-                  font={font}
-                  theme={theme}
-                  navigator={navigation}
-                  customVideo={true}
-                  customCardStyle={style.videoCard}
-                />
-            ))}
+            ? filteredData.slice(pageStartIndex, pageEndIndex).map((item, index) => <CourseCard
+              key={index}
+              item={item}
+              index={index}
+              font={font}
+              theme={theme}
+              navigator={navigation}
+              customVideo={true}
+              customCardStyle={style.videoCard}
+            />)
+            : lockedData && lockedData.videos
+              .slice(pageStartIndex, pageEndIndex).map((item, index) => <CourseCard
+                key={index}
+                item={item}
+                index={index}
+                font={font}
+                theme={theme}
+                navigator={navigation}
+                customVideo={true}
+                customCardStyle={style.videoCard}
+              />)}
         </View>
       </ScrollView>
       {lockedData && <Paginator
@@ -164,7 +167,7 @@ const VideoHome = ({ navigation, route }) => {
         }
         countPerPage={10}
         currentPageNumber={page}
-        onPageChange={(value) => selectPage(value)}
+        onPageChange={(pageNumber) => selectPage(pageNumber)}
         onNextBtnPress={() => selectPage(page + 1)}
         onPrevBtnPress={() => selectPage(page - 1)}
         pageTheme={pageTheme}
