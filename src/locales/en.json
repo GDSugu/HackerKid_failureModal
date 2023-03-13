@@ -829,14 +829,6 @@
     "defaultMessage": "Coding Pirate",
     "description": "Coding pirate title"
   },
-  "CJH/k4": {
-    "defaultMessage": "{title} - {type}",
-    "description": "Course Name"
-  },
-  "CKmvD+": {
-    "defaultMessage": "Videos",
-    "description": "Course Name"
-  },
   "CLW1pi": {
     "defaultMessage": "Close",
     "description": "success modal closed"
@@ -2891,6 +2883,10 @@
     "defaultMessage": "Create Club",
     "description": "Create club modal title"
   },
+  "oX/E9Z": {
+    "defaultMessage": "Videos",
+    "description": "Page heading"
+  },
   "ok+aA/": {
     "defaultMessage": "Limited(Python & JS)",
     "description": "Limited(Python & JS)"
@@ -3490,6 +3486,10 @@
   "zXjEvn": {
     "defaultMessage": "sleep",
     "description": "sleep function"
+  },
+  "zXlol7": {
+    "defaultMessage": "{courseName}",
+    "description": "Course Name"
   },
   "zeGEYY": {
     "defaultMessage": "Oh ho ho.. failed",

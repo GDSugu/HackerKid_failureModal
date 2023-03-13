@@ -78,15 +78,6 @@ const VideoHome = ({ navigation, route }) => {
   const [page, selectPage] = useState(1);
   const [filteredData, setFilterData] = useState(false);
   const [lockedData, setLockedData] = useState(false);
-  const searcher = new FuzzySearch(lockedData.videos, ['title']);
-  const onSearch = (keyword) => {
-    if (keyword === '' || !keyword) {
-      setFilterData(false);
-    } else {
-      const result = searcher.search(keyword);
-      setFilterData(result);
-    }
-  };
 
   const { subscriptionData } = React.useContext(SubscriptionContext);
 
@@ -109,6 +100,22 @@ const VideoHome = ({ navigation, route }) => {
     }
   }, [moduleData]);
 
+  const searcher = new FuzzySearch(lockedData.videos, ['title']);
+  const onSearch = (keyword) => {
+    if (keyword === '' || !keyword) {
+      setFilterData(false);
+    } else {
+      const result = searcher.search(keyword);
+      setFilterData(result);
+    }
+  };
+
+  const itemsPerPage = 10;
+  const pageStartIndex = (page - 1) * itemsPerPage;
+  const pageEndIndex = page * itemsPerPage;
+
+  console.log(pageStartIndex);
+  console.log(pageEndIndex);
   return (
     <View style={style.container}>
       <ScrollView>
@@ -131,33 +138,27 @@ const VideoHome = ({ navigation, route }) => {
         </View>
         <View>
           {filteredData
-            ? filteredData.map((item, index) => index < page * 10
-              && index > page * 10 - 10 && (
-                <CourseCard
-                  key={index}
-                  item={item}
-                  index={index}
-                  font={font}
-                  theme={theme}
-                  navigator={navigation}
-                  customVideo={true}
-                  customCardStyle={style.videoCard}
-                />
-              ))
-            : lockedData
-            && lockedData.videos.map((item, index) => index < page * 10
-              && index > page * 10 - 11 && (
-                <CourseCard
-                  key={index}
-                  item={item}
-                  index={index}
-                  font={font}
-                  theme={theme}
-                  navigator={navigation}
-                  customVideo={true}
-                  customCardStyle={style.videoCard}
-                />
-              ))}
+            ? filteredData.slice(pageStartIndex, pageEndIndex).map((item, index) => <CourseCard
+              key={index}
+              item={item}
+              index={index}
+              font={font}
+              theme={theme}
+              navigator={navigation}
+              customVideo={true}
+              customCardStyle={style.videoCard}
+            />)
+            : lockedData && lockedData.videos
+              .slice(pageStartIndex, pageEndIndex).map((item, index) => <CourseCard
+                key={index}
+                item={item}
+                index={index}
+                font={font}
+                theme={theme}
+                navigator={navigation}
+                customVideo={true}
+                customCardStyle={style.videoCard}
+              />)}
         </View>
       </ScrollView>
       {lockedData && <Paginator
@@ -166,7 +167,7 @@ const VideoHome = ({ navigation, route }) => {
         }
         countPerPage={10}
         currentPageNumber={page}
-        onPageChange={(value) => selectPage(value)}
+        onPageChange={(pageNumber) => selectPage(pageNumber)}
         onNextBtnPress={() => selectPage(page + 1)}
         onPrevBtnPress={() => selectPage(page - 1)}
         pageTheme={pageTheme}
