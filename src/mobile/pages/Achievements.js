@@ -14,7 +14,9 @@ import { SvgUri } from 'react-native-svg';
 import ThemeContext from '../components/theme';
 import LeaderboardSvg from '../../images/more/leaderboard.svg';
 import GameIcon from '../../images/common/black-joystick.svg';
-import ShareIcon from '../../images/common/black-share-icon.svg';
+import AwardInfoSvg from '../../images/achievements/awardInfo.svg';
+// import ShareIcon from '../../images/common/black-share-icon.svg';
+import ShareIcon from '../../images/common/share.svg';
 import Icon from '../common/Icons';
 import { useGetSession } from '../../hooks/pages/root';
 import { useProfileInfo } from '../../hooks/pages/profile';
@@ -69,7 +71,8 @@ const getStyles = (theme, utilColors, font, gradients) => StyleSheet.create({
     backgroundColor: utilColors.bg2,
   },
   awardsCardBg: {
-    backgroundColor: theme.bodyBg,
+    borderWidth: 2,
+    borderColor: theme.borderLight,
   },
   collectiblesBorder: {
     borderColor: theme.borderLight,
@@ -124,26 +127,36 @@ const getStyles = (theme, utilColors, font, gradients) => StyleSheet.create({
     height: 64,
   },
   awardCard: {
-    width: 108,
-    height: 108,
+    width: '100%',
+    height: 98,
     // paddingVertical: 20,
     // paddingHorizontal: 15,
-    padding: 4,
+    // padding: 2,
     marginRight: 6,
     marginBottom: 6,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    flexDirection: 'row',
+  },
+  awardIconContainer: {
+    height: 84,
+    width: 84,
+    alignSelf: 'center',
+    justifyContent: 'center',
   },
   awardNameText: {
-    ...font.captionBold,
+    ...font.subtitle1,
     color: utilColors.dark,
     alignItems: 'center',
     textAlign: 'center',
-    marginTop: 8,
+  },
+  awardInfoIcon: {
+    margin: 16,
   },
   rowFlexCenter: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   statIcon: {
     width: 25,
@@ -248,20 +261,25 @@ const AwardsGrid = ({
           style={style.awardIcon}
           source={{ uri: award.awardImage }}
         /> */}
-        <SvgUri
-          uri={award.awardImage}
-          width={'60%'}
-          height={'60%'}
-        />
-        <Text style={style.awardNameText}>
-          <FormattedMessage
-            defaultMessage={'{awardName}'}
-            description={'award name'}
-            values={{
-              awardName: award.awardName,
-            }}
-          />
-        </Text>
+        <View style={[style.rowFlexCenter, { height: '100%' }]}>
+          <View style={style.awardIconContainer}>
+            <SvgUri
+              uri={award.awardImage}
+              width={'100%'}
+              height={'60%'}
+            />
+          </View>
+          <Text style={style.awardNameText}>
+            <FormattedMessage
+              defaultMessage={'{awardName}'}
+              description={'award name'}
+              values={{
+                awardName: award.awardName,
+              }}
+            />
+          </Text>
+        </View>
+        <AwardInfoSvg style={style.awardInfoIcon}/>
       </View>)
     }
     {

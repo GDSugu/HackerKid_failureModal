@@ -36,25 +36,25 @@ const AppWrapper = () => {
 
   return (
     <SubscriptionProvider>
-    <AuthProvider>
-      {state.currentLocaleMessages
-        ? <ThemeContext.Provider
-          value={{
-            currentTheme: state.currentTheme,
-            theme: themes[state.currentTheme],
-            font,
-            toggleTheme,
-          }}>
-          <IntlProvider
-            locale={state.currentLocale}
-            defaultLocale='en'
-            messages={state.currentLocaleMessages}
-          >
-            <App />
-          </IntlProvider>
-        </ThemeContext.Provider>
-        : <View><Text>Loading....</Text></View>}
-    </AuthProvider>
+      <AuthProvider>
+        {state.currentLocaleMessages
+          ? <ThemeContext.Provider
+            value={{
+              currentTheme: state.currentTheme,
+              theme: themes[state.currentTheme],
+              font,
+              toggleTheme,
+            }}>
+            <IntlProvider
+              locale={state.currentLocale}
+              defaultLocale='en'
+              messages={state.currentLocaleMessages}
+            >
+              <App />
+            </IntlProvider>
+          </ThemeContext.Provider>
+          : <View><Text>Loading....</Text></View>}
+      </AuthProvider>
     </SubscriptionProvider>
   );
 };

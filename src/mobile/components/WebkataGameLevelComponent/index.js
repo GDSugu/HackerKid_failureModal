@@ -4,6 +4,7 @@ import {
   Dimensions, FlatList, ImageBackground, StyleSheet, Text, TouchableOpacity, View, Image,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import levelCurrentImg from '../../../images/games/level_current.png';
 import levelCompletedImg from '../../../images/games/level_completed.png';
@@ -89,6 +90,7 @@ const LevelButton = ({
   closeLevels,
   questionState,
 }) => {
+  const navigation = useNavigation();
   let bgImg = levelNotCompletedImg;
 
   if (question) {
@@ -103,7 +105,11 @@ const LevelButton = ({
 
   const handleLevel = (qnState) => {
     if (question) {
-      if (qnState === 'locked') return;
+      if (qnState === 'locked') {
+        closeLevels();
+        navigation.navigate('Premium');
+        return;
+      }
 
       onLevelButtonPress(virtualId);
       closeLevels();

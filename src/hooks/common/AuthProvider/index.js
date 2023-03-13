@@ -1,6 +1,6 @@
 import React from 'react';
 import { AuthContext, useGetSession } from '../../pages/root';
-import { mergeRecursive } from '../framework';
+// import { mergeRecursive } from '../framework';
 
 const AuthProvider = ({ children }) => {
   const [authState, setAuthState] = React.useState({
@@ -10,14 +10,15 @@ const AuthProvider = ({ children }) => {
     subscriptionData: {},
   });
 
-  const setAuth = (arg) => {
-    // const newObj = $.extend(true, {}, authState, arg);
-    const newObj = mergeRecursive(authState, arg);
-    setAuthState((prevState) => ({
-      ...prevState,
-      ...newObj,
-    }));
-  };
+  // const setAuth = (arg) => {
+  //   // const newObj = $.extend(true, {}, authState, arg);
+  //   console.log('mrg rc', authState, arg);
+  //   const newObj = mergeRecursive(authState, arg);
+  //   setAuthState((prevState) => ({
+  //     ...prevState,
+  //     ...newObj,
+  //   }));
+  // };
 
   const clearAuthState = () => {
     setAuthState({
@@ -34,10 +35,15 @@ const AuthProvider = ({ children }) => {
 
   React.useEffect(() => {
     if (session.authtoken) {
-      setAuth({
+      // setAuth({
+      //   isLoggedIn: true,
+      //   sessionData: session,
+      // });
+      setAuthState((prevState) => ({
+        ...prevState,
         isLoggedIn: true,
         sessionData: session,
-      });
+      }));
     }
   }, [session]);
 
@@ -45,10 +51,12 @@ const AuthProvider = ({ children }) => {
     <>
       <AuthContext.Provider
         value={{
+          isRefresh: false,
           isLoggedIn: authState.isLoggedIn,
           appData: authState.appData,
           sessionData: authState.sessionData,
-          setAuthState: setAuth,
+          authState,
+          setAuthState,
           clearAuthState,
         }}
       >

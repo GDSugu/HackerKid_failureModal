@@ -11,6 +11,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 // import Swiper from 'react-native-swiper';
 import { FormattedMessage } from 'react-intl';
+import { useNavigation } from '@react-navigation/native';
 import ThemeContext from '../theme';
 // import useCourses from '../../hooks/pages/courses';
 import PlayBtnIcon from '../../../images/courses/play-btn.svg';
@@ -201,9 +202,15 @@ const CourseCard = ({
   const pageTheme = theme.screenVideo;
   const style = getStyles(pageTheme);
 
+  const navigation = useNavigation();
+
   const onPress = (locked) => {
     // if locked navigate to pricing, for now returing
-    if (locked) return;
+    // if (locked) return;
+    if (locked) {
+      navigation.navigate('Premium');
+      return;
+    }
 
     navigateVideoPlayer(item.moduleId, item.number, navigator);
   };
@@ -262,6 +269,7 @@ const CourseCard = ({
             </Text>
             <TouchableOpacity style={style.unlockNowBtn} onPress={() => {
               // navigate to pricing
+              navigation.navigate('Premium');
             }}>
               <Text
                 style={{

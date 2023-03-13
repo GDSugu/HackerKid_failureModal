@@ -70,11 +70,12 @@ const LogoutModal = ({ logoutAction = () => { } }) => {
   const style = getStyles(theme.screenMore, utilColors, font);
   const authContext = React.useContext(AuthContext);
 
-  const closeModal = () => authContext.setAuthState({
+  const closeModal = () => authContext.setAuthState((prevState) => ({
+    ...prevState,
     appData: {
       logoutModalVisibility: false,
     },
-  });
+  }));
 
   return <>
     <Modal
