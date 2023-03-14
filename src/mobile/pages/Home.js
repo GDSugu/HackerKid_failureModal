@@ -2,6 +2,8 @@ import React, {
   memo,
   useCallback,
   useContext,
+  useEffect,
+  useMemo,
   useRef,
 } from 'react';
 import {
@@ -1183,18 +1185,6 @@ const Index = ({ route, navigation }) => {
     }));
   };
 
-  if (authContext.appData.isRefresh) {
-    onRefresh();
-    if (isPageMounted.current) {
-      authContext.setAuthState((prevState) => ({
-        ...prevState,
-        appData: {
-          isRefresh: false,
-        },
-      }));
-    }
-  }
-
   const handleViewAllAwards = () => {
     bottomSheetRef.current.close();
     navigation.navigate('AwardsCollectibles');
@@ -1206,7 +1196,6 @@ const Index = ({ route, navigation }) => {
   };
 
   const onHomeFocused = () => {
-    // console.log('foc ', authContext.appData.isRefresh);
     // if (authContext.appData.isRefresh) {
     //   onRefresh();
     //   authContext.setAuthState((prevState) => ({
@@ -1249,6 +1238,12 @@ const Index = ({ route, navigation }) => {
   useFocusEffect(() => {
     focusEffect();
   });
+
+  const memoizedAppData = useMemo(() => authContext.appData, [authContext.appData]);
+
+  useEffect(() => {
+    onHomeFocused();
+  }, [memoizedAppData]);
 
   React.useEffect(() => {
     onRefresh();

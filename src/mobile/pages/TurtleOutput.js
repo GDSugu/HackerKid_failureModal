@@ -272,7 +272,6 @@ const TurtleOutput = ({ navigation }) => {
         webViewRef.current.injectJavaScript(init);
       }
     }, timeout);
-    // console.log(webViewRef.current);
   }, [turtleContext.ctxState.questionObject]);
 
   return <>

@@ -345,7 +345,6 @@ const ZombieLandMain = ({ navigation }) => {
       stopTimeTrack('zombieland-main');
     };
   }, []);
-  // console.log('state , ', zlState.questionObject.hints);
 
   return <>
     <View style={style.container}>

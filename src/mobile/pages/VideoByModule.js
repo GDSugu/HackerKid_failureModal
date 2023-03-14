@@ -114,8 +114,6 @@ const VideoHome = ({ navigation, route }) => {
   const pageStartIndex = (page - 1) * itemsPerPage;
   const pageEndIndex = page * itemsPerPage;
 
-  console.log(pageStartIndex);
-  console.log(pageEndIndex);
   return (
     <View style={style.container}>
       <ScrollView>

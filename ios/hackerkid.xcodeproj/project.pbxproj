@@ -36,6 +36,7 @@
 		EC4F5D2542AA4E01840983DC /* DMMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4FCF3674D57A4CA7ABFFC593 /* DMMono-Regular.ttf */; };
 		EC5CCE224B4B5C987D36072B /* libPods-hackerkid-hackerkidTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A88E4EBA3CD704572DD0953 /* libPods-hackerkid-hackerkidTests.a */; };
 		F463D07A3099402F8AB4E6BE /* AveriaSansLibre-Light.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 81F43CA06FF945E8A409793E /* AveriaSansLibre-Light.woff2 */; };
+		C9271D7142E6415980DF718C /* FredokaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC094EC8370748CEAB8A2A9C /* FredokaOne-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		DF4D34E86760405D94938678 /* AveriaSansLibre-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AveriaSansLibre-Bold.ttf"; path = "../src/fonts/AveriaSansLibre-Bold.ttf"; sourceTree = "<group>"; };
 		E9101B2A52E943ACA16A15DE /* DMMono-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DMMono-Light.ttf"; path = "../src/fonts/DMMono-Light.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		EC094EC8370748CEAB8A2A9C /* FredokaOne-Regular.ttf */ = {isa = PBXFileReference; name = "FredokaOne-Regular.ttf"; path = "../src/fonts/FredokaOne-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +195,7 @@
 				753DFAF821D34A849744FCA1 /* DMMono-MediumItalic.ttf */,
 				4FCF3674D57A4CA7ABFFC593 /* DMMono-Regular.ttf */,
 				CBE6396602E141668987F640 /* DMSans-Regular.ttf */,
+				EC094EC8370748CEAB8A2A9C /* FredokaOne-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				7279D534578341179C86EE4A /* DMMono-MediumItalic.ttf in Resources */,
 				EC4F5D2542AA4E01840983DC /* DMMono-Regular.ttf in Resources */,
 				10708D802BE44C0B9A8440E4 /* DMSans-Regular.ttf in Resources */,
+				C9271D7142E6415980DF718C /* FredokaOne-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

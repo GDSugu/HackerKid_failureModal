@@ -35,7 +35,7 @@ const Premium = () => {
       </Text>
       <Text style={style.premiumContentText}>
         <FormattedMessage
-          defaultMessage={'Go to hackerkid.org to finish signing up to unlock more features.'}
+          defaultMessage={'Go to hackerkid.org & finish the sign up process. As a Premium Member, you\'ll have unlimited access to gamified coding problems, video libraries, challenges, activity awards, badges, certificates and special access to clubs.'}
         />
       </Text>
     </View>
