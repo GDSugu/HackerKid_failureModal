@@ -59,6 +59,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
 });
 
 const TurtleOutput = ({ navigation }) => {
+  const isPageMounted = React.useRef(true);
   const { theme: { utilColors, screenTurtleOutput }, font } = React.useContext(ThemeContext);
   const style = getStyles(screenTurtleOutput, utilColors, font);
   const webViewRef = React.useRef(null);
@@ -103,7 +104,9 @@ const TurtleOutput = ({ navigation }) => {
         window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
       }`;
       setTimeout(() => {
-        webViewRef.current.injectJavaScript(runTurtle);
+        if (isPageMounted.current) {
+          webViewRef.current.injectJavaScript(runTurtle);
+        }
       }, 300);
     }
   };
@@ -125,7 +128,9 @@ const TurtleOutput = ({ navigation }) => {
           };
           window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
         }`;
-      webViewRef.current.injectJavaScript(runTurtle);
+      if (isPageMounted.current) {
+        webViewRef.current.injectJavaScript(runTurtle);
+      }
     }
   };
 
@@ -148,7 +153,9 @@ const TurtleOutput = ({ navigation }) => {
         window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
       }`;
       setTimeout(() => {
-        webViewRef.current.injectJavaScript(runTurtle);
+        if (isPageMounted.current) {
+          webViewRef.current.injectJavaScript(runTurtle);
+        }
       }, 300);
     }
   };
@@ -269,11 +276,17 @@ const TurtleOutput = ({ navigation }) => {
             window.ReactNativeWebView.postMessage(err.message);
           }
         `;
-        webViewRef.current.injectJavaScript(init);
+        if (isPageMounted.current) {
+          webViewRef.current.injectJavaScript(init);
+        }
       }
     }, timeout);
     // console.log(webViewRef.current);
   }, [turtleContext.ctxState.questionObject]);
+
+  React.useEffect(() => () => {
+    isPageMounted.current = false;
+  }, []);
 
   return <>
     <View style={style.container}>
@@ -370,11 +383,11 @@ const TurtleOutput = ({ navigation }) => {
           </Text>
           <View>
             <Icon
-                name='play'
-                type='FontAwesome5'
-                size={18}
-                color={utilColors.white}
-              />
+              name='play'
+              type='FontAwesome5'
+              size={18}
+              color={utilColors.white}
+            />
           </View>
         </TouchableOpacity>
       </View>

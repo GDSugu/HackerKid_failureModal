@@ -24,6 +24,7 @@ const TurtleEditor = () => {
   const turtleContext = React.useContext(TurtleContext);
   const webViewRef = React.useRef(null);
   let webViewString = '';
+  const isPageMounted = React.useRef(true);
 
   const {
     BodyContent, ScriptContent, styleString, scriptToInject,
@@ -64,7 +65,9 @@ const TurtleEditor = () => {
         const initBlockly = `
           Turtle.initializeBlockly(${JSON.stringify(turtleContext.ctxState)});
         `;
-        webViewRef.current.injectJavaScript(initBlockly);
+        if (isPageMounted.current) {
+          webViewRef.current.injectJavaScript(initBlockly);
+        }
       }
     }, 1000);
     turtleContext.ctxSetState((prevState) => ({
@@ -78,6 +81,10 @@ const TurtleEditor = () => {
   //   webViewRef.current.injectJavaScript(initBlockly);
   // }
 
+  React.useEffect(() => () => {
+    isPageMounted.current = false;
+  }, []);
+
   return <>
     <View style={style.container}>
       <WebView
@@ -87,7 +94,7 @@ const TurtleEditor = () => {
         originWhitelist={['*']}
         injectedJavaScript={scriptToInject}
         onMessage={handleMessage}
-        />
+      />
     </View>
   </>;
 };

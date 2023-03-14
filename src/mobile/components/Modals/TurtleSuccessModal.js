@@ -4,6 +4,7 @@ import {
   Dimensions, Image, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View,
 } from 'react-native';
 import Clipboard from '@react-native-clipboard/clipboard';
+import { useNavigation } from '@react-navigation/native';
 import Icon from '../../common/Icons';
 import ThemeContext from '../theme';
 import SuccessHero from '../../../images/games/turtle-success.png';
@@ -127,6 +128,7 @@ const TurtleSuccessModal = () => {
   const { font, theme } = React.useContext(ThemeContext);
   const turtleContext = React.useContext(TurtleContext);
   const style = getStyles(theme.screenMore, font, theme.utilColors);
+  const navigation = useNavigation();
 
   // const [modalProps, setModalProps] = React.useState({
   //   modalType: 'success',
@@ -155,7 +157,7 @@ const TurtleSuccessModal = () => {
 
   return (
     <>
-    {/* <Modal
+      {/* <Modal
       visible={turtleContext.ctxState.validated}
       transparent
       onRequestClose={handleCloseBtn}
@@ -288,15 +290,15 @@ const TurtleSuccessModal = () => {
         </View>
       </View>
     </Modal> */}
-    <StatusModal
-      visible={turtleContext.ctxState.validated}
-      handleCloseBtn={handleCloseBtn}
-    >
-      {
-        turtleContext.ctxState.modalType === 'success'
-        && <>
-          <View style={style.modalCardContent}>
-            {/* <View> */}
+      <StatusModal
+        visible={turtleContext.ctxState.validated}
+        handleCloseBtn={handleCloseBtn}
+      >
+        {
+          turtleContext.ctxState.modalType === 'success'
+          && <>
+            <View style={style.modalCardContent}>
+              {/* <View> */}
               <Image
                 source={SuccessHero}
                 style={{
@@ -319,25 +321,35 @@ const TurtleSuccessModal = () => {
                   }}
                 />
               </Text>
-            {/* </View> */}
-            <View style={style.rowCenter}>
-              <View style={style.btnContiner}>
-                <TouchableOpacity
-                  style={style.secondaryBtn}
-                  onPress={handleShareBtn}
+              {/* </View> */}
+              <View style={style.rowCenter}>
+                <View style={style.btnContiner}>
+                  <TouchableOpacity
+                    style={style.secondaryBtn}
+                    onPress={handleShareBtn}
                   >
-                  <Text style={style.secondaryBtnText}>
-                    <FormattedMessage
-                      defaultMessage={'Share'}
-                      description={'Share Button'}
-                    />
-                  </Text>
-                </TouchableOpacity>
-              </View>
-              <View style={style.btnContiner}>
-                <TouchableOpacity
-                  style={style.primaryBtn}
-                  onPress={() => { turtleContext.getNextQuestion(); }}
+                    <Text style={style.secondaryBtnText}>
+                      <FormattedMessage
+                        defaultMessage={'Share'}
+                        description={'Share Button'}
+                      />
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={style.btnContiner}>
+                  <TouchableOpacity
+                    style={style.primaryBtn}
+                    onPress={() => {
+                      const { lastOpenVirtualId } = turtleContext;
+                      const currentVirtualId = turtleContext.ctxState.questionObject.virtualId;
+
+                      if (lastOpenVirtualId && lastOpenVirtualId === currentVirtualId) {
+                        handleCloseBtn();
+                        navigation.navigate('Premium');
+                      } else {
+                        turtleContext.getNextQuestion();
+                      }
+                    }}
                   >
                     <View style={style.rowBetween}>
                       <Text style={style.primaryBtnText}>
@@ -353,54 +365,54 @@ const TurtleSuccessModal = () => {
                         color={theme.utilColors.white}
                       />
                     </View>
-                </TouchableOpacity>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
-          </View>
-        </>
-      }
-      {
-        turtleContext.ctxState.modalType === 'share'
-        && <>
-          <View style={style.modalCardContent}>
-            <Text style={{
-              ...style.modalTitle,
-              ...style.shareTitle,
-            }}>
-              <FormattedMessage
-                defaultMessage='Share'
-                description='Modal Title'
-              />
-            </Text>
-            <View style={style.rowCenter}>
-              <View style={style.textInputContainer}>
-                <TextInput
-                  style={style.textInput}
-                  value={turtleContext.ctxState?.responseObject?.shareLink || 'https://www.hackerkid.org/turtle/submissions/'}
-                  editable={false}
-                  selection={{
-                    start: 0,
-                    end: 0,
-                  }}
+          </>
+        }
+        {
+          turtleContext.ctxState.modalType === 'share'
+          && <>
+            <View style={style.modalCardContent}>
+              <Text style={{
+                ...style.modalTitle,
+                ...style.shareTitle,
+              }}>
+                <FormattedMessage
+                  defaultMessage='Share'
+                  description='Modal Title'
                 />
-              </View>
-              <View style={style.copyBtnContainer}>
-                <TouchableOpacity
-                  style={style.secondaryBtn}
-                  onPress={handleCopyBtn}>
-                  <Text style={style.secondaryBtnText}>
-                    <FormattedMessage
-                      defaultMessage='Copy Link'
-                      description='Modal Copy'
-                    />
-                  </Text>
-                </TouchableOpacity>
+              </Text>
+              <View style={style.rowCenter}>
+                <View style={style.textInputContainer}>
+                  <TextInput
+                    style={style.textInput}
+                    value={turtleContext.ctxState?.responseObject?.shareLink || 'https://www.hackerkid.org/turtle/submissions/'}
+                    editable={false}
+                    selection={{
+                      start: 0,
+                      end: 0,
+                    }}
+                  />
+                </View>
+                <View style={style.copyBtnContainer}>
+                  <TouchableOpacity
+                    style={style.secondaryBtn}
+                    onPress={handleCopyBtn}>
+                    <Text style={style.secondaryBtnText}>
+                      <FormattedMessage
+                        defaultMessage='Copy Link'
+                        description='Modal Copy'
+                      />
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
-          </View>
-        </>
-      }
-    </StatusModal>
+          </>
+        }
+      </StatusModal>
     </>
   );
 };
