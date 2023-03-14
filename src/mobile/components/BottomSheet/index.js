@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   mask: {
     flex: 1,
     backgroundColor: 'transparent',
+    overflow: 'scroll',
   },
   container: {
     backgroundColor: '#fff',

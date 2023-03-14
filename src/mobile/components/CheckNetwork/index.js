@@ -35,6 +35,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
   errorCardMessageText: {
     ...font.heading6,
     textAlign: 'center',
+    color: utilColors.dark,
   },
 });
 

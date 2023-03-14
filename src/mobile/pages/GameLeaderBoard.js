@@ -19,6 +19,7 @@ import { useTimeTrack } from '../../hooks/pages/timeTrack';
 import { useAwardsByGame } from '../../hooks/pages/awards';
 import BottomSheet from '../components/BottomSheet';
 import AwardProgressBar from '../components/AwardProgressBar';
+import { formatSeconds } from '../../hooks/common/utlis';
 
 const compareProps = (prev, next) => {
   let isEqual = true;
@@ -704,9 +705,9 @@ const GameLeaderBoard = ({ route, navigation }) => {
           </Text>
           <Text style={style.heroCardText}>
               <FormattedMessage
-                defaultMessage={'{timeInMinutes} Mins'}
+                defaultMessage={'{timeInMinutes}'}
                 description={'Time spent'}
-                values={{ timeInMinutes: 10 }}
+                values={{ timeInMinutes: formatSeconds(memoizedProgress?.totalTimeSpent) }}
               />
           </Text>
         </View>
