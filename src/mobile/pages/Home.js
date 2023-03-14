@@ -223,7 +223,10 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => Styl
   },
   gameCardContent: {
     marginVertical: 8,
-    flexWrap: 'wrap',
+    // flexWrap: 'wrap',
+  },
+  gameCardTextContent: {
+    flex: 1,
   },
   gameCardIcons: {
     width: 32,
@@ -234,6 +237,7 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => Styl
     ...font.body,
     marginBottom: 8,
     color: utilColors.lightGrey,
+    flexWrap: 'wrap',
   },
   gameCardText: {
     ...font.subtitle1,
@@ -641,7 +645,7 @@ const GameBlock = ({
                 style={[style.bodyCardContentTitleImage, style.gameCardIcons]}
                 source={hkcoin}
               />
-              <View>
+              <View style={style.gameCardTextContent}>
                 <Text style={style.gameCardSubtitle}>
                   <FormattedMessage
                     defaultMessage={'Coins Earned:'}
@@ -664,8 +668,8 @@ const GameBlock = ({
                 style={[style.bodyCardContentTitleImage, style.gameCardIcons]}
                 source={timeSpent}
               />
-              <View>
-                <Text style={style.gameCardSubtitle}>
+              <View style={style.gameCardTextContent}>
+                <Text style={[style.gameCardSubtitle]}>
                   <FormattedMessage
                     defaultMessage={'Time Spent:'}
                     description='Time Spent'

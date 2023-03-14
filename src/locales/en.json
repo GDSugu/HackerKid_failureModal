@@ -705,6 +705,10 @@
     "defaultMessage": "Login",
     "description": "Login button"
   },
+  "9mzddr": {
+    "defaultMessage": "PREMIUM",
+    "description": "premium tag"
+  },
   "A/XB4F": {
     "defaultMessage": "Student's Name",
     "description": "Student Name cell header"
@@ -1508,10 +1512,6 @@
     "defaultMessage": "Go to login",
     "description": "Go to login button"
   },
-  "Nsl0id": {
-    "defaultMessage": "XP Earned:",
-    "description": "XP Earned card caption"
-  },
   "NsygW3": {
     "defaultMessage": "Run",
     "description": "Run code button"
@@ -2241,10 +2241,6 @@
     "defaultMessage": "{toastMessage}",
     "description": "toast message"
   },
-  "bo2dGc": {
-    "defaultMessage": "{xp} xp",
-    "description": "XP earned"
-  },
   "bpZOUP": {
     "defaultMessage": "Your changes have been saved successfully.",
     "description": "successfull mussage"
@@ -2588,6 +2584,10 @@
   "iohPi0": {
     "defaultMessage": "Continue Watching",
     "description": "Continue Watching"
+  },
+  "iuBAou": {
+    "defaultMessage": "{timeSpent}",
+    "description": "timespent"
   },
   "j+kOS8": {
     "defaultMessage": "Profile Edit",
@@ -3272,6 +3272,10 @@
   "uPz4GT": {
     "defaultMessage": "Run",
     "description": "name"
+  },
+  "uc4JXZ": {
+    "defaultMessage": "Time Spent:",
+    "description": "time spent card caption"
   },
   "ueVo+G": {
     "defaultMessage": "Today",

@@ -1173,6 +1173,12 @@
       "value": "Login"
     }
   ],
+  "9mzddr": [
+    {
+      "type": 0,
+      "value": "PREMIUM"
+    }
+  ],
   "A/XB4F": [
     {
       "type": 0,
@@ -2453,12 +2459,6 @@
       "value": "Go to login"
     }
   ],
-  "Nsl0id": [
-    {
-      "type": 0,
-      "value": "XP Earned:"
-    }
-  ],
   "NsygW3": [
     {
       "type": 0,
@@ -3659,16 +3659,6 @@
       "value": "toastMessage"
     }
   ],
-  "bo2dGc": [
-    {
-      "type": 1,
-      "value": "xp"
-    },
-    {
-      "type": 0,
-      "value": " xp"
-    }
-  ],
   "bpZOUP": [
     {
       "type": 0,
@@ -4219,6 +4209,12 @@
     {
       "type": 0,
       "value": "Continue Watching"
+    }
+  ],
+  "iuBAou": [
+    {
+      "type": 1,
+      "value": "timeSpent"
     }
   ],
   "j+kOS8": [
@@ -5301,6 +5297,12 @@
     {
       "type": 0,
       "value": "Run"
+    }
+  ],
+  "uc4JXZ": [
+    {
+      "type": 0,
+      "value": "Time Spent:"
     }
   ],
   "ueVo+G": [
