@@ -29,6 +29,12 @@
       "value": "step"
     }
   ],
+  "+Zk1jK": [
+    {
+      "type": 1,
+      "value": "timeSpent"
+    }
+  ],
   "+c+in9": [
     {
       "type": 0,
@@ -209,16 +215,6 @@
     {
       "type": 0,
       "value": "Start Playing"
-    }
-  ],
-  "0By1LZ": [
-    {
-      "type": 1,
-      "value": "timeInMinutes"
-    },
-    {
-      "type": 0,
-      "value": " Mins"
     }
   ],
   "0IKGwB": [
@@ -431,6 +427,16 @@
     {
       "type": 0,
       "value": "Create a New Account"
+    }
+  ],
+  "2fDxMH": [
+    {
+      "type": 0,
+      "value": "/"
+    },
+    {
+      "type": 1,
+      "value": "totalGames"
     }
   ],
   "2qExk8": [
@@ -2245,6 +2251,16 @@
       "value": "good problem-solving"
     }
   ],
+  "M152mH": [
+    {
+      "type": 0,
+      "value": "#"
+    },
+    {
+      "type": 1,
+      "value": "rank"
+    }
+  ],
   "M3JNcL": [
     {
       "type": 0,
@@ -3481,6 +3497,12 @@
       "value": "“My son, Shrey is 12 year old and very enthusiastic kid. He came to know about the Hacker kid portal by his elder brother. He is so happy with the portal that he is always eager to do it. He made some games, programs on the portal and always keen to make improvements in it. One to one session with the mentor is also a good initiative taken by Hacker kid. Interactive demonstration of the code helps him visualise the concept behind the code which makes his concept more robust.”"
     }
   ],
+  "ZORgXx": [
+    {
+      "type": 0,
+      "value": "Time Spent:"
+    }
+  ],
   "ZUKwtW": [
     {
       "type": 1,
@@ -3545,6 +3567,12 @@
     {
       "type": 0,
       "value": "Dismiss"
+    }
+  ],
+  "aVgB+x": [
+    {
+      "type": 1,
+      "value": "totalPoints"
     }
   ],
   "aWjMjy": [
@@ -5107,6 +5135,12 @@
       "value": " xp"
     }
   ],
+  "spNQl0": [
+    {
+      "type": 1,
+      "value": "timeSpent"
+    }
+  ],
   "ssTFur": [
     {
       "type": 0,
@@ -5153,6 +5187,12 @@
     {
       "type": 0,
       "value": "View All Achievements"
+    }
+  ],
+  "tM4fi+": [
+    {
+      "type": 1,
+      "value": "timeInMinutes"
     }
   ],
   "tRGm5z": [
@@ -5387,6 +5427,16 @@
       "value": "Turtle"
     }
   ],
+  "vx1Vws": [
+    {
+      "type": 0,
+      "value": "#"
+    },
+    {
+      "type": 1,
+      "value": "rank"
+    }
+  ],
   "wEEL+e": [
     {
       "type": 1,
@@ -5525,6 +5575,12 @@
     {
       "type": 0,
       "value": "Challenges Creation"
+    }
+  ],
+  "xj6WTn": [
+    {
+      "type": 1,
+      "value": "totalPointsEarned"
     }
   ],
   "xlvJ5U": [

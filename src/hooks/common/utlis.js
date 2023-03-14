@@ -54,6 +54,28 @@ const debounce1 = (fn, delay) => {
   };
 };
 
+const formatSeconds = (s) => {
+  let time = '';
+  let seconds = parseInt(s, 10);
+  let minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  seconds %= 60;
+  minutes %= 60;
+  if (hours > 0) {
+    time = `${hours} Hour${hours > 1 ? 's' : ''}`;
+    if (minutes > 0) {
+      time += ` ${minutes} Mins`;
+    }
+  } else if (minutes > 0) {
+    time = `${minutes} Minute${minutes > 1 ? 's' : ''}`;
+  } else if (seconds > 0) {
+    time = `${seconds} Seconds`;
+  } else {
+    time = '0 Seconds';
+  }
+  return time;
+};
+
 export default getPlatform;
 
 export {
@@ -61,4 +83,5 @@ export {
   throttle,
   getDevice,
   debounce1,
+  formatSeconds,
 };

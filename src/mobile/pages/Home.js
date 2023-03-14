@@ -16,6 +16,7 @@ import {
   ImageBackground,
   // FlatList,
   RefreshControl,
+  Pressable,
 } from 'react-native';
 import { FormattedMessage } from 'react-intl';
 import { useFocusEffect } from '@react-navigation/native';
@@ -30,7 +31,7 @@ import dashboardHero from '../../images/dashboard/dashboard-hero-bg-mobile.png';
 import defaultUser from '../../images/profile/default_user.png';
 import hkcoin from '../../images/common/hkcoin.png';
 // import xpPoints from '../../images/common/xp.png';
-// import timeSpent from '../../images/common/eva_clock-fill.png';
+import timeSpent from '../../images/common/eva_clock-fill.png';
 import turtle from '../../images/dashboard/dashboard-turtle.png';
 import zombieLand from '../../images/dashboard/dashboard-zombieLand.png';
 import codekata from '../../images/dashboard/dashboard-codePirate.png';
@@ -42,6 +43,7 @@ import {
   AuthContext,
   // SubscriptionContext,
 } from '../../hooks/pages/root';
+import { formatSeconds } from '../../hooks/common/utlis';
 // import { isFeatureEnabled } from '../../web/javascripts/common/framework';
 // import LockSvg from '../../images/common/feature-lock.svg';
 
@@ -206,6 +208,14 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => Styl
     width: '50%',
     flex: 1,
     justifyContent: 'center',
+    // padding: 12,
+    // flexWrap: 'wrap',
+  },
+  gameCircularProgressBlock: {
+    width: '50%',
+    flex: 0.8,
+    justifyContent: 'center',
+    alignSelf: 'center',
   },
   gameCardSvgCaption: {
     ...font.caption,
@@ -213,6 +223,7 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => Styl
   },
   gameCardContent: {
     marginVertical: 8,
+    flexWrap: 'wrap',
   },
   gameCardIcons: {
     width: 32,
@@ -230,6 +241,7 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => Styl
     includeFontPadding: false,
     padding: 0,
     margin: 0,
+    flexWrap: 'wrap',
   },
   gameCardTextLight: {
     ...font.subtitle1,
@@ -542,7 +554,9 @@ const HomeBlock = ({
   </>;
 };
 
-const GameBlock = ({ style, navigation, gameData }) => {
+const GameBlock = ({
+  style, navigation, gameData, gameProgress,
+}) => {
   const gameProgressValue = new Animated.Value(0);
   const gameDataTextRef = useRef();
 
@@ -586,30 +600,40 @@ const GameBlock = ({ style, navigation, gameData }) => {
       <View style={style.bodyCardContent}>
         <View style={[style.bodyCardContentTitle, style.gameCardProgressContainer]}>
           <View style={style.gameCardProgressBlock}>
-            <CircleGradientProgressBar
-              gradientColors={[[style.svgGradient.color[0], '10%'], [style.svgGradient.color[1], '90%']]}
-              progressValue={gameData ? gameData.gameProgress : 0}
-              totalValue={gameData ? gameData.totalGames : 100}
-              startAnim={Boolean(gameData)}
-              progressBg={style.svgProgressBackground.color}
-            >
-              <View style={style.bodyCardContentTitle}>
-                <AnimatedTextInput
-                  ref={gameDataTextRef}
-                  underlineColorAndroid='transparent'
-                  style={style.gameCardText}
-                  value={'0'}
-                  editable={false}
-                />
-                <Text style={style.gameCardTextLight}>/{gameData ? gameData.totalGames : '--'}</Text>
-              </View>
-              <Text style={style.gameCardSvgCaption}>
-                <FormattedMessage
-                  defaultMessage="completed"
-                  description="Game Progress card caption"
-                />
-              </Text>
-            </CircleGradientProgressBar>
+            <View style={style.gameCircularProgressBlock}>
+              <CircleGradientProgressBar
+                gradientColors={[[style.svgGradient.color[0], '10%'], [style.svgGradient.color[1], '90%']]}
+                progressValue={gameData ? gameData.gameProgress : 0}
+                totalValue={gameData ? gameData.totalGames : 100}
+                startAnim={Boolean(gameData)}
+                progressBg={style.svgProgressBackground.color}
+              >
+                <View style={style.bodyCardContentTitle}>
+                  <AnimatedTextInput
+                    ref={gameDataTextRef}
+                    underlineColorAndroid='transparent'
+                    style={style.gameCardText}
+                    value={'0'}
+                    editable={false}
+                  />
+                  <Text style={style.gameCardTextLight}>
+                    <FormattedMessage
+                      defaultMessage={'/{totalGames}'}
+                      description={'total games'}
+                      values={{
+                        totalGames: gameData?.totalGames || '0',
+                      }}
+                    />
+                  </Text>
+                </View>
+                <Text style={style.gameCardSvgCaption}>
+                  <FormattedMessage
+                    defaultMessage="completed"
+                    description="Game Progress card caption"
+                  />
+                </Text>
+              </CircleGradientProgressBar>
+            </View>
           </View>
           <View style={style.gameCardProgressBlock}>
             <View style={[style.bodyCardContentTitle, style.gameCardContent]}>
@@ -624,10 +648,18 @@ const GameBlock = ({ style, navigation, gameData }) => {
                     description='Coins Earned'
                   />
                 </Text>
-                <Text style={style.gameCardText}>{gameData ? gameData.totalPointsEarned : '--'}</Text>
+                <Text style={style.gameCardText}>
+                  <FormattedMessage
+                    defaultMessage={'{totalPointsEarned}'}
+                    description={'total points earned'}
+                    values={{
+                      totalPointsEarned: gameData?.totalPointsEarned || 0,
+                    }}
+                  />
+                </Text>
               </View>
             </View>
-            {/* <View style={[style.bodyCardContentTitle, style.gameCardContent]}>
+            <View style={[style.bodyCardContentTitle, style.gameCardContent]}>
               <Image
                 style={[style.bodyCardContentTitleImage, style.gameCardIcons]}
                 source={timeSpent}
@@ -639,9 +671,17 @@ const GameBlock = ({ style, navigation, gameData }) => {
                     description='Time Spent'
                   />
                 </Text>
-                <Text style={style.gameCardText}>{'14 Mins'}</Text>
+                <Text style={style.gameCardText}>
+                  <FormattedMessage
+                    defaultMessage={'{timeSpent}'}
+                    description={'total time spent on platform'}
+                    values={{
+                      timeSpent: formatSeconds(gameProgress?.totalTimeSpent),
+                    }}
+                  />
+                </Text>
               </View>
-            </View> */}
+            </View>
           </View>
         </View>
       </View>
@@ -940,7 +980,15 @@ const LeaderBoardCard = ({
           <View style={style.sheetCardHeroContent}>
             <Text
               style={[style.sheetCardTextColor, style.sheetCardHeroTitle]}
-            >#{leaderBoardUserData.rank}</Text>
+            >
+              <FormattedMessage
+                defaultMessage={'#{rank}'}
+                description={'user rank'}
+                values={{
+                  rank: leaderBoardUserData?.rank || '--',
+                }}
+              />
+            </Text>
             <Text style={style.sheetCardBodyText}>
               <FormattedMessage
                 defaultMessage='rank'
@@ -962,10 +1010,34 @@ const LeaderBoardCard = ({
                   style={[
                     style.sheetCardBodyText, style.sheetCardRowIndex,
                   ]}
-                >#{item.rank}</Text>
-                <Text style={style.sheetCardBodyText}>{item.name}</Text>
+                >
+                  <FormattedMessage
+                    defaultMessage={'#{rank}'}
+                    description={'members rank'}
+                    values={{
+                      rank: item?.rank || '--',
+                    }}
+                  />
+                </Text>
+                <Text style={style.sheetCardBodyText}>
+                  <FormattedMessage
+                    defaultMessage={'{name}'}
+                    description={'member name'}
+                    values={{
+                      name: item.name,
+                    }}
+                  />
+                </Text>
               </View>
-              <Text style={style.sheetCardBodyText}>{item.points}</Text>
+              <Text style={style.sheetCardBodyText}>
+                <FormattedMessage
+                  defaultMessage={'{points}'}
+                  description={'member points'}
+                  values={{
+                    points: item.points,
+                  }}
+                />
+              </Text>
             </View>))}
         {
           !leaderboardData
@@ -1080,6 +1152,7 @@ const Index = ({ route, navigation }) => {
     leaderboardData,
     userData: leaderBoardUserData,
     status: leaderboardStatus,
+    gameProgress,
   } = leaderBoardState;
 
   const { sessionData } = authContext;
@@ -1108,12 +1181,14 @@ const Index = ({ route, navigation }) => {
 
   if (authContext.appData.isRefresh) {
     onRefresh();
-    authContext.setAuthState((prevState) => ({
-      ...prevState,
-      appData: {
-        isRefresh: false,
-      },
-    }));
+    if (isPageMounted.current) {
+      authContext.setAuthState((prevState) => ({
+        ...prevState,
+        appData: {
+          isRefresh: false,
+        },
+      }));
+    }
   }
 
   const handleViewAllAwards = () => {
@@ -1234,6 +1309,7 @@ const Index = ({ route, navigation }) => {
                     navigation={navigation}
                     style={style}
                     reloadComponent={reloadComponent}
+                    gameProgress={gameProgress}
                   />
                 </>
               }
@@ -1256,34 +1332,36 @@ const Index = ({ route, navigation }) => {
             <ScrollView
               showsVerticalScrollIndicator={false}
             >
-              <AchievementComponent
-                navigation={navigation}
-                style={style}
-                achievementHandler={handleViewAllAwards}
-                // gameData={gameData}
-                sessionData={sessionData}
-              />
-             {/* {
-                clubData
-                && clubData?.hasClub
-                && <ClubComponent
-                  clubData={clubData}
+              <Pressable onPress={() => {}}>
+                <AchievementComponent
                   navigation={navigation}
                   style={style}
-                  bottomSheetRef={bottomSheetRef}
-                  enabled={isClubEnabled()}
+                  achievementHandler={handleViewAllAwards}
+                  // gameData={gameData}
+                  sessionData={sessionData}
                 />
-              } */}
-              {
-                leaderboardData
-                && <LeaderBoardComponent
-                leaderboardData={leaderboardData}
-                leaderBoardUserData={leaderBoardUserData}
-                bottomSheetRef={bottomSheetRef}
-                navigation={navigation}
-                style={style}
-                handleShowLeaderBoard={handleShowLeaderBoard} />
-              }
+              {/* {
+                  clubData
+                  && clubData?.hasClub
+                  && <ClubComponent
+                    clubData={clubData}
+                    navigation={navigation}
+                    style={style}
+                    bottomSheetRef={bottomSheetRef}
+                    enabled={isClubEnabled()}
+                  />
+                } */}
+                {
+                  leaderboardData
+                  && <LeaderBoardComponent
+                  leaderboardData={leaderboardData}
+                  leaderBoardUserData={leaderBoardUserData}
+                  bottomSheetRef={bottomSheetRef}
+                  navigation={navigation}
+                  style={style}
+                  handleShowLeaderBoard={handleShowLeaderBoard} />
+                }
+              </Pressable>
             </ScrollView>
           </BottomSheet>
         </>

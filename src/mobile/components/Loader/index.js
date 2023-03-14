@@ -3,14 +3,11 @@ import React, {
   useEffect, useImperativeHandle, useRef, useState,
 } from 'react';
 import {
-  // ActivityIndicator,
   Animated,
   StyleSheet,
-  // Text,
   View,
 } from 'react-native';
-// import { debounce1 } from '../../../hooks/common/utlis';
-// import * as Animatable from 'react-native-animatable';
+import { debounce1 } from '../../../hooks/common/utlis';
 import ThemeContext from '../theme';
 
 const getStyles = (theme, utilColors) => StyleSheet.create({
@@ -18,7 +15,6 @@ const getStyles = (theme, utilColors) => StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: theme.bodyBg,
   },
   fillScreen: {
     ...StyleSheet.absoluteFill,
@@ -103,6 +99,7 @@ const ScreenLoader = ({ route, duration = 250 }, ref) => {
   const loaderBlock2Ref = useRef(null);
   const loaderBlock3Ref = useRef(null);
   const isAnimationRunning = useRef(false);
+  const animationRef = useRef(null);
 
   const block1XYValue = new Animated.ValueXY({
     x: 0,
@@ -171,7 +168,7 @@ const ScreenLoader = ({ route, duration = 250 }, ref) => {
       );
       loaderBlockArry[idx].posIdx = nextPosIdx;
     });
-    Animated.sequence(
+    animationRef.current = Animated.sequence(
       animationArry,
     ).start(({ finished }) => {
       if (finished) {
@@ -206,6 +203,9 @@ const ScreenLoader = ({ route, duration = 250 }, ref) => {
     loaderBlockArry.forEach((arEl) => {
       arEl?.animatedValue?.removeAllListeners();
     });
+    if (animationRef.current) {
+      animationRef.current.stop();
+    }
   };
 
   const showLoader = () => {
@@ -221,14 +221,14 @@ const ScreenLoader = ({ route, duration = 250 }, ref) => {
     setIsLoaderVisible(false);
   };
 
-  // const debouncedShowLoader = debounce1(showLoader, 500);
-  // const debouncedCloseLoader = debounce1(closeLoader, 500);
+  const debouncedShowLoader = debounce1(showLoader, 500);
+  const debouncedCloseLoader = debounce1(closeLoader, 500);
 
   useImperativeHandle(ref, () => ({
-    // show: debouncedShowLoader,
-    // hide: debouncedCloseLoader,
-    show: showLoader,
-    hide: closeLoader,
+    show: debouncedShowLoader,
+    hide: debouncedCloseLoader,
+    // show: showLoader,
+    // hide: closeLoader,
   }));
 
   useEffect(() => () => {
