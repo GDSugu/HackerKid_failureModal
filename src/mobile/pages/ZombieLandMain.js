@@ -28,6 +28,8 @@ import { useZombieLand, ZombieLandContext } from '../../hooks/pages/zombieLand';
 import Icon from '../common/Icons';
 import ZombieLandStatusModal from '../components/Modals/ZombieLandStatusModal';
 import { useTimeTrack } from '../../hooks/pages/timeTrack';
+import { SubscriptionContext } from '../../hooks/pages/root';
+import { isFeatureEnabled } from '../../web/javascripts/common/framework';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -145,104 +147,104 @@ const HintComponent = ({
         ...style.hintContainer,
         bottom: hintVisible ? 84 : -500,
       }}
-      animation={ hintVisible ? 'fadeInUp' : 'fadeOutDown' }
+      animation={hintVisible ? 'fadeInUp' : 'fadeOutDown'}
       duration={500}
-      >
-        {
-          hintDetails && Object.keys(hintDetails).length > 0
-          && <>
-            <View style={style.flexBetween}>
-              <Text
-                style={style.hintTitle}
-              >
-                <FormattedMessage
-                  defaultMessage={'Hint:'}
-                  description={'Hint title'}
-                />
-              </Text>
-              <TouchableOpacity
-                onPress={closeHintContainer}>
-                <Icon
-                  name='close'
-                  color={Red.color500}
-                  type='FontAwesome'
-                  size={28}
-                />
-              </TouchableOpacity>
-            </View>
-            <View>
-              <Image
-                style={style.hintImage}
-                resizeMode={'contain'}
-                source={{
-                  uri: `https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/${currentHint.active.picture.split('/')[3]}`,
+    >
+      {
+        hintDetails && Object.keys(hintDetails).length > 0
+        && <>
+          <View style={style.flexBetween}>
+            <Text
+              style={style.hintTitle}
+            >
+              <FormattedMessage
+                defaultMessage={'Hint:'}
+                description={'Hint title'}
+              />
+            </Text>
+            <TouchableOpacity
+              onPress={closeHintContainer}>
+              <Icon
+                name='close'
+                color={Red.color500}
+                type='FontAwesome'
+                size={28}
+              />
+            </TouchableOpacity>
+          </View>
+          <View>
+            <Image
+              style={style.hintImage}
+              resizeMode={'contain'}
+              source={{
+                uri: `https://static.hackerkid.org/hackerKid/live/zombieLandAssets/assets/${currentHint.active.picture.split('/')[3]}`,
+              }}
+            />
+          </View>
+          {
+            Object.keys(currentHint.active).length > 0
+            && currentHint.active.hints.map((hint, idx) => <Text key={idx} style={style.hintText}>
+              <FormattedMessage
+                defaultMessage={'{idx}. {hint}'}
+                description={'Hint'}
+                values={{
+                  hint,
+                  idx: idx + 1,
                 }}
               />
-            </View>
-            {
-              Object.keys(currentHint.active).length > 0
-              && currentHint.active.hints.map((hint, idx) => <Text key={idx} style={style.hintText}>
-                  <FormattedMessage
-                    defaultMessage={'{idx}. {hint}'}
-                    description={'Hint'}
-                    values={{
-                      hint,
-                      idx: idx + 1,
-                    }}
-                  />
-                </Text>)
-            }
-            <View style={{
-              ...style.flexBetween,
-              ...style.mt16,
-            }}>
-              <TouchableOpacity
-                onPress={() => { navigateHint('prev'); }}
-                disabled={currentHint.isFirst}
-                style={[style.navigationBtn, { opacity: currentHint.isFirst ? 0.5 : 1 }]}>
-                  <Icon
-                    name='angle-left'
-                    type='FontAwesome5'
-                    color={Yellow.color700}
-                    size={24}
-                  />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => { navigateHint('next'); }}
-                disabled={currentHint.isLast}
-                style={[style.navigationBtn, { opacity: currentHint.isLast ? 0.5 : 1 }]}>
-                  <Icon
-                    name='angle-right'
-                    type='FontAwesome5'
-                    color={Yellow.color700}
-                    size={24}
-                  />
-              </TouchableOpacity>
-            </View>
-          </>
-        }
-        {
-          !hintDetails
-          && <>
-            <View style={style.flexBetween}>
-              <Text style={style.hintText}>
-                <FormattedMessage
-                  defaultMessage={'Move any blocks to get hints'}
-                  description={'Hint message'}
-                />
-              </Text>
-              <TouchableOpacity
-                onPress={closeHintContainer}>
-                <Icon
-                  name='close'
-                  color={Red.color500}
-                  type='FontAwesome'
-                  size={28}
-                />
-              </TouchableOpacity>
-            </View>
-          </>
-        }
+            </Text>)
+          }
+          <View style={{
+            ...style.flexBetween,
+            ...style.mt16,
+          }}>
+            <TouchableOpacity
+              onPress={() => { navigateHint('prev'); }}
+              disabled={currentHint.isFirst}
+              style={[style.navigationBtn, { opacity: currentHint.isFirst ? 0.5 : 1 }]}>
+              <Icon
+                name='angle-left'
+                type='FontAwesome5'
+                color={Yellow.color700}
+                size={24}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => { navigateHint('next'); }}
+              disabled={currentHint.isLast}
+              style={[style.navigationBtn, { opacity: currentHint.isLast ? 0.5 : 1 }]}>
+              <Icon
+                name='angle-right'
+                type='FontAwesome5'
+                color={Yellow.color700}
+                size={24}
+              />
+            </TouchableOpacity>
+          </View>
+        </>
+      }
+      {
+        !hintDetails
+        && <>
+          <View style={style.flexBetween}>
+            <Text style={style.hintText}>
+              <FormattedMessage
+                defaultMessage={'Move any blocks to get hints'}
+                description={'Hint message'}
+              />
+            </Text>
+            <TouchableOpacity
+              onPress={closeHintContainer}>
+              <Icon
+                name='close'
+                color={Red.color500}
+                type='FontAwesome'
+                size={28}
+              />
+            </TouchableOpacity>
+          </View>
+        </>
+      }
     </Animatable.View>
   </>;
 };
@@ -289,6 +291,7 @@ const ZombieLandMain = ({ navigation }) => {
     },
   } = useZombieLand({
     isPageMounted,
+    virtualid: 5,
   });
 
   const {
@@ -316,14 +319,34 @@ const ZombieLandMain = ({ navigation }) => {
     }));
   };
 
+  const isAlreadyCompleted = () => zlSetState.submissionDetails
+    && zlSetState.submissionDetails.completed;
+
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+
+  const gamesLimit = (gameName) => {
+    const gamesEnabled = isFeatureEnabled(subscriptionData, 'games', gameName);
+    return gamesEnabled.enabled && gamesEnabled[gameName];
+  };
+
   const handleStatusCTA = (status) => {
     if (status === 'passed') {
-      const virtualId = zlState.questionObject.virtualId + 1;
-      if (virtualId < 10) {
-        fetchZombieLandQuestion({ virtualId })
-          .then(hideStatusModal);
-      } else {
+      // const virtualId = zlState.questionObject.virtualId + 1;
+      // if (virtualId < 10) {
+      //   fetchZombieLandQuestion({ virtualId })
+      //     .then(hideStatusModal);
+      const currentVirtualId = zlState.questionObject.virtualId;
+      const nextVirtualId = currentVirtualId + 1;
+      const isLastQuestion = zlState.questionList[zlState.questionList.length - 1].virtualId
+        === currentVirtualId;
+      const lastOpenVirtualId = gamesLimit('zombieLand');
+
+      if (isLastQuestion) {
         hideStatusModal();
+      } else if (lastOpenVirtualId && (currentVirtualId === lastOpenVirtualId)) {
+        navigation.navigate('Premium');
+      } else {
+        fetchZombieLandQuestion({ virtualId: nextVirtualId }).then(hideStatusModal);
       }
     } else if (status === 'failed') {
       hideStatusModal();
@@ -345,6 +368,15 @@ const ZombieLandMain = ({ navigation }) => {
       stopTimeTrack('zombieland-main');
     };
   }, []);
+
+  useEffect(() => {
+    const { virtualId } = zlState.questionObject;
+    const lastOpenVirtualId = gamesLimit('zombieLand');
+    if (lastOpenVirtualId && virtualId > lastOpenVirtualId && !isAlreadyCompleted()) {
+      fetchZombieLandQuestion({ virtualId: lastOpenVirtualId });
+    }
+  }, [zlState]);
+  // console.log('state , ', zlState.questionObject.hints);
 
   return <>
     <View style={style.container}>

@@ -325,13 +325,14 @@ const CourseCard = ({
 };
 
 const ModuleContainer = ({
-  data, navigator, continueWatch = false, customModuleName = false,
+  data, navigator, continueWatch = false, customModuleName = false, noVideosMessage = '',
 }) => {
   const [inViewPort, setInViewPort] = useState(0);
   const faltItemRef = useRef();
   const { font, theme } = useContext(ThemeContext);
   const pageTheme = theme.screenVideo;
-  const style = getStyles(pageTheme);
+  const { utilColors } = theme;
+  const style = getStyles(pageTheme, font, utilColors);
   const nextCard = () => {
     faltItemRef.current.scrollToIndex({ animated: true, index: inViewPort + 1 });
   };
@@ -395,24 +396,39 @@ const ModuleContainer = ({
               </LinearGradient>
             </View>
           )}
-        <FlatList
-          horizontal
-          ref={faltItemRef}
-          viewabilityConfigCallbackPairs={
-            viewabilityConfigCallbackPairs.current
-          }
-          data={videoData}
-          renderItem={({ item, index }) => <CourseCard
-            item={item}
-            index={index}
-            font={font}
-            theme={theme}
-            navigator={navigator}
-            moduleData={data}
-            customVideo={continueWatch}
-          />}
-          keyExtractor={(key) => key.videoId}
-        />
+        {
+          videoData.length > 0 && <FlatList
+            horizontal
+            ref={faltItemRef}
+            viewabilityConfigCallbackPairs={
+              viewabilityConfigCallbackPairs.current
+            }
+            data={videoData}
+            renderItem={({ item, index }) => <CourseCard
+              item={item}
+              index={index}
+              font={font}
+              theme={theme}
+              navigator={navigator}
+              moduleData={data}
+              customVideo={continueWatch}
+            />}
+            keyExtractor={(key) => key.videoId}
+          />
+        }
+        {
+          videoData.length === 0 && <Text style={{
+            color: utilColors.dark,
+            ...font.subtitle2,
+            marginLeft: 18,
+            padding: 20,
+            paddingLeft: 0,
+          }}>
+            <FormattedMessage defaultMessage={'{noVideosMessage}'} description='no videos text' values={{
+              noVideosMessage,
+            }} />
+          </Text>
+        }
         {(inViewPort > 0 && videoData.length > 2) && (
           <View style={style.prevBtnCont}>
             <LinearGradient colors={['rgba(229, 244, 237, 1)', 'rgba(229, 244, 237, 0)']} style={style.btnGradientPrev}>
