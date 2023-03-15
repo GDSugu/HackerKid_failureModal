@@ -767,6 +767,12 @@
       "value": "About Club"
     }
   ],
+  "64kwqI": [
+    {
+      "type": 0,
+      "value": "Almost there!"
+    }
+  ],
   "66xp/7": [
     {
       "type": 1,
@@ -955,6 +961,12 @@
     {
       "type": 0,
       "value": "Games"
+    }
+  ],
+  "7c/5xr": [
+    {
+      "type": 0,
+      "value": "hackerkid.org"
     }
   ],
   "7dyAWL": [
@@ -1981,12 +1993,6 @@
       "value": "St. Michael's Academy"
     }
   ],
-  "IheIvZ": [
-    {
-      "type": 0,
-      "value": "Go to hackerkid.org & finish the sign up process. As a Premium Member, you'll have unlimited access to gamified coding problems, video libraries, challenges, activity awards, badges, certificates and special access to clubs."
-    }
-  ],
   "IloyRB": [
     {
       "type": 1,
@@ -2393,6 +2399,12 @@
       "value": "HackerKid is a next-generation platform that helps kids learn coding in a gamified environment through games like Turtle and Zombieland. Kids can compete with each other through challenges and create clubs to scale their learning. They would also get awards and certificates for completing challenges, thus keeping learning competitive and encouraging."
     }
   ],
+  "N5Q2pH": [
+    {
+      "type": 0,
+      "value": "& finish the sign up process."
+    }
+  ],
   "N930gg": [
     {
       "type": 1,
@@ -2727,12 +2739,6 @@
       "value": "Profile"
     }
   ],
-  "R5SEEt": [
-    {
-      "type": 0,
-      "value": "Close"
-    }
-  ],
   "R6fRXj": [
     {
       "type": 0,
@@ -2883,6 +2889,12 @@
     {
       "type": 0,
       "value": "Help"
+    }
+  ],
+  "SbBhMX": [
+    {
+      "type": 0,
+      "value": "Playback speed"
     }
   ],
   "Sbkd3U": [
@@ -3313,6 +3325,12 @@
     {
       "type": 0,
       "value": " for your excellent record."
+    }
+  ],
+  "X6XVnH": [
+    {
+      "type": 1,
+      "value": "closeBtnText"
     }
   ],
   "XEOksh": [
@@ -4437,12 +4455,6 @@
       "value": "Subscription"
     }
   ],
-  "lurpFa": [
-    {
-      "type": 0,
-      "value": "You're almost there"
-    }
-  ],
   "lw8qSk": [
     {
       "type": 0,
@@ -4655,6 +4667,12 @@
     {
       "type": 1,
       "value": "message"
+    }
+  ],
+  "nXjHGd": [
+    {
+      "type": 0,
+      "value": "Go to"
     }
   ],
   "nawIST": [
@@ -5005,6 +5023,12 @@
       "value": "tag"
     }
   ],
+  "qwnHfF": [
+    {
+      "type": 0,
+      "value": "No Videos Found"
+    }
+  ],
   "qx2FMG": [
     {
       "type": 1,
@@ -5043,6 +5067,12 @@
     {
       "type": 0,
       "value": "Copy Link"
+    }
+  ],
+  "rlR4g3": [
+    {
+      "type": 0,
+      "value": "As a Premium Member, you'll have unlimited access to gamified coding problems, video libraries, challenges, activity awards, badges, certificates and special access to clubs."
     }
   ],
   "roTiGY": [

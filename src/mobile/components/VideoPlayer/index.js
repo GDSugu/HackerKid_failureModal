@@ -315,7 +315,6 @@ class VideoPlayer extends React.Component {
   };
 
   onSeekPoly = (event) => {
-    console.log('onbuffer ', event);
     if (!event.isBuffering) {
       this.touchDisabled = false;
       if (!this.state.paused) {
