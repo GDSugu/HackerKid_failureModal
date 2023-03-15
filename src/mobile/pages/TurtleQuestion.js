@@ -88,6 +88,7 @@ const getStyles = (theme, font, utilColors) => StyleSheet.create({
 });
 
 const TurtleQuestion = ({ navigation }) => {
+  const isPageMounted = React.useRef(true);
   const { font, theme } = React.useContext(ThemeContext);
   const { utilColors } = theme;
   const turtleContext = React.useContext(TurtleContext);
@@ -123,7 +124,9 @@ const TurtleQuestion = ({ navigation }) => {
         window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
       }`;
       setTimeout(() => {
-        webViewRef.current.injectJavaScript(runTurtle);
+        if (isPageMounted.current) {
+          webViewRef.current.injectJavaScript(runTurtle);
+        }
       }, 300);
     }
   };
@@ -146,7 +149,9 @@ const TurtleQuestion = ({ navigation }) => {
           window.ReactNativeWebView.postMessage(err.message);
         }
       `;
-      webViewRef.current.injectJavaScript(init);
+      if (isPageMounted.current) {
+        webViewRef.current.injectJavaScript(init);
+      }
     }
   };
 
@@ -192,6 +197,10 @@ const TurtleQuestion = ({ navigation }) => {
     }
   }, [turtleContext.ctxState.questionObject]);
 
+  React.useEffect(() => () => {
+    isPageMounted.current = false;
+  }, []);
+
   return <>
     <View style={style.container}>
       <Text style={style.titleText}>
@@ -205,7 +214,7 @@ const TurtleQuestion = ({ navigation }) => {
       </Text>
       <View style={[style.card, style.cardProblemBg]}>
         <ScrollView>
-          { turtleContext.ctxState.questionObject.steps
+          {turtleContext.ctxState.questionObject.steps
             && turtleContext.ctxState.questionObject.steps.map(
               (step, index) => <Text key={index} style={style.problemStatement}>
                 <FormattedMessage
@@ -216,7 +225,7 @@ const TurtleQuestion = ({ navigation }) => {
                   }}
                 />
               </Text>,
-            ) }
+            )}
         </ScrollView>
       </View>
       <Text style={{
@@ -230,12 +239,12 @@ const TurtleQuestion = ({ navigation }) => {
       </Text>
       <View style={style.outputCard}>
         <WebView
-            ref={webViewRef}
-            source={{ html: webViewString }}
-            originWhitelist={['*']}
-            startInLoadingState={true}
-            injectedJavaScript={scriptToInject}
-          />
+          ref={webViewRef}
+          source={{ html: webViewString }}
+          originWhitelist={['*']}
+          startInLoadingState={true}
+          injectedJavaScript={scriptToInject}
+        />
       </View>
       <TouchableOpacity
         onPress={() => { navigation.navigate('TurtleOutput'); }}

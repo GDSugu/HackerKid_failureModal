@@ -64,6 +64,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
 });
 
 const ZombieLandOutput = ({ navigation }) => {
+  const isPageMounted = useRef(true);
   const { theme: { utilColors, screenZombieLandOutput }, font } = React.useContext(ThemeContext);
   const style = getStyles(screenZombieLandOutput, utilColors, font);
   const webViewRef = React.useRef(null);
@@ -155,7 +156,9 @@ const ZombieLandOutput = ({ navigation }) => {
         }
         `;
       setTimeout(() => {
-        webViewRef.current.injectJavaScript(runZl);
+        if (isPageMounted.current) {
+          webViewRef.current.injectJavaScript(runZl);
+        }
       }, 300);
     }
   };
@@ -234,29 +237,34 @@ const ZombieLandOutput = ({ navigation }) => {
             window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
           }
         `;
-
-        webViewRef.current.injectJavaScript(initScript);
+        if (isPageMounted.current) {
+          webViewRef.current.injectJavaScript(initScript);
+        }
       }
     }, timeout);
   }, [zlContext.ctxState.questionObject]);
 
+  React.useEffect(() => () => {
+    isPageMounted.current = false;
+  }, []);
+
   return <>
     <View style={style.container}>
-        <WebView
-          style={style.container}
-          ref={webViewRef}
-          source={{ html: webViewString }}
-          originWhitelist={['*']}
-          injectedJavaScript={scriptToInject}
-          allowUniversalAccessFromFileURLs={true}
-          mixedContentMode={'always'}
-          scrollEnabled={false}
-          scalesPageToFit={false}
-          startInLoadingState={true}
-          onMessage={handleMessage}
-          androidLayerType="hardware"
-        />
-        <View style={style.btnContainer}>
+      <WebView
+        style={style.container}
+        ref={webViewRef}
+        source={{ html: webViewString }}
+        originWhitelist={['*']}
+        injectedJavaScript={scriptToInject}
+        allowUniversalAccessFromFileURLs={true}
+        mixedContentMode={'always'}
+        scrollEnabled={false}
+        scalesPageToFit={false}
+        startInLoadingState={true}
+        onMessage={handleMessage}
+        androidLayerType="hardware"
+      />
+      <View style={style.btnContainer}>
         <TouchableOpacity
           style={[
             style.outputBtn,
@@ -271,18 +279,18 @@ const ZombieLandOutput = ({ navigation }) => {
             }}
           >
             {<FormattedMessage
-                  defaultMessage={'Play'}
-                  description={'Turtle Play Button'}
-                />
+              defaultMessage={'Play'}
+              description={'Turtle Play Button'}
+            />
             }
           </Text>
           <View>
             <Icon
-                name='play'
-                type='FontAwesome5'
-                size={18}
-                color={utilColors.white}
-              />
+              name='play'
+              type='FontAwesome5'
+              size={18}
+              color={utilColors.white}
+            />
           </View>
         </TouchableOpacity>
       </View>
@@ -290,7 +298,7 @@ const ZombieLandOutput = ({ navigation }) => {
     <Loader
       route={'ZombieLandOutput'}
       ref={loaderRef}
-      />
+    />
   </>;
 };
 

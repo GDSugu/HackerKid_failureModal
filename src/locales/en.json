@@ -1253,6 +1253,10 @@
     "defaultMessage": "No Awards Found!",
     "description": "error message"
   },
+  "JnX/VF": {
+    "defaultMessage": "{noVideosMessage}",
+    "description": "no videos text"
+  },
   "JnwRMJ": {
     "defaultMessage": "OTP",
     "description": "OTP label"

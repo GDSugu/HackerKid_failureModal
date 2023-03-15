@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, {
   useContext, useState, useRef, useEffect,
 } from 'react';
@@ -64,6 +65,12 @@ const getStyles = (theme, font, utilColors) => {
     pageBtn: {
       color: theme.btnBg,
     },
+    noVideoFoundText: {
+      color: utilColors.dark,
+      ...font.subtitle2,
+      marginTop: 30,
+      textAlign: 'center',
+    },
   });
 };
 
@@ -100,7 +107,7 @@ const VideoHome = ({ navigation, route }) => {
     }
   }, [moduleData]);
 
-  const searcher = new FuzzySearch(lockedData.videos, ['title']);
+  const searcher = new FuzzySearch(lockedData.videos, ['title'], { sort: true });
   const onSearch = (keyword) => {
     if (keyword === '' || !keyword) {
       setFilterData(false);
@@ -114,8 +121,6 @@ const VideoHome = ({ navigation, route }) => {
   const pageStartIndex = (page - 1) * itemsPerPage;
   const pageEndIndex = page * itemsPerPage;
 
-  console.log(pageStartIndex);
-  console.log(pageEndIndex);
   return (
     <View style={style.container}>
       <ScrollView>
@@ -138,17 +143,20 @@ const VideoHome = ({ navigation, route }) => {
         </View>
         <View>
           {filteredData
-            ? filteredData.slice(pageStartIndex, pageEndIndex).map((item, index) => <CourseCard
-              key={index}
-              item={item}
-              index={index}
-              font={font}
-              theme={theme}
-              navigator={navigation}
-              customVideo={true}
-              customCardStyle={style.videoCard}
-            />)
-            : lockedData && lockedData.videos
+            ? filteredData.length === 0 ? <Text style={style.noVideoFoundText}>
+              <FormattedMessage defaultMessage={'No Videos Found'} description='no video found' />
+            </Text>
+              : filteredData.slice(pageStartIndex, pageEndIndex).map((item, index) => <CourseCard
+                key={index}
+                item={item}
+                index={index}
+                font={font}
+                theme={theme}
+                navigator={navigation}
+                customVideo={true}
+                customCardStyle={style.videoCard}
+              />)
+            : lockedData && lockedData && lockedData.videos
               .slice(pageStartIndex, pageEndIndex).map((item, index) => <CourseCard
                 key={index}
                 item={item}

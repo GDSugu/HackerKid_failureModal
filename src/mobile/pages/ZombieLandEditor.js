@@ -24,6 +24,7 @@ const ZombieLandEditor = () => {
   const zlContext = React.useContext(ZombieLandContext);
   const webViewRef = React.useRef(null);
   let webViewString = '';
+  const isPageMounted = React.useRef(true);
 
   // const {
   //   ctxState: zlState,
@@ -113,10 +114,16 @@ const ZombieLandEditor = () => {
             window.ReactNativeWebView.postMessage(JSON.stringify(errmsg));
           }
         `;
-        webViewRef.current.injectJavaScript(initScript);
+        if (isPageMounted.current) {
+          webViewRef.current.injectJavaScript(initScript);
+        }
       }
     }, 1000);
   }, [zlContext.ctxState.questionObject]);
+
+  React.useEffect(() => () => {
+    isPageMounted.current = false;
+  }, []);
 
   return <>
     <View style={style.container}>

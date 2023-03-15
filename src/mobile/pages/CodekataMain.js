@@ -29,6 +29,8 @@ import PlayBtn from '../../images/games/playBtn.svg';
 import GameNavBar from '../components/GameNavBar';
 import { useTimeTrack } from '../../hooks/pages/timeTrack';
 import Loader from '../components/Loader';
+import { isFeatureEnabled } from '../../web/javascripts/common/framework';
+import { SubscriptionContext } from '../../hooks/pages/root';
 
 const getStyles = (theme, font, utilColors) => StyleSheet.create({
   container: {
@@ -294,7 +296,7 @@ const QuestionComponent = ({ style, data }) => {
             type="FontAwesome"
             size={24}
             style={style.collapseIcon}
-            // color={theme.utilColors.white}
+          // color={theme.utilColors.white}
           />
         </View>
       </TouchableHighlight>
@@ -372,58 +374,58 @@ const QuestionComponent = ({ style, data }) => {
 const OutputContainer = ({
   style, output = false, setOutputVisible, submitCode, setOutput,
 }) => <View
-style={style.outputCont}>
-  <View style={style.collapsedBtnCont}>
-    <TouchableHighlight style={style.slideCloseBnt} onPress={() => setOutputVisible(false)}>
-      <Icon
-        name="chevron-right"
-        type="FontAwesome"
-        size={24}
-        style={style.collapseIcon}
+  style={style.outputCont}>
+    <View style={style.collapsedBtnCont}>
+      <TouchableHighlight style={style.slideCloseBnt} onPress={() => setOutputVisible(false)}>
+        <Icon
+          name="chevron-right"
+          type="FontAwesome"
+          size={24}
+          style={style.collapseIcon}
         // color={theme.utilColors.white}
         />
-    </TouchableHighlight>
-  </View>
-  <View style={style.outputCard}>
-  <View style={style.outputHeadCont}>
-    <Text style={style.outputHead}>
-      <FormattedMessage
-      defaultMessage={'Output'}
-      description={'Output Heading'}/>
-    </Text>
-    <TouchableHighlight onPress={() => setOutput(false)}>
-    <Icon
-      name="rotate-right"
-      type="FontAwesome"
-      size={24}
-      style={style.refreshIcon}
-      // color={theme.utilColors.white}
-      />
-    </TouchableHighlight>
+      </TouchableHighlight>
+    </View>
+    <View style={style.outputCard}>
+      <View style={style.outputHeadCont}>
+        <Text style={style.outputHead}>
+          <FormattedMessage
+            defaultMessage={'Output'}
+            description={'Output Heading'} />
+        </Text>
+        <TouchableHighlight onPress={() => setOutput(false)}>
+          <Icon
+            name="rotate-right"
+            type="FontAwesome"
+            size={24}
+            style={style.refreshIcon}
+          // color={theme.utilColors.white}
+          />
+        </TouchableHighlight>
       </View>
       <View style={style.outputTextCont}>
         {output ? <><Text style={style.outputText}>
-        <FormattedMessage
-      defaultMessage={'{output}'}
-      description={'Output'}
-      values={{ output }}/>
+          <FormattedMessage
+            defaultMessage={'{output}'}
+            description={'Output'}
+            values={{ output }} />
         </Text><TouchableOpacity onPress={submitCode} style={style.submitBtn}>
-          <View style={style.rowBetween}>
-            <Text style={style.titleText}>
-              <FormattedMessage
-                defaultMessage='Submit'
-                description='Submit Button'
-              />
-            </Text>
-            <PlayBtn/>
-          </View>
-        </TouchableOpacity></> : <Text style={[style.outputTextDefault, style.outputText]}>
-        <FormattedMessage
-      defaultMessage={'Click “Run” to generate output for your code'}
-      description={'Output'}/>
+            <View style={style.rowBetween}>
+              <Text style={style.titleText}>
+                <FormattedMessage
+                  defaultMessage='Submit'
+                  description='Submit Button'
+                />
+              </Text>
+              <PlayBtn />
+            </View>
+          </TouchableOpacity></> : <Text style={[style.outputTextDefault, style.outputText]}>
+          <FormattedMessage
+            defaultMessage={'Click “Run” to generate output for your code'}
+            description={'Output'} />
         </Text>}
       </View>
-      </View>
+    </View>
   </View>;
 
 const updateCodeEditorJSString = (mode, code) => {
@@ -508,53 +510,53 @@ const CodekataBody = () => {
         data={codekataContext.ctxState.questionObject}
       />
       <LanguageSelector
-      style={style}
-      value={selectedLang}
-      setValue={setLang}
-      open={langSelector}
-      setOpen={setLangSelector}
-      onChangeValue={onChangeValue}
-      onload={() => {}}
-      theme="DARK"
+        style={style}
+        value={selectedLang}
+        setValue={setLang}
+        open={langSelector}
+        setOpen={setLangSelector}
+        onChangeValue={onChangeValue}
+        onload={() => { }}
+        theme="DARK"
       />
       <CodeEditor
-      codeEditorWebViewRef={editorRef}
-      style={style}
-      styleStringForDocumentInsideWebView=''
-      onload={onCodeEditorLoad}
-      onCodeEditorChanged={(value) => { setCode(value); }}
-      onCodeEditorClicked={() => {}}
-      onCodeEditorUpdateFinish={() => { }}
-      showLoader={true}
-      loadingFunction={() => {}}
+        codeEditorWebViewRef={editorRef}
+        style={style}
+        styleStringForDocumentInsideWebView=''
+        onload={onCodeEditorLoad}
+        onCodeEditorChanged={(value) => { setCode(value); }}
+        onCodeEditorClicked={() => { }}
+        onCodeEditorUpdateFinish={() => { }}
+        showLoader={true}
+        loadingFunction={() => { }}
       />
       <TouchableHighlight style={style.slideBtn} onPress={() => setOutputVisible(true)}>
-      <View>
-      <Icon
-        name="chevron-left"
-        type="FontAwesome"
-        size={24}
-        style={style.collapseIcon}
-        />
-      </View>
+        <View>
+          <Icon
+            name="chevron-left"
+            type="FontAwesome"
+            size={24}
+            style={style.collapseIcon}
+          />
+        </View>
       </TouchableHighlight>
       <TouchableOpacity onPress={codeRun} style={style.tryNowBtn}>
-          <View style={style.rowBetween}>
-            <Text style={style.titleText}>
-              <FormattedMessage
-                defaultMessage='Run'
-                description='Run Button'
-              />
-            </Text>
-            <PlayBtn/>
-          </View>
-        </TouchableOpacity>
+        <View style={style.rowBetween}>
+          <Text style={style.titleText}>
+            <FormattedMessage
+              defaultMessage='Run'
+              description='Run Button'
+            />
+          </Text>
+          <PlayBtn />
+        </View>
+      </TouchableOpacity>
       {outputVisible && <OutputContainer
-      setOutputVisible={setOutputVisible}
-      style={style}
-      output={outputField}
-      submitCode={codeSubmit}
-      setOutput={setOutputField}/>}
+        setOutputVisible={setOutputVisible}
+        style={style}
+        output={outputField}
+        submitCode={codeSubmit}
+        setOutput={setOutputField} />}
     </View>
   );
 };
@@ -576,7 +578,7 @@ const CodekataMain = ({ navigation }) => {
       runCode,
       submitCode,
     },
-  } = useCodekata({ isPageMounted });
+  } = useCodekata({ isPageMounted, virtualid: 11 });
 
   const loaderRef = useRef(null);
 
@@ -591,6 +593,24 @@ const CodekataMain = ({ navigation }) => {
       loaderRef.current.hide();
     }
   };
+
+  const isAlreadyCompleted = () => codekataData.submissionDetails
+    && codekataData.submissionDetails.completed;
+
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+
+  const gamesLimit = (gameName) => {
+    const gamesEnabled = isFeatureEnabled(subscriptionData, 'games', gameName);
+    return gamesEnabled.enabled && gamesEnabled[gameName];
+  };
+
+  useEffect(() => {
+    const { virtualId } = codekataData.questionObject;
+    const lastOpenVirtualId = gamesLimit('codekata');
+    if (lastOpenVirtualId && virtualId > lastOpenVirtualId && !isAlreadyCompleted()) {
+      getCodekataQuestions(lastOpenVirtualId);
+    }
+  }, [codekataData]);
 
   useEffect(() => {
     startTimeTrack('codekata-main');

@@ -384,11 +384,6 @@ const TurtleMain = ({ navigation }) => {
   };
 
   useEffect(() => {
-    const { virtualId } = turtleQuestionState;
-    if (virtualId > gamesLimit('turtle') && !isAlreadyCompleted()) {
-      // navigate to pricing, for now navigating to home
-      navigation.navigate('Home');
-    }
     startTimeTrack('turtle-main');
 
     return () => {
@@ -397,6 +392,14 @@ const TurtleMain = ({ navigation }) => {
       hideLoader();
     };
   }, []);
+
+  useEffect(() => {
+    const { virtualId } = turtleQuestionState.questionObject;
+    const lastOpenVirtualId = gamesLimit('turtle');
+    if (lastOpenVirtualId && virtualId > lastOpenVirtualId && !isAlreadyCompleted()) {
+      fetchTurtleQuestion({ type: 'initialQuestion', virtualId: lastOpenVirtualId });
+    }
+  }, [turtleQuestionState]);
 
   return <>
     <View style={style.container}>
@@ -415,6 +418,7 @@ const TurtleMain = ({ navigation }) => {
             submitQuestion: submitTurtle,
             showLoader,
             hideLoader,
+            lastOpenVirtualId: gamesLimit('turtle'),
           }}>
             <GameNavigator
               currentScreen={{

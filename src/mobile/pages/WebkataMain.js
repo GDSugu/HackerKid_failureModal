@@ -31,6 +31,8 @@ import TestCaseFailedIcon from '../../images/webkata/test-case-failed-icon.svg';
 import { debounce1 } from '../../hooks/common/utlis';
 import { useTimeTrack } from '../../hooks/pages/timeTrack';
 import Loader from '../components/Loader';
+import { SubscriptionContext } from '../../hooks/pages/root';
+import { isFeatureEnabled } from '../../web/javascripts/common/framework';
 
 // tab navigators
 const CodeEditorsTab = createMaterialTopTabNavigator();
@@ -606,6 +608,7 @@ const LivePreview = ({
   style,
   codeState,
   onMessageFromLivePreviewWebView,
+  isPageMounted,
 }) => {
   const getInitialScript = () => `
     try {
@@ -692,7 +695,9 @@ const LivePreview = ({
 
     const toInjectScript = updateLivePreivewJSString(codeArr.join(''));
 
-    livePreviewWebViewRef.current.injectJavaScript(toInjectScript);
+    if (isPageMounted.current) {
+      livePreviewWebViewRef.current.injectJavaScript(toInjectScript);
+    }
   };
 
   useEffect(() => {
@@ -814,7 +819,9 @@ const WebkataMain = ({ route, navigation }) => {
         newCodeState[name] = code;
 
         const toInjectScript = updateCodeEditorJSString(mode, code);
-        codeEditorsRefs.current[name]?.injectJavaScript(toInjectScript);
+        if (isPageMounted.current) {
+          codeEditorsRefs.current[name]?.injectJavaScript(toInjectScript);
+        }
       });
 
       setCodeState(newCodeState);
@@ -898,7 +905,7 @@ const WebkataMain = ({ route, navigation }) => {
   const onRunBtnPress = () => {
     const { testCases } = questionObject;
     const toInjectScript = invokeRunProccessJSString(testCases);
-    livePreviewWebViewRef.current.injectJavaScript(toInjectScript);
+    if (isPageMounted.current) { livePreviewWebViewRef.current.injectJavaScript(toInjectScript); }
   };
 
   const getNextQuestion = () => {
@@ -909,9 +916,26 @@ const WebkataMain = ({ route, navigation }) => {
       });
   };
 
+  const closeSucessModal = () => setLocalState((prev) => ({ ...prev, successModalOpen: false }));
+
+  const isAlreadyCompleted = () => webkataQuestionState.submissionDetails
+    && webkataQuestionState.submissionDetails.completed;
+
+  const { subscriptionData } = React.useContext(SubscriptionContext);
+
+  const gamesLimit = (gameName) => {
+    const gamesEnabled = isFeatureEnabled(subscriptionData, 'games', gameName);
+    return gamesEnabled.enabled && gamesEnabled[gameName];
+  };
+
   // sideEffects
   useEffect(() => {
     if (questionObject) {
+      const { virtualId } = webkataQuestionState.questionObject;
+      const lastOpenVirtualId = gamesLimit('webkata');
+      if (lastOpenVirtualId && virtualId > lastOpenVirtualId && !isAlreadyCompleted()) {
+        fetchWebkataQuestion(conceptId, lastOpenVirtualId);
+      }
       // reseting every states when user moves to different level
       resetWebkataSubmitState();
       setCodeState({
@@ -1083,6 +1107,7 @@ const WebkataMain = ({ route, navigation }) => {
                   livePreviewWebViewRef={livePreviewWebViewRef}
                   codeState={codeState}
                   onMessageFromLivePreviewWebView={onMessageFromLivePreviewWebView}
+                  isPageMounted={isPageMounted}
                 />
                 <ValidatedResult
                   visible={secondaryActiveTab === 'validatedResult'}
@@ -1120,9 +1145,18 @@ const WebkataMain = ({ route, navigation }) => {
     />
     <WebkataSuccessModal
       visible={localState.successModalOpen}
-      closeModal={() => setLocalState((prev) => ({ ...prev, successModalOpen: false }))}
+      closeModal={closeSucessModal}
       modalBodyText={pointsDetails?.submissionStatus?.replace('{{name}}', profileDetails.name)}
-      getNextQuestion={getNextQuestion}
+      handlePlayNext={() => {
+        const lastOpenVirtualId = gamesLimit('webkata');
+        if (lastOpenVirtualId
+          && questionObject.virtualId === lastOpenVirtualId) {
+          closeSucessModal();
+          navigation.navigate('Premium');
+        } else {
+          getNextQuestion();
+        }
+      }}
     />
     <Loader
       ref={loaderRef}

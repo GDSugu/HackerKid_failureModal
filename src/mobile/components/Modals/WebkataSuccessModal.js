@@ -119,7 +119,7 @@ const getStyles = (theme, font, utilColors) => StyleSheet.create({
 });
 
 const WebkataSuccessModal = ({
-  visible, closeModal, modalBodyText, getNextQuestion,
+  visible, closeModal, modalBodyText, handlePlayNext,
 }) => {
   const { font, theme } = React.useContext(ThemeContext);
   const style = getStyles(theme.screenMore, font, theme.utilColors);
@@ -179,7 +179,7 @@ const WebkataSuccessModal = ({
                 <View style={style.btnContiner}>
                   <TouchableOpacity
                     style={style.primaryBtn}
-                    onPress={getNextQuestion}
+                    onPress={handlePlayNext}
                   >
                     <View style={style.rowBetween}>
                       <Text style={style.primaryBtnText}>
