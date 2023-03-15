@@ -1981,6 +1981,12 @@
       "value": "St. Michael's Academy"
     }
   ],
+  "IheIvZ": [
+    {
+      "type": 0,
+      "value": "Go to hackerkid.org & finish the sign up process. As a Premium Member, you'll have unlimited access to gamified coding problems, video libraries, challenges, activity awards, badges, certificates and special access to clubs."
+    }
+  ],
   "IloyRB": [
     {
       "type": 1,
@@ -3729,12 +3735,6 @@
     {
       "type": 1,
       "value": "name"
-    }
-  ],
-  "cucSNn": [
-    {
-      "type": 0,
-      "value": "Go to hackerkid.org to finish signing up to unlock more features."
     }
   ],
   "d/zBnH": [

@@ -75,7 +75,7 @@ class BottomSheet extends Component {
       this.setState({ modalVisible: visible });
       if (typeof onOpen === 'function') onOpen(props);
       this.setState({ overlayHeight: SCREEN_HEIGHT });
-      this.setState({ modalBg: '#00000050' });
+      this.setState({ modalBg: '#000000cf' });
     } else {
       this.setState({ modalBg: '#00000000' });
       pan.setValue({ x: 0, y: 0 });
