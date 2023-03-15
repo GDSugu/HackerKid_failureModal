@@ -299,7 +299,8 @@ const themes = {
     },
     screenPremium: {
       ...Theme.light.screenYellow,
-      ...fragmentIconDisposal,
+      // ...fragmentIconDisposal,
+      ...fragmentBtnDisposal,
     },
     utilColors: Theme.light.utilColors,
     gradients: Theme.light.gradients,

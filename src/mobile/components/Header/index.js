@@ -272,10 +272,15 @@ const Header = ({ route, navigation }) => {
               ...font.captionBold,
               color: theme.utilColors.dark,
             }}>
-              <FormattedMessage
-                defaultMessage='Close'
-                description='close button'
-              />
+              {
+                <FormattedMessage
+                  defaultMessage={'{closeBtnText}'}
+                  description='close button'
+                  values={{
+                    closeBtnText: route === 'Premium' ? 'Go Back' : 'Close',
+                  }}
+                />
+              }
             </Text>
           </TouchableOpacity>}
           {screenTheme.disposal === 'icon' && <TouchableOpacity
