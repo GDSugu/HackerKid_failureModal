@@ -464,6 +464,10 @@
   "64+NBp": {
     "defaultMessage": "About Club"
   },
+  "64kwqI": {
+    "defaultMessage": "Almost there!",
+    "description": "Premium title tag"
+  },
   "66xp/7": {
     "defaultMessage": "{coins} coins",
     "description": "club coins"
@@ -587,6 +591,10 @@
     "defaultMessage": "Games",
     "description": "games page heading"
   },
+  "7c/5xr": {
+    "defaultMessage": "hackerkid.org",
+    "description": "premium content"
+  },
   "7dyAWL": {
     "defaultMessage": "No invites",
     "description": "no invites"
@@ -704,6 +712,10 @@
   "9gqH2W": {
     "defaultMessage": "Login",
     "description": "Login button"
+  },
+  "9mzddr": {
+    "defaultMessage": "PREMIUM",
+    "description": "premium tag"
   },
   "A/XB4F": {
     "defaultMessage": "Student's Name",
@@ -1460,6 +1472,10 @@
     "defaultMessage": "HackerKid is a next-generation platform that helps kids learn coding in a gamified environment through games like Turtle and Zombieland. Kids can compete with each other through challenges and create clubs to scale their learning. They would also get awards and certificates for completing challenges, thus keeping learning competitive and encouraging.",
     "description": "faq description"
   },
+  "N5Q2pH": {
+    "defaultMessage": "& finish the sign up process.",
+    "description": "premium content"
+  },
   "N930gg": {
     "defaultMessage": "{message}",
     "description": "feed message"
@@ -1511,10 +1527,6 @@
   "Nn5oAD": {
     "defaultMessage": "Go to login",
     "description": "Go to login button"
-  },
-  "Nsl0id": {
-    "defaultMessage": "XP Earned:",
-    "description": "XP Earned card caption"
   },
   "NsygW3": {
     "defaultMessage": "Run",
@@ -1680,10 +1692,6 @@
     "defaultMessage": "Profile",
     "description": "profile heading"
   },
-  "R5SEEt": {
-    "defaultMessage": "Close",
-    "description": "close button"
-  },
   "R6fRXj": {
     "defaultMessage": "View",
     "description": "more card button"
@@ -1769,6 +1777,10 @@
   "SUyZvl": {
     "defaultMessage": "Help",
     "description": "Help title"
+  },
+  "SbBhMX": {
+    "defaultMessage": "Playback speed",
+    "description": "playback speed text"
   },
   "Sbkd3U": {
     "defaultMessage": "{xp} coins",
@@ -2037,6 +2049,10 @@
     "defaultMessage": "Congratulations {user}, you have earned the {award} for your excellent record.",
     "description": "Award Modal Desciption"
   },
+  "X6XVnH": {
+    "defaultMessage": "{closeBtnText}",
+    "description": "close button"
+  },
   "XEOksh": {
     "defaultMessage": "Basics of JavaScript",
     "description": "video title"
@@ -2245,10 +2261,6 @@
     "defaultMessage": "{toastMessage}",
     "description": "toast message"
   },
-  "bo2dGc": {
-    "defaultMessage": "{xp} xp",
-    "description": "XP earned"
-  },
   "bpZOUP": {
     "defaultMessage": "Your changes have been saved successfully.",
     "description": "successfull mussage"
@@ -2295,9 +2307,6 @@
   "croLiZ": {
     "defaultMessage": "{name}",
     "description": "name"
-  },
-  "cucSNn": {
-    "defaultMessage": "Go to hackerkid.org to finish signing up to unlock more features."
   },
   "d/zBnH": {
     "defaultMessage": "...",
@@ -2593,6 +2602,10 @@
     "defaultMessage": "Continue Watching",
     "description": "Continue Watching"
   },
+  "iuBAou": {
+    "defaultMessage": "{timeSpent}",
+    "description": "timespent"
+  },
   "j+kOS8": {
     "defaultMessage": "Profile Edit",
     "description": "Profile Edit"
@@ -2731,10 +2744,6 @@
     "defaultMessage": "Subscription",
     "description": "more menu button"
   },
-  "lurpFa": {
-    "defaultMessage": "You're almost there",
-    "description": "Premium title tag"
-  },
   "lw8qSk": {
     "defaultMessage": "Buy Now",
     "description": "Buy Now btn"
@@ -2865,6 +2874,10 @@
   "nWr131": {
     "defaultMessage": "{message}",
     "description": "Status message"
+  },
+  "nXjHGd": {
+    "defaultMessage": "Go to",
+    "description": "premium content"
   },
   "nawIST": {
     "defaultMessage": "Is HackerKid free?",
@@ -3085,6 +3098,10 @@
     "defaultMessage": "{tag}",
     "description": "Course Title"
   },
+  "qwnHfF": {
+    "defaultMessage": "No Videos Found",
+    "description": "no video found"
+  },
   "qx2FMG": {
     "defaultMessage": "{type}",
     "description": "video Type"
@@ -3108,6 +3125,10 @@
   "rZKLPy": {
     "defaultMessage": "Copy Link",
     "description": "Copy Link button"
+  },
+  "rlR4g3": {
+    "defaultMessage": "As a Premium Member, you'll have unlimited access to gamified coding problems, video libraries, challenges, activity awards, badges, certificates and special access to clubs.",
+    "description": "premium content"
   },
   "roTiGY": {
     "defaultMessage": "Learners Community",
@@ -3276,6 +3297,10 @@
   "uPz4GT": {
     "defaultMessage": "Run",
     "description": "name"
+  },
+  "uc4JXZ": {
+    "defaultMessage": "Time Spent:",
+    "description": "time spent card caption"
   },
   "ueVo+G": {
     "defaultMessage": "Today",

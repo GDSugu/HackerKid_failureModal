@@ -13,12 +13,14 @@ import React, { useCallback, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { IntlProvider } from 'react-intl';
 import SplashScreen from 'react-native-splash-screen';
+import CodePush from 'react-native-code-push';
 import App from './pages/App';
 import useRootPageState from '../hooks/pages/root';
 import ThemeContext from './components/theme';
 import { themes, font } from './components/config';
 import AuthProvider from '../hooks/common/AuthProvider';
 import SubscriptionProvider from '../hooks/common/SubscriptionProvider';
+import { getCodePushKey } from './common/framework';
 
 const AppWrapper = () => {
   const { state, setState } = useRootPageState();
@@ -59,4 +61,8 @@ const AppWrapper = () => {
   );
 };
 
-export default AppWrapper;
+const codePushOptions = {
+  deploymentKey: getCodePushKey(),
+};
+
+export default CodePush(codePushOptions)(AppWrapper);

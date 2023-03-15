@@ -281,7 +281,6 @@ const TurtleOutput = ({ navigation }) => {
         }
       }
     }, timeout);
-    // console.log(webViewRef.current);
   }, [turtleContext.ctxState.questionObject]);
 
   React.useEffect(() => () => {

@@ -20,15 +20,17 @@ import useCourses from '../../hooks/pages/courses';
 import SearchIcon from '../../images/courses/search.svg';
 import coinIcon from '../../images/courses/Coins.png';
 import xpIcon from '../../images/courses/XP.png';
-import timerIcon from '../../images/courses/timer.png';
+// import timerIcon from '../../images/courses/timer.png';
+import timerIcon from '../../images/common/eva_clock-fill.png';
 import { ModuleContainer } from '../components/CourseComponents';
 import BottomSheet from '../components/BottomSheet';
 import CircleGradientProgressBar from '../components/CircleGradientProgressBar';
 import Loader from '../components/Loader';
 import { SubscriptionContext } from '../../hooks/pages/root';
 import { isFeatureEnabled } from '../../web/javascripts/common/framework';
+import { formatSeconds } from '../../hooks/common/utlis';
 
-const secToMin = (time) => ((time > 50) ? `${Math.floor(time / 60)} min` : `${time} sec`);
+// const secToMin = (time) => ((time > 50) ? `${Math.floor(time / 60)} min` : `${time} sec`);
 
 const getStyles = (theme, font, gradients, utilColors) => StyleSheet.create({
   container: {
@@ -153,9 +155,9 @@ const getStyles = (theme, font, gradients, utilColors) => StyleSheet.create({
   xpProgressCont: {
     justifyContent: 'space-around',
   },
-  // xpHeight: {
-  //   marginBottom: 12,
-  // },
+  xpHeight: {
+    marginBottom: 12,
+  },
   linearProgress: {
     height: 4,
     flex: 1,
@@ -215,6 +217,10 @@ const getStyles = (theme, font, gradients, utilColors) => StyleSheet.create({
     marginHorizontal: 18,
     marginTop: 8,
     padding: 16,
+  },
+  sheetContentText: {
+    ...font.subtitle1,
+    color: utilColors.dark,
   },
 });
 const VideoHome = ({ navigation }) => {
@@ -504,11 +510,31 @@ const VideoHome = ({ navigation }) => {
                             description="coins earned card caption"
                           />
                         </Text>
-                        <Text style={style.vidoeHead}>
+                        <Text style={style.sheetContentText}>
                           <FormattedMessage
                             defaultMessage="{coins} coins"
                             description="coins earned"
                             values={{ coins: overallProgress.coinsEarned }}
+                          />
+                        </Text>
+                      </View>
+                    </View>
+                    <View style={[style.xpCont]}>
+                      <Image
+                        style={style.xpIcon}
+                        source={timerIcon} />
+                      <View style={style.xpTextCont}>
+                        <Text style={style.xpEarnedText}>
+                          <FormattedMessage
+                            defaultMessage="Time Spent:"
+                            description="time spent card caption"
+                          />
+                        </Text>
+                        <Text style={style.sheetContentText}>
+                          <FormattedMessage
+                            defaultMessage="{timeSpent}"
+                            description="timespent"
+                            values={{ timeSpent: formatSeconds(overallProgress.watchTime) }}
                           />
                         </Text>
                       </View>
@@ -585,7 +611,7 @@ const VideoHome = ({ navigation }) => {
                           <FormattedMessage
                             defaultMessage="{time}"
                             description="Time Spent card caption"
-                            values={{ time: secToMin(item.watchTime) }}
+                            values={{ time: formatSeconds(item.watchTime) }}
                           />
                         </Text>
                       </View>

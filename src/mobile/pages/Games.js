@@ -1,5 +1,5 @@
 import React, {
-  useContext, useEffect, useMemo, useRef, useState,
+  useContext, useEffect, useRef, useState,
 } from 'react';
 import {
   Text,
@@ -813,11 +813,9 @@ const Games = ({ navigation }) => {
   const { state: dashBoardState, static: { getDashboardData } } = useDashboard({ isPageMounted });
   const { state: leaderBoardState } = useLeaderBoard({ isPageMounted });
   const { dashBoardData, gameData } = dashBoardState;
-  const { leaderboardData, userData: leaderBoardUserData, gameProgress } = leaderBoardState;
+  const { leaderboardData, userData: leaderBoardUserData } = leaderBoardState;
   const authContext = useContext(AuthContext);
   const loaderRef = useRef(null);
-
-  const memoizedGameProgress = useMemo(() => gameProgress, [gameProgress]);
 
   const showLoader = () => {
     if (loaderRef.current) {
@@ -1032,7 +1030,7 @@ const Games = ({ navigation }) => {
             style={style}
             contentContainerSyle={style.totalStats}
             totalEarnedCoins={gameData.totalPointsEarned}
-            timeSpent={formatSeconds(memoizedGameProgress.totalTimeSpent)}
+            timeSpent={formatSeconds(gameData.timeSpent)}
             />
         }
         {
@@ -1133,7 +1131,7 @@ const Games = ({ navigation }) => {
                           defaultMessage={'{timeSpent}'}
                           description={'total time spent'}
                           values={{
-                            timeSpent: formatSeconds(memoizedGameProgress?.totalTimeSpent),
+                            timeSpent: formatSeconds(gameData.timeSpent),
                           }}
                         />
                       </Text>

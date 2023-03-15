@@ -3,4 +3,5 @@
     <string name="splash_heading">Hacker<font color="#FF9B03">KID</font></string>
     <string name="subtitle_1">#1</string>
     <string name="subtitle_2">Gamified Coding Platform for kids</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">ac107196-833b-41ca-a55c-9b1a82ed89d4</string>
 </resources>

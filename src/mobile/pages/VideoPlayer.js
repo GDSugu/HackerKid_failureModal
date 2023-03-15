@@ -12,7 +12,7 @@ import {
   Modal,
   Image,
 } from 'react-native';
-import Video from 'react-native-video';
+// import Video from 'react-native-video';
 import { FormattedMessage } from 'react-intl';
 import ThemeContext from '../components/theme';
 import useVideos from '../../hooks/pages/videos';
@@ -24,6 +24,7 @@ import { ModuleContainer } from '../components/CourseComponents';
 import Loader from '../components/Loader';
 import { isFeatureEnabled } from '../../web/javascripts/common/framework';
 import { SubscriptionContext } from '../../hooks/pages/root';
+import VideoPlayer from '../components/VideoPlayer';
 
 const getStyles = (theme) => {
   const cardWidth = Dimensions.get('window').width;
@@ -403,7 +404,7 @@ const VideoPlayerPage = ({ navigation, route }) => {
     <View style={style.container}>
       {currentQuestion && <ScrollView>
         <View style={style.playerView}>
-          <Video
+          {/* <Video
             ref={videoRef}
             style={style.player}
             navigator={navigation}
@@ -415,6 +416,19 @@ const VideoPlayerPage = ({ navigation, route }) => {
             paused={isPaused}
             source={{ uri: source }}
             seek={currentQuestion.completed ? 0 : currentQuestion.timeleftAt}
+          /> */}
+          <VideoPlayer
+            ref={videoRef}
+            navigation={navigation}
+            source={{
+              uri: source,
+            }}
+            height={'100%'}
+            width={'100%'}
+            onSeekEnd={onSeek}
+            onEnd={onEnd}
+            paused={true}
+            onProgress = {videoProgress}
           />
           {isPaused && (
             <View style={style.playBtn}>

@@ -12,6 +12,8 @@ const useCourses = ({ isPageMounted }) => {
       if (isPageMounted.current) {
         if (res !== 'access_denied') {
           const parsedRes = JSON.parse(res);
+          parsedRes.overallProgress.watchTime = parsedRes?.progress
+            ?.reduce((acc, val) => acc + val.watchTime, 0);
           setCourseData(parsedRes);
         }
       }

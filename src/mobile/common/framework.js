@@ -2,6 +2,7 @@ import { Linking, Platform } from 'react-native';
 import analytics from '@react-native-firebase/analytics';
 import messaging from '@react-native-firebase/messaging';
 import { validateField } from '../../hooks/common/framework';
+import API from '../../../env';
 
 // Firebase Analytics Functions
 const mobAddAnalyticsEvent = (action, dataObject = {}) => analytics().logEvent(action, dataObject);
@@ -102,6 +103,8 @@ const openMail = (email) => {
     .catch((err) => console.error('An error occurred', err));
 };
 
+const getCodePushKey = () => API.CODEPUSH_KEY;
+
 export default null;
 
 export {
@@ -115,4 +118,5 @@ export {
   mobTrackCurrentScreen,
   validate,
   closeFormError,
+  getCodePushKey,
 };
