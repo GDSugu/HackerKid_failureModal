@@ -27,6 +27,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     color: utilColors.dark,
     ...font.heading6,
     marginVertical: 20,
+    paddingHorizontal: 20,
   },
   controls: {
     flexDirection: 'row',
@@ -59,7 +60,7 @@ const getStyles = (theme, utilColors, font) => StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     marginBottom: 8,
-    paddingHorizontal: 5,
+    paddingHorizontal: 20,
     paddingVertical: 15,
   },
   loggedInUserHighlight: {
@@ -224,7 +225,7 @@ const Leaderboard = ({ navigation }) => {
     <>
       <ScrollView
         style={{ flex: 1 }}
-        contentContainerStyle={{ paddingHorizontal: 20 }}
+        // contentContainerStyle={{ paddingHorizontal: 20 }}
         ref={scrollViewRef}>
         <Text style={style.heading}>
           <FormattedMessage defaultMessage={'Leaderboard'} description={'Leaderboard page heading'} />

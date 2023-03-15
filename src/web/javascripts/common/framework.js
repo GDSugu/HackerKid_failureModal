@@ -54,16 +54,19 @@ const secondsToMins = (s) => {
   const hours = Math.floor(minutes / 60);
   seconds %= 60;
   minutes %= 60;
+  let time = '';
   if (hours > 0) {
-    return `${hours} Hour${hours > 1 ? 's' : ''} ${minutes} Mins`;
+    time = `${hours} Hour${hours > 1 ? 's' : ''}`;
+    if (minutes > 0) {
+      time += ` ${minutes} Mins`;
+    }
+  } else if (minutes > 0) {
+    time = `${minutes} Minute${minutes > 1 ? 's' : ''}`;
+  } else if (seconds > 0) {
+    time = `${seconds} Seconds`;
   }
-  if (hours === 0 && minutes > 0) {
-    return `${minutes} Minute${minutes > 1 ? 's' : ''}`;
-  }
-  if (minutes === 0 && seconds > 0) {
-    return `${seconds} Seconds`;
-  }
-  return '0 Seconds';
+  time = '0 Seconds';
+  return time;
 };
 
 const timeTrack = (pageName) => {

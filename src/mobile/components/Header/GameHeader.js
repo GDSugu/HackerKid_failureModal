@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
@@ -39,6 +39,8 @@ const GameHeader = ({
   const { theme: { utilColors } } = React.useContext(ThemeContext);
   const authContext = React.useContext(AuthContext);
   const style = getStyles(utilColors);
+
+  useEffect(() => {}, [authContext.appData]);
 
   return <>
     <View style={style.gameHeader}>

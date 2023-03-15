@@ -18,6 +18,10 @@
     "defaultMessage": "{step}",
     "description": "take challenge instruction"
   },
+  "+Zk1jK": {
+    "defaultMessage": "{timeSpent}",
+    "description": "timeSpent"
+  },
   "+c+in9": {
     "defaultMessage": "Activate Subscription",
     "description": "operation title"
@@ -123,10 +127,6 @@
   "/yRdu/": {
     "defaultMessage": "Start Playing",
     "description": "Play button"
-  },
-  "0By1LZ": {
-    "defaultMessage": "{timeInMinutes} Mins",
-    "description": "Time spent"
   },
   "0IKGwB": {
     "defaultMessage": "Output Description:",
@@ -262,6 +262,10 @@
   "2bMdhC": {
     "defaultMessage": "Create a New Account",
     "description": "create a new account button"
+  },
+  "2fDxMH": {
+    "defaultMessage": "/{totalGames}",
+    "description": "total games"
   },
   "2qExk8": {
     "defaultMessage": "Get the rare collectibles with your coins now",
@@ -1376,6 +1380,10 @@
     "defaultMessage": "good problem-solving",
     "description": "faq description"
   },
+  "M152mH": {
+    "defaultMessage": "#{rank}",
+    "description": "user rank"
+  },
   "M3JNcL": {
     "defaultMessage": "Challenges Attempting",
     "description": "Challenges Attempting title"
@@ -2137,6 +2145,10 @@
     "defaultMessage": "“My son, Shrey is 12 year old and very enthusiastic kid. He came to know about the Hacker kid portal by his elder brother. He is so happy with the portal that he is always eager to do it. He made some games, programs on the portal and always keen to make improvements in it. One to one session with the mentor is also a good initiative taken by Hacker kid. Interactive demonstration of the code helps him visualise the concept behind the code which makes his concept more robust.”",
     "description": "happy learning description"
   },
+  "ZORgXx": {
+    "defaultMessage": "Time Spent:",
+    "description": "Time spent"
+  },
   "ZUKwtW": {
     "defaultMessage": "{pageNumber}",
     "description": "page button"
@@ -2180,6 +2192,10 @@
   "aNoleS": {
     "defaultMessage": "Dismiss",
     "description": "dismiss modal button"
+  },
+  "aVgB+x": {
+    "defaultMessage": "{totalPoints}",
+    "description": "total points earned"
   },
   "aWjMjy": {
     "defaultMessage": "Register",
@@ -3149,6 +3165,10 @@
     "defaultMessage": "{xp} xp",
     "description": "club xp"
   },
+  "spNQl0": {
+    "defaultMessage": "{timeSpent}",
+    "description": "total time spent on platform"
+  },
   "ssTFur": {
     "defaultMessage": "HackerKid also offer exclusive courses on various pedagogies like Web Development, App Development, Game Development & Data Science. We have an elite team of teacher to guide with your learning process. We have team that can answer all your queries before you decide enroll with us. Go on tell your parent right now, What are you waiting for?",
     "description": "HackerKid Exclusive Courses description"
@@ -3180,6 +3200,10 @@
   "tI1tX6": {
     "defaultMessage": "View All Achievements",
     "description": "show achievements"
+  },
+  "tM4fi+": {
+    "defaultMessage": "{timeInMinutes}",
+    "description": "Time spent"
   },
   "tRGm5z": {
     "defaultMessage": "Time Spent:",
@@ -3332,6 +3356,10 @@
     "defaultMessage": "Turtle",
     "description": "Game Title"
   },
+  "vx1Vws": {
+    "defaultMessage": "#{rank}",
+    "description": "members rank"
+  },
   "wEEL+e": {
     "defaultMessage": "{studentName}",
     "description": "Student Name"
@@ -3419,6 +3447,10 @@
   "xd1i3c": {
     "defaultMessage": "Challenges Creation",
     "description": "Challenges Creation title"
+  },
+  "xj6WTn": {
+    "defaultMessage": "{totalPointsEarned}",
+    "description": "total points earned"
   },
   "xlvJ5U": {
     "defaultMessage": "You are offline.",

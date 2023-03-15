@@ -119,7 +119,9 @@ const getStyles = (theme, font, gradients, utilColors) => StyleSheet.create({
   },
   progressBar: {
     width: '40%',
-    marginTop: 10,
+    height: 80,
+    // flex: 1,
+    // marginTop: 10,
   },
   progressBodyText: {
     ...font.overline,
@@ -131,8 +133,8 @@ const getStyles = (theme, font, gradients, utilColors) => StyleSheet.create({
     color: utilColors.dark,
   },
   xpEarnedText: {
-    ...font.caption,
-    color: utilColors.dark,
+    ...font.captionBold,
+    color: utilColors.lightGrey,
   },
   xpIcon: {
     width: 30,
@@ -151,9 +153,9 @@ const getStyles = (theme, font, gradients, utilColors) => StyleSheet.create({
   xpProgressCont: {
     justifyContent: 'space-around',
   },
-  xpHeight: {
-    marginBottom: 12,
-  },
+  // xpHeight: {
+  //   marginBottom: 12,
+  // },
   linearProgress: {
     height: 4,
     flex: 1,
@@ -174,19 +176,19 @@ const getStyles = (theme, font, gradients, utilColors) => StyleSheet.create({
     height: 19,
   },
   xpCardText: {
-    ...font.caption,
-    color: '#000',
+    ...font.bodyBold,
+    color: utilColors.dark,
   },
   xpcardTextCont: {
 
   },
   progressCardText: {
-    ...font.caption,
-    color: utilColors.dark,
+    ...font.captionBold,
+    color: utilColors.lightGrey,
   },
   cardHead: {
-    color: '#000',
-    ...font.captionBold,
+    color: utilColors.dark,
+    ...font.subtitle1,
     marginBottom: 5,
   },
   cardModuleImg: {
@@ -237,7 +239,7 @@ const VideoHome = ({ navigation }) => {
     },
     container: {
       backgroundColor: 'transparent',
-      // paddingHorizontal: 12,
+      paddingBottom: 6,
     },
   };
 
@@ -465,136 +467,140 @@ const VideoHome = ({ navigation }) => {
           contentPanEnabled={true}
           customStyles={bottomSheetStyles}
         >
-          {overallProgress && <ScrollView><View
-            style={style.detailsCont}>
-            <View style={style.progressBarCont}>
-              <View style={style.progressBar}>
-                <CircleGradientProgressBar
-                  gradientColors={[[style.svgGradient.color[0], '80%'], [style.svgGradient.color[1], '10%']]}
-                  progressValue={overallProgress ? overallProgress.completedCount : 0}
-                  totalValue={overallProgress ? overallProgress.totalVideos : 100}
-                  startAnim={Boolean(overallProgress)}
-                  progressBg={theme.screenVideo.progressBg}
-                >
-                  <View style={style.progressInnerText}>
-                    <Text style={style.vidoeHead}>{overallProgress ? overallProgress.completedCount : '--'}</Text>
-                    <Text style={style.totalText}>/{overallProgress ? overallProgress.totalVideos : '--'}</Text>
-                  </View>
-                  <Text style={style.progressBodyText}>
-                    <FormattedMessage
-                      defaultMessage="completed"
-                      description="Game Progress card caption"
-                    />
-                  </Text>
-                </CircleGradientProgressBar>
-              </View>
-              <View style={style.xpProgressCont}>
-                <View style={[style.xpCont, style.xpHeight]}>
-                  <Image
-                    style={style.xpIcon}
-                    source={coinIcon} />
-                  <View style={style.xpTextCont}>
-                    <Text style={style.xpEarnedText}>
-                      <FormattedMessage
-                        defaultMessage="Coins Earned:"
-                        description="coins earned card caption"
-                      />
-                    </Text>
-                    <Text style={style.vidoeHead}>
-                      <FormattedMessage
-                        defaultMessage="{coins} coins"
-                        description="coins earned"
-                        values={{ coins: overallProgress.coinsEarned }}
-                      />
-                    </Text>
-                  </View>
-                </View>
-                <View style={style.xpCont}>
-                  <Image
-                    style={style.xpIcon}
-                    source={xpIcon} />
-                  <View style={style.xpTextCont}>
-                    <Text style={style.xpEarnedText}>
-                      <FormattedMessage
-                        defaultMessage="XP Earned:"
-                        description="XP Earned card caption"
-                      />
-                    </Text>
-                    <Text style={style.vidoeHead}>
-                      <FormattedMessage
-                        defaultMessage="{xp} xp"
-                        description="XP earned"
-                        values={{ xp: overallProgress.xpEarned }}
-                      />
-                    </Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-          </View>
-            {progress.map((item, index) => <View
-              style={style.moduleCard}
-              key={index}>
-              <View style={style.cardProgressCont}>
-                <Image
-                  style={style.cardModuleImg}
-                  source={{ uri: item.thumbnail }} />
-                <View>
-                  <Text style={style.cardHead}>
-                    <FormattedMessage
-                      defaultMessage="{module}"
-                      description="Time Spent card caption"
-                      values={{ module: item.moduleName }}
-                    />
-                  </Text>
-                  <Text style={style.progressCardText}>
-                    <FormattedMessage
-                      defaultMessage={'{count}/{totalCount} watched'}
-                      description="Time Spent card caption"
-                      values={{ count: item.watched, totalCount: item.totalVideos }}
-                    />
-                  </Text>
-                </View>
-              </View>
-              <View style={style.cardwithProgress}>
-                <View style={style.xpTimerCont}>
-                  <View style={style.xpcardCont}>
-                    <Image
-                      style={style.xpcardIcon}
-                      source={xpIcon} />
-                    <View style={style.xpTextCont}>
-                      <Text style={style.xpCardText}>
+          {overallProgress
+            && <ScrollView>
+              <View
+                style={style.detailsCont}>
+                <View style={style.progressBarCont}>
+                  <View style={style.progressBar}>
+                    <CircleGradientProgressBar
+                      gradientColors={[[style.svgGradient.color[0], '80%'], [style.svgGradient.color[1], '10%']]}
+                      progressValue={overallProgress ? overallProgress.completedCount : 0}
+                      totalValue={overallProgress ? overallProgress.totalVideos : 100}
+                      startAnim={Boolean(overallProgress)}
+                      progressBg={theme.screenVideo.progressBg}
+                    >
+                      <View style={style.progressInnerText}>
+                        <Text style={style.vidoeHead}>{overallProgress ? overallProgress.completedCount : '--'}</Text>
+                        <Text style={style.totalText}>/{overallProgress ? overallProgress.totalVideos : '--'}</Text>
+                      </View>
+                      <Text style={style.progressBodyText}>
                         <FormattedMessage
-                          defaultMessage="{count} Xp"
-                          description="Time Spent card caption"
-                          values={{ count: item.xpEarned }}
+                          defaultMessage="completed"
+                          description="Game Progress card caption"
                         />
                       </Text>
-                    </View>
+                    </CircleGradientProgressBar>
                   </View>
-                  <View style={style.xpcardCont}>
-                    <Image
-                      style={style.xpcardIcon}
-                      source={timerIcon} />
-                    <View style={style.xpTextCont}>
-                      <Text style={style.xpCardText}>
-                        <FormattedMessage
-                          defaultMessage="{time}"
-                          description="Time Spent card caption"
-                          values={{ time: secToMin(item.watchTime) }}
-                        />
-                      </Text>
+                  <View style={style.xpProgressCont}>
+                    <View style={[style.xpCont, style.xpHeight]}>
+                      <Image
+                        style={style.xpIcon}
+                        source={coinIcon} />
+                      <View style={style.xpTextCont}>
+                        <Text style={style.xpEarnedText}>
+                          <FormattedMessage
+                            defaultMessage="Coins Earned:"
+                            description="coins earned card caption"
+                          />
+                        </Text>
+                        <Text style={style.vidoeHead}>
+                          <FormattedMessage
+                            defaultMessage="{coins} coins"
+                            description="coins earned"
+                            values={{ coins: overallProgress.coinsEarned }}
+                          />
+                        </Text>
+                      </View>
                     </View>
+                    {/* <View style={style.xpCont}>
+                      <Image
+                        style={style.xpIcon}
+                        source={xpIcon} />
+                      <View style={style.xpTextCont}>
+                        <Text style={style.xpEarnedText}>
+                          <FormattedMessage
+                            defaultMessage="XP Earned:"
+                            description="XP Earned card caption"
+                          />
+                        </Text>
+                        <Text style={style.vidoeHead}>
+                          <FormattedMessage
+                            defaultMessage="{xp} xp"
+                            description="XP earned"
+                            values={{ xp: overallProgress.xpEarned }}
+                          />
+                        </Text>
+                      </View>
+                    </View> */}
                   </View>
-                </View>
-                <View style={style.linearProgressCont}>
-                  <LinearGradient style={[style.linearProgress, { width: '20%' }]}
-                    start={{ x: 0, y: 1 }}
-                    end={{ x: 1, y: 1 }}
-                    colors={[style.svgGradient.color[1], style.svgGradient.color[0]]} />
                 </View>
               </View>
-            </View>)}</ScrollView>}
+              {progress.map((item, index) => <View
+                style={style.moduleCard}
+                key={index}>
+                <View style={style.cardProgressCont}>
+                  <Image
+                    style={style.cardModuleImg}
+                    source={{ uri: item.thumbnail }} />
+                  <View>
+                    <Text style={style.cardHead}>
+                      <FormattedMessage
+                        defaultMessage="{module}"
+                        description="Time Spent card caption"
+                        values={{ module: item.moduleName }}
+                      />
+                    </Text>
+                    <Text style={style.progressCardText}>
+                      <FormattedMessage
+                        defaultMessage={'{count}/{totalCount} watched'}
+                        description="Time Spent card caption"
+                        values={{ count: item.watched, totalCount: item.totalVideos }}
+                      />
+                    </Text>
+                  </View>
+                </View>
+                <View style={style.cardwithProgress}>
+                  <View style={style.xpTimerCont}>
+                    <View style={style.xpcardCont}>
+                      <Image
+                        style={style.xpcardIcon}
+                        source={xpIcon} />
+                      <View style={style.xpTextCont}>
+                        <Text style={style.xpCardText}>
+                          <FormattedMessage
+                            defaultMessage="{count} Xp"
+                            description="Time Spent card caption"
+                            values={{ count: item.xpEarned }}
+                          />
+                        </Text>
+                      </View>
+                    </View>
+                    <View style={style.xpcardCont}>
+                      <Image
+                        style={style.xpcardIcon}
+                        source={timerIcon} />
+                      <View style={style.xpTextCont}>
+                        <Text style={style.xpCardText}>
+                          <FormattedMessage
+                            defaultMessage="{time}"
+                            description="Time Spent card caption"
+                            values={{ time: secToMin(item.watchTime) }}
+                          />
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                  <View style={style.linearProgressCont}>
+                    <LinearGradient style={[style.linearProgress, { width: '20%' }]}
+                      start={{ x: 0, y: 1 }}
+                      end={{ x: 1, y: 1 }}
+                      colors={[style.svgGradient.color[1], style.svgGradient.color[0]]} />
+                  </View>
+                </View>
+              </View>)}
+            </ScrollView>
+          }
         </BottomSheet>
       </View>
       <Loader

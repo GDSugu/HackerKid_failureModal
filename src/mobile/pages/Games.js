@@ -1,5 +1,5 @@
 import React, {
-  useContext, useEffect, useRef, useState,
+  useContext, useEffect, useMemo, useRef, useState,
 } from 'react';
 import {
   Text,
@@ -13,6 +13,7 @@ import {
   FlatList,
   RefreshControl,
   TextInput,
+  Pressable,
 } from 'react-native';
 import { FormattedMessage } from 'react-intl';
 import { Skeleton } from '@rneui/base';
@@ -28,11 +29,13 @@ import LevelIcon from '../../images/games/level-icon.svg';
 import PlayBtnIcon from '../../images/games/play-game-icon.svg';
 import { useDashboard } from '../../hooks/pages/dashboard';
 import hkcoin from '../../images/common/hkcoin.png';
+import timeSpentImg from '../../images/common/eva_clock-fill.png';
 import { AuthContext } from '../../hooks/pages/root';
 import BottomSheet from '../components/BottomSheet';
 import { useLeaderBoard } from '../../hooks/pages/leaderboard';
 import CircleGradientProgressBar from '../components/CircleGradientProgressBar';
 import Loader from '../components/Loader';
+import { formatSeconds } from '../../hooks/common/utlis';
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
@@ -247,7 +250,7 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => {
     },
     otherStats: {
       flexDirection: 'row',
-      justifyContent: 'space-between',
+      // justifyContent: 'space-between',
       alignItems: 'center',
     },
     gameStatsCoinsIcon: {
@@ -415,6 +418,9 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => {
       paddingVertical: 10,
       paddingHorizontal: 15,
     },
+    ml24: {
+      marginLeft: 24,
+    },
   });
 };
 
@@ -492,7 +498,7 @@ const LeaderBoardCard = ({
 
 const IndividualGameSummaryCard = ({
   style, contentContainerStyles = {}, gameTitle, gameCoverImage, validSubmissionCount, totalLevels,
-  totalEarnedCoins, onPress,
+  totalEarnedCoins, onPress, timeSpent,
 }) => (
   <View style={[style.gameSummaryCard, contentContainerStyles]}>
     <View style={style.gameSummaryCoverImageAndTitle}>
@@ -515,7 +521,8 @@ const IndividualGameSummaryCard = ({
       <OtherStats
         style={style}
         totalEarnedCoins={totalEarnedCoins}
-        contentContainerSyle={{ marginBottom: 10 }} />
+        contentContainerSyle={{ marginBottom: 10 }}
+        timeSpent={timeSpent} />
       <LinearProgressBar
         style={style}
         step={validSubmissionCount}
@@ -526,13 +533,19 @@ const IndividualGameSummaryCard = ({
 
 // in page re-usable components
 const OtherStats = ({
-  style, totalEarnedCoins, contentContainerSyle = {},
+  style, totalEarnedCoins, timeSpent = '', contentContainerSyle = {},
   // totalEarnedXp = 0, averageTime = 0,
 }) => (<View style={[style.otherStats, contentContainerSyle]}>
   <View style={style.gameStat}>
     <Image style={style.gameStatsCoinsIcon} source={hkcoin} />
     <Text style={style.gameStatText}>
       <FormattedMessage defaultMessage={'{totalEarnedCoins}'} description='level text' values={{ totalEarnedCoins }} />
+    </Text>
+  </View>
+  <View style={[style.gameStat, style.ml24]}>
+    <Image style={style.gameStatsCoinsIcon} source={timeSpentImg} />
+    <Text style={style.gameStatText}>
+      <FormattedMessage defaultMessage={'{timeSpent}'} description='timeSpent' values={{ timeSpent }} />
     </Text>
   </View>
 </View>);
@@ -575,7 +588,7 @@ const GameCard = ({
   }, [state.showGameStats]);
 
   const GameStats = ({
-    validSubmissionCount, totalLevels, totalEarnedCoins,
+    validSubmissionCount, totalLevels, totalEarnedCoins, timeSpent,
   }) => (
     <Animated.View
       style={[style.gameStatsContainer, { transform: [{ translateY: state.translateValue }] }]}>
@@ -586,10 +599,14 @@ const GameCard = ({
         </Text>
       </View>
       <View style={style.gameStatsOtherStatsWithProgress}>
-        <OtherStats style={style} totalEarnedCoins={totalEarnedCoins} contentContainerSyle={{
-          backgroundColor: 'transparent',
-          marginBottom: 12,
-        }} />
+        <OtherStats
+          style={style}
+          totalEarnedCoins={totalEarnedCoins}
+          contentContainerSyle={{
+            backgroundColor: 'transparent',
+            marginBottom: 12,
+          }}
+          timeSpent={timeSpent} />
         <LinearProgressBar
           step={validSubmissionCount}
           steps={totalLevels}
@@ -642,7 +659,8 @@ const GameCard = ({
           && <GameStats
             validSubmissionCount={gameDetails.validSubmissionCount}
             totalLevels={gameDetails.totalLevels}
-            totalEarnedCoins={gameDetails.totalEarnedCoins} />
+            totalEarnedCoins={gameDetails.totalEarnedCoins}
+            timeSpent={gameDetails.timeSpent} />
         }
       </View>
     </TouchableOpacity>
@@ -673,6 +691,7 @@ const ContinuePlayingSection = ({ style, gameCardsData }) => (
               totalLevels: data.totalLevels,
               totalEarnedCoins: data.totalEarnedCoins,
               validSubmissionCount: data.validSubmissionCount,
+              timeSpent: data.timeSpent,
             }} />}
           keyExtractor={(data, index) => index.toString()}
           horizontal={true}
@@ -769,6 +788,7 @@ const AllGamesSection = ({ style, gameCardsData }) => (
                 currentLevelNumber: data.currentLevelNumber,
                 totalLevels: data.totalLevels,
                 totalEarnedCoins: data.totalEarnedCoins,
+                timeSpent: data.timeSpent,
               }} />)
           }
         </>
@@ -793,9 +813,11 @@ const Games = ({ navigation }) => {
   const { state: dashBoardState, static: { getDashboardData } } = useDashboard({ isPageMounted });
   const { state: leaderBoardState } = useLeaderBoard({ isPageMounted });
   const { dashBoardData, gameData } = dashBoardState;
-  const { leaderboardData, userData: leaderBoardUserData } = leaderBoardState;
+  const { leaderboardData, userData: leaderBoardUserData, gameProgress } = leaderBoardState;
   const authContext = useContext(AuthContext);
   const loaderRef = useRef(null);
+
+  const memoizedGameProgress = useMemo(() => gameProgress, [gameProgress]);
 
   const showLoader = () => {
     if (loaderRef.current) {
@@ -850,6 +872,7 @@ const Games = ({ navigation }) => {
     validSubmissionCount: dashBoardData?.turtle?.validSubmissionCount,
     totalLevels: dashBoardData?.turtle?.overAllQuestionCount,
     totalEarnedCoins: dashBoardData?.turtle?.totalPointsEarned,
+    timeSpent: formatSeconds(dashBoardData?.turtle?.timeSpent),
     onPress: () => { navigation.navigate('TurtleHome'); },
   },
   {
@@ -860,6 +883,7 @@ const Games = ({ navigation }) => {
     validSubmissionCount: dashBoardData?.zombieLand?.validSubmissionCount,
     totalLevels: dashBoardData?.zombieLand?.overAllQuestionCount,
     totalEarnedCoins: dashBoardData?.zombieLand?.totalPointsEarned,
+    timeSpent: formatSeconds(dashBoardData?.zombieLand?.timeSpent),
     onPress: () => { navigation.navigate('ZombieLandHome'); },
   },
   {
@@ -870,6 +894,7 @@ const Games = ({ navigation }) => {
     totalLevels: dashBoardData?.webkataHtml?.overAllQuestionCount,
     validSubmissionCount: dashBoardData?.webkataHtml?.validSubmissionCount,
     totalEarnedCoins: dashBoardData?.webkataHtml?.totalPointsEarned,
+    timeSpent: formatSeconds(dashBoardData?.webkataHtml?.timeSpent),
     onPress: () => navigation.navigate('WebkataHome', {
       conceptId: 'HTML',
     }),
@@ -882,6 +907,7 @@ const Games = ({ navigation }) => {
     totalLevels: dashBoardData?.webkataCss?.overAllQuestionCount,
     validSubmissionCount: dashBoardData?.webkataCss?.validSubmissionCount,
     totalEarnedCoins: dashBoardData?.webkataCss?.totalPointsEarned,
+    timeSpent: formatSeconds(dashBoardData?.webkataCss?.timeSpent),
     onPress: () => navigation.navigate('WebkataHome', {
       conceptId: 'CSS',
     }),
@@ -894,6 +920,7 @@ const Games = ({ navigation }) => {
     totalLevels: dashBoardData?.webkataJs?.overAllQuestionCount,
     validSubmissionCount: dashBoardData?.webkataJs?.validSubmissionCount,
     totalEarnedCoins: dashBoardData?.webkataJs?.totalPointsEarned,
+    timeSpent: formatSeconds(dashBoardData?.webkataJs?.timeSpent),
     onPress: () => navigation.navigate('WebkataHome', {
       conceptId: 'JS',
     }),
@@ -906,6 +933,7 @@ const Games = ({ navigation }) => {
     totalLevels: dashBoardData?.codekata?.overAllQuestionCount,
     validSubmissionCount: dashBoardData?.codekata?.validSubmissionCount,
     totalEarnedCoins: dashBoardData?.codekata?.totalPointsEarned,
+    timeSpent: formatSeconds(dashBoardData?.codekata?.timeSpent),
     onPress: () => navigation.navigate('Codekata'),
   },
   ];
@@ -933,6 +961,7 @@ const Games = ({ navigation }) => {
     container: {
       backgroundColor: 'transparent',
       paddingHorizontal: 12,
+      paddingBottom: 24,
     },
   };
   const gameProgressValue = new Animated.Value(0);
@@ -1001,7 +1030,10 @@ const Games = ({ navigation }) => {
         {
           gameData && <OtherStats
             style={style}
-            contentContainerSyle={style.totalStats} totalEarnedCoins={gameData.totalPointsEarned} />
+            contentContainerSyle={style.totalStats}
+            totalEarnedCoins={gameData.totalPointsEarned}
+            timeSpent={formatSeconds(memoizedGameProgress.totalTimeSpent)}
+            />
         }
         {
           !gameData && <Skeleton width={'100%'} height={50} style={{ borderRadius: 8 }} />
@@ -1027,79 +1059,112 @@ const Games = ({ navigation }) => {
         <ScrollView
           showsVerticalScrollIndicator={false}
         >
-          {
-            gameData && <View style={{
-              paddingVertical: 40,
-              backgroundColor: 'white',
-              flexDirection: 'row',
-              borderRadius: 15,
-            }}>
-              <View style={style.gameCardProgressBlock}>
-                <CircleGradientProgressBar
-                  gradientColors={[[style.svgGradient.color[0], '10%'], [style.svgGradient.color[1], '90%']]}
-                  progressValue={gameData ? gameData.progress : 0}
-                  totalValue={gameData ? gameData.totalGames : 100}
-                  startAnim={Boolean(gameData)}
-                >
-                  <View style={style.bodyCardContentTitle}>
-                    <AnimatedTextInput
-                      ref={gameDataTextRef}
-                      underlineColorAndroid='transparent'
-                      style={style.gameCardText}
-                      value={'0'}
-                      editable={false}
-                    />
-                    <Text style={style.gameCardTextLight}>/{gameData ? gameData.totalGames : '--'}</Text>
-                  </View>
-                  <Text style={style.gameCardSvgCaption}>
-                    <FormattedMessage
-                      defaultMessage="completed"
-                      description="Game Progress card caption"
-                    />
-                  </Text>
-                </CircleGradientProgressBar>
-              </View>
-              <View style={style.gameCardProgressBlock}>
-                <View style={[style.bodyCardContentTitle, style.gameCardContent]}>
-                  <Image
-                    style={[style.bodyCardContentTitleImage, style.gameCardIcons]}
-                    source={hkcoin}
-                  />
-                  <View>
-                    <Text style={style.gameCardSubtitle}>
+          <Pressable onPress={() => {}}>
+            {
+              gameData && <View style={{
+                paddingVertical: 40,
+                backgroundColor: 'white',
+                flexDirection: 'row',
+                borderRadius: 15,
+              }}>
+                <View style={style.gameCardProgressBlock}>
+                  <CircleGradientProgressBar
+                    gradientColors={[[style.svgGradient.color[0], '10%'], [style.svgGradient.color[1], '90%']]}
+                    progressValue={gameData ? gameData.progress : 0}
+                    totalValue={gameData ? gameData.totalGames : 100}
+                    startAnim={Boolean(gameData)}
+                  >
+                    <View style={style.bodyCardContentTitle}>
+                      <AnimatedTextInput
+                        ref={gameDataTextRef}
+                        underlineColorAndroid='transparent'
+                        style={style.gameCardText}
+                        value={'0'}
+                        editable={false}
+                      />
+                      <Text style={style.gameCardTextLight}>/{gameData ? gameData.totalGames : '--'}</Text>
+                    </View>
+                    <Text style={style.gameCardSvgCaption}>
                       <FormattedMessage
-                        defaultMessage={'Coins Earned:'}
-                        description='Coins Earned'
+                        defaultMessage="completed"
+                        description="Game Progress card caption"
                       />
                     </Text>
-                    <Text style={style.gameCardText}>{gameData ? gameData.totalPointsEarned : '--'}</Text>
+                  </CircleGradientProgressBar>
+                </View>
+                <View style={style.gameCardProgressBlock}>
+                  <View style={[style.bodyCardContentTitle, style.gameCardContent]}>
+                    <Image
+                      style={[style.bodyCardContentTitleImage, style.gameCardIcons]}
+                      source={hkcoin}
+                    />
+                    <View>
+                      <Text style={style.gameCardSubtitle}>
+                        <FormattedMessage
+                          defaultMessage={'Coins Earned:'}
+                          description='Coins Earned'
+                        />
+                      </Text>
+                      <Text style={style.gameCardText}>
+                        <FormattedMessage
+                          defaultMessage={'{totalPoints}'}
+                          description={'total points earned'}
+                          values={{
+                            totalPoints: gameData?.totalPointsEarned || '0',
+                          }}
+                        />
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={[style.bodyCardContentTitle, style.gameCardContent]}>
+                    <Image
+                      style={[style.bodyCardContentTitleImage, style.gameCardIcons]}
+                      source={timeSpentImg}
+                    />
+                    <View>
+                      <Text style={style.gameCardSubtitle}>
+                        <FormattedMessage
+                          defaultMessage={'Time Spent:'}
+                          description='Time spent'
+                        />
+                      </Text>
+                      <Text style={style.gameCardText}>
+                        <FormattedMessage
+                          defaultMessage={'{timeSpent}'}
+                          description={'total time spent'}
+                          values={{
+                            timeSpent: formatSeconds(memoizedGameProgress?.totalTimeSpent),
+                          }}
+                        />
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </View>
-            </View>
-          }
-          {
-            gameCardsDataArr
-            && <>
-              {
-                gameCardsDataArr.map((data, index) => <IndividualGameSummaryCard
-                  key={index}
-                  style={style}
-                  contentContainerStyles={{ marginTop: 5 }}
-                  {...data}
-                />)
-              }
-            </>
-          }
-          {
-            leaderboardData
-            && <LeaderBoardCard
-              leaderboardData={leaderboardData}
-              leaderBoardUserData={leaderBoardUserData}
-              bottomSheetRef={bottomSheetRef}
-              navigation={navigation}
-              style={style} />
-          }
+            }
+            {
+              gameCardsDataArr
+              && <>
+                {
+                  gameCardsDataArr.map((data, index) => <IndividualGameSummaryCard
+                    key={index}
+                    style={style}
+                    contentContainerStyles={{ marginTop: 5 }}
+                    {...data}
+                  />)
+                }
+              </>
+            }
+            {
+              leaderboardData
+              && <LeaderBoardCard
+                leaderboardData={leaderboardData}
+                leaderBoardUserData={leaderBoardUserData}
+                bottomSheetRef={bottomSheetRef}
+                navigation={navigation}
+                style={style} />
+            }
+          </Pressable>
         </ScrollView>
       </BottomSheet>
       <Loader
