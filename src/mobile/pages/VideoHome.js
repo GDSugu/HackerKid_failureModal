@@ -291,7 +291,7 @@ const VideoHome = ({ navigation }) => {
 
   if (lockedData) {
     lockedData.forEach((module) => {
-      const searcher = new FuzzySearch(module.videos, ['title']);
+      const searcher = new FuzzySearch(module.videos, ['title'], { sort: true });
       searchers[module.moduleId] = searcher;
     });
   }
@@ -453,11 +453,11 @@ const VideoHome = ({ navigation }) => {
           )}
           {filteredData
             ? filteredData.map((item, index) => (
-              <ModuleContainer key={index} data={item} navigator={navigation} />
+              <ModuleContainer key={index} data={item} navigator={navigation} noVideosMessage='No Videos Found' />
             ))
             : lockedData
             && lockedData.map((item, index) => (
-              <ModuleContainer key={index} data={item} navigator={navigation} />
+              <ModuleContainer key={index} data={item} navigator={navigation} noVideosMessage='No Videos Found'/>
             ))}
         </ScrollView>
         <BottomSheet
