@@ -43,20 +43,34 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => {
   const containerPaddingHorizontal = 12;
   const gameCardBorderRadius = 12;
 
-  const variant0DivideTotalHeightBy = 3;
+  // const variant0DivideTotalHeightBy = 3;
+
+  const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
+  const cardWidth = windowWidth < windowHeight ? windowWidth : windowHeight;
+  const cardHeight = (cardWidth / 16) * 9;
 
   const variant0 = {
-    width: 300,
-    height: Dimensions.get('window').height / variant0DivideTotalHeightBy - (containerPaddingHorizontal),
+    width: (cardWidth / 5) * 4,
+    // height: Dimensions.get('window').height
+    //  / variant0DivideTotalHeightBy - (containerPaddingHorizontal),
+    height: cardHeight,
   };
 
-  const variant1DivideTotalHeightBy = 4.1;
+  // const variant1DivideTotalHeightBy = 4.1;
   const variant1NumberOfGridCol = 2;
   const variant1marginBtwCards = 10;
+  const variant1Width = (windowWidth / variant1NumberOfGridCol)
+  - (containerPaddingHorizontal + variant1marginBtwCards);
+  const variant1Height = (variant1Width / 4) * 3;
 
   const variant1 = {
-    width: Dimensions.get('window').width / variant1NumberOfGridCol - (containerPaddingHorizontal + variant1marginBtwCards),
-    height: Dimensions.get('window').height / variant1DivideTotalHeightBy - (containerPaddingHorizontal + variant1marginBtwCards),
+    // width: Dimensions.get('window').width / variant1NumberOfGridCol
+    //  - (containerPaddingHorizontal + variant1marginBtwCards),
+    // height: Dimensions.get('window').height / variant1DivideTotalHeightBy
+    //  - (containerPaddingHorizontal + variant1marginBtwCards),
+    width: variant1Width,
+    height: variant1Height,
   };
 
   return StyleSheet.create({
@@ -100,7 +114,7 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => {
     },
     skeleton: {
       variant0: {
-        width: 300,
+        width: variant0.width,
         height: variant0.height,
         marginRight: 10,
         borderRadius: gameCardBorderRadius,
@@ -118,7 +132,7 @@ const getStyles = (theme, utilColors, gradients, font, additionalThemes) => {
         position: 'relative',
         zIndex: 200,
         elevation: -1,
-        width: 300,
+        width: variant0.width,
         height: variant0.height,
         marginRight: 10,
       },
@@ -936,7 +950,7 @@ const Games = ({ navigation }) => {
   },
   ];
 
-  if (authContext.appData.isRefresh) {
+  if (authContext.authState.appData.isRefresh) {
     onRefresh();
     authContext.setAuthState((prevState) => ({
       ...prevState,

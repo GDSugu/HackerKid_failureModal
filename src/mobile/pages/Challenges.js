@@ -358,10 +358,10 @@ const Challenges = ({ navigation }) => {
 
   // run on focus side effect
   useFocusEffect(React.useCallback(() => {
-    if (authContext.appData.isRefresh) {
+    if (authContext.authState.appData.isRefresh) {
       onRefresh();
     }
-  }, [authContext.appData.isRefresh]));
+  }, [authContext.authState.appData.isRefresh]));
 
   return (
     <>

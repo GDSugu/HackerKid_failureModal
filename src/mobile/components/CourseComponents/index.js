@@ -1,4 +1,6 @@
-import React, { useContext, useState, useRef } from 'react';
+import React, {
+  useContext, useState, useRef,
+} from 'react';
 import {
   Text,
   StyleSheet,
@@ -21,7 +23,9 @@ import lockedImg from '../../../images/common/feature-lock-white.png';
 // import SearchIcon from '../../images/courses/search.svg';
 
 const getStyles = (theme) => {
-  const totalWidth = Dimensions.get('window').width;
+  const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
+  const totalWidth = windowWidth < windowHeight ? windowWidth : windowHeight;
   const cardWidth = (totalWidth / 5) * 4;
   const cardHeight = (cardWidth / 16) * 9;
   const remainingWidth = totalWidth - (cardWidth + 10);
@@ -197,7 +201,8 @@ const navigateModule = (moduleId, navigation) => {
 };
 
 const CourseCard = ({
-  item, index, font, theme, navigator, moduleData, customVideo, customCardStyle,
+  item, index, font, theme, navigator,
+  moduleData, customVideo, customCardStyle,
 }) => {
   const pageTheme = theme.screenVideo;
   const style = getStyles(pageTheme);
@@ -333,12 +338,13 @@ const ModuleContainer = ({
   const pageTheme = theme.screenVideo;
   const { utilColors } = theme;
   const style = getStyles(pageTheme, font, utilColors);
+
   const nextCard = () => {
-    faltItemRef.current.scrollToIndex({ animated: true, index: inViewPort + 1 });
+    faltItemRef?.current?.scrollToIndex({ animated: true, index: inViewPort + 1 });
   };
 
   const prevCard = () => {
-    faltItemRef.current.scrollToIndex({ animated: true, index: inViewPort - 1 });
+    faltItemRef?.current?.scrollToIndex({ animated: true, index: inViewPort - 1 });
   };
 
   const onViewableItemsChanged = ({ viewableItems }) => {
@@ -348,10 +354,11 @@ const ModuleContainer = ({
       setInViewPort(viewableItems[0].index);
     } else if (viewableItems.length === 4) {
       setInViewPort(viewableItems[2].index);
-    } else {
+    } else if (viewableItems.length === 1) {
       setInViewPort(viewableItems[0].index);
     }
   };
+
   const videoData = continueWatch ? data : data.videos;
   const viewabilityConfigCallbackPairs = useRef([{ onViewableItemsChanged }]);
 

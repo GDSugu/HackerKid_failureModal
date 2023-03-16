@@ -131,7 +131,10 @@ const TabBar = (props) => {
     style,
     screenTheme,
     utilColors,
+    authContext,
   } = props;
+
+  const isFullScreen = () => authContext.authState.isFullScreen;
 
   return (
     <View style={{ flexDirection: 'row', ...style.topBar }} >
@@ -160,7 +163,11 @@ const TabBar = (props) => {
           });
         };
 
-        return route.name !== 'Home' && (
+        return (
+          !isFullScreen()
+          && route.name !== 'Home'
+        )
+        && (
           <TouchableOpacity
             key={index}
             accessibilityRole='button'
@@ -214,43 +221,53 @@ const TabNavigators = (prop) => {
     style,
     theme,
     navigation,
+    authContext,
   } = prop;
   const { static: { startTimeTrack, stopTimeTrack } } = useTimeTrack({ navigation });
 
   return (
-    <Tab.Navigator
-      initialRouteName='Home'
-      tabBar={
-        (props) => <TabBar
-          {...props}
-          utilColors={theme.utilColors}
-          screenTheme={screenTheme}
-          style={style}
-        />
+    <>
+      {
+        // authContext.authState.isFullScreen
+        // &&
+        <>
+          <Tab.Navigator
+            initialRouteName='Home'
+            tabBar={
+              (props) => <TabBar
+                {...props}
+                utilColors={theme.utilColors}
+                screenTheme={screenTheme}
+                style={style}
+                authContext={authContext}
+              />
+            }
+            screenOptions={{
+              lazy: true,
+              lazyPlaceholder: () => <Loader route={routeName} />,
+              // swipeEnabled: routeName !== 'Home',
+              swipeEnabled: false,
+            }}
+          >
+            {TabArray.map((item, index) => (
+              <Tab.Screen
+                key={index}
+                name={item.name}
+                component={item.component}
+                listeners={{
+                  focus: () => {
+                    startTimeTrack(item?.id);
+                  },
+                  blur: () => {
+                    stopTimeTrack(item?.id);
+                  },
+                }}
+              />
+            ))}
+          </Tab.Navigator>
+        </>
       }
-      screenOptions={{
-        lazy: true,
-        lazyPlaceholder: () => <Loader route={routeName} />,
-        // swipeEnabled: routeName !== 'Home',
-        swipeEnabled: false,
-      }}
-    >
-      {TabArray.map((item, index) => (
-        <Tab.Screen
-          key={index}
-          name={item.name}
-          component={item.component}
-          listeners={{
-            focus: () => {
-              startTimeTrack(item?.id);
-            },
-            blur: () => {
-              stopTimeTrack(item?.id);
-            },
-          }}
-        />
-      ))}
-    </Tab.Navigator>
+    </>
   );
 };
 
@@ -263,13 +280,23 @@ const App = () => {
 
   const authContext = useContext(AuthContext);
 
+  const isFullScreen = () => authContext.authState.isFullScreen || false;
+
   return (
     <SafeAreaProvider>
-      <StatusBar
-        backgroundColor={screenTheme.notificationBg}
-      />
+        <>
+          <StatusBar
+            backgroundColor={screenTheme.notificationBg}
+            hidden={isFullScreen()}
+          />
+        </>
       <View style={style.container}>
-        <Header route={routeName} navigation={navigationRef} />
+        {
+          !isFullScreen()
+          && <>
+            <Header route={routeName} navigation={navigationRef} />
+          </>
+        }
         <CheckNetwork route={routeName} />
         <NavigationContainer
           ref={navigationRef}
@@ -283,7 +310,7 @@ const App = () => {
             }} initialRouteName={'Login'}>
             <Stack.Group>
               {
-                authContext.isLoggedIn
+                authContext.authState.isLoggedIn
                   ? <>
                     <Stack.Screen name='Start'>
                       {({ navigation }) => TabNavigators({
@@ -292,6 +319,7 @@ const App = () => {
                         style,
                         theme,
                         navigation,
+                        authContext,
                       })}
                     </Stack.Screen>
                     <Stack.Screen name='Class' component={RouteClass} />

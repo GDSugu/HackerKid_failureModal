@@ -36,8 +36,8 @@ const useProfileInfo = ({
   };
 
   const getProfileInfo = ({ cached = true }) => {
-    if (cached && authContext.profileInfoHook) {
-      const { profileInfoHook } = authContext;
+    if (cached && authContext.authState.profileInfoHook) {
+      const { authState: { profileInfoHook } } = authContext;
       setProfileInfo({
         ...profileInfoHook,
         status: 'success',
@@ -86,8 +86,8 @@ const useProfileInfo = ({
   const getProfileData = ({ cached = true }) => {
     let result = new Promise((res) => res());
     if (uniqueurl) {
-      if (cached && authContext.profileDataHook) {
-        const { profileDataHook } = authContext;
+      if (cached && authContext.authState.profileDataHook) {
+        const { authState: { profileDataHook } } = authContext;
         setProfileInfo({
           ...profileDataHook,
         });

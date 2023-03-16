@@ -38,6 +38,9 @@ const getStyles = (theme, font, gradients, utilColors) => StyleSheet.create({
     backgroundColor: theme.bodyBg,
     justifyContent: 'flex-start',
   },
+  scrollInset: {
+    paddingBottom: 16,
+  },
   topHeadCont: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -368,6 +371,7 @@ const VideoHome = ({ navigation }) => {
               onRefresh={onRefresh}
             />
           }
+          contentContainerStyle={style.scrollInset}
         >
           <View>
             <View style={style.topHeadCont}>

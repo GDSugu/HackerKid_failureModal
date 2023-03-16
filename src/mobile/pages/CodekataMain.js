@@ -578,7 +578,7 @@ const CodekataMain = ({ navigation }) => {
       runCode,
       submitCode,
     },
-  } = useCodekata({ isPageMounted, virtualid: 11 });
+  } = useCodekata({ isPageMounted });
 
   const loaderRef = useRef(null);
 

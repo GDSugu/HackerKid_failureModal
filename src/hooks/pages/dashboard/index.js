@@ -16,8 +16,8 @@ const useDashboard = ({ dateString = new Date().toISOString(), isPageMounted }) 
 
   const getSessionData = ({ cached = true }) => {
     let result;
-    if (cached && authContext.sessionData.authtoken) {
-      const { sessionData } = authContext;
+    if (cached && authContext.authState.sessionData.authtoken) {
+      const { authState: { sessionData } } = authContext;
       setDashboardData((prevState) => ({
         ...prevState,
         sessionData: {
@@ -56,8 +56,8 @@ const useDashboard = ({ dateString = new Date().toISOString(), isPageMounted }) 
     const queryDate = new Date(Date.parse(dateString));
     const isoDate = queryDate.toISOString().substring(0, 10);
     let result;
-    if (cached && authContext.dashBoardHook) {
-      const { dashBoardHook } = authContext;
+    if (cached && authContext.authState.dashBoardHook) {
+      const { authState: { dashBoardHook } } = authContext;
       setDashboardData((prevState) => ({
         ...prevState,
         ...dashBoardHook,

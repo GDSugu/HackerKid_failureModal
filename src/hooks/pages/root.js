@@ -165,6 +165,7 @@ const AuthContext = React.createContext({
   sessionData: {},
   isRefresh: false,
   subscriptionData: {},
+  authState: {},
   setAuthState: () => {},
 });
 const SubscriptionContext = React.createContext();
