@@ -1095,11 +1095,11 @@ const PricingPlans = () => {
         <PriceCards
         planType = {subscriptionData.planType}
         data = {planDetails}
-        isLoggedIn={authContext.isLoggedIn}/>
+        isLoggedIn={authContext.authState.isLoggedIn}/>
         <PlansFeatures
         planType = {subscriptionData.planType}
         data = {planDetails}
-        isLoggedIn={authContext.isLoggedIn}/>
+        isLoggedIn={authContext.authState.isLoggedIn}/>
         <ExclusiveCourses />
       </div>
     </div>

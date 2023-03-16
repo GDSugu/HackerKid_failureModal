@@ -1161,7 +1161,7 @@ const Index = ({ route, navigation }) => {
     gameProgress,
   } = leaderBoardState;
 
-  const { sessionData } = authContext;
+  const { authState: { sessionData } } = authContext;
 
   const {
     status: challengesStatus,
@@ -1196,7 +1196,7 @@ const Index = ({ route, navigation }) => {
   };
 
   const onHomeFocused = () => {
-    // if (authContext.appData.isRefresh) {
+    // if (authContext.authState.appData.isRefresh) {
     //   onRefresh();
     //   authContext.setAuthState((prevState) => ({
     //     ...prevState,
@@ -1205,7 +1205,7 @@ const Index = ({ route, navigation }) => {
     //     },
     //   }));
     // }
-    if (authContext.appData.isRefresh) {
+    if (authContext.authState.appData.isRefresh) {
       onRefresh();
       if (isPageMounted.current) {
         authContext.setAuthState((prevState) => ({
@@ -1239,7 +1239,8 @@ const Index = ({ route, navigation }) => {
     focusEffect();
   });
 
-  const memoizedAppData = useMemo(() => authContext.appData, [authContext.appData]);
+  const memoizedAppData = useMemo(() => authContext.authState.appData,
+    [authContext.authState.appData]);
 
   useEffect(() => {
     onHomeFocused();

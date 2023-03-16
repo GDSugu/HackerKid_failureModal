@@ -40,7 +40,7 @@ const GameHeader = ({
   const authContext = React.useContext(AuthContext);
   const style = getStyles(utilColors);
 
-  useEffect(() => {}, [authContext.appData]);
+  useEffect(() => {}, [authContext.authState.appData]);
 
   return <>
     <View style={style.gameHeader}>

@@ -16,7 +16,7 @@ const useRegister = () => {
     retypedPassword: '',
   });
 
-  const createAccountRequest = (token, recaptchaVersion) => {
+  const createAccountRequest = async (token, recaptchaVersion) => {
     const postData = {
       type: 'register',
       phone: stateObj.phoneNumber,

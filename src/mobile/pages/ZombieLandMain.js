@@ -291,7 +291,6 @@ const ZombieLandMain = ({ navigation }) => {
     },
   } = useZombieLand({
     isPageMounted,
-    virtualid: 5,
   });
 
   const {

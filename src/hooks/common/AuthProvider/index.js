@@ -52,6 +52,7 @@ const AuthProvider = ({ children }) => {
       <AuthContext.Provider
         value={{
           isRefresh: false,
+          isFullScreen: false,
           isLoggedIn: authState.isLoggedIn,
           appData: authState.appData,
           sessionData: authState.sessionData,

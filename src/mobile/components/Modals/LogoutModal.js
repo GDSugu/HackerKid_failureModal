@@ -79,7 +79,7 @@ const LogoutModal = ({ logoutAction = () => { } }) => {
 
   return <>
     <Modal
-      visible={authContext.appData.logoutModalVisibility || false}
+      visible={authContext.authState.appData.logoutModalVisibility || false}
       transparent
       onRequestClose={closeModal}
     //  animationType='fade'

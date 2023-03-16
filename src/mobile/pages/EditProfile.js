@@ -452,10 +452,6 @@ const EditProfile = ({ navigation }) => {
         setAvatar(profileImage);
       }
     }
-
-    // return () => {
-    //   isPageMounted.current = false;
-    // };
   }, Object.keys(state).filter((key) => key !== 'profileImage' && key !== 'profileImageName' && key !== 'response'));
 
   return <>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">hackerkid</string>
+    <string name="app_name">HackerKID</string>
     <string name="splash_heading">Hacker<font color="#FF9B03">KID</font></string>
     <string name="subtitle_1">#1</string>
     <string name="subtitle_2">Gamified Coding Platform for kids</string>

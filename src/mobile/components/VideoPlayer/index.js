@@ -19,10 +19,11 @@ import Video from 'react-native-video';
 import * as Animatable from 'react-native-animatable';
 import Orientation from 'react-native-orientation';
 import { FormattedMessage } from 'react-intl';
+import { AuthContext } from '../../../hooks/pages/root';
 
 const getStyles = () => StyleSheet.create({
   sliderLandscapeActive: {
-    flex: 1,
+    // flex: 1,
     height: 30,
     marginHorizontal: Platform.select({
       ios: 0,
@@ -61,6 +62,8 @@ const getStyles = () => StyleSheet.create({
 });
 
 class VideoPlayer extends React.Component {
+  static contextType = AuthContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -89,6 +92,7 @@ class VideoPlayer extends React.Component {
       speedOverlayHeight: 390,
       viewStyle: { flex: 1 },
     };
+    this.portraintVideoHeight = this.props.height;
     this.overallDuration = 0;
     this.touchDisabled = false;
     this.toggleControlsTimer = '';
@@ -110,12 +114,38 @@ class VideoPlayer extends React.Component {
   componentDidMount() {
     Orientation.lockToPortrait();
     Orientation.addOrientationListener(this.orientationChanged);
+    this.attachBackHandler();
   }
 
   componentWillUnmount() {
     Orientation.removeOrientationListener(this.orientationChanged);
     Orientation.unlockAllOrientations();
+    this.removeBackHandler();
+    this.setFullScreen(false);
   }
+
+  backHandler = (e) => {
+    e.preventDefault();
+    Orientation.getOrientation((error, orientation) => {
+      if (orientation === 'LANDSCAPE') {
+        this.exitFullScreen();
+      } else {
+        this.props.navigation.dispatch(e.data.action);
+      }
+    });
+  };
+
+  attachBackHandler = () => {
+    if (this.props.navigation) {
+      this.props.navigation.addListener('beforeRemove', this.backHandler);
+    }
+  };
+
+  removeBackHandler = () => {
+    if (this.props.navigation) {
+      this.props.navigation.removeListener('beforeRemove', this.backHandler);
+    }
+  };
 
   orientationChanged = (orientation) => {
     this.setState({
@@ -125,10 +155,12 @@ class VideoPlayer extends React.Component {
       this.props.navigation.setParams({
         hidden: false,
       });
-      this.setState({
-        fullscreenHeight: 'auto',
-        fullScreenFlex: 0.6,
-      });
+      if (this.props?.pageMounted?.current) {
+        this.setState({
+          fullscreenHeight: 'auto',
+          fullScreenFlex: 0.6,
+        });
+      }
     } else {
       this.props.navigation.setParams({
         hidden: true,
@@ -314,6 +346,13 @@ class VideoPlayer extends React.Component {
     }
   };
 
+  setFullScreen = (status = false) => {
+    this.context.setAuthState((prevState) => ({
+      ...prevState,
+      isFullScreen: Boolean(status),
+    }));
+  };
+
   onSeekPoly = (event) => {
     if (!event.isBuffering) {
       this.touchDisabled = false;
@@ -359,24 +398,52 @@ class VideoPlayer extends React.Component {
   };
 
   enterFullScreen = () => {
+    const offset = Dimensions.get('window').height * 0.17;
+    this.props.navigation.setParams({
+      hidden: true,
+    });
+    if (this.props.pageMounted.current) {
+      this.setState({
+        fullscreenHeight: Dimensions.get('window').width,
+        fullScreenFlex: 1,
+        orientation: 'LANDSCAPE',
+        fullScreenOffset: offset,
+        fullscreenIcon: 'fullscreen-exit',
+        moreOverlayHeight: '20%',
+        speedOverlayHeight: '100%',
+        viewStyle: { height: 0 },
+      });
+      this.setFullScreen(true);
+    }
+    Orientation.lockToLandscape();
+  };
+
+  exitFullScreen = () => {
+    if (this.props.pageMounted.current) {
+      this.props.navigation.setParams({
+        hidden: false,
+      });
+      this.setState({
+        fullscreenHeight: this.portraintVideoHeight,
+        fullScreenFlex: 0.6,
+        orientation: 'PORTRAIT',
+        fullScreenOffset: 0,
+        fullscreenIcon: 'fullscreen',
+        moreOverlayHeight: 60,
+        speedOverlayHeight: 390,
+        viewStyle: { flex: 1 },
+      });
+      this.setFullScreen(false);
+    }
+    Orientation.lockToPortrait();
+  };
+
+  togglFullScreen = () => {
     Orientation.getOrientation((error, orientation) => {
       if (orientation === 'PORTRAIT') {
-        const offset = Dimensions.get('window').height * 0.17;
-        this.props.navigation.setParams({
-          hidden: true,
-        });
-        this.setState({
-          fullscreenHeight: Dimensions.get('window').width, fullScreenFlex: 1, orientation: 'LANDSCAPE', fullScreenOffset: offset, fullscreenIcon: 'fullscreen-exit', moreOverlayHeight: '20%', speedOverlayHeight: '100%', viewStyle: { height: 0 },
-        });
-        Orientation.lockToLandscape();
+        this.enterFullScreen();
       } else {
-        this.props.navigation.setParams({
-          hidden: false,
-        });
-        this.setState({
-          fullscreenHeight: this.props.height, fullScreenFlex: 0.6, orientation: 'PORTRAIT', fullScreenOffset: 0, fullscreenIcon: 'fullscreen', moreOverlayHeight: 60, speedOverlayHeight: 390, viewStyle: { flex: 1 },
-        });
-        Orientation.lockToPortrait();
+        this.exitFullScreen();
       }
     });
   };
@@ -394,12 +461,11 @@ class VideoPlayer extends React.Component {
   };
 
   handleBack = () => {
-    // console.log("ok");
     Orientation.getOrientation((error, orientation) => {
       if (orientation === 'PORTRAIT') {
         this.props.navigation.goBack();
       } else {
-        this.enterFullScreen();
+        this.togglFullScreen();
       }
     });
   };
@@ -490,7 +556,10 @@ class VideoPlayer extends React.Component {
       <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end' }}>
         <View style={{ justifyContent: 'flex-start' }}>
           <Text style={{
-            color: this.state.enabledColor, paddingBottom: 18, paddingLeft: 5, fontSize: 12,
+            color: this.state.enabledColor,
+            paddingBottom: 18,
+            paddingLeft: 5,
+            fontSize: 12,
           }}>
             {this.state.progressText}
           </Text>
@@ -532,7 +601,7 @@ class VideoPlayer extends React.Component {
           iconStyle={{ color: this.state.enabledColor, padding: 10 }}
           size={30}
           underlayColor="rgba(0,0,0,0)"
-          onPress={() => this.enterFullScreen()}
+          onPress={() => this.togglFullScreen()}
           disabled = {this.state.controlsHidden}
           disabledStyle = {{ backgroundColor: 'rgba(0,0,0,0)' }}
           />
@@ -542,7 +611,13 @@ class VideoPlayer extends React.Component {
     if (this.state.orientation === 'PORTRAIT') {
       sliderMarkup = <View style={{ flex: 1 }}>
         <View style = {{
-          position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, width: '100%', height: '100%',
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          width: '100%',
+          height: '100%',
         }}>
           <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end' }}>
             <View style={{ flex: 1, justifyContent: 'flex-start' }}>
@@ -563,7 +638,7 @@ class VideoPlayer extends React.Component {
               iconStyle={{ color: this.state.enabledColor, padding: 10 }}
               size={30}
               underlayColor="rgba(0,0,0,0)"
-              onPress={() => this.enterFullScreen()}
+              onPress={() => this.togglFullScreen()}
               disabled = {this.state.controlsHidden}
               disabledStyle = {{ backgroundColor: 'rgba(0,0,0,0)' }}
               />
@@ -586,7 +661,7 @@ class VideoPlayer extends React.Component {
                 thumbTintColor={'rgba(0,0,0,0)'}
               />
             </View>
-            <TouchableWithoutFeedback style={{ width: '100%', backgroundColor: 'blue' }} onPressIn={this.seekToLocation} disabled={this.touchDisabled}>
+            <TouchableWithoutFeedback style={{ width: '100%' }} onPressIn={this.seekToLocation} disabled={this.touchDisabled}>
               <Slider
                 value = {this.state.sliderPosition}
                 style={this.style.sliderPortraitActive}
@@ -625,7 +700,13 @@ class VideoPlayer extends React.Component {
         </Animatable.View>;
     }
     return (
-      <View style={{ backgroundColor: '#f6f6f9', height: this.state.fullscreenHeight, zIndex: 1 }}>
+      <View style={{
+        width: '100%',
+        backgroundColor: '#f6f6f9',
+        height: this.state.fullscreenHeight,
+        zIndex: 1,
+        // flex: 1,
+      }}>
         <Overlay
           animationType="slide"
           isVisible={this.state.moreOverlay}
@@ -684,12 +765,25 @@ class VideoPlayer extends React.Component {
           </View>
         </Overlay>
         <View style={{
-          flex: 1, position: 'relative', width: '100%', height: this.state.fullscreenHeight, backgroundColor: '#000',
+          position: 'relative',
+          width: '100%',
+          height: this.state.fullscreenHeight,
+          backgroundColor: '#000',
         }}
         >
           <Video ref={this.videoRef}
-            source={this.props.source} paused={this.state.paused} resizeMode="contain" style={{
-              flex: 0.5, position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, width: '100%', height: '100%',
+            source={this.props.source}
+            paused={this.state.paused}
+            resizeMode="contain"
+            style={{
+              // flex: 1,
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              width: '100%',
+              height: '100%',
             }}
             onLoadStart = {this.onLoadStart}
             onLoad={this.onLoad}

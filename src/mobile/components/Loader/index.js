@@ -100,6 +100,7 @@ const ScreenLoader = ({ route, duration = 250 }, ref) => {
   const loaderBlock3Ref = useRef(null);
   const isAnimationRunning = useRef(false);
   const animationRef = useRef(null);
+  const isPageMounted = useRef(true);
 
   const block1XYValue = new Animated.ValueXY({
     x: 0,
@@ -209,16 +210,20 @@ const ScreenLoader = ({ route, duration = 250 }, ref) => {
   };
 
   const showLoader = () => {
-    isAnimationRunning.current = true;
-    removeListeners();
-    setIsLoaderVisible(true);
-    attachListeners();
-    changeBlockPos();
+    if (isPageMounted.current) {
+      isAnimationRunning.current = true;
+      removeListeners();
+      setIsLoaderVisible(true);
+      attachListeners();
+      changeBlockPos();
+    }
   };
 
   const closeLoader = () => {
-    removeListeners();
-    setIsLoaderVisible(false);
+    if (isPageMounted.current) {
+      removeListeners();
+      setIsLoaderVisible(false);
+    }
   };
 
   const debouncedShowLoader = debounce1(showLoader, 500);
@@ -232,6 +237,7 @@ const ScreenLoader = ({ route, duration = 250 }, ref) => {
   }));
 
   useEffect(() => () => {
+    isPageMounted.current = false;
     isAnimationRunning.current = false;
     removeListeners();
   }, []);

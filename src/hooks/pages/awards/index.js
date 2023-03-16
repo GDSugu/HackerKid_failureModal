@@ -31,8 +31,8 @@ const useAwardsByGame = ({ isPageMounted, initializeData = true, game }) => {
     cached = true,
   }) => {
     let result;
-    if (cached && authContext.awardsByGame) {
-      const { awardsByGameHook } = authContext;
+    if (cached && authContext.authState.awardsByGame) {
+      const { authState: { awardsByGameHook } } = authContext;
       setAwardsByGameState({
         ...awardsByGameHook,
         status: 'success',
@@ -160,8 +160,8 @@ const useAwards = ({ isPageMounted, initializeData = true }) => {
     cached = true, searchQuery = '', sort = 'default', limit = 15,
   }) => {
     let result;
-    if (cached && authContext.awards) {
-      const { awardsHook } = authContext;
+    if (cached && authContext.authState.awards) {
+      const { authState: { awardsHook } } = authContext;
       setAwardsState({
         ...awardsHook,
         status: 'success',
