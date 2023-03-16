@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* hackerkidTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* hackerkidTests.m */; };
+		00E356F31AD99517003FC87E /* HackerKIDTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* HackerKIDTests.m */; };
 		10708D802BE44C0B9A8440E4 /* DMSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBE6396602E141668987F640 /* DMSans-Regular.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -16,7 +16,7 @@
 		203E37D71F824628AA3E368F /* AveriaSansLibre-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF4D34E86760405D94938678 /* AveriaSansLibre-Bold.ttf */; };
 		33D9FBC1D96E4D4CB0E5FE6C /* DMMono-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9101B2A52E943ACA16A15DE /* DMMono-Light.ttf */; };
 		4398499D19B4445785D6D9EC /* Courgette-Regular.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 4D89227FAAA74B1ABB374E26 /* Courgette-Regular.woff2 */; };
-		4A8194F65436740F467F5A0D /* libPods-hackerkid.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7351B755E68023B477146F17 /* libPods-hackerkid.a */; };
+		4A8194F65436740F467F5A0D /* libPods-HackerKID.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7351B755E68023B477146F17 /* libPods-HackerKID.a */; };
 		6125CCFD48CB4660A7F93E85 /* AveriaSansLibre-Regular.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 92DFA1B1533845B79CDB7CA3 /* AveriaSansLibre-Regular.woff2 */; };
 		69B9A1125E0B491C834AB138 /* DMMono-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5C59B6422A14DD8811CB9E4 /* DMMono-LightItalic.ttf */; };
 		6BB24916EFC14A7FBA1007CD /* AveriaSansLibre-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C3448E5292D417098AF9F36 /* AveriaSansLibre-Regular.ttf */; };
@@ -34,7 +34,7 @@
 		D02DBC55BAF24174A03E5307 /* DMMono-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09F156E7F5DA4D3EB45B88D0 /* DMMono-Italic.ttf */; };
 		E5C08AA75BE3426AA0EA1047 /* AveriaSansLibre-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FB5AC7A79ED47AC9141128D /* AveriaSansLibre-Light.ttf */; };
 		EC4F5D2542AA4E01840983DC /* DMMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4FCF3674D57A4CA7ABFFC593 /* DMMono-Regular.ttf */; };
-		EC5CCE224B4B5C987D36072B /* libPods-hackerkid-hackerkidTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A88E4EBA3CD704572DD0953 /* libPods-hackerkid-hackerkidTests.a */; };
+		EC5CCE224B4B5C987D36072B /* libPods-HackerKID-HackerKIDTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A88E4EBA3CD704572DD0953 /* libPods-HackerKID-HackerKIDTests.a */; };
 		F463D07A3099402F8AB4E6BE /* AveriaSansLibre-Light.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 81F43CA06FF945E8A409793E /* AveriaSansLibre-Light.woff2 */; };
 		C9271D7142E6415980DF718C /* FredokaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC094EC8370748CEAB8A2A9C /* FredokaOne-Regular.ttf */; };
 /* End PBXBuildFile section */
@@ -45,40 +45,40 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = hackerkid;
+			remoteInfo = "HackerKID";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* hackerkidTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hackerkidTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* HackerKIDTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HackerKIDTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* hackerkidTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = hackerkidTests.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* HackerKIDTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "HackerKIDTests.m"; sourceTree = "<group>"; };
 		09F156E7F5DA4D3EB45B88D0 /* DMMono-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DMMono-Italic.ttf"; path = "../src/fonts/DMMono-Italic.ttf"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* hackerkid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hackerkid.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = hackerkid/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = hackerkid/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = hackerkid/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = hackerkid/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = hackerkid/main.m; sourceTree = "<group>"; };
-		16C196D9926D9D32E2CC30E6 /* Pods-hackerkid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackerkid.release.xcconfig"; path = "Target Support Files/Pods-hackerkid/Pods-hackerkid.release.xcconfig"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* HackerKID.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HackerKID.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "HackerKID/AppDelegate.h"; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = HackerKID/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "HackerKID/Images.xcassets"; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "HackerKID/Info.plist"; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "HackerKID/main.m"; sourceTree = "<group>"; };
+		16C196D9926D9D32E2CC30E6 /* Pods-HackerKID.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackerKID.release.xcconfig"; path = "Target Support Files/Pods-HackerKID/Pods-HackerKID.release.xcconfig"; sourceTree = "<group>"; };
 		1C3448E5292D417098AF9F36 /* AveriaSansLibre-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AveriaSansLibre-Regular.ttf"; path = "../src/fonts/AveriaSansLibre-Regular.ttf"; sourceTree = "<group>"; };
 		42F5912EDE5A4B15A8D5260F /* DMMono-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DMMono-Medium.ttf"; path = "../src/fonts/DMMono-Medium.ttf"; sourceTree = "<group>"; };
 		48D16919D10A4D5C91C93076 /* AveriaSansLibre-Bold.woff */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AveriaSansLibre-Bold.woff"; path = "../src/fonts/AveriaSansLibre-Bold.woff"; sourceTree = "<group>"; };
 		4D89227FAAA74B1ABB374E26 /* Courgette-Regular.woff2 */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Courgette-Regular.woff2"; path = "../src/fonts/Courgette-Regular.woff2"; sourceTree = "<group>"; };
 		4FCF3674D57A4CA7ABFFC593 /* DMMono-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DMMono-Regular.ttf"; path = "../src/fonts/DMMono-Regular.ttf"; sourceTree = "<group>"; };
-		7351B755E68023B477146F17 /* libPods-hackerkid.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hackerkid.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7351B755E68023B477146F17 /* libPods-HackerKID.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HackerKID.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		753DFAF821D34A849744FCA1 /* DMMono-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DMMono-MediumItalic.ttf"; path = "../src/fonts/DMMono-MediumItalic.ttf"; sourceTree = "<group>"; };
-		79BEA8FD61D81DC979F78EA5 /* Pods-hackerkid-hackerkidTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackerkid-hackerkidTests.debug.xcconfig"; path = "Target Support Files/Pods-hackerkid-hackerkidTests/Pods-hackerkid-hackerkidTests.debug.xcconfig"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = hackerkid/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		79BEA8FD61D81DC979F78EA5 /* Pods-HackerKID-HackerKIDTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackerKID-HackerKIDTests.debug.xcconfig"; path = "Target Support Files/Pods-HackerKID-HackerKIDTests/Pods-HackerKID-HackerKIDTests.debug.xcconfig"; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "HackerKID/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		81F43CA06FF945E8A409793E /* AveriaSansLibre-Light.woff2 */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AveriaSansLibre-Light.woff2"; path = "../src/fonts/AveriaSansLibre-Light.woff2"; sourceTree = "<group>"; };
 		8973B66905044C51815A9E54 /* AveriaSansLibre-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AveriaSansLibre-BoldItalic.ttf"; path = "../src/fonts/AveriaSansLibre-BoldItalic.ttf"; sourceTree = "<group>"; };
-		8A88E4EBA3CD704572DD0953 /* libPods-hackerkid-hackerkidTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hackerkid-hackerkidTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A88E4EBA3CD704572DD0953 /* libPods-HackerKID-HackerKIDTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HackerKID-HackerKIDTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FB5AC7A79ED47AC9141128D /* AveriaSansLibre-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AveriaSansLibre-Light.ttf"; path = "../src/fonts/AveriaSansLibre-Light.ttf"; sourceTree = "<group>"; };
 		910240CB370E4C81894DA27F /* AveriaSansLibre-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AveriaSansLibre-Italic.ttf"; path = "../src/fonts/AveriaSansLibre-Italic.ttf"; sourceTree = "<group>"; };
 		92DFA1B1533845B79CDB7CA3 /* AveriaSansLibre-Regular.woff2 */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AveriaSansLibre-Regular.woff2"; path = "../src/fonts/AveriaSansLibre-Regular.woff2"; sourceTree = "<group>"; };
-		B243BDAD57ED33E217C3CB0D /* Pods-hackerkid.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackerkid.debug.xcconfig"; path = "Target Support Files/Pods-hackerkid/Pods-hackerkid.debug.xcconfig"; sourceTree = "<group>"; };
+		B243BDAD57ED33E217C3CB0D /* Pods-HackerKID.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackerKID.debug.xcconfig"; path = "Target Support Files/Pods-HackerKID/Pods-HackerKID.debug.xcconfig"; sourceTree = "<group>"; };
 		B67A45F56C6B4873BD5E19F1 /* AveriaSansLibre-Light.woff */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AveriaSansLibre-Light.woff"; path = "../src/fonts/AveriaSansLibre-Light.woff"; sourceTree = "<group>"; };
-		C02F68DEAD78DD9B7A739A73 /* Pods-hackerkid-hackerkidTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackerkid-hackerkidTests.release.xcconfig"; path = "Target Support Files/Pods-hackerkid-hackerkidTests/Pods-hackerkid-hackerkidTests.release.xcconfig"; sourceTree = "<group>"; };
+		C02F68DEAD78DD9B7A739A73 /* Pods-HackerKID-HackerKIDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackerKID-HackerKIDTests.release.xcconfig"; path = "Target Support Files/Pods-HackerKID-HackerKIDTests/Pods-HackerKID-HackerKIDTests.release.xcconfig"; sourceTree = "<group>"; };
 		CB775E8CCE044058A67C01DA /* Courgette-Regular.woff */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Courgette-Regular.woff"; path = "../src/fonts/Courgette-Regular.woff"; sourceTree = "<group>"; };
 		CBE6396602E141668987F640 /* DMSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-Regular.ttf"; path = "../src/fonts/DMSans-Regular.ttf"; sourceTree = "<group>"; };
 		CF8E5F54492E43F8949DF8BA /* AveriaSansLibre-Bold.woff2 */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AveriaSansLibre-Bold.woff2"; path = "../src/fonts/AveriaSansLibre-Bold.woff2"; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC5CCE224B4B5C987D36072B /* libPods-hackerkid-hackerkidTests.a in Frameworks */,
+				EC5CCE224B4B5C987D36072B /* libPods-HackerKID-HackerKIDTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,20 +123,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A8194F65436740F467F5A0D /* libPods-hackerkid.a in Frameworks */,
+				4A8194F65436740F467F5A0D /* libPods-HackerKID.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* hackerkidTests */ = {
+		00E356EF1AD99517003FC87E /* HackerKIDTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* hackerkidTests.m */,
+				00E356F21AD99517003FC87E /* HackerKIDTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = hackerkidTests;
+			path = "HackerKIDTests";
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -147,7 +147,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* hackerkid */ = {
+		13B07FAE1A68108700A75B9A /* HackerKID */ = {
 			isa = PBXGroup;
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -157,15 +157,15 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = hackerkid;
+			name = "HackerKID";
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				7351B755E68023B477146F17 /* libPods-hackerkid.a */,
-				8A88E4EBA3CD704572DD0953 /* libPods-hackerkid-hackerkidTests.a */,
+				7351B755E68023B477146F17 /* libPods-HackerKID.a */,
+				8A88E4EBA3CD704572DD0953 /* libPods-HackerKID-HackerKIDTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -203,10 +203,10 @@
 		80D3064C8766DFB731B9D39F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B243BDAD57ED33E217C3CB0D /* Pods-hackerkid.debug.xcconfig */,
-				16C196D9926D9D32E2CC30E6 /* Pods-hackerkid.release.xcconfig */,
-				79BEA8FD61D81DC979F78EA5 /* Pods-hackerkid-hackerkidTests.debug.xcconfig */,
-				C02F68DEAD78DD9B7A739A73 /* Pods-hackerkid-hackerkidTests.release.xcconfig */,
+				B243BDAD57ED33E217C3CB0D /* Pods-HackerKID.debug.xcconfig */,
+				16C196D9926D9D32E2CC30E6 /* Pods-HackerKID.release.xcconfig */,
+				79BEA8FD61D81DC979F78EA5 /* Pods-HackerKID-HackerKIDTests.debug.xcconfig */,
+				C02F68DEAD78DD9B7A739A73 /* Pods-HackerKID-HackerKIDTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -239,9 +239,9 @@
 				D1FE120E29B91CC700D5A99A /* Zocial.ttf */,
 				D1FE120729B91C8300D5A99A /* Fonts */,
 				D1FE120529B9172500D5A99A /* fonts */,
-				13B07FAE1A68108700A75B9A /* hackerkid */,
+				13B07FAE1A68108700A75B9A /* HackerKID */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* hackerkidTests */,
+				00E356EF1AD99517003FC87E /* HackerKIDTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				80D3064C8766DFB731B9D39F /* Pods */,
@@ -255,8 +255,8 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* hackerkid.app */,
-				00E356EE1AD99517003FC87E /* hackerkidTests.xctest */,
+				13B07F961A680F5B00A75B9A /* HackerKID.app */,
+				00E356EE1AD99517003FC87E /* HackerKIDTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -264,9 +264,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* hackerkidTests */ = {
+		00E356ED1AD99517003FC87E /* HackerKIDTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "hackerkidTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "HackerKIDTests" */;
 			buildPhases = (
 				153513A27C561D94DA198BBE /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -280,14 +280,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = hackerkidTests;
-			productName = hackerkidTests;
-			productReference = 00E356EE1AD99517003FC87E /* hackerkidTests.xctest */;
+			name = "HackerKIDTests";
+			productname = "HackerKIDTests";
+			productReference = 00E356EE1AD99517003FC87E /* HackerKIDTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* hackerkid */ = {
+		13B07F861A680F5B00A75B9A /* HackerKID */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "hackerkid" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "HackerKID" */;
 			buildPhases = (
 				FA57D5F03171A3E9D0BD3E2C /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -303,9 +303,9 @@
 			);
 			dependencies = (
 			);
-			name = hackerkid;
-			productName = hackerkid;
-			productReference = 13B07F961A680F5B00A75B9A /* hackerkid.app */;
+			name = "HackerKID";
+			productName = "HackerKID";
+			productReference = 13B07F961A680F5B00A75B9A /* HackerKID.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -325,7 +325,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "hackerkid" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "HackerKID" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -338,8 +338,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* hackerkid */,
-				00E356ED1AD99517003FC87E /* hackerkidTests */,
+				13B07F861A680F5B00A75B9A /* HackerKID */,
+				00E356ED1AD99517003FC87E /* HackerKIDTests */,
 			);
 		};
 /* End PBXProject section */
@@ -407,15 +407,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-hackerkid/Pods-hackerkid-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-HackerKID/Pods-HackerKID-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-hackerkid/Pods-hackerkid-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-HackerKID/Pods-HackerKID-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hackerkid/Pods-hackerkid-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HackerKID/Pods-HackerKID-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		153513A27C561D94DA198BBE /* [CP] Check Pods Manifest.lock */ = {
@@ -433,7 +433,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-hackerkid-hackerkidTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-HackerKID-HackerKIDTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -446,15 +446,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-hackerkid-hackerkidTests/Pods-hackerkid-hackerkidTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-HackerKID-HackerKIDTests/Pods-HackerKID-HackerKIDTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-hackerkid-hackerkidTests/Pods-hackerkid-hackerkidTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-HackerKID-HackerKIDTests/Pods-HackerKID-HackerKIDTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hackerkid-hackerkidTests/Pods-hackerkid-hackerkidTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HackerKID-HackerKIDTests/Pods-HackerKID-HackerKIDTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		777A67C2DE55E74AFA716A2C /* [CP] Embed Pods Frameworks */ = {
@@ -463,15 +463,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-hackerkid/Pods-hackerkid-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-HackerKID/Pods-HackerKID-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-hackerkid/Pods-hackerkid-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-HackerKID/Pods-HackerKID-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hackerkid/Pods-hackerkid-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HackerKID/Pods-HackerKID-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7E3DF90E035563BFC6B39DB2 /* [CP-User] [RNFB] Core Configuration */ = {
@@ -493,15 +493,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-hackerkid-hackerkidTests/Pods-hackerkid-hackerkidTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-HackerKID-HackerKIDTests/Pods-HackerKID-HackerKIDTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-hackerkid-hackerkidTests/Pods-hackerkid-hackerkidTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-HackerKID-HackerKIDTests/Pods-HackerKID-HackerKIDTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hackerkid-hackerkidTests/Pods-hackerkid-hackerkidTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HackerKID-HackerKIDTests/Pods-HackerKID-HackerKIDTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FA57D5F03171A3E9D0BD3E2C /* [CP] Check Pods Manifest.lock */ = {
@@ -519,7 +519,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-hackerkid-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-HackerKID-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -552,7 +552,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* hackerkidTests.m in Sources */,
+				00E356F31AD99517003FC87E /* HackerKIDTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,7 +570,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* hackerkid */;
+			target = 13B07F861A680F5B00A75B9A /* HackerKID */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -578,7 +578,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79BEA8FD61D81DC979F78EA5 /* Pods-hackerkid-hackerkidTests.debug.xcconfig */;
+			baseConfigurationReference = 79BEA8FD61D81DC979F78EA5 /* Pods-HackerKID-HackerKIDTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -586,7 +586,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = hackerkidTests/Info.plist;
+				INFOPLIST_FILE = "HackerKIDTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -598,20 +598,20 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.guvi.hackerkid";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/hackerkid.app/hackerkid";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HackerKID.app/HackerKID";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C02F68DEAD78DD9B7A739A73 /* Pods-hackerkid-hackerkidTests.release.xcconfig */;
+			baseConfigurationReference = C02F68DEAD78DD9B7A739A73 /* Pods-HackerKID-HackerKIDTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = hackerkidTests/Info.plist;
+				INFOPLIST_FILE = "HackerKIDTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -623,22 +623,23 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.guvi.hackerkid";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/hackerkid.app/hackerkid";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HackerKID.app/HackerKID";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B243BDAD57ED33E217C3CB0D /* Pods-hackerkid.debug.xcconfig */;
+			baseConfigurationReference = B243BDAD57ED33E217C3CB0D /* Pods-HackerKID.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 966ZM8WZUS;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = hackerkid/Info.plist;
+				INFOPLIST_FILE = "HackerKID/Info.plist";
+             INFOPLIST_KEY_CFBundleDisplayName = "HackerKID";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -649,8 +650,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = hackerkid;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.guvi.hackerkid";
+				PRODUCT_NAME = "HackerKID";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -659,13 +660,14 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 16C196D9926D9D32E2CC30E6 /* Pods-hackerkid.release.xcconfig */;
+			baseConfigurationReference = 16C196D9926D9D32E2CC30E6 /* Pods-HackerKID.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 966ZM8WZUS;
-				INFOPLIST_FILE = hackerkid/Info.plist;
+				INFOPLIST_FILE = "HackerKID/Info.plist";
+             INFOPLIST_KEY_CFBundleDisplayName = "HackerKID";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -676,8 +678,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = hackerkid;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.guvi.hackerkid";
+				PRODUCT_NAME = "HackerKID";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -809,7 +811,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "hackerkidTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "HackerKIDTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -818,7 +820,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "hackerkid" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "HackerKID" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -827,7 +829,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "hackerkid" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "HackerKID" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

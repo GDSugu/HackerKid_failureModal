@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '11.0'
 
-target 'hackerkid' do
+target 'HackerKID' do
   config = use_native_modules!
 
   use_react_native!(
@@ -22,7 +22,7 @@ target 'hackerkid' do
 
   pod 'CodePush', :path => '../node_modules/react-native-code-push'
 
-  target 'hackerkidTests' do
+  target 'HackerKIDTests' do
     inherit! :complete
     # Pods for testing
   end
