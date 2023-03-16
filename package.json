@@ -1,6 +1,6 @@
 {
   "name": "hackerkid",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "test": "cross-env --SILENT=true npm run build:dist",
