@@ -398,14 +398,18 @@ const VideoPlayerPage = ({ navigation, route }) => {
   };
 
   const onEnd = () => {
-    setModalVisible(true);
+    if (isPageMounted.current) {
+      setModalVisible(true);
+    }
   };
 
   const setFullScreen = (status = false) => {
-    authContext.setAuthState((prevState) => ({
-      ...prevState,
-      isFullScreen: Boolean(status),
-    }));
+    if (isPageMounted.current) {
+      authContext.setAuthState((prevState) => ({
+        ...prevState,
+        isFullScreen: Boolean(status),
+      }));
+    }
   };
 
   const isFullScreen = () => authContext.authState.isFullScreen || false;
