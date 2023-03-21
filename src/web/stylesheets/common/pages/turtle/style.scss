@@ -845,6 +845,106 @@
     }
   }
 
+  .failureModal {
+    .modal-custom-header {
+      button.close {
+        color: gt.theme-var(text-color-2);
+        font-size: 2rem;
+        background: gt.theme-var(game-modal-close-btn-bg, null, $thememaplight, $cssvars);
+        padding: 0.125rem 0.6rem 0.45rem;
+        line-height: 0.75;
+        opacity: 1;
+      }
+    }
+
+    .failure-modal-content {
+      .recognition-content,
+      .share-content {
+        display: grid;
+        place-items: center;
+
+        h5,
+        p {
+          text-align: center;
+        }
+
+        button {
+          margin: 0 0.25rem;
+          border-width: 2px;
+          border-radius: 0.75rem;
+          font-weight: bold;
+
+          &.btn-outline-primary {
+            &:hover {
+              color: gt.theme-var(text-color-2);
+            }
+          }
+        }
+      }
+
+      .recognition-content {
+        h5 {
+          margin: 1rem 0;
+        }
+
+        Img{
+          width: 150px;
+          height: 150px;
+          margin-bottom: 35px;
+        }
+        
+        p {
+          margin: 1rem 0;
+          line-height: 1.5;
+          
+        }
+
+        i {
+          margin-left: 1rem;
+          font-size: 1.25rem;
+        }
+
+        img {
+          width: 12rem;
+        }
+
+        button {
+          &.btn-primary {
+            color: gt.theme-var(text-color-2);
+            margin:10px;
+            padding-left: 30px;
+            padding-right: 30px;
+          }
+        }
+
+        input {
+          border: 1px solid gt.theme-var(game-input-border-color, null, $thememaplight, $cssvars);
+        }
+      }
+
+      .share-content {
+        .btn-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 2rem auto;
+          padding: 0;
+
+          .form-group {
+            margin: 0;
+            padding: 0;
+
+            input {
+              border-radius: 0.5rem;
+              border: 1px solid gt.theme-var(game-input-border-color, null, $thememaplight, $cssvars);
+              background-color: gt.theme-var(bg-1);
+            }
+          }
+        }
+      }
+    }
+  }
+
   @keyframes refresh {
     0% {
       background-position: -100%;

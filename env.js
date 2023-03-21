@@ -1,1 +1,1 @@
-export default {"API":"https://api.codingpuppet.com/v1/","S3PREFIX":"dev","RECAPCHAV2SITEKEY":"6Ld1E0chAAAAADy4J9o3EgCUdEQcPCwrkUU5SRwQ","RECAPCHAV3SITEKEY":"6LdlNzkhAAAAACHROyP4u5UKmMbmKewfuNlFQwOX","CODEPUSH_KEY":"ac107196-833b-41ca-a55c-9b1a82ed89d4"};
+export default {"API":"http://api.codingpuppet.com/v1/","S3PREFIX":"dev","RECAPCHAV2SITEKEY":"6Ld1E0chAAAAADy4J9o3EgCUdEQcPCwrkUU5SRwQ","RECAPCHAV3SITEKEY":"6LdlNzkhAAAAACHROyP4u5UKmMbmKewfuNlFQwOX"};

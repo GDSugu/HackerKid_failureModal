@@ -560,6 +560,110 @@ const SuccessModalComponent = ({
 
 const SuccessModalRefComponent = React.forwardRef(SuccessModalComponent);
 
+const FailureModalComponent = ({
+  questionObject, validated, uniqueUrl, message = false, userName = 'user', nextHandler = () => { },
+}, ref) => {
+  const [screen, setScreen] = React.useState('recognition-screen');
+  const shareUrl = `${window.location.origin}/turtle/submissions/${uniqueUrl}/${questionObject.question_id}/${questionObject.uniqueString}`;
+  const handleRegister = () => pathNavigator('register');
+
+  React.useImperativeHandle(ref, () => ({
+    resetScreen: () => setScreen('recognition-screen'),
+  }));
+
+  return <>
+    {
+      !validated
+      && <>
+        <div className='failure-modal-content'>
+          {
+            screen === 'recognition-screen'
+            && <div className='recognition-content'>
+              <Img 
+                src={'../../../../images/games/turtle-failure.svg'}
+                
+              />
+              <div className='col-10 mx-auto'>
+                <h5>
+                  <FormattedMessage
+                    defaultMessage={'Oops!'}
+                    description={'Failure message'}
+                  />
+                </h5>
+                {
+                  message
+                  && <>
+                    <p className='failure'>
+                      <FormattedMessage
+                        defaultMessage={'That was not correct. Please try again!'}
+                        description={'Failure message'}
+                        
+                      />
+                    </p>
+                    <div className='d-flex align-items-center justify-content-center'>
+                      <button className='btn btn-primary' onClick={nextHandler}>
+                        <div className="d-flex justify-content-between align-items-center">
+                       
+                          <FormattedMessage
+                            defaultMessage={'Retry'}
+                            description={'Retry button'}
+                          />
+                          <i className="fas fa-angle-right "></i>
+                        </div>
+                      </button>
+
+                    </div>
+                  </>
+                }
+                {
+                  !message
+                  && <>
+                    <div className='d-flex align-items-center justify-content-center'>
+                    
+                      <button className='btn btn-primary' onClick={handleRegister}>
+                        <FormattedMessage
+                          defaultMessage={'Register for free'}
+                          description={'register button'}
+                        />
+                      </button>
+                    </div>
+                  </>
+                }
+              </div>
+              { }
+            </div>
+          }
+          {screen === 'share-screen'
+            && <div className='share-content'>
+              <div className='content-header'>
+                <h5>
+                  <FormattedMessage
+                    defaultMessage={'Share'}
+                    description={'Share message'}
+                  />
+                </h5>
+              </div>
+              <div className="col-11 col-md-10 btn-container">
+                <div className="form-group col">
+                  <input type="text" className="form-control" name="shareLink" id="shareLink" value={shareUrl} aria-describedby="helpId" placeholder="share link" readOnly />
+                </div>
+                <button className='btn btn-outline-primary' onClick={copyHandler} >
+                  <FormattedMessage
+                    defaultMessage={'Copy Link'}
+                    description={'Copy Link button'}
+                  />
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+      </>
+    }
+  </>;
+};
+
+const FailureModalRefComponent = React.forwardRef(FailureModalComponent);
+
 const HintComponent = ({ hintDetails, handleHint }) => {
   const hideHintContainer = () => $('.hintContainer').animate({
     transform: 200,
@@ -816,6 +920,8 @@ const TurtleGameComponent = () => {
   const isPageMounted = React.useRef(true);
   const successModalRef = React.useRef();
   const successModalComponentRef = React.useRef();
+  const failureModalRef = React.useRef();
+  const failureModalComponentRef = React.useRef();
   const levelComponentRef = React.useRef();
   const leaderboardComponentRef = React.useRef();
   const awardsNotificationCardRef = React.useRef();
@@ -908,7 +1014,12 @@ const TurtleGameComponent = () => {
             awardsNotificationCardRef.current.show();
             successModalRef.current.show();
           }
-        } else {
+          else{
+            failureModalRef.current.show();
+          }
+         
+        }
+         else {
           const parsedResponse = JSON.parse(resp);
           setTurtleQuestionState((prevState) => ({
             ...prevState,
@@ -920,7 +1031,11 @@ const TurtleGameComponent = () => {
             awardsNotificationCardRef.current.show();
             successModalRef.current.show();
           }
+          else{
+            failureModalRef.current.show();
+          }
         }
+        
       });
   };
 
@@ -933,6 +1048,10 @@ const TurtleGameComponent = () => {
         awardsNotificationCardRef.current.hide();
       });
   };
+
+  const handleClose = () => {
+    failureModalRef.current.hide();
+  }
 
   const handleFetchQuestion = (questionId) => {
     $('#loader').show();
@@ -1099,6 +1218,7 @@ const TurtleGameComponent = () => {
       customClass={'curved'}
       onHidden={() => { successModalComponentRef.current.resetScreen(); }}
       header={<div></div>}>
+
       <SuccessModalRefComponent
         ref={successModalComponentRef}
         questionObject={questionObject}
@@ -1108,6 +1228,24 @@ const TurtleGameComponent = () => {
         userName={validationDetails?.profileDetails?.name}
         nextHandler={handleNextQuestion}
       />
+    </Modal>
+    <Modal
+      ref={failureModalRef}
+      options={'hide'}
+      modalClass={'failureModal'}
+      customClass={'curved'}
+      onHidden={() => { failureModalComponentRef.current.resetScreen(); }}
+      header={<div></div>}>
+      <FailureModalRefComponent
+        ref={failureModalComponentRef}
+        questionObject={questionObject}
+        validated={validated}
+        uniqueUrl={validationDetails?.profileDetails?.uniqueUrl}
+        message={validationDetails?.pointsDetails?.submissionStatus}
+        userName={validationDetails?.profileDetails?.name}
+        nextHandler={handleClose}
+      />
+      
     </Modal>
     <AwardsNotificationCard ref={awardsNotificationCardRef} onClose={() => {
       setSession('awardsGiven', 'false');

@@ -741,6 +741,10 @@
     "defaultMessage": "Harshini",
     "description": "Happy Learning Starts Here... title"
   },
+  "AHzvcj": {
+    "defaultMessage": "Retry",
+    "description": "Retry button"
+  },
   "AMy8PQ": {
     "defaultMessage": "Email ID*",
     "description": "Email ID"
@@ -789,6 +793,10 @@
     "defaultMessage": "{points}",
     "description": "member points"
   },
+  "BCvIP7": {
+    "defaultMessage": "Oops!",
+    "description": "Failure message"
+  },
   "BI7XwF": {
     "defaultMessage": "Edit Challenge",
     "description": "edit challenge button"
@@ -796,6 +804,10 @@
   "BIWKGG": {
     "defaultMessage": "Time Spent:",
     "description": "time spent heading text"
+  },
+  "BJA3SV": {
+    "defaultMessage": "That was not correct. Please try again!",
+    "description": "Failure message"
   },
   "BK01d3": {
     "defaultMessage": "What is a club and how does it work?",
